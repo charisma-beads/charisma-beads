@@ -1,0 +1,4 @@
+SecFilterEngine Off
+SecFilterScanPOST Off
+
+AddHandler application/x-httpd-php5 .php

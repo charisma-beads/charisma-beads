@@ -1,0 +1,23 @@
+#LeftColumn {
+	display:none;
+}
+
+#RightColumn {
+	display:none;
+}
+
+#Heading {
+	display:none;
+} 
+
+#Middle {
+	margin:0px;	
+} 
+
+#Row1 {
+	margin:0px;
+}
+
+#Row2 {
+	display:none;
+} 

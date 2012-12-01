@@ -1,0 +1,55 @@
+<!doctype html public "-//W3C//DTD xhtml 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>#### TITLE ####</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta name="Content-Language" content="english" />
+<style type="text/css">
+body {
+	background-color:white;
+	font-size:10pt;
+}
+#merchant {
+	text-align:center;
+	font-weight:bold;
+	font-size:26pt;
+}
+.product {
+	text-align:left; 
+	width:30%; 
+	background-color:skyblue;
+}
+.description {
+	text-align:left; 
+	width:30%; 
+	background-color:skyblue;
+}
+.price {
+	text-align:left; 
+	width:10%; 
+	background-color:skyblue;
+}
+.vat {
+	text-align:left; 
+	width:10%; 
+	background-color:skyblue;
+}
+.quantity {
+	text-align:left; 
+	width:10%; 
+	background-color:skyblue;
+}
+.total {
+	text-align:left; 
+	width:10%; 
+	background-color:skyblue;
+}
+</style>
+</head>
+<body> 
+<div id="merchant">#### NAME ####</div>
+<div>
+#### INVOICE ####
+</div>
+</body>
+</html>

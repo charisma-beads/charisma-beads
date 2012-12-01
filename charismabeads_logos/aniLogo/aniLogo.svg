@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="85"
+   height="100"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="0.45.1"
+   version="1.0"
+   sodipodi:docbase="/home/shaun/Public/charismabeads/aniLogo"
+   sodipodi:docname="aniLogo.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     gridtolerance="10000"
+     guidetolerance="10"
+     objecttolerance="10"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1"
+     inkscape:cx="42.5"
+     inkscape:cy="50"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     width="85px"
+     height="100px"
+     inkscape:window-width="910"
+     inkscape:window-height="627"
+     inkscape:window-x="58"
+     inkscape:window-y="57" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <image
+       y="0"
+       x="0"
+       id="image2484"
+       height="100"
+       width="85"
+       sodipodi:absref="../ani pics/background.png"
+       xlink:href="../ani pics/background.png" />
+    <image
+       y="0"
+       x="6"
+       id="image2605"
+       height="100"
+       width="73"
+       sodipodi:absref="../ani pics/bead1.gif"
+       xlink:href="../ani pics/bead1.gif" />
+    <image
+       y="0"
+       x="6"
+       id="image2648"
+       height="100"
+       width="73"
+       sodipodi:absref="../ani pics/bead2.gif"
+       xlink:href="../ani pics/bead2.gif" />
+    <image
+       y="0"
+       x="6"
+       id="image2691"
+       height="100"
+       width="73"
+       sodipodi:absref="../ani pics/bead3.gif"
+       xlink:href="../ani pics/bead3.gif" />
+    <image
+       y="0"
+       x="6"
+       id="image2734"
+       height="100"
+       width="73"
+       sodipodi:absref="../ani pics/bead4.gif"
+       xlink:href="../ani pics/bead4.gif" />
+    <image
+       y="0"
+       x="6"
+       id="image2777"
+       height="100"
+       width="73"
+       sodipodi:absref="../ani pics/bead5.gif"
+       xlink:href="../ani pics/bead5.gif" />
+    <image
+       y="0"
+       x="6"
+       id="image2820"
+       height="100"
+       width="73"
+       sodipodi:absref="../ani pics/bead6.gif"
+       xlink:href="../ani pics/bead6.gif" />
+    <image
+       y="0"
+       x="6"
+       id="image2878"
+       height="100"
+       width="73"
+       sodipodi:absref="../ani pics/bead7.gif"
+       xlink:href="../ani pics/bead7.gif" />
+    <image
+       y="0"
+       x="6"
+       id="image2921"
+       height="100"
+       width="73"
+       sodipodi:absref="../ani pics/bead8.gif"
+       xlink:href="../ani pics/bead8.gif" />
+    <image
+       y="0"
+       x="6"
+       id="image3039"
+       height="100"
+       width="73"
+       sodipodi:absref="../ani pics/needle.gif"
+       xlink:href="../ani pics/needle.gif" />
+    <image
+       y="0"
+       x="6"
+       id="image3082"
+       height="100"
+       width="73"
+       sodipodi:absref="../ani pics/line.gif"
+       xlink:href="../ani pics/line.gif" />
+    <image
+       y="0"
+       x="6"
+       id="image3125"
+       height="100"
+       width="73"
+       sodipodi:absref="../ani pics/bead9.gif"
+       xlink:href="../ani pics/bead9.gif" />
+    <image
+       y="0"
+       x="6"
+       id="image3168"
+       height="100"
+       width="73"
+       sodipodi:absref="../ani pics/bead10.gif"
+       xlink:href="../ani pics/bead10.gif" />
+  </g>
+</svg>

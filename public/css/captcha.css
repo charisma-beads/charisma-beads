@@ -1,0 +1,91 @@
+/*********************************
+ *
+ *	CAPTCHA-Styles
+ *
+ */
+	p.captcha_1,
+	p.captcha_2,
+	p.captcha_notvalid
+	{
+		margin-left: 30px;
+		margin-right: 20px;
+		font-size: 12px;
+		font-style: normal;
+		font-weight: normal;
+		font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+		background: transparent;
+		color: #000000;
+	}
+	p.captcha_2
+	{
+		font-size: 10px;
+		font-style: italic;
+		font-weight: normal;
+	}
+	p.captcha_notvalid
+	{
+		font-weight: bold;
+		color: #FFAAAA;
+	}
+	
+	.captchapict
+	{
+		margin: 0px;
+		padding: 0px;
+	}
+	
+	#captcha
+	{	
+		
+		font-size:12px;
+		text-align:center;
+		margin-left: auto;
+		margin-right: auto;
+		border-style: dashed;
+		border-width: 2px;
+		border-color: #FFD940;
+	}
+	
+	#captcha table {
+		text-align:center;
+	}
+	
+	.notes {
+		padding:20px;
+		width:250px;
+		text-align:left;
+		background: #FFFACD; 
+		border-top: 1px solid buttonhighlight;
+		border-left: 1px solid buttonhighlight;
+    	border-bottom: 1px solid buttonshadow;
+    	border-right: 1px solid buttonshadow;
+	}
+	
+	.notes h3, .notes p {
+		margin:0px;
+	}
+	
+	.notes h3 {
+		text-decoration:underline;
+	}
+	
+	.password {
+		height:150px;
+		overflow:auto;
+	}
+	
+	.password ul {
+		margin:0px;
+		padding:10px;
+	}
+	
+	.password li {
+		margin-top:5px;
+		list-style-type:square;
+	}
+	
+	#admin_login {
+		font-size:x-small;
+	}
+	
+	
