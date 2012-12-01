@@ -1,0 +1,16 @@
+@CHARSET "UTF-8";
+
+.errors {
+	color: #f00;
+}
+
+ul.errors {
+	margin: 0px;
+	padding: 0px;
+}
+
+.errors li {
+	margin :0px;
+	padding: 0px;
+    font-size: 12px;
+}

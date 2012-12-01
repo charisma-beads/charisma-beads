@@ -1,0 +1,24 @@
+<html>
+	<style type="text/css">
+		#### STYLE ####
+	</style>
+
+	<div id="wrap">
+
+		<div id="top_panel">
+			<div id="logo"><img src="#### LINK ####/Mail.png" /><img src="#### LINK ####/charisma_logo.gif" /></div>
+		</div>
+
+		<div id="content">
+			#### CONTENT ####
+		</div>
+
+		<div id="bottom_panel">
+			<p class="center">
+				To unsubscribe from future mailings please <a class="link" href="#### UNSUBSCRIBE ####">click here</a>
+				<br />
+				&copy; <a class="link" href="#### WEBSITE ####">#### NAME ####</a>
+			<p>
+		</div>
+	</div>
+</html>
