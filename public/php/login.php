@@ -26,7 +26,8 @@ function form () {
     if ($referer_link) {
         $s .= '<input type="hidden" name="referer_link" value="'.$referer_link.'" />';
     }
-	$s .= '<tr><td><b>Password:</b></td><td><input tabindex="2" class="inputbox" type="password" name="password" size="20" /></td></tr>';
+	$s .= '<tr><td><b>Password:</b></td><td><input id="password" tabindex="2" class="inputbox" type="password" name="password" size="20" /></td></tr>';
+	$s .= '<tr><td colspan="2"><input type="checkbox" onchange="document.getElementById(\'password\').type = this.checked ? \'text\' : \'password\'"> Show password</td></tr>';
 	$s .= '</table>';
     return $s;
 }
