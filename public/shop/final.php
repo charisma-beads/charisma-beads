@@ -32,10 +32,10 @@ if (isset($_SESSION['cid']) && $_GET['stage'] == 2 && $cart->getNumCartItems() !
 
     $i = $invoice->displayInvoice($_SESSION['cid'], $cart);
     $cartItems = $invoice->fixPrices($cart);
-    $cartTotals = $cart->getCartTotals();
+    $cartTotals = $cart->getCartTotals(true);
+    $cartTotals['CART_TOTAL'] = str_replace(',', '', $cartTotals['CART_TOTAL']);
 
     $c = addslashes (serialize ($cartItems));
-
 
 	// Find the last invoice No.
 	$query = "
@@ -76,6 +76,7 @@ if (isset($_SESSION['cid']) && $_GET['stage'] == 2 && $cart->getNumCartItems() !
 			INSERT INTO customer_orders (customer_id, order_status_id, total, order_date, cart, invoice, shipping, vat_total, vat_invoice)
 			VALUES ({$_SESSION['cid']}, $order_status, {$cartTotals['CART_TOTAL']}, NOW(), '$c', $invoice_no, {$cartTotals['POST_COST']}, {$cartTotals['VAT_TOTAL']}, $VatState)
 		";
+		
 	} else {
 		$error = TRUE;
 	}
