@@ -57,7 +57,7 @@ var miniCart = new Class({
         this.setUpCartButtons();
 
         this.alertBox = new AscModal(null, null, {
-            addCloseBtn: false
+            addCloseBtn: true
         });
 
         this.mask = new Mask($(document.body), {
@@ -243,7 +243,7 @@ var miniCart = new Class({
         if (j.added == true) {
             this.alertBox.set_contents('You have added ' + j.stock.itemName + ' x 1 to your shopping cart.', 'i');
             this.alertBox.show();
-            this.clearAddItemAlert.delay(1500, this);
+            this.clearAddItemAlert.delay(3000, this);
         }
         
         this.updateStock(j.stock);
@@ -379,5 +379,5 @@ var miniCart = new Class({
 });
 
 window.addEvent('domready', function(){
-	if(document.id('productList')) miniShop = new miniCart();
+	if(document.id('productList') && !Browser.Platform.ios && !Browser.Platform.android && !Browser.Platform.webos) miniShop = new miniCart();
 });
