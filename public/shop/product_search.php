@@ -36,32 +36,37 @@ if (is_numeric($_GET['search_id']) && isset ($_GET['search_query'])) {
 
 	// Number of records to show.
     $display = $ProductDisplay;
+    
+    $regex = '/[^ \-a-zA-Z0-9]+/';
+    $search_query = preg_replace($regex, '', urldecode($_GET['search_query']), -1);
 	
 	// formulate serch query.
 	switch ($_GET['search_type']) {
 		
 		case 'part':
-			$search_query = explode(" ", $_GET['search_query']);
-	
-			foreach ($search_query AS $key => $value) {
-				$search_query[$key] = "%" . $value;
+			$search_query_temp = explode(" ", $search_query);
+		
+			foreach ($search_query_temp AS $key => $value) {
+				$search_query_temp[$key] = "%" . $value;
 			}
 	
-			$search_query = implode("", $search_query)."%";
-			$cat_search = "WHERE (category LIKE '$search_query')";
-			$product_search = "WHERE (p.description LIKE '$search_query' OR p.product_name LIKE '$search_query')";
+			$search_query_temp = implode("", $search_query_temp)."%";
+			$search_query_temp = preg_replace('/(%+)/', '%', $search_query_temp);
+			
+			$cat_search = "WHERE (category LIKE '$search_query_temp')";
+			$product_search = "WHERE (p.description LIKE '$search_query_temp' OR p.product_name LIKE '$search_query_temp')";
 			break;
 			
 		case 'exact':
-			$search_query = $_GET['search_query'];
+			
 			$cat_search = "WHERE (category LIKE '$search_query')";
 			$product_search = "WHERE (p.description LIKE '$search_query' OR p.product_name LIKE '$search_query')";
 			break;
 			
 		case 'all':
-			$search_query = explode(" ", $_GET['search_query']);
+			$search_query_temp = explode(" ", $search_query);
 	
-			foreach ($search_query AS $key => $value) {
+			foreach ($search_query_temp AS $key => $value) {
 				$search_query_bits[$key] = "(p.description LIKE '%$value%' OR p.product_name LIKE '%$value%')";
 				
 				$cat_search_bits[$key] = "(category LIKE '%$value%')";
@@ -215,13 +220,13 @@ if (is_numeric($_GET['search_id']) && isset ($_GET['search_query'])) {
             
             // If it's not the first page, make a previous button.
             if ($current_page != 1){
-				echo '<a href="javascript:productSearch(' . ($start - $display) . ', ' . $num_pages . ', ' . $_GET['search_id'] . ', \'' . $_GET['search_query'] . '\', \''.$_GET['search_type'].'\')">Previous</a> ';
+				echo '<a href="javascript:productSearch(' . ($start - $display) . ', ' . $num_pages . ', ' . $_GET['search_id'] . ', \'' . $search_query . '\', \''.$_GET['search_type'].'\')">Previous</a> ';
             }
             
             // Make all the numbered pages.
             for ($i = 1; $i <= $num_pages; $i++) {
                 if ($i != $current_page) {
-					echo '<a href="javascript:productSearch(' . (($display * ($i - 1))) . ', ' . $num_pages . ', ' . $_GET['search_id'] . ', \'' . $_GET['search_query'] . '\', \''.$_GET['search_type'].'\')">' . $i . '</a> ';
+					echo '<a href="javascript:productSearch(' . (($display * ($i - 1))) . ', ' . $num_pages . ', ' . $_GET['search_id'] . ', \'' . $search_query . '\', \''.$_GET['search_type'].'\')">' . $i . '</a> ';
                 } else {
                     echo $i . ' ';
                 }
@@ -229,7 +234,7 @@ if (is_numeric($_GET['search_id']) && isset ($_GET['search_query'])) {
 
         	// If it's not the last page, make a Next button.
         	if ($current_page != $num_pages) {
-				echo '<a href="javascript:productSearch(' . ($start + $display) . ', ' . $num_pages . ', ' . $_GET['search_id'] . ', \'' . $_GET['search_query'] . '\', \''.$_GET['search_type'].'\')">Next</a> ';
+				echo '<a href="javascript:productSearch(' . ($start + $display) . ', ' . $num_pages . ', ' . $_GET['search_id'] . ', \'' . $search_query . '\', \''.$_GET['search_type'].'\')">Next</a> ';
             
         	}
 
@@ -332,13 +337,13 @@ if (is_numeric($_GET['search_id']) && isset ($_GET['search_query'])) {
             echo '<p class="center">';
             // Determine what page the script is on.
             if ($current_page != 1){
-				echo '<a href="javascript:productSearch(' . ($start - $display) . ', ' . $num_pages . ', ' . $_GET['search_id'] . ', \'' . $_GET['search_query'] . '\', \''.$_GET['search_type'].'\')">Previous</a> ';
+				echo '<a href="javascript:productSearch(' . ($start - $display) . ', ' . $num_pages . ', ' . $_GET['search_id'] . ', \'' . $search_query . '\', \''.$_GET['search_type'].'\')">Previous</a> ';
             }
             
             // Make all the numbered pages.
             for ($i = 1; $i <= $num_pages; $i++) {
                 if ($i != $current_page) {
-					echo '<a href="javascript:productSearch(' . (($display * ($i - 1))) . ', ' . $num_pages . ', ' . $_GET['search_id'] . ', \'' . $_GET['search_query'] . '\', \''.$_GET['search_type'].'\')">' . $i . '</a> ';
+					echo '<a href="javascript:productSearch(' . (($display * ($i - 1))) . ', ' . $num_pages . ', ' . $_GET['search_id'] . ', \'' . $search_query . '\', \''.$_GET['search_type'].'\')">' . $i . '</a> ';
                 } else {
                     echo $i . ' ';
                 }
@@ -346,7 +351,7 @@ if (is_numeric($_GET['search_id']) && isset ($_GET['search_query'])) {
 
         	// If it's not the last page, make a Next button.
         	if ($current_page != $num_pages) {
-				echo '<a href="javascript:productSearch(' . ($start + $display) . ', ' . $num_pages . ', ' . $_GET['search_id'] . ', \'' . $_GET['search_query'] . '\', \''.$_GET['search_type'].'\')">Next</a> ';
+				echo '<a href="javascript:productSearch(' . ($start + $display) . ', ' . $num_pages . ', ' . $_GET['search_id'] . ', \'' . $search_query . '\', \''.$_GET['search_type'].'\')">Next</a> ';
             
         	}
 

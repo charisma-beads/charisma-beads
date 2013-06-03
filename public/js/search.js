@@ -27,10 +27,13 @@ function searchComplete() {
 	});
 			
 	setTimeout('loadOut()',2000);
-	searchTips = new Tips($$('.Tips'), {
-		onShow: function(tip, el){ tip.fade('in'); },
-		onHide: function(tip, el){ tip.fade('out'); }
-	});
+	
+	if (!Browser.Platform.ios && !Browser.Platform.android && !Browser.Platform.webos) {
+		searchTips = new Tips($$('.Tips'), {
+			onShow: function(tip, el){ tip.fade('in'); },
+			onHide: function(tip, el){ tip.fade('out'); }
+		});
+	}
 }
 
 function loadOut() {
@@ -66,9 +69,9 @@ function productSearch(s, np, id, Query, searchtype) {
 	}
 	
 	if (searchQuery == null) {
-		searchQuery = '&search_query=' + $('search_query').value;
+		searchQuery = '&search_query=' + escape($('search_query').value);
 	} else {
-		searchQuery = '&search_query=' + searchQuery;
+		searchQuery = '&search_query=' + escape(searchQuery);
 	}
 	
 	if (searchType) {
@@ -89,8 +92,11 @@ function productSearch(s, np, id, Query, searchtype) {
 			searchComplete();
   		}
 	}).send().chain(function(){
-        miniShop.removeEvents();
-		miniShop.setupEvents();
+	
+		if (!Browser.Platform.ios && !Browser.Platform.android && !Browser.Platform.webos) {
+        	miniShop.removeEvents();
+			miniShop.setupEvents();
+		}
 		
 		var scroll = new Fx.Scroll(window, {
 			duration: 1500,
