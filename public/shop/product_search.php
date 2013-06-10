@@ -247,7 +247,7 @@ if (is_numeric($_GET['search_id']) && isset ($_GET['search_query'])) {
 
         // Retrieve and print every record.
 		while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-			if ($row['quantity'] != 0) {
+			//if ($row['quantity'] != 0) {
                 // Set picture status.
                 $product_img_dir = "/shop/images/";
 
@@ -311,9 +311,15 @@ if (is_numeric($_GET['search_id']) && isset ($_GET['search_query'])) {
                 if ($row['image_status'] == 1) {
                     print "<td>";
                     print "<div>";
-                    if ($avail) print "<a href=\"cart.php?action=add&pid={$row['product_id']}\">";
-                    print "<img src=\"$img\" class=\"item Tips\" style=\"border: 3px double #AFA582;\" alt=\"{$row['product_name']}\" title=\"Shop Tip\" rel=\"Drag this image and drop it onto Your Cart to add this product to your shopping basket\"/>";
-                    if ($avail) print "</a>";
+                    if ($avail) {
+                    	print "<a href=\"cart.php?action=add&pid={$row['product_id']}\">";
+                    	print "<img src=\"$img\" class=\"item Tips\" style=\"border: 3px double #AFA582;\" alt=\"{$row['product_name']}\" title=\"Shop Tip\" rel=\"Drag this image and drop it onto Your Cart to add this product to your shopping basket\"/>";
+                    	print "</a>";
+                    } else {
+                    	print "<img src=\"$img\" style=\"border: 3px double #AFA582;\" alt=\"{$row['product_name']}\" />";
+                    }
+                    
+                    
                     print "</div>";
                     print "</td>";
                 }
@@ -324,7 +330,7 @@ if (is_numeric($_GET['search_id']) && isset ($_GET['search_query'])) {
                 print "</tr>\r\n"; // end row
 
                 //print "<tr><td></td><td colspan=\"3\"><hr /></td></tr></table></tr>\r\n";
-            }
+            //}
 	
 		} // end of While loop
 	
