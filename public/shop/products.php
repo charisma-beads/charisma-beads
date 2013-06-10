@@ -39,7 +39,7 @@ if (isset($_GET['s'])) { // Already been determined.
 
 // Make the query.
 $query = "
-	SELECT product_id, category_id, size, product_name, price, p.description, image, p.image_status, quantity, tax_rate, postunit, vat_inc 
+	SELECT product_id, category_id, size, product_name, price, p.description, image, p.image_status, quantity, tax_rate, postunit, vat_inc, enabled
 	FROM products AS p, product_size AS ps, tax_codes AS tc, tax_rates AS tr, product_postunit AS w
 	WHERE p.category_id={$_GET['pcid']}
 	AND p.size_id=ps.size_id 
@@ -101,7 +101,7 @@ if ($num > 0) { // If it ran OK, display the records.
 
 	// Retrieve and print every record.
 	while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) { 
-		if ($row['quantity'] != 0) {
+		//if ($row['enabled'] == 1) {
             // Set picture status.
             $product_img_dir = "/shop/images/";
 
@@ -136,11 +136,14 @@ if ($num > 0) { // If it ran OK, display the records.
 
             $content .= "<b>Price &pound;" . number_format(($row['price'] + $tax), 2) . "</b><br />";
 
+            $avail = true;
+            
             if ($StockControl == 1 && $row['quantity'] != -1) {
                 if ($row['quantity'] > 0) {
                     $content .= '<b>Quantity Available: <span id="pid'.$row['product_id'].'Qty">'.$row['quantity'].'</span></b>';
                 } else {
                     $content .= '<b><span id="pid'.$row['product_id'].'Qty">Out of stock</span></b>';
+                    $avail = false;
                 }
             }
             $content .= "</div>";
@@ -149,21 +152,29 @@ if ($num > 0) { // If it ran OK, display the records.
             if ($row['image_status'] == 1) {
                 $content .= "<td>";
                 $content .= "<div>";
-                $content .= "<a href=\"cart.php?action=add&pid={$row['product_id']}\">";
-                $content .= "<img src=\"$img\" class=\"item Tips\" style=\"border: 3px double #AFA582;\" alt=\"{$row['product_name']}\" title=\"Shop Tip\" rel=\"Drag this image and drop it onto Your Cart to add this product to your shopping basket\"/>";
-                $content .= "</a>";
+                if ($avail) {
+                	$content .= "<a href=\"cart.php?action=add&pid={$row['product_id']}\">";
+                	$content .= "<img src=\"$img\" class=\"item Tips\" style=\"border: 3px double #AFA582;\" alt=\"{$row['product_name']}\" title=\"Shop Tip\" rel=\"Drag this image and drop it onto Your Cart to add this product to your shopping basket\"/>";
+                	$content .= "</a>";
+                } else {
+                	$content .= "<img src=\"$img\" style=\"border: 3px double #AFA582;\" alt=\"{$row['product_name']}\" />";
+                }
                 $content .= "</div>";
                 $content .= "</td>";
             }
             unset($img);
             
             $content .= "<td style=\"width:90px;\">\r\n";
-            $content .= "<table><tr><td class=\"button Tips\" title=\"Shop Tip\" rel=\"Click to add to cart\"><a class=\"cart_buttons\" href=\"cart.php?action=add&pid={$row['product_id']}\">Add to Cart</a></td></tr></table>";
+            if ($avail) {
+            	$content .= "<table><tr><td class=\"button Tips\" title=\"Shop Tip\" rel=\"Click to add to cart\"><a class=\"cart_buttons\" href=\"cart.php?action=add&pid={$row['product_id']}\">Add to Cart</a></td></tr></table>";
+            } else {
+            	$content .= "&nbsp;";
+            }
             $content .= "</td>\r\n";
             $content .= "</tr>\r\n"; // end row
 
             //$content .= "<tr><td></td><td colspan=\"3\"><hr /></td></tr></table></tr>\r\n";
-        }
+        //}
 	} // end of While loop
 	
 	$content .= "</table>";
