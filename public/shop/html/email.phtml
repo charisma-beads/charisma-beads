@@ -41,24 +41,6 @@ body {
 	        <td><?= substr($this->post['ccNumber'], -4); ?></td>
 	    </tr>
 	    <tr>
-	        <th>Expiry Date</th>
-	        <td><?= $this->post['ccExpiryMonth']; ?>/<?= $this->post['ccExpiryYear']; ?></td>
-	    </tr>
-	    <tr>
-	        <th>Card Verification Number</th>
-	        <td><?= $this->post['ccCardVerificationNumber']; ?></td>
-	    </tr>
-	    <? if ($this->post['ccIssueNumber']): ?>
-	    <tr>
-	        <th>Issue Number</th>
-	        <td><?= $this->post['ccIssueNumber']; ?></td>
-	    </tr>
-	    <tr>
-	        <th>Start Date</th>
-	        <td><?= $this->post['ccStartMonth']; ?>/<?= $this->post['ccStartYear']; ?></td>
-	    </tr>
-	    <? endif; ?>
-	    <tr>
 	        <th>Address Line 1</th>
 	        <td><?= $this->post['addressLine1']; ?></td>
 	    </tr>

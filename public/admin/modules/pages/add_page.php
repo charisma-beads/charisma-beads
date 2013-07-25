@@ -17,9 +17,9 @@ if (!$authorized) {
 	if ($_POST['submit'] == "Make Page") {
 	
 		// Set variables.
-		$title = ucwords (strtolower (escape_data($_POST['title'])));
-		$PageName = str_replace (" ", "_", strtolower (Utility::filterString(escape_data($_POST['title']))));
-		$url = "pages/{$PageName}.php";
+		$title = ucwords (escape_data($_POST['title']));
+		$PageName = strtolower (Utility::filterString($_POST['title']));
+		$url = "pages/{$PageName}";
 	 	
 		// Check to see if page exists.
 		$query = "
@@ -34,8 +34,8 @@ if (!$authorized) {
 			
 			// Add page to database.
 			$query = "
-				INSERT INTO pages (page, date_entered) 
-				VALUES ('$title', NOW() );
+				INSERT INTO pages (ident, page, date_entered) 
+				VALUES ('$PageName', '$title', NOW() );
 				";
 			$result = mysql_query ($query);
 			$PageId = mysql_insert_id();
@@ -57,34 +57,9 @@ if (!$authorized) {
 				";
 			$result = mysql_query($query);
 			
-			// Add page on server.
-			/*
-			$page = file ('template.php');
+			// Create site map from menu links in database.
+			new SiteMap();
 			
-			$content = array ('PAGE TITLE' => $title, 'PAGE ID' => $PageId);
-			
-			for ($d = 0; $d < count ($page); $d++) {
-				foreach ($content as $key => $value) {
-					$template_name = '#### ' . $key . ' ####';
-					$page[$d] = str_replace ($template_name, $value, $page[$d]);
-				} 
-			}
-			
-			if ($fp = fopen ($_SERVER['DOCUMENT_ROOT'] . '/' . $url, 'wb')) {
-			
-				$data = "<?php\r\n";
-				
-				foreach ($page as $line) {
-					
-					$data .= $line;
-				}
-				
-				$data .= "?>\r\n";	
-			
-				fwrite ($fp, "$data");
-				fclose ($fp);
-			}
-			*/
 			print ("<span class=\"smcap\"><p class=\"pass\"><img src=\"/admin/images/actionok.png\" /> The $title page has been added.</p></span>");
 		
 		} else {

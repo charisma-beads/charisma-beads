@@ -56,15 +56,21 @@ if (!$authorized) {
 			if ($category && $insert_type) {
 
 				if ($tree->getCategory($category) == 0) {
-
+					
+					$ident= strtolower (Utility::filterString($category));
+					
 					$update = array (
 						'category_id' => 'NULL',
+						'ident' => $ident,
 						'category' => $category,
 						'image' => 'NULL',
 						'image_status' => 1
 					);
 
 					$category_id = $tree->insert($parent_id, $update, $_POST['insert_type']);
+					
+					// Create site map from menu links in database.
+					new SiteMap();
 
                     Utility::go ('categories.php');
 

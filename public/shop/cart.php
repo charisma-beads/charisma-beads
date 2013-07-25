@@ -43,7 +43,7 @@ if (isset($_GET['action'])) {
     if (isset($_SESSION['queryString'])) {
         $referer_link = $_SESSION['queryString'];
     } else {
-        $referer_link = null;
+        $referer_link = '/shop';
     }
 
 } else {
@@ -52,7 +52,7 @@ if (isset($_GET['action'])) {
 
 $cart->referer = $referer_link;
 
-$content .= Utility::returnLink('/shop/index.php?'.$referer_link, 'Continue Shopping');
+$content .= Utility::returnLink($referer_link, 'Continue Shopping');
 
 switch ($action) {
     case 'add':

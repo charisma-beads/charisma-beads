@@ -5,14 +5,20 @@
 // Include configuration file for error management and such.
 require_once ($_SERVER['DOCUMENT_ROOT'] . '/includes/inc_files.php');
 
+if (isset($ident)) {
+	$pcid = Utility::get_pcid($ident);
+} elseif (isset($_GET['pcid'])) {
+	$pcid = $_GET['pcid'];
+}
+
 // start tree class
 $tree = new NestedTree('product_category', NULL, 'category', $dbc);
 
 // Set the page title.
-if (isset ($_GET['pcid'])) {
+if (isset ($pcid)) {
 	
 	$page_title = NULL;
-	$pathway = $tree->pathway($_GET['pcid']);
+	$pathway = $tree->pathway($pcid);
 	
 	if (count($pathway) > 0) {
 					
@@ -52,9 +58,9 @@ $content .= "
 
 // Display Serach Box.
 // set id for search if one.
-if (isset($_GET['pcid']))
+if (isset($pcid))
 {
-	$search_id = $_GET['pcid'];
+	$search_id = $pcid;
 } else {
 	$search_id = 0;
 }
@@ -77,25 +83,25 @@ $start = 0;
 
 $display = 3;
 
-if (isset($_GET['pcid']))
+if (isset($pcid))
 {
 	
-	$tree->setId($_GET['pcid']);
+	$tree->setId($pcid);
 	
 	//unset ($pathway[$_GET['pcid']]);
 	
 	if (count($pathway) > 0)
     {
 		
-		$content .= "<span style=\"text-align:left;\"><a href=\"/shop/index.php\" class=\"Tips\" title=\"Shop Tip\" rel=\"Click here to goto the shop front\">Shop Front</a></span>";
+		$content .= "<span style=\"text-align:left;\"><a href=\"/shop\" class=\"Tips\" title=\"Shop Tip\" rel=\"Click here to goto the shop front\">Shop Front</a></span>";
 		
 		foreach ($pathway as $id => $path)
         {
 			$content .= "<span style=\"text-align:left;\">&nbsp;::&nbsp;";
 			
-			if ($_GET['pcid'] != $path['category_id'])
+			if ($pcid != $path['category_id'])
             {
-				$content .= "<a href=\"/shop/index.php?pcid={$id}\" class=\"Tips\" title=\"Shop Tip\" rel=\"Click here to goto the {$path['category']} category\">{$path['category']}</a>";
+				$content .= "<a href=\"/shop/{$path['ident']}\" class=\"Tips\" title=\"Shop Tip\" rel=\"Click here to goto the {$path['category']} category\">{$path['category']}</a>";
 			}
             else
             {
@@ -139,10 +145,10 @@ if (isset($_GET['pcid']))
 					$img = $product_img_dir.$row[$d]['image'];
                     $img = Utility::getShopImage($img);
 			
-					$content .= "<p style=\"margin-bottom:0px;\"><a href=\"/shop/index.php?pcid={$row[$d]['category_id']}\"><img src=\"$img\" style=\"border: 3px double #AFA582;\" /></a></p>";
+					$content .= "<p style=\"margin-bottom:0px;\"><a href=\"/shop/{$row[$d]['ident']}\"><img src=\"$img\" style=\"border: 3px double #AFA582;\" /></a></p>";
 				}
 				
-				$content .= "<table align=\"center\"><tr><td class=\"button\"><a href=\"/shop/index.php?pcid={$row[$d]['category_id']}\">{$row[$d]['category']}</a></td></tr></table>";
+				$content .= "<table align=\"center\"><tr><td class=\"button\"><a href=\"/shop/{$row[$d]['ident']}\">{$row[$d]['category']}</a></td></tr></table>";
 				
 			}
 				
@@ -204,7 +210,7 @@ if (isset($_GET['pcid']))
 					$content .= "<p style=\"margin-bottom:0px;\"><img src=\"$img\" style=\"border: 3px double #AFA582;\" /></a></p>";
 				}
 				
-				$content .= "<table align=\"center\"><tr><td class=\"button\"><a href=\"/shop/index.php?pcid={$row[$d]['category_id']}\">{$row[$d]['category']}</a></td></tr></table>";
+				$content .= "<table align=\"center\"><tr><td class=\"button\"><a href=\"/shop/{$row[$d]['ident']}\">{$row[$d]['category']}</a></td></tr></table>";
 			} else {
 				$content .= "&nbsp;";
 			}
@@ -227,7 +233,7 @@ if (isset($_GET['pcid']))
 }
 mysql_close();
 
-$_SESSION['queryString'] = $_SERVER['QUERY_STRING'];
+$_SESSION['queryString'] = $_SERVER['REQUEST_URI'];
 
 // Include the HTML footer.
 require_once ($_SERVER['DOCUMENT_ROOT'] . '/includes/inc_bottom.php');

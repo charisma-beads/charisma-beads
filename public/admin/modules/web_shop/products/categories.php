@@ -27,6 +27,29 @@ if (!$authorized) {
 		}
 
 	}
+	
+	/*$query = "
+		SELECT *
+		FROM product_category
+	";
+	
+	$result = mysql_query ($query);
+	
+	
+	while ($row = mysql_fetch_row($result, MYSQL_ASSOC)) {
+		$ident= strtolower (Utility::filterString($row['category']));
+		
+		$query = "
+		UPDATE product_category
+		SET ident='$ident'
+		WHERE category_id='{$row['category_id']}'
+		";
+		print "<pre>";
+		print_r ($row['category']);
+		print "</pre>";
+		
+		$result3 = mysql_query($query);
+	}*/
 
 	// Menu Links
 	print "<table><tr><td valign=\"top\">";

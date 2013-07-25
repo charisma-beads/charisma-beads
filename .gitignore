@@ -1,4 +1,6 @@
+/cb-back-up/
 /data/
 /logs/
+/public/admin/tmp/
 /ssl/
-/.settings/
+.settings/

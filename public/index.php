@@ -33,20 +33,26 @@ $path = Utility::getPath();
 
 switch($path[0]):
 	case 'pages':
-		$page = ucwords(str_replace('_', ' ', str_replace('.php', '', $path[1])));
+		$page = $path[1];
 		break;
-	default: $page = 'Home';
+	case 'shop':
+		$ident = $path[1];
+		include_once ($_SERVER['DOCUMENT_ROOT'] . '/shop/index.php');
+		exit();
+		break;
+	default: $page = 1;
 endswitch;
 
 // update page stats.
+$where = (is_int($page)) ? 'page_id=' . $page : "ident='$page'"; 
 $query = "
 	SELECT page_id, page, content
 	FROM pages
-	WHERE page='$page'
+	WHERE $where
 	";
 $result = mysql_fetch_array (mysql_query ($query), MYSQL_NUM);
 
-if (count($result) == 0) {
+if (!$result) {
     $page_title = "404 ERROR";
     $content = "<p>Sorry We cannot find the page you are looking for.</p><p>404 error: The page: $page doesn't exist</p>";
     require_once ($_SERVER['DOCUMENT_ROOT'] . '/includes/inc_bottom.php');
@@ -73,10 +79,6 @@ if (is_resource($result)) {
 		WHERE page_id=1
 	";
 	$result1 = mysql_query ($query);
-}
-
-if (!isset ($_SERVER['HTTPS']) && $page == 'Home') {
-	//$content .= file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/UserFiles/File/ring.txt');
 }
 
 require_once ($_SERVER['DOCUMENT_ROOT'] . '/includes/inc_bottom.php');

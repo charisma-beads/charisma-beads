@@ -36,6 +36,10 @@ if (!$authorized) {
 			AND sort_order>{$_POST['so']}
 			";
 		$result = mysql_query ($query);
+		
+		// Create site map from menu links in database.
+		new SiteMap();
+		
 		print $query . "<br />";
 		ob_end_clean ();
 		header ("Location: $https/admin/modules/pages/index.php");

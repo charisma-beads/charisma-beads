@@ -55,6 +55,8 @@ if (!$authorized) {
 			// Update category table.
 			$tree->removeAll ($pcid);
 			
+			// Create site map from menu links in database.
+			new SiteMap();
 			
             Utility::go ('categories.php');
 			
