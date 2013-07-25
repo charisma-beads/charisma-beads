@@ -13,9 +13,10 @@ if (!$authorized) {
 
 	if ($_POST['submit'] == "Update Title") {
 	
-		$title = ucwords (strtolower (escape_data($_POST['title'])));
-		$PageName = str_replace (" ", "_", strtolower (Utility::filterString(escape_data($_POST['title']))));
-		$url = "pages/{$PageName}.php";
+		$title = ucwords (escape_data($_POST['title']));
+		$PageName = strtolower (Utility::filterString($_POST['title']));
+
+		$url = "pages/{$PageName}";
 
         $query = "
 			SELECT page_id, title
@@ -30,7 +31,7 @@ if (!$authorized) {
         $query = "
             SELECT parent_id
             FROM menu_parent
-            WHERE parent = '".$row['title']."'
+            WHERE parent = '".escape_data($row['title'])."'
         ";
         $result = mysql_query($query);
 
@@ -49,15 +50,15 @@ if (!$authorized) {
         // update pages.
         if ($page_id == 0) {
             $query = "
-				INSERT INTO pages (page, date_entered)
-				VALUES ('$title', NOW() );
+				INSERT INTO pages (ident, page, date_entered)
+				VALUES ('$PageName', '$title', NOW() );
 				";
 			$result = mysql_query ($query);
 			$page_id = mysql_insert_id();
         } else {
             $query = "
                 UPDATE pages
-                SET page='$title'
+                SET page='$title', ident='$PageName'
                 WHERE page_id=$page_id
                 ";
             $result = mysql_query($query);
@@ -71,6 +72,9 @@ if (!$authorized) {
 			WHERE links_id={$_POST['lid']}
 			";
 		$result = mysql_query ($query);
+		
+		// Create site map from menu links in database.
+		new SiteMap();
 		
 		ob_end_clean ();
 		header ("Location: $https/admin/modules/pages/index.php");

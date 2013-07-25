@@ -28,7 +28,7 @@ class SiteMap
 		
 		foreach ($row as $key => $value) {
 // 			$href = $merchant_website.'/shop/'.encodeurl($row[$key]['category']);
-			$href = $merchant_website.'/shop/index.php?pcid='.$row[$key]['category_id'];
+			$href = $merchant_website.'/shop/'.$row[$key]['ident'];
 			$url = $this->dom->createElement('url');
 			$loc = $this->dom->createElement('loc',$href);
 			

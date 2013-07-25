@@ -14,7 +14,7 @@ if (isset($_GET['np'])) {
 	$query = "
 		SELECT product_id 
 		FROM products 
-		WHERE category_id={$_GET['pcid']}
+		WHERE category_id={$pcid}
 		AND enabled=1
 		AND discontinued=0
 		ORDER BY product_name + 0
@@ -41,7 +41,7 @@ if (isset($_GET['s'])) { // Already been determined.
 $query = "
 	SELECT product_id, category_id, size, product_name, price, p.description, image, p.image_status, quantity, tax_rate, postunit, vat_inc, enabled
 	FROM products AS p, product_size AS ps, tax_codes AS tc, tax_rates AS tr, product_postunit AS w
-	WHERE p.category_id={$_GET['pcid']}
+	WHERE p.category_id={$pcid}
 	AND p.size_id=ps.size_id 
 	AND p.tax_code_id=tc.tax_code_id 
 	AND tc.tax_rate_id=tr.tax_rate_id
@@ -62,6 +62,12 @@ if ($num > 0) { // If it ran OK, display the records.
 	
 	$content .= "<br />";
 	
+	if (isset($ident)) {
+		$page = $ident . '?';
+	} else {
+		$page = 'index.php?pcid=' . $pcid . '&';
+	}
+	
 	// Make the links to other pages, if necessary.
 	if ($num_pages > 1) {
 	
@@ -72,7 +78,7 @@ if ($num > 0) { // If it ran OK, display the records.
 		// If it's not the first page, make a previous button.
 		if ($current_page != 1){
 
-			$content .= '<a href="index.php?s=' . ($start - $display) . '&np=' . $num_pages . '&pcid=' . $_GET['pcid'] . '">Previous</a> ';
+			$content .= '<a href="'. $page .'s=' . ($start - $display) . '&np=' . $num_pages . '">Previous</a> ';
 		}
 
 		// Make all the numbered pages.
@@ -80,7 +86,7 @@ if ($num > 0) { // If it ran OK, display the records.
 
 			if ($i != $current_page) {
  
-				$content .= '<a href="index.php?s=' . (($display * ($i - 1))) . '&np=' . $num_pages . '&pcid=' . $_GET['pcid'] . '">' . $i . '</a> ';
+				$content .= '<a href="'. $page .'s=' . (($display * ($i - 1))) . '&np=' . $num_pages . '">' . $i . '</a> ';
 			} else {
 				$content .= $i . ' ';
 			}
@@ -88,7 +94,7 @@ if ($num > 0) { // If it ran OK, display the records.
 
 		// If it's not the last page, make a Next button.
 		if ($current_page != $num_pages) {
-			$content .= '<a href="index.php?s=' . ($start + $display) . '&np=' . $num_pages . '&pcid=' . $_GET['pcid'] . '">Next</a> ';
+			$content .= '<a href="'. $page .'s=' . ($start + $display) . '&np=' . $num_pages . '">Next</a> ';
 
 		}
 
@@ -187,13 +193,13 @@ if ($num > 0) { // If it ran OK, display the records.
 		$current_page = ($start/$display) + 1;
 
 		if ($current_page != 1){
-			$content .= '<a href="index.php?s=' . ($start - $display) . '&np=' . $num_pages . '&pcid=' . $_GET['pcid'] . '">Previous</a> ';
+			$content .= '<a href="' .$page .'s=' . ($start - $display) . '&np=' . $num_pages . '">Previous</a> ';
 		}
 
 		// Make all the numbered pages.
 		for ($i = 1; $i <= $num_pages; $i++) {
 			if ($i != $current_page) {
-				$content .= '<a href="index.php?s=' . (($display * ($i - 1))) . '&np=' . $num_pages . '&pcid=' . $_GET['pcid'] . '">' . $i . '</a> ';
+				$content .= '<a href="' .$page .'s=' . (($display * ($i - 1))) . '&np=' . $num_pages . '">' . $i . '</a> ';
 			} else {
 				$content .= $i . ' ';
 			}
@@ -201,7 +207,7 @@ if ($num > 0) { // If it ran OK, display the records.
 
         // If it's not the last page, make a Next button.
         if ($current_page != $num_pages) {
-			$content .= '<a href="index.php?s=' . ($start + $display) . '&np=' . $num_pages . '&pcid=' . $_GET['pcid'] . '">Next</a> ';
+			$content .= '<a href="' .$page .'s=' . ($start + $display) . '&np=' . $num_pages . '">Next</a> ';
 		}
 
         $content .= '</div>';
@@ -216,7 +222,7 @@ if ($num > 0) { // If it ran OK, display the records.
   				transition: Fx.Transitions.Quad.easeInOut
 			});
 	
-			scroll.toElement(\'pid'.$_GET['pid'].'\');
+			scroll.toElement(\'pid'.$pcid.'\');
 		</script>
 	';
 	}

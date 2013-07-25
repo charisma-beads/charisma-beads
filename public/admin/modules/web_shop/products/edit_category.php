@@ -73,11 +73,11 @@ if (!$authorized) {
 
 				// If category name has changed rename directory and update database.
 				if ($_POST['old_category'] != $cat) {
-
+					$ident= strtolower (Utility::filterString($cat));
 					// Update category in database.
 					mysql_query ("
 						UPDATE product_category
-						SET category='$cat'
+						SET category='$cat', ident='$ident'
 						WHERE category_id=$pcid
 					");
 
@@ -102,7 +102,8 @@ if (!$authorized) {
 				}
 			}
 
-
+			// Create site map from menu links in database.
+			new SiteMap();
 
 		} else {
 			?>

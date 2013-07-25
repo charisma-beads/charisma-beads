@@ -34,6 +34,8 @@ if (!$authorized) {
 		$result = mysql_query($query);
 		
 		if (mysql_affected_rows() == 1) {
+			// Create site map from menu links in database.
+			new SiteMap();
 			
 			print '<p>Your update to <b>' . $_POST['page'] . '</b> has been successful.</p>';
 		} else {

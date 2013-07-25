@@ -83,7 +83,8 @@ class Utility
      */
     public static function getPath()
     {
-        return explode('/',substr(REQUEST_URI,1));
+    	//print_r($_SERVER['QUERY_STRING']);
+        return explode('/',substr(str_replace('?'.$_SERVER['QUERY_STRING'], '', REQUEST_URI),1));
     }
 
     /**
@@ -166,6 +167,23 @@ class Utility
             return FALSE;
         }
 
+    }
+    
+    public static function get_pcid ($ident)
+    {
+    	$query = "
+    	SELECT category_id
+    	FROM product_category
+    	WHERE ident='$ident'
+    	";
+    	$result = mysql_query ($query);
+    	
+    	if ($result) {
+    		return mysql_result($result,0);
+    	}
+    	
+    	return false;
+    
     }
 
     /**
@@ -286,9 +304,9 @@ class Utility
 
     public function filterString($value)
     {
-        $find    = array( '`', '&',   ' ', '"', "'" );
-        $replace = array( '',  'and', '_', '',  '', );
-        $new = str_replace( $find, $replace,$value);
+        $find    = array( '`', '&',   ' ', '"', "'", );
+        $replace = array( '',  'and', '-', '',  '', );
+        $new = str_replace( $find, $replace, $value);
 
         $noalpha = 'ÁÉÍÓÚÝáéíóúýÂÊÎÔÛâêîôûÀÈÌÒÙàèìòùÄËÏÖÜäëïöüÿÃãÕõÅåÑñÇç@°ºª';
         $alpha   = 'AEIOUYaeiouyAEIOUaeiouAEIOUaeiouAEIOUaeiouyAaOoAaNnCcaooa';
@@ -297,12 +315,12 @@ class Utility
         $new = strtr( $new, $noalpha, $alpha );
 
         // not permitted chars are replaced with "-"
-        $new = preg_replace( '/[^a-zA-Z0-9_\+]/', '_', $new );
+        $new = preg_replace('/[^a-zA-Z0-9_\+]/', '-', $new);
 
         //remove -----'s
-        $new = preg_replace( '/(_+)/', '_', $new );
+        $new = preg_replace('/(-+)/', '-', $new);
 
-        return rtrim( $new, '_' );
+        return strtolower(rtrim($new, '-'));
     }
 
     public static function getShopImage($img)

@@ -19,10 +19,11 @@ if (!$authorized) {
 		$query = "
 		SELECT title, DATE_FORMAT(modified_date, '%D %M, %Y') AS date, links_id, sort_order, editable, url, page_id, deletable
 		FROM menu_links, menu_parent
-		WHERE menu_parent.parent='$parent'
+		WHERE menu_parent.parent='". escape_data($parent) . "'
 		AND menu_parent.parent_id=menu_links.parent_id
 		ORDER BY sort_order ASC
 		";
+		
 		$result = mysql_query($query);
 		
 		while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
@@ -39,12 +40,17 @@ if (!$authorized) {
 			print "<td style=\"background-color:skyblue;\"><b>{$row['date']}</b></td>\r\n"; 
 			print "<td style=\"background-color:skyblue;\"><a href=\"assend.php?lid={$row['links_id']}\" ><img src=\"/admin/images/assend.png\" alt=\"Move Up\" /></a></td>\r\n";
 			print "<td style=\"background-color:skyblue;\"><a href=\"desend.php?lid={$row['links_id']}\" ><img src=\"/admin/images/desend.png\" alt=\"Move Down\" /></a></td>\r\n";
-			if ($row['url'] != "index.php" && $row['url'] != "php/login.php" && $row['url'] != "php/logout.php") {
+			if ($row['deletable'] == "Y" && $row['editable'] == "Y") {
 				print "<td style=\"background-color:skyblue;\"><a href=\"merge.php?lid={$row['links_id']}\" ><img src=\"/admin/images/merge.png\" alt=\"Move the page\" /></a></td>\r\n"; 
 			} else {
 				print "<td style=\"background-color:skyblue;\">&nbsp</td>\r\n";
 			}
-			print "<td style=\"background-color:skyblue;\"><a href=\"title.php?lid={$row['links_id']}\" ><img src=\"/admin/images/title.gif\" alt=\"Edit Title\" /></a></td>\r\n";
+			if ($row['editable'] == "Y") {
+				print "<td style=\"background-color:skyblue;\"><a href=\"title.php?lid={$row['links_id']}\" ><img src=\"/admin/images/title.gif\" alt=\"Edit Title\" /></a></td>\r\n";
+			} else {
+				print "<td style=\"background-color:skyblue;\">&nbsp</td>\r\n";
+			}
+			
 			if ($row['editable'] == "Y") {
 				print "<td style=\"background-color:skyblue;\"><a href=\"/admin/modules/pages/edit_page.php?pid={$row['page_id']}\"  style=\"text-decoration:none; \" ><img src=\"/admin/images/edit.png\" alt=\"edit page\" /></a></td>\r\n";
 			} else {

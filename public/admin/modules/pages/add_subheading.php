@@ -17,11 +17,10 @@ if (!$authorized) {
 	if ($_POST['submit'] == "Make Heading") {
 	
 		// Set variables.
-		$title = ucwords (strtolower (escape_data($_POST['title'])));
-		$Parent = str_replace (" ", "_", strtolower (escape_data($_POST['title'])));
+		$title = ucwords (escape_data($_POST['title']));
 
-		$PageName = str_replace (" ", "_", strtolower (Utility::filterString(escape_data($_POST['title']))));
-		$url = "pages/{$PageName}.php";
+		$PageName = strtolower (Utility::filterString($_POST['title']));
+		$url = "pages/{$PageName}";
 	 	
 		// Check to see if Heading exists.
 		$query = "
@@ -33,6 +32,13 @@ if (!$authorized) {
 		$result = mysql_query($query);
 		
 		if (mysql_num_rows ($result) == 0) {
+			
+			$query = "
+				INSERT INTO pages (ident, page, date_entered)
+				VALUES ('$PageName', '$title', NOW() );
+			";
+			$result = mysql_query ($query);
+			$PageId = mysql_insert_id();
 		
 			// Add page to database.
 			$query = "
@@ -54,10 +60,13 @@ if (!$authorized) {
 			
 			// Add page to the menu links.
 			$query = "
-				INSERT INTO menu_links (parent_id, status_id, page_id, title, url, sort_order, editable, modified_date, deletable)
-				VALUES (1, 1, 0, '$title', '$url', '$SortOrder', 'Y', NOW(), 'Y');
+				INSERT INTO menu_links (parent_id, status_id, page_id, title, url, sort_order, sub_menu, editable, modified_date, deletable)
+				VALUES (1, 1, '$PageId', '$title', '$url', '$SortOrder', 1, 'Y', NOW(), 'Y');
 				";
 			$result = mysql_query($query);
+			
+			// Create site map from menu links in database.
+			new SiteMap();
 			
 			print ("<span class=\"smcap\"><p class=\"pass\"><img src=\"/admin/images/actionok.png\" /> The $title page has been added.</p></span>");
 		

@@ -44,6 +44,9 @@ if (!$authorized) {
 				";
 			$result = mysql_query ($query);
 			print $query;
+			
+			// Create site map from menu links in database.
+			new SiteMap();
 		}
 		ob_end_clean ();
 		header ("Location: $https/admin/modules/pages/index.php");

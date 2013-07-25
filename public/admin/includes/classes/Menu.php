@@ -26,7 +26,7 @@ class Menu
 		
 		foreach ($row as $key => $value) {
 			//$url = '/shop/'.encodeurl($row[$key]['category']);
-			$url = '/shop/index.php?pcid='.$row[$key]['category_id'];
+			$url = '/shop/'.$row[$key]['ident'];
 			$this->menu .= "<li>";
 			$this->menu .= "<a href=\"$url\">".$row[$key]['category']."</a>";
 			
@@ -38,7 +38,7 @@ class Menu
 					
 				// find the end of the array.
 				$end = end($row);
-					
+				// closures
 				if ($row[$key]['category_id'] == $end['category_id']) {
 					$this->menu .= str_repeat("</li></ul>", $row[$key]['depth']);
 					$this->menu .= "</li>";
