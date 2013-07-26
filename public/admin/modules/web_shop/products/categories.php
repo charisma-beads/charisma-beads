@@ -134,6 +134,7 @@ if (!$authorized) {
         echo '<table align="center" cellspacing="2" cellpadding="2" id="test">
 		<tr bgcolor="#EEEEEE">
 			<td align="center"><b>Category</b></td>
+        	<td><b>Category URL</b></td>
 			<td><b>Image</b></td>
 			<td><b> </b></td>
 			<td><b> </b></td>
@@ -163,7 +164,9 @@ if (!$authorized) {
 			print "<td align=\"left\">".str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;',($row['depth']));
 			if ($row['depth'] > 0) print "&bull;&nbsp;";
 			print $row['category']."</td>\r\n";
-
+			
+			print "<td><a href=\"$merchant_website/shop/{$row['ident']}\" target=\"_blank\" ><b>$merchant_website/shop/{$row['ident']}</b></a></td>";
+			
 			print "<td><img src=\"$img_file\" /></td>";
 
 			print "<td align=\"center\"><a href=\"edit_category.php?pcid={$row['category_id']}&s=$start&np=$num_pages\"><img src=\"/admin/images/edit.png\" alt=\"Edit catagory\"/></a></td>\r\n";

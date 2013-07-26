@@ -36,7 +36,8 @@ if (!$authorized) {
 			if ($row['url'] == "index.php") {
 				print "<img src=\"/admin/images/intro.png\" style=\"vertical-align:middle;\" alt=\"Home Page\" />\r\n";
 			}
-			print "<span style=\"vertical-align:middle;\">{$row['title']}</span></b></td>\r\n"; 
+			print "<span style=\"vertical-align:middle;\">{$row['title']}</span></b></td>\r\n";
+			print "<td style=\"background-color:skyblue;\"><a href=\"$merchant_website/{$row['url']}\" target=\"_blank\" ><b>$merchant_website/{$row['url']}</b></a></td>\r\n";
 			print "<td style=\"background-color:skyblue;\"><b>{$row['date']}</b></td>\r\n"; 
 			print "<td style=\"background-color:skyblue;\"><a href=\"assend.php?lid={$row['links_id']}\" ><img src=\"/admin/images/assend.png\" alt=\"Move Up\" /></a></td>\r\n";
 			print "<td style=\"background-color:skyblue;\"><a href=\"desend.php?lid={$row['links_id']}\" ><img src=\"/admin/images/desend.png\" alt=\"Move Down\" /></a></td>\r\n";
@@ -89,7 +90,7 @@ if (!$authorized) {
 				<table border="0" cellpadding="2" cellspacing="2" style="border:1px solid black;">
 					<tr>
 						<td style="background-color:skyblue;"><b>Page Name</b></td>
-						
+						<td style="background-color:skyblue;"><b>Page URL</b></td>
 						<td style="background-color:skyblue;"><b>Last Modified</b></td>
 						<td style="background-color:skyblue;">&nbsp;</td>
 						<td style="background-color:skyblue;">&nbsp;</td>
