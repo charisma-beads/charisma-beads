@@ -188,6 +188,9 @@ if (!$authorized) {
 		}
 
 	}
+	
+	// Create site map from menu links in database.
+	new SiteMap();
 
 }
 // Flush the buffered output to the web browser.
