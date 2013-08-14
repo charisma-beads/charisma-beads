@@ -18,6 +18,7 @@ class SiteMap
 	function shop_menu()
 	{
 		global $dbc;
+		global $merchant_website;
 		
 		include_once ($_SERVER['DOCUMENT_ROOT'] . '/admin/includes/NestedTree.class.php');
 		

@@ -1,3 +1,4 @@
+php_value include_path .:/home/shaun/public/library
 RewriteEngine on
 
 RewriteCond %{REQUEST_FILENAME} !-f

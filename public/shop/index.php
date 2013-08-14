@@ -17,7 +17,7 @@ $tree = new NestedTree('product_category', NULL, 'category', $dbc);
 // Set the page title.
 if (isset ($pcid)) {
 	
-	$page_title = NULL;
+	$page_title = 'Shop ';
 	$pathway = $tree->pathway($pcid);
 	
 	if (count($pathway) > 0) {
@@ -117,15 +117,15 @@ if (isset($pcid))
 	$content .= "<table  border=\"0\" cellpadding=\"30\" cellspacing=\"0\" style=\"margin-left:auto; margin-right:auto; text-align:center;\">"; // start table
 			
 	$row = $tree->getDecendants(TRUE);
-	/*
+	
 	if ($row) {
 		foreach ($row AS $key => $value) {
-			$category[$key]  = $value['category'];
+			if ($value['enabled'] == 0 || $value['discontinued'] == 1) {
+				unset ($row[$key]);
+			}
 		}
-	
-		array_multisort($category, SORT_ASC, $row);
 	}
-	*/
+	
 	$num_rows = ceil(count($row)/$display);
 	
 	for ($n = 1; $n <= $num_rows; $n++) {
@@ -174,7 +174,7 @@ if (isset($pcid))
 	
 	$row = $tree->getTree();
 	foreach ($row as $key => $value) {
-		if ($value['depth'] != 0) {
+		if ($value['depth'] != 0 || $value['enabled'] == 0 || $value['discontinued'] == 1) {
 			unset ($row[$key]);
 		}
 	}

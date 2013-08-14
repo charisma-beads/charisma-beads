@@ -155,14 +155,14 @@ function form () {
 	}
 	$s .= '" /><span class="required">*</span></td></tr>';
     
-   	$s .= '<tr><td align="right"><b>Email:</b></td> <td align="left"><input type="text" name="email" size="40" value="';
+   	$s .= '<tr><td align="right"><b>Email:</b></td> <td align="left"><input type="email" name="email" size="40" value="';
 	if (isset($_POST['email'])) {
 		$s .= $_POST['email'];
 	}
 	
 	$s .= '" /><span class="required">*</span></td></tr>';
 	
-	$s .= '<tr><td align="right"><b>Comfirm Email:</b></td> <td align="left"><input type="text" name="email1" size="40" value="';
+	$s .= '<tr><td align="right"><b>Comfirm Email:</b></td> <td align="left"><input type="email" name="email1" size="40" value="';
 	if (isset($_POST['email1'])) {
 		$s .= $_POST['email1'];
 	}

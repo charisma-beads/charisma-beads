@@ -48,6 +48,7 @@ body {
 </head>
 <body> 
 <div id="merchant">#### NAME ####</div>
+#### COLLECT ####
 <div>
 #### INVOICE ####
 </div>

@@ -27,8 +27,32 @@ if (!$authorized) {
 	 	
 		// Cancel.
 		if ($_POST['submit'] == "Cancel") {
+			Utility::go('categories.php');
+		}
 		
-			go ('categories.php');
+		if ($_POST['submit'] == "Discontinue") {
+			
+			$tree->setId($_POST['pcid']);
+			$decendants = $tree->getDecendants();
+			
+			$cats = array();
+			
+			foreach ($decendants as $row) {
+				$cats[] = $row['category_id'];
+			}
+			
+			$cats = implode(',', $cats);
+			
+			$query = "UPDATE product_category SET discontinued=1 WHERE category_id IN ($cats)";
+			
+			$result = mysql_query($query);
+			
+			if ($result) {
+				$query = "UPDATE products SET discontinued=1 WHERE category_id IN ($cats)";
+				$result = mysql_query($query);
+			}
+			
+			Utility::go ('categories.php');
 		}
 		
 		// Delete Group.
@@ -70,17 +94,32 @@ if (!$authorized) {
 		<div class="box">
 		<table cellspacing="2" cellpadding="2">
 		<form action="<?=$_SERVER['PHP_SELF']?>" method="post">
-		<tr><td colspan="2" align="center" style="border:2px dashed red;background-color:white;"><img src="<?=$_SERVER['DOCUMENT_ROOT']?>/admin/images/actionwarning.png" style="vertical-align:middle;" /><span style="vertical-align:middle;font-weight:bold;font-variant:small-caps;color:red;">Deleting this category will:-
+		<tr><td colspan="3" align="center" style="border:2px dashed red;background-color:white;">
+			<img src="<?=$_SERVER['DOCUMENT_ROOT']?>/admin/images/actionwarning.png" style="vertical-align:middle;" />
+			<span style="vertical-align:middle;font-weight:bold;font-variant:small-caps;color:red;">Deleting this category will:-
 			<ol>
 				<li>Delete all sub categories</li>
 				<li>Orphan all the products</li>
 				<li>Delete all the image files</li>
 			</ol>
-		belonging to this category and it's sub categories.</span></td></tr>
+		belonging to this category and it's sub categories.</span><br />
+		<span style="vertical-align:middle;font-weight:bold;font-variant:small-caps;color:red;">
+			Deleting this categories will delete it from all invoices.<br />
+			Why not disable it for now or discontinue it.
+		</span></td></tr>
 		<tr><td align="right"><b>Category</b></td><td><?=$cat?></td></tr>
 		<input type="hidden" name="pcid" value="<?=$_GET['pcid']?>" />
 		<input type="hidden" name="category" value="<?=$cat?>" />
-		<tr><td align="center"><input type="submit" name="submit" value="Delete" /></td><td align="center"><input type="submit" name="submit" value="Cancel" /></td></tr>
+		<tr>
+			<td align="center">
+				<input type="submit" name="submit" value="Discontinue" />
+			</td>
+			<td align="center">
+				<input type="submit" name="submit" value="Delete" />
+			</td><td align="center">
+				<input type="submit" name="submit" value="Cancel" />
+			</td>
+		</tr>
 		</form> 
 		</table>
 		</div>

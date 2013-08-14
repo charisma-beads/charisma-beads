@@ -30,6 +30,8 @@ if (isset($_SESSION['cid']) && $cart->getNumCartItems() > 0 && ($_POST['stage'] 
 		if ($_POST['terms'] == 1) {
 
 			$_SESSION['terms'] = "agree";
+			
+			$_SESSION['collect_instore'] = $_POST['collectInStore'];
 
 			if (isset($_POST['payment_option'])) {
 
@@ -95,9 +97,14 @@ if (isset($_SESSION['cid']) && $cart->getNumCartItems() > 0 && ($_POST['stage'] 
 		}
 
 	$content .= '<p>'.$i.'</p>
-	</div>
+	</div>';
+	
+	if ($CollectInstore) {
+		$content .= '<p><input type="checkbox" name="collectInStore" value="0" /><b>&nbsp;Please click box if you would like to collect your order from the shop</b></p>';
+		$content .= "<p>When collecting from shop postage will be removed from total</p>";
+	}
 
-	<div style="margin-bottom:10px;">
+	$content .= '<div style="margin-bottom:10px;">
 		<p>Additional requirements:</p>
 		<p><textarea name="customer_note" rows="6" cols="50">';
     if (isset($_POST['customer_note'])) $content .= $_POST['customer_note'];

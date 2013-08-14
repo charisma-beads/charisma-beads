@@ -745,7 +745,7 @@ class HnCaptcha
 
             if($which==='input')
             {
-				$ret .= '<input tabindex="4" class="inputbox" type="text" name="hncaptcha_private_key" value="" maxlength="'.$this->chars.'" size="'.$this->chars.'" />'."\n";
+				$ret .= '<input tabindex="4" class="inputbox" type="text" name="hncaptcha_private_key" value="" maxlength="'.$this->chars.'" size="'.($this->chars + 4).'" />'."\n";
             }
 
             if($which==='text')
