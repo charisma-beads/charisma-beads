@@ -26,31 +26,34 @@ class Menu
 		
 		foreach ($row as $key => $value) {
 			//$url = '/shop/'.encodeurl($row[$key]['category']);
-			$url = '/shop/'.$row[$key]['ident'];
-			$this->menu .= "<li>";
-			$this->menu .= "<a href=\"$url\">".$row[$key]['category']."</a>";
-			
-			$children = (($row[$key]['rgt'] - $row[$key]['lft']) - 1) / 2;
-					
-			if ($children > 0) $this->menu .= "<ul>";
-					
-			if ($row[$key]['depth'] > 0) {
-					
-				// find the end of the array.
-				$end = end($row);
-				// closures
-				if ($row[$key]['category_id'] == $end['category_id']) {
-					$this->menu .= str_repeat("</li></ul>", $row[$key]['depth']);
-					$this->menu .= "</li>";
-				} else if ($row[$key + 1]['depth'] < $row[$key]['depth']) {
-					$this->menu .= str_repeat("</li></ul>", ($row[$key]['depth'] - $row[$key + 1]['depth']));
-					$this->menu .= "</li>";
+			if ($value['enabled'] == 1 && $value['discontinued'] == 0) {
+				
+				$url = '/shop/'.$row[$key]['ident'];
+				$this->menu .= "<li>";
+				$this->menu .= "<a href=\"$url\">".$row[$key]['category']."</a>";
+				
+				$children = (($row[$key]['rgt'] - $row[$key]['lft']) - 1) / 2;
+						
+				if ($children > 0) $this->menu .= "<ul>";
+						
+				if ($row[$key]['depth'] > 0) {
+						
+					// find the end of the array.
+					$end = end($row);
+					// closures
+					if ($row[$key]['category_id'] == $end['category_id']) {
+						$this->menu .= str_repeat("</li></ul>", $row[$key]['depth']);
+						$this->menu .= "</li>";
+					} else if ($row[$key + 1]['depth'] < $row[$key]['depth']) {
+						$this->menu .= str_repeat("</li></ul>", ($row[$key]['depth'] - $row[$key + 1]['depth']));
+						$this->menu .= "</li>";
+					} else {
+						if ($children == 0) $this->menu .= "</li>";
+					}	
 				} else {
 					if ($children == 0) $this->menu .= "</li>";
-				}	
-			} else {
-				if ($children == 0) $this->menu .= "</li>";
-			}	
+				}
+			}
 		}
 	}
 	

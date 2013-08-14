@@ -74,6 +74,7 @@ if ($num > 0) { // If it ran OK, display the records.
 		$content .= '<div class="center"><br />';
 		// Determine what page the script is on.
 		$current_page = ($start/$display) + 1;
+		$page_title .= ' Page ' . $current_page;
 
 		// If it's not the first page, make a previous button.
 		if ($current_page != 1){
@@ -170,7 +171,7 @@ if ($num > 0) { // If it ran OK, display the records.
             }
             unset($img);
             
-            $content .= "<td style=\"width:90px;\">\r\n";
+            $content .= "<td>\r\n";
             if ($avail) {
             	$content .= "<table><tr><td class=\"button Tips\" title=\"Shop Tip\" rel=\"Click to add to cart\"><a class=\"cart_buttons\" href=\"cart.php?action=add&pid={$row['product_id']}\">Add to Cart</a></td></tr></table>";
             } else {

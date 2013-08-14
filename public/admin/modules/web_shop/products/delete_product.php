@@ -93,7 +93,15 @@ if (!$authorized) {
 		<div class="box">
 		<table cellspacing="2" cellpadding="2">
 		<form action="<?=$_SERVER['PHP_SELF']?>" method="post">
-		<tr><td colspan="3" align="center" style="border:2px dashed red;background-color:white;"><img src="/admin/images/actionwarning.png" style="vertical-align:middle;" /><span style="vertical-align:middle;font-weight:bold;font-variant:small-caps;color:red;">Deleting this product will delete it from all invoices.<br />Why not disable it for now or discontinue it.</span></td></tr>
+		<tr>
+			<td colspan="3" align="center" style="border:2px dashed red;background-color:white;">
+				<img src="/admin/images/actionwarning.png" style="vertical-align:middle;" />
+				<span style="vertical-align:middle;font-weight:bold;font-variant:small-caps;color:red;">
+					Deleting this product will delete it from all invoices.<br />
+					Why not disable it for now or discontinue it.
+				</span>
+			</td>
+		</tr>
 		<tr><td align="right"><b>Product</b></td><td><?=$product?></td></tr>
 		<input type="hidden" name="pid" value="<?=$_GET['pid']?>" />
 		<tr>

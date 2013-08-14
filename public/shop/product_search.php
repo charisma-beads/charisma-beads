@@ -167,6 +167,8 @@ if (is_numeric($_GET['search_id']) && isset ($_GET['search_query'])) {
 	FROM products AS p, product_size AS ps, tax_codes AS tc, tax_rates AS tr, product_postunit AS w, product_category AS pc
 	$product_search
 	AND p.category_id IN ($search_categories)
+	AND pc.enabled=1
+	AND pc.discontinued=0
 	AND p.category_id=pc.category_id
 	AND p.size_id=ps.size_id 
 	AND p.tax_code_id=tc.tax_code_id 
@@ -324,7 +326,7 @@ if (is_numeric($_GET['search_id']) && isset ($_GET['search_query'])) {
                     print "</td>";
                 }
 
-                print "<td style=\"width:90px;\">\r\n";
+                print "<td>\r\n";
                 if ($avail) print "<table><tr><td class=\"button Tips\" title=\"Shop Tip\" rel=\"Click to add to cart\"><a class=\"cart_buttons\" href=\"cart.php?action=add&pid={$row['product_id']}\">Add to Cart</a></td></tr></table>";
                 print "</td>\r\n";
                 print "</tr>\r\n"; // end row

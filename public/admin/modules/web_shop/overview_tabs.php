@@ -128,6 +128,7 @@ if (!$authorized) {
 							FROM customer_order_status
 							WHERE order_status != 'Cancelled'
 							AND order_status != 'Dispatched'
+							AND order_status != 'Acknowledged'
 						)
 						AND customer_orders.order_status_id = customer_order_status.order_status_id
 						AND customers.customer_id = customer_orders.customer_id

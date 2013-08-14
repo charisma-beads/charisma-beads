@@ -70,6 +70,8 @@ class ShoppingCart
      */
     private $tax_state = false;
     
+    protected $collect_instore = false;
+    
     /**
      * Holds the customer id or session id to reference
      * cart in database.
@@ -180,6 +182,10 @@ class ShoppingCart
 
         // Retrieve cart if there is one.
         $retrieveCart = $this->retrieveCart();
+	}
+	
+	public function setCollectInstore() {
+		$this->collect_instore = true;
 	}
 
     /**
@@ -633,6 +639,8 @@ class ShoppingCart
 				$postTaxRate = $row->tax_rate;
 			endif;
         }
+        
+        if ($this->collect_instore) $this->totals['postCost'] = 0;
 
 		$tax_array = $this->calculateTax($this->totals['postCost'], 1, $postTaxRate, $postVatInc);
 

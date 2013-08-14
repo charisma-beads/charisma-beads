@@ -127,9 +127,9 @@ if (!$authorized) {
     
     // Make the query.
     $query = "
-		SELECT product_id, group_id, product_name, price, short_description, products.image, enabled, products.category_id, lft
+		SELECT product_id, group_id, product_name, price, short_description, products.image, products.enabled, products.category_id, lft
 		FROM products, product_category
-		WHERE discontinued=1
+		WHERE products.discontinued=1
 		AND products.category_id=product_category.category_id
 		";
 	if (isset ($_SESSION['filter'])) {

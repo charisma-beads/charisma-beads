@@ -190,14 +190,6 @@ class NestedTree
 		// reset the tree array.
 		$this->full_tree = array();
 
-		/*
-		SELECT child.*, (COUNT(parent.category) - 1) AS depth
-		FROM product_category AS child, product_category AS parent
-		WHERE child.lft BETWEEN parent.lft AND parent.rgt
-		GROUP BY child.category_id
-		ORDER BY child.lft
-		*/
-
 		$result = mysql_query ("
 			SELECT child.*, (COUNT(parent.".$this->category_field.") - 1) AS depth
 			FROM ".$this->table." AS child, ".$this->table." AS parent

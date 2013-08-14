@@ -18,7 +18,7 @@ function form () {
 	global $referer_link;
 
     $s = '<table>';
-	$s .= '<tr><td><b>Email:</b></td><td><input tabindex="1" class="inputbox" type="text" name="email" size="20" value="';
+	$s .= '<tr><td><b>Email:</b></td><td><input tabindex="1" class="inputbox" type="email" name="email" size="20" value="';
 	if(isset($_POST['email'])) {
 		$s .= $_POST['email'];
 	}

@@ -108,6 +108,22 @@ if (!$authorized) {
 					<td><input type="text" name="VatNumber" size="30" maxlength="30" value="<?php print $VatNumber; ?>" /></td>
 				</tr>
 
+				<tr>
+					<td class="bold">Collect at Shop:</td>
+					<td class="bold">Yes:<input type="radio" name="CollectInstore" value="1"
+					<?php
+					if ($CollectInstore == 1) {
+						print 'checked="checked"';
+					}
+					?> />
+					No:<input type="radio" name="CollectInstore" value="0"
+					<?php
+					if ($CollectInstore == 0) {
+						print 'checked="checked"';
+					}
+					?> /></td>
+				</tr>
+				
     			<tr>
 					<td class="bold">Pay by Check:</td>
 					<td class="bold">Yes:<input type="radio" name="PayCheck" value="1"

@@ -34,6 +34,7 @@ if (!$authorized) {
 		print ">All Categories</option>";
 	
 		foreach ($tree->getTree() as $row) {
+			if ($row['discontinued']) continue;
 			print "<option value=\"{$row['category_id']}\"";
 			if (isset($_POST['pcf']) && $_POST['pcf'] == $row['category_id']) print " $selected";
 			print ">".str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;',($row['depth']));
@@ -70,6 +71,8 @@ if (!$authorized) {
 	
 	print "<table class=\"todo_menu\">";
 	print "<tr><td height=\"25\" class=\"Link\" onMouseOver=\"this.className='bodyLink'\" onMouseOut=\"this.className='Link'\"><a href=\"add_product.php\" class=\"Link\">Add New Product</a></td></tr>";
+	
+	print "<tr><td height=\"25\" class=\"Link\" onMouseOver=\"this.className='bodyLink'\" onMouseOut=\"this.className='Link'\"><a href=\"discontinued_list.php\" class=\"Link\">Discontinued Products</a></td></tr>";
 	
 	print "<tr><td height=\"25\" class=\"Link\" onMouseOver=\"this.className='bodyLink'\" onMouseOut=\"this.className='Link'\"><a href=\"out_of_stock.php\" class=\"Link\" >Export Out of Stock List</a></td></tr>";
 	
@@ -127,9 +130,9 @@ if (!$authorized) {
     
     // Make the query.
     $query = "
-		SELECT product_id, group_id, product_name, price, quantity, short_description, products.image, enabled, products.category_id, lft
+		SELECT product_id, group_id, product_name, price, quantity, short_description, products.image, products.enabled, products.category_id, lft
 		FROM products, product_category
-		WHERE discontinued=0
+		WHERE products.discontinued=0
 		AND products.category_id=product_category.category_id
 		";
 	if (isset ($_SESSION['filter'])) {
