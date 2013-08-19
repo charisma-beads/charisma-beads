@@ -31,7 +31,7 @@ if (isset($_SESSION['cid']) && $cart->getNumCartItems() > 0 && ($_POST['stage'] 
 
 			$_SESSION['terms'] = "agree";
 			
-			$_SESSION['collect_instore'] = $_POST['collectInStore'];
+			$_SESSION['collect_instore'] = (isset($_POST['collectInStore'])) ? true : false;
 
 			if (isset($_POST['payment_option'])) {
 
@@ -42,6 +42,8 @@ if (isset($_SESSION['cid']) && $cart->getNumCartItems() > 0 && ($_POST['stage'] 
 				} else {
 					$_SESSION['customer_note'] = "none";
 				}
+				
+				print_r($_SESSION);
 
                 Utility::go('final.php?stage='.$_POST['stage']);
 
@@ -100,8 +102,8 @@ if (isset($_SESSION['cid']) && $cart->getNumCartItems() > 0 && ($_POST['stage'] 
 	</div>';
 	
 	if ($CollectInstore) {
-		$content .= '<p><input type="checkbox" name="collectInStore" value="0" /><b>&nbsp;Please click box if you would like to collect your order from the shop</b></p>';
-		$content .= "<p>When collecting from shop postage will be removed from total</p>";
+		$content .= '<p><input type="checkbox" name="collectInStore" value="1" /><b>&nbsp;Please click the box if you would like to collect your order.</b></p>';
+		$content .= "<p>When collecting, postage will be removed from total</p>";
 	}
 
 	$content .= '<div style="margin-bottom:10px;">

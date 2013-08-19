@@ -171,14 +171,21 @@ class Utility
     
     public static function get_pcid ($ident)
     {
+    	global $dbc;
+    	$errorLog = ErrorLogging::getInstance();
+    	
     	$query = "
     	SELECT category_id
     	FROM product_category
     	WHERE ident='$ident'
     	";
-    	$result = mysql_query ($query);
     	
-    	if ($result) {
+    	$result = mysql_query ($query) or
+            $errorLog->sqlErrorHandler(mysql_errno($dbc), mysql_error($dbc), $query);
+    	
+    	$numRows = mysql_num_rows($result);
+    	
+    	if ($result && $numRows == 1) {
     		return mysql_result($result,0);
     	}
     	
