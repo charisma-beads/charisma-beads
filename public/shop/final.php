@@ -15,7 +15,7 @@ if (isset($_SESSION['cid']) && $_GET['stage'] == 2 && $cart->getNumCartItems() !
 
     $invoice = new Invoice($dbc);
     
-    if ($_SESSION['collect_instore']) $cart->setCollectInstore();
+    if ($_SESSION['collect_instore'] === true) $cart->setCollectInstore();
 
 	$content .= "<h1>Payment: Step 3 of 3</h1>";
 	# *** This page will receive the approval code. *** #
@@ -108,7 +108,7 @@ if (isset($_SESSION['cid']) && $_GET['stage'] == 2 && $cart->getNumCartItems() !
                 'TITLE' => $title,
                 'NAME' => $merchant_name,
                 'INVOICE' => $i,
-				'COLLECT' => ($_SESSION['collect_instore']) ? '<p>Collect Order At Shop</p>' : ''
+				'COLLECT' => ($_SESSION['collect_instore']) ? '<p>Collect Order:- You will be notified when your order is ready</b></p>' : ''
             );
 
 			$email_message = Utility::templateParser($invoice_tpl, $template, '#### ', ' ####');
