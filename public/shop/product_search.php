@@ -163,7 +163,7 @@ if (is_numeric($_GET['search_id']) && isset ($_GET['search_query'])) {
 
     // Make the query.
     $query = "
-	(SELECT product_id, p.category_id, size, product_name, price, p.description, p.image, p.image_status, quantity, tax_rate, postunit, vat_inc, lft, enabled, discontinued
+	(SELECT product_id, p.category_id, size, product_name, price, p.description, p.image, p.image_status, quantity, tax_rate, postunit, vat_inc, lft, p.enabled, p.discontinued
 	FROM products AS p, product_size AS ps, tax_codes AS tc, tax_rates AS tr, product_postunit AS w, product_category AS pc
 	$product_search
 	AND p.category_id IN ($search_categories)

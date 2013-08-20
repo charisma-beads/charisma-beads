@@ -3,6 +3,7 @@
 /logs/
 /public/admin/tmp/
 /ssl/
+/sample/
 
 data/cache/*
 public/.htaccess
