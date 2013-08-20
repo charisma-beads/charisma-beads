@@ -3,4 +3,13 @@
 /logs/
 /public/admin/tmp/
 /ssl/
-.settings/
+
+data/cache/*
+public/.htaccess
+vendor/*
+.buildpath
+.DS_Store
+.project
+.settings
+local.php
+*.local.php
