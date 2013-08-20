@@ -1,5 +1,4 @@
 /cb-back-up/
-/data/
 /logs/
 /public/admin/tmp/
 /ssl/
@@ -7,6 +6,7 @@
 data/cache/*
 public/.htaccess
 vendor/*
+sample/*
 .buildpath
 .DS_Store
 .project

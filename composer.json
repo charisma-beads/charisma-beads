@@ -1,0 +1,32 @@
+{
+	"name" : "charisma-beads/charisma-beads-reloaded",
+	"description" : "E-Commerce Website",
+	"authors" : [{
+			"name" : "Shaun Freeman",
+			"email" : "shaun@shaunfreeman.co.uk",
+			"homepage" : "http://www.shaunfreeman.co.uk",
+			"role" : "developer"
+		}
+	],
+	"keywords" : [
+		"framework",
+		"zf2"
+	],
+	"homepage" : "http://charismabeads.co.uk",
+	"license" : [
+		"BSD-3-Clause"
+	],
+	"require" : {
+		"php" : ">=5.3.3",
+		"firephp/firephp-core" : "0.4.0",
+		"mwillbanks/zfc-twitter-bootstrap" : "master-dev",
+		"twitter/bootstrap" : "~2",
+		"zendframework/zendframework" : "2.2.*"
+	},
+	"minimum-stability" : "stable",
+	"support" : {
+		"source" : "https://github.com/charisma-beads/charisma-beads-reloaded",
+		"email" : "webmaster@charismabeads.co.uk",
+		"issues" : "https://github.com/charisma-beads/charisma-beads-reloaded/issues"
+	}
+}
