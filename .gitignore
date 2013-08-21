@@ -1,8 +1,11 @@
 /cb-back-up/
 /data/
 /logs/
-/public/admin/tmp/
+/public/admin/tmp/*.*
+!do_not_remove
 /ssl/
+/sample/
+
 
 data/cache/*
 public/.htaccess
