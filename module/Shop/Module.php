@@ -9,11 +9,7 @@
 
 namespace Shop;
 
-use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
-use Zend\Mvc\ModuleRouteListener;
-use Zend\Mvc\MvcEvent;
-
-class Module implements AutoloaderProviderInterface
+class Module
 {
 	public function getAutoloaderConfig()
     {

@@ -1,22 +1,17 @@
 <?php
 return array(
-    'controllers' => array(
-        'invokables' => array(
-            'Users\Controller\Users' => 'Users\Controller\UsersController',
-        ),
-    ),
     'router' => array(
         'routes' => array(
-            'users' => array(
+            'user' => array(
                 'type'    => 'Literal',
                 'options' => array(
                     // Change this to something specific to your module
-                    'route'    => '/users',
+                    'route'    => '/user',
                     'defaults' => array(
                         // Change this value to reflect the namespace in which
                         // the controllers for your module are found
-                        '__NAMESPACE__' => 'Users\Controller',
-                        'controller'    => 'Users',
+                        '__NAMESPACE__' => 'User\Controller',
+                        'controller'    => 'User',
                         'action'        => 'index',
                     ),
                 ),
@@ -38,13 +33,55 @@ return array(
                             ),
                         ),
                     ),
+                    
                 ),
+            ),
+            'auth' => array(
+        		'type' => 'Literal',
+        		'options' => array(
+    				'route' => '/auth',
+    				'defaults' => array(
+    				    '__NAMESPACE__' => 'User\Controller',
+						'controller'    => 'Auth',
+						'action'        => 'login',
+    				),
+        		),
+        		'may_terminate' => true,
+        		'child_routes' => array(
+    				'authenticate' => array(
+						'type' => 'Literal',
+						'options' => array(
+							'route' => '/authenticate',
+							'defaults' => array(
+								'action' => 'authenticate',
+							),
+						),
+    				),
+    				'logout' => array(
+    					'type' => 'Literal',
+    					'options' => array(
+    						'route' => '/logout',
+    						'defaults' => array(
+    							'action' => 'logout',
+    						),
+    					),
+    				),
+    				'login' => array(
+						'type' => 'Literal',
+						'options' => array(
+							'route' => '/login',
+							'defaults' => array(
+								'action' => 'login',
+							),
+						),
+    				),
+        		),
             ),
         ),
     ),
     'view_manager' => array(
         'template_path_stack' => array(
-            'Users' => __DIR__ . '/../view',
+            'User' => __DIR__ . '/../view',
         ),
     ),
 );

@@ -7,13 +7,9 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Users;
+namespace User;
 
-use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
-use Zend\Mvc\ModuleRouteListener;
-use Zend\Mvc\MvcEvent;
-
-class Module implements AutoloaderProviderInterface
+class Module
 {
 	public function getAutoloaderConfig()
     {
@@ -32,5 +28,25 @@ class Module implements AutoloaderProviderInterface
     public function getConfig()
     {
         return include __DIR__ . '/config/module.config.php';
+    }
+    
+    public function getServiceConfig()
+    {
+    	return include __DIR__ . '/config/service.config.php';
+    }
+    
+    public function getViewHelperConfig()
+    {
+        return include __DIR__ . '/config/viewHelper.config.php';
+    }
+    
+    public function getControllerConfig()
+    {
+        return include __DIR__ . '/config/controller.config.php';
+    }
+    
+    public function getControllerPluginConfig()
+    {
+        return include __DIR__ . '/config/controllerPlugins.config.php';
     }
 }

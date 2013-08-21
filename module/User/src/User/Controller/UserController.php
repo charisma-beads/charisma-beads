@@ -7,11 +7,11 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Users\Controller;
+namespace User\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 
-class UsersController extends AbstractActionController
+class UserController extends AbstractActionController
 {
     public function indexAction()
     {

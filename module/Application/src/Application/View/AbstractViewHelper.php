@@ -10,12 +10,12 @@ namespace Application\View;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Stdlib\Exception\InvalidArgumentException;
-use Zend\View\Helper\AbstractHelper as ViewHelperAbstract;
+use Zend\View\Helper\AbstractHelper;
 
 /**
  * View Helper
  */
-class AbstractHelper extends ViewHelperAbstract implements ServiceLocatorAwareInterface
+class AbstractViewHelper extends AbstractHelper implements ServiceLocatorAwareInterface
 {
     /**
      * @var ServiceLocatorInterface
