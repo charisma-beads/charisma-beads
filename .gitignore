@@ -1,7 +1,8 @@
 /cb-back-up/
+/data/*
 data/cache/*
 /logs/
-
+/public/admin/tmp/*
 /ssl/
 /vendor/
 /sample/
