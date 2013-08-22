@@ -12,5 +12,18 @@
  */
 
 return array(
-    // ...
+    'session' => array(
+		'config' => array(
+			'class' => 'Zend\Session\Config\SessionConfig',
+			'options' => array(
+				'name' => 'myapp',
+			),
+		),
+		'storage' => 'Zend\Session\Storage\SessionArrayStorage',
+        'save_handler' => 'Application\SessionSaveHandler',
+		'validators' => array(
+			'Zend\Session\Validator\RemoteAddr',
+			'Zend\Session\Validator\HttpUserAgent',
+		),
+    ),
 );

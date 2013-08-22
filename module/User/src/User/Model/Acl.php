@@ -18,8 +18,8 @@ class Acl extends ZendAcl
 			'parent'		=> null,
 			'privileges'	=> array(
 				'resources' => array(
-						'menu:guest',
-						'Guest'
+					'menu:guest',
+					'Guest'
 				)
 			)
 		),
@@ -32,8 +32,8 @@ class Acl extends ZendAcl
 				'edit'      => null,
 				'delete'    => null,
 				'resources' => array(
-						'menu:user',
-						'User'
+					'menu:user',
+					'User'
 				)
 			)
 		),
@@ -46,8 +46,8 @@ class Acl extends ZendAcl
 				'edit'      => array(),
 				'delete'    => array(),
 				'resources' => array(
-						'menu:admin',
-						'Admin'
+					'menu:admin',
+					'Admin'
 				)
 			)
 		),

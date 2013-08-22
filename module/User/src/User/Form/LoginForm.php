@@ -33,5 +33,10 @@ class LoginForm extends Form
 				'label' => 'Password:',
 			),
     	));
+    	
+    	$this->add(array(
+    		'name'    => 'security',
+    	    'type'    => 'csrf',
+    	));
     }
 }

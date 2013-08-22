@@ -7,18 +7,13 @@ use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Stdlib\ArrayUtils;
 
-
 class AclFactory implements FactoryInterface
 {
     public function createService(ServiceLocatorInterface $sm)
     {
         $config = $sm->get('config');
         
-        if ($config instanceof Traversable) {
-            $config = ArrayUtils::iteratorToArray($config);
-        }
-        
-        $aclRules = $config['app_acl'];
+        $aclRules = (array_key_exists('app_acl', $config)) ? $config['app_acl'] : array();
         
         $acl = new Acl($aclRules);
         

@@ -24,5 +24,7 @@ class LoginFilter extends InputFilter
 				array('name' => 'StringTrim'),
 			),
     	));
+    	
+    	
     }
 }

@@ -3,7 +3,7 @@
 namespace User\Controller;
 
 use User\Form\LoginForm;
-use User\Service\AuthenticationService;
+use User\Model\Authentication;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
@@ -12,7 +12,7 @@ class AuthController extends AbstractActionController
     protected $auth;
     protected $form;
     
-    public function setAuthService(AuthenticationService $auth)
+    public function setAuthService(Authentication $auth)
     {
     	$this->auth = $auth;
     }
@@ -24,6 +24,10 @@ class AuthController extends AbstractActionController
     
     public function loginAction()
     {   
+        if (!$this->isAllowed('Guest')) {
+            return $this->redirect()->toRoute('home');
+        }
+        
         return new ViewModel(array(
             'form' => $this->form
         ));   
@@ -32,7 +36,7 @@ class AuthController extends AbstractActionController
     public function logoutAction()
     {
         $this->auth->clear();
-        return $this->redirect()->toRoute('application');
+        return $this->redirect()->toRoute('home');
     }
     
     public function authenticateAction()
@@ -64,13 +68,13 @@ class AuthController extends AbstractActionController
 
         if (false === $this->auth->authenticate($form->getData())) {
             //$form->setDescription('Login failed, Please try again.');
-        	$this->flashMessenger()->addInfoMessage(
+        	$this->flashMessenger()->addErrorMessage(
         		'Login failed, Please try again.'
         	);
 
             return $viewModel; // re-render the login form
         }
 
-        return $this->redirect()->toRoute('application');
+        return $this->redirect()->toRoute('home');
     }
 }

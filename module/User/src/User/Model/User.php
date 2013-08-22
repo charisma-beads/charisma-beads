@@ -9,13 +9,13 @@ class User extends AbstractModel
 {
     protected $classMap = array(
 		'gateways' => array(
-			'user' => 'Application\Model\DbTable\UserTable',
+			'user' => 'User\Model\DbTable\UserTable',
 		),
 		'entities' => array(
-			'user' => 'Application\Model\Entity\UserEntity',
+			'user' => 'User\Model\Entity\UserEntity',
 		),
 		'forms' => array(
-			'user' => 'Application\Form\UserForm'
+			'user' => 'User\Form\UserForm'
 		)
     );
     
