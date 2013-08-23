@@ -41,6 +41,10 @@ class AuthController extends AbstractActionController
     
     public function authenticateAction()
     {
+        if (!$this->isAllowed('Guest')) {
+        	return $this->redirect()->toRoute('home');
+        }
+        
         $request = $this->getRequest();
 
         if (!$request->isPost()) {
@@ -56,6 +60,7 @@ class AuthController extends AbstractActionController
         $viewModel = new ViewModel(array(
             'form' => $form
         ));
+        
         $viewModel->setTemplate('user/auth/login.phtml');
 
         if (!$form->isValid()) {
@@ -67,7 +72,6 @@ class AuthController extends AbstractActionController
         }
 
         if (false === $this->auth->authenticate($form->getData())) {
-            //$form->setDescription('Login failed, Please try again.');
         	$this->flashMessenger()->addErrorMessage(
         		'Login failed, Please try again.'
         	);

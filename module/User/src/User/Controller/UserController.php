@@ -9,12 +9,38 @@
 
 namespace User\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController;
+use Application\Controller\AbstractController;
+use Zend\View\Helper\ViewModel;
 
-class UserController extends AbstractActionController
+class UserController extends AbstractController
 {
     public function indexAction()
     {
-        return array();
+        return new ViewModel();
     }
+    
+    public function registerAction()
+    {
+        return new ViewModel();
+    }
+    
+    public function listAction()
+    {
+        return new ViewModel();
+    }
+    
+    public function addAction()
+    {
+        return new ViewModel();
+	}
+	
+	public function editAction()
+	{
+	    return new ViewModel();
+	}
+
+	public function deleteAction()
+	{
+	    return new ViewModel();
+	}
 }
