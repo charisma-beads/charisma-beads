@@ -1,21 +1,16 @@
 <?php
 return array(
-    'controllers' => array(
-        'invokables' => array(
-            'Menu\Controller\Menu' => 'Menu\Controller\MenuController',
-        ),
-    ),
     'router' => array(
         'routes' => array(
-            'menu' => array(
+            'navigation' => array(
                 'type'    => 'Literal',
                 'options' => array(
                     // Change this to something specific to your module
-                    'route'    => '/menu',
+                    'route'    => '/navigation',
                     'defaults' => array(
                         // Change this value to reflect the namespace in which
                         // the controllers for your module are found
-                        '__NAMESPACE__' => 'Menu\Controller',
+                        '__NAMESPACE__' => 'Navigation\Controller',
                         'controller'    => 'Menu',
                         'action'        => 'index',
                     ),
@@ -44,7 +39,7 @@ return array(
     ),
     'view_manager' => array(
         'template_path_stack' => array(
-            'Menu' => __DIR__ . '/../view',
+            'Navigation' => __DIR__ . '/../view',
         ),
     ),
 );

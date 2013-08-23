@@ -6,7 +6,6 @@ use Application\Model\DbTable\AbstractTable;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Where;
 use Zend\Db\Sql\Expression;
-use Zend\Db\Adapter\Platform\Mysql;
 use FB;
 
 abstract class AbstractNestedSet extends AbstractTable
@@ -32,8 +31,6 @@ abstract class AbstractNestedSet extends AbstractTable
             )
             ->group('child.'.$this->primary)
             ->order('child.lft');
-        
-        //FB::info($select->getSqlString(new Mysql));
         
         return $this->fetchResult($select);
     }

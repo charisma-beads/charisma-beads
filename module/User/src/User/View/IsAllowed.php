@@ -1,10 +1,9 @@
 <?php
 
-namespace Core\View;
+namespace User\View;
 
 use Application\View\AbstractViewHelper;
 use User\Controller\Plugin\IsAllowed as PluginIsAllowed;
-use Zend\View\Helper\AbstractHelper;
 
 class IsAllowed extends AbstractViewHelper
 {

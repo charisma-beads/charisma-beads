@@ -7,7 +7,7 @@ return array(
     	'Shop',
     	'User',
     	'Article',
-    	'Menu',
+    	'Navigation',
         'ZfcTwitterBootstrap',
     ),
 

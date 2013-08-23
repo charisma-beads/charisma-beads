@@ -52,11 +52,6 @@ return array(
             ),
         ),
     ),
-    'controllers' => array(
-        'invokables' => array(
-            'Application\Controller\Index' => 'Application\Controller\IndexController'
-        ),
-    ),
     'view_manager' => array(
         'display_not_found_reason' => true,
         'display_exceptions'       => true,
@@ -73,9 +68,4 @@ return array(
             __DIR__ . '/../view',
         ),
     ),
-    'view_helpers' => array(
-        'invokables' => array(
-	       'AbstractHelper' => 'Application\View\AbstractHelper',
-		),
-	)
 );

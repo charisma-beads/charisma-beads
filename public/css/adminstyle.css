@@ -5,7 +5,7 @@ body {
 }
 
 div.container a.brand {
-    background: url("../img/bba-logo.png") no-repeat scroll 0 5px transparent;
+    background: url("../img/admin-logo.png") no-repeat scroll 0 5px transparent;
     margin-left: 0;
     padding: 8px 50px 12px 40px;
 }

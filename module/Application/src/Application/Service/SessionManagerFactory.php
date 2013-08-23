@@ -41,6 +41,7 @@ class SessionManagerFactory implements FactoryInterface
         	if (isset($session['validators'])) {
         		$chain = $sessionManager->getValidatorChain();
         		foreach ($session['validators'] as $validator) {
+        			
         			$validator = new $validator();
         			$chain->attach('session.validate', array($validator, 'isValid'));
         		}

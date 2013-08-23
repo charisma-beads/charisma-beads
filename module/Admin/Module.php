@@ -28,15 +28,12 @@ class Module
         $match = $e->getRouteMatch();
         $controller = $e->getTarget();
         
-        print_r(strpos($match->getMatchedRouteName(), 'admin') );
-        
         if (!$match instanceof RouteMatch || false === strpos($match->getMatchedRouteName(), 'admin') || $controller->getEvent()->getResult()->terminate()) {
             return;
         }
         
         $layout = $config['admin']['admin_layout_template'];
-        $controller->layout($layout);
-        
+        $controller->layout($layout); 
     }
     
 	public function getAutoloaderConfig()
