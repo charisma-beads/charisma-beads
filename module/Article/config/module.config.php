@@ -1,12 +1,7 @@
 <?php
 return array(
-    'controllers' => array(
-        'invokables' => array(
-            'Pages\Controller\Article' => 'Pages\Controller\ArticleController',
-        ),
-    ),
-    'router' => array(
-        'routes' => array(
+	'router' => array(
+		'routes' => array(
             'article' => array(
                 'type'    => 'Literal',
                 'options' => array(
