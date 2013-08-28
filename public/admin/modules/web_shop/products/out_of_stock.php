@@ -31,8 +31,8 @@ if (!$authorized) {
 			SELECT product_name, category, lft, rgt, products.category_id
 			FROM products, product_category
 			WHERE products.category_id=product_category.category_id
-			AND enabled=0
-			AND discontinued=0
+			AND products.enabled=0
+			AND products.discontinued=0
 			ORDER BY lft ASC, product_name ASC
 		";
 	
