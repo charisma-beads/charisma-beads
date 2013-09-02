@@ -12,11 +12,13 @@ class AuthenticationFactory implements FactoryInterface
     {
         $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
         $model = $sm->get('User\Model\User');
+        $config = $sm->get('config');
         
         $auth = new Authentication();
         
         $auth->setDbAdapter($dbAdapter);
         $auth->setUserModel($model);
+        $auth->setOptions($config['user']['auth']);
         
         return $auth;
     }

@@ -9,7 +9,7 @@ class PageTable extends AbstractNestedSet
 {
 	protected $table = 'page';
 	protected $primary = 'pageId';
-	protected $rowClass = 'Core\Model\Entity\PageEntity';
+	protected $rowClass = 'Navigation\Model\Entity\PageEntity';
     
     public function getPagesByMenuId($id)
     {

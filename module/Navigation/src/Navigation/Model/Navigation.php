@@ -11,16 +11,16 @@ class Navigation extends AbstractModel
 {
 	protected $classMap = array(
 		'gateways' => array(
-			'menu' => 'Core\Model\DbTable\MenuTable',
-			'page' => 'Core\Model\DbTable\PageTable',
+			'menu' => 'Navigation\Model\DbTable\MenuTable',
+			'page' => 'Navigation\Model\DbTable\PageTable',
 		),
 		'entities' => array(
-			'menu' => 'Core\Model\Entity\MenuEntity',
-			'page' => 'Core\Model\Entity\PageEntity',
+			'menu' => 'Navigation\Model\Entity\MenuEntity',
+			'page' => 'Navigation\Model\Entity\PageEntity',
 		),
 		'forms' => array(
-			'menu' => 'Core\Form\MenuForm',
-			'page' => 'Core\Form\PageForm'
+			'menu' => 'Navigation\Form\MenuForm',
+			'page' => 'Navigation\Form\PageForm'
 		)
 	);
 

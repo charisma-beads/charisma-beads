@@ -7,7 +7,7 @@ class MenuTable extends AbstractTable
 {
 	protected $table = 'menu';
 	protected $primary = 'menuId';
-	protected $rowClass = 'Core\Model\Entity\MenuEntity';
+	protected $rowClass = 'Navigation\Model\Entity\MenuEntity';
 	
 	public function getMenu($menu)
 	{

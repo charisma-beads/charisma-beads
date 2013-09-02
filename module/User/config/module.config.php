@@ -1,5 +1,13 @@
 <?php
 return array(
+	'user' => array(
+		'auth' => array(
+			'dbTable' => '',
+			'identity' => '',
+			'credential' => '',
+			'hash' => ''
+		),
+	),
     'router' => array(
         'routes' => array(
             'user' => array(

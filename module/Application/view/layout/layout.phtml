@@ -24,6 +24,11 @@
             <div id="header" class="container">
                 <a><img alt="Charisma Beads Ltd" src="<?php echo $this->basepath('/img/layout/logo.png'); ?>"></a>
             </div>
+            <div class="navbar">
+				<div class="navbar-inner">
+            		<?php echo $this->aclMenu('model', 'top menu'); ?>
+            	</div>
+            </div>
             <?php echo $this->content; ?>
             <hr>
             <footer>

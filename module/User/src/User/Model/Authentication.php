@@ -58,6 +58,16 @@ class Authentication extends ZendAuthenticationService
     }
     
     /**
+     * Sets the auth options
+     * 
+     * @param array $options
+     */
+    public function setOptions(array $options)
+    {
+    	$this->options = $options;
+    }
+    
+    /**
      * Authenticate a user
      *
      * @param  array $credentials Matched pair array containing email/passwd
@@ -111,19 +121,19 @@ class Authentication extends ZendAuthenticationService
     		$treatment = $this->options['credentialTreatment'];
     
     		$authAdapter = new AuthAdapter(
-    				$this->dbAdapter,
-    				'user',
-    				'email',
-    				'passwd'
+    			$this->dbAdapter,
+    			$this->options['dbTable'],
+    			$this->options['identity'],
+    			$this->options['credential']
     		);
     
     		$this->setAuthAdapter($authAdapter);
     		$this->authAdapter->setIdentity(
-    				$values['email']
+    			$values['email']
     		);
     
     		$this->authAdapter->setCredential(
-    				sha1($values['passwd'])
+    			$this->options['hash']($values['passwd'])
     		);
     	}
     
