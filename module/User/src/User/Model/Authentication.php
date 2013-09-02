@@ -118,8 +118,6 @@ class Authentication extends ZendAuthenticationService
     {
     	if (null === $this->authAdapter) {
     
-    		$treatment = $this->options['credentialTreatment'];
-    
     		$authAdapter = new AuthAdapter(
     			$this->dbAdapter,
     			$this->options['dbTable'],
