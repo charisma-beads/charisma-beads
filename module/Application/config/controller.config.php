@@ -2,6 +2,7 @@
 
 return array(
 	'invokables' => array(
-		'Application\Controller\Index' => 'Application\Controller\IndexController'
+		'Application\Controller\Admin' => 'Application\Controller\AdminController',
+		'Application\Controller\Index' => 'Application\Controller\IndexController',
 	),
 );

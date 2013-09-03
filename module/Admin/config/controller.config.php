@@ -2,6 +2,6 @@
 
 return array(
 	'invokables' => array(
-		'Admin\Controller\AdminController' => 'Amdmin\Controller\AdminController',
+		'Admin\Controller\Admin' => 'Admin\Controller\AdminController',
 	),
 );

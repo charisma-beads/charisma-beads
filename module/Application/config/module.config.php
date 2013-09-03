@@ -50,6 +50,25 @@ return array(
                     ),
                 ),
             ),
+            'admin' => array(
+            	'child_routes' => array(
+            		'application' => array(
+            			'type'    => 'Segment',
+            			'options' => array(
+            				'route'    => '/application[/:action[/id/[:id]]]',
+            				'constraints' => array(
+            					'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+            					'id' 		 => '\d+'
+            				),
+            				'defaults' => array(
+            					'__NAMESPACE__' => 'Application\Controller',
+                        		'controller'    => 'Admin',
+                        		'action'        => 'dashboard',
+            				),
+            			),
+            		),
+            	),
+            ),
         ),
     ),
     'view_manager' => array(

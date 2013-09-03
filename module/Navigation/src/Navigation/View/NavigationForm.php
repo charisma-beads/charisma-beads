@@ -9,7 +9,7 @@ class NavigationForm extends AbstractViewHelper
 {
 	public function __invoke()
     {
-        $model = $this->getServiceLocator()->getServiceLocator()->get('Core\Model\Navigation');
+        $model = $this->getServiceLocator()->getServiceLocator()->get('Navigation\Model\Navigation');
         $pages = $model->getGateway('page')->getFullTree();
         $menus = $model->fetchAllMenus();
         

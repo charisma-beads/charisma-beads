@@ -1,6 +1,9 @@
 <?php
 
 return array(
+	'admin_options' => array(
+		'default_route' => 'admin/application',
+	),
 	'router' => array(
 		'routes' => array(
 			'admin' => array(

@@ -37,7 +37,7 @@
                     </a>
                     <a class="brand" href="<?php echo $this->url('home') ?>">&nbsp;</a>
                     <div class="nav-collapse collapse">
-                    	<?php echo $this->aclMenu('Core\Admin\Navigation'); ?>
+                    	<?php /*echo $this->aclMenu('Admin\Navigation');*/ ?>
                     </div><!--/.nav-collapse -->
                     <div class="dropdown">
                     <ul class="nav pull-right">
@@ -49,10 +49,10 @@
     				        
                             <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                                 <li>
-                                    <a href="<?php echo $this->url('admin/user', array(
+                                    <a href="<?php /*echo $this->url('admin/user', array(
                 	                    'action' => 'edit',
                 	                    'id'     => $this->identity()->userId
-            	                    )); ?>">Edit Profile
+            	                    ));*/ ?>">Edit Profile
     				                </a>
                                 </li>
                                 <li>
