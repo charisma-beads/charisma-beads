@@ -9,16 +9,18 @@ use Application\View\AbstractViewHelper;
 
 class AclMenu extends AbstractViewHelper
 {
-	public function __invoke($container = null, $menu = null, $partial = null)
+	public function __invoke($container = null, $menu = null, $partial = null, $useZtb = true)
     {
         $acl = $this->getServiceLocator()->getServiceLocator()->get('User\Service\AclFactory');
         
         if ($container == 'model') {
             $container = $this->getPages($menu);
-            //$partial = array('core/layout/tb-nested-menu', 'default');
         }
         
-    	$nav = $this->view->ztbNavigation($container);
+        $n = ($useZtb) ? 'ztbNavigation' : 'Navigation';
+        $m = ($useZtb) ? 'ztbMenu' : 'Menu';
+        
+    	$nav = $this->view->$n($container) ;
     	
     	// must set acl before partial.
     	$identity = $this->view->plugin('identity');
@@ -30,10 +32,10 @@ class AclMenu extends AbstractViewHelper
     			$partial = array($partial, 'default');
     		}
     		
-    		$nav->ztbMenu()->setPartial($partial);
+    		$nav->$m()->setPartial($partial);
     	}
     	
-    	return $nav->ztbMenu()->render();
+    	return $nav->$m()->render();
     }
     
     protected function getPages($menu)

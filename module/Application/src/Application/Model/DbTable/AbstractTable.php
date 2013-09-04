@@ -10,7 +10,7 @@ use Zend\Db\Sql\Select;
 use Zend\Paginator\Paginator;
 use Zend\Paginator\Adapter\Iterator as PaginatorIterator;
 
-abstract class AbstractTable
+class AbstractTable
 {
     /**
      * @var TableGateway
@@ -165,15 +165,22 @@ abstract class AbstractTable
 		if ($sort === '' || null === $sort) {
 			return $select;
 		}
-	
-		if (strchr($sort,'-')) {
-			$sort = substr($sort, 1, strlen($sort));
-			$order = 'DESC';
-		} else {
-			$order = 'ASC';
+		
+		$sort = (array) $sort;
+		
+		$order = array();
+		
+		foreach ($sort as $column) {
+			if (strchr($column,'-')) {
+				$column = substr($column, 1, strlen($column));
+				$direction = 'DESC';
+			} else {
+				$direction = 'ASC';
+			}
+			$order[] = $column. ' ' . $direction;
 		}
 	
-		return $select->order($sort . ' ' . $order);
+		return $select->order($order);
 	}
 	
 	/**

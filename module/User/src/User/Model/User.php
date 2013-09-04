@@ -31,9 +31,9 @@ class User extends AbstractModel
     	return $this->getGateway('user')->getUserByEmail($email, $ignore);
     }
     
-    public function fetchAllUsers()
+    public function fetchAllUsers($post = array())
     {
-    	return $this->getGateway('user')->fetchAll();
+    	return $this->getGateway('user')->fetchAllUsers($post);
     }
     
     public function addUser($post)

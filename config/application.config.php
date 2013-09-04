@@ -4,10 +4,10 @@ return array(
     'modules' => array(
     	'Admin',
         'Application',
-    	'Shop',
-    	'User',
     	'Article',
     	'Navigation',
+    	'Shop',
+    	'User',
         'ZfcTwitterBootstrap',
     ),
 

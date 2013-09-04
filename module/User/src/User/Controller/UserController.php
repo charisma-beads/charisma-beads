@@ -8,58 +8,11 @@ use Zend\View\Model\ViewModel;
 
 class UserController extends AbstractController
 {
-	public function listAction()
+	public function registerAction()
 	{
-		if (!$this->isAllowed('User', 'view')) {
-			return $this->redirect()->toRoute('home');
-		}
-
-		return new ViewModel(array(
-			'users' => $this->getModel('User\Model\User')->fetchAllUsers()
-		));
-	}
-
-	public function addAction()
-	{
-		if (!$this->isAllowed('User', 'add')) {
-			return $this->redirect()->toRoute('home');
-		}
-
-		$request = $this->getRequest();
-
-		if ($request->isPost()) {
-
-			$result = $this->getModel('User\Model\User')->addUser($request->getPost());
-				
-			if ($result instanceof UserForm) {
-
-				$this->flashMessenger()->addInfoMessage(
-					'There were one or more isues with your submission. Please correct them as indicated below.'
-				);
-
-				return new ViewModel(array(
-					'form' => $result
-				));
-
-			} else {
-				if ($result) {
-					$this->flashMessenger()->addSuccessMessage(
-						'User has been saved to database.'
-					);
-				} else {
-					$this->flashMessenger()->addErrorMessage(
-						'User could not be saved due to a database error.'
-					);
-				}
-
-				// Redirect to list of articles
-				return $this->redirect()->toRoute('admin/user');
-			}
-		}
-
-		return new ViewModel(array(
-			'form' => $this->getModel('User\Model\User')->getForm('user'),
-		));
+		if (!$this->isAllowed('Guest')) {
+            return $this->redirect()->toRoute('home');
+        }
 	}
 
 	public function editAction()
@@ -68,10 +21,13 @@ class UserController extends AbstractController
 			return $this->redirect()->toRoute('home');
 		}
 
+		
+		// lock the user into only editing his propile by extracting value
+		// from seesion auth values.
 		$id = (int) $this->params()->fromRoute('id', 0);
 		if (!$id) {
-			return $this->redirect()->toRoute('admin/user', array(
-				'action' => 'add'
+			return $this->redirect()->toRoute('user', array(
+				'action' => 'edit'
 			));
 		}
 
@@ -80,8 +36,8 @@ class UserController extends AbstractController
 		try {
 			$user = $this->getModel('User\Model\User')->getUserById($id);
 		} catch (\Exception $e) {
-			return $this->redirect()->toRoute('admin/user', array(
-				'action' => 'list'
+			return $this->redirect()->toRoute('user', array(
+				'action' => 'index'
 			));
 		}
 
@@ -123,44 +79,6 @@ class UserController extends AbstractController
 			'form' => $form,
 			'user' => $user
 		));
-	}
-
-	public function deleteAction()
-	{
-		if (!$this->isAllowed('User', 'delete')) {
-			return $this->redirect()->toRoute('home');
-		}
-
-		$request = $this->getRequest();
-
-		$id = (int) $request->getPost('userId');
-		if (!$id) {
-			return $this->redirect()->toRoute('admin/user');
-		}
-
-		if ($request->isPost()) {
-			$del = $request->getPost('submit', 'No');
-
-			if ($del == 'delete') {
-				$id = (int) $request->getPost('userId');
-				$result = $this->getModel('User\Model\User')->deleteUser($id);
-
-				if ($result) {
-					$this->flashMessenger()->addSuccessMessage(
-						'User has been deleted from the database.'
-					);
-				} else {
-					$this->flashMessenger()->addErrorMessage(
-						'User could not be deleted due to a database error.'
-					);
-				}
-			}
-
-			// Redirect to list of users
-			return $this->redirect()->toRoute('admin/user');
-		}
-
-		return $this->redirect()->toRoute('admin/user');
 	}
 }
 

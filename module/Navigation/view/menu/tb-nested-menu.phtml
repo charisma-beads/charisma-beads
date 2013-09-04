@@ -1,0 +1,61 @@
+
+<ul class="nav">
+    <?php $arrayCopy = $this->container->toArray(); ?>
+   
+    <?php $count = -1; ?>
+    <?php // find the end of the menu ?>
+    <?php $maxDepth = count($this->container) - 1; ?>
+    <?php foreach ($this->container as $key => $page): ?>
+        <?php $count++; ?>
+        <?php /* @var $page Zend\Navigation\Page\Mvc */ ?>
+        <?php // when using partials we need to manually check for ACL conditions ?>
+        <?php if( ! $page->isVisible() || !$this->navigation()->accept($page)) continue; ?>
+        <?php $isActive = $page->isActive(true); ?>
+        <?php $hasChildren = (($page->rgt - $page->lft) - 1) / 2; ?>
+        
+        <?php if ($hasChildren): ?>
+            <?php $submenu = ($page->depth > 0) ? '-submenu': ''; ?>
+            <li class="dropdown<?php echo $submenu; ?><?php if ($isActive) echo ' active'; ?>">
+                <a id="drop<?php echo $count ?>" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
+            	   <span><?php echo $page->getLabel() ?></span>
+            	   <?php if ($page->depth == 0): ?>
+            	   <b class="caret"></b>
+            	   <?php endif; ?>
+                </a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="drop<?php echo $count ?>">
+        <?php elseif ($page->depth > 0): ?>
+                <li role="presentation" class="<?php if ($isActive) echo 'active'; ?>">
+                    <a role="menuitem" tabindex="-1" href="<?php echo $page->getHref() ?>">
+                        <?php echo $page->getLabel() ?>
+                    </a>
+        <?php else: ?>
+        <li class="<?php if ($isActive) echo 'active'; ?>">
+            <a href="<?php echo $page->getHref() ?>">
+            	<?php if (strtolower($page->getLabel()) === 'home'): ?>
+            		<i class="icon-home"></i>
+            	<?php else: ?>
+                	<?php echo $page->getLabel() ?>
+                <?php endif; ?>
+            </a>
+        <?php endif; ?>
+        
+        <?php // closures ?>
+        
+        <?php if ($page->depth > 0): ?>
+            <?php if ($count == $maxDepth): ?>
+                <?php echo str_repeat('</li></ul>', $page->depth); ?>
+			</li>
+            <?php elseif ($arrayCopy[$count + 1]['depth'] < $page->depth): ?>
+                <?php echo str_repeat('</li></ul>', ($page->depth - $arrayCopy[$count + 1]['depth'])); ?>
+			</li>
+			<?php else: ?>
+            </li>
+            <?php endif; ?>
+        <?php else: ?>
+        </li>
+        <?php if (strtolower($page->getLabel()) === 'home'): ?>
+		<li class="divider-vertical"></li>
+		<?php endif; ?>
+        <?php endif; ?>
+    <?php endforeach ?>
+</ul>

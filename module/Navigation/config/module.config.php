@@ -38,6 +38,9 @@ return array(
         ),
     ),
     'view_manager' => array(
+    	'template_map' => array(
+    		'navigation/tb-nested-menu' => __DIR__ . '/../view/menu/tb-nested-menu.phtml',
+    	),
         'template_path_stack' => array(
             'Navigation' => __DIR__ . '/../view',
         ),

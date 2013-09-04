@@ -1,0 +1,8 @@
+<?php $this->headTitle('Edit User') ?>
+<?php echo $this->ztbFlashMessenger()->render(); ?>
+
+<?php echo $this->partial('user/user-form', array(
+	'form' => $this->form,
+	'formAction' => 'edit',
+	'userId' => $this->user->userId
+)); ?>

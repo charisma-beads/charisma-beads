@@ -48,9 +48,7 @@ class AuthController extends AbstractActionController
         $request = $this->getRequest();
 
         if (!$request->isPost()) {
-            return $this->forward()->dispatch('auth', array(
-                'action' => 'login'
-            ));
+            return $this->redirect()->toRoute('user/login');
         }
         
         // Validate

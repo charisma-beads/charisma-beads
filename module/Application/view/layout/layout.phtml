@@ -21,17 +21,55 @@
     </head>
     <body>
         <div id="main-content" class="container">
-            <div id="header" class="container">
+			
+            <div id="header" class="row-fulid">
                 <a><img alt="Charisma Beads Ltd" src="<?php echo $this->basepath('/img/layout/logo.png'); ?>"></a>
             </div>
             <div class="navbar">
 				<div class="navbar-inner">
-            		<?php echo $this->aclMenu('model', 'top menu'); ?>
+					<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">menu</a>
+					<div class="nav-collapse">
+	            		<?php echo $this->aclMenu('model', 'top menu', 'navigation/tb-nested-menu', false); ?>
+	            		<ul class="nav pull-right">
+							<li class="divider-vertical"></li>
+							<li class="dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-search"></i></a>
+									<div class="dropdown-menu">
+										<form class="form-search">
+											<div class="input-append">
+												<input type="text" class="search-query" placeholder="Type your search...">
+												<button class="btn">ok</button>
+											</div>
+										</form> 
+									</div>
+							</li>
+							<li class="dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-envelope"></i></a>
+								<div class="dropdown-menu">
+									<address>
+										<strong>CompanyName</strong><br>
+										Address 123<br>
+										Zipcode, State and City
+									</address>
+									<hr>
+									<strong>Phone</strong>: 012-345 67 89<br>
+									<a href="contact.html"><strong>E-mail</strong>: info@example.com</a>
+								</div>
+							</li>
+							<li class="dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-shopping-cart"></i></a>
+								<div class="dropdown-menu">
+									<hr>
+									<a href="order.html">Show all items in shopping cart <i class="icon-chevron-right"></i></a>
+								</div>
+							</li>
+						</ul>
+					</div>
             	</div>
             </div>
             <?php echo $this->content; ?>
             <hr>
-            <footer>
+            <footer class="row-fluid">
                 <p>&copy; 2005 - <?php echo date('Y') ?> by Charisma Beads Ltd. All rights reserved.</p>
                 <p>Zend Framework Version: <?php echo \Zend\Version\Version::VERSION; ?></p>
             </footer>

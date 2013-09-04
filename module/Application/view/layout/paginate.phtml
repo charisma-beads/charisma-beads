@@ -1,0 +1,33 @@
+<div id="pagination">
+	<?php if ($this->pageCount): ?>
+	<div class="centered">
+	    <span>Showing <strong><?php echo $this->firstItemNumber ?> - <?php echo $this->lastItemNumber ?></strong>
+	 	of <strong><?php echo $this->totalItemCount ?></strong></span>
+	</div>
+	<div class="row-fluid pagination-wrap">
+	    <div class="pagination pagination-centered">
+	    	<ul id="pagination-links">
+	    		<?php if (isset($this->previous)): ?>
+	 			<li><a href="<?php echo $this->url($this->route, array('page' => $this->previous)); ?>">&laquo; Prev</a></li>
+	 			<?php endif; ?>
+	 			<?php if($this->current > 1 && $this->firstPageInRange > 1): ?>
+	 			<li><a href="<?php echo $this->url($this->route, array('page' => 1)); ?>">1</a></li>
+	            <?php endif; ?>
+	            <?php foreach ($this->pagesInRange as $page): ?>
+	 				<?php if ($page != $this->current): ?>
+	 				<li><a href="<?php echo $this->url($this->route, array('page' => $page)); ?>"><?php echo $page; ?></a></li>
+	 				<?php else: ?>
+	 				<li class="active"><a href=""><?php echo $page; ?></a></li>
+	 				<?php endif; ?>
+	 			<?php endforeach; ?>
+	 			<?php if($this->current != $this->last && $this->last > $this->lastPageInRange): ?>
+	 			<li id="last-in-range"><a href="<?php echo $this->url($this->route, array('page' => $this->last)); ?>"><?php echo $this->last; ?></a></li>
+	 			<?php endif; ?>
+	 			<?php if (isset($this->next)): ?>
+	 			<li><a href="<?php echo $this->url($this->route, array('page' => $this->next)); ?>">Next &raquo;</a></li>
+	 			<?php endif; ?>
+	    	</ul>
+	    </div>
+	</div>
+	<?php endif; ?>
+</div>

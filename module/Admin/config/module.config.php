@@ -24,7 +24,13 @@ return array(
 		'admin_layout_template' => 'layout/admin',
 	),
 	'navigation' => array(
-		'admin' => array(),
+		'admin' => array(
+			'home' => array(
+				'label' => 'Home',
+				'route' => 'home',
+				'resource' => 'menu:admin',
+			),
+		),
 	),
 	'view_manager' => array(
 	   'template_path_stack' => array(
