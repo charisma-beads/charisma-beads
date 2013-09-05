@@ -8,11 +8,11 @@ use User\Model\UserException;
 use Zend\View\Model\ViewModel;
 use FB;
 
-class AdminController extends AbstractController
+class UserAdminController extends AbstractController
 {
 	public function indexAction()
 	{
-		if (!$this->isAllowed('Admin', 'view')) {
+		if (!$this->isAllowed('UserAdmin', 'view')) {
 			return $this->redirect()->toRoute('home');
 		}
 		
@@ -32,7 +32,7 @@ class AdminController extends AbstractController
 	
 	public function listAction()
 	{
-		if (!$this->isAllowed('Admin', 'view')) {
+		if (!$this->isAllowed('UserAdmin', 'view')) {
 			throw new UserException('Access Denied');
 		}
 	
@@ -49,7 +49,7 @@ class AdminController extends AbstractController
 	
 	public function addAction()
 	{
-		if (!$this->isAllowed('Admin', 'add')) {
+		if (!$this->isAllowed('UserAdmin', 'add')) {
 			return $this->redirect()->toRoute('home');
 		}
 
@@ -92,7 +92,7 @@ class AdminController extends AbstractController
 	
 	public function editAction()
 	{
-		if (!$this->isAllowed('Admin', 'edit')) {
+		if (!$this->isAllowed('UserAdmin', 'edit')) {
 			return $this->redirect()->toRoute('home');
 		}
 
@@ -155,7 +155,7 @@ class AdminController extends AbstractController
 	
 	public function deleteAction()
 	{
-		if (!$this->isAllowed('Admin', 'delete')) {
+		if (!$this->isAllowed('UserAdmin', 'delete')) {
 			return $this->redirect()->toRoute('home');
 		}
 

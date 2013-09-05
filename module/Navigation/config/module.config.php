@@ -2,44 +2,71 @@
 return array(
     'router' => array(
         'routes' => array(
-            'navigation' => array(
-                'type'    => 'Literal',
-                'options' => array(
-                    // Change this to something specific to your module
-                    'route'    => '/navigation',
-                    'defaults' => array(
-                        // Change this value to reflect the namespace in which
-                        // the controllers for your module are found
-                        '__NAMESPACE__' => 'Navigation\Controller',
-                        'controller'    => 'Menu',
-                        'action'        => 'index',
-                    ),
-                ),
-                'may_terminate' => true,
-                'child_routes' => array(
-                    // This route is a sane default when developing a module;
-                    // as you solidify the routes for your module, however,
-                    // you may want to remove it and replace it with more
-                    // specific routes.
-                    'default' => array(
-                        'type'    => 'Segment',
-                        'options' => array(
-                            'route'    => '/[:controller[/:action]]',
-                            'constraints' => array(
-                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
-                            'defaults' => array(
-                            ),
-                        ),
-                    ),
-                ),
-            ),
+        	'admin' => array(
+        		'child_routes' => array(
+        			'menu' => array(
+        				'type'    => 'Segment',
+        				'options' => array(
+        					'route'    => '/menu[/:action[/id/[:id]]]',
+        					'constraints' => array(
+        						'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+        						'id' 		 => '\d+'
+        					),
+        					'defaults' => array(
+        						'__NAMESPACE__' => 'Navigation\Controller',
+        						'controller'    => 'Menu',
+        						'action'        => 'list',
+        					),
+        				),
+        			),
+        			'page' => array(
+        				'type'    => 'Segment',
+        				'options' => array(
+        					'route'    => '/page[/:action[/menuId/[:menuId]][/id/[:id]]]',
+        					'constraints' => array(
+        						'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+        						'id' 		 => '\d+',
+        						'menuId' 	 => '\d+'
+        					),
+        					'defaults' => array(
+        						'__NAMESPACE__' => 'Navigation\Controller',
+        						'controller'    => 'Page',
+        						'action'        => 'list',
+        					),
+        				),
+        			),
+        		),
+        	),
         ),
     ),
+	'navigation' => array(
+		'admin' => array(
+			'menu' => array(
+            	'label' => 'Menu',
+            	'pages' => array(
+            		'list' => array(
+            			'label' => 'List All Menus',
+            			'action' => 'list',
+            			'route' => 'admin/menu',
+            			'resource' => 'menu:admin'
+            		),
+            		'add' => array(
+            			'label' => 'Add New Menu',
+            			'action' => 'add',
+            			'route' => 'admin/menu',
+            			'resource' => 'menu:admin'
+            		)
+            	),
+            	'route' => 'admin/menu',
+            	'resource' => 'menu:admin'
+			),
+		),
+	),
     'view_manager' => array(
     	'template_map' => array(
-    		'navigation/tb-nested-menu' => __DIR__ . '/../view/menu/tb-nested-menu.phtml',
+    		'navigation/tb-nested-menu' => __DIR__ . '/../view/navigation/tb-nested-menu.phtml',
+    		'menu/menu-form' 			=> __DIR__ . '/../view/navigation/menu/menu-form.phtml',
+            'page/page-form' 			=> __DIR__ . '/../view/navigation/page/page-form.phtml',
     	),
         'template_path_stack' => array(
             'Navigation' => __DIR__ . '/../view',

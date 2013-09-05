@@ -12,7 +12,7 @@ class Acl extends ZendAcl
      *
      * @var array
      */
-    protected $appRoles = array(
+    protected $userRoles = array(
 		'guest'			=> array(
 			'label'			=> 'Guest',
 			'parent'		=> null,
@@ -58,11 +58,11 @@ class Acl extends ZendAcl
      *
      * @var array
     */
-    protected $appResources = array(
-    		// resources for menu.
-    		'menu:admin', 'menu:guest', 'menu:user',
-    		// resources based on controllers and DataBase tables.
-    		'Admin', 'Guest', 'User',
+    protected $userResources = array(
+    	// resources for menu.
+    	'menu:admin', 'menu:guest', 'menu:user',
+    	// resources based on controllers and DataBase tables.
+    	'Admin', 'Guest', 'User',
     );
     
     /**
@@ -73,20 +73,20 @@ class Acl extends ZendAcl
     	// block all by default.
     	$this->deny();
     
-    	if (isset($config['appRoles'])) {
-    		$this->appRoles = $config['appRoles'];
+    	if (isset($config['userRoles'])) {
+    		$this->userRoles = $config['userRoles'];
     	}
     
-    	if (isset($config['appResources'])) {
-    		$this->appResources = $config['appResources'];
+    	if (isset($config['userResources'])) {
+    		$this->userResources = $config['userResources'];
     	}
     
     	// add resources.
-    	foreach ($this->appResources as $value) {
+    	foreach ($this->userResources as $value) {
     		$this->addResource(new Resource($value));
     	}
     
-    	foreach ($this->appRoles as $role => $values) {
+    	foreach ($this->userRoles as $role => $values) {
     		$this->addRole(new Role($role), $values['parent']);
     
     		if (is_string($values['privileges'])) {

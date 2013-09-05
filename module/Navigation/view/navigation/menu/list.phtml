@@ -1,0 +1,54 @@
+<?php $this->headTitle('Menus') ?>
+<?php echo $this->ztbFlashMessenger()->render(); ?>
+
+<table class="table table-hover table-bordered table-condensed">
+	<thead>
+		<tr>
+			<th data-field="menuId">Menu Id</th>
+			<th data-field="title">Menu</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		<?php foreach($this->menus as $row): ?>
+		<tr>
+			<td><?php echo $this->escapeHtml($row->menuId); ?></td>
+			<td><?php echo $this->escapeHtml($row->menu); ?></td>
+			<td>
+				<a href="<?php echo $this->basepath(
+					'/admin/menu/edit/id/' . $this->escapeHtml($row->menuId)
+				) ?>" role="button" class="btn">Edit</a>
+				&nbsp;
+				
+				<a href="<?php echo $this->basepath(
+					'/admin/page/list/menuId/' . $this->escapeHtml($row->menuId)
+				) ?>" role="button" class="btn">Edit Pages</a>
+				&nbsp;
+				
+				<!-- Button to trigger modal -->
+                <a href="#menuModel<?php echo $row->menuId; ?>" role="button" class="btn btn-danger" data-toggle="modal">Delete</a>
+                <!-- Modal -->
+				<div class="modal hide fade" id="menuModel<?php echo $row->menuId; ?>" tabindex="-1" role="dialog" aria-labelledby="menuModel<?php echo $row->menuId; ?>" aria-hidden="true">
+				  <div class="modal-header">
+				    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				    <h3 id="menuModel<?php echo $row->menuId; ?>Label">Warning</h3>
+				  </div>
+				  <form class="form-horizontal"  method="post" action="<?php echo $this->url('admin/menu', array(
+				        'action' => 'delete',
+				    )) ?>">
+				        <div class="modal-body">
+				            <p>Are you sure you want to delete this menu.</p>
+				            <p class="label label-important">This action cannot be undone</p>
+				        </div>
+				        <input type="hidden" name="menuId" value="<?php echo $row->menuId ?>">
+				        <div class="modal-footer">
+				            <button type="button" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">No Don't Do It</button>
+				            <button type="submit" name="submit" class="btn btn-danger" value="delete">Yes Delete It</button>
+				        </div>
+				    </form>
+				</div>
+			</td>
+		</tr>
+		<?php endforeach; ?>
+	</tbody>
+</table>

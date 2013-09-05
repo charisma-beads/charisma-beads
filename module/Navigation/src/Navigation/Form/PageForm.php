@@ -62,7 +62,7 @@ class PageForm extends Form
 			),
 		));
 		
-		$resources = $config['app_acl']['appResources'];
+		$resources = $config['userAcl']['userResources'];
 		
 		$this->add(array(
 			'name' => 'resource',

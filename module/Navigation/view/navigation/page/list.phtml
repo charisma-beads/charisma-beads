@@ -1,0 +1,74 @@
+<?php $this->headTitle('Pages') ?>
+<?php echo $this->ztbFlashMessenger()->render(); ?>
+
+<a href="<?php echo $this->url('admin/page', array(
+		'menuId' => $this->menuId,
+		'action' => 'add',
+	)); ?>" role="button" class="btn">Add Page</a>
+<div class="clear">&nbsp;</div>
+
+
+<table class="table table-hover table-bordered table-condensed">
+	<thead>
+		<tr>
+			<th data-field="pageId">Page Id</th>
+			<th data-field="label">Label</th>
+			<th data-field="params">Params</th>
+			<th data-field="route">Route</th>
+			<th data-field="reource">Resource</th>
+			<th data-field="isVisible">Is Visible</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		<?php if ($pages->count()): ?>
+		<?php foreach($this->pages as $key => $row): ?>
+		<tr>
+			<td><?php echo $this->escapeHtml($row->pageId); ?></td>
+			<td>
+                <?php echo str_repeat('&nbsp;&nbsp;', ($row->depth)) . '&bull;&nbsp;'; ?>
+                <?php echo $this->escapeHtml($row->label); ?></td>
+			<td><?php echo $this->escapeHtml($row->params); ?></td>
+			<td><?php echo $this->escapeHtml($row->route); ?></td>
+			<td><?php echo $this->escapeHtml($row->resource); ?></td>
+			<td><?php echo $this->escapeHtml($row->isVisible); ?></td>
+			<td>
+				<a href="<?php echo $this->basepath(
+					'/admin/page/edit/id/' . $this->escapeHtml($row->pageId)
+				) ?>" role="button" class="btn">Edit</a>
+				&nbsp;
+				
+				<!-- Button to trigger modal -->
+                <a href="#pageModel<?php echo $row->pageId; ?>" role="button" class="btn btn-danger" data-toggle="modal">Delete</a>
+                <!-- Modal -->
+				<div class="modal hide fade" id="pageModel<?php echo $row->pageId; ?>" tabindex="-1" role="dialog" aria-labelledby="pageModel<?php echo $row->pageId; ?>" aria-hidden="true">
+				  <div class="modal-header">
+				    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				    <h3 id="pageModel<?php echo $row->pageId; ?>Label">Warning</h3>
+				  </div>
+				  <form class="form-horizontal"  method="post" action="<?php echo $this->url('admin/page', array(
+				        'action' => 'delete',
+				    )) ?>">
+				        <div class="modal-body">
+				            <p>Are you sure you want to delete this page.</p>
+				            <p class="label label-important">This action cannot be undone</p>
+				        </div>
+				        <input type="hidden" name="pageId" value="<?php echo $row->pageId ?>">
+				        <input type="hidden" name="menuId" value="<?php echo $row->menuId ?>">
+				        <div class="modal-footer">
+				            <button type="button" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">No Don't Do It</button>
+				            <button type="submit" name="submit" class="btn btn-danger" value="delete">Yes Delete It</button>
+				        </div>
+				    </form>
+				</div>
+			</td>
+		</tr>
+		<?php endforeach; ?>
+		<?php else: ?>
+		<tr>
+			<td colspan="3">No Pages Availible</td>
+		</tr>
+		<?php endif; ?>
+	</tbody>
+</table>
+

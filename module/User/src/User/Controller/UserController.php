@@ -15,7 +15,7 @@ class UserController extends AbstractController
 	
 	public function registerAction()
 	{
-		if (!$this->isAllowed('Guest')) {
+		if (!$this->isAllowed('Guest', 'add')) {
             return $this->redirect()->toRoute('home');
         }
         

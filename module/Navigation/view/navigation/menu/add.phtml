@@ -1,0 +1,7 @@
+<?php $this->headTitle('Add Menu') ?>
+<?php echo $this->ztbFlashMessenger()->render(); ?>
+
+<?php echo $this->partial('menu/menu-form', array(
+	'form' => $this->form,
+	'formAction' => 'add',
+)); ?>

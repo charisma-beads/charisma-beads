@@ -1,11 +1,11 @@
 <?php
-namespace Core\Filter;
+namespace Application\Filter;
 
 use Zend\Filter\AbstractFilter;
 
 class Slug extends AbstractFilter
 {
-    public function filter($value)
+public function filter($value)
     {
         $find    = array('`', '&',   ' ', '"', "'");
         $replace = array('',  'and', '-', '',  '',);
@@ -25,4 +25,5 @@ class Slug extends AbstractFilter
 
         return strtolower(rtrim($new, '-'));
     }
+	
 }

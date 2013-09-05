@@ -1,0 +1,9 @@
+<?php $this->headTitle('Add Page') ?>
+<?php echo $this->ztbFlashMessenger()->render(); ?>
+
+<?php echo $this->partial('page/page-form', array(
+	'form' => $this->form,
+	'formAction' => 'add',
+	'menuId' => $this->menuId
+)); ?>
+

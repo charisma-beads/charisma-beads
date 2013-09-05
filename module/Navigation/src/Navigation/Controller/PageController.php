@@ -100,7 +100,7 @@ class PageController extends AbstractController
     	$request = $this->getRequest();
 		if ($request->isPost()) {
 			
-			$result = $this->getModel('Core\Model\Navigation')->editPage($page, $request->getPost());
+			$result = $this->getModel('Navigation\Model\Navigation')->editPage($page, $request->getPost());
 			
 			if ($result instanceof PageForm) {
 				
@@ -123,13 +123,13 @@ class PageController extends AbstractController
 					);
 				}
 				
-				// Redirect to list of articles
+				// Redirect to list of pages
 				return $this->redirect()->toRoute('admin/page', array('menuId' => $menuId));
 			}
 		}
 		
 		return new ViewModel(array(
-            'form' => $this->getModel('Core\Model\Navigation')->getForm('page')->bind($page),
+            'form' => $this->getModel('Navigation\Model\Navigation')->getForm('page')->bind($page),
             'page' => $page
         ));
     }

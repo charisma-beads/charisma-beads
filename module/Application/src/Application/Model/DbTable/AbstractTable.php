@@ -104,7 +104,6 @@ class AbstractTable
 	 */
 	public function insert($data)
 	{
-	    
 		return $this->tableGateway->insert($data);
 	}
 	

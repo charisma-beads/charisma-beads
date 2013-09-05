@@ -1,5 +1,5 @@
 <?php
-namespace Core\Filter;
+namespace Application\Filter;
 
 use Zend\Filter\AbstractFilter;
 

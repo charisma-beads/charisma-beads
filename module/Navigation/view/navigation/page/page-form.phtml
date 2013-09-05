@@ -1,0 +1,59 @@
+<?php
+$form = $this->form;
+$routeArray = array('action' => $this->formAction);
+if (isset($this->menuId)) $routeArray['menuId'] = $this->menuId;
+if (isset($this->pageId)) $routeArray['id'] = $this->pageId;
+
+?>
+<div>
+    <form class="form form-horizontal"  method="post" action="<?php echo $this->url('admin/page', $routeArray) ?>">
+        <fieldset>
+        <legend><?php echo ucwords($this->formAction); ?> Page Form:</legend>
+        <div class="row-fluid">
+            <div class="span6">
+                
+                <?php echo $this->ztbFormElement($form->get('label')); ?>
+                
+                <?php echo $this->ztbFormElement($form->get('route')); ?>
+                
+                <?php echo $this->ztbFormElement($form->get('params')); ?>
+                
+                <?php echo $this->ztbFormElement($form->get('resource')); ?>
+                
+                <?php echo $this->ztbFormElement($form->get('visible')); ?>
+            </div>
+            <div class="span6">
+       	        <?php echo $this->ztbFormElement($form->getPageSelect($this->menuId)); ?>
+       	        <div class="control-group">
+                    <div class="controls">
+                   	    <label class="radio">
+                            <input type="radio" name="menuInsertType" id="menuInsertType1" value="insert" checked>
+                            insert after this page.
+                        </label>
+                        <label class="radio">
+                            <input type="radio" name="menuInsertType" id="menuInsertType2" value="insertSub">
+                            insert as a subpage of this page.
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+       	<?php echo $this->formHidden($form->get('pageId')); ?>
+        <?php echo $this->formHidden($form->get('menuId')->setValue($this->menuId)); ?>
+        <input type="hidden" name="action" value="<?php echo $this->formAction; ?>">
+        
+        <div class="control-group">
+            <div class="controls">
+                <button type="submit" class="btn btn-primary" 
+                data-loading-text="Please wait...">Submit</button>
+                <button type="button" class="btn btn-warning" 
+                data-loading-text="Please wait..." onClick="window.location = '<?php echo $this->url('admin/page', array(
+                        'action' => 'list',
+                        'menuId' => $this->menuId
+                    )) ?>';">Cancel</button>
+            </div>
+        </div>
+        </fieldset>
+    </form>
+</div>

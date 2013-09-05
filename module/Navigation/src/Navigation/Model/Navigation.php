@@ -170,6 +170,7 @@ class Navigation extends AbstractModel
                     $result = $this->addPage($post);
                 }
             } else {
+            	$page = $form->getData();
                 $result = $this->getGateway('page')->update($page->pageId, $page->getArrayCopy());
             }
 		} else {
