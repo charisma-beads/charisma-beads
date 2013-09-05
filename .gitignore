@@ -3,7 +3,6 @@
 data/cache/*
 /logs/
 /public/admin/tmp/*
-/public/js/LiveEditor/*
 /ssl/
 /vendor/
 /sample/

@@ -1,0 +1,5 @@
+Bootstrap LIVE Editor 1.2
+Copyright © 2013, InnovaStudio (www.InnovaStudio.com). All rights reserved.
+____________________________________________________________________
+
+Visit: https://wrapbootstrap.com/help/licenses

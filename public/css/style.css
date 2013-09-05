@@ -23,3 +23,17 @@ div.container a.brand {
     margin-left: 0;
     padding: 8px 20px 12px 40px;
 }
+
+.intro {
+	border-top: 1px solid #d4d4d4;
+	border-bottom: 1px solid #d4d4d4;
+	margin-bottom: 20px;
+}
+
+.intro h2 {
+	height: 50px;
+	line-height: 50px;
+	float: left;
+}
+
+.text-right { text-align: right; }

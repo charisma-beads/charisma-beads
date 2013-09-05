@@ -1,9 +1,7 @@
 <?php
 
 return array(
-	'controllers' => array(
-		'invokables' => array(
-			'Pages\Controller\Article' => 'Pages\Controller\ArticleController',
-		),
+	'invokables' => array(
+		'Article\Controller\Article' => 'Article\Controller\ArticleController',
 	),
 );

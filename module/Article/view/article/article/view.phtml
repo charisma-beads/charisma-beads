@@ -1,0 +1,21 @@
+<?php 
+$articleTitle = $this->escapehtml($this->page->title);
+$this->headTitle($articleTitle);
+$splitTitle = split(' ', $articleTitle);
+$title2 = end($splitTitle);
+array_pop($splitTitle);
+$title1 = implode(' ', $splitTitle);
+
+// setting page keywords and description
+$this->headMeta()
+	->appendName('keywords', $this->escapehtml($this->page->keywords))
+	->appendName('decription', $this->escapehtml($this->page->description));
+?>
+<?php if ($this->page->slug != 'welcome'): ?>
+<div class="row-fluid intro">
+	<h2 class="span6"><?php echo $title1; ?> <span class="theme-color"><?php echo $title2; ?></span></h2>
+	<h2 class="span6 text-right">Call Us: <span class="theme-color">0845</span>-838-0284</h2>
+</div>
+<?php endif; ?>
+
+<?php echo $this->page->content; ?>

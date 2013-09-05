@@ -13,7 +13,7 @@ class ArticleEntity extends AbstractEntity
             'filters'    => array(
                 array('name'    => 'StripTags'),
                 array('name'    => 'StringTrim'),
-                array('name'    => 'Core\Filter\Ucwords'),
+                array('name'    => 'Application\Filter\Ucwords'),
             ),
             'validators' => array(
                 array(
@@ -32,7 +32,7 @@ class ArticleEntity extends AbstractEntity
             'filters'    => array(
                 array('name'    => 'StripTags'),
                 array('name'    => 'StringTrim'),
-                array('name'    => 'Core\Filter\Slug')
+                array('name'    => 'Application\Filter\Slug')
             ),
             'validators' => array(
                 array(

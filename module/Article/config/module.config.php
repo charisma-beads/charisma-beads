@@ -2,42 +2,72 @@
 return array(
 	'router' => array(
 		'routes' => array(
-            'article' => array(
-                'type'    => 'Literal',
-                'options' => array(
-                    // Change this to something specific to your module
-                    'route'    => '/article',
-                    'defaults' => array(
-                        // Change this value to reflect the namespace in which
-                        // the controllers for your module are found
-                        '__NAMESPACE__' => 'Article\Controller',
-                        'controller'    => 'Article',
-                        'action'        => 'index',
-                    ),
-                ),
-                'may_terminate' => true,
-                'child_routes' => array(
-                    // This route is a sane default when developing a module;
-                    // as you solidify the routes for your module, however,
-                    // you may want to remove it and replace it with more
-                    // specific routes.
-                    'default' => array(
-                        'type'    => 'Segment',
+        	'application' => array(
+            	'child_routes' => array(
+					'article' => array(
+						'type'    => 'Segment',
                         'options' => array(
-                            'route'    => '/[:controller[/:action]]',
-                            'constraints' => array(
-                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                            'route'         => '[:slug]',
+                            'constraints'   => array(
+                                'slug' => '[a-zA-Z][a-zA-Z0-9_-]*',
                             ),
-                            'defaults' => array(
+                            'defaults'      => array(
+                            	'__NAMESPACE__' => 'Article\Controller',
+                                'controller' => 'Article',
+                                'action' => 'view'
                             ),
                         ),
                     ),
                 ),
             ),
+			'admin' => array(
+				'child_routes' => array(
+					'article' => array(
+						'type'    => 'Segment',
+						'options' => array(
+							'route'    => '/article[/:action[/id/[:id]]]',
+							'constraints' => array(
+								'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+								'id' 		 => '\d+'
+							),
+							'defaults' => array(
+								'__NAMESPACE__' => 'Article\Controller',
+								'controller'    => 'Article',
+								'action'        => 'list',
+							),
+						),
+					),
+				),
+			),
         ),
     ),
+	'navigation' => array(
+		'admin' => array(
+			'article' => array(
+				'label' => 'Article',
+				'pages' => array(
+					'list' => array(
+						'label' => 'List All Articles',
+						'action' => 'list',
+						'route' => 'admin/article',
+						'resource' => 'menu:user'
+					),
+					'add' => array(
+						'label' => 'Add New Article',
+						'action' => 'add',
+						'route' => 'admin/article',
+						'resource' => 'menu:user'
+					)
+				),
+				'route' => 'admin/article',
+				'resource' => 'menu:user'
+			),
+		),
+	),
     'view_manager' => array(
+    	'template_map' => array(
+    		'article/article-form'	=> __DIR__ . '/../view/article/article/article-form.phtml',
+    	),
         'template_path_stack' => array(
             'Article' => __DIR__ . '/../view',
         ),
