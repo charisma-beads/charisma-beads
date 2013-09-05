@@ -1,7 +1,6 @@
 <?php
 $form = $this->form;
 $routeArray = array('action' => $this->formAction);
-if (isset($this->userId)) $routeArray['id'] = $this->userId;
 ?>
 <div>
     <form class="form-horizontal"  method="post" action="<?php echo $this->url('user/default', $routeArray) ?>">

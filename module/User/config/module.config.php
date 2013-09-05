@@ -29,10 +29,9 @@ return array(
                 	'default' => array(
                 		'type' => 'Segment',
                 		'options' => array(
-                			'route' => '/:action[/id/[:id]]',
+                			'route' => '/[:action]',
                 			'constraints' => array(
-                				'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                				'id' 		 => '\d+'
+                				'action'     => '[a-zA-Z][a-zA-Z0-9_-]*'
                 			),
                 			'defaults' => array(
                 				'controller' => 'User',

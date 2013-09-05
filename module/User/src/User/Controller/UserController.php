@@ -41,16 +41,17 @@ class UserController extends AbstractController
         	} else {
         		if ($result) {
         			$this->flashMessenger()->addSuccessMessage(
-        				'Thank you you have registered with us.'
+        				'Thank you, you have successfully registered with us.'
         			);
+        			
+        			// Redirect to home
+        			return $this->redirect()->toRoute('user/thank-you');
+        			
         		} else {
         			$this->flashMessenger()->addErrorMessage(
-        				'We could not register you due to a database error.'
+        				'We could not register you due to a database error. Please try again later.'
         			);
         		}
-        
-        		// Redirect to home
-        		return $this->redirect()->toRoute('user/thank-you');
         	}
         }
         
@@ -64,25 +65,8 @@ class UserController extends AbstractController
 		if (!$this->isAllowed('User', 'edit')) {
 			return $this->redirect()->toRoute('home');
 		}
-
-		// lock the user into only editing his propile by extracting value
-		// from seesion auth values.
-		$id = (int) $this->params()->fromRoute('id', 0);
-		if (!$id) {
-			return $this->redirect()->toRoute('user', array(
-				'action' => 'edit'
-			));
-		}
-
-		// Get the User with the specified id.  An exception is thrown
-		// if it cannot be found, in which case go to the list page.
-		try {
-			$user = $this->getModel('User\Model\User')->getUserById($id);
-		} catch (\Exception $e) {
-			return $this->redirect()->toRoute('user', array(
-				'action' => 'index'
-			));
-		}
+		
+		$user = $this->identity();
 
 		$request = $this->getRequest();
 		if ($request->isPost()) {
@@ -102,16 +86,17 @@ class UserController extends AbstractController
 			} else {
 				if ($result) {
 					$this->flashMessenger()->addSuccessMessage(
-						'User has been saved to database.'
+						'Your changes have been saved.'
 					);
+					
+					// Redirect to user
+					return $this->redirect()->toRoute('user/edit');
+					
 				} else {
 					$this->flashMessenger()->addErrorMessage(
-						'User could not be saved due to a database error.'
+						'We could not save your cahnges due to a database error.'
 					);
 				}
-
-				// Redirect to list of articles
-				return $this->redirect()->toRoute('admin/user');
 			}
 		}
 		
