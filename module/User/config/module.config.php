@@ -15,6 +15,7 @@ return array(
                 'options' => array(
                     // Change this to something specific to your module
                     'route'    => '/user',
+        			
                     'defaults' => array(
                         // Change this value to reflect the namespace in which
                         // the controllers for your module are found
@@ -25,6 +26,40 @@ return array(
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
+                	'default' => array(
+                		'type' => 'Segment',
+                		'options' => array(
+                			'route' => '/:action[/id/[:id]]',
+                			'constraints' => array(
+                				'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                				'id' 		 => '\d+'
+                			),
+                			'defaults' => array(
+                				'controller' => 'User',
+                				'action' => 'index',
+                			),
+                		),
+                	),
+                	'register' => array(
+                		'type' => 'Literal',
+                		'options' => array(
+                			'route' => '/register',
+                			'defaults' => array(
+                				'controller'    => 'User',
+                				'action' => 'register',
+                			),
+                		),
+                	),
+                	'thank-you' => array(
+                		'type' => 'Literal',
+                		'options' => array(
+                			'route' => '/thank-you',
+                			'defaults' => array(
+                				'controller'    => 'User',
+                				'action' => 'thank-you',
+                			),
+                		),
+                	),
                     'authenticate' => array(
 						'type' => 'Literal',
 						'options' => array(
@@ -119,8 +154,9 @@ return array(
 	),
     'view_manager' => array(
     	'template_map' => array(
-    		'user/list'			=> __DIR__ . '/../view/user/admin/list.phtml',
-    		'user/user-form'	=> __DIR__ . '/../view/user/admin/user-form.phtml',
+    		'user/list'				=> __DIR__ . '/../view/user/admin/list.phtml',
+    		'user/user-form'		=> __DIR__ . '/../view/user/user/user-form.phtml',
+    		'admin/user/user-form'	=> __DIR__ . '/../view/user/admin/user-form.phtml',
     	),
         'template_path_stack' => array(
             'User' => __DIR__ . '/../view',

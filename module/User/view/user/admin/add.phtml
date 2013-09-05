@@ -1,0 +1,7 @@
+<?php $this->headTitle('Add User') ?>
+<?php echo $this->ztbFlashMessenger()->render(); ?>
+
+<?php echo $this->partial('admin/user/user-form', array(
+	'form' => $this->form,
+	'formAction' => 'add',
+)); ?>

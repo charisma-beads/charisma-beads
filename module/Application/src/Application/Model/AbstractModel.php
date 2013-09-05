@@ -67,6 +67,18 @@ abstract class AbstractModel implements ServiceLocatorAwareInterface
     }
     
     /**
+     * get application config option by its key.
+     * 
+     * @param string $key
+     * @return array $config
+     */
+    protected function getConfig($key)
+    {
+    	$config = $this->getServiceLocator()->get('config');
+    	return $config[$key];
+    }
+    
+    /**
      * Get a data gateway by its name.
      * 
      * @param string $name

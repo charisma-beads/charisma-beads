@@ -8,11 +8,55 @@ use Zend\View\Model\ViewModel;
 
 class UserController extends AbstractController
 {
+	public function thankYouAction()
+	{
+		return new ViewModel();
+	}
+	
 	public function registerAction()
 	{
 		if (!$this->isAllowed('Guest')) {
             return $this->redirect()->toRoute('home');
         }
+        
+        $request = $this->getRequest();
+        
+        if ($request->isPost()) {
+        	
+        	$post = $request->getPost();
+        	$post['role'] = 'registered'; 
+        
+        	$result = $this->getModel('User\Model\User')->addUser($post);
+        
+        	if ($result instanceof UserForm) {
+        
+        		$this->flashMessenger()->addInfoMessage(
+        			'There were one or more isues with your submission. Please correct them as indicated below.'
+        		);
+        
+        		return new ViewModel(array(
+        			'form' => $result
+        		));
+        
+        	} else {
+        		if ($result) {
+        			$this->flashMessenger()->addSuccessMessage(
+        				'Thank you you have registered with us.'
+        			);
+        		} else {
+        			$this->flashMessenger()->addErrorMessage(
+        				'We could not register you due to a database error.'
+        			);
+        		}
+        
+        		// Redirect to home
+        		return $this->redirect()->toRoute('user/thank-you');
+        	}
+        }
+        
+        return new ViewModel(array(
+        	'form' => $this->getModel('User\Model\User')->getForm('user'),
+        ));
 	}
 
 	public function editAction()
@@ -21,7 +65,6 @@ class UserController extends AbstractController
 			return $this->redirect()->toRoute('home');
 		}
 
-		
 		// lock the user into only editing his propile by extracting value
 		// from seesion auth values.
 		$id = (int) $this->params()->fromRoute('id', 0);

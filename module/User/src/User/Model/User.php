@@ -15,7 +15,7 @@ class User extends AbstractModel
 			'user' => 'User\Model\Entity\UserEntity',
 		),
 		'forms' => array(
-			'user' => 'User\Form\UserForm'
+			'user' => 'User\Form\UserForm',
 		)
     );
     
@@ -82,7 +82,9 @@ class User extends AbstractModel
     	$data = $user->getArrayCopy();
     
     	if (array_key_exists('passwd', $data) && '' != $data['passwd']) {
-    		$data['passwd'] = sha1($data['passwd']);
+    		$authOptions = $this->getConfig('user');
+    		$hash = $authOptions['auth']['hash'];
+    		$data['passwd'] = $hash($data['passwd']);
     	} else {
     		unset($data['passwd']);
     	}

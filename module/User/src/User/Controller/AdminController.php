@@ -12,7 +12,7 @@ class AdminController extends AbstractController
 {
 	public function indexAction()
 	{
-		if (!$this->isAllowed('User', 'view')) {
+		if (!$this->isAllowed('Admin', 'view')) {
 			return $this->redirect()->toRoute('home');
 		}
 		
@@ -30,25 +30,9 @@ class AdminController extends AbstractController
 		));
 	}
 	
-
-	public function viewAction()
-	{
-		if (!$this->isAllowed('Admin', 'view')) {
-			throw new UserException('Access Denied');
-		}
-		
-		$request = $this->getRequest();
-	
-		$viewModel = new ViewModel(array(
-			'user' => $this->getModel('User\Model\User')->getUserById($this->params()->fromPost('userId'))
-		));
-		$viewModel->setTerminal(true);
-		return $viewModel;
-	}
-	
 	public function listAction()
 	{
-		if (!$this->isAllowed('User', 'view')) {
+		if (!$this->isAllowed('Admin', 'view')) {
 			throw new UserException('Access Denied');
 		}
 	
@@ -65,7 +49,7 @@ class AdminController extends AbstractController
 	
 	public function addAction()
 	{
-		if (!$this->isAllowed('User', 'add')) {
+		if (!$this->isAllowed('Admin', 'add')) {
 			return $this->redirect()->toRoute('home');
 		}
 
@@ -108,7 +92,7 @@ class AdminController extends AbstractController
 	
 	public function editAction()
 	{
-		if (!$this->isAllowed('User', 'edit')) {
+		if (!$this->isAllowed('Admin', 'edit')) {
 			return $this->redirect()->toRoute('home');
 		}
 
@@ -171,7 +155,7 @@ class AdminController extends AbstractController
 	
 	public function deleteAction()
 	{
-		if (!$this->isAllowed('User', 'delete')) {
+		if (!$this->isAllowed('Admin', 'delete')) {
 			return $this->redirect()->toRoute('home');
 		}
 

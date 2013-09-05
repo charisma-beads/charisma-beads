@@ -33,12 +33,16 @@ class UserTable extends AbstractTable
     			$id = (int) substr($user, 1);
     			$select->where->equalTo('userId', $id);
     		} else {
-    			$select->where
-    			->nest()
-    			->like('firstname', '%'.preg_replace('/\s+|-+/', '', $user).'%')
-    			->or
-    			->like('lastname',  '%'.preg_replace('/\s+|-+/', '', $user).'%')
-    			->unnest();
+    			$searchTerms = explode(' ', $user);
+    			$where = $select->where->nest();
+    			
+    			foreach ($searchTerms as $value) {
+    				$where->like('firstname', '%'.$value.'%')
+    					->or
+    					->like('lastname',  '%'.$value.'%');
+    			}
+    			
+    			$where->unnest();
     		}
     	}
     

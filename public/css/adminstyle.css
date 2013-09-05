@@ -15,7 +15,7 @@ div.container a.brand {
     height: 500px;
 }
 
-.bba-power-loading {
+.admin-loading {
     display:    none;
     position:   fixed;
     z-index:    1000;
@@ -42,7 +42,7 @@ body.loading .admin-loading {
 }
 
 tr:hover, th:hover {
-	cursor: pointer;
+	/*cursor: pointer;*/
 }
 
 #userTabs .close {

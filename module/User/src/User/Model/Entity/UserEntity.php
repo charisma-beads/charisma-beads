@@ -64,4 +64,9 @@ class UserEntity extends AbstractEntity
     {
     	return $this->row->firstname . ' ' . $this->row->lastname;
     }
+    
+    public function getLastNameFirst()
+    {
+    	return $this->row->lastname . ', ' . $this->row->firstname;
+    }
 }

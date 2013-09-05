@@ -1,0 +1,7 @@
+<?php $this->headTitle('Register') ?>
+<?php echo $this->ztbFlashMessenger()->render(); ?>
+
+<?php echo $this->partial('user/user-form', array(
+	'form' => $this->form,
+	'formAction' => 'register',
+)); ?>

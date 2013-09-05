@@ -14,12 +14,47 @@
                         ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css') ?>
 
         <!-- Scripts -->
-        <?php echo $this->headScript()->prependFile($this->basePath() . '/js/html5.js', 'text/javascript', array('conditional' => 'lt IE 9',))
-                                      ->prependFile($this->basePath() . '/js/bootstrap.min.js')
-                                      ->prependFile($this->basePath() . '/js/jquery.min.js') ?>
+        <?php echo $this->headScript()
+        				->prependFile($this->basePath() . '/js/site.js')
+        				->prependFile($this->basePath() . '/js/jquery.placeholder.min.js')
+        				->prependFile($this->basePath() . '/js/html5.js', 'text/javascript', array('conditional' => 'lt IE 9',))
+        				->prependFile($this->basePath() . '/js/bootstrap.min.js')
+                        ->prependFile($this->basePath() . '/js/jquery.min.js') ?>
 
     </head>
     <body>
+    	<div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div id="top-bar-nav" class="container">
+                    <div class="dropdown">
+                    	<?php if ($this->identity()): ?>
+	                    <ul class="nav pull-right">
+	                	    <li>
+	                	        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+	    					        <?php echo $this->ztbIcon()->user(); ?> <?php echo $this->identity()->getFullName(); ?> 
+	    					        <b class="caret"></b>
+	    				        </a>
+	    				        
+	                            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+	                                <li>
+	                                    <a href="<?php echo $this->url('user/default', array(
+	                	                    'action' => 'edit',
+	                	                    'id'     => $this->identity()->userId
+	            	                    )); ?>">Edit Profile
+	    				                </a>
+	                                </li>
+	                                <li>
+	                                    <a href="<?php echo $this->url('user/logout'); ?>">Logout</a>
+	                                </li>
+	                            </ul>
+	
+	                	    </li>
+	                	</ul>
+	                	<?php endif; ?>
+                	</div>
+                </div>
+            </div>
+        </div>
         <div id="main-content" class="container">
 			
             <div id="header" class="row-fulid">
@@ -27,7 +62,11 @@
             </div>
             <div class="navbar">
 				<div class="navbar-inner">
-					<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">menu</a>
+					<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
 					<div class="nav-collapse">
 	            		<?php echo $this->aclMenu('model', 'top menu', 'navigation/tb-nested-menu', false); ?>
 	            		<ul class="nav pull-right">

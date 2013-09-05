@@ -1,6 +1,8 @@
 <?php $this->headTitle('Users') ?>
 <?php echo $this->ztbFlashMessenger()->render(); ?>
 
+<?php if (count($this->users) > 0): ?>
+
 <table class="table table-hover table-bordered table-condensed">
 	<thead>
 		<tr>
@@ -19,7 +21,7 @@
 		
 		<tr>
 			<td><?php echo $this->escapeHtml($row->userId); ?></td>
-			<td class="tab-title"><?php echo $this->escapeHtml($row->getFullName()); ?></td>
+			<td class="tab-title"><?php echo $this->escapeHtml($row->getLastNameFirst()); ?></td>
 			<td><?php echo $this->escapeHtml($row->email); ?></td>
 			<td><?php echo $this->escapeHtml($row->role); ?></td>
 			<td><?php echo $this->escapeHtml($this->formatDate($row->dateCreated)); ?></td>
@@ -68,4 +70,8 @@
     'paginate',
 	array('route' => 'admin/user/page')
 ); ?>
+
+<?php else: ?>
+<h4>No users where returned by search.</h4>
+<?php endif; ?>
 
