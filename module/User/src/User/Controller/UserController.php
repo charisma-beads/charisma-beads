@@ -90,7 +90,7 @@ class UserController extends AbstractController
 					);
 					
 					// Redirect to user
-					return $this->redirect()->toRoute('user/edit');
+					return $this->redirect()->toRoute('user');
 					
 				} else {
 					$this->flashMessenger()->addErrorMessage(
