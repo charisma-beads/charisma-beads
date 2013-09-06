@@ -4,7 +4,7 @@ $routeArray = array('action' => $this->formAction);
 if (isset($this->userId)) $routeArray['id'] = $this->userId;
 ?>
 <div>
-    <form class="form-horizontal"  method="post" action="<?php echo $this->url('admin/user', $routeArray) ?>">
+    <form class="form-horizontal"  method="post" action="<?php echo $this->url('admin/user/edit', $routeArray) ?>">
         <fieldset>
         <legend><?php echo ucwords($this->formAction); ?> User Form:</legend>
         <div class="control-group<?php if ($form->get('firstname')->getMessages()) echo ' error'; ?>">
