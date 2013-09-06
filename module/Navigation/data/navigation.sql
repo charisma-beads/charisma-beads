@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS `page` (
   `label` varchar(255) NOT NULL,
   `params` text NOT NULL,
   `route` varchar(255) DEFAULT NULL,
+  `uri` varchar(255) DEFAULT NULL,
   `resource` varchar(255) NOT NULL,
   `visible` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `lft` int(10) unsigned NOT NULL,

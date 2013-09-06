@@ -8,7 +8,7 @@ use User\Model\UserException;
 use Zend\View\Model\ViewModel;
 use FB;
 
-class UserAdminController extends AbstractController
+class AdminController extends AbstractController
 {
 	public function indexAction()
 	{

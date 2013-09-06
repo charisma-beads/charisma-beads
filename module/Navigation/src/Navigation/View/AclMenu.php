@@ -47,10 +47,13 @@ class AclMenu extends AbstractViewHelper
         foreach ($pages as $page) {
             $p = $page->toArray();
             $p['params'] = parse_ini_string($p['params']);
+            
             if ($p['route'] == '0') {
                 unset($p['route']);
-                $p['uri'] = '';
+            } else {
+            	unset($p['uri']);
             }
+            
             $pageArray[] = $p;
         }
         
