@@ -96,11 +96,7 @@ return array(
         			'user' => array(
         				'type'    => 'Segment',
         				'options' => array(
-        					'route'    => '/user[/:action[/id/[:id]]]',
-        					'constraints' => array(
-        						'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-        						'id' 		 => '\d+'
-        					),
+        					'route'    => '/user',
         					'defaults' => array(
         						'__NAMESPACE__' => 'User\Controller',
         						'controller'    => 'Admin',
@@ -109,6 +105,19 @@ return array(
         				),
         				'may_terminate' => true,
         				'child_routes' => array(
+        					'edit' => array(
+        						'type'    => 'Segment',
+        						'options' => array(
+        							'route'         => '/[:action[/id/[:id]]]',
+        							'constraints'   => array(
+        								'action'    => '[a-zA-Z][a-zA-Z0-9_-]*',
+        								'id'		=> '\d+'
+        							),
+        							'defaults'      => array(
+        								'action' => 'edit',
+        							),
+        						),
+        					),
         					'page' => array(
         						'type'    => 'Segment',
         						'options' => array(

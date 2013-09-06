@@ -21,7 +21,8 @@
 		"firephp/firephp-core" : "0.4.0",
 		"mwillbanks/zfc-twitter-bootstrap" : "master-dev",
 		"twitter/bootstrap" : "~2",
-		"zendframework/zendframework" : "2.2.*"
+		"zendframework/zendframework" : "2.2.*",
+		"netglue/zf2-ssl-module" : "dev-master"
 	},
 	"minimum-stability" : "stable",
 	"support" : {

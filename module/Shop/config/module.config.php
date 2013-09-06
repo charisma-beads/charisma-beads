@@ -1,10 +1,5 @@
 <?php
 return array(
-    'controllers' => array(
-        'invokables' => array(
-            'Shop\Controller\Shop' => 'Shop\Controller\ShopController',
-        ),
-    ),
     'router' => array(
         'routes' => array(
             'shop' => array(
