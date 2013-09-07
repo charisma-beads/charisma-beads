@@ -119,7 +119,7 @@ class Navigation extends AbstractModel
 	public function deleteMenu($id)
 	{
 		$id = (int) $id;
-		$this->getGateway('page')->deletePagesByMenuId($id);
+		//$this->getGateway('page')->deletePagesByMenuId($id);
 		return $this->getGateway('menu')->delete($id);
 	}
 	

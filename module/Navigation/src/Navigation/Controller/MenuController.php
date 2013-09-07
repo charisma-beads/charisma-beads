@@ -140,17 +140,21 @@ class MenuController extends AbstractController
 			$del = $request->getPost('submit', 'No');
 		
 			if ($del == 'delete') {
-				$id = (int) $request->getPost('menuId');
-				$result = $this->getModel('Navigation\Model\Navigation')->deleteMenu($id);
+				try {
+					$id = (int) $request->getPost('menuId');
+					$result = $this->getModel('Navigation\Model\Navigation')->deleteMenu($id);
 				
-				if ($result) {
-					$this->flashMessenger()->addSuccessMessage(
-						'Menu has been deleted from the database.'
-					);
-				} else {
-					$this->flashMessenger()->addErrorMessage(
-						'Menu could not be deleted due to a database error.'
-					);
+					if ($result) {
+						$this->flashMessenger()->addSuccessMessage(
+							'Menu has been deleted from the database.'
+						);
+					} else {
+						$this->flashMessenger()->addErrorMessage(
+							'Menu could not be deleted due to a database error.'
+						);
+					}
+				} catch (\Exception $e) {
+					$this->setExceptionMessages($e);
 				}
 			}
 		

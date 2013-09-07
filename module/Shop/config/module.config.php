@@ -5,22 +5,15 @@ return array(
             'shop' => array(
                 'type'    => 'Literal',
                 'options' => array(
-                    // Change this to something specific to your module
                     'route'    => '/shop',
                     'defaults' => array(
-                        // Change this value to reflect the namespace in which
-                        // the controllers for your module are found
                         '__NAMESPACE__' => 'Shop\Controller',
                         'controller'    => 'Shop',
-                        'action'        => 'index',
+                        'action'        => 'shop-front',
                     ),
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
-                    // This route is a sane default when developing a module;
-                    // as you solidify the routes for your module, however,
-                    // you may want to remove it and replace it with more
-                    // specific routes.
                     'default' => array(
                         'type'    => 'Segment',
                         'options' => array(
@@ -30,13 +23,47 @@ return array(
                                 'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
                             ),
                             'defaults' => array(
+                            	'controller'    => 'Shop',
+                            	'action'        => 'shop-front',
                             ),
                         ),
                     ),
                 ),
             ),
+        	'admin' => array(
+        		'child_routes' => array(
+        			'shop' => array(
+        				'type'    => 'Segment',
+        				'options' => array(
+        					'route'    => '/shop',
+        					'defaults' => array(
+        						'__NAMESPACE__' => 'Shop\Controller',
+        						'controller'    => 'Shop',
+        						'action'        => 'index',
+        					),
+        				),
+        			),
+        		),
+        	),
         ),
     ),
+	'navigation' => array(
+		'admin' => array(
+			'shop' => array(
+				'label' => 'Shop',
+				'pages' => array(
+					'overview' => array(
+						'label' => 'Overview',
+						'action' => 'index',
+						'route' => 'admin/shop',
+						'resource' => 'menu:admin'
+					),
+				),
+				'route' => 'admin/shop',
+				'resource' => 'menu:admin'
+			),
+		),
+	),
     'view_manager' => array(
         'template_path_stack' => array(
             'Shop' => __DIR__ . '/../view',

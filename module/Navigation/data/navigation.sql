@@ -1,4 +1,16 @@
 
+SET FOREIGN_KEY_CHECKS=0;
+
+--
+-- Database: `charisma-beads`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `menu`
+--
+
 DROP TABLE IF EXISTS `menu`;
 CREATE TABLE IF NOT EXISTS `menu` (
   `menuId` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -6,6 +18,12 @@ CREATE TABLE IF NOT EXISTS `menu` (
   PRIMARY KEY (`menuId`),
   UNIQUE KEY `menu` (`menu`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `page`
+--
 
 DROP TABLE IF EXISTS `page`;
 CREATE TABLE IF NOT EXISTS `page` (
@@ -24,7 +42,13 @@ CREATE TABLE IF NOT EXISTS `page` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 --
+-- Constraints for dumped tables
+--
+
+--
 -- Constraints for table `page`
 --
 ALTER TABLE `page`
-  ADD CONSTRAINT `page_ibfk_1` FOREIGN KEY (`menuId`) REFERENCES `menu` (`menuId`);
+  ADD CONSTRAINT `page_ibfk_3` FOREIGN KEY (`menuId`) REFERENCES `menu` (`menuId`);
+  
+SET FOREIGN_KEY_CHECKS=1;

@@ -42,7 +42,7 @@
 				    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				    <h3 id="userModel<?php echo $row->userId; ?>Label">Warning</h3>
 				  </div>
-				  <form class="form-horizontal"  method="post" action="<?php echo $this->url('admin/user', array(
+				  <form class="form-horizontal"  method="post" action="<?php echo $this->url('admin/user/edit', array(
 				        'action' => 'delete',
 				    )) ?>">
 				        <div class="modal-body">

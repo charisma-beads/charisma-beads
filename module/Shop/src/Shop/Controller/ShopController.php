@@ -9,12 +9,22 @@
 
 namespace Shop\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController;
+use Application\Controller\AbstractController;
+use Zend\View\Model\ViewModel;
 
-class ShopController extends AbstractActionController
+class ShopController extends AbstractController
 {
     public function indexAction()
     {
-        return array();
+    	if (!$this->isAllowed('ShopAdmin', 'view')) {
+    		return $this->redirect()->toRoute('home');
+    	}
+    	
+        return new ViewModel();
+    }
+    
+    public function shopFrontAction()
+    {
+    	return new ViewModel();
     }
 }
