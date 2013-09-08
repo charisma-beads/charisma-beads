@@ -79,5 +79,4 @@ class UserTable extends AbstractTable
     		return $this->paginate($resultSet, $page, $count);
     	}
     }
-    
 }

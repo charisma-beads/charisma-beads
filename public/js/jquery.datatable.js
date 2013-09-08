@@ -19,8 +19,6 @@
         	this.thead = $('#'+this.id+' table thead tr:first-child');
         	this.tbody = $('#'+this.id+' table tbody');
         	
-        	
-        	
         	if (this.options.paging && typeof this.options.paging == 'string') {
         		switch(this.options.paging){
         			case 'links':

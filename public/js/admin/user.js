@@ -45,7 +45,7 @@ $(document).ready(function(){
     
     $('#table-user').dataGrid({
     	url : 'user/list',
-    	query: { sort : 'lastname' },
+    	query: { sort : 'name' },
     	searchForm : $('#search-user'),
     	paging : 'links',
     	columnSort: true,

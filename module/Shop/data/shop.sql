@@ -71,6 +71,23 @@ CREATE TABLE IF NOT EXISTS `productImage` (
   KEY `productId` (`productId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `productOption`
+--
+
+DROP TABLE IF EXISTS `productOption`;
+CREATE TABLE IF NOT EXISTS `productOption` (
+  `productOptionId` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `productId` int(10) unsigned NOT NULL,
+  `option` varchar(100) NOT NULL,
+  `price` decimal(6,2) unsigned NOT NULL DEFAULT '0.00',
+  PRIMARY KEY (`productOptionId`),
+  KEY `productId` (`productId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
 --
 -- Constraints for dumped tables
 --
@@ -92,5 +109,11 @@ ALTER TABLE `productCategory`
 --
 ALTER TABLE `productImage`
   ADD CONSTRAINT `productImage_ibfk_1` FOREIGN KEY (`productId`) REFERENCES `product` (`productId`);
+  
+--
+-- Constraints for table `productOption`
+--
+ALTER TABLE `productOption`
+  ADD CONSTRAINT `productOption_ibfk_1` FOREIGN KEY (`productId`) REFERENCES `product` (`productId`);
   
 SET FOREIGN_KEY_CHECKS=1;

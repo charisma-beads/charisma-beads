@@ -20,7 +20,7 @@ class Article extends AbstractModel
 	);
 	
 	/*
-	 * @var Core\Model\Navigation
+	 * @var Navigation\Model\Navigation
 	 */
 	protected $navigation;
 
@@ -180,7 +180,7 @@ class Article extends AbstractModel
 	}
 	
 	/**
-	 * @return \Core\Model\Article
+	 * @return \Article\Model\Article
 	 */
 	protected function setNavigation()
 	{
@@ -189,7 +189,7 @@ class Article extends AbstractModel
 	}
 	
 	/**
-	 * @return \Core\Model\Navigation
+	 * @return \Navigation\Model\Navigation
 	 */
 	protected function getNavigation()
 	{

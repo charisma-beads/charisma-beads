@@ -16,7 +16,7 @@ return array(
 		'config' => array(
 			'class' => 'Zend\Session\Config\SessionConfig',
 			'options' => array(
-				'name' => 'myapp',
+				'name' => 'charisma-beads',
 			),
 		),
 		'storage' => 'Zend\Session\Storage\SessionArrayStorage',
