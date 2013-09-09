@@ -54,10 +54,9 @@ class AbstractTable
 		$resultSetPrototype->setArrayObjectPrototype(new $this->rowClass());
 		$this->tableGateway = new TableGateway($this->table, $dbAdapter, new MetadataFeature(), $resultSetPrototype);
 		
-		if (method_exists($this->rowClass, 'getColumns')) {
+		if (method_exists($this->rowClass, 'setColumns')) {
 			$this->tableGateway->getResultSetPrototype()
-				->getArrayObjectPrototype()
-				->setColumns($this->getColumns());
+				->getArrayObjectPrototype()->setColumns($this->getColumns());
 		}
 		
 		$this->sql = new Sql($dbAdapter);
