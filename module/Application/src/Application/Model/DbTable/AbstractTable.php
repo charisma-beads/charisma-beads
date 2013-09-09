@@ -127,8 +127,9 @@ class AbstractTable
 	 * @param int $limit
 	 * @return \Zend\Paginator\Paginator
 	 */
-	public function paginate(ResultSet $resultSet, $page, $limit)
+	public function paginate(Select $select, $page, $limit)
 	{
+		$resultSet = $this->executeStatement($select);
 		$adapter = new PaginatorIterator($resultSet);
 			
 		$paginator = new Paginator($adapter);
@@ -136,6 +137,18 @@ class AbstractTable
 			->setCurrentPageNumber($page);
 			
 		return $paginator;
+	}
+	
+	protected function executeStatement($select)
+	{
+		$resultSet = $this->tableGateway->getResultSetPrototype();
+		$statement = $this->sql->prepareStatementForSqlObject($select);
+		$result = $statement->execute();
+		
+		$resultSet->initialize($result);
+		$resultSet->buffer();
+		
+		return $resultSet;
 	}
 	
 	/**

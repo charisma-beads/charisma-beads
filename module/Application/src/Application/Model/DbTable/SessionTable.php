@@ -15,21 +15,14 @@ class SessionTable extends AbstractTable
 		$page = (isset($post['page'])) ? (int) $post['page'] : null;
 	
 		$select = $this->sql->select();
-		$select->from('session');
+		$select->from($this->table);
 	
 		$select = $this->setSortOrder($select, $sort);
-	
-		$resultSet = $this->tableGateway->getResultSetPrototype();
-		$statement = $this->sql->prepareStatementForSqlObject($select);
-		$result = $statement->execute();
-	
-		$resultSet->initialize($result);
-		$resultSet->buffer();
 		 
 		if (null === $page) {
-			return $resultSet;
-		} else {
-			return $this->paginate($resultSet, $page, $count);
-		}
+    		return $this->executeStatement($select);
+    	} else {
+    		return $this->paginate($select, $page, $count);
+    	}
 	}
 }

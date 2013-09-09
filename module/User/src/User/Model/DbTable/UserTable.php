@@ -26,7 +26,7 @@ class UserTable extends AbstractTable
     	$page = (isset($post['page'])) ? (int) $post['page'] : null;
     	 
     	$select = $this->sql->select();
-    	$select->from('user');
+    	$select->from($this->table);
     
     	if (!$user == '') {
     		if (substr($user, 0, 1) == '=') {
@@ -62,21 +62,11 @@ class UserTable extends AbstractTable
     	}
     
     	$select = $this->setSortOrder($select, $sort);
-    	//$select = $this->setLimit($select, $count, $offset);
-    	 
-    	//echo $select->getSqlString();
-    	 
-    	$resultSet = $this->tableGateway->getResultSetPrototype();
-    	$statement = $this->sql->prepareStatementForSqlObject($select);
-    	$result = $statement->execute();
-    	 
-    	$resultSet->initialize($result);
-    	$resultSet->buffer();
     	
     	if (null === $page) {
-    		return $resultSet;
+    		return $this->executeStatement($select);
     	} else {
-    		return $this->paginate($resultSet, $page, $count);
+    		return $this->paginate($select, $page, $count);
     	}
     }
 }
