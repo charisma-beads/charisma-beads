@@ -18,11 +18,12 @@ class SessionTable extends AbstractTable
 		$select->from($this->table);
 	
 		$select = $this->setSortOrder($select, $sort);
+		$resultSet = $this->fetchResult($select);
 		 
 		if (null === $page) {
-    		return $this->executeStatement($select);
+    		return $resultSet;
     	} else {
-    		return $this->paginate($select, $page, $count);
+    		return $this->paginate($resultSet, $page, $count);
     	}
 	}
 }

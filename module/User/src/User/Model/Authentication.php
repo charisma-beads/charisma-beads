@@ -122,7 +122,8 @@ class Authentication extends ZendAuthenticationService
     			$this->dbAdapter,
     			$this->options['dbTable'],
     			$this->options['identity'],
-    			$this->options['credential']
+    			$this->options['credential'],
+    			$this->options['credentialTreatment']
     		);
     
     		$this->setAuthAdapter($authAdapter);
@@ -131,7 +132,7 @@ class Authentication extends ZendAuthenticationService
     		);
     
     		$this->authAdapter->setCredential(
-    			$this->options['hash']($values['passwd'])
+    			$values['passwd']
     		);
     	}
     

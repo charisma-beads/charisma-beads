@@ -1,9 +1,9 @@
 <?php
 namespace Shop\Model\DbTable\Product;
 
-use Application\Model\DbTable\AbstractTable;
+use Application\Model\DbTable\AbstractNestedSet;
 
-class Category extends AbstractTable
+class Category extends AbstractNestedSet
 {
 	protected $table = 'productCategory';
 	protected $primary = 'productCategoryId';

@@ -5,7 +5,7 @@ return array(
 			'dbTable' => '',
 			'identity' => '',
 			'credential' => '',
-			'hash' => ''
+			'credentialTreatment' => ''
 		),
 	),
     'router' => array(

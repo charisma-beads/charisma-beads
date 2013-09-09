@@ -109,23 +109,6 @@ abstract class AbstractNestedSet extends AbstractTable
     }
     
     /**
-     * Fetches the result of select from database
-     * 
-     * @param Select $select
-     * @return \Zend\Db\ResultSet\ResultSet
-     */
-    public function fetchResult(Select $select)
-    {
-        //FB::info($select->getSqlString());
-        $resultSet = $this->tableGateway->getResultSetPrototype();
-        $statement = $this->sql->prepareStatementForSqlObject($select);
-        $result = $statement->execute();
-        $resultSet->initialize($result);
-         
-        return $resultSet;
-    }
-    
-    /**
      * Updates right values of tree
      * 
      * @param int $rgt
