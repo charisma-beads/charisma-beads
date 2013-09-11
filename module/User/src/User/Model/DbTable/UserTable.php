@@ -19,7 +19,6 @@ class UserTable extends AbstractTable
     public function fetchAllUsers(array $post)
     {
     	$count = (isset($post['count'])) ? (int) $post['count'] : null;
-    	$offset = (isset($post['offset'])) ? (int) $post['offset'] : null;
     	$email = (isset($post['email'])) ? (string) $post['email'] : '';
     	$user = (isset($post['user'])) ? (string) $post['user'] : '';
     	$sort = (isset($post['sort'])) ? (string) $post['sort'] : '';

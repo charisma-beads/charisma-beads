@@ -96,7 +96,7 @@ class AdminController extends AbstractController
 			return $this->redirect()->toRoute('home');
 		}
 
-		$id = (int) $this->params()->fromRoute('id', 0);
+		$id = (int) $this->params('id', 0);
 		if (!$id) {
 			return $this->redirect()->toRoute('admin/user', array(
 				'action' => 'add'

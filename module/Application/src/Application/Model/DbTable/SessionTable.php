@@ -10,7 +10,6 @@ class SessionTable extends AbstractTable
 	public function fetchAllSessions(array $post)
 	{
 		$count = (isset($post['count'])) ? (int) $post['count'] : null;
-		$offset = (isset($post['offset'])) ? (int) $post['offset'] : null;
 		$sort = (isset($post['sort'])) ? (string) $post['sort'] : '';
 		$page = (isset($post['page'])) ? (int) $post['page'] : null;
 	
