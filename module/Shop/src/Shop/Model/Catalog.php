@@ -1,9 +1,9 @@
 <?php
 namespace Shop\Model;
 
-use Application\Model\DbTable\AbstractTable;
+use Application\Model\AbstractModel;
 
-class Catalog extends AbstractTable
+class Catalog extends AbstractModel
 {
 	protected $classMap = array(
 		'gateways'	=> array(

@@ -85,6 +85,7 @@ CREATE TABLE IF NOT EXISTS `productOption` (
   `productId` int(10) unsigned NOT NULL,
   `option` varchar(100) NOT NULL,
   `price` decimal(6,2) unsigned NOT NULL DEFAULT '0.00',
+  `sortOrder` int(2) unsigned NOT NULL,
   PRIMARY KEY (`productOptionId`),
   KEY `productId` (`productId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
