@@ -26,6 +26,8 @@ CREATE TABLE IF NOT EXISTS `product` (
   `addPostage` int(1) unsigned NOT NULL DEFAULT '1',
   `discountPercent` int(3) unsigned NOT NULL DEFAULT '0',
   `hits` int(10) unsigned NOT NULL DEFAULT '0',
+  `enabled` int(1) unsigned NOT NULL DEFAULT '1',
+  `discontinued` int(1) unsigned NOT NULL DEFAULT '0',
   `dateCreated` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `dateModified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`productId`),

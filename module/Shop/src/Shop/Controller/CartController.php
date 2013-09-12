@@ -9,7 +9,7 @@ class CartController extends AbstractController
 {
 	public function addAction()
 	{
-		$product = $this->getModel('Shop\Model\Cart')->getProductById(
+		$product = $this->getModel('Shop\Model\Catalog')->getProductById(
 			$this->params('productId')
 		);
 	
@@ -38,7 +38,7 @@ class CartController extends AbstractController
 	public function updateAction()
 	{
 		foreach($this->params('quantity') as $id => $value) {
-			$product = $this->getModel('Shop/Model/Cart')->getProductById($id);
+			$product = $this->getModel('Shop/Model/Catalog')->getProductById($id);
 	
 			if (null !== $product) {
 				$this->getModel('Shop/Model/Cart')->addItem($product, $value);

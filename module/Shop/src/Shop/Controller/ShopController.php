@@ -25,6 +25,10 @@ class ShopController extends AbstractController
     
     public function shopFrontAction()
     {
-    	return new ViewModel();
+    	$cats = $this->getModel('Shop\Model\Category')->getTopLevelCategories();
+    	
+    	return new ViewModel(array(
+			'cats' => $cats
+    	));
     }
 }

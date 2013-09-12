@@ -14,17 +14,17 @@ return array(
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
-                    'default' => array(
+                    'catalog' => array(
                         'type'    => 'Segment',
                         'options' => array(
-                            'route'    => '/[:controller[/:action]]',
+                            'route'    => '/[:categoryIdent]',
                             'constraints' => array(
-                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                            	'categoryIdent' => '[a-zA-Z][a-zA-Z0-9_-]*'
                             ),
                             'defaults' => array(
-                            	'controller'    => 'Shop',
-                            	'action'        => 'shop-front',
+                            	'controller'    => 'Catalog',
+                            	'action'        => 'index',
+                            	'categoryIdent' => ''
                             ),
                         ),
                     ),

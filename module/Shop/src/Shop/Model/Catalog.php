@@ -2,6 +2,7 @@
 namespace Shop\Model;
 
 use Application\Model\AbstractModel;
+use FB;
 
 class Catalog extends AbstractModel
 {
@@ -24,13 +25,15 @@ class Catalog extends AbstractModel
 		$parentId = (int) $parentId;
 	
 		$categories = ($parentId != 0) ? $this->getGateway('category')
-			->getCategoriesByParentId($parentId) : $this->getGateway('category')->fetchAll();
+			->getDecendentsByParentId($parentId) : $this->getGateway('category')->fetchAll();
 	
 		return $categories;
 	}
 	
 	public function getCategoryByIdent($ident)
 	{
+		$ident = (string) $ident;
+		
 		return $this->getGateway('category')
 			->getCategoryByIdent($ident);
 	}
@@ -52,7 +55,7 @@ class Catalog extends AbstractModel
 	{
 		if (is_string($category)) {
 			$cat = $this->getGateway('category')->getCategoryByIdent($category);
-			$categoryId = (null === $cat) ? 0 : $cat->categoryId;
+			$categoryId = (null === $cat) ? 0 : $cat->productCategoryId;
 		} else {
 			$categoryId = (int) $category;
 		}
@@ -82,14 +85,14 @@ class Catalog extends AbstractModel
 		$cats = array();
 	
 		foreach ($categories as $category) {
-			$cats[] = $category->categoryId;
+			$cats[] = $category->productCategoryId;
 		}
 	
 		return $cats;
 	}
 	
-	public function getParentCategories($category)
+	public function getParentCategories($categoryId)
 	{
-		return $category->getPathway();
+		return $this->getGateway('category')->getPathwayByChildId($categoryId);
 	}
 }

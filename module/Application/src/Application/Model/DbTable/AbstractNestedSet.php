@@ -6,6 +6,7 @@ use Application\Model\DbTable\AbstractTable;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Where;
 use Zend\Db\Sql\Expression;
+use Zend\Db\Adapter\Platform\Mysql;
 use FB;
 
 abstract class AbstractNestedSet extends AbstractTable
@@ -13,9 +14,10 @@ abstract class AbstractNestedSet extends AbstractTable
     /**
      * Gets the full tree from database
      * 
+     * @param bool $topLevelOnly
      * @return \Zend\Db\ResultSet\ResultSet
      */
-    public function getFullTree()
+    public function getFullTree($topLevelOnly=false)
     {   
         $select = $this->sql->select();
         $select->from(array('child' => $this->table))
@@ -31,6 +33,10 @@ abstract class AbstractNestedSet extends AbstractTable
             )
             ->group('child.'.$this->primary)
             ->order('child.lft');
+		
+        if (true === $topLevelOnly) {
+        	$select->having('depth = 0');;
+        }
         
         return $this->fetchResult($select);
     }
@@ -47,39 +53,61 @@ abstract class AbstractNestedSet extends AbstractTable
             ->join(
                 array('parent' => $this->table),
                 'child.lft BETWEEN parent.lft AND parent.rgt', 
-                array(),
+                array(Select::SQL_STAR),
                 Select::JOIN_INNER
             )
-            ->where('child.'.$this->primary.' = ?', $id)
+            ->where(array('child.'.$this->primary.' = ?' => $id))
             ->order('child.lft');
+        
+        FB::info($select->getSqlString(new Mysql()));
     
         return $this->fetchResult($select);
     }
     
     /**
-     * TODO this method needs refactoring
+     *  
+        SELECT `child`.*, (COUNT(`parent`.`productCategoryId`) - (`subTree`.`depth` + 1)) AS `depth` 
+		FROM `productCategory` AS `child` 
+		INNER JOIN `productCategory` AS `parent` ON `child`.`lft` BETWEEN `parent`.`lft` AND `parent`.`rgt` 
+		INNER JOIN `productCategory` AS `subParent` ON `child`.`lft` BETWEEN `subParent`.`lft` AND `subParent`.`rgt` 
+		INNER JOIN (
+			SELECT `child`.`productCategoryId`, (COUNT(`parent`.`productCategoryId`) - 1) AS `depth` 
+		        FROM `productCategory` AS `child` 
+		        INNER JOIN `productCategory` AS `parent` ON `child`.`lft` BETWEEN `parent`.`lft` AND `parent`.`rgt` 
+		        WHERE `child`.`productCategoryId` = '2' 
+		        GROUP BY `child`.`productCategoryId` 
+		        ORDER BY `child`.`lft` ASC
+		) AS `subTree` ON `subParent`.`productCategoryId` = `subTree`.`productCategoryId` 
+		GROUP BY `child`.`productCategoryId` 
+		ORDER BY `child`.`lft` ASC
      * 
      * @param int $parentId
      * @param string $immediate
      */
     public function getDecendentsByParentId($parentId, $immediate=true)
     {
-        $subTree = $this->select()
+        $subTree = $this->sql->select()
             ->from(array('child' => $this->table))
-            ->columns(array('depth' => '(COUNT(parent.'.$this->primary.') - 1)'))
+            ->columns(array(
+            	'productCategoryId',
+            	'depth' => new Expression('(COUNT(parent.'.$this->primary.') - 1)')
+            ))
             ->join(
                 array('parent' => $this->table),
                 'child.lft BETWEEN parent.lft AND parent.rgt',
                 array(),
                 Select::JOIN_INNER
             )
-            ->where('child.'.$this->primary.' = ?', $parentId)
+            ->where(array('child.'.$this->primary.' = ?' => $parentId))
             ->group('child.'.$this->primary)
             ->order('child.lft');
     
-        $select = $this->select()
+        $select = $this->sql->select()
             ->from(array('child' => $this->table))
-            ->columns(array('depth' => '(COUNT(parent.'.$this->primary.') - (subTree.depth + 1))'))
+            ->columns(array(
+            	Select::SQL_STAR,
+            	'depth' => new Expression('(COUNT(parent.'.$this->primary.') - (subTree.depth + 1))')
+            ))
             ->join(
                 array('parent' => $this->table),
                 'child.lft BETWEEN parent.lft AND parent.rgt',
@@ -93,7 +121,7 @@ abstract class AbstractNestedSet extends AbstractTable
                 Select::JOIN_INNER
             )
             ->join(
-                array(array('subTree' => new Expression('('.$subTree.')'))),
+                array('subTree' => $subTree),
                 'subParent.'.$this->primary.' = subTree.'.$this->primary,
                 array(),
                 Select::JOIN_INNER

@@ -2,6 +2,7 @@
 namespace Shop\Model\DbTable;
 
 use Application\Model\DbTable\AbstractTable;
+use FB;
 
 class Product extends AbstractTable
 {
@@ -18,12 +19,14 @@ class Product extends AbstractTable
 	
 	public function getProductsByCategory($categoryId, $page=null, $count=null, $order=null)
 	{
+		$categoryId = implode(',', $categoryId);
+		
 		$select = $this->sql->select();
 		$select->from($this->table)->where(array(
-				'categoryId IN(?)'	=> $categoryId,
-				'enabled'			=> 1,
-				'discontinued'		=> 0
-			));
+			'productCategoryId IN(?)'	=> $categoryId,
+			'enabled'			=> 1,
+			'discontinued'		=> 0
+		));
 	
 		if (true === is_array($order)) {
 			$select = $this->setSortOrder($select, $order);

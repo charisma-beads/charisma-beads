@@ -1,0 +1,9 @@
+<?php $this->headtitle($this->escapehtml($this->category->category)); ?>
+
+<h2><?php echo $this->escapehtml($this->category->category); ?></h2>
+
+<?php \FB::info($this->category); ?>
+
+<?php \FB::info($this->subCategories); ?>
+
+<?php \FB::info($this->products); ?>

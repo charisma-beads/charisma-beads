@@ -17,6 +17,7 @@
         <?php echo $this->headScript()
         				->prependFile($this->basePath() . '/js/site.js')
         				->prependFile($this->basePath() . '/js/jquery.placeholder.min.js')
+        				->prependFile($this->basePath() . '/js/holder.js')
         				->prependFile($this->basePath() . '/js/html5.js', 'text/javascript', array('conditional' => 'lt IE 9',))
         				->prependFile($this->basePath() . '/js/bootstrap.min.js')
                         ->prependFile($this->basePath() . '/js/jquery.min.js') ?>
@@ -56,7 +57,7 @@
         </div>
         <div id="main-content" class="container">
 			
-            <div id="header" class="row-fulid">
+            <div id="header">
                 <a><img alt="Charisma Beads Ltd" src="<?php echo $this->basepath('/img/layout/logo.png'); ?>"></a>
             </div>
             <div class="navbar">
@@ -105,9 +106,14 @@
 					</div>
             	</div>
             </div>
-            <?php echo $this->content; ?>
+            <div class="row">
+            	<div class="span12">
+            		<?php echo $this->content; ?>
+            	</div>
+            </div>
+            
             <hr>
-            <footer class="row-fluid">
+            <footer>
                 <p>&copy; 2005 - <?php echo date('Y') ?> by Charisma Beads Ltd. All rights reserved.</p>
                 <p>Zend Framework Version: <?php echo \Zend\Version\Version::VERSION; ?></p>
             </footer>
