@@ -28,7 +28,8 @@ class ShopController extends AbstractController
     	$cats = $this->getModel('Shop\Model\Category')->getTopLevelCategories();
     	
     	return new ViewModel(array(
-			'cats' => $cats
+			'cats' => $cats,
+    		'subCategories' => $this->getModel('Shop\Model\Catalog')->getCategoriesByParentId(0),
     	));
     }
 }

@@ -148,7 +148,15 @@ class AbstractTable
 	 */
 	protected function fetchResult(Select $select)
 	{
-		$resultSet = $this->tableGateway->getResultSetPrototype();
+		// we have to set up a new result set otherwise
+		// the table class will only retrive the last query
+		$resultSet = new ResultSet();
+		$resultSet->setArrayObjectPrototype(new $this->rowClass());
+		
+		if (method_exists($this->rowClass, 'setColumns')) {
+			$resultSet->getArrayObjectPrototype()->setColumns($this->getColumns());
+		}
+		
 		$statement = $this->sql->prepareStatementForSqlObject($select);
 		$result = $statement->execute();
 		

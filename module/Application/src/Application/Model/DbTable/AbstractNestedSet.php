@@ -6,8 +6,6 @@ use Application\Model\DbTable\AbstractTable;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Where;
 use Zend\Db\Sql\Expression;
-use Zend\Db\Adapter\Platform\Mysql;
-use FB;
 
 abstract class AbstractNestedSet extends AbstractTable
 {
@@ -48,8 +46,10 @@ abstract class AbstractNestedSet extends AbstractTable
      */
     public function getPathwayByChildId($id)
     {
+    	
         $select = $this->sql->select();
         $select->from(array('child' => $this->table))
+        	->columns(array())
             ->join(
                 array('parent' => $this->table),
                 'child.lft BETWEEN parent.lft AND parent.rgt', 
@@ -59,8 +59,6 @@ abstract class AbstractNestedSet extends AbstractTable
             ->where(array('child.'.$this->primary.' = ?' => $id))
             ->order('child.lft');
         
-        FB::info($select->getSqlString(new Mysql()));
-    
         return $this->fetchResult($select);
     }
     

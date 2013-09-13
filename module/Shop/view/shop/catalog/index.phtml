@@ -4,6 +4,41 @@
 
 <?php \FB::info($this->category); ?>
 
-<?php \FB::info($this->subCategories); ?>
+<?php \FB::info($this->breadCrumbs, 'crumbs'); ?>
+
+<?php \FB::info($this->subCategories, 'subCats'); ?>
 
 <?php \FB::info($this->products); ?>
+
+<?php foreach ($this->breadCrumbs as $bread): ?>
+<?php echo $this->escapehtml($bread->category); ?>::
+<?php endforeach; ?>
+
+<div class="row">
+	<div class="span2">
+		<h5>In This Category</h5>
+		<?php foreach ($this->subCategories as $cat):?>
+		<p><a href="<?php echo $this->url('shop/catalog', array(
+    		'categoryIdent' => $cat->ident
+    	)); ?>"><?php echo $this->escapehtml($cat->category); ?></a></p>
+		<?php endforeach; ?>
+	</div>
+	<div class="span10">
+		<ul class="thumbnails">
+	
+		<?php foreach ($this->products as $row): ?>
+		    <li class="span3">
+		    	<div class="thumbnail text-center">
+		    		<img data-src="holder.js/200x100/auto" alt="">
+		    		<h5><?php echo $this->escapehtml($row->name);?></h5>
+		    		<a href="<?php echo $this->url('shop/catalog', array(
+		    			'categoryIdent' => $this->category->ident
+		    		)); ?>" class="btn">Click to see all Products in this Category</a>
+		    	</div>
+		    	
+		    </li>
+		<?php endforeach; ?>
+	
+		</ul>
+	</div>
+</div>

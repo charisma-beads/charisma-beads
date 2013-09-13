@@ -25,7 +25,7 @@ class Catalog extends AbstractModel
 		$parentId = (int) $parentId;
 	
 		$categories = ($parentId != 0) ? $this->getGateway('category')
-			->getDecendentsByParentId($parentId) : $this->getGateway('category')->fetchAll();
+			->getDecendentsByParentId($parentId) : $this->getGateway('category')->getFullTree(true);
 	
 		return $categories;
 	}
