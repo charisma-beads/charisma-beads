@@ -21,10 +21,6 @@ class CatalogController extends AbstractController
 		$category = $this->getModel('Shop\Model\Catalog')->getCategoryByIdent(
 			$this->params('categoryIdent', '')
 		);
-		
-		$subs = $this->getModel('Shop\Model\Catalog')->getCategoriesByParentId($category->productCategoryId);
-		
-		$breadCrumbs = $this->getBreadcrumb($category->productCategoryId);
 	
 		if (null === $category) {
 			throw new Exception(
@@ -33,9 +29,8 @@ class CatalogController extends AbstractController
 		}
 	
 		return new ViewModel(array(
-			'breadCrumbs'	=> $breadCrumbs,
+			'bread'			=> $this->getBreadcrumb($category->productCategoryId),
 			'category'      => $category,
-			'subCategories' => $subs,
 			'products'      => $products
 		));
 	}

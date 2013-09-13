@@ -4,25 +4,35 @@
 
 <?php \FB::info($this->category); ?>
 
-<?php \FB::info($this->breadCrumbs, 'crumbs'); ?>
-
-<?php \FB::info($this->subCategories, 'subCats'); ?>
+<?php \FB::info($this->bread, 'crumbs'); ?>
 
 <?php \FB::info($this->products); ?>
 
-<?php foreach ($this->breadCrumbs as $bread): ?>
-<?php echo $this->escapehtml($bread->category); ?>::
-<?php endforeach; ?>
+<?php echo $this->breadcrumbs(); ?>
 
 <div class="row">
 	<div class="span2">
+		
+		<?php $subCats = $this->category()->getChildCategories($this->category->productCategoryId); ?>
+		<?php if ($subCats->count() > 0): ?>
 		<h5>In This Category</h5>
-		<?php foreach ($this->subCategories as $cat):?>
+		<?php foreach ($subCats as $cat):?>
 		<p><a href="<?php echo $this->url('shop/catalog', array(
     		'categoryIdent' => $cat->ident
     	)); ?>"><?php echo $this->escapehtml($cat->category); ?></a></p>
 		<?php endforeach; ?>
+		<?php endif; ?>
+		
+		<h5>Categories</h5>
+		<?php foreach ($this->category()->getChildCategories() as $cat): ?>
+		
+		<p><a href="<?php echo $this->url('shop/catalog', array(
+		    'categoryIdent' => $cat->ident
+		)); ?>"><?php echo $this->escapehtml($cat->category); ?></a></p>
+		
+		<?php endforeach; ?>
 	</div>
+	
 	<div class="span10">
 		<ul class="thumbnails">
 	

@@ -6,12 +6,12 @@
 <div class="row">
 	<div class="span2">
 		<h5>Categories</h5>
-		<?php foreach ($this->subCategories as $cat): ?>
-		<? if ($cat->depth == 0): ?>
+		<?php foreach ($this->category()->getChildCategories() as $cat): ?>
+		
 		<p><a href="<?php echo $this->url('shop/catalog', array(
 		    'categoryIdent' => $cat->ident
 		)); ?>"><?php echo $this->escapehtml($cat->category); ?></a></p>
-		<?php endif; ?>
+		
 		<?php endforeach; ?>
 	</div>
 	<div class="span10">

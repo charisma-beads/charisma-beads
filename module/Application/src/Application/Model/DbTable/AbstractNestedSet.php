@@ -57,7 +57,7 @@ abstract class AbstractNestedSet extends AbstractTable
                 Select::JOIN_INNER
             )
             ->where(array('child.'.$this->primary.' = ?' => $id))
-            ->order('child.lft');
+            ->order('parent.lft');
         
         return $this->fetchResult($select);
     }

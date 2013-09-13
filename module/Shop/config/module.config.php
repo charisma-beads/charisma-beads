@@ -19,7 +19,7 @@ return array(
                         'options' => array(
                             'route'    => '/[:categoryIdent]',
                             'constraints' => array(
-                            	'categoryIdent' => '[a-zA-Z][a-zA-Z0-9_-]*'
+                            	'categoryIdent' => '[a-zA-Z0-9][a-zA-Z0-9_-]*'
                             ),
                             'defaults' => array(
                             	'controller'    => 'Catalog',
