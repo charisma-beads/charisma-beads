@@ -22,7 +22,12 @@ class Breadcrumb extends AbstractHelper
 				$href = $urlHelper('shop/catalog', array(
 					'categoryIdent' => $category->ident,
 				));
-				$crumbs[] = '<li><a href="' . $href . '">' . $escapeHtml($category->category) . '</a><span class="divider">/</span></li>';
+				
+				if (null === $product && $this->view->category->ident !== $category->ident) {
+					$crumbs[] = '<li><a href="' . $href . '">' . $escapeHtml($category->category) . '</a> <span class="divider">/</span></li>';
+				} else {
+					$crumbs[] = '<li class="active">' . $escapeHtml($category->category) . '</li>';
+				}
 			}
 		
 			if (null !== $product) {
