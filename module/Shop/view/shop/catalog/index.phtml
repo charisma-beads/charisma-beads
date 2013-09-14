@@ -50,5 +50,18 @@
 		<?php endforeach; ?>
 	
 		</ul>
+		
+		<?php echo $this->paginationControl(
+		    $this->products,
+		    'Elastic',
+		    'paginate',
+			array(
+				'route'		=> 'shop/catalog/page',
+				'params' 	=> array(
+					'categoryIdent' => $this->category->ident
+				)
+			)
+		); ?>
+		
 	</div>
 </div>

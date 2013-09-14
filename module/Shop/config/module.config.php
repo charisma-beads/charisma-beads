@@ -27,6 +27,21 @@ return array(
                             	'categoryIdent' => ''
                             ),
                         ),
+                    	'may_terminate' => true,
+                    	'child_routes' => array(
+                    		'page' => array(
+                    			'type'    => 'Segment',
+                    			'options' => array(
+                    				'route'         => '/page/[:page]',
+                    				'constraints'   => array(
+                    					'page'			=> '\d+'
+                    				),
+                    				'defaults'      => array(
+                    					'page' => 1
+                    				),
+                    			),
+                    		),
+                    	),
                     ),
                 ),
             ),

@@ -135,7 +135,8 @@ class AbstractTable
 		$paginator = new Paginator($adapter);
 		
 		$paginator->setItemCountPerPage($limit)
-			->setCurrentPageNumber($page);
+			->setCurrentPageNumber($page)
+			->setPageRange(5);
 		
 		return $paginator;
 	}

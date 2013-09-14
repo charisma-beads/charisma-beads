@@ -23,7 +23,7 @@ class Product extends AbstractTable
 		
 		$select = $this->sql->select();
 		$select->from($this->table)->where(array(
-			'productCategoryId IN(?)'	=> $categoryId,
+			'productCategoryId IN('.$categoryId.')',
 			'enabled'			=> 1,
 			'discontinued'		=> 0
 		));
