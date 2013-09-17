@@ -4,13 +4,20 @@ namespace Shop\Controller;
 use Application\Controller\AbstractController;
 use Shop\Model\ShopException;
 use Zend\View\Model\ViewModel;
+use FB;
 
 class CartController extends AbstractController
 {
 	public function addAction()
 	{
+		$request = $this->request;
+		
+		if (!$request->isPost()) {
+			return $this->redirect()->toRoute('shop');
+		}
+		
 		$product = $this->getModel('Shop\Model\Catalog')->getProductById(
-			$this->params('productId')
+			$request->getPost('productId')
 		);
 	
 		if (null === $product) {
@@ -20,12 +27,12 @@ class CartController extends AbstractController
 		}
 	
 		$this->getModel('Shop\Model\Cart')->addItem(
-			$product, $this->params('qty')
+			$product, $request->getPost('qty')
 		);
+		
+		$this->flashMessenger()->addInfoMessage('Added '  .$request->getPost('qty') . ' X ' . $product->name . ' to your cart');
 	
-		$return = $this->params('returnto');
-	
-		return $this->redirect()->toRoute($return);
+		return $this->redirect()->toUrl($request->getPost('returnTo'));
 	}
 	
 	public function viewAction()
@@ -49,6 +56,8 @@ class CartController extends AbstractController
 			$this->params('shipping')
 		);
 	
-		return $this->redirect()->toRoute('shop/cart/view');
+		return $this->redirect()->toRoute('shop/cart', array(
+			'action' => 'view'
+		));
 	}
 }

@@ -137,7 +137,7 @@ class Cart extends AbstractCollection
 	public function loadSession()
 	{
 		if (isset($this->getContainer()->items)) {
-			$this->_items = $this->getContainer()->items;
+			$this->entities = $this->getContainer()->items;
 		}
 	
 		if (isset($this->getContainer()->shipping)) {

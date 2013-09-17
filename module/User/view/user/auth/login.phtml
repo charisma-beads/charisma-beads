@@ -4,7 +4,6 @@ $form = $this->form;
 $email = $form->get('email');
 $passwd = $form->get('passwd');
 ?>
-<?php echo $this->ztbFlashMessenger()->render(); ?>
 
 <div>
     <form class="form-horizontal"  method="post" action="<?php echo $this->url('user/authenticate') ?>">

@@ -96,8 +96,12 @@
 								</div>
 							</li>
 							<li class="dropdown">
-								<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-shopping-cart"></i></a>
+								<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+									<i class="icon-shopping-cart"></i>
+									<span class="badge badge-inverse"><?php echo $this->cart()->countItems(); ?></span>
+								</a>
 								<div class="dropdown-menu">
+									<?php echo $this->cart()->getSummary(); ?>
 									<hr>
 									<a href="order.html">Show all items in shopping cart <i class="icon-chevron-right"></i></a>
 								</div>
@@ -107,6 +111,9 @@
             	</div>
             </div>
             <div class="row">
+            	<div class="span12">
+            		<?php echo $this->ztbFlashMessenger()->render(); ?>
+            	</div>
             	<div class="span12">
             		<?php echo $this->content; ?>
             	</div>

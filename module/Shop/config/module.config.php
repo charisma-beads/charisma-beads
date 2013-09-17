@@ -29,12 +29,25 @@ return array(
                         ),
                     	'may_terminate' => true,
                     	'child_routes' => array(
+                    		'product' => array(
+                    			'type' => 'Segment',
+                    			'options' => array(
+                    				'route' => '/[:productIdent]',
+                    				'constraints' => array(
+                    					'productIdent' => '[a-zA-Z0-9][a-zA-Z0-9_-]*'
+                    				),
+                    				'defaults' => array(
+										'action' => 'view',
+                    					'productIdent' => '',
+									),
+                    			),
+                    		),
                     		'page' => array(
                     			'type'    => 'Segment',
                     			'options' => array(
                     				'route'         => '/page/[:page]',
                     				'constraints'   => array(
-                    					'page'			=> '\d+'
+                    					'page' => '\d+'
                     				),
                     				'defaults'      => array(
                     					'page' => 1
@@ -43,6 +56,19 @@ return array(
                     		),
                     	),
                     ),
+                	'cart' => array(
+                		'type' => 'Segment',
+                		'options' => array(
+                			'route' => '/cart/[:action]',
+                			'constraints' => array(
+                				'action' => '[a-zA-Z0-9][a-zA-Z0-9_-]*',
+                			),
+                			'defaults' => array(
+                				'controller' 	=> 'Cart',
+                				'action'		=> 'view'
+                			),
+                		),
+                	),
                 ),
             ),
         	'admin' => array(

@@ -18,7 +18,7 @@ class Item
 	{
 		$this->productId        = (int) $product->productId;
 		$this->name             = $product->name;
-		$this->price            = (float) $product->getPrice(false, false);
+		$this->price            = (float) $product->price;
 		$this->taxable          = $product->taxable;
 		$this->discountPercent  = (int) $product->discountPercent;
 		$this->qty              = (int) $qty;

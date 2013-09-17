@@ -2,12 +2,6 @@
 
 <h2><?php echo $this->escapehtml($this->category->category); ?></h2>
 
-<?php \FB::info($this->category); ?>
-
-<?php \FB::info($this->bread, 'crumbs'); ?>
-
-<?php \FB::info($this->products); ?>
-
 <?php echo $this->breadcrumbs(); ?>
 
 <div class="row">
@@ -39,13 +33,19 @@
 		<?php foreach ($this->products as $row): ?>
 		    <li class="span3">
 		    	<div class="thumbnail text-center">
-		    		<img data-src="holder.js/200x100/auto" alt="">
+		    		<img data-src="holder.js/200x100/auto" alt="<?php echo $this->escapehtml($row->name); ?>">
 		    		<h5><?php echo $this->escapehtml($row->name);?></h5>
-		    		<a href="<?php echo $this->url('shop/catalog', array(
-		    			'categoryIdent' => $this->category->ident
-		    		)); ?>" class="btn">Click to see all Products in this Category</a>
+		    		<p><?php echo $this->escapehtml($row->shortDescription); ?></p>
+		    		<?php $form = $this->cart()->addForm($row); ?>
+	    		    <?php echo $this->form()->openTag($form); ?>
+					    <div class="input-append">
+					    <?php echo $this->formInput($form->get('qty')); ?>
+					    <?php echo $this->formButton($form->get('buy-item')); ?>
+					    </div>
+					    <?php echo $this->formHidden($form->get('productId')); ?>
+					    <?php echo $this->formHidden($form->get('returnTo')); ?>
+				    <?php echo $this->form()->closeTag(); ?>
 		    	</div>
-		    	
 		    </li>
 		<?php endforeach; ?>
 	

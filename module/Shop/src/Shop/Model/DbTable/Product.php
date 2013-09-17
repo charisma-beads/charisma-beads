@@ -7,7 +7,7 @@ use FB;
 class Product extends AbstractTable
 {
 	protected $table = 'product';
-	protected $primary = 'prodctId';
+	protected $primary = 'productId';
 	protected $rowClass = 'Shop\Model\Entity\Product';
 	
 	public function getProductByIdent($ident)
@@ -17,16 +17,13 @@ class Product extends AbstractTable
 		return $row;
 	}
 	
-	public function getProductsByCategory($categoryId, $page=null, $count=null, $order=null)
-	{
-		$categoryId = implode(',', $categoryId);
-		
+	public function getProductsByCategory(array $categoryId, $page=null, $count=null, $order=null)
+	{	
 		$select = $this->sql->select();
-		$select->from($this->table)->where(array(
-			'productCategoryId IN('.$categoryId.')',
-			'enabled'			=> 1,
-			'discontinued'		=> 0
-		));
+		$select->from($this->table)->where
+			->in('productCategoryId', $categoryId)
+			->and->equalTo('enabled', 1)
+			->and->equalTo('discontinued', 0);
 	
 		if (true === is_array($order)) {
 			$select = $this->setSortOrder($select, $order);
