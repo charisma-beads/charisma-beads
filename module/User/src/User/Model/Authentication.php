@@ -1,7 +1,7 @@
 <?php
 namespace User\Model;
 
-use User\Model\User;
+use User\Model\Mapper\User;
 use Zend\Authentication\AuthenticationService as ZendAuthenticationService;
 use Zend\Authentication\Adapter\DbTable as AuthAdapter;
 use Zend\Db\Adapter\Adapter as DbAapter;
@@ -19,9 +19,9 @@ class Authentication extends ZendAuthenticationService
     protected $dbAdapter;
     
     /**
-     * @var User\Model\User
+     * @var User\Model\Mapper\User
      */
-    protected $userModel;
+    protected $userMapper;
     
     /**
      * @var ZendAuthenticationService
@@ -46,14 +46,14 @@ class Authentication extends ZendAuthenticationService
     }
     
     /**
-     * Set the user model
+     * Set the user mapper
      * 
-     * @param User $model
+     * @param User $mapper
      * @return \User\Model\Authentication
      */
-    public function setUserModel(User $model)
+    public function setUserMapper(User $mapper)
     {
-        $this->userModel = $model;
+        $this->userMapper = $mapper;
         return $this;
     }
     
@@ -82,8 +82,8 @@ class Authentication extends ZendAuthenticationService
     		return false;
     	}
     
-    	$user = $this->userModel
-    	->getUserByEmail($credentials['email']);
+    	$user = $this->userMapper
+    		->getUserByEmail($credentials['email']);
     
     	$this->getStorage()->write($user);
     

@@ -14,6 +14,11 @@ use Zend\View\Model\ViewModel;
 
 class ShopController extends AbstractController
 {
+	/**
+	 * @var \Shop\Model\Product\Category
+	 */
+	protected $categoryMapper;
+	
     public function indexAction()
     {
     	if (!$this->isAllowed('ShopAdmin', 'view')) {
@@ -25,10 +30,23 @@ class ShopController extends AbstractController
     
     public function shopFrontAction()
     {
-    	$cats = $this->getModel('Shop\Model\Category')->getTopLevelCategories();
+    	$cats = $this->getCategoryMapper()->getTopLevelCategories();
     	
     	return new ViewModel(array(
 			'cats' => $cats
     	));
+    }
+    
+    /**
+     * @return \Shop\Model\Product\Category
+     */
+    protected function getCategoryMapper()
+    {
+    	if (!$this->categoryMapper) {
+    		$sl = $this->getServiceLocator();
+    		$this->categoryMapper = $sl->get('Shop\Model\Category');
+    	}
+    
+    	return $this->categoryMapper;
     }
 }

@@ -8,10 +8,15 @@ use Zend\View\Model\ViewModel;
 
 class ArticleController extends AbstractController
 {
+	/**
+	 * @var \Article\Model\Article;
+	 */
+	protected $articleMapper;
+	
 	public function viewAction()
 	{
 		$slug = $this->params()->fromRoute('slug');
-		$page = $this->getModel('Article\Model\Article')->getArticleBySlug($slug);
+		$page = $this->getArticleMapper()->getArticleBySlug($slug);
 		
 		if (!$page) {
 			$model = new ViewModel();
@@ -19,7 +24,7 @@ class ArticleController extends AbstractController
 			return $model;
 		}
 		
-		$this->getModel('Article\Model\Article')->addPageHit($page);
+		$this->getArticleMapper()->addPageHit($page);
 		
 		return new ViewModel(array(
             'page' => $page
@@ -35,7 +40,7 @@ class ArticleController extends AbstractController
 		$this->layout('layout/admin');
 		
 		return new ViewModel(array(
-			'articles' => $this->getModel('Article\Model\Article')->fetchAllArticles()
+			'articles' => $this->getArticleMapper()->fetchAllArticles()
 		));
 	}
 	
@@ -50,7 +55,7 @@ class ArticleController extends AbstractController
 		$request = $this->getRequest();
 		
 		if ($request->isPost()) {
-			$result = $this->getModel('Article\Model\Article')->addArticle($request->getPost());
+			$result = $this->getArticleMapper()->addArticle($request->getPost());
 			
 			if ($result instanceof ArticleForm) {
 				
@@ -79,8 +84,8 @@ class ArticleController extends AbstractController
 		}
 		
 		return new ViewModel(array(
-			'form' => $this->getModel('Article\Model\Article')->getForm('article'),
-		    'pageForm' => $this->getModel('Navigation\Model\Navigation')->getForm('page')
+			'form' => $this->get('Article\Model\Article')->getForm('article'),
+		    'pageForm' => $this->get('Navigation\Model\Navigation')->getForm('page')
 		));	
 	}
 	
@@ -102,7 +107,7 @@ class ArticleController extends AbstractController
 		// Get the Article with the specified id.  An exception is thrown
 		// if it cannot be found, in which case go to the list page.
 		try {
-			$article = $this->getModel('Article\Model\Article')->getArticleById($id);
+			$article = $this->getArticleMapper()->getArticleById($id);
 		} catch (\Exception $e) {
 			return $this->redirect()->toRoute('admin/article', array(
 				'action' => 'list'
@@ -112,7 +117,7 @@ class ArticleController extends AbstractController
 		$request = $this->getRequest();
 		if ($request->isPost()) {
 			
-			$result = $this->getModel('Article\Model\Article')->editArticle($article, $request->getPost());
+			$result = $this->getArticleMapper()->editArticle($article, $request->getPost());
 			
 			if ($result instanceof ArticleForm) {
 				
@@ -141,7 +146,7 @@ class ArticleController extends AbstractController
 		}
 		
 		return new ViewModel(array(
-            'form' => $this->getModel('Article\Model\Article')->getForm('article')->bind($article),
+            'form' => $this->get('Article\Model\Article')->getForm('article')->bind($article),
             'article' => $article
         ));
 	}
@@ -164,7 +169,7 @@ class ArticleController extends AbstractController
 		
 			if ($del == 'delete') {
 				$id = (int) $request->getPost('articleId');
-				$result = $this->getModel('Article\Model\Article')->deleteArticle($id);
+				$result = $this->get('Article\Model\Article')->deleteArticle($id);
 				
 				if ($result) {
 					$this->flashMessenger()->addSuccessMessage(
@@ -182,5 +187,18 @@ class ArticleController extends AbstractController
 		}
 		
 		return $this->redirect()->toRoute('admin/article');
+	}
+	
+	/**
+	 * @return \Article\Model\Article
+	 */
+	protected function getArticleMapper()
+	{
+		if (!$this->articleMapper) {
+			$sl = $this->getServiceLocator();
+			$this->articleMapper = $sl->get('Article\Model\Article');
+		}
+		
+		return $this->articleMapper;
 	}
 }

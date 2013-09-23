@@ -3,11 +3,16 @@
 namespace User\Controller;
 
 use Application\Controller\AbstractController;
-use User\Form\UserForm;
+use User\Form\User as UserForm;
 use Zend\View\Model\ViewModel;
 
 class UserController extends AbstractController
 {
+	/**
+	 * @var \User\Model\Mapper\User
+	 */
+	protected $userMapper;
+	
 	public function thankYouAction()
 	{
 		return new ViewModel();
@@ -26,10 +31,9 @@ class UserController extends AbstractController
         	$post = $request->getPost();
         	$post['role'] = 'registered'; 
         
-        	$result = $this->getModel('User\Model\User')->addUser($post);
+        	$result = $this->getUserMapper()->addUser($post);
         
         	if ($result instanceof UserForm) {
-        
         		$this->flashMessenger()->addInfoMessage(
         			'There were one or more isues with your submission. Please correct them as indicated below.'
         		);
@@ -56,7 +60,7 @@ class UserController extends AbstractController
         }
         
         return new ViewModel(array(
-        	'form' => $this->getModel('User\Model\User')->getForm('user'),
+        	'form' => $this->getUserMapper()->getUserForm(),
         ));
 	}
 
@@ -71,7 +75,7 @@ class UserController extends AbstractController
 		$request = $this->getRequest();
 		if ($request->isPost()) {
 				
-			$result = $this->getModel('User\Model\User')->editUser($user, $request->getPost());
+			$result = $this->getUserMapper()->editUser($user, $request->getPost());
 				
 			if ($result instanceof UserForm) {
 
@@ -100,13 +104,25 @@ class UserController extends AbstractController
 			}
 		}
 		
-		$form = $this->getModel('User\Model\User')->getForm('user')->bind($user);
+		$form = $this->getUserMapper()->getUserForm()->bind($user);
 		$form->get('passwd')->setAttribute('value', '');
 		
 		return new ViewModel(array(
-			'form' => $form,
-			'user' => $user
+			'form' => $form
 		));
+	}
+	
+	/**
+	 * @return \User\Model\Mapper\User
+	 */
+	protected function getUserMapper()
+	{
+		if (!$this->userMapper) {
+			$sl = $this->getServiceLocator();
+			$this->userMapper = $sl->get('User\Mapper\User');
+		}
+		
+		return $this->userMapper;
 	}
 }
 

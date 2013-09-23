@@ -1,10 +1,29 @@
 <?php
 
+function filterIdent($value)
+{
+	$find    = array('`', '&',   ' ', '"', "'");
+	$replace = array('',  'and', '-', '',  '',);
+	$new = str_replace($find, $replace,$value);
+
+	$noalpha = 'ÁÉÍÓÚÝáéíóúýÂÊÎÔÛâêîôûÀÈÌÒÙàèìòùÄËÏÖÜäëïöüÿÃãÕõÅåÑñÇç@°ºª';
+	$alpha   = 'AEIOUYaeiouyAEIOUaeiouAEIOUaeiouAEIOUaeiouyAaOoAaNnCcaooa';
+
+	$new = substr($new, 0, 255);
+	$new = strtr($new, $noalpha, $alpha);
+
+	// not permitted chars are replaced with "-"
+	$new = preg_replace('/[^a-zA-Z0-9_\+]/', '-', $new);
+
+	//remove -----'s
+	$new = preg_replace('/(-+)/', '-', $new);
+
+	return strtolower(rtrim($new, '-'));
+}
+
 $mysqli = new mysqli("localhost", "root", "password", "charisma_charismabeads");
 
 $result = $mysqli->query("SELECT * FROM products");
-
-print_r($result->fetch);
 
 $resultArray = array();
 
@@ -14,12 +33,13 @@ while($obj = $result->fetch_object()) {
 		'productCategoryId' 	=> $obj->category_id,
 		'productSizeId'			=> $obj->size_id,
 		'taxCodeId'				=> $obj->tax_code_id,
-		'postUnitId'			=> $obj->postunit_id,
+		'productPostUnitId'		=> $obj->postunit_id,
 		'productGroupId'		=> $obj->group_id,
+		'ident'					=> filterIdent($obj->product_name . ' ' . $obj->short_description),
 		'name'					=> $obj->product_name,
 		'price'					=> $obj->price,
-		'description'			=> $obj->description,
-		'shortDescription'		=> $obj->short_description,
+		'description'			=> $mysqli->real_escape_string($obj->description),
+		'shortDescription'		=> $mysqli->real_escape_string($obj->short_description),
 		'quantity'				=> $obj->quantity,
 		'taxable'				=> $obj->vat_inc,
 		'addPostage'			=> $obj->postage,
@@ -36,6 +56,7 @@ $result->close();
 $mysqli->select_db("charisma-beads");
 
 $result = $mysqli->query("TRUNCATE product");
+$c = 0;
 
 foreach ($resultArray as $values) {
 	$keys = array_keys($values);
@@ -50,10 +71,19 @@ foreach ($resultArray as $values) {
 	$sql .= "NOW()
 		)
 	";
+	
 	$result = $mysqli->query($sql);
-	print "<pre>";
-	print_r($sql);
-	print "</pre>";
+	
+	if (!$result) {
+		print "<pre>";
+		print_r($sql);
+		print "</pre>";
+	} else {
+		$c++;
+	}
+	
 }
+
+print 'rows Inserted = ' . $c;
 
 $result->close();

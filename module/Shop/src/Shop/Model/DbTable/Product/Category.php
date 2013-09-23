@@ -11,6 +11,7 @@ class Category extends AbstractNestedSet
 	
 	public function getCategoryByIdent($ident)
 	{
+		$ident = (string) $ident;
 		$rowset = $this->tableGateway->select(array('ident' => $ident));
 		$row = $rowset->current();
 		return $row;

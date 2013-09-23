@@ -36,5 +36,7 @@ div.container a.brand {
 	float: left;
 }
 
+.product-item-box { height: 275px; }
+
 .text-right { text-align: right; }
 .text-center { text-align: center; }

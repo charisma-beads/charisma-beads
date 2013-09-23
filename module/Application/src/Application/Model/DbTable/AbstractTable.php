@@ -4,11 +4,15 @@ namespace Application\Model\DbTable;
 
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\TableGateway\Feature\MetadataFeature;
-use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\Select;
 use Zend\Paginator\Paginator;
-use Zend\Paginator\Adapter\Iterator as PaginatorIterator;
+use Zend\Paginator\Adapter\DbSelect;
+
+use Zend\Stdlib\Hydrator\ObjectProperty;
+use Zend\Db\ResultSet\HydratingResultSet;
+
+use FB;
 
 class AbstractTable
 {
@@ -50,16 +54,23 @@ class AbstractTable
 	 */
 	public function __construct($dbAdapter)
 	{
-		$resultSetPrototype = new ResultSet();
-		$resultSetPrototype->setArrayObjectPrototype(new $this->rowClass());
-		$this->tableGateway = new TableGateway($this->table, $dbAdapter, new MetadataFeature(), $resultSetPrototype);
-		
-		if (method_exists($this->rowClass, 'setColumns')) {
-			$this->tableGateway->getResultSetPrototype()
-				->getArrayObjectPrototype()->setColumns($this->getColumns());
-		}
+		$this->tableGateway = new TableGateway($this->table, $dbAdapter, new MetadataFeature(), $this->getResultSet());
 		
 		$this->sql = new Sql($dbAdapter);
+	}
+	
+	/**
+	 * gets the resultSet
+	 * 
+	 * @return \Zend\Db\ResultSet\HydratingResultSet
+	 */
+	protected function getResultSet()
+	{
+		$resultSetPrototype = new HydratingResultSet();
+		$resultSetPrototype->setHydrator(new ObjectProperty());
+		$resultSetPrototype->setObjectPrototype(new $this->rowClass());
+		
+		return $resultSetPrototype;
 	}
 	
 	/**
@@ -70,6 +81,7 @@ class AbstractTable
 	 */
 	public function getById($id)
 	{
+		$id = (int) $id;
 		$rowset = $this->tableGateway->select(array($this->primary => $id));
 		$row = $rowset->current();
 		return $row;
@@ -83,6 +95,7 @@ class AbstractTable
 	public function fetchAll()
 	{
 		$resultSet = $this->tableGateway->select();
+		\FB::info($resultSet, __METHOD__);
 		return $resultSet;
 	}
 	
@@ -127,16 +140,16 @@ class AbstractTable
 	 * @param int $limit
 	 * @return \Zend\Paginator\Paginator
 	 */
-	public function paginate(ResultSet $resultSet, $page, $limit)
+	public function paginate(Select $select, $page, $limit)
 	{
-		$resultSet->buffer();
-		
-		$adapter = new PaginatorIterator($resultSet);	
+		$adapter = new DbSelect($select, $this->sql, $this->tableGateway->getResultSetPrototype());	
 		$paginator = new Paginator($adapter);
 		
 		$paginator->setItemCountPerPage($limit)
 			->setCurrentPageNumber($page)
 			->setPageRange(5);
+		
+		FB::info($paginator, __METHOD__);
 		
 		return $paginator;
 	}
@@ -151,23 +164,21 @@ class AbstractTable
 	{
 		// we have to set up a new result set otherwise
 		// the table class will only retrive the last query
-		$resultSet = new ResultSet();
-		$resultSet->setArrayObjectPrototype(new $this->rowClass());
-		
-		if (method_exists($this->rowClass, 'setColumns')) {
-			$resultSet->getArrayObjectPrototype()->setColumns($this->getColumns());
-		}
+		$resultSet = $this->getResultSet();
 		
 		$statement = $this->sql->prepareStatementForSqlObject($select);
 		$result = $statement->execute();
 		
 		$resultSet->initialize($result);
 		
+		FB::info($resultSet, __METHOD__);
+		
 		return $resultSet;
 	}
 	
 	/**
 	 * Sets database query limit
+	 * 
 	 * @param Select $select
 	 * @param int $count
 	 * @param int $offset

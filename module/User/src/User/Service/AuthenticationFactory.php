@@ -11,13 +11,13 @@ class AuthenticationFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $sm)
     {
         $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
-        $model = $sm->get('User\Model\User');
+        $mapper= $sm->get('User\Mapper\User');
         $config = $sm->get('config');
         
         $auth = new Authentication();
         
         $auth->setDbAdapter($dbAdapter);
-        $auth->setUserModel($model);
+        $auth->setUserMapper($mapper);
         $auth->setOptions($config['user']['auth']);
         
         return $auth;

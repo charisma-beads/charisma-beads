@@ -3,11 +3,11 @@ namespace Navigation\Model\DbTable;
 
 use Application\Model\DbTable\AbstractTable;
 
-class MenuTable extends AbstractTable
+class Menu extends AbstractTable
 {
 	protected $table = 'menu';
 	protected $primary = 'menuId';
-	protected $rowClass = 'Navigation\Model\Entity\MenuEntity';
+	protected $rowClass = 'Navigation\Model\Entity\Menu';
 	
 	public function getMenu($menu)
 	{

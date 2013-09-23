@@ -5,11 +5,11 @@ use Application\Model\DbTable\AbstractNestedSet;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Expression;
 
-class PageTable extends AbstractNestedSet
+class Page extends AbstractNestedSet
 {
 	protected $table = 'page';
 	protected $primary = 'pageId';
-	protected $rowClass = 'Navigation\Model\Entity\PageEntity';
+	protected $rowClass = 'Navigation\Model\Entity\Page';
     
     public function getPagesByMenuId($id)
     {

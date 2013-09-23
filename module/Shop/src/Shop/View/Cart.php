@@ -54,6 +54,12 @@ class Cart extends AbstractViewHelper
 		return $html;
 	}
 	
+	public function formatAmount($amount)
+    {
+        $currency = $this->getCurrencyHelper();
+        return $currency($amount);
+    }
+	
 	public function addForm(Product $product)
 	{
 		$form = new Add();

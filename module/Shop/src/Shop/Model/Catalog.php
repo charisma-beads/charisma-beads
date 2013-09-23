@@ -6,55 +6,48 @@ use FB;
 
 class Catalog extends AbstractModel
 {
-	protected $classMap = array(
-		'gateways'	=> array(
-			'product'	=> 'Shop\Model\DbTable\Product',
-			'category'	=> 'Shop\Model\DbTable\Product\Category',
-		),
-		'entities'	=> array(
-			'product'	=> 'Shop\Model\Entity\Product',
-			'category'	=> 'Shop\Model\Entity\Product\Category',
-		),
-		'forms'		=> array(
-			
-		),
-	);
+	/**
+	 * @var Shop\Model\DbTable\Product\Category
+	 */
+	protected $categoryGateway;
+	
+	/**
+	 * @var Shop\Model\DbTable\Product
+	 */
+	protected $productGateway;
 	
 	public function getCategoriesByParentId($parentId)
 	{
 		$parentId = (int) $parentId;
 	
-		$categories = ($parentId != 0) ? $this->getGateway('category')
-			->getDecendentsByParentId($parentId) : $this->getGateway('category')->getFullTree(true);
-	
-		return $categories;
+		$categories = $this->getCategoryGateway();
+		
+		return ($parentId != 0) ? $categories->getDecendentsByParentId($parentId) : $categories->getFullTree(true);
 	}
 	
 	public function getCategoryByIdent($ident)
 	{
 		$ident = (string) $ident;
 		
-		return $this->getGateway('category')
-			->getCategoryByIdent($ident);
+		return $this->getCategoryGateway()->getCategoryByIdent($ident);
 	}
 	
 	public function getProductById($id)
 	{
 		$id = (int) $id;
 	
-		return $this->getGateway('product')->getById($id);
+		return $this->getProductGateway()->getById($id);
 	}
 	
 	public function getProductByIdent($ident)
 	{
-		return $this->getGateway('product')
-			->getProductByIdent($ident);
+		return $this->getGateway('product')->getProductByIdent($ident);
 	}
 	
 	public function getProductsByCategory($category, $page=false, $count=25, $order=null, $deep=true)
 	{
 		if (is_string($category)) {
-			$cat = $this->getGateway('category')->getCategoryByIdent($category);
+			$cat = $this->getCategoryGateway()->getCategoryByIdent($category);
 			$categoryId = (null === $cat) ? 0 : $cat->productCategoryId;
 		} else {
 			$categoryId = (int) $category;
@@ -69,7 +62,7 @@ class Catalog extends AbstractModel
 			$categoryId = (null === $ids) ? $categoryId : $ids;
 		}
 	
-		return $this->getGateway('product')
+		return $this->getProductGateway()
 			->getProductsByCategory(
 				$categoryId,
 				$page,
@@ -80,7 +73,7 @@ class Catalog extends AbstractModel
 	
 	public function getCategoryChildrenIds($categoryId, $recursive=false)
 	{
-		$categories = $this->getGateway('category')
+		$categories = $this->getCategoryGateway()
 			->getDecendentsByParentId($categoryId, $recursive);
 		$cats = array();
 	
@@ -93,6 +86,32 @@ class Catalog extends AbstractModel
 	
 	public function getParentCategories($categoryId)
 	{
-		return $this->getGateway('category')->getPathwayByChildId($categoryId);
+		return $this->getCategoryGateway()->getPathwayByChildId($categoryId);
+	}
+	
+	/**
+	 * @return \Shop\Model\DbTable\Product\Category
+	 */
+	protected function getCategoryGateway()
+	{
+		if (!$this->categoryGateway) {
+			$sl = $this->getServiceLocator();
+			$this->categoryGateway = $sl->get('Shop\Gateway\Category');
+		}
+		
+		return $this->categoryGateway;
+	}
+	
+	/**
+	 * @return \Shop\Model\DbTable\Product
+	 */
+	protected function getProductGateway()
+	{
+		if (!$this->productGateway) {
+			$sl = $this->getServiceLocator();
+			$this->productGateway = $sl->get('Shop\Gateway\Product');
+		}
+		
+		return $this->productGateway;
 	}
 }

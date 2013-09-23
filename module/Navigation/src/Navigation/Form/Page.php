@@ -4,16 +4,25 @@ namespace Navigation\Form;
 
 use Zend\Form\Form;
 
-class PageForm extends Form
+class Page extends Form
 {
-    protected $sm;
+	/**
+	 * @var array
+	 */
+    protected $config;
     
-	public function __construct($sm)
+    /**
+     * @var \Navigation\Model\Mapper\Page
+     */
+    protected $pageMapper;
+    
+	public function __construct()
 	{
 		parent::__construct('Page');
-		
-		$this->sm = $sm;
-		
+	}
+	
+	public function init()
+	{
 		$this->add(array(
 			'name' => 'pageId',
 			'type' => 'hidden',
@@ -37,19 +46,18 @@ class PageForm extends Form
 		));
 		
 		$this->add(array(
-		    'name' => 'params',
-		    'type' => 'textarea',
-		    'options' => array(
-		        'label' => 'Params:',
-		        'required' => false,
-		    ),
-		    'attributes' => array(
-		        'placeholder' => 'Params:',
-		    ),
+			'name' => 'params',
+			'type' => 'textarea',
+			'options' => array(
+				'label' => 'Params:',
+				'required' => false,
+			),
+			'attributes' => array(
+				'placeholder' => 'Params:',
+			),
 		));
 		
-		$config = $sm->get('Config');
-		$routes = $config['router']['routes'];
+		$routes = $this->config['router']['routes'];
 		
 		$this->add(array(
 			'name' => 'route',
@@ -57,12 +65,12 @@ class PageForm extends Form
 			'options' => array(
 				'label' => 'Route:',
 				'required' => false,
-			    'empty_option' => '---Please Select a Route---',
-			    'value_options' => $this->getRouteSelect($routes)
+				'empty_option' => '---Please Select a Route---',
+				'value_options' => $this->getRouteSelect($routes)
 			),
 		));
 		
-		$resources = $config['userAcl']['userResources'];
+		$resources = $this->config['userAcl']['userResources'];
 		
 		$this->add(array(
 			'name' => 'resource',
@@ -70,8 +78,8 @@ class PageForm extends Form
 			'options' => array(
 				'label' => 'Resource:',
 				'required' => false,
-			    'empty_option' => 'None',
-			    'value_options' => $this->getResourceSelect($resources)
+				'empty_option' => 'None',
+				'value_options' => $this->getResourceSelect($resources)
 			),
 			'attributes' => array(
 				'placeholder' => 'Resource:',
@@ -86,18 +94,26 @@ class PageForm extends Form
 				'required' => true,
 				'empty_option' => '---Please select option---',
 				'value_options' => array(
-					'0' 		=> 'No',
-					'1' 		=> 'Yes',
+					'0'	=> 'No',
+					'1'	=> 'Yes',
 				),
 			),
 		));
 	}
 	
-	public function getPageSelect($menuId)
+	public function setConfig($config)
 	{
-	    $nav = $this->sm->get('Navigation\Model\Navigation');
-	     
-	    $pages = $nav->getPagesByMenuId($menuId);
+		$this->config = $config;
+	}
+	
+	public function setPageMapper($mapper)
+	{
+		$this->pageMapper = $mapper;
+	}
+	
+	public function getPageSelect($menuId)
+	{    
+	    $pages = $this->pageMapper->getPagesByMenuId($menuId);
 	    $pagesOptions = array();
 	    
 	    $pagesOptions[0] = 'Add to top of menu';

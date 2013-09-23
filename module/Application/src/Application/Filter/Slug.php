@@ -5,7 +5,7 @@ use Zend\Filter\AbstractFilter;
 
 class Slug extends AbstractFilter
 {
-public function filter($value)
+	public function filter($value)
     {
         $find    = array('`', '&',   ' ', '"', "'");
         $replace = array('',  'and', '-', '',  '',);

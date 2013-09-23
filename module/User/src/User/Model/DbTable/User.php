@@ -3,13 +3,13 @@ namespace User\Model\DbTable;
 
 use Application\Model\DbTable\AbstractTable;
 
-class UserTable extends AbstractTable
+class User extends AbstractTable
 { 
 	protected $table = 'user';
 	protected $primary = 'userId';
-	protected $rowClass = 'User\Model\Entity\UserEntity';
+	protected $rowClass = 'User\Model\Entity\User';
     
-    public function getUserByEmail($email, $ignore)
+    public function getUserByEmail($email, $ignore=null)
     {
         $rowset = $this->tableGateway->select(array('email' => $email));
         $row = $rowset->current();
@@ -61,12 +61,11 @@ class UserTable extends AbstractTable
     	}
     
     	$select = $this->setSortOrder($select, $sort);
-    	$resultSet = $this->fetchResult($select);
     	
     	if (null === $page) {
-    		return $resultSet;
+    		return $this->fetchResult($select);
     	} else {
-    		return $this->paginate($resultSet, $page, $count);
+    		return $this->paginate($select, $page, $count);
     	}
     }
 }

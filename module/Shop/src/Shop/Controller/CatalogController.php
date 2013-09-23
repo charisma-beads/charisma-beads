@@ -8,17 +8,22 @@ use FB;
 
 class CatalogController extends AbstractController
 {
+	/**
+	 * @var \Shop\Model\Catalog
+	 */
+	protected $catalogMapper;
+	
 	public function indexAction()
 	{
 		$ident = $this->params('categoryIdent', 0);
 		$page = $this->params('page', 1);
 		
-		$products = $this->getModel('Shop\Model\Catalog')->getProductsByCategory(
+		$products = $this->getCatalogMapper()->getProductsByCategory(
 			$ident,
 			$page
 		);
 	
-		$category = $this->getModel('Shop\Model\Catalog')->getCategoryByIdent(
+		$category = $this->getCatalogMapper()->getCategoryByIdent(
 			$this->params('categoryIdent', '')
 		);
 	
@@ -37,7 +42,7 @@ class CatalogController extends AbstractController
 	
 	public function viewAction()
 	{
-		$product = $this->getModel('Shop\Model\Catalog')->getProductByIdent(
+		$product = $this->getCatalogMapper()->getProductByIdent(
 			$this->params('productIdent', 0)
 		);
 	
@@ -45,7 +50,7 @@ class CatalogController extends AbstractController
 			throw new Exception('Unknown product' . $this->params('productIdent'));
 		}
 	
-		$category = $this->getModel('Shop\Model\Catalog')->getCategoryByIdent(
+		$category = $this->getCatalogMapper()->getCategoryByIdent(
 			$this->params('categoryIdent', '')
 		);
 	
@@ -61,7 +66,20 @@ class CatalogController extends AbstractController
 	
 	public function getBreadcrumb($category)
 	{
-		return $this->getModel('Shop\Model\Catalog')
+		return $this->getCatalogMapper()
 			->getParentCategories($category);
+	}
+	
+	/**
+	 * @return \Shop\Model\Catalog
+	 */
+	protected function getCatalogMapper()
+	{
+		if (!$this->catalogMapper) {
+			$sl = $this->getServiceLocator();
+			$this->catalogMapper = $sl->get('Shop\Model\Catalog');
+		}
+		
+		return $this->catalogMapper;
 	}
 }

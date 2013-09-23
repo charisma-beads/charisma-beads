@@ -3,13 +3,18 @@
 namespace User\Controller;
 
 use Application\Controller\AbstractController;
-use User\Form\UserForm;
+use User\Form\User as UserForm;
 use User\Model\UserException;
 use Zend\View\Model\ViewModel;
 use FB;
 
 class AdminController extends AbstractController
 {
+	/**
+	 * @var \User\Model\Mapper\User
+	 */
+	protected $userMapper;
+	
 	public function indexAction()
 	{
 		if (!$this->isAllowed('UserAdmin', 'view')) {
@@ -25,7 +30,7 @@ class AdminController extends AbstractController
 		);
 		
 		return new ViewModel(array(
-			'users' => $this->getModel('User\Model\User')->fetchAllUsers($params),
+			'users' => $this->getUserMapper()->fetchAllUsers($params),
 			//'searchForm' => new UserSearch()
 		));
 	}
@@ -39,7 +44,7 @@ class AdminController extends AbstractController
 		$params = $this->params()->fromPost();
 		
 		$viewModel = new ViewModel(array(
-			'users' => $this->getModel('User\Model\User')->fetchAllUsers($params)
+			'users' => $this->getUserMapper()->fetchAllUsers($params)
 		));
 	
 		$viewModel->setTerminal(true);
@@ -57,7 +62,7 @@ class AdminController extends AbstractController
 
 		if ($request->isPost()) {
 
-			$result = $this->getModel('User\Model\User')->addUser($request->getPost());
+			$result = $this->getUserMapper()->addUser($request->getPost());
 				
 			if ($result instanceof UserForm) {
 
@@ -86,7 +91,7 @@ class AdminController extends AbstractController
 		}
 
 		return new ViewModel(array(
-			'form' => $this->getModel('User\Model\User')->getForm('user'),
+			'form' => $this->getUserMapper()->getUserForm(),
 		));
 	}
 	
@@ -106,7 +111,7 @@ class AdminController extends AbstractController
 		// Get the User with the specified id.  An exception is thrown
 		// if it cannot be found, in which case go to the list page.
 		try {
-			$user = $this->getModel('User\Model\User')->getUserById($id);
+			$user = $this->getUserMapper()->getUserById($id);
 		} catch (\Exception $e) {
 			return $this->redirect()->toRoute('admin/user', array(
 				'action' => 'list'
@@ -116,7 +121,7 @@ class AdminController extends AbstractController
 		$request = $this->getRequest();
 		if ($request->isPost()) {
 				
-			$result = $this->getModel('User\Model\User')->editUser($user, $request->getPost());
+			$result = $this->getUserMapper()->editUser($user, $request->getPost());
 				
 			if ($result instanceof UserForm) {
 
@@ -144,7 +149,7 @@ class AdminController extends AbstractController
 			}
 		}
 		
-		$form = $this->getModel('User\Model\User')->getForm('user')->bind($user);
+		$form = $this->getUserMapper()->getUserForm()->bind($user);
 		$form->get('passwd')->setAttribute('value', '');
 		
 		return new ViewModel(array(
@@ -171,7 +176,7 @@ class AdminController extends AbstractController
 
 			if ($del == 'delete') {
 				$id = (int) $request->getPost('userId');
-				$result = $this->getModel('User\Model\User')->deleteUser($id);
+				$result = $this->getUserMapper()->deleteUser($id);
 
 				if ($result) {
 					$this->flashMessenger()->addSuccessMessage(
@@ -189,5 +194,18 @@ class AdminController extends AbstractController
 		}
 
 		return $this->redirect()->toRoute('admin/user');
+	}
+	
+	/**
+	 * @return \User\Model\Mapper\User
+	 */
+	protected function getUserMapper()
+	{
+		if (!$this->userMapper) {
+			$sl = $this->getServiceLocator();
+			$this->userMapper = $sl->get('User\Mapper\User');
+		}
+	
+		return $this->userMapper;
 	}
 }

@@ -1,46 +1,43 @@
 <?php
-namespace User\Model;
+namespace User\Model\Mapper;
 
-use Application\Model\AbstractModel;
-use User\Model\Entity\UserEntity;
+use Application\Model\AbstractMapper;
+use User\Model\Entity\User as UserEntity;
 use User\Model\UserException;
 
-class User extends AbstractModel
-{
-    protected $classMap = array(
-		'gateways' => array(
-			'user' => 'User\Model\DbTable\UserTable',
-		),
-		'entities' => array(
-			'user' => 'User\Model\Entity\UserEntity',
-		),
-		'forms' => array(
-			'user' => 'User\Form\UserForm',
-		)
-    );
+class User extends AbstractMapper
+{   
+    /**
+     * @var User\Model\DbTable\User
+     */
+    protected $userGateway;
+    
+    /**
+     * @var User\Form\User
+     */
+    protected $userForm;
     
     public function getUserById($id)
     {
     	$id = (int) $id;
-    	return $this->getGateway('user')->getById($id);
+    	return $this->getUserGateway()->getById($id);
     }
     
     public function getUserByEmail($email, $ignore=null)
     {
     	$email = (string) $email;
-    	return $this->getGateway('user')->getUserByEmail($email, $ignore);
+    	return $this->getUserGateway()->getUserByEmail($email, $ignore);
     }
     
     public function fetchAllUsers($post = array())
     {
-    	return $this->getGateway('user')->fetchAllUsers($post);
+    	return $this->getUserGateway()->fetchAllUsers($post);
     }
     
     public function addUser($post)
     {
-    	$form  = $this->getForm('user');
-    	$user = $this->getEntity('user');
-    	$user->setColumns($this->getGateway('user')->getColumns());
+    	$form  = $this->getUserForm();
+    	$user = new UserEntity();
     
     	$form->setInputFilter($user->getInputFilter());
     	$form->setData($post);
@@ -56,7 +53,7 @@ class User extends AbstractModel
     
     public function editUser(UserEntity $user, $post)
     {
-    	$form  = $this->getForm('user');
+    	$form  = $this->getUserForm();
     
     	$form->setInputFilter($user->getInputFilter());
     	$form->getInputFilter()->get('passwd')->setRequired(false);
@@ -95,10 +92,10 @@ class User extends AbstractModel
     	// TODO check for existing email.
     
     	if ($id == 0) {
-    		$result = $this->getGateway('user')->insert($data);
+    		$result = $this->getUserGateway()->insert($data);
     	} else {
     		if ($this->getUserById($id)) {
-    			$result = $this->getGateway('user')->update($id, $data);
+    			$result = $this->getUserGateway()->update($id, $data);
     		} else {
     			throw new UserException('User id does not exist');
     		}
@@ -110,6 +107,32 @@ class User extends AbstractModel
     public function deleteUser($id)
     {
     	$id = (int) $id;
-    	return $this->getGateway('user')->delete($id);
+    	return $this->getUserGateway()->delete($id);
+    }
+    
+    /**
+     * @return \User\Form\User
+     */
+    public function getUserForm()
+    {
+    	if (!$this->userForm){
+    		$sl = $this->getServiceLocator();
+    		$this->userForm = $sl->get('User\Form\User');
+    	}
+    	 
+    	return $this->userForm;
+    }
+    
+    /**
+     * @return \User\Model\DbTable\User
+     */
+    protected function getUserGateway()
+    {
+    	if (!$this->userGateway){
+    		$sl = $this->getServiceLocator();
+    		$this->userGateway = $sl->get('User\Gateway\User');
+    	}
+    	
+    	return $this->userGateway;
     }
 }

@@ -4,7 +4,7 @@ namespace Navigation\Form;
 
 use Zend\Form\Form;
 
-class MenuForm extends Form
+class Menu extends Form
 {
 	public function __construct()
 	{

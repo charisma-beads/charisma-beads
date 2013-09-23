@@ -3,8 +3,8 @@
 namespace User\Service;
 
 use User\Controller\AuthController;
-use User\Form\LoginForm;
-use User\Form\LoginFilter;
+use User\Form\Login as LoginForm;
+use User\InputFilter\Login as LoginFilter;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 

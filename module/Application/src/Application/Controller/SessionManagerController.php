@@ -7,6 +7,11 @@ use Exception;
 
 class SessionManagerController extends AbstractController
 {
+	/**
+	 * @var \Application\Model\SessionManager
+	 */
+	protected $sessionMapper;
+	
 	public function indexAction()
 	{
 		if (!$this->isAllowed('SessionManager', 'view')) {
@@ -22,7 +27,7 @@ class SessionManagerController extends AbstractController
 		);
 		
 		return new ViewModel(array(
-			'sessions' => $this->getModel('Application\Model\SessionManager')->fetchAllSessions($params),
+			'sessions' => $this->getSessionMapper()->fetchAllSessions($params),
 		));
 	}
 	
@@ -35,7 +40,7 @@ class SessionManagerController extends AbstractController
 		$id = (string) $this->params()->fromRoute('id', 0);
 	
 		$viewModel = new ViewModel(array(
-			'session' => $this->getModel('Application\Model\SessionManager')->getSessionById($id)
+			'session' => $this->getSessionMapper()->getSessionById($id)
 		));
 	
 		$viewModel->setTerminal(true);
@@ -51,7 +56,7 @@ class SessionManagerController extends AbstractController
 		$params = $this->params()->fromPost();
 		
 		$viewModel = new ViewModel(array(
-			'sessions' => $this->getModel('Application\Model\SessionManager')->fetchAllSessions($params)
+			'sessions' => $this->getSessionMapper()->fetchAllSessions($params)
 		));
 	
 		$viewModel->setTerminal(true);
@@ -75,7 +80,7 @@ class SessionManagerController extends AbstractController
 			$del = $request->getPost('submit', 'No');
 	
 			if ($del == 'delete') {
-				$result = $this->getModel('Application\Model\SessionManager')->deleteSession($id);
+				$result = $this->getSessionMapper()->deleteSession($id);
 	
 				if ($result) {
 					$this->flashMessenger()->addSuccessMessage(
@@ -94,5 +99,17 @@ class SessionManagerController extends AbstractController
 	
 		return $this->redirect()->toRoute('admin/session');
 	}
-
+	
+	/**
+	 * @return \Application\Model\SessionManager
+	 */
+	protected function getSessionMapper()
+	{
+		if (!$this->sessionMapper) {
+			$sl = $this->getServiceLocator();
+			$this->sessionMapper = $sl->get('Application\Model\SessionManager');
+		}
+	
+		return $this->sessionMapper;
+	}
 }

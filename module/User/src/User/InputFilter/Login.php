@@ -1,9 +1,9 @@
 <?php
-namespace User\Form;
+namespace User\InputFilter;
 
 use Zend\InputFilter\InputFilter;
 
-class LoginFilter extends InputFilter
+class Login extends InputFilter
 {
     public function __construct()
     {
@@ -24,7 +24,5 @@ class LoginFilter extends InputFilter
 				array('name' => 'StringTrim'),
 			),
     	));
-    	
-    	
     }
 }

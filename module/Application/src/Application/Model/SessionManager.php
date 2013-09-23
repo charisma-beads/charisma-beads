@@ -2,32 +2,41 @@
 
 namespace Application\Model;
 
-class SessionManager extends AbstractModel
-{
-	protected $classMap = array(
-		'gateways' => array(
-			'session' => 'Application\Model\DbTable\SessionTable',
-		),
-		'entities' => array(
-			'session' => 'Application\Model\Entity\SessionEntity',
-		),
-	);
+class SessionManager extends AbstractMapper
+{	
+	/**
+	 * @var Application\Model\DbTable\Session
+	 */
+	protected $sessionGateway;
 	
 	public function getSessionById($id)
 	{
 		$id = (string) $id;
-		return $this->getGateway('session')->getById($id);
+		
+		return $this->getSessionGateway()->getById($id);
 	}
 	
 	public function fetchAllSessions($post = array())
 	{
-		return $this->getGateway('session')->fetchAllSessions($post);
+		return $this->getSessionGateway()->fetchAllSessions($post);
 	}
 	
 	public function deleteSession($id)
 	{
 		$id = (string) $id;
-		\FB::info($id);
-		return $this->getGateway('session')->delete($id);
+		return $this->getSessionGateway()->delete($id);
+	}
+	
+	/**
+	 * @return \Application\Model\DbTable\Session
+	 */
+	protected function getSessionGateway()
+	{
+		if (!$this->sessionGateway){
+			$sl = $this->getServiceLocator();
+			$this->sessionGateway = $sl->get('Application\Gateway\Session');
+		}
+		 
+		return $this->sessionGateway;
 	}
 }

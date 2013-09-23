@@ -2,22 +2,18 @@
 return array(
 	'router' => array(
 		'routes' => array(
-        	'application' => array(
-            	'child_routes' => array(
-					'article' => array(
-						'type'    => 'Segment',
-                        'options' => array(
-                            'route'         => '[:slug]',
-                            'constraints'   => array(
-                                'slug' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
-                            'defaults'      => array(
-                            	'__NAMESPACE__' => 'Article\Controller',
-                                'controller' => 'Article',
-                                'action' => 'view'
-                            ),
-                        ),
+        	'article' => array(
+				'type'    => 'Segment',
+                'options' => array(
+                	'route'         => '/page/[:slug]',
+                    'constraints'   => array(
+                    	'slug' => '[a-zA-Z][a-zA-Z0-9_-]*',
                     ),
+                    'defaults'      => array(
+                    	'__NAMESPACE__' => 'Article\Controller',
+                    	'controller' => 'Article',
+                    	'action' => 'view'
+					),
                 ),
             ),
 			'admin' => array(

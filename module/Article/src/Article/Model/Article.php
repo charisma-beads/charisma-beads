@@ -23,22 +23,28 @@ class Article extends AbstractModel
 	 * @var Navigation\Model\Navigation
 	 */
 	protected $navigation;
+	
+	/**
+	 * @var \Article\Model\DbTable\ArticleTable
+	 */
+	protected $articleGateway;
 
 	public function getArticleById($id)
 	{
 		$id = (int) $id;
-		return $this->getGateway('article')->getById($id);
+		return $this->getArticleGateway()->getById($id);
 	}
 	
 	public function getArticleBySlug($slug)
 	{
 		$slug = (string) $slug;
-		return $this->getGateway('article')->getArticleBySlug($slug);
+		\FB::info($this->getArticleGateway());
+		return $this->getArticleGateway()->getArticleBySlug($slug);
 	}
 	
 	public function fetchAllArticles()
 	{
-		return $this->getGateway('article')->fetchAll();
+		return $this->getArticleGateway()->fetchAll();
 	}
 	
 	public function addPageHit(ArticleEntity $page)
@@ -159,10 +165,10 @@ class Article extends AbstractModel
 		$data['dateModified'] = $this->currentDate();
 	
 		if (0 === $id) {
-			$result = $this->getGateway('article')->insert($data);
+			$result = $this->getArticleGateway()->insert($data);
 		} else {
 			if ($this->getArticleById($id)) {
-				$result = $this->getGateway('article')->update($id, $data);
+				$result = $this->getArticleGateway()->update($id, $data);
 			} else {
 				throw new \Exception('Article id does not exist');
 			}
@@ -177,6 +183,19 @@ class Article extends AbstractModel
 		
 		// find all links in menus first, if exists delete them before after deleting.
 		return $this->getGateway('article')->delete($id);
+	}
+	
+	/**
+	 * @return \Article\Model\DbTable\ArticleTable
+	 */
+	protected function getArticleGateway()
+	{
+		if (!$this->articleGateway) {
+			$sl = $this->getServiceLocator();
+			$this->articleGateway = $sl->get('Article\Gateway\Article');
+		}
+		
+		return $this->articleGateway;
 	}
 	
 	/**

@@ -11,6 +11,7 @@ class AclMenu extends AbstractViewHelper
 {
 	public function __invoke($container = null, $menu = null, $partial = null, $useZtb = true)
     {
+    	/* @var $acl \User\Model\Acl */
         $acl = $this->getServiceLocator()->getServiceLocator()->get('User\Service\AclFactory');
         
         if ($container == 'model') {
@@ -40,12 +41,15 @@ class AclMenu extends AbstractViewHelper
     
     protected function getPages($menu)
     {
-        $model = $this->getServiceLocator()->getServiceLocator()->get('Navigation\Model\Navigation');
-        $pages = $model->getGateway('page')->getPagesByMenu($menu);
+    	/* @var $gateway \Navigation\Model\DbTable\Page */
+        $gateway = $this->getServiceLocator()->getServiceLocator()->get('Navigation\Gateway\Page');
+        
+        $pages = $gateway->getPagesByMenu($menu);
         $pageArray = array();
         
+        /* @var $page \Navigation\Model\Entity\Page */
         foreach ($pages as $page) {
-            $p = $page->toArray();
+            $p = $page->getArrayCopy(true);
             $p['params'] = parse_ini_string($p['params']);
             
             if ($p['route'] == '0') {

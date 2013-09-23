@@ -4,7 +4,7 @@ namespace User\Form;
 
 use Zend\Form\Form;
 
-class UserForm extends Form
+class User extends Form
 {
 	public function __construct()
 	{
@@ -79,6 +79,11 @@ class UserForm extends Form
 		
 		$this->add(array(
 			'name' => 'dateCreated',
+			'type' => 'hidden',
+		));
+		
+		$this->add(array(
+			'name' => 'dateModified',
 			'type' => 'hidden',
 		));
 	}

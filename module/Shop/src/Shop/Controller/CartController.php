@@ -8,6 +8,16 @@ use FB;
 
 class CartController extends AbstractController
 {
+	/**
+	 * @var \Shop\Model\Cart
+	 */
+	protected $cart;
+	
+	/**
+	 * @var \Shop\Model\Catalog
+	 */
+	protected $calalogMapper;
+	
 	public function addAction()
 	{
 		$request = $this->request;
@@ -16,7 +26,7 @@ class CartController extends AbstractController
 			return $this->redirect()->toRoute('shop');
 		}
 		
-		$product = $this->getModel('Shop\Model\Catalog')->getProductById(
+		$product = $this->getCatalogMapper()->getProductById(
 			$request->getPost('productId')
 		);
 	
@@ -26,7 +36,7 @@ class CartController extends AbstractController
 			);
 		}
 	
-		$this->getModel('Shop\Model\Cart')->addItem(
+		$this->getCart()->addItem(
 			$product, $request->getPost('qty')
 		);
 		
@@ -38,26 +48,52 @@ class CartController extends AbstractController
 	public function viewAction()
 	{
 		return new ViewModel(array(
-			'cartModel' => $this->get('Shop\Model\Cart')
+			'cartModel' => $this->getCart()
 		));
 	}
 	
 	public function updateAction()
 	{
 		foreach($this->params('quantity') as $id => $value) {
-			$product = $this->getModel('Shop/Model/Catalog')->getProductById($id);
+			$product = $this->getCatalogMapper()->getProductById($id);
 	
 			if (null !== $product) {
-				$this->getModel('Shop/Model/Cart')->addItem($product, $value);
+				$this->getCart()->addItem($product, $value);
 			}
 		}
 	
-		$this->getModel('Shop/Model/Cart')->setShippingCost(
+		$this->getCatalogMapper()->setShippingCost(
 			$this->params('shipping')
 		);
 	
 		return $this->redirect()->toRoute('shop/cart', array(
 			'action' => 'view'
 		));
+	}
+	
+	/**
+	 * @return \Shop\Model\Cart
+	 */
+	protected function getCart()
+	{
+		if (!$this->cart) {
+			$sl = $this->getServiceLocator();
+			$this->cart = $sl->get('Shop\Model\Cart');
+		}
+	
+		return $this->cart;
+	}
+	
+	/**
+	 * @return \Shop\Model\Catalog
+	 */
+	protected function getCatalogMapper()
+	{
+		if (!$this->catalogMapper) {
+			$sl = $this->getServiceLocator();
+			$this->calalogMapper = $sl->get('Shop\Model\Catalog');
+		}
+	
+		return $this->calalogMapper;
 	}
 }

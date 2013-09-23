@@ -5,7 +5,8 @@ return array(
 		'Application\Model\SessionManager' => 'Application\Model\SessionManager',
 	),
     'factories' => array(
-    	'Application\SessionManager'       => 'Application\Service\SessionManagerFactory',
-        'Application\SessionSaveHandler'   => 'Application\Service\SessionSaveHandlerFactory',
+    	'Application\Gateway\Session'		=> 'Application\Service\DbTable\SessionFactory',
+    	'Application\SessionManager'		=> 'Application\Service\SessionManagerFactory',
+        'Application\SessionSaveHandler'	=> 'Application\Service\SessionSaveHandlerFactory',
     ),
 );

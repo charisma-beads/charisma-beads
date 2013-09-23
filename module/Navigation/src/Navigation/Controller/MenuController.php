@@ -4,10 +4,15 @@ namespace Navigation\Controller;
 
 use Application\Controller\AbstractController;
 use Zend\View\Model\ViewModel;
-use Navigation\Form\MenuForm;
+use Navigation\Form\Menu as MenuForm;
 
 class MenuController extends AbstractController
 {
+	/**
+	 * @var \Navigation\Model\Mapper\Menu;
+	 */
+	protected $menuMapper;
+	
     public function listAction()
     {
     	if (!$this->isAllowed('Menu', 'view')) {
@@ -15,7 +20,7 @@ class MenuController extends AbstractController
     	}
     	
         return new ViewModel(array(
-        	'menus' => $this->getModel('Navigation\Model\Navigation')->fetchAllMenus()
+        	'menus' => $this->getMenuMapper()->fetchAllMenus()
         ));
     }
     
@@ -28,7 +33,7 @@ class MenuController extends AbstractController
 		$request = $this->getRequest();
 		
 		if ($request->isPost()) {
-			$result = $this->getModel('Navigation\Model\Navigation')->addMenu($request->getPost());
+			$result = $this->getMenuMapper()->addMenu($request->getPost());
 			
 			if ($result instanceof MenuForm) {
 				
@@ -57,7 +62,7 @@ class MenuController extends AbstractController
 		}
 		
 		return new ViewModel(array(
-			'form' => $this->getModel('Navigation\Model\Navigation')->getForm('menu'),
+			'form' => $this->getMenuMapper()->getMenuForm()
 		));	
 	}
 	
@@ -79,7 +84,7 @@ class MenuController extends AbstractController
 		// Get the Article with the specified id.  An exception is thrown
 		// if it cannot be found, in which case go to the list page.
 		try {
-			$menu = $this->getModel('Navigation\Model\Navigation')->getMenuById($id);
+			$menu = $this->getMenuMapper()->getMenuById($id);
 		} catch (\Exception $e) {
 			return $this->redirect()->toRoute('admin/menu', array(
 				'action' => 'list'
@@ -89,7 +94,7 @@ class MenuController extends AbstractController
 		$request = $this->getRequest();
 		if ($request->isPost()) {
 			
-			$result = $this->getModel('Navigation\Model\Navigation')->editMenu($menu, $request->getPost());
+			$result = $this->getMenuMapper()->editMenu($menu, $request->getPost());
 			
 			if ($result instanceof MenuForm) {
 				
@@ -118,7 +123,7 @@ class MenuController extends AbstractController
 		}
 		
 		return new ViewModel(array(
-            'form' => $this->getModel('Navigation\Model\Navigation')->getForm('menu')->bind($menu),
+            'form' => $this->getMenuMapper()->getMenuForm()->bind($menu),
             'menu' => $menu
         ));
 	}
@@ -142,7 +147,7 @@ class MenuController extends AbstractController
 			if ($del == 'delete') {
 				try {
 					$id = (int) $request->getPost('menuId');
-					$result = $this->getModel('Navigation\Model\Navigation')->deleteMenu($id);
+					$result = $this->getMenuMapper()->deleteMenu($id);
 				
 					if ($result) {
 						$this->flashMessenger()->addSuccessMessage(
@@ -163,5 +168,18 @@ class MenuController extends AbstractController
 		}
 		
 		return $this->redirect()->toRoute('admin/menu');
+	}
+	
+	/**
+	 * @return \Navigation\Model\Mapper\Menu
+	 */
+	protected function getMenuMapper()
+	{
+		if (!$this->menuMapper) {
+			$sl = $this->getServiceLocator();
+			$this->menuMapper = $sl->get('Navigation\Mapper\Menu');
+		}
+		
+		return $this->menuMapper;
 	}
 }

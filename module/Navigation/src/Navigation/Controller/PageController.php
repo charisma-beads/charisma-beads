@@ -4,10 +4,15 @@ namespace Navigation\Controller;
 
 use Application\Controller\AbstractController;
 use Zend\View\Model\ViewModel;
-use Navigation\Form\PageForm;
+use Navigation\Form\Page as PageForm;
 
 class PageController extends AbstractController
 {
+	/**
+	 * @var \Navigation\Model\Mapper\Page;
+	 */
+	protected $pageMapper;
+	
     public function listAction()
     {
     	if (!$this->isAllowed('Page', 'view')) {
@@ -19,7 +24,7 @@ class PageController extends AbstractController
     	if (!$menuId) return $this->redirect()->toRoute('admin/menu');
     	
         return new ViewModel(array(
-        	'pages' => $this->getModel('Navigation\Model\Navigation')->getPagesByMenuId($menuId),
+        	'pages' => $this->getPageMapper()->getPagesByMenuId($menuId),
         	'menuId' => $menuId
         ));
     }
@@ -34,7 +39,7 @@ class PageController extends AbstractController
     
     	$request = $this->getRequest();
     	if ($request->isPost()) {
-			$result = $this->getModel('Navigation\Model\Navigation')->addPage($request->getPost());
+			$result = $this->getPageMapper()->addPage($request->getPost());
 			
 			if ($result instanceof PageForm) {
 				
@@ -64,7 +69,7 @@ class PageController extends AbstractController
 		}
 		
 		return new ViewModel(array(
-			'form' => $this->getModel('Navigation\Model\Navigation')->getForm('page'),
+			'form' => $this->getPageMapper()->getPageForm(),
 			'menuId' => $menuId
 		));	
     
@@ -90,7 +95,7 @@ class PageController extends AbstractController
     	// Get the Page with the specified id.  An exception is thrown
     	// if it cannot be found, in which case go to the list page.
     	try {
-    		$page = $this->getModel('Navigation\Model\Navigation')->getPageById($id);
+    		$page = $this->getPageMapper()->getPageById($id);
     	} catch (\Exception $e) {
     		return $this->redirect()->toRoute('admin/page', array(
     			'action' => 'list'
@@ -100,7 +105,7 @@ class PageController extends AbstractController
     	$request = $this->getRequest();
 		if ($request->isPost()) {
 			
-			$result = $this->getModel('Navigation\Model\Navigation')->editPage($page, $request->getPost());
+			$result = $this->getPageMapper()->editPage($page, $request->getPost());
 			
 			if ($result instanceof PageForm) {
 				
@@ -129,7 +134,7 @@ class PageController extends AbstractController
 		}
 		
 		return new ViewModel(array(
-            'form' => $this->getModel('Navigation\Model\Navigation')->getForm('page')->bind($page),
+            'form' => $this->getPageMapper()->getPageForm()->bind($page),
             'page' => $page
         ));
     }
@@ -154,7 +159,7 @@ class PageController extends AbstractController
 		
 			if ($del == 'delete') {
 				$id = (int) $request->getPost('pageId');
-				$result = $this->getModel('Navigation\Model\Navigation')->deletePage($id);
+				$result = $this->getPageMapper()->deletePage($id);
 				
 				if ($result) {
 					$this->flashMessenger()->addSuccessMessage(
@@ -172,5 +177,18 @@ class PageController extends AbstractController
 		}
 		
 		return $this->redirect()->toRoute('admin/page', array('menuId' => $menuId));
+	}
+	
+	/**
+	 * @return \Navigation\Model\Mapper\Page
+	 */
+	protected function getPageMapper()
+	{
+		if (!$this->pageMapper) {
+			$sl = $this->getServiceLocator();
+			$this->pageMapper = $sl->get('Navigation\Mapper\Page');
+		}
+	
+		return $this->pageMapper;
 	}
 }

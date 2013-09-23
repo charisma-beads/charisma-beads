@@ -1,11 +1,25 @@
 <?php
 namespace Application\Model\DbTable;
 
-class SessionTable extends AbstractTable
+class Session extends AbstractTable
 {
 	protected $table = 'session';
 	protected $primary = 'id';
-	protected $rowClass = 'Application\Model\Entity\SessionEntity';
+	protected $rowClass = 'Application\Model\Entity\Session';
+	
+	/**
+	 * Gets one row by its id
+	 *
+	 * @param int $id
+	 * @return \Application\Model\Entity\Session
+	 */
+	public function getById($id)
+	{
+		$id = (string) $id;
+		$rowset = $this->tableGateway->select(array($this->primary => $id));
+		$row = $rowset->current();
+		return $row;
+	}
 	
 	public function fetchAllSessions(array $post)
 	{
@@ -17,12 +31,11 @@ class SessionTable extends AbstractTable
 		$select->from($this->table);
 	
 		$select = $this->setSortOrder($select, $sort);
-		$resultSet = $this->fetchResult($select);
 		 
 		if (null === $page) {
-    		return $resultSet;
+    		return $this->fetchResult($select);
     	} else {
-    		return $this->paginate($resultSet, $page, $count);
+    		return $this->paginate($select, $page, $count);
     	}
 	}
 }

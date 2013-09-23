@@ -9,9 +9,10 @@ class NavigationForm extends AbstractViewHelper
 {
 	public function __invoke()
     {
-        $model = $this->getServiceLocator()->getServiceLocator()->get('Navigation\Model\Navigation');
-        $pages = $model->getGateway('page')->getFullTree();
-        $menus = $model->fetchAllMenus();
+    	/* @var $gateway \Navigation\Model\DbTable\Page */
+        $gateway = $this->getServiceLocator()->getServiceLocator()->get('Navigation\Gateway\Page');
+        $pages = $gateway->getFullTree();
+        $menus = $gateway->fetchAllMenus();
         
         $select = new Element\Select('position');
         $pagesOptions = array();
@@ -26,11 +27,12 @@ class NavigationForm extends AbstractViewHelper
             
         }
         
+        /* @var $page \Navigation\Model\Entity\Page */
         foreach ($pages as $page) {
             
             $ident = ($page->depth > 0) ? str_repeat('%space%%space%',($page->depth)) . '%bull%%space%' : '';
             
-            $pagesOptions[$page->menuId]['options'][$page->menuId . '-' . $page->pageId] = $ident . $page->label;
+            $pagesOptions[$page->menuId]['options'][$page->menuId . '-' . $page->pageId] = $ident . $page->getRouteLabel();
         }
         
         $select = new Element\Select('position');

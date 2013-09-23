@@ -1,13 +1,13 @@
 <?php
+namespace Navigation\InputFilter;
 
-namespace Navigation\Model\Entity;
+use Zend\InputFilter\InputFilter;
 
-use Application\Model\Entity\AbstractEntity;
-
-class MenuEntity extends AbstractEntity
+class Menu extends InputFilter
 {
-    protected $filters = array(
-        array(
+	public function __construct()
+	{
+		$this->add(array(
             'name'       => 'menu',
             'required'   => true,
             'filters'    => array(
@@ -24,6 +24,6 @@ class MenuEntity extends AbstractEntity
                     ),
                 ),
             ),
-        )
-    );
+		));
+	}
 }
