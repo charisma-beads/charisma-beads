@@ -1,13 +1,13 @@
 <?php
+namespace Article\InputFilter;
 
-namespace Article\Model\Entity;
+use Zend\InputFilter\InputFilter;
 
-use Application\Model\Entity\AbstractEntity;
-
-class ArticleEntity extends AbstractEntity
+class Article extends InputFilter
 {
-	protected $filters = array(
-	    array(
+	public function __construct()
+	{
+		$this->add(array(
             'name'       => 'title',
             'required'   => true,
             'filters'    => array(
@@ -25,8 +25,9 @@ class ArticleEntity extends AbstractEntity
                     ),
                 ),
             ),
-        ),
-        array(
+        ));
+		
+		$this->add(array(
             'name'       => 'slug',
             'required'   => true,
             'filters'    => array(
@@ -44,6 +45,6 @@ class ArticleEntity extends AbstractEntity
                     ),
                 ),
             ),
-        )
-	);
+        ));
+	}
 }

@@ -4,7 +4,7 @@ namespace Article\Form;
 
 use Zend\Form\Form;
 
-class ArticleForm extends Form
+class Article extends Form
 {
 	public function __construct()
 	{

@@ -2,14 +2,14 @@
 
 namespace Article\Controller;
 
-use Article\Form\ArticleForm;
+use Article\Form\Article as ArticleForm;
 use Application\Controller\AbstractController;
 use Zend\View\Model\ViewModel;
 
 class ArticleController extends AbstractController
 {
 	/**
-	 * @var \Article\Model\Article;
+	 * @var \Article\Model\Mapper\Article;
 	 */
 	protected $articleMapper;
 	
@@ -84,8 +84,7 @@ class ArticleController extends AbstractController
 		}
 		
 		return new ViewModel(array(
-			'form' => $this->get('Article\Model\Article')->getForm('article'),
-		    'pageForm' => $this->get('Navigation\Model\Navigation')->getForm('page')
+			'form' => $this->getArticleMapper()->getArticleForm()
 		));	
 	}
 	
@@ -146,7 +145,7 @@ class ArticleController extends AbstractController
 		}
 		
 		return new ViewModel(array(
-            'form' => $this->get('Article\Model\Article')->getForm('article')->bind($article),
+            'form' => $this->getArticleMapper()->getArticleForm()->bind($article),
             'article' => $article
         ));
 	}
@@ -169,7 +168,7 @@ class ArticleController extends AbstractController
 		
 			if ($del == 'delete') {
 				$id = (int) $request->getPost('articleId');
-				$result = $this->get('Article\Model\Article')->deleteArticle($id);
+				$result = $this->getArticleMapper()->deleteArticle($id);
 				
 				if ($result) {
 					$this->flashMessenger()->addSuccessMessage(
@@ -190,13 +189,13 @@ class ArticleController extends AbstractController
 	}
 	
 	/**
-	 * @return \Article\Model\Article
+	 * @return \Article\Model\Mapper\Article
 	 */
 	protected function getArticleMapper()
 	{
 		if (!$this->articleMapper) {
 			$sl = $this->getServiceLocator();
-			$this->articleMapper = $sl->get('Article\Model\Article');
+			$this->articleMapper = $sl->get('Article\Mapper\Article');
 		}
 		
 		return $this->articleMapper;

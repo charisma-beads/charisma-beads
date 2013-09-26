@@ -1,33 +1,26 @@
 <?php
 
-namespace Article\Model;
+namespace Article\Model\Mapper;
 
-use Article\Model\Entity\ArticleEntity;
-use Application\Model\AbstractModel;
+use Article\Model\Entity\Article as ArticleEntity;
+use Application\Model\AbstractMapper;
 
-class Article extends AbstractModel
-{
-	protected $classMap = array(
-		'gateways' => array(
-			'article' => 'Article\Model\DbTable\ArticleTable',
-		),
-		'entities' => array(
-			'article' => 'Article\Model\Entity\ArticleEntity',
-		),
-		'forms' => array(
-			'article' => 'Article\Form\ArticleForm'
-		)
-	);
-	
-	/*
-	 * @var Navigation\Model\Navigation
+class Article extends AbstractMapper
+{	
+	/**
+	 * @var Navigation\Model\Mapper\Page
 	 */
-	protected $navigation;
+	protected $pageMapper;
 	
 	/**
-	 * @var \Article\Model\DbTable\ArticleTable
+	 * @var \Article\Model\DbTable\Article
 	 */
 	protected $articleGateway;
+	
+	/**
+	 * @var \Article\Form\Article
+	 */
+	protected $articleForm;
 
 	public function getArticleById($id)
 	{
@@ -38,7 +31,6 @@ class Article extends AbstractModel
 	public function getArticleBySlug($slug)
 	{
 		$slug = (string) $slug;
-		\FB::info($this->getArticleGateway());
 		return $this->getArticleGateway()->getArticleBySlug($slug);
 	}
 	
@@ -49,7 +41,9 @@ class Article extends AbstractModel
 	
 	public function addPageHit(ArticleEntity $page)
 	{
-		$page->pageHits++;
+		$pageHits = $page->getPageHits();
+		$pageHits++;
+		$page->setPageHits($pageHits);
 		$this->saveArticle($page);
 	}
 	
@@ -69,7 +63,7 @@ class Article extends AbstractModel
 				'menuInsertType' => $post['menuInsertType']
 			);
 				
-			$this->getNavigation()->addPage($data);
+			$this->getPageMapper()->addPage($data);
 		}
 	}
 	
@@ -79,9 +73,8 @@ class Article extends AbstractModel
 			$post['slug'] = $post['title'];
 		}
 		
-		$form  = $this->getForm('article');
-		$article = $this->getEntity('article');
-		$article->setColumns($this->getGateway('article')->getColumns());
+		$form  = $this->getArticleForm();
+		$article = new ArticleEntity();
 		
 		$form->setInputFilter($article->getInputFilter());
 		$form->setData($post);
@@ -108,7 +101,7 @@ class Article extends AbstractModel
 				'menuInsertType' => $post['menuInsertType']
 			);
 				
-			$this->getNavigation()->addPage($data);
+			$this->getPageMapper()->addPage($data);
 		}
 		
 		return $insertId;
@@ -116,7 +109,7 @@ class Article extends AbstractModel
 	
 	public function editArticle(ArticleEntity $article, $post)
 	{
-		$form  = $this->getForm('article');
+		$form  = $this->getArticleForm();
 		
 		$form->setInputFilter($article->getInputFilter());
 		$form->bind($article);
@@ -147,9 +140,9 @@ class Article extends AbstractModel
 		    $page = $this->getNavigation()->getPageByMenuIdAndLabel($ids[0], $article->title);
 		    
 		    if (!$page) {
-		        $this->getNavigation()->addPage($data);
+		        $this->getPageMapper()->addPage($data);
 		    } else {
-		        $this->getNavigation()->editPage($page, $data);
+		        $this->getPageMapper()->editPage($page, $data);
 		    }
 		}
 		
@@ -182,11 +175,24 @@ class Article extends AbstractModel
 		$id = (int) $id;
 		
 		// find all links in menus first, if exists delete them before after deleting.
-		return $this->getGateway('article')->delete($id);
+		return $this->getArticleGateway()->delete($id);
 	}
 	
 	/**
-	 * @return \Article\Model\DbTable\ArticleTable
+	 * @return \Article\Form\Article
+	 */
+	public function getArticleForm()
+	{
+		if (!$this->articleForm) {
+			$sl = $this->getServiceLocator();
+			$this->articleForm = $sl->get('Article\Form\Article');
+		}
+		
+		return $this->articleForm;
+	}
+	
+	/**
+	 * @return \Article\Model\DbTable\Article
 	 */
 	protected function getArticleGateway()
 	{
@@ -199,23 +205,15 @@ class Article extends AbstractModel
 	}
 	
 	/**
-	 * @return \Article\Model\Article
+	 * @return \Navigation\Model\Mapper\Page
 	 */
-	protected function setNavigation()
+	protected function getPageMapper()
 	{
-	    $this->navigation = $this->getServiceLocator()->get('Navigation\Model\Navigation');
-	    return $this;
-	}
-	
-	/**
-	 * @return \Navigation\Model\Navigation
-	 */
-	protected function getNavigation()
-	{
-	    if (!$this->navigation) {
-	        $this->setNavigation();
-	    }
-	    
-	    return $this->navigation;
+	    if (!$this->pageMapper) {
+			$sl = $this->getServiceLocator();
+			$this->pageMapper = $sl->get('Navigation\Mapper\Page');
+		}
+		
+		return $this->pageMapper;
 	}
 }

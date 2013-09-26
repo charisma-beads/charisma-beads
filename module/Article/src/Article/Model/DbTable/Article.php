@@ -4,11 +4,11 @@ namespace Article\Model\DbTable;
 
 use Application\Model\DbTable\AbstractTable;
 
-class ArticleTable extends AbstractTable
+class Article extends AbstractTable
 {
 	protected $table = 'article';
 	protected $primary = 'articleId';
-	protected $rowClass = 'Article\Model\Entity\ArticleEntity';
+	protected $rowClass = 'Article\Model\Entity\Article';
 	
 	public function getArticleBySlug($slug)
 	{

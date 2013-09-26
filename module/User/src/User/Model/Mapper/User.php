@@ -80,7 +80,7 @@ class User extends AbstractMapper
     
     	if (array_key_exists('passwd', $data) && '' != $data['passwd']) {
     		$authOptions = $this->getConfig('user');
-    		$hash = $authOptions['auth']['hash'];
+    		$hash = str_replace('(?)', '', strtolower($authOptions['auth']['credentialTreatment']));
     		$data['passwd'] = $hash($data['passwd']);
     	} else {
     		unset($data['passwd']);

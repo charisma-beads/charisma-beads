@@ -8,6 +8,6 @@ class ArticleFactory extends AbstractDbTableFactory
 
 	protected function getName()
 	{
-		return 'Article\Model\DbTable\ArticleTable';
+		return 'Article\Model\DbTable\Article';
 	}
 }

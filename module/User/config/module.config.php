@@ -147,7 +147,7 @@ return array(
                     'add' => array(
                         'label' => 'Add New User',
                         'action' => 'add',
-                        'route' => 'admin/user',
+                        'route' => 'admin/user/edit',
                         'resource' => 'menu:admin'
                     ),
                 ),
