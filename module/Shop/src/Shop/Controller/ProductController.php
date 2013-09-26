@@ -7,7 +7,7 @@ use Zend\View\Model\ViewModel;
 class ProductController extends AbstractController
 {
 	/**
-	 * @var \Shop\Model\Product
+	 * @var \Shop\Model\Mapper\Product
 	 */
 	protected $productMapper;
 	
@@ -17,12 +17,12 @@ class ProductController extends AbstractController
 	}
 	
 	/**
-	 * @return \Shop\Model\Product
+	 * @return \Shop\Model\Mapper\Product
 	 */
 	protected function getProductMapper()
 	{
 		if (!$this->productMapper) {
-			$this->productMapper = $this->get('Shop\Model\Product');
+			$this->productMapper = $this->get('Shop\Mapper\Product');
 		}
 	
 		return $this->productMapper;

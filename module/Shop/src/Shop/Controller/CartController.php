@@ -16,7 +16,7 @@ class CartController extends AbstractController
 	/**
 	 * @var \Shop\Model\Catalog
 	 */
-	protected $calalogMapper;
+	protected $calalog;
 	
 	public function addAction()
 	{
@@ -26,7 +26,7 @@ class CartController extends AbstractController
 			return $this->redirect()->toRoute('shop');
 		}
 		
-		$product = $this->getCatalogMapper()->getProductById(
+		$product = $this->getCatalog()->getProductById(
 			$request->getPost('productId')
 		);
 	
@@ -55,14 +55,14 @@ class CartController extends AbstractController
 	public function updateAction()
 	{
 		foreach($this->params('quantity') as $id => $value) {
-			$product = $this->getCatalogMapper()->getProductById($id);
+			$product = $this->getCatalog()->getProductById($id);
 	
 			if (null !== $product) {
 				$this->getCart()->addItem($product, $value);
 			}
 		}
 	
-		$this->getCatalogMapper()->setShippingCost(
+		$this->getCatalog()->setShippingCost(
 			$this->params('shipping')
 		);
 	
@@ -87,13 +87,13 @@ class CartController extends AbstractController
 	/**
 	 * @return \Shop\Model\Catalog
 	 */
-	protected function getCatalogMapper()
+	protected function getCatalog()
 	{
-		if (!$this->catalogMapper) {
+		if (!$this->catalog) {
 			$sl = $this->getServiceLocator();
-			$this->calalogMapper = $sl->get('Shop\Model\Catalog');
+			$this->calalog = $sl->get('Shop\Model\Catalog');
 		}
 	
-		return $this->calalogMapper;
+		return $this->calalog;
 	}
 }

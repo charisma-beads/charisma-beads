@@ -1,9 +1,9 @@
 <?php
-namespace Shop\Model\Product;
+namespace Shop\Model\Mapper\Product;
 
-use Application\Model\AbstractModel;
+use Application\Model\AbstractMapper;
 
-class Category extends AbstractModel
+class Category extends AbstractMapper
 {
 	/**
 	 * @var \Shop\Model\DbTable\Product\Category

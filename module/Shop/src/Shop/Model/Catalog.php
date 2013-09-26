@@ -1,10 +1,10 @@
 <?php
 namespace Shop\Model;
 
-use Application\Model\AbstractModel;
+use Application\Model\AbstractMapper;
 use FB;
 
-class Catalog extends AbstractModel
+class Catalog extends AbstractMapper
 {
 	/**
 	 * @var Shop\Model\DbTable\Product\Category

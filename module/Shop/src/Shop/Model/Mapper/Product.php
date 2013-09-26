@@ -1,9 +1,9 @@
 <?php
-namespace Shop\Model;
+namespace Shop\Model\Mapper;
 
-use Application\Model\AbstractModel;
+use Application\Model\AbstractMapper;
 
-class Product extends AbstractModel
+class Product extends AbstractMapper
 {
 	
 }
