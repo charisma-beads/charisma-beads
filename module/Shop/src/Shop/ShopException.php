@@ -1,5 +1,5 @@
 <?php
-namespace Shop\Model;
+namespace Shop;
 
 use Exception;
 

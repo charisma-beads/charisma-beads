@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `productImage` (
   `productId` int(10) unsigned NOT NULL,
   `thumbnail` varchar(200) NOT NULL,
   `full` varchar(200) NOT NULL,
-  `isDefault` int(1) unsigned NOT NULL DEFAULT '0',
+  `default` int(1) unsigned NOT NULL DEFAULT '0',
   `dateCreated` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `dateModified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`productImageId`),

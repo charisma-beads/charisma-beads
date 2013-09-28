@@ -1,10 +1,10 @@
 <?php
-namespace Shop\Model\Entity\Cart;
+namespace Shop\Model;
 
-use Shop\Model\Entity\Product;
+use Shop\Model\Product;
 use Shop\Service\Taxation;
 
-class Item
+class CartItem
 {
 	public $productId;
 	public $name;

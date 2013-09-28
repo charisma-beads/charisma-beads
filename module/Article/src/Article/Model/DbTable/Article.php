@@ -12,7 +12,7 @@ class Article extends AbstractTable
 	
 	public function getArticleBySlug($slug)
 	{
-		$rowset = $this->tableGateway->select(array('slug' => $slug));
+		$rowset = $this->getTablegateway()->select(array('slug' => $slug));
 		$row = $rowset->current();
 		return $row;
 	}

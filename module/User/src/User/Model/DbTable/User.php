@@ -11,7 +11,7 @@ class User extends AbstractTable
     
     public function getUserByEmail($email, $ignore=null)
     {
-        $rowset = $this->tableGateway->select(array('email' => $email));
+        $rowset = $this->getTablegateway()->select(array('email' => $email));
         $row = $rowset->current();
         return $row;
     }
@@ -24,7 +24,7 @@ class User extends AbstractTable
     	$sort = (isset($post['sort'])) ? (string) $post['sort'] : '';
     	$page = (isset($post['page'])) ? (int) $post['page'] : null;
     	 
-    	$select = $this->sql->select();
+    	$select = $this->getSql()->select();
     	$select->from($this->table);
     
     	if (!$user == '') {

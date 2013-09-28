@@ -16,7 +16,7 @@ class Session extends AbstractTable
 	public function getById($id)
 	{
 		$id = (string) $id;
-		$rowset = $this->tableGateway->select(array($this->primary => $id));
+		$rowset = $this->getTablegateway()->select(array($this->primary => $id));
 		$row = $rowset->current();
 		return $row;
 	}
@@ -27,7 +27,7 @@ class Session extends AbstractTable
 		$sort = (isset($post['sort'])) ? (string) $post['sort'] : '';
 		$page = (isset($post['page'])) ? (int) $post['page'] : null;
 	
-		$select = $this->sql->select();
+		$select = $this->getSql()->select();
 		$select->from($this->table);
 	
 		$select = $this->setSortOrder($select, $sort);

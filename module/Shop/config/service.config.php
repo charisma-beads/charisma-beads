@@ -9,7 +9,6 @@ return array(
 		'Shop\Model\Category'	=> 'Shop\Model\Mapper\Product\Category',
 	),
 	'factories' => array(
-		'Shop\Gateway\Category'	=> 'Shop\Service\DbTable\CategoryFactory',
-		'Shop\Gateway\Product'	=> 'Shop\Service\DbTable\ProductFactory',
-	)
+		
+	),
 );

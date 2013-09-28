@@ -1,13 +1,13 @@
 <?php
 
-namespace Application\Model\DbTable;
+namespace Application\Mapper;
 
-use Application\Model\DbTable\AbstractTable;
+use Application\Mapper\AbstractMapper;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Where;
 use Zend\Db\Sql\Expression;
 
-abstract class AbstractNestedSet extends AbstractTable
+abstract class AbstractNestedSet extends AbstractMapper
 {
     /**
      * Gets the full tree from database
@@ -17,7 +17,7 @@ abstract class AbstractNestedSet extends AbstractTable
      */
     public function getFullTree($topLevelOnly=false)
     {   
-        $select = $this->sql->select();
+        $select = $this->getSql()->select();
         $select->from(array('child' => $this->table))
             ->columns(array(
                 Select::SQL_STAR,
@@ -47,7 +47,7 @@ abstract class AbstractNestedSet extends AbstractTable
     public function getPathwayByChildId($id)
     {
     	
-        $select = $this->sql->select();
+        $select = $this->getSql()->select();
         $select->from(array('child' => $this->table))
         	->columns(array())
             ->join(
@@ -84,7 +84,7 @@ abstract class AbstractNestedSet extends AbstractTable
      */
     public function getDecendentsByParentId($parentId, $immediate=true)
     {
-        $subTree = $this->sql->select()
+        $subTree = $this->getSql()->select()
             ->from(array('child' => $this->table))
             ->columns(array(
             	'productCategoryId',
@@ -100,7 +100,7 @@ abstract class AbstractNestedSet extends AbstractTable
             ->group('child.'.$this->primary)
             ->order('child.lft');
     
-        $select = $this->sql->select()
+        $select = $this->getSql()->select()
             ->from(array('child' => $this->table))
             ->columns(array(
             	Select::SQL_STAR,
@@ -200,7 +200,7 @@ abstract class AbstractNestedSet extends AbstractTable
                 break;
         }
         
-        $select = $this->sql->select($this->table);
+        $select = $this->getSql()->select($this->table);
         
         $where = new Where();
         $where->equalTo($this->primary, $id);

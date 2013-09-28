@@ -1,10 +1,10 @@
 <?php
-namespace Shop\Model;
+namespace Shop\Service;
 
 use Application\Model\AbstractCollection;
 use Application\Model\CollectionException;
-use Shop\Model\Entity\Product;
-use Shop\Model\Entity\Cart\Item;
+use Shop\Model\Product;
+use Shop\Model\CartItem;
 use Zend\Session\Container;
 use SeekableIterator;
 
@@ -44,7 +44,7 @@ class Cart extends AbstractCollection
 	 *
 	 * @var string
 	 */
-	protected $entityClass = 'Shop\Model\Entity\Cart\Item';
+	protected $entityClass = 'Shop\Model\CartItem';
 	
 	/**
 	 * Constructor
@@ -59,9 +59,9 @@ class Cart extends AbstractCollection
 	/**
 	 * Adds or updates an item contained with the shopping cart
 	 *
-	 * @param Shop\Model\Entity\Product $product
+	 * @param Shop\Model\Product $product
 	 * @param int $qty
-	 * @return Shop\Model\Entity\Cart\Item
+	 * @return Shop\Model\CartItem
 	 */
 	public function addItem(Product $product, $qty)
 	{
@@ -74,7 +74,7 @@ class Cart extends AbstractCollection
 			return false;
 		}
 	
-		$item = new Item($product, $qty);
+		$item = new CartItem($product, $qty);
 		$this->entities[$item->productId] = $item;
 		$this->persist();
 		return $item;
@@ -83,7 +83,7 @@ class Cart extends AbstractCollection
 	/**
 	 * Remove an item for the shopping cart
 	 *
-	 * @param int|Shop\Model\Entity\Product $product
+	 * @param int|Shop\Model\Product $product
 	 */
 	public function removeItem($product)
 	{
@@ -224,6 +224,4 @@ class Cart extends AbstractCollection
 			throw new CollectionException('Invalid seek position');
 		}
 	}
-
-	
 }

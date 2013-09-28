@@ -13,7 +13,7 @@ class Page extends AbstractNestedSet
     
     public function getPagesByMenuId($id)
     {
-    	$select = $this->sql->select();
+    	$select = $this->getSql()->select();
     	$select->from(array('child' => $this->table))
     	->columns(array(
     	    Select::SQL_STAR,
@@ -34,7 +34,7 @@ class Page extends AbstractNestedSet
     
     public function getPagesByMenu($menu)
     {
-        $select = $this->sql->select();
+        $select = $this->getSql()->select();
         $select->from(array('child' => $this->table))
         ->columns(array(
             Select::SQL_STAR,
@@ -60,13 +60,13 @@ class Page extends AbstractNestedSet
     
     public function getPageByMenuIdAndLabel($menuId, $label)
     {
-    	$rowSet = $this->tableGateway->select(array('menuId' => $menuId, 'label' => $label));
+    	$rowSet = $this->getTablegateway()->select(array('menuId' => $menuId, 'label' => $label));
     	$row = $rowSet->current();
     	return $row;
     }
     
     public function deletePagesByMenuId($id)
     {
-    	return $this->tableGateway->delete(array('menuId' => $id));
+    	return $this->getTablegateway()->delete(array('menuId' => $id));
     }
 }

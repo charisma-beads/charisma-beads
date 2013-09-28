@@ -1,14 +1,14 @@
 <?php
-namespace Shop\Model\Mapper\Product;
+namespace Shop\Service;
 
-use Application\Model\AbstractMapper;
+use Application\Service\AbstractService;
 
-class Category extends AbstractMapper
+class ProductCategory extends AbstractService
 {
 	/**
-	 * @var \Shop\Model\DbTable\Product\Category
+	 * @var \Shop\Mapper\Category
 	 */
-	protected $categoryGateway;
+	protected $categoryMapper;
 	
 	public function getTopLevelCategories()
 	{
@@ -16,7 +16,7 @@ class Category extends AbstractMapper
 	}
 	
 	/**
-	 * @return \Shop\Model\DbTable\Product\Category
+	 * @return \Shop\Mapper\Category
 	 */
 	protected function getCategoryGateway()
 	{

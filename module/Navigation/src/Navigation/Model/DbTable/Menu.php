@@ -11,7 +11,7 @@ class Menu extends AbstractTable
 	
 	public function getMenu($menu)
 	{
-	    $rowset = $this->tableGateway->select(array('menu' => $menu));
+	    $rowset = $this->getTablegateway()->select(array('menu' => $menu));
 	    $row = $rowset->current();
 	    return $row;
 	}
