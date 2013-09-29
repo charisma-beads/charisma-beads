@@ -37,14 +37,14 @@ class ProductCategory extends AbstractModel
 	protected $rgt;
 	
 	/**
-	 * @var int
+	 * @var bool
 	 */
-	protected $enabled = 1;
+	protected $enabled = true;
 	
 	/**
-	 * @var int
+	 * @var bool
 	 */
-	protected $discontinued = 0;
+	protected $discontinued = false;
 	
 	/**
 	 * @var DateTime
@@ -179,6 +179,7 @@ class ProductCategory extends AbstractModel
 	 */
 	public function setEnabled($enabled)
 	{
+		$enabled = (bool) $enabled;
 		$this->enabled = $enabled;
 		return $this;
 	}
@@ -196,6 +197,7 @@ class ProductCategory extends AbstractModel
 	 */
 	public function setDiscontinued($discontinued)
 	{
+		$discontinued = (bool) $discontinued;
 		$this->discontinued = $discontinued;
 		return $this;
 	}

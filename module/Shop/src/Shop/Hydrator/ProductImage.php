@@ -3,6 +3,7 @@ namespace Shop\Hydrator;
 
 use Application\Hydrator\AbstractHydrator;
 use Application\Hydrator\Strategy\DateTime as DateTimeStrategy;
+use Application\Hydrator\Strategy\TrueFalse;
 use Shop\Model\ProductImage;
 
 class ProductImage extends AbstractHydrator
@@ -11,8 +12,11 @@ class ProductImage extends AbstractHydrator
 	{
 		parent::__construct();
 		
-		$this->addStrategy('dateCreated', new DateTimeStrategy());
-		$this->addStrategy('dateModified', new DateTimeStrategy());
+		$dateTime = new DateTimeStrategy();
+		
+		$this->addStrategy('default', new TrueFalse());
+		$this->addStrategy('dateCreated', $dateTime);
+		$this->addStrategy('dateModified', $dateTime);
 	}
 	
 	public Function extract(ProductImage $object)
@@ -22,7 +26,7 @@ class ProductImage extends AbstractHydrator
 			'productId'			=> $object->getProductId(),
 			'thumbnail'			=> $object->getThumbnail(),
 			'full'				=> $object->getFull(),
-			'default'			=> $object->getDefault(),
+			'default'			=> $this->extractValue('default', $object->getDefault()),
 			'dateCreated'		=> $this->extractValue('dateCreated', $object->getDateCreated()),
 			'dateModified'		=> $this->extractValue('dateCreated', $object->getDateModified())
 		);

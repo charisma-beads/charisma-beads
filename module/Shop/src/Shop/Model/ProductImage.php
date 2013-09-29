@@ -28,9 +28,9 @@ class ProductImage extends AbstractModel
 	protected $full;
 	
 	/**
-	 * @var int
+	 * @var bool
 	 */
-	protected $default;
+	protected $default = false;
 	
 	/**
 	 * @var DateTime
@@ -56,6 +56,7 @@ class ProductImage extends AbstractModel
 	public function setProductImageId($productImageId)
 	{
 		$this->productImageId = $productImageId;
+		return $this;
 	}
 
 	/**
@@ -72,6 +73,7 @@ class ProductImage extends AbstractModel
 	public function setProductId($productId)
 	{
 		$this->productId = $productId;
+		return $this;
 	}
 
 	/**
@@ -88,6 +90,7 @@ class ProductImage extends AbstractModel
 	public function setThumbnail($thumbnail)
 	{
 		$this->thumbnail = $thumbnail;
+		return $this;
 	}
 
 	/**
@@ -104,6 +107,7 @@ class ProductImage extends AbstractModel
 	public function setFull($full)
 	{
 		$this->full = $full;
+		return $this;
 	}
 
 	/**
@@ -119,7 +123,9 @@ class ProductImage extends AbstractModel
 	 */
 	public function setDefault($default)
 	{
+		$default = (bool) $default;
 		$this->default = $default;
+		return $this;
 	}
 
 	/**
@@ -136,6 +142,7 @@ class ProductImage extends AbstractModel
 	public function setDateCreated(DateTime $dateCreated=null)
 	{
 		$this->dateCreated = $dateCreated;
+		return $this;
 	}
 
 	/**
@@ -152,5 +159,6 @@ class ProductImage extends AbstractModel
 	public function setDateModified(DateTime $dateModified=null)
 	{
 		$this->dateModified = $dateModified;
+		return $this;
 	}
 }

@@ -31,6 +31,7 @@ return array(
                         'action'        => 'index',
                     ),
                 ),
+                'may_terminate' => true,
             ),
             'admin' => array(
             	'child_routes' => array(

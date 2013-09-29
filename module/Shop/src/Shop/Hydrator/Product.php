@@ -3,6 +3,7 @@ namespace Shop\Hydrator;
 
 use Application\Hydrator\AbstractHydrator;
 use Application\Hydrator\Strategy\DateTime as DateTimeStrategy;
+use Application\Hydrator\Strategy\TrueFalse;
 use Shop\Model\Product;
 
 class Product extends AbstractHydrator
@@ -11,14 +12,41 @@ class Product extends AbstractHydrator
 	{
 		parent::__construct();
 		
-		$this->addStrategy('dateCreated', new DateTimeStrategy());
-		$this->addStrategy('dateModified', new DateTimeStrategy());
+		$dateTime = new DateTimeStrategy();
+		$trueFalse = new TrueFalse();
+		
+		$this->addStrategy('taxable', $trueFalse);
+		$this->addStrategy('addPostage', $trueFalse);
+		$this->addStrategy('enabled', $trueFalse);
+		$this->addStrategy('discontinued', $trueFalse);
+		$this->addStrategy('dateCreated', $dateTime);
+		$this->addStrategy('dateModified', $dateTime);
 	}
 	
 	public function extract(Product $object)
 	{
 		return array(
-			
+			'productId'				=> $object->getProductId(),
+			'productCategoryId'		=> $object->getProductCategoryId(),
+			'productSizeId'			=> $object->getProductSizeId(),
+			'taxCodeId'				=> $object->getTaxCodeId(),
+			'productPostUnitId'		=> $object->getProductPostUnitId(),
+			'productGroupId'		=> $object->getProductGroupId(),
+			'productStockStatusId'	=> $object->getProductStockStatusId(),	
+			'ident'					=> $object->getIdent(),
+			'name'					=> $object->getName(),
+			'price'					=> $object->getPrice(),
+			'description'			=> $object->getDescription(),
+			'shortDescription'		=> $object->getShortDescription(),
+			'quantity'				=> $object->getQuantity(),
+			'taxable'				=> $this->extractValue('taxable', $object->getTaxable()),
+			'addPostage'			=> $this->extractValue('addPostage', $object->getAddPostage()),
+			'discountPercent'		=> $object->getDiscountPercent(),
+			'hits'					=> $object->getHits(),
+			'enabled'				=> $this->extractValue('enabled', $object->getEnabled()),
+			'discontinued'			=> $this->extractValue('discontinued', $object->getDiscontinued()),
+			'dateCreated'			=> $this->extractValue('dateCreated', $object->getDateCreated()),
+			'dateModified'			=> $this->extractValue('dateModified', $object->getDateModified())
 		);
 	}
 }
