@@ -1,5 +1,5 @@
 <?php
-namespace Application\Service;
+namespace Application\Service\Initializer;
 
 use Application\Mapper\DbAdapterAwareInterface;
 use Zend\ServiceManager\InitializerInterface;

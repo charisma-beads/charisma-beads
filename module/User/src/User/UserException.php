@@ -1,5 +1,5 @@
 <?php
-namespace User\Model;
+namespace User;
 
 use Exception;
 

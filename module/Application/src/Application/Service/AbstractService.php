@@ -12,6 +12,11 @@ class AbstractService implements ServiceLocatorAwareInterface
 	protected $serviceLocator;
 	
 	/**
+	 * @var \Application\Mapper\AbstractMapper
+	 */
+	protected $mapper;
+	
+	/**
 	 * get application config option by its key.
 	 *
 	 * @param string $key

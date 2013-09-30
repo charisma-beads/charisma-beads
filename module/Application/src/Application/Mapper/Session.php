@@ -1,17 +1,18 @@
 <?php
-namespace Application\Model\DbTable;
+namespace Application\Mapper;
 
-class Session extends AbstractTable
+class Session extends AbstractMapper
 {
 	protected $table = 'session';
 	protected $primary = 'id';
-	protected $rowClass = 'Application\Model\Entity\Session';
+	protected $rowClass = 'Application\Model\Session';
+	protected $hydrator = 'Application\Hydrator\Session';
 	
 	/**
 	 * Gets one row by its id
 	 *
 	 * @param int $id
-	 * @return \Application\Model\Entity\Session
+	 * @return \Application\Model\Session
 	 */
 	public function getById($id)
 	{

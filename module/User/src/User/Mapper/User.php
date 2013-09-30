@@ -1,13 +1,14 @@
 <?php
-namespace User\Model\DbTable;
+namespace User\Mapper;
 
-use Application\Model\DbTable\AbstractTable;
+use Application\Mapper\AbstractMapper;
 
-class User extends AbstractTable
+class User extends AbstractMapper
 { 
 	protected $table = 'user';
 	protected $primary = 'userId';
 	protected $rowClass = 'User\Model\Entity\User';
+	protected $hydrator = 'User\Hydrator\User';
     
     public function getUserByEmail($email, $ignore=null)
     {

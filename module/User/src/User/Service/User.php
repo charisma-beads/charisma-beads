@@ -1,17 +1,12 @@
 <?php
-namespace User\Model\Mapper;
+namespace User\Service;
 
-use Application\Model\AbstractMapper;
-use User\Model\Entity\User as UserEntity;
-use User\Model\UserException;
+use Application\Service\AbstractService;
+use User\Model\User as UserEntity;
+use User\UserException;
 
-class User extends AbstractMapper
+class User extends AbstractService
 {   
-    /**
-     * @var User\Model\DbTable\User
-     */
-    protected $userGateway;
-    
     /**
      * @var User\Form\User
      */
@@ -20,24 +15,24 @@ class User extends AbstractMapper
     public function getUserById($id)
     {
     	$id = (int) $id;
-    	return $this->getUserGateway()->getById($id);
+    	return $this->getMapper()->getById($id);
     }
     
     public function getUserByEmail($email, $ignore=null)
     {
     	$email = (string) $email;
-    	return $this->getUserGateway()->getUserByEmail($email, $ignore);
+    	return $this->getMapper()->getUserByEmail($email, $ignore);
     }
     
     public function fetchAllUsers($post = array())
     {
-    	return $this->getUserGateway()->fetchAllUsers($post);
+    	return $this->getMapper()->fetchAllUsers($post);
     }
     
     public function addUser($post)
     {
     	$form  = $this->getUserForm();
-    	$user = new UserEntity();
+    	$user = $this->getMapper()->getModel($post);
     
     	$form->setInputFilter($user->getInputFilter());
     	$form->setData($post);
@@ -92,10 +87,10 @@ class User extends AbstractMapper
     	// TODO check for existing email.
     
     	if ($id == 0) {
-    		$result = $this->getUserGateway()->insert($data);
+    		$result = $this->getMapper()->insert($data);
     	} else {
     		if ($this->getUserById($id)) {
-    			$result = $this->getUserGateway()->update($id, $data);
+    			$result = $this->getMapper()->update($id, $data);
     		} else {
     			throw new UserException('User id does not exist');
     		}
@@ -107,7 +102,7 @@ class User extends AbstractMapper
     public function deleteUser($id)
     {
     	$id = (int) $id;
-    	return $this->getUserGateway()->delete($id);
+    	return $this->getMapper()->delete($id);
     }
     
     /**
@@ -124,15 +119,15 @@ class User extends AbstractMapper
     }
     
     /**
-     * @return \User\Model\DbTable\User
-     */
-    protected function getUserGateway()
-    {
-    	if (!$this->userGateway){
-    		$sl = $this->getServiceLocator();
-    		$this->userGateway = $sl->get('User\Gateway\User');
-    	}
-    	
-    	return $this->userGateway;
-    }
+	 * @return \User\Mapper\User
+	 */
+	public function getMapper()
+	{
+		if (!$this->mapper){
+			$sl = $this->getServiceLocator();
+			$this->mapper = $sl->get('User\Mapper\User');
+		}
+		 
+		return $this->mapper;
+	}
 }

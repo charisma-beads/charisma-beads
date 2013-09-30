@@ -1,5 +1,5 @@
 <?php
-namespace Application\Service;
+namespace Application\Service\Factory;
 
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\TableGateway\TableGateway;

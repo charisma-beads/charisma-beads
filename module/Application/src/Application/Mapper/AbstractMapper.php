@@ -30,11 +30,11 @@ class AbstractMapper implements DbAdapterAwareInterface
 	protected $primary;
 	
 	/**
-	 * name of entity class
+	 * name of model class
 	 *
 	 * @var string
 	 */
-	protected $rowClass;
+	protected $model;
 	
 	/**
 	 * @var TableGateway
@@ -65,7 +65,7 @@ class AbstractMapper implements DbAdapterAwareInterface
 	{
 		$resultSetPrototype = new HydratingResultSet();
 		$resultSetPrototype->setHydrator($this->getHydrator());
-		$resultSetPrototype->setObjectPrototype(new $this->rowClass());
+		$resultSetPrototype->setObjectPrototype(new $this->model());
 	
 		return $resultSetPrototype;
 	}
@@ -229,6 +229,22 @@ class AbstractMapper implements DbAdapterAwareInterface
 			return new $this->hydrator();
 		} else {
 			return new ClassMethods();
+		}
+	}
+	
+	/**
+	 * @return model
+	 */
+	public function getModel(array $data = null)
+	{
+		if (is_string($this->model) && class_exists($this->model)) {
+			if ($data) {
+				$hydrator = $this->getHydrator();
+				return $hydrator->hydrate($data, new $this->model);
+			}
+			return new $this->model;
+		}else{
+			throw new \RuntimeException('could not instantiate model - ' . $this->model);
 		}
 	}
 	

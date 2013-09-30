@@ -1,5 +1,5 @@
 <?php
-namespace Shop\Model;
+namespace Application\Model;
 
 use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;

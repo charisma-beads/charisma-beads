@@ -2,13 +2,19 @@
 
 return array(
 	'invokables' => array(
-		'Shop\Model\Cart'		=> 'Shop\Model\Cart',
-		'Shop\Model\Catalog' 	=> 'Shop\Model\Catalog',
-		'Shop\Model\Shipping'	=> 'Shop\Model\Shipping',
-		'Shop\Model\Product' 	=> 'Shop\Model\Mapper\Product',
-		'Shop\Model\Category'	=> 'Shop\Model\Mapper\Product\Category',
-	),
-	'factories' => array(
+		'Shop\Mapper\Product' 				=> 'Shop\Mapper\Product',
+		'Shop\Mapper\ProductCategory'		=> 'Shop\Mapper\ProductCategory',
+		'Shop\Mapper\ProductImage'			=> 'Shop\Mapper\ProductImage',
+		'Shop\Mapper\ProductOption'			=> 'Shop\Mapper\ProductOption',
+		'Shop\Mapper\ProductPostUnit'		=> 'Shop\Mapper\ProductPostUnit',
+		'Shop\Mapper\ProductSize'			=> 'Shop\Mapper\ProductSize',
+		'Shop\Mapper\ProductStockStatus'	=> 'Shop\Mapper\ProductStockStatus',
+		'Shop\Mapper\TaxCode'				=> 'Shop\Mapper\TaxCode',
+		'Shop\Mapper\TaxRate'				=> 'Shop\Mapper\TaxRate',
 		
+		'Shop\Service\Cart'					=> 'Shop\Service\Cart',
+		'Shop\Service\Catalog' 				=> 'Shop\Service\Catalog',
+		'Shop\Service\Shipping'				=> 'Shop\Service\Shipping',
+		'Shop\Service\Taxation'				=> 'Shop\Service\Taxation',
 	),
 );

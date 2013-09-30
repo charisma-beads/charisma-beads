@@ -1,6 +1,6 @@
 <?php
 
-namespace User\Service;
+namespace User\Service\Factory;
 
 use User\Controller\AuthController;
 use User\Form\Login as LoginForm;

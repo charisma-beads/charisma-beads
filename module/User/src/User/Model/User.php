@@ -1,9 +1,10 @@
 <?php
-namespace User\Model\Entity;
+namespace User\Model;
 
-use Application\Model\Entity\AbstractEntity;
+use Application\Model\AbstractModel;
+use DateTime;
 
-class User extends AbstractEntity
+class User extends AbstractModel
 {   
 	/**
 	 * @var int
@@ -36,43 +37,16 @@ class User extends AbstractEntity
 	protected $role;
 	
 	/**
-	 * @var string
+	 * @var DateTime
 	 */
 	protected $dateCreated;
 	
 	/**
-	 * @var string
+	 * @var DateTime
 	 */
 	protected $dateModified;
 	
 	protected $inputFilterClass = 'User\InputFilter\User';
-	
-	public function exchangeArray(array $data)
-	{
-		$this->setUserId($data['userId'])
-			->setFirstname($data['firstname'])
-			->setLastname($data['lastname'])
-			->setEmail($data['email'])
-			->setPasswd($data['passwd'])
-			->setRole($data['role'])
-			->setDateCreated($data['dateCreated'])
-			->setDateModified($data['dateModified']);
-		return $this;
-	}
-	
-	public function getArrayCopy()
-	{
-		return array(
-			'userId'		=> $this->getUserId(),
-			'firstname'		=> $this->getFirstname(),
-			'lastname'		=> $this->getLastname(),
-			'email'			=> $this->getEmail(),
-			'passwd'		=> $this->getPasswd(),
-			'role'			=> $this->getRole(),
-			'dateCreated'	=> $this->getDateCreated(),
-			'dateModified'	=> $this->getDateModified()
-		);
-	}
 	
     /**
 	 * @return the $userId
@@ -185,9 +159,9 @@ class User extends AbstractEntity
 	}
 
 	/**
-	 * @param string $dateCreated
+	 * @param DateTime $dateCreated
 	 */
-	public function setDateCreated($dateCreated)
+	public function setDateCreated(DateTime $dateCreated=null)
 	{
 		$this->dateCreated = $dateCreated;
 		return $this;
@@ -202,9 +176,9 @@ class User extends AbstractEntity
 	}
 
 	/**
-	 * @param string $dateModified
+	 * @param DateTime $dateModified
 	 */
-	public function setDateModified($dateModified)
+	public function setDateModified(DateTime $dateModified=null)
 	{
 		$this->dateModified = $dateModified;
 		return $this;

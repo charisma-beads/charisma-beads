@@ -1,10 +1,9 @@
 <?php
-namespace Application\Model\Entity;
+namespace Application\Model;
 
-use Application\Model\Entity\AbstractEntity;
-use Exception;
+use Application\Model\AbstractModel;
 
-class Session extends AbstractEntity
+class Session extends AbstractModel
 {
 	/**
      * ID Column
@@ -35,20 +34,6 @@ class Session extends AbstractEntity
      * @var int
      */
     protected  $modified;
-    
-    public function exchangeArray(array $data)
-    {
-    	$this->setId($data['id'])
-    		->setName($data['name'])
-    		->setLifetime($data['lifetime'])
-    		->setModified($data['modified'])
-    		->setData($data['data']);
-    }
-    
-    public function getArrayCopy()
-    {
-    	throw new Exception("Not used");
-    }
 
 	/**
 	 * @return the int

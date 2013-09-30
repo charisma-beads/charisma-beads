@@ -1,8 +1,7 @@
 <?php
-namespace User\Service;
+namespace User\Service\Factory;
 
-use Traversable;
-use User\Model\Acl;
+use User\Service\Acl;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 

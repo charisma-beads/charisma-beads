@@ -2,14 +2,15 @@
 
 return array(
 	'invokables' => array(
-		'Application\Model\SessionManager'	=> 'Application\Model\SessionManager',
-		'Application\Gateway\Session'		=> 'Application\Model\DbTable\Session',
+		'Application\Mapper\Session'				=> 'Application\Mapper\Session',
+		
+		'Application\Servive\SessionManager'		=> 'Application\Service\SessionManager',
 	),
     'factories' => array(
-    	'Application\SessionManager'		=> 'Application\Service\SessionManagerFactory',
-        'Application\SessionSaveHandler'	=> 'Application\Service\SessionSaveHandlerFactory',
+    	'Application\SessionManager'				=> 'Application\Service\Factory\SessionManagerFactory',
+        'Application\SessionSaveHandler'			=> 'Application\Service\Factory\SessionSaveHandlerFactory',
     ),
 	'initializers' => array(
-    	'Application\Service\DbAdapterInitializer' => 'Application\Service\DbAdapterInitializer',
+    	'Application\Service\DbAdapterInitializer'	=> 'Application\Service\Initializer\DbAdapterInitializer',
     )
 );

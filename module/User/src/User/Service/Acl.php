@@ -1,5 +1,5 @@
 <?php
-namespace User\Model;
+namespace User\Service;
 
 use Zend\Permissions\Acl\Acl as ZendAcl;
 use Zend\Permissions\Acl\Role\GenericRole as Role;
