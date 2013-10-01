@@ -1,10 +1,10 @@
 <?php
 
-namespace Navigation\Model\Entity;
+namespace Navigation\Model;
 
-use Application\Model\Entity\AbstractEntity;
+use Application\Model\AbstractModel;
 
-class Menu extends AbstractEntity
+class Menu extends AbstractModel
 {
 	/**
 	 * @var int
@@ -18,19 +18,6 @@ class Menu extends AbstractEntity
 	
 	protected $inputFilterClass = 'Navigation\InputFilter\Menu';
 	
-	public function exchangeArray(array $data)
-	{
-		$this->setMenuId($data['menuId'])
-			->setMenu($data['menu']);
-	}
-	
-	public function getArrayCopy()
-	{
-		return array(
-			'menuId'	=> $this->getMenuId(),
-			'menu'		=> $this->getMenu()
-		);
-	}
 	/**
 	 * @return the $menuId
 	 */

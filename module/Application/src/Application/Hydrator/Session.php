@@ -1,11 +1,13 @@
 <?php
 namespace Application\Hydrator;
 
-use Application\Model\Session;
-
 class Session extends AbstractHydrator
 {
-	public function extract(Session $object)
+	/**
+	 * @param \Application\Model\Session
+	 * @return array
+	 */
+	public function extract($object)
 	{
 		return array(
 			'id'		=> $object->getId(),

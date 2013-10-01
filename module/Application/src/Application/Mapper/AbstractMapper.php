@@ -6,12 +6,9 @@ use Zend\Db\Adapter\Adapter as DbAdapter;
 use Zend\Db\ResultSet\HydratingResultSet;
 use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\Select;
-use Zend\Db\TableGateway\TableGateway;
 use Zend\Paginator\Paginator;
 use Zend\Paginator\Adapter\DbSelect;
 use Zend\Stdlib\Hydrator\ClassMethods;
-
-use FB;
 
 class AbstractMapper implements DbAdapterAwareInterface
 {
@@ -37,11 +34,6 @@ class AbstractMapper implements DbAdapterAwareInterface
 	protected $model;
 	
 	/**
-	 * @var TableGateway
-	 */
-	protected $tableGateway;
-	
-	/**
 	 * @var Sql
 	 */
 	protected $sql;
@@ -57,29 +49,48 @@ class AbstractMapper implements DbAdapterAwareInterface
 	protected $hydrator;
 	
 	/**
+	 * @var HydratingResultSet
+	 */
+	protected $resultSetProtype;
+	
+	/**
+	 * return an instance of Select
+	 * 
+	 * @param string $tableName
+	 * @return \Zend\Db\Sql\Select
+	 */
+	public function getSelect($tableName=null)
+	{
+		return $this->getSql()->select($tableName ?: $this->table);
+	}
+	
+	/**
 	 * gets the resultSet
 	 *
 	 * @return \Zend\Db\ResultSet\HydratingResultSet
 	 */
 	protected function getResultSet()
 	{
-		$resultSetPrototype = new HydratingResultSet();
-		$resultSetPrototype->setHydrator($this->getHydrator());
-		$resultSetPrototype->setObjectPrototype(new $this->model());
+		if (!$this->resultSetProtype instanceof HydratingResultSet) {
+			$resultSetPrototype = new HydratingResultSet();
+			$resultSetPrototype->setHydrator($this->getHydrator());
+			$resultSetPrototype->setObjectPrototype(new $this->model());
+			$this->resultSetProtype = $resultSetPrototype;
+		}
 	
-		return $resultSetPrototype;
+		return clone $this->resultSetProtype;
 	}
 	
 	/**
 	 * Gets one row by its id
 	 *
 	 * @param int $id
-	 * @return \Application\Model\Entity\AbstractEntity
+	 * @return \Application\Mapper\AbstractModel
 	 */
 	public function getById($id)
 	{
-		$id = (int) $id;
-		$rowset = $this->getTablegateway()->select(array($this->primary => $id));
+		$select = $this->getSelect()->where(array($this->primary => $id));
+		$rowset = $this->fetchResult($select);
 		$row = $rowset->current();
 		return $row;
 	}
@@ -91,8 +102,7 @@ class AbstractMapper implements DbAdapterAwareInterface
 	 */
 	public function fetchAll()
 	{
-		$resultSet = $this->getTablegateway()->select();
-		FB::info($resultSet, __METHOD__);
+		$resultSet = $this->getSelect()->select();
 		return $resultSet;
 	}
 	
@@ -101,22 +111,38 @@ class AbstractMapper implements DbAdapterAwareInterface
 	 *
 	 * @param int $id
 	 * @param array $data
-	 * @return Ambigous <number, \Zend\Db\TableGateway\mixed>
+	 * @return int number of affected rows
 	 */
 	public function update($id, $data)
 	{
-		return $this->getTablegateway()->update($data, array($this->primary => $id));
+		$sql = $this->getSql();
+		$update = $sql->update($this->table);
+	
+		$update->set($data)
+			->where(array($this->primary => $id));
+	
+		$statement = $sql->prepareStatementForSqlObject($update);
+	
+		return $statement->execute();
 	}
 	
 	/**
 	 * Inserts a new row into database returns insertId
 	 *
 	 * @param array $data
-	 * @return int
+	 * @return int|null
 	 */
 	public function insert($data)
 	{
-		return $this->getTablegateway()->insert($data);
+		$sql = $this->getSql();
+		$insert = $sql->insert($this->table);
+	
+		$insert->values($data);
+	
+		$statement = $sql->prepareStatementForSqlObject($insert);
+		$result = $statement->execute();
+	
+		return $result->getGeneratedValue();
 	}
 	
 	/**
@@ -126,7 +152,14 @@ class AbstractMapper implements DbAdapterAwareInterface
 	 */
 	public function delete($id)
 	{
-		return $this->getTablegateway()->delete(array($this->primary => $id));
+		$sql = $this->getSql();
+		$delete = $sql->delete($this->table);
+	
+		$delete->where(array($this->primary => $id));
+	
+		$statement = $sql->prepareStatementForSqlObject($delete);
+	
+		return $statement->execute();
 	}
 	
 	/**
@@ -139,14 +172,12 @@ class AbstractMapper implements DbAdapterAwareInterface
 	 */
 	public function paginate(Select $select, $page, $limit)
 	{
-		$adapter = new DbSelect($select, $this->getSql(), $this->getTablegateway()->getResultSetPrototype());
+		$adapter = new DbSelect($select, $this->getDbAdapter(), $this->getResultSet());
 		$paginator = new Paginator($adapter);
 	
 		$paginator->setItemCountPerPage($limit)
 			->setCurrentPageNumber($page)
 			->setPageRange(5);
-	
-		FB::info($paginator, __METHOD__);
 	
 		return $paginator;
 	}
@@ -167,8 +198,6 @@ class AbstractMapper implements DbAdapterAwareInterface
 		$result = $statement->execute();
 	
 		$resultSet->initialize($result);
-	
-		FB::info($resultSet, __METHOD__);
 	
 		return $resultSet;
 	}

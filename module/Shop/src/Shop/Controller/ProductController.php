@@ -7,9 +7,9 @@ use Zend\View\Model\ViewModel;
 class ProductController extends AbstractController
 {
 	/**
-	 * @var \Shop\Model\Mapper\Product
+	 * @var \Shop\Service\Product
 	 */
-	protected $productMapper;
+	protected $productService;
 	
 	public function viewAction()
 	{
@@ -17,14 +17,14 @@ class ProductController extends AbstractController
 	}
 	
 	/**
-	 * @return \Shop\Model\Mapper\Product
+	 * @return \Shop\Service\Product
 	 */
-	protected function getProductMapper()
+	protected function getPorductService()
 	{
-		if (!$this->productMapper) {
-			$this->productMapper = $this->get('Shop\Mapper\Product');
+		if (!$this->productService) {
+			$this->productService = $this->get('Shop\Service\Product');
 		}
 	
-		return $this->productMapper;
+		return $this->productService;
 	}
 }

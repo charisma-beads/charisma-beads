@@ -2,6 +2,8 @@
 return array(
     // This should be an array of module namespaces used in the application.
     'modules' => array(
+    	'ZendDeveloperTools',
+    	'BjyProfiler',
     	'Admin',
         'Application',
     	'Article',
@@ -67,9 +69,7 @@ return array(
    // Initial configuration with which to seed the ServiceManager.
    // Should be compatible with Zend\ServiceManager\Config.
    'service_manager' => array(
-		'factories' => array(
-			'Navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
-			'Zend\Db\Adapter\Adapter' => 'Zend\Db\Adapter\AdapterServiceFactory',
-		),
+   		'Navigation' 				=> 'Zend\Navigation\Service\DefaultNavigationFactory',
+   		'Zend\Db\Adapter\Adapter' 	=> 'Application\Service\Factory\DbAdapterServiceFactory',
 	),
 );

@@ -77,7 +77,7 @@ class CatalogController extends AbstractController
 	{
 		if (!$this->catalogMapper) {
 			$sl = $this->getServiceLocator();
-			$this->catalogMapper = $sl->get('Shop\Model\Catalog');
+			$this->catalogMapper = $sl->get('Shop\Service\Catalog');
 		}
 		
 		return $this->catalogMapper;

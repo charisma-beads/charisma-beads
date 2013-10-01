@@ -177,7 +177,7 @@ class MenuController extends AbstractController
 	{
 		if (!$this->menuMapper) {
 			$sl = $this->getServiceLocator();
-			$this->menuMapper = $sl->get('Navigation\Mapper\Menu');
+			$this->menuMapper = $sl->get('Navigation\Service\Menu');
 		}
 		
 		return $this->menuMapper;

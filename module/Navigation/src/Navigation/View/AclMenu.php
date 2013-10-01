@@ -11,7 +11,7 @@ class AclMenu extends AbstractViewHelper
 {
 	public function __invoke($container = null, $menu = null, $partial = null, $useZtb = true)
     {
-    	/* @var $acl \User\Model\Acl */
+    	/* @var $acl \User\Service\Acl */
         $acl = $this->getServiceLocator()->getServiceLocator()->get('User\Service\AclFactory');
         
         if ($container == 'model') {
@@ -25,7 +25,7 @@ class AclMenu extends AbstractViewHelper
     	
     	// must set acl before partial.
     	$identity = $this->view->plugin('identity');
-    	$role = ($identity()) ? $identity()->role : 'guest';
+    	$role = ($identity()) ? $identity()->getRole() : 'guest';
     	$nav->setAcl($acl)->setRole($role);
     	
     	if ($partial) {
@@ -41,15 +41,18 @@ class AclMenu extends AbstractViewHelper
     
     protected function getPages($menu)
     {
-    	/* @var $gateway \Navigation\Model\DbTable\Page */
-        $gateway = $this->getServiceLocator()->getServiceLocator()->get('Navigation\Gateway\Page');
+    	/* @var $gateway \Navigation\Service\Page */
+        $gateway = $this->getServiceLocator()->getServiceLocator()->get('Navigation\Service\Page');
         
         $pages = $gateway->getPagesByMenu($menu);
+        $hydrator = $pages->getHydrator();
+        $hydrator->addDepth();
+        
         $pageArray = array();
         
-        /* @var $page \Navigation\Model\Entity\Page */
+        /* @var $page \Navigation\Model\Page */
         foreach ($pages as $page) {
-            $p = $page->getArrayCopy(true);
+            $p = $hydrator->extract($page);
             $p['params'] = parse_ini_string($p['params']);
             
             if ($p['route'] == '0') {

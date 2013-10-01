@@ -4,7 +4,7 @@ return array(
 	'invokables' => array(
 		'Application\Mapper\Session'				=> 'Application\Mapper\Session',
 		
-		'Application\Servive\SessionManager'		=> 'Application\Service\SessionManager',
+		'Application\Service\SessionManager'		=> 'Application\Service\SessionManager',
 	),
     'factories' => array(
     	'Application\SessionManager'				=> 'Application\Service\Factory\SessionManagerFactory',

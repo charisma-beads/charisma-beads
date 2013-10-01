@@ -20,27 +20,27 @@
 		<?php foreach($this->users as $row): ?>
 		
 		<tr>
-			<td><?php echo $this->escapeHtml($row->userId); ?></td>
+			<td><?php echo $this->escapeHtml($row->getUserId()); ?></td>
 			<td><?php echo $this->escapeHtml($row->getLastNameFirst()); ?></td>
-			<td><?php echo $this->escapeHtml($row->email); ?></td>
-			<td><?php echo $this->escapeHtml($row->role); ?></td>
-			<td><?php echo $this->escapeHtml($this->formatDate($row->dateCreated)); ?></td>
-			<td><?php echo $this->escapeHtml($this->formatDate($row->dateModified)); ?></td>
+			<td><?php echo $this->escapeHtml($row->getEmail()); ?></td>
+			<td><?php echo $this->escapeHtml($row->getRole()); ?></td>
+			<td><?php echo $this->escapeHtml($this->formatDate($row->getDateCreated())); ?></td>
+			<td><?php echo $this->escapeHtml($this->formatDate($row->getDateModified())); ?></td>
 			<td>
 				<a href="<?php echo $this->basepath(
-					'/admin/user/edit/id/' . $this->escapeHtml($row->userId)
+					'/admin/user/edit/id/' . $this->escapeHtml($row->getUserId())
 				) ?>" role="button" class="btn">Edit</a>
 				&nbsp;
-				<?php if ($this->identity()->userId == $row->userId):?>
+				<?php if ($this->identity()->getUserId() == $row->getUserId()):?>
 				<a role="button" class="btn btn-danger disabled" data-toggle="modal">Delete</a>
 				<?php else: ?>
 				<!-- Button to trigger modal -->
-                <a href="#userModel<?php echo $row->userId; ?>" role="button" class="btn btn-danger" data-toggle="modal">Delete</a>
+                <a href="#userModel<?php echo $row->getUserId(); ?>" role="button" class="btn btn-danger" data-toggle="modal">Delete</a>
                 <!-- Modal -->
-				<div class="modal hide fade" id="userModel<?php echo $row->userId; ?>" tabindex="-1" role="dialog" aria-labelledby="userModel<?php echo $row->userId; ?>" aria-hidden="true">
+				<div class="modal hide fade" id="userModel<?php echo $row->getUserId(); ?>" tabindex="-1" role="dialog" aria-labelledby="userModel<?php echo $row->getUserId(); ?>" aria-hidden="true">
 				  <div class="modal-header">
 				    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				    <h3 id="userModel<?php echo $row->userId; ?>Label">Warning</h3>
+				    <h3 id="userModel<?php echo $row->getUserId(); ?>Label">Warning</h3>
 				  </div>
 				  <form class="form-horizontal"  method="post" action="<?php echo $this->url('admin/user/edit', array(
 				        'action' => 'delete',
@@ -49,7 +49,7 @@
 				            <p>Are you sure you want to delete this user.</p>
 				            <p class="label label-important">This action cannot be undone</p>
 				        </div>
-				        <input type="hidden" name="userId" value="<?php echo $row->userId ?>">
+				        <input type="hidden" name="userId" value="<?php echo $row->getUserId(); ?>">
 				        <div class="modal-footer">
 				            <button type="button" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">No Don't Do It</button>
 				            <button type="submit" name="submit" class="btn btn-danger" value="delete">Yes Delete It</button>

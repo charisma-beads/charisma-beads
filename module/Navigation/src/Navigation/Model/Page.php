@@ -1,10 +1,10 @@
 <?php
 
-namespace Navigation\Model\Entity;
+namespace Navigation\Model;
 
-use Application\Model\Entity\AbstractEntity;
+use Application\Model\AbstractModel;
 
-class Page extends AbstractEntity
+class Page extends AbstractModel
 {   
 	/**
 	 * @var int
@@ -63,46 +63,6 @@ class Page extends AbstractEntity
 	
 	protected $inputFilterClass = 'Navigation\InputFilter\Page';
 	
-	public function exchangeArray(array $data)
-	{
-		$this->setPageId($data['pageId'])
-			->setMenuId($data['menuId'])
-			->setLabel($data['lable'])
-			->setParams($data['params'])
-			->setRoute($data['route'])
-			->setUri($data['uri'])
-			->setResource($data['resource'])
-			->setVisible($data['visible'])
-			->setLft($data['lft'])
-			->setRgt($data['rgt']);
-		
-		if (isset($data['depth'])) {
-			$this->setDepth($data['depth']);
-		}
-	}
-	
-	public function getArrayCopy($addDepth=false)
-	{
-		$data = array(
-			'pageId'	=> $this->getPageId(),
-			'menuId'	=> $this->getMenuId(),
-			'label'		=> $this->getLabel(),
-			'params'	=> $this->getParams(),
-			'route'		=> $this->getRoute(),
-			'uri'		=> $this->getUri(),
-			'resource'	=> $this->getResource(),
-			'visible'	=> $this->getVisible(),
-			'lft'		=> $this->getLft(),
-			'rgt'		=> $this->getRgt()
-		);
-		
-		if (true === $addDepth) {
-			$data['depth'] = $this->getDepth();
-		}
-		
-		return $data;
-	}
-
 	/**
 	 * @return the $pageId
 	 */

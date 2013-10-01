@@ -10,7 +10,7 @@ class SessionManagerController extends AbstractController
 	/**
 	 * @var \Application\Service\SessionManager
 	 */
-	protected $sessionMapper;
+	protected $sessionService;
 	
 	public function indexAction()
 	{

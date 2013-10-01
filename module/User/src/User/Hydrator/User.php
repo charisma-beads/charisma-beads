@@ -3,7 +3,6 @@ namespace User\Hydrator;
 
 use Application\Hydrator\AbstractHydrator;
 use Application\Hydrator\Strategy\DateTime as DateTimeStrategy;
-use User\Model\User;
 
 class User extends AbstractHydrator
 {
@@ -17,7 +16,11 @@ class User extends AbstractHydrator
 		$this->addStrategy('dateModified', $dateTime);
 	}
 	
-	public function extract(User $object)
+	/**
+	 * @param \User\Model\User $object
+	 * @return array
+	 */
+	public function extract($object)
 	{
 		return array(
 			'userId'		=> $this->getUserId(),

@@ -1,12 +1,12 @@
 <?php
 
-namespace Navigation\Model\Mapper;
+namespace Navigation\Service;
 
-use Navigation\Model\Entity\Menu as MenuEntity;
-use Application\Model\AbstractMapper;
+use Navigation\Model\Menu as MenuModel;
+use Application\Service\AbstractService;
 use Exception;
 
-class Menu extends AbstractMapper
+class Menu extends AbstractService
 {	
 	/**
 	 * @var \Navigation\Model\DbTable\Menu
@@ -40,7 +40,7 @@ class Menu extends AbstractMapper
 	public function addMenu($post)
 	{
 		$form  = $this->getMenuForm();
-		$menu = new MenuEntity();
+		$menu = new MenuModel();
 		
 		$form->setInputFilter($menu->getInputFilter());
 		$form->setData($post);
@@ -54,7 +54,7 @@ class Menu extends AbstractMapper
 		return $this->saveMenu($menu);
 	}
 	
-	public function editMenu(MenuEntity $menu, $post)
+	public function editMenu(MenuModel $menu, $post)
 	{
 		$form  = $this->getMenuForm();
 		
@@ -69,7 +69,7 @@ class Menu extends AbstractMapper
 		return $this->saveMenu($form->getData());
 	}
 	
-	public function saveMenu(MenuEntity $menu)
+	public function saveMenu(MenuModel $menu)
 	{
 		$id = (int) $menu->menuId;
 		$data = $menu->getArrayCopy();
@@ -101,7 +101,7 @@ class Menu extends AbstractMapper
 	{
 		if (!$this->menuGateway) {
 			$sl = $this->getServiceLocator();
-			$this->menuGateway = $sl->get('Navigation\Gateway\Menu');
+			$this->menuGateway = $sl->get('Navigation\Mapper\Menu');
 		}
 		
 		return $this->menuGateway;

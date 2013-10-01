@@ -186,7 +186,7 @@ class PageController extends AbstractController
 	{
 		if (!$this->pageMapper) {
 			$sl = $this->getServiceLocator();
-			$this->pageMapper = $sl->get('Navigation\Mapper\Page');
+			$this->pageMapper = $sl->get('Navigation\Service\Page');
 		}
 	
 		return $this->pageMapper;

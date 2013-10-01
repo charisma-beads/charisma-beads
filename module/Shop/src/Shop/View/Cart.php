@@ -2,7 +2,7 @@
 namespace Shop\View;
 
 use Application\View\AbstractViewHelper;
-use Shop\Model\Entity\Product;
+use Shop\Model\Product;
 use Shop\Form\Cart\Add;
 use Zend\I18n\View\Helper\CurrencyFormat;
 
@@ -22,7 +22,7 @@ class Cart extends AbstractViewHelper
 	{
 		$this->cartModel = $this->getServiceLocator()
 			->getServiceLocator()
-			->get('Shop\Model\Cart');
+			->get('Shop\Service\Cart');
 	
 		return $this;
 	}

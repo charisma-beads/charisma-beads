@@ -22,7 +22,9 @@
 		"mwillbanks/zfc-twitter-bootstrap" : "master-dev",
 		"twitter/bootstrap" : "~2",
 		"zendframework/zendframework" : "2.2.*",
-		"netglue/zf2-ssl-module" : "dev-master"
+		"netglue/zf2-ssl-module" : "dev-master",
+		"zendframework/zend-developer-tools" : "dev-master",
+		"bjyoungblood/bjy-profiler" : "dev-master"
 	},
 	"minimum-stability" : "stable",
 	"support" : {

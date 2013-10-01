@@ -1,13 +1,14 @@
 <?php
-namespace Navigation\Model\DbTable;
+namespace Navigation\Mapper;
 
-use Application\Model\DbTable\AbstractTable;
+use Application\Mapper\AbstractMapper;
 
-class Menu extends AbstractTable
+class Menu extends AbstractMapper
 {
 	protected $table = 'menu';
 	protected $primary = 'menuId';
-	protected $rowClass = 'Navigation\Model\Entity\Menu';
+	protected $model = 'Navigation\Model\Menu';
+	protected $hydrator = 'Navigation\Hydrator\Menu';
 	
 	public function getMenu($menu)
 	{

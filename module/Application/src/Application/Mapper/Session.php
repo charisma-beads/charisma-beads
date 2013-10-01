@@ -5,22 +5,8 @@ class Session extends AbstractMapper
 {
 	protected $table = 'session';
 	protected $primary = 'id';
-	protected $rowClass = 'Application\Model\Session';
+	protected $model = 'Application\Model\Session';
 	protected $hydrator = 'Application\Hydrator\Session';
-	
-	/**
-	 * Gets one row by its id
-	 *
-	 * @param int $id
-	 * @return \Application\Model\Session
-	 */
-	public function getById($id)
-	{
-		$id = (string) $id;
-		$rowset = $this->getTablegateway()->select(array($this->primary => $id));
-		$row = $rowset->current();
-		return $row;
-	}
 	
 	public function fetchAllSessions(array $post)
 	{
@@ -28,8 +14,7 @@ class Session extends AbstractMapper
 		$sort = (isset($post['sort'])) ? (string) $post['sort'] : '';
 		$page = (isset($post['page'])) ? (int) $post['page'] : null;
 	
-		$select = $this->getSql()->select();
-		$select->from($this->table);
+		$select = $this->getSelect();
 	
 		$select = $this->setSortOrder($select, $sort);
 		 

@@ -75,8 +75,8 @@ class IsAllowed extends AbstractPlugin
             }
 
             $identity = new Role($identity['role']);
-        } elseif (is_object($identity) && is_string($identity->role)) {
-            $identity = new Role($identity->role);
+        } elseif (is_object($identity) && is_string($identity->getRole())) {
+            $identity = new Role($identity->getRole());
         } elseif (is_scalar($identity) && !is_bool($identity)) {
             $identity = new Role($identity);
         } elseif (null === $identity) {

@@ -2,7 +2,7 @@
 namespace Shop\Controller;
 
 use Application\Controller\AbstractController;
-use Shop\Model\ShopException;
+use Shop\ShopException;
 use Zend\View\Model\ViewModel;
 use FB;
 
@@ -78,7 +78,7 @@ class CartController extends AbstractController
 	{
 		if (!$this->cart) {
 			$sl = $this->getServiceLocator();
-			$this->cart = $sl->get('Shop\Model\Cart');
+			$this->cart = $sl->get('Shop\Service\Cart');
 		}
 	
 		return $this->cart;
@@ -91,7 +91,7 @@ class CartController extends AbstractController
 	{
 		if (!$this->catalog) {
 			$sl = $this->getServiceLocator();
-			$this->calalog = $sl->get('Shop\Model\Catalog');
+			$this->calalog = $sl->get('Shop\Service\Catalog');
 		}
 	
 		return $this->calalog;

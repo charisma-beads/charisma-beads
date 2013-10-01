@@ -1,7 +1,7 @@
 <?php
-namespace Navigation\Model\DbTable;
+namespace Navigation\Mapper;
 
-use Application\Model\DbTable\AbstractNestedSet;
+use Application\Mapper\AbstractNestedSet;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Expression;
 
@@ -9,7 +9,8 @@ class Page extends AbstractNestedSet
 {
 	protected $table = 'page';
 	protected $primary = 'pageId';
-	protected $rowClass = 'Navigation\Model\Entity\Page';
+	protected $model = 'Navigation\Model\Page';
+	protected $hydrator = 'Navigation\Hydrator\Page';
     
     public function getPagesByMenuId($id)
     {

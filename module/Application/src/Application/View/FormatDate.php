@@ -14,7 +14,9 @@ class FormatDate extends AbstractHelper
 	
 	public function __invoke($date)
 	{
-		$date = new DateTime($date);
+		if (!$date instanceof DateTime) {
+			$date = new DateTime($date);
+		}
         
         return $date->format($this->format);
 	}

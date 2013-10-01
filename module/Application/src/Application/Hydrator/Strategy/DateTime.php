@@ -2,7 +2,7 @@
 namespace Application\Hydrator\Strategy;
 
 use Zend\Stdlib\Hydrator\Strategy\StrategyInterface;
-use DateTime;
+use DateTime as DateTimeClass;
 
 class DateTime implements StrategyInterface
 {
@@ -10,8 +10,8 @@ class DateTime implements StrategyInterface
 	
 	public function extract($value)
 	{
-		if (!$value instanceof DateTime) {
-			$value = new DateTime();
+		if (!$value instanceof DateTimeClass) {
+			$value = new DateTimeClass();
 		}
 		
 		return $value->format($this->dateFormat);
@@ -22,7 +22,7 @@ class DateTime implements StrategyInterface
 		if (is_string($value) && '' === $value) {
 			$value = null;
 		} else {
-			$value = new DateTime($value);
+			$value = new DateTimeClass($value);
 		}
 		
 		return $value;

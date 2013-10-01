@@ -3,7 +3,7 @@
 namespace User\Controller;
 
 use User\Form\Login as LoginForm;
-use User\Model\Authentication;
+use User\Service\Authentication;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 

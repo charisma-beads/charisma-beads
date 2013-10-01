@@ -1,12 +1,12 @@
 <?php
-namespace Navigation\Model\Mapper;
+namespace Navigation\Service;
 
-use Application\Model\AbstractMapper;
-use Navigation\Model\Entity\Page as PageEntity;
+use Application\Service\AbstractService;
+use Navigation\Model\Page as PageModel;
 use Zend\Form\FormInterface;
 use Exception;
 
-class Page extends AbstractMapper
+class Page extends AbstractService
 {
 	/**
 	 * @var \Navigation\Model\DbTable\Page
@@ -38,10 +38,16 @@ class Page extends AbstractMapper
 		return $this->getPageGateway()->getPagesByMenuId($id);
 	}
 	
+	public function getPagesByMenu($menu)
+	{
+		$menu = (string) $menu;
+		return $this->getPageGateway()->getPagesByMenu($menu);
+	}
+	
 	public function addPage($post)
 	{
 		$form  = $this->getPageForm();
-		$page = new PageEntity();
+		$page = new PageModel();
 		$position = (int) $post['position'];
 		$insertType = (string) $post['menuInsertType'];
 	
@@ -58,7 +64,7 @@ class Page extends AbstractMapper
 		return $this->getPageGateway()->insert($page->getArrayCopy(), $position, $insertType);
 	}
 	
-	public function editPage(PageEntity $page, $post)
+	public function editPage(PageModel $page, $post)
 	{
 		$form  = $this->getPageForm();
 	
@@ -114,13 +120,13 @@ class Page extends AbstractMapper
 	}
 	
 	/**
-	 * @return \Navigation\Model\DbTable\Page
+	 * @return \Navigation\Mapper\Page
 	 */
 	protected function getPageGateway()
 	{
 		if (!$this->pageGateway) {
 			$sl = $this->getServiceLocator();
-			$this->pageGateway = $sl->get('Navigation\Gateway\Page');
+			$this->pageGateway = $sl->get('Navigation\Mapper\Page');
 		}
 	
 		return $this->pageGateway;

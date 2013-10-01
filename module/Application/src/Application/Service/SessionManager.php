@@ -7,13 +7,12 @@ class SessionManager extends AbstractService
 	public function getSessionById($id)
 	{
 		$id = (string) $id;
-		
 		return $this->getMapper()->getById($id);
 	}
 	
 	public function fetchAllSessions($post = array())
 	{
-		return $this->getSessionGateway()->fetchAllSessions($post);
+		return $this->getMapper()->fetchAllSessions($post);
 	}
 	
 	public function deleteSession($id)

@@ -7,13 +7,17 @@ class User extends AbstractMapper
 { 
 	protected $table = 'user';
 	protected $primary = 'userId';
-	protected $rowClass = 'User\Model\Entity\User';
+	protected $model= 'User\Model\User';
 	protected $hydrator = 'User\Hydrator\User';
     
     public function getUserByEmail($email, $ignore=null)
     {
-        $rowset = $this->getTablegateway()->select(array('email' => $email));
+        $select = $this->getSelect()
+        	->where(array('email' => $email));
+        $rowset = $this->fetchResult($select);
         $row = $rowset->current();
+        
+        \FB::info($row);
         return $row;
     }
     
@@ -25,8 +29,7 @@ class User extends AbstractMapper
     	$sort = (isset($post['sort'])) ? (string) $post['sort'] : '';
     	$page = (isset($post['page'])) ? (int) $post['page'] : null;
     	 
-    	$select = $this->getSql()->select();
-    	$select->from($this->table);
+    	$select = $this->getSelect();
     
     	if (!$user == '') {
     		if (substr($user, 0, 1) == '=') {
