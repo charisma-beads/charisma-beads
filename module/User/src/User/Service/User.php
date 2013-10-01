@@ -2,16 +2,12 @@
 namespace User\Service;
 
 use Application\Service\AbstractService;
+use User\Hydrator\User as UserHydrator;
 use User\Model\User as UserEntity;
 use User\UserException;
 
 class User extends AbstractService
 {   
-    /**
-     * @var User\Form\User
-     */
-    protected $userForm;
-    
     public function getUserById($id)
     {
     	$id = (int) $id;
@@ -106,16 +102,25 @@ class User extends AbstractService
     }
     
     /**
+     * TODO: make this a seperate service and set input filter too from service.
      * @return \User\Form\User
      */
-    public function getUserForm()
+    public function getUserForm($model=null, $data=null)
     {
-    	if (!$this->userForm){
-    		$sl = $this->getServiceLocator();
-    		$this->userForm = $sl->get('User\Form\User');
+    	$sl = $this->getServiceLocator();
+    	$form = $sl->get('User\Form\User');
+    	$form->setInputFilter($sl->get('User\InputFilter\User'));
+    	$form->setHydrator(new UserHydrator());
+    	
+    	if ($model) {
+    		$form->bind($model);
+    	}
+    	
+    	if ($data) {
+    		$form->setData($data);
     	}
     	 
-    	return $this->userForm;
+    	return $form;
     }
     
     /**

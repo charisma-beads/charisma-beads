@@ -9,9 +9,9 @@ use Zend\View\Model\ViewModel;
 class UserController extends AbstractController
 {
 	/**
-	 * @var \User\Model\Mapper\User
+	 * @var \User\Service\User
 	 */
-	protected $userMapper;
+	protected $userService;
 	
 	public function thankYouAction()
 	{
@@ -31,7 +31,7 @@ class UserController extends AbstractController
         	$post = $request->getPost();
         	$post['role'] = 'registered'; 
         
-        	$result = $this->getUserMapper()->addUser($post);
+        	$result = $this->getUserService()->addUser($post);
         
         	if ($result instanceof UserForm) {
         		$this->flashMessenger()->addInfoMessage(
@@ -60,7 +60,7 @@ class UserController extends AbstractController
         }
         
         return new ViewModel(array(
-        	'form' => $this->getUserMapper()->getUserForm(),
+        	'form' => $this->getUserService()->getUserForm(),
         ));
 	}
 
@@ -75,7 +75,7 @@ class UserController extends AbstractController
 		$request = $this->getRequest();
 		if ($request->isPost()) {
 				
-			$result = $this->getUserMapper()->editUser($user, $request->getPost());
+			$result = $this->getUserService()->editUser($user, $request->getPost());
 				
 			if ($result instanceof UserForm) {
 
@@ -104,7 +104,7 @@ class UserController extends AbstractController
 			}
 		}
 		
-		$form = $this->getUserMapper()->getUserForm()->bind($user);
+		$form = $this->getUserService()->getUserForm()->bind($user);
 		$form->get('passwd')->setAttribute('value', '');
 		
 		return new ViewModel(array(
@@ -113,16 +113,16 @@ class UserController extends AbstractController
 	}
 	
 	/**
-	 * @return \User\Model\Mapper\User
+	 * @return \User\Service\User
 	 */
-	protected function getUserMapper()
+	protected function getUserService()
 	{
-		if (!$this->userMapper) {
+		if (!$this->userService) {
 			$sl = $this->getServiceLocator();
-			$this->userMapper = $sl->get('User\Mapper\User');
+			$this->userService = $sl->get('User\Service\User');
 		}
 		
-		return $this->userMapper;
+		return $this->userService;
 	}
 }
 

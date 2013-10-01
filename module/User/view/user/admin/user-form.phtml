@@ -62,7 +62,7 @@ if (isset($this->userId)) $routeArray['id'] = $this->userId;
             <label class="control-label" for="title">Role:</label>
             <div class="controls">
                 <?php
-                if ($this->identity()->userId == $this->userId) {
+                if ($this->identity()->getUserId() == $this->userId) {
                     $form->get('role')
                         ->setAttribute('disabled', true);
                 }

@@ -3,6 +3,7 @@ namespace User\Hydrator;
 
 use Application\Hydrator\AbstractHydrator;
 use Application\Hydrator\Strategy\DateTime as DateTimeStrategy;
+use Application\Hydrator\Strategy\EmptyString;
 
 class User extends AbstractHydrator
 {
@@ -12,6 +13,7 @@ class User extends AbstractHydrator
 		
 		$dateTime = new DateTimeStrategy();
 		
+		$this->addStrategy('passwd', new EmptyString());
 		$this->addStrategy('dateCreated', $dateTime);
 		$this->addStrategy('dateModified', $dateTime);
 	}
@@ -23,14 +25,14 @@ class User extends AbstractHydrator
 	public function extract($object)
 	{
 		return array(
-			'userId'		=> $this->getUserId(),
-			'firstname'		=> $this->getFirstname(),
-			'lastname'		=> $this->getLastname(),
-			'email'			=> $this->getEmail(),
-			'passwd'		=> $this->getPasswd(),
-			'role'			=> $this->getRole(),
-			'dateCreated'	=> $this->extractValue('dateCreated', $this->getDateCreated()),
-			'dateModified'	=> $this->extractValue('dateModified', $this->getDateModified()),
+			'userId'		=> $object->getUserId(),
+			'firstname'		=> $object->getFirstname(),
+			'lastname'		=> $object->getLastname(),
+			'email'			=> $object->getEmail(),
+			'passwd'		=> $this->extractValue('passwd', $object->getPasswd()),
+			'role'			=> $object->getRole(),
+			'dateCreated'	=> $this->extractValue('dateCreated', $object->getDateCreated()),
+			'dateModified'	=> $this->extractValue('dateModified', $object->getDateModified()),
 		);
 	}
 }
