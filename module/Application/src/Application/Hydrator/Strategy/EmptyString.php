@@ -8,12 +8,12 @@ class EmptyString implements StrategyInterface
 
 	public function extract($value)
 	{
-		return '';
+		return $value;
 	}
 	
 	public function hydrate($value)
 	{
-		return $value;
+		return '';
 	}
 
 }
