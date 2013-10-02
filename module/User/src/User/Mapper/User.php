@@ -9,6 +9,12 @@ class User extends AbstractMapper
 	protected $primary = 'userId';
 	protected $model= 'User\Model\User';
 	protected $hydrator = 'User\Hydrator\User';
+	
+	public function getById($id)
+	{
+		$this->getResultSet()->getHydrator()->emptyPassword();
+		return parent::getById($id);
+	}
     
     public function getUserByEmail($email, $ignore=null)
     {
@@ -22,6 +28,8 @@ class User extends AbstractMapper
     
     public function fetchAllUsers(array $post)
     {
+    	$this->getResultSet()->getHydrator()->emptyPassword();
+    	
     	$count = (isset($post['count'])) ? (int) $post['count'] : null;
     	$email = (isset($post['email'])) ? (string) $post['email'] : '';
     	$user = (isset($post['user'])) ? (string) $post['user'] : '';

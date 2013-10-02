@@ -61,13 +61,20 @@ class Page extends AbstractNestedSet
     
     public function getPageByMenuIdAndLabel($menuId, $label)
     {
-    	$rowSet = $this->getTablegateway()->select(array('menuId' => $menuId, 'label' => $label));
+    	$rowSet = $this->getSelect()->where(array('menuId' => $menuId, 'label' => $label));
     	$row = $rowSet->current();
     	return $row;
     }
     
     public function deletePagesByMenuId($id)
     {
-    	return $this->getTablegateway()->delete(array('menuId' => $id));
+    	$sql = $this->getSql();
+    	$delete = $sql->delete($this->table);
+    	
+    	$delete->where(array('menuId' => $id));
+    	
+    	$statement = $sql->prepareStatementForSqlObject($delete);
+    	
+    	return $statement->execute();
     }
 }

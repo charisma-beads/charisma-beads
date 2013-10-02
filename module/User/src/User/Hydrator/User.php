@@ -13,9 +13,15 @@ class User extends AbstractHydrator
 		
 		$dateTime = new DateTimeStrategy();
 		
-		$this->addStrategy('passwd', new EmptyString());
 		$this->addStrategy('dateCreated', $dateTime);
 		$this->addStrategy('dateModified', $dateTime);
+		return $this;
+	}
+	
+	public function emptyPassword()
+	{
+		$this->addStrategy('passwd', new EmptyString());
+		return $this;
 	}
 	
 	/**

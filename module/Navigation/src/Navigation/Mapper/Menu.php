@@ -12,7 +12,7 @@ class Menu extends AbstractMapper
 	
 	public function getMenu($menu)
 	{
-	    $rowset = $this->getTablegateway()->select(array('menu' => $menu));
+	    $rowset = $this->getSelect()->where(array('menu' => $menu));
 	    $row = $rowset->current();
 	    return $row;
 	}

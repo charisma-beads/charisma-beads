@@ -2,7 +2,6 @@
 namespace User\Service;
 
 use Application\Service\AbstractService;
-use User\Hydrator\User as UserHydrator;
 use User\Model\User as UserEntity;
 use User\UserException;
 
@@ -27,8 +26,9 @@ class User extends AbstractService
     
     public function addUser($post)
     {
-        $user = $this->getMapper()->getModel($post);
-    	$form  = $this->getUserForm($user);
+    	\FB::info($post);
+        $user = $this->getMapper()->getModel();
+    	$form  = $this->getUserForm($user, $post);
     
     	if (!$form->isValid()) {
     		return $form;
@@ -57,8 +57,10 @@ class User extends AbstractService
     
     public function saveUser(UserEntity $user)
     {
+    	$user->setDateModified();
+    	
     	$id = (int) $user->getUserId();
-    	$data = $user->getArrayCopy();
+    	$data = $this->getMapper()->extract($user);
     
     	if (array_key_exists('passwd', $data) && '' != $data['passwd']) {
     		$authOptions = $this->getConfig('user');
@@ -98,7 +100,7 @@ class User extends AbstractService
     	$sl = $this->getServiceLocator();
     	$form = $sl->get('User\Form\User');
     	$form->setInputFilter($sl->get('User\InputFilter\User'));
-    	$form->setHydrator(new UserHydrator());
+    	$form->setHydrator($this->getMapper()->getHydrator());
     	
     	if ($model) {
     		$form->bind($model);

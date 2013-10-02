@@ -1,6 +1,7 @@
 <?php
 namespace Application\Mapper;
 
+use Application\Model\AbstractModel;
 use Application\Mapper\DbAdapterAwareInterface;
 use Zend\Db\Adapter\Adapter as DbAdapter;
 use Zend\Db\ResultSet\HydratingResultSet;
@@ -9,6 +10,7 @@ use Zend\Db\Sql\Select;
 use Zend\Paginator\Paginator;
 use Zend\Paginator\Adapter\DbSelect;
 use Zend\Stdlib\Hydrator\ClassMethods;
+use Zend\Stdlib\Hydrator\HydratorInterface;
 
 class AbstractMapper implements DbAdapterAwareInterface
 {
@@ -247,6 +249,18 @@ class AbstractMapper implements DbAdapterAwareInterface
 		}
 	
 		return $select->order($order);
+	}
+	
+	public function extract($dataOrModel, HydratorInterface $hydrator = null)
+	{
+		if (is_array($dataOrModel)) {
+			return $dataOrModel;
+		}
+		if (!$dataOrModel instanceOf AbstractModel) {
+			throw new \InvalidArgumentException('need nstance of AbstractModel got: ' . getType($dataOrModel));
+		}
+		$hydrator = $hydrator ?: $this->getHydrator();
+		return $hydrator->extract($dataOrModel);
 	}
 	
 	/**
