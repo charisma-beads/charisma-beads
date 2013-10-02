@@ -17,7 +17,6 @@ class User extends AbstractMapper
         $rowset = $this->fetchResult($select);
         $row = $rowset->current();
         
-        \FB::info($row);
         return $row;
     }
     

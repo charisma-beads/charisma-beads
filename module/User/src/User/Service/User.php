@@ -27,35 +27,26 @@ class User extends AbstractService
     
     public function addUser($post)
     {
-    	$form  = $this->getUserForm();
-    	$user = $this->getMapper()->getModel($post);
-    
-    	$form->setInputFilter($user->getInputFilter());
-    	$form->setData($post);
+        $user = $this->getMapper()->getModel($post);
+    	$form  = $this->getUserForm($user);
     
     	if (!$form->isValid()) {
     		return $form;
     	}
     
-    	$user->exchangeArray($form->getData());
-    
-    	return $this->saveUser($user);
+    	return $this->saveUser($form->getData());
     }
     
     public function editUser(UserEntity $user, $post)
     {
-    	$form  = $this->getUserForm();
-    
-    	$form->setInputFilter($user->getInputFilter());
+    	if (!isset($post['role'])) {
+    		$post['role'] = $user->getRole();
+    	}
+    	
+    	$form  = $this->getUserForm($user, $post);
+        
     	$form->getInputFilter()->get('passwd')->setRequired(false);
     	$form->getInputFilter()->get('passwd')->setAllowEmpty(true);
-    
-    	if (!isset($post['role'])) {
-    		$post['role'] = $user->role;
-    	}
-    
-    	$form->bind($user);
-    	$form->setData($post);
     
     	if (!$form->isValid()) {
     		return $form;
@@ -66,7 +57,7 @@ class User extends AbstractService
     
     public function saveUser(UserEntity $user)
     {
-    	$id = (int) $user->userId;
+    	$id = (int) $user->getUserId();
     	$data = $user->getArrayCopy();
     
     	if (array_key_exists('passwd', $data) && '' != $data['passwd']) {
@@ -76,9 +67,6 @@ class User extends AbstractService
     	} else {
     		unset($data['passwd']);
     	}
-    
-    	if (0 === $id) $data['dateCreated'] = $this->currentDate();
-    	$data['dateModified'] = $this->currentDate();
     
     	// TODO check for existing email.
     

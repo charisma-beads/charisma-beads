@@ -102,7 +102,9 @@ class AbstractMapper implements DbAdapterAwareInterface
 	 */
 	public function fetchAll()
 	{
-		$resultSet = $this->getSelect()->select();
+		$select = $this->getSelect();
+		$resultSet = $this->fetchResult($select);
+		
 		return $resultSet;
 	}
 	
@@ -190,8 +192,6 @@ class AbstractMapper implements DbAdapterAwareInterface
 	 */
 	protected function fetchResult(Select $select)
 	{
-		// we have to set up a new result set otherwise
-		// the table class will only retrive the last query
 		$resultSet = $this->getResultSet();
 	
 		$statement = $this->getSql()->prepareStatementForSqlObject($select);
