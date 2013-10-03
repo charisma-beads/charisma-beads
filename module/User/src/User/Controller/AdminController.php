@@ -17,10 +17,6 @@ class AdminController extends AbstractController
 	
 	public function indexAction()
 	{
-		if (!$this->isAllowed('UserAdmin', 'view')) {
-			return $this->redirect()->toRoute('home');
-		}
-		
 		$page = $this->params()->fromRoute('page');
 		
 		$params = array(
@@ -37,10 +33,6 @@ class AdminController extends AbstractController
 	
 	public function listAction()
 	{
-		if (!$this->isAllowed('UserAdmin', 'view')) {
-			throw new UserException('Access Denied');
-		}
-	
 		$params = $this->params()->fromPost();
 		
 		$viewModel = new ViewModel(array(
@@ -54,10 +46,6 @@ class AdminController extends AbstractController
 	
 	public function addAction()
 	{
-		if (!$this->isAllowed('UserAdmin', 'add')) {
-			return $this->redirect()->toRoute('home');
-		}
-
 		$request = $this->getRequest();
 
 		if ($request->isPost()) {
@@ -97,10 +85,6 @@ class AdminController extends AbstractController
 	
 	public function editAction()
 	{
-		if (!$this->isAllowed('UserAdmin', 'edit')) {
-			return $this->redirect()->toRoute('home');
-		}
-
 		$id = (int) $this->params('id', 0);
 		if (!$id) {
 			return $this->redirect()->toRoute('admin/user', array(
@@ -159,10 +143,6 @@ class AdminController extends AbstractController
 	
 	public function deleteAction()
 	{
-		if (!$this->isAllowed('UserAdmin', 'delete')) {
-			return $this->redirect()->toRoute('home');
-		}
-
 		$request = $this->getRequest();
 
 		$id = (int) $request->getPost('userId');

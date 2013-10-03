@@ -14,10 +14,6 @@ class SessionManagerController extends AbstractController
 	
 	public function indexAction()
 	{
-		if (!$this->isAllowed('SessionManager', 'view')) {
-			return $this->redirect()->toRoute('home');
-		}
-		
 		$page = $this->params()->fromRoute('page');
 		
 		$params = array(
@@ -33,10 +29,6 @@ class SessionManagerController extends AbstractController
 	
 	public function viewAction()
 	{
-		if (!$this->isAllowed('SessionManager', 'view')) {
-			throw new Exception('Access Denied');
-		}
-	
 		$id = (string) $this->params()->fromRoute('id', 0);
 	
 		$viewModel = new ViewModel(array(
@@ -49,10 +41,6 @@ class SessionManagerController extends AbstractController
 	
 	public function listAction()
 	{
-		if (!$this->isAllowed('SessionManager', 'view')) {
-			throw new Exception('Access Denied');
-		}
-	
 		$params = $this->params()->fromPost();
 		
 		$viewModel = new ViewModel(array(
@@ -65,10 +53,6 @@ class SessionManagerController extends AbstractController
 	
 	public function deleteAction()
 	{
-		if (!$this->isAllowed('SessionManager', 'delete')) {
-			return $this->redirect()->toRoute('home');
-		}
-	
 		$request = $this->getRequest();
 	
 		$id = (string) $request->getPost('id');

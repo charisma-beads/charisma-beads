@@ -21,10 +21,6 @@ class ShopController extends AbstractController
 	
     public function indexAction()
     {
-    	if (!$this->isAllowed('ShopAdmin', 'view')) {
-    		return $this->redirect()->toRoute('home');
-    	}
-    	
         return new ViewModel();
     }
     

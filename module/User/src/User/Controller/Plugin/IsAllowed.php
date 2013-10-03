@@ -44,6 +44,32 @@ class IsAllowed extends AbstractPlugin
         
         return $this->acl;
     }
+    
+    public function doAuthorization($event)
+    {
+    	\FB::info($this->getAcl(), 'ACL');
+    	
+    	$match = $event->getRouteMatch();
+    	$controller = $match->getParam('controller');
+    	$action = $match->getParam('action');
+    	
+    	// each controller a resource
+    	\FB::info($controller, 'controller');
+    	//each action a privilege
+    	\FB::info($action, 'action');
+    	 
+    	/*if ( ! $this->isAllowed($controller, $action)) {
+    		$router = $event->getRouter();
+    		$url    = $router->assemble(array(), array('name' => 'user/default'));
+    		 
+    		$response = $event->getResponse();
+    		$response->setStatusCode(302);
+    		//redirect to login route...
+    		// change with header('location: '.$url); if code below not working 
+    		$response->getHeaders()->addHeaderLine('Location', $url);
+    		$event->stopPropagation();
+    	}*/
+    }
 
     /**
      * Check the acl

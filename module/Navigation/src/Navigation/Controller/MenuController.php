@@ -14,11 +14,7 @@ class MenuController extends AbstractController
 	protected $menuMapper;
 	
     public function listAction()
-    {
-    	if (!$this->isAllowed('Menu', 'view')) {
-    		return $this->redirect()->toRoute('home');
-    	}
-    	
+    {	
         return new ViewModel(array(
         	'menus' => $this->getMenuMapper()->fetchAllMenus()
         ));
@@ -26,10 +22,6 @@ class MenuController extends AbstractController
     
 	public function addAction()
 	{
-		if (!$this->isAllowed('Menu', 'add')) {
-			return $this->redirect()->toRoute('home');
-		}
-		
 		$request = $this->getRequest();
 		
 		if ($request->isPost()) {
@@ -68,12 +60,6 @@ class MenuController extends AbstractController
 	
 	public function editAction()
 	{
-		if (!$this->isAllowed('Menu', 'edit')) {
-			return $this->redirect()->toRoute('home');
-		}
-		
-		$this->layout('layout/admin');
-		
 		$id = (int) $this->params()->fromRoute('id', 0);
 		if (!$id) {
 			return $this->redirect()->toRoute('admin/menu', array(
@@ -130,10 +116,6 @@ class MenuController extends AbstractController
 	
 	public function deleteAction()
 	{
-		if (!$this->isAllowed('Menu', 'delete')) {
-			return $this->redirect()->toRoute('home');
-		}
-		
 		$request = $this->getRequest();
 		
 		$id = (int) $request->getPost('menuId');

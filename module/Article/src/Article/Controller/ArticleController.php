@@ -33,12 +33,6 @@ class ArticleController extends AbstractController
 	
 	public function listAction()
 	{
-		if (!$this->isAllowed('Article', 'view')) {
-			return $this->redirect()->toRoute('home');
-		}
-		
-		$this->layout('layout/admin');
-		
 		return new ViewModel(array(
 			'articles' => $this->getArticleMapper()->fetchAllArticles()
 		));
@@ -46,12 +40,6 @@ class ArticleController extends AbstractController
 	
 	public function addAction()
 	{
-		if (!$this->isAllowed('Article', 'add')) {
-			return $this->redirect()->toRoute('home');
-		}
-		
-		$this->layout('layout/admin');
-		
 		$request = $this->getRequest();
 		
 		if ($request->isPost()) {
@@ -90,12 +78,6 @@ class ArticleController extends AbstractController
 	
 	public function editAction()
 	{
-		if (!$this->isAllowed('Article', 'edit')) {
-			return $this->redirect()->toRoute('home');
-		}
-		
-		$this->layout('layout/admin');
-		
 		$id = (int) $this->params()->fromRoute('id', 0);
 		if (!$id) {
 			return $this->redirect()->toRoute('admin/article', array(
@@ -152,10 +134,6 @@ class ArticleController extends AbstractController
 	
 	public function deleteAction()
 	{
-		if (!$this->isAllowed('Article', 'delete')) {
-			return $this->redirect()->toRoute('home');
-		}
-		
 		$request = $this->getRequest();
 		
 		$id = (int) $request->getPost('articleId');

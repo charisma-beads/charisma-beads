@@ -8,6 +8,12 @@ return array(
 			'credentialTreatment' => ''
 		),
 	),
+	'userAcl' => array(
+		'userRoles' => array(
+		),
+		'userResources' => array(
+		),
+	),
     'router' => array(
         'routes' => array(
             'user' => array(

@@ -14,11 +14,7 @@ class PageController extends AbstractController
 	protected $pageMapper;
 	
     public function listAction()
-    {
-    	if (!$this->isAllowed('Page', 'view')) {
-    		return $this->redirect()->toRoute('home');
-    	}
-    	
+    {    	
     	$menuId = $this->params('menuId', 0);
     	
     	if (!$menuId) return $this->redirect()->toRoute('admin/menu');
@@ -31,10 +27,6 @@ class PageController extends AbstractController
     
     public function addAction()
     {
-    	if (!$this->isAllowed('Page', 'add')) {
-    		return $this->redirect()->toRoute('home');
-    	}
-    	
     	$menuId = $this->params('menuId', 0);
     
     	$request = $this->getRequest();
@@ -77,11 +69,6 @@ class PageController extends AbstractController
     
     public function editAction()
     {
-    	if (!$this->isAllowed('Page', 'edit')) {
-    		return $this->redirect()->toRoute('home');
-    	}
-    
-    	$this->layout('layout/admin');
     	$menuId = $this->params('menuId', 0);
     
     	$id = (int) $this->params()->fromRoute('id', 0);
@@ -141,10 +128,6 @@ class PageController extends AbstractController
     
 	public function deleteAction()
 	{
-		if (!$this->isAllowed('Page', 'delete')) {
-			return $this->redirect()->toRoute('home');
-		}
-		
 		$request = $this->getRequest();
 		
 		$menuId = (int) $request->getPost('menuId');

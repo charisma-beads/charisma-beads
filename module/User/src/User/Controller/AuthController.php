@@ -24,10 +24,6 @@ class AuthController extends AbstractActionController
     
     public function loginAction()
     {   
-        if (!$this->isAllowed('Guest')) {
-            return $this->redirect()->toRoute('home');
-        }
-        
         return new ViewModel(array(
             'form' => $this->form
         ));   
@@ -41,10 +37,6 @@ class AuthController extends AbstractActionController
     
     public function authenticateAction()
     {
-        if (!$this->isAllowed('Guest')) {
-        	return $this->redirect()->toRoute('home');
-        }
-        
         $request = $this->getRequest();
 
         if (!$request->isPost()) {

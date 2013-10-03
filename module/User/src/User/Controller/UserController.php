@@ -20,10 +20,6 @@ class UserController extends AbstractController
 	
 	public function registerAction()
 	{
-		if (!$this->isAllowed('Guest', 'add')) {
-            return $this->redirect()->toRoute('home');
-        }
-        
         $request = $this->getRequest();
         
         if ($request->isPost()) {
@@ -66,10 +62,6 @@ class UserController extends AbstractController
 
 	public function editAction()
 	{
-		if (!$this->isAllowed('User', 'edit')) {
-			return $this->redirect()->toRoute('home');
-		}
-		
 		$user = $this->identity();
 
 		$request = $this->getRequest();
