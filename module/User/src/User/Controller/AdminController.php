@@ -4,7 +4,6 @@ namespace User\Controller;
 
 use Application\Controller\AbstractController;
 use User\Form\User as UserForm;
-use User\UserException;
 use Zend\View\Model\ViewModel;
 use FB;
 

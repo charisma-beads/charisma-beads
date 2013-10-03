@@ -8,6 +8,31 @@
  */
 
 return array(
+	'userAcl' => array(
+		'userRoles' => array(
+			'guest'	=>array(
+				'privileges' => array(
+					array('controller' => 'Application\Controller\Index', 'action' => array('index')),
+				),
+			),
+			'registered' => array(
+				'privileges' => array(
+					array('controller' => 'Application\Controller\Index', 'action' => array('index')),
+				),
+			),
+			'admin' => array(
+				'privileges' => array(
+					array('controller' => 'Application\Controller\Admin', 'action' => 'all'),
+					array('controller' => 'Application\Controller\SessionManager', 'action' => 'all'),
+				),
+			),
+		),
+		'userResources' => array(
+			'Application\Controller\Admin',
+			'Application\Controller\Index',
+			'Application\Controller\SessionManager',
+		),
+	),
     'router' => array(
         'routes' => array(
             'home' => array(

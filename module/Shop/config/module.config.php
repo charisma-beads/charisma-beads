@@ -1,5 +1,37 @@
 <?php
 return array(
+	'userAcl' => array(
+		'userRoles' => array(
+			'guest'	=>array(
+				'privileges' => array(
+					array('controller' => 'Shop\Controller\Cart', 'action' => 'all'),
+					array('controller' => 'Shop\Controller\Catalog', 'action' => 'all'),
+					array('controller' => 'Shop\Controller\Product', 'action' => array('view')),
+					array('controller' => 'Shop\Controller\Shop', 'action' => array('shop-front')),
+				),
+			),
+			'registered' => array(
+				'privileges' => array(
+					array('controller' => 'Shop\Controller\Cart', 'action' => 'all'),
+					array('controller' => 'Shop\Controller\Catalog', 'action' => 'all'),
+					array('controller' => 'Shop\Controller\Product', 'action' => array('view')),
+					array('controller' => 'Shop\Controller\Shop', 'action' => array('shop-front')),
+				),
+			),
+			'admin' => array(
+				'privileges' => array(
+					array('controller' => 'Shop\Controller\Product', 'action' => 'all'),
+					array('controller' => 'Shop\Controller\Shop', 'action' => 'all'),
+				),
+			),
+		),
+		'userResources' => array(
+			'Shop\Controller\Cart',
+			'Shop\Controller\Catalog',
+			'Shop\Controller\Product',
+			'Shop\Controller\Shop',
+		),
+	),
     'router' => array(
         'routes' => array(
             'shop' => array(

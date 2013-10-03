@@ -47,20 +47,13 @@ class IsAllowed extends AbstractPlugin
     
     public function doAuthorization($event)
     {
-    	\FB::info($this->getAcl(), 'ACL');
-    	
     	$match = $event->getRouteMatch();
     	$controller = $match->getParam('controller');
     	$action = $match->getParam('action');
-    	
-    	// each controller a resource
-    	\FB::info($controller, 'controller');
-    	//each action a privilege
-    	\FB::info($action, 'action');
     	 
-    	/*if ( ! $this->isAllowed($controller, $action)) {
+    	if (!$this->isAllowed($controller, $action)) {
     		$router = $event->getRouter();
-    		$url    = $router->assemble(array(), array('name' => 'user/default'));
+    		$url    = $router->assemble(array(), array('name' => 'user/login'));
     		 
     		$response = $event->getResponse();
     		$response->setStatusCode(302);
@@ -68,7 +61,7 @@ class IsAllowed extends AbstractPlugin
     		// change with header('location: '.$url); if code below not working 
     		$response->getHeaders()->addHeaderLine('Location', $url);
     		$event->stopPropagation();
-    	}*/
+    	}
     }
 
     /**

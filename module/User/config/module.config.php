@@ -10,8 +10,37 @@ return array(
 	),
 	'userAcl' => array(
 		'userRoles' => array(
+			'guest'			=> array(
+				'label'			=> 'Guest',
+				'parent'		=> null,
+				'privileges'	=> array(
+					array('controller' => 'User\Controller\Auth', 'action' => array('login', 'authenticate')),
+					array('controller' => 'User\Controller\User', 'action' => array('register', 'thank-you')),
+				),
+				'resources' => array('menu:guest'),
+			),
+			'registered'    => array(
+				'label'         => 'User',
+				'parent'        => null,
+				'privileges'    => array(
+					array('controller' => 'User\Controller\Auth', 'action' => array('logout')),
+					array('controller' => 'User\Controller\User', 'action' => array('edit')),
+				),
+				'resources' => array('menu:user')
+			),
+			'admin'        => array(
+				'label'         => 'Admin',
+				'parent'        => 'registered',
+				'privileges'    => array(
+					array('controller' => 'User\Controller\Admin', 'action' => 'all'),
+				),
+				'resources' => array('menu:admin'),
+			),
 		),
 		'userResources' => array(
+			'User\Controller\Admin',
+			'User\Controller\Auth',
+			'User\Controller\User',
 		),
 	),
     'router' => array(

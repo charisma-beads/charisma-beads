@@ -1,5 +1,20 @@
 <?php
 return array(
+	'userAcl' => array(
+		'userRoles' => array(
+			'admin' => array(
+				'privileges' => array(
+					array('controller' => 'Navigation\Controller\Menu', 'action' => 'all'),
+					array('controller' => 'Navigation\Controller\Page', 'action' => 'all'),
+				),
+			),
+		),
+		'userResources' => array(
+			'Navigation\Controller\Menu',
+			'Navigation\Controller\Page',
+			'menu:admin', 'menu:guest', 'menu:user',
+		),
+	),
     'router' => array(
         'routes' => array(
         	'admin' => array(

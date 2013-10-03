@@ -1,5 +1,27 @@
 <?php
 return array(
+	'userAcl' => array(
+		'userRoles' => array(
+			'guest'	=>array(
+				'privileges' => array(
+					array('controller' => 'Article\Controller\Article', 'action' => array('view')),
+				),
+			),
+			'registered' => array(
+				'privileges' => array(
+					array('controller' => 'Article\Controller\Article', 'action' => array('view')),
+				),
+			),
+			'admin' => array(
+				'privileges' => array(
+					array('controller' => 'Article\Controller\Article', 'action' => 'all'),
+				),
+			),
+		),
+		'userResources' => array(
+			'Article\Controller\Article',
+		),
+	),
 	'router' => array(
 		'routes' => array(
         	'article' => array(

@@ -15,8 +15,8 @@ class Module
 {
 	public function onBootstrap(MvcEvent $e)
 	{
-		$eventManager        = $e->getApplication()->getEventManager();
-		//$eventManager->attach('route', array($this, 'loadConfiguration'), 2);
+		$eventManager = $e->getApplication()->getEventManager();
+		$eventManager->attach('route', array($this, 'loadConfiguration'), 2);
 	}
 	
 	public function loadConfiguration(MvcEvent $e)
