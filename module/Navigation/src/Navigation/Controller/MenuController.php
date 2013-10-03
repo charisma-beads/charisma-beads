@@ -9,14 +9,14 @@ use Navigation\Form\Menu as MenuForm;
 class MenuController extends AbstractController
 {
 	/**
-	 * @var \Navigation\Model\Mapper\Menu;
+	 * @var \Navigation\Service\Menu;
 	 */
-	protected $menuMapper;
+	protected $menuService;
 	
     public function listAction()
     {	
         return new ViewModel(array(
-        	'menus' => $this->getMenuMapper()->fetchAllMenus()
+        	'menus' => $this->getMenuService()->fetchAll()
         ));
     }
     
@@ -25,7 +25,7 @@ class MenuController extends AbstractController
 		$request = $this->getRequest();
 		
 		if ($request->isPost()) {
-			$result = $this->getMenuMapper()->addMenu($request->getPost());
+			$result = $this->getMenuService()->add($request->getPost());
 			
 			if ($result instanceof MenuForm) {
 				
@@ -54,7 +54,7 @@ class MenuController extends AbstractController
 		}
 		
 		return new ViewModel(array(
-			'form' => $this->getMenuMapper()->getMenuForm()
+			'form' => $this->getMenuService()->getForm()
 		));	
 	}
 	
@@ -70,7 +70,7 @@ class MenuController extends AbstractController
 		// Get the Article with the specified id.  An exception is thrown
 		// if it cannot be found, in which case go to the list page.
 		try {
-			$menu = $this->getMenuMapper()->getMenuById($id);
+			$menu = $this->getMenuService()->getById($id);
 		} catch (\Exception $e) {
 			return $this->redirect()->toRoute('admin/menu', array(
 				'action' => 'list'
@@ -80,7 +80,7 @@ class MenuController extends AbstractController
 		$request = $this->getRequest();
 		if ($request->isPost()) {
 			
-			$result = $this->getMenuMapper()->editMenu($menu, $request->getPost());
+			$result = $this->getMenuService()->edit($menu, $request->getPost());
 			
 			if ($result instanceof MenuForm) {
 				
@@ -109,7 +109,7 @@ class MenuController extends AbstractController
 		}
 		
 		return new ViewModel(array(
-            'form' => $this->getMenuMapper()->getMenuForm()->bind($menu),
+            'form' => $this->getMenuService()->getMenuForm($menu),
             'menu' => $menu
         ));
 	}
@@ -129,7 +129,7 @@ class MenuController extends AbstractController
 			if ($del == 'delete') {
 				try {
 					$id = (int) $request->getPost('menuId');
-					$result = $this->getMenuMapper()->deleteMenu($id);
+					$result = $this->getMenuService()->delete($id);
 				
 					if ($result) {
 						$this->flashMessenger()->addSuccessMessage(
@@ -153,15 +153,15 @@ class MenuController extends AbstractController
 	}
 	
 	/**
-	 * @return \Navigation\Model\Mapper\Menu
+	 * @return \Navigation\Service\Menu
 	 */
-	protected function getMenuMapper()
+	protected function getMenuService()
 	{
-		if (!$this->menuMapper) {
+		if (!$this->menuService) {
 			$sl = $this->getServiceLocator();
-			$this->menuMapper = $sl->get('Navigation\Service\Menu');
+			$this->menuService = $sl->get('Navigation\Service\Menu');
 		}
 		
-		return $this->menuMapper;
+		return $this->menuService;
 	}
 }

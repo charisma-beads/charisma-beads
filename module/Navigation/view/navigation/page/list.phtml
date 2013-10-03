@@ -24,27 +24,27 @@
 		<?php if ($pages->count()): ?>
 		<?php foreach($this->pages as $key => $row): ?>
 		<tr>
-			<td><?php echo $this->escapeHtml($row->pageId); ?></td>
+			<td><?php echo $this->escapeHtml($row->getPageId()); ?></td>
 			<td>
-                <?php echo str_repeat('&nbsp;&nbsp;', ($row->depth)) . '&bull;&nbsp;'; ?>
-                <?php echo $this->escapeHtml($row->label); ?></td>
-			<td><?php echo $this->escapeHtml($row->params); ?></td>
-			<td><?php echo $this->escapeHtml($row->route); ?></td>
-			<td><?php echo $this->escapeHtml($row->resource); ?></td>
+                <?php echo str_repeat('&nbsp;&nbsp;', ($row->getDepth())) . '&bull;&nbsp;'; ?>
+                <?php echo $this->escapeHtml($row->getLabel()); ?></td>
+			<td><?php echo $this->escapeHtml($row->getParams()); ?></td>
+			<td><?php echo $this->escapeHtml($row->getRoute()); ?></td>
+			<td><?php echo $this->escapeHtml($row->getResource()); ?></td>
 			<td><?php echo $this->escapeHtml($row->isVisible()); ?></td>
 			<td>
 				<a href="<?php echo $this->basepath(
-					'/admin/page/edit/id/' . $this->escapeHtml($row->pageId)
+					'/admin/page/edit/id/' . $this->escapeHtml($row->getPageId())
 				) ?>" role="button" class="btn">Edit</a>
 				&nbsp;
 				
 				<!-- Button to trigger modal -->
-                <a href="#pageModel<?php echo $row->pageId; ?>" role="button" class="btn btn-danger" data-toggle="modal">Delete</a>
+                <a href="#pageModel<?php echo $row->getPageId(); ?>" role="button" class="btn btn-danger" data-toggle="modal">Delete</a>
                 <!-- Modal -->
-				<div class="modal hide fade" id="pageModel<?php echo $row->pageId; ?>" tabindex="-1" role="dialog" aria-labelledby="pageModel<?php echo $row->pageId; ?>" aria-hidden="true">
+				<div class="modal hide fade" id="pageModel<?php echo $row->getPageId(); ?>" tabindex="-1" role="dialog" aria-labelledby="pageModel<?php echo $row->getPageId(); ?>" aria-hidden="true">
 				  <div class="modal-header">
 				    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				    <h3 id="pageModel<?php echo $row->pageId; ?>Label">Warning</h3>
+				    <h3 id="pageModel<?php echo $row->getPageId(); ?>Label">Warning</h3>
 				  </div>
 				  <form class="form-horizontal"  method="post" action="<?php echo $this->url('admin/page', array(
 				        'action' => 'delete',
@@ -53,8 +53,8 @@
 				            <p>Are you sure you want to delete this page.</p>
 				            <p class="label label-important">This action cannot be undone</p>
 				        </div>
-				        <input type="hidden" name="pageId" value="<?php echo $row->pageId ?>">
-				        <input type="hidden" name="menuId" value="<?php echo $row->menuId ?>">
+				        <input type="hidden" name="pageId" value="<?php echo $row->getPageId() ?>">
+				        <input type="hidden" name="menuId" value="<?php echo $row->getMenuId() ?>">
 				        <div class="modal-footer">
 				            <button type="button" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">No Don't Do It</button>
 				            <button type="submit" name="submit" class="btn btn-danger" value="delete">Yes Delete It</button>

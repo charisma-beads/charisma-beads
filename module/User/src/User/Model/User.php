@@ -46,8 +46,6 @@ class User extends AbstractModel
 	 */
 	protected $dateModified;
 	
-	protected $inputFilterClass = 'User\InputFilter\User';
-	
     /**
 	 * @return the $userId
 	 */

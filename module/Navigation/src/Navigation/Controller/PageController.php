@@ -9,9 +9,9 @@ use Navigation\Form\Page as PageForm;
 class PageController extends AbstractController
 {
 	/**
-	 * @var \Navigation\Model\Mapper\Page;
+	 * @var \Navigation\Service\Page;
 	 */
-	protected $pageMapper;
+	protected $pageService;
 	
     public function listAction()
     {    	
@@ -20,7 +20,7 @@ class PageController extends AbstractController
     	if (!$menuId) return $this->redirect()->toRoute('admin/menu');
     	
         return new ViewModel(array(
-        	'pages' => $this->getPageMapper()->getPagesByMenuId($menuId),
+        	'pages' => $this->getPageService()->getPagesByMenuId($menuId),
         	'menuId' => $menuId
         ));
     }
@@ -31,7 +31,7 @@ class PageController extends AbstractController
     
     	$request = $this->getRequest();
     	if ($request->isPost()) {
-			$result = $this->getPageMapper()->addPage($request->getPost());
+			$result = $this->getPageService()->add($request->getPost());
 			
 			if ($result instanceof PageForm) {
 				
@@ -61,7 +61,7 @@ class PageController extends AbstractController
 		}
 		
 		return new ViewModel(array(
-			'form' => $this->getPageMapper()->getPageForm(),
+			'form' => $this->getPageService()->getForm(),
 			'menuId' => $menuId
 		));	
     
@@ -82,7 +82,7 @@ class PageController extends AbstractController
     	// Get the Page with the specified id.  An exception is thrown
     	// if it cannot be found, in which case go to the list page.
     	try {
-    		$page = $this->getPageMapper()->getPageById($id);
+    		$page = $this->getPageService()->getById($id);
     	} catch (\Exception $e) {
     		return $this->redirect()->toRoute('admin/page', array(
     			'action' => 'list'
@@ -92,7 +92,7 @@ class PageController extends AbstractController
     	$request = $this->getRequest();
 		if ($request->isPost()) {
 			
-			$result = $this->getPageMapper()->editPage($page, $request->getPost());
+			$result = $this->getPageService()->edit($page, $request->getPost());
 			
 			if ($result instanceof PageForm) {
 				
@@ -121,7 +121,7 @@ class PageController extends AbstractController
 		}
 		
 		return new ViewModel(array(
-            'form' => $this->getPageMapper()->getPageForm()->bind($page),
+            'form' => $this->getPageService()->getForm($page),
             'page' => $page
         ));
     }
@@ -142,7 +142,7 @@ class PageController extends AbstractController
 		
 			if ($del == 'delete') {
 				$id = (int) $request->getPost('pageId');
-				$result = $this->getPageMapper()->deletePage($id);
+				$result = $this->getPageService()->delete($id);
 				
 				if ($result) {
 					$this->flashMessenger()->addSuccessMessage(
@@ -163,15 +163,15 @@ class PageController extends AbstractController
 	}
 	
 	/**
-	 * @return \Navigation\Model\Mapper\Page
+	 * @return \Navigation\Service\Page
 	 */
-	protected function getPageMapper()
+	protected function getPageService()
 	{
-		if (!$this->pageMapper) {
+		if (!$this->pageService) {
 			$sl = $this->getServiceLocator();
-			$this->pageMapper = $sl->get('Navigation\Service\Page');
+			$this->pageService = $sl->get('Navigation\Service\Page');
 		}
 	
-		return $this->pageMapper;
+		return $this->pageService;
 	}
 }

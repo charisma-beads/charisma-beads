@@ -61,8 +61,6 @@ class Page extends AbstractModel
 	 */
 	protected $depth;
 	
-	protected $inputFilterClass = 'Navigation\InputFilter\Page';
-	
 	/**
 	 * @return the $pageId
 	 */

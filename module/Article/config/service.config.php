@@ -1,9 +1,13 @@
 <?php
 
 return array(
-	'invokables' => array(
-		'Article\Form\Article'		=> 'Article\Form\Article',
-		'Article\Mapper\Article'	=> 'Article\Model\Mapper\Article',
-		'Article\Gateway\Article' 	=> 'Article\Model\DbTable\Article',
+	'shared' 		=> array(
+		'Article\Form\Article'			=> false,
+	),
+	'invokables' 	=> array(
+		'Article\Form\Article'			=> 'Article\Form\Article',
+		'Article\InputFilter\Article'	=> 'Article\InputFilter\Article',
+		'Article\Mapper\Article'		=> 'Article\Mapper\Article',
+		'Article\Service\Article' 		=> 'Article\Service\Article',
 	),
 );

@@ -119,7 +119,7 @@ class Page extends Form
 	    $pagesOptions[0] = 'Add to top of menu';
 	    
 	    foreach($pages as $page){
-	        $pagesOptions[$page->pageId] = $page->label;
+	        $pagesOptions[$page->getPageId()] = $page->getLabel();
 	    }
 	    
 	    $this->add(array(

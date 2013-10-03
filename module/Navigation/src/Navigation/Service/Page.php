@@ -3,132 +3,78 @@ namespace Navigation\Service;
 
 use Application\Service\AbstractService;
 use Navigation\Model\Page as PageModel;
-use Zend\Form\FormInterface;
 use Exception;
 
 class Page extends AbstractService
 {
-	/**
-	 * @var \Navigation\Model\DbTable\Page
-	 */
-	protected $pageGateway;
-	
-	/**
-	 * @var \Navigation\Form\Page
-	 */
-	protected $pageForm;
-	
-	public function getPageById($id)
-	{
-		$id = (int) $id;
-		return $this->getPageGateway()->getById($id);
-	}
+	protected $mapperClass = 'Navigation\Mapper\Page';
+	protected $form = 'Navigation\Form\Page';
+	protected $inputFilter = 'Navigation\InputFilter\Page';
 	
 	public function getPageByMenuIdAndLabel($menuId, $label)
 	{
 		$menuId = (int) $menuId;
 		$label = (string) $label;
 	
-		return $this->getPageGateway()->getPageByMenuIdAndLabel($menuId, $label);
+		return $this->getMapper()->getPageByMenuIdAndLabel($menuId, $label);
 	}
 	
 	public function getPagesByMenuId($id)
 	{
 		$id = (int) $id;
-		return $this->getPageGateway()->getPagesByMenuId($id);
+		return $this->getMapper()->getPagesByMenuId($id);
 	}
 	
 	public function getPagesByMenu($menu)
 	{
 		$menu = (string) $menu;
-		return $this->getPageGateway()->getPagesByMenu($menu);
+		return $this->getMapper()->getPagesByMenu($menu);
 	}
 	
-	public function addPage($post)
+	public function add($post)
 	{
-		$form  = $this->getPageForm();
-		$page = new PageModel();
+		$page = $this->getMapper()->getModel();
+		$form  = $this->getForm($page, $post);
 		$position = (int) $post['position'];
 		$insertType = (string) $post['menuInsertType'];
 	
-		$form->setInputFilter($page->getInputFilter());
-	
-		$form->setData($post);
-	
 		if (!$form->isValid()) {
 			return $form;
 		}
-	
-		$page->exchangeArray($form->getData(FormInterface::VALUES_AS_ARRAY));
-	
-		return $this->getPageGateway()->insert($page->getArrayCopy(), $position, $insertType);
+		
+		$data = $this->getMapper()->extract($form->getData());
+		
+		return $this->getMapper()->insert($data, $position, $insertType);
 	}
 	
-	public function editPage(PageModel $page, $post)
+	public function edit(PageModel $page, $post)
 	{
-		$form  = $this->getPageForm();
-	
-		$form->setInputFilter($page->getInputFilter());
-		$form->bind($page);
-		$form->setData($post);
+		$form  = $this->getForm($page, $post);
 	
 		if (!$form->isValid()) {
 			return $form;
 		}
-	
-		$page = $this->getPageById($page->pageId);
+		
+		$page = $this->getById($page->getPageId());
 	
 		if ($page) {
 			// if page postion has changed then we need to delete it
 			// and reinsert it in the new position else just update it.
 			if ($post['position']) {
 				// TODO find children and move them as well.
-				$del = $this->deletePage($page->pageId);
+				$del = $this->delete($page->getPageId());
 	
 				if ($del) {
-					$post = (is_object($post)) ? $post->toArray() : $post;
-					$result = $this->addPage($post);
+					$result = $this->add($post);
 				}
 			} else {
-				$page = $form->getData();
-				$result = $this->getPageGateway()->update($page->pageId, $page->getArrayCopy());
+				$data = $this->getMapper()->extract($form->getData());
+				$result = $this->getMapper()->update($page->getPageId(), $data);
 			}
 		} else {
 			throw new Exception('Page id does not exist');
 		}
 	
 		return $result;
-	}
-	
-	public function deletePage($id)
-	{
-		$id = (int) $id;
-		return $this->getPageGateway()->delete($id);
-	}
-	
-	/**
-	 * @return \Navigation\From\Page
-	 */
-	public function getPageForm()
-	{
-		if (!$this->pageForm) {
-			$sl = $this->getServiceLocator();
-			$this->pageForm = $sl->get('Navigation\Form\Page');
-		}
-	
-		return $this->pageForm;
-	}
-	
-	/**
-	 * @return \Navigation\Mapper\Page
-	 */
-	protected function getPageGateway()
-	{
-		if (!$this->pageGateway) {
-			$sl = $this->getServiceLocator();
-			$this->pageGateway = $sl->get('Navigation\Mapper\Page');
-		}
-	
-		return $this->pageGateway;
 	}
 }

@@ -9,33 +9,33 @@ class NavigationForm extends AbstractViewHelper
 {
 	public function __invoke()
     {
-    	/* @var $gateway \Navigation\Model\DbTable\Page */
-        $gateway = $this->getServiceLocator()->getServiceLocator()->get('Navigation\Gateway\Page');
-        $pages = $gateway->getFullTree();
+    	/* @var $gateway \Navigation\Service\Page */
+        $pageMapper = $this->getServiceLocator()->getServiceLocator()->get('Navigation\Service\Page');
+        $pages = $pageMapper->getFullTree();
         
-        /* @var $menuMapper \Navigation\Model\Mapper\Menu */
-        $menuMapper = $this->getServiceLocator()->getServiceLocator()->get('Navigation\Mapper\Menu');
-        $menus = $menuMapper->fetchAllMenus();
+        /* @var $menuMapper \Navigation\Service\Menu */
+        $menuMapper = $this->getServiceLocator()->getServiceLocator()->get('Navigation\Service\Menu');
+        $menus = $menuMapper->fetchAll();
         
         $select = new Element\Select('position');
         $pagesOptions = array();
         $menuArray = array();
         
         foreach ($menus as $menu) {
-            $menuArray[$menu->menuId] = $menu->menu;
+            $menuArray[$menu->etMenuId()] = $menu->menu;
             
-            $pagesOptions[$menu->menuId]['options'][$menu->menuId . '-' . '0'] = 'At top of this menu';
-            $pagesOptions[$menu->menuId]['empty_option'] = '---Please Select a page---';
-            $pagesOptions[$menu->menuId]['label'] = $menu->menu;
+            $pagesOptions[$menu->etMenuId()]['options'][$menu->getMenuId() . '-' . '0'] = 'At top of this menu';
+            $pagesOptions[$menu->etMenuId()]['empty_option'] = '---Please Select a page---';
+            $pagesOptions[$menu->etMenuId()]['label'] = $menu->getMenu();
             
         }
         
         /* @var $page \Navigation\Model\Entity\Page */
         foreach ($pages as $page) {
             
-            $ident = ($page->depth > 0) ? str_repeat('%space%%space%',($page->depth)) . '%bull%%space%' : '';
+            $ident = ($page->getDepth > 0) ? str_repeat('%space%%space%',($page->getDepth())) . '%bull%%space%' : '';
             
-            $pagesOptions[$page->menuId]['options'][$page->menuId . '-' . $page->pageId] = $ident . $page->getLabel();
+            $pagesOptions[$page->getMenuId()]['options'][$page->getMenuId() . '-' . $page->getPageId()] = $ident . $page->getLabel();
         }
         
         $select = new Element\Select('position');

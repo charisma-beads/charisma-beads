@@ -25,8 +25,7 @@ class AdminController extends AbstractController
 		);
 		
 		return new ViewModel(array(
-			'users' => $this->getUserService()->fetchAllUsers($params),
-			//'searchForm' => new UserSearch()
+			'users' => $this->getUserService()->fetchAllUsers($params)
 		));
 	}
 	
@@ -49,7 +48,7 @@ class AdminController extends AbstractController
 
 		if ($request->isPost()) {
 
-			$result = $this->getUserService()->addUser($request->getPost());
+			$result = $this->getUserService()->add($request->getPost());
 				
 			if ($result instanceof UserForm) {
 
@@ -78,7 +77,7 @@ class AdminController extends AbstractController
 		}
 
 		return new ViewModel(array(
-			'form' => $this->getUserService()->getUserForm(),
+			'form' => $this->getUserService()->getForm(),
 		));
 	}
 	
@@ -94,7 +93,7 @@ class AdminController extends AbstractController
 		// Get the User with the specified id.  An exception is thrown
 		// if it cannot be found, in which case go to the list page.
 		try {
-			$user = $this->getUserService()->getUserById($id);
+			$user = $this->getUserService()->getById($id);
 		} catch (\Exception $e) {
 			return $this->redirect()->toRoute('admin/user', array(
 				'action' => 'list'
@@ -104,7 +103,7 @@ class AdminController extends AbstractController
 		$request = $this->getRequest();
 		if ($request->isPost()) {
 				
-			$result = $this->getUserService()->editUser($user, $request->getPost());
+			$result = $this->getUserService()->edit($user, $request->getPost());
 				
 			if ($result instanceof UserForm) {
 
@@ -132,7 +131,7 @@ class AdminController extends AbstractController
 			}
 		}
 		
-		$form = $this->getUserService()->getUserForm($user);
+		$form = $this->getUserService()->getForm($user);
 		
 		return new ViewModel(array(
 			'form' => $form,
@@ -154,7 +153,7 @@ class AdminController extends AbstractController
 
 			if ($del == 'delete') {
 				$id = (int) $request->getPost('userId');
-				$result = $this->getUserService()->deleteUser($id);
+				$result = $this->getUserService()->delete($id);
 
 				if ($result) {
 					$this->flashMessenger()->addSuccessMessage(

@@ -1,8 +1,10 @@
 <?php
 namespace Application\Service;
 
+use Application\Model\AbstractModel;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
+use Exception;
 
 class AbstractService implements ServiceLocatorAwareInterface
 {
@@ -15,6 +17,108 @@ class AbstractService implements ServiceLocatorAwareInterface
 	 * @var \Application\Mapper\AbstractMapper
 	 */
 	protected $mapper;
+	
+	protected $form;
+	protected $inputFilter;
+	protected $mapperClass;
+	
+	public function getById($id)
+	{
+		$id = (int) $id;
+		return $this->getMapper()->getById($id);
+	}
+	
+	public function fetchAll()
+	{
+		return $this->getMapper()->fetchAll();
+	}
+	
+	public function add($post)
+	{
+		$model = $this->getMapper()->getModel();
+		$form  = $this->getForm($model, $post);
+	
+		if (!$form->isValid()) {
+			return $form;
+		}
+	
+		return $this->save($form->getData());
+	}
+	
+	public function edit($model, $post)
+	{
+		$form  = $this->getForm($model, $post);
+		
+		if (!$form->isValid()) {
+			return $form;
+		}
+		
+		return $this->saveUser($form->getData());
+	}
+	
+	public function save($data)
+	{
+		if ($data instanceof AbstractModel) {
+			$data = $this->getMapper()->extract($data);
+		}
+		
+		$pk = $this->getMapper()->getPrimaryKey();
+		$id = $data[$pk];
+		
+		if ($id == 0) {
+			$result = $this->getMapper()->insert($data);
+		} else {
+			if ($this->getById($id)) {
+				$result = $this->getMapper()->update($id, $data);
+			} else {
+				throw new Exception('Id ' . $id . ' does not exist');
+			}
+		}
+		
+		return $result;
+	}
+	
+	public function delete($id)
+	{
+		$id = (int) $id;
+		return $this->getMapper()->delete($id);
+	}
+	
+	/**
+	 * 
+	 * @return \Application\Mapper\AbstractMapper
+	 */
+	public function getMapper()
+	{
+		if (!$this->mapper) {
+			$sl = $this->getServiceLocator();
+			$this->mapper = $sl->get($this->mapperClass);
+		}
+		
+		return $this->mapper;
+	}
+	
+	/**
+	 * TODO: make this a seperate service and set input filter too from service.
+	 * @return $form
+	 */
+	public function getForm($model=null, $data=null)
+	{
+		$sl = $this->getServiceLocator();
+		$form = $sl->get($this->form);
+		$form->setInputFilter($sl->get($this->inputFilter));
+		$form->setHydrator($this->getMapper()->getHydrator());
+		 
+		if ($model) {
+			$form->bind($model);
+		}
+		 
+		if ($data) {
+			$form->setData($data);
+		}
+	
+		return $form;
+	}
 	
 	/**
 	 * get application config option by its key.

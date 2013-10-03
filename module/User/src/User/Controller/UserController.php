@@ -27,7 +27,7 @@ class UserController extends AbstractController
         	$post = $request->getPost();
         	$post['role'] = 'registered'; 
         
-        	$result = $this->getUserService()->addUser($post);
+        	$result = $this->getUserService()->add($post);
         
         	if ($result instanceof UserForm) {
         		$this->flashMessenger()->addInfoMessage(
@@ -56,7 +56,7 @@ class UserController extends AbstractController
         }
         
         return new ViewModel(array(
-        	'form' => $this->getUserService()->getUserForm(),
+        	'form' => $this->getUserService()->getForm(),
         ));
 	}
 
@@ -67,7 +67,7 @@ class UserController extends AbstractController
 		$request = $this->getRequest();
 		if ($request->isPost()) {
 				
-			$result = $this->getUserService()->editUser($user, $request->getPost());
+			$result = $this->getUserService()->edit($user, $request->getPost());
 				
 			if ($result instanceof UserForm) {
 
@@ -96,8 +96,7 @@ class UserController extends AbstractController
 			}
 		}
 		
-		$form = $this->getUserService()->getUserForm()->bind($user);
-		$form->get('passwd')->setAttribute('value', '');
+		$form = $this->getUserService()->getForm($user);
 		
 		return new ViewModel(array(
 			'form' => $form

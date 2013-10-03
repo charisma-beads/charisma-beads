@@ -18,8 +18,14 @@ class User extends AbstractMapper
     
     public function getUserByEmail($email, $ignore=null)
     {
+    	$this->getResultSet()->getHydrator()->emptyPassword();
         $select = $this->getSelect()
         	->where(array('email' => $email));
+        
+        if ($ignore) {
+        	$select->where->notEqualTo('email', $ignore);
+        }
+        
         $rowset = $this->fetchResult($select);
         $row = $rowset->current();
         

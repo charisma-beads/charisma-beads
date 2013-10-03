@@ -192,9 +192,9 @@ class AbstractMapper implements DbAdapterAwareInterface
 	 * @param Select $select
 	 * @return \Zend\Db\ResultSet\ResultSet
 	 */
-	protected function fetchResult(Select $select)
+	protected function fetchResult(Select $select, $resultSet=null)
 	{
-		$resultSet = $this->getResultSet();
+		$resultSet = $resultSet ?: $this->getResultSet();
 	
 		$statement = $this->getSql()->prepareStatementForSqlObject($select);
 		$result = $statement->execute();
@@ -319,5 +319,13 @@ class AbstractMapper implements DbAdapterAwareInterface
     {
         $this->dbAdapter = $dbAdapter;
         return $this;
+    }
+    
+    /**
+     * @return $primary
+     */
+    public function getPrimaryKey()
+    {
+    	return $this->primary;
     }
 }

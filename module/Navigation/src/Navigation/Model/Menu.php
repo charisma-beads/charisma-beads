@@ -16,8 +16,6 @@ class Menu extends AbstractModel
 	 */
 	protected $menu;
 	
-	protected $inputFilterClass = 'Navigation\InputFilter\Menu';
-	
 	/**
 	 * @return the $menuId
 	 */

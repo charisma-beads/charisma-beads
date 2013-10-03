@@ -5,8 +5,8 @@ return array(
 		'User\Form\User'							=> false,
 	),
     'invokables' => array(
-    	'User\InputFilter\User'						=> 'User\InputFilter\User',
     	'User\Form\User'							=> 'User\Form\User',
+    	'User\InputFilter\User'						=> 'User\InputFilter\User',
         'User\Mapper\User'							=> 'User\Mapper\User',
     	'User\Service\User'							=> 'User\Service\User',
     ),

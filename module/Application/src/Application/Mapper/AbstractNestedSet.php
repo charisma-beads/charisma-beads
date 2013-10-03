@@ -3,6 +3,7 @@
 namespace Application\Mapper;
 
 use Application\Mapper\AbstractMapper;
+use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Where;
 use Zend\Db\Sql\Expression;
@@ -151,7 +152,14 @@ abstract class AbstractNestedSet extends AbstractMapper
         $where = new Where();
         $where->greaterThan('rgt', $rgt);
         
-        return $this->getTablegateway()->update($data, $where);
+		$sql = $this->getSql();
+        $update = $sql->update($this->table)
+			->set($data)
+			->where($where);
+	
+		$statement = $sql->prepareStatementForSqlObject($update);
+	
+		return $statement->execute();
     }
     
     /**
@@ -171,7 +179,14 @@ abstract class AbstractNestedSet extends AbstractMapper
         $where = new Where();
         $where->greaterThan('lft', $lft);
         
-        return $this->getTablegateway()->update($data, $where);
+        $sql = $this->getSql();
+        $update = $sql->update($this->table)
+			->set($data)
+			->where($where);
+	
+		$statement = $sql->prepareStatementForSqlObject($update);
+	
+		return $statement->execute();
     }
     
     /**
@@ -200,13 +215,13 @@ abstract class AbstractNestedSet extends AbstractMapper
                 break;
         }
         
-        $select = $this->getSql()->select($this->table);
+        $select = $this->getSelect();
         
         $where = new Where();
         $where->equalTo($this->primary, $id);
         $select->columns($cols)->where($where);
         
-        $row = $this->fetchResult($select)->current();
+        $row = $this->fetchResult($select, new ResultSet())->current();
         
         return $row;
     }
@@ -222,7 +237,7 @@ abstract class AbstractNestedSet extends AbstractMapper
         $data['lft'] = $lft_rgt + 1;
         $data['rgt'] = $lft_rgt + 2;
         
-        return $this->getTablegateway()->insert($data);
+        return parent::insert($data);
     }
     
     /**
@@ -309,11 +324,20 @@ abstract class AbstractNestedSet extends AbstractMapper
      */
     public function delete($id)
     {
-        $row = $this->getPosition ($id, 'both');
+        $row = $this->getPosition($id, 'both');
+        
         
         $where = new Where();
         $where->between('lft', $row->lft, $row->rgt);
-        $result = $this->getTablegateway()->delete($where);
+        
+        $sql = $this->getSql();
+        $delete = $sql->delete($this->table);
+        
+        $delete->where($where);
+        
+        $statement = $sql->prepareStatementForSqlObject($delete);
+        
+        $result = $statement->execute();
         
         if ($result) {
             $this->updateRight ($row->rgt, 'minus', $row->width);
