@@ -2,7 +2,7 @@
 namespace User\Service;
 
 use Application\Service\AbstractService;
-use User\Model\User as UserEntity;
+use User\Model\User as UserModel;
 
 class User extends AbstractService
 {   
@@ -21,7 +21,7 @@ class User extends AbstractService
     	return $this->getMapper()->fetchAllUsers($post);
     }
     
-    public function edit(UserEntity $user, $post)
+    public function edit(UserModel $user, $post)
     {
     	if (!isset($post['role'])) {
     		$post['role'] = $user->getRole();
@@ -39,7 +39,7 @@ class User extends AbstractService
 		return $this->save($form->getData());
     }
     
-    public function save(UserEntity $user)
+    public function save(UserModel $user)
     {
     	$user->setDateModified();
     	

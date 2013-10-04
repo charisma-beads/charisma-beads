@@ -1,18 +1,20 @@
 <?php
 
-namespace Article\Model\DbTable;
+namespace Article\Mapper;
 
-use Application\Model\DbTable\AbstractTable;
+use Application\Mapper\AbstractMapper;
 
-class Article extends AbstractTable
+class Article extends AbstractMapper
 {
 	protected $table = 'article';
 	protected $primary = 'articleId';
-	protected $rowClass = 'Article\Model\Entity\Article';
+	protected $model = 'Article\Model\Article';
+	protected $hydrator = 'Article\Hydrator\Article';
 	
 	public function getArticleBySlug($slug)
 	{
-		$rowset = $this->getTablegateway()->select(array('slug' => $slug));
+		$select = $this->getSelect()->where(array('slug' => $slug));
+		$rowset = $this->fetchResult($select);
 		$row = $rowset->current();
 		return $row;
 	}

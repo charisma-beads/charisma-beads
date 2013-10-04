@@ -42,17 +42,15 @@ class AclMenu extends AbstractViewHelper
     protected function getPages($menu)
     {
     	/* @var $gateway \Navigation\Service\Page */
-        $gateway = $this->getServiceLocator()->getServiceLocator()->get('Navigation\Service\Page');
+        $service = $this->getServiceLocator()->getServiceLocator()->get('Navigation\Service\Page');
         
-        $pages = $gateway->getPagesByMenu($menu);
-        $hydrator = $pages->getHydrator();
-        $hydrator->addDepth();
+        $pages = $service->getPagesByMenu($menu, true);
         
         $pageArray = array();
         
         /* @var $page \Navigation\Model\Page */
         foreach ($pages as $page) {
-            $p = $hydrator->extract($page);
+            $p = $pages->getHydrator()->extract($page);
             $p['params'] = parse_ini_string($p['params']);
             
             if ($p['route'] == '0') {

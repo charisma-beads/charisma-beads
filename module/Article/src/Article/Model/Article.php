@@ -1,10 +1,11 @@
 <?php
 
-namespace Article\Model\Entity;
+namespace Article\Model;
 
-use Application\Model\Entity\AbstractEntity;
+use Application\Model\AbstractModel;
+use DateTime;
 
-class Article extends AbstractEntity
+class Article extends AbstractModel
 {
 	/**
 	 * @var int
@@ -42,45 +43,14 @@ class Article extends AbstractEntity
 	protected $pageHits;
 	
 	/**
-	 * @var string
+	 * @var DateTime
 	 */
 	protected $dateCreated;
 	
 	/**
-	 * @var string
+	 * @var DateTime
 	 */
 	protected $dateModified;
-	
-	protected $inputFilterClass = 'Article\InputFilter\Article';
-	
-	public function exchangeArray(array $data)
-	{
-		$this->setArticleId($data['articleId'])
-			->setTitle($data['title'])
-			->setSlug($data['slug'])
-			->setContent($data['content'])
-			->setDescription($data['description'])
-			->setKeywords($data['keywords'])
-			->setPageHits($data['pageHits'])
-			->setDateCreated($data['dateCreated'])
-			->setDateModified($data['dateModified']);
-		return $this;
-	}
-
-	public function getArrayCopy()
-	{
-		return array(
-			'articleId'		=> $this->getArticleId(),
-			'title'			=> $this->getTitle(),
-			'slug'			=> $this->getSlug(),
-			'content'		=> $this->getContent(),
-			'description'	=> $this->getDescription(),
-			'keywords'		=> $this->getKeywords(),
-			'pageHits'		=> $this->getPageHits(),
-			'dateCreated'	=> $this->getDateCreated(),
-			'dateModified'	=> $this->getDateModified()
-		);
-	}
 	
 	/**
 	 * @return the $articleId
@@ -210,9 +180,9 @@ class Article extends AbstractEntity
 	}
 
 	/**
-	 * @param string $dateCreated
+	 * @param DateTime $dateCreated
 	 */
-	public function setDateCreated($dateCreated)
+	public function setDateCreated(DateTime $dateCreated=null)
 	{
 		$this->dateCreated = $dateCreated;
 		return $this;
@@ -227,9 +197,9 @@ class Article extends AbstractEntity
 	}
 
 	/**
-	 * @param string $dateModified
+	 * @param DateTime $dateModified
 	 */
-	public function setDateModified($dateModified)
+	public function setDateModified(DateTime $dateModified=null)
 	{
 		$this->dateModified = $dateModified;
 		return $this;

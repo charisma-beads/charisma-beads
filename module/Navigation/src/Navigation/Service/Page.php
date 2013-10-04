@@ -11,6 +11,11 @@ class Page extends AbstractService
 	protected $form = 'Navigation\Form\Page';
 	protected $inputFilter = 'Navigation\InputFilter\Page';
 	
+	public function fetchAll($topLevelOnly=false)
+	{
+	  return $this->getMapper()->getFullTree($topLevelOnly);
+	}
+	
 	public function getPageByMenuIdAndLabel($menuId, $label)
 	{
 		$menuId = (int) $menuId;
@@ -25,10 +30,16 @@ class Page extends AbstractService
 		return $this->getMapper()->getPagesByMenuId($id);
 	}
 	
-	public function getPagesByMenu($menu)
+	public function getPagesByMenu($menu, $addDepth=false)
 	{
 		$menu = (string) $menu;
-		return $this->getMapper()->getPagesByMenu($menu);
+		$result = $this->getMapper()->getPagesByMenu($menu);
+		
+		if ($addDepth) {
+            $result->getHydrator()->addDepth();
+        }
+        
+        return $result;
 	}
 	
 	public function add($post)

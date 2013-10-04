@@ -88,7 +88,7 @@ abstract class AbstractNestedSet extends AbstractMapper
         $subTree = $this->getSql()->select()
             ->from(array('child' => $this->table))
             ->columns(array(
-            	'productCategoryId',
+            	$this->primary,
             	'depth' => new Expression('(COUNT(parent.'.$this->primary.') - 1)')
             ))
             ->join(

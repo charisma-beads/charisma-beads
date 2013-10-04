@@ -55,7 +55,7 @@ class Page extends AbstractNestedSet
         ->where(array('menu.menu' => $menu))
         ->group('child.'.$this->primary)
         ->order('child.lft');
-         
+        
         return $this->fetchResult($select);
     }
     

@@ -11,7 +11,7 @@ class NavigationForm extends AbstractViewHelper
     {
     	/* @var $gateway \Navigation\Service\Page */
         $pageMapper = $this->getServiceLocator()->getServiceLocator()->get('Navigation\Service\Page');
-        $pages = $pageMapper->getFullTree();
+        $pages = $pageMapper->fetchAll();
         
         /* @var $menuMapper \Navigation\Service\Menu */
         $menuMapper = $this->getServiceLocator()->getServiceLocator()->get('Navigation\Service\Menu');
@@ -22,18 +22,18 @@ class NavigationForm extends AbstractViewHelper
         $menuArray = array();
         
         foreach ($menus as $menu) {
-            $menuArray[$menu->etMenuId()] = $menu->menu;
+            $menuArray[$menu->getMenuId()] = $menu->getMenu();
             
-            $pagesOptions[$menu->etMenuId()]['options'][$menu->getMenuId() . '-' . '0'] = 'At top of this menu';
-            $pagesOptions[$menu->etMenuId()]['empty_option'] = '---Please Select a page---';
-            $pagesOptions[$menu->etMenuId()]['label'] = $menu->getMenu();
+            $pagesOptions[$menu->getMenuId()]['options'][$menu->getMenuId() . '-' . '0'] = 'At top of this menu';
+            $pagesOptions[$menu->getMenuId()]['empty_option'] = '---Please Select a page---';
+            $pagesOptions[$menu->getMenuId()]['label'] = $menu->getMenu();
             
         }
         
         /* @var $page \Navigation\Model\Entity\Page */
         foreach ($pages as $page) {
             
-            $ident = ($page->getDepth > 0) ? str_repeat('%space%%space%',($page->getDepth())) . '%bull%%space%' : '';
+            $ident = ($page->getDepth() > 0) ? str_repeat('%space%%space%',($page->getDepth())) . '%bull%%space%' : '';
             
             $pagesOptions[$page->getMenuId()]['options'][$page->getMenuId() . '-' . $page->getPageId()] = $ident . $page->getLabel();
         }

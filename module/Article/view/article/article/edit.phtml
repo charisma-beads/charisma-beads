@@ -4,5 +4,5 @@
 <?php echo $this->partial('article/article-form', array(
 	'form' => $this->form,
 	'formAction' => 'edit',
-	'articleId' => $this->article->articleId
+	'articleId' => $this->article->getArticleId()
 )); ?>
