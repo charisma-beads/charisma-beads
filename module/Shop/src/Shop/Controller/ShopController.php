@@ -15,9 +15,9 @@ use Zend\View\Model\ViewModel;
 class ShopController extends AbstractController
 {
 	/**
-	 * @var \Shop\Model\Product\Category
+	 * @var \Shop\Service\ProductCategory
 	 */
-	protected $categoryMapper;
+	protected $productCategoryService;
 	
     public function indexAction()
     {
@@ -26,7 +26,7 @@ class ShopController extends AbstractController
     
     public function shopFrontAction()
     {
-    	$cats = $this->getCategoryMapper()->getTopLevelCategories();
+    	$cats = $this->getProductCategoryService()->fetchAll(true);
     	
     	return new ViewModel(array(
 			'cats' => $cats
@@ -34,15 +34,15 @@ class ShopController extends AbstractController
     }
     
     /**
-     * @return \Shop\Model\Product\Category
+     * @return \Shop\Service\ProductCategory
      */
-    protected function getCategoryMapper()
+    protected function getProductCategoryService()
     {
-    	if (!$this->categoryMapper) {
+    	if (!$this->productCategoryService) {
     		$sl = $this->getServiceLocator();
-    		$this->categoryMapper = $sl->get('Shop\Model\Category');
+    		$this->productCategoryService = $sl->get('Shop\Service\ProductCategory');
     	}
     
-    	return $this->categoryMapper;
+    	return $this->productCategoryService;
     }
 }

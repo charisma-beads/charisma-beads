@@ -1,7 +1,7 @@
 <?php
 namespace Shop\Model;
 
-use Shop\Model\AbstractModel;
+use Application\Model\AbstractModel;
 use DateTime;
 
 class Product extends AbstractModel

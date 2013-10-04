@@ -2,7 +2,6 @@
 namespace Shop\Service;
 
 use Application\Service\AbstractService;
-use FB;
 
 class Product extends AbstractService
 {
@@ -30,7 +29,7 @@ class Product extends AbstractService
 		}
 	
 		if (true === $deep) {
-			$ids = $this->getCategoryChildrenIds(
+			$ids = $this->getCategoryService()->getCategoryChildrenIds(
 				$categoryId, true
 			);
 	

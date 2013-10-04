@@ -2,39 +2,43 @@
 namespace Shop\Controller;
 
 use Application\Controller\AbstractController;
+use Shop\ShopException;
 use Zend\View\Model\ViewModel;
-use Exception;
-use FB;
 
 class CatalogController extends AbstractController
 {
-	/**
-	 * @var \Shop\Model\Catalog
+    /**
+	 * @var \Shop\Service\Product
 	 */
-	protected $catalogMapper;
+	protected $productService;
+	
+	/**
+	 * @var \Shop\Service\ProductCategory
+	 */
+	protected $productCategoryService;
 	
 	public function indexAction()
 	{
 		$ident = $this->params('categoryIdent', 0);
 		$page = $this->params('page', 1);
 		
-		$products = $this->getCatalogMapper()->getProductsByCategory(
+		$products = $this->getProductService()->getProductsByCategory(
 			$ident,
 			$page
 		);
 	
-		$category = $this->getCatalogMapper()->getCategoryByIdent(
+		$category = $this->getProductCategoryService()->getCategoryByIdent(
 			$this->params('categoryIdent', '')
 		);
 	
 		if (null === $category) {
-			throw new Exception(
+			throw new ShopException(
 				'Unknown category ' . $this->params('categoryIdent')
 			);
 		}
 	
 		return new ViewModel(array(
-			'bread'			=> $this->getBreadcrumb($category->productCategoryId),
+			'bread'			=> $this->getBreadcrumb($category->getProductCategoryId()),
 			'category'      => $category,
 			'products'      => $products
 		));
@@ -42,44 +46,59 @@ class CatalogController extends AbstractController
 	
 	public function viewAction()
 	{
-		$product = $this->getCatalogMapper()->getProductByIdent(
+		$product = $this->getProductService()->getProductByIdent(
 			$this->params('productIdent', 0)
 		);
 	
 		if (null === $product) {
-			throw new Exception('Unknown product' . $this->params('productIdent'));
+			throw new ShopException('Unknown product' . $this->params('productIdent'));
 		}
 	
-		$category = $this->getCatalogMapper()->getCategoryByIdent(
+		$category = $this->getProductCategoryService()->getCategoryByIdent(
 			$this->params('categoryIdent', '')
 		);
 	
 		//$this->getBreadcrumb($category);
-	
-		//$this->view->headTitle(ucfirst($category->name))
-			//->headTitle(ucfirst($product->name));
-	
-		return new ViewModel(array(
+		
+		$view = new ViewModel(array(
 			'product' => $product,
 		));
+	
+		$view->headTitle(ucfirst($category->getName()))
+			->headTitle(ucfirst($product->getName()));
+	
+		return $view;
 	}
 	
 	public function getBreadcrumb($category)
 	{
-		return $this->getCatalogMapper()
+		return $this->getProductCategoryService()
 			->getParentCategories($category);
 	}
 	
 	/**
-	 * @return \Shop\Model\Catalog
+	 * @return \Shop\Service\Product
 	 */
-	protected function getCatalogMapper()
+	protected function getProductService()
 	{
-		if (!$this->catalogMapper) {
+		if (!$this->productService) {
 			$sl = $this->getServiceLocator();
-			$this->catalogMapper = $sl->get('Shop\Service\Catalog');
+			$this->productService = $sl->get('Shop\Service\Product');
 		}
-		
-		return $this->catalogMapper;
+	
+		return $this->productService;
+	}
+	
+	/**
+	 * @return \Shop\Service\ProductCategory
+	 */
+	protected function getProductCategoryService()
+	{
+		if (!$this->productCategoryService) {
+			$sl = $this->getServiceLocator();
+			$this->productCategoryService = $sl->get('Shop\Service\ProductCategory');
+		}
+	
+		return $this->productCategoryService;
 	}
 }

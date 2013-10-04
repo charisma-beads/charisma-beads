@@ -1,8 +1,7 @@
 <?php
 namespace Shop\Model;
 
-use Shop\Model\AbstractModel;
-use Shop\Model\Product;
+use Application\Model\AbstractModel;
 use DateTime;
 
 class ProductImage extends AbstractModel

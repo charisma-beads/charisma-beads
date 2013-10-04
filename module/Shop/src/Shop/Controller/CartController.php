@@ -4,7 +4,6 @@ namespace Shop\Controller;
 use Application\Controller\AbstractController;
 use Shop\ShopException;
 use Zend\View\Model\ViewModel;
-use FB;
 
 class CartController extends AbstractController
 {
@@ -14,9 +13,9 @@ class CartController extends AbstractController
 	protected $cart;
 	
 	/**
-	 * @var \Shop\Model\Catalog
+	 * @var \Shop\Service\Product
 	 */
-	protected $calalog;
+	protected $productService;
 	
 	public function addAction()
 	{
@@ -26,7 +25,7 @@ class CartController extends AbstractController
 			return $this->redirect()->toRoute('shop');
 		}
 		
-		$product = $this->getCatalog()->getProductById(
+		$product = $this->getProductService()->getById(
 			$request->getPost('productId')
 		);
 	
@@ -40,7 +39,7 @@ class CartController extends AbstractController
 			$product, $request->getPost('qty')
 		);
 		
-		$this->flashMessenger()->addInfoMessage('Added '  .$request->getPost('qty') . ' X ' . $product->name . ' to your cart');
+		$this->flashMessenger()->addInfoMessage('Added '  .$request->getPost('qty') . ' X ' . $product->getName() . ' to your cart');
 	
 		return $this->redirect()->toUrl($request->getPost('returnTo'));
 	}
@@ -55,16 +54,16 @@ class CartController extends AbstractController
 	public function updateAction()
 	{
 		foreach($this->params('quantity') as $id => $value) {
-			$product = $this->getCatalog()->getProductById($id);
+			$product = $this->getProductService()->getById($id);
 	
 			if (null !== $product) {
 				$this->getCart()->addItem($product, $value);
 			}
 		}
 	
-		$this->getCatalog()->setShippingCost(
+		/*$this->getCatalog()->setShippingCost(
 			$this->params('shipping')
-		);
+		);*/
 	
 		return $this->redirect()->toRoute('shop/cart', array(
 			'action' => 'view'
@@ -78,22 +77,22 @@ class CartController extends AbstractController
 	{
 		if (!$this->cart) {
 			$sl = $this->getServiceLocator();
-			$this->cart = $sl->get('Shop\Service\Cart');
+			$this->cart = $sl->get('Shop\Model\Cart');
 		}
 	
 		return $this->cart;
 	}
 	
 	/**
-	 * @return \Shop\Model\Catalog
+	 * @return \Shop\Service\Product
 	 */
-	protected function getCatalog()
+	protected function getProductService()
 	{
-		if (!$this->catalog) {
+		if (!$this->productService) {
 			$sl = $this->getServiceLocator();
-			$this->calalog = $sl->get('Shop\Service\Catalog');
+			$this->productService = $sl->get('Shop\Service\Product');
 		}
 	
-		return $this->calalog;
+		return $this->productService;
 	}
 }

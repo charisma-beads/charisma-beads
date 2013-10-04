@@ -6,21 +6,21 @@ use Application\View\AbstractViewHelper;
 class Category extends AbstractViewHelper
 {
 	/**
-	 * @var Shop\Model\Catalog
+	 * @var Shop\Service\ProductCategory
 	 */
-	protected $model;
+	protected $service;
 	
 	public function __invoke()
 	{
-		$this->model = $this->getServiceLocator()
+		$this->service = $this->getServiceLocator()
 			->getServiceLocator()
-			->get('Shop\Model\Catalog');
+			->get('Shop\Service\ProductCategory');
 		
 		return $this;
 	}
 	
 	public function getChildCategories($id = 0)
 	{
-		return $this->model->getCategoriesByParentId($id);
+		return $this->service->getCategoriesByParentId($id);
 	}
 }

@@ -1,19 +1,19 @@
-<?php $this->headtitle($this->escapehtml($this->category->category)); ?>
+<?php $this->headtitle($this->escapehtml($this->category->getCategory())); ?>
 
-<h2><?php echo $this->escapehtml($this->category->category); ?></h2>
+<h2><?php echo $this->escapehtml($this->category->getCategory()); ?></h2>
 
 <?php echo $this->breadcrumbs(); ?>
 
 <div class="row">
 	<div class="span2">
 		
-		<?php $subCats = $this->category()->getChildCategories($this->category->productCategoryId); ?>
+		<?php $subCats = $this->category()->getChildCategories($this->category->getProductCategoryId()); ?>
 		<?php if ($subCats->count() > 0): ?>
 		<h5>In This Category</h5>
 		<?php foreach ($subCats as $cat):?>
 		<p><a href="<?php echo $this->url('shop/catalog', array(
-    		'categoryIdent' => $cat->ident
-    	)); ?>"><?php echo $this->escapehtml($cat->category); ?></a></p>
+    		'categoryIdent' => $cat->getIdent()
+    	)); ?>"><?php echo $this->escapehtml($cat->getCategory()); ?></a></p>
 		<?php endforeach; ?>
 		<?php endif; ?>
 		
@@ -21,8 +21,8 @@
 		<?php foreach ($this->category()->getChildCategories() as $cat): ?>
 		
 		<p><a href="<?php echo $this->url('shop/catalog', array(
-		    'categoryIdent' => $cat->ident
-		)); ?>"><?php echo $this->escapehtml($cat->category); ?></a></p>
+		    'categoryIdent' => $cat->getIdent()
+		)); ?>"><?php echo $this->escapehtml($cat->getCategory()); ?></a></p>
 		
 		<?php endforeach; ?>
 	</div>
@@ -33,10 +33,10 @@
 		<?php foreach ($this->products as $row): ?>
 		    <li class="span3">
 		    	<div class="thumbnail text-center product-item-box">
-		    		<img data-src="holder.js/200x100/auto" alt="<?php echo $this->escapehtml($row->name); ?>">
-		    		<h5><?php echo $this->escapehtml($row->name);?> <?php echo $this->escapehtml($row->size); ?></h5>
-		    		<p><?php echo $this->escapehtml($row->shortDescription); ?></p>
-		    		<p><b><?php echo $this->cart()->formatAmount($row->price); ?></b> for <?php echo $this->escapehtml(number_format($row->postUnit)); ?>g</p>
+		    		<img data-src="holder.js/200x100/auto" alt="<?php echo $this->escapehtml($row->getName()); ?>">
+		    		<h5><?php echo $this->escapehtml($row->getName());?> <?php echo $this->escapehtml($row->getProductSizeId()); ?></h5>
+		    		<p><?php echo $this->escapehtml($row->getShortDescription()); ?></p>
+		    		<p><b><?php echo $this->cart()->formatAmount($row->getPrice()); ?></b> for <?php echo $this->escapehtml(number_format($row->getProductPostUnitId())); ?>g</p>
 		    		<?php $form = $this->cart()->addForm($row); ?>
 	    		    <?php echo $this->form()->openTag($form); ?>
 					    <div class="input-append">
@@ -59,7 +59,7 @@
 			array(
 				'route'		=> 'shop/catalog/page',
 				'params' 	=> array(
-					'categoryIdent' => $this->category->ident
+					'categoryIdent' => $this->category->getIdent()
 				)
 			)
 		); ?>

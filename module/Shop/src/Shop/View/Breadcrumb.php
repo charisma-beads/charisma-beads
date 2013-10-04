@@ -20,18 +20,18 @@ class Breadcrumb extends AbstractHelper
 			foreach ($bread as $category) {
 				
 				$href = $urlHelper('shop/catalog', array(
-					'categoryIdent' => $category->ident,
+					'categoryIdent' => $category->getIdent(),
 				));
 				
-				if (null === $product && $this->view->category->ident !== $category->ident) {
-					$crumbs[] = '<li><a href="' . $href . '">' . $escapeHtml($category->category) . '</a> <span class="divider">/</span></li>';
+				if (null === $product && $this->view->category->getIdent() !== $category->getIdent()) {
+					$crumbs[] = '<li><a href="' . $href . '">' . $escapeHtml($category->getCategory()) . '</a> <span class="divider">/</span></li>';
 				} else {
-					$crumbs[] = '<li class="active">' . $escapeHtml($category->category) . '</li>';
+					$crumbs[] = '<li class="active">' . $escapeHtml($category->getCategory()) . '</li>';
 				}
 			}
 		
 			if (null !== $product) {
-				$crumbs[] = '<li class="active">' . $escapeHtml($product->name) . '</li>';
+				$crumbs[] = '<li class="active">' . $escapeHtml($product->getName()) . '</li>';
 			}
 			
 			$html .= implode(' ', $crumbs);

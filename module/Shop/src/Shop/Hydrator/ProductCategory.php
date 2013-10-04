@@ -7,7 +7,7 @@ use Application\Hydrator\Strategy\TrueFalse;
 
 class ProductCategory extends AbstractHydrator
 {
-	protected $addDepth = fasle;
+	protected $addDepth = false;
 	
 	public function __construct()
 	{

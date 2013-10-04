@@ -65,7 +65,7 @@ class Cart extends AbstractViewHelper
 		$form = new Add();
 		
 		$form->setData(array(
-			'productId' => $product->productId,
+			'productId' => $product->getProductId(),
 			'returnTo'  => $this->view->serverUrl(true)
 		));
 		

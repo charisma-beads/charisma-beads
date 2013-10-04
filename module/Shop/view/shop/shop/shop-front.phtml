@@ -9,8 +9,8 @@
 		<?php foreach ($this->category()->getChildCategories() as $cat): ?>
 		
 		<p><a href="<?php echo $this->url('shop/catalog', array(
-		    'categoryIdent' => $cat->ident
-		)); ?>"><?php echo $this->escapehtml($cat->category); ?></a></p>
+		    'categoryIdent' => $cat->getIdent()
+		)); ?>"><?php echo $this->escapehtml($cat->getCategory()); ?></a></p>
 		
 		<?php endforeach; ?>
 	</div>
@@ -21,9 +21,9 @@
 		    <li class="span3">
 		    	<div class="thumbnail text-center">
 		    		<img data-src="holder.js/200x100/auto" alt="">
-		    		<h5><?php echo $this->escapehtml($row->category);?></h5>
+		    		<h5><?php echo $this->escapehtml($row->getCategory());?></h5>
 		    		<a href="<?php echo $this->url('shop/catalog', array(
-		    			'categoryIdent' => $row->ident
+		    			'categoryIdent' => $row->getIdent()
 		    		)); ?>" class="btn">Click to see all Products in this Category</a>
 		    	</div>
 		    	
