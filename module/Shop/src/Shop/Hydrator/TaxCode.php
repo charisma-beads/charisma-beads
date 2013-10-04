@@ -2,11 +2,14 @@
 namespace Shop\Hydrator;
 
 use Application\Hydrator\AbstractHydrator;
-use Shop\Model\TaxCode;
 
 class TaxCode extends AbstractHydrator
 {
-	public function extract(TaxCode $object)
+	/**
+	 * @param \Shop\Model\TaxCode $object
+	 * @return array $data
+	 */
+	public function extract($object)
 	{
 		return array(
 			'taxCodeId'		=> $object->getTaxCodeId(),

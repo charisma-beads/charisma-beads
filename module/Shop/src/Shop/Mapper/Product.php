@@ -9,12 +9,14 @@ class Product extends AbstractMapper
 	protected $table = 'product';
 	protected $primary = 'productId';
 	protected $model = 'Shop\Model\Product';
+	protected $hydrator = 'Shop\Hydrator\Product';
 	
 	public function getProductByIdent($ident)
 	{
 		$ident = (string) $ident;
-		$rowset = $this->getTablegateway()->select(array('ident', $ident));
-		$row = $rowset->current();
+		$select = $this->getSelect()->where(array('ident', $ident));
+		$resultSet = $this->fetchResult($select);
+		$row = $resultSet->current();
 		return $row;
 	}
 	

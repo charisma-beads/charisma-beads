@@ -2,11 +2,14 @@
 namespace Shop\Hydrator;
 
 use Application\Hydrator\AbstractHydrator;
-use Shop\Model\ProductSize;
 
 class ProductSize extends AbstractHydrator
 {
-	public function extract(ProductSize $object)
+	/**
+	 * @param \Shop\Model\ProductSize $object
+	 * @return array $data
+	 */
+	public function extract($object)
 	{
 		return array(
 			'productSizeId'	=> $object->getProductSizeId(),

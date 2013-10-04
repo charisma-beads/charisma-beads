@@ -8,4 +8,5 @@ class ProductSize extends AbstractMapper
 	protected $table = 'productSize';
 	protected $primary = 'productSizeId';
 	protected $model = 'Shop\Model\ProductSize';
+	protected $hydrator = 'Shop\Hydrator\ProductSize';
 }

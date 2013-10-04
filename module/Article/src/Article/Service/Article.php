@@ -39,7 +39,7 @@ class Article extends AbstractService
     			'label' => $article->getTitle(),
     			'position' => $ids[1],
     			'params' => 'slug=' . $article->getSlug(),
-    			'route' => 'application/article',
+    			'route' => 'article',
     			'resource' => '',
     			'visible' => 1,
     			'menuInsertType' => $post['menuInsertType']

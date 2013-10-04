@@ -1,5 +1,5 @@
 <?php
-namespace Shop\Service;
+namespace Shop\Model;
 
 use Application\Model\AbstractCollection;
 use Application\Model\CollectionException;

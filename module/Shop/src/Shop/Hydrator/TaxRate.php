@@ -2,11 +2,14 @@
 namespace Shop\Hydrator;
 
 use Application\Hydrator\AbstractHydrator;
-use Shop\Model\TaxRate;
 
 class TaxRate extends AbstractHydrator
 {
-	public function extract(TaxRate $object)
+	/**
+	 * @param \Shop\Model\TaxRate $object
+	 * @return array $data
+	 */
+	public function extract($object)
 	{
 		return array(
 			'taxRateId'	=> $object->getTaxRateId(),

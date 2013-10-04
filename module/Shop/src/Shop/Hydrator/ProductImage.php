@@ -4,7 +4,6 @@ namespace Shop\Hydrator;
 use Application\Hydrator\AbstractHydrator;
 use Application\Hydrator\Strategy\DateTime as DateTimeStrategy;
 use Application\Hydrator\Strategy\TrueFalse;
-use Shop\Model\ProductImage;
 
 class ProductImage extends AbstractHydrator
 {
@@ -19,7 +18,11 @@ class ProductImage extends AbstractHydrator
 		$this->addStrategy('dateModified', $dateTime);
 	}
 	
-	public Function extract(ProductImage $object)
+	/**
+	 * @param \Shop\Model\ProductImage $object
+	 * @return array $data
+	 */
+	public Function extract($object)
 	{
 		return array(
 			'productImageId'	=> $object->getProductImageId(),

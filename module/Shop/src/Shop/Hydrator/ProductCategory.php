@@ -4,10 +4,11 @@ namespace Shop\Hydrator;
 use Application\Hydrator\AbstractHydrator;
 use Application\Hydrator\Strategy\DateTime as DateTimeStrategy;
 use Application\Hydrator\Strategy\TrueFalse;
-use Shop\Model\ProductCategory;
 
 class ProductCategory extends AbstractHydrator
 {
+	protected $addDepth = fasle;
+	
 	public function __construct()
 	{
 		parent::__construct();
@@ -21,9 +22,18 @@ class ProductCategory extends AbstractHydrator
 		$this->addStrategy('dateModified', $dateTime);
 	}
 	
-	public function extract(ProductCategory $object)
+	public function addDepth()
 	{
-		return array(
+		$this->addDepth = true;
+	}
+	
+	/**
+	 * @param \Shop\Model\ProductCategory $object
+	 * @return array $data
+	 */
+	public function extract($object)
+	{
+		$data = array(
 			'productCategoryId'	=> $object->getProductCategoryId(),
 			'productImageId'	=> $object->getProductImageId(),
 			'ident'				=> $object->getIdent(),
@@ -35,5 +45,11 @@ class ProductCategory extends AbstractHydrator
 			'dateCreated'		=> $this->extractValue('dateCreated', $object->getDateCreated()),
 			'dateModified'		=> $this->extractValue('dateModified', $object->getDateModified())
 		);
+		
+		if (true === $this->addDepth) {
+			$data['depth'] = $object->getDepth();
+		}
+		
+		return $data;
 	}
 }

@@ -2,11 +2,14 @@
 namespace Shop\Hydrator;
 
 use Application\Hydrator\AbstractHydrator;
-use Shop\Model\ProductOption;
 
 class ProductOption extends AbstractHydrator
 {
-	public function extract(ProductOption $object)
+	/**
+	 * @param \Shop\Model\ProductOption $object
+	 * @return array $data
+	 */
+	public function extract($object)
 	{
 		return array(
 			'productOptionId'	=> $object->getProductOptionId(),

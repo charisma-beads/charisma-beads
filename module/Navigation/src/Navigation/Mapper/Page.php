@@ -61,7 +61,8 @@ class Page extends AbstractNestedSet
     
     public function getPageByMenuIdAndLabel($menuId, $label)
     {
-    	$rowSet = $this->getSelect()->where(array('menuId' => $menuId, 'label' => $label));
+    	$select = $this->getSelect()->where(array('menuId' => $menuId, 'label' => $label));
+    	$rowSet = $this->fetchResult($select);
     	$row = $rowSet->current();
     	return $row;
     }

@@ -12,7 +12,7 @@ return array(
 		'Shop\Mapper\TaxCode'				=> 'Shop\Mapper\TaxCode',
 		'Shop\Mapper\TaxRate'				=> 'Shop\Mapper\TaxRate',
 		
-		'Shop\Service\Cart'					=> 'Shop\Service\Cart',
+		'Shop\Model\Cart'					=> 'Shop\Model\Cart',
 		'Shop\Service\Catalog' 				=> 'Shop\Service\Catalog',
 		'Shop\Service\Shipping'				=> 'Shop\Service\Shipping',
 		'Shop\Service\Taxation'				=> 'Shop\Service\Taxation',

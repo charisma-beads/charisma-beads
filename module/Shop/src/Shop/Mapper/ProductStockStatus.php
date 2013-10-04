@@ -8,4 +8,5 @@ class ProductStockStatus extends AbstractMapper
 	protected $table = 'productStockStatus';
 	protected $primary = 'productStockStatusId';
 	protected $model = 'Shop\Model\ProductStockStatus';
+	protected $hydrator = 'Shop\Hydrator\ProductStockStatus';
 }

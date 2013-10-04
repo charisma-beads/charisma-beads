@@ -6,6 +6,7 @@ use Application\Hydrator\AbstractHydrator;
 class Page extends AbstractHydrator
 {
 	protected $addDepth = false;
+	
 	/**
 	 * @param \Navigation\Model\Page $object
 	 * @return array $data

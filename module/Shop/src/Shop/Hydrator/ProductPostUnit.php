@@ -2,11 +2,14 @@
 namespace Shop\Hydrator;
 
 use Application\Hydrator\AbstractHydrator;
-use Shop\Model\ProductPostUnit;
 
 class ProductPostUnit extends AbstractHydrator
 {
-	public function extract(ProductPostUnit $object)
+	/**
+	 * @param \Shop\Model\ProductPostUnit $object
+	 * @return array $data
+	 */
+	public function extract($object)
 	{
 		return array(
 			'productPostUnitId'	=> $object->getProductPostUnitId(),

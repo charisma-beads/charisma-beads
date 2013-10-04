@@ -5,26 +5,45 @@ use Application\Service\AbstractService;
 
 class ProductCategory extends AbstractService
 {
-	/**
-	 * @var \Shop\Mapper\Category
-	 */
-	protected $categoryMapper;
+	protected $mapperClass = 'Shop\Mapper\ProductCategory';
+	protected $form = '';
+	protected $inputFilter = '';
 	
-	public function getTopLevelCategories()
+	public function fetchAll($topLevelOnly=false)
 	{
-		return $this->getCategoryGateway()->getFullTree(true);
+	  return $this->getMapper()->getFullTree($topLevelOnly);
 	}
 	
-	/**
-	 * @return \Shop\Mapper\Category
-	 */
-	protected function getCategoryGateway()
+	public function getCategoriesByParentId($parentId)
 	{
-		if (!$this->categoryGateway) {
-			$sl = $this->getServiceLocator();
-			$this->categoryGateway = $sl->get('Shop\Gateway\Category');
+		$parentId = (int) $parentId;
+	
+		return ($parentId != 0) ? $this->getMapper()->getDecendentsByParentId($parentId) : $this->fetchAll(true);
+	}
+	
+	public function getCategoryByIdent($ident)
+	{
+		$ident = (string) $ident;
+	
+		return $this->getMapper()->getCategoryByIdent($ident);
+	}
+	
+	public function getCategoryChildrenIds($categoryId, $recursive=false)
+	{
+		$categories = $this->getMapper()
+			->getDecendentsByParentId($categoryId, $recursive);
+		
+		$cats = array();
+	
+		foreach ($categories as $category) {
+			$cats[] = $category->getProductCategoryId();
 		}
 	
-		return $this->categoryGateway;
+		return $cats;
+	}
+	
+	public function getParentCategories($categoryId)
+	{
+		return $this->getMapper()->getPathwayByChildId($categoryId);
 	}
 }

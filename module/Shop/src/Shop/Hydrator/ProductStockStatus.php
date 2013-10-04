@@ -2,11 +2,14 @@
 namespace Shop\Hydrator;
 
 use Application\Hydrator\AbstractHydrator;
-use Shop\Model\ProductStockStatus;
 
 class ProductStockStatus extends AbstractHydrator
 {
-	public function extract(ProductStockStatus $object)
+	/**
+	 * @param \Shop\Model\ProductStockStatus $object
+	 * @return array $data
+	 */
+	public function extract($object)
 	{
 		return array(
 			'productStockStautsId'	=> $object->getProductStockStautsId(),

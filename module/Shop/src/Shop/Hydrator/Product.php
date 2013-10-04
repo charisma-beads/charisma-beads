@@ -4,7 +4,6 @@ namespace Shop\Hydrator;
 use Application\Hydrator\AbstractHydrator;
 use Application\Hydrator\Strategy\DateTime as DateTimeStrategy;
 use Application\Hydrator\Strategy\TrueFalse;
-use Shop\Model\Product;
 
 class Product extends AbstractHydrator
 {
@@ -23,7 +22,11 @@ class Product extends AbstractHydrator
 		$this->addStrategy('dateModified', $dateTime);
 	}
 	
-	public function extract(Product $object)
+	/**
+	 * @param \Shop\Model\Product $object
+	 * @return array $data
+	 */
+	public function extract($object)
 	{
 		return array(
 			'productId'				=> $object->getProductId(),

@@ -22,7 +22,7 @@ class Cart extends AbstractViewHelper
 	{
 		$this->cartModel = $this->getServiceLocator()
 			->getServiceLocator()
-			->get('Shop\Service\Cart');
+			->get('Shop\Model\Cart');
 	
 		return $this;
 	}

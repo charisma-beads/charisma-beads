@@ -8,4 +8,5 @@ class ProductPostUnit extends AbstractMapper
 	protected $table = 'productPostUnit';
 	protected $primary = 'productPostUnitId';
 	protected $model = 'Shop\Model\ProductPostUnit';
+	protected $hydrator = 'Shop\Hydrator\ProductPostUnit';
 }

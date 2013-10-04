@@ -16,13 +16,13 @@ class CartItem
 	
 	public function __construct(Product $product, $qty)
 	{
-		$this->productId        = (int) $product->productId;
-		$this->name             = $product->name;
-		$this->price            = (float) $product->price;
-		$this->taxable          = $product->taxable;
-		$this->discountPercent  = (int) $product->discountPercent;
+		$this->productId        = (int) $product->getProductId();
+		$this->name             = $product->getName();
+		$this->price            = (float) $product->getPrice();
+		$this->taxable          = $product->getTaxable();
+		$this->discountPercent  = (int) $product->getDiscountPercent();
 		$this->qty              = (int) $qty;
-		$this->taxCodeId		= (int) $product->taxCodeId; 
+		$this->taxCodeId		= (int) $product->getTaxCodeId(); 
 	}
 	
 	public function getLineCost()

@@ -1,7 +1,7 @@
 <?php
 namespace Shop\Model;
 
-use Shop\Model\AbstractModel;
+use Application\Model\AbstractModel;
 use DateTime;
 
 class ProductCategory extends AbstractModel
@@ -61,8 +61,6 @@ class ProductCategory extends AbstractModel
 	 * @var int
 	 */
 	protected $depth;
-	
-	protected $inputFilterClass = 'Shop\InputFilter\ProductCategory';
 	
 	/**
 	 * @return the $productCategoryId
