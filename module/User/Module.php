@@ -18,7 +18,7 @@ class Module
 		$eventManager = $e->getApplication()->getEventManager()->getSharedManager();
 		$eventManager->attach(
 		    'Zend\Mvc\Controller\AbstractActionController',
-		    'dispatch',
+		    MvcEvent::EVENT_DISPATCH,
 		    array('User\Event\Authenticate', 'checkAcl'),
 		    2
 		);
