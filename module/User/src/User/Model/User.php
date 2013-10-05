@@ -2,9 +2,10 @@
 namespace User\Model;
 
 use Application\Model\AbstractModel;
+use Zend\Permissions\Acl\Role\RoleInterface;
 use DateTime;
 
-class User extends AbstractModel
+class User extends AbstractModel implements RoleInterface
 {   
 	/**
 	 * @var int
@@ -180,6 +181,11 @@ class User extends AbstractModel
 	{
 		$this->dateModified = $dateModified;
 		return $this;
+	}
+	
+	public function getRoleId()
+	{
+	    return $this->getRole();
 	}
 
 	public function getFullName()

@@ -1,6 +1,7 @@
 <?php
 namespace User\Controller\Plugin;
 
+use User\Model\User;
 use Zend\Mvc\Controller\Plugin\AbstractPlugin;
 use Zend\Permissions\Acl\Role\GenericRole as Role;
 use Zend\Permissions\Acl\Role\RoleInterface;
@@ -16,16 +17,6 @@ class IsAllowed extends AbstractPlugin
      * @var string
      */
     protected $identity;
-    
-    /**
-     * @param string $acl
-     */
-    public function __construct($acl = null)
-    {
-        if ($acl) {
-            $this->acl = $acl;
-        }
-    }
 
     /**
      * Get the current acl
@@ -43,25 +34,6 @@ class IsAllowed extends AbstractPlugin
         }
         
         return $this->acl;
-    }
-    
-    public function doAuthorization($event)
-    {
-    	$match = $event->getRouteMatch();
-    	$controller = $match->getParam('controller');
-    	$action = $match->getParam('action');
-    	 
-    	if (!$this->isAllowed($controller, $action)) {
-    		$router = $event->getRouter();
-    		$url    = $router->assemble(array(), array('name' => 'user/login'));
-    		 
-    		$response = $event->getResponse();
-    		$response->setStatusCode(302);
-    		//redirect to login route...
-    		// change with header('location: '.$url); if code below not working 
-    		$response->getHeaders()->addHeaderLine('Location', $url);
-    		$event->stopPropagation();
-    	}
     }
 
     /**
@@ -83,21 +55,13 @@ class IsAllowed extends AbstractPlugin
     /**
      * Set the identity of the current request
      *
-     * @param array|string|null|Zend\Permissions\Acl\Role\RoleInterface $identity
+     * @param array null|User|Role $identity
      * @return User\Controller\Plugin\Acl
      */
     public function setIdentity($identity)
     {
-        if (is_array($identity)) {
-            if (!isset($identity['role'])) {
-                $identity['role'] = 'guest';
-            }
-
-            $identity = new Role($identity['role']);
-        } elseif (is_object($identity) && is_string($identity->getRole())) {
-            $identity = new Role($identity->getRole());
-        } elseif (is_scalar($identity) && !is_bool($identity)) {
-            $identity = new Role($identity);
+        if ($identity instanceof User) {
+            $identity = $identity->getRole();
         } elseif (null === $identity) {
             $identity = new Role('guest');
         } elseif (!$identity instanceof RoleInterface) {
@@ -110,7 +74,7 @@ class IsAllowed extends AbstractPlugin
     }
 
     /**
-     * Get the identity, if no ident use Guest
+     * Get the identity
      *
      * @return string
      */
@@ -118,11 +82,6 @@ class IsAllowed extends AbstractPlugin
     {
         if (null === $this->identity) {
             $identity = $this->getController()->plugin('identity');
-
-            if (!$identity()) {
-                return 'guest';
-            }
-
             $this->setIdentity($identity());
         }
 

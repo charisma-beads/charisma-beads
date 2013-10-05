@@ -15,28 +15,13 @@ class Module
 {
 	public function onBootstrap(MvcEvent $e)
 	{
-		$eventManager = $e->getApplication()->getEventManager();
-		$eventManager->attach('route', array($this, 'loadConfiguration'), 2);
-	}
-	
-	public function loadConfiguration(MvcEvent $e)
-	{
-		$application   = $e->getApplication();
-		$sm            = $application->getServiceManager();
-		$sharedManager = $application->getEventManager()->getSharedManager();
-		 
-		$router = $sm->get('router');
-		$request = $sm->get('request');
-		 
-		$matchedRoute = $router->match($request);
-		if (null !== $matchedRoute) {
-			$sharedManager->attach('Zend\Mvc\Controller\AbstractActionController','dispatch',
-				function($e) use ($sm) {
-					$sm->get('ControllerPluginManager')->get('IsAllowed')
-						->doAuthorization($e); //pass to the plugin...
-				},2
-			);
-		}
+		$eventManager = $e->getApplication()->getEventManager()->getSharedManager();
+		$eventManager->attach(
+		    'Zend\Mvc\Controller\AbstractActionController',
+		    'dispatch',
+		    array('User\Event\Authenticate', 'checkAcl'),
+		    2
+		);
 	}
 	
     public function getConfig()
