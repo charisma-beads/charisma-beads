@@ -60,12 +60,12 @@ class Cart extends AbstractViewHelper
         return $currency($amount);
     }
 	
-	public function addForm(Product $product)
+	public function addForm($product)
 	{
 		$form = new Add();
 		
 		$form->setData(array(
-			'productId' => $product->getProductId(),
+			'productId' => $product->productId,
 			'returnTo'  => $this->view->serverUrl(true)
 		));
 		

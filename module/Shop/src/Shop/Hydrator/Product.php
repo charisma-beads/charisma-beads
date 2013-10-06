@@ -5,6 +5,7 @@ use Application\Hydrator\AbstractHydrator;
 use Application\Hydrator\Strategy\DateTime as DateTimeStrategy;
 use Application\Hydrator\Strategy\TrueFalse;
 
+
 class Product extends AbstractHydrator
 {
 	public Function __construct()

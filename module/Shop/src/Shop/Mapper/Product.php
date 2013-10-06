@@ -3,6 +3,7 @@ namespace Shop\Mapper;
 
 use Application\Mapper\AbstractMapper;
 use Zend\Db\Sql\Select;
+use Zend\Db\ResultSet\ResultSet;
 
 class Product extends AbstractMapper
 {
@@ -57,9 +58,9 @@ class Product extends AbstractMapper
 		}
 	
 		if (null !== $page) {
-			return $this->paginate($select, $page, $count);
+			return $this->paginate($select, $page, $count, new ResultSet());
 		}
 	
-		return $this->fetchAll($select);
+		return $this->fetchAll($select, new ResultSet());
 	}
 }

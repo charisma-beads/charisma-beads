@@ -174,9 +174,10 @@ class AbstractMapper implements DbAdapterAwareInterface
 	 * @param int $limit
 	 * @return \Zend\Paginator\Paginator
 	 */
-	public function paginate(Select $select, $page, $limit)
+	public function paginate(Select $select, $page, $limit, $resultSet=null)
 	{
-		$adapter = new DbSelect($select, $this->getDbAdapter(), $this->getResultSet());
+		$resultSet = $resultSet ?: $this->getResultSet();
+		$adapter = new DbSelect($select, $this->getDbAdapter(), $resultSet);
 		$paginator = new Paginator($adapter);
 	
 		$paginator->setItemCountPerPage($limit)
