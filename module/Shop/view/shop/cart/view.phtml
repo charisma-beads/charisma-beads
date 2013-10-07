@@ -1,1 +1,25 @@
-<h2>Cart</h2>
+<h2>Shopping Cart</h2>
+
+<table class="table table-striped">
+	<tr>
+		<th>product</th>
+		<th>Description</th>
+		<th>Price</th>
+		<th>Quantity</th>
+		<th>Total</th>
+		<th>&nbsp;</th>
+	</tr>
+	<?php foreach ($this->cart()->getItems() as $item): ?>
+	<tr>
+		<td><?=$item->name;?></td>
+		<td><?=$item->category;?> / <?=$item->description;?></td>
+		<td><?=$this->cart()->formatAmount($item->price);?></td>
+		<td>
+			<input type="number" name="quantity[<?=$item->productId;?>]" class="input-mini" value="<?=$item->qty;?>">
+		</td>
+		<td><?=$this->cart()->formatAmount($item->getLineCost());?>
+		<td><?=$this->ztbIcon('remove');?>
+	</tr>
+	
+	<?php endforeach; ?>
+</table>

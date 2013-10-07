@@ -46,9 +46,7 @@ class CartController extends AbstractController
 	
 	public function viewAction()
 	{
-		return new ViewModel(array(
-			'cartModel' => $this->getCart()
-		));
+		return new ViewModel();
 	}
 	
 	public function updateAction()

@@ -5,11 +5,13 @@ use Application\Model\AbstractCollection;
 use Application\Model\CollectionException;
 use Shop\Model\Product;
 use Shop\Model\CartItem;
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Session\Container;
 use SeekableIterator;
 
 class Cart extends AbstractCollection
-	implements SeekableIterator
+	implements SeekableIterator, ServiceLocatorAwareInterface
 {	
 	/**
 	 * Total before shipping
@@ -73,11 +75,17 @@ class Cart extends AbstractCollection
 			$this->removeItem($product);
 			return false;
 		}
-	
-		$item = new CartItem($product, $qty);
-		$this->entities[$item->productId] = $item;
+		
+		$cartItem = $this->getServiceLocator()->get('Shop\Model\CartItem');
+		$category = $this->getServiceLocator()->get('Shop\Service\ProductCategory');
+		
+		$cartItem->init($product, $qty);
+		$cartItem->category = $category->getById($product->getProductCategoryId())->getCategory();
+		$this->entities[$cartItem->productId] = $cartItem;
+		
 		$this->persist();
-		return $item;
+		
+		return $cartItem;
 	}
 	
 	/**
@@ -92,7 +100,7 @@ class Cart extends AbstractCollection
 		}
 	
 		if ($product instanceof Product) {
-			unset($this->entities[$product->productId]);
+			unset($this->entities[$product->getProductId()]);
 		}
 	
 		return $this->persist();
@@ -223,5 +231,27 @@ class Cart extends AbstractCollection
 		if (!$this->valid()) {
 			throw new CollectionException('Invalid seek position');
 		}
+	}
+	
+	/**
+	 * Set the service locator.
+	 *
+	 * @param ServiceLocatorInterface $serviceLocator
+	 * @return \Shop\Model\Cart
+	 */
+	public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
+	{
+		$this->serviceLocator = $serviceLocator;
+		return $this;
+	}
+	
+	/**
+	 * Get the service locator.
+	 *
+	 * @return \Zend\ServiceManager\ServiceLocatorInterface
+	 */
+	public function getServiceLocator()
+	{
+		return $this->serviceLocator;
 	}
 }

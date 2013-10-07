@@ -2,7 +2,7 @@
 
 return array(
     'shared'        => array(
-        
+    	'Shop\Model\CartItem'					=> false,
     ),
 	'invokables'    => array(
 	
@@ -16,7 +16,6 @@ return array(
 		'Shop\InputFilter\TaxCode'				=> 'Shop\InputFilter\TaxCode',
 		'Shop\InputFilter\TaxRate'				=> 'Shop\InputFilter\TaxRate',
 	    
-	    
 		'Shop\Mapper\Product' 				    => 'Shop\Mapper\Product',
 		'Shop\Mapper\ProductCategory'		    => 'Shop\Mapper\ProductCategory',
 		'Shop\Mapper\ProductImage'			    => 'Shop\Mapper\ProductImage',
@@ -28,6 +27,7 @@ return array(
 		'Shop\Mapper\TaxRate'				    => 'Shop\Mapper\TaxRate',
 		
 		'Shop\Model\Cart'					    => 'Shop\Model\Cart',
+		'Shop\Model\CartItem'					=> 'Shop\Model\CartItem',
 		
 		'Shop\Service\Product' 				    => 'Shop\Service\Product',
 		'Shop\Service\ProductCategory'          => 'Shop\Service\ProductCategory',

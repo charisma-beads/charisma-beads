@@ -2,9 +2,9 @@
 namespace Shop\View;
 
 use Application\View\AbstractViewHelper;
-use Shop\Model\Product;
 use Shop\Form\Cart\Add;
 use Zend\I18n\View\Helper\CurrencyFormat;
+use Shop\Model\Cart as CartModel;
 
 class Cart extends AbstractViewHelper
 {
@@ -20,11 +20,21 @@ class Cart extends AbstractViewHelper
 	
 	public function __invoke()
 	{
-		$this->cartModel = $this->getServiceLocator()
-			->getServiceLocator()
-			->get('Shop\Model\Cart');
+		if (!$this->cartModel instanceof CartModel) {
+			$this->cartModel = $this->getServiceLocator()
+				->getServiceLocator()
+				->get('Shop\Model\Cart');
+		}
 	
 		return $this;
+	}
+	
+	/**
+	 * @return CartModel
+	 */
+	public function getItems()
+	{
+		return $this->cartModel;
 	}
 	
 	public function countItems()
