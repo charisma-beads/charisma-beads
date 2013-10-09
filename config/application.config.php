@@ -11,6 +11,7 @@ return array(
     	'Shop',
     	'User',
         'ZfcTwitterBootstrap',
+    	'NetglueSSL',
     ),
 
     // These are various options for the listeners attached to the ModuleManager

@@ -19,14 +19,12 @@ class CartController extends AbstractController
 	
 	public function addAction()
 	{
-		$request = $this->request;
-		
-		if (!$request->isPost()) {
+		if (!$this->request->isPost()) {
 			return $this->redirect()->toRoute('shop');
 		}
 		
 		$product = $this->getProductService()->getById(
-			$request->getPost('productId')
+			$this->params()->fromPost('productId')
 		);
 	
 		if (null === $product) {
@@ -36,12 +34,12 @@ class CartController extends AbstractController
 		}
 	
 		$this->getCart()->addItem(
-			$product, $request->getPost('qty')
+			$product, $this->params()->fromPost('qty')
 		);
 		
-		$this->flashMessenger()->addInfoMessage('Added '  .$request->getPost('qty') . ' X ' . $product->getName() . ' to your cart');
+		$this->flashMessenger()->addInfoMessage('You have added '  . $this->params()->fromPost('qty') . ' X ' . $product->getName() . ' to your cart');
 	
-		return $this->redirect()->toUrl($request->getPost('returnTo'));
+		return $this->redirect()->toUrl($this->params()->fromPost('returnTo'));
 	}
 	
 	public function viewAction()
@@ -49,9 +47,29 @@ class CartController extends AbstractController
 		return new ViewModel();
 	}
 	
+	public function removeAction()
+	{
+		$id = $this->params()->fromRoute('id', 0);
+		$product = $this->getProductService()->getById($id);
+		
+		if ($product) {
+			$this->getCart()->removeItem($product);
+		}
+		
+		return $this->redirect()->toRoute('shop/cart', array(
+				'action' => 'view'
+		));
+	}
+	
 	public function updateAction()
 	{
-		foreach($this->params('quantity') as $id => $value) {
+		if (!$this->request->isPost()) {
+			return $this->redirect()->toRoute('shop/cart', array(
+				'action' => 'view'
+			));
+		}
+		
+		foreach($this->params()->fromPost('quantity') as $id => $value) {
 			$product = $this->getProductService()->getById($id);
 	
 			if (null !== $product) {
@@ -59,10 +77,15 @@ class CartController extends AbstractController
 			}
 		}
 	
-		/*$this->getCatalog()->setShippingCost(
-			$this->params('shipping')
-		);*/
+		return $this->redirect()->toRoute('shop/cart', array(
+			'action' => 'view'
+		));
+	}
 	
+	public function emptyAction()
+	{
+		$this->getCart()->clear();
+		
 		return $this->redirect()->toRoute('shop/cart', array(
 			'action' => 'view'
 		));

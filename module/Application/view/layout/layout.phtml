@@ -95,15 +95,13 @@
 									<a href="contact.html"><strong>E-mail</strong>: info@example.com</a>
 								</div>
 							</li>
-							<li class="dropdown">
+							<li class="dropdown shop-summary">
 								<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 									<i class="icon-shopping-cart"></i>
 									<span class="badge badge-inverse"><?php echo $this->cart()->countItems(); ?></span>
 								</a>
 								<div class="dropdown-menu">
 									<?php echo $this->cart()->getSummary(); ?>
-									<hr>
-									<a href="order.html">Show all items in shopping cart <i class="icon-chevron-right"></i></a>
 								</div>
 							</li>
 						</ul>

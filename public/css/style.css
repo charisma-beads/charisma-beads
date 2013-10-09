@@ -40,3 +40,11 @@ div.container a.brand {
 
 .text-right { text-align: right; }
 .text-center { text-align: center; }
+
+/* Shop Styles */
+
+.shop-summary .dropdown-menu {
+	padding: 5px;
+	margin: 0px;
+	
+}

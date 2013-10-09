@@ -5,6 +5,7 @@ use Application\View\AbstractViewHelper;
 use Shop\Form\Cart\Add;
 use Zend\I18n\View\Helper\CurrencyFormat;
 use Shop\Model\Cart as CartModel;
+use Zend\View\Model\ViewModel;
 
 class Cart extends AbstractViewHelper
 {
@@ -32,7 +33,7 @@ class Cart extends AbstractViewHelper
 	/**
 	 * @return CartModel
 	 */
-	public function getItems()
+	public function getCart()
 	{
 		return $this->cartModel;
 	}
@@ -44,24 +45,9 @@ class Cart extends AbstractViewHelper
 	
 	public function getSummary()
 	{
-		$currency = $this->getCurrencyHelper();
-		$itemCount = $this->countItems();
-	
-		if (0 == $itemCount) {
-			return '<p>No Items</p>';
-		}
-	
-		$html = '<p>Items: ' . $itemCount;
-		$html .= ' | Total: ' . $currency(
-			$this->cartModel->getSubTotal()
-		);
-		$html .= '<br /><a href="';
-		$html .= $this->view->url('shop/cart', array(
-			'action' => 'view'
-		));
-		$html .= '">View Cart</a></p>';
-	
-		return $html;
+		$view = new ViewModel();
+		$view->setTemplate('cart/summary');
+		return $this->getView()->render($view);
 	}
 	
 	public function formatAmount($amount)

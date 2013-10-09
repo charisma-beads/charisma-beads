@@ -6,6 +6,7 @@ return array(
 				'privileges' => array(
 					array('controller' => 'Shop\Controller\Cart', 'action' => 'all'),
 					array('controller' => 'Shop\Controller\Catalog', 'action' => 'all'),
+					array('controller' => 'Shop\Controller\Checkout', 'action' => array('index')),
 					array('controller' => 'Shop\Controller\Product', 'action' => array('view')),
 					array('controller' => 'Shop\Controller\Shop', 'action' => array('shop-front')),
 				),
@@ -14,6 +15,7 @@ return array(
 				'privileges' => array(
 					array('controller' => 'Shop\Controller\Cart', 'action' => 'all'),
 					array('controller' => 'Shop\Controller\Catalog', 'action' => 'all'),
+					array('controller' => 'Shop\Controller\Checkout', 'action' => 'all'),
 					array('controller' => 'Shop\Controller\Product', 'action' => array('view')),
 					array('controller' => 'Shop\Controller\Shop', 'action' => array('shop-front')),
 				),
@@ -28,6 +30,7 @@ return array(
 		'userResources' => array(
 			'Shop\Controller\Cart',
 			'Shop\Controller\Catalog',
+			'Shop\Controller\Checkout',
 			'Shop\Controller\Product',
 			'Shop\Controller\Shop',
 		),
@@ -91,13 +94,27 @@ return array(
                 	'cart' => array(
                 		'type' => 'Segment',
                 		'options' => array(
-                			'route' => '/cart/[:action]',
+                			'route' => '/cart/[:action[/[:id]]]',
                 			'constraints' => array(
-                				'action' => '[a-zA-Z0-9][a-zA-Z0-9_-]*',
+                				'action'	=> '[a-zA-Z0-9][a-zA-Z0-9_-]*',
+                				'id'		=> '\d+'
                 			),
                 			'defaults' => array(
                 				'controller' 	=> 'Cart',
                 				'action'		=> 'view'
+                			),
+                		),
+                	),
+                	'checkout' => array(
+                		'type' => 'Segment',
+                		'options' => array(
+                			'route' => '/checkout[/:action]',
+                			'constraints' => array(
+                				'action'	=> '[a-zA-Z0-9][a-zA-Z0-9_-]*'
+                			),
+                			'defaults' => array(
+                				'controller' 	=> 'Checkout',
+                				'action'		=> 'index'
                 			),
                 		),
                 	),
@@ -138,6 +155,9 @@ return array(
 		),
 	),
     'view_manager' => array(
+    	'template_map' => array(
+    		'cart/summary' => __DIR__ . '/../view/shop/cart/cart-summary.phtml',
+    	),
         'template_path_stack' => array(
             'Shop' => __DIR__ . '/../view',
         ),

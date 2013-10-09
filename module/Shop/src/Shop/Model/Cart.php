@@ -4,7 +4,6 @@ namespace Shop\Model;
 use Application\Model\AbstractCollection;
 use Application\Model\CollectionException;
 use Shop\Model\Product;
-use Shop\Model\CartItem;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Session\Container;
@@ -103,6 +102,15 @@ class Cart extends AbstractCollection
 			unset($this->entities[$product->getProductId()]);
 		}
 	
+		return $this->persist();
+	}
+	
+	/**
+	 * clears shopping cart of all items
+	 */
+	public function clear()
+	{
+		parent::clear();
 		return $this->persist();
 	}
 	

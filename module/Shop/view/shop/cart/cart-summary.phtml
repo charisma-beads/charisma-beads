@@ -1,0 +1,26 @@
+
+<?php if ($this->cart()->countItems()): ?>
+<table class="table table-condensed table-striped">
+	<tr>
+		<th>Name/Qty</th>
+		<th>Cost</th>
+	</tr>
+	<?php foreach ($this->cart()->getCart() as $item): ?>
+		<tr>
+			<td><?=$item->name;?> X <?=$item->qty;?></td>
+			<td><?=$this->cart()->formatAmount($item->getLineCost());?>
+		</tr>
+	<?php endforeach; ?>
+		<tr>
+			<th>Total</th>
+			<th><?=$this->cart()->formatAmount($this->cart()->getCart()->getSubTotal());?></th>
+		</tr>
+</table>
+
+<a href="<?=$this->url('shop/cart', array(
+	'action' => 'view'
+));?>">View Cart <i class="icon-chevron-right"></i></a>
+		
+<?php else: ?>
+	<p>No Items</p>
+<?php endif; ?>

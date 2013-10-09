@@ -66,7 +66,7 @@ return array(
             				'defaults' => array(
             					'__NAMESPACE__' => 'Application\Controller',
                         		'controller'    => 'Admin',
-                        		'action'        => 'dashboard',
+                        		'action'        => 'dashboard'
             				),
             			),
             		),
