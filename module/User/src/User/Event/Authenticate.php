@@ -2,14 +2,14 @@
 namespace User\Event;
 
 use Zend\Mvc\MvcEvent;
-use Zend\Console\Request as ConsoleRequest;
+use Zend\Http\Request;
 
 
 class Authenticate
 {
     public function checkAcl(MvcEvent $event)
     {
-        if ($event->getRequest() instanceof ConsoleRequest) {
+        if (!$event->getRequest() instanceof Request) {
     	    return;
         }
         
