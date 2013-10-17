@@ -192,13 +192,6 @@ return array(
 		),
 	),
     'view_manager' => array(
-    	'template_map' => array(
-    		'user/list'				=> __DIR__ . '/../view/user/admin/list.phtml',
-    		'user/user-form'		=> __DIR__ . '/../view/user/user/user-form.phtml',
-    		'admin/user/user-form'	=> __DIR__ . '/../view/user/admin/user-form.phtml',
-    	),
-        'template_path_stack' => array(
-            'User' => __DIR__ . '/../view',
-        ),
+    	'template_map' => include __DIR__  .'/../template_map.php',
     ),
 );

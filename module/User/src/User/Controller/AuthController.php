@@ -51,7 +51,7 @@ class AuthController extends AbstractActionController
             'form' => $form
         ));
         
-        $viewModel->setTemplate('user/auth/login.phtml');
+        $viewModel->setTemplate('user/auth/login');
 
         if (!$form->isValid()) {
         	$this->flashMessenger()->addInfoMessage(
