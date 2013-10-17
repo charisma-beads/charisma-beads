@@ -5,7 +5,7 @@ return array(
     	'Shop\Model\CartItem'					=> false,
     ),
 	'invokables'    => array(
-	
+	    
 	    'Shop\InputFilter\Product' 			    => 'Shop\InputFilter\Product',
 		'Shop\InputFilter\ProductCategory'	    => 'Shop\InputFilter\ProductCategory',
 		'Shop\InputFilter\ProductImage'		    => 'Shop\InputFilter\ProductImage',

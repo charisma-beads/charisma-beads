@@ -31,8 +31,9 @@ CREATE TABLE IF NOT EXISTS `customerAddress` (
   `county` varchar(40) DEFAULT NULL,
   `postcode` varchar(10) DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`addressId`),
-  KEY `addressId` (`addressId`)
+  `dateCreated` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `dateModified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`addressId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -72,15 +73,12 @@ CREATE TABLE IF NOT EXISTS `order` (
   `orderId` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `userId` int(10) unsigned NOT NULL,
   `orderStatusId` int(10) unsigned NOT NULL,
-  `InvoiceId` int(10) unsigned NOT NULL,
   `total` decimal(10,2) unsigned NOT NULL DEFAULT '0.00',
   `orderDate` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `shipping` decimal(4,2) NOT NULL DEFAULT '0.00',
   `vatTotal` decimal(10,2) NOT NULL DEFAULT '0.00',
   `txnId` varchar(19) DEFAULT NULL,
-  PRIMARY KEY (`orderId`),
-  KEY `customer_id` (`userId`),
-  KEY `order_date` (`orderDate`)
+  PRIMARY KEY (`orderId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -94,13 +92,10 @@ CREATE TABLE IF NOT EXISTS `orderLines` (
   `orderLineId` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `orderId` int(10) unsigned NOT NULL,
   `productId` int(10) unsigned NOT NULL,
-  `total` decimal(10,2) unsigned NOT NULL DEFAULT '0.00',
   `qty` int(5) unsigned NOT NULL DEFAULT '0',
   `price` decimal(4,2) NOT NULL DEFAULT '0.00',
-  `vatTotal` decimal(10,2) NOT NULL DEFAULT '0.00',
-  PRIMARY KEY (`orderId`),
-  KEY `customer_id` (`userId`),
-  KEY `order_date` (`orderDate`)
+  `vatPercent` decimal(4,2) NOT NULL DEFAULT '0.00',
+  PRIMARY KEY (`orderId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -129,9 +124,7 @@ CREATE TABLE IF NOT EXISTS `postCost` (
   `postZoneId` int(10) unsigned NOT NULL,
   `cost` decimal(6,2) NOT NULL DEFAULT '0.00',
   `vatInc` int(1) unsigned NOT NULL,
-  PRIMARY KEY (`postCostId`),
-  KEY `cost` (`cost`),
-  KEY `level` (`postLevelId`)
+  PRIMARY KEY (`postCostId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -188,6 +181,7 @@ CREATE TABLE IF NOT EXISTS `product` (
   `hits` int(10) unsigned NOT NULL DEFAULT '0',
   `enabled` int(1) unsigned NOT NULL DEFAULT '1',
   `discontinued` int(1) unsigned NOT NULL DEFAULT '0',
+  `vatInc` int(1) unsigned NOT NULL,
   `dateCreated` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `dateModified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`productId`),

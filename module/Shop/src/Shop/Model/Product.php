@@ -102,6 +102,11 @@ class Product extends AbstractModel
 	protected $discontinued = false;
 	
 	/**
+	 * @var bool
+	 */
+	protected $vatInc;
+	
+	/**
 	 * @var DateTime
 	 */
 	protected $dateCreated;
@@ -112,9 +117,9 @@ class Product extends AbstractModel
 	protected $dateModified;
 	
 	/**
-	 * @return the $productId
+	 * @return number $productId
 	 */
-	public function getProductId()
+	public function getProductId ()
 	{
 		return $this->productId;
 	}
@@ -122,16 +127,16 @@ class Product extends AbstractModel
 	/**
 	 * @param number $productId
 	 */
-	public function setProductId($productId)
+	public function setProductId ($productId)
 	{
 		$this->productId = $productId;
 		return $this;
 	}
 
 	/**
-	 * @return the $productCategoryId
+	 * @return number $productCategoryId
 	 */
-	public function getProductCategoryId()
+	public function getProductCategoryId ()
 	{
 		return $this->productCategoryId;
 	}
@@ -139,16 +144,16 @@ class Product extends AbstractModel
 	/**
 	 * @param number $productCategoryId
 	 */
-	public function setProductCategoryId($productCategoryId)
+	public function setProductCategoryId ($productCategoryId)
 	{
 		$this->productCategoryId = $productCategoryId;
 		return $this;
 	}
 
 	/**
-	 * @return the $productSizeId
+	 * @return number $productSizeId
 	 */
-	public function getProductSizeId()
+	public function getProductSizeId ()
 	{
 		return $this->productSizeId;
 	}
@@ -156,16 +161,16 @@ class Product extends AbstractModel
 	/**
 	 * @param number $productSizeId
 	 */
-	public function setProductSizeId($productSizeId)
+	public function setProductSizeId ($productSizeId)
 	{
 		$this->productSizeId = $productSizeId;
 		return $this;
 	}
 
 	/**
-	 * @return the $taxCodeId
+	 * @return number $taxCodeId
 	 */
-	public function getTaxCodeId()
+	public function getTaxCodeId ()
 	{
 		return $this->taxCodeId;
 	}
@@ -173,16 +178,16 @@ class Product extends AbstractModel
 	/**
 	 * @param number $taxCodeId
 	 */
-	public function setTaxCodeId($taxCodeId)
+	public function setTaxCodeId ($taxCodeId)
 	{
 		$this->taxCodeId = $taxCodeId;
 		return $this;
 	}
 
 	/**
-	 * @return the $productPostUnitId
+	 * @return number $productPostUnitId
 	 */
-	public function getProductPostUnitId()
+	public function getProductPostUnitId ()
 	{
 		return $this->productPostUnitId;
 	}
@@ -190,16 +195,16 @@ class Product extends AbstractModel
 	/**
 	 * @param number $productPostUnitId
 	 */
-	public function setProductPostUnitId($productPostUnitId)
+	public function setProductPostUnitId ($productPostUnitId)
 	{
 		$this->productPostUnitId = $productPostUnitId;
 		return $this;
 	}
 
 	/**
-	 * @return the $productGroupId
+	 * @return number $productGroupId
 	 */
-	public function getProductGroupId()
+	public function getProductGroupId ()
 	{
 		return $this->productGroupId;
 	}
@@ -207,16 +212,16 @@ class Product extends AbstractModel
 	/**
 	 * @param number $productGroupId
 	 */
-	public function setProductGroupId($productGroupId)
+	public function setProductGroupId ($productGroupId)
 	{
 		$this->productGroupId = $productGroupId;
 		return $this;
 	}
 
 	/**
-	 * @return the $productStockStatusId
+	 * @return number $productStockStatusId
 	 */
-	public function getProductStockStatusId()
+	public function getProductStockStatusId ()
 	{
 		return $this->productStockStatusId;
 	}
@@ -224,16 +229,16 @@ class Product extends AbstractModel
 	/**
 	 * @param number $productStockStatusId
 	 */
-	public function setProductStockStatusId($productStockStatusId)
+	public function setProductStockStatusId ($productStockStatusId)
 	{
 		$this->productStockStatusId = $productStockStatusId;
 		return $this;
 	}
 
 	/**
-	 * @return the $ident
+	 * @return string $ident
 	 */
-	public function getIdent()
+	public function getIdent ()
 	{
 		return $this->ident;
 	}
@@ -241,16 +246,16 @@ class Product extends AbstractModel
 	/**
 	 * @param string $ident
 	 */
-	public function setIdent($ident)
+	public function setIdent ($ident)
 	{
 		$this->ident = $ident;
 		return $this;
 	}
 
 	/**
-	 * @return the $name
+	 * @return string $name
 	 */
-	public function getName() 
+	public function getName ()
 	{
 		return $this->name;
 	}
@@ -258,16 +263,16 @@ class Product extends AbstractModel
 	/**
 	 * @param string $name
 	 */
-	public function setName($name)
+	public function setName ($name)
 	{
 		$this->name = $name;
 		return $this;
 	}
 
 	/**
-	 * @return the $price
+	 * @return number $price
 	 */
-	public function getPrice()
+	public function getPrice ()
 	{
 		return $this->price;
 	}
@@ -275,16 +280,16 @@ class Product extends AbstractModel
 	/**
 	 * @param number $price
 	 */
-	public function setPrice($price)
+	public function setPrice ($price)
 	{
 		$this->price = $price;
 		return $this;
 	}
 
 	/**
-	 * @return the $description
+	 * @return string $description
 	 */
-	public function getDescription()
+	public function getDescription ()
 	{
 		return $this->description;
 	}
@@ -292,16 +297,16 @@ class Product extends AbstractModel
 	/**
 	 * @param string $description
 	 */
-	public function setDescription($description)
+	public function setDescription ($description)
 	{
 		$this->description = $description;
 		return $this;
 	}
 
 	/**
-	 * @return the $shortDescription
+	 * @return string $shortDescription
 	 */
-	public function getShortDescription()
+	public function getShortDescription ()
 	{
 		return $this->shortDescription;
 	}
@@ -309,16 +314,16 @@ class Product extends AbstractModel
 	/**
 	 * @param string $shortDescription
 	 */
-	public function setShortDescription($shortDescription)
+	public function setShortDescription ($shortDescription)
 	{
 		$this->shortDescription = $shortDescription;
 		return $this;
 	}
 
 	/**
-	 * @return the $quantity
+	 * @return number $quantity
 	 */
-	public function getQuantity()
+	public function getQuantity ()
 	{
 		return $this->quantity;
 	}
@@ -326,16 +331,16 @@ class Product extends AbstractModel
 	/**
 	 * @param number $quantity
 	 */
-	public function setQuantity($quantity)
+	public function setQuantity ($quantity)
 	{
 		$this->quantity = $quantity;
 		return $this;
 	}
 
 	/**
-	 * @return the $taxable
+	 * @return boolean $taxable
 	 */
-	public function getTaxable()
+	public function getTaxable ()
 	{
 		return $this->taxable;
 	}
@@ -343,16 +348,16 @@ class Product extends AbstractModel
 	/**
 	 * @param boolean $taxable
 	 */
-	public function setTaxable($taxable)
+	public function setTaxable ($taxable)
 	{
 		$this->taxable = $taxable;
 		return $this;
 	}
 
 	/**
-	 * @return the $addPostage
+	 * @return boolean $addPostage
 	 */
-	public function getAddPostage()
+	public function getAddPostage ()
 	{
 		return $this->addPostage;
 	}
@@ -360,16 +365,16 @@ class Product extends AbstractModel
 	/**
 	 * @param boolean $addPostage
 	 */
-	public function setAddPostage($addPostage)
+	public function setAddPostage ($addPostage)
 	{
 		$this->addPostage = $addPostage;
 		return $this;
 	}
 
 	/**
-	 * @return the $discountPercent
+	 * @return number $discountPercent
 	 */
-	public function getDiscountPercent()
+	public function getDiscountPercent ()
 	{
 		return $this->discountPercent;
 	}
@@ -377,16 +382,16 @@ class Product extends AbstractModel
 	/**
 	 * @param number $discountPercent
 	 */
-	public function setDiscountPercent($discountPercent)
+	public function setDiscountPercent ($discountPercent)
 	{
 		$this->discountPercent = $discountPercent;
 		return $this;
 	}
 
 	/**
-	 * @return the $hits
+	 * @return number $hits
 	 */
-	public function getHits()
+	public function getHits ()
 	{
 		return $this->hits;
 	}
@@ -394,16 +399,16 @@ class Product extends AbstractModel
 	/**
 	 * @param number $hits
 	 */
-	public function setHits($hits)
+	public function setHits ($hits)
 	{
 		$this->hits = $hits;
 		return $this;
 	}
 
 	/**
-	 * @return the $enabled
+	 * @return boolean $enabled
 	 */
-	public function getEnabled()
+	public function getEnabled ()
 	{
 		return $this->enabled;
 	}
@@ -411,16 +416,16 @@ class Product extends AbstractModel
 	/**
 	 * @param boolean $enabled
 	 */
-	public function setEnabled($enabled)
+	public function setEnabled ($enabled)
 	{
 		$this->enabled = $enabled;
 		return $this;
 	}
 
 	/**
-	 * @return the $discontinued
+	 * @return boolean $discontinued
 	 */
-	public function getDiscontinued()
+	public function getDiscontinued ()
 	{
 		return $this->discontinued;
 	}
@@ -428,16 +433,33 @@ class Product extends AbstractModel
 	/**
 	 * @param boolean $discontinued
 	 */
-	public function setDiscontinued($discontinued)
+	public function setDiscontinued ($discontinued)
 	{
 		$this->discontinued = $discontinued;
 		return $this;
 	}
 
 	/**
-	 * @return the $dateCreated
+	 * @return boolean $vatInc
 	 */
-	public function getDateCreated()
+	public function getVatInc ()
+	{
+		return $this->vatInc;
+	}
+
+	/**
+	 * @param boolean $vatInc
+	 */
+	public function setVatInc ($vatInc)
+	{
+		$this->vatInc = $vatInc;
+		return $this;
+	}
+
+	/**
+	 * @return DateTime $dateCreated
+	 */
+	public function getDateCreated ()
 	{
 		return $this->dateCreated;
 	}
@@ -445,16 +467,16 @@ class Product extends AbstractModel
 	/**
 	 * @param DateTime $dateCreated
 	 */
-	public function setDateCreated(DateTime $dateCreated=null)
+	public function setDateCreated (DateTime $dateCreated)
 	{
 		$this->dateCreated = $dateCreated;
 		return $this;
 	}
 
 	/**
-	 * @return the $dateModified
+	 * @return DateTime $dateModified
 	 */
-	public function getDateModified()
+	public function getDateModified ()
 	{
 		return $this->dateModified;
 	}
@@ -462,10 +484,11 @@ class Product extends AbstractModel
 	/**
 	 * @param DateTime $dateModified
 	 */
-	public function setDateModified(DateTime $dateModified=null)
+	public function setDateModified (DateTime $dateModified)
 	{
 		$this->dateModified = $dateModified;
 		return $this;
 	}
+
 
 }

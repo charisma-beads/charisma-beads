@@ -45,6 +45,7 @@ while($obj = $result->fetch_object()) {
 		'addPostage'			=> $obj->postage,
 		'hits'					=> $obj->hits,
 		'enabled'				=> $obj->enabled,
+	    'vatInc'                => $obj->vat_inc,
 		'discontinued'			=> $obj->discontinued,
 		'dateCreated'			=> $obj->date_entered,
 	);
