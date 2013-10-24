@@ -1,49 +1,8 @@
 <?php $this->headTitle('Log In') ?>
-<?php 
-$form = $this->form;
-$email = $form->get('email');
-$passwd = $form->get('passwd');
-?>
 
-<div>
-    <form class="form-horizontal"  method="post" action="<?php echo $this->url('user/authenticate') ?>">
-        <fieldset>
-        <legend>Use Form To Log In:</legend>
-        <div class="control-group<?php if ($email->getMessages()) echo ' error'; ?>">
-            <label class="control-label" for="email">Email:</label>
-            <div class="controls">
-                <div class="input-prepend">
-                    <span class="add-on"><i class="icon-envelope"></i></span>
-                    <?php echo $this->formEmail($email); ?>
-                </div>
-                <span class="help-block">
-                <?php echo $this->formElementErrors($email, array(
-                    'class' => 'unstyled'
-                )); ?>
-                </span>
-            </div>
-        </div>
-        <div class="control-group<?php if ($passwd->getMessages()) echo ' error'; ?>">
-            <label class="control-label" for="passwd">Password:</label>
-            <div class="controls">
-                <div class="input-prepend">
-                    <span class="add-on"><i class="icon-lock"></i></span>
-                    <?php echo $this->formPassword($passwd); ?>
-                </div>
-                <span class="help-block">
-                <?php echo $this->formElementErrors($passwd, array(
-                    'class' => 'unstyled'
-                )); ?>
-                </span>
-            </div>
-        </div>
-        <?php echo $this->formElement($form->get('security')); ?>
-        <div class="control-group">
-            <div class="controls">
-                <button type="submit" class="btn btn-primary" 
-                data-loading-text="Please wait...">Login</button>
-            </div>
-        </div>
-        </fieldset>
-    </form>
-</div>
+
+
+<?php echo $this->partial('user/auth/login-form', array(
+    'form' => $this->form,
+    'legend' => 'Use Form To Log In:'
+)); ?>

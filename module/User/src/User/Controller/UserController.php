@@ -44,8 +44,14 @@ class UserController extends AbstractController
         				'Thank you, you have successfully registered with us.'
         			);
         			
-        			// Redirect to home
-        			return $this->redirect()->toRoute('user/thank-you');
+        			// log user in
+        			$this->getServiceLocator()
+        			     ->get('Zend\Authentication\AuthenticationService')
+        			     ->authenticate($post);
+        			
+        			$return = ($post['returnTo']) ? $post['returnTo'] : 'user/thank-you';
+        			
+        			return $this->redirect()->toRoute($return);
         			
         		} else {
         			$this->flashMessenger()->addErrorMessage(

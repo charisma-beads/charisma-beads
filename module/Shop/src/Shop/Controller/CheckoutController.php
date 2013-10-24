@@ -2,23 +2,62 @@
 namespace Shop\Controller;
 
 use Application\Controller\AbstractController;
+use User\Form\Login as LoginForm;
 use Zend\View\Model\ViewModel;
 
 class CheckoutController extends AbstractController
 {
+    /**
+     * @var \Shop\Model\Cart
+     */
+    protected $cart;
+    
 	public function indexAction()
 	{
+	    if (!$this->getCart()->count()) {
+	        return $this->redirect()->toRoute('shop');
+	    }
+	    
 		if ($this->identity()) {
 			return $this->redirect()->toRoute('shop/checkout', array(
 				'action' => 'confirm-address'
 			));
 		}
 		
-		return new ViewModel();
+		return new ViewModel(array(
+			'login'       => $this->getLoginForm(),
+		    'register'    => $this->getRegisterForm()
+		));
 	}
 	
 	public function confirmAddressAction()
 	{
 		return new ViewModel();
+	}
+	
+	/**
+	 * @return \Shop\Model\Cart
+	 */
+	protected function getCart()
+	{
+	    if (!$this->cart) {
+	        $sl = $this->getServiceLocator();
+	        $this->cart = $sl->get('Shop\Service\Cart');
+	    }
+	
+	    return $this->cart;
+	}
+	
+	public function getLoginForm()
+	{
+	    $form = new LoginForm();
+	    $form->setData(array('returnTo' => 'shop/checkout'));
+	    return $form;
+	}
+	
+	public function getRegisterForm()
+	{
+	    $userService = $this->getServiceLocator()->get('User\Service\User');
+	    return $userService->getForm(null, array('returnTo' => 'shop/checkout'));
 	}
 }

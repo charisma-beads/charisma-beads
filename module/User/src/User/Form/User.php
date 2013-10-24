@@ -86,5 +86,10 @@ class User extends Form
 			'name' => 'dateModified',
 			'type' => 'hidden',
 		));
+		
+		$this->add(array(
+			'name' => 'returnTo',
+		    'type' => 'hidden',
+		));
 	}
 }

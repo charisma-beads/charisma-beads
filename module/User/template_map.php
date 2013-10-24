@@ -8,6 +8,7 @@ return array(
     'user/admin/list'      => __DIR__ . '/view/user/admin/list.phtml',
     'user/admin/user-form' => __DIR__ . '/view/user/admin/user-form.phtml',
     'user/auth/login'      => __DIR__ . '/view/user/auth/login.phtml',
+    'user/auth/login-form' => __DIR__ . '/view/user/auth/login-form.phtml',
     'user/user/edit'       => __DIR__ . '/view/user/user/edit.phtml',
     'user/user/index'      => __DIR__ . '/view/user/user/index.phtml',
     'user/user/register'   => __DIR__ . '/view/user/user/register.phtml',

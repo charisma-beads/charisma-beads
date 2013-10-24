@@ -44,8 +44,9 @@ class AuthController extends AbstractActionController
         }
         
         // Validate
+        $post = $request->getPost();
         $form = $this->form;
-        $form->setData($request->getPost());
+        $form->setData($post);
         
         $viewModel = new ViewModel(array(
             'form' => $form
@@ -68,7 +69,8 @@ class AuthController extends AbstractActionController
 
             return $viewModel; // re-render the login form
         }
-
-        return $this->redirect()->toRoute('home');
+        
+        $return = ($post['returnTo']) ? $post['returnTo'] : 'home';
+        return $this->redirect()->toRoute($return);
     }
 }

@@ -2,46 +2,73 @@
 namespace Shop\Model;
 
 use Shop\Model\Product;
-use Shop\Service\Taxation;
 
 class CartItem
 {
-	public $productId;
-	public $category;
-	public $name;
-	public $description;
-	public $price;
-	public $taxable;
-	public $discountPercent;
-	public $qty;
-	public $taxCodeId;
+    /**
+     * @var int
+     */
+	protected $qty;
 	
-	public function init(Product $product, $qty)
-	{
-		$this->productId        	= (int) $product->getProductId();
-		$this->name             	= $product->getName();
-		$this->description			= $product->getShortDescription();
-		$this->price            	= (float) $product->getPrice();
-		$this->taxable          	= $product->getTaxable();
-		$this->discountPercent  	= (int) $product->getDiscountPercent();
-		$this->qty              	= (int) $qty;
-		$this->taxCodeId			= (int) $product->getTaxCodeId(); 
-	}
+	/**
+	 * @var Product
+	 */
+	protected $product;
 	
-	public function getLineCost()
-	{
-		$price = $this->price;
+	/**
+	 * @var string
+	 */
+	protected $category;
+    
+    public function getQty()
+    {
+        return $this->qty;
+    }
+    
+    public function setQty($qty)
+    {
+        $qty = (int) $qty;
+        $this->qty = $qty;
+        return $this;
+    }
+    
+    public function getProduct()
+    {
+        return $this->product;
+    }
+    
+    public function setProduct(Product $product)
+    {
+        $this->product = $product;
+        return $this;
+    }
 	
-		if (0 !== $this->discountPercent) {
-			$discounted = ($price*$this->discountPercent)/100;
-			$price = round($price - $discounted, 2);
-		}
-	
-		if ('Yes' === $this->taxable) {
-			$taxService = new Taxation($this->taxCodeId);
-			$price = $taxService->addTax($price);
-		}
-	
-		return $price * $this->qty;
-	}
+	/**
+     * @return string $category
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+	/**
+     * @param string $category
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
+        return $this;
+    }
+    
+    /**
+     * Proxies caals to Product Model.
+     * 
+     * @param method $method
+     * @param array $arguments
+     * @return mixed
+     */
+    public function __call($method, array $arguments)
+    {
+        return call_user_func_array(array($this->getProduct(), $method), $arguments);
+    }
 }

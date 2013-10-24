@@ -57,7 +57,7 @@ class CartController extends AbstractController
 		}
 		
 		return $this->redirect()->toRoute('shop/cart', array(
-				'action' => 'view'
+			'action' => 'view'
 		));
 	}
 	
@@ -98,7 +98,7 @@ class CartController extends AbstractController
 	{
 		if (!$this->cart) {
 			$sl = $this->getServiceLocator();
-			$this->cart = $sl->get('Shop\Model\Cart');
+			$this->cart = $sl->get('Shop\Service\Cart');
 		}
 	
 		return $this->cart;

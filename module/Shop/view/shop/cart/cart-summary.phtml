@@ -7,13 +7,13 @@
 	</tr>
 	<?php foreach ($this->cart()->getCart() as $item): ?>
 		<tr>
-			<td><?=$item->name;?> X <?=$item->qty;?></td>
-			<td><?=$this->cart()->formatAmount($item->getLineCost());?>
+			<td><?=$item->getName();?> X <?=$item->getQty();?></td>
+			<td><?=$this->cart()->getLineCost($item);?>
 		</tr>
 	<?php endforeach; ?>
 		<tr>
 			<th>Total</th>
-			<th><?=$this->cart()->formatAmount($this->cart()->getCart()->getSubTotal());?></th>
+			<th><?=$this->cart()->getSubTotal();?></th>
 		</tr>
 </table>
 

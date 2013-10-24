@@ -1,16 +1,14 @@
 <?php
-namespace Shop\Model;
+namespace Shop\Service;
 
 use Application\Model\AbstractCollection;
 use Application\Model\CollectionException;
-use Shop\Model\Product;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Shop\Model\CartItem;
+use Shop\Model\Product as ProductModel;
 use Zend\Session\Container;
 use SeekableIterator;
 
-class Cart extends AbstractCollection
-	implements SeekableIterator, ServiceLocatorAwareInterface
+class Cart extends AbstractCollection implements SeekableIterator
 {	
 	/**
 	 * Total before shipping
@@ -48,13 +46,21 @@ class Cart extends AbstractCollection
 	protected $entityClass = 'Shop\Model\CartItem';
 	
 	/**
+	 * @var \Shop\Service\Taxation
+	 */
+	protected $taxService;
+	
+	/**
+	 * @var \Shop\Service\ProductCategory
+	 */
+	protected $productCategoryService;
+	
+	/**
 	 * Constructor
 	 */
 	public function  __construct()
 	{
 		parent::__construct();
-		
-		$this->loadSession();
 	}
 	
 	/**
@@ -64,7 +70,7 @@ class Cart extends AbstractCollection
 	 * @param int $qty
 	 * @return Shop\Model\CartItem
 	 */
-	public function addItem(Product $product, $qty)
+	public function addItem(ProductModel $product, $qty)
 	{
 		if (0 > $qty) {
 			return false;
@@ -75,12 +81,14 @@ class Cart extends AbstractCollection
 			return false;
 		}
 		
-		$cartItem = $this->getServiceLocator()->get('Shop\Model\CartItem');
-		$category = $this->getServiceLocator()->get('Shop\Service\ProductCategory');
+		$cartItem = new CartItem();
+		$category = $this->getProductCategoryService();
 		
-		$cartItem->init($product, $qty);
-		$cartItem->category = $category->getById($product->getProductCategoryId())->getCategory();
-		$this->entities[$cartItem->productId] = $cartItem;
+		$cartItem->setProduct($product)
+		  ->setQty($qty)
+		  ->setCategory($category->getById($product->getProductCategoryId())->getCategory());
+		
+		$this->entities[$cartItem->getProductId()] = $cartItem;
 		
 		$this->persist();
 		
@@ -97,8 +105,8 @@ class Cart extends AbstractCollection
 		if (is_int($product)) {
 			unset($this->entities[$product]);
 		}
-	
-		if ($product instanceof Product) {
+	   
+		if ($product instanceof ProductModel) {
 			unset($this->entities[$product->getProductId()]);
 		}
 	
@@ -142,7 +150,7 @@ class Cart extends AbstractCollection
 	 * Persist the cart data in the session
 	 */
 	public function persist()
-	{
+	{   
 		$this->getContainer()->items = $this->entities;
 		$this->getContainer()->shipping = $this->getShippingCost();
 	}
@@ -152,6 +160,7 @@ class Cart extends AbstractCollection
 	 */
 	public function loadSession()
 	{
+	    
 		if (isset($this->getContainer()->items)) {
 			$this->entities = $this->getContainer()->items;
 		}
@@ -159,6 +168,32 @@ class Cart extends AbstractCollection
 		if (isset($this->getContainer()->shipping)) {
 			$this->setShippingCost($this->getContainer()->shipping);
 		}
+		
+	}
+	
+	/**
+	 * calulates the item line price
+	 * 
+	 * @param CartItem $item
+	 * @return number
+	 */
+	public function getLineCost(CartItem $item)
+	{
+	    $price = $item->getPrice();
+	
+	    if (0 !== $item->getDiscountPercent()) {
+	        $discounted = ($price*$item->getDiscountPercent())/100;
+	        $price = round($price-$discounted, 2);
+	    }
+	    
+	    if (true === $item->getTaxable()) {
+	        $taxService = $this->getTaxService();
+	        $taxService->setTaxCodeId($item->getTaxCodeId())
+	           ->setTaxInc($item->getVatInc());
+	        $price = $taxService->addTax($price);
+	    }
+	
+	    return $price['price'] * $item->getQty();
 	}
 	
 	/**
@@ -168,13 +203,14 @@ class Cart extends AbstractCollection
 	{
 		$sub = 0;
 	
-		foreach($this as $item) {
-			$sub = $sub + $item->getLineCost();
+		foreach($this->getEntities() as $item) {
+			$sub = $sub + $this->getLineCost($item);
 		}
 	
 		$this->subTotal = $sub;
 		$this->total = $this->subTotal + (float) $this->shipping;
 	}
+	
 	
 	/**
 	 * Set the shipping cost
@@ -242,24 +278,37 @@ class Cart extends AbstractCollection
 	}
 	
 	/**
-	 * Set the service locator.
-	 *
-	 * @param ServiceLocatorInterface $serviceLocator
-	 * @return \Shop\Model\Cart
+	 * @return \Shop\Service\Taxation $taxService
 	 */
-	public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
+	public function getTaxService()
 	{
-		$this->serviceLocator = $serviceLocator;
+		return $this->taxService;
+	}
+
+	/**
+	 * @param \Shop\Service\Taxation $taxService
+	 */
+	public function setTaxService($taxService)
+	{
+		$this->taxService = $taxService;
 		return $this;
 	}
-	
+
 	/**
-	 * Get the service locator.
-	 *
-	 * @return \Zend\ServiceManager\ServiceLocatorInterface
+	 * @return \Shop\Service\ProductCategory $productCategoryService
 	 */
-	public function getServiceLocator()
+	public function getProductCategoryService()
 	{
-		return $this->serviceLocator;
+		return $this->productCategoryService;
 	}
+
+	/**
+	 * @param \Shop\Service\ProductCategory $productCategoryService
+	 */
+	public function setProductCategoryService($productCategoryService)
+	{
+		$this->productCategoryService = $productCategoryService;
+		return $this;
+	}
+
 }

@@ -12,22 +12,28 @@
     		<th>Total</th>
     		<th>&nbsp;</th>
     	</tr>
+    	
     	<?php foreach ($this->cart()->getCart() as $item): ?>
     	<tr>
-    		<td><?=$item->name;?></td>
-    		<td><?=$item->category;?> / <?=$item->description;?></td>
-    		<td><?=$this->cart()->formatAmount($item->price);?></td>
+    		<td><?=$item->getName();?></td>
+    		<td><?=$item->getCategory();?> / <?=$item->getDescription();?></td>
+    		<td><?=$this->cart()->formatAmount($item->getPrice());?></td>
     		<td>
-    			<input type="number" name="quantity[<?=$item->productId;?>]" class="input-mini" value="<?=$item->qty;?>">
+    			<input type="number" name="quantity[<?=$item->getProductId();?>]" class="input-mini" value="<?=$item->getQty();?>">
     		</td>
-    		<td><?=$this->cart()->formatAmount($item->getLineCost());?></td>
+    		<td><?=$this->cart()->getLineCost($item);?></td>
     		<td><a href="<?=$this->url('shop/cart', array(
     			'action'	=> 'remove',
-    			'id'		=> $item->productId
+    			'id'		=> $item->getProductId()
     		));?>"><?=$this->ztbIcon('remove');?></a>
     	</tr>
-    	
     	<?php endforeach; ?>
+    	<tr>
+    	   <td colspan="2">&nbsp;</td>
+    	   <th colspan="2"><p class="text-right">Total:</p></th>
+    	   <td><?=$this->cart()->getSubTotal();?></td>
+    	   <td>&nbsp;</td>
+    	</tr>
     	
     </table>
     <div class="text-center">

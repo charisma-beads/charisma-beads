@@ -38,5 +38,10 @@ class Login extends Form
     		'name'    => 'security',
     	    'type'    => 'csrf',
     	));
+    	
+    	$this->add(array(
+    	    'name' => 'returnTo',
+    	    'type' => 'hidden',
+    	));
     }
 }

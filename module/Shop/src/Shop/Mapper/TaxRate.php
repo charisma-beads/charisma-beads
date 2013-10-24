@@ -9,4 +9,5 @@ class TaxRate extends AbstractMapper
 	protected $primary = 'taxRateId';
 	protected $model = 'Shop\Model\TaxRate';
 	protected $hydrator = 'Shop\Hydrator\TaxRate';
+	
 }

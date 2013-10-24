@@ -2,10 +2,9 @@
 
 return array(
     'shared'        => array(
-    	'Shop\Model\CartItem'					=> false,
+        'Shop\Form\Customer\Address'            => false,
     ),
 	'invokables'    => array(
-	    
 	    'Shop\InputFilter\Product' 			    => 'Shop\InputFilter\Product',
 		'Shop\InputFilter\ProductCategory'	    => 'Shop\InputFilter\ProductCategory',
 		'Shop\InputFilter\ProductImage'		    => 'Shop\InputFilter\ProductImage',
@@ -36,12 +35,14 @@ return array(
 		'Shop\Mapper\TaxCode'				    => 'Shop\Mapper\TaxCode',
 		'Shop\Mapper\TaxRate'				    => 'Shop\Mapper\TaxRate',
 		
-		'Shop\Model\Cart'					    => 'Shop\Model\Cart',
-		'Shop\Model\CartItem'					=> 'Shop\Model\CartItem',
-		
 		'Shop\Service\Product' 				    => 'Shop\Service\Product',
 		'Shop\Service\ProductCategory'          => 'Shop\Service\ProductCategory',
 		'Shop\Service\Shipping'                 => 'Shop\Service\Shipping',
 		'Shop\Service\Taxation'                 => 'Shop\Service\Taxation',
 	),
+    'factories' => array(
+        'Shop\Form\Customer\Address'            => 'Shop\Service\Factory\AddressFormFactory',
+        
+        'Shop\Service\Cart'                     => 'Shop\Service\Factory\CartFactory',
+    ),
 );
