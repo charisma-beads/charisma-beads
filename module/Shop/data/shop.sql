@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS `country` (
   `postZoneId` int(10) unsigned NOT NULL,
   `country` varchar(150) NOT NULL,
   PRIMARY KEY (`countryId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
 
 -- --------------------------------------------------------
 
@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS `country` (
 
 DROP TABLE IF EXISTS `customerAddress`;
 CREATE TABLE IF NOT EXISTS `customerAddress` (
-  `addressId` int(10) unsigned NOT NULL,
+  `addressId` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `userId` int(5) unsigned NOT NULL,
   `countryId` int(2) unsigned DEFAULT '0',
   `address1` varchar(80) DEFAULT NULL,
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `customerBillingAddress` (
   `customerBillingAddressId` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `customerAddressId` int(10) unsigned NOT NULL,
   PRIMARY KEY (`customerBillingAddressId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
 
 -- --------------------------------------------------------
 
@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `customerDeliveryAddress` (
   `customerDeliveryAddressId` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `customerAddressId` int(10) unsigned NOT NULL,
   PRIMARY KEY (`customerDeliveryAddressId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
 
 -- --------------------------------------------------------
 
@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `order` (
   `vatTotal` decimal(10,2) NOT NULL DEFAULT '0.00',
   `txnId` varchar(19) DEFAULT NULL,
   PRIMARY KEY (`orderId`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;
 
 -- --------------------------------------------------------
 
@@ -95,8 +95,8 @@ CREATE TABLE IF NOT EXISTS `orderLines` (
   `qty` int(5) unsigned NOT NULL DEFAULT '0',
   `price` decimal(4,2) NOT NULL DEFAULT '0.00',
   `vatPercent` decimal(4,2) NOT NULL DEFAULT '0.00',
-  PRIMARY KEY (`orderId`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  PRIMARY KEY (`orderLineId`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;
 
 -- --------------------------------------------------------
 
@@ -109,7 +109,7 @@ CREATE TABLE IF NOT EXISTS `orderStatus` (
   `orderStatusId` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `status` varchar(200) NOT NULL,
   PRIMARY KEY (`orderStatusId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
 
 -- --------------------------------------------------------
 
@@ -125,7 +125,7 @@ CREATE TABLE IF NOT EXISTS `postCost` (
   `cost` decimal(6,2) NOT NULL DEFAULT '0.00',
   `vatInc` int(1) unsigned NOT NULL,
   PRIMARY KEY (`postCostId`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;
 
 -- --------------------------------------------------------
 
@@ -138,7 +138,7 @@ CREATE TABLE IF NOT EXISTS `postLevel` (
   `postLevelId` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `postLevel` decimal(5,2) unsigned NOT NULL DEFAULT '0.00',
   PRIMARY KEY (`postLevelId`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;
 
 -- --------------------------------------------------------
 
@@ -152,7 +152,7 @@ CREATE TABLE IF NOT EXISTS `postZone` (
   `taxCodeId` int(10) unsigned NOT NULL,
   `zone` varchar(45) NOT NULL,
   PRIMARY KEY (`postZoneId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
 
 -- --------------------------------------------------------
 
@@ -187,7 +187,7 @@ CREATE TABLE IF NOT EXISTS `product` (
   PRIMARY KEY (`productId`),
   UNIQUE KEY `ident` (`ident`),
   KEY `ProductCategoryId` (`productCategoryId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7054 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
 
 -- --------------------------------------------------------
 
@@ -210,7 +210,7 @@ CREATE TABLE IF NOT EXISTS `productCategory` (
   PRIMARY KEY (`productCategoryId`),
   UNIQUE KEY `ident` (`ident`),
   KEY `productImageId` (`productImageId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=150 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
 
 -- --------------------------------------------------------
 
@@ -229,7 +229,7 @@ CREATE TABLE IF NOT EXISTS `productImage` (
   `dateModified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`productImageId`),
   KEY `productId` (`productId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6789 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
 
 -- --------------------------------------------------------
 
@@ -258,7 +258,7 @@ CREATE TABLE IF NOT EXISTS `productPostUnit` (
   `productPostUnitId` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `postUnit` decimal(6,2) unsigned NOT NULL,
   PRIMARY KEY (`productPostUnitId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
 
 -- --------------------------------------------------------
 
@@ -271,7 +271,7 @@ CREATE TABLE IF NOT EXISTS `productSize` (
   `productSizeId` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `size` varchar(60) NOT NULL,
   PRIMARY KEY (`productSizeId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=38 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
 
 -- --------------------------------------------------------
 
@@ -284,7 +284,7 @@ CREATE TABLE IF NOT EXISTS `productStockStatus` (
   `productStockStautsId` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `stockStatus` varchar(50) NOT NULL,
   PRIMARY KEY (`productStockStautsId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
 
 -- --------------------------------------------------------
 
@@ -299,7 +299,7 @@ CREATE TABLE IF NOT EXISTS `taxCode` (
   `taxCode` varchar(2) NOT NULL,
   `description` varchar(60) NOT NULL,
   PRIMARY KEY (`taxCodeId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
 
 -- --------------------------------------------------------
 
@@ -312,7 +312,7 @@ CREATE TABLE IF NOT EXISTS `taxRate` (
   `taxRateId` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `taxRate` decimal(4,3) unsigned NOT NULL,
   PRIMARY KEY (`taxRateId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
 
 --
 -- Constraints for dumped tables

@@ -8,7 +8,7 @@ $resultArray = array();
 
 while($obj = $result->fetch_object()) {
 	$resultArray[] = array(
-		'userId'		=> $obj-> customer_id,
+		'userId'		=> $obj->customer_id,
 		'firstname' 	=> $obj->first_name,
 		'lastname'		=> $obj->last_name,
 		'email'			=> $obj->email,
@@ -27,9 +27,8 @@ $result = $mysqli->query("TRUNCATE user");
 
 foreach ($resultArray as $values) {
 	$result = $mysqli->query("
-		INSERT INTO user (userId, firstname, lastname, email, passwd, role, dateCreated, dateModified)
+		INSERT INTO user (firstname, lastname, email, passwd, role, dateCreated, dateModified)
 		VALUES (
-			'".$values['userId']."',
 			'".$values['firstname']."',
 			'".$values['lastname']."',
 			'".$values['email']."',
