@@ -36,6 +36,7 @@ return array(
                     	'__NAMESPACE__' => 'Application\Controller',
                         'controller' 	=> 'Index',
                         'action'     	=> 'index',
+                        'force-ssl'     => 'http'
                     ),
                 ),
             ),
@@ -47,6 +48,7 @@ return array(
                         '__NAMESPACE__' => 'Application\Controller',
                         'controller'    => 'Index',
                         'action'        => 'index',
+                        'force-ssl'     => 'http'
                     ),
                 ),
             ),
@@ -59,7 +61,8 @@ return array(
             				'defaults' => array(
             					'__NAMESPACE__' => 'Application\Controller',
                         		'controller'    => 'Admin',
-                        		'action'        => 'dashboard'
+                        		'action'        => 'dashboard',
+            				    'force-ssl'     => 'ssl'
             				),
             			),
             		),
@@ -71,6 +74,7 @@ return array(
 	            				'__NAMESPACE__' => 'Application\Controller',
 	            				'controller'    => 'SessionManager',
 	            				'action'        => 'index',
+	            			    'force-ssl'     => 'ssl'
 	            			),
 	            		),
 	            		'may_terminate' => true,
@@ -80,7 +84,8 @@ return array(
 	            				'options' => array(
 	            					'route' => '/delete',
 									'defaults' => array(
-	            						'action' => 'delete',
+	            						'action'     => 'delete',
+									    'force-ssl'  => 'ssl'
 	            					)
 	            				),
 	            			),
@@ -92,7 +97,8 @@ return array(
 	            						//'id'		=> '\d+'
 	            					),
 	            					'defaults'      => array(
-	            						'action' => 'view',
+	            						'action'     => 'view',
+	            					    'force-ssl'  => 'ssl'
 	            					),
 	            				),
 	            			),
@@ -101,7 +107,8 @@ return array(
 	            				'options' => array(
 	            					'route'         => '/list',
 	            					'defaults'      => array(
-	            						'action' => 'list',
+	            						'action'     => 'list',
+	            					    'force-ssl'  => 'ssl'
 	            					),
 	            				),
 	            			),
@@ -113,8 +120,9 @@ return array(
 	            						'page'			=> '\d+'
 	            					),
 	            					'defaults'      => array(
-	            						'action' => 'list',
-	            						'page' => 1
+	            						'action'     => 'list',
+	            						'page'       => 1,
+	            					    'force-ssl'  => 'ssl'
 	            					),
 	            				),
 	            			),

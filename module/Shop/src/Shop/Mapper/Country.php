@@ -9,4 +9,6 @@ class Country extends AbstractMapper
     protected $primary = 'countryId';
     protected $model = 'Shop\Model\Country';
     protected $hydrator = 'Shop\Hydrator\Country';
+    
+    
 }

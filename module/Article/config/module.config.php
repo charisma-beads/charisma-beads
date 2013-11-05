@@ -33,8 +33,9 @@ return array(
                     ),
                     'defaults'      => array(
                     	'__NAMESPACE__' => 'Article\Controller',
-                    	'controller' => 'Article',
-                    	'action' => 'view'
+                    	'controller'    => 'Article',
+                    	'action'        => 'view',
+                        'force-ssl'     => 'http'
 					),
                 ),
             ),
@@ -52,6 +53,7 @@ return array(
 								'__NAMESPACE__' => 'Article\Controller',
 								'controller'    => 'Article',
 								'action'        => 'list',
+							    'force-ssl'     => 'ssl'
 							),
 						),
 					),

@@ -53,6 +53,7 @@ return array(
                         '__NAMESPACE__' => 'User\Controller',
                         'controller'    => 'User',
                         'action'        => 'index',
+                        'force-ssl'     => 'ssl'
                     ),
                 ),
                 'may_terminate' => true,
@@ -65,8 +66,9 @@ return array(
                 				'action'     => '[a-zA-Z][a-zA-Z0-9_-]*'
                 			),
                 			'defaults' => array(
-                				'controller' => 'User',
-                				'action' => 'index',
+                				'controller'    => 'User',
+                				'action'        => 'index',
+                			    'force-ssl'     => 'ssl'
                 			),
                 		),
                 	),
@@ -76,7 +78,8 @@ return array(
                 			'route' => '/register',
                 			'defaults' => array(
                 				'controller'    => 'User',
-                				'action' => 'register',
+                				'action'        => 'register',
+                			    'force-ssl'     => 'ssl'
                 			),
                 		),
                 	),
@@ -86,7 +89,8 @@ return array(
                 			'route' => '/thank-you',
                 			'defaults' => array(
                 				'controller'    => 'User',
-                				'action' => 'thank-you',
+                				'action'        => 'thank-you',
+                			    'force-ssl'     => 'ssl'
                 			),
                 		),
                 	),
@@ -96,7 +100,8 @@ return array(
 							'route' => '/authenticate',
 							'defaults' => array(
 								'controller'    => 'Auth',
-								'action' => 'authenticate',
+								'action'        => 'authenticate',
+							    'force-ssl'     => 'ssl'
 							),
 						),
     				),
@@ -106,7 +111,8 @@ return array(
     						'route' => '/logout',
     						'defaults' => array(
     							'controller'    => 'Auth',
-    							'action' => 'logout',
+    							'action'        => 'logout',
+    						    'force-ssl'     => 'ssl'
     						),
     					),
     				),
@@ -116,7 +122,8 @@ return array(
 							'route' => '/login',
 							'defaults' => array(
 								'controller'    => 'Auth',
-								'action' => 'login',
+								'action'        => 'login',
+							    'force-ssl'     => 'ssl'
 							),
 						),
     				),
@@ -132,6 +139,7 @@ return array(
         						'__NAMESPACE__' => 'User\Controller',
         						'controller'    => 'Admin',
         						'action'        => 'index',
+        					    'force-ssl'     => 'ssl'
         					),
         				),
         				'may_terminate' => true,
@@ -145,7 +153,8 @@ return array(
         								'id'		=> '\d+'
         							),
         							'defaults'      => array(
-        								'action' => 'edit',
+        								'action'        => 'edit',
+        							    'force-ssl'     => 'ssl'
         							),
         						),
         					),
@@ -157,8 +166,9 @@ return array(
         								'page'			=> '\d+'
         							),
         							'defaults'      => array(
-        								'action' => 'list',
-        								'page' => 1
+        								'action'        => 'list',
+        								'page'          => 1,
+        							    'force-ssl'     => 'ssl'
         							),
         						),
         					),

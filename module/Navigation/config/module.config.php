@@ -31,6 +31,7 @@ return array(
         						'__NAMESPACE__' => 'Navigation\Controller',
         						'controller'    => 'Menu',
         						'action'        => 'list',
+        					    'force-ssl'     => 'ssl'
         					),
         				),
         			),
@@ -47,6 +48,7 @@ return array(
         						'__NAMESPACE__' => 'Navigation\Controller',
         						'controller'    => 'Page',
         						'action'        => 'list',
+        					    'force-ssl'     => 'ssl'
         					),
         				),
         			),

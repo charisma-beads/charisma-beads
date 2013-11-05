@@ -28,6 +28,7 @@ return array(
 						'__NAMESPACE__' => 'Admin\Controller',
 						'controller'    => 'Admin',
 						'action'        => 'index',
+					    'force-ssl'     => 'ssl'
 					),
 				),
 				'may_terminate' => true,

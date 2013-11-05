@@ -9,7 +9,7 @@ class CustomerAddress extends AbstractModel
     /**
      * @var int
      */
-    protected $addressId;
+    protected $customerAddressId;
     
     /**
      * @var int
@@ -67,19 +67,19 @@ class CustomerAddress extends AbstractModel
     protected $dateModified;
     
 	/**
-	 * @return number $addressId
+	 * @return number $customerAddressId
 	 */
-	public function getAddressId ()
+	public function getCustomerAddressId ()
 	{
 		return $this->addressId;
 	}
 
 	/**
-	 * @param number $addressId
+	 * @param number $customerAddressId
 	 */
-	public function setAddressId ($addressId)
+	public function setCustomerAddressId ($addressId)
 	{
-		$this->addressId = $addressId;
+		$this->customerAddressId = $addressId;
 		return $this;
 	}
 

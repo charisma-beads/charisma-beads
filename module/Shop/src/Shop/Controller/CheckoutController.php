@@ -8,9 +8,14 @@ use Zend\View\Model\ViewModel;
 class CheckoutController extends AbstractController
 {
     /**
-     * @var \Shop\Model\Cart
+     * @var \Shop\Service\Cart
      */
     protected $cart;
+    
+    /**
+     * @var \Shop\Service\CustomerAddress
+     */
+    protected $customerAddressService;
     
 	public function indexAction()
 	{
@@ -36,7 +41,20 @@ class CheckoutController extends AbstractController
 	}
 	
 	/**
-	 * @return \Shop\Model\Cart
+	 * @return \Shop\Service\CustomerAddress
+	 */
+	public function getCustomerAddressService()
+	{
+	    if (!$this->customerAddressService) {
+	    	$sl = $this->getServiceLocator();
+	    	$this->customerAddressService = $sl->get('Shop\Service\CustomerAddress');
+	    }
+	    
+	    return $this->customerAddressService;
+	}
+	
+	/**
+	 * @return \Shop\Service\Cart
 	 */
 	protected function getCart()
 	{

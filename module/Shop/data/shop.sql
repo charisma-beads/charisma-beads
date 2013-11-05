@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS `country` (
 
 DROP TABLE IF EXISTS `customerAddress`;
 CREATE TABLE IF NOT EXISTS `customerAddress` (
-  `addressId` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `customerAddressId` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `userId` int(5) unsigned NOT NULL,
   `countryId` int(2) unsigned DEFAULT '0',
   `address1` varchar(80) DEFAULT NULL,

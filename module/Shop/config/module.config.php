@@ -45,6 +45,7 @@ return array(
                         '__NAMESPACE__' => 'Shop\Controller',
                         'controller'    => 'Shop',
                         'action'        => 'shop-front',
+                        'force-ssl'     => 'http'
                     ),
                 ),
                 'may_terminate' => true,
@@ -59,7 +60,8 @@ return array(
                             'defaults' => array(
                             	'controller'    => 'Catalog',
                             	'action'        => 'index',
-                            	'categoryIdent' => ''
+                            	'categoryIdent' => '',
+                                'force-ssl'     => 'http'
                             ),
                         ),
                     	'may_terminate' => true,
@@ -72,8 +74,9 @@ return array(
                     					'productIdent' => '[a-zA-Z0-9][a-zA-Z0-9_-]*'
                     				),
                     				'defaults' => array(
-										'action' => 'view',
-                    					'productIdent' => '',
+										'action'        => 'view',
+                    					'productIdent'  => '',
+                    				    'force-ssl'     => 'http'
 									),
                     			),
                     		),
@@ -85,7 +88,8 @@ return array(
                     					'page' => '\d+'
                     				),
                     				'defaults'      => array(
-                    					'page' => 1
+                    					'page'         => 1,
+                    				    'force-ssl'    => 'http'
                     				),
                     			),
                     		),
@@ -101,7 +105,8 @@ return array(
                 			),
                 			'defaults' => array(
                 				'controller' 	=> 'Cart',
-                				'action'		=> 'view'
+                				'action'		=> 'view',
+                			    'force-ssl'     => 'http'
                 			),
                 		),
                 	),
@@ -114,7 +119,8 @@ return array(
                 			),
                 			'defaults' => array(
                 				'controller' 	=> 'Checkout',
-                				'action'		=> 'index'
+                				'action'		=> 'index',
+                			    'force-ssl'     => 'ssl'
                 			),
                 		),
                 	),
@@ -130,6 +136,7 @@ return array(
         						'__NAMESPACE__' => 'Shop\Controller',
         						'controller'    => 'Shop',
         						'action'        => 'index',
+        					    'force-ssl'     => 'ssl'
         					),
         				),
         			),

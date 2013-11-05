@@ -27,8 +27,9 @@ $result = $mysqli->query("TRUNCATE user");
 
 foreach ($resultArray as $values) {
 	$result = $mysqli->query("
-		INSERT INTO user (firstname, lastname, email, passwd, role, dateCreated, dateModified)
+		INSERT INTO user (userId, firstname, lastname, email, passwd, role, dateCreated, dateModified)
 		VALUES (
+	        '".$values['userId']."',
 			'".$values['firstname']."',
 			'".$values['lastname']."',
 			'".$values['email']."',

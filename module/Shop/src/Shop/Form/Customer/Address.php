@@ -3,17 +3,17 @@ namespace Shop\Form\Customer;
 
 use Zend\Form\Form;
 
-//`countryId` int(2) unsigned DEFAULT '0',
-
-
 class Address extends Form
 {
+    /**
+     * @var \Shop\Mapper\Country
+     */
     protected $countryMapper;
     
     public function init()
     {   
         $this->add(array(
-            'name'  => 'addressId',
+            'name'  => 'customerAddressId',
             'type'  => 'hidden',
         ));
         
@@ -107,6 +107,17 @@ class Address extends Form
         ));
         
         $this->add(array(
+        	'name' => 'country',
+        	'type' => 'select',
+        	'options' => array(
+        		'label' => 'Country',
+        		'required' => true,
+        		'empty_option' => '---Please select a country---',
+        		'value_options' => $this->getCountryList()
+        	),
+        ));
+        
+        $this->add(array(
         	'name' => 'phone',
         	'type'  => 'tel',
         	'attributes' => array(
@@ -127,6 +138,18 @@ class Address extends Form
         	'name' => 'dateModified',
         	'type' => 'hidden',
         ));
+    }
+    
+    public function getCountryList()
+    {
+        $countries = $this->countryMapper->fetchAll();
+        $countryOptions = array();
+         
+        foreach($countries as $country) {
+        	$countryOptions[$country->getCountryId()] = $country->getCountry();
+        }
+        
+        return $countryOptions;
     }
     
     /**
