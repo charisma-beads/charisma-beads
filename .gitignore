@@ -14,3 +14,4 @@ local.php
 *.local.php
 !do_not_remove
 composer.lock
+composer.phar
