@@ -3,6 +3,7 @@
 data/cache/*
 /logs/
 /public/admin/tmp/*
+/public/.htaccess
 /ssl/
 /vendor/
 /sample/
