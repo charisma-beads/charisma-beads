@@ -13,7 +13,7 @@ Installation
 
 Pull From Git
 --------------------
-git clone git@github.com:charisma-beads/charisma-beads.git
+git clone git@github.com:charisma-beads/charisma-beads.git [folder-name]
 
 Run Setup Script
 --------------------
