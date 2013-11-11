@@ -54,6 +54,11 @@ class CustomerAddress extends AbstractModel
     /**
      * @var string
      */
+    protected $country;
+    
+    /**
+     * @var string
+     */
     protected $phone;
     
     /**
@@ -216,6 +221,23 @@ class CustomerAddress extends AbstractModel
 	public function setPostcode ($postcode)
 	{
 		$this->postcode = $postcode;
+		return $this;
+	}
+
+	/**
+	 * @return string $country
+	 */
+	public function getCountry()
+	{
+		return $this->country;
+	}
+
+	/**
+	 * @param string $country
+	 */
+	public function setCountry($country)
+	{
+		$this->country = $country;
 		return $this;
 	}
 

@@ -23,7 +23,7 @@ while($obj = $result->fetch_object()) {
 		'address3'		        => $mysqli->real_escape_string($obj->address3),
 		'city'		            => $mysqli->real_escape_string($obj->city),
 		'county'				=> $mysqli->real_escape_string($obj->county),
-		'postcode'				=> $obj->postcode,
+		'postcode'				=> $obj->post_code,
 		'phone'					=> $obj->phone,
 		'dateCreated'			=> $obj->registration_date,
 	);

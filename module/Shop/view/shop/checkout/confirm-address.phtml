@@ -1,0 +1,24 @@
+<?php $this->headTitle('Checkout - Comfirm Address') ?>
+<h2>Comfirm Address</h2>
+<div class="row">
+
+    <div class="span4 offset1">
+        <h3>Billing Address</h3>
+        <address>
+            <?=$this->formatAddress()->getBillingAddress()?>
+        </address>
+    </div>
+    
+    <div class="span4 offset2">
+        <h3>Delivery Address</h3>
+        <address>
+            <?=$this->formatAddress()->getDeliveryAddress()?>
+        </address>
+    </div>
+</div>
+
+<form method="post" action="<?php echo $this->url('shop/checkout', array(
+    'action' => 'confirm-order',
+)) ?>">
+    <button type="submit" name="submit" class="btn btn-primary" value="confirmAddress">Check & Confirm Order</button>
+</form>

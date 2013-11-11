@@ -40,6 +40,11 @@ class CheckoutController extends AbstractController
 		return new ViewModel();
 	}
 	
+	public function confirmOrderAction()
+	{
+	    
+	}
+	
 	/**
 	 * @return \Shop\Service\CustomerAddress
 	 */

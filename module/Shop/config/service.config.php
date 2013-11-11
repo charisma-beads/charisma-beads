@@ -35,6 +35,7 @@ return array(
 		'Shop\Mapper\TaxCode'				    => 'Shop\Mapper\TaxCode',
 		'Shop\Mapper\TaxRate'				    => 'Shop\Mapper\TaxRate',
 		
+	    'Shop\Service\CustomerAddress'          => 'Shop\Service\CustomerAddress',
 		'Shop\Service\Product' 				    => 'Shop\Service\Product',
 		'Shop\Service\ProductCategory'          => 'Shop\Service\ProductCategory',
 		'Shop\Service\Shipping'                 => 'Shop\Service\Shipping',

@@ -22,10 +22,17 @@ class CustomerAddress extends AbstractMapper
             'customerAddress.customerAddressId = customerDeliveryAddress.customerAddressId',
 			array(),
 			Select::JOIN_LEFT
+		)->join(
+			'country',
+		    'customerAddress.countryId=country.countryId',
+		    array('country' => 'country'),
+		    Select::JOIN_LEFT
 		)->where
 		->equalTo('userId', $id);
 		
-		return $this->fetchAll($select);
+		$resultSet = $this->fetchResult($select);
+		$row = $resultSet->current();
+		return $row;
     }
     
     public function getUserBillingAddress($id)
@@ -39,9 +46,16 @@ class CustomerAddress extends AbstractMapper
     		'customerAddress.customerAddressId = customerBillingAddress.customerAddressId',
     		array(),
     		Select::JOIN_LEFT
-    	)->where
+    	)->join(
+			'country',
+		    'customerAddress.countryId=country.countryId',
+		    array('country' => 'country'),
+		    Select::JOIN_LEFT
+		)->where
     	->equalTo('userId', $id);
     
-    	return $this->fetchAll($select);
+    	$resultSet = $this->fetchResult($select);
+		$row = $resultSet->current();
+		return $row;
     }
 }

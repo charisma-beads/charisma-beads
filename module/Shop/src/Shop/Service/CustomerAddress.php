@@ -11,6 +11,11 @@ class CustomerAddress extends AbstractService
     
     public function getBillingAddress($userId)
     {
-        return $this->getMapper()->getCustomerBillingAddress($userId);
+        return $this->getMapper()->getUserBillingAddress($userId);
+    }
+    
+    public function getDeliveryAddress($userId)
+    {
+        return $this->getMapper()->getUserDeliveryAddress($userId);
     }
 }

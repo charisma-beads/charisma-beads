@@ -15,7 +15,9 @@ Pull From Git
 --------------------
 git clone git@github.com:charisma-beads/charisma-beads.git [folder-name]
 
+cd [folder-name]
+
 Run Setup Script
 --------------------
-bin/setup.sh
+sh bin/setup.sh
 
