@@ -211,7 +211,6 @@ class Cart extends AbstractCollection implements SeekableIterator
 		$this->total = $this->subTotal + (float) $this->shipping;
 	}
 	
-	
 	/**
 	 * Set the shipping cost
 	 *
@@ -278,7 +277,7 @@ class Cart extends AbstractCollection implements SeekableIterator
 	}
 	
 	/**
-	 * @return \Shop\Service\Taxation $taxService
+	 * @return \Shop\Service\Tax $taxService
 	 */
 	public function getTaxService()
 	{
@@ -286,7 +285,7 @@ class Cart extends AbstractCollection implements SeekableIterator
 	}
 
 	/**
-	 * @param \Shop\Service\Taxation $taxService
+	 * @param \Shop\Service\Tax $taxService
 	 */
 	public function setTaxService($taxService)
 	{

@@ -1,0 +1,54 @@
+<?php $checkout = ($this->checkout === true) ? : false; ?>
+
+<table class="table table-striped">
+	<tr>
+		<th>Product</th>
+		<th>Description</th>
+		<th>Price</th>
+		<th>Quantity</th>
+		<th>Total</th>
+		<?php if (!$checkout): ?>
+		<th>&nbsp;</th>
+		<?php endif; ?>
+	</tr>
+	
+	<?php foreach ($this->cart()->getCart() as $item): ?>
+	<tr>
+		<td><?=$item->getName();?></td>
+		<td><?=$item->getCategory();?> / <?=$item->getDescription();?></td>
+		<td><?=$this->cart()->formatAmount($item->getPrice());?></td>
+		<td>
+		    <?php if (!$checkout): ?>
+			<input type="number" name="quantity[<?=$item->getProductId();?>]" class="input-mini" value="<?=$item->getQty();?>">
+			<?php else: ?>
+			<?=$item->getQty();?>
+			<?php endif; ?>
+		</td>
+		<td><?=$this->cart()->getLineCost($item);?></td>
+		<?php if (!$checkout): ?>
+		<td>
+            <a href="<?=$this->url('shop/cart', array(
+                'action'	=> 'remove',
+                'id'		=> $item->getProductId()
+            ));?>"><?=$this->ztbIcon('remove');?></a>
+        </td>
+        <?php endif; ?>
+	</tr>
+	<?php endforeach; ?>
+	<tr>
+        <td colspan="2">&nbsp;</td>
+	    <th colspan="2"><p class="text-right">Postage:</p></th>
+	    <td><?=$this->cart()->getShippingTotal();?></td>
+	    <?php if (!$checkout): ?>
+	    <td>&nbsp;</td>
+	    <?php endif; ?>
+	</tr>
+	<tr>
+        <td colspan="2">&nbsp;</td>
+	    <th colspan="2"><p class="text-right">Total:</p></th>
+	    <td><?=$this->cart()->getSubTotal();?></td>
+	    <?php if (!$checkout): ?>
+	    <td>&nbsp;</td>
+	    <?php endif; ?>
+	</tr>
+</table>

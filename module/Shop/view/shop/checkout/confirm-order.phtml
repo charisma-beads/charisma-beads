@@ -1,2 +1,7 @@
 <?php $this->headTitle('Checkout - Comfirm Order') ?>
 
+<h1>Comfirm Order</h1>
+
+<?=$this->partial('shop/cart', array(
+	'checkout' => true,
+)); ?>

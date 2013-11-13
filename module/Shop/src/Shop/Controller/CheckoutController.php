@@ -42,7 +42,7 @@ class CheckoutController extends AbstractController
 	
 	public function confirmOrderAction()
 	{
-	    
+	    return new ViewModel();
 	}
 	
 	/**

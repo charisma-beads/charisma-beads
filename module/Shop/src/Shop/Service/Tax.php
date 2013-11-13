@@ -1,7 +1,7 @@
 <?php
 namespace Shop\Service;
 
-class Taxation
+class Tax
 {
     /**
      * @var int
@@ -17,6 +17,8 @@ class Taxation
      * @var bool
      */
     public $taxState = false;
+    
+    protected $taxRateService;
     
     public function addTax($price, $taxRate=0)
     {   
@@ -34,8 +36,8 @@ class Taxation
         }
         
         return array(
-            'tax' => number_format($tax, 2),
-            'price' => number_format($price, 2)
+            'tax'   => number_format($tax, 2),
+            'price' => number_format($price, 2),
         );
     }
     
@@ -90,4 +92,20 @@ class Taxation
         return $this;
     }
 
+    /**
+     * @return \Shop\Service\TaxRate $taxRateService
+     */
+    public function getTaxRateService()
+    {
+    	return $this->taxRateService;
+    }
+    
+    /**
+     * @param \Shop\Service\TaxRate $taxRateService
+     */
+    public function setTaxRateService($taxRateService)
+    {
+    	$this->taxRateService = $taxRateService;
+    	return $this;
+    }
 }

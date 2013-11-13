@@ -10,7 +10,7 @@ class CartFactory implements FactoryInterface
 
 	public function createService(ServiceLocatorInterface $serviceLocator)
 	{
-	    $taxService = $serviceLocator->get('Shop\Service\Taxation');
+	    $taxService = $serviceLocator->get('Shop\Service\Tax');
 	    $productCategoryService = $serviceLocator->get('Shop\Service\ProductCategory');
 	    
         $cartService = new Cart();

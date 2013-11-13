@@ -3,39 +3,7 @@
 <form method="post" action="<?=$this->url('shop/cart', array(
 	'action' => 'update'
 ));?>">
-    <table class="table table-striped">
-    	<tr>
-    		<th>Product</th>
-    		<th>Description</th>
-    		<th>Price</th>
-    		<th>Quantity</th>
-    		<th>Total</th>
-    		<th>&nbsp;</th>
-    	</tr>
-    	
-    	<?php foreach ($this->cart()->getCart() as $item): ?>
-    	<tr>
-    		<td><?=$item->getName();?></td>
-    		<td><?=$item->getCategory();?> / <?=$item->getDescription();?></td>
-    		<td><?=$this->cart()->formatAmount($item->getPrice());?></td>
-    		<td>
-    			<input type="number" name="quantity[<?=$item->getProductId();?>]" class="input-mini" value="<?=$item->getQty();?>">
-    		</td>
-    		<td><?=$this->cart()->getLineCost($item);?></td>
-    		<td><a href="<?=$this->url('shop/cart', array(
-    			'action'	=> 'remove',
-    			'id'		=> $item->getProductId()
-    		));?>"><?=$this->ztbIcon('remove');?></a>
-    	</tr>
-    	<?php endforeach; ?>
-    	<tr>
-    	   <td colspan="2">&nbsp;</td>
-    	   <th colspan="2"><p class="text-right">Total:</p></th>
-    	   <td><?=$this->cart()->getSubTotal();?></td>
-    	   <td>&nbsp;</td>
-    	</tr>
-    	
-    </table>
+    <?=$this->partial('shop/cart'); ?>
     <div class="text-center">
     	<button name="update" class="btn" value="update">Update Cart</button>
     	<a href="<?=$this->url('shop/checkout');?>" class="btn">Check Out</a>

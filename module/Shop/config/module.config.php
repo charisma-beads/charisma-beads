@@ -164,6 +164,7 @@ return array(
     'view_manager' => array(
     	'template_map' => array(
     		'cart/summary' => __DIR__ . '/../view/shop/cart/cart-summary.phtml',
+    	    'shop/cart'    => __DIR__ . '/../view/shop/cart/cart.phtml',
     	),
         'template_path_stack' => array(
             'Shop' => __DIR__ . '/../view',

@@ -63,6 +63,11 @@ class Cart extends AbstractViewHelper
 	    return $this->formatAmount($amount);
 	}
 	
+	public function getShippingTotal()
+	{
+	    
+	}
+	
 	public function formatAmount($amount)
     {
         $currency = $this->getCurrencyHelper();

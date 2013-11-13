@@ -35,15 +35,17 @@ return array(
 		'Shop\Mapper\TaxCode'				    => 'Shop\Mapper\TaxCode',
 		'Shop\Mapper\TaxRate'				    => 'Shop\Mapper\TaxRate',
 		
+	    'Shop\Service\Country'                  => 'Shop\Service\Country',
 	    'Shop\Service\CustomerAddress'          => 'Shop\Service\CustomerAddress',
 		'Shop\Service\Product' 				    => 'Shop\Service\Product',
 		'Shop\Service\ProductCategory'          => 'Shop\Service\ProductCategory',
-		'Shop\Service\Shipping'                 => 'Shop\Service\Shipping',
-		'Shop\Service\Taxation'                 => 'Shop\Service\Taxation',
+	    'Shop\Service\TaxRate'                  => 'Shop\Service\TaxRate',
 	),
     'factories' => array(
         'Shop\Form\Customer\Address'            => 'Shop\Service\Factory\AddressFormFactory',
         
         'Shop\Service\Cart'                     => 'Shop\Service\Factory\CartFactory',
+        'Shop\Service\Shipping'                 => 'Shop\Service\Factory\ShippingFactory',
+        'Shop\Service\Tax'                      => 'Shop\Service\Factory\TaxFactory',
     ),
 );
