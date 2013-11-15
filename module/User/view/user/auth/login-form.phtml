@@ -5,7 +5,6 @@ $email = $form->get('email');
 $passwd = $form->get('passwd');
 ?>
 
-<div>
     <form class="form-horizontal"  method="post" action="<?php echo $this->url('user/authenticate') ?>">
         <fieldset>
         <legend><?=$this->legend;?></legend>
@@ -49,4 +48,4 @@ $passwd = $form->get('passwd');
         <?php echo $this->formElement($form->get('returnTo')); ?>
         
     </form>
-</div>
+    

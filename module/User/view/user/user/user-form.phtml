@@ -2,7 +2,7 @@
 $form = $this->form;
 $routeArray = array('action' => $this->formAction);
 ?>
-<div>
+
     <form class="form-horizontal"  method="post" action="<?php echo $this->url('user/default', $routeArray) ?>">
         <fieldset>
         <legend><?php echo ucwords($this->formAction) . $this->legend; ?> </legend>
@@ -75,5 +75,5 @@ $routeArray = array('action' => $this->formAction);
         <?php echo $this->formElement($form->get('returnTo')); ?>
         
     </form>
-</div>
+
 
