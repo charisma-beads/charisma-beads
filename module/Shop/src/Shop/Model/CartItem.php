@@ -14,11 +14,6 @@ class CartItem
 	 * @var Product
 	 */
 	protected $product;
-	
-	/**
-	 * @var string
-	 */
-	protected $category;
     
     public function getQty()
     {
@@ -40,23 +35,6 @@ class CartItem
     public function setProduct(Product $product)
     {
         $this->product = $product;
-        return $this;
-    }
-	
-	/**
-     * @return string $category
-     */
-    public function getCategory()
-    {
-        return $this->category;
-    }
-
-	/**
-     * @param string $category
-     */
-    public function setCategory($category)
-    {
-        $this->category = $category;
         return $this;
     }
     

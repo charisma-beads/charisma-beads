@@ -15,6 +15,7 @@ class ShippingFactory implements FactoryInterface
 	    
 	    $shippingService = new Shipping();
 	    $shippingService->setCountryService($countryService);
+	    $shippingService->setTaxService($taxService);
 	    
 	    return $shippingService;
 	}

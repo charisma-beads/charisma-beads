@@ -39,6 +39,7 @@ return array(
 	    'Shop\Service\CustomerAddress'          => 'Shop\Service\CustomerAddress',
 		'Shop\Service\Product' 				    => 'Shop\Service\Product',
 		'Shop\Service\ProductCategory'          => 'Shop\Service\ProductCategory',
+	    'Shop\Service\Tax'                      => 'Shop\Service\Tax',
 	    'Shop\Service\TaxRate'                  => 'Shop\Service\TaxRate',
 	),
     'factories' => array(
@@ -46,6 +47,5 @@ return array(
         
         'Shop\Service\Cart'                     => 'Shop\Service\Factory\CartFactory',
         'Shop\Service\Shipping'                 => 'Shop\Service\Factory\ShippingFactory',
-        'Shop\Service\Tax'                      => 'Shop\Service\Factory\TaxFactory',
     ),
 );

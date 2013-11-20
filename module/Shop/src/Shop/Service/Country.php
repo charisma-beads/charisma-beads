@@ -9,4 +9,10 @@ class Country extends AbstractService
     protected $form = 'Shop\Form\Country';
     protected $inputFilter = 'Shop\InputFilter\Country';
     
+    public function getCountryPostalRates($id)
+    {
+        $id = (int) $id;
+        return $this->getMapper()->getCountryPostalRates($id);
+    }
+    
 }

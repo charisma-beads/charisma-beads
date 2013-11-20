@@ -9,4 +9,5 @@ class CustomerBillingAddress extends AbstractMapper
     protected $primary = 'customerBillingAddressId';
     protected $model = 'Shop\Model\CustomerBillingAddress';
     protected $hydrator = 'Shop\Hydrator\CustomerBillingAddress';
+    
 }

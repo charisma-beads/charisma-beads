@@ -23,7 +23,7 @@ class CartController extends AbstractController
 			return $this->redirect()->toRoute('shop');
 		}
 		
-		$product = $this->getProductService()->getById(
+		$product = $this->getProductService()->getFullProductById(
 			$this->params()->fromPost('productId')
 		);
 	
@@ -70,7 +70,7 @@ class CartController extends AbstractController
 		}
 		
 		foreach($this->params()->fromPost('quantity') as $id => $value) {
-			$product = $this->getProductService()->getById($id);
+			$product = $this->getProductService()->getFullProductById($id);
 	
 			if (null !== $product) {
 				$this->getCart()->addItem($product, $value);

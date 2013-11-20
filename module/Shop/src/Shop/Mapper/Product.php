@@ -3,7 +3,6 @@ namespace Shop\Mapper;
 
 use Application\Mapper\AbstractMapper;
 use Zend\Db\Sql\Select;
-use Zend\Db\ResultSet\ResultSet;
 
 class Product extends AbstractMapper
 {
@@ -21,46 +20,75 @@ class Product extends AbstractMapper
 		return $row;
 	}
 	
+	public function getFullProductById($id)
+	{
+	    $select = $this->getFullSelect();
+	    $select->where
+	       ->equalTo('product.productId', $id)
+	       ->and->equalTo('product.enabled', 1)
+	       ->and->equalTo('product.discontinued', 0);
+	    
+	    $this->model = 'Shop\Model\FullProduct';
+	    $resultSet = $this->fetchResult($select);
+	    $row = $resultSet->current();
+	    return $row;
+	}
+	
 	public function getProductsByCategory(array $categoryId, $page=null, $count=null, $order=null)
 	{
-		$select = $this->getSql()->select();
-		$select->from($this->table)
-		->join(
-				'taxCode',
-				'product.taxCodeId = taxCode.taxCodeId',
-				array(),
-				Select::JOIN_LEFT
-		)
-		->join(
-				'taxRate',
-				'taxCode.taxRateId = taxRate.taxRateId',
-				array('taxRate'),
-				Select::JOIN_LEFT
-		)
-		->join(
-				'productPostUnit',
-				'product.productPostUnitId = productPostUnit.productPostUnitId',
-				array('postUnit'),
-				Select::JOIN_INNER
-		)
-		->join(
-				'productSize',
-				'product.productSizeId = productSize.productSizeId',
-				array('size'),
-				Select::JOIN_INNER
-		)->where
-		->in('productCategoryId', $categoryId)
-		->and->equalTo('enabled', 1)
-		->and->equalTo('discontinued', 0);
+	    $select = $this->getFullSelect();
+		$select->where
+            ->in('product.productCategoryId', $categoryId)
+            ->and->equalTo('product.enabled', 1)
+            ->and->equalTo('product.discontinued', 0);
+		
+		$this->model = 'Shop\Model\FullProduct';
 	
 		if (true === is_array($order)) {
 			$select = $this->setSortOrder($select, $order);
 		}
 	
 		if (null !== $page) {
-			return $this->paginate($select, $page, $count, new ResultSet());
+			return $this->paginate($select, $page, $count);
 		}
 	
-		return $this->fetchAll($select, new ResultSet());
+		return $this->fetchResult($select);
+	}
+	
+	/**
+	 * @return \Zend\Db\Sql\Select
+	 */
+	public function getFullSelect()
+	{
+	    $select = $this->getSql()->select();
+	    $select->from($this->table)
+	    ->join(
+	        'productCategory',
+	        'product.productCategoryId=productCategory.productCategoryId',
+	        array('category'),
+	        Select::JOIN_INNER
+        )->join(
+	    	'productPostUnit',
+	    	'product.productPostUnitId=productPostUnit.productPostUnitId',
+	    	array('postUnit'),
+	    	Select::JOIN_INNER
+	    )->join(
+	    	'productSize',
+	    	'product.productSizeId=productSize.productSizeId',
+	    	array('size'),
+	    	Select::JOIN_INNER
+	    )->join(
+	    	'taxCode',
+	    	'product.taxCodeId=taxCode.taxCodeId',
+	    	array('taxCode'),
+	    	Select::JOIN_INNER
+	    )->join(
+	    	'taxRate',
+	    	'taxCode.taxRateId=taxRate.taxRateId',
+	    	array('taxRate'),
+	    	Select::JOIN_INNER
+	    );
+	    
+	    return $select;
 	}
 }

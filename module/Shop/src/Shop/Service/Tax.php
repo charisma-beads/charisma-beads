@@ -2,23 +2,21 @@
 namespace Shop\Service;
 
 class Tax
-{
+{   
     /**
      * @var int
      */
-    public $taxCodeId;
-    
-    /**
-     * @var int
-     */
-    public $taxInc;
+    protected $taxInc;
     
     /**
      * @var bool
      */
-    public $taxState = false;
+    protected $taxState = false;
     
-    protected $taxRateService;
+    /**
+     * @var decimal
+     */
+    protected $taxTotal;
     
     public function addTax($price, $taxRate=0)
     {   
@@ -39,23 +37,6 @@ class Tax
             'tax'   => number_format($tax, 2),
             'price' => number_format($price, 2),
         );
-    }
-    
-	/**
-     * @return number $taxCodeId
-     */
-    public function getTaxCodeId()
-    {
-        return $this->taxCodeId;
-    }
-
-	/**
-     * @param number $taxCodeId
-     */
-    public function setTaxCodeId($taxCodeId)
-    {
-        $this->taxCodeId = $taxCodeId;
-        return $this;
     }
 
 	/**
@@ -91,21 +72,22 @@ class Tax
         $this->taxState = $taxState;
         return $this;
     }
-
-    /**
-     * @return \Shop\Service\TaxRate $taxRateService
-     */
-    public function getTaxRateService()
-    {
-    	return $this->taxRateService;
-    }
     
-    /**
-     * @param \Shop\Service\TaxRate $taxRateService
-     */
-    public function setTaxRateService($taxRateService)
-    {
-    	$this->taxRateService = $taxRateService;
-    	return $this;
-    }
+	/**
+	 * @return \float $taxTotal
+	 */
+	public function getTaxTotal()
+	{
+		return $this->taxTotal;
+	}
+
+	/**
+	 * @param float $taxTotal
+	 */
+	public function setTaxTotal($taxTotal)
+	{
+		$this->taxTotal = $taxTotal;
+		return $this;
+	}
+
 }

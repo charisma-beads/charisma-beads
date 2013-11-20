@@ -31,12 +31,13 @@
 		<ul class="thumbnails">
 	
 		<?php foreach ($this->products as $row): ?>
+		<?php   \FB::info($row);?>
 		    <li class="span3">
 		    	<div class="thumbnail text-center product-item-box">
-		    		<img data-src="holder.js/200x100/auto" alt="<?php echo $this->escapehtml($row->name); ?>">
-		    		<h5><?php echo $this->escapehtml($row->name);?> <?php echo $this->escapehtml($row->size); ?></h5>
-		    		<p><?php echo $this->escapehtml($row->shortDescription); ?></p>
-		    		<p><b><?php echo $this->cart()->formatAmount($row->price); ?></b> for <?php echo $this->escapehtml(number_format($row->postUnit)); ?>g</p>
+		    		<img data-src="holder.js/200x100/auto" alt="<?php echo $this->escapehtml($row->getName()); ?>">
+		    		<h5><?php echo $this->escapehtml($row->getName());?> <?php echo $this->escapehtml($row->getSize()); ?></h5>
+		    		<p><?php echo $this->escapehtml($row->getShortDescription()); ?></p>
+		    		<p><b><?php echo $this->cart()->formatAmount($row->getPrice()); ?></b> for <?php echo $this->escapehtml(number_format($row->getPostUnit())); ?>g</p>
 		    		<?php $form = $this->cart()->addForm($row); ?>
 	    		    <?php echo $this->form()->openTag($form); ?>
 					    <div class="input-append">

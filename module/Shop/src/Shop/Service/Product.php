@@ -14,6 +14,12 @@ class Product extends AbstractService
 	 */
 	protected $categoryService;
 	
+	public function getFullProductById($id)
+	{
+	    $id = (int) $id;
+	    return $this->getMapper()->getFullProductById($id);
+	}
+	
 	public function getProductByIdent($ident)
 	{
 		return $this->getMapper()->getProductByIdent($ident);

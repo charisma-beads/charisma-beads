@@ -35,18 +35,20 @@
         <?php endif; ?>
 	</tr>
 	<?php endforeach; ?>
+	<?php if ($this->countryId): ?>
 	<tr>
         <td colspan="2">&nbsp;</td>
 	    <th colspan="2"><p class="text-right">Postage:</p></th>
-	    <td><?=$this->cart()->getShippingTotal();?></td>
+	    <td><?=$this->cart()->getShippingTotal($this->countryId);?></td>
 	    <?php if (!$checkout): ?>
 	    <td>&nbsp;</td>
 	    <?php endif; ?>
 	</tr>
+	<?php endif; ?>
 	<tr>
         <td colspan="2">&nbsp;</td>
 	    <th colspan="2"><p class="text-right">Total:</p></th>
-	    <td><?=$this->cart()->getSubTotal();?></td>
+	    <td><?=$this->cart()->getTotal();?></td>
 	    <?php if (!$checkout): ?>
 	    <td>&nbsp;</td>
 	    <?php endif; ?>

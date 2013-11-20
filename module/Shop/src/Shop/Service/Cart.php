@@ -32,6 +32,13 @@ class Cart extends AbstractCollection implements SeekableIterator
 	protected $shipping = 0;
 	
 	/**
+	 * Total of tax
+	 * 
+	 * @var decimal
+	 */
+	protected $taxTotal = 0;
+	
+	/**
 	 * ZNS for Persistance
 	 *
 	 * @var Zend\Session\Container
@@ -49,11 +56,6 @@ class Cart extends AbstractCollection implements SeekableIterator
 	 * @var \Shop\Service\Taxation
 	 */
 	protected $taxService;
-	
-	/**
-	 * @var \Shop\Service\ProductCategory
-	 */
-	protected $productCategoryService;
 	
 	/**
 	 * Constructor
@@ -82,11 +84,9 @@ class Cart extends AbstractCollection implements SeekableIterator
 		}
 		
 		$cartItem = new CartItem();
-		$category = $this->getProductCategoryService();
 		
 		$cartItem->setProduct($product)
-		  ->setQty($qty)
-		  ->setCategory($category->getById($product->getProductCategoryId())->getCategory());
+		  ->setQty($qty);
 		
 		$this->entities[$cartItem->getProductId()] = $cartItem;
 		
@@ -188,12 +188,12 @@ class Cart extends AbstractCollection implements SeekableIterator
 	    
 	    if (true === $item->getTaxable()) {
 	        $taxService = $this->getTaxService();
-	        $taxService->setTaxCodeId($item->getTaxCodeId())
-	           ->setTaxInc($item->getVatInc());
-	        $price = $taxService->addTax($price);
+	        $taxService->setTaxInc($item->getVatInc());
+	        $price = $taxService->addTax($price, $item->getTaxRate());
+	        $this->taxTotal += $price['tax'] * $item->getQty();
 	    }
 	
-	    return $price['price'] * $item->getQty();
+	    return ($price['price'] + $price['tax']) * $item->getQty();
 	}
 	
 	/**
@@ -202,13 +202,14 @@ class Cart extends AbstractCollection implements SeekableIterator
 	public function calculateTotals()
 	{
 		$sub = 0;
+		$this->taxTotal = 0;
 	
 		foreach($this->getEntities() as $item) {
 			$sub = $sub + $this->getLineCost($item);
 		}
 	
 		$this->subTotal = $sub;
-		$this->total = $this->subTotal + (float) $this->shipping;
+		$this->total = $this->subTotal + $this->shipping;
 	}
 	
 	/**
@@ -290,23 +291,6 @@ class Cart extends AbstractCollection implements SeekableIterator
 	public function setTaxService($taxService)
 	{
 		$this->taxService = $taxService;
-		return $this;
-	}
-
-	/**
-	 * @return \Shop\Service\ProductCategory $productCategoryService
-	 */
-	public function getProductCategoryService()
-	{
-		return $this->productCategoryService;
-	}
-
-	/**
-	 * @param \Shop\Service\ProductCategory $productCategoryService
-	 */
-	public function setProductCategoryService($productCategoryService)
-	{
-		$this->productCategoryService = $productCategoryService;
 		return $this;
 	}
 
