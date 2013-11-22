@@ -17,6 +17,11 @@ class CartController extends AbstractController
 	 */
 	protected $productService;
 	
+	/**
+	 * @var \Shop\Service\CustomerAddress
+	 */
+	protected $customerAddressService;
+	
 	public function addAction()
 	{
 		if (!$this->request->isPost()) {
@@ -44,7 +49,15 @@ class CartController extends AbstractController
 	
 	public function viewAction()
 	{
-		return new ViewModel();
+	    if ($this->identity()) {
+	       $countryId = $this->getCustomerAddressService()->getDeliveryAddress($this->identity()->getUserId())->getCountryId();
+	    } else {
+	        $countryId = null;
+	    }
+	    
+		return new ViewModel(array(
+			'countryId' => $countryId
+	    ));
 	}
 	
 	public function removeAction()
@@ -115,5 +128,18 @@ class CartController extends AbstractController
 		}
 	
 		return $this->productService;
+	}
+	
+	/**
+	 * @return \Shop\Service\CustomerAddress
+	 */
+	public function getCustomerAddressService()
+	{
+		if (!$this->customerAddressService) {
+			$sl = $this->getServiceLocator();
+			$this->customerAddressService = $sl->get('Shop\Service\CustomerAddress');
+		}
+		 
+		return $this->customerAddressService;
 	}
 }

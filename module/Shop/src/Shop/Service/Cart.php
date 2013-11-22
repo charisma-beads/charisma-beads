@@ -152,7 +152,7 @@ class Cart extends AbstractCollection implements SeekableIterator
 	public function persist()
 	{   
 		$this->getContainer()->items = $this->entities;
-		$this->getContainer()->shipping = $this->getShippingCost();
+		//$this->getContainer()->shipping = $this->getShippingCost();
 	}
 	
 	/**
@@ -165,9 +165,9 @@ class Cart extends AbstractCollection implements SeekableIterator
 			$this->entities = $this->getContainer()->items;
 		}
 	
-		if (isset($this->getContainer()->shipping)) {
+		/*if (isset($this->getContainer()->shipping)) {
 			$this->setShippingCost($this->getContainer()->shipping);
-		}
+		}*/
 		
 	}
 	
