@@ -45,6 +45,10 @@ return array(
     'factories' => array(
         'Shop\Form\Customer\Address'            => 'Shop\Service\Factory\AddressFormFactory',
         
+        'Shop\Options\Checkout'                 => 'Shop\Service\Factory\CheckoutOptionsFactory',
+        'Shop\Options\Paypal'                   => 'Shop\Service\Factory\PaypalOptionsFactory',
+        'Shop\Options\Shop'                     => 'Shop\Service\Factory\ShopOptionsFactory',
+        
         'Shop\Service\Cart'                     => 'Shop\Service\Factory\CartFactory',
         'Shop\Service\Shipping'                 => 'Shop\Service\Factory\ShippingFactory',
     ),

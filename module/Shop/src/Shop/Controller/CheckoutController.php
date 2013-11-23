@@ -42,7 +42,10 @@ class CheckoutController extends AbstractController
 	
 	public function confirmOrderAction()
 	{
-	    $countryId = $this->getCustomerAddressService()->getDeliveryAddress($this->identity()->getUserId())->getCountryId();
+	    $countryId = $this->getCustomerAddressService()
+            ->getDeliveryAddress(
+                $this->identity()->getUserId()
+		)->getCountryId();
 	    
 	    return new ViewModel(array(
 			'countryId' => $countryId

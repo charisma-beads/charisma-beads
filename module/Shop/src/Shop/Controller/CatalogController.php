@@ -17,6 +17,11 @@ class CatalogController extends AbstractController
 	 */
 	protected $productCategoryService;
 	
+	/**
+	 * @var \Shop\Options\ShopOptions;
+	 */
+	protected $shopOptions;
+	
 	public function indexAction()
 	{
 		$ident = $this->params('categoryIdent', 0);
@@ -24,7 +29,8 @@ class CatalogController extends AbstractController
 		
 		$products = $this->getProductService()->getProductsByCategory(
 			$ident,
-			$page
+			$page,
+		    $this->getShopOptions()->getProductsPerPage()
 		);
 	
 		$category = $this->getProductCategoryService()->getCategoryByIdent(
@@ -74,6 +80,19 @@ class CatalogController extends AbstractController
 	{
 		return $this->getProductCategoryService()
 			->getParentCategories($category);
+	}
+	
+	/**
+	 * @return \Shop\Options\ShopOptions;
+	 */
+	protected function getShopOptions()
+	{
+	    if (!$this->shopOptions) {
+	    	$sl = $this->getServiceLocator();
+	    	$this->shopOptions = $sl->get('Shop\Options\Shop');
+	    }
+	    
+	    return $this->shopOptions;
 	}
 	
 	/**
