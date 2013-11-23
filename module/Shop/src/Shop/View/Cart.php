@@ -81,7 +81,7 @@ class Cart extends AbstractViewHelper
 	    $shipping = $this->getShippingService()->setCountryId($countryId);
 	    $cost = $shipping->calculateShipping($this->getCart());
 	    $this->getCart()->setShippingCost($cost);
-	    \FB::info($shipping);
+	    
 	    return $this->formatAmount($this->getCart()->getShippingCost());
 	}
 	

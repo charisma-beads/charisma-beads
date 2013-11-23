@@ -66,10 +66,6 @@ class Shipping
         
         $this->setShippingTax($price['tax']);
         
-        \FB::info($this->shippingTotal);
-        \FB::info($itemLevel);
-        \FB::info($price);
-        
         return $price['price'] + $price['tax'];
     }
     
