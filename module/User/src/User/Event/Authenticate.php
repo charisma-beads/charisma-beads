@@ -7,7 +7,7 @@ use Zend\Http\Request;
 
 class Authenticate
 {
-    public function checkAcl(MvcEvent $event)
+    public static function checkAcl(MvcEvent $event)
     {
         if (!$event->getRequest() instanceof Request) {
     	    return;
