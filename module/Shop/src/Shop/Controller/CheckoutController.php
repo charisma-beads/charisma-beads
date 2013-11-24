@@ -52,6 +52,13 @@ class CheckoutController extends AbstractController
 	    ));
 	}
 	
+	public function processOrderAction()
+	{
+	    // this is where we add the order to the database,
+	    // send email order, offer a printable version of order
+	    // and redirect to payment choice.
+	}
+	
 	/**
 	 * @return \Shop\Service\CustomerAddress
 	 */
