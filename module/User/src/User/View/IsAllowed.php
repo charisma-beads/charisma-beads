@@ -48,7 +48,7 @@ class IsAllowed extends AbstractViewHelper
         
         $acl = $this->getServiceLocator()
             ->getServiceLocator()
-            ->get('User\Service\AclFactory');
+            ->get('User\Service\Acl');
         $identity = $this->view->plugin('identity');
     
         $this->pluginIsAllowed = new PluginIsAllowed($acl);

@@ -31,7 +31,7 @@ class PageController extends AbstractController
     
     	$request = $this->getRequest();
     	if ($request->isPost()) {
-			$result = $this->getPageService()->add($request->getPost());
+			$result = $this->getPageService()->addPage($request->getPost());
 			
 			if ($result instanceof PageForm) {
 				
@@ -92,7 +92,7 @@ class PageController extends AbstractController
     	$request = $this->getRequest();
 		if ($request->isPost()) {
 			
-			$result = $this->getPageService()->edit($page, $request->getPost());
+			$result = $this->getPageService()->editPage($page, $request->getPost());
 			
 			if ($result instanceof PageForm) {
 				

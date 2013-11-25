@@ -21,6 +21,7 @@ class AbstractService implements ServiceLocatorAwareInterface
 	protected $form;
 	protected $inputFilter;
 	protected $mapperClass;
+	protected $saveOverRide;
 	
 	public function getById($id)
 	{
@@ -45,15 +46,17 @@ class AbstractService implements ServiceLocatorAwareInterface
 		return $this->save($form->getData());
 	}
 	
-	public function edit($model, $post)
+	public function edit($model, $post, $form = null)
 	{
-		$form  = $this->getForm($model, $post);
+		$form  = ($form) ? $form : $this->getForm($model, $post);
 		
 		if (!$form->isValid()) {
 			return $form;
 		}
 		
-		return $this->saveUser($form->getData());
+		$save = ($this->saveOverRide) ? : 'save';
+		
+		return $this->$save($form->getData());
 	}
 	
 	public function save($data)

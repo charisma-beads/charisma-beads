@@ -73,7 +73,7 @@ class UserController extends AbstractController
 		$request = $this->getRequest();
 		if ($request->isPost()) {
 				
-			$result = $this->getUserService()->edit($user, $request->getPost());
+			$result = $this->getUserService()->editUser($user, $request->getPost());
 				
 			if ($result instanceof UserForm) {
 

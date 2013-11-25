@@ -73,10 +73,10 @@ class Authentication extends ZendAuthenticationService
      * @param  array $credentials Matched pair array containing email/passwd
      * @return boolean
      */
-    public function authenticate($credentials)
+    public function doAuthentication($credentials)
     {
     	$adapter    = $this->getAuthAdapter($credentials);
-    	$result     = parent::authenticate($adapter);
+    	$result     = $this->authenticate($adapter);
     
     	if (!$result->isValid()) {
     		return false;

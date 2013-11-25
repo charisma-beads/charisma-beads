@@ -62,7 +62,7 @@ class AuthController extends AbstractActionController
             return $viewModel; // re-render the login form
         }
 
-        if (false === $this->auth->authenticate($form->getData())) {
+        if (false === $this->auth->doAuthentication($form->getData())) {
         	$this->flashMessenger()->addErrorMessage(
         		'Login failed, Please try again.'
         	);

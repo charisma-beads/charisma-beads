@@ -12,7 +12,7 @@ class AclMenu extends AbstractViewHelper
 	public function __invoke($container = null, $menu = null, $partial = null, $useZtb = true)
     {
     	/* @var $acl \User\Service\Acl */
-        $acl = $this->getServiceLocator()->getServiceLocator()->get('User\Service\AclFactory');
+        $acl = $this->getServiceLocator()->getServiceLocator()->get('User\Service\Acl');
         
         if ($container == 'model') {
             $container = $this->getPages($menu);

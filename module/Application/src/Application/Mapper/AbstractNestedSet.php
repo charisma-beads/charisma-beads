@@ -286,7 +286,7 @@ abstract class AbstractNestedSet extends AbstractMapper
      * @param string $insertType
      * @return int
      */
-    public function insert(array $data, $position = 0, $insertType = 'insert')
+    public function insertRow(array $data, $position = 0, $insertType = 'insert')
     {
         $num = $this->fetchAll()->count();
         $row = array();

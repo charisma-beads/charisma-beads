@@ -28,7 +28,7 @@ class IsAllowed extends AbstractPlugin
         if (!$this->acl) {
             $acl = $this->getController()
                 ->getServiceLocator()
-                ->get('User\Service\AclFactory');
+                ->get('User\Service\Acl');
             
             $this->acl = $acl;
         }

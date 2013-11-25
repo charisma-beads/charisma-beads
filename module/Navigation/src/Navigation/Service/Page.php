@@ -42,7 +42,7 @@ class Page extends AbstractService
         return $result;
 	}
 	
-	public function add($post)
+	public function addPage($post)
 	{
 		$page = $this->getMapper()->getModel();
 		$form  = $this->getForm($page, $post);
@@ -55,10 +55,10 @@ class Page extends AbstractService
 		
 		$data = $this->getMapper()->extract($form->getData());
 		
-		return $this->getMapper()->insert($data, $position, $insertType);
+		return $this->getMapper()->insertRow($data, $position, $insertType);
 	}
 	
-	public function edit(PageModel $page, $post)
+	public function editPage(PageModel $page, $post)
 	{
 		$form  = $this->getForm($page, $post);
 	
@@ -76,7 +76,7 @@ class Page extends AbstractService
 				$del = $this->delete($page->getPageId());
 	
 				if ($del) {
-					$result = $this->add($post);
+					$result = $this->addPage($post);
 				}
 			} else {
 				$data = $this->getMapper()->extract($form->getData());

@@ -12,6 +12,6 @@ return array(
     ),
     'factories' => array(
     	'Zend\Authentication\AuthenticationService'	=> 'User\Service\Factory\AuthenticationFactory',
-        'User\Service\AclFactory'					=> 'User\Service\Factory\AclFactory',
+        'User\Service\Acl'					        => 'User\Service\Factory\AclFactory',
     ),
 );

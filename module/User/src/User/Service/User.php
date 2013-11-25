@@ -9,6 +9,7 @@ class User extends AbstractService
 	protected $mapperClass = 'User\Mapper\User';
 	protected $form = 'User\Form\User';
 	protected $inputFilter = 'User\InputFilter\User';
+	protected $saveOverRide = 'saveUser';
     
     public function getUserByEmail($email, $ignore=null)
     {
@@ -21,7 +22,7 @@ class User extends AbstractService
     	return $this->getMapper()->fetchAllUsers($post);
     }
     
-    public function edit(UserModel $user, $post)
+    public function editUser(UserModel $user, $post)
     {
     	if (!isset($post['role'])) {
     		$post['role'] = $user->getRole();
@@ -31,15 +32,11 @@ class User extends AbstractService
     	
     	$form->getInputFilter()->get('passwd')->setRequired(false);
     	$form->getInputFilter()->get('passwd')->setAllowEmpty(true);
-    	
-    	if (!$form->isValid()) {
-			return $form;
-		}
 		
-		return $this->save($form->getData());
+		return $this->edit($user, $post, $form);
     }
     
-    public function save(UserModel $user)
+    public function saveUser(UserModel $user)
     {
     	$user->setDateModified();
     	
@@ -55,6 +52,6 @@ class User extends AbstractService
     
     	// TODO check for existing email.
     
- 		return parent::save($data);
+ 		return $this->save($data);
     }
 }
