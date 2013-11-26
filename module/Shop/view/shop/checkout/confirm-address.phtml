@@ -2,14 +2,14 @@
 <h2>Comfirm Address</h2>
 <div class="row">
 
-    <div class="span4">
+    <div class="span4 pull-left">
         <h3>Billing Address</h3>
         <address>
             <?=$this->formatAddress()->getBillingAddress()?>
         </address>
     </div>
     
-    <div class="span4">
+    <div class="span4 pull-right">
         <h3>Delivery Address</h3>
         <address>
             <?=$this->formatAddress()->getDeliveryAddress()?>
