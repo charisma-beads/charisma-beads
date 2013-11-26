@@ -12,9 +12,9 @@ $this->headMeta()
 	->appendName('decription', $this->escapehtml($this->page->getDescription()));
 ?>
 <?php if ($this->page->getSlug() != 'welcome'): ?>
-<div class="row-fluid intro">
-	<h2 class="span6"><?php echo $title1; ?> <span class="theme-color"><?php echo $title2; ?></span></h2>
-	<h2 class="span6 text-right">Call Us: <span class="theme-color">0845</span>-838-0284</h2>
+<div>
+	<h2><?=$title1; ?> <span class="theme-color"><?=$title2; ?></span></h2>
+	<hr>
 </div>
 <?php endif; ?>
 

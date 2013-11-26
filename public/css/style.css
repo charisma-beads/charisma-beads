@@ -24,22 +24,14 @@ div.container a.brand {
     padding: 8px 20px 12px 40px;
 }
 
-.intro {
-	border-top: 1px solid #d4d4d4;
-	border-bottom: 1px solid #d4d4d4;
-	margin-bottom: 20px;
-}
-
-.intro h2 {
-	height: 50px;
-	line-height: 50px;
-	float: left;
-}
-
 .product-item-box { height: 275px; }
 
 .text-right { text-align: right; }
 .text-center { text-align: center; }
+
+#product-nav {
+	/*font-size: 12px;*/
+}
 
 /* Shop Styles */
 
@@ -47,4 +39,20 @@ div.container a.brand {
 	padding: 5px;
 	margin: 0px;
 	
+}
+
+#checkout-or {
+	margin-right: auto;
+	margin-left: auto;
+	font-weight: bold;
+	width: 50px;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	background-color: #eee;
+	border: 1px solid #ccc;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	-webkit-border-radius: 25px;
+       -moz-border-radius: 25px;
+            border-radius: 25px;
 }

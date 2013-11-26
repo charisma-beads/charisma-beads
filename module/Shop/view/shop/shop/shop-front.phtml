@@ -1,36 +1,19 @@
 <?php $this->headTitle('Shop') ?>
 
-
 <h2>Shop Front</h2>
 
-<div class="row">
-	<div class="span2">
-		<h5>Categories</h5>
-		<?php foreach ($this->category()->getChildCategories() as $cat): ?>
-		
-		<p><a href="<?php echo $this->url('shop/catalog', array(
-		    'categoryIdent' => $cat->getIdent()
-		)); ?>"><?php echo $this->escapehtml($cat->getCategory()); ?></a></p>
-		
-		<?php endforeach; ?>
-	</div>
-	<div class="span10">
-		<ul class="thumbnails">
-	
-		<?php foreach ($this->cats as $row): ?>
-		    <li class="span3">
-		    	<div class="thumbnail text-center">
-		    		<img data-src="holder.js/200x100/auto" alt="">
-		    		<h5><?php echo $this->escapehtml($row->getCategory());?></h5>
-		    		<a href="<?php echo $this->url('shop/catalog', array(
-		    			'categoryIdent' => $row->getIdent()
-		    		)); ?>" class="btn">Click to see all Products in this Category</a>
-		    	</div>
-		    	
-		    </li>
-		<?php endforeach; ?>
-	
-		</ul>
-	</div>
-</div>
+<ul class="thumbnails">
+<?php foreach ($this->cats as $row): ?>
+    <li class="span3">
+    	<div class="thumbnail text-center">
+    		<img data-src="holder.js/200x100/auto" alt="">
+    		<h5><?php echo $this->escapehtml($row->getCategory());?></h5>
+    		<a href="<?php echo $this->url('shop/catalog', array(
+    			'categoryIdent' => $row->getIdent()
+    		)); ?>" class="btn">Click to see all Products in this Category</a>
+    	</div>
+    	
+    </li>
+<?php endforeach; ?>
+</ul>
 

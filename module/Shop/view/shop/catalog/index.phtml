@@ -1,69 +1,43 @@
 <?php $this->headtitle($this->escapehtml($this->category->getCategory())); ?>
 
-<h2><?php echo $this->escapehtml($this->category->getCategory()); ?></h2>
-
-<?php echo $this->breadcrumbs(); ?>
-
-<div class="row">
-	<div class="span2">
-		
-		<?php $subCats = $this->category()->getChildCategories($this->category->getProductCategoryId()); ?>
-		<?php if ($subCats->count() > 0): ?>
-		<h5>In This Category</h5>
-		<?php foreach ($subCats as $cat):?>
-		<p><a href="<?php echo $this->url('shop/catalog', array(
-    		'categoryIdent' => $cat->getIdent()
-    	)); ?>"><?php echo $this->escapehtml($cat->getCategory()); ?></a></p>
-		<?php endforeach; ?>
-		<?php endif; ?>
-		
-		<h5>Categories</h5>
-		<?php foreach ($this->category()->getChildCategories() as $cat): ?>
-		
-		<p><a href="<?php echo $this->url('shop/catalog', array(
-		    'categoryIdent' => $cat->getIdent()
-		)); ?>"><?php echo $this->escapehtml($cat->getCategory()); ?></a></p>
-		
-		<?php endforeach; ?>
-	</div>
-	
-	<div class="span10">
-		<ul class="thumbnails">
-	
-		<?php foreach ($this->products as $row): ?>
-		<?php   \FB::info($row);?>
-		    <li class="span3">
-		    	<div class="thumbnail text-center product-item-box">
-		    		<img data-src="holder.js/200x100/auto" alt="<?php echo $this->escapehtml($row->getName()); ?>">
-		    		<h5><?php echo $this->escapehtml($row->getName());?> <?php echo $this->escapehtml($row->getSize()); ?></h5>
-		    		<p><?php echo $this->escapehtml($row->getShortDescription()); ?></p>
-		    		<p><b><?php echo $this->cart()->formatAmount($row->getPrice()); ?></b> for <?php echo $this->escapehtml(number_format($row->getPostUnit())); ?>g</p>
-		    		<?php $form = $this->cart()->addForm($row); ?>
-	    		    <?php echo $this->form()->openTag($form); ?>
-					    <div class="input-append">
-					    <?php echo $this->formInput($form->get('qty')); ?>
-					    <?php echo $this->formButton($form->get('buy-item')); ?>
-					    </div>
-					    <?php echo $this->formHidden($form->get('productId')); ?>
-					    <?php echo $this->formHidden($form->get('returnTo')); ?>
-				    <?php echo $this->form()->closeTag(); ?>
-		    	</div>
-		    </li>
-		<?php endforeach; ?>
-	
-		</ul>
-		
-		<?php echo $this->paginationControl(
-		    $this->products,
-		    'Elastic',
-		    'paginate',
-			array(
-				'route'		=> 'shop/catalog/page',
-				'params' 	=> array(
-					'categoryIdent' => $this->category->getIdent()
-				)
-			)
-		); ?>
-		
-	</div>
+<h2>
+    <?=$this->escapehtml($this->category->getCategory()); ?>
+</h2>
+<div>
+    <?=$this->breadcrumbs(); ?>
 </div>
+
+<ul class="thumbnails">
+<?php foreach ($this->products as $row): ?>
+    <li class="span3">
+    	<div class="thumbnail text-center product-item-box">
+    		<img data-src="holder.js/200x100/auto" alt="<?=$this->escapehtml($row->getName()); ?>">
+    		<h5><?=$this->escapehtml($row->getName());?> <?=$this->escapehtml($row->getSize()); ?></h5>
+    		<p><?=$this->escapehtml($row->getShortDescription()); ?></p>
+    		<p><b><?=$this->cart()->formatAmount($row->getPrice()); ?></b> for <?=$this->escapehtml(number_format($row->getPostUnit())); ?>g</p>
+    		<?php $form = $this->cart()->addForm($row); ?>
+		    <?=$this->form()->openTag($form); ?>
+			    <div class="input-append">
+			    <?=$this->formInput($form->get('qty')); ?>
+			    <?=$this->formButton($form->get('buy-item')); ?>
+			    </div>
+			    <?=$this->formHidden($form->get('productId')); ?>
+			    <?=$this->formHidden($form->get('returnTo')); ?>
+		    <?=$this->form()->closeTag(); ?>
+    	</div>
+    </li>
+<?php endforeach; ?>
+</ul>
+
+<?=$this->paginationControl(
+    $this->products,
+    'Elastic',
+    'paginate',
+	array(
+		'route'		=> 'shop/catalog/page',
+		'params' 	=> array(
+			'categoryIdent' => $this->category->getIdent()
+		)
+	)
+); ?>
+		
