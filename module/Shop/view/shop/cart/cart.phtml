@@ -15,7 +15,7 @@
 	<?php foreach ($this->cart()->getCart() as $item): ?>
 	<tr>
 		<td><?=$item->getName();?></td>
-		<td><?=$item->getCategory();?> / <?=$item->getDescription();?></td>
+		<td><?=$item->getCategory();?> / <?=$item->getShortDescription();?></td>
 		<td><?=$this->cart()->formatAmount($item->getPrice());?></td>
 		<td>
 		    <?php if (!$checkout): ?>

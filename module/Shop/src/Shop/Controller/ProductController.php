@@ -16,6 +16,11 @@ class ProductController extends AbstractController
 		return new ViewModel();
 	}
 	
+	public function listAction()
+	{
+	    
+	}
+	
 	/**
 	 * @return \Shop\Service\Product
 	 */

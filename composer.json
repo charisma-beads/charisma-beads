@@ -16,6 +16,12 @@
 	"license" : [
 		"BSD-3-Clause"
 	],
+	"repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/shaunfreeman/ZfcTwitterBootstrap"
+        }
+    ],
 	"require" : {
 		"php" : ">=5.3.3",
 		"firephp/firephp-core" : "0.4.0",

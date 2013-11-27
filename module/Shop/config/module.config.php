@@ -105,29 +105,29 @@ return array(
 		'routes' => array(
 			'shop' => array(
 				'type' => 'Literal',
-				'options' => array(
-					'route' => '/shop',
+				'options'       => array(
+					'route'    => '/shop',
 					'defaults' => array(
-						'__NAMESPACE__' => 'Shop\Controller',
-						'controller' => 'Shop',
-						'action' => 'shop-front',
-						'force-ssl' => 'http'
+						'__NAMESPACE__'   => 'Shop\Controller',
+						'controller'      => 'Shop',
+						'action'          => 'shop-front',
+						'force-ssl'       => 'http'
 					)
 				),
 				'may_terminate' => true,
-				'child_routes' => array(
-					'catalog' => array(
-						'type' => 'Segment',
+				'child_routes'  => array(
+					'catalog'  => array(
+						'type'    => 'Segment',
 						'options' => array(
-							'route' => '/[:categoryIdent]',
-							'constraints' => array(
+							'route'          => '/[:categoryIdent]',
+							'constraints'    => array(
 								'categoryIdent' => '[a-zA-Z0-9][a-zA-Z0-9_-]*'
 							),
-							'defaults' => array(
-								'controller' => 'Catalog',
-								'action' => 'index',
+							'defaults'       => array(
+								'controller'    => 'Catalog',
+								'action'        => 'index',
 								'categoryIdent' => '',
-								'force-ssl' => 'http'
+								'force-ssl'     => 'http'
 							)
 						),
 						'may_terminate' => true,
@@ -221,20 +221,65 @@ return array(
 			'admin' => array(
 				'child_routes' => array(
 					'shop' => array(
-						'type' => 'Segment',
+						'type'    => 'Segment',
 						'options' => array(
-							'route' => '/shop',
-							'defaults' => array(
+							'route'      => '/shop',
+							'defaults'   => array(
 								'__NAMESPACE__' => 'Shop\Controller',
-								'controller' => 'Shop',
-								'action' => 'index',
-								'force-ssl' => 'ssl'
-							)
-						)
-					)
-				)
-			)
-		)
+								'controller'    => 'Shop',
+								'action'        => 'index',
+								'force-ssl'     => 'ssl'
+							),
+						),
+					    'may_terminate'    => true,
+					    'child_routes' => array(
+					        'product' => array(
+					            'type'     => 'Segment',
+    					        'options'  => array(
+                                    'route'     => '/product',
+    					            'defaults' => array(
+    					                'controller'   => 'Product',
+    					                'action'       => 'list',
+    					                'force-ssl'    => 'ssl',
+                                    ),
+                                ),
+					            'may_terminate'    => true,
+					            'child_routes'     => array(
+					                'edit' => array(
+					                	'type'    => 'Segment',
+					                	'options' => array(
+					                		'route'         => '/[:action[/id/[:id]]]',
+					                		'constraints'   => array(
+					                			'action'    => '[a-zA-Z][a-zA-Z0-9_-]*',
+					                			'id'		=> '\d+'
+					                		),
+					                		'defaults'      => array(
+					                			'action'        => 'edit',
+					                			'force-ssl'     => 'ssl'
+					                		),
+					                	),
+					                ),
+					                'page' => array(
+					                	'type'    => 'Segment',
+					                	'options' => array(
+					                		'route'         => '/page/[:page]',
+					                		'constraints'   => array(
+					                			'page'			=> '\d+'
+					                		),
+					                		'defaults'      => array(
+					                			'action'        => 'list',
+					                			'page'          => 1,
+					                			'force-ssl'     => 'ssl'
+					                		),
+					                	),
+					                ),
+					            ),
+				            ),
+					    ),
+					),
+				),
+			),
+		),
 	),
 	'navigation' => array(
 		'admin' => array(
@@ -246,7 +291,27 @@ return array(
 						'action' => 'index',
 						'route' => 'admin/shop',
 						'resource' => 'menu:admin'
-					)
+					),
+				    'products' => array(
+				    	'label' => 'Products',
+				    	'action' => 'index',
+				    	'route' => 'admin/shop/product',
+				    	'resource' => 'menu:admin',
+				        'pages' => array(
+				            'list' => array(
+				            	'label' => 'List All Products',
+				            	'action' => 'list',
+				            	'route' => 'admin/shop/product',
+				            	'resource' => 'menu:admin'
+				            ),
+				            'add' => array(
+				            	'label' => 'Add New User',
+				            	'action' => 'add',
+				            	'route' => 'admin/shop/product/edit',
+				            	'resource' => 'menu:admin'
+				            ),
+				        )
+				    ),
 				),
 				'route' => 'admin/shop',
 				'resource' => 'menu:admin'

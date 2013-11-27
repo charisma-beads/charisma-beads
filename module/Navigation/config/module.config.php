@@ -81,6 +81,7 @@ return array(
 	),
     'view_manager' => array(
     	'template_map' => array(
+    	    'navigation/tb-menu'        => __DIR__ . '/../view/navigation/tb-menu.phtml',
     		'navigation/tb-nested-menu' => __DIR__ . '/../view/navigation/tb-nested-menu.phtml',
     		'menu/menu-form' 			=> __DIR__ . '/../view/navigation/menu/menu-form.phtml',
             'page/page-form' 			=> __DIR__ . '/../view/navigation/page/page-form.phtml',
