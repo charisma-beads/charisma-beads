@@ -52,6 +52,11 @@ class Product extends AbstractService
 			);
 	}
 	
+	public function fetchAllProducts($post = array())
+	{
+		return $this->getMapper()->fetchAllProducts($post);
+	}
+	
 	public function getCategoryService()
 	{
 		if (!$this->categoryService) {

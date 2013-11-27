@@ -239,7 +239,7 @@ return array(
                                     'route'     => '/product',
     					            'defaults' => array(
     					                'controller'   => 'Product',
-    					                'action'       => 'list',
+    					                'action'       => 'index',
     					                'force-ssl'    => 'ssl',
                                     ),
                                 ),
@@ -300,12 +300,12 @@ return array(
 				        'pages' => array(
 				            'list' => array(
 				            	'label' => 'List All Products',
-				            	'action' => 'list',
+				            	'action' => 'index',
 				            	'route' => 'admin/shop/product',
 				            	'resource' => 'menu:admin'
 				            ),
 				            'add' => array(
-				            	'label' => 'Add New User',
+				            	'label' => 'Add New Product',
 				            	'action' => 'add',
 				            	'route' => 'admin/shop/product/edit',
 				            	'resource' => 'menu:admin'
@@ -321,7 +321,8 @@ return array(
 	'view_manager' => array(
 		'template_map' => array(
 			'cart/summary' => __DIR__ . '/../view/shop/cart/cart-summary.phtml',
-			'shop/cart' => __DIR__ . '/../view/shop/cart/cart.phtml'
+			'shop/cart' => __DIR__ . '/../view/shop/cart/cart.phtml',
+		    'shop/product/list'      => __DIR__ . '/../view/shop/product/list.phtml',
 		),
 		'template_path_stack' => array(
 			'Shop' => __DIR__ . '/../view'

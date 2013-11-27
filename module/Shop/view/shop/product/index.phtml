@@ -1,0 +1,27 @@
+<?php $this->headScript()->appendFile($this->basePath() . '/js/admin/product.js'); ?>
+<div class="tab-wrap">
+<!-- 
+	<ul id="productTabs" class="nav nav-tabs">
+	    <li><a href="#admin-user">Products</a></li>
+	</ul>
+	
+	<div id="productTabContent" class="tab-content">
+	    <div class="tab-pane" id="admin-product">
+	    -->
+	    	<div class="row-fluid">
+		    	<form id="search-product" class="form-search" method="post">
+		    	    <input type="text" name="product" placeholder="Product:">
+		    	    <input type="text" name="category" placeholder="Category:">
+		    	    <button type="submit" class="btn btn-primary"><i class="icon-search icon-white"></i> Search</button>
+		    	    <button type="reset" class="btn">Reset</button>
+		    	</form>
+	    	</div>
+	    	
+	    	<div id="table-product" class="row-fluid table-wrap">
+		    	<?=$this->partial('shop/product/list', array(
+		    	    'products' => $this->products
+		    	)); ?>
+	    	</div>
+	    <!-- </div>
+	</div> -->
+</div>

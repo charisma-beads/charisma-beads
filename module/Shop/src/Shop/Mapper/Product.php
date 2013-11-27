@@ -8,7 +8,7 @@ class Product extends AbstractMapper
 {
 	protected $table = 'product';
 	protected $primary = 'productId';
-	protected $model = 'Shop\Model\Product';
+	protected $model = 'Shop\Model\FullProduct';
 	protected $hydrator = 'Shop\Hydrator\Product';
 	
 	public function getProductByIdent($ident)
@@ -28,7 +28,7 @@ class Product extends AbstractMapper
 	       ->and->equalTo('product.enabled', 1)
 	       ->and->equalTo('product.discontinued', 0);
 	    
-	    $this->model = 'Shop\Model\FullProduct';
+	    //$this->model = 'Shop\Model\FullProduct';
 	    $resultSet = $this->fetchResult($select);
 	    $row = $resultSet->current();
 	    return $row;
@@ -53,6 +53,25 @@ class Product extends AbstractMapper
 		}
 	
 		return $this->fetchResult($select);
+	}
+	
+	public function fetchAllProducts(array $post)
+	{
+	    $count = (isset($post['count'])) ? (int) $post['count'] : null;
+	    $product = (isset($post['product'])) ? (string) $post['product'] : '';
+	    $category = (isset($post['category'])) ? (string) $post['category'] : '';
+	    $sort = (isset($post['sort'])) ? (string) $post['sort'] : '';
+	    $page = (isset($post['page'])) ? (int) $post['page'] : null;
+	    
+	    $select = $this->getFullSelect();
+	    
+	    $select = $this->setSortOrder($select, $sort);
+	     
+	    if (null === $page) {
+	    	return $this->fetchResult($select);
+	    } else {
+	    	return $this->paginate($select, $page, $count);
+	    }
 	}
 	
 	/**
