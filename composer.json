@@ -19,7 +19,7 @@
 	"repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/shaunfreeman/ZfcTwitterBootstrap"
+            "url": "https://github.com/shaun-freeman/ZfcTwitterBootstrap"
         }
     ],
 	"require" : {
