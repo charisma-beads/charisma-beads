@@ -65,6 +65,31 @@ class Product extends AbstractMapper
 	    
 	    $select = $this->getFullSelect();
 	    
+	    if (!$product == '') {
+	    	if (substr($product, 0, 1) == '=') {
+	    		$id = (int) substr($product, 1);
+	    		$select->where->equalTo('productId', $id);
+	    	} else {
+	    		$searchTerms = explode(' ', $product);
+	    		$where = $select->where->nest();
+	    		 
+	    		foreach ($searchTerms as $value) {
+	    			$where->like('name', '%'.$value.'%')
+	    			->or
+	    			->like('shortDescription',  '%'.$value.'%');
+	    		}
+	    		 
+	    		$where->unnest();
+	    	}
+	    }
+	    
+	    if (!$category == '') {
+	    	$select->where
+	    	->nest()
+	    	->like('category', '%'.$category.'%')
+	    	->unnest();
+	    }
+	    
 	    $select = $this->setSortOrder($select, $sort);
 	     
 	    if (null === $page) {
