@@ -6,5 +6,6 @@ return array(
 		'Category'		=> 'Shop\View\Category',
 		'Cart'			=> 'Shop\View\Cart',
 	    'FormatAddress' => 'Shop\View\FormatAddress',
+	    'Product'       => 'Shop\View\Product',
 	)
 );

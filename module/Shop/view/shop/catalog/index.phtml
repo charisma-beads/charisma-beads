@@ -14,7 +14,7 @@
     		<img data-src="holder.js/200x100/auto" alt="<?=$this->escapehtml($row->getName()); ?>">
     		<h5><?=$this->escapehtml($row->getName());?> <?=$this->escapehtml($row->getSize()); ?></h5>
     		<p><?=$this->escapehtml($row->getShortDescription()); ?></p>
-    		<p><b><?=$this->cart()->formatAmount($row->getPrice()); ?></b> for <?=$this->escapehtml(number_format($row->getPostUnit())); ?>g</p>
+    		<p><b><?=$this->product()->formatAmount($row->getPrice()); ?></b> for <?=$this->escapehtml(number_format($row->getPostUnit())); ?>g</p>
     		<?php $form = $this->cart()->addForm($row); ?>
 		    <?=$this->form()->openTag($form); ?>
 			    <div class="input-append">

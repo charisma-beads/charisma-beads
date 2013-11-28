@@ -117,6 +117,11 @@ class Product extends AbstractMapper
 	    	array('size'),
 	    	Select::JOIN_INNER
 	    )->join(
+	    	'productGroupPrice',
+	    	'product.productGroupId=productGroupPrice.productGroupId',
+	    	array('group'),
+	    	Select::JOIN_LEFT
+	    )->join(
 	    	'taxCode',
 	    	'product.taxCodeId=taxCode.taxCodeId',
 	    	array('taxCode'),
