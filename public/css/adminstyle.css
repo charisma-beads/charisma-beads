@@ -41,8 +41,8 @@ body.loading .admin-loading {
     display: block;
 }
 
-tr:hover, th:hover {
-	/*cursor: pointer;*/
+.sortable-table th:hover {
+	cursor: pointer;
 }
 
 #userTabs .close {
@@ -50,5 +50,4 @@ tr:hover, th:hover {
 	right: -10px;
 	top: -10px;
 	margin-bottom: -30px;
-	
 }

@@ -41,6 +41,10 @@ class SessionManagerController extends AbstractController
 	
 	public function listAction()
 	{
+	    if (!$this->getRequest()->isXmlHttpRequest()) {
+	    	return $this->redirect()->toRoute('admin/session');
+	    }
+	    
 		$params = $this->params()->fromPost();
 		
 		$viewModel = new ViewModel(array(

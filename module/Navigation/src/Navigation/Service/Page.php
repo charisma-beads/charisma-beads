@@ -11,11 +11,6 @@ class Page extends AbstractService
 	protected $form = 'Navigation\Form\Page';
 	protected $inputFilter = 'Navigation\InputFilter\Page';
 	
-	public function fetchAll($topLevelOnly=false)
-	{
-	  return $this->getMapper()->getFullTree($topLevelOnly);
-	}
-	
 	public function getPageByMenuIdAndLabel($menuId, $label)
 	{
 		$menuId = (int) $menuId;

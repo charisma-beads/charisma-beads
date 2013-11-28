@@ -2,8 +2,6 @@
 namespace Navigation\Mapper;
 
 use Application\Mapper\AbstractNestedSet;
-use Zend\Db\Sql\Select;
-use Zend\Db\Sql\Expression;
 
 class Page extends AbstractNestedSet
 {
@@ -13,48 +11,23 @@ class Page extends AbstractNestedSet
 	protected $hydrator = 'Navigation\Hydrator\Page';
     
     public function getPagesByMenuId($id)
-    {
-    	$select = $this->getSql()->select();
-    	$select->from(array('child' => $this->table))
-    	->columns(array(
-    	    Select::SQL_STAR,
-    	    'depth' => new Expression('(COUNT(parent.'.$this->primary.') - 1)')
-    	))
-    	->join(
-    	    array('parent' => $this->table),
-    	    'child.lft BETWEEN parent.lft AND parent.rgt',
-    	    array(),
-    	    Select::JOIN_INNER
-    	)
-    	->where(array('child.menuId' => $id))
-    	->group('child.'.$this->primary)
-    	->order('child.lft');
+    {   
+        $select = $this->getFullTree();
+        $select->reset('where');
+        $select->where(array('child.menuId' => $id));
     	
     	return $this->fetchResult($select);
     }
     
     public function getPagesByMenu($menu)
     {
-        $select = $this->getSql()->select();
-        $select->from(array('child' => $this->table))
-        ->columns(array(
-            Select::SQL_STAR,
-            'depth' => new Expression('(COUNT(parent.'.$this->primary.') - 1)')
-        ))
-        ->join(
-            array('parent' => $this->table),
-            'child.lft BETWEEN parent.lft AND parent.rgt',
-            array(),
-            Select::JOIN_INNER
-        )
-        ->join(
+        $select = $this->getFullTree();
+        $select->reset('where');
+        $select->join(
         	'menu',
             'child.menuId = menu.menuId',
             array()
-        )
-        ->where(array('menu.menu' => $menu))
-        ->group('child.'.$this->primary)
-        ->order('child.lft');
+        )->where(array('menu.menu' => $menu));
         
         return $this->fetchResult($select);
     }

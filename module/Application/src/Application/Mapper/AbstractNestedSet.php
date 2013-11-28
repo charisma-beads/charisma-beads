@@ -11,12 +11,36 @@ use Zend\Db\Sql\Expression;
 abstract class AbstractNestedSet extends AbstractMapper
 {
     /**
-     * Gets the full tree from database
+     * Gets all items in tree.
      * 
-     * @param bool $topLevelOnly
+     * @see \Zend\Db\ResultSet\ResultSet
+     */
+    public function fetchAll()
+    {
+        $select = $this->getFullTree();
+        	
+        return $this->fetchResult($select);
+    }
+    
+    /**
+     * Get only the top level items in tree.
+     * 
      * @return \Zend\Db\ResultSet\ResultSet
      */
-    public function getFullTree($topLevelOnly=false)
+    public function fetchTopLevelOnly()
+    {
+        $select = $this->getFullTree();
+        $select->having('depth = 0');
+        	
+        return $this->fetchResult($select);
+    }
+    
+    /**
+     * Gets the full tree from database
+     * 
+     * @return \Zend\Db\ResultSet\ResultSet
+     */
+    public function getFullTree()
     {   
         $select = $this->getSql()->select();
         $select->from(array('child' => $this->table))
@@ -33,11 +57,7 @@ abstract class AbstractNestedSet extends AbstractMapper
             ->group('child.'.$this->primary)
             ->order('child.lft');
 		
-        if (true === $topLevelOnly) {
-        	$select->having('depth = 0');;
-        }
-        
-        return $this->fetchResult($select);
+        return $select;
     }
 
     /**
@@ -60,7 +80,7 @@ abstract class AbstractNestedSet extends AbstractMapper
             ->where(array('child.'.$this->primary.' = ?' => $id))
             ->order('parent.lft');
         
-        return $this->fetchResult($select);
+        return $select;
     }
     
     /**
@@ -132,7 +152,7 @@ abstract class AbstractNestedSet extends AbstractMapper
             $select->having('depth = 1');
         }
     
-        return $this->fetchResult($select);
+        return $select;
     }
     
     /**

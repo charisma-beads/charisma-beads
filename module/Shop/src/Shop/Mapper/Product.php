@@ -10,6 +10,8 @@ class Product extends AbstractMapper
 	protected $primary = 'productId';
 	protected $model = 'Shop\Model\FullProduct';
 	protected $hydrator = 'Shop\Hydrator\Product';
+	protected $fetchEnabled = true;
+	protected $fetchDisabled = false;
 	
 	public function getProductByIdent($ident)
 	{
@@ -24,11 +26,8 @@ class Product extends AbstractMapper
 	{
 	    $select = $this->getFullSelect();
 	    $select->where
-	       ->equalTo('product.productId', $id)
-	       ->and->equalTo('product.enabled', 1)
-	       ->and->equalTo('product.discontinued', 0);
+	       ->equalTo('product.productId', $id);
 	    
-	    //$this->model = 'Shop\Model\FullProduct';
 	    $resultSet = $this->fetchResult($select);
 	    $row = $resultSet->current();
 	    return $row;
@@ -37,22 +36,18 @@ class Product extends AbstractMapper
 	public function getProductsByCategory(array $categoryId, $page=null, $count=null, $order=null)
 	{
 	    $select = $this->getFullSelect();
-		$select->where
-            ->in('product.productCategoryId', $categoryId)
-            ->and->equalTo('product.enabled', 1)
-            ->and->equalTo('product.discontinued', 0);
+		$where = $select->where
+            ->in('product.productCategoryId', $categoryId);
 		
-		$this->model = 'Shop\Model\FullProduct';
-	
-		if (true === is_array($order)) {
-			$select = $this->setSortOrder($select, $order);
+		if ($order) {
+		    $select = $this->setSortOrder($select, $order);
 		}
-	
-		if (null !== $page) {
-			return $this->paginate($select, $page, $count);
-		}
-	
-		return $this->fetchResult($select);
+		
+		if (null === $page) {
+	    	return $this->fetchResult($select);
+	    } else {
+	    	return $this->paginate($select, $page, $count);
+	    }
 	}
 	
 	public function fetchAllProducts(array $post)
@@ -133,6 +128,38 @@ class Product extends AbstractMapper
 	    	Select::JOIN_INNER
 	    );
 	    
+	    if ($this->getFetchEnabled()) {
+	    	$select->where->and->equalTo('product.enabled', 1);
+	    }
+	     
+	    if ($this->getFetchDisabled()) {
+	    	$select->where->and->equalTo('product.discontinued', 1);
+	    } else {
+	        $select->where->and->equalTo('product.discontinued', 0);
+	    }
+	    
 	    return $select;
+	}
+	
+	public function getFetchEnabled()
+	{
+		return $this->fetchEnabled;
+	}
+
+	public function setFetchEnabled($fetchEnabled)
+	{
+		$this->fetchEnabled = $fetchEnabled;
+		return $this;
+	}
+	
+	public function getFetchDisabled()
+	{
+		return $this->fetchDisabled;
+	}
+
+	public function setFetchDisabled($fetchDisabled)
+	{
+		$this->fetchDisabled = $fetchDisabled;
+		return $this;
 	}
 }

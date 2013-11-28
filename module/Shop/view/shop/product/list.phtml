@@ -3,7 +3,7 @@
 
 <?php if (count($this->products) > 0): ?>
 
-<table class="table table-hover table-bordered table-condensed">
+<table class="table table-hover table-bordered table-condensed sortable-table">
 	<thead>
 		<tr>
 			<th data-field="productId">Product Id</th>
@@ -18,7 +18,6 @@
 	
 	<tbody>
 		<?php foreach($this->products as $row): ?>
-		
 		<tr>
 			<td><?=$this->escapeHtml($row->getProductId()); ?></td>
 			<td><?=$this->escapeHtml($row->getName()); ?></td>
@@ -31,7 +30,6 @@
 		<?php endforeach; ?>
 	</tbody>
 </table>
-
 
 <?=$this->paginationControl(
     $this->products,

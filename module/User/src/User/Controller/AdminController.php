@@ -31,6 +31,10 @@ class AdminController extends AbstractController
 	
 	public function listAction()
 	{
+	    if (!$this->getRequest()->isXmlHttpRequest()) {
+	    	return $this->redirect()->toRoute('admin/user');
+	    }
+	    
 		$params = $this->params()->fromPost();
 		
 		$viewModel = new ViewModel(array(

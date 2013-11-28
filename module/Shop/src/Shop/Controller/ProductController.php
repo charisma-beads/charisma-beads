@@ -27,6 +27,8 @@ class ProductController extends AbstractController
 	    	'page' => ($page) ? $page : 1
 	    );
 	    
+	    $this->getPorductService()->getMapper()->setFetchEnabled(false);
+	    
 	    return new ViewModel(array(
 	    	'products' => $this->getPorductService()->fetchAllProducts($params)
 	    ));
@@ -34,13 +36,20 @@ class ProductController extends AbstractController
 	
 	public function listAction()
 	{
+	    if (!$this->getRequest()->isXmlHttpRequest()) {
+	    	return $this->redirect()->toRoute('admin/shop/product');
+	    }
+	    
 	    $params = $this->params()->fromPost();
+	    
+	    $this->getPorductService()->getMapper()->setFetchEnabled(false);
 	    
 	    $viewModel = new ViewModel(array(
 	    	'products' => $this->getPorductService()->fetchAllProducts($params)
 	    ));
 	    
 	    $viewModel->setTerminal(true);
+	    
 	    return $viewModel;
 	}
 	

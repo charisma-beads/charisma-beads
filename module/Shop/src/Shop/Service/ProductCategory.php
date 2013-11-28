@@ -11,14 +11,18 @@ class ProductCategory extends AbstractService
 	
 	public function fetchAll($topLevelOnly=false)
 	{
-	  return $this->getMapper()->getFullTree($topLevelOnly);
+	    if ($topLevelOnly) {
+	    	return $this->getMapper()->getTopLevelCategories();
+	    } else {
+	    	return $this->getMapper()->getAllCategories();
+	    }
 	}
 	
 	public function getCategoriesByParentId($parentId)
 	{
 		$parentId = (int) $parentId;
 	
-		return ($parentId != 0) ? $this->getMapper()->getDecendentsByParentId($parentId) : $this->fetchAll(true);
+		return ($parentId != 0) ? $this->getMapper()->getSubCategoriesByParentId($parentId) : $this->fetchAll(true);
 	}
 	
 	public function getCategoryByIdent($ident)
@@ -31,7 +35,7 @@ class ProductCategory extends AbstractService
 	public function getCategoryChildrenIds($categoryId, $recursive=false)
 	{
 		$categories = $this->getMapper()
-			->getDecendentsByParentId($categoryId, $recursive);
+			->getSubCategoriesByParentId($categoryId, $recursive);
 		
 		$cats = array();
 	
@@ -44,6 +48,6 @@ class ProductCategory extends AbstractService
 	
 	public function getParentCategories($categoryId)
 	{
-		return $this->getMapper()->getPathwayByChildId($categoryId);
+		return $this->getMapper()->getBreadCrumbs($categoryId);
 	}
 }
