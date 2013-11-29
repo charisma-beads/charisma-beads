@@ -45,7 +45,7 @@ body.loading .admin-loading {
 	cursor: pointer;
 }
 
-#product-list p {
+#product-list p.product-status {
 	width: 24px;
 	margin-left: auto;
 	margin-right: auto;

@@ -158,6 +158,9 @@
                         this.$element.html(responseText);
                     } else {
                     	this.init();
+                    	$('html, body').animate({
+                            scrollTop: $("body").offset().top
+                        }, 1000);
                     }
             }.bind(this));
         }
