@@ -27,10 +27,10 @@ class ProductController extends AbstractController
 	    	'page' => ($page) ? $page : 1
 	    );
 	    
-	    $this->getPorductService()->getMapper()->setFetchEnabled(false);
+	    $this->getProductService()->getMapper()->setFetchEnabled(false);
 	    
 	    return new ViewModel(array(
-	    	'products' => $this->getPorductService()->fetchAllProducts($params)
+	    	'products' => $this->getProductService()->fetchAllProducts($params)
 	    ));
 	}
 	
@@ -42,15 +42,49 @@ class ProductController extends AbstractController
 	    
 	    $params = $this->params()->fromPost();
 	    
-	    $this->getPorductService()->getMapper()->setFetchEnabled(false);
+	    $this->getProductService()->getMapper()->setFetchEnabled(false);
 	    
 	    $viewModel = new ViewModel(array(
-	    	'products' => $this->getPorductService()->fetchAllProducts($params)
+	    	'products' => $this->getProductService()->fetchAllProducts($params)
 	    ));
 	    
 	    $viewModel->setTerminal(true);
 	    
 	    return $viewModel;
+	}
+	
+	public function changeProductStatusAction()
+	{
+	   $id = (int) $this->params('id', 0);
+		if (!$id) {
+			return $this->redirect()->toRoute('admin/shop/product', array(
+				'action' => 'list'
+			));
+		}
+
+		// Get the Product with the specified id.  An exception is thrown
+		// if it cannot be found, in which case go to the list page.
+		try {
+		    /* @var $product \Shop\Model\Product */
+			$product = $this->getProductService()->getById($id);
+		} catch (\Exception $e) {
+		    $this->setExceptionMessages($e);
+			return $this->redirect()->toRoute('admin/shop/product', array(
+				'action' => 'list'
+			));
+		}
+		
+		if (true === $product->getEnabled()) {
+		    $product->setEnabled(false);
+		} else {
+		    $product->setEnabled(true);
+		}
+		
+		$result = $this->getProductService()->save($product);
+		
+		return $this->redirect()->toRoute('admin/shop/product', array(
+			'action' => 'list'
+		));
 	}
 	
 	public function addAction()
@@ -71,7 +105,7 @@ class ProductController extends AbstractController
 	/**
 	 * @return \Shop\Service\Product
 	 */
-	protected function getPorductService()
+	protected function getProductService()
 	{
 		if (!$this->productService) {
 		    $sl = $this->getServiceLocator();

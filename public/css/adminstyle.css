@@ -45,6 +45,36 @@ body.loading .admin-loading {
 	cursor: pointer;
 }
 
+#product-list p {
+	width: 24px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#product-list a.glyphicons {
+	text-decoration:none;
+}
+
+#product-list a.glyphicons:before {
+	margin-left: 0px;
+}
+
+#product-list a.product-enabled:before {
+	color: #51a351;
+}
+
+#product-list a.product-disabled:before {
+	color: #bd362f;
+}
+
+#product-list a.product-enabled:hover:before {
+	color: #499249;
+}
+
+#product-list a.product-disabled:hover:before {
+	color: #a9302a;
+}
+
 #userTabs .close {
 	position: relative;
 	right: -10px;

@@ -24,9 +24,9 @@ class GlyphIcons extends AbstractHelper
      */
     protected $pFormat = '<p><i class="%s"></i>%s</p>';
     
-    protected $aFormat = '<a href="%s" class="%s"><i></i>%s</a>';
+    protected $aFormat = '<a href="%s" class="%s">%s</a>';
     
-    protected $format = '<span class="%s"><i></i></span>';
+    protected $format = '<i class="%s"></i>';
     
     protected $options = array(
     	'white' => false,

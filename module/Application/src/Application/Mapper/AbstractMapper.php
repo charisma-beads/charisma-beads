@@ -94,6 +94,9 @@ class AbstractMapper implements DbAdapterAwareInterface
 		$select = $this->getSelect()->where(array($this->primary => $id));
 		$rowset = $this->fetchResult($select);
 		$row = $rowset->current();
+		if (!$row) {
+			throw new \Exception("Could not find row $id");
+		}
 		return $row;
 	}
 	

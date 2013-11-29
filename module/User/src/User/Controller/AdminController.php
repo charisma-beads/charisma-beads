@@ -99,6 +99,7 @@ class AdminController extends AbstractController
 		try {
 			$user = $this->getUserService()->getById($id);
 		} catch (\Exception $e) {
+		    $this->setExceptionMessages($e);
 			return $this->redirect()->toRoute('admin/user', array(
 				'action' => 'list'
 			));
