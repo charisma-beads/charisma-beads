@@ -275,6 +275,48 @@ return array(
 					                ),
 					            ),
 				            ),
+					        'category' => array(
+					        	'type'     => 'Segment',
+					        	'options'  => array(
+					        		'route'     => '/category',
+					        		'defaults' => array(
+					        			'controller'   => 'Category',
+					        			'action'       => 'index',
+					        			'force-ssl'    => 'ssl',
+					        		),
+					        	),
+					        	'may_terminate'    => true,
+					        	'child_routes'     => array(
+					        		'edit' => array(
+					        			'type'    => 'Segment',
+					        			'options' => array(
+					        				'route'         => '/[:action[/id/[:id]]]',
+					        				'constraints'   => array(
+					        					'action'    => '[a-zA-Z][a-zA-Z0-9_-]*',
+					        					'id'		=> '\d+'
+					        				),
+					        				'defaults'      => array(
+					        					'action'        => 'edit',
+					        					'force-ssl'     => 'ssl'
+					        				),
+					        			),
+					        		),
+					        		'page' => array(
+					        			'type'    => 'Segment',
+					        			'options' => array(
+					        				'route'         => '/page/[:page]',
+					        				'constraints'   => array(
+					        					'page'			=> '\d+'
+					        				),
+					        				'defaults'      => array(
+					        					'action'        => 'list',
+					        					'page'          => 1,
+					        					'force-ssl'     => 'ssl'
+					        				),
+					        			),
+					        		),
+					        	),
+					        ),
 					    ),
 					),
 				),
@@ -311,6 +353,26 @@ return array(
 				            	'resource' => 'menu:admin'
 				            ),
 				        )
+				    ),
+				    'categories' => array(
+				    	'label' => 'Categories',
+				    	'action' => 'index',
+				    	'route' => 'admin/shop/category',
+				    	'resource' => 'menu:admin',
+				    	'pages' => array(
+				    		'list' => array(
+				    			'label' => 'List All Categories',
+				    			'action' => 'index',
+				    			'route' => 'admin/shop/category',
+				    			'resource' => 'menu:admin'
+				    		),
+				    		'add' => array(
+				    			'label' => 'Add New Category',
+				    			'action' => 'add',
+				    			'route' => 'admin/shop/category/edit',
+				    			'resource' => 'menu:admin'
+				    		),
+				    	)
 				    ),
 				),
 				'route' => 'admin/shop',
