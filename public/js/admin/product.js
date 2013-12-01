@@ -22,7 +22,7 @@ admin.product = {
                     }
             });
         
-            $('#productTabs a[href=#user'+trId+']').tab('show');
+            $('#productTabs a[href=#product'+trId+']').tab('show');
         }
 	}
 };
@@ -35,7 +35,7 @@ $(document).ready(function(){
     });
     
     $('#productTabs a:first').tab('show');
-    userTabs = $('#productTabs a:first');
+    productTabs = $('#productTabs a:first');
     
     $('#productTabs').on('click', '.close', function(e){ 
     	$($(this).parent().attr('href')).remove();

@@ -4,92 +4,32 @@ return array(
 		'userRoles' => array(
 			'guest' => array(
 				'privileges' => array(
-					array(
-						'controller' => 'Shop\Controller\Cart',
-						'action' => 'all'
-					),
-					array(
-						'controller' => 'Shop\Controller\Catalog',
-						'action' => 'all'
-					),
-					array(
-						'controller' => 'Shop\Controller\Checkout',
-						'action' => array(
-							'index'
-						)
-					),
-					array(
-						'controller' => 'Shop\Controller\Paypal',
-						'action' => array(
-							'ipn'
-						)
-					),
-					array(
-						'controller' => 'Shop\Controller\Product',
-						'action' => array(
-							'view'
-						)
-					),
-					array(
-						'controller' => 'Shop\Controller\Shop',
-						'action' => array(
-							'shop-front'
-						)
-					)
-				)
+					array('controller' => 'Shop\Controller\Cart', 'action' => 'all'),
+					array('controller' => 'Shop\Controller\Catalog', 'action' => 'all'),
+					array('controller' => 'Shop\Controller\Checkout', 'action' => array('index')),
+					array('controller' => 'Shop\Controller\Paypal', 'action' => array('ipn')),
+					array('controller' => 'Shop\Controller\Product', 'action' => array('view')),
+					array('controller' => 'Shop\Controller\Shop', 'action' => array('shop-front')),
+				),
 			),
 			'registered' => array(
 				'privileges' => array(
-					array(
-						'controller' => 'Shop\Controller\Cart',
-						'action' => 'all'
-					),
-					array(
-						'controller' => 'Shop\Controller\Catalog',
-						'action' => 'all'
-					),
-					array(
-						'controller' => 'Shop\Controller\Checkout',
-						'action' => 'all'
-					),
-					array(
-						'controller' => 'Shop\Controller\Payment',
-						'action' => 'all'
-					),
-					array(
-						'controller' => 'Shop\Controller\Paypal',
-						'action' => array(
-							'process',
-							'success',
-							'cancel'
-						)
-					),
-					array(
-						'controller' => 'Shop\Controller\Product',
-						'action' => array(
-							'view'
-						)
-					),
-					array(
-						'controller' => 'Shop\Controller\Shop',
-						'action' => array(
-							'shop-front'
-						)
-					)
-				)
+					array('controller' => 'Shop\Controller\Cart', 'action' => 'all'),
+					array('controller' => 'Shop\Controller\Catalog', 'action' => 'all'),
+					array('controller' => 'Shop\Controller\Checkout', 'action' => 'all'),
+					array('controller' => 'Shop\Controller\Payment', 'action' => 'all'),
+					array('controller' => 'Shop\Controller\Paypal', 'action' => array('process', 'success', 'cancel')),
+					array('controller' => 'Shop\Controller\Product', 'action' => array('view')),
+					array('controller' => 'Shop\Controller\Shop', 'action' => array('shop-front')),
+				),
 			),
 			'admin' => array(
 				'privileges' => array(
-					array(
-						'controller' => 'Shop\Controller\Product',
-						'action' => 'all'
-					),
-					array(
-						'controller' => 'Shop\Controller\Shop',
-						'action' => 'all'
-					)
-				)
-			)
+					array('controller' => 'Shop\Controller\Product', 'action' => 'all'),
+				    array('controller' => 'Shop\Controller\Category', 'action' => 'all'),
+					array('controller' => 'Shop\Controller\Shop', 'action' => 'all'),
+				),
+			),
 		),
 		'userResources' => array(
 			'Shop\Controller\Cart',
@@ -98,6 +38,7 @@ return array(
 			'Shop\Controller\Payment',
 			'Shop\Controller\Paypal',
 			'Shop\Controller\Product',
+		    'Shop\Controller\Category',
 			'Shop\Controller\Shop'
 		)
 	),
