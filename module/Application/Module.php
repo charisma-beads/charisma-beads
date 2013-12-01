@@ -24,9 +24,20 @@ class Module implements
 {
     public function onBootstrap(MvcEvent $e)
     {
-        $eventManager        = $e->getApplication()->getEventManager();
+        $app                 = $e->getApplication();
+        $eventManager        = $app->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
+        
+        $config = $app->getConfig();
+        $phpSettings = $config['php_settings'];
+        
+        if ($phpSettings) {
+        	foreach ($phpSettings as $key => $value) {
+        		ini_set($key, $value);
+        	}
+        }
+        
         $this->bootstrapSession($e);
     }
     

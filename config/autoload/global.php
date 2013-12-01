@@ -26,4 +26,10 @@ return array(
 			'Zend\Session\Validator\HttpUserAgent',
 		),
     ),
+    'php_settings' => array(
+    	'display_startup_errors' => false,
+    	'display_errors' => true,
+    	'max_execution_time' => 60,
+    	'date.timezone' => 'Europe/London'
+    ),
 );
