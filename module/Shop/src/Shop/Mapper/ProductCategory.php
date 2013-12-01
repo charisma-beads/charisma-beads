@@ -25,6 +25,16 @@ class ProductCategory extends AbstractNestedSet
 	{
 		$select = $this->getFullTree();
 		$select->having('depth = 0');
+		
+		if ($this->getFetchEnabled()) {
+			$select->where->and->equalTo('child.enabled', 1);
+		}
+		 
+		if ($this->getFetchDisabled()) {
+			$select->where->and->equalTo('child.discontinued', 1);
+		} else {
+			$select->where->and->equalTo('child.discontinued', 0);
+		}
 		 
 		return $this->fetchResult($select);
 	}
@@ -32,6 +42,17 @@ class ProductCategory extends AbstractNestedSet
 	public function getAllCategories()
 	{
 	    $select = $this->getFullTree();
+	    
+	    if ($this->getFetchEnabled()) {
+	    	$select->where->and->equalTo('child.enabled', 1);
+	    }
+	    
+	    if ($this->getFetchDisabled()) {
+	    	$select->where->and->equalTo('child.discontinued', 1);
+	    } else {
+	    	$select->where->and->equalTo('child.discontinued', 0);
+	    }
+	    
 	    return $this->fetchResult($select);
 	}
 	

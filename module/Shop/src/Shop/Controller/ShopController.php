@@ -20,7 +20,7 @@ class ShopController extends AbstractController
 	protected $productCategoryService;
 	
     public function indexAction()
-    {
+    {   
         return new ViewModel();
     }
     
