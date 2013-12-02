@@ -68,9 +68,39 @@ class ProductCategory extends AbstractNestedSet
 	    return $this->fetchResult($select);
 	}
 	
-	public function fetchAllCategories()
+	public function searchCategories($category, $sort)
 	{
+	    $select = $this->getFullTree();
 	    
+	    if (!$category == '') {
+	    	if (substr($category, 0, 1) == '=') {
+	    		$id = (int) substr($category, 1);
+	    		$select->where->equalTo($this->primary, $id);
+	    	} else {
+	    		$searchTerms = explode(' ', $category);
+	    		$where = $select->where->nest();
+	    
+	    		foreach ($searchTerms as $value) {
+	    			$where->like('category', '%'.$value.'%');
+	    		}
+	    
+	    		$where->unnest();
+	    	}
+	    	
+	    	if ($this->getFetchEnabled()) {
+	    		$select->where->and->equalTo('child.enabled', 1);
+	    	}
+	    	
+	    	if ($this->getFetchDisabled()) {
+	    		$select->where->and->equalTo('child.discontinued', 1);
+	    	} else {
+	    		$select->where->and->equalTo('child.discontinued', 0);
+	    	}
+	    }
+	    
+	    $select = $this->setSortOrder($select, $sort);
+	    
+	    return $this->fetchResult($select);
 	}
 	
 	public function getFetchEnabled()

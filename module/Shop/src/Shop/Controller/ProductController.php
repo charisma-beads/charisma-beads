@@ -55,9 +55,10 @@ class ProductController extends AbstractController
 	    return $viewModel;
 	}
 	
-	public function changeProductStatusAction()
+	public function setEnabledAction()
 	{
 	   $id = (int) $this->params('id', 0);
+	   
 		if (!$id) {
 			return $this->redirect()->toRoute('admin/shop/product', array(
 				'action' => 'list'

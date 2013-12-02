@@ -45,33 +45,40 @@ body.loading .admin-loading {
 	cursor: pointer;
 }
 
-#product-list p.product-status {
+#product-list p.product-status,
+#productCategory-list p.productCategory-status {
 	width: 24px;
 	margin-left: auto;
 	margin-right: auto;
 }
 
-#product-list a.glyphicons {
+#product-list a.glyphicons,
+#productCategory-list a.glypicons {
 	text-decoration:none;
 }
 
-#product-list a.glyphicons:before {
+#product-list a.glyphicons:before,
+#productCategory-list a.glypicons:before {
 	margin-left: 0px;
 }
 
-#product-list a.product-enabled:before {
+#product-list a.product-enabled:before,
+#productCategory-list a.productCategory-enabled:before {
 	color: #51a351;
 }
 
-#product-list a.product-disabled:before {
+#product-list a.product-disabled:before,
+#productCategory-list a.productCategory-disabled:before {
 	color: #bd362f;
 }
 
-#product-list a.product-enabled:hover:before {
+#product-list a.product-enabled:hover:before,
+#productCategory-list a.productCategory-enabled:hover:before {
 	color: #499249;
 }
 
-#product-list a.product-disabled:hover:before {
+#product-list a.product-disabled:hover:before,
+#productCategory-list a.productCategory-disabled:hover:before {
 	color: #a9302a;
 }
 

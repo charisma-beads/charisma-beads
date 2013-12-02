@@ -18,9 +18,12 @@ class ProductCategory extends AbstractService
 	    }
 	}
 	
-	public function fetchAllCategories($post = array())
+	public function searchCategories(array $post)
 	{
-		return $this->getMapper()->fetchAllCategories($post);
+	    $category = (isset($post['category'])) ? (string) $post['category'] : '';
+	    $sort = (isset($post['sort'])) ? (string) $post['sort'] : '';
+	    
+		return $this->getMapper()->searchCategories($category, $sort);
 	}
 	
 	public function getCategoriesByParentId($parentId)

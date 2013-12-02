@@ -53,7 +53,7 @@ class Product extends AbstractMapper
 	    if (!$product == '') {
 	    	if (substr($product, 0, 1) == '=') {
 	    		$id = (int) substr($product, 1);
-	    		$select->where->equalTo('productId', $id);
+	    		$select->where->equalTo($this->primary, $id);
 	    	} else {
 	    		$searchTerms = explode(' ', $product);
 	    		$where = $select->where->nest();

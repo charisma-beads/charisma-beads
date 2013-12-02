@@ -5,7 +5,8 @@ return array(
 		'BreadCrumbs'	=> 'Shop\View\Breadcrumb',
 		'Category'		=> 'Shop\View\Category',
 		'Cart'			=> 'Shop\View\Cart',
+	    'Enabled'       => 'Shop\View\Enabled',
 	    'FormatAddress' => 'Shop\View\FormatAddress',
-	    'Product'       => 'Shop\View\Product',
+	    'PriceFormat'   => 'Shop\View\PriceFormat',
 	)
 );

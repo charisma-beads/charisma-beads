@@ -43,10 +43,10 @@ $(document).ready(function(){
     	categoryTabs.tab('show');
     });*/
     
-    $('#table-product').dataGrid({
+    $('#table-category').dataGrid({
     	url : 'category/list',
-    	query: { sort : 'name' },
-    	searchForm : $('#search-product'),
+    	query: { sort : 'lft' },
+    	searchForm : $('#search-category'),
     	paging : 'links',
     	columnSort: true,
     	//rowClick : admin.category.rowClick

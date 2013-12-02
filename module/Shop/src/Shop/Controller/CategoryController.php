@@ -13,18 +13,19 @@ class CategoryController extends AbstractController
     
     public function indexAction()
     {
-        $page = $this->params()->fromRoute('page');
+        $page = $this->params()->fromRoute('page', 1);
 	    
 	    $params = array(
 	    	'sort' => 'lft',
-	    	'count' => 25,
-	    	'page' => ($page) ? $page : 1
 	    );
 	    
 	    $this->getProductCategoryService()->getMapper()->setFetchEnabled(false);
 	    
 	    return new ViewModel(array(
-	    	'products' => $this->getProductCategoryService()->fetchAllCategories($params)
+	    	'categories' => $this->getProductCategoryService()->usePaginator(array(
+	    	    'limit' => 25,
+	    	    'page' => $page
+            ))->searchCategories($params)
 	    ));
     }
     
@@ -39,12 +40,50 @@ class CategoryController extends AbstractController
         $this->getProductCategoryService()->getMapper()->setFetchEnabled(false);
          
         $viewModel = new ViewModel(array(
-        	'categories' => $this->getProductCategoryService()->fetchAllCategories($params)
+        	'categories' => $this->getProductCategoryService()->usePaginator(array(
+	    	    'limit' => 25,
+	    	    'page' => $params['page']
+            ))->searchCategories($params)
         ));
          
         $viewModel->setTerminal(true);
          
         return $viewModel;
+    }
+    
+    public function setEnabledAction()
+    {
+    	$id = (int) $this->params('id', 0);
+    
+    	if (!$id) {
+    		return $this->redirect()->toRoute('admin/shop/category', array(
+    			'action' => 'list'
+    		));
+    	}
+    
+    	// Get the Product with the specified id.  An exception is thrown
+    	// if it cannot be found, in which case go to the list page.
+    	try {
+    		/* @var $product \Shop\Model\Product */
+    		$category = $this->getProductCategoryService()->getById($id);
+    	} catch (\Exception $e) {
+    		$this->setExceptionMessages($e);
+    		return $this->redirect()->toRoute('admin/shop/product', array(
+    			'action' => 'list'
+    		));
+    	}
+    
+    	if (true === $category->getEnabled()) {
+    		$category->setEnabled(false);
+    	} else {
+    		$category->setEnabled(true);
+    	}
+    
+    	$result = $this->getProductCategoryService()->save($category);
+    
+    	return $this->redirect()->toRoute('admin/shop/product', array(
+    		'action' => 'list'
+    	));
     }
     
     public function addAction()
@@ -89,7 +128,7 @@ class CategoryController extends AbstractController
         	$category->setEnabled(true);
         }
         
-        $result = $this->getProductService()->save($category);
+        $result = $this->getProductCategoryService()->save($category);
         
         return $this->redirect()->toRoute('admin/shop/category', array(
         	'action' => 'list'

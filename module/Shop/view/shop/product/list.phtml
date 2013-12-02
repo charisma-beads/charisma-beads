@@ -22,11 +22,14 @@
 	<tbody>
 		<?php foreach($this->products as $row): ?>
 		<tr>
-		    <td><?=$this->product()->getEnabled($row); ?></td>
+		    <td><?=$this->enabled($row, array(
+		    	'table' => 'product',
+		        'route' => 'admin/shop/product/edit',
+		    )); ?></td>
 			<td><?=$this->escapeHtml($row->getProductId()); ?></td>
 			<td><?=$this->escapeHtml($row->getName()); ?></td>
 			<td><?=$this->escapeHtml($row->getShortDescription()); ?></td>
-			<td><?=$this->product()->formatAmount($row->getPrice()); ?>
+			<td><?=$this->priceFormat($row->getPrice()); ?>
 			<td><?=$this->escapeHtml($row->getGroup()); ?>
 			<td><?=$this->escapeHtml($row->getCategory()); ?></td>
 			<td><?=$this->escapeHtml($this->formatDate($row->getDateCreated())); ?></td>

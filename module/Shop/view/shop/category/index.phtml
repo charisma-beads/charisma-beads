@@ -1,1 +1,26 @@
-<?php
+<?php $this->headScript()->appendFile($this->basePath() . '/js/admin/category.js'); ?>
+<div class="tab-wrap">
+<!-- 
+	<ul id="categoryTabs" class="nav nav-tabs">
+	    <li><a href="#admin-user">Categories</a></li>
+	</ul>
+	
+	<div id="categoryTabContent" class="tab-content">
+	    <div class="tab-pane" id="admin-category">
+	    -->
+	    	<div class="row-fluid">
+		    	<form id="search-category" class="form-search" method="post">
+		    	    <input type="text" name="category" placeholder="Category:">
+		    	    <button type="submit" class="btn btn-primary"><i class="icon-search icon-white"></i> Search</button>
+		    	    <button type="reset" class="btn">Reset</button>
+		    	</form>
+	    	</div>
+	    	
+	    	<div id="table-category" class="row-fluid table-wrap">
+		    	<?=$this->partial('shop/category/list', array(
+		    	    'categories' => $this->categories
+		    	)); ?>
+	    	</div>
+	    <!-- </div>
+	</div> -->
+</div>
