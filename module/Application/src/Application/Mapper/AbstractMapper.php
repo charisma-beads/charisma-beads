@@ -56,6 +56,16 @@ class AbstractMapper implements DbAdapterAwareInterface
 	protected $resultSetProtype;
 	
 	/**
+	 * @var boolean
+	 */
+	protected $usePaginator;
+	
+	/**
+	 * @var array
+	 */
+	protected $paginatorOptions;
+	
+	/**
 	 * return an instance of Select
 	 * 
 	 * @param string $tableName
@@ -169,6 +179,24 @@ class AbstractMapper implements DbAdapterAwareInterface
 		return $statement->execute();
 	}
 	
+	public function usePaginator(array $paginatorOptions = array())
+	{
+		$this->usePaginator = true;
+		$this->paginatorOptions = $paginatorOptions;
+		return $this;
+	}
+	
+	public function getPaginatorOptions()
+	{
+		return $this->paginatorOptions;
+	}
+
+	public function setPaginatorOptions($paginatorOptions)
+	{
+		$this->paginatorOptions = $paginatorOptions;
+		return $this;
+	}
+
 	/**
 	 * Paginates the resultset
 	 *
@@ -177,15 +205,23 @@ class AbstractMapper implements DbAdapterAwareInterface
 	 * @param int $limit
 	 * @return \Zend\Paginator\Paginator
 	 */
-	public function paginate(Select $select, $page, $limit, $resultSet=null)
+	public function paginate(Select $select, $resultSet=null)
 	{
 		$resultSet = $resultSet ?: $this->getResultSet();
 		$adapter = new DbSelect($select, $this->getDbAdapter(), $resultSet);
 		$paginator = new Paginator($adapter);
+		
+		$options = $this->getPaginatorOptions();
+		
+		if (isset($options['limit'])) {
+		    $paginator->setItemCountPerPage($options['limit']);
+		}
+		
+		if (isset($options['page'])) {
+		    $paginator->setCurrentPageNumber($options['page']);
+		}
 	
-		$paginator->setItemCountPerPage($limit)
-			->setCurrentPageNumber($page)
-			->setPageRange(5);
+		$paginator->setPageRange(5);
 	
 		return $paginator;
 	}
@@ -199,11 +235,15 @@ class AbstractMapper implements DbAdapterAwareInterface
 	protected function fetchResult(Select $select, $resultSet=null)
 	{
 		$resultSet = $resultSet ?: $this->getResultSet();
-	
-		$statement = $this->getSql()->prepareStatementForSqlObject($select);
-		$result = $statement->execute();
-	
-		$resultSet->initialize($result);
+		
+		if($this->usePaginator) {
+			$this->usePaginator = false;
+			$resultSet = $this->paginate($select, $resultSet);
+		} else {
+            $statement = $this->getSql()->prepareStatementForSqlObject($select);
+            $result = $statement->execute();
+            $resultSet->initialize($result);
+		}
 	
 		return $resultSet;
 	}

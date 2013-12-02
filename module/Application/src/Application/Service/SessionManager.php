@@ -10,8 +10,10 @@ class SessionManager extends AbstractService
 		return $this->getMapper()->getById($id);
 	}
 	
-	public function fetchAllSessions($post = array())
+	public function fetchAllSessions(array $post)
 	{
+	    $sort = (isset($post['sort'])) ? (string) $post['sort'] : '';
+	    
 		return $this->getMapper()->fetchAllSessions($post);
 	}
 	

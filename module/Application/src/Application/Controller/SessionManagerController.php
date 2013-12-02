@@ -14,16 +14,17 @@ class SessionManagerController extends AbstractController
 	
 	public function indexAction()
 	{
-		$page = $this->params()->fromRoute('page');
+		$page = $this->params()->fromRoute('page', 1);
 		
 		$params = array(
 			'sort' => 'id',
-			'count' => 25,
-			'page' => ($page) ? $page : 1
 		);
 		
 		return new ViewModel(array(
-			'sessions' => $this->getSessionService()->fetchAllSessions($params),
+			'sessions' => $this->getSessionService()->usePaginator(array(
+				'limit' => 25,
+			    'page' => $page
+			))->fetchAllSessions($params),
 		));
 	}
 	
@@ -48,7 +49,10 @@ class SessionManagerController extends AbstractController
 		$params = $this->params()->fromPost();
 		
 		$viewModel = new ViewModel(array(
-			'sessions' => $this->getSessionService()->fetchAllSessions($params)
+			'sessions' => $this->getSessionService()->usePaginator(array(
+			    'limit' => 25,
+			    'page' => $params['page']
+			))->fetchAllSessions($params)
 		));
 	
 		$viewModel->setTerminal(true);

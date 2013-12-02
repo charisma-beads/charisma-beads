@@ -68,6 +68,11 @@ class ProductCategory extends AbstractNestedSet
 	    return $this->fetchResult($select);
 	}
 	
+	public function fetchAllCategories()
+	{
+	    
+	}
+	
 	public function getFetchEnabled()
 	{
 		return $this->fetchEnabled;

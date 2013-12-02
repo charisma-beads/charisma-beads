@@ -19,18 +19,17 @@ class ProductController extends AbstractController
 	
 	public function indexAction()
 	{
-	    $page = $this->params()->fromRoute('page');
+	    $page = $this->params()->fromRoute('page', 1);
 	    
-	    $params = array(
-	    	'sort' => 'name',
-	    	'count' => 25,
-	    	'page' => ($page) ? $page : 1
-	    );
+	    $params = array('sort' => 'name');
 	    
 	    $this->getProductService()->getMapper()->setFetchEnabled(false);
 	    
 	    return new ViewModel(array(
-	    	'products' => $this->getProductService()->fetchAllProducts($params)
+	    	'products' => $this->getProductService()->usePaginator(array(
+	    	    'limit' => 25,
+	    	    'page' => $page
+            ))->searchProducts($params)
 	    ));
 	}
 	
@@ -45,7 +44,10 @@ class ProductController extends AbstractController
 	    $this->getProductService()->getMapper()->setFetchEnabled(false);
 	    
 	    $viewModel = new ViewModel(array(
-	    	'products' => $this->getProductService()->fetchAllProducts($params)
+	    	'products' => $this->getProductService()->usePaginator(array(
+	    	    'limit' => 25,
+	    	    'page' => $params['page']
+            ))->searchProducts($params)
 	    ));
 	    
 	    $viewModel->setTerminal(true);

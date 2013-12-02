@@ -25,7 +25,7 @@ class Product extends AbstractService
 		return $this->getMapper()->getProductByIdent($ident);
 	}
 	
-	public function getProductsByCategory($category, $page=false, $count=12, $order=null, $deep=true)
+	public function getProductsByCategory($category, $order=null, $deep=true)
 	{
 		if (is_string($category)) {
 			$cat = $this->getCategoryService()->getCategoryByIdent($category);
@@ -43,18 +43,17 @@ class Product extends AbstractService
 			$categoryId = (null === $ids) ? $categoryId : $ids;
 		}
 	
-		return $this->getMapper()
-			->getProductsByCategory(
-				$categoryId,
-				$page,
-				$count,
-				$order
-			);
+		return $this->getMapper()->getProductsByCategory($categoryId, $order);
 	}
 	
-	public function fetchAllProducts($post = array())
+	public function searchProducts(array $post)
 	{
-		return $this->getMapper()->fetchAllProducts($post);
+	    $product = (isset($post['product'])) ? (string) $post['product'] : '';
+	    $category = (isset($post['category'])) ? (string) $post['category'] : '';
+	    $sort = (isset($post['sort'])) ? (string) $post['sort'] : '';
+	    
+	    return $this->getMapper()->searchProducts($product, $category, $sort);
+	    
 	}
 	
 	public function getCategoryService()

@@ -33,7 +33,7 @@ class Product extends AbstractMapper
 	    return $row;
 	}
 	
-	public function getProductsByCategory(array $categoryId, $page=null, $count=null, $order=null)
+	public function getProductsByCategory(array $categoryId, $order=null)
 	{
 	    $select = $this->getFullSelect();
 		$where = $select->where
@@ -43,21 +43,11 @@ class Product extends AbstractMapper
 		    $select = $this->setSortOrder($select, $order);
 		}
 		
-		if (null === $page) {
-	    	return $this->fetchResult($select);
-	    } else {
-	    	return $this->paginate($select, $page, $count);
-	    }
+		return $this->fetchResult($select);
 	}
 	
-	public function fetchAllProducts(array $post)
+	public function searchProducts($product, $category, $sort)
 	{
-	    $count = (isset($post['count'])) ? (int) $post['count'] : null;
-	    $product = (isset($post['product'])) ? (string) $post['product'] : '';
-	    $category = (isset($post['category'])) ? (string) $post['category'] : '';
-	    $sort = (isset($post['sort'])) ? (string) $post['sort'] : '';
-	    $page = (isset($post['page'])) ? (int) $post['page'] : null;
-	    
 	    $select = $this->getFullSelect();
 	    
 	    if (!$product == '') {
@@ -87,11 +77,7 @@ class Product extends AbstractMapper
 	    
 	    $select = $this->setSortOrder($select, $sort);
 	     
-	    if (null === $page) {
-	    	return $this->fetchResult($select);
-	    } else {
-	    	return $this->paginate($select, $page, $count);
-	    }
+	    return $this->fetchResult($select);
 	}
 	
 	/**

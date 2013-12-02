@@ -16,16 +16,17 @@ class AdminController extends AbstractController
 	
 	public function indexAction()
 	{
-		$page = $this->params()->fromRoute('page');
+		$page = $this->params()->fromRoute('page', 1);
 		
 		$params = array(
 			'sort' => 'lastname',
-			'count' => 25,
-			'page' => ($page) ? $page : 1
 		);
 		
 		return new ViewModel(array(
-			'users' => $this->getUserService()->fetchAllUsers($params)
+			'users' => $this->getUserService()->usePaginator(array(
+	    	    'limit' => 25,
+	    	    'page' => $page
+            ))->searchUsers($params)
 		));
 	}
 	
@@ -38,7 +39,10 @@ class AdminController extends AbstractController
 		$params = $this->params()->fromPost();
 		
 		$viewModel = new ViewModel(array(
-			'users' => $this->getUserService()->fetchAllUsers($params)
+			'users' => $this->getUserService()->usePaginator(array(
+	    	    'limit' => 25,
+	    	    'page' => $params['page']
+            ))->searchUsers($params)
 		));
 	
 		$viewModel->setTerminal(true);

@@ -17,9 +17,13 @@ class User extends AbstractService
     	return $this->getMapper()->getUserByEmail($email, $ignore);
     }
     
-    public function fetchAllUsers($post = array())
+    public function searchUsers($post = array())
     {
-    	return $this->getMapper()->fetchAllUsers($post);
+        $email = (isset($post['email'])) ? (string) $post['email'] : '';
+        $user = (isset($post['user'])) ? (string) $post['user'] : '';
+        $sort = (isset($post['sort'])) ? (string) $post['sort'] : '';
+        
+    	return $this->getMapper()->searchUsers($email, $user, $sort);
     }
     
     public function editUser(UserModel $user, $post)

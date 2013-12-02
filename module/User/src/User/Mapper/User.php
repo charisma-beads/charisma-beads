@@ -32,15 +32,9 @@ class User extends AbstractMapper
         return $row;
     }
     
-    public function fetchAllUsers(array $post)
+    public function searchUsers($email, $user, $sort = '')
     {
     	$this->getResultSet()->getHydrator()->emptyPassword();
-    	
-    	$count = (isset($post['count'])) ? (int) $post['count'] : null;
-    	$email = (isset($post['email'])) ? (string) $post['email'] : '';
-    	$user = (isset($post['user'])) ? (string) $post['user'] : '';
-    	$sort = (isset($post['sort'])) ? (string) $post['sort'] : '';
-    	$page = (isset($post['page'])) ? (int) $post['page'] : null;
     	 
     	$select = $this->getSelect();
     
@@ -79,10 +73,6 @@ class User extends AbstractMapper
     
     	$select = $this->setSortOrder($select, $sort);
     	
-    	if (null === $page) {
-    		return $this->fetchResult($select);
-    	} else {
-    		return $this->paginate($select, $page, $count);
-    	}
+    	return $this->fetchResult($select);
     }
 }

@@ -135,6 +135,12 @@ class AbstractService implements ServiceLocatorAwareInterface
 		return $config[$key];
 	}
 	
+	public function usePaginator($options=array())
+	{
+		$this->getMapper()->usePaginator($options);
+		return $this;
+	}
+	
 	/**
 	 * Set the service locator.
 	 *

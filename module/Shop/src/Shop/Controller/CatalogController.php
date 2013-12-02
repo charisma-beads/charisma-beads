@@ -27,11 +27,10 @@ class CatalogController extends AbstractController
 		$ident = $this->params('categoryIdent', 0);
 		$page = $this->params('page', 1);
 		
-		$products = $this->getProductService()->getProductsByCategory(
-			$ident,
-			$page,
-		    $this->getShopOptions()->getProductsPerPage()
-		);
+		$products = $this->getProductService()->usePaginator(array(
+		    'limit' => $this->getShopOptions()->getProductsPerPage(),
+		    'page'  => $page
+		))->getProductsByCategory($ident);
 	
 		$category = $this->getProductCategoryService()->getCategoryByIdent(
 			$this->params('categoryIdent', '')
