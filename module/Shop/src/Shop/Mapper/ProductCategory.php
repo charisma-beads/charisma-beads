@@ -98,7 +98,11 @@ class ProductCategory extends AbstractNestedSet
 	    	}
 	    }
 	    
-	    $select = $this->setSortOrder($select, $sort);
+	    if ($sort != '') {
+	        $select->reset('order');
+	        $select = $this->setSortOrder($select, $sort);
+	    }
+	    
 	    
 	    return $this->fetchResult($select);
 	}

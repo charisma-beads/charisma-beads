@@ -53,12 +53,12 @@ body.loading .admin-loading {
 }
 
 #product-list a.glyphicons,
-#productCategory-list a.glypicons {
+#productCategory-list a.glyphicons {
 	text-decoration:none;
 }
 
 #product-list a.glyphicons:before,
-#productCategory-list a.glypicons:before {
+#productCategory-list a.glyphicons:before {
 	margin-left: 0px;
 }
 

@@ -61,10 +61,10 @@ class CategoryController extends AbstractController
     		));
     	}
     
-    	// Get the Product with the specified id.  An exception is thrown
+    	// Get the ProductCategory with the specified id.  An exception is thrown
     	// if it cannot be found, in which case go to the list page.
     	try {
-    		/* @var $product \Shop\Model\Product */
+    		/* @var $product \Shop\Model\ProductCategory */
     		$category = $this->getProductCategoryService()->getById($id);
     	} catch (\Exception $e) {
     		$this->setExceptionMessages($e);
@@ -81,7 +81,7 @@ class CategoryController extends AbstractController
     
     	$result = $this->getProductCategoryService()->save($category);
     
-    	return $this->redirect()->toRoute('admin/shop/product', array(
+    	return $this->redirect()->toRoute('admin/shop/category', array(
     		'action' => 'list'
     	));
     }
@@ -99,40 +99,6 @@ class CategoryController extends AbstractController
     public function deleteAction()
     {
         
-    }
-    
-    public function changeCategoryStatusAction()
-    {
-        $id = (int) $this->params('id', 0);
-        if (!$id) {
-        	return $this->redirect()->toRoute('admin/shop/category', array(
-        		'action' => 'list'
-        	));
-        }
-        
-        // Get the Product with the specified id.  An exception is thrown
-        // if it cannot be found, in which case go to the list page.
-        try {
-        	/* @var $product \Shop\Model\Product */
-        	$category = $this->getProductCategoryService()->getById($id);
-        } catch (\Exception $e) {
-        	$this->setExceptionMessages($e);
-        	return $this->redirect()->toRoute('admin/shop/category', array(
-        		'action' => 'list'
-        	));
-        }
-        
-        if (true === $category->getEnabled()) {
-        	$category->setEnabled(false);
-        } else {
-        	$category->setEnabled(true);
-        }
-        
-        $result = $this->getProductCategoryService()->save($category);
-        
-        return $this->redirect()->toRoute('admin/shop/category', array(
-        	'action' => 'list'
-        ));
     }
     
     /**

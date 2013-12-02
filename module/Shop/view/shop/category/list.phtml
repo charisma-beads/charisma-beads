@@ -9,6 +9,8 @@
 		    <th data-field="enabled">&nbsp;</th>
 			<th data-field="productCategoryId">Product Category Id</th>
 			<th data-field="category">Category</th>
+			<th data-field="lft">Lft</th>
+			<th data-field="rgt">Rgt</th>
 			<th data-field="dateCreated">Date Created</th>
 			<th data-field="dateModified">Date Modified</th>
 			<th>Actions</th>
@@ -24,6 +26,8 @@
 		    )); ?></td>
 			<td><?=$this->escapeHtml($row->getProductCategoryId()); ?></td>
 			<td><?=$this->escapeHtml($row->getCategory()); ?></td>
+			<td><?=$this->escapeHtml($row->getLft()); ?></td>
+			<td><?=$this->escapeHtml($row->getRgt()); ?></td>
 			<td><?=$this->escapeHtml($this->formatDate($row->getDateCreated())); ?></td>
 			<td><?=$this->escapeHtml($this->formatDate($row->getDateModified())); ?></td>
 			<td>
