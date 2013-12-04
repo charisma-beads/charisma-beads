@@ -9,9 +9,9 @@
 
         <!-- Le styles -->
         <?=$this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
-            ->prependStylesheet($this->basePath() . '/css/bootstrap-responsive.min.css')
+            ->prependStylesheet($this->basePath() . '/css/bootstrap-responsive.css')
             ->prependStylesheet($this->basePath() . '/css/style.css')
-            ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css') ?>
+            ->prependStylesheet($this->basePath() . '/css/bootstrap.css') ?>
 
         <!-- Scripts -->
         <?=$this->headScript()
@@ -19,8 +19,8 @@
 			->prependFile($this->basePath() . '/js/jquery.placeholder.min.js')
 			->prependFile($this->basePath() . '/js/holder.js')
 			->prependFile($this->basePath() . '/js/html5.js', 'text/javascript', array('conditional' => 'lt IE 9',))
-			->prependFile($this->basePath() . '/js/bootstrap.min.js')
-            ->prependFile($this->basePath() . '/js/jquery.min.js') ?>
+			->prependFile($this->basePath() . '/js/bootstrap.js')
+            ->prependFile('//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js') ?>
 
     </head>
     <body>
