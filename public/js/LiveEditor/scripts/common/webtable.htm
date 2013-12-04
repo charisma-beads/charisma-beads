@@ -271,7 +271,7 @@
                     }
                 }
             }
-            
+
             if(bUseBootstrap){
                 sHTML += '<div onmouseover="over(this)" onmouseout="out(this)" class="item" onclick="applyBootstrapTable(\'table-striped\')" style="cursor:pointer;text-align:center;font-family:Arvo;letter-spacing:1px;font-size:12px;width:115px;">table striped</div>';
                 sHTML += '<div onmouseover="over(this)" onmouseout="out(this)" class="item" onclick="applyBootstrapTable(\'table-bordered\')" style="cursor:pointer;text-align:center;font-family:Arvo;letter-spacing:1px;font-size:12px;width:115px;">table bordered</div>';
@@ -285,18 +285,18 @@
         function applyBootstrapTable(sName) {
             obj.saveForUndo();
 
-            var oTable = I_GetTable();            
+            var oTable = I_GetTable();
             if (!oTable) return;
 
             if(sName=='table-condensed') {
                 if(oTable.className.indexOf('table-condensed')==-1){
-                    oTable.className = oTable.className + ' ' + sName;   
-                } 
+                    oTable.className = oTable.className + ' ' + sName;
+                }
                 else if(oTable.className==''){
-                    oTable.className = 'table ' + sName; 
+                    oTable.className = 'table ' + sName;
                 }
             } else {
-                oTable.className = 'table ' + sName;           
+                oTable.className = 'table ' + sName;
             }
         }
 
@@ -595,7 +595,7 @@
         <td style="padding-left:10px;padding-top:5px;">
             <div style="margin-bottom:3px"><span id="lblThickness">Thickness:</span> <span id="valThickness"></span>
             </div>
-            <input name="inpBorderWidth" id="inpBorderWidth" type="range" min="0" max="30" step="1" title="Range: 0 to 30 in steps of 1" value="1" />
+            <input name="inpBorderWidth" id="inpBorderWidth" type="range" min="0" max="30" step="1" title="Range: 0 to 30 in steps of 1" value="1" style="margin:5px 0 3px;padding:0;width:180px"/>
 	        <script type="text/javascript" language="javascript">
 	            fdSlider.addEvent(document.getElementById("inpBorderWidth"), "change", function (e) {
 	                I_TableBorder($("#inpBorderWidth").val());
@@ -617,7 +617,7 @@
     <td valign="top" colspan="2" style="padding-top:5px;">
             <span id="lblCellWidth">Width:</span> <span id="valCellWidth"></span> <span style="font-family:Arial;cursor:pointer" onclick="cellWidth('');$('#inpCellWidth').val('');$('#valCellWidth').html('');">[x]</span>
             <br />
-            <input name="inpCellWidth" id="inpCellWidth" type="range" min="0" max="500" step="1" title="Range: 0 to 500 in steps of 1" value="1" />
+            <input name="inpCellWidth" id="inpCellWidth" type="range" min="0" max="500" step="1" title="Range: 0 to 500 in steps of 1" value="1" style="margin:5px 0 3px;padding:0;width:180px"/>
 	        <script type="text/javascript" language="javascript">
 	            fdSlider.addEvent(document.getElementById("inpCellWidth"), "change", function (e) {
 	                cellWidth($("#inpCellWidth").val());
@@ -628,7 +628,7 @@
 
             <span id="lblCellHeight">Height:</span> <span id="valCellHeight"></span> <span style="font-family:Arial;cursor:pointer" onclick="cellHeight('');$('#inpCellHeight').val('');$('#valCellHeight').html('');">[x]</span>
             <br />
-            <input name="inpCellHeight" id="inpCellHeight" type="range" min="0" max="500" step="1" title="Range: 0 to 500 in steps of 1" value="1" />
+            <input name="inpCellHeight" id="inpCellHeight" type="range" min="0" max="500" step="1" title="Range: 0 to 500 in steps of 1" value="1" style="margin:5px 0 3px;padding:0;width:180px"/>
 	        <script type="text/javascript" language="javascript">
 	            fdSlider.addEvent(document.getElementById("inpCellHeight"), "change", function (e) {
 	                cellHeight($("#inpCellHeight").val());
@@ -656,7 +656,7 @@
     <div style="border-top:#fff 1px solid;border-bottom:#ccc 1px solid;margin-top:9px;margin-bottom:9px;margin-left:0px;width:333px;height:1px"></div>
 
     <span id="lblCellPadding">CELL PADDING:</span> <span id="valCellPadding"></span><br />
-    <input name="inpPadding" id="inpPadding" type="range" min="0" max="100" step="1" title="Range: 0 to 30 in steps of 1" value="0" />
+    <input name="inpPadding" id="inpPadding" type="range" min="0" max="100" step="1" title="Range: 0 to 30 in steps of 1" value="0" style="margin:5px 0 3px;padding:0;width:180px"/>
 	<script type="text/javascript" language="javascript">
 	    fdSlider.addEvent(document.getElementById("inpPadding"), "change", function (e) {
 	        I_TablePadding($("#inpPadding").val());
