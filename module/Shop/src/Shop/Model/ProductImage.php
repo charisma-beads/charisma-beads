@@ -29,7 +29,7 @@ class ProductImage extends AbstractModel
 	/**
 	 * @var bool
 	 */
-	protected $default = false;
+	protected $isDefault = false;
 	
 	/**
 	 * @var DateTime
@@ -112,18 +112,18 @@ class ProductImage extends AbstractModel
 	/**
 	 * @return the $default
 	 */
-	public function getDefault()
+	public function getIsDefault()
 	{
-		return $this->default;
+		return $this->isDefault;
 	}
 
 	/**
 	 * @param number $default
 	 */
-	public function setDefault($default)
+	public function setIsDefault($default)
 	{
 		$default = (bool) $default;
-		$this->default = $default;
+		$this->isDefault = $default;
 		return $this;
 	}
 

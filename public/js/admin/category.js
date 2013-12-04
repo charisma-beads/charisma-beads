@@ -12,7 +12,7 @@ admin.category = {
             $('#caegoryTabs')
             .append('<li><a href="#category'+trId+'">'+title+'&nbsp;<em class="close">&times;</em></a></li>');
             $('#categoryTabContent')
-            .append('<div class="tab-pane" id="user'+trId+'">Loading...</div>');
+            .append('<div class="tab-pane" id="category'+trId+'">Loading...</div>');
             
             $('#category'+trId).load('shop/category/edit', {userId : trId},
                 function (responseText, textStatus, req) {

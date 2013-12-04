@@ -1,0 +1,27 @@
+<?php $this->headScript()->appendFile($this->basePath() . '/js/admin/image.js'); ?>
+<div class="tab-wrap">
+<!-- 
+	<ul id="imageTabs" class="nav nav-tabs">
+	    <li><a href="#admin-image">Images</a></li>
+	</ul>
+	
+	<div id="imageTabContent" class="tab-content">
+	    <div class="tab-pane" id="admin-image">
+	    -->
+	    	<div class="row-fluid">
+		    	<form id="search-image" class="form-search" method="post">
+		    	    <input type="text" name="image" placeholder="Image">
+		    	    <input type="text" name="product" placeholder="Product">
+		    	    <button type="submit" class="btn btn-primary"><i class="icon-search icon-white"></i> Search</button>
+		    	    <button type="reset" class="btn">Reset</button>
+		    	</form>
+	    	</div>
+	    	
+	    	<div id="table-image" class="row-fluid table-wrap">
+		    	<?=$this->partial('shop/product-image/list', array(
+		    	    'images' => $this->images
+		    	)); ?>
+	    	</div>
+	    <!-- </div>
+	</div> -->
+</div>

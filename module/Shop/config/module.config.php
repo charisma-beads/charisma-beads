@@ -26,7 +26,8 @@ return array(
 			'admin' => array(
 				'privileges' => array(
 					array('controller' => 'Shop\Controller\Product', 'action' => 'all'),
-				    array('controller' => 'Shop\Controller\Category', 'action' => 'all'),
+				    array('controller' => 'Shop\Controller\ProductCategory', 'action' => 'all'),
+				    array('controller' => 'Shop\Controller\ProductImage', 'action' => 'all'),
 					array('controller' => 'Shop\Controller\Shop', 'action' => 'all'),
 				),
 			),
@@ -38,7 +39,8 @@ return array(
 			'Shop\Controller\Payment',
 			'Shop\Controller\Paypal',
 			'Shop\Controller\Product',
-		    'Shop\Controller\Category',
+		    'Shop\Controller\ProductCategory',
+		    'Shop\Controller\ProductImage',
 			'Shop\Controller\Shop'
 		)
 	),
@@ -221,7 +223,49 @@ return array(
 					        	'options'  => array(
 					        		'route'     => '/category',
 					        		'defaults' => array(
-					        			'controller'   => 'Category',
+					        			'controller'   => 'ProductCategory',
+					        			'action'       => 'index',
+					        			'force-ssl'    => 'ssl',
+					        		),
+					        	),
+					        	'may_terminate'    => true,
+					        	'child_routes'     => array(
+					        		'edit' => array(
+					        			'type'    => 'Segment',
+					        			'options' => array(
+					        				'route'         => '/[:action[/id/[:id]]]',
+					        				'constraints'   => array(
+					        					'action'    => '[a-zA-Z][a-zA-Z0-9_-]*',
+					        					'id'		=> '\d+'
+					        				),
+					        				'defaults'      => array(
+					        					'action'        => 'edit',
+					        					'force-ssl'     => 'ssl'
+					        				),
+					        			),
+					        		),
+					        		'page' => array(
+					        			'type'    => 'Segment',
+					        			'options' => array(
+					        				'route'         => '/page/[:page]',
+					        				'constraints'   => array(
+					        					'page'			=> '\d+'
+					        				),
+					        				'defaults'      => array(
+					        					'action'        => 'list',
+					        					'page'          => 1,
+					        					'force-ssl'     => 'ssl'
+					        				),
+					        			),
+					        		),
+					        	),
+					        ),
+					        'image' => array(
+					        	'type'     => 'Segment',
+					        	'options'  => array(
+					        		'route'     => '/image',
+					        		'defaults' => array(
+					        			'controller'   => 'ProductImage',
 					        			'action'       => 'index',
 					        			'force-ssl'    => 'ssl',
 					        		),
@@ -315,6 +359,26 @@ return array(
 				    		),
 				    	)
 				    ),
+				    'images' => array(
+				    	'label' => 'Images',
+				    	'action' => 'index',
+				    	'route' => 'admin/shop/image',
+				    	'resource' => 'menu:admin',
+				    	'pages' => array(
+				    		'list' => array(
+				    			'label' => 'List All Images',
+				    			'action' => 'index',
+				    			'route' => 'admin/shop/image',
+				    			'resource' => 'menu:admin'
+				    		),
+				    		'add' => array(
+				    			'label' => 'Add New Image',
+				    			'action' => 'add',
+				    			'route' => 'admin/shop/image/edit',
+				    			'resource' => 'menu:admin'
+				    		),
+				    	)
+				    ),
 				),
 				'route' => 'admin/shop',
 				'resource' => 'menu:admin'
@@ -325,7 +389,6 @@ return array(
 		'template_map' => array(
 			'cart/summary' => __DIR__ . '/../view/shop/cart/cart-summary.phtml',
 			'shop/cart' => __DIR__ . '/../view/shop/cart/cart.phtml',
-		    'shop/product/list'      => __DIR__ . '/../view/shop/product/list.phtml',
 		),
 		'template_path_stack' => array(
 			'Shop' => __DIR__ . '/../view'

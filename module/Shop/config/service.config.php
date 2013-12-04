@@ -39,6 +39,7 @@ return array(
 	    'Shop\Service\CustomerAddress'          => 'Shop\Service\CustomerAddress',
 		'Shop\Service\Product' 				    => 'Shop\Service\Product',
 		'Shop\Service\ProductCategory'          => 'Shop\Service\ProductCategory',
+	    'Shop\Service\ProductImage'             => 'Shop\Service\ProductImage',
 	    'Shop\Service\Tax'                      => 'Shop\Service\Tax',
 	    'Shop\Service\TaxRate'                  => 'Shop\Service\TaxRate',
 	),

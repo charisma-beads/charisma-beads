@@ -1,9 +1,9 @@
 <?php
-namespace Shop\Model;
+namespace Shop\Model\Relational;
 
-use Shop\Model\Product;
+use Shop\Model\Product as Base;
 
-class FullProduct extends Product
+class Product extends Base
 {
     /**
      * @var string

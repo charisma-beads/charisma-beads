@@ -12,7 +12,7 @@ admin.product = {
             $('#productTabs')
             .append('<li><a href="#product'+trId+'">'+title+'&nbsp;<em class="close">&times;</em></a></li>');
             $('#productTabContent')
-            .append('<div class="tab-pane" id="user'+trId+'">Loading...</div>');
+            .append('<div class="tab-pane" id="product'+trId+'">Loading...</div>');
             
             $('#product'+trId).load('shop/product/edit', {userId : trId},
                 function (responseText, textStatus, req) {
