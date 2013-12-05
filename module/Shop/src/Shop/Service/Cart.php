@@ -3,7 +3,7 @@ namespace Shop\Service;
 
 use Application\Model\AbstractCollection;
 use Application\Model\CollectionException;
-use Shop\Model\CartItem;
+use Shop\Model\Cart\Item as CartItem;
 use Shop\Model\Product as ProductModel;
 use Zend\Session\Container;
 use SeekableIterator;

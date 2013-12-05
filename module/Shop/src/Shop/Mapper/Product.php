@@ -93,8 +93,8 @@ class Product extends AbstractMapper
 	        array('category'),
 	        Select::JOIN_INNER
         )->join(
-	    	'productPostUnit',
-	    	'product.productPostUnitId=productPostUnit.productPostUnitId',
+	    	'postUnit',
+	    	'product.postUnitId=postUnit.postUnitId',
 	    	array('postUnit'),
 	    	Select::JOIN_INNER
 	    )->join(

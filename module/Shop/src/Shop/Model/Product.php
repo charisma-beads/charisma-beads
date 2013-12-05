@@ -29,7 +29,7 @@ class Product extends AbstractModel
 	/**
 	 * @var int
 	 */
-	protected $productPostUnitId;
+	protected $postUnitId;
 	
 	/**
 	 * @var int
@@ -39,7 +39,7 @@ class Product extends AbstractModel
 	/**
 	 * @var int
 	 */
-	protected $productStockStatusId;
+	protected $stockStatusId;
 	
 	/**
 	 * @var string
@@ -187,17 +187,17 @@ class Product extends AbstractModel
 	/**
 	 * @return number $productPostUnitId
 	 */
-	public function getProductPostUnitId ()
+	public function getPostUnitId ()
 	{
-		return $this->productPostUnitId;
+		return $this->postUnitId;
 	}
 
 	/**
-	 * @param number $productPostUnitId
+	 * @param number $postUnitId
 	 */
-	public function setProductPostUnitId ($productPostUnitId)
+	public function setPostUnitId ($postUnitId)
 	{
-		$this->productPostUnitId = $productPostUnitId;
+		$this->postUnitId = $postUnitId;
 		return $this;
 	}
 
@@ -221,17 +221,17 @@ class Product extends AbstractModel
 	/**
 	 * @return number $productStockStatusId
 	 */
-	public function getProductStockStatusId ()
+	public function getStockStatusId ()
 	{
-		return $this->productStockStatusId;
+		return $this->stockStatusId;
 	}
 
 	/**
-	 * @param number $productStockStatusId
+	 * @param number $stockStatusId
 	 */
-	public function setProductStockStatusId ($productStockStatusId)
+	public function setStockStatusId ($stockStatusId)
 	{
-		$this->productStockStatusId = $productStockStatusId;
+		$this->stockStatusId = $stockStatusId;
 		return $this;
 	}
 

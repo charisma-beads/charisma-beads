@@ -8,8 +8,8 @@ return array(
 		'Shop\Controller\Payment'         => 'Shop\Controller\PaymentController',
 		'Shop\Controller\Paypal'          => 'Shop\Controller\PaypalController',
 		'Shop\Controller\Product'         => 'Shop\Controller\ProductController',
-		'Shop\Controller\ProductCategory' => 'Shop\Controller\ProductCategoryController',
-	    'Shop\Controller\ProductImage'    => 'Shop\Controller\ProductImageController',
+		'Shop\Controller\ProductCategory' => 'Shop\Controller\Product\CategoryController',
+	    'Shop\Controller\ProductImage'    => 'Shop\Controller\Product\ImageController',
 		'Shop\Controller\Shop'            => 'Shop\Controller\ShopController'
 	)
 );
