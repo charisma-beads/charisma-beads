@@ -1,10 +1,10 @@
 <?php
-namespace Shop\Controller\Product;
+namespace Shop\Controller;
 
 use Application\Controller\AbstractController;
 use Zend\View\Model\ViewModel;
 
-class ImageController extends AbstractController
+class ProductImageController extends AbstractController
 {
     /**
      * @var \Shop\Service\ProductImage

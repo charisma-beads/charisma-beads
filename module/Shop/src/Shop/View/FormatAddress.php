@@ -1,7 +1,7 @@
 <?php
 namespace Shop\View;
 
-use Shop\Model\CustomerAddress;
+use Shop\Model\Customer\Address;
 use Application\View\AbstractViewHelper;
 
 class FormatAddress extends AbstractViewHelper
@@ -28,7 +28,7 @@ class FormatAddress extends AbstractViewHelper
         return $this->formatAddress($address, true);
     }
     
-    public function formatAddress(CustomerAddress $address, $includeEmail=false)
+    public function formatAddress(Address $address, $includeEmail=false)
     {
         $identity = $this->view->plugin('identity');
         $html = $identity()->getFullName() . '<br>';
@@ -64,13 +64,13 @@ class FormatAddress extends AbstractViewHelper
     }
     
     /**
-     * @return \Shop\Service\CustomerAddress
+     * @return \Shop\Service\Customer\Address
      */
     public function getCustomerAddressService()
     {
     	if (!$this->customerAddressService) {
     		$sl = $this->getServiceLocator()->getServiceLocator();
-    		$this->customerAddressService = $sl->get('Shop\Service\CustomerAddress');
+    		$this->customerAddressService = $sl->get('Shop\Service\Customer\Address');
     	}
     	 
     	return $this->customerAddressService;

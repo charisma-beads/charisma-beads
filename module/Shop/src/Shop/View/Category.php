@@ -2,7 +2,7 @@
 namespace Shop\View;
 
 use Application\View\AbstractViewHelper;
-use Shop\Service\ProductCategory;
+use Shop\Service\Product\Category as ProductCategory;
 
 class Category extends AbstractViewHelper
 {
@@ -16,7 +16,7 @@ class Category extends AbstractViewHelper
 		if (!$this->service instanceof ProductCategory) {
 			$this->service = $this->getServiceLocator()
 				->getServiceLocator()
-				->get('Shop\Service\ProductCategory');
+				->get('Shop\Service\Product\Category');
 		}
 		
 		return $this;
@@ -24,7 +24,7 @@ class Category extends AbstractViewHelper
 	
 	/**
 	 * @param int $id
-	 * @return \Shop\Model\ProductCategory
+	 * @return \Shop\Model\Product\Category
 	 */
 	public function getCategory($id)
 	{

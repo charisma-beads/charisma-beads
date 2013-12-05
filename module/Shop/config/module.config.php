@@ -25,23 +25,39 @@ return array(
 			),
 			'admin' => array(
 				'privileges' => array(
+				    array('controller' => 'Shop\Controller\Country', 'action' => 'all'),
+				    array('controller' => 'Shop\Controller\Customer', 'action' => 'all'),
+				    array('controller' => 'Shop\Controller\Order', 'action' => 'all'),
+				    array('controller' => 'Shop\Controller\PostCost', 'action' => 'all'),
+				    array('controller' => 'Shop\Controller\PostLevel', 'action' => 'all'),
+				    array('controller' => 'Shop\Controller\PostZone', 'action' => 'all'),
 					array('controller' => 'Shop\Controller\Product', 'action' => 'all'),
 				    array('controller' => 'Shop\Controller\ProductCategory', 'action' => 'all'),
 				    array('controller' => 'Shop\Controller\ProductImage', 'action' => 'all'),
 					array('controller' => 'Shop\Controller\Shop', 'action' => 'all'),
+				    array('controller' => 'Shop\Controller\TaxCode', 'action' => 'all'),
+				    array('controller' => 'Shop\Controller\TaxRate', 'action' => 'all'),
 				),
 			),
 		),
 		'userResources' => array(
 			'Shop\Controller\Cart',
-			'Shop\Controller\Catalog',
-			'Shop\Controller\Checkout',
-			'Shop\Controller\Payment',
-			'Shop\Controller\Paypal',
-			'Shop\Controller\Product',
-		    'Shop\Controller\ProductCategory',
-		    'Shop\Controller\ProductImage',
-			'Shop\Controller\Shop'
+            'Shop\Controller\Catalog',
+            'Shop\Controller\Checkout',
+            'Shop\Controller\Country',
+            'Shop\Controller\Customer',
+            'Shop\Controller\Order',
+            'Shop\Controller\Payment',
+            'Shop\Controller\Paypal',
+		    'Shop\Controller\PostCost',
+		    'Shop\Controller\PostLevel',
+            'Shop\Controller\PostZone',
+            'Shop\Controller\Product',
+            'Shop\Controller\ProductCategory',
+            'Shop\Controller\ProductImage',
+            'Shop\Controller\Shop',
+            'Shop\Controller\TaxCode',
+            'Shop\Controller\TaxRate',
 		)
 	),
 	'router' => array(
@@ -302,6 +318,368 @@ return array(
 					        		),
 					        	),
 					        ),
+					        'country' => array(
+					        	'type'     => 'Segment',
+					        	'options'  => array(
+					        		'route'     => '/country',
+					        		'defaults' => array(
+					        			'controller'   => 'Country',
+					        			'action'       => 'index',
+					        			'force-ssl'    => 'ssl',
+					        		),
+					        	),
+					        	'may_terminate'    => true,
+					        	'child_routes'     => array(
+					        		'edit' => array(
+					        			'type'    => 'Segment',
+					        			'options' => array(
+					        				'route'         => '/[:action[/id/[:id]]]',
+					        				'constraints'   => array(
+					        					'action'    => '[a-zA-Z][a-zA-Z0-9_-]*',
+					        					'id'		=> '\d+'
+					        				),
+					        				'defaults'      => array(
+					        					'action'        => 'edit',
+					        					'force-ssl'     => 'ssl'
+					        				),
+					        			),
+					        		),
+					        		'page' => array(
+					        			'type'    => 'Segment',
+					        			'options' => array(
+					        				'route'         => '/page/[:page]',
+					        				'constraints'   => array(
+					        					'page'			=> '\d+'
+					        				),
+					        				'defaults'      => array(
+					        					'action'        => 'list',
+					        					'page'          => 1,
+					        					'force-ssl'     => 'ssl'
+					        				),
+					        			),
+					        		),
+					        	),
+					        ),
+					        'customer' => array(
+					        	'type'     => 'Segment',
+					        	'options'  => array(
+					        		'route'     => '/customer',
+					        		'defaults' => array(
+					        			'controller'   => 'Customer',
+					        			'action'       => 'index',
+					        			'force-ssl'    => 'ssl',
+					        		),
+					        	),
+					        	'may_terminate'    => true,
+					        	'child_routes'     => array(
+					        		'edit' => array(
+					        			'type'    => 'Segment',
+					        			'options' => array(
+					        				'route'         => '/[:action[/id/[:id]]]',
+					        				'constraints'   => array(
+					        					'action'    => '[a-zA-Z][a-zA-Z0-9_-]*',
+					        					'id'		=> '\d+'
+					        				),
+					        				'defaults'      => array(
+					        					'action'        => 'edit',
+					        					'force-ssl'     => 'ssl'
+					        				),
+					        			),
+					        		),
+					        		'page' => array(
+					        			'type'    => 'Segment',
+					        			'options' => array(
+					        				'route'         => '/page/[:page]',
+					        				'constraints'   => array(
+					        					'page'			=> '\d+'
+					        				),
+					        				'defaults'      => array(
+					        					'action'        => 'list',
+					        					'page'          => 1,
+					        					'force-ssl'     => 'ssl'
+					        				),
+					        			),
+					        		),
+					        	),
+					        ),
+					        'order' => array(
+					        	'type'     => 'Segment',
+					        	'options'  => array(
+					        		'route'     => '/order',
+					        		'defaults' => array(
+					        			'controller'   => 'Order',
+					        			'action'       => 'index',
+					        			'force-ssl'    => 'ssl',
+					        		),
+					        	),
+					        	'may_terminate'    => true,
+					        	'child_routes'     => array(
+					        		'edit' => array(
+					        			'type'    => 'Segment',
+					        			'options' => array(
+					        				'route'         => '/[:action[/id/[:id]]]',
+					        				'constraints'   => array(
+					        					'action'    => '[a-zA-Z][a-zA-Z0-9_-]*',
+					        					'id'		=> '\d+'
+					        				),
+					        				'defaults'      => array(
+					        					'action'        => 'edit',
+					        					'force-ssl'     => 'ssl'
+					        				),
+					        			),
+					        		),
+					        		'page' => array(
+					        			'type'    => 'Segment',
+					        			'options' => array(
+					        				'route'         => '/page/[:page]',
+					        				'constraints'   => array(
+					        					'page'			=> '\d+'
+					        				),
+					        				'defaults'      => array(
+					        					'action'        => 'list',
+					        					'page'          => 1,
+					        					'force-ssl'     => 'ssl'
+					        				),
+					        			),
+					        		),
+					        	),
+					        ),
+					        'post' => array(
+					        	'type'     => 'Segment',
+					        	'options'  => array(
+					        		'route'     => '/post',
+					        		'defaults' => array(
+					        			'action'       => 'index',
+					        			'force-ssl'    => 'ssl',
+					        		),
+					        	),
+					        	'may_terminate'    => true,
+					        	'child_routes'     => array(
+					        	    'cost' => array(
+					        	    	'type'     => 'Segment',
+					        	    	'options'  => array(
+					        	    		'route'     => '/cost',
+					        	    		'defaults' => array(
+					        	    			'controller'   => 'PostCost',
+					        	    			'action'       => 'index',
+					        	    			'force-ssl'    => 'ssl',
+					        	    		),
+					        	    	),
+					        	    	'may_terminate'    => true,
+					        	    	'child_routes'     => array(
+					        	    		'edit' => array(
+					        	    			'type'    => 'Segment',
+					        	    			'options' => array(
+					        	    				'route'         => '/[:action[/id/[:id]]]',
+					        	    				'constraints'   => array(
+					        	    					'action'    => '[a-zA-Z][a-zA-Z0-9_-]*',
+					        	    					'id'		=> '\d+'
+					        	    				),
+					        	    				'defaults'      => array(
+					        	    					'action'        => 'edit',
+					        	    					'force-ssl'     => 'ssl'
+					        	    				),
+					        	    			),
+					        	    		),
+					        	    		'page' => array(
+					        	    			'type'    => 'Segment',
+					        	    			'options' => array(
+					        	    				'route'         => '/page/[:page]',
+					        	    				'constraints'   => array(
+					        	    					'page'			=> '\d+'
+					        	    				),
+					        	    				'defaults'      => array(
+					        	    					'action'        => 'list',
+					        	    					'page'          => 1,
+					        	    					'force-ssl'     => 'ssl'
+					        	    				),
+					        	    			),
+					        	    		),
+					        	    	),
+					        	    ),
+					        	    'level' => array(
+					        	    	'type'     => 'Segment',
+					        	    	'options'  => array(
+					        	    		'route'     => '/level',
+					        	    		'defaults' => array(
+					        	    			'controller'   => 'PostLevel',
+					        	    			'action'       => 'index',
+					        	    			'force-ssl'    => 'ssl',
+					        	    		),
+					        	    	),
+					        	    	'may_terminate'    => true,
+					        	    	'child_routes'     => array(
+					        	    		'edit' => array(
+					        	    			'type'    => 'Segment',
+					        	    			'options' => array(
+					        	    				'route'         => '/[:action[/id/[:id]]]',
+					        	    				'constraints'   => array(
+					        	    					'action'    => '[a-zA-Z][a-zA-Z0-9_-]*',
+					        	    					'id'		=> '\d+'
+					        	    				),
+					        	    				'defaults'      => array(
+					        	    					'action'        => 'edit',
+					        	    					'force-ssl'     => 'ssl'
+					        	    				),
+					        	    			),
+					        	    		),
+					        	    		'page' => array(
+					        	    			'type'    => 'Segment',
+					        	    			'options' => array(
+					        	    				'route'         => '/page/[:page]',
+					        	    				'constraints'   => array(
+					        	    					'page'			=> '\d+'
+					        	    				),
+					        	    				'defaults'      => array(
+					        	    					'action'        => 'list',
+					        	    					'page'          => 1,
+					        	    					'force-ssl'     => 'ssl'
+					        	    				),
+					        	    			),
+					        	    		),
+					        	    	),
+					        	    ),
+					        	    'zone' => array(
+					        	    	'type'     => 'Segment',
+					        	    	'options'  => array(
+					        	    		'route'     => '/zone',
+					        	    		'defaults' => array(
+					        	    			'controller'   => 'PostZone',
+					        	    			'action'       => 'index',
+					        	    			'force-ssl'    => 'ssl',
+					        	    		),
+					        	    	),
+					        	    	'may_terminate'    => true,
+					        	    	'child_routes'     => array(
+					        	    		'edit' => array(
+					        	    			'type'    => 'Segment',
+					        	    			'options' => array(
+					        	    				'route'         => '/[:action[/id/[:id]]]',
+					        	    				'constraints'   => array(
+					        	    					'action'    => '[a-zA-Z][a-zA-Z0-9_-]*',
+					        	    					'id'		=> '\d+'
+					        	    				),
+					        	    				'defaults'      => array(
+					        	    					'action'        => 'edit',
+					        	    					'force-ssl'     => 'ssl'
+					        	    				),
+					        	    			),
+					        	    		),
+					        	    		'page' => array(
+					        	    			'type'    => 'Segment',
+					        	    			'options' => array(
+					        	    				'route'         => '/page/[:page]',
+					        	    				'constraints'   => array(
+					        	    					'page'			=> '\d+'
+					        	    				),
+					        	    				'defaults'      => array(
+					        	    					'action'        => 'list',
+					        	    					'page'          => 1,
+					        	    					'force-ssl'     => 'ssl'
+					        	    				),
+					        	    			),
+					        	    		),
+					        	    	),
+					        	    ),
+					        	),
+					        ),
+					        'tax' => array(
+					        	'type'     => 'Segment',
+					        	'options'  => array(
+					        		'route'     => '/tax',
+					        		'defaults' => array(
+					        			'action'       => 'index',
+					        			'force-ssl'    => 'ssl',
+					        		),
+					        	),
+					        	'may_terminate'    => true,
+					        	'child_routes'     => array(
+					        	    'code' => array(
+					        	    	'type'     => 'Segment',
+					        	    	'options'  => array(
+					        	    		'route'     => '/code',
+					        	    		'defaults' => array(
+					        	    			'controller'   => 'TaxCode',
+					        	    			'action'       => 'index',
+					        	    			'force-ssl'    => 'ssl',
+					        	    		),
+					        	    	),
+					        	    	'may_terminate'    => true,
+					        	    	'child_routes'     => array(
+					        	    		'edit' => array(
+					        	    			'type'    => 'Segment',
+					        	    			'options' => array(
+					        	    				'route'         => '/[:action[/id/[:id]]]',
+					        	    				'constraints'   => array(
+					        	    					'action'    => '[a-zA-Z][a-zA-Z0-9_-]*',
+					        	    					'id'		=> '\d+'
+					        	    				),
+					        	    				'defaults'      => array(
+					        	    					'action'        => 'edit',
+					        	    					'force-ssl'     => 'ssl'
+					        	    				),
+					        	    			),
+					        	    		),
+					        	    		'page' => array(
+					        	    			'type'    => 'Segment',
+					        	    			'options' => array(
+					        	    				'route'         => '/page/[:page]',
+					        	    				'constraints'   => array(
+					        	    					'page'			=> '\d+'
+					        	    				),
+					        	    				'defaults'      => array(
+					        	    					'action'        => 'list',
+					        	    					'page'          => 1,
+					        	    					'force-ssl'     => 'ssl'
+					        	    				),
+					        	    			),
+					        	    		),
+					        	    	),
+					        	    ),
+					        	    'rate' => array(
+					        	    	'type'     => 'Segment',
+					        	    	'options'  => array(
+					        	    		'route'     => '/rate',
+					        	    		'defaults' => array(
+					        	    			'controller'   => 'TaxRate',
+					        	    			'action'       => 'index',
+					        	    			'force-ssl'    => 'ssl',
+					        	    		),
+					        	    	),
+					        	    	'may_terminate'    => true,
+					        	    	'child_routes'     => array(
+					        	    		'edit' => array(
+					        	    			'type'    => 'Segment',
+					        	    			'options' => array(
+					        	    				'route'         => '/[:action[/id/[:id]]]',
+					        	    				'constraints'   => array(
+					        	    					'action'    => '[a-zA-Z][a-zA-Z0-9_-]*',
+					        	    					'id'		=> '\d+'
+					        	    				),
+					        	    				'defaults'      => array(
+					        	    					'action'        => 'edit',
+					        	    					'force-ssl'     => 'ssl'
+					        	    				),
+					        	    			),
+					        	    		),
+					        	    		'page' => array(
+					        	    			'type'    => 'Segment',
+					        	    			'options' => array(
+					        	    				'route'         => '/page/[:page]',
+					        	    				'constraints'   => array(
+					        	    					'page'			=> '\d+'
+					        	    				),
+					        	    				'defaults'      => array(
+					        	    					'action'        => 'list',
+					        	    					'page'          => 1,
+					        	    					'force-ssl'     => 'ssl'
+					        	    				),
+					        	    			),
+					        	    		),
+					        	    	),
+					        	    ),
+					        	),
+					        ),
 					    ),
 					),
 				),
@@ -378,6 +756,182 @@ return array(
 				    			'resource' => 'menu:admin'
 				    		),
 				    	)
+				    ),
+				    'customers' => array(
+				    	'label' => 'Customers',
+				    	'action' => 'index',
+				    	'route' => 'admin/shop/customer',
+				    	'resource' => 'menu:admin',
+				    	'pages' => array(
+				    		'list' => array(
+				    			'label' => 'List All Customers',
+				    			'action' => 'index',
+				    			'route' => 'admin/shop/customer',
+				    			'resource' => 'menu:admin'
+				    		),
+				    		'add' => array(
+				    			'label' => 'Add New Customer',
+				    			'action' => 'add',
+				    			'route' => 'admin/shop/customer/edit',
+				    			'resource' => 'menu:admin'
+				    		),
+				    	)
+				    ),
+				    'orders' => array(
+				    	'label' => 'Orders',
+				    	'action' => 'index',
+				    	'route' => 'admin/shop/order',
+				    	'resource' => 'menu:admin',
+				    	'pages' => array(
+				    		'list' => array(
+				    			'label' => 'List All Orders',
+				    			'action' => 'index',
+				    			'route' => 'admin/shop/order',
+				    			'resource' => 'menu:admin'
+				    		),
+				    		'add' => array(
+				    			'label' => 'Add New Order',
+				    			'action' => 'add',
+				    			'route' => 'admin/shop/order/edit',
+				    			'resource' => 'menu:admin'
+				    		),
+				    	)
+				    ),
+				    'postage' => array(
+				    	'label' => 'Postage',
+				    	'action' => 'index',
+				    	'route' => 'admin/shop/post',
+				    	'resource' => 'menu:admin',
+				    	'pages' => array(
+				    	    'costs' => array(
+				    	        'label' => 'Postage Costs',
+				    	        'action' => 'index',
+				    	        'route' => 'admin/shop/post/cost',
+				    	        'resource' => 'menu:admin',
+				    	        'pages' => array(
+    				    	        'edit' => array(
+    				    	        	'label' => 'List All Postage Costs',
+    				    	        	'action' => 'index',
+    				    	        	'route' => 'admin/shop/post/cost',
+    				    	        	'resource' => 'menu:admin'
+    				    	        ),
+    				    	        'add' => array(
+    				    	        	'label' => 'Add New Postage Cost',
+    				    	        	'action' => 'add',
+    				    	        	'route' => 'admin/shop/post/cost/edit',
+    				    	        	'resource' => 'menu:admin'
+    				    	        ),
+			    	            ),
+                            ),
+				    	    'levels' => array(
+				    	    	'label' => 'Postage Levels',
+				    	    	'action' => 'index',
+				    	    	'route' => 'admin/shop/post/level',
+				    	    	'resource' => 'menu:admin',
+				    	    	'pages' => array(
+				    	    		'edit' => array(
+				    	    			'label' => 'List All Postage Levels',
+				    	    			'action' => 'index',
+				    	    			'route' => 'admin/shop/post/level',
+				    	    			'resource' => 'menu:admin'
+				    	    		),
+				    	    		'add' => array(
+				    	    			'label' => 'Add New Postage Level',
+				    	    			'action' => 'add',
+				    	    			'route' => 'admin/shop/post/level/edit',
+				    	    			'resource' => 'menu:admin'
+				    	    		),
+				    	    	),
+				    	    ),
+				    	    'countries' => array(
+				    	    	'label' => 'Countries',
+				    	    	'action' => 'index',
+				    	    	'route' => 'admin/shop/country',
+				    	    	'resource' => 'menu:admin',
+				    	    	'pages' => array(
+				    	    		'edit' => array(
+				    	    			'label' => 'List All Countries',
+				    	    			'action' => 'index',
+				    	    			'route' => 'admin/shop/country',
+				    	    			'resource' => 'menu:admin'
+				    	    		),
+				    	    		'add' => array(
+				    	    			'label' => 'Add New Country',
+				    	    			'action' => 'add',
+				    	    			'route' => 'admin/shop/country/edit',
+				    	    			'resource' => 'menu:admin'
+				    	    		),
+				    	    	),
+				    	    ),
+				    	    'zones' => array(
+				    	    	'label' => 'Zones',
+				    	    	'action' => 'index',
+				    	    	'route' => 'admin/shop/post/zone',
+				    	    	'resource' => 'menu:admin',
+				    	    	'pages' => array(
+				    	    		'edit' => array(
+				    	    			'label' => 'List All Zones',
+				    	    			'action' => 'index',
+				    	    			'route' => 'admin/shop/post/zone',
+				    	    			'resource' => 'menu:admin'
+				    	    		),
+				    	    		'add' => array(
+				    	    			'label' => 'Add New Zone',
+				    	    			'action' => 'add',
+				    	    			'route' => 'admin/shop/post/zone/edit',
+				    	    			'resource' => 'menu:admin'
+				    	    		),
+				    	    	),
+				    	    ),
+				    	),
+				    ),
+				    'tax' => array(
+				    	'label' => 'Tax',
+				    	'action' => 'index',
+				    	'route' => 'admin/shop/tax',
+				    	'resource' => 'menu:admin',
+				    	'pages' => array(
+				    		'rates' => array(
+				    	    	'label' => 'Rates',
+				    	    	'action' => 'index',
+				    	    	'route' => 'admin/shop/tax/rate',
+				    	    	'resource' => 'menu:admin',
+				    	    	'pages' => array(
+				    	    		'edit' => array(
+				    	    			'label' => 'List All Tax Rates',
+				    	    			'action' => 'index',
+				    	    			'route' => 'admin/shop/tax/rate',
+				    	    			'resource' => 'menu:admin'
+				    	    		),
+				    	    		'add' => array(
+				    	    			'label' => 'Add New Tax Rate',
+				    	    			'action' => 'add',
+				    	    			'route' => 'admin/shop/tax/rate/edit',
+				    	    			'resource' => 'menu:admin'
+				    	    		),
+				    	    	),
+				    	    ),
+				    	    'codes' => array(
+				    	    	'label' => 'Codes',
+				    	    	'action' => 'index',
+				    	    	'route' => 'admin/shop/tax/code',
+				    	    	'resource' => 'menu:admin',
+				    	    	'pages' => array(
+				    	    		'edit' => array(
+				    	    			'label' => 'List All Tax Codes',
+				    	    			'action' => 'index',
+				    	    			'route' => 'admin/shop/tax/code',
+				    	    			'resource' => 'menu:admin'
+				    	    		),
+				    	    		'add' => array(
+				    	    			'label' => 'Add New Tax Code',
+				    	    			'action' => 'add',
+				    	    			'route' => 'admin/shop/tax/code/edit',
+				    	    			'resource' => 'menu:admin'
+				    	    		),
+				    	    	),
+				    	    ),
+				    	),
 				    ),
 				),
 				'route' => 'admin/shop',
