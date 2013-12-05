@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 
@@ -14,8 +14,8 @@
         #inpSearch, #inpReplace {
 	        border:1px inset #ddd;
 	        font-size:12px;
-	        -moz-border-radius:3px;
-	        -webkit-border-radius:3px;
+	        -moz-border-radius:3px; 
+	        -webkit-border-radius:3px; 
 	        padding-left:7px;
             }
     </style>
@@ -84,12 +84,7 @@
                 if (oSel.text.toLowerCase() == inpSearch.value.toLowerCase()) {
                     parent.oUtil.obj.saveForUndo();
                     oSel.text = inpReplace.value;
-                    oSel = oEditor.document.selection.createRange();
-                    oSel.moveStart("character", inpSearch.value.length);
-                    oSel.moveEnd("character", 1);
-                    oSel.collapse("false");
-                    oSel.select();
-                    setTimeout(function() { doSearch(); }, 100);
+                    doSearch();
                 }
                 else {
                     doSearch();
@@ -138,22 +133,16 @@
                 else if (chkMatchWord.checked) sType = 2;
                 else sType = 0;
 
-                //oSel.expand("textedit");
-                //oSel.collapse("true");
-                //oSel.select();
+                oSel.expand("textedit");
+                oSel.collapse("true");
+                oSel.select();
 
                 if (oSel.findText(inpSearch.value, 1000000000, sType)) {
                     oSel.select();
                     oSel.text = inpReplace.value;
                     nReplaced++;
-
-                    oSel = oEditor.document.selection.createRange();
-                    oSel.moveStart("character", inpSearch.value.length);
-					oSel.moveEnd("character", 1);
-					oSel.collapse("false");
                     oSel.select();
-
-                    setTimeout(function() { doReplaceAll(); }, 10);
+                    doReplaceAll();
                 }
                 else {
                     alert(nReplaced + " occurrence(s) replaced.");
@@ -178,7 +167,7 @@
                 oSel.addRange(newRange);
 
                 while (true) {
-                    if (oEditor.find(word, chkCase, false, false, chkWord, false, false)) {
+                    if (oEditor.find(word, chkCase, false, true, chkWord, false, false)) {
                         var repWordObj = oEditor.document.createTextNode(repWord);
                         range = oEditor.getSelection().getRangeAt(0);
                         range.deleteContents();

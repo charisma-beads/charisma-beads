@@ -11,15 +11,11 @@ function modalDialog(url, width, height, title) {
         icClose = addClose;
     }
     catch (e) { }
-  
-    var clean = function() {
-      if(oUtil) oUtil.onSelectionChanged=null;
-    };
-    
+
     if (title)
-        box.open({ url: url, type: 'iframe', width: width + 'px', height: height + 'px', title: title, adjY: '20px', overlay: false, parent:document.body, onClose:function() {clean();} });
+        box.open({ url: url, type: 'iframe', width: width + 'px', height: height + 'px', title: title, adjY: '20px', overlay: false });
     else
-        box.open({ url: url, type: 'iframe', width: width + 'px', height: height + 'px', adjY: '20px', overlay: false, parent:document.body, onClose:function() {clean();} });
+        box.open({ url: url, type: 'iframe', width: width + 'px', height: height + 'px', adjY: '20px', overlay: false });
     if (navigator.appName.indexOf('Microsoft') == -1) {/* Selain IE. Sebenarnya hanya utk Ipad */
         document.getElementById('mybox$box_title').addEventListener("touchstart", touchHandler, true);
         document.getElementById('mybox$box_title').addEventListener("touchmove", touchHandler, true);

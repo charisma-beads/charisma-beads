@@ -203,11 +203,9 @@
 					} else if(href.match(/^mailto:/gi)) {
 						document.getElementById('selPro').selectedIndex = 1; //mailto
 						href=href.replace(/^mailto:/gi, "");
-					} else if(href.match(/^http:\/\//gi)) {
+					} else {
 						document.getElementById('selPro').selectedIndex = 0; //http
 						href=href.replace(/^http:\/\//gi, "");
-					} else {
-						document.getElementById('selPro').selectedIndex = 3; //http
 					}
 
                     /* Source */
@@ -243,20 +241,8 @@
 
         function I_InsertLinkMsft() {
             var sPro = document.getElementById('selPro').value;
-
             var sUrl = document.getElementById('inpURL').value;
-            if(sUrl!="") {
-            	if(sUrl.match(/^https:\/\//gi)) {
-            		sUrl=sUrl.replace(/^https:\/\//gi, "");
-            	} else if(sUrl.match(/^http:\/\//gi)) {
-				    sUrl=sUrl.replace(/^http:\/\//gi, "");
-            	} else if(sUrl.match(/^mailto:\/\//gi)) {
-				    sUrl=sUrl.replace(/^mailto:\/\//gi, "");
-            	}
-
-            	if(sUrl.substring(0, 1)!="/" && sUrl.substring(0, 1)!="/" && sUrl.substring(0, 1)!="#") sUrl = sPro + sUrl;
-            }
-
+            if(sUrl!="" && sUrl.substring(0, 1)!="/") sUrl = sPro + sUrl;
             var sTitle = document.getElementById('inpTitle').value;
             var sTarget = I_GetRadioValue("rdoTarget");
 
@@ -300,13 +286,8 @@
                 if (document.getElementById('inpTitle').value != "") oEl.title = document.getElementById('inpTitle').value;
                 else oEl.removeAttribute("title", 0);
 
-                if (document.getElementById('inpName').value != "") {
-                	oEl.name = document.getElementById('inpName').value;
-                	oEl.NAME = document.getElementById('inpName').value;
-                } else {
-                	oEl.removeAttribute("name", 0);
-                	oEl.removeAttribute("NAME", 0);
-                }
+                if (document.getElementById('inpName').value != "") oEl.name = document.getElementById('inpName').value;
+                else oEl.removeAttribute("name", 0);
 
                 if ($("#hidStyle").val() != "") oEl.className = $("#hidStyle").val();
 
@@ -316,20 +297,8 @@
 
         function I_InsertLinkMoz() {
         	var sPro = document.getElementById('selPro').value;
-
             var sUrl = document.getElementById('inpURL').value;
-            if(sUrl!="") {
-            	if(sUrl.match(/^https:\/\//gi)) {
-            		sUrl=sUrl.replace(/^https:\/\//gi, "");
-            	} else if(sUrl.match(/^http:\/\//gi)) {
-				    sUrl=sUrl.replace(/^http:\/\//gi, "");
-            	} else if(sUrl.match(/^mailto:\/\//gi)) {
-				    sUrl=sUrl.replace(/^mailto:\/\//gi, "");
-            	}
-
-            	if(sUrl.substring(0, 1)!="/" && sUrl.substring(0, 1)!="/" && sUrl.substring(0, 1)!="#") sUrl = sPro + sUrl;
-            }
-
+            if(sUrl!="" && sUrl.substring(0, 1)!="/") sUrl = sPro + sUrl;
             var sTitle = document.getElementById('inpTitle').value;
             var sTarget = I_GetRadioValue("rdoTarget");
             var sName = document.getElementById('inpName').value;
@@ -449,20 +418,8 @@
 
         function I_InsertLinkSaf() {
         	var sPro = document.getElementById('selPro').value;
-
             var sUrl = document.getElementById('inpURL').value;
-            if(sUrl!="") {
-            	if(sUrl.match(/^https:\/\//gi)) {
-            		sUrl=sUrl.replace(/^https:\/\//gi, "");
-            	} else if(sUrl.match(/^http:\/\//gi)) {
-				    sUrl=sUrl.replace(/^http:\/\//gi, "");
-            	} else if(sUrl.match(/^mailto:\/\//gi)) {
-				    sUrl=sUrl.replace(/^mailto:\/\//gi, "");
-            	}
-
-            	if(sUrl.substring(0, 1)!="/" && sUrl.substring(0, 1)!="/" && sUrl.substring(0, 1)!="#") sUrl = sPro + sUrl;
-            }
-
+            if(sUrl!="" && sUrl.substring(0, 1)!="/") sUrl = sPro + sUrl;
             var sTitle = document.getElementById('inpTitle').value;
             var sTarget = I_GetRadioValue("rdoTarget");
 
@@ -620,10 +577,10 @@
 
 <input id="hidStyle" type="hidden" value="" />
 
-<div id="tab1" onclick="tabClick(1)" style="float:left;font-family:Arvo;font-size:11px;text-shadow:1px 1px 1px rgba(255,255,255,0.6);color:#000;letter-spacing:1px;cursor:pointer;width:100px;min-height:15px;text-align:center;margin-bottom:-8px;padding:3px;background:#ccc;margin-left:22px;margin-top:7px">
+<div id="tab1" onclick="tabClick(1)" style="float:left;font-family:Arvo;font-size:11px;text-shadow:1px 1px 1px rgba(255,255,255,0.6);color:#000;letter-spacing:1px;cursor:pointer;width:100px;min-height:15px;text-align:center;margin-bottom:0px;padding:3px;background:#ccc;margin-left:22px;margin-top:7px">
     STYLES
 </div>
-<div id="tab0" onclick="tabClick(0)" style="float:left;font-family:Arvo;font-size:11px;text-shadow:1px 1px 1px rgba(255,255,255,0.6);color:#000;letter-spacing:1px;cursor:pointer;width:100px;min-height:15px;text-align:center;margin-bottom:-8px;padding:3px;background:#fcfcfc;margin-left:5px;margin-top:7px">
+<div id="tab0" onclick="tabClick(0)" style="float:left;font-family:Arvo;font-size:11px;text-shadow:1px 1px 1px rgba(255,255,255,0.6);color:#000;letter-spacing:1px;cursor:pointer;width:100px;min-height:15px;text-align:center;margin-bottom:0px;padding:3px;background:#fcfcfc;margin-left:5px;margin-top:7px">
     MY FILES
 </div>
 
@@ -728,13 +685,12 @@
 </td>
 <td style="font-family:Arvo;letter-spacing:1px;text-shadow:1px 1px 1px rgba(255,255,255,0.6);color:#000;" valign="top">
 
-    <div style="margin-bottom:15px;margin-top:10px">
+    <div style="margin-bottom:15px;">
         <span id="lblProtocol">PROTOCOL:</span><br />
         <select name="selPro" id="selPro" style="margin-top:5px;width:235px;height:23px;">
         	<option value="http://" selected="selected">http://</option>
         	<option value="mailto:">mailto:</option>
         	<option value="https://">https://</option>
-        	<option value="">none</option>
         </select>
     </div>
 

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 
@@ -10,6 +10,11 @@
     </script>
     <script>writeTitle()</script>
     <script src="jquery-1.7.min.js" type="text/javascript"></script>
+    <!--<script src="camanjs/caman.full.pack.js" type="text/javascript"></script>-->
+    <!--<script src="webimage.js" type="text/javascript"></script>-->
+
+    <!--Reflection-->
+    <script src="reflection/reflection.js" type="text/javascript"></script>
 
     <style type="text/css">
         #inpImgURL, #inpTitle, #inpURL, #inpKeywords {
@@ -45,7 +50,6 @@
         }
 
         jQuery(document).ready(function ($) {
-            
             renderEffect("images/sample.png");
 
             I_RealtimeImage();
@@ -468,7 +472,7 @@
                 $("#box10").attr("style", "");
                 $("#hidEffect").val(6);
             });
-            /*$("<img/>").attr("src", src).attr("style", sw + "float:right;margin-right:15px").attr("class", "reflect").appendTo("#box7").click(function () {
+            $("<img/>").attr("src", src).attr("style", sw + "float:right;margin-right:15px").attr("class", "reflect").appendTo("#box7").click(function () {
                 $("#box1").attr("style", "");
                 $("#box2").attr("style", "");
                 $("#box3").attr("style", "");
@@ -480,7 +484,7 @@
                 $("#box9").attr("style", "");
                 $("#box10").attr("style", "");
                 $("#hidEffect").val(7);
-            });*/
+            });
             $("<img/>").attr("src", src).attr("style", sw + "padding: 5px;border: solid 1px #ddd;").appendTo("#box8").click(function () {
                 $("#box1").attr("style", "");
                 $("#box2").attr("style", "");
@@ -520,7 +524,7 @@
                 $("#box10").attr("style", "background:#e9ed03;-webkit-border-radius: 7px;-moz-border-radius: 7px;border-radius: 7px;");
                 $("#hidEffect").val(10);
             });
-
+            $('img.reflect').reflect();
         }
 
         function changeSize() {
@@ -594,16 +598,13 @@
             var nMarginRight = document.getElementById("selMarginRight").value;
             var nMarginBottom = document.getElementById("selMarginBottom").value;
             var nMarginLeft = document.getElementById("selMarginLeft").value;
-            var sMargin = "margin: " + nMarginTop + "px " + nMarginRight + "px " + nMarginBottom + "px " + nMarginLeft + "px;";
-            if (nMarginTop == 0 && nMarginRight == 0 && nMarginBottom == 0 && nMarginLeft == 0) sMargin = "margin: 0;";
             if (document.getElementById("selAlign").value == "left")
-                oEl.style.cssText = oEl.style.cssText + ";float:left;" + sMargin;
+                oEl.style.cssText = oEl.style.cssText + ";float:left;margin-top:" + nMarginTop + "px;margin-right:" + nMarginRight + "px;margin-bottom:" + nMarginBottom + "px;margin-left:" + nMarginLeft + "px;";
             else if (document.getElementById("selAlign").value == "right")
-                oEl.style.cssText = oEl.style.cssText + ";float:right;" + sMargin;
+                oEl.style.cssText = oEl.style.cssText + ";float:right;margin-top:" + nMarginTop + "px;margin-right:" + nMarginRight + "px;margin-bottom:" + nMarginBottom + "px;margin-left:" + nMarginLeft + "px;";
             else {
-                oEl.style.cssText = oEl.style.cssText + ";float:none;" + sMargin;
+                oEl.style.cssText = oEl.style.cssText + ";float:none;margin-top:" + nMarginTop + "px;margin-right:" + nMarginRight + "px;margin-bottom:" + nMarginBottom + "px;margin-left:" + nMarginLeft + "px;";
             }
-
 
             var bAbs = getQueryString()["abs"];
             if (bAbs == "true")
@@ -687,8 +688,6 @@
                     oLink.setAttribute("target", "_blank");
                     oLink.setAttribute("rel", "");
                 }
-
-                oLink.setAttribute("class", oLink.getAttribute("class") + " img-responsive")
             }
             else {
 
@@ -703,15 +702,12 @@
                 var nMarginRight = document.getElementById("selMarginRight").value;
                 var nMarginBottom = document.getElementById("selMarginBottom").value;
                 var nMarginLeft = document.getElementById("selMarginLeft").value;
-                var sMargin = "margin: " + nMarginTop + "px " + nMarginRight + "px " + nMarginBottom + "px " + nMarginLeft + "px;";
-                if (nMarginTop == 0 && nMarginRight == 0 && nMarginBottom == 0 && nMarginLeft == 0) sMargin = "margin: 0;";
                 if (document.getElementById("selAlign").value == "left")
-                    sCssStyle = "float:left;" + sMargin;
+                    sCssStyle = "float:left;margin-top:" + nMarginTop + "px;margin-right:" + nMarginRight + "px;margin-bottom:" + nMarginBottom + "px;margin-left:" + nMarginLeft + "px;";
                 else if (document.getElementById("selAlign").value == "right")
-                    sCssStyle = "float:right;" + sMargin;
+                    sCssStyle = "float:right;margin-top:" + nMarginTop + "px;margin-right:" + nMarginRight + "px;margin-bottom:" + nMarginBottom + "px;margin-left:" + nMarginLeft + "px;";
                 else
-                    sCssStyle = sMargin;
-
+                    sCssStyle = "margin-top:" + nMarginTop + "px;margin-right:" + nMarginRight + "px;margin-bottom:" + nMarginBottom + "px;margin-left:" + nMarginLeft + "px;";
 
                 if (navigator.userAgent.indexOf('Safari') != -1) {
                     var range = oSel.getRangeAt(0);
@@ -743,8 +739,7 @@
 
                 if (oElement) {
                     oElement.setAttribute("title", sTitle)
-                    if(sCssStyle!="") oElement.setAttribute("style", sCssStyle)
-                    oElement.setAttribute("class", oElement.getAttribute("class") + " img-responsive")
+                    oElement.setAttribute("style", sCssStyle)
                     if (document.getElementById("chkNewWindow").checked) {
                         oElement.setAttribute("rel", "");
                         oElement.setAttribute("target", "_blank");
@@ -814,14 +809,12 @@
             var nMarginRight = document.getElementById("selMarginRight").value;
             var nMarginBottom = document.getElementById("selMarginBottom").value;
             var nMarginLeft = document.getElementById("selMarginLeft").value;
-            var sMargin = "margin: " + nMarginTop + "px " + nMarginRight + "px " + nMarginBottom + "px " + nMarginLeft + "px;";
-            if (nMarginTop == 0 && nMarginRight == 0 && nMarginBottom == 0 && nMarginLeft == 0) sMargin = "margin: 0;";
             if (document.getElementById("selAlign").value == "left")
-                sCssStyle = "float:left;" + sMargin;
+                sCssStyle = "float:left;margin-top:" + nMarginTop + "px;margin-right:" + nMarginRight + "px;margin-bottom:" + nMarginBottom + "px;margin-left:" + nMarginLeft + "px;";
             else if (document.getElementById("selAlign").value == "right")
-                sCssStyle = "float:right;" + sMargin;
+                sCssStyle = "float:right;margin-top:" + nMarginTop + "px;margin-right:" + nMarginRight + "px;margin-bottom:" + nMarginBottom + "px;margin-left:" + nMarginLeft + "px;";
             else
-                if (sMargin != "margin: 0;") sCssStyle = sMargin;
+                sCssStyle = "margin-top:" + nMarginTop + "px;margin-right:" + nMarginRight + "px;margin-bottom:" + nMarginBottom + "px;margin-left:" + nMarginLeft + "px;";
 
             /* Dimension */
             if (document.getElementById("inpWidth").value != "") {
@@ -836,6 +829,7 @@
 
             /* Image Css Class */
             var sImgCssClass = "";
+//            if (document.getElementById("chkReflection").checked) sImgCssClass = "reflect";
 
             /* Image Css Style */
             var sImgCssStyle = "";
@@ -860,8 +854,6 @@
                     oImg.hspace = "7";
                     oImg.vspace = "7";
                 }
-
-            oImg.setAttribute("class", "img-responsive")
 
             /* RETOUCH IMAGE */
             applyRetouchedImage(oImg);
@@ -923,7 +915,12 @@
                 oImg.style.cssText = oImg.style.cssText + ";" + "border:#fff 7px solid;-webkit-box-shadow: 0 15px 10px -10px rgba(0, 0, 0, 0.5), 0 1px 4px rgba(0, 0, 0, 0.3);-moz-box-shadow: 0 15px 10px -10px rgba(0, 0, 0, 0.5), 0 1px 4px rgba(0, 0, 0, 0.3);box-shadow: 0 15px 10px -10px rgba(0, 0, 0, 0.5), 0 1px 4px rgba(0, 0, 0, 0.3);-moz-border-radius:7px;border-radius:7px;";
             }
             if (nEff == 7) {
-
+                if (navigator.appName.indexOf('Microsoft') != -1) {
+                    oImg.style.className = "reflect";
+                }
+                else {
+                    oImg.setAttribute("class", "reflect");
+                }
             }
             if (nEff == 8) {
                 oImg.style.cssText = oImg.style.cssText + ";" + "padding: 5px;border: solid 1px #ddd;";

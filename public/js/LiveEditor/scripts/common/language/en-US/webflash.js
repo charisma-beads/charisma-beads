@@ -1,8 +1,8 @@
-function loadTxt() {
+﻿function loadTxt() {
     document.getElementById("lblSource").innerHTML = "SOURCE:";
     document.getElementById("lblWidth").innerHTML = "WIDTH:";
     document.getElementById("lblHeight").innerHTML = "HEIGHT:";
-    document.getElementById("btnCancel").value = "close";
+    document.getElementById("btnCancel").innerHTML = "close";
     document.getElementById("btnInsert").value = " insert ";
 }
 

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 
@@ -443,33 +443,12 @@
             if (nSize == 5) {
                 sSize = " width=\"960\" height=\"720\" ";
             }
+            var sEmbedUrl = "http://www.youtube.com/embed/" + getVideoId($('#inpURL').val());
+            var sHTML = "<iframe style=\"" + sCssText + "\" title=\"YouTube video player\" " + sSize + " src=\"" + sEmbedUrl + "?wmode=transparent\" wmode=\"Opaque\" frameborder=\"0\" allowfullscreen></iframe>";
 
-
-            //var sEmbedUrl = "http://www.youtube.com/embed/" + getVideoId($('#inpURL').val());
-            //var sHTML = "<iframe style=\"" + sCssText + "\" title=\"YouTube video player\" " + sSize + " src=\"" + embedUrl() + "?wmode=transparent\" wmode=\"Opaque\" frameborder=\"0\" allowfullscreen></iframe>";
-
-            var sHTML = "<article style=\"" + sCssText + "\" class=\"flex-video\"><iframe " + sSize + " src=\"" + embedUrl() + "\"></iframe></article>";
+            //var sHTML = "<article style=\"" + sCssText + "\" class=\"flex-video\"><iframe " + sSize + " src=\"" + sEmbedUrl + "\"></iframe></article>";
 
             I_InsertHTML(sHTML)
-        }
-
-        function embedUrl(){
-            var inputUrl = $('#inpURL').val();
-            var youRegex = /^http[s]?:\/\/(((www.youtube.com\/watch\?(feature=player_detailpage&)?)v=)|(youtu.be\/))([^#\&\?]*)/;
-            var vimeoRegex = /^.*(vimeo\.com\/)((channels\/[A-z]+\/)|(groups\/[A-z]+\/videos\/)|(video\/))?([0-9]+)\/?/;
-            var youRegexMatches = youRegex.exec(inputUrl);
-            var vimeoRegexMatches = vimeoRegex.exec(inputUrl);
-            if (youRegexMatches != null && youRegexMatches.length >= 7) {
-                var youMatch = [6];
-                var youUrl = 'http://www.youtube.com/embed/' + youMatch;
-                return youUrl;
-            }
-            if (vimeoRegexMatches != null && vimeoRegexMatches.length >= 7) {
-                var vimeoMatch = vimeoRegexMatches[6];
-
-                var vimeoUrl = 'http://player.vimeo.com/video/' + vimeoMatch;
-                return vimeoUrl;
-            }
         }
 
         function getVideoId(url) {
@@ -533,7 +512,7 @@
 <div id="tab1" onclick="tabClick(1)" style="float:left;font-family:Arvo;font-size:11px;text-shadow:1px 1px 1px rgba(255,255,255,0.6);color:#000;letter-spacing:1px;cursor:pointer;width:75px;min-height:15px;text-align:center;margin-bottom:0px;padding:3px;background:#ccc;margin-left:5px;margin-top:7px">
     STYLES
 </div>
-<div id="tab2" onclick="tabClick(2)" style="display:none;float:left;font-family:Arvo;font-size:11px;text-shadow:1px 1px 1px rgba(255,255,255,0.6);color:#000;letter-spacing:1px;cursor:pointer;width:115px;min-height:15px;text-align:center;margin-bottom:0px;padding:3px;background:#ccc;margin-left:5px;margin-top:7px">
+<div id="tab2" onclick="tabClick(2)" style="float:left;font-family:Arvo;font-size:11px;text-shadow:1px 1px 1px rgba(255,255,255,0.6);color:#000;letter-spacing:1px;cursor:pointer;width:115px;min-height:15px;text-align:center;margin-bottom:0px;padding:3px;background:#ccc;margin-left:5px;margin-top:7px">
     DIMENSION
 </div>
 

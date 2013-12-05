@@ -7,7 +7,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 
     <style type="text/css">
         .item {padding:15px 30px 30px;border-bottom:#e7e7e7 1px solid;
@@ -38,30 +39,28 @@
 
 
 <div class="item">
-<div class="row">
-    <div class="col-lg-12">
+<div class="row-fluid">
+    <div class="span12">
         <h4>Video</h4> 
     </div>
 </div>
-<div class="row">
-    <div class="col-lg-12">
+<div class="row-fluid">
+    <div class="span12">
         <div id="divYoutube">
             <article class="flex-video">   
 	        <iframe width="560" height="315" src="http://www.youtube.com/embed/e7OYeIXsW60"></iframe>
             </article>
         </div>
 
-        <label for="inpUrl">URL: </label>
-        <input id="inpUrl" type="text" class="form-control" value="http://www.youtube.com/embed/e7OYeIXsW60" onkeyup="setPreview()" />
-
-        <div class="alert-info" style="margin-top:12px;padding:10px;font-size:12px">
+        <label for="inpUrl">URL: </label><input id="inpUrl" type="text" class="span12" value="http://www.youtube.com/embed/e7OYeIXsW60" onkeyup="setPreview()" />
+        <div class="alert-info" style="padding:10px;font-size:12px">
         ex.<br />
         http://player.vimeo.com/video/50676747 
         <br />       
         http://www.youtube.com/embed/e7OYeIXsW60
         </div>
         <br />
-        <a class="btn btn-default" href="javascript:insertSnippet('divYoutube')">Insert</a>
+        <a class="btn" href="javascript:insertSnippet('divYoutube')">Insert</a>
     </div>
 </div>
 </div>
