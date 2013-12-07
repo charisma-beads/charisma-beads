@@ -8,9 +8,8 @@ $resultArray = array();
 
 while($obj = $result->fetch_object()) {
 	$resultArray[] = array(
-		'userId'		=> $obj->customer_id,
-		'firstname' 	=> $obj->first_name,
-		'lastname'		=> $obj->last_name,
+		'firstname' 	=> $mysqli->real_escape_string($obj->first_name),
+		'lastname'		=> $mysqli->real_escape_string($obj->last_name),
 		'email'			=> $obj->email,
 		'passwd'		=> $obj->password,
 		'role'			=> ($obj->email == 'shaun@shaunfreeman.co.uk' || $obj->email == 'vivien@charismabeads.co.uk' || $obj->email == 'richard@barnaclesfinch.me.uk') ? 'admin' : 'registered',
@@ -24,12 +23,12 @@ $result->close();
 $mysqli->select_db("charisma-beads");
 
 $result = $mysqli->query("TRUNCATE user");
+$c = 0;
 
 foreach ($resultArray as $values) {
-	$result = $mysqli->query("
-		INSERT INTO user (userId, firstname, lastname, email, passwd, role, dateCreated, dateModified)
+	$sql = "
+		INSERT INTO user (firstname, lastname, email, passwd, role, dateCreated, dateModified)
 		VALUES (
-	        '".$values['userId']."',
 			'".$values['firstname']."',
 			'".$values['lastname']."',
 			'".$values['email']."',
@@ -38,8 +37,17 @@ foreach ($resultArray as $values) {
 			'".$values['dateCreated']."',
 			NOW()
 		)
-	");
-	print "<pre>";
-	print_r($values);
-	print "</pre>";
+	";
+	
+	$result = $mysqli->query($sql);
+	
+	if (!$result) {
+		print "<pre>";
+		print_r($sql);
+		print "</pre>";
+	} else {
+		$c++;
+	}
 }
+
+print 'rows Inserted = ' . $c;

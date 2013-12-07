@@ -26,8 +26,8 @@ class Address extends AbstractHydrator
 	{
 		return array(
 			'customerAddressId'  => $object->getCustomerAddressId(),
+		    'customerId'         => $object->getCustomerId(),
 		    'countryId'          => $object->getCountryId(),
-			'userId'             => $object->getUserId(),
 			'address1'           => $object->getAddress1(),
 			'address2'           => $object->getAddress2(),
 			'address3'           => $object->getAddress3(),

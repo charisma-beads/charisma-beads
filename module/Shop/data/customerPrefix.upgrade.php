@@ -2,14 +2,15 @@
 
 $mysqli = new mysqli("localhost", "root", "password", "charisma_charismabeads");
 
-$result = $mysqli->query("SELECT * FROM product_postunit");
+$result = $mysqli->query("SELECT * FROM customer_prefix");
 
 $resultArray = array();
 
 while($obj = $result->fetch_object()) {
 	$resultArray[] = array(
-		'productPostUnitId'			=> $obj->postunit_id,
-		'postUnit' 					=> $obj->postunit,
+		'prefixId'		=> $obj->prefix_id,
+	    'prefix'        => $obj->prefix
+		
 	);
 }
 
@@ -18,20 +19,20 @@ $result->close();
 /* change db to new db */
 $mysqli->select_db("charisma-beads");
 
-$result = $mysqli->query("TRUNCATE productPostUnit");
+$result = $mysqli->query("TRUNCATE customerPrefix");
 $c = 0;
 
 foreach ($resultArray as $values) {
 	$keys = array_keys($values);
 	$sql = "
-		INSERT INTO productPostUnit (".implode(', ', $keys).")
+		INSERT INTO customerPrefix (".implode(', ', $keys).")
 		VALUES (";
-	
+
 	foreach ($values as $val) {
 		$sql .= "'" . $val . "', ";
 	}
-	
-	$sql = substr($sql, 0, -2);
+
+    $sql = substr($sql, 0, -2);
 	
 	$sql .= "
 		)
@@ -46,9 +47,6 @@ foreach ($resultArray as $values) {
 	} else {
 		$c++;
 	}
-	
 }
 
 print 'rows Inserted = ' . $c;
-
-$result->close();

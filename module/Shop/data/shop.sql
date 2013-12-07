@@ -1,6 +1,8 @@
 
 SET FOREIGN_KEY_CHECKS=0;
 
+-- --------------------------------------------------------
+
 --
 -- Table structure for table `country`
 --
@@ -11,6 +13,26 @@ CREATE TABLE IF NOT EXISTS `country` (
   `postZoneId` int(10) unsigned NOT NULL,
   `country` varchar(150) NOT NULL,
   PRIMARY KEY (`countryId`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customer`
+--
+
+DROP TABLE IF EXISTS `customer`;
+CREATE TABLE IF NOT EXISTS `customer` (
+  `customerId` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `userId` int(10) unsigned NOT NULL DEFAULT 0,
+  `prefixId` int(10) unsigned NOT NULL,
+  `firstname` varchar(128) NOT NULL,
+  `lastname` varchar(128) NOT NULL,
+  `billingAddressId` int(10) unsigned NOT NULL,
+  `deliveryAddressId` int(10) unsigned NOT NULL,
+  `dateCreated` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `dateModified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`customerId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
 
 -- --------------------------------------------------------
@@ -22,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `country` (
 DROP TABLE IF EXISTS `customerAddress`;
 CREATE TABLE IF NOT EXISTS `customerAddress` (
   `customerAddressId` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `userId` int(5) unsigned NOT NULL,
+  `customerId` int(5) unsigned NOT NULL,
   `countryId` int(2) unsigned DEFAULT '0',
   `address1` varchar(80) DEFAULT NULL,
   `address2` varchar(80) DEFAULT NULL,
@@ -31,36 +53,24 @@ CREATE TABLE IF NOT EXISTS `customerAddress` (
   `county` varchar(40) DEFAULT NULL,
   `postcode` varchar(10) DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
   `dateCreated` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `dateModified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`addressId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`customerAddressId`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `customerBillingAddress`
+-- Table structure for table `customerPrefix`
 --
 
-DROP TABLE IF EXISTS `customerBillingAddress`;
-CREATE TABLE IF NOT EXISTS `customerBillingAddress` (
-  `customerBillingAddressId` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `customerAddressId` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`customerBillingAddressId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `customerDeliveryAddress`
---
-
-DROP TABLE IF EXISTS `customerDeliveryAddress`;
-CREATE TABLE IF NOT EXISTS `customerDeliveryAddress` (
-  `customerDeliveryAddressId` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `customerAddressId` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`customerDeliveryAddressId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
+DROP TABLE IF EXISTS `customerPrefix`;
+CREATE TABLE IF NOT EXISTS `customerPrefix` (
+  `prefixId` int(1) unsigned NOT NULL AUTO_INCREMENT,
+  `prefix` varchar(5) NOT NULL,
+  PRIMARY KEY (`prefixId`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
 
 -- --------------------------------------------------------
 
@@ -71,12 +81,15 @@ CREATE TABLE IF NOT EXISTS `customerDeliveryAddress` (
 DROP TABLE IF EXISTS `order`;
 CREATE TABLE IF NOT EXISTS `order` (
   `orderId` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `userId` int(10) unsigned NOT NULL,
+  `customerId` int(10) unsigned NOT NULL,
   `orderStatusId` int(10) unsigned NOT NULL,
   `total` decimal(10,2) unsigned NOT NULL DEFAULT '0.00',
   `orderDate` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `cart` text NOT NULL,
+  `invoice` int(5) unsigned NOT NULL DEFAULT '0',
   `shipping` decimal(4,2) NOT NULL DEFAULT '0.00',
   `vatTotal` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `vatInvoice` int(1) unsigned NOT NULL DEFAULT '0',
   `txnId` varchar(19) DEFAULT NULL,
   PRIMARY KEY (`orderId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;
@@ -124,8 +137,10 @@ CREATE TABLE IF NOT EXISTS `postCost` (
   `postZoneId` int(10) unsigned NOT NULL,
   `cost` decimal(6,2) NOT NULL DEFAULT '0.00',
   `vatInc` int(1) unsigned NOT NULL,
-  PRIMARY KEY (`postCostId`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;
+  PRIMARY KEY (`postCostId`),
+  KEY `cost` (`cost`),
+  KEY `level` (`postLevelId`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
 
 -- --------------------------------------------------------
 
@@ -138,7 +153,20 @@ CREATE TABLE IF NOT EXISTS `postLevel` (
   `postLevelId` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `postLevel` decimal(5,2) unsigned NOT NULL DEFAULT '0.00',
   PRIMARY KEY (`postLevelId`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `postUnit`
+--
+
+DROP TABLE IF EXISTS `postUnit`;
+CREATE TABLE IF NOT EXISTS `postUnit` (
+  `postUnitId` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `postUnit` decimal(6,2) unsigned NOT NULL,
+  PRIMARY KEY (`postUnitId`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
 
 -- --------------------------------------------------------
 
@@ -152,7 +180,7 @@ CREATE TABLE IF NOT EXISTS `postZone` (
   `taxCodeId` int(10) unsigned NOT NULL,
   `zone` varchar(45) NOT NULL,
   PRIMARY KEY (`postZoneId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
 
 -- --------------------------------------------------------
 
@@ -166,9 +194,9 @@ CREATE TABLE IF NOT EXISTS `product` (
   `productCategoryId` int(10) unsigned NOT NULL,
   `productSizeId` int(10) unsigned NOT NULL,
   `taxCodeId` int(10) unsigned NOT NULL,
-  `productPostUnitId` int(10) unsigned NOT NULL,
+  `postUnitId` int(10) unsigned NOT NULL,
   `productGroupId` int(10) unsigned DEFAULT NULL,
-  `productStockStatusId` int(10) unsigned DEFAULT NULL,
+  `stockStatusId` int(10) unsigned DEFAULT NULL,
   `ident` varchar(250) NOT NULL,
   `name` varchar(64) NOT NULL,
   `price` decimal(6,2) NOT NULL DEFAULT '0.00',
@@ -224,7 +252,7 @@ CREATE TABLE IF NOT EXISTS `productGroupPrice` (
   `group` varchar(5) DEFAULT '0',
   `price` decimal(4,2) DEFAULT '0.00',
   PRIMARY KEY (`productGroupId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
 
 -- --------------------------------------------------------
 
@@ -259,20 +287,7 @@ CREATE TABLE IF NOT EXISTS `productOption` (
   `price` decimal(10,2) unsigned NOT NULL DEFAULT '0.00',
   PRIMARY KEY (`productOptionId`),
   KEY `productId` (`productId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `productPostUnit`
---
-
-DROP TABLE IF EXISTS `productPostUnit`;
-CREATE TABLE IF NOT EXISTS `productPostUnit` (
-  `productPostUnitId` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `postUnit` decimal(6,2) unsigned NOT NULL,
-  PRIMARY KEY (`productPostUnitId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
 
 -- --------------------------------------------------------
 
@@ -290,14 +305,14 @@ CREATE TABLE IF NOT EXISTS `productSize` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `productStockStatus`
+-- Table structure for table `stockStatus`
 --
 
-DROP TABLE IF EXISTS `productStockStatus`;
-CREATE TABLE IF NOT EXISTS `productStockStatus` (
-  `productStockStautsId` int(10) unsigned NOT NULL AUTO_INCREMENT,
+DROP TABLE IF EXISTS `stockStatus`;
+CREATE TABLE IF NOT EXISTS `stockStatus` (
+  `stockStautsId` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `stockStatus` varchar(50) NOT NULL,
-  PRIMARY KEY (`productStockStautsId`)
+  PRIMARY KEY (`stockStautsId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
 
 -- --------------------------------------------------------
@@ -337,6 +352,4 @@ CREATE TABLE IF NOT EXISTS `taxRate` (
 --
 ALTER TABLE `productCategory`
   ADD CONSTRAINT `productCategory_ibfk_4` FOREIGN KEY (`productImageId`) REFERENCES `productImage` (`productImageId`) ON DELETE SET NULL;
-
 SET FOREIGN_KEY_CHECKS=1;
-

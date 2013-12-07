@@ -16,9 +16,9 @@ return array(
 		'Shop\InputFilter\TaxRate'				=> 'Shop\InputFilter\Tax\Rate',
 	    
 	    'Shop\Mapper\Country'                   => 'Shop\Mapper\Country',
+	    'Shop\Mapper\Customer'                  => 'Shop\Mapper\Customer',
 	    'Shop\Mapper\CustomerAddress'           => 'Shop\Mapper\Customer\Address',
-	    'Shop\Mapper\CustomerBillingAddress'    => 'Shop\Mapper\Customer\BillingAddress',
-	    'Shop\Mapper\CustomerDeliveryAddress'   => 'Shop\Mapper\Customer\DeliveryAddress',
+	    'Shop\Mapper\CustomerPrefix'            => 'Shop\Mapper\Customer\Prefix',
 	    'Shop\Mapper\Order'                     => 'Shop\Mapper\Order',
 	    'Shop\Mapper\OrderLine'                 => 'Shop\Mapper\Order\Line',
 	    'Shop\Mapper\OrderStatus'               => 'Shop\Mapper\Order\Status',
@@ -36,7 +36,7 @@ return array(
 		'Shop\Mapper\TaxRate'				    => 'Shop\Mapper\Tax\Rate',
 		
 	    'Shop\Service\Country'                  => 'Shop\Service\Country',
-	    'Shop\Service\CustomerAddress'          => 'Shop\Service\Customer\Address',
+	    'Shop\Service\Customer'                 => 'Shop\Service\Customer',
 		'Shop\Service\Product' 				    => 'Shop\Service\Product',
 		'Shop\Service\ProductCategory'          => 'Shop\Service\Product\Category',
 	    'Shop\Service\ProductImage'             => 'Shop\Service\Product\Image',
