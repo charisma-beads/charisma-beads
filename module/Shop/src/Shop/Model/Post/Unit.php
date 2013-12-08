@@ -26,7 +26,7 @@ class Unit extends AbstractModel
 	/**
 	 * @param number $productPostUnitId
 	 */
-	public function setProductPostUnitId($postUnitId)
+	public function setPostUnitId($postUnitId)
 	{
 		$this->postUnitId = $postUnitId;
 		return $this;

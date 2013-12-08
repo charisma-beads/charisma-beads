@@ -5,6 +5,10 @@ use Application\Hydrator\AbstractHydrator;
 
 class Code extends AbstractHydrator
 {
+    protected $relationshipHydrators = array(
+    	'Shop\Hydrator\Tax\Rate' => 'Shop\Model\Tax\Rate',
+    );
+    
 	/**
 	 * @param \Shop\Model\Tax\Code $object
 	 * @return array $data

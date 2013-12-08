@@ -5,13 +5,10 @@ use Application\Mapper\AbstractMapper;
 use Zend\Db\Sql\Select;
 
 class Product extends AbstractMapper
-{
-    const MODEL = 'Shop\Model\Product';
-    const MODEL_RELATIONAL = 'Shop\Model\Relational\Product';
-        
+{       
 	protected $table = 'product';
 	protected $primary = 'productId';
-	protected $model = self::MODEL_RELATIONAL;
+	protected $model = 'Shop\Model\Product';
 	protected $hydrator = 'Shop\Hydrator\Product';
 	protected $fetchEnabled = true;
 	protected $fetchDisabled = false;
