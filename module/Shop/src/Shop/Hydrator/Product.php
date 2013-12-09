@@ -8,18 +8,14 @@ use Application\Hydrator\Strategy\TrueFalse;
 
 class Product extends AbstractHydrator
 {   
-    protected $relationshipHydrators = array(
+    protected $hydratorMap = array(
     	'Shop\Hydrator\Product\Category'    => 'Shop\Model\Product\Category',
         'Shop\Hydrator\Product\Size'        => 'Shop\Model\Product\Size',
         'Shop\Hydrator\Post\Unit'           => 'Shop\Model\Post\Unit',
         'Shop\Hydrator\Tax\Code'            => 'Shop\Model\Tax\Code',
     );
     
-    protected $parentMap = array(
-    	'ident', 'name', 'price', 'description', 'shortDescription', 'quantity', 
-        'taxable', 'addPostage', 'discountPercent', 'hits', 'enabled', 'discontinued',
-        'vatInc', 'dateCreated', 'dateModified',
-    );
+    protected $prefix = 'product.';
     
 	public Function __construct()
 	{

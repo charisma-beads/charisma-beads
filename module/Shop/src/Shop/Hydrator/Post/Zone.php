@@ -5,6 +5,8 @@ use Application\Hydrator\AbstractHydrator;
 
 class Zone extends AbstractHydrator
 {
+    protected $prefix = 'postZone.';
+    
     /**
      * @param \Shop\Model\Post\Zone $object
      * @return array $data

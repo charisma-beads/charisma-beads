@@ -5,6 +5,8 @@ use Application\Hydrator\AbstractHydrator;
 
 class Size extends AbstractHydrator
 {
+    protected $prefix = 'productSize.';
+    
 	/**
 	 * @param \Shop\Model\Product\Size $object
 	 * @return array $data

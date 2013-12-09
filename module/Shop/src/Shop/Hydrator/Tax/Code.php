@@ -5,9 +5,11 @@ use Application\Hydrator\AbstractHydrator;
 
 class Code extends AbstractHydrator
 {
-    protected $relationshipHydrators = array(
+    protected $hydratorMap = array(
     	'Shop\Hydrator\Tax\Rate' => 'Shop\Model\Tax\Rate',
     );
+    
+    protected $prefix = 'taxCode.';
     
 	/**
 	 * @param \Shop\Model\Tax\Code $object

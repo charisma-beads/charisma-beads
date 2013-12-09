@@ -90,32 +90,32 @@ class Product extends AbstractMapper
 	    ->join(
 	        'productCategory',
 	        'product.productCategoryId=productCategory.productCategoryId',
-	        array('category'),
+	        array('productCategory.category' => 'category'),
 	        Select::JOIN_INNER
         )->join(
 	    	'postUnit',
 	    	'product.postUnitId=postUnit.postUnitId',
-	    	array('postUnit'),
+	    	array('postUnit.postUnit' => 'postUnit'),
 	    	Select::JOIN_INNER
 	    )->join(
 	    	'productSize',
 	    	'product.productSizeId=productSize.productSizeId',
-	    	array('size'),
+	    	array('productSize.size' => 'size'),
 	    	Select::JOIN_INNER
 	    )->join(
 	    	'productGroupPrice',
 	    	'product.productGroupId=productGroupPrice.productGroupId',
-	    	array('group'),
+	    	array('productPriceGroup.group' => 'group'),
 	    	Select::JOIN_LEFT
 	    )->join(
 	    	'taxCode',
 	    	'product.taxCodeId=taxCode.taxCodeId',
-	    	array('taxCode'),
+	    	array('taxCode.taxCode' => 'taxCode'),
 	    	Select::JOIN_INNER
 	    )->join(
 	    	'taxRate',
 	    	'taxCode.taxRateId=taxRate.taxRateId',
-	    	array('taxRate'),
+	    	array('taxRate.taxRate' => 'taxRate'),
 	    	Select::JOIN_INNER
 	    );
 	    

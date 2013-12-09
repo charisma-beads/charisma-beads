@@ -5,6 +5,8 @@ use Application\Hydrator\AbstractHydrator;
 
 class Cost extends AbstractHydrator
 {
+    protected $prefix = 'postCost.';
+    
     /**
      * @param \Shop\Model\Post\Cost $object
      * @return array $data

@@ -10,22 +10,30 @@ class AbstractHydrator extends ZendAbstractHydrator
     
     protected $useRetionships = true;
     
-    protected $relationshipHydrators = array();
+    protected $hydratorMap = array();
     
-    protected $parentMap = array();
+    protected $prefix;
     
 	public function hydrate(array $data, $object)
 	{
-		foreach ($data as $key => $value) {
+	    $modelData = array();
+	    // if Child model filter out the keys based on an prefix alias
+	    if ($this->getIsChild()) {
+	        foreach ($data as $key => $value) {
+    	    	if (0 === strpos($key, $this->prefix)) {
+    	    		$key = str_replace($this->prefix, '', $key);
+    	    		$modelData[$key] = $value;
+    	    	}
+	        }
+	    } else {
+	        $modelData = $data;
+	    }
+	    
+		foreach ($modelData as $key => $value) {
 			if ($object->has($key)) {
 				$method = 'set' . ucfirst($key);
-				$value = $this->hydrateValue($key, $value, $data);
+				$value = $this->hydrateValue($key, $value, $modelData);
 				$object->$method($value);
-				
-			}
-			
-			if (!$this->isChild && in_array($key, $this->parentMap)) {
-			    unset($data[$key]);
 			}
 		}
 	
@@ -38,7 +46,7 @@ class AbstractHydrator extends ZendAbstractHydrator
 	
 	public function hydrateChild(array $data, $object)
 	{
-	    foreach($this->relationshipHydrators as $hydrator => $model) {
+	    foreach ($this->hydratorMap as $hydrator => $model) {
 	        $hydrator = new $hydrator();
 	        $hydrator->setIsChild(true);
 	        $model = $hydrator->hydrate($data, new $model());
@@ -69,5 +77,4 @@ class AbstractHydrator extends ZendAbstractHydrator
 		$this->isChild = $isChild;
 		return $this;
 	}
-
 }
