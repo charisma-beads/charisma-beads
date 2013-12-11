@@ -28,6 +28,12 @@
     	<div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
                 <div id="top-bar-nav" class="container">
+                    <form class="form-search navbar-search pull-left">
+                        <div class="input-append">
+							<input type="text" class="search-query" placeholder="Type your search...">
+						  <button class="btn"><i class="icon-search"></i></button>
+						</div>
+                    </form>
                     <div class="dropdown">
                     	<?php if ($this->identity()): ?>
 	                    <ul class="nav pull-right">
@@ -72,17 +78,6 @@
 	            		<?=$this->aclMenu('model', 'top menu'); ?>
 	            		<ul class="nav pull-right">
 							<li class="divider-vertical"></li>
-							<li class="dropdown">
-								<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-search"></i></a>
-									<div class="dropdown-menu">
-										<form class="form-search">
-											<div class="input-append">
-												<input type="text" class="search-query" placeholder="Type your search...">
-												<button class="btn">ok</button>
-											</div>
-										</form> 
-									</div>
-							</li>
 							<li class="dropdown">
 								<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-envelope"></i></a>
 								<div class="dropdown-menu">
