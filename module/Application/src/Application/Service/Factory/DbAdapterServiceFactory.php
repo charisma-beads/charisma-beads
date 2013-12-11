@@ -20,12 +20,12 @@ class DbAdapterServiceFactory implements FactoryInterface
         $dbParams = $config['db'];
         
         $adapter = new ProfilingAdapter(array(
-        		'driver'    => 'pdo',
-        		'dsn'       => 'mysql:dbname='.$dbParams['database'].';host='.$dbParams['hostname'],
-        		'database'  => $dbParams['database'],
-        		'username'  => $dbParams['username'],
-        		'password'  => $dbParams['password'],
-        		'hostname'  => $dbParams['hostname'],
+        	'driver'    => 'pdo',
+        	'dsn'       => 'mysql:dbname='.$dbParams['database'].';host='.$dbParams['hostname'],
+        	'database'  => $dbParams['database'],
+        	'username'  => $dbParams['username'],
+        	'password'  => $dbParams['password'],
+        	'hostname'  => $dbParams['hostname'],
         ));
         
         $adapter->setProfiler(new Profiler);
