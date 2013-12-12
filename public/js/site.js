@@ -11,6 +11,8 @@ $(document).ready(function(){
             $(this).removeClass("loading");
         }    
     });
+    
+    $('[data-toggle="tooltip"]').tooltip({'placement': 'top'});
 
     $('input[placeholder], textarea[placeholder]').placeholder();
     

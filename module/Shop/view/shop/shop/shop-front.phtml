@@ -5,12 +5,14 @@
 <ul class="thumbnails">
 <?php foreach ($this->cats as $row): ?>
     <li class="span3">
-    	<div class="thumbnail text-center">
+    	<div class="thumbnail text-center category-item-box">
     		<img data-src="holder.js/200x100/auto" alt="">
-    		<h5><?php echo $this->escapehtml($row->getCategory());?></h5>
-    		<a href="<?php echo $this->url('shop/catalog', array(
-    			'categoryIdent' => $row->getIdent()
-    		)); ?>" class="btn">Click to see all Products in this Category</a>
+    		<h5>
+                <a href="<?php echo $this->url('shop/catalog', array(
+        			'categoryIdent' => $row->getIdent()
+        		)); ?>" class="btn"><?=$this->escapehtml($row->getCategory());?></a>
+    		</h5>
+    		
     	</div>
     	
     </li>

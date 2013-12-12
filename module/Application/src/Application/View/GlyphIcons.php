@@ -184,7 +184,7 @@ class GlyphIcons extends AbstractHelper
         }
     
         if (!in_array($icon, $this->icons)) {
-            throw new InvalidArgumentException($icon . ' is not supported');
+            //throw new InvalidArgumentException($icon . ' is not supported');
         }
     
         if ($argv) {
@@ -222,7 +222,7 @@ class GlyphIcons extends AbstractHelper
     protected function render($icon, $options = array())
     {
         if (!in_array($icon, $this->icons)) {
-            throw new Exception($icon . ' icon is not supported');
+            //throw new Exception($icon . ' icon is not supported');
         }
         
         $this->setOptions($options);

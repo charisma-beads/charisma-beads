@@ -11,6 +11,7 @@
         <!-- Le styles -->
         <?=$this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
             ->prependStylesheet($this->basePath() . '/css/style.css')
+            ->prependStylesheet($this->basepath() . '/css/glyphicons.css')
             ->prependStylesheet($this->basePath() . '/css/bootstrap-responsive.css')
             ->prependStylesheet($this->basePath() . '/css/bootstrap.css') ?>
 
@@ -64,8 +65,11 @@
         </div>
         <div id="main-content" class="container">
 			
-            <div id="header">
-                <a><img alt="Charisma Beads Ltd" src="<?=$this->basepath('/img/layout/logo.png'); ?>"></a>
+            <div id="header" class="row">
+                    <h2 class="span12">
+                        <a><img alt="Charisma Beads Ltd" src="<?=$this->basepath('/img/layout/logo.png'); ?>"></a>
+                        <span class="pull-right"><i class="glyphicons phone_alt">&nbsp;</i>01462 454054</span>
+                    </h2>
             </div>
             <div class="navbar">
 				<div class="navbar-inner">

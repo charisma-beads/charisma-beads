@@ -24,7 +24,18 @@ div.container a.brand {
     padding: 8px 20px 12px 40px;
 }
 
+#header h2 span {
+	margin-top: 25px;
+}
+
+#header h2 span .glyphicons:before {
+	top: 4px;
+	left: 24px;
+}
+
 .product-item-box { height: 275px; }
+
+.category-item-box { min-height: 175px; }
 
 .text-right { text-align: right; }
 .text-center { text-align: center; }
@@ -55,4 +66,16 @@ div.container a.brand {
 	-webkit-border-radius: 25px;
        -moz-border-radius: 25px;
             border-radius: 25px;
+}
+
+@media (max-width: 979px) {
+	.navbar-fixed-top {
+		position: absolute;
+	}
+	
+	#main-content {
+		margin-top: 0px;
+	}
+	
+	.product-item-box { height: 230px; }
 }
