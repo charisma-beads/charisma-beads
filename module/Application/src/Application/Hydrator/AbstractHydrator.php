@@ -8,7 +8,7 @@ class AbstractHydrator extends ZendAbstractHydrator
 {
     protected $isChild = false;
     
-    protected $useRetionships = true;
+    protected $useRelationships = false;
     
     protected $hydratorMap = array();
     
@@ -37,7 +37,7 @@ class AbstractHydrator extends ZendAbstractHydrator
 			}
 		}
 	
-		if (true === $this->useRetionships) {
+		if (true === $this->useRelationships) {
     		$object = $this->hydrateChild($data, $object);
     	}
     	 
@@ -47,7 +47,7 @@ class AbstractHydrator extends ZendAbstractHydrator
 	public function hydrateChild(array $data, $object)
 	{
 	    foreach ($this->hydratorMap as $hydrator => $model) {
-	        $hydrator = new $hydrator();
+	        $hydrator = new $hydrator($this->useRelationships);
 	        $hydrator->setIsChild(true);
 	        $model = $hydrator->hydrate($data, new $model());
 	        $object->setRelationalModel($model);

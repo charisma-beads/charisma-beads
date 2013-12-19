@@ -15,7 +15,7 @@ class Rate extends AbstractHydrator
 	{
 		return array(
 			'taxRateId'	=> $object->getTaxRateId(),
-			'taxRate'	=>$object->getTaxRate()
+			'taxRate'	=> $object->getTaxRate()
 		);
 	}
 }

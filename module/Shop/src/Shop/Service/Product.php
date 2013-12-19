@@ -10,13 +10,19 @@ class Product extends AbstractService
 	protected $inputFilter = '';
 	
 	/**
-	 * @var \Shop\Service\ProductCategory
+	 * @var \Shop\Service\Product\Category
 	 */
 	protected $categoryService;
+	
+	/**
+	 * @var \Shop\Service\Product\GroupPrice
+	 */
+	protected $groupPriceService;
 	
 	public function getFullProductById($id)
 	{
 	    $id = (int) $id;
+	    $this->getMapper()->useModelRelationships(true);
 	    return $this->getMapper()->getFullProductById($id);
 	}
 	
@@ -42,6 +48,8 @@ class Product extends AbstractService
 			$ids[] = $categoryId;
 			$categoryId = (null === $ids) ? $categoryId : $ids;
 		}
+		
+		$this->getMapper()->useModelRelationships(true);
 	
 		return $this->getMapper()->getProductsByCategory($categoryId, $order);
 	}
@@ -52,10 +60,43 @@ class Product extends AbstractService
 	    $category = (isset($post['category'])) ? (string) $post['category'] : '';
 	    $sort = (isset($post['sort'])) ? (string) $post['sort'] : '';
 	    
-	    return $this->getMapper()->searchProducts($product, $category, $sort);
+	    //$this->getMapper()->useModelRelationships(true);
 	    
+	    $products = $this->getMapper()->searchProducts($product, $category, $sort);
+	    
+	    foreach ($products as $product) {
+	        $this->populate($product);
+	    }
+	    
+	    return $products;
 	}
 	
+	/**
+	 * 
+	 * @param \Shop\Model\Product $product
+	 */
+	public function populate($product)
+	{
+	    $product->setRelationalModel($this->getCategoryService()->getById($product->getProductCategoryId()));
+	    $product->setRelationalModel($this->getGroupPriceService()->getById($product->getProductGroupId()));
+	}
+	
+	/**
+	 * @return \Shop\Service\Product\GroupPrice
+	 */
+	public function getGroupPriceService()
+	{
+		if (!$this->groupPriceService) {
+			$sl = $this->getServiceLocator();
+			$this->groupPriceService = $sl->get('Shop\Service\ProductGroupPrice');
+		}
+	
+		return $this->groupPriceService;
+	}
+	
+	/**
+	 * @return \Shop\Service\Product\Category
+	 */
 	public function getCategoryService()
 	{
 		if (!$this->categoryService) {

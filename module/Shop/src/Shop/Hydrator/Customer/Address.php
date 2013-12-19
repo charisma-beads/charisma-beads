@@ -6,10 +6,17 @@ use Application\Hydrator\Strategy\DateTime as DateTimeStrategy;
 
 class Address extends AbstractHydrator
 {
-
-	public Function __construct()
+    protected $hydratorMap = array(
+        'Shop\Hydrator\Country'     => 'Shop\Model\Country',
+        'Shop\Hydrator\Customer'    => 'Shop\Model\Customer',
+    );
+    
+    protected $prefix = 'customerAddress.';
+    
+	public Function __construct($useRelationships)
 	{
 		parent::__construct();
+		$this->useRelationships = useRelationships;
 		
 		$dateTime = new DateTimeStrategy();
 		

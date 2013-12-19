@@ -5,7 +5,8 @@ use Application\Hydrator\AbstractHydrator;
 
 class Line extends AbstractHydrator
 {
-
+    protected $prefix = 'orderLine.';
+    
     /**
      *
      * @param \Shop\Model\Order\Line $object            

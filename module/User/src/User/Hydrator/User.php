@@ -7,6 +7,8 @@ use Application\Hydrator\Strategy\EmptyString;
 
 class User extends AbstractHydrator
 {
+    protected $prefix = 'user.';
+    
 	public function __construct()
 	{
 		parent::__construct();

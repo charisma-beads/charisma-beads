@@ -204,7 +204,7 @@ class Product extends AbstractModel
 	/**
 	 * @return number $productGroupId
 	 */
-	public function getProductGroupId ()
+	public function getProductGroupId()
 	{
 		return $this->productGroupId;
 	}

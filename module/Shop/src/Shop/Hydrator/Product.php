@@ -10,6 +10,7 @@ class Product extends AbstractHydrator
 {   
     protected $hydratorMap = array(
     	'Shop\Hydrator\Product\Category'    => 'Shop\Model\Product\Category',
+        'Shop\Hydrator\Product\GroupPrice'  => 'Shop\Model\Product\GroupPrice',
         'Shop\Hydrator\Product\Size'        => 'Shop\Model\Product\Size',
         'Shop\Hydrator\Post\Unit'           => 'Shop\Model\Post\Unit',
         'Shop\Hydrator\Tax\Code'            => 'Shop\Model\Tax\Code',
@@ -17,9 +18,11 @@ class Product extends AbstractHydrator
     
     protected $prefix = 'product.';
     
-	public Function __construct()
+	public Function __construct($useRelationships)
 	{
 		parent::__construct();
+		
+		$this->useRelationships = $useRelationships;
 		
 		$dateTime = new DateTimeStrategy();
 		$trueFalse = new TrueFalse();

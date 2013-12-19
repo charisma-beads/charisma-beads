@@ -5,7 +5,7 @@ use Application\Service\AbstractService;
 
 class Category extends AbstractService
 {
-	protected $mapperClass = 'Shop\Mapper\Product\Category';
+	protected $mapperClass = 'Shop\Mapper\ProductCategory';
 	protected $form = '';
 	protected $inputFilter = '';
 	

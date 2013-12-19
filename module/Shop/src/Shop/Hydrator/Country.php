@@ -5,6 +5,18 @@ use Application\Hydrator\AbstractHydrator;
 
 class Country extends AbstractHydrator
 {
+    protected $hydratorMap = array(
+    	'Shop\Hydrator\Post\Zone'    => 'Shop\Model\Post\Zone',
+    );
+    
+    protected $prefix = 'country.';
+    
+    public function __construct($useRelationships)
+    {
+        parent::__construct();
+        $this->useRelationships = $useRelationships;
+    }
+    
     /**
      *
      * @param \Shop\Model\Country $object            

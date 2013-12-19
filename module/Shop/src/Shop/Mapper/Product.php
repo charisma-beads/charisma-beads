@@ -48,7 +48,20 @@ class Product extends AbstractMapper
 	
 	public function searchProducts($product, $category, $sort)
 	{
-	    $select = $this->getFullSelect();
+	    $select = $this->getSql()->select();
+	    $select->from($this->table)
+	    ->join(
+	    	'productCategory',
+	    	'product.productCategoryId=productCategory.productCategoryId',
+	    	array(),
+	    	Select::JOIN_LEFT
+	    )
+	    ->join(
+	    	'productGroupPrice',
+	    	'product.productGroupId=productGroupPrice.productGroupId',
+	    	array(),
+	    	Select::JOIN_LEFT
+	    );
 	    
 	    if (!$product == '') {
 	    	if (substr($product, 0, 1) == '=') {
@@ -105,7 +118,7 @@ class Product extends AbstractMapper
 	    )->join(
 	    	'productGroupPrice',
 	    	'product.productGroupId=productGroupPrice.productGroupId',
-	    	array('productPriceGroup.group' => 'group'),
+	    	array('productGroupPrice.group' => 'group'),
 	    	Select::JOIN_LEFT
 	    )->join(
 	    	'taxCode',

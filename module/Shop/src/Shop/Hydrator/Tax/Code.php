@@ -11,6 +11,12 @@ class Code extends AbstractHydrator
     
     protected $prefix = 'taxCode.';
     
+    public function __construct($useRelationships)
+    {
+        parent::__construct();
+        $this->useRelationships = $useRelationships;
+    }
+    
 	/**
 	 * @param \Shop\Model\Tax\Code $object
 	 * @return array $data

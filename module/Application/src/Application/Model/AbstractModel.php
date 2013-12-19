@@ -30,8 +30,11 @@ class AbstractModel
 	 */
 	public function setRelationalModel($model)
 	{
-	    $className = get_class($model);
-	    $this->relationalVars[$className] = $model;
+	    if ($model) {
+	       $className = get_class($model);
+	       $this->relationalVars[$className] = $model;
+	    }
+	    
 	    return $this;
 	}
 	

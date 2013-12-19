@@ -5,6 +5,8 @@ use Application\Hydrator\AbstractHydrator;
 
 class Status extends AbstractHydrator
 {
+    protected $prefix = 'stockStatus.';
+    
 	/**
 	 * @param \Shop\Model\Stock\Status $object
 	 * @return array $data

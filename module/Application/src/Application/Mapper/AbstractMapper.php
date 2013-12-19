@@ -51,6 +51,11 @@ class AbstractMapper implements DbAdapterAwareInterface
 	protected $hydrator;
 	
 	/**
+	 * @var bool
+	 */
+	protected $useModelRelationships = false;
+	
+	/**
 	 * @var HydratingResultSet
 	 */
 	protected $resultSetProtype;
@@ -104,9 +109,6 @@ class AbstractMapper implements DbAdapterAwareInterface
 		$select = $this->getSelect()->where(array($this->primary => $id));
 		$rowset = $this->fetchResult($select);
 		$row = $rowset->current();
-		if (!$row) {
-			throw new \Exception("Could not find row $id");
-		}
 		return $row;
 	}
 	
@@ -235,6 +237,7 @@ class AbstractMapper implements DbAdapterAwareInterface
 	protected function fetchResult(Select $select, $resultSet=null)
 	{
 		$resultSet = $resultSet ?: $this->getResultSet();
+		$resultSet->buffer();
 		
 		if($this->usePaginator) {
 			$this->usePaginator = false;
@@ -313,10 +316,18 @@ class AbstractMapper implements DbAdapterAwareInterface
 	public function getHydrator()
 	{
 		if (is_string($this->hydrator) && class_exists($this->hydrator)) {
-			return new $this->hydrator();
+			return new $this->hydrator($this->useModelRelationships);
 		} else {
 			return new ClassMethods();
 		}
+	}
+	
+	/**
+	 * @param bool $bool
+	 */
+	public function useModelRelationships($bool)
+	{
+	    $this->useModelRelationships = (bool) $bool;
 	}
 	
 	/**

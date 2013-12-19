@@ -7,6 +7,12 @@ class Cost extends AbstractHydrator
 {
     protected $prefix = 'postCost.';
     
+    public function __construct($useRelationships)
+    {
+    	parent::__construct();
+    	$this->useRelationships = $useRelationships;
+    }
+    
     /**
      * @param \Shop\Model\Post\Cost $object
      * @return array $data
