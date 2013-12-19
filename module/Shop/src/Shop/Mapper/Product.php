@@ -88,6 +88,16 @@ class Product extends AbstractMapper
 	    	->unnest();
 	    }
 	    
+	    if ($this->getFetchEnabled()) {
+	    	$select->where->and->equalTo('product.enabled', 1);
+	    }
+	    
+	    if ($this->getFetchDisabled()) {
+	    	$select->where->and->equalTo('product.discontinued', 1);
+	    } else {
+	    	$select->where->and->equalTo('product.discontinued', 0);
+	    }
+	    
 	    $select = $this->setSortOrder($select, $sort);
 	     
 	    return $this->fetchResult($select);

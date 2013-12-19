@@ -8,7 +8,7 @@ class Image extends AbstractMapper
 {
 	protected $table = 'productImage';
 	protected $primary = 'productImageId';
-	protected $model = 'Shop\Model\Relational\Product\Image';
+	protected $model = 'Shop\Model\Product\Image';
 	protected $hydrator = 'Shop\Hydrator\Product\Image';
 	
 	public function searchImages($image, $product, $sort)
@@ -18,7 +18,7 @@ class Image extends AbstractMapper
         ->join(
             'product',
             'productImage.productId=product.productId',
-            array('name'),
+            array(),
             Select::JOIN_INNER     
 	    );
 	     
