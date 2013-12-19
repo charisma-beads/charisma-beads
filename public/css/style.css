@@ -24,6 +24,10 @@ div.container a.brand {
     padding: 8px 20px 12px 40px;
 }
 
+#header a {
+	text-decoration: none;
+}
+
 #header h2 span {
 	margin-top: 25px;
 }

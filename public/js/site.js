@@ -1,7 +1,7 @@
 
 $(document).ready(function(){
 
-    $("body").on({
+    $('body').on({
         ajaxStart: function() { 
             $(this).addClass("loading"); 
         },

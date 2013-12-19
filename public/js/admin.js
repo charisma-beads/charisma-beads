@@ -1,18 +1,17 @@
 
-var admin = {
-	
-};
+var admin = {};
 
 $(document).ready(function(){
 
-    $("body").on({
+    $(document).on({
         ajaxStart: function() { 
-            $(this).addClass("loading"); 
+        	console.log($(this));
+            $('body').addClass("loading"); 
         },
         ajaxStop: function() {
         	$('button[type=submit]').button('reset');
         	$('input[placeholder], textarea[placeholder]').placeholder();
-            $(this).removeClass("loading");
+            $('body').removeClass("loading");
         }    
     });
 
