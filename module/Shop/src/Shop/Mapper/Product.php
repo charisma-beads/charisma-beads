@@ -53,15 +53,17 @@ class Product extends AbstractMapper
 	    ->join(
 	    	'productCategory',
 	    	'product.productCategoryId=productCategory.productCategoryId',
-	    	array(),
-	    	Select::JOIN_LEFT
+	    	array('category'),
+	    	Select::JOIN_INNER
 	    )
 	    ->join(
 	    	'productGroupPrice',
 	    	'product.productGroupId=productGroupPrice.productGroupId',
-	    	array(),
+	    	array('group'),
 	    	Select::JOIN_LEFT
 	    );
+	    
+	    //$select->where->isNotNull('category');
 	    
 	    if (!$product == '') {
 	    	if (substr($product, 0, 1) == '=') {
@@ -141,6 +143,8 @@ class Product extends AbstractMapper
 	    	array('taxRate.taxRate' => 'taxRate'),
 	    	Select::JOIN_INNER
 	    );
+	    
+	    $select->where->isNotNull('category');
 	    
 	    if ($this->getFetchEnabled()) {
 	    	$select->where->and->equalTo('product.enabled', 1);

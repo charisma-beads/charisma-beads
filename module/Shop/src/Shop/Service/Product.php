@@ -2,6 +2,7 @@
 namespace Shop\Service;
 
 use Application\Service\AbstractService;
+use Shop\Model\Product as ProductModel;
 
 class Product extends AbstractService
 {
@@ -15,15 +16,45 @@ class Product extends AbstractService
 	protected $categoryService;
 	
 	/**
+	 * @var \Shop\Service\Product\Size
+	 */
+	protected  $sizeService;
+	
+	/**
+	 * @var \Shop\Service\Tax\Code
+	 */
+	protected  $taxCodeService;
+	
+	/**
+	 * @var \Shop\Service\Post\Unit
+	 */
+	protected  $postUnitService;
+	
+	/**
 	 * @var \Shop\Service\Product\GroupPrice
 	 */
 	protected $groupPriceService;
 	
+	/**
+	 * TODO: this is not yet implement, sure about it.
+	 * @var \Shop\Service\Stock\Status
+	 */
+	protected $stockStatusService;
+	
+	/**
+	 * @var \Shop\Service\Product\Image
+	 */
+	protected  $imageService;
+	
 	public function getFullProductById($id)
 	{
 	    $id = (int) $id;
-	    $this->getMapper()->useModelRelationships(true);
-	    return $this->getMapper()->getFullProductById($id);
+	    $product = $this->getById($id);
+	    
+	    $this->populate($product, true);
+	    
+	    return $product;
+	    
 	}
 	
 	public function getProductByIdent($ident)
@@ -65,20 +96,106 @@ class Product extends AbstractService
 	    $products = $this->getMapper()->searchProducts($product, $category, $sort);
 	    
 	    foreach ($products as $product) {
-	        $this->populate($product);
+	        $this->populate($product, true);
 	    }
 	    
 	    return $products;
 	}
 	
 	/**
-	 * 
 	 * @param \Shop\Model\Product $product
+	 * @param bool|array $children
 	 */
-	public function populate($product)
+	public function populate(ProductModel $product, $children = false)
 	{
-	    $product->setRelationalModel($this->getCategoryService()->getById($product->getProductCategoryId()));
-	    $product->setRelationalModel($this->getGroupPriceService()->getById($product->getProductGroupId()));
+		$allChildren = ($children === true) ? true : false;
+		$children = (is_array($children)) ? $children : array();
+		 
+		if ($allChildren || in_array('category', $children)) {
+		    $id = $product->getProductCategoryId();
+		    
+			$product->setRelationalModel($this->getCategoryService()->getById($id));
+		}
+		 
+		if ($allChildren || in_array('size', $children)) {
+			$product->setRelationalModel($this->getSizeService()->getById($product->getProductSizeId()));
+		}
+		 
+		if ($allChildren || in_array('taxCode', $children)) {
+			$product->setRelationalModel($this->getTaxCodeService()->getById($product->getTaxCodeId()));
+		}
+		 
+		if ($allChildren || in_array('postUnit', $children)) {
+			$product->setRelationalModel($this->getPostUnitService()->getById($product->getPostUnitId()));
+		}
+		 
+		if ($allChildren || in_array('group', $children)) {
+		    $id = $product->getProductGroupId();
+		    if (0 === $id) {
+		        $product->setRelationalModel($this->getGroupPriceService()->getById($id));
+		    }
+			
+		}
+		 
+		if ($allChildren || in_array('stockStatus', $children)) {
+			$product->setRelationalModel($this->getStockStatusService()->getById($product->getStockStatusId()));
+		}
+		 
+		if ($allChildren || in_array('image', $children)) {
+			 
+		}
+	}
+	
+	/**
+	 * @return \Shop\Service\Product\Category
+	 */
+	public function getCategoryService()
+	{
+		if (!$this->categoryService) {
+			$sl = $this->getServiceLocator();
+			$this->categoryService = $sl->get('Shop\Service\ProductCategory');
+		}
+		
+		return $this->categoryService;
+	}
+	
+	/**
+	 * @return \Shop\Service\Product\Size
+	 */
+	public function getSizeService()
+	{
+		if (!$this->sizeService) {
+			$sl = $this->getServiceLocator();
+			$this->sizeService = $sl->get('Shop\Service\ProductSize');
+		}
+	
+		return $this->sizeService;
+	}
+	
+	/**
+	 * @return \Shop\Service\Tax\Code
+	 */
+	public function getTaxCodeService()
+	{
+		if (!$this->taxCodeService) {
+			$sl = $this->getServiceLocator();
+			$this->taxCodeService = $sl->get('Shop\Service\TaxCode');
+		}
+	
+		return $this->taxCodeService;
+	}
+	
+	/**
+	 * @return \Shop\Service\Post\Unit
+	 */
+	public function getPostUnitService()
+	{
+		if (!$this->postUnitService) {
+			$sl = $this->getServiceLocator();
+			$this->postUnitService = $sl->get('Shop\Service\PostUnit');
+		}
+	
+		return $this->postUnitService;
 	}
 	
 	/**
@@ -95,15 +212,28 @@ class Product extends AbstractService
 	}
 	
 	/**
-	 * @return \Shop\Service\Product\Category
+	 * @return \Shop\Service\Stoct\Status
 	 */
-	public function getCategoryService()
+	public function getStockStatusService()
 	{
-		if (!$this->categoryService) {
+		if (!$this->stockStatusService) {
 			$sl = $this->getServiceLocator();
-			$this->categoryService = $sl->get('Shop\Service\ProductCategory');
+			$this->stockStatusService = $sl->get('Shop\Service\StockStatus');
 		}
-		
-		return $this->categoryService;
+	
+		return $this->stockStatusService;
+	}
+	
+	/**
+	 * @return \Shop\Service\Product\Image
+	 */
+	public function getImageService()
+	{
+		if (!$this->imageService) {
+			$sl = $this->getServiceLocator();
+			$this->imageService = $sl->get('Shop\Service\ProductImage');
+		}
+	
+		return $this->imageService;
 	}
 }
