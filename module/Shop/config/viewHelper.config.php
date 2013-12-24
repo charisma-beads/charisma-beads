@@ -8,5 +8,6 @@ return array(
 	    'Enabled'       => 'Shop\View\Enabled',
 	    'FormatAddress' => 'Shop\View\FormatAddress',
 	    'PriceFormat'   => 'Shop\View\PriceFormat',
+	    'ProductPrice'  => 'Shop\View\ProductPrice',
 	)
 );

@@ -179,12 +179,7 @@ class Cart extends AbstractCollection implements SeekableIterator
 	 */
 	public function getLineCost(CartItem $item)
 	{
-	    $price = $item->getPrice();
-	
-	    if (0 !== $item->getDiscountPercent()) {
-	        $discounted = ($price*$item->getDiscountPercent())/100;
-	        $price = round($price-$discounted, 2);
-	    }
+	    $price = $item->getPrice(true);
 	    
 	    if (true === $item->getTaxable()) {
 	        $taxService = $this->getTaxService();

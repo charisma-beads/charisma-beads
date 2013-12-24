@@ -113,7 +113,6 @@ class Product extends AbstractService
 		 
 		if ($allChildren || in_array('category', $children)) {
 		    $id = $product->getProductCategoryId();
-		    
 			$product->setRelationalModel($this->getCategoryService()->getById($id));
 		}
 		 
@@ -131,7 +130,7 @@ class Product extends AbstractService
 		 
 		if ($allChildren || in_array('group', $children)) {
 		    $id = $product->getProductGroupId();
-		    if (0 === $id) {
+		    if (0 !== $id) {
 		        $product->setRelationalModel($this->getGroupPriceService()->getById($id));
 		    }
 			

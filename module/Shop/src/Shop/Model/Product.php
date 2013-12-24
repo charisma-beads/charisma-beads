@@ -272,9 +272,17 @@ class Product extends AbstractModel
 	/**
 	 * @return number $price
 	 */
-	public function getPrice ()
+	public function getPrice ($withDiscount = true)
 	{
-		return $this->price;
+	    $price = $this->price;
+	    
+	    if (true === $this->isDiscounted() && true === $withDiscount) {
+	    	$discount = $this->getDiscountPercent();
+	    	$discounted = ($price*$discount)/100;
+	    	$price = round($price - $discounted, 2);
+	    }
+	    
+		return $price;
 	}
 
 	/**
@@ -490,5 +498,8 @@ class Product extends AbstractModel
 		return $this;
 	}
 
-
+    public function isDiscounted()
+    {
+        return (0 == $this->getDiscountPercent()) ? false : true;
+    }
 }
