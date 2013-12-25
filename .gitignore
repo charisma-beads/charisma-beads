@@ -1,12 +1,11 @@
-/cb-back-up/
+*
 /data/
 /logs/
-/public_html/admin/tmp/*.*
 !do_not_remove
 /ssl/
 /sample/
 
-data/cache/*
+data/*
 vendor/*
 .buildpath
 .DS_Store
@@ -14,3 +13,12 @@ vendor/*
 .settings
 local.php
 *.local.php
+
+!/assets/*
+!/public_html/*
+!composer.json
+!init_autoloader.php
+!LICENCE.txt
+!README.md
+/public_html/admin/tmp/*.*
+/public_html/shaop/images/*.*
