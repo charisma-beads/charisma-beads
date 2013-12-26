@@ -1,4 +1,4 @@
-*
+
 /data/*
 data/cache/*
 /logs/
@@ -15,14 +15,3 @@ local.php
 composer.lock
 composer.phar
 !do_not_remove
-!/assets/*
-!/bin/*
-!/config/application.config.php
-!/config/application/autoload/global.php
-!/lib/*
-!/module/*
-!/public_html/*
-!composer.json
-!init_autoloader.php
-!LICENCE.txt
-!README.md
