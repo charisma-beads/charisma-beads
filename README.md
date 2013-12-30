@@ -19,9 +19,9 @@ Features To Add
 - ~~User Module~~
 - ~~Navigation Module~~ , create and edit menus, add DB routes.
 - ~~ACL~~
-- [] Artilce Module
+- Artilce Module
 - ~~Article list and edit~~
-- [] File Upload Manager
+- File Upload Manager
 - ~~Session Manager~~
 - Scheduled Task Managaer
 - Mailer
