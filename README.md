@@ -1,23 +1,43 @@
 ZendSkeletonApplication
 =======================
 
-Introduction
-------------
-This is a simple, skeleton application using the ZF2 MVC layer and module
-systems. This application is meant to be used as a starting place for those
-looking to get their feet wet with ZF2.
-
+Features To Add
+---------------
+- [x] Basic App Modile
+- [x] Admin Module
+- [] Shop Module to include:
+- [] Admin product list and edit
+- [] Admin category list and edit
+- [] Admin image list and edit
+- [] Admin customer list and edit
+- [] Admin postage list and edit
+- [] Admin tax list and edit
+- [x] Public product list
+- [] Shopping cart
+- [] Checkout process
+- [] Paypal IPN
+- [x] User Module
+- [x] Navigation Module , create and edit menus, add DB routes.
+- [x] ACL
+- [] Artilce Module
+- [x] Article list and edit
+- [] File Upload Manager
+- [x] Session Manager
+- [] Scheduled Task Managaer
+- [] Mailer
+- [] Newsletter
+- [] Dashboard
 
 Installation
 ------------
 
 Pull From Git
---------------------
+-------------
 git clone git@github.com:charisma-beads/charisma-beads.git [folder-name]
 
 cd [folder-name]
 
 Run Setup Script
---------------------
+----------------
 sh bin/setup.sh
 
