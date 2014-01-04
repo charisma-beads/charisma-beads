@@ -6,7 +6,7 @@ use BjyProfiler\Db\Adapter\ProfilingAdapter;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class DbAdapterServiceFactory implements FactoryInterface
+class DbProfilerAdapterServiceFactory implements FactoryInterface
 {
     /**
      * Create db adapter service

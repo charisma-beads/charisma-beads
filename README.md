@@ -14,10 +14,11 @@ Features To Add
 	* Admin postage list and edit
 	* Admin tax list and edit
 	* ~~Public product list~~
+	* Indivual product page
 	* Shopping cart
 	* Checkout process
 	* Paypal IPN
-* ~~Navigation Module~~ , create and edit menus, add DB routes.
+* ~~Navigation Module, create and edit menus, add DB routes~~.
 * ~~User Module~~
 	* ~~ACL~~
 * Artilce Module
@@ -25,7 +26,7 @@ Features To Add
 	* Ingegrate file uploads in html editor
 * File Upload Manager
 * ~~Session Manager~~
-* Scheduled Task Managaer
+* Scheduled Task Manager
 * Mailer
 * Newsletter
 * Dashboard

@@ -2,6 +2,6 @@
 
 curl -sS https://getcomposer.org/installer | php
 
-php composer.phar install
+COMPOSER_HOME="/home/charisma" php composer.phar --prefer-dist install
 
-cp assests/.htaccess public/.htaccess
+#cp assests/.htaccess public/.htaccess
