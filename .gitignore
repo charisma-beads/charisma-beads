@@ -6,6 +6,7 @@ data/cache/*
 /ssl/
 /vendor/
 /sample/
+.htaccess
 .buildpath
 .DS_Store
 .project
