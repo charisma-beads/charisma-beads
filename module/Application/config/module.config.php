@@ -2,7 +2,7 @@
 
 return array(
     'application' => array(
-	   'ssl' => true
+	   'ssl' => false
     ),
 	'userAcl' => array(
 		'userRoles' => array(
