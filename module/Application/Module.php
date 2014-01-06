@@ -29,11 +29,19 @@ class Module implements
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
         
-        $config = $app->getConfig();
-        $phpSettings = $config['php_settings'];
+        $sharedEventManager  = $eventManager->getSharedManager();
+        $config              = $app->getConfig();
         
-        if ($phpSettings) {
-        	foreach ($phpSettings as $key => $value) {
+        if (true === $config['application']['ssl']) {
+            $eventManager->attach(
+            	MvcEvent::EVENT_ROUTE,
+            	array('Application\Event\Ssl', 'checkSsl'),
+                -100000
+            );
+        }
+        
+        if (isset($config['php_settings'])) {
+        	foreach ($config['php_settings'] as $key => $value) {
         		ini_set($key, $value);
         	}
         }

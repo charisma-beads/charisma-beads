@@ -1,6 +1,9 @@
 <?php
 
 return array(
+    'application' => array(
+	   'ssl' => true
+    ),
 	'userAcl' => array(
 		'userRoles' => array(
 			'guest'	=>array(

@@ -45,10 +45,13 @@
 		"zendframework/zend-session": "2.*",
     	"zendframework/zend-view": "2.*",
 		"zendframework/zend-version": "2.*",
-		"firephp/firephp-core" : "0.4.0",
 		"mwillbanks/zfc-twitter-bootstrap" : "master-dev",
-		"twitter/bootstrap" : "~2",
-		"netglue/zf2-ssl-module" : "dev-master",
+		"twitter/bootstrap" : "~2"
+		
+	},
+	"require-dev" : {
+		"firephp/firephp-core" : "0.4.0",
+		"bjyoungblood/bjy-profiler" : "dev-master",
 		"zendframework/zend-developer-tools" : "dev-master"
 	},
 	"support" : {

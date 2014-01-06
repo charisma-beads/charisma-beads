@@ -4,7 +4,6 @@ namespace User\Event;
 use Zend\Mvc\MvcEvent;
 use Zend\Http\Request;
 
-
 class Authenticate
 {
     public static function checkAcl(MvcEvent $event)
@@ -30,6 +29,8 @@ class Authenticate
     		// change with header('location: '.$url); if code below not working 
     		$response->getHeaders()->addHeaderLine('Location', $url);
     		$event->stopPropagation();
+    		return $response;
     	}
+    	return;
     }
 }
