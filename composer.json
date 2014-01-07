@@ -31,10 +31,13 @@
 		"composer/installers": "~1.0",
 		"zendframework/zend-authentication": "2.*",
 		"zendframework/zend-captcha": "2.*",
+		"zendframework/zend-config": "2.*",
 		"zendframework/zend-console": "2.*",
 		"zendframework/zend-db": "2.*",
 		"zendframework/zend-filter": "2.*",
 		"zendframework/zend-form": "2.*",
+		"zendframework/zend-http": "2.*",
+		"zendframework/zend-i18n": "2.*",
 		"zendframework/zend-mail": "2.*",
 		"zendframework/zend-modulemanager": "2.*",
         "zendframework/zend-mvc": "2.*",
@@ -45,13 +48,11 @@
 		"zendframework/zend-session": "2.*",
     	"zendframework/zend-view": "2.*",
 		"zendframework/zend-version": "2.*",
-		"mwillbanks/zfc-twitter-bootstrap" : "master-dev",
-		"twitter/bootstrap" : "~2"
-		
+		"mwillbanks/zfc-twitter-bootstrap" : "master-dev"
 	},
 	"require-dev" : {
+	    "twitter/bootstrap" : "~2",
 		"firephp/firephp-core" : "0.4.0",
-		"bjyoungblood/bjy-profiler" : "dev-master",
 		"zendframework/zend-developer-tools" : "dev-master"
 	},
 	"support" : {

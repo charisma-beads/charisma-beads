@@ -10,18 +10,14 @@
 namespace User;
 
 use Zend\Mvc\MvcEvent;
+use User\Event\MvcListener;
 
 class Module
 {
-	public function onBootstrap(MvcEvent $e)
+	public function onBootstrap(MvcEvent $event)
 	{
-		$eventManager = $e->getApplication()->getEventManager()->getSharedManager();
-		$eventManager->attach(
-		    'Zend\Mvc\Controller\AbstractActionController',
-		    MvcEvent::EVENT_DISPATCH,
-		    array('User\Event\Authenticate', 'checkAcl'),
-		    2
-		);
+		$eventManager = $event->getApplication()->getEventManager();
+		$eventManager->attach(new MvcListener());
 	}
 	
     public function getConfig()

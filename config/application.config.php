@@ -1,16 +1,25 @@
 <?php
+
+$env = getenv('APP_ENV') ?: 'production';
+
+// Use the $env value to determine which modules to load
+$modules = array(
+	'Admin',
+	'Application',
+	'Article',
+	'Navigation',
+	'Shop',
+	'User',
+	'ZfcTwitterBootstrap',
+);
+
+if ($env == 'development') {
+	$modules[] = 'ZendDeveloperTools';
+}
+
 return array(
     // This should be an array of module namespaces used in the application.
-    'modules' => array(
-    	'ZendDeveloperTools',
-    	'Admin',
-        'Application',
-    	'Article',
-    	'Navigation',
-    	'Shop',
-    	'User',
-        'ZfcTwitterBootstrap',
-    ),
+    'modules' => $modules,
 
     // These are various options for the listeners attached to the ModuleManager
     'module_listener_options' => array(
@@ -33,7 +42,7 @@ return array(
         // Whether or not to enable a configuration cache.
         // If enabled, the merged configuration will be cached and used in
         // subsequent requests.
-        'config_cache_enabled' => false,
+        'config_cache_enabled' => ($env == 'production'),
 
         // The key used to create the configuration cache file name.
         'config_cache_key' => 'config_cache',
@@ -41,7 +50,7 @@ return array(
         // Whether or not to enable a module class map cache.
         // If enabled, creates a module class map cache which will be used
         // by in future requests, to reduce the autoloading process.
-        'module_map_cache_enabled' => false,
+        'module_map_cache_enabled' => ($env == 'production'),
 
         // The key used to create the class map cache file name.
         'module_map_cache_key' => 'module_map_cache',
@@ -52,7 +61,7 @@ return array(
         // Whether or not to enable modules dependency checking.
         // Enabled by default, prevents usage of modules that depend on other modules
         // that weren't loaded.
-        // 'check_dependencies' => true,
+        'check_dependencies' => ($env != 'production'),
     ),
 
     // Used to create an own service manager. May contain one or more child arrays.

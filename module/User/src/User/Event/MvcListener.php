@@ -1,24 +1,54 @@
 <?php
 namespace User\Event;
 
-use Zend\Mvc\MvcEvent;
+use Zend\EventManager\EventManagerInterface;
+use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Http\Request;
+use Zend\Mvc\MvcEvent;
 
-class Authenticate
+class MvcListener implements ListenerAggregateInterface
 {
-    public static function checkAcl(MvcEvent $event)
+    /**
+     * @var \Zend\Stdlib\CallbackHandler[]
+     */
+    protected $listeners = array();
+
+    /**
+     * {@inheritDoc}
+     */
+    public function attach(EventManagerInterface $events)
+    {
+    	$events = $events->getSharedManager();
+        $this->listeners[] = $events->attach(
+        	'Zend\Mvc\Controller\AbstractActionController',
+            MvcEvent::EVENT_DISPATCH,
+            array($this, 'doAuthentication'),
+            2
+        );
+    }
+
+    public function detach(EventManagerInterface $events)
+    {
+        foreach ($this->listeners as $index => $listener) {
+            if ($events->detach($listener)) {
+                unset($this->listeners[$index]);
+            }
+        }
+    }
+    
+    public function doAuthentication(MvcEvent $event)
     {
         if (!$event->getRequest() instanceof Request) {
     	    return;
         }
-        
+      	
         $application    = $event->getApplication();
 		$sm             = $application->getServiceManager();
     	$match          = $event->getRouteMatch();
     	$controller     = $match->getParam('controller');
     	$action         = $match->getParam('action');
     	$plugin         = $sm->get('ControllerPluginManager')->get('IsAllowed');
-            	 
+    	
     	if (!$plugin->isAllowed($controller, $action)) {
     		$router = $event->getRouter();
     		$url    = $router->assemble(array(), array('name' => 'user/login'));

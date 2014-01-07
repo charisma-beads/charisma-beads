@@ -1,20 +1,52 @@
 <?php
 namespace Application\Event;
 
-use Zend\Mvc\MvcEvent;
+use Exception;
+use Zend\EventManager\EventManagerInterface;
+use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Http\Request;
+use Zend\Mvc\Application as MvcApplication;
+use Zend\Mvc\MvcEvent;
 
-class Ssl
+class MvcListener implements ListenerAggregateInterface
 {
-    public static function checkSsl(MvcEvent $event)
+    /**
+     * @var \Zend\Stdlib\CallbackHandler[]
+     */
+    protected $listeners = array();
+
+    /**
+     * {@inheritDoc}
+     */
+    public function attach(EventManagerInterface $events)
     {
+		$this->listeners[] = $events->attach(MvcEvent::EVENT_ROUTE, array($this, 'requireSsl'), -10000);
+    }
+
+    public function detach(EventManagerInterface $events)
+    {
+        foreach ($this->listeners as $index => $listener) {
+            if ($events->detach($listener)) {
+                unset($this->listeners[$index]);
+            }
+        }
+    }
+    
+    public function requireSsl(MvcEvent $event)
+    {
+    	$config = $event->getApplication()->getConfig();
+    	
+    	if (false === $config['application']['ssl']) {
+    		return;
+    	}
+    	
         $request = $event->getRequest();
         
         if (!$request instanceof Request) {
         	return;
         }
         
-        if ($event->isError() && $event->getError() === Application::ERROR_ROUTER_NO_MATCH) {
+        if ($event->isError() && $event->getError() === MvcApplication::ERROR_ROUTER_NO_MATCH) {
         	// No matched route has been found - don't do anything
         	return;
         }
@@ -27,7 +59,7 @@ class Ssl
     	 * anything else and redirect if appropriate
     	 *
     	 * Possible values of 'force-ssl' param are:
-    	 *   'ssl' : Force SSL
+    	 *   'ssl'      : Force SSL
     	 *   'http'     : Force Non-SSL
     	 */
     	if (isset($params['force-ssl'])) {
@@ -49,7 +81,7 @@ class Ssl
     	return;
     }
     
-    public static function redirect($uri, $response)
+    private function redirect($uri, $response)
     {
         $response->getHeaders()->addHeaderLine('Location', $uri->toString());
         $response->setStatusCode(302);

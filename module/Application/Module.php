@@ -10,21 +10,21 @@
 namespace Application;
 
 use Exception;
+use Application\Event\MvcListener;
+use Zend\Console\Adapter\AdapterInterface as Console;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 use Zend\ModuleManager\Feature\ConsoleUsageProviderInterface;
 use Zend\ModuleManager\Feature\ConsoleBannerProviderInterface;
-use Zend\Console\Adapter\AdapterInterface as Console;
-
 use Zend\Session\Container;
 
 class Module implements
     ConsoleUsageProviderInterface,
     ConsoleBannerProviderInterface
 {
-    public function onBootstrap(MvcEvent $e)
+    public function onBootstrap(MvcEvent $event)
     {
-        $app                 = $e->getApplication();
+        $app                 = $event->getApplication();
         $eventManager        = $app->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
@@ -32,42 +32,43 @@ class Module implements
         $sharedEventManager  = $eventManager->getSharedManager();
         $config              = $app->getConfig();
         
-        if (true === $config['application']['ssl']) {
-            $eventManager->attach(
-            	MvcEvent::EVENT_ROUTE,
-            	array('Application\Event\Ssl', 'checkSsl'),
-                -100000
-            );
-        }
+        $eventManager->attach(new MvcListener());
         
-        if (isset($config['php_settings'])) {
-        	foreach ($config['php_settings'] as $key => $value) {
-        		ini_set($key, $value);
-        	}
-        }
-        
-        $this->bootstrapSession($e);
+        $this->setPhpSettings($event);
+        $this->startSession($event);
     }
     
-    public function bootstrapSession($e)
+    public function setPhpSettings(MvcEvent $event)
     {
-        try {
-        	$session = $e->getApplication()
-        	   ->getServiceManager()
-        	   ->get('Application\SessionManager');
-        	$session->start();
-        
-        	$container = new Container();
-        	if (!isset($container->init)) {
-        		$session->regenerateId(true);
-        		$container->init = 1;
-        	}
-        } catch (Exception $e) {
-            echo '<pre>';
-            echo $e->getMessage();
-            echo '</pre';
-            exit();
-        }
+    	$config = $event->getApplication()->getConfig();
+    	 
+    	if (isset($config['php_settings'])) {
+    		foreach ($config['php_settings'] as $key => $value) {
+    			ini_set($key, $value);
+    		}
+    	}
+    }
+    
+    public function startSession(MvcEvent $event)
+    {
+    	try {
+    		$session = $event->getApplication()
+    			->getServiceManager()
+    			->get('Application\SessionManager');
+    		$session->start();
+    		 
+    		$container = new Container();
+    
+    		if (!isset($container->init)) {
+    			$session->regenerateId(true);
+    			$container->init = 1;
+    		}
+    	} catch (Exception $e) {
+    		echo '<pre>';
+    		echo $e->getMessage();
+    		echo '</pre';
+    		exit();
+    	}
     }
     
     public function getConsoleUsage(Console $console)

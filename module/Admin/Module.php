@@ -10,30 +10,14 @@
 namespace Admin;
 
 use Zend\Mvc\MvcEvent;
-use Zend\Mvc\Router\RouteMatch;
+use Admin\Event\MvcListener;
 
 class Module
 {
-    public function onBootstrap(MvcEvent $e)
+    public function onBootstrap(MvcEvent $event)
     {
-        $eventManager = $e->getApplication()->getEventManager();
-        $eventManager->attach(MvcEvent::EVENT_DISPATCH, array($this, 'selectAdminLayout'));
-    }
-    
-    public function selectAdminLayout(MvcEvent $e)
-    {
-        $sm = $e->getApplication()->getServiceManager();
-        $config = $sm->get('config');
-        
-        $match = $e->getRouteMatch();
-        $controller = $e->getTarget();
-        
-        if (!$match instanceof RouteMatch || false === strpos($match->getMatchedRouteName(), 'admin') || $controller->getEvent()->getResult()->terminate()) {
-            return;
-        }
-        
-        $layout = $config['admin']['admin_layout_template'];
-        $controller->layout($layout); 
+        $eventManager = $event->getApplication()->getEventManager();
+        $eventManager->attach(new MvcListener());
     }
     
 	public function getAutoloaderConfig()
