@@ -475,7 +475,7 @@ class Product extends AbstractModel
 	/**
 	 * @param DateTime $dateCreated
 	 */
-	public function setDateCreated (DateTime $dateCreated)
+	public function setDateCreated (DateTime $dateCreated = null)
 	{
 		$this->dateCreated = $dateCreated;
 		return $this;
@@ -492,7 +492,7 @@ class Product extends AbstractModel
 	/**
 	 * @param DateTime $dateModified
 	 */
-	public function setDateModified (DateTime $dateModified)
+	public function setDateModified (DateTime $dateModified = null)
 	{
 		$this->dateModified = $dateModified;
 		return $this;

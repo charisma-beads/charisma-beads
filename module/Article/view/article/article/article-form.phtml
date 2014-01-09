@@ -2,23 +2,22 @@
 $form = $this->form;
 $routeArray = array('action' => $this->formAction);
 if (isset($this->articleId)) $routeArray['id'] = $this->articleId;
-
 ?>
 <div>
-    <form class="form form-horizontal"  method="post" action="<?php echo $this->url('admin/article', $routeArray) ?>">
+    <form class="form form-horizontal" method="post" action="<?=$this->url('admin/article', $routeArray) ?>">
         <fieldset>
-        <legend><?php echo ucwords($this->formAction); ?> Article Form:</legend>
+        <legend><?=ucwords($this->formAction); ?> Article Form:</legend>
         <div class="row-fluid">
             <div class="span6">
                 <fieldset>
            	        <legend>Article Details</legend>
-                    <?php echo $this->ztbFormElement($form->get('title')); ?>
+                    <?=$this->ztbFormElement($form->get('title')); ?>
                     
-                    <?php echo $this->ztbFormElement($form->get('slug')); ?>
+                    <?=$this->ztbFormElement($form->get('slug')); ?>
                     
-                    <?php echo $this->ztbFormElement($form->get('keywords')); ?>
+                    <?=$this->ztbFormElement($form->get('keywords')); ?>
                     
-                    <?php echo $this->ztbFormElement($form->get('description')); ?>
+                    <?=$this->ztbFormElement($form->get('description')); ?>
                 </fieldset>
            	</div>
             
@@ -26,7 +25,7 @@ if (isset($this->articleId)) $routeArray['id'] = $this->articleId;
                 <fieldset>
            	        <legend>Menu</legend>
            	        
-                    <?php echo $this->navigationForm(); ?>
+                    <?=$this->navigationForm(); ?>
            	        <div class="control-group">
                         <div class="controls">
                              <label class="radio">
@@ -43,7 +42,6 @@ if (isset($this->articleId)) $routeArray['id'] = $this->articleId;
                             </label>
                         </div>
                     </div>
-                </div>
                 </fieldset>
            	</div>
         </div>
@@ -57,16 +55,16 @@ if (isset($this->articleId)) $routeArray['id'] = $this->articleId;
             </div>
         </div>
                 
-        <?php echo $this->formElement($form->get('articleId')); ?>
-        <?php echo $this->formElement($form->get('pageHits')); ?>
-        <input type="hidden" name="action" value="<?php echo $this->formAction; ?>">
+        <?=$this->formElement($form->get('articleId')); ?>
+        <?=$this->formElement($form->get('pageHits')); ?>
+        <input type="hidden" name="action" value="<?=$this->formAction; ?>">
         
         <div class="control-group">
             <div class="controls">
                 <button type="submit" class="btn btn-primary" 
                 data-loading-text="Please wait...">Submit</button>
                 <button type="button" class="btn btn-warning" 
-                data-loading-text="Please wait..." onClick="window.location = '<?php echo $this->url('admin/article', array(
+                data-loading-text="Please wait..." onClick="window.location = '<?=$this->url('admin/article', array(
                         'action' => 'list',
                     )) ?>';">Cancel</button>
             </div>
@@ -80,7 +78,7 @@ if (isset($this->articleId)) $routeArray['id'] = $this->articleId;
 $(document).ready(function(){
 	$('#article-content-textarea').liveEdit({
 	    height: 350,
-	    css: ['<?php echo $this->basePath(); ?>/css/bootstrap.min.css', '<?php echo $this->basePath(); ?>/css/bootstrap-extend.css'] /* Apply bootstrap css into the editing area */,
+	    css: ['<?=$this->basePath(); ?>/css/bootstrap.min.css', '<?=$this->basePath(); ?>/css/bootstrap-extend.css'] /* Apply bootstrap css into the editing area */,
 	    groups: [
 	        ["group1", "", ["Bold", "Italic", "Underline", "ForeColor", "RemoveFormat"]],
 	        ["group2", "", ["Bullets", "Numbering", "Indent", "Outdent"]],

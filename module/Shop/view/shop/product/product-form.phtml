@@ -1,0 +1,31 @@
+<?php
+$form = $this->form;
+$routeArray = array('action' => $this->formAction);
+if (isset($this->productId)) $routeArray['id'] = $this->productId;
+?>
+<div>
+	<form class="form form-horizontal" method="post" action="<?=$this->url('admin/shop/product', $routeArray) ?>">
+		<fieldset>
+			<legend><?=ucwords($this->formAction); ?> Product Form:</legend>
+			<div class="row-fluid">
+				<div class="span6">
+					<fieldset>
+						<legend>Details:</legend>
+						<?=$this->ztbFormElement($form->get('enabled'));?>
+						<?=$this->ztbFormElement($form->get('name'));?>
+						<?=$this->ztbFormElement($form->get('ident'));?>
+						<?=$this->ztbFormElement($form->get('shortDescription'));?>
+						<?=$this->ztbFormElement($form->get('description'));?>
+					</fieldset>
+				</div>
+				<div class="span6">
+					<fieldset>
+						<legend>Price:</legend>
+						<?=$this->ztbFormElement($form->get('price'));?>
+						<?=$this->ztbFormElement($form->get('quantity'));?>
+					</fieldset>
+				</div>
+			</div>
+		</fieldset>
+	</form>
+</div>

@@ -1,1 +1,8 @@
-<h2>Not yet implemented</h2>
+<?php $this->headTitle('Edit Product') ?>
+<?=$this->ztbFlashMessenger()->render(); ?>
+
+<?=$this->partial('shop/product/product-form', array(
+	'form' => $this->form,
+	'formAction' => 'edit',
+	'productId' => $this->product->getProductId()
+)); ?>

@@ -26,15 +26,15 @@
 			<td>
 				<a href="<?php echo $this->basepath(
 					'/admin/article/edit/id/' . $this->escapeHtml($row->getArticleId())
-				) ?>" role="button" class="btn">Edit</a>
+				) ?>" class="btn">Edit</a>
 				&nbsp;
 				
 				<!-- Button to trigger modal -->
-                <a href="#articleModel<?php echo $row->getArticleId(); ?>" role="button" class="btn btn-danger" data-toggle="modal">Delete</a>
+                <a href="#articleModel<?php echo $row->getArticleId(); ?>" class="btn btn-danger" data-toggle="modal">Delete</a>
                 <!-- Modal -->
-				<div class="modal hide fade" id="articleModel<?php echo $row->getArticleId(); ?>" tabindex="-1" role="dialog" aria-labelledby="articleModel<?php echo $row->getArticleId(); ?>" aria-hidden="true">
+				<div class="modal hide fade" id="articleModel<?php echo $row->getArticleId(); ?>" tabindex="-1">
 				  <div class="modal-header">
-				    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				    <button type="button" class="close" data-dismiss="modal">&times;</button>
 				    <h3 id="articleModel<?php echo $row->getArticleId(); ?>Label">Warning</h3>
 				  </div>
 				  <form class="form-horizontal"  method="post" action="<?php echo $this->url('admin/article', array(
@@ -46,7 +46,7 @@
 				        </div>
 				        <input type="hidden" name="articleId" value="<?php echo $row->getArticleId() ?>">
 				        <div class="modal-footer">
-				            <button type="button" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">No Don't Do It</button>
+				            <button type="button" class="btn btn-primary" data-dismiss="modal">No Don't Do It</button>
 				            <button type="submit" name="submit" class="btn btn-danger" value="delete">Yes Delete It</button>
 				        </div>
 				    </form>

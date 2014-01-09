@@ -2,6 +2,7 @@
 namespace Shop\Controller;
 
 use Application\Controller\AbstractController;
+use Shop\Form\Product as ProductForm;
 use Zend\View\Model\ViewModel;
 
 class ProductController extends AbstractController
@@ -97,7 +98,62 @@ class ProductController extends AbstractController
 	
 	public function editAction()
 	{
-	    
+		$id = (int) $this->params('id', 0);
+		if (!$id) {
+			return $this->redirect()->toRoute('admin/shop/product', array(
+				'action' => 'add'
+			));
+		}
+		
+		// Get the Product with the specified id.  An exception is thrown
+		// if it cannot be found, in which case go to the list page.
+		try {
+			$product = $this->getProductService()->getById($id);
+		} catch (\Exception $e) {
+			$this->setExceptionMessages($e);
+			return $this->redirect()->toRoute('admin/shop/product', array(
+				'action' => 'list'
+			));
+		}
+		
+		$request = $this->getRequest();
+		
+		if ($request->isPost()) {
+				
+			$result = $this->getProductService()->editProduct($product, $request->getPost());
+		
+			if ($result instanceof ProductForm) {
+		
+				$this->flashMessenger()->addInfoMessage(
+					'There were one or more isues with your submission. Please correct them as indicated below.'
+				);
+		
+				return new ViewModel(array(
+					'form'		=> $result,
+					'product'	=> $product,
+				));
+			} else {
+				if ($result) {
+					$this->flashMessenger()->addSuccessMessage(
+						'Product has been saved to database.'
+					);
+				} else {
+					$this->flashMessenger()->addErrorMessage(
+						'Product could not be saved due to a database error.'
+					);
+				}
+		
+				// Redirect to list of articles
+				return $this->redirect()->toRoute('admin/shop/product');
+			}
+		}
+		
+		$form = $this->getProductService()->getForm($product);
+		
+		return new ViewModel(array(
+			'form'		=> $form,
+			'product'	=> $product,
+		));
 	}
 	
 	public function deleteAction()

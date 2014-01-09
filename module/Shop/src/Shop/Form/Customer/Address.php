@@ -71,7 +71,7 @@ class Address extends Form
         ));
         
         $this->add(array(
-        	'name' => 'address1',
+        	'name' => 'county',
         	'type'  => 'county',
         	'attributes' => array(
         		'placeholder' => 'County:',
@@ -79,18 +79,6 @@ class Address extends Form
         	),
         	'options' => array(
         		'label' => 'County:',
-        	),
-        ));
-        
-        $this->add(array(
-        	'name' => 'address1',
-        	'type'  => 'text',
-        	'attributes' => array(
-        		'placeholder' => 'Address Line 1:',
-        		'autofocus' => true
-        	),
-        	'options' => array(
-        		'label' => 'Address Line 1:',
         	),
         ));
         
@@ -118,14 +106,28 @@ class Address extends Form
         ));
         
         $this->add(array(
-        	'name' => 'phone',
-        	'type'  => 'tel',
-        	'attributes' => array(
-        		'placeholder' => 'Phone No.:',
-        		'autofocus' => true
+        	'name'			=> 'phone',
+        	'type'			=> 'tel',
+        	'attributes'	=> array(
+        		'placeholder'	=> 'Phone No.:',
+        		'autofocus'		=> true,
+        		'required'      => true,
         	),
-        	'options' => array(
+        	'options'		=> array(
         		'label' => 'Phone No.:',
+        	),
+        ));
+        
+        $this->add(array(
+        	'name'			=> 'email',
+        	'type'			=> 'email',
+        	'attributes'	=> array(
+        		'placeholder'	=> 'Email:',
+        		'autofocus'		=> true,
+        		'required'		=> true,
+        	),
+        	'options'		=> array(
+        		'label'	=> 'Email',
         	),
         ));
         

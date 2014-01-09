@@ -3,8 +3,11 @@
 return array(
     'shared'        => array(
         'Shop\Form\Customer\Address'            => false,
+    	'Shop\Form\Product'						=> false,
     ),
 	'invokables'    => array(
+		'Shop\Form\Product'						=> 'Shop\Form\Product',
+		
 	    'Shop\InputFilter\PostUnit'	            => 'Shop\InputFilter\Post\Unit',
 	    'Shop\InputFilter\Product' 			    => 'Shop\InputFilter\Product',
 		'Shop\InputFilter\ProductCategory'	    => 'Shop\InputFilter\Product\Category',

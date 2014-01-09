@@ -7,8 +7,8 @@ use Shop\Model\Product as ProductModel;
 class Product extends AbstractService
 {
 	protected $mapperClass = 'Shop\Mapper\Product';
-	protected $form = '';
-	protected $inputFilter = '';
+	protected $form = 'Shop\Form\Product';
+	protected $inputFilter = 'Shop\InputFilter\Product';
 	
 	/**
 	 * @var \Shop\Service\Product\Category
@@ -133,7 +133,6 @@ class Product extends AbstractService
 		    if (0 !== $id) {
 		        $product->setRelationalModel($this->getGroupPriceService()->getById($id));
 		    }
-			
 		}
 		 
 		if ($allChildren || in_array('stockStatus', $children)) {
@@ -143,6 +142,12 @@ class Product extends AbstractService
 		if ($allChildren || in_array('image', $children)) {
 			 
 		}
+	}
+	
+	public function editProduct(ProductModel $product, $post)
+	{
+		$product->setDateModified();
+		$this->edit($product, $post);
 	}
 	
 	/**
