@@ -36,12 +36,6 @@ class Product extends AbstractService
 	protected $groupPriceService;
 	
 	/**
-	 * TODO: this is not yet implement, sure about it.
-	 * @var \Shop\Service\Stock\Status
-	 */
-	protected $stockStatusService;
-	
-	/**
 	 * @var \Shop\Service\Product\Image
 	 */
 	protected  $imageService;
@@ -135,10 +129,6 @@ class Product extends AbstractService
 		    }
 		}
 		 
-		if ($allChildren || in_array('stockStatus', $children)) {
-			$product->setRelationalModel($this->getStockStatusService()->getById($product->getStockStatusId()));
-		}
-		 
 		if ($allChildren || in_array('image', $children)) {
 			 
 		}
@@ -147,7 +137,7 @@ class Product extends AbstractService
 	public function editProduct(ProductModel $product, $post)
 	{
 		$product->setDateModified();
-		$this->edit($product, $post);
+		return $this->edit($product, $post);
 	}
 	
 	/**
@@ -213,19 +203,6 @@ class Product extends AbstractService
 		}
 	
 		return $this->groupPriceService;
-	}
-	
-	/**
-	 * @return \Shop\Service\Stoct\Status
-	 */
-	public function getStockStatusService()
-	{
-		if (!$this->stockStatusService) {
-			$sl = $this->getServiceLocator();
-			$this->stockStatusService = $sl->get('Shop\Service\StockStatus');
-		}
-	
-		return $this->stockStatusService;
 	}
 	
 	/**

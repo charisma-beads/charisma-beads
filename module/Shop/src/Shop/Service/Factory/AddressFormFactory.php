@@ -7,7 +7,6 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 
 class AddressFormFactory implements FactoryInterface
 {
-
 	public function createService(ServiceLocatorInterface $serviceLocator)
 	{
 	    $mapper = $serviceLocator->get('Shop\Mapper\Country');

@@ -5,8 +5,8 @@ Features To Add
 ---------------
 * ~~Basic App Module~~
 * ~~Admin Module~~
-* Shop Module to include:
-	* Admin product list and edit
+* Basic Shop Module to include:
+	* ~~Admin product list and edit~~
 	* Admin category list and edit
 	* Admin image list and edit
 	* Admin customer list and edit

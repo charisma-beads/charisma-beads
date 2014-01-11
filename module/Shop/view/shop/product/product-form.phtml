@@ -4,14 +4,22 @@ $routeArray = array('action' => $this->formAction);
 if (isset($this->productId)) $routeArray['id'] = $this->productId;
 ?>
 <div>
-	<form class="form form-horizontal" method="post" action="<?=$this->url('admin/shop/product', $routeArray) ?>">
+	<form class="form form-horizontal" method="post" action="<?=$this->url('admin/shop/product/edit', $routeArray) ?>">
 		<fieldset>
 			<legend><?=ucwords($this->formAction); ?> Product Form:</legend>
 			<div class="row-fluid">
 				<div class="span6">
 					<fieldset>
 						<legend>Details:</legend>
-						<?=$this->ztbFormElement($form->get('enabled'));?>
+						<div class="row-fluid">
+							<div class="span6">
+								<?=$this->ztbFormElement($form->get('enabled'));?>
+							</div>
+							<div class="span6">
+								<?=$this->ztbFormElement($form->get('discontinued'));?>
+							</div>
+						</div>
+						<?=$this->ztbFormElement($form->get('productCategoryId'));?>
 						<?=$this->ztbFormElement($form->get('name'));?>
 						<?=$this->ztbFormElement($form->get('ident'));?>
 						<?=$this->ztbFormElement($form->get('shortDescription'));?>
@@ -21,11 +29,49 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
 				<div class="span6">
 					<fieldset>
 						<legend>Price:</legend>
+						<?=$this->ztbFormElement($form->get('productGroupId'));?>
 						<?=$this->ztbFormElement($form->get('price'));?>
+						<?=$this->ztbFormElement($form->get('discountPercent'));?>
 						<?=$this->ztbFormElement($form->get('quantity'));?>
+						<?=$this->ztbFormElement($form->get('taxCodeId'));?>
+						<div class="row-fluid">
+							<div class="span4">
+								<?=$this->ztbFormElement($form->get('addPostage'));?>
+							</div>
+							<div class="span4">
+								<?=$this->ztbFormElement($form->get('taxable'));?>
+							</div>
+							<div class="span4">
+								<?=$this->ztbFormElement($form->get('vatInc'));?>
+							</div>
+						</div>
+					</fieldset>
+				</div>
+				<div class="span6">
+					<fieldset>
+						<legend>Attributes:</legend>
+						<?=$this->ztbFormElement($form->get('productSizeId'));?>
+						<?=$this->ztbFormElement($form->get('postUnitId'));?>
 					</fieldset>
 				</div>
 			</div>
+			
+			<?=$this->formElement($form->get('productId'));?>
+			<?=$this->formElement($form->get('dateCreated'));?>
+			<?=$this->formElement($form->get('dateModified'));?>
+		
+		<input type="hidden" name="action" value="<?=$this->formAction;?>">
+			
+			<div class="control-group">
+            <div class="controls">
+                <button type="submit" class="btn btn-primary" data-loading-text="Please wait...">
+                	Submit
+                </button>
+                <button type="button" class="btn btn-warning"  data-loading-text="Please wait..." onClick="window.location = '<?=$this->url('admin/shop/product') ?>';">
+                	Cancel
+                </button>
+            </div>
+        </div>
 		</fieldset>
 	</form>
 </div>

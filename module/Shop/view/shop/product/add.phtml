@@ -1,1 +1,7 @@
-<h2>Not yet implemented</h2>
+<?php $this->headTitle('Add Product') ?>
+<?=$this->ztbFlashMessenger()->render(); ?>
+
+<?=$this->partial('shop/product/product-form', array(
+	'form' => $this->form,
+	'formAction' => 'add',
+)); ?>

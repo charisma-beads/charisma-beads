@@ -37,18 +37,18 @@
 			<td>
                 <a href="<?=$this->url('admin/shop/product/edit', array(
                     'id' => $row->getProductId()
-				)); ?>" role="button" class="btn">Edit</a>
+				)); ?>" class="btn">Edit</a>
 				&nbsp;
 				
 				<!-- Button to trigger modal -->
-                <a href="#productModel<?php echo $row->getProductId(); ?>" role="button" class="btn btn-danger" data-toggle="modal">Delete</a>
+                <a href="#productModel<?=$row->getProductId();?>" class="btn btn-danger" data-toggle="modal">Delete</a>
                 <!-- Modal -->
 				<div class="modal hide fade" id="productModel<?=$row->getProductId(); ?>">
 				  <div class="modal-header">
 				    <button type="button" class="close" data-dismiss="modal">&times;</button>
 				    <h3 id="productModel<?=$row->getProductId(); ?>Label">Warning</h3>
 				  </div>
-				  <form class="form-horizontal"  method="post" action="<?=$this->url('admin/shop/product', array(
+				  <form class="form-horizontal"  method="post" action="<?=$this->url('admin/shop/product/edit', array(
 				        'action' => 'delete',
 				    )) ?>">
 				        <div class="modal-body">

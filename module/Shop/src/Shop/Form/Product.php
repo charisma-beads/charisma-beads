@@ -1,46 +1,46 @@
 <?php
 namespace Shop\Form;
 
+use Shop\Mapper\Post\Unit as PostUnitMapper;
+use Shop\Mapper\Product\Category as CategoryMapper;
+use Shop\Mapper\Product\GroupPrice as GroupPriceMapper;
+use Shop\Mapper\Product\Size as SizeMapper;
+use Shop\Mapper\Tax\Code as TaxCodeMapper;
 use Zend\Form\Form;
 
 class Product extends Form
 {
+	/**
+	 * @var CategoryMapper
+	 */
+	protected $categoryMapper;
+	
+	/**
+	 * @var GroupPriceMapper
+	 */
+	protected  $groupPriceMapper;
+	
+	/**
+	 * @var PostUnitMapper
+	 */
+	protected $postUnitMapper;
+	
+	/**
+	 * @var SizeMapper
+	 */
+	protected $sizeMapper;
+	
+	/**
+	 * @var TaxCodeMapper
+	 */
+	protected $taxCodeMapper;
+	
     public function __construct()
     {
         parent::__construct('Product From');
         
         $this->add(array(
         	'name'	=> 'productId',
-        	'type'	=> 'hidden',
-        ));
-        
-        $this->add(array(
-        	'name'	=> 'productCategoryId',
-        	'type'	=> 'hidden',
-        ));
-        
-        $this->add(array(
-        	'name'	=> 'productSizeId',
-        	'type'	=> 'hidden',
-        ));
-        
-        $this->add(array(
-        	'name'	=> 'taxCodeId',
-        	'type'	=> 'hidden',
-        ));
-        
-        $this->add(array(
-        	'name'	=> 'postUnitId',
-        	'type'	=> 'hidden',
-        ));
-        
-        $this->add(array(
-        	'name'	=> 'productGroupId',
-        	'type'	=> 'hidden',
-        ));
-        
-        $this->add(array(
-        	'name'	=> 'stockStausId',
         	'type'	=> 'hidden',
         ));
         
@@ -75,8 +75,9 @@ class Product extends Form
         	'name'			=> 'price',
         	'type'			=> 'number',
         	'attributes'	=> array(
-        		'placeholder'		=> 'Price:',
-        		'autofocus'			=> true,
+        		'placeholder'	=> 'Price:',
+        		'autofocus'		=> true,
+        		'step'			=> '0.01'
         	),
         	'options'		=> array(
         		'label'			=> 'Price:',
@@ -116,6 +117,8 @@ class Product extends Form
         	'type'			=> 'number',
         	'attributes'	=> array(
         		'autofocus'	=> true,
+        		'min'		=> '-1',
+        		'step'		=> '1',
         	),
         	'options'		=> array(
         		'label'	=> 'Quantity:',
@@ -124,29 +127,25 @@ class Product extends Form
         
         $this->add(array(
         	'name'			=> 'taxable',
-        	'type'			=> 'select',
+        	'type'			=> 'checkbox',
         	'options'		=> array(
         		'label'			=> 'Taxable:',
         		'required' 		=> true,
-        		'empty_option'	=> '---Please select---',
-        		'value_options' => array(
-        			'0' => 'No',
-        			'1' => 'Yes'
-        		),
+        		'use_hidden_element' => true,
+        		'checked_value' => '1',
+        		'unchecked_value' => '0',
         	),
         ));
         
         $this->add(array(
         	'name'			=> 'addPostage',
-        	'type'			=> 'select',
+        	'type'			=> 'checkbox',
         	'options'		=> array(
         		'label'			=> 'Add Postage:',
         		'required' 		=> true,
-        		'empty_option'	=> '---Please select---',
-        		'value_options' => array(
-        			'0' => 'No',
-        			'1' => 'Yes'
-        		),
+        		'use_hidden_element' => true,
+        		'checked_value' => '1',
+        		'unchecked_value' => '0',
         	),
         ));
         
@@ -174,34 +173,31 @@ class Product extends Form
         		'use_hidden_element' => true,
         		'checked_value' => '1',
         		'unchecked_value' => '0',
+        		'required' 		=> true,
         	),
         ));
         
         $this->add(array(
         	'name'			=> 'discontinued',
-        	'type'			=> 'select',
+        	'type'			=> 'checkbox',
         	'options'		=> array(
         		'label'			=> 'Discontinued:',
         		'required' 		=> true,
-        		'empty_option'	=> '---Please select---',
-        		'value_options' => array(
-        			'0' => 'No',
-        			'1' => 'Yes'
-        		),
+        		'use_hidden_element' => true,
+        		'checked_value' => '1',
+        		'unchecked_value' => '0',
         	),
         ));
         
         $this->add(array(
         	'name'			=> 'vatInc',
-        	'type'			=> 'select',
+        	'type'			=> 'checkbox',
         	'options'		=> array(
         		'label'			=> 'Vat Included:',
         		'required' 		=> true,
-        		'empty_option'	=> '---Please select---',
-        		'value_options' => array(
-        			'0' => 'No',
-        			'1' => 'Yes'
-        		),
+        		'use_hidden_element' => true,
+        		'checked_value' => '1',
+        		'unchecked_value' => '0',
         	),
         ));
         
@@ -215,4 +211,185 @@ class Product extends Form
         	'type' => 'hidden',
         ));
     }
+    
+    public function init()
+    {	
+    	$this->add(array(
+    		'name'		=> 'productCategoryId',
+    		'type'		=> 'select',
+    		'options'	=> array(
+    			'label'			=> 'Category:',
+    			'required'		=> true,
+    			'empty_option'	=> '---Please select a category---',
+    			'value_options'	=> $this->getCategoryList(),
+    		),
+    	));
+    	
+    	$this->add(array(
+    		'name'		=> 'productSizeId',
+    		'type'		=> 'select',
+    		'options'	=> array(
+    			'label'			=> 'Size:',
+    			'required'		=> true,
+    			'empty_option'	=> '---Please select a size---',
+    			'value_options'	=> $this->getSizeList(),
+    		),
+    	));
+    	
+    	$this->add(array(
+    		'name'		=> 'postUnitId',
+    		'type'		=> 'select',
+    		'options'	=> array(
+    			'label'			=> 'Weight:',
+    			'required'		=> true,
+    			'empty_option'	=> '---Please select a weight---',
+    			'value_options'	=> $this->getPostUnitList(),
+    		),
+    	));
+    	
+    	$this->add(array(
+    		'name'		=> 'productGroupId',
+    		'type'		=> 'select',
+    		'options'	=> array(
+    			'label'			=> 'Price Group:',
+    			'required'		=> true,
+    			'empty_option'	=> '--Please select a price group---',
+    			'value_options'	=> $this->getGroupPriceList(),
+    		),
+    	));
+    	
+    	$this->add(array(
+    		'name'		=> 'taxCodeId',
+    		'type'		=> 'select',
+    		'options'	=> array(
+    			'label'			=> 'Tax Code:',
+    			'required'		=> true,
+    			'empty_option'	=> '---Please select a tax code---',
+    			'value_options'	=> $this->getTaxCodeList(),
+    		),
+    	));
+    }
+    
+    protected function getCategoryList()
+    {
+    	$cats = $this->categoryMapper->fetchAll();
+    	$categoryOptions = array();
+    	$parent = 0;
+    	
+    	/* @var $cat \Shop\Model\Product\Category */
+    	foreach($cats as $cat) {
+    		
+    		if (0 == $cat->getDepth()) {
+    			$parent = $cat->getProductCategoryId();
+    			$categoryOptions[$parent]['options'][$cat->getProductCategoryId()] = $cat->getCategory();
+    			$categoryOptions[$parent]['label'] = $cat->getCategory();
+    		} else {
+    			$categoryOptions[$parent]['options'][$cat->getProductCategoryId()] = $cat->getCategory();
+    		}
+    	}
+    	
+    	return $categoryOptions;
+    }
+    
+    protected function getGroupPriceList()
+    {
+    	$groups = $this->groupPriceMapper->fetchAll();
+    	$groupPriceOptions = array('0' => 'None');
+    	
+    	/* @var $group \Shop\Model\Product\GroupPrice */
+    	foreach($groups as $group) {
+    		$groupPriceOptions[$group->getProductGroupId()] = $group->getGroup() . ' - ' . $group->getPrice();
+    	}
+    	
+    	return $groupPriceOptions;
+    }
+    
+    protected function getPostUnitList()
+    {
+    	$postUnits = $this->postUnitMapper->fetchAll();
+    	$postUnitOptions = array();
+    	
+    	/* @var $postUnit \Shop\Model\Post\Unit */
+    	foreach($postUnits as $postUnit) {
+    		$postUnitOptions[$postUnit->getPostUnitId()] = $postUnit->getPostUnit();
+    	}
+    	
+    	return $postUnitOptions;
+    }
+    
+    protected function getSizeList()
+    {
+    	$sizes = $this->sizeMapper->fetchAll();
+    	$sizeOptions = array();
+    	
+    	/* @var $size \Shop\Model\Product\Size */
+    	foreach($sizes as $size) {
+    		$sizeOptions[$size->getProductSizeId()] = $size->getSize(); 
+    	}
+    	
+    	return $sizeOptions;
+    }
+    
+    protected function getTaxCodeList()
+    {
+    	$taxCodes = $this->taxCodeMapper->fetchAll();
+    	$taxCodeOptions = array();
+    	
+    	/* @var $taxCode \Shop\Model\Tax\Code */
+    	foreach($taxCodes as $taxCode) {
+    		$taxCodeOptions[$taxCode->getTaxCodeId()] = $taxCode->getTaxCode() . ' - ' . $taxCode->getDescription();
+    	}
+    	
+    	return $taxCodeOptions;
+    }
+    
+    /**
+     * @param CategoryMapper $categoryMapper
+     * @return \Shop\Form\Product
+     */
+    public function setCategoryMapper(CategoryMapper $categoryMapper)
+    {
+    	$this->categoryMapper = $categoryMapper;
+    	return $this;
+    }
+    
+    /**
+     * @param GroupPriceMapper $groupPriceMapper
+     * @return \Shop\Form\Product
+     */
+	public function setGroupPriceMapper(GroupPriceMapper $groupPriceMapper)
+	{
+		$this->groupPriceMapper = $groupPriceMapper;
+		return $this;
+	}
+	    
+    /**
+     * @param PostUnitMapper $postUnitMapper
+     * @return \Shop\Form\Product
+     */
+	public function setPostUnitMapper(PostUnitMapper $postUnitMapper)
+	{
+		$this->postUnitMapper = $postUnitMapper;
+		return $this;
+	}
+	    
+    /**
+     * @param SizeMapper $sizeMapper
+     * @return \Shop\Form\Product
+     */
+	public function setSizeMapper(SizeMapper $sizeMapper)
+	{
+		$this->sizeMapper = $sizeMapper;
+		return $this;
+	}
+	
+	/**
+	 * @param TaxCodeMapper $taxCodeMapper
+	 * @return \Shop\Form\Product
+	 */
+	public function setTaxCodeMapper(TaxCodeMapper $taxCodeMapper)
+	{
+		$this->taxCodeMapper = $taxCodeMapper;
+		return $this;
+	}
 }

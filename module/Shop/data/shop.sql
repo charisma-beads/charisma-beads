@@ -196,7 +196,6 @@ CREATE TABLE IF NOT EXISTS `product` (
   `taxCodeId` int(10) unsigned NOT NULL,
   `postUnitId` int(10) unsigned NOT NULL,
   `productGroupId` int(10) unsigned DEFAULT NULL,
-  `stockStatusId` int(10) unsigned DEFAULT NULL,
   `ident` varchar(250) NOT NULL,
   `name` varchar(64) NOT NULL,
   `price` decimal(6,2) NOT NULL DEFAULT '0.00',

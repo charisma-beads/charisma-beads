@@ -6,7 +6,7 @@ return array(
     	'Shop\Form\Product'						=> false,
     ),
 	'invokables'    => array(
-		'Shop\Form\Product'						=> 'Shop\Form\Product',
+		
 		
 	    'Shop\InputFilter\PostUnit'	            => 'Shop\InputFilter\Post\Unit',
 	    'Shop\InputFilter\Product' 			    => 'Shop\InputFilter\Product',
@@ -63,6 +63,7 @@ return array(
 	),
     'factories' => array(
         'Shop\Form\Customer\Address'            => 'Shop\Service\Factory\AddressFormFactory',
+    	'Shop\Form\Product'						=> 'Shop\Service\Factory\ProductFormFactory',
         
         'Shop\Options\Checkout'                 => 'Shop\Service\Factory\CheckoutOptionsFactory',
         'Shop\Options\Paypal'                   => 'Shop\Service\Factory\PaypalOptionsFactory',
