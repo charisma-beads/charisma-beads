@@ -4,9 +4,10 @@ return array(
     'shared'        => array(
         'Shop\Form\Customer\Address'            => false,
     	'Shop\Form\Product'						=> false,
+    	'Shop\Form\Product\Category'			=> false,
     ),
 	'invokables'    => array(
-		
+		'Shop\Form\ProductCategory'				=> 'Shop\Form\Product\Category',
 		
 	    'Shop\InputFilter\PostUnit'	            => 'Shop\InputFilter\Post\Unit',
 	    'Shop\InputFilter\Product' 			    => 'Shop\InputFilter\Product',

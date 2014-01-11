@@ -55,12 +55,8 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
 					</fieldset>
 				</div>
 			</div>
-			
-			<?=$this->formElement($form->get('productId'));?>
-			<?=$this->formElement($form->get('dateCreated'));?>
-			<?=$this->formElement($form->get('dateModified'));?>
 		
-		<input type="hidden" name="action" value="<?=$this->formAction;?>">
+			<input type="hidden" name="action" value="<?=$this->formAction;?>">
 			
 			<div class="control-group">
             <div class="controls">

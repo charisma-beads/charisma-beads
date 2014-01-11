@@ -33,11 +33,11 @@
 			<td>
                 <a href="<?=$this->url('admin/shop/category/edit', array(
                     'id' => $row->getProductCategoryId()
-				)); ?>" role="button" class="btn">Edit</a>
+				)); ?>" class="btn">Edit</a>
 				&nbsp;
 				
 				<!-- Button to trigger modal -->
-                <a href="#categoryModel<?=$row->getProductCategoryId(); ?>" role="button" class="btn btn-danger" data-toggle="modal">Delete</a>
+                <a href="#categoryModel<?=$row->getProductCategoryId(); ?>" class="btn btn-danger" data-toggle="modal">Delete</a>
                 <!-- Modal -->
 				<div class="modal hide fade" id="categoryModel<?=$row->getProductCategoryId(); ?>">
 				  <div class="modal-header">

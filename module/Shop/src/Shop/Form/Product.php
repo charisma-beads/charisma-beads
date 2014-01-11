@@ -40,11 +40,6 @@ class Product extends Form
         parent::__construct('Product From');
         
         $this->add(array(
-        	'name'	=> 'productId',
-        	'type'	=> 'hidden',
-        ));
-        
-        $this->add(array(
         	'name'			=> 'ident',
         	'type'			=> 'text',
         	'attributes'	=> array(
@@ -199,16 +194,6 @@ class Product extends Form
         		'checked_value' => '1',
         		'unchecked_value' => '0',
         	),
-        ));
-        
-        $this->add(array(
-        	'name' => 'dateCreated',
-        	'type' => 'hidden',
-        ));
-        
-        $this->add(array(
-        	'name' => 'dateModified',
-        	'type' => 'hidden',
         ));
     }
     

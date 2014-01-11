@@ -2,12 +2,13 @@
 namespace Shop\Service\Product;
 
 use Application\Service\AbstractService;
+use Shop\Model\Product\Category as CategoryModel;
 
 class Category extends AbstractService
 {
 	protected $mapperClass = 'Shop\Mapper\ProductCategory';
-	protected $form = '';
-	protected $inputFilter = '';
+	protected $form = 'Shop\Form\ProductCategory';
+	protected $inputFilter = 'Shop\InputFilter\ProductCategory';
 	
 	public function fetchAll($topLevelOnly=false)
 	{
@@ -57,5 +58,12 @@ class Category extends AbstractService
 	public function getParentCategories($categoryId)
 	{
 		return $this->getMapper()->getBreadCrumbs($categoryId);
+	}
+	
+	public function editCategory(CategoryModel $category, $post)
+	{
+		$category->setDateModified();
+		
+		return $this->edit($category, $post);
 	}
 }

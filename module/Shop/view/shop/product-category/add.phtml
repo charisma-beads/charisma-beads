@@ -1,1 +1,7 @@
-<h2>Not yet implemented</h2>
+<?php $this->headTitle('Add Category') ?>
+<?=$this->ztbFlashMessenger()->render(); ?>
+
+<?=$this->partial('shop/product-category/category-form', array(
+	'form' => $this->form,
+	'formAction' => 'add'
+)); ?>

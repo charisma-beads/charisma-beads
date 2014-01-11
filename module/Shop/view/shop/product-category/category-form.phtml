@@ -1,0 +1,31 @@
+<?php
+$form = $this->form;
+$routeArray = array('action' => $this->formAction);
+if (isset($this->productCategoryId)) $routeArray['id'] = $this->productCategoryId;
+?>
+<div>
+	<form class="form form-horizontal" method="post" action="<?=$this->url('admin/shop/category/edit', $routeArray) ?>">
+		<fieldset>
+			<legend><?=ucwords($this->formAction); ?> Product Category Form:</legend>
+			
+			<?=$this->ztbFormElement($form->get('enabled'));?>
+			<?=$this->ztbFormElement($form->get('discontinued'));?>
+			
+			<?=$this->ztbFormElement($form->get('category'));?>
+			<?=$this->ztbFormElement($form->get('ident'));?>
+			
+			<input type="hidden" name="action" value="<?=$this->formAction;?>">
+			
+			<div class="control-group">
+            <div class="controls">
+                <button type="submit" class="btn btn-primary" data-loading-text="Please wait...">
+                	Submit
+                </button>
+                <button type="button" class="btn btn-warning"  data-loading-text="Please wait..." onClick="window.location = '<?=$this->url('admin/shop/category') ?>';">
+                	Cancel
+                </button>
+            </div>
+        </div>
+		</fieldset>
+	</form>
+</div>
