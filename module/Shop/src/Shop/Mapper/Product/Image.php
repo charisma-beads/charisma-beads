@@ -11,6 +11,22 @@ class Image extends AbstractMapper
 	protected $model = 'Shop\Model\Product\Image';
 	protected $hydrator = 'Shop\Hydrator\Product\Image';
 	
+	public function getImagesByCategoryIds(array $ids)
+	{
+		$select = $this->getSql()->select();
+		$select->from($this->table)
+		->join(
+			'product',
+			'productImage.productId=product.productId',
+			array(),
+			Select::JOIN_INNER
+		);
+		
+		$select->where->in('productCategoryId', $ids);
+		
+		return $this->fetchResult($select);
+	}
+	
 	public function searchImages($image, $product, $sort)
 	{
 	    $select = $this->getSql()->select();

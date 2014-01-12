@@ -6,24 +6,24 @@ if (isset($this->pageId)) $routeArray['id'] = $this->pageId;
 
 ?>
 <div>
-    <form class="form form-horizontal"  method="post" action="<?php echo $this->url('admin/page', $routeArray) ?>">
+    <form class="form form-horizontal"  method="post" action="<?=$this->url('admin/page', $routeArray);?>">
         <fieldset>
-        <legend><?php echo ucwords($this->formAction); ?> Page Form:</legend>
+        <legend><?=ucwords($this->formAction);?> Page Form:</legend>
         <div class="row-fluid">
             <div class="span6">
                 
-                <?php echo $this->ztbFormElement($form->get('label')); ?>
+                <?=$this->ztbFormElement($form->get('label')); ?>
                 
-                <?php echo $this->ztbFormElement($form->get('route')); ?>
+                <?=$this->ztbFormElement($form->get('route')); ?>
                 
-                <?php echo $this->ztbFormElement($form->get('params')); ?>
+                <?=$this->ztbFormElement($form->get('params')); ?>
                 
-                <?php echo $this->ztbFormElement($form->get('resource')); ?>
+                <?=$this->ztbFormElement($form->get('resource')); ?>
                 
-                <?php echo $this->ztbFormElement($form->get('visible')); ?>
+                <?=$this->ztbFormElement($form->get('visible')); ?>
             </div>
             <div class="span6">
-       	        <?php echo $this->ztbFormElement($form->getPageSelect($this->menuId)); ?>
+       	        <?=$this->ztbFormElement($form->getPageSelect($this->menuId)); ?>
        	        <div class="control-group">
                     <div class="controls">
                    	    <label class="radio">
@@ -39,19 +39,19 @@ if (isset($this->pageId)) $routeArray['id'] = $this->pageId;
             </div>
         </div>
         
-       	<?php echo $this->formHidden($form->get('pageId')); ?>
-        <?php echo $this->formHidden($form->get('menuId')->setValue($this->menuId)); ?>
-        <input type="hidden" name="action" value="<?php echo $this->formAction; ?>">
+       	<?=$this->formHidden($form->get('pageId'));?>
+        <?=$this->formHidden($form->get('menuId')->setValue($this->menuId));?>
+        <input type="hidden" name="action" value="<?=$this->formAction;?>">
         
         <div class="control-group">
             <div class="controls">
                 <button type="submit" class="btn btn-primary" 
                 data-loading-text="Please wait...">Submit</button>
                 <button type="button" class="btn btn-warning" 
-                data-loading-text="Please wait..." onClick="window.location = '<?php echo $this->url('admin/page', array(
+                data-loading-text="Please wait..." onClick="window.location = '<?=$this->url('admin/page', array(
                         'action' => 'list',
                         'menuId' => $this->menuId
-                    )) ?>';">Cancel</button>
+                    ));?>';">Cancel</button>
             </div>
         </div>
         </fieldset>

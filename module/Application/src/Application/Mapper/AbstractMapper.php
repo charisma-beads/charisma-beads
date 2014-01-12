@@ -383,4 +383,16 @@ class AbstractMapper implements DbAdapterAwareInterface
     {
     	return $this->primary;
     }
+    
+    /**
+     * @param Select $select
+     * @return string $sqlString
+     */
+    public function getSqlString(Select $select)
+    {
+    	$adapterPlatform	= $this->getSql()->getAdapter()->getPlatform();
+    	$sqlString			= $select->getSqlString($adapterPlatform);
+    	
+    	return $sqlString;
+    }
 }

@@ -1,7 +1,7 @@
 <?php $this->headScript()->appendFile($this->basePath() . '/js/admin/session.js'); ?>
     	
 <div id="table-session" class="row-fluid table-wrap">
-	<?php echo $this->partial('session/list', array(
+	<?=$this->partial('session/list', array(
 		'sessions' => $this->sessions
-    )); ?>
+    ));?>
 </div>

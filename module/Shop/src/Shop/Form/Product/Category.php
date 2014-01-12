@@ -1,10 +1,27 @@
 <?php
 namespace Shop\Form\Product;
 
+use Shop\Mapper\Product\Image as ImageMapper;
+use Shop\Service\Product\Category as CategoryService;
 use Zend\Form\Form;
 
 class Category extends Form
 {
+	/**
+	 * @var CategoryService
+	 */
+	protected $categoryService;
+	
+	/**
+	 * @var ImageMapper
+	 */
+	protected $imageMapper;
+	
+	/**
+	 * @var int
+	 */
+	protected $categoryId;
+	
     public function __construct()
     {
     	parent::__construct('Category From');
@@ -60,4 +77,116 @@ class Category extends Form
     		),
     	));
     }
+    
+    public function init()
+    {
+    	$this->add(array(
+    		'name'		=> 'productImageId',
+    		'type'		=> 'select',
+    		'options'	=> array(
+    			'label'			=> 'Category Image:',
+    			'required'		=> true,
+    			'value_options'	=> $this->getImageList(),
+    		),
+    	));
+    	
+    	$this->add(array(
+    		'name' => 'parent',
+    		'type' => 'select',
+    		'options' => array(
+    			'label' => 'Parent:',
+    			'required' => true,
+    			'value_options' => $this->getParentList()
+    		),
+    	));
+    }
+    
+    public function getParentList()
+    {
+    	$cats = $this->getCategoryService()->fetchAll();
+    	$parentOptions = array(0 => 'Top');
+    	
+    	/* @var $cat \Shop\Model\Product\Category */
+    	foreach($cats as $cat) {
+    		$parentOptions[$cat->getProductCategoryId()] = $cat->getCategory();
+    	}
+    	
+    	return $parentOptions;
+    }
+    
+    public function getImageList()
+    {
+    	$id = $this->getCategoryId();
+    	$imageOptions = array();
+    	
+    	if (!0 == $id) {
+    		$ids = $this->getCategoryService()->getCategoryChildrenIds($id);
+    		$images = $this->getImageMapper()->getImagesByCategoryIds($ids);
+    		
+    		/* @var $image \Shop\Model\Product\Image */
+    		foreach($images as $image) {
+    			$imageOptions[$image->getProductImageId()] = $image->getThumbnail();
+    		}
+    	} else {
+    		$imageOptions[0] = 'No Images Uploaded';
+    	}
+    	
+    	return $imageOptions;
+    }
+    
+    /**
+     * @return number
+     */
+	public function getCategoryId()
+	{
+		return $this->categoryId;
+	}
+		
+	/**
+	 * @param int $categoryId
+	 * @return \Shop\Form\Product\Category
+	 */
+	public function setCategoryId($categoryId)
+	{
+		$categoryId = (int) $categoryId;
+		$this->categoryId = $categoryId;
+		return $this;
+	}
+	
+	/**
+	 * @return \Shop\Service\Product\Category
+	 */
+	public function getCategoryService()
+	{
+		return $this->categoryService;
+	}
+	    
+    /**
+     * @param CategoryService $categoryService
+     * @return \Shop\Form\Product\Category
+     */
+	public function setCategoryService(CategoryService $categoryService)
+	{
+		$this->categoryService = $categoryService;
+		return $this;
+	}
+	
+	/**
+	 * @return \Shop\Mapper\Product\Image
+	 */
+	public function getImageMapper()
+	{
+		return $this->imageMapper;
+	}
+	    
+    /**
+     * @param ImageMapper $imageMapper
+     * @return \Shop\Form\Product\Category
+     */
+	public function setImageMapper(ImageMapper $imageMapper)
+	{
+		$this->imageMapper = $imageMapper;
+		return $this;
+	}
+	
 }

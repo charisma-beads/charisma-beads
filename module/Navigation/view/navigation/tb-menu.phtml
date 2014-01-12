@@ -21,15 +21,15 @@
         </li>
         <?php else: ?>
         <li class="dropdown">
-            <a id="drop<?php echo $count ?>" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
+            <a id="drop<?php echo $count ?>" href="#" class="dropdown-toggle" data-toggle="dropdown">
             	<span><?php echo $page->getLabel() ?></span> <b class="caret"></b>
             </a>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="drop<?php echo $count ?>">
+            <ul class="dropdown-menu">
             <?php foreach($page->getPages() as $child): ?>
                 <?php // when using partials we need to manually check for ACL conditions ?>
                 <?php if( ! $child->isVisible() || !$this->navigation()->accept($child)) continue; ?>
-                <li role="presentation">
-                    <a role="menuitem" tabindex="-1" href="<?php echo $child->getHref() ?>">
+                <li>
+                    <a tabindex="-1" href="<?php echo $child->getHref() ?>">
                         <?php echo $child->getLabel() ?>
                     </a>
                 </li>

@@ -1,5 +1,5 @@
 <?php $this->headTitle('Menus') ?>
-<?php echo $this->ztbFlashMessenger()->render(); ?>
+<?=$this->ztbFlashMessenger()->render(); ?>
 
 <table class="table table-hover table-bordered table-condensed">
 	<thead>
@@ -12,37 +12,37 @@
 	<tbody>
 		<?php foreach($this->menus as $row): ?>
 		<tr>
-			<td><?php echo $this->escapeHtml($row->getMenuId()); ?></td>
-			<td><?php echo $this->escapeHtml($row->getMenu()); ?></td>
+			<td><?=$this->escapeHtml($row->getMenuId()); ?></td>
+			<td><?=$this->escapeHtml($row->getMenu()); ?></td>
 			<td>
-				<a href="<?php echo $this->basepath(
+				<a href="<?=$this->basepath(
 					'/admin/menu/edit/id/' . $this->escapeHtml($row->getMenuId())
-				) ?>" role="button" class="btn">Edit</a>
+				);?>" class="btn">Edit</a>
 				&nbsp;
 				
-				<a href="<?php echo $this->basepath(
+				<a href="<?=$this->basepath(
 					'/admin/page/list/menuId/' . $this->escapeHtml($row->getMenuId())
-				) ?>" role="button" class="btn">Edit Pages</a>
+				);?>" class="btn">Edit Pages</a>
 				&nbsp;
 				
 				<!-- Button to trigger modal -->
-                <a href="#menuModel<?php echo $row->getMenuId(); ?>" role="button" class="btn btn-danger" data-toggle="modal">Delete</a>
+                <a href="#menuModel<?=$row->getMenuId();?>" class="btn btn-danger" data-toggle="modal">Delete</a>
                 <!-- Modal -->
-				<div class="modal hide fade" id="menuModel<?php echo $row->getMenuId(); ?>" tabindex="-1" role="dialog" aria-labelledby="menuModel<?php echo $row->getMenuId(); ?>" aria-hidden="true">
+				<div class="modal hide fade" id="menuModel<?=$row->getMenuId();?>" tabindex="-1">
 				  <div class="modal-header">
-				    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				    <h3 id="menuModel<?php echo $row->getMenuId(); ?>Label">Warning</h3>
+				    <button type="button" class="close" data-dismiss="modal">&times;</button>
+				    <h3 id="menuModel<?=$row->getMenuId();?>Label">Warning</h3>
 				  </div>
-				  <form class="form-horizontal"  method="post" action="<?php echo $this->url('admin/menu', array(
+				  <form class="form-horizontal"  method="post" action="<?=$this->url('admin/menu', array(
 				        'action' => 'delete',
-				    )) ?>">
+				    ));?>">
 				        <div class="modal-body">
 				            <p>Are you sure you want to delete this menu.</p>
 				            <p class="label label-important">This action cannot be undone</p>
 				        </div>
-				        <input type="hidden" name="menuId" value="<?php echo $row->getMenuId() ?>">
+				        <input type="hidden" name="menuId" value="<?=$row->getMenuId();?>">
 				        <div class="modal-footer">
-				            <button type="button" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">No Don't Do It</button>
+				            <button type="button" class="btn btn-primary" data-dismiss="modal">No Don't Do It</button>
 				            <button type="submit" name="submit" class="btn btn-danger" value="delete">Yes Delete It</button>
 				        </div>
 				    </form>

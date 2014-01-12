@@ -7,7 +7,6 @@ return array(
     	'Shop\Form\Product\Category'			=> false,
     ),
 	'invokables'    => array(
-		'Shop\Form\ProductCategory'				=> 'Shop\Form\Product\Category',
 		
 	    'Shop\InputFilter\PostUnit'	            => 'Shop\InputFilter\Post\Unit',
 	    'Shop\InputFilter\Product' 			    => 'Shop\InputFilter\Product',
@@ -65,6 +64,7 @@ return array(
     'factories' => array(
         'Shop\Form\Customer\Address'            => 'Shop\Service\Factory\AddressFormFactory',
     	'Shop\Form\Product'						=> 'Shop\Service\Factory\ProductFormFactory',
+    	'Shop\Form\ProductCategory'				=> 'Shop\Service\Factory\ProductCategoryFormFactory',
         
         'Shop\Options\Checkout'                 => 'Shop\Service\Factory\CheckoutOptionsFactory',
         'Shop\Options\Paypal'                   => 'Shop\Service\Factory\PaypalOptionsFactory',
