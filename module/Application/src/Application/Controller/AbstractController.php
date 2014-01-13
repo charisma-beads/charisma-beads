@@ -15,7 +15,7 @@ class AbstractController extends AbstractActionController
     {
     	$this->flashMessenger()->addErrorMessage(array(
     			'message' => $exception->getMessage(),
-    			'title'   => 'Fatal Error!'
+    			'title'   => 'Error!'
     	));
     
     	$e = $exception->getPrevious();

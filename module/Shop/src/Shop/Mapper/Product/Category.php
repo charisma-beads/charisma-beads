@@ -2,6 +2,7 @@
 namespace Shop\Mapper\Product;
 
 use Application\Mapper\AbstractNestedSet;
+use Shop\Model\Product\Category as CategoryModel;
 
 class Category extends AbstractNestedSet
 {
@@ -81,7 +82,7 @@ class Category extends AbstractNestedSet
 	    		$where = $select->where->nest();
 	    
 	    		foreach ($searchTerms as $value) {
-	    			$where->like('category', '%'.$value.'%');
+	    			$where->like('child.category', '%'.$value.'%');
 	    		}
 	    
 	    		$where->unnest();
@@ -105,6 +106,23 @@ class Category extends AbstractNestedSet
 	    
 	    
 	    return $this->fetchResult($select);
+	}
+	
+	public function toggleEnabled(CategoryModel $model)
+	{
+		$data = $this->extract($model);
+		$sql = $this->getSql();
+		$update = $sql->update($this->table);
+	
+		$update->set(array(
+			'enabled'		=> $data['enabled'], 
+			'dateModified'	=> $data['dateModified']
+		))
+		->where->between('lft', $data['lft'], $data['rgt']);
+	
+		$statement = $sql->prepareStatementForSqlObject($update);
+	
+		return $statement->execute();
 	}
 	
 	public function getFetchEnabled()

@@ -1,0 +1,14 @@
+
+<form id="search-<?=$this->name;?>" class="form-search" method="post">
+	<?php foreach($this->searchInputs as $input):?>
+	<input type="text" name="<?=$input;?>" placeholder="<?=ucwords($input)?>:">
+	<?php endforeach;?>
+	<select name="limit" class="input-mini">
+		<option>25</option>
+		<option>50</option>
+		<option>75</option>
+		<option>100</option>
+	</select>
+	<button type="submit" class="btn btn-primary"><i class="icon-search icon-white"></i> Search</button>
+	<button type="reset" class="btn">Reset</button>
+</form>

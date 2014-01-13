@@ -105,4 +105,30 @@ class Category extends AbstractService
 	
 		return $result;
 	}
+	
+	public function toggleEnabled(CategoryModel $category)
+	{
+		if (true === $category->getEnabled()) {
+			$category->setEnabled(false);
+		} else {
+			$category->setEnabled(true);
+		}
+		
+		//check for parent and if it's enabled or not
+		// if disabled don't update.
+		$parents = $this->getParentCategories($category->getProductCategoryId());
+		
+		if ($parents->count() > 1) {
+			$parent = $parents->current();
+			
+			if ((false === $parent->getEnabled() && false === $category->getEnabled()) || 
+				(false === $parent->getEnabled() && true === $category->getEnabled())) {
+				throw new ShopException("Can't change enabled status on child while parent is disabled. First enable the parent category");
+			}
+		}
+		
+		$category->setDateModified();
+		
+		return $this->getMapper()->toggleEnabled($category);
+	}
 }

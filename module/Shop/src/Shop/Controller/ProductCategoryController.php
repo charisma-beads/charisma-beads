@@ -8,7 +8,7 @@ use Zend\View\Model\ViewModel;
 class ProductCategoryController extends AbstractController
 {
     /**
-     * @var \Shop\Service\ProductCategory
+     * @var \Shop\Service\Product\Category
      */
     protected $productCategoryService;
     
@@ -65,22 +65,11 @@ class ProductCategoryController extends AbstractController
     	// Get the ProductCategory with the specified id.  An exception is thrown
     	// if it cannot be found, in which case go to the list page.
     	try {
-    		/* @var $product \Shop\Model\ProductCategory */
     		$category = $this->getProductCategoryService()->getById($id);
+    		$result = $this->getProductCategoryService()->toggleEnabled($category);
     	} catch (\Exception $e) {
     		$this->setExceptionMessages($e);
-    		return $this->redirect()->toRoute('admin/shop/product', array(
-    			'action' => 'list'
-    		));
     	}
-    
-    	if (true === $category->getEnabled()) {
-    		$category->setEnabled(false);
-    	} else {
-    		$category->setEnabled(true);
-    	}
-    
-    	$result = $this->getProductCategoryService()->save($category);
     
     	return $this->redirect()->toRoute('admin/shop/category', array(
     		'action' => 'list'
@@ -226,7 +215,7 @@ class ProductCategoryController extends AbstractController
     }
     
     /**
-     * @return \Shop\Service\ProductCategory
+     * @return \Shop\Service\Product\Category
      */
     protected function getProductCategoryService()
     {

@@ -9,17 +9,12 @@
 	    <div class="tab-pane" id="admin-category">
 	    -->
 	    	<div class="row-fluid">
-		    	<form id="search-category" class="form-search" method="post">
-		    	    <input type="text" name="category" placeholder="Category:">
-		    	    <select name="limit" class="input-mini">
-		    	    	<option>25</option>
-		    	    	<option>50</option>
-		    	    	<option>75</option>
-		    	    	<option>100</option>
-		    	    </select>
-		    	    <button type="submit" class="btn btn-primary"><i class="icon-search icon-white"></i> Search</button>
-		    	    <button type="reset" class="btn">Reset</button>
-		    	</form>
+		    	<?=$this->partial('layout/search', array(
+		    		'name'			=> 'category',
+		    		'searchInputs'	=> array(
+		    			'category',
+		    		),
+		    	));?>
 	    	</div>
 	    	
 	    	<div id="table-category" class="row-fluid table-wrap">
