@@ -42,7 +42,7 @@ class ProductCategoryController extends AbstractController
          
         $viewModel = new ViewModel(array(
         	'categories' => $this->getProductCategoryService()->usePaginator(array(
-	    	    'limit' => 25,
+	    	    'limit' => $params['limit'],
 	    	    'page' => $params['page']
             ))->searchCategories($params)
         ));
@@ -93,7 +93,7 @@ class ProductCategoryController extends AbstractController
     	
     	if ($request->isPost()) {
     	
-    		$result = $this->getProductCategoryService()->add($request->getPost());
+    		$result = $this->getProductCategoryService()->addCategory($request->getPost());
     	
     		if ($result instanceof CategoryForm) {
     	
@@ -116,7 +116,7 @@ class ProductCategoryController extends AbstractController
     				);
     			}
     	
-    			// Redirect to list of articles
+    			// Redirect to list of categories
     			return $this->redirect()->toRoute('admin/shop/category');
     		}
     	}
@@ -173,7 +173,7 @@ class ProductCategoryController extends AbstractController
     				);
     			}
     	
-    			// Redirect to list of articles
+    			// Redirect to list of categories
     			return $this->redirect()->toRoute('admin/shop/category');
     		}
     	}
@@ -201,7 +201,7 @@ class ProductCategoryController extends AbstractController
     		if ($del == 'delete') {
     			try {
     				$id = (int) $request->getPost('productCategoryId');
-    				$result = $this->getProductService()->delete($id);
+    				$result = $this->getProductCategoryService()->delete($id);
     					
     				if ($result) {
     					$this->flashMessenger()->addSuccessMessage(
@@ -217,7 +217,7 @@ class ProductCategoryController extends AbstractController
     			}
     		}
     	
-    		// Redirect to list of users
+    		// Redirect to list of categories
     		return $this->redirect()->toRoute('admin/shop/category');
     	}
     	

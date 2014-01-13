@@ -3,6 +3,7 @@ namespace Shop\Hydrator\Product;
 
 use Application\Hydrator\AbstractHydrator;
 use Application\Hydrator\Strategy\DateTime as DateTimeStrategy;
+use Application\Hydrator\Strategy\Null as NullStrategy;
 use Application\Hydrator\Strategy\TrueFalse;
 
 class Category extends AbstractHydrator
@@ -18,6 +19,7 @@ class Category extends AbstractHydrator
 		$dateTime = new DateTimeStrategy();
 		$trueFalse = new TrueFalse();
 		
+		$this->addStrategy('productImageId', new NullStrategy());
 		$this->addStrategy('enabled', $trueFalse);
 		$this->addStrategy('discontinued', $trueFalse);
 		$this->addStrategy('dateCreated', $dateTime);
@@ -37,7 +39,7 @@ class Category extends AbstractHydrator
 	{
 		$data = array(
 			'productCategoryId'	=> $object->getProductCategoryId(),
-			'productImageId'	=> $object->getProductImageId(),
+			'productImageId'	=> $this->extractValue('productImageId', $object->getProductImageId()),
 			'ident'				=> $object->getIdent(),
 			'category'			=> $object->getCategory(),
 			'lft'				=> $object->getLft(),

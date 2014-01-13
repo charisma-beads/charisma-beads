@@ -22,12 +22,18 @@ if (isset($this->productCategoryId)) $routeArray['id'] = $this->productCategoryI
 					<?=$this->ztbFormElement($form->get('parent'));?>
 					<div class="control-group">
 	                    <div class="controls">
+	                    	<?php if ('edit' === $this->formAction):?>
+	                    	<label class="radio">
+                                <input type="radio" name="categoryInsertType" id="categoryInsertType1" value="noInsert" checked>
+                                no change.
+                            </label>
+                            <?php endif;?>
 	                   	    <label class="radio">
-	                            <input type="radio" name="categoryInsertType" id="categoryInsertType1" value="insert" checked>
+	                            <input type="radio" name="categoryInsertType" id="categoryInsertType1" value="insert">
 	                            insert after this category.
 	                        </label>
 	                        <label class="radio">
-	                            <input type="radio" name="categoryInsertType" id="categoryInsertType2" value="insertSub">
+	                            <input type="radio" name="categoryInsertType" id="categoryInsertType2" value="insertSub"<?=('add' === $this->formAction) ? ' checked' : ''?>>
 	                            insert as a new sub-category at the top.
 	                        </label>
 	                    </div>

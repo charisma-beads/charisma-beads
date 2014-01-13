@@ -45,6 +45,22 @@ body.loading .admin-loading {
 	cursor: pointer;
 }
 
+.bold {
+	font-weight: bold;
+}
+
+.indent1 {
+	text-indent: 1em;
+}
+
+.indent2 {
+	text-indent: 2em;
+}
+
+.indent3 {
+	text-indent: 3em;
+}
+
 #product-list p.product-status,
 #productCategory-list p.productCategory-status {
 	width: 24px;

@@ -2,6 +2,7 @@
 namespace Shop\Service\Product;
 
 use Application\Service\AbstractService;
+use Shop\ShopException;
 use Shop\Model\Product\Category as CategoryModel;
 
 class Category extends AbstractService
@@ -60,10 +61,48 @@ class Category extends AbstractService
 		return $this->getMapper()->getBreadCrumbs($categoryId);
 	}
 	
+	public function addCategory($post)
+	{
+		$page = $this->getMapper()->getModel();
+		$form  = $this->getForm($page, $post);
+		$position = (int) $post['parent'];
+		$insertType = (string) $post['categoryInsertType'];
+	
+		if (!$form->isValid()) {
+			return $form;
+		}
+	
+		$data = $this->getMapper()->extract($form->getData());
+	
+		return $this->getMapper()->insertRow($data, $position, $insertType);
+	}
+	
 	public function editCategory(CategoryModel $category, $post)
 	{
 		$category->setDateModified();
 		
-		return $this->edit($category, $post);
+		$form  = $this->getForm($category, $post);
+	
+		if (!$form->isValid()) {
+			return $form;
+		}
+		
+		$category = $this->getById($category->getProductCategoryId());
+	
+		if ($category) {
+			// if page postion has changed then we need to delete it
+			// and reinsert it in the new position else just update it.
+			if ('noInsert' !== $post['categoryInsertType']) {
+				// TODO find children and move them as well.
+				return $form;
+			} else {
+				$data = $this->getMapper()->extract($form->getData());
+				$result = $this->getMapper()->update($category->getProductCategoryId(), $data);
+			}
+		} else {
+			throw new ShopException('Product Category id does not exist');
+		}
+	
+		return $result;
 	}
 }

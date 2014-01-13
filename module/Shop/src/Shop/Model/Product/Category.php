@@ -250,4 +250,15 @@ class Category extends AbstractModel
 		$this->depth = $depth;
 		return $this;
 	}
+	
+	/**
+	 * returns true if this category has children
+	 * 
+	 * @return boolean
+	 */
+	public function hasChildren()
+	{
+		$children = (($this->getRgt() - $this->getLft()) - 1) / 2;
+		return (0 === $children) ? false : true;
+	}
 }

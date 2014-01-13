@@ -91,11 +91,14 @@ class Category extends Form
     	));
     	
     	$this->add(array(
-    		'name' => 'parent',
-    		'type' => 'select',
-    		'options' => array(
-    			'label' => 'Parent:',
-    			'required' => true,
+    		'name'			=> 'parent',
+    		'type'			=> 'select',
+    		'attributes'	=> array(
+    			'class' => 'input-xlarge',
+    		),
+    		'options'		=> array(
+    			'label'			=> 'Parent:',
+    			'required'		=> true,
     			'value_options' => $this->getParentList()
     		),
     	));
@@ -108,7 +111,15 @@ class Category extends Form
     	
     	/* @var $cat \Shop\Model\Product\Category */
     	foreach($cats as $cat) {
-    		$parentOptions[$cat->getProductCategoryId()] = $cat->getCategory();
+    		$indent = 'indent' . ($cat->getDepth() + 1);
+    		$parent = ($cat->hasChildren() || $cat->getDepth() == 0) ? 'bold ' : '';
+    		$parentOptions[] = array(
+    			'label'	=> $cat->getCategory(),
+    			'value'	=> $cat->getProductCategoryId(),
+    			'attributes'	=> array(
+    				'class'	=> $parent . $indent,
+    			)
+    		);
     	}
     	
     	return $parentOptions;
