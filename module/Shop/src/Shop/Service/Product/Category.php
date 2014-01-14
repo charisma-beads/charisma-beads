@@ -63,6 +63,10 @@ class Category extends AbstractService
 	
 	public function addCategory($post)
 	{
+		if (!$post['ident']) {
+			$post['ident'] = $post['category'];
+		}
+		
 		$page = $this->getMapper()->getModel();
 		$form  = $this->getForm($page, $post);
 		$position = (int) $post['parent'];
@@ -79,9 +83,13 @@ class Category extends AbstractService
 	
 	public function editCategory(CategoryModel $category, $post)
 	{
+		if (!$post['ident']) {
+			$post['ident'] = $post['category'];
+		}
+		
 		$category->setDateModified();
 		
-		$form  = $this->getForm($category, $post);
+		$form = $this->getForm($category, $post);
 	
 		if (!$form->isValid()) {
 			return $form;

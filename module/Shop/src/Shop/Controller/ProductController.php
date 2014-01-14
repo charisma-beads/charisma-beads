@@ -71,20 +71,14 @@ class ProductController extends AbstractController
 		try {
 		    /* @var $product \Shop\Model\Product */
 			$product = $this->getProductService()->getById($id);
+			
+			$result = $this->getProductService()->toggleEnabled($product);
 		} catch (\Exception $e) {
 		    $this->setExceptionMessages($e);
 			return $this->redirect()->toRoute('admin/shop/product', array(
 				'action' => 'list'
 			));
 		}
-		
-		if (true === $product->getEnabled()) {
-		    $product->setEnabled(false);
-		} else {
-		    $product->setEnabled(true);
-		}
-		
-		$result = $this->getProductService()->save($product);
 		
 		return $this->redirect()->toRoute('admin/shop/product', array(
 			'action' => 'list'
@@ -97,7 +91,7 @@ class ProductController extends AbstractController
 		
 		if ($request->isPost()) {
 		
-			$result = $this->getProductService()->add($request->getPost());
+			$result = $this->getProductService()->addProduct($request->getPost());
 		
 			if ($result instanceof ProductForm) {
 		

@@ -42,7 +42,7 @@ class ProductCategoryController extends AbstractController
          
         $viewModel = new ViewModel(array(
         	'categories' => $this->getProductCategoryService()->usePaginator(array(
-	    	    'limit' => $params['limit'],
+	    	    'limit' => $params['count'],
 	    	    'page' => $params['page']
             ))->searchCategories($params)
         ));

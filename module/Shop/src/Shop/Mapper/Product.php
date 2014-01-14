@@ -2,6 +2,7 @@
 namespace Shop\Mapper;
 
 use Application\Mapper\AbstractMapper;
+use Shop\Model\Product as ProductModel;
 use Zend\Db\Sql\Select;
 
 class Product extends AbstractMapper
@@ -157,6 +158,23 @@ class Product extends AbstractMapper
 	    }
 	    
 	    return $select;
+	}
+	
+	public function toggleEnabled(ProductModel $model)
+	{
+		$data = $this->extract($model);
+		$sql = $this->getSql();
+		$update = $sql->update($this->table);
+	
+		$update->set(array(
+			'enabled'		=> $data['enabled'],
+			'dateModified'	=> $data['dateModified']
+		))
+		->where(array($this->getPrimaryKey() => $model->getProductId()));
+	
+		$statement = $sql->prepareStatementForSqlObject($update);
+	
+		return $statement->execute();
 	}
 	
 	public function getFetchEnabled()

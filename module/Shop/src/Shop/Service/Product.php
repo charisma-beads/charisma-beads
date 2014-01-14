@@ -134,10 +134,38 @@ class Product extends AbstractService
 		}
 	}
 	
+	public function addProduct($post)
+	{
+		if (!$post['ident']) {
+			$post['ident'] = $post['name'] . ' ' . $post['shortDescription'];
+		}
+		
+		return $this->add($post);
+	}
+	
 	public function editProduct(ProductModel $product, $post)
 	{
+		if (!$post['ident']) {
+			$post['ident'] = $post['name'] . ' ' . $post['shortDescription'];
+		}
+		
 		$product->setDateModified();
+		
 		return $this->edit($product, $post);
+	}
+	
+	public function toggleEnabled(ProductModel $product)
+	{
+	
+		if (true === $product->getEnabled()) {
+			$product->setEnabled(false);
+		} else {
+			$product->setEnabled(true);
+		}
+	
+		$product->setDateModified();
+	
+		return $this->getMapper()->toggleEnabled($product);
 	}
 	
 	/**

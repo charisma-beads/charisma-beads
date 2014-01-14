@@ -3,8 +3,8 @@
 	<?php foreach($this->searchInputs as $input):?>
 	<input type="text" name="<?=$input;?>" placeholder="<?=ucwords($input)?>:">
 	<?php endforeach;?>
-	<select name="limit" class="input-mini">
-		<option>25</option>
+	<select name="count" class="input-mini">
+		<option selected="selected">25</option>
 		<option>50</option>
 		<option>75</option>
 		<option>100</option>

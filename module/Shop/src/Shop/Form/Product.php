@@ -151,13 +151,9 @@ class Product extends Form
         		'autofocus'	=> true,
         	),
         	'options'		=> array(
-        		'label'	=> 'Product Discount:'
+        		'label'			=> 'Product Discount:',
+        		'help-inline'	=> 'Do not include the % sign.'
         	)
-        ));
-        
-        $this->add(array(
-        	'name' => 'hits',
-        	'type' => 'hidden',
         ));
         
         $this->add(array(
