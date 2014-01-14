@@ -18,4 +18,17 @@ class Customer extends AbstractService
     {
         return $this->getMapper()->getDeliveryAddress($userId);
     }
+    
+    public function searchCustomers(array $post)
+    {
+    	$customer = (isset($post['customer'])) ? (string) $post['customer'] : '';
+    	$address = (isset($post['address'])) ? (string) $post['address'] : '';
+    	$sort = (isset($post['sort'])) ? (string) $post['sort'] : '';
+    	 
+    	//$this->getMapper()->useModelRelationships(true);
+    	 
+    	$customers = $this->getMapper()->searchCustomers($customer, $address, $sort);
+    	 
+    	return $customers;
+    }
 }

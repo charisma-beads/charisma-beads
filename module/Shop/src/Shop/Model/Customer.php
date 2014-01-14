@@ -203,5 +203,14 @@ class Customer extends AbstractModel
 		$this->dateModified = $dateModified;
 		return $this;
 	}
-
+	
+	public function getFullName()
+	{
+		return $this->getFirstname() . ' ' . $this->getLastname();
+	}
+	
+	public function getLastNameFirst()
+	{
+		return $this->getLastname() . ', ' . $this->getFirstname();
+	}
 }

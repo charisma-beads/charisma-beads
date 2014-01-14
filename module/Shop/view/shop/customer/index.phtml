@@ -1,1 +1,28 @@
-<h2>Not yet implemented</h2>
+<?php $this->headScript()->appendFile($this->basePath() . '/js/admin/customer.js'); ?>
+<div class="tab-wrap">
+<!-- 
+	<ul id="categoryTabs" class="nav nav-tabs">
+	    <li><a href="#admin-user">Categories</a></li>
+	</ul>
+	
+	<div id="categoryTabContent" class="tab-content">
+	    <div class="tab-pane" id="admin-category">
+	    -->
+	    	<div class="row-fluid">
+		    	<?=$this->partial('layout/search', array(
+		    		'name'			=> 'customer',
+		    		'searchInputs'	=> array(
+		    			'customer', 'address'
+		    		),
+		    	));?>
+	    	</div>
+	    	
+	    	<div id="table-customer" class="row-fluid table-wrap">
+		    	<?=$this->partial('shop/customer/list', array(
+		    	    'customers' => $this->customers
+		    	)); ?>
+	    	</div>
+	    <!-- </div>
+	</div> -->
+</div>
+
