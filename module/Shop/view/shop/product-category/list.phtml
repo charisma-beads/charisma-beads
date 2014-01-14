@@ -19,13 +19,17 @@
 	
 	<tbody>
 		<?php foreach($this->categories as $row): ?>
+		<?php 
+			$indent = 'indent' . ($row->getDepth() + 1);
+    		$parent = ($row->hasChildren() || $row->getDepth() == 0) ? 'bold ' : '';
+		?>
 		<tr>
 		    <td><?=$this->enabled($row, array(
 		    	'table' => 'productCategory',
 		        'route' => 'admin/shop/category/edit',
 		    )); ?></td>
 			<td><?=$this->escapeHtml($row->getProductCategoryId()); ?></td>
-			<td><?=$this->escapeHtml($row->getCategory()); ?></td>
+			<td class="<?=$parent . $indent;?>"><?=$this->escapeHtml($row->getCategory()); ?></td>
 			<td><?=$this->escapeHtml($row->getLft()); ?></td>
 			<td><?=$this->escapeHtml($row->getRgt()); ?></td>
 			<td><?=$this->escapeHtml($this->formatDate($row->getDateCreated())); ?></td>

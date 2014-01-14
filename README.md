@@ -7,7 +7,7 @@ Features To Add
 * ~~Admin Module~~
 * Basic Shop Module to include:
 	* ~~Admin product list and edit~~
-	* Admin category list and edit
+	* ~~Admin category list and edit~~
 	* Admin image list and edit
 	* Admin customer list and edit
 	* Admin order list and edit

@@ -90,8 +90,10 @@ class Category extends AbstractService
 		$category = $this->getById($category->getProductCategoryId());
 	
 		if ($category) {
-			// if page postion has changed then we need to delete it
+			// if category postion has changed then we need to delete it
 			// and reinsert it in the new position else just update it.
+			// no this should update, no reinseting and deleting thank you.
+			// move this to the mapper class.
 			if ('noInsert' !== $post['categoryInsertType']) {
 				// TODO find children and move them as well.
 				return $form;
@@ -107,24 +109,22 @@ class Category extends AbstractService
 	}
 	
 	public function toggleEnabled(CategoryModel $category)
-	{
+	{	
+		//check for parent and if it's enabled or not, if disabled don't update.
+		$parents = $this->getParentCategories($category->getProductCategoryId())
+						->toArray();
+		
+		array_pop($parents);
+		$parent = array_slice($parents, -1, 1);
+		
+		if (count($parent) && !$parent[0]['enabled']) {
+			throw new ShopException("Can't change enabled status on child while parent is disabled. First enable the parent category");
+		}
+
 		if (true === $category->getEnabled()) {
 			$category->setEnabled(false);
 		} else {
 			$category->setEnabled(true);
-		}
-		
-		//check for parent and if it's enabled or not
-		// if disabled don't update.
-		$parents = $this->getParentCategories($category->getProductCategoryId());
-		
-		if ($parents->count() > 1) {
-			$parent = $parents->current();
-			
-			if ((false === $parent->getEnabled() && false === $category->getEnabled()) || 
-				(false === $parent->getEnabled() && true === $category->getEnabled())) {
-				throw new ShopException("Can't change enabled status on child while parent is disabled. First enable the parent category");
-			}
 		}
 		
 		$category->setDateModified();
