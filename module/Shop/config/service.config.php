@@ -2,12 +2,14 @@
 
 return array(
     'shared'        => array(
+    	'Shop\Form\Country'						=> false,
         'Shop\Form\Customer\Address'            => false,
     	'Shop\Form\Product'						=> false,
     	'Shop\Form\Product\Category'			=> false,
     ),
 	'invokables'    => array(
 		
+		'Shop\InputFilter\Country'				=> 'Shop\InputFilter\Country',
 	    'Shop\InputFilter\PostUnit'	            => 'Shop\InputFilter\Post\Unit',
 	    'Shop\InputFilter\Product' 			    => 'Shop\InputFilter\Product',
 		'Shop\InputFilter\ProductCategory'	    => 'Shop\InputFilter\Product\Category',
@@ -62,7 +64,8 @@ return array(
 	    'Shop\Service\TaxRate'                  => 'Shop\Service\Tax\Rate',
 	),
     'factories' => array(
-        'Shop\Form\Customer\Address'            => 'Shop\Service\Factory\AddressFormFactory',
+    	'Shop\Form\Country'						=> 'Shop\Service\Factory\CountryFormFactory',
+        'Shop\Form\CustomerAddress'				=> 'Shop\Service\Factory\AddressFormFactory',
     	'Shop\Form\Product'						=> 'Shop\Service\Factory\ProductFormFactory',
     	'Shop\Form\ProductCategory'				=> 'Shop\Service\Factory\ProductCategoryFormFactory',
         

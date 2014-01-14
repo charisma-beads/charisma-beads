@@ -12,6 +12,32 @@ class Country extends AbstractMapper
     protected $model = 'Shop\Model\Country';
     protected $hydrator = 'Shop\Hydrator\Country';
     
+    public function searchCountries($country, $sort)
+    {
+    	$select = $this->getSql()->select();
+    	$select->from($this->table);
+    	
+    	if (!$country == '') {
+    		if (substr($country, 0, 1) == '=') {
+    			$id = (int) substr($country, 1);
+    			$select->where->equalTo($this->primary, $id);
+    		} else {
+    			$searchTerms = explode(' ', $country);
+    			$where = $select->where->nest();
+    	
+    			foreach ($searchTerms as $value) {
+    				$where->like('country', '%'.$value.'%');
+    			}
+    	
+    			$where->unnest();
+    		}
+    	}
+    	
+    	$select = $this->setSortOrder($select, $sort);
+    	
+    	return $this->fetchResult($select);
+    }
+    
     public function getCountryPostalRates($id)
     {
         $select = $this->getSql()->select();

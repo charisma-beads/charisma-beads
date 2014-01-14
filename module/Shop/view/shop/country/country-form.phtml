@@ -1,0 +1,27 @@
+<?php
+$form = $this->form;
+$routeArray = array('action' => $this->formAction);
+if (isset($this->countryId)) $routeArray['id'] = $this->countryId;
+?>
+<div>
+	<form class="form form-horizontal" method="post" action="<?=$this->url('admin/shop/country/edit', $routeArray) ?>">
+		<fieldset>
+			<legend><?=ucwords($this->formAction); ?> Country Form:</legend>
+			<?=$this->ztbFormElement($form->get('country'));?>
+			<?=$this->ztbFormElement($form->get('postZoneId'));?>
+			<input type="hidden" name="action" value="<?=$this->formAction;?>">
+			
+			<div class="control-group">
+            <div class="controls">
+                <button type="submit" class="btn btn-primary" data-loading-text="Please wait...">
+                	Submit
+                </button>
+                <button type="button" class="btn btn-warning"  data-loading-text="Please wait..." onClick="window.location = '<?=$this->url('admin/shop/country') ?>';">
+                	Cancel
+                </button>
+            </div>
+        </div>
+		</fieldset>
+	</form>
+</div>
+

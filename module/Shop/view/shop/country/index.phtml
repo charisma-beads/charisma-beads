@@ -1,1 +1,27 @@
-<h2>Not yet implemented</h2>
+<?php $this->headScript()->appendFile($this->basePath() . '/js/admin/country.js'); ?>
+<div class="tab-wrap">
+<!-- 
+	<ul id="countryTabs" class="nav nav-tabs">
+	    <li><a href="#admin-country">Countries</a></li>
+	</ul>
+	
+	<div id="countryTabContent" class="tab-content">
+	    <div class="tab-pane" id="admin-country">
+	    -->
+	    	<div class="row-fluid">
+		    	<?=$this->partial('layout/search', array(
+		    		'name'			=> 'country',
+		    		'searchInputs'	=> array(
+		    			'country',
+		    		),
+		    	));?>
+	    	</div>
+	    	
+	    	<div id="table-country" class="row-fluid table-wrap">
+		    	<?=$this->partial('shop/country/list', array(
+		    	    'countries' => $this->countries
+		    	)); ?>
+	    	</div>
+	    <!-- </div>
+	</div> -->
+</div>

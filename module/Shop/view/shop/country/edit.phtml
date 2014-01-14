@@ -1,1 +1,8 @@
-<h2>Not yet implemented</h2>
+<?php $this->headTitle('Edit Country') ?>
+<?=$this->ztbFlashMessenger()->render(); ?>
+
+<?=$this->partial('shop/country/country-form', array(
+	'form' => $this->form,
+	'formAction' => 'edit',
+	'countryId' => $this->country->getCountryId()
+)); ?>

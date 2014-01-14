@@ -803,66 +803,6 @@ return array(
 				    	'route' => 'admin/shop/post',
 				    	'resource' => 'menu:admin',
 				    	'pages' => array(
-				    	    'costs' => array(
-				    	        'label' => 'Postage Costs',
-				    	        'action' => 'index',
-				    	        'route' => 'admin/shop/post/cost',
-				    	        'resource' => 'menu:admin',
-				    	        'pages' => array(
-    				    	        'edit' => array(
-    				    	        	'label' => 'List All Postage Costs',
-    				    	        	'action' => 'index',
-    				    	        	'route' => 'admin/shop/post/cost',
-    				    	        	'resource' => 'menu:admin'
-    				    	        ),
-    				    	        'add' => array(
-    				    	        	'label' => 'Add New Postage Cost',
-    				    	        	'action' => 'add',
-    				    	        	'route' => 'admin/shop/post/cost/edit',
-    				    	        	'resource' => 'menu:admin'
-    				    	        ),
-			    	            ),
-                            ),
-				    	    'levels' => array(
-				    	    	'label' => 'Postage Levels',
-				    	    	'action' => 'index',
-				    	    	'route' => 'admin/shop/post/level',
-				    	    	'resource' => 'menu:admin',
-				    	    	'pages' => array(
-				    	    		'edit' => array(
-				    	    			'label' => 'List All Postage Levels',
-				    	    			'action' => 'index',
-				    	    			'route' => 'admin/shop/post/level',
-				    	    			'resource' => 'menu:admin'
-				    	    		),
-				    	    		'add' => array(
-				    	    			'label' => 'Add New Postage Level',
-				    	    			'action' => 'add',
-				    	    			'route' => 'admin/shop/post/level/edit',
-				    	    			'resource' => 'menu:admin'
-				    	    		),
-				    	    	),
-				    	    ),
-				    	    'countries' => array(
-				    	    	'label' => 'Countries',
-				    	    	'action' => 'index',
-				    	    	'route' => 'admin/shop/country',
-				    	    	'resource' => 'menu:admin',
-				    	    	'pages' => array(
-				    	    		'edit' => array(
-				    	    			'label' => 'List All Countries',
-				    	    			'action' => 'index',
-				    	    			'route' => 'admin/shop/country',
-				    	    			'resource' => 'menu:admin'
-				    	    		),
-				    	    		'add' => array(
-				    	    			'label' => 'Add New Country',
-				    	    			'action' => 'add',
-				    	    			'route' => 'admin/shop/country/edit',
-				    	    			'resource' => 'menu:admin'
-				    	    		),
-				    	    	),
-				    	    ),
 				    	    'zones' => array(
 				    	    	'label' => 'Zones',
 				    	    	'action' => 'index',
@@ -883,6 +823,66 @@ return array(
 				    	    		),
 				    	    	),
 				    	    ),
+				    		'countries' => array(
+			    				'label' => 'Countries',
+			    				'action' => 'index',
+			    				'route' => 'admin/shop/country',
+			    				'resource' => 'menu:admin',
+			    				'pages' => array(
+			    					'edit' => array(
+			    						'label' => 'List All Countries',
+			    						'action' => 'index',
+			    						'route' => 'admin/shop/country',
+			    						'resource' => 'menu:admin'
+			    					),
+			    					'add' => array(
+			    						'label' => 'Add New Country',
+			    						'action' => 'add',
+			    						'route' => 'admin/shop/country/edit',
+			    						'resource' => 'menu:admin'
+			    					),
+			    				),
+			    			),
+			    			'levels' => array(
+			    				'label' => 'Postage Levels',
+			    				'action' => 'index',
+			    				'route' => 'admin/shop/post/level',
+			    				'resource' => 'menu:admin',
+			    				'pages' => array(
+			    					'edit' => array(
+			    						'label' => 'List All Postage Levels',
+			    						'action' => 'index',
+			    						'route' => 'admin/shop/post/level',
+			    						'resource' => 'menu:admin'
+			    					),
+			    					'add' => array(
+			    						'label' => 'Add New Postage Level',
+			    						'action' => 'add',
+			    						'route' => 'admin/shop/post/level/edit',
+			    						'resource' => 'menu:admin'
+			    					),
+			    				),
+			    			),
+			    			'costs' => array(
+			    				'label' => 'Postage Costs',
+			    				'action' => 'index',
+			    				'route' => 'admin/shop/post/cost',
+			    				'resource' => 'menu:admin',
+			    				'pages' => array(
+			    					'edit' => array(
+			    						'label' => 'List All Postage Costs',
+			    						'action' => 'index',
+			    						'route' => 'admin/shop/post/cost',
+			    						'resource' => 'menu:admin'
+			    					),
+			    					'add' => array(
+			    						'label' => 'Add New Postage Cost',
+			    						'action' => 'add',
+			    						'route' => 'admin/shop/post/cost/edit',
+			    						'resource' => 'menu:admin'
+			    					),
+			    				),
+			    			),
 				    	),
 				    ),
 				    'tax' => array(
