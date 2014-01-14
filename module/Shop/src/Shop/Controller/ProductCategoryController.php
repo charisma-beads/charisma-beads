@@ -61,9 +61,7 @@ class ProductCategoryController extends AbstractController
     			'action' => 'list'
     		));
     	}
-    
-    	// Get the ProductCategory with the specified id.  An exception is thrown
-    	// if it cannot be found, in which case go to the list page.
+  		
     	try {
     		$category = $this->getProductCategoryService()->getById($id);
     		$result = $this->getProductCategoryService()->toggleEnabled($category);
@@ -104,8 +102,7 @@ class ProductCategoryController extends AbstractController
     					'Category could not be saved due to a database error.'
     				);
     			}
-    	
-    			// Redirect to list of categories
+    			
     			return $this->redirect()->toRoute('admin/shop/category');
     		}
     	}
@@ -124,8 +121,6 @@ class ProductCategoryController extends AbstractController
     		));
     	}
     	
-    	// Get the Product Category with the specified id.  An exception is thrown
-    	// if it cannot be found, in which case go to the list page.
     	try {
     		$category = $this->getProductCategoryService()->getById($id);
     	} catch (\Exception $e) {
@@ -161,8 +156,7 @@ class ProductCategoryController extends AbstractController
     					'Category could not be saved due to a database error.'
     				);
     			}
-    	
-    			// Redirect to list of categories
+    			
     			return $this->redirect()->toRoute('admin/shop/category');
     		}
     	}
@@ -205,9 +199,6 @@ class ProductCategoryController extends AbstractController
     				$this->setExceptionMessages($e);
     			}
     		}
-    	
-    		// Redirect to list of categories
-    		return $this->redirect()->toRoute('admin/shop/category');
     	}
     	
     	return $this->redirect()->toRoute('admin/shop/category');

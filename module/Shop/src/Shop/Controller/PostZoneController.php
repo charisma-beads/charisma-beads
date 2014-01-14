@@ -76,8 +76,7 @@ class PostZoneController extends AbstractController
 						'Post Zone could not be saved due to a database error.'
 					);
 				}
-					
-				// Redirect to list of categories
+				
 				return $this->redirect()->toRoute('admin/shop/post/zone');
 			}
 		}
@@ -95,9 +94,7 @@ class PostZoneController extends AbstractController
 				'action' => 'add'
 			));
 		}
-			
-		// Get the Product Category with the specified id.  An exception is thrown
-		// if it cannot be found, in which case go to the list page.
+		
 		try {
 			$zone = $this->getPostZoneService()->getById($id);
 		} catch (\Exception $e) {
@@ -133,8 +130,7 @@ class PostZoneController extends AbstractController
 						'Post Zone could not be saved due to a database error.'
 					);
 				}
-					
-				// Redirect to list of categories
+				
 				return $this->redirect()->toRoute('admin/shop/post/zone');
 			}
 		}
@@ -177,9 +173,6 @@ class PostZoneController extends AbstractController
 					$this->setExceptionMessages($e);
 				}
 			}
-	
-			// Redirect to list of categories
-			return $this->redirect()->toRoute('admin/shop/post/zone');
 		}
 			
 		return $this->redirect()->toRoute('admin/shop/post/zone');

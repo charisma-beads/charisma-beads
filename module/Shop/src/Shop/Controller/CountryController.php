@@ -77,7 +77,6 @@ class CountryController extends AbstractController
 					);
 				}
 				 
-				// Redirect to list of categories
 				return $this->redirect()->toRoute('admin/shop/country');
 			}
 		}
@@ -95,15 +94,13 @@ class CountryController extends AbstractController
 				'action' => 'add'
 			));
 		}
-		 
-		// Get the Product Category with the specified id.  An exception is thrown
-		// if it cannot be found, in which case go to the list page.
+		
 		try {
 			$country = $this->getCountryService()->getById($id);
 		} catch (\Exception $e) {
 			$this->setExceptionMessages($e);
 			return $this->redirect()->toRoute('admin/shop/country', array(
-					'action' => 'list'
+				'action' => 'list'
 			));
 		}
 		 
@@ -121,7 +118,7 @@ class CountryController extends AbstractController
 				 
 				return new ViewModel(array(
 					'form'		=> $result,
-					'category'	=> $country,
+					'country'	=> $country,
 				));
 			} else {
 				if ($result) {
@@ -134,7 +131,6 @@ class CountryController extends AbstractController
 					);
 				}
 				 
-				// Redirect to list of categories
 				return $this->redirect()->toRoute('admin/shop/country');
 			}
 		}
@@ -177,9 +173,6 @@ class CountryController extends AbstractController
 					$this->setExceptionMessages($e);
 				}
 			}
-			 
-			// Redirect to list of categories
-			return $this->redirect()->toRoute('admin/shop/country');
 		}
 		 
 		return $this->redirect()->toRoute('admin/shop/country');

@@ -65,9 +65,7 @@ class ProductController extends AbstractController
 				'action' => 'list'
 			));
 		}
-
-		// Get the Product with the specified id.  An exception is thrown
-		// if it cannot be found, in which case go to the list page.
+		
 		try {
 		    /* @var $product \Shop\Model\Product */
 			$product = $this->getProductService()->getById($id);
@@ -113,8 +111,7 @@ class ProductController extends AbstractController
 						'Product could not be saved due to a database error.'
 					);
 				}
-		
-				// Redirect to list of articles
+				
 				return $this->redirect()->toRoute('admin/shop/product');
 			}
 		}
@@ -133,8 +130,6 @@ class ProductController extends AbstractController
 			));
 		}
 		
-		// Get the Product with the specified id.  An exception is thrown
-		// if it cannot be found, in which case go to the list page.
 		try {
 			$product = $this->getProductService()->getById($id);
 		} catch (\Exception $e) {
@@ -170,8 +165,7 @@ class ProductController extends AbstractController
 						'Product could not be saved due to a database error.'
 					);
 				}
-		
-				// Redirect to list of articles
+				
 				return $this->redirect()->toRoute('admin/shop/product');
 			}
 		}
@@ -214,9 +208,6 @@ class ProductController extends AbstractController
 					$this->setExceptionMessages($e);
 				}
 			}
-		
-			// Redirect to list of users
-			return $this->redirect()->toRoute('admin/shop/product');
 		}
 		
 		return $this->redirect()->toRoute('admin/shop/product');
