@@ -1,1 +1,7 @@
-<h2>Not yet implemented</h2>
+<?php $this->headTitle('Add Post Zone') ?>
+<?=$this->ztbFlashMessenger()->render(); ?>
+
+<?=$this->partial('shop/post-zone/zone-form', array(
+	'form' => $this->form,
+	'formAction' => 'add'
+)); ?>

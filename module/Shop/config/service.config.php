@@ -4,6 +4,7 @@ return array(
     'shared'        => array(
     	'Shop\Form\Country'						=> false,
         'Shop\Form\Customer\Address'            => false,
+    	'Shop\Form\PostZone'					=> false,
     	'Shop\Form\Product'						=> false,
     	'Shop\Form\Product\Category'			=> false,
     ),
@@ -11,6 +12,7 @@ return array(
 		
 		'Shop\InputFilter\Country'				=> 'Shop\InputFilter\Country',
 	    'Shop\InputFilter\PostUnit'	            => 'Shop\InputFilter\Post\Unit',
+		'Shop\InputFilter\PostZone'				=> 'Shop\InputFilter\Post\Zone',
 	    'Shop\InputFilter\Product' 			    => 'Shop\InputFilter\Product',
 		'Shop\InputFilter\ProductCategory'	    => 'Shop\InputFilter\Product\Category',
 		'Shop\InputFilter\ProductImage'		    => 'Shop\InputFilter\Product\Image',
@@ -66,6 +68,7 @@ return array(
     'factories' => array(
     	'Shop\Form\Country'						=> 'Shop\Service\Factory\CountryFormFactory',
         'Shop\Form\CustomerAddress'				=> 'Shop\Service\Factory\AddressFormFactory',
+    	'Shop\Form\PostZone'					=> 'Shop\Service\Factory\PostZoneFormFactory',
     	'Shop\Form\Product'						=> 'Shop\Service\Factory\ProductFormFactory',
     	'Shop\Form\ProductCategory'				=> 'Shop\Service\Factory\ProductCategoryFormFactory',
         

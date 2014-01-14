@@ -1,0 +1,27 @@
+<?php
+$form = $this->form;
+$routeArray = array('action' => $this->formAction);
+if (isset($this->postZoneId)) $routeArray['id'] = $this->postZoneId;
+?>
+<div>
+	<form class="form form-horizontal" method="post" action="<?=$this->url('admin/shop/post/zone/edit', $routeArray) ?>">
+		<fieldset>
+			<legend><?=ucwords($this->formAction); ?> Post Zone Form:</legend>
+			<?=$this->ztbFormElement($form->get('zone'));?>
+			<?=$this->ztbFormElement($form->get('taxCodeId'));?>
+			<input type="hidden" name="action" value="<?=$this->formAction;?>">
+			
+			<div class="control-group">
+            <div class="controls">
+                <button type="submit" class="btn btn-primary" data-loading-text="Please wait...">
+                	Submit
+                </button>
+                <button type="button" class="btn btn-warning"  data-loading-text="Please wait..." onClick="window.location = '<?=$this->url('admin/shop/post/zone') ?>';">
+                	Cancel
+                </button>
+            </div>
+        </div>
+		</fieldset>
+	</form>
+</div>
+

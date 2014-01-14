@@ -1,1 +1,28 @@
-<h2>Not yet implemented</h2>
+<?php $this->headScript()->appendFile($this->basePath() . '/js/admin/post-zone.js'); ?>
+<div class="tab-wrap">
+<!-- 
+	<ul id="postZoneTabs" class="nav nav-tabs">
+	    <li><a href="#admin-postZone">Post Zones</a></li>
+	</ul>
+	
+	<div id="postZoneTabContent" class="tab-content">
+	    <div class="tab-pane" id="admin-postZone">
+	    -->
+	    	<div class="row-fluid">
+		    	<?=$this->partial('layout/search', array(
+		    		'name'			=> 'zone',
+		    		'searchInputs'	=> array(
+		    			'zone',
+		    		),
+		    	));?>
+	    	</div>
+	    	
+	    	<div id="table-postZone" class="row-fluid table-wrap">
+		    	<?=$this->partial('shop/post-zone/list', array(
+		    	    'zones' => $this->zones
+		    	)); ?>
+	    	</div>
+	    <!-- </div>
+	</div> -->
+</div>
+

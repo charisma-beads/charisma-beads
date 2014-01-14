@@ -1,5 +1,5 @@
 <?php
-namespace Shop\Hydrator\Zone;
+namespace Shop\Hydrator\Post;
 
 use Application\Hydrator\AbstractHydrator;
 

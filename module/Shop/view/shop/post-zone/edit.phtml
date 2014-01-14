@@ -1,1 +1,8 @@
-<h2>Not yet implemented</h2>
+<?php $this->headTitle('Edit Post Zone') ?>
+<?=$this->ztbFlashMessenger()->render(); ?>
+
+<?=$this->partial('shop/post-zone/zone-form', array(
+	'form' => $this->form,
+	'formAction' => 'edit',
+	'postZoneId' => $this->zone->getPostZoneId()
+)); ?>
