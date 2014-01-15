@@ -1,12 +1,12 @@
 <?php
 
-namespace Shop\Service\Factory;
+namespace Shop\Service\Factory\Form;
 
-use Shop\Form\Product;
+use Shop\Form\Product as ProductForm;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class ProductFormFactory implements FactoryInterface
+class Product implements FactoryInterface
 {
 	public function createService(ServiceLocatorInterface $serviceLocator)
 	{
@@ -16,7 +16,7 @@ class ProductFormFactory implements FactoryInterface
 		$sizeMapper			= $serviceLocator->get('Shop\Mapper\ProductSize');
 		$taxCodeMapper		= $serviceLocator->get('Shop\Mapper\TaxCode');
 		
-		$form = new Product();
+		$form = new ProductForm();
 		
 		$form->setCategoryMapper($categoryMapper)
 			->setGroupPriceMapper($groupPriceMapper)

@@ -1,11 +1,11 @@
 <?php
 namespace Shop\Service\Factory;
 
-use Shop\Service\Shipping;
+use Shop\Service\Shipping as ShippingService;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class ShippingFactory implements FactoryInterface
+class Shipping implements FactoryInterface
 {
 
 	public function createService(ServiceLocatorInterface $serviceLocator)
@@ -13,7 +13,7 @@ class ShippingFactory implements FactoryInterface
 	    $taxService = $serviceLocator->get('Shop\Service\Tax');
 	    $countryService = $serviceLocator->get('Shop\Service\Country');
 	    
-	    $shippingService = new Shipping();
+	    $shippingService = new ShippingService();
 	    $shippingService->setCountryService($countryService);
 	    $shippingService->setTaxService($taxService);
 	    

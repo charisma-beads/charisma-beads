@@ -1,12 +1,12 @@
 <?php
 
-namespace Shop\Service\Factory;
+namespace Shop\Service\Factory\Form;
 
-use Shop\Form\Product\Category;
+use Shop\Form\Product\Category as CategoryForm;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class ProductCategoryFormFactory implements FactoryInterface
+class ProductCategory implements FactoryInterface
 {
 	public function createService(ServiceLocatorInterface $serviceLocator)
 	{
@@ -19,7 +19,7 @@ class ProductCategoryFormFactory implements FactoryInterface
 		 
 		$categoryId			= (isset($params['id'])) ? $params['id'] : 0;
 		
-		$form = new Category();
+		$form = new CategoryForm();
 		
 		$form->setCategoryService($categoryService)
 			->setImageMapper($imageMapper)

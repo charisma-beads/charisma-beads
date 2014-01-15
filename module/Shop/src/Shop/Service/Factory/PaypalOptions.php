@@ -1,11 +1,11 @@
 <?php
 namespace Service\Factory;
 
-use Shop\Options\PaypalOptions;
+use Shop\Options\PaypalOptions as Options;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class PaypalOptionsFatcory implements FactoryInterface
+class PaypalOptions implements FactoryInterface
 {
 
 	public function createService(ServiceLocatorInterface $serviceLocator)
@@ -13,6 +13,6 @@ class PaypalOptionsFatcory implements FactoryInterface
 	    $config = $serviceLocator->get('config');
 	    $options = isset($config['shop']['paypal_options']) ? $config['shop']['paypal_options'] : array();
 	     
-	    return new PaypalOptions($options);
+	    return new Options($options);
 	}
 }

@@ -1,11 +1,11 @@
 <?php
 namespace Shop\Service\Factory;
 
-use Shop\Options\CheckoutOptions;
+use Shop\Options\CheckoutOptions as Options;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class CheckoutOptionsFactory implements FactoryInterface
+class CheckoutOptions implements FactoryInterface
 {
 
 	public function createService(ServiceLocatorInterface $serviceLocator)
@@ -13,6 +13,6 @@ class CheckoutOptionsFactory implements FactoryInterface
 	    $config = $serviceLocator->get('config');
 	    $options = isset($config['shop']['checkout_options']) ? $config['shop']['checkout_options'] : array();
 	     
-	    return new CheckoutOptions($options);
+	    return new Options($options);
 	}
 }

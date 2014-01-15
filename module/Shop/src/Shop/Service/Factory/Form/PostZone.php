@@ -1,18 +1,18 @@
 <?php
 
-namespace Shop\Service\Factory;
+namespace Shop\Service\Factory\Form;
 
-use Shop\Form\Post\Zone;
+use Shop\Form\Post\Zone as ZoneForm;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class PostZoneFormFactory implements FactoryInterface
+class PostZone implements FactoryInterface
 {
 	public function createService(ServiceLocatorInterface $serviceLocator)
 	{
 		$taxCodeService	= $serviceLocator->get('Shop\Service\TaxCode');
 		
-		$form = new Zone();
+		$form = new ZoneForm();
 		
 		$form->setTaxCodeService($taxCodeService);
 		$form->init();

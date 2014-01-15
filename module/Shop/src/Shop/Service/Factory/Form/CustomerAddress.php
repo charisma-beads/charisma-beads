@@ -1,17 +1,17 @@
 <?php
-namespace Shop\Service\Factory;
+namespace Shop\Service\Factory\Form;
 
-use Shop\Form\Customer\Address;
+use Shop\Form\Customer\Address as AddressForm;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class AddressFormFactory implements FactoryInterface
+class CustomerAddress implements FactoryInterface
 {
 	public function createService(ServiceLocatorInterface $serviceLocator)
 	{
 	    $mapper = $serviceLocator->get('Shop\Mapper\Country');
 	    
-	    $form = new Address();
+	    $form = new AddressForm();
 	    $form->setCountryMapper($mapper);
 	    $form->init();
 	    

@@ -1,11 +1,11 @@
 <?php
 namespace Shop\Service\Factory;
 
-use Shop\Service\Cart;
+use Shop\Service\Cart as CartService;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class CartFactory implements FactoryInterface
+class Cart implements FactoryInterface
 {
 
 	public function createService(ServiceLocatorInterface $serviceLocator)
@@ -15,7 +15,7 @@ class CartFactory implements FactoryInterface
 	    
 	    $taxService->setTaxState($shopOptions->getVatState());
 	    
-        $cartService = new Cart();
+        $cartService = new CartService();
         
         $cartService->setTaxService($taxService);
         $cartService->loadSession();
