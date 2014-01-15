@@ -1,1 +1,28 @@
-<h2>Not yet implemented</h2>
+<?php $this->headScript()->appendFile($this->basePath() . '/js/admin/post-cost.js'); ?>
+<div class="tab-wrap">
+<!-- 
+	<ul id="postCostTabs" class="nav nav-tabs">
+	    <li><a href="#admin-postCost">Post Costs</a></li>
+	</ul>
+	
+	<div id="postCostTabContent" class="tab-content">
+	    <div class="tab-pane" id="admin-postCost">
+	    -->
+	    	<div class="row-fluid">
+		    	<?=$this->partial('layout/search', array(
+		    		'name'			=> 'cost',
+		    		'searchInputs'	=> array(
+		    			'cost',
+		    		),
+		    	));?>
+	    	</div>
+	    	
+	    	<div id="table-postCost" class="row-fluid table-wrap">
+		    	<?=$this->partial('shop/post-cost/list', array(
+		    	    'postCosts' => $this->postCosts
+		    	)); ?>
+	    	</div>
+	    <!-- </div>
+	</div> -->
+</div>
+

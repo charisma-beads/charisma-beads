@@ -21,7 +21,7 @@ class PostLevelController extends AbstractController
 		);
 			
 		return new ViewModel(array(
-			'postLevels' => $this->getPosLevelService()->usePaginator(array(
+			'postLevels' => $this->getPostLevelService()->usePaginator(array(
 				'limit' => 25,
 				'page' => $page
 			))->searchLevels($params)
@@ -37,7 +37,7 @@ class PostLevelController extends AbstractController
 		$params = $this->params()->fromPost();
 			
 		$viewModel = new ViewModel(array(
-			'postLevels' => $this->getPosLevelService()->usePaginator(array(
+			'postLevels' => $this->getPostLevelService()->usePaginator(array(
 				'limit' => $params['count'],
 				'page' => $params['page']
 			))->searchLevels($params)
@@ -54,7 +54,7 @@ class PostLevelController extends AbstractController
 			
 		if ($request->isPost()) {
 	
-			$result = $this->getPosLevelService()->add($request->getPost());
+			$result = $this->getPostLevelService()->add($request->getPost());
 	
 			if ($result instanceof PostLevelForm) {
 					
@@ -82,7 +82,7 @@ class PostLevelController extends AbstractController
 		}
 			
 		return new ViewModel(array(
-			'form' => $this->getPosLevelService()->getForm(),
+			'form' => $this->getPostLevelService()->getForm(),
 		));
 	}
 	
@@ -96,7 +96,7 @@ class PostLevelController extends AbstractController
 		}
 	
 		try {
-			$postLevel = $this->getPosLevelService()->getById($id);
+			$postLevel = $this->getPostLevelService()->getById($id);
 		} catch (\Exception $e) {
 			$this->setExceptionMessages($e);
 			return $this->redirect()->toRoute('admin/shop/post/level', array(
@@ -108,7 +108,7 @@ class PostLevelController extends AbstractController
 			
 		if ($request->isPost()) {
 	
-			$result = $this->getPosLevelService()->edit($postLevel, $request->getPost());
+			$result = $this->getPostLevelService()->edit($postLevel, $request->getPost());
 	
 			if ($result instanceof PostLevelForm) {
 					
@@ -135,7 +135,7 @@ class PostLevelController extends AbstractController
 			}
 		}
 			
-		$form = $this->getPosLevelService()->getForm($postLevel);
+		$form = $this->getPostLevelService()->getForm($postLevel);
 			
 		return new ViewModel(array(
 			'form'		=> $form,
@@ -158,7 +158,7 @@ class PostLevelController extends AbstractController
 			if ($del == 'delete') {
 				try {
 					$id = (int) $request->getPost('postLevelId');
-					$result = $this->getPosLevelService()->delete($id);
+					$result = $this->getPostLevelService()->delete($id);
 	
 					if ($result) {
 						$this->flashMessenger()->addSuccessMessage(
@@ -181,7 +181,7 @@ class PostLevelController extends AbstractController
 	/**
 	 * @return \Shop\Service\Post\Level
 	 */
-	protected function getPosLevelService()
+	protected function getPostLevelService()
 	{
 		if (null === $this->postLevelService) {
 			$sl = $this->getServiceLocator();

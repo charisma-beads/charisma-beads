@@ -1,1 +1,8 @@
-<h2>Not yet implemented</h2>
+<?php $this->headTitle('Edit Post Cost') ?>
+<?=$this->ztbFlashMessenger()->render(); ?>
+
+<?=$this->partial('shop/post-cost/cost-form', array(
+	'form' => $this->form,
+	'formAction' => 'edit',
+	'postCostId' => $this->postCost->getPostCostId()
+)); ?>

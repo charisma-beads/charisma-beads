@@ -2,6 +2,7 @@
 namespace Shop\Mapper\Post;
 
 use Application\Mapper\AbstractMapper;
+use Zend\Db\Sql\Select;
 
 class Cost extends AbstractMapper
 {
@@ -12,7 +13,20 @@ class Cost extends AbstractMapper
     
     public function searchCosts($cost, $sort)
     {
-    	$select = $this->getSelect();
+    	$select = $this->getSql()->select($this->table);
+    	
+    	$select->join(
+	    	'postLevel',
+	    	'postCost.postLevelId=postLevel.postLevelId',
+	    	array('postLevel'),
+	    	Select::JOIN_INNER
+	    )
+	    ->join(
+	    	'postZone',
+	    	'postCost.postZoneId=postZone.postZoneId',
+	    	array('zone'),
+	    	Select::JOIN_LEFT
+	    );
     	 
     	if (!$cost == '') {
     		if (substr($cost, 0, 1) == '=') {
