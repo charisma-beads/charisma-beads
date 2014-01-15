@@ -1,1 +1,28 @@
-<h2>Not yet implemented</h2>
+<?php $this->headScript()->appendFile($this->basePath() . '/js/admin/post-level.js'); ?>
+<div class="tab-wrap">
+<!-- 
+	<ul id="postLevelTabs" class="nav nav-tabs">
+	    <li><a href="#admin-postLevel">Post Levels</a></li>
+	</ul>
+	
+	<div id="postLevelTabContent" class="tab-content">
+	    <div class="tab-pane" id="admin-postLevel">
+	    -->
+	    	<div class="row-fluid">
+		    	<?=$this->partial('layout/search', array(
+		    		'name'			=> 'postLevel',
+		    		'searchInputs'	=> array(
+		    			'postLevel',
+		    		),
+		    	));?>
+	    	</div>
+	    	
+	    	<div id="table-postLevel" class="row-fluid table-wrap">
+		    	<?=$this->partial('shop/post-level/list', array(
+		    	    'postLevels' => $this->postLevels
+		    	)); ?>
+	    	</div>
+	    <!-- </div>
+	</div> -->
+</div>
+

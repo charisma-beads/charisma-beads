@@ -4,13 +4,16 @@ return array(
     'shared'        => array(
     	'Shop\Form\Country'						=> false,
         'Shop\Form\Customer\Address'            => false,
+    	'Shop\Form\PostLevel'					=> false,
     	'Shop\Form\PostZone'					=> false,
     	'Shop\Form\Product'						=> false,
     	'Shop\Form\Product\Category'			=> false,
     ),
 	'invokables'    => array(
+		'Shop\Form\PostLevel'					=> 'Shop\Form\Post\Level',
 		
 		'Shop\InputFilter\Country'				=> 'Shop\InputFilter\Country',
+		'Shop\InputFilter\PostLevel'			=> 'Shop\InputFilter\Post\Level',
 	    'Shop\InputFilter\PostUnit'	            => 'Shop\InputFilter\Post\Unit',
 		'Shop\InputFilter\PostZone'				=> 'Shop\InputFilter\Post\Zone',
 	    'Shop\InputFilter\Product' 			    => 'Shop\InputFilter\Product',

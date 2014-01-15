@@ -44,7 +44,7 @@ $(document).ready(function(){
     });*/
     
     $('#table-postZone').dataGrid({
-    	url : 'post/zone/list',
+    	url : 'zone/list',
     	query: { sort : 'zone' },
     	searchForm : $('#search-zone'),
     	paging : 'links',

@@ -176,7 +176,6 @@ class PostZoneController extends AbstractController
 		}
 			
 		return $this->redirect()->toRoute('admin/shop/post/zone');
-	
 	}
 	
 	/**

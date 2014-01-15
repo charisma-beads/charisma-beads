@@ -50,7 +50,7 @@ class Product extends InputFilter
     		),
     		'validators'	=> array(
     			array('name' => 'Float')
-    		)
+    		),
     	));
     	
     	$this->add(array(

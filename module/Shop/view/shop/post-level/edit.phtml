@@ -1,1 +1,8 @@
-<h2>Not yet implemented</h2>
+<?php $this->headTitle('Edit Post Level') ?>
+<?=$this->ztbFlashMessenger()->render(); ?>
+
+<?=$this->partial('shop/post-level/level-form', array(
+	'form' => $this->form,
+	'formAction' => 'edit',
+	'postLevelId' => $this->postLevel->getPostLevelId()
+)); ?>
