@@ -10,6 +10,11 @@ use Zend\Db\Sql\Expression;
 
 abstract class AbstractNestedSet extends AbstractMapper
 {
+	const INSERT_NODE	= 'insert';
+	const INSERT_CHILD	= 'insertSub';
+	const COLUMN_LEFT	= 'lft';
+	const COLUMN_RIGHT	= 'rgt';
+	
     /**
      * Gets all items in tree.
      * 
@@ -43,19 +48,19 @@ abstract class AbstractNestedSet extends AbstractMapper
     public function getFullTree()
     {   
         $select = $this->getSql()->select();
-        $select->from(array('child' => $this->table))
+        $select->from(array('child' => $this->getTable()))
             ->columns(array(
                 Select::SQL_STAR,
-                'depth' => new Expression('(COUNT(parent.'.$this->primary.') - 1)')
+                'depth' => new Expression('(COUNT(parent.'.$this->getPrimaryKey().') - 1)')
             ))
             ->join(
-                array('parent' => $this->table),
-                'child.lft BETWEEN parent.lft AND parent.rgt',
+                array('parent' => $this->getTable()),
+                'child.' . self::COLUMN_LEFT . ' BETWEEN parent.' . self::COLUMN_LEFT . ' AND parent.' . self::COLUMN_RIGHT,
                 array(),
                 Select::JOIN_INNER
             )
-            ->group('child.'.$this->primary)
-            ->order('child.lft');
+            ->group('child.'.$this->getPrimaryKey())
+            ->order('child.' . self::COLUMN_LEFT);
 		
         return $select;
     }
@@ -69,16 +74,16 @@ abstract class AbstractNestedSet extends AbstractMapper
     {
     	
         $select = $this->getSql()->select();
-        $select->from(array('child' => $this->table))
+        $select->from(array('child' => $this->getTable()))
         	->columns(array())
             ->join(
-                array('parent' => $this->table),
-                'child.lft BETWEEN parent.lft AND parent.rgt', 
+                array('parent' => $this->getTable()),
+                'child.' . self::COLUMN_LEFT . ' BETWEEN parent.' . self::COLUMN_LEFT . ' AND parent.' . self::COLUMN_RIGHT, 
                 array(Select::SQL_STAR),
                 Select::JOIN_INNER
             )
-            ->where(array('child.'.$this->primary.' = ?' => $id))
-            ->order('parent.lft');
+            ->where(array('child.'.$this->getPrimaryKey().' = ?' => $id))
+            ->order('parent.' . self::COLUMN_LEFT);
         
         return $select;
     }
@@ -106,47 +111,47 @@ abstract class AbstractNestedSet extends AbstractMapper
     public function getDecendentsByParentId($parentId, $immediate=true)
     {
         $subTree = $this->getSql()->select()
-            ->from(array('child' => $this->table))
+            ->from(array('child' => $this->getTable()))
             ->columns(array(
             	$this->primary,
-            	'depth' => new Expression('(COUNT(parent.'.$this->primary.') - 1)')
+            	'depth' => new Expression('(COUNT(parent.'.$this->getPrimaryKey().') - 1)')
             ))
             ->join(
-                array('parent' => $this->table),
-                'child.lft BETWEEN parent.lft AND parent.rgt',
+                array('parent' => $this->getTable()),
+                'child.' . self::COLUMN_LEFT . ' BETWEEN parent.' . self::COLUMN_LEFT . ' AND parent.' .self::COLUMN_RIGHT,
                 array(),
                 Select::JOIN_INNER
             )
-            ->where(array('child.'.$this->primary.' = ?' => $parentId))
-            ->group('child.'.$this->primary)
-            ->order('child.lft');
+            ->where(array('child.'.$this->getPrimaryKey().' = ?' => $parentId))
+            ->group('child.'.$this->getPrimaryKey())
+            ->order('child.' . self::COLUMN_LEFT);
     
         $select = $this->getSql()->select()
-            ->from(array('child' => $this->table))
+            ->from(array('child' => $this->getTable()))
             ->columns(array(
             	Select::SQL_STAR,
-            	'depth' => new Expression('(COUNT(parent.'.$this->primary.') - (subTree.depth + 1))')
+            	'depth' => new Expression('(COUNT(parent.'.$this->getPrimaryKey().') - (subTree.depth + 1))')
             ))
             ->join(
-                array('parent' => $this->table),
-                'child.lft BETWEEN parent.lft AND parent.rgt',
+                array('parent' => $this->getTable()),
+                'child.' . self::COLUMN_LEFT . ' BETWEEN parent.' . self::COLUMN_LEFT . ' AND parent.' . self::COLUMN_RIGHT,
                 array(),
                 Select::JOIN_INNER
             )
             ->join(
-                array('subParent' => $this->table),
-                'child.lft BETWEEN subParent.lft AND subParent.rgt',
+                array('subParent' => $this->getTable()),
+                'child.' . self::COLUMN_LEFT . ' BETWEEN subParent.' . self::COLUMN_LEFT . ' AND subParent.' . self::COLUMN_RIGHT,
                 array(),
                 Select::JOIN_INNER
             )
             ->join(
                 array('subTree' => $subTree),
-                'subParent.'.$this->primary.' = subTree.'.$this->primary,
+                'subParent.'.$this->getPrimaryKey().' = subTree.'.$this->getPrimaryKey(),
                 array(),
                 Select::JOIN_INNER
             )
-            ->group('child.'.$this->primary)
-            ->order('child.lft');
+            ->group('child.'.$this->getPrimaryKey())
+            ->order('child.' . self::COLUMN_LEFT);
     
         if (true === $immediate) {
             $select->having('depth = 1');
@@ -156,146 +161,51 @@ abstract class AbstractNestedSet extends AbstractMapper
     }
     
     /**
-     * Updates right values of tree
-     * 
-     * @param int $rgt
-     * @param string $option
+     * Updates left and right values of tree
+     *
+     * @param int $left_rgt
+     * @param string $operator
      * @param int $offset
      */
-    protected function updateRight($rgt, $option, $offset)
+    protected function updateTree($lft_rgt, $operator, $offset)
     {
-        $operator = (($option === 'add') ? '+' : '-');
-        $data = array(
-            'rgt' => new Expression('rgt ' . $operator . ' ' . $offset)
-        );
-        
-        $where = new Where();
-        $where->greaterThan('rgt', $rgt);
-        
-		$sql = $this->getSql();
-        $update = $sql->update($this->table)
-			->set($data)
-			->where($where);
-	
-		$statement = $sql->prepareStatementForSqlObject($update);
-	
-		return $statement->execute();
-    }
-    
-    /**
-     * Update left values of tree
-     * 
-     * @param int $lft
-     * @param string $option
-     * @param int $offset
-     */
-    protected function updateLeft($lft, $option, $offset)
-    {
-        $operator = (($option === 'add') ? '+' : '-');
-        $data = array(
-            'lft' => new Expression('lft ' . $operator . ' ' . $offset)
-        );
-        
-        $where = new Where();
-        $where->greaterThan('lft', $lft);
-        
-        $sql = $this->getSql();
-        $update = $sql->update($this->table)
-			->set($data)
-			->where($where);
-	
-		$statement = $sql->prepareStatementForSqlObject($update);
-	
-		return $statement->execute();
+    	$lft = new Where();
+    	$rgt = new Where();
+    	
+    	$lftUpdate = $this->update(array(
+    		self::COLUMN_LEFT => new Expression(self::COLUMN_LEFT . $operator . $offset)
+    	), $lft->greaterThan(self::COLUMN_LEFT, $lft_rgt));
+    	
+    	$rgtUpdate = $this->update(array(
+    		self::COLUMN_RIGHT => new Expression(self::COLUMN_RIGHT . $operator . $offset)
+    	), $rgt->greaterThan(self::COLUMN_RIGHT, $lft_rgt));
+    	
+    	return array($lftUpdate, $rgtUpdate);
     }
     
     /**
      * Get the position of a child in the tree
      * 
      * @param int $id
-     * @param string $option
      * @return array
      */
-    protected function getPosition($id, $option)
+    protected function getPosition($id)
     {
-        $cols = array('width' => new Expression('rgt - lft + 1'));
-        
-        switch ($option) {
-            case 'left':
-                $cols[] = 'lft';
-                break;
-        
-            case 'right':
-                $cols[] = 'rgt';
-                break;
-        
-            case 'both':
-                $cols[] = 'lft';
-                $cols[] = 'rgt';
-                break;
-        }
+        $cols = array(
+        	self::COLUMN_LEFT,
+        	self::COLUMN_RIGHT,
+        	'width' => new Expression(self::COLUMN_RIGHT . ' - ' . self::COLUMN_LEFT  . ' + 1'),
+        );
         
         $select = $this->getSelect();
         
         $where = new Where();
-        $where->equalTo($this->primary, $id);
+        $where->equalTo($this->getPrimaryKey(), $id);
         $select->columns($cols)->where($where);
         
         $row = $this->fetchResult($select, new ResultSet())->current();
         
         return $row;
-    }
-    
-    /**
-     * Adds a new record.
-     * 
-     * @param unknown $lft_rgt
-     * @param unknown $data
-     */
-    protected function addRow($lft_rgt, $data)
-    {
-        $data['lft'] = $lft_rgt + 1;
-        $data['rgt'] = $lft_rgt + 2;
-        
-        return parent::insert($data);
-    }
-    
-    /**
-     * Inserts a row after given id
-     * 
-     * @param array|object $row
-     * @param array $data
-     * @return int
-     */
-    protected function insertAfter($row, $data)
-    {
-        $rgt = (is_array($row)) ? $row['rgt'] : $row->rgt;
-        
-        $this->updateRight($rgt, 'add', 2);
-        $this->updateLeft($rgt, 'add', 2);
-        
-        $insertId = $this->addRow($rgt, $data);
-        
-        return $insertId;
-    }
-    
-    /**
-     * Inserts a row before given id
-     * 
-     * @param array|object $row
-     * @param array $data
-     * @return int
-     */
-    protected function insertBefore($row, $data)
-    {
-        $lft = (is_array($row)) ? $row['lft'] : $row->lft;
-        
-        $this->updateRight($lft, 'add', 2);
-        $this->updateLeft($lft, 'add', 2);
-        
-        $insertId = $this->addRow($lft, $data);
-        
-        return $insertId;
     }
     
     /**
@@ -306,32 +216,23 @@ abstract class AbstractNestedSet extends AbstractMapper
      * @param string $insertType
      * @return int
      */
-    public function insertRow(array $data, $position = 0, $insertType = 'insert')
+    public function insertRow(array $data, $position = 0, $insertType = self::INSERT_NODE)
     {
         $num = $this->fetchAll()->count();
-        $row = array();
         
-        switch ($insertType) {
-            case 'insertSub':
-                if ($num && $position != 0) {
-                    $row = $this->getPosition($position, 'left');
-                } else {
-                    $row['lft'] = 0;
-                }
-
-                $insertId = $this->insertBefore($row, $data);
-                break;
-                
-            case 'insert':
-                if ($num && $position != 0) {
-                    $row = $this->getPosition($position, 'right');
-                } else {
-                    $row['rgt'] = 0;
-                }
-                
-                $insertId = $this->insertAfter($row, $data);
-                break;
+        if ($num && $position) {
+        	$row = $this->getPosition($position);
+        	$lft_rgt = ($insertType === self::INSERT_NODE) ? $row->{self::COLUMN_RIGHT} : $row->{self::COLUMN_LEFT};
+        } else {
+        	$lft_rgt = 0;
         }
+        
+        $this->updateTree($lft_rgt, '+', 2);
+        
+        $data['lft'] = $lft_rgt + 1;
+        $data['rgt'] = $lft_rgt + 2;
+        
+        $insertId = parent::insert($data);
         
         return $insertId;
     }
@@ -339,32 +240,29 @@ abstract class AbstractNestedSet extends AbstractMapper
     /**
      * Deletes a row from tree.
      * 
-     * @param unknown $id
-     * @return boolean
+	 * @param int|array $where
+	 * @param string $table
+	 * @return int number of affected rows
      */
-    public function delete($id)
+    public function delete($where, $table = null)
     {
-        $row = $this->getPosition($id, 'both');
-        
+    	if (is_array($where)) {
+    		$pk = $where[$this->getPrimaryKey()];
+    	} else {
+    		$pk = (int) $where;
+    	}
+    	
+        $row = $this->getPosition($pk);
         
         $where = new Where();
-        $where->between('lft', $row->lft, $row->rgt);
+        $where->between(self::COLUMN_LEFT, $row->{self::COLUMN_LEFT}, $row->{self::COLUMN_RIGHT});
         
-        $sql = $this->getSql();
-        $delete = $sql->delete($this->table);
-        
-        $delete->where($where);
-        
-        $statement = $sql->prepareStatementForSqlObject($delete);
-        
-        $result = $statement->execute();
+        $result = parent::delete($where, $table);
         
         if ($result) {
-            $this->updateRight ($row->rgt, 'minus', $row->width);
-            $this->updateLeft ($row->rgt, 'minus', $row->width);
-            return true;
-        } else {
-            return false;
+            $this->updateTree($row->{self::COLUMN_RIGHT}, '-', $row->width);
         }
+        
+        return $result;
     }
 }

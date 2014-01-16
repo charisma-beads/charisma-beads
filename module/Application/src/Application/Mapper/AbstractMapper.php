@@ -126,35 +126,17 @@ class AbstractMapper implements DbAdapterAwareInterface
 	}
 	
 	/**
-	 * Updates a database row by its id.
-	 *
-	 * @param int $id
-	 * @param array $data
-	 * @return int number of affected rows
-	 */
-	public function update($id, $data)
-	{
-		$sql = $this->getSql();
-		$update = $sql->update($this->table);
-	
-		$update->set($data)
-			->where(array($this->primary => $id));
-	
-		$statement = $sql->prepareStatementForSqlObject($update);
-	
-		return $statement->execute();
-	}
-	
-	/**
 	 * Inserts a new row into database returns insertId
 	 *
 	 * @param array $data
+	 * @param string $table
 	 * @return int|null
 	 */
-	public function insert($data)
+	public function insert(array $data, $table = null)
 	{
+		$table = ($table) ?: $this->getTable();
 		$sql = $this->getSql();
-		$insert = $sql->insert($this->table);
+		$insert = $sql->insert($table);
 	
 		$insert->values($data);
 	
@@ -165,16 +147,42 @@ class AbstractMapper implements DbAdapterAwareInterface
 	}
 	
 	/**
-	 * Deletes a row in the database
+	 * Updates a database row/s.
 	 *
-	 * @param int $id
+	 * @param array $data
+	 * @param string|array|Where $where
+	 * @param string $table
+	 * @return int number of affected rows
 	 */
-	public function delete($id)
+	public function update(array $data, $where, $table = null)
 	{
+		$table = ($table) ?: $this->getTable();
 		$sql = $this->getSql();
-		$delete = $sql->delete($this->table);
+		$update = $sql->update($table);
 	
-		$delete->where(array($this->primary => $id));
+		$update->set($data)
+			->where($where);
+	
+		$statement = $sql->prepareStatementForSqlObject($update);
+	
+		return $statement->execute();
+	}
+	
+	/**
+	 * Deletes a row/s in the database returns number
+	 * of rows affacted
+	 *
+	 * @param string|array|Where $where
+	 * @param string $table
+	 * @return int
+	 */
+	public function delete($where, $table = null)
+	{
+		$table = ($table) ?: $this->getTable();
+		$sql = $this->getSql();
+		$delete = $sql->delete($table);
+	
+		$delete->where($where);
 	
 		$statement = $sql->prepareStatementForSqlObject($delete);
 	
@@ -280,9 +288,11 @@ class AbstractMapper implements DbAdapterAwareInterface
 		if ($sort === '' || null === $sort) {
 			return $select;
 		}
-	
-		$sort = (array) $sort;
-	
+		
+		if (is_string($sort)) {
+			$sort = explode(' ', $sort);
+		}
+		
 		$order = array();
 	
 		foreach ($sort as $column) {
@@ -374,6 +384,14 @@ class AbstractMapper implements DbAdapterAwareInterface
     {
         $this->dbAdapter = $dbAdapter;
         return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getTable()
+    {
+    	return $this->table;
     }
     
     /**

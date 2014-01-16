@@ -31,7 +31,7 @@ class Cost extends AbstractMapper
     	if (!$cost == '') {
     		if (substr($cost, 0, 1) == '=') {
     			$id = (int) substr($cost, 1);
-    			$select->where->equalTo($this->primary, $id);
+    			$select->where->equalTo($this->getPrimaryKey(), $id);
     		} else {
     			$searchTerms = explode(' ', $cost);
     			$where = $select->where->nest();

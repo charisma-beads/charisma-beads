@@ -3,6 +3,7 @@ namespace Shop\Mapper\Product;
 
 use Application\Mapper\AbstractNestedSet;
 use Shop\Model\Product\Category as CategoryModel;
+use Zend\Db\Sql\Where;
 
 class Category extends AbstractNestedSet
 {
@@ -76,7 +77,7 @@ class Category extends AbstractNestedSet
 	    if (!$category == '') {
 	    	if (substr($category, 0, 1) == '=') {
 	    		$id = (int) substr($category, 1);
-	    		$select->where->equalTo($this->primary, $id);
+	    		$select->where->equalTo($this->getPrimaryKey(), $id);
 	    	} else {
 	    		$searchTerms = explode(' ', $category);
 	    		$where = $select->where->nest();
@@ -111,18 +112,16 @@ class Category extends AbstractNestedSet
 	public function toggleEnabled(CategoryModel $model)
 	{
 		$data = $this->extract($model);
-		$sql = $this->getSql();
-		$update = $sql->update($this->table);
-	
-		$update->set(array(
-			'enabled'		=> $data['enabled'], 
+		
+		$where = new Where();
+		$where->between(self::COLUMN_LEFT, $data[self::COLUMN_LEFT], $data[self::COLUMN_RIGHT]);
+		
+		$data = array(
+			'enabled'		=> $data['enabled'],
 			'dateModified'	=> $data['dateModified']
-		))
-		->where->between('lft', $data['lft'], $data['rgt']);
+		);
 	
-		$statement = $sql->prepareStatementForSqlObject($update);
-	
-		return $statement->execute();
+		return $this->update($data, $where);
 	}
 	
 	public function getFetchEnabled()

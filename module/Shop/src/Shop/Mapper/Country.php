@@ -14,8 +14,13 @@ class Country extends AbstractMapper
     
     public function searchCountries($country, $sort)
     {
-    	$select = $this->getSql()->select();
-    	$select->from($this->table);
+    	$select = $this->getSql()->select($this->table);
+    	$select->join(
+    		'postZone',
+    		'country.postZoneId=postZone.postZoneId',
+			array('postZone.zone' => 'zone'),
+    		Select::JOIN_INNER
+    	);
     	
     	if (!$country == '') {
     		if (substr($country, 0, 1) == '=') {

@@ -8,6 +8,7 @@
 		<tr>
 			<th data-field="countryId">Country Id</th>
 			<th data-field="country">Country</th>
+			<th data-field="zone">Post Zone</th>
 			<th>Actions</th>
 		</tr>
 	</thead>
@@ -17,6 +18,7 @@
 		<tr>
 			<td><?=$this->escapeHtml($row->getCountryId()); ?></td>
 			<td><?=$this->escapeHtml($row->getCountry()); ?></td>
+			<td><?=$this->escapeHtml($row->getZone()); ?></td>
 			<td>
                 <a href="<?=$this->url('admin/shop/country/edit', array(
                     'id' => $row->getCountryId()

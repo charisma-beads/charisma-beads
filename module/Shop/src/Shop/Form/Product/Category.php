@@ -1,6 +1,7 @@
 <?php
 namespace Shop\Form\Product;
 
+use Application\Mapper\AbstractNestedSet as NestedSet;
 use Shop\Mapper\Product\Image as ImageMapper;
 use Shop\Service\Product\Category as CategoryService;
 use Zend\Form\Form;
@@ -102,6 +103,25 @@ class Category extends Form
     			'value_options' => $this->getParentList()
     		),
     	));
+    	
+    	$categoryInsertOptions = array(
+    		NestedSet::INSERT_NODE	=> 'insert after this category.',
+    		NestedSet::INSERT_CHILD	=> 'insert as a new sub-category at the top.',
+    		
+    	);
+    	
+    	if ($this->getCategoryId()) {
+    		$categoryInsertOptions['noInsert'] = 'no change';
+    	}
+    	
+    	$this->add(array(
+    		'name'			=> 'categoryInsertType',
+    		'type'			=> 'radio',
+    		'options'		=> array(
+    			'required'		=> true,
+    			'value_options' => array_reverse($categoryInsertOptions, true),
+    		),
+    	));
     }
     
     public function getParentList()
@@ -134,9 +154,13 @@ class Category extends Form
     		$ids = $this->getCategoryService()->getCategoryChildrenIds($id);
     		$images = $this->getImageMapper()->getImagesByCategoryIds($ids);
     		
-    		/* @var $image \Shop\Model\Product\Image */
-    		foreach($images as $image) {
-    			$imageOptions[$image->getProductImageId()] = $image->getThumbnail();
+    		if ($images) {
+    			/* @var $image \Shop\Model\Product\Image */
+    			foreach($images as $image) {
+    				$imageOptions[$image->getProductImageId()] = $image->getThumbnail();
+    			}
+    		} else {
+    			$imageOptions[0] = 'No Images Uploaded';
     		}
     	} else {
     		$imageOptions[0] = 'No Images Uploaded';

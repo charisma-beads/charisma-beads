@@ -20,7 +20,7 @@ class Country extends AbstractService
     	$country = (isset($post['country'])) ? (string) $post['country'] : '';
     	$sort = (isset($post['sort'])) ? (string) $post['sort'] : '';
     
-    	//$this->getMapper()->useModelRelationships(true);
+    	$this->getMapper()->useModelRelationships(true);
     
     	$countries = $this->getMapper()->searchCountries($country, $sort);
     

@@ -51,7 +51,7 @@ class Zone extends Form
 		
 		/* @var $taxCode \Shop\Model\Tax\Code */
 		foreach($taxCodes as $taxCode) {
-			$taxCodeOptions[$taxCode->getTaxCodeId()] = $taxCode->getTaxCode();
+			$taxCodeOptions[$taxCode->getTaxCodeId()] = $taxCode->getTaxCode() . ' - ' . $taxCode->getDescription();
 		}
 		
 		return $taxCodeOptions;

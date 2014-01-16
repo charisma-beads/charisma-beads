@@ -68,11 +68,11 @@ class AbstractService implements ServiceLocatorAwareInterface
 		$pk = $this->getMapper()->getPrimaryKey();
 		$id = $data[$pk];
 		
-		if ($id == 0) {
+		if (0 === $id || null === $id) {
 			$result = $this->getMapper()->insert($data);
 		} else {
 			if ($this->getById($id)) {
-				$result = $this->getMapper()->update($id, $data);
+				$result = $this->getMapper()->update($data, array($pk => $id));
 			} else {
 				throw new Exception('Id ' . $id . ' does not exist');
 			}
@@ -84,7 +84,9 @@ class AbstractService implements ServiceLocatorAwareInterface
 	public function delete($id)
 	{
 		$id = (int) $id;
-		return $this->getMapper()->delete($id);
+		return $this->getMapper()->delete(array(
+			$this->getMapper()->getPrimaryKey() => $id
+		));
 	}
 	
 	/**

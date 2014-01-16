@@ -8,10 +8,13 @@ return array(
     	'Shop\Form\PostLevel'					=> false,
     	'Shop\Form\PostZone'					=> false,
     	'Shop\Form\Product'						=> false,
-    	'Shop\Form\Product\Category'			=> false,
+    	'Shop\Form\ProductCategory'				=> false,
+    	'Shop\Form\TaxCode'						=> false,
+    	'Shop\Form\TaxRate'						=> false,
     ),
 	'invokables'    => array(
 		'Shop\Form\PostLevel'					=> 'Shop\Form\Post\Level',
+		'Shop\Form\TaxRate'						=> 'Shop\Form\Tax\Rate',
 		
 		'Shop\InputFilter\Country'				=> 'Shop\InputFilter\Country',
 		'Shop\InputFilter\PostCost'				=> 'Shop\InputFilter\Post\Cost',
@@ -74,6 +77,7 @@ return array(
     	'Shop\Form\PostZone'					=> 'Shop\Service\Factory\Form\PostZone',
     	'Shop\Form\Product'						=> 'Shop\Service\Factory\Form\Product',
     	'Shop\Form\ProductCategory'				=> 'Shop\Service\Factory\Form\ProductCategory',
+    	'Shop\Form\TaxCode'						=> 'Shop\Service\Factory\Form\TaxCode',
         
         'Shop\Options\Checkout'                 => 'Shop\Service\Factory\CheckoutOptions',
         'Shop\Options\Paypal'                   => 'Shop\Service\Factory\PaypalOptions',
