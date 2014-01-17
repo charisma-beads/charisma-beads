@@ -1,7 +1,7 @@
 <?php $this->headTitle('Product Categories') ?>
 <?php echo $this->ztbFlashMessenger()->render(); ?>
 
-<?php if (count($this->categories) > 0): ?>
+<?php if (count($this->models) > 0): ?>
 
 <table id="productCategory-list" class="table table-hover table-bordered table-condensed sortable-table">
 	<thead>
@@ -18,7 +18,7 @@
 	</thead>
 	
 	<tbody>
-		<?php foreach($this->categories as $row): ?>
+		<?php foreach($this->models as $row): ?>
 		<?php 
 			$indent = 'indent' . ($row->getDepth() + 1);
     		$parent = ($row->hasChildren() || $row->getDepth() == 0) ? 'bold ' : '';
@@ -69,7 +69,7 @@
 </table>
 
 <?=$this->paginationControl(
-    $this->categories,
+    $this->models,
     'Elastic',
     'paginate',
 	array('route' => 'admin/shop/category/page')

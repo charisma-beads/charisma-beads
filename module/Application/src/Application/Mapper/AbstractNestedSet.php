@@ -23,7 +23,7 @@ abstract class AbstractNestedSet extends AbstractMapper
     public function fetchAll()
     {
         $select = $this->getFullTree();
-        	
+                	
         return $this->fetchResult($select);
     }
     
@@ -59,7 +59,7 @@ abstract class AbstractNestedSet extends AbstractMapper
                 array(),
                 Select::JOIN_INNER
             )
-            ->group('child.'.$this->getPrimaryKey())
+            ->group('child.' . $this->getPrimaryKey())
             ->order('child.' . self::COLUMN_LEFT);
 		
         return $select;
@@ -82,7 +82,7 @@ abstract class AbstractNestedSet extends AbstractMapper
                 array(Select::SQL_STAR),
                 Select::JOIN_INNER
             )
-            ->where(array('child.'.$this->getPrimaryKey().' = ?' => $id))
+            ->where(array('child.' . $this->getPrimaryKey() . ' = ?' => $id))
             ->order('parent.' . self::COLUMN_LEFT);
         
         return $select;
@@ -114,7 +114,7 @@ abstract class AbstractNestedSet extends AbstractMapper
             ->from(array('child' => $this->getTable()))
             ->columns(array(
             	$this->primary,
-            	'depth' => new Expression('(COUNT(parent.'.$this->getPrimaryKey().') - 1)')
+            	'depth' => new Expression('(COUNT(parent.' . $this->getPrimaryKey() . ') - 1)')
             ))
             ->join(
                 array('parent' => $this->getTable()),
@@ -122,15 +122,15 @@ abstract class AbstractNestedSet extends AbstractMapper
                 array(),
                 Select::JOIN_INNER
             )
-            ->where(array('child.'.$this->getPrimaryKey().' = ?' => $parentId))
-            ->group('child.'.$this->getPrimaryKey())
+            ->where(array('child.' . $this->getPrimaryKey() . ' = ?' => $parentId))
+            ->group('child.' . $this->getPrimaryKey())
             ->order('child.' . self::COLUMN_LEFT);
     
         $select = $this->getSql()->select()
             ->from(array('child' => $this->getTable()))
             ->columns(array(
             	Select::SQL_STAR,
-            	'depth' => new Expression('(COUNT(parent.'.$this->getPrimaryKey().') - (subTree.depth + 1))')
+            	'depth' => new Expression('(COUNT(parent.' . $this->getPrimaryKey() . ') - (subTree.depth + 1))')
             ))
             ->join(
                 array('parent' => $this->getTable()),
@@ -146,11 +146,11 @@ abstract class AbstractNestedSet extends AbstractMapper
             )
             ->join(
                 array('subTree' => $subTree),
-                'subParent.'.$this->getPrimaryKey().' = subTree.'.$this->getPrimaryKey(),
+                'subParent.' . $this->getPrimaryKey() . ' = subTree.' . $this->getPrimaryKey(),
                 array(),
                 Select::JOIN_INNER
             )
-            ->group('child.'.$this->getPrimaryKey())
+            ->group('child.' . $this->getPrimaryKey())
             ->order('child.' . self::COLUMN_LEFT);
     
         if (true === $immediate) {
@@ -169,8 +169,8 @@ abstract class AbstractNestedSet extends AbstractMapper
      */
     protected function updateTree($lft_rgt, $operator, $offset)
     {
-    	$lft = new Where();
-    	$rgt = new Where();
+    	$lft = new Where;
+    	$rgt = new Where;
     	
     	$lftUpdate = $this->update(array(
     		self::COLUMN_LEFT => new Expression(self::COLUMN_LEFT . $operator . $offset)
@@ -199,7 +199,7 @@ abstract class AbstractNestedSet extends AbstractMapper
         
         $select = $this->getSelect();
         
-        $where = new Where();
+        $where = new Where;
         $where->equalTo($this->getPrimaryKey(), $id);
         $select->columns($cols)->where($where);
         
@@ -229,8 +229,8 @@ abstract class AbstractNestedSet extends AbstractMapper
         
         $this->updateTree($lft_rgt, '+', 2);
         
-        $data['lft'] = $lft_rgt + 1;
-        $data['rgt'] = $lft_rgt + 2;
+        $data[self::COLUMN_LEFT] = $lft_rgt + 1;
+        $data[self::COLUMN_RIGHT] = $lft_rgt + 2;
         
         $insertId = parent::insert($data);
         
@@ -254,7 +254,7 @@ abstract class AbstractNestedSet extends AbstractMapper
     	
         $row = $this->getPosition($pk);
         
-        $where = new Where();
+        $where = new Where;
         $where->between(self::COLUMN_LEFT, $row->{self::COLUMN_LEFT}, $row->{self::COLUMN_RIGHT});
         
         $result = parent::delete($where, $table);

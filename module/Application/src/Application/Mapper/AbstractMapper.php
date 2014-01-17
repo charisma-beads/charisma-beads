@@ -74,22 +74,22 @@ class AbstractMapper implements DbAdapterAwareInterface
 	 * return an instance of Select
 	 * 
 	 * @param string $tableName
-	 * @return \Zend\Db\Sql\Select
+	 * @return Select
 	 */
 	public function getSelect($tableName=null)
 	{
-		return $this->getSql()->select($tableName ?: $this->table);
+		return $this->getSql()->select($tableName ?: $this->getTable());
 	}
 	
 	/**
 	 * gets the resultSet
 	 *
-	 * @return \Zend\Db\ResultSet\HydratingResultSet
+	 * @return HydratingResultSet
 	 */
 	protected function getResultSet()
 	{
 		if (!$this->resultSetProtype instanceof HydratingResultSet) {
-			$resultSetPrototype = new HydratingResultSet();
+			$resultSetPrototype = new HydratingResultSet;
 			$resultSetPrototype->setHydrator($this->getHydrator());
 			$resultSetPrototype->setObjectPrototype(new $this->model());
 			$this->resultSetProtype = $resultSetPrototype;
@@ -102,11 +102,11 @@ class AbstractMapper implements DbAdapterAwareInterface
 	 * Gets one row by its id
 	 *
 	 * @param int $id
-	 * @return \Application\Mapper\AbstractModel
+	 * @return AbstractModel
 	 */
 	public function getById($id)
 	{
-		$select = $this->getSelect()->where(array($this->primary => $id));
+		$select = $this->getSelect()->where(array($this->getPrimaryKey() => $id));
 		$rowset = $this->fetchResult($select);
 		$row = $rowset->current();
 		return $row;
@@ -123,6 +123,43 @@ class AbstractMapper implements DbAdapterAwareInterface
 		$resultSet = $this->fetchResult($select);
 		
 		return $resultSet;
+	}
+	
+	/**
+	 * basic search on table
+	 * 
+	 * @param array $search
+	 * @param string $sort
+	 * @param Select $select
+	 * @return \Zend\Db\ResultSet\ResultSet|Paginator|HydratingResultSet
+	 */
+	public function search(array $search, $sort, Select $select = null)
+	{
+		$select = ($select) ?: $this->getSelect();
+		
+		foreach ($search as $key => $value) {
+			if (!$value['searchString'] == '') {
+				if (substr($value['searchString'], 0, 1) == '=' && $key == 0) {
+					$id = (int) substr($value['searchString'], 1);
+					$select->where->equalTo($this->getPrimaryKey(), $id);
+				} else {
+					$where = $select->where->nest();
+					$c = 0;
+					
+					foreach ($value['columns'] as $column) {
+						if ($c > 0) $where->or;
+						$where->like($column, '%' . $value['searchString'] . '%');
+						$c++;
+					}
+			
+					$where->unnest();
+				}
+			}
+		}
+		
+		$select = $this->setSortOrder($select, $sort);
+		
+		return $this->fetchResult($select);
 	}
 	
 	/**
@@ -189,6 +226,10 @@ class AbstractMapper implements DbAdapterAwareInterface
 		return $statement->execute();
 	}
 	
+	/**
+	 * @param array $paginatorOptions
+	 * @return \Application\Mapper\AbstractMapper
+	 */
 	public function usePaginator(array $paginatorOptions = array())
 	{
 		$this->usePaginator = true;
@@ -196,11 +237,18 @@ class AbstractMapper implements DbAdapterAwareInterface
 		return $this;
 	}
 	
+	/**
+	 * @return array
+	 */
 	public function getPaginatorOptions()
 	{
 		return $this->paginatorOptions;
 	}
 
+	/**
+	 * @param array $paginatorOptions
+	 * @return \Application\Mapper\AbstractMapper
+	 */
 	public function setPaginatorOptions($paginatorOptions)
 	{
 		$this->paginatorOptions = $paginatorOptions;
@@ -213,7 +261,7 @@ class AbstractMapper implements DbAdapterAwareInterface
 	 * @param ResultSet $resultSet
 	 * @param int $page
 	 * @param int $limit
-	 * @return \Zend\Paginator\Paginator
+	 * @return Paginator
 	 */
 	public function paginate(Select $select, $resultSet=null)
 	{
@@ -240,7 +288,7 @@ class AbstractMapper implements DbAdapterAwareInterface
 	 * Fetches the result of select from database
 	 *
 	 * @param Select $select
-	 * @return \Zend\Db\ResultSet\ResultSet
+	 * @return \Zend\Db\ResultSet\ResultSet|Paginator|HydratingResultSet
 	 */
 	protected function fetchResult(Select $select, $resultSet=null)
 	{
@@ -280,7 +328,7 @@ class AbstractMapper implements DbAdapterAwareInterface
 	 * Sets sort order of database query
 	 *
 	 * @param Select $select
-	 * @param string $sort
+	 * @param string|array $sort
 	 * @return Select
 	 */
 	public function setSortOrder(Select $select, $sort)
@@ -288,6 +336,8 @@ class AbstractMapper implements DbAdapterAwareInterface
 		if ($sort === '' || null === $sort) {
 			return $select;
 		}
+		
+		$select->reset('order');
 		
 		if (is_string($sort)) {
 			$sort = explode(' ', $sort);
@@ -298,9 +348,9 @@ class AbstractMapper implements DbAdapterAwareInterface
 		foreach ($sort as $column) {
 			if (strchr($column,'-')) {
 				$column = substr($column, 1, strlen($column));
-				$direction = 'DESC';
+				$direction = Select::ORDER_DESCENDING;
 			} else {
-				$direction = 'ASC';
+				$direction = Select::ORDER_ASCENDING;
 			}
 			$order[] = $column. ' ' . $direction;
 		}
@@ -308,6 +358,13 @@ class AbstractMapper implements DbAdapterAwareInterface
 		return $select->order($order);
 	}
 	
+	/**
+	 * 
+	 * @param AbstractModel|array $dataOrModel
+	 * @param HydratorInterface $hydrator
+	 * @throws \InvalidArgumentException
+	 * @return array
+	 */
 	public function extract($dataOrModel, HydratorInterface $hydrator = null)
 	{
 		if (is_array($dataOrModel)) {
@@ -341,6 +398,7 @@ class AbstractMapper implements DbAdapterAwareInterface
 	}
 	
 	/**
+	 * @param array $data
 	 * @return model
 	 */
 	public function getModel(array $data = null)
@@ -377,7 +435,7 @@ class AbstractMapper implements DbAdapterAwareInterface
     }
 
     /**
-	 * @param $dbAdapter
+	 * @param DbAdapter $dbAdapter
 	 * @return self
 	 */
     public function setDbAdapter(DbAdapter $dbAdapter)

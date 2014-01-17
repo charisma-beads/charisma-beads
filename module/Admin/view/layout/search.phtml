@@ -1,7 +1,7 @@
 
 <form id="search-<?=$this->name;?>" class="form-search" method="post">
-	<?php foreach($this->searchInputs as $input):?>
-	<input type="text" name="<?=$input;?>" placeholder="<?=ucwords($input)?>:">
+	<?php foreach($this->searchInputs as $label => $input):?>
+	<input type="text" name="<?=$input;?>" placeholder="<?=ucwords($label)?>:">
 	<?php endforeach;?>
 	<select name="count" class="input-mini">
 		<option selected="selected">25</option>

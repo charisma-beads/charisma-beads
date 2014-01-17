@@ -12,14 +12,14 @@
 		    	<?=$this->partial('layout/search', array(
 		    		'name'			=> 'category',
 		    		'searchInputs'	=> array(
-		    			'category',
+		    			'Category' => 'category',
 		    		),
 		    	));?>
 	    	</div>
 	    	
 	    	<div id="table-category" class="row-fluid table-wrap">
 		    	<?=$this->partial('shop/product-category/list', array(
-		    	    'categories' => $this->categories
+		    	    'models' => $this->models
 		    	)); ?>
 	    	</div>
 	    <!-- </div>

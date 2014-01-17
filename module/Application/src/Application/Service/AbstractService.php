@@ -18,9 +18,24 @@ class AbstractService implements ServiceLocatorAwareInterface
 	 */
 	protected $mapper;
 	
+	/**
+	 * @var string
+	 */
 	protected $form;
+	
+	/**
+	 * @var string
+	 */
 	protected $inputFilter;
+	
+	/**
+	 * @var string
+	 */
 	protected $mapperClass;
+	
+	/**
+	 * @var string
+	 */
 	protected $saveOverRide;
 	
 	public function getById($id)
@@ -32,6 +47,30 @@ class AbstractService implements ServiceLocatorAwareInterface
 	public function fetchAll()
 	{
 		return $this->getMapper()->fetchAll();
+	}
+	
+	public function search(array $post)
+	{
+		$sort = (isset($post['sort'])) ? (string) $post['sort']: '';
+		unset($post['sort'], $post['count'], $post['offset'], $post['page']);
+		
+		$searches = array();
+		
+		foreach($post as $key => $value) {
+			$searches[] = array(
+				'searchString'	=> (string) $value,
+				'columns'		=> explode('-', $key),
+			);
+		}
+		 
+		$models = $this->getMapper()->search($searches, $sort);
+		 
+		return $models;
+	}
+	
+	public function populate($model, $children = false)
+	{
+		return $model;
 	}
 	
 	public function add($post)
@@ -90,7 +129,6 @@ class AbstractService implements ServiceLocatorAwareInterface
 	}
 	
 	/**
-	 * 
 	 * @return \Application\Mapper\AbstractMapper
 	 */
 	public function getMapper()
@@ -105,6 +143,7 @@ class AbstractService implements ServiceLocatorAwareInterface
 	
 	/**
 	 * TODO: make this a seperate service and set input filter too from service.
+	 * 
 	 * @return $form
 	 */
 	public function getForm($model=null, $data=null)

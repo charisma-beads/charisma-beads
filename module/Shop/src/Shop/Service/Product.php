@@ -79,15 +79,9 @@ class Product extends AbstractService
 		return $this->getMapper()->getProductsByCategory($categoryId, $order);
 	}
 	
-	public function searchProducts(array $post)
+	public function search(array $post)
 	{
-	    $product = (isset($post['product'])) ? (string) $post['product'] : '';
-	    $category = (isset($post['category'])) ? (string) $post['category'] : '';
-	    $sort = (isset($post['sort'])) ? (string) $post['sort'] : '';
-	    
-	    //$this->getMapper()->useModelRelationships(true);
-	    
-	    $products = $this->getMapper()->searchProducts($product, $category, $sort);
+	    $products = parent::search($post);
 	    
 	    foreach ($products as $product) {
 	        $this->populate($product, true);
@@ -100,7 +94,7 @@ class Product extends AbstractService
 	 * @param \Shop\Model\Product $product
 	 * @param bool|array $children
 	 */
-	public function populate(ProductModel $product, $children = false)
+	public function populate($product, $children = false)
 	{
 		$allChildren = ($children === true) ? true : false;
 		$children = (is_array($children)) ? $children : array();
@@ -134,24 +128,27 @@ class Product extends AbstractService
 		}
 	}
 	
-	public function addProduct($post)
+	public function add($post)
 	{
 		if (!$post['ident']) {
 			$post['ident'] = $post['name'] . ' ' . $post['shortDescription'];
 		}
 		
-		return $this->add($post);
+		return parent::add($post);
 	}
 	
-	public function editProduct(ProductModel $product, $post)
+	/**
+	 * @param ProductModel $model
+	 */
+	public function edit($model, $post, $form = null)
 	{
 		if (!$post['ident']) {
 			$post['ident'] = $post['name'] . ' ' . $post['shortDescription'];
 		}
 		
-		$product->setDateModified();
+		$model->setDateModified();
 		
-		return $this->edit($product, $post);
+		return parent::edit($model, $post);
 	}
 	
 	public function toggleEnabled(ProductModel $product)

@@ -20,14 +20,6 @@ class Category extends AbstractService
 	    }
 	}
 	
-	public function searchCategories(array $post)
-	{
-	    $category = (isset($post['category'])) ? (string) $post['category'] : '';
-	    $sort = (isset($post['sort'])) ? (string) $post['sort'] : '';
-	    
-		return $this->getMapper()->searchCategories($category, $sort);
-	}
-	
 	public function getCategoriesByParentId($parentId)
 	{
 		$parentId = (int) $parentId;
@@ -61,7 +53,20 @@ class Category extends AbstractService
 		return $this->getMapper()->getBreadCrumbs($categoryId);
 	}
 	
-	public function addCategory($post)
+	public function search(array $post)
+	{
+		foreach ($post as $key => $value) {
+			if ($key == 'category') {
+				$key = preg_replace('(\w+)', 'child.$0', $key);
+				$post[$key] = $value;
+				unset($post['category']);
+			}
+		}
+		
+		return parent::search($post);
+	}
+	
+	public function add($post)
 	{
 		if (!$post['ident']) {
 			$post['ident'] = $post['category'];
@@ -81,21 +86,24 @@ class Category extends AbstractService
 		return $this->getMapper()->insertRow($data, $position, $insertType);
 	}
 	
-	public function editCategory(CategoryModel $category, $post)
+	/**
+	 * @param CategoryModel $model
+	 */
+	public function edit($model, $post, $form = null)
 	{
 		if (!$post['ident']) {
 			$post['ident'] = $post['category'];
 		}
 		
-		$category->setDateModified();
+		$model->setDateModified();
 		
-		$form = $this->getForm($category, $post);
+		$form = $this->getForm($model, $post);
 	
 		if (!$form->isValid()) {
 			return $form;
 		}
 		
-		$category = $this->getById($category->getProductCategoryId());
+		$category = $this->getById($model->getProductCategoryId());
 	
 		if ($category) {
 			// if category postion has changed then we need to delete it
@@ -106,8 +114,7 @@ class Category extends AbstractService
 				// TODO find children and move them as well.
 				return $form;
 			} else {
-				$data = $this->getMapper()->extract($form->getData());
-				$result = $this->getMapper()->update($category->getProductCategoryId(), $data);
+				$result = $this->save($model);
 			}
 		} else {
 			throw new ShopException('Product Category id does not exist');

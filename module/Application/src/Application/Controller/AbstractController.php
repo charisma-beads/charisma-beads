@@ -4,11 +4,12 @@ namespace Application\Controller;
 use Exception;
 use Zend\Mvc\Controller\AbstractActionController;
 
-class AbstractController extends AbstractActionController
+
+abstract class AbstractController extends AbstractActionController
 {   
     /**
      * Sets a exception message for flash plugin.
-     * 
+     *
      * @param Exception $exception
      */
     public function setExceptionMessages(Exception $exception)
@@ -19,7 +20,7 @@ class AbstractController extends AbstractActionController
     	));
     
     	$e = $exception->getPrevious();
-    		
+    
     	if ($e) {
     		while ($e) {
     			$this->flashMessenger()->addMessage($e->getMessage());

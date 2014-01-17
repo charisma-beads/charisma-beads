@@ -30,6 +30,6 @@ return array(
     	'display_startup_errors' => false,
     	'display_errors' => true,
     	'max_execution_time' => 60,
-    	'date.timezone' => 'Europe/London'
+    	'date.timezone' => 'Europe/London',
     ),
 );

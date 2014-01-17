@@ -48,6 +48,36 @@ class Product extends AbstractMapper
 		return $this->fetchResult($select);
 	}
 	
+	public function search(array $search, $sort, Select $select = null)
+	{
+		$select = $this->getSql()->select();
+		$select->from($this->table)
+		->join(
+				'productCategory',
+				'product.productCategoryId=productCategory.productCategoryId',
+				array('category'),
+				Select::JOIN_INNER
+		)
+		->join(
+				'productGroupPrice',
+				'product.productGroupId=productGroupPrice.productGroupId',
+				array('group'),
+				Select::JOIN_LEFT
+		);
+		
+		if ($this->getFetchEnabled()) {
+			$select->where->and->equalTo('product.enabled', 1);
+		}
+		 
+		if ($this->getFetchDisabled()) {
+			$select->where->and->equalTo('product.discontinued', 1);
+		} else {
+			$select->where->and->equalTo('product.discontinued', 0);
+		}
+		
+		return parent::search($search, $sort, $select);
+	}
+	
 	public function searchProducts($product, $category, $sort)
 	{
 	    $select = $this->getSql()->select();

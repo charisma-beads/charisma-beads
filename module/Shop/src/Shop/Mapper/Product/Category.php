@@ -70,43 +70,21 @@ class Category extends AbstractNestedSet
 	    return $this->fetchResult($select);
 	}
 	
-	public function searchCategories($category, $sort)
+	public function search(array $search, $sort, $select = null)
 	{
 	    $select = $this->getFullTree();
 	    
-	    if (!$category == '') {
-	    	if (substr($category, 0, 1) == '=') {
-	    		$id = (int) substr($category, 1);
-	    		$select->where->equalTo($this->getPrimaryKey(), $id);
-	    	} else {
-	    		$searchTerms = explode(' ', $category);
-	    		$where = $select->where->nest();
-	    
-	    		foreach ($searchTerms as $value) {
-	    			$where->like('child.category', '%'.$value.'%');
-	    		}
-	    
-	    		$where->unnest();
-	    	}
-	    	
-	    	if ($this->getFetchEnabled()) {
-	    		$select->where->and->equalTo('child.enabled', 1);
-	    	}
-	    	
-	    	if ($this->getFetchDisabled()) {
-	    		$select->where->and->equalTo('child.discontinued', 1);
-	    	} else {
-	    		$select->where->and->equalTo('child.discontinued', 0);
-	    	}
+	    if ($this->getFetchEnabled()) {
+	    	$select->where->and->equalTo('child.enabled', 1);
 	    }
 	    
-	    if ($sort != '') {
-	        $select->reset('order');
-	        $select = $this->setSortOrder($select, $sort);
+	    if ($this->getFetchDisabled()) {
+	    	$select->where->and->equalTo('child.discontinued', 1);
+	    } else {
+	    	$select->where->and->equalTo('child.discontinued', 0);
 	    }
 	    
-	    
-	    return $this->fetchResult($select);
+	    return parent::search($search, $sort, $select);
 	}
 	
 	public function toggleEnabled(CategoryModel $model)

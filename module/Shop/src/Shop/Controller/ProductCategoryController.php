@@ -1,55 +1,24 @@
 <?php
 namespace Shop\Controller;
 
-use Application\Controller\AbstractController;
-use Shop\Form\Product\Category as CategoryForm;
-use Zend\View\Model\ViewModel;
+use Application\Controller\AbstractCrudController;
 
-class ProductCategoryController extends AbstractController
+class ProductCategoryController extends AbstractCrudController
 {
-    /**
-     * @var \Shop\Service\Product\Category
-     */
-    protected $productCategoryService;
+    protected $searchDefaultParams = array('sort' => 'lft');
+    protected $serviceName = 'Shop\Service\ProductCategory';
+    protected $route = 'admin/shop/category';
     
     public function indexAction()
     {
-        $page = $this->params()->fromRoute('page', 1);
-	    
-	    $params = array(
-	    	'sort' => 'lft',
-	    );
-	    
-	    $this->getProductCategoryService()->getMapper()->setFetchEnabled(false);
-	    
-	    return new ViewModel(array(
-	    	'categories' => $this->getProductCategoryService()->usePaginator(array(
-	    	    'limit' => 25,
-	    	    'page' => $page
-            ))->searchCategories($params)
-	    ));
+	    $this->getService()->getMapper()->setFetchEnabled(false);
+	    return parent::indexAction();
     }
     
     public function listAction()
     {
-        if (!$this->getRequest()->isXmlHttpRequest()) {
-        	return $this->redirect()->toRoute('admin/shop/category');
-        }
-         
-        $params = $this->params()->fromPost();
-         
-        $this->getProductCategoryService()->getMapper()->setFetchEnabled(false);
-         
-        $viewModel = new ViewModel(array(
-        	'categories' => $this->getProductCategoryService()->usePaginator(array(
-	    	    'limit' => $params['count'],
-	    	    'page' => $params['page']
-            ))->searchCategories($params)
-        ));
-         
-        $viewModel->setTerminal(true);
-         
-        return $viewModel;
+       $this->getService()->getMapper()->setFetchEnabled(false);
+       return parent::listAction();
     }
     
     public function setEnabledAction()
@@ -57,164 +26,20 @@ class ProductCategoryController extends AbstractController
     	$id = (int) $this->params('id', 0);
     
     	if (!$id) {
-    		return $this->redirect()->toRoute('admin/shop/category', array(
+    		return $this->redirect()->toRoute($this->getRoute(), array(
     			'action' => 'list'
     		));
     	}
   		
     	try {
-    		$category = $this->getProductCategoryService()->getById($id);
-    		$result = $this->getProductCategoryService()->toggleEnabled($category);
+    		$category = $this->getService()->getById($id);
+    		$result = $this->getService()->toggleEnabled($category);
     	} catch (\Exception $e) {
     		$this->setExceptionMessages($e);
     	}
     
-    	return $this->redirect()->toRoute('admin/shop/category', array(
+    	return $this->redirect()->toRoute($this->getRoute(), array(
     		'action' => 'list'
     	));
-    }
-    
-    public function addAction()
-    {
-    	$request = $this->getRequest();
-    	
-    	if ($request->isPost()) {
-    	
-    		$result = $this->getProductCategoryService()->addCategory($request->getPost());
-    	
-    		if ($result instanceof CategoryForm) {
-    	
-    			$this->flashMessenger()->addInfoMessage(
-    				'There were one or more isues with your submission. Please correct them as indicated below.'
-    			);
-    	
-    			return new ViewModel(array(
-    				'form' => $result
-    			));
-    	
-    		} else {
-    			if ($result) {
-    				$this->flashMessenger()->addSuccessMessage(
-    					'Category has been saved to database.'
-    				);
-    			} else {
-    				$this->flashMessenger()->addErrorMessage(
-    					'Category could not be saved due to a database error.'
-    				);
-    			}
-    			
-    			return $this->redirect()->toRoute('admin/shop/category');
-    		}
-    	}
-    	
-    	return new ViewModel(array(
-    		'form' => $this->getProductCategoryService()->getForm(),
-    	));
-    }
-    
-    public function editAction()
-    {
-    	$id = (int) $this->params('id', 0);
-    	if (!$id) {
-    		return $this->redirect()->toRoute('admin/shop/category', array(
-    			'action' => 'add'
-    		));
-    	}
-    	
-    	try {
-    		$category = $this->getProductCategoryService()->getById($id);
-    	} catch (\Exception $e) {
-    		$this->setExceptionMessages($e);
-    		return $this->redirect()->toRoute('admin/shop/category', array(
-    			'action' => 'list'
-    		));
-    	}
-    	
-    	$request = $this->getRequest();
-    	
-    	if ($request->isPost()) {
-    	
-    		$result = $this->getProductCategoryService()->editCategory($category, $request->getPost());
-    	
-    		if ($result instanceof CategoryForm) {
-    	
-    			$this->flashMessenger()->addInfoMessage(
-    				'There were one or more isues with your submission. Please correct them as indicated below.'
-    			);
-    	
-    			return new ViewModel(array(
-    				'form'		=> $result,
-    				'category'	=> $category,
-    			));
-    		} else {
-    			if ($result) {
-    				$this->flashMessenger()->addSuccessMessage(
-    					'Category has been saved to database.'
-    				);
-    			} else {
-    				$this->flashMessenger()->addErrorMessage(
-    					'Category could not be saved due to a database error.'
-    				);
-    			}
-    			
-    			return $this->redirect()->toRoute('admin/shop/category');
-    		}
-    	}
-    	
-    	$form = $this->getProductCategoryService()->getForm($category);
-    	
-    	return new ViewModel(array(
-    		'form'		=> $form,
-    		'category'	=> $category,
-    	));
-    }
-    
-    public function deleteAction()
-    {
-    	$request = $this->getRequest();
-    	
-    	$id = (int) $request->getPost('productCategoryId');
-    	if (!$id) {
-    		return $this->redirect()->toRoute('admin/shop/category');
-    	}
-    	
-    	if ($request->isPost()) {
-    		$del = $request->getPost('submit', 'No');
-    	
-    		if ($del == 'delete') {
-    			try {
-    				$id = (int) $request->getPost('productCategoryId');
-    				$result = $this->getProductCategoryService()->delete($id);
-    					
-    				if ($result) {
-    					$this->flashMessenger()->addSuccessMessage(
-    						'Category has been deleted from the database.'
-    					);
-    				} else {
-    					$this->flashMessenger()->addErrorMessage(
-    						'Category could not be deleted due to a database error.'
-    					);
-    				}
-    			} catch (\Exception $e) {
-    				$this->setExceptionMessages($e);
-    			}
-    		}
-    	}
-    	
-    	return $this->redirect()->toRoute('admin/shop/category');
-    	 
-    }
-    
-    /**
-     * @return \Shop\Service\Product\Category
-     */
-    protected function getProductCategoryService()
-    {
-        if (null === $this->productCategoryService) {
-            $sl = $this->getServiceLocator();
-            $this->productCategoryService = $sl->get('Shop\Service\ProductCategory');
-        }
-        
-        return $this->productCategoryService;
     }
 }

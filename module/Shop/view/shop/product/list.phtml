@@ -1,7 +1,7 @@
 <?php $this->headTitle('Products') ?>
 <?php echo $this->ztbFlashMessenger()->render(); ?>
 
-<?php if (count($this->products) > 0): ?>
+<?php if (count($this->models) > 0): ?>
 
 <table id="product-list" class="table table-hover table-bordered table-condensed sortable-table">
 	<thead>
@@ -20,7 +20,7 @@
 	</thead>
 	
 	<tbody>
-		<?php foreach($this->products as $row): ?>
+		<?php foreach($this->models as $row): ?>
 		<tr>
 		    <td><?=$this->enabled($row, array(
 		    	'table' => 'product',
@@ -69,7 +69,7 @@
 </table>
 
 <?=$this->paginationControl(
-    $this->products,
+    $this->models,
     'Elastic',
     'paginate',
 	array('route' => 'admin/shop/product/page')
