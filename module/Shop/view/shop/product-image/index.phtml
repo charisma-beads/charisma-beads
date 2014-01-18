@@ -9,19 +9,33 @@
 	    <div class="tab-pane" id="admin-image">
 	    -->
 	    	<div class="row-fluid">
-		    	<form id="search-image" class="form-search" method="post">
-		    	    <input type="text" name="image" placeholder="Image">
-		    	    <input type="text" name="product" placeholder="Product">
-		    	    <button type="submit" class="btn btn-primary"><i class="icon-search icon-white"></i> Search</button>
-		    	    <button type="reset" class="btn">Reset</button>
-		    	</form>
+		    	<?=$this->partial('partial/search', array(
+		    		'name'			=> 'productImage',
+		    		'searchInputs'	=> array(
+		    			'Image'		=> 'full-thumbnail',
+						'Product'	=> 'name',
+		    		),
+		    	));?>
 	    	</div>
 	    	
-	    	<div id="table-image" class="row-fluid table-wrap">
+	    	<div id="table-productImage" class="row-fluid table-wrap">
 		    	<?=$this->partial('shop/product-image/list', array(
-		    	    'images' => $this->images
+		    	    'models' => $this->models
 		    	)); ?>
 	    	</div>
 	    <!-- </div>
 	</div> -->
 </div>
+
+<?php $this->headScript()->captureStart(); ?>
+$(document).ready(function(){
+	$('#table-productImage').dataGrid({
+	    url : 'image/list',
+	    query: { sort : 'productImageId' },
+	    searchForm : $('#search-productImage'),
+	    paging : 'links',
+	    columnSort: true,
+	    //rowClick : admin.product.rowClick
+	});
+});
+<?php $this->headScript()->captureEnd(); ?>

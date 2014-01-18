@@ -6,36 +6,32 @@ use Application\Service\AbstractService;
 class Image extends AbstractService
 {
     protected $mapperClass = 'Shop\Mapper\ProductImage';
-    protected $form = '';
-    protected $inputFilter = '';
+    protected $form = 'Shop\Form\ProductImage';
+    protected $inputFilter = 'Shop\InputFilter\ProductImage';
     
     /**
      * @var \Shop\Service\Product
      */
     protected $productService;
     
-    public function searchImages(array $post)
-    {
-    	$image = (isset($post['image'])) ? (string) $post['image'] : '';
-    	$product = (isset($post['product'])) ? (string) $post['product'] : '';
-    	$sort = (isset($post['sort'])) ? (string) $post['sort'] : '';
-    	 
-    	$images = $this->getMapper()->searchImages($image, $product, $sort);
+    public function search(array $post)
+    {	 
+    	$models = parent::search($post);
     	
-    	foreach ($images as $image) {
-    	    $this->populate($image);
+    	foreach ($models as $model) {
+    	    $this->populate($model);
     	}
     	
-    	return $images;
+    	return $models;
     }
     
     /**
     *
-    * @param \Shop\Model\Product\Image $image
+    * @param \Shop\Model\Product\Image $model
     */
-    public function populate($image)
+    public function populate($model, $children = false)
     {
-    	$image->setRelationalModel($this->getProductService()->getById($image->getProductId()));
+    	$model->setRelationalModel($this->getProductService()->getById($model->getProductId()));
     }
     
     /**

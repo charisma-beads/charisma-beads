@@ -1,10 +1,11 @@
 <?php
 namespace Shop\Controller;
 
-use Application\Controller\AbstractController;
-use Zend\View\Model\ViewModel;
+use Application\Controller\AbstractCrudController;
 
-class TaxRateController extends AbstractController
+class TaxRateController extends AbstractCrudController
 {
-
+	protected $searchDefaultParams = array('sort' => 'taxRate');
+	protected $serviceName = 'Shop\Service\TaxRate';
+	protected $route = 'admin/shop/tax/rate';
 }

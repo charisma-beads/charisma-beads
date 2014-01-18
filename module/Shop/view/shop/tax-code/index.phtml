@@ -1,1 +1,42 @@
-<h2>Not yet implemented</h2>
+
+<div class="tab-wrap">
+<!-- 
+	<ul id="taxCodeTabs" class="nav nav-tabs">
+	    <li><a href="#admin-postZone">Tax Codes</a></li>
+	</ul>
+	
+	<div id="taxCodeTabContent" class="tab-content">
+	    <div class="tab-pane" id="admin-taxCode">
+	    -->
+	    	<div class="row-fluid">
+		    	<?=$this->partial('partial/search', array(
+		    		'name'			=> 'taxCode',
+		    		'searchInputs'	=> array(
+		    			'Tax Code' => 'taxCode-description',
+		    		),
+		    	));?>
+	    	</div>
+	    	
+	    	<div id="table-taxCode" class="row-fluid table-wrap">
+		    	<?=$this->partial('shop/tax-code/list', array(
+		    	    'models' => $this->models
+		    	)); ?>
+	    	</div>
+	    <!-- </div>
+	</div> -->
+</div>
+
+<?php $this->headScript()->captureStart(); ?>
+$(document).ready(function(){
+	$('#table-taxCode').dataGrid({
+	    url : 'code/list',
+	    query: { sort : 'taxCodeId' },
+	    searchForm : $('#search-taxCode'),
+	    paging : 'links',
+	    columnSort: true,
+	    //rowClick : admin.dataTable.rowClick
+	});
+});
+<?php $this->headScript()->captureEnd(); ?>
+
+

@@ -51,7 +51,7 @@ class Product extends AbstractHydrator
 			'productGroupId'		=> $object->getProductGroupId(),
 			'ident'					=> $object->getIdent(),
 			'name'					=> $object->getName(),
-			'price'					=> $object->getPrice(),
+			'price'					=> $object->getPrice(false),
 			'description'			=> $object->getDescription(),
 			'shortDescription'		=> $object->getShortDescription(),
 			'quantity'				=> $object->getQuantity(),

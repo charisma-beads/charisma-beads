@@ -6,7 +6,7 @@ use Shop\Form\Tax\Code as TaxCodeForm;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class Country implements FactoryInterface
+class TaxCode implements FactoryInterface
 {
 	public function createService(ServiceLocatorInterface $serviceLocator)
 	{

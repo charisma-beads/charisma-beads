@@ -9,11 +9,13 @@ return array(
     	'Shop\Form\PostZone'					=> false,
     	'Shop\Form\Product'						=> false,
     	'Shop\Form\ProductCategory'				=> false,
+    	'Shop\Form\ProductImage'				=> false,
     	'Shop\Form\TaxCode'						=> false,
     	'Shop\Form\TaxRate'						=> false,
     ),
 	'invokables'    => array(
 		'Shop\Form\PostLevel'					=> 'Shop\Form\Post\Level',
+		'Shop\Form\ProductImage'				=> 'Shop\Form\Product\Image',
 		'Shop\Form\TaxRate'						=> 'Shop\Form\Tax\Rate',
 		
 		'Shop\InputFilter\Country'				=> 'Shop\InputFilter\Country',

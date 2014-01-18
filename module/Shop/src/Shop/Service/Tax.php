@@ -22,10 +22,10 @@ class Tax
     {   
         if ($this->taxState && $taxRate != 0) {
             if (!$this->taxInc) {
-                $pat = round(($price*$taxRate), 2);
+                $pat = round(($price*($taxRate + 1)), 2);
                 $tax = $pat - $price;
             } else {
-                $pbt = round(($price/$taxRate), 2);
+                $pbt = round(($price/($taxRate + 1)), 2);
                 $tax = $price - $pbt;
                 $price = $pbt;
             }

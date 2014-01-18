@@ -2,13 +2,12 @@
 namespace Shop\Service\Tax;
 
 use Application\Service\AbstractService;
-use Shop\Model\Tax\Code as TaxCode;
 
 class Code extends AbstractService
 {
     protected $mapperClass = 'Shop\Mapper\TaxCode';
-    protected $form = '';
-    protected $inputFilter = '';
+    protected $form = 'Shop\Form\TaxCode';
+    protected $inputFilter = 'Shop\InputFilter\TaxCode';
     
     /**
      * @var \Shop\Service\Tax\Rate
@@ -23,12 +22,25 @@ class Code extends AbstractService
         return $taxCode;
     }
     
-    /**
-     * @param TaxCode $taxCode
-     */
-    public function populate(TaxCode $taxCode)
+    
+    
+    public function search(array $post)
     {
-        $taxCode->setRelationalModel($this->getTaxRateService()->getById($taxCode->getTaxRateId()));
+        $models = parent::search($post);
+        
+        foreach ($models as $model) {
+        	$this->populate($model);
+        }
+     
+        return $models;
+    }
+    
+    /**
+     * @param \Shop\Model\Tax\Code $model
+     */
+    public function populate($model, $children = false)
+    {
+        $model->setRelationalModel($this->getTaxRateService()->getById($model->getTaxRateId()));
     }
     
     public function getTaxRateService()

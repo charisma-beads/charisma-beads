@@ -160,4 +160,9 @@ class Image extends AbstractModel
 		$this->dateModified = $dateModified;
 		return $this;
 	}
+	
+	public function isDefaultImage()
+	{
+		return ($this->getIsDefault()) ? 'Yes' : 'No';
+	}
 }

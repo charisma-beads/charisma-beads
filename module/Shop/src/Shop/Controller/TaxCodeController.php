@@ -1,10 +1,11 @@
 <?php
 namespace Shop\Controller;
 
-use Application\Controller\AbstractController;
-use Zend\View\Model\ViewModel;
+use Application\Controller\AbstractCrudController;
 
-class TaxCodeController extends AbstractController
+class TaxCodeController extends AbstractCrudController
 {
-
+	protected $searchDefaultParams = array('sort' => 'taxCodeId');
+	protected $serviceName = 'Shop\Service\TaxCode';
+	protected $route = 'admin/shop/tax/code';
 }
