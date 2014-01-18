@@ -11,36 +11,8 @@ class Customer extends AbstractMapper
     protected $model = 'Shop\Model\Customer';
     protected $hydrator = 'Shop\Hydrator\Customer';
     
-    public function searchCustomers($customer, $address, $sort)
-    {
-    	$select = $this->getSql()->select();
-    	$select->from($this->table);
-    	 
-    	if (!$customer == '') {
-    		if (substr($customer, 0, 1) == '=') {
-    			$id = (int) substr($customer, 1);
-    			$select->where->equalTo($this->primary, $id);
-    		} else {
-    			$searchTerms = explode(' ', $customer);
-    			$where = $select->where->nest();
-    
-    			foreach ($searchTerms as $value) {
-    				$where->like('firstname', '%'.$value.'%')
-    					->or
-    					->like('lastname',  '%'.$value.'%');
-    			}
-    
-    			$where->unnest();
-    		}
-    	}
-    	 
-    	if (!$address == '') {
-    		$select->where
-    		->nest()
-    		->like('address', '%'.$address.'%')
-    		->unnest();
-    	}
-    	
+    public function search(array $search, $sort, Select $select = null)
+    {	
     	if (str_replace('-', '', $sort) == 'name') {
     		if (strchr($sort,'-')) {
     			$sort = array('-lastname', '-firstname');
@@ -49,9 +21,7 @@ class Customer extends AbstractMapper
     		}
     	}
     	 
-    	$select = $this->setSortOrder($select, $sort);
-    
-    	return $this->fetchResult($select);
+    	return parent::search($search, $sort);
     }
     
     public function getDeliveryAddress($id)

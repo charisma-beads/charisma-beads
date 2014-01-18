@@ -1,4 +1,3 @@
-<?php $this->headScript()->appendFile($this->basePath() . '/js/admin/category.js'); ?>
 <div class="tab-wrap">
 <!-- 
 	<ul id="categoryTabs" class="nav nav-tabs">
@@ -9,15 +8,15 @@
 	    <div class="tab-pane" id="admin-category">
 	    -->
 	    	<div class="row-fluid">
-		    	<?=$this->partial('layout/search', array(
-		    		'name'			=> 'category',
+		    	<?=$this->partial('partial/search', array(
+		    		'name'			=> 'productCategory',
 		    		'searchInputs'	=> array(
 		    			'Category' => 'category',
 		    		),
 		    	));?>
 	    	</div>
 	    	
-	    	<div id="table-category" class="row-fluid table-wrap">
+	    	<div id="table-productCategory" class="row-fluid table-wrap">
 		    	<?=$this->partial('shop/product-category/list', array(
 		    	    'models' => $this->models
 		    	)); ?>
@@ -25,3 +24,16 @@
 	    <!-- </div>
 	</div> -->
 </div>
+
+<?php $this->headScript()->captureStart(); ?>
+$(document).ready(function(){
+	$('#table-productCategory').dataGrid({
+	    url : 'category/list',
+	    query: { sort : 'lft' },
+	    searchForm : $('#search-productCategory'),
+	    paging : 'links',
+	    columnSort: true,
+	    //rowClick : admin.product.rowClick
+	});
+});
+<?php $this->headScript()->captureEnd(); ?>

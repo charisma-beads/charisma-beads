@@ -1,4 +1,4 @@
-<?php $this->headScript()->appendFile($this->basePath() . '/js/admin/post-level.js'); ?>
+
 <div class="tab-wrap">
 <!-- 
 	<ul id="postLevelTabs" class="nav nav-tabs">
@@ -9,20 +9,32 @@
 	    <div class="tab-pane" id="admin-postLevel">
 	    -->
 	    	<div class="row-fluid">
-		    	<?=$this->partial('layout/search', array(
+		    	<?=$this->partial('partial/search', array(
 		    		'name'			=> 'postLevel',
 		    		'searchInputs'	=> array(
-		    			'postLevel',
+		    			'Post Level' => 'postLevel',
 		    		),
 		    	));?>
 	    	</div>
 	    	
 	    	<div id="table-postLevel" class="row-fluid table-wrap">
 		    	<?=$this->partial('shop/post-level/list', array(
-		    	    'postLevels' => $this->postLevels
+		    	    'models' => $this->models
 		    	)); ?>
 	    	</div>
 	    <!-- </div>
 	</div> -->
 </div>
 
+<?php $this->headScript()->captureStart(); ?>
+$(document).ready(function(){
+	$('#table-postLevel').dataGrid({
+	    url : 'level/list',
+	    query: { sort : 'postLevel' },
+	    searchForm : $('#search-postLevel'),
+	    paging : 'links',
+	    columnSort: true,
+	    //rowClick : admin.product.rowClick
+	});
+});
+<?php $this->headScript()->captureEnd(); ?>

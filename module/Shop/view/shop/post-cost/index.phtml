@@ -1,4 +1,4 @@
-<?php $this->headScript()->appendFile($this->basePath() . '/js/admin/post-cost.js'); ?>
+
 <div class="tab-wrap">
 <!-- 
 	<ul id="postCostTabs" class="nav nav-tabs">
@@ -9,20 +9,32 @@
 	    <div class="tab-pane" id="admin-postCost">
 	    -->
 	    	<div class="row-fluid">
-		    	<?=$this->partial('layout/search', array(
-		    		'name'			=> 'cost',
+		    	<?=$this->partial('partial/search', array(
+		    		'name'			=> 'postCost',
 		    		'searchInputs'	=> array(
-		    			'cost',
+		    			'Cost' => 'cost',
 		    		),
 		    	));?>
 	    	</div>
 	    	
 	    	<div id="table-postCost" class="row-fluid table-wrap">
 		    	<?=$this->partial('shop/post-cost/list', array(
-		    	    'postCosts' => $this->postCosts
+		    	    'models' => $this->models
 		    	)); ?>
 	    	</div>
 	    <!-- </div>
 	</div> -->
 </div>
 
+<?php $this->headScript()->captureStart(); ?>
+$(document).ready(function(){
+	$('#table-postCost').dataGrid({
+	    url : 'cost/list',
+	    query: { sort : 'postZoneId' },
+	    searchForm : $('#search-postCost'),
+	    paging : 'links',
+	    columnSort: true,
+	    //rowClick : admin.product.rowClick
+	});
+});
+<?php $this->headScript()->captureEnd(); ?>

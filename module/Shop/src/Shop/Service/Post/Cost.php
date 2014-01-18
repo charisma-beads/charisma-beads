@@ -3,7 +3,6 @@
 namespace Shop\Service\Post;
 
 use Application\Service\AbstractService;
-use Shop\Model\Post\Cost as PostCostModel;
 
 class Cost extends AbstractService
 {
@@ -21,14 +20,9 @@ class Cost extends AbstractService
 	 */
 	protected $postZoneService;
 	
-	public function searchCosts(array $post)
+	public function search(array $post)
 	{
-		$cost = (isset($post['cost'])) ? (string) $post['cost'] : '';
-		$sort = (isset($post['sort'])) ? (string) $post['sort'] : '';
-	
-		//$this->getMapper()->useModelRelationships(true);
-	
-		$costs = $this->getMapper()->searchCosts($cost, $sort);
+		$costs = parent::search($post);
 		
 		foreach ($costs as $cost) {
 			$this->populate($cost, true);
@@ -37,19 +31,22 @@ class Cost extends AbstractService
 		return $costs;
 	}
 	
-	public function populate(PostCostModel $cost, $children = false)
+	/*
+	 * @param Shop\Model\Post\Cost $model
+	 */
+	public function populate($model, $children = false)
 	{
 		$allChildren = ($children === true) ? true : false;
 		$children = (is_array($children)) ? $children : array();
 		
 		if ($allChildren || in_array('postLevel', $children)) {
-			$id = $cost->getPostLevelId();
-			$cost->setRelationalModel($this->getPostLevelService()->getById($id));
+			$id = $model->getPostLevelId();
+			$model->setRelationalModel($this->getPostLevelService()->getById($id));
 		}
 		
 		if ($allChildren || in_array('postZone', $children)) {
-			$id = $cost->getPostZoneId();
-			$cost->setRelationalModel($this->getPostZoneService()->getById($id));
+			$id = $model->getPostZoneId();
+			$model->setRelationalModel($this->getPostZoneService()->getById($id));
 		}
 	}
 	

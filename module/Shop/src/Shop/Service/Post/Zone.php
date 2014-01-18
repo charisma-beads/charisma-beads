@@ -10,15 +10,4 @@ class Zone extends AbstractService
 	protected $form = 'Shop\Form\PostZone';
 	protected $inputFilter = 'Shop\InputFilter\PostZone';
 	
-	public function searchZones(array $post)
-	{
-		$zone = (isset($post['zone'])) ? (string) $post['zone'] : '';
-		$sort = (isset($post['sort'])) ? (string) $post['sort'] : '';
-	
-		//$this->getMapper()->useModelRelationships(true);
-	
-		$zones = $this->getMapper()->searchZones($zone, $sort);
-	
-		return $zones;
-	}
 }

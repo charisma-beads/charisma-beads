@@ -11,7 +11,7 @@ class Cost extends AbstractMapper
     protected $model = 'Shop\Model\Post\Cost';
     protected $hydrator = 'Shop\Hydrator\Post\Cost';
     
-    public function searchCosts($cost, $sort)
+    public function search(array $search, $sort, Select $select = null)
     {
     	$select = $this->getSql()->select($this->table);
     	
@@ -28,24 +28,6 @@ class Cost extends AbstractMapper
 	    	Select::JOIN_LEFT
 	    );
     	 
-    	if (!$cost == '') {
-    		if (substr($cost, 0, 1) == '=') {
-    			$id = (int) substr($cost, 1);
-    			$select->where->equalTo($this->getPrimaryKey(), $id);
-    		} else {
-    			$searchTerms = explode(' ', $cost);
-    			$where = $select->where->nest();
-    			 
-    			foreach ($searchTerms as $value) {
-    				$where->like('cost', '%'.$value.'%');
-    			}
-    			 
-    			$where->unnest();
-    		}
-    	}
-    	 
-    	$select = $this->setSortOrder($select, $sort);
-    	 
-    	return $this->fetchResult($select);
+    	return parent::search($search, $sort, $select);
     }
 }

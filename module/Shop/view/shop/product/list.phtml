@@ -20,6 +20,7 @@
 	</thead>
 	
 	<tbody>
+		<?php /* @var $row \Shop\Model\Product */ ?>
 		<?php foreach($this->models as $row): ?>
 		<tr>
 		    <td><?=$this->enabled($row, array(
@@ -35,33 +36,12 @@
 			<td><?=$this->escapeHtml($this->formatDate($row->getDateCreated())); ?></td>
 			<td><?=$this->escapeHtml($this->formatDate($row->getDateModified())); ?></td>
 			<td>
-                <a href="<?=$this->url('admin/shop/product/edit', array(
-                    'id' => $row->getProductId()
-				)); ?>" class="btn">Edit</a>
-				&nbsp;
-				
-				<!-- Button to trigger modal -->
-                <a href="#productModel<?=$row->getProductId();?>" class="btn btn-danger" data-toggle="modal">Delete</a>
-                <!-- Modal -->
-				<div class="modal hide fade" id="productModel<?=$row->getProductId(); ?>">
-				  <div class="modal-header">
-				    <button type="button" class="close" data-dismiss="modal">&times;</button>
-				    <h3 id="productModel<?=$row->getProductId(); ?>Label">Warning</h3>
-				  </div>
-				  <form class="form-horizontal"  method="post" action="<?=$this->url('admin/shop/product/edit', array(
-				        'action' => 'delete',
-				    )) ?>">
-				        <div class="modal-body">
-				            <p>Are you sure you want to delete this product.</p>
-				            <p class="label label-important">This action cannot be undone</p>
-				        </div>
-				        <input type="hidden" name="productId" value="<?=$row->getProductId() ?>">
-				        <div class="modal-footer">
-				            <button type="button" class="btn btn-primary" data-dismiss="modal">No Don't Do It</button>
-				            <button type="submit" name="submit" class="btn btn-danger" value="delete">Yes Delete It</button>
-				        </div>
-				    </form>
-				</div>
+                <?=$this->partial('partial/edit-actions', array(
+                	'pk'		=> 'productId',
+                	'id'		=> $row->getProductId(),
+		    		'tableName'	=> 'product',
+                	'route'		=> 'admin/shop/product/edit',
+		    	));?>
 			</td>
 		</tr>
 		<?php endforeach; ?>

@@ -15,15 +15,9 @@ class Country extends AbstractService
         return $this->getMapper()->getCountryPostalRates($id);
     }
     
-    public function searchCountries(array $post)
+    public function search(array $post)
     {
-    	$country = (isset($post['country'])) ? (string) $post['country'] : '';
-    	$sort = (isset($post['sort'])) ? (string) $post['sort'] : '';
-    
     	$this->getMapper()->useModelRelationships(true);
-    
-    	$countries = $this->getMapper()->searchCountries($country, $sort);
-    
-    	return $countries;
+    	return parent::search($post);
     }
 }

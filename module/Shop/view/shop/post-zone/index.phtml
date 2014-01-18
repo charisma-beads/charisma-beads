@@ -1,4 +1,4 @@
-<?php $this->headScript()->appendFile($this->basePath() . '/js/admin/post-zone.js'); ?>
+
 <div class="tab-wrap">
 <!-- 
 	<ul id="postZoneTabs" class="nav nav-tabs">
@@ -9,20 +9,33 @@
 	    <div class="tab-pane" id="admin-postZone">
 	    -->
 	    	<div class="row-fluid">
-		    	<?=$this->partial('layout/search', array(
-		    		'name'			=> 'zone',
+		    	<?=$this->partial('partial/search', array(
+		    		'name'			=> 'postZone',
 		    		'searchInputs'	=> array(
-		    			'zone',
+		    			'Zone' => 'zone',
 		    		),
 		    	));?>
 	    	</div>
 	    	
 	    	<div id="table-postZone" class="row-fluid table-wrap">
 		    	<?=$this->partial('shop/post-zone/list', array(
-		    	    'zones' => $this->zones
+		    	    'models' => $this->models
 		    	)); ?>
 	    	</div>
 	    <!-- </div>
 	</div> -->
 </div>
+
+<?php $this->headScript()->captureStart(); ?>
+$(document).ready(function(){
+	$('#table-postZone').dataGrid({
+	    url : 'zone/list',
+	    query: { sort : 'zone' },
+	    searchForm : $('#search-postZone'),
+	    paging : 'links',
+	    columnSort: true,
+	    //rowClick : admin.product.rowClick
+	});
+});
+<?php $this->headScript()->captureEnd(); ?>
 

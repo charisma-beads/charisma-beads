@@ -1,4 +1,4 @@
-<?php $this->headScript()->appendFile($this->basePath() . '/js/admin/country.js'); ?>
+
 <div class="tab-wrap">
 <!-- 
 	<ul id="countryTabs" class="nav nav-tabs">
@@ -9,19 +9,32 @@
 	    <div class="tab-pane" id="admin-country">
 	    -->
 	    	<div class="row-fluid">
-		    	<?=$this->partial('layout/search', array(
+		    	<?=$this->partial('partial/search', array(
 		    		'name'			=> 'country',
 		    		'searchInputs'	=> array(
-		    			'country',
+		    			'Country' => 'country',
 		    		),
 		    	));?>
 	    	</div>
 	    	
 	    	<div id="table-country" class="row-fluid table-wrap">
 		    	<?=$this->partial('shop/country/list', array(
-		    	    'countries' => $this->countries
+		    	    'models' => $this->models
 		    	)); ?>
 	    	</div>
 	    <!-- </div>
 	</div> -->
 </div>
+
+<?php $this->headScript()->captureStart(); ?>
+$(document).ready(function(){
+	$('#table-country').dataGrid({
+	    url : 'country/list',
+	    query: { sort : 'country' },
+	    searchForm : $('#search-country'),
+	    paging : 'links',
+	    columnSort: true,
+	    //rowClick : admin.product.rowClick
+	});
+});
+<?php $this->headScript()->captureEnd(); ?>

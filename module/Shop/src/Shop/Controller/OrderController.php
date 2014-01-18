@@ -1,10 +1,11 @@
 <?php
 namespace Shop\Controller;
 
-use Application\Controller\AbstractController;
-use Zend\View\Model\ViewModel;
+use Application\Controller\AbstractCrudController;
 
-class OrderController extends AbstractController
+class OrderController extends AbstractCrudController
 {
-
+	protected $searchDefaultParams = array('sort' => 'country');
+	protected $serviceName = 'Shop\Service\Order';
+	protected $route = 'admin/shop/order';
 }
