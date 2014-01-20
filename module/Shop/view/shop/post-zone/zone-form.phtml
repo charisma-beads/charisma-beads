@@ -9,6 +9,8 @@ if (isset($this->postZoneId)) $routeArray['id'] = $this->postZoneId;
 			<legend><?=ucwords($this->formAction); ?> Post Zone Form:</legend>
 			<?=$this->ztbFormElement($form->get('zone'));?>
 			<?=$this->ztbFormElement($form->get('taxCodeId'));?>
+			
+			<?=$this->ztbFormElement($form->get('postZoneId'));?>
 			<input type="hidden" name="action" value="<?=$this->formAction;?>">
 			
 			<div class="control-group">

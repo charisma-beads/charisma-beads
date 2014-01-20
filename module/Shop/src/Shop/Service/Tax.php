@@ -21,11 +21,13 @@ class Tax
     public function addTax($price, $taxRate=0)
     {   
         if ($this->taxState && $taxRate != 0) {
+        	$taxRate = $taxRate + 1;
+        	
             if (!$this->taxInc) {
-                $pat = round(($price*($taxRate + 1)), 2);
+                $pat = round(($price*($taxRate)), 2);
                 $tax = $pat - $price;
             } else {
-                $pbt = round(($price/($taxRate + 1)), 2);
+                $pbt = round(($price/($taxRate)), 2);
                 $tax = $price - $pbt;
                 $price = $pbt;
             }

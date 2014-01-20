@@ -28,6 +28,11 @@ class Category extends Form
     	parent::__construct('Category From');
     	
     	$this->add(array(
+    		'name'	=> 'productCategoryId',
+    		'type'	=> 'hidden',
+    	));
+    	
+    	$this->add(array(
     		'name'			=> 'category',
     		'type'			=> 'text',
     		'attributes'	=> array(

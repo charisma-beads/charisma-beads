@@ -9,10 +9,11 @@ use Zend\View\Model\ViewModel;
 
 abstract class AbstractCrudController extends AbstractController
 {   
-    const DATABSE_SAVE_ERROR		= 'row could not be saved due to a database error.';
-    const DATABASE_SAVE_SUCCESS		= 'row with id %s has been saved to database.';
-    const DATABASE_DELETE_ERROR		= 'row could not be deleted due to a database error.';
-    const DATABASE_DELETE_SUCCESS	= 'row with id %s has been deleted from the database.';
+    const DATABASE_SAVE_ERROR		= 'row %s could not be saved to table %s due to a database error.';
+    const DATABASE_ADD_ERROR		= 'record could not be saved to table %s due to a database error.';
+    const DATABASE_SAVE_SUCCESS		= 'row %s has been saved to database table %s.';
+    const DATABASE_DELETE_ERROR		= 'row %s could not be deleted form table %s due to a database error.';
+    const DATABASE_DELETE_SUCCESS	= 'row %s has been deleted from the database table %s.';
     const FORM_ERROR				= 'There were one or more isues with your submission. Please correct them as indicated below.';
     
     protected $searchDefaultParams;
@@ -70,9 +71,10 @@ abstract class AbstractCrudController extends AbstractController
     
     		} else {
     			if ($result) {
-    				$this->flashMessenger()->addSuccessMessage(self::DATABASE_SAVE_SUCCESS);
+    				$tableName = $this->getService()->getMapper()->getTable();
+    				$this->flashMessenger()->addSuccessMessage(sprintf(self::DATABASE_SAVE_SUCCESS, $result, $tableName));
     			} else {
-    				$this->flashMessenger()->addErrorMessage(self::DATABASE_DELETE_SUCCESS);
+    				$this->flashMessenger()->addErrorMessage(sprintf(self::DATABASE_ADD_ERROR, $tableName));
     			}
     
     			return $this->redirect()->toRoute($this->getRoute());
@@ -95,39 +97,50 @@ abstract class AbstractCrudController extends AbstractController
     
     	try {
     		$model = $this->getService()->getById($id);
+    
+	    	$request = $this->getRequest();
+	    
+	    	if ($request->isPost()) {
+	    		
+	    		// primary key ids must match.
+	    		$pk = $this->getService()->getMapper()->getPrimaryKey();
+	    		$tableName = $this->getService()->getMapper()->getTable();
+	    		$modelMethod = 'get' . ucwords($pk);
+	    		$post = $this->params()->fromPost();
+	    		
+	    		if ($post[$pk] != $model->$modelMethod()) {
+	    			throw new \Exception('Primary keys do not match.');
+	    		}
+	    
+	    		$result = $this->getService()->edit($model, $post);
+	    
+	    		if ($result instanceof Form) {
+	    
+	    			$this->flashMessenger()->addInfoMessage(self::FORM_ERROR);
+	    
+	    			return new ViewModel(array(
+	    				'form'	=> $result,
+	    				'model'	=> $model,
+	    			));
+	    		} else {
+	    			if ($result) {
+	    				$this->flashMessenger()->addSuccessMessage(sprintf(self::DATABASE_SAVE_SUCCESS, $id, $tableName));
+	    			} else {
+	    				$this->flashMessenger()->addErrorMessage(sprintf(self::DATABASE_SAVE_ERROR, id, $tableName));
+	    			}
+	    
+	    			return $this->redirect()->toRoute($this->getRoute());
+	    		}
+	    	}
+	    	
+	    	$form = $this->getService()->getForm($model);
+	    	
     	} catch (\Exception $e) {
     		$this->setExceptionMessages($e);
     		return $this->redirect()->toRoute($this->getRoute(), array(
     			'action' => 'list'
     		));
     	}
-    
-    	$request = $this->getRequest();
-    
-    	if ($request->isPost()) {
-    
-    		$result = $this->getService()->edit($model, $request->getPost());
-    
-    		if ($result instanceof Form) {
-    
-    			$this->flashMessenger()->addInfoMessage(self::FORM_ERROR);
-    
-    			return new ViewModel(array(
-    				'form'	=> $result,
-    				'model'	=> $model,
-    			));
-    		} else {
-    			if ($result) {
-    				$this->flashMessenger()->addSuccessMessage(self::DATABASE_SAVE_SUCCESS);
-    			} else {
-    				$this->flashMessenger()->addErrorMessage(self::DATABSE_SAVE_ERROR);
-    			}
-    
-    			return $this->redirect()->toRoute($this->getRoute());
-    		}
-    	}
-    
-    	$form = $this->getService()->getForm($model);
     
     	return new ViewModel(array(
     		'form'	=> $form,
@@ -139,6 +152,7 @@ abstract class AbstractCrudController extends AbstractController
     {
     	$request = $this->getRequest();
     
+    	$tableName = $this->getService()->getMapper()->getTable();
     	$pk = $this->getService()->getMapper()->getPrimaryKey();
     	$id = (int) $request->getPost($pk);
     
@@ -154,9 +168,9 @@ abstract class AbstractCrudController extends AbstractController
     				$result = $this->getService()->delete($id);
     
     				if ($result) {
-    					$this->flashMessenger()->addSuccessMessage(self::DATABASE_DELETE_SUCCESS);
+    					$this->flashMessenger()->addSuccessMessage(sprintf(self::DATABASE_DELETE_SUCCESS, $id, $tableName));
     				} else {
-    					$this->flashMessenger()->addErrorMessage(self::DATABASE_DELETE_ERROR);
+    					$this->flashMessenger()->addErrorMessage(sprintf(self::DATABASE_DELETE_ERROR, $id, $tableName));
     				}
     			} catch (\Exception $e) {
     				$this->setExceptionMessages($e);
@@ -235,27 +249,5 @@ abstract class AbstractCrudController extends AbstractController
     {
     	$this->route = $route;
     	return $this;
-    }
-    
-    /**
-     * Sets a exception message for flash plugin.
-     *
-     * @param Exception $exception
-     */
-    public function setExceptionMessages(Exception $exception)
-    {
-    	$this->flashMessenger()->addErrorMessage(array(
-    			'message' => $exception->getMessage(),
-    			'title'   => 'Error!'
-    	));
-    
-    	$e = $exception->getPrevious();
-    
-    	if ($e) {
-    		while ($e) {
-    			$this->flashMessenger()->addMessage($e->getMessage());
-    			$e = $e->getPrevious();
-    		}
-    	}
     }
 }

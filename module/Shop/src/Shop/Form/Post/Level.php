@@ -11,6 +11,11 @@ class Level extends Form
 		parent::__construct('Post Level Form');
 		
 		$this->add(array(
+			'name'	=> 'postLevelId',
+			'type'	=> 'hidden',
+		));
+		
+		$this->add(array(
 			'name'			=> 'postLevel',
 			'type'			=> 'number',
 			'attributes'	=> array(

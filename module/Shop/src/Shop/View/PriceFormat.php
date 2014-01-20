@@ -10,7 +10,10 @@ class PriceFormat extends AbstractViewHelper
     
     public function __invoke($amount)
     {
-    	$currency = $this->getCurrencyHelper();
+    	$currency = $this->getCurrencyHelper()
+    		->setCurrencyCode("GBP")
+    		->setLocale("en_GB");
+    	
     	return $currency($amount);
     }
     
@@ -20,8 +23,7 @@ class PriceFormat extends AbstractViewHelper
     protected function getCurrencyHelper()
     {
     	if (!$this->currencyHelper instanceof CurrencyFormat) {
-    		$this->currencyHelper = $this->view->plugin('currencyFormat')
-    		->setCurrencyCode("GBP")->setLocale("en_GB");
+    		$this->currencyHelper = $this->view->plugin('currencyFormat');
     	}
     
     	return $this->currencyHelper;

@@ -40,6 +40,11 @@ class Product extends Form
         parent::__construct('Product From');
         
         $this->add(array(
+        	'name'	=> 'productId',
+        	'type'	=> 'hidden',
+        ));
+        
+        $this->add(array(
         	'name'			=> 'ident',
         	'type'			=> 'text',
         	'attributes'	=> array(
@@ -149,6 +154,9 @@ class Product extends Form
         	'type'			=> 'number',
         	'attributes'	=> array(
         		'autofocus'	=> true,
+        		'min'		=> '0.00',
+        		'max'		=> '100.00',
+        		'step'		=> '0.01',
         	),
         	'options'		=> array(
         		'label'			=> 'Product Discount:',

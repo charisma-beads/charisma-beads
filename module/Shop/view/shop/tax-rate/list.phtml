@@ -1,1 +1,43 @@
-<h2>Not yet implemented</h2>
+<?php $this->headTitle('Tax Rates') ?>
+<?php echo $this->ztbFlashMessenger()->render(); ?>
+
+<?php if (count($this->models) > 0): ?>
+
+<table id="taxCode-list" class="table table-hover table-bordered table-condensed sortable-table">
+	<thead>
+		<tr>
+			<th data-field="taxRateId">Tax Rate Id</th>
+			<th data-field="taxRate">Tax Rate</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	
+	<tbody>
+		<?php /* @var $row \Shop\Model\Tax\Code */ ?>
+		<?php foreach($this->models as $row): ?>
+		<tr>
+			<td><?=$this->escapeHtml($row->getTaxRateId()); ?></td>
+			<td><?=$this->escapeHtml($this->percentFormat($row->getTaxRate())); ?></td>
+			<td>
+                <?=$this->partial('partial/edit-actions', array(
+                	'pk'		=> 'taxRateId',
+                	'id'		=> $row->getTaxRateId(),
+		    		'tableName'	=> 'taxRate',
+                	'route'		=> 'admin/shop/tax/rate/edit',
+		    	));?>
+			</td>
+		</tr>
+		<?php endforeach; ?>
+	</tbody>
+</table>
+
+<?=$this->paginationControl(
+    $this->models,
+    'Elastic',
+    'paginate',
+	array('route' => 'admin/shop/tax/rate/page')
+); ?>
+
+<?php else: ?>
+<h4>No Tax Rates where returned by search.</h4>
+<?php endif; ?>

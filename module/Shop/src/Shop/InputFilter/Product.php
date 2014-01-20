@@ -137,7 +137,6 @@ class Product extends InputFilter
     		'filters'		=> array(
     			array('name' => 'StripTags'),
     			array('name' => 'StringTrim'),
-    			array('name' => 'Digits'),
     		),
     		'validators'	=> array(
     			array('name' => 'Float'),

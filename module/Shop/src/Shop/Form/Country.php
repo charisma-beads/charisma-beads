@@ -17,6 +17,11 @@ class Country extends Form
 		parent::__construct('Country Form');
 		
 		$this->add(array(
+			'name'	=> 'countryId',
+			'type'	=> 'hidden',
+		));
+		
+		$this->add(array(
         	'name'			=> 'country',
         	'type'			=> 'text',
         	'attributes'	=> array(

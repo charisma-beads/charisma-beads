@@ -1,1 +1,43 @@
-<h2>Not yet implemented</h2>
+
+<div class="tab-wrap">
+<!-- 
+	<ul id="taxRateTabs" class="nav nav-tabs">
+	    <li><a href="#admin-taxRate">Tax Rates</a></li>
+	</ul>
+	
+	<div id="taxRateTabContent" class="tab-content">
+	    <div class="tab-pane" id="admin-taxRate">
+	    -->
+	    	<div class="row-fluid">
+		    	<?=$this->partial('partial/search', array(
+		    		'name'			=> 'taxRate',
+		    		'searchInputs'	=> array(
+		    			'Tax Rate' => 'taxRate',
+		    		),
+		    	));?>
+	    	</div>
+	    	
+	    	<div id="table-taxRate" class="row-fluid table-wrap">
+		    	<?=$this->partial('shop/tax-rate/list', array(
+		    	    'models' => $this->models
+		    	)); ?>
+	    	</div>
+	    <!-- </div>
+	</div> -->
+</div>
+
+<?php $this->headScript()->captureStart(); ?>
+$(document).ready(function(){
+	$('#table-taxRate').dataGrid({
+	    url : 'rate/list',
+	    query: { sort : 'taxRateId' },
+	    searchForm : $('#search-taxRate'),
+	    paging : 'links',
+	    columnSort: true,
+	    //rowClick : admin.dataTable.rowClick
+	});
+});
+<?php $this->headScript()->captureEnd(); ?>
+
+
+

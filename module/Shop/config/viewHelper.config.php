@@ -7,7 +7,8 @@ return array(
 		'Cart'			=> 'Shop\View\Cart',
 	    'Enabled'       => 'Shop\View\Enabled',
 	    'FormatAddress' => 'Shop\View\FormatAddress',
+		'PercentFormat'	=> 'Shop\View\PercentFormat',
 	    'PriceFormat'   => 'Shop\View\PriceFormat',
 	    'ProductPrice'  => 'Shop\View\ProductPrice',
-	)
+	),
 );

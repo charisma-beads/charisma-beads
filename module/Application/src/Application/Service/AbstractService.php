@@ -4,6 +4,7 @@ namespace Application\Service;
 use Application\Model\AbstractModel;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\Stdlib\Hydrator\ClassMethods;
 use Exception;
 
 class AbstractService implements ServiceLocatorAwareInterface
@@ -76,7 +77,7 @@ class AbstractService implements ServiceLocatorAwareInterface
 	public function add($post)
 	{
 		$model = $this->getMapper()->getModel();
-		$form  = $this->getForm($model, $post);
+		$form  = $this->getForm($model, $post, true, true);
 	
 		if (!$form->isValid()) {
 			return $form;
@@ -87,7 +88,7 @@ class AbstractService implements ServiceLocatorAwareInterface
 	
 	public function edit($model, $post, $form = null)
 	{
-		$form  = ($form) ? $form : $this->getForm($model, $post);
+		$form  = ($form) ? $form : $this->getForm($model, $post, true, true);
 		
 		if (!$form->isValid()) {
 			return $form;
@@ -142,16 +143,26 @@ class AbstractService implements ServiceLocatorAwareInterface
 	}
 	
 	/**
-	 * TODO: make this a seperate service and set input filter too from service.
+	 * Gets the default form for the service.
 	 * 
-	 * @return $form
+	 * @param AbstractModel $model
+	 * @param array $data
+	 * @param bool $useInputFilter
+	 * @param bool $useHydrator
+	 * @return \Zend\Form\Form $form
 	 */
-	public function getForm($model=null, $data=null)
+	public function getForm(AbstractModel $model=null, array $data=null, $useInputFilter=false, $useHydrator=false)
 	{
 		$sl = $this->getServiceLocator();
 		$form = $sl->get($this->form);
-		$form->setInputFilter($sl->get($this->inputFilter));
-		$form->setHydrator($this->getMapper()->getHydrator());
+		
+		if ($useInputFilter) {
+			$form->setInputFilter($sl->get($this->inputFilter));
+		}
+		
+		if ($useHydrator) {
+			$form->setHydrator($this->getMapper()->getHydrator());
+		}
 		 
 		if ($model) {
 			$form->bind($model);

@@ -24,6 +24,7 @@ if (isset($this->productCategoryId)) $routeArray['id'] = $this->productCategoryI
 				</div>
 			</div>
 			
+			<?=$this->ztbFormElement($form->get('productCategoryId'));?>
 			<input type="hidden" name="action" value="<?=$this->formAction;?>">
 			
 			<div class="control-group">

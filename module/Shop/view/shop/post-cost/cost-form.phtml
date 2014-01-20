@@ -11,6 +11,8 @@ if (isset($this->postCostId)) $routeArray['id'] = $this->postCostId;
 			<?=$this->ztbFormElement($form->get('vatInc'));?>
 			<?=$this->ztbFormElement($form->get('postLevelId'));?>
 			<?=$this->ztbFormElement($form->get('postZoneId'));?>
+			
+			<?=$this->ztbFormElement($form->get('postCostId'));?>
 			<input type="hidden" name="action" value="<?=$this->formAction;?>">
 			
 			<div class="control-group">

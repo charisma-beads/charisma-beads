@@ -22,6 +22,11 @@ class AbstractModel
 		return method_exists($this, $getter);
 	}
 	
+	public function getArrayCopy()
+	{
+		return get_object_vars($this);
+	}
+	
 	/**
 	 * Set relationship model
 	 * 

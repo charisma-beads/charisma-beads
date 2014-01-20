@@ -9,6 +9,8 @@ if (isset($this->countryId)) $routeArray['id'] = $this->countryId;
 			<legend><?=ucwords($this->formAction); ?> Country Form:</legend>
 			<?=$this->ztbFormElement($form->get('country'));?>
 			<?=$this->ztbFormElement($form->get('postZoneId'));?>
+			
+			<?=$this->ztbFormElement($form->get('countryId'));?>
 			<input type="hidden" name="action" value="<?=$this->formAction;?>">
 			
 			<div class="control-group">

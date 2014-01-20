@@ -12,6 +12,16 @@ class Code extends Form
 	 */
 	protected $taxRateService;
 	
+	public function __construct()
+	{
+		parent::__construct('Tax Rate Form');
+		
+		$this->add(array(
+			'name'	=> 'taxRateId',
+			'type'	=> 'hidden',
+		));
+	}
+	
 	/**
 	 * @param TaxRateService $taxRateService
 	 * @return \Shop\Form\Tax\Code

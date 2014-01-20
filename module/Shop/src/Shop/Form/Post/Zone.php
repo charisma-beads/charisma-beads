@@ -17,6 +17,11 @@ class Zone extends Form
 		parent::__construct('Post Zone Form');
 		
 		$this->add(array(
+			'name'	=> 'postZoneId',
+			'type'	=> 'hidden',
+		));
+		
+		$this->add(array(
 			'name'			=> 'zone',
 			'type'			=> 'text',
 			'attributes'	=> array(

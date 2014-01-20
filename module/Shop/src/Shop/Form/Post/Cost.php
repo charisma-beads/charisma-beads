@@ -23,6 +23,11 @@ class Cost extends Form
 		parent::__construct('Post Cost Form');
 		
 		$this->add(array(
+			'name'	=> 'postCostId',
+			'type'	=> 'hidden',
+		));
+		
+		$this->add(array(
 			'name'			=> 'cost',
 			'type'			=> 'number',
 			'attributes'	=> array(
