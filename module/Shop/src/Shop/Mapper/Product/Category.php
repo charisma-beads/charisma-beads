@@ -3,7 +3,9 @@ namespace Shop\Mapper\Product;
 
 use Application\Mapper\AbstractNestedSet;
 use Shop\Model\Product\Category as CategoryModel;
+use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Where;
+
 
 class Category extends AbstractNestedSet
 {
@@ -70,7 +72,7 @@ class Category extends AbstractNestedSet
 	    return $this->fetchResult($select);
 	}
 	
-	public function search(array $search, $sort, $select = null)
+	public function search(array $search, $sort, Select $select = null)
 	{
 	    $select = $this->getFullTree();
 	    

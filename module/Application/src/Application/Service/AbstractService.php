@@ -2,9 +2,9 @@
 namespace Application\Service;
 
 use Application\Model\AbstractModel;
+use Zend\Form\Form;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\Stdlib\Hydrator\ClassMethods;
 use Exception;
 
 class AbstractService implements ServiceLocatorAwareInterface
@@ -39,17 +39,34 @@ class AbstractService implements ServiceLocatorAwareInterface
 	 */
 	protected $saveOverRide;
 	
+	/**
+	 * return just one record from database
+	 * 
+	 * @param int $id
+	 * @return AbstractModel|null
+	 */
 	public function getById($id)
 	{
 		$id = (int) $id;
 		return $this->getMapper()->getById($id);
 	}
 	
+	/**
+	 * fetch all records form database
+	 * 
+	 * @return \Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator|\Zend\Db\ResultSet\HydratingResultSet
+	 */
 	public function fetchAll()
 	{
 		return $this->getMapper()->fetchAll();
 	}
 	
+	/**
+	 * basic search on database
+	 * 
+	 * @param array $post
+	 * @return \Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator|\Zend\Db\ResultSet\HydratingResultSet
+	 */
 	public function search(array $post)
 	{
 		$sort = (isset($post['sort'])) ? (string) $post['sort']: '';
@@ -69,12 +86,25 @@ class AbstractService implements ServiceLocatorAwareInterface
 		return $models;
 	}
 	
+	/**
+	 * override this to populate relational records.
+	 * 
+	 * @param AbstractModel $model
+	 * @param string $children
+	 * @return AbstractModel $model
+	 */
 	public function populate($model, $children = false)
 	{
 		return $model;
 	}
 	
-	public function add($post)
+	/**
+	 * prepare data to be inserted into database
+	 * 
+	 * @param array $post
+	 * @return int results from self::save()
+	 */
+	public function add(array $post)
 	{
 		$model = $this->getMapper()->getModel();
 		$form  = $this->getForm($model, $post, true, true);
@@ -86,7 +116,15 @@ class AbstractService implements ServiceLocatorAwareInterface
 		return $this->save($form->getData());
 	}
 	
-	public function edit($model, $post, $form = null)
+	/**
+	 * prepare data to be updated and saved into database.
+	 * 
+	 * @param AbstractModel $model
+	 * @param array $post
+	 * @param Form $form
+	 * @return int results from self::save()
+	 */
+	public function edit(AbstractModel $model, array $post, Form $form = null)
 	{
 		$form  = ($form) ? $form : $this->getForm($model, $post, true, true);
 		
@@ -99,6 +137,13 @@ class AbstractService implements ServiceLocatorAwareInterface
 		return $this->$save($form->getData());
 	}
 	
+	/**
+	 * updates a row if id is supplied else insert a new row
+	 * 
+	 * @param array|AbstractModel $data
+	 * @throws Exception
+	 * @return int $reults number of rows affected or insertId
+	 */
 	public function save($data)
 	{
 		if ($data instanceof AbstractModel) {
@@ -121,12 +166,20 @@ class AbstractService implements ServiceLocatorAwareInterface
 		return $result;
 	}
 	
+	/**
+	 * delete row from database
+	 * 
+	 * @param int $id
+	 * @return int $result number of rows affected
+	 */
 	public function delete($id)
 	{
 		$id = (int) $id;
-		return $this->getMapper()->delete(array(
+		$result = $this->getMapper()->delete(array(
 			$this->getMapper()->getPrimaryKey() => $id
 		));
+		
+		return $result;
 	}
 	
 	/**
@@ -149,7 +202,7 @@ class AbstractService implements ServiceLocatorAwareInterface
 	 * @param array $data
 	 * @param bool $useInputFilter
 	 * @param bool $useHydrator
-	 * @return \Zend\Form\Form $form
+	 * @return Form $form
 	 */
 	public function getForm(AbstractModel $model=null, array $data=null, $useInputFilter=false, $useHydrator=false)
 	{
@@ -197,7 +250,7 @@ class AbstractService implements ServiceLocatorAwareInterface
 	 * Set the service locator.
 	 *
 	 * @param ServiceLocatorInterface $serviceLocator
-	 * @return \Application\Model\AbstractModel
+	 * @return AbstractModel
 	 */
 	public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
 	{
@@ -208,7 +261,7 @@ class AbstractService implements ServiceLocatorAwareInterface
 	/**
 	 * Get the service locator.
 	 *
-	 * @return \Zend\ServiceManager\ServiceLocatorInterface
+	 * @return ServiceLocatorInterface
 	 */
 	public function getServiceLocator()
 	{

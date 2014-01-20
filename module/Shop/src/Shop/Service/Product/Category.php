@@ -1,9 +1,11 @@
 <?php
 namespace Shop\Service\Product;
 
+use Application\Model\AbstractModel;
 use Application\Service\AbstractService;
 use Shop\ShopException;
 use Shop\Model\Product\Category as CategoryModel;
+use Zend\Form\Form;
 
 class Category extends AbstractService
 {
@@ -66,7 +68,7 @@ class Category extends AbstractService
 		return parent::search($post);
 	}
 	
-	public function add($post)
+	public function add(array $post)
 	{
 		if (!$post['ident']) {
 			$post['ident'] = $post['category'];
@@ -89,8 +91,12 @@ class Category extends AbstractService
 	/**
 	 * @param CategoryModel $model
 	 */
-	public function edit($model, $post, $form = null)
+	public function edit(AbstractModel $model, array $post, Form $form = null)
 	{
+		if ($model instanceof CategoryModel) {
+			throw new ShopException('$model must be an instance of \Shop\Model\Product\Category');
+		}
+		
 		if (!$post['ident']) {
 			$post['ident'] = $post['category'];
 		}

@@ -19,6 +19,7 @@ class MvcListener implements ListenerAggregateInterface
     public function attach(EventManagerInterface $events)
     {
         $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH, array($this, 'onDispatch'));
+        $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($this, 'onDispatchError'), -200);
     }
 
     public function detach(EventManagerInterface $events)
@@ -43,6 +44,30 @@ class MvcListener implements ListenerAggregateInterface
         }
         
         $layout = $config['admin']['admin_layout_template'];
-        $controller->layout($layout); 
+        $controller->layout($layout);
+    }
+    
+    public function onDispatchError(MvcEvent $event)
+    {
+    	$sm = $event->getApplication()->getServiceManager();
+    	
+    	$request = $event->getRequest();
+    	
+    	$baseUrl = $request->getBaseUrl();
+    	$requestUri = $request->getRequestUri(); 
+    	
+    	$route = str_replace($baseUrl . '/', '', $requestUri);
+    	$controller = explode('/', $route);
+    	
+    	if ($controller[0] !== 'admin') {
+    		return;
+    	}
+    	
+    	$config = $sm->get('config');
+    	$layout = $config['admin']['admin_layout_template'];
+    	
+    	$viewModel = $event->getViewModel();
+    	$viewModel->setTemplate($layout);
+    	
     }
 }

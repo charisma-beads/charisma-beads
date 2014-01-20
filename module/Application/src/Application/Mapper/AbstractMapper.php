@@ -102,7 +102,7 @@ class AbstractMapper implements DbAdapterAwareInterface
 	 * Gets one row by its id
 	 *
 	 * @param int $id
-	 * @return AbstractModel
+	 * @return AbstractModel|null
 	 */
 	public function getById($id)
 	{

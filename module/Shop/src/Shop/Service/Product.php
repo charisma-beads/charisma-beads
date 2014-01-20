@@ -1,8 +1,11 @@
 <?php
 namespace Shop\Service;
 
+use Application\Model\AbstractModel;
 use Application\Service\AbstractService;
 use Shop\Model\Product as ProductModel;
+use Shop\ShopException;
+use Zend\Form\Form;
 
 class Product extends AbstractService
 {
@@ -91,35 +94,35 @@ class Product extends AbstractService
 	}
 	
 	/**
-	 * @param \Shop\Model\Product $product
+	 * @param ProductModel $model
 	 * @param bool|array $children
 	 */
-	public function populate($product, $children = false)
+	public function populate($model, $children = false)
 	{
 		$allChildren = ($children === true) ? true : false;
 		$children = (is_array($children)) ? $children : array();
 		 
 		if ($allChildren || in_array('category', $children)) {
-		    $id = $product->getProductCategoryId();
-			$product->setRelationalModel($this->getCategoryService()->getById($id));
+		    $id = $model->getProductCategoryId();
+			$model->setRelationalModel($this->getCategoryService()->getById($id));
 		}
 		 
 		if ($allChildren || in_array('size', $children)) {
-			$product->setRelationalModel($this->getSizeService()->getById($product->getProductSizeId()));
+			$model->setRelationalModel($this->getSizeService()->getById($model->getProductSizeId()));
 		}
 		 
 		if ($allChildren || in_array('taxCode', $children)) {
-			$product->setRelationalModel($this->getTaxCodeService()->getById($product->getTaxCodeId()));
+			$model->setRelationalModel($this->getTaxCodeService()->getById($model->getTaxCodeId()));
 		}
 		 
 		if ($allChildren || in_array('postUnit', $children)) {
-			$product->setRelationalModel($this->getPostUnitService()->getById($product->getPostUnitId()));
+			$model->setRelationalModel($this->getPostUnitService()->getById($model->getPostUnitId()));
 		}
 		 
 		if ($allChildren || in_array('group', $children)) {
-		    $id = $product->getProductGroupId();
+		    $id = $model->getProductGroupId();
 		    if (0 !== $id) {
-		        $product->setRelationalModel($this->getGroupPriceService()->getById($id));
+		        $model->setRelationalModel($this->getGroupPriceService()->getById($id));
 		    }
 		}
 		 
@@ -128,7 +131,7 @@ class Product extends AbstractService
 		}
 	}
 	
-	public function add($post)
+	public function add(array $post)
 	{
 		if (!$post['ident']) {
 			$post['ident'] = $post['name'] . ' ' . $post['shortDescription'];
@@ -140,8 +143,12 @@ class Product extends AbstractService
 	/**
 	 * @param ProductModel $model
 	 */
-	public function edit($model, $post, $form = null)
+	public function edit(AbstractModel $model, array $post, Form $form = null)
 	{
+		if ($model instanceof ProductModel) {
+			throw new ShopException('$model must be an instance of \Shop\Model\Product');
+		}
+		
 		if (!$post['ident']) {
 			$post['ident'] = $post['name'] . ' ' . $post['shortDescription'];
 		}
