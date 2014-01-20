@@ -93,8 +93,8 @@ class Category extends AbstractService
 	 */
 	public function edit(AbstractModel $model, array $post, Form $form = null)
 	{
-		if ($model instanceof CategoryModel) {
-			throw new ShopException('$model must be an instance of \Shop\Model\Product\Category');
+		if (!$model instanceof CategoryModel) {
+			throw new ShopException('$model must be an instance of Shop\Model\Product\Category, ' . get_class($model) . ' given.');
 		}
 		
 		if (!$post['ident']) {

@@ -145,8 +145,8 @@ class Product extends AbstractService
 	 */
 	public function edit(AbstractModel $model, array $post, Form $form = null)
 	{
-		if ($model instanceof ProductModel) {
-			throw new ShopException('$model must be an instance of \Shop\Model\Product');
+		if (!$model instanceof ProductModel) {
+			throw new ShopException('$model must be an instance of Shop\Model\Product, ' . get_class($model) . ' given.');
 		}
 		
 		if (!$post['ident']) {
