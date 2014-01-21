@@ -14,5 +14,21 @@ class Rate extends Form
 			'name'	=> 'taxRateId',
 			'type'	=> 'hidden',
 		));
+		
+		$this->add(array(
+			'name'			=> 'taxRate',
+			'type'			=> 'number',
+			'attributes'	=> array(
+				'placeholder'	=> 'Tax Rate:',
+				'autofocus'		=> true,
+				'min'			=> '0.00',
+				'max'			=> '100.00',
+				'step'			=> '0.01',
+			),
+			'options'		=> array(
+				'label' => 'Tax Rate:',
+				'help-inline'	=> 'Do not include the % sign.'
+			),
+		));
 	}
 }

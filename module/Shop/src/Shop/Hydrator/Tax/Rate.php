@@ -2,10 +2,20 @@
 namespace Shop\Hydrator\Tax;
 
 use Application\Hydrator\AbstractHydrator;
+use Shop\Hydrator\Strategy\Percent;
 
 class Rate extends AbstractHydrator
 {
     protected $prefix = 'taxRate.';
+    
+    public Function __construct($useRelationships)
+    {
+    	parent::__construct();
+    	
+    	$this->useRelationships = $useRelationships;
+    
+    	$this->addStrategy('taxRate', new Percent());
+    }
     
 	/**
 	 * @param \Shop\Model\Tax\Rate $object
@@ -15,7 +25,7 @@ class Rate extends AbstractHydrator
 	{
 		return array(
 			'taxRateId'	=> $object->getTaxRateId(),
-			'taxRate'	=> $object->getTaxRate()
+			'taxRate'	=> $this->extractValue('taxRate', $object->getTaxRate()),
 		);
 	}
 }

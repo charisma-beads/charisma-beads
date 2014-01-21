@@ -360,9 +360,9 @@ class Product extends AbstractModel
 	/**
 	 * @return number $discountPercent
 	 */
-	public function getDiscountPercent()
+	public function getDiscountPercent($formatPercent=false)
 	{
-		return $this->discountPercent;
+		return (true === $formatPercent) ? $this->discountPercent / 100 : $this->discountPercent;
 	}
 
 	/**

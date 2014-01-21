@@ -11,8 +11,8 @@ Features To Add
 	* Admin image list and edit
 	* Admin customer list and edit
 	* Admin order list and edit
-	* Admin postage list and edit
-	* Admin tax list and edit
+	* ~~Admin postage list and edit~~
+	* ~~Admin tax list and edit~~
 	* ~~Public product list~~
 	* Indivual product page
 	* Shopping cart

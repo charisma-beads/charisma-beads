@@ -1,8 +1,14 @@
 <?php $this->headTitle('Edit Country') ?>
 <?=$this->ztbFlashMessenger()->render(); ?>
 
-<?=$this->partial('shop/country/country-form', array(
-	'form' => $this->form,
-	'formAction' => 'edit',
-	'countryId' => $this->model->getCountryId()
+<?=$this->partial('partial/add-edit-form', array(
+	'form' 			=> $this->form,
+	'formAction' 	=> 'edit',
+	'primaryKey'	=> $this->model->getCountryId(),
+	'formName'		=> 'Country',
+	'postRoute'		=> 'admin/shop/country/edit',
+	'cancelRoute'	=> 'admin/shop/country',
+	'formElements'	=> array(
+		'country', 'postZoneId', 'countryId',
+	),
 )); ?>

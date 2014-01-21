@@ -17,9 +17,62 @@ class Code extends Form
 		parent::__construct('Tax Rate Form');
 		
 		$this->add(array(
-			'name'	=> 'taxRateId',
+			'name'	=> 'taxCodeId',
 			'type'	=> 'hidden',
 		));
+		
+		$this->add(array(
+			'name'			=> 'taxCode',
+			'type'			=> 'text',
+			'attributes'	=> array(
+				'placeholder'		=> 'Tax Code:',
+				'autofocus'			=> true,
+				'autocapitalize'	=> 'on',
+			),
+			'options'		=> array(
+				'label' => 'Tax Code:',
+			),
+		));
+		
+		$this->add(array(
+			'name'			=> 'description',
+			'type'			=> 'text',
+			'attributes'	=> array(
+				'placeholder'		=> 'Description:',
+				'autofocus'			=> true,
+				'autocapitalise'	=> 'on',
+			),
+			'options'		=> array(
+				'label'	=> 'Description:',
+			),
+		));
+	}
+	
+	public function init()
+	{
+		$this->add(array(
+			'name'		=> 'taxRateId',
+			'type'		=> 'select',
+			'options'	=> array(
+				'label'			=> 'Tax Rate:',
+				'required'		=> true,
+				'empty_option'	=> '---Please select a tax rate---',
+				'value_options'	=> $this->getTaxRateList(),
+			),
+		));
+	}
+	
+	public function getTaxRateList()
+	{
+		$taxRates = $this->taxRateService->fetchAll();
+		$taxRateOptions = array();
+		
+		/* @var $taxRate \Shop\Model\Tax\Rate */
+		foreach ($taxRates as $taxRate) {
+			$taxRateOptions[$taxRate->getTaxRateId()] = $taxRate->getTaxRate();
+		}
+		
+		return $taxRateOptions;
 	}
 	
 	/**

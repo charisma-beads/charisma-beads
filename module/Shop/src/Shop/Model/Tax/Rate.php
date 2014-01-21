@@ -35,9 +35,9 @@ class Rate extends AbstractModel
 	/**
 	 * @return the $taxRate
 	 */
-	public function getTaxRate()
+	public function getTaxRate($formatPercent=false)
 	{
-		return $this->taxRate;
+		return (true === $formatPercent) ? $this->taxRate / 100 : $this->taxRate;
 	}
 
 	/**

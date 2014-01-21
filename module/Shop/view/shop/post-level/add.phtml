@@ -1,7 +1,13 @@
 <?php $this->headTitle('Add Post Level') ?>
 <?=$this->ztbFlashMessenger()->render(); ?>
 
-<?=$this->partial('shop/post-level/level-form', array(
-	'form' => $this->form,
-	'formAction' => 'add'
+<?=$this->partial('partial/add-edit-form', array(
+	'form' 			=> $this->form,
+	'formAction' 	=> 'add',
+	'formName'		=> 'Post Level',
+	'postRoute'		=> 'admin/shop/post/level/edit',
+	'cancelRoute'	=> 'admin/shop/post/level',
+	'formElements'	=> array(
+		'postLevel',
+	),
 )); ?>

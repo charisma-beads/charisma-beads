@@ -1,0 +1,27 @@
+<?php
+$form = $this->form;
+$routeArray = array('action' => $this->formAction);
+if (isset($this->primaryKey)) $routeArray['id'] = $this->primaryKey;
+?>
+<div>
+	<form class="form form-horizontal" method="post" action="<?=$this->url($this->postRoute, $routeArray) ?>">
+		<fieldset>
+			<legend><?=ucwords($this->formAction); ?> <?=$this->formName;?> Form:</legend>
+			<?php foreach($this->formElements as $element):?>
+				<?=$this->ztbFormElement($form->get($element));?>
+			<?php endforeach;?>
+			<input type="hidden" name="action" value="<?=$this->formAction;?>">
+			
+			<div class="control-group">
+            <div class="controls">
+                <button type="submit" class="btn btn-primary" data-loading-text="Please wait...">
+                	Submit
+                </button>
+                <button type="button" class="btn btn-warning"  data-loading-text="Please wait..." onClick="window.location = '<?=$this->url($this->cancelRoute) ?>';">
+                	Cancel
+                </button>
+            </div>
+        </div>
+		</fieldset>
+	</form>
+</div>

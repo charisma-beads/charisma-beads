@@ -1,8 +1,14 @@
 <?php $this->headTitle('Edit Post Zone') ?>
 <?=$this->ztbFlashMessenger()->render(); ?>
 
-<?=$this->partial('shop/post-zone/zone-form', array(
-	'form' => $this->form,
-	'formAction' => 'edit',
-	'postZoneId' => $this->model->getPostZoneId()
+<?=$this->partial('partial/add-edit-form', array(
+	'form' 			=> $this->form,
+	'formAction' 	=> 'edit',
+	'primaryKey'	=> $this->model->getPostZoneId(),
+	'formName'		=> 'Post Zone',
+	'postRoute'		=> 'admin/shop/post/zone/edit',
+	'cancelRoute'	=> 'admin/shop/post/zone',
+	'formElements'	=> array(
+		'zone', 'taxCodeId', 'postZoneId',
+	),
 )); ?>

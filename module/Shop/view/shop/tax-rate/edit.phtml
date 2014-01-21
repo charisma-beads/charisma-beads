@@ -1,1 +1,14 @@
-<h2>Not yet implemented</h2>
+<?php $this->headTitle('Edit Tax Rate') ?>
+<?=$this->ztbFlashMessenger()->render(); ?>
+
+<?=$this->partial('partial/add-edit-form', array(
+	'form' 			=> $this->form,
+	'formAction' 	=> 'edit',
+	'primaryKey'	=> $this->model->getTaxRateId(),
+	'formName'		=> 'Tax Rate',
+	'postRoute'		=> 'admin/shop/tax/rate/edit',
+	'cancelRoute'	=> 'admin/shop/tax/rate',
+	'formElements'	=> array(
+		'taxRate', 'taxRateId',
+	),
+)); ?>
