@@ -208,6 +208,7 @@ class AbstractService implements ServiceLocatorAwareInterface
 	{
 		$sl = $this->getServiceLocator();
 		$form = $sl->get($this->form);
+		$form->init();
 		
 		if ($useInputFilter) {
 			$form->setInputFilter($sl->get($this->inputFilter));

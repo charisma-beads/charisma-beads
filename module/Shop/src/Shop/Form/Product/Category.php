@@ -1,32 +1,18 @@
 <?php
 namespace Shop\Form\Product;
 
+use Application\Form\AbstractForm;
 use Application\Mapper\AbstractNestedSet as NestedSet;
-use Shop\Mapper\Product\Image as ImageMapper;
-use Shop\Service\Product\Category as CategoryService;
-use Zend\Form\Form;
 
-class Category extends Form
-{
-	/**
-	 * @var CategoryService
-	 */
-	protected $categoryService;
-	
-	/**
-	 * @var ImageMapper
-	 */
-	protected $imageMapper;
-	
+class Category extends AbstractForm
+{	
 	/**
 	 * @var int
 	 */
 	protected $categoryId;
 	
-    public function __construct()
+    public function init()
     {
-    	parent::__construct('Category From');
-    	
     	$this->add(array(
     		'name'	=> 'productCategoryId',
     		'type'	=> 'hidden',
@@ -82,10 +68,7 @@ class Category extends Form
     			'unchecked_value' => '0',
     		),
     	));
-    }
-    
-    public function init()
-    {
+    	
     	$this->add(array(
     		'name'		=> 'productImageId',
     		'type'		=> 'select',
@@ -156,8 +139,7 @@ class Category extends Form
     	$imageOptions = array();
     	
     	if (!0 == $id) {
-    		$ids = $this->getCategoryService()->getCategoryChildrenIds($id);
-    		$images = $this->getImageMapper()->getImagesByCategoryIds($ids);
+    		$images = $this->getCategoryService()->getCategoryImages($id);
     		
     		if ($images) {
     			/* @var $image \Shop\Model\Product\Image */
@@ -198,35 +180,6 @@ class Category extends Form
 	 */
 	public function getCategoryService()
 	{
-		return $this->categoryService;
+		return $this->getServiceLocator()->get('Shop\Service\ProductCategory');
 	}
-	    
-    /**
-     * @param CategoryService $categoryService
-     * @return \Shop\Form\Product\Category
-     */
-	public function setCategoryService(CategoryService $categoryService)
-	{
-		$this->categoryService = $categoryService;
-		return $this;
-	}
-	
-	/**
-	 * @return \Shop\Mapper\Product\Image
-	 */
-	public function getImageMapper()
-	{
-		return $this->imageMapper;
-	}
-	    
-    /**
-     * @param ImageMapper $imageMapper
-     * @return \Shop\Form\Product\Category
-     */
-	public function setImageMapper(ImageMapper $imageMapper)
-	{
-		$this->imageMapper = $imageMapper;
-		return $this;
-	}
-	
 }

@@ -2,20 +2,12 @@
 
 namespace Shop\Form\Post;
 
-use Shop\Service\Tax\Code;
-use Zend\Form\Form;
+use Application\Form\AbstractForm;
 
-class Zone extends Form
-{
-	/**
-	 * @var Code
-	 */
-	protected $taxCodeService;
-	
-	public function __construct()
+class Zone extends AbstractForm
+{	
+	public function init()
 	{
-		parent::__construct('Post Zone Form');
-		
 		$this->add(array(
 			'name'	=> 'postZoneId',
 			'type'	=> 'hidden',
@@ -33,10 +25,7 @@ class Zone extends Form
 				'required'	=> true,
 			),
 		));
-	}
 	
-	public function init()
-	{
 		$this->add(array(
 			'name'		=> 'taxCodeId',
 			'type'		=> 'select',
@@ -51,7 +40,7 @@ class Zone extends Form
 	
 	public function getTaxCodeList()
 	{
-		$taxCodes = $this->taxCodeService->fetchAll();
+		$taxCodes = $this->getTaxCodeService()->fetchAll();
 		$taxCodeOptions = array();
 		
 		/* @var $taxCode \Shop\Model\Tax\Code */
@@ -63,13 +52,11 @@ class Zone extends Form
 	}
 	
 	/**
-	 * @param Code $taxCodeService
-	 * @return \Shop\Form\Post\Zone
+	 * @return \Shop\Service\Tax\Code
 	 */
-	public function setTaxCodeService(Code $taxCodeService)
+	public function getTaxCodeService()
 	{
-		$this->taxCodeService = $taxCodeService;
-		return $this;
+		return $this->getServiceLocator()->get('Shop\Service\TaxCode');
 	}
 	
 }

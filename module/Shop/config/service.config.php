@@ -14,8 +14,15 @@ return array(
     	'Shop\Form\TaxRate'						=> false,
     ),
 	'invokables'    => array(
+		'Shop\Form\Country'						=> 'Shop\Form\Country',
+		'Shop\Form\CustomerAddress'				=> 'Shop\Form\Address',
+		'Shop\Form\PostCost'					=> 'Shop\Form\Post\Cost',
 		'Shop\Form\PostLevel'					=> 'Shop\Form\Post\Level',
+		'Shop\Form\PostZone'					=> 'Shop\Form\Post\Zone',
+		'Shop\Form\Product'						=> 'Shop\Form\Product',
 		'Shop\Form\ProductImage'				=> 'Shop\Form\Product\Image',
+		'Shop\Form\ProductCategory'				=> 'Shop\Form\Product\Category',
+		'Shop\Form\TaxCode'						=> 'Shop\Form\Tax\Code',
 		'Shop\Form\TaxRate'						=> 'Shop\Form\Tax\Rate',
 		
 		'Shop\InputFilter\Country'				=> 'Shop\InputFilter\Country',
@@ -73,14 +80,6 @@ return array(
 	    'Shop\Service\TaxRate'                  => 'Shop\Service\Tax\Rate',
 	),
     'factories' => array(
-    	'Shop\Form\Country'						=> 'Shop\Service\Factory\Form\Country',
-        'Shop\Form\CustomerAddress'				=> 'Shop\Service\Factory\Form\Address',
-    	'Shop\Form\PostCost'					=> 'Shop\Service\Factory\Form\PostCost',
-    	'Shop\Form\PostZone'					=> 'Shop\Service\Factory\Form\PostZone',
-    	'Shop\Form\Product'						=> 'Shop\Service\Factory\Form\Product',
-    	'Shop\Form\ProductCategory'				=> 'Shop\Service\Factory\Form\ProductCategory',
-    	'Shop\Form\TaxCode'						=> 'Shop\Service\Factory\Form\TaxCode',
-        
         'Shop\Options\Checkout'                 => 'Shop\Service\Factory\CheckoutOptions',
         'Shop\Options\Paypal'                   => 'Shop\Service\Factory\PaypalOptions',
         'Shop\Options\Shop'                     => 'Shop\Service\Factory\ShopOptions',

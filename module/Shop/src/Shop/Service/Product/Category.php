@@ -13,6 +13,11 @@ class Category extends AbstractService
 	protected $form = 'Shop\Form\ProductCategory';
 	protected $inputFilter = 'Shop\InputFilter\ProductCategory';
 	
+	/**
+	 * @var \Shop\Service\Product\Image
+	 */
+	protected $imageService;
+	
 	public function fetchAll($topLevelOnly=false)
 	{
 	    if ($topLevelOnly) {
@@ -50,6 +55,14 @@ class Category extends AbstractService
 		return $cats;
 	}
 	
+	public function getCategoryImages($categoryId, $recursive=false)
+	{
+		$ids = $this->getCategoryChildrenIds($categoryId, $recursive);
+		$images = $this->getImageService()->getMapper()->getImagesByCategoryIds($ids);
+		
+		return $images;
+	}
+	
 	public function getParentCategories($categoryId)
 	{
 		return $this->getMapper()->getBreadCrumbs($categoryId);
@@ -75,7 +88,7 @@ class Category extends AbstractService
 		}
 		
 		$page = $this->getMapper()->getModel();
-		$form  = $this->getForm($page, $post);
+		$form  = $this->getForm($page, $post, true, true);
 		$position = (int) $post['parent'];
 		$insertType = (string) $post['categoryInsertType'];
 	
@@ -103,7 +116,7 @@ class Category extends AbstractService
 		
 		$model->setDateModified();
 		
-		$form = $this->getForm($model, $post);
+		$form = $this->getForm($model, $post, true, true);
 	
 		if (!$form->isValid()) {
 			return $form;
@@ -151,5 +164,44 @@ class Category extends AbstractService
 		$category->setDateModified();
 		
 		return $this->getMapper()->toggleEnabled($category);
+	}
+	
+	public function getForm(AbstractModel $model=null, array $data=null, $useInputFilter=false, $useHydrator=false)
+	{
+		$sl = $this->getServiceLocator();
+		$form = $sl->get($this->form);
+		
+		if ($model) {
+			$form->setCategoryId($model->getProductCategoryId());
+			$form->init();
+			$form->bind($model);
+		}
+	
+		if ($useInputFilter) {
+			$form->setInputFilter($sl->get($this->inputFilter));
+		}
+	
+		if ($useHydrator) {
+			$form->setHydrator($this->getMapper()->getHydrator());
+		}
+			
+		if ($data) {
+			$form->setData($data);
+		}
+	
+		return $form;
+	}
+	
+	/**
+	 * @return \Shop\Service\Product\Image
+	 */
+	public function getImageService()
+	{
+		if (!$this->imageService) {
+			$sl = $this->getServiceLocator();
+			$this->imageService = $sl->get('Shop\Service\ProductImage');
+		}
+	
+		return $this->imageService;
 	}
 }

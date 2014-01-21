@@ -2,20 +2,12 @@
 
 namespace Shop\Form\Tax;
 
-use Shop\Service\Tax\Rate as TaxRateService;
-use Zend\Form\Form;
+use Application\Form\AbstractForm;
 
-class Code extends Form
+class Code extends AbstractForm
 {
-	/**
-	 * @var TaxRateService
-	 */
-	protected $taxRateService;
-	
-	public function __construct()
+	public function init()
 	{
-		parent::__construct('Tax Rate Form');
-		
 		$this->add(array(
 			'name'	=> 'taxCodeId',
 			'type'	=> 'hidden',
@@ -46,10 +38,7 @@ class Code extends Form
 				'label'	=> 'Description:',
 			),
 		));
-	}
-	
-	public function init()
-	{
+		
 		$this->add(array(
 			'name'		=> 'taxRateId',
 			'type'		=> 'select',
@@ -64,7 +53,7 @@ class Code extends Form
 	
 	public function getTaxRateList()
 	{
-		$taxRates = $this->taxRateService->fetchAll();
+		$taxRates = $this->getTaxRateService()->fetchAll();
 		$taxRateOptions = array();
 		
 		/* @var $taxRate \Shop\Model\Tax\Rate */
@@ -76,12 +65,10 @@ class Code extends Form
 	}
 	
 	/**
-	 * @param TaxRateService $taxRateService
-	 * @return \Shop\Form\Tax\Code
+	 * @return \Shop\Service\Tax\Rate
 	 */
-	public function setTaxRateService(TaxRateService $taxRateService)
+	public function getTaxRateService()
 	{
-		$this->taxRateService = $taxRateService;
-		return $this;
+		return $this->getServiceLocator()->get('Shop\Service\TaxRate');
 	}
 }

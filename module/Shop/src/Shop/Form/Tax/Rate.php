@@ -6,10 +6,8 @@ use Zend\Form\Form;
 
 class Rate extends Form
 {
-	public function __construct()
+	public function init()
 	{
-		parent::__construct('Tax Rate Form');
-		
 		$this->add(array(
 			'name'	=> 'taxRateId',
 			'type'	=> 'hidden',

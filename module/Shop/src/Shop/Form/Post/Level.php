@@ -6,10 +6,8 @@ use Zend\Form\Form;
 
 class Level extends Form
 {
-	public function __construct()
+	public function init()
 	{
-		parent::__construct('Post Level Form');
-		
 		$this->add(array(
 			'name'	=> 'postLevelId',
 			'type'	=> 'hidden',

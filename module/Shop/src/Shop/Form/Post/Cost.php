@@ -2,26 +2,12 @@
 
 namespace Shop\Form\Post;
 
-use Shop\Service\Post\Level;
-use Shop\Service\Post\Zone;
-use Zend\Form\Form;
+use Application\Form\AbstractForm;
 
-class Cost extends Form
-{
-	/**
-	 * @var Level
-	 */
-	protected $postLevelService;
-	
-	/**
-	 * @var Zone
-	 */
-	protected $postZoneService;
-	
-	public function __construct()
+class Cost extends AbstractForm
+{	
+	public function init()
 	{
-		parent::__construct('Post Cost Form');
-		
 		$this->add(array(
 			'name'	=> 'postCostId',
 			'type'	=> 'hidden',
@@ -53,10 +39,7 @@ class Cost extends Form
 				'unchecked_value' => '0',
 			),
 		));
-	}
-	
-	public function init()
-	{
+		
 		$this->add(array(
 			'name'		=> 'postLevelId',
 			'type'		=> 'select',
@@ -111,17 +94,7 @@ class Cost extends Form
 	 */
 	public function getPostLevelService()
 	{
-		return $this->postLevelService;
-	}
-	
-	/**
-	 * @param Level $postLevelService
-	 * @return \Shop\Form\Post\Cost
-	 */
-	public function setPostLevelService(Level $postLevelService)
-	{
-		$this->postLevelService = $postLevelService;
-		return $this;
+		return $this->getServiceLocator()->get('Shop\Service\PostLevel');
 	}
 	
 	/**
@@ -129,17 +102,6 @@ class Cost extends Form
 	 */
 	public function getPostZoneService()
 	{
-		return $this->postZoneService;
+		return $this->getServiceLocator()->get('Shop\Service\PostZone');
 	}
-	
-	/**
-	 * @param Zone $postZoneService
-	 * @return \Shop\Form\Post\Cost
-	 */
-	public function setPostZoneService(Zone $postZoneService)
-	{
-		$this->postZoneService = $postZoneService;
-		return $this;
-	}
-	
 }

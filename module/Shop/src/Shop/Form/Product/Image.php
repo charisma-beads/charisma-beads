@@ -5,10 +5,8 @@ use Zend\Form\Form;
 
 class Image extends Form
 {
-    public function __construct()
+    public function init()
     {
-        parent::__construct('Image Form');
-        
         $this->add(array(
         	'name'	=> 'productImageId',
         	'type'	=> 'hidden',

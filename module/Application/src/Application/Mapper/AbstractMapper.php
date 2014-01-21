@@ -126,7 +126,7 @@ class AbstractMapper implements DbAdapterAwareInterface
 	}
 	
 	/**
-	 * basic search on table
+	 * basic search on table data
 	 * 
 	 * @param array $search
 	 * @param string $sort
@@ -409,7 +409,7 @@ class AbstractMapper implements DbAdapterAwareInterface
 				return $hydrator->hydrate($data, new $this->model);
 			}
 			return new $this->model;
-		}else{
+		} else {
 			throw new \RuntimeException('could not instantiate model - ' . $this->model);
 		}
 	}

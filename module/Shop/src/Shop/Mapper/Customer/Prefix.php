@@ -2,7 +2,6 @@
 namespace Shop\Mapper\Customer;
 
 use Application\Mapper\AbstractMapper;
-use Zend\Db\Sql\Select;
 
 class Address extends AbstractMapper
 {

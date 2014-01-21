@@ -2,20 +2,12 @@
 
 namespace Shop\Form;
 
-use Shop\Service\Post\Zone;
-use Zend\Form\Form;
+use Application\Form\AbstractForm;
 
-class Country extends Form
+class Country extends AbstractForm
 {
-	/**
-	 * @var \Shop\Service\Post\Zone
-	 */
-	public $postZoneService;
-	
-	public function __construct()
+	public function init()
 	{
-		parent::__construct('Country Form');
-		
 		$this->add(array(
 			'name'	=> 'countryId',
 			'type'	=> 'hidden',
@@ -33,10 +25,7 @@ class Country extends Form
         		'required'	=> true,
         	),
         ));
-	}
-	
-	public function init()
-	{
+		
 		$this->add(array(
 			'name'		=> 'postZoneId',
 			'type'		=> 'select',
@@ -51,7 +40,7 @@ class Country extends Form
 	
 	protected function getPostZoneList()
 	{
-		$zones = $this->postZoneService->fetchAll();
+		$zones = $this->getPostZoneService()->fetchAll();
 		$zoneOptions = array();
 		 
 		/* @var $zone \Shop\Model\Post\Zone */
@@ -63,13 +52,10 @@ class Country extends Form
 	}
 	
 	/**
-	 * @param Zone $postZoneService
-	 * @return \Shop\Form\Country
+	 * @return \Shop\Service\Post\Zone
 	 */
-	public function setPostZoneService(Zone $postZoneService)
+	public function getPostZoneService()
 	{
-		$this->postZoneService = $postZoneService;
-		return $this;
+		return $this->getServiceLocator()->get('Shop\Service\PostZone');
 	}
-	
 }

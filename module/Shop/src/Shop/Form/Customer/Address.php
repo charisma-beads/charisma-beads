@@ -1,15 +1,10 @@
 <?php
 namespace Shop\Form\Customer;
 
-use Zend\Form\Form;
+use Application\Form\AbstractForm;
 
-class Address extends Form
+class Address extends AbstractForm
 {
-    /**
-     * @var \Shop\Mapper\Country
-     */
-    protected $countryMapper;
-    
     public function init()
     {   
         $this->add(array(
@@ -144,7 +139,7 @@ class Address extends Form
     
     public function getCountryList()
     {
-        $countries = $this->countryMapper->fetchAll();
+        $countries = $this->getCountryService()->fetchAll();
         $countryOptions = array();
          
         foreach($countries as $country) {
@@ -155,10 +150,10 @@ class Address extends Form
     }
     
     /**
-     * @param \Shop\Mapper\Country $mapper
+     * @return \Shop\Service\Country
      */
-    public function setCountryMapper($mapper)
+    public function getCountryService()
     {
-    	$this->countryMapper = $mapper;
+    	return $this->getServiceLocator()->get('Shop\Service\Country');
     }
 }

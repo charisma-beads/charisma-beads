@@ -1,44 +1,12 @@
 <?php
 namespace Shop\Form;
 
-use Shop\Mapper\Post\Unit as PostUnitMapper;
-use Shop\Mapper\Product\Category as CategoryMapper;
-use Shop\Mapper\Product\GroupPrice as GroupPriceMapper;
-use Shop\Mapper\Product\Size as SizeMapper;
-use Shop\Mapper\Tax\Code as TaxCodeMapper;
-use Zend\Form\Form;
+use Application\Form\AbstractForm;
 
-class Product extends Form
-{
-	/**
-	 * @var CategoryMapper
-	 */
-	protected $categoryMapper;
-	
-	/**
-	 * @var GroupPriceMapper
-	 */
-	protected  $groupPriceMapper;
-	
-	/**
-	 * @var PostUnitMapper
-	 */
-	protected $postUnitMapper;
-	
-	/**
-	 * @var SizeMapper
-	 */
-	protected $sizeMapper;
-	
-	/**
-	 * @var TaxCodeMapper
-	 */
-	protected $taxCodeMapper;
-	
-    public function __construct()
+class Product extends AbstractForm
+{	
+    public function init()
     {
-        parent::__construct('Product From');
-        
         $this->add(array(
         	'name'	=> 'productId',
         	'type'	=> 'hidden',
@@ -199,10 +167,7 @@ class Product extends Form
         		'unchecked_value' => '0',
         	),
         ));
-    }
-    
-    public function init()
-    {	
+    		
     	$this->add(array(
     		'name'		=> 'productCategoryId',
     		'type'		=> 'select',
@@ -261,7 +226,7 @@ class Product extends Form
     
     protected function getCategoryList()
     {
-    	$cats = $this->categoryMapper->fetchAll();
+    	$cats = $this->getCategoryService()->fetchAll();
     	$categoryOptions = array();
     	$parent = 0;
     	
@@ -282,7 +247,7 @@ class Product extends Form
     
     protected function getGroupPriceList()
     {
-    	$groups = $this->groupPriceMapper->fetchAll();
+    	$groups = $this->getGroupPriceService()->fetchAll();
     	$groupPriceOptions = array('0' => 'None');
     	
     	/* @var $group \Shop\Model\Product\GroupPrice */
@@ -295,7 +260,7 @@ class Product extends Form
     
     protected function getPostUnitList()
     {
-    	$postUnits = $this->postUnitMapper->fetchAll();
+    	$postUnits = $this->getPostUnitService()->fetchAll();
     	$postUnitOptions = array();
     	
     	/* @var $postUnit \Shop\Model\Post\Unit */
@@ -308,7 +273,7 @@ class Product extends Form
     
     protected function getSizeList()
     {
-    	$sizes = $this->sizeMapper->fetchAll();
+    	$sizes = $this->getSizeService()->fetchAll();
     	$sizeOptions = array();
     	
     	/* @var $size \Shop\Model\Product\Size */
@@ -321,7 +286,7 @@ class Product extends Form
     
     protected function getTaxCodeList()
     {
-    	$taxCodes = $this->taxCodeMapper->fetchAll();
+    	$taxCodes = $this->getTaxCodeService()->fetchAll();
     	$taxCodeOptions = array();
     	
     	/* @var $taxCode \Shop\Model\Tax\Code */
@@ -333,52 +298,42 @@ class Product extends Form
     }
     
     /**
-     * @param CategoryMapper $categoryMapper
-     * @return \Shop\Form\Product
+     * @return \Shop\Service\Product\Category
      */
-    public function setCategoryMapper(CategoryMapper $categoryMapper)
+    public function getCategoryService()
     {
-    	$this->categoryMapper = $categoryMapper;
-    	return $this;
+    	return $this->getServiceLocator()->get('Shop\Service\ProductCategory');
     }
     
     /**
-     * @param GroupPriceMapper $groupPriceMapper
-     * @return \Shop\Form\Product
+     * @return \Shop\Service\Product\GroupPrice
      */
-	public function setGroupPriceMapper(GroupPriceMapper $groupPriceMapper)
+	public function getGroupPriceService()
 	{
-		$this->groupPriceMapper = $groupPriceMapper;
-		return $this;
+		return $this->getServiceLocator()->get('Shop\Service\ProductGroupPrice');
+	}
+	
+    /**
+     * @return Shop\Service\Post\Unit
+     */
+	public function getPostUnitService()
+	{
+		return $this->getServiceLocator()->get('Shop\Service\PostUnit');
 	}
 	    
     /**
-     * @param PostUnitMapper $postUnitMapper
-     * @return \Shop\Form\Product
+     * @return \Shop\Service\Product\Size
      */
-	public function setPostUnitMapper(PostUnitMapper $postUnitMapper)
+	public function getSizeService()
 	{
-		$this->postUnitMapper = $postUnitMapper;
-		return $this;
-	}
-	    
-    /**
-     * @param SizeMapper $sizeMapper
-     * @return \Shop\Form\Product
-     */
-	public function setSizeMapper(SizeMapper $sizeMapper)
-	{
-		$this->sizeMapper = $sizeMapper;
-		return $this;
+		return $this->getServiceLocator()->get('Shop\Service\ProductSize');
 	}
 	
 	/**
-	 * @param TaxCodeMapper $taxCodeMapper
-	 * @return \Shop\Form\Product
+	 * @return \Shop\Service\Tax\Code
 	 */
-	public function setTaxCodeMapper(TaxCodeMapper $taxCodeMapper)
+	public function getTaxCodeService()
 	{
-		$this->taxCodeMapper = $taxCodeMapper;
-		return $this;
+		return $this->getServiceLocator()->get('Shop\Service\TaxCode');
 	}
 }
