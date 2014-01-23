@@ -14,7 +14,7 @@ class Unit extends AbstractHydrator
 	public function extract($object)
 	{
 		return array(
-			'productPostUnitId'	=> $object->getProductPostUnitId(),
+			'postUnitId'	    => $object->getPostUnitId(),
 			'postUnit'			=> $object->getPostUnit()
 		);
 	}

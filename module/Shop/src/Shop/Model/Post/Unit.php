@@ -16,7 +16,7 @@ class Unit extends AbstractModel
 	protected $postUnit;
 	
 	/**
-	 * @return the $productPostUnitId
+	 * @return the $postUnitId
 	 */
 	public function getPostUnitId()
 	{
@@ -24,7 +24,7 @@ class Unit extends AbstractModel
 	}
 
 	/**
-	 * @param number $productPostUnitId
+	 * @param number $postUnitId
 	 */
 	public function setPostUnitId($postUnitId)
 	{

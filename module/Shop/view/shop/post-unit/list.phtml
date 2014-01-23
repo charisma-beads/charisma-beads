@@ -1,0 +1,43 @@
+<?php $this->headTitle('Post Units') ?>
+<?php echo $this->ztbFlashMessenger()->render(); ?>
+
+<?php if (count($this->models) > 0): ?>
+
+<table id="postUnit-list" class="table table-hover table-bordered table-condensed sortable-table">
+	<thead>
+		<tr>
+			<th data-field="postUnitId">Post Unit Id</th>
+			<th data-field="postUnit">Post Unit</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	
+	<tbody>
+		<?php /* @var $row \Shop\Model\Post\Unit */ ?>
+		<?php foreach($this->models as $row): ?>
+		<tr>
+			<td><?=$this->escapeHtml($row->getPostUnitId()); ?></td>
+			<td><?=$this->escapeHtml($row->getPostUnit()); ?></td>
+			<td>
+               <?=$this->partial('partial/edit-actions', array(
+                	'pk'		=> 'postUnitId',
+                	'id'		=> $row->getPostUnitId(),
+		    		'tableName'	=> 'postUnit',
+                	'route'		=> 'admin/shop/post/unit/edit',
+		    	));?>
+			</td>
+		</tr>
+		<?php endforeach; ?>
+	</tbody>
+</table>
+
+<?=$this->paginationControl(
+    $this->models,
+    'Elastic',
+    'paginate',
+	array('route' => 'admin/shop/post/unit/page')
+); ?>
+
+<?php else: ?>
+<h4>No Post Units where returned by search.</h4>
+<?php endif; ?>
