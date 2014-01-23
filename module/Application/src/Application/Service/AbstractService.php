@@ -129,6 +129,7 @@ class AbstractService implements ServiceLocatorAwareInterface
 		$form  = ($form) ? $form : $this->getForm($model, $post, true, true);
 		
 		if (!$form->isValid()) {
+		    \FB::info($form);
 			return $form;
 		}
 		

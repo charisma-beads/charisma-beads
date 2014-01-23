@@ -61,8 +61,8 @@ abstract class AbstractCrudController extends AbstractController
     
     	if ($request->isPost()) {
     		try {
-    			
-	    		$result = $this->getService()->add($request->getPost());
+    			$params = $this->params()->fromPost();
+	    		$result = $this->getService()->add($params);
 	    
 	    		if ($result instanceof Form) {
 	    

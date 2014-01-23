@@ -16,7 +16,7 @@ return array(
         'Shop\Controller\Product'           => 'Shop\Controller\ProductController',
         'Shop\Controller\ProductCategory'   => 'Shop\Controller\ProductCategoryController',
         'Shop\Controller\ProductImage'      => 'Shop\Controller\ProductImageController',
-        'Shop\Controller\ProductPriceGroup' => 'Shop\Controller\ProductPriceGroupController',
+        'Shop\Controller\ProductGroupPrice' => 'Shop\Controller\ProductGroupPriceController',
         'Shop\Controller\Shop'              => 'Shop\Controller\ShopController',
         'Shop\Controller\TaxCode'           => 'Shop\Controller\TaxCodeController',
         'Shop\Controller\TaxRate'           => 'Shop\Controller\TaxRateController'

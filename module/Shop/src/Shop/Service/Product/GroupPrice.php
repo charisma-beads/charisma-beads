@@ -6,6 +6,6 @@ use Application\Service\AbstractService;
 class GroupPrice extends AbstractService
 {
     protected $mapperClass = 'Shop\Mapper\ProductGroupPrice';
-    protected $form = '';
-    protected $inputFilter = '';
+    protected $form = 'Shop\Form\ProductGroupPrice';
+    protected $inputFilter = 'Shop\InputFilter\ProductGroupPrice';
 }

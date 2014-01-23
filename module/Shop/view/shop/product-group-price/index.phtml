@@ -1,0 +1,39 @@
+
+<div class="tab-wrap">
+<!-- 
+	<ul id="productGroupPriceTabs" class="nav nav-tabs">
+	    <li><a href="#admin-productGroupPrice">Group Prices</a></li>
+	</ul>
+	
+	<div id="productGroupPriceTabContent" class="tab-content">
+	    <div class="tab-pane" id="admin-productGroupPrice">
+	    -->
+	    	<div class="row-fluid">
+		    	<?=$this->partial('partial/search', array(
+		    		'name'			=> 'productGroupPrice',
+		    		'searchInputs'	=> array(
+		    			'Group'		=> 'group',
+		    		),
+		    	));?>
+	    	</div>
+	    	
+	    	<div id="table-productGroupPrice" class="row-fluid table-wrap">
+		    	<?=$this->partial('shop/product-group-price/list', array(
+		    	    'models' => $this->models
+		    	)); ?>
+	    	</div>
+	    <!-- </div>
+	</div> -->
+</div>
+
+<?php $this->headScript()->captureStart(); ?>
+$(document).ready(function(){
+	$('#table-productGroupPrice').dataGrid({
+	    url : 'group-price/list',
+	    query: { sort : 'productGroupId' },
+	    searchForm : $('#search-productGroupPrice'),
+	    paging : 'links',
+	    columnSort: true
+	});
+});
+<?php $this->headScript()->captureEnd(); ?>

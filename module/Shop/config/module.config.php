@@ -34,7 +34,7 @@ return array(
 					array('controller' => 'Shop\Controller\Product', 'action' => 'all'),
 				    array('controller' => 'Shop\Controller\ProductCategory', 'action' => 'all'),
 				    array('controller' => 'Shop\Controller\ProductImage', 'action' => 'all'),
-				    array('controller' => 'Shop\Controller\ProductPriceGroup', 'action' => 'all'),
+				    array('controller' => 'Shop\Controller\ProductGroupPrice', 'action' => 'all'),
 					array('controller' => 'Shop\Controller\Shop', 'action' => 'all'),
 				    array('controller' => 'Shop\Controller\TaxCode', 'action' => 'all'),
 				    array('controller' => 'Shop\Controller\TaxRate', 'action' => 'all'),
@@ -56,7 +56,7 @@ return array(
             'Shop\Controller\Product',
             'Shop\Controller\ProductCategory',
             'Shop\Controller\ProductImage',
-		    'Shop\Controller\ProductPriceGroup',
+		    'Shop\Controller\ProductGroupPrice',
             'Shop\Controller\Shop',
             'Shop\Controller\TaxCode',
             'Shop\Controller\TaxRate',
@@ -278,12 +278,12 @@ return array(
 					        		),
 					        	),
 					        ),
-					    	'price-group' => array(
+					    	'group-price' => array(
 					    		'type'     => 'Segment',
 					    		'options'  => array(
-					    			'route'     => '/price-group',
+					    			'route'     => '/group-price',
 					    			'defaults' => array(
-					    				'controller'   => 'ProductPriceGroup',
+					    				'controller'   => 'ProductGroupPrice',
 					    				'action'       => 'index',
 					    				'force-ssl'    => 'ssl',
 					    			),
@@ -841,22 +841,22 @@ return array(
 	        						),
 		        				),
 			        		),
-				        	'price-groups' => array(
-				        		'label' => 'Price Groups',
+				        	'group-prices' => array(
+				        		'label' => 'Group Prices',
 				        		'action' => 'index',
-				        		'route' => 'admin/shop/price-group',
+				        		'route' => 'admin/shop/group-price',
 				        		'resource' => 'menu:admin',
 				        		'pages' => array(
 				        			'list' => array(
-				        				'label' => 'List All Price Groups',
+				        				'label' => 'List All Group Prices',
 				        				'action' => 'index',
-				        				'route' => 'admin/shop/price-group',
+				        				'route' => 'admin/shop/group-price',
 				        				'resource' => 'menu:admin'
 				        			),
 				        			'add' => array(
-				        				'label' => 'Add New Price Group',
+				        				'label' => 'Add New Group Price',
 				        				'action' => 'add',
-				        				'route' => 'admin/shop/price-group/edit',
+				        				'route' => 'admin/shop/group-price/edit',
 				        				'resource' => 'menu:admin'
 				        			),
 				        		),
