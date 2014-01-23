@@ -184,7 +184,7 @@ class Cart extends AbstractCollection implements SeekableIterator
 	    if (true === $item->getTaxable()) {
 	        $taxService = $this->getTaxService();
 	        $taxService->setTaxInc($item->getVatInc());
-	        $price = $taxService->addTax($price, $item->getTaxRate());
+	        $price = $taxService->addTax($price, $item->getTaxRate(true));
 	        $this->taxTotal += $price['tax'] * $item->getQty();
 	    }
 	

@@ -49,7 +49,7 @@ class IsAllowed extends AbstractPlugin
             $this->getAcl();
         }
 
-        return $this->acl->isAllowed($this->getIdentity(), $resource, $privilege);
+        return $this->acl->isAllowed($this->getIdentity()->getRoleId(), $resource, $privilege);
     }
 
     /**
@@ -61,14 +61,12 @@ class IsAllowed extends AbstractPlugin
     public function setIdentity($identity)
     {
         if ($identity instanceof User) {
-            $identity = $identity->getRole();
+            $this->identity = $identity;
         } elseif (null === $identity) {
-            $identity = new Role('guest');
+            $this->identity = new Role('guest');
         } elseif (!$identity instanceof RoleInterface) {
             throw new \Exception('Invalid identity provided');
         }
-
-        $this->identity = $identity;
 
         return $this;
     }

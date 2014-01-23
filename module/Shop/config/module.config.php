@@ -34,6 +34,7 @@ return array(
 					array('controller' => 'Shop\Controller\Product', 'action' => 'all'),
 				    array('controller' => 'Shop\Controller\ProductCategory', 'action' => 'all'),
 				    array('controller' => 'Shop\Controller\ProductImage', 'action' => 'all'),
+				    array('controller' => 'Shop\Controller\ProductPriceGroup', 'action' => 'all'),
 					array('controller' => 'Shop\Controller\Shop', 'action' => 'all'),
 				    array('controller' => 'Shop\Controller\TaxCode', 'action' => 'all'),
 				    array('controller' => 'Shop\Controller\TaxRate', 'action' => 'all'),
@@ -55,6 +56,7 @@ return array(
             'Shop\Controller\Product',
             'Shop\Controller\ProductCategory',
             'Shop\Controller\ProductImage',
+		    'Shop\Controller\ProductPriceGroup',
             'Shop\Controller\Shop',
             'Shop\Controller\TaxCode',
             'Shop\Controller\TaxRate',
@@ -276,6 +278,48 @@ return array(
 					        		),
 					        	),
 					        ),
+					    	'price-group' => array(
+					    		'type'     => 'Segment',
+					    		'options'  => array(
+					    			'route'     => '/price-group',
+					    			'defaults' => array(
+					    				'controller'   => 'ProductPriceGroup',
+					    				'action'       => 'index',
+					    				'force-ssl'    => 'ssl',
+					    			),
+					    		),
+					    		'may_terminate'    => true,
+					    		'child_routes'     => array(
+					    			'edit' => array(
+					    				'type'    => 'Segment',
+					    				'options' => array(
+					    					'route'         => '/[:action[/id/[:id]]]',
+					    					'constraints'   => array(
+					    						'action'    => '[a-zA-Z][a-zA-Z0-9_-]*',
+					    						'id'		=> '\d+'
+					    					),
+					    					'defaults'      => array(
+					    						'action'        => 'edit',
+					    						'force-ssl'     => 'ssl'
+					    					),
+					    				),
+					    			),
+					    			'page' => array(
+					    				'type'    => 'Segment',
+					    				'options' => array(
+					    					'route'         => '/page/[:page]',
+					    					'constraints'   => array(
+					    						'page'			=> '\d+'
+					    					),
+					    					'defaults'      => array(
+					    						'action'        => 'list',
+					    						'page'          => 1,
+					    						'force-ssl'     => 'ssl'
+					    					),
+					    				),
+					    			),
+					    		),
+					    	),
 					        'image' => array(
 					        	'type'     => 'Segment',
 					        	'options'  => array(
@@ -581,6 +625,48 @@ return array(
 					        	    		),
 					        	    	),
 					        	    ),
+					        		'unit' => array(
+					        			'type'     => 'Segment',
+					        			'options'  => array(
+					        				'route'     => '/unit',
+					        				'defaults' => array(
+					        					'controller'   => 'PostUnit',
+					        					'action'       => 'index',
+					        					'force-ssl'    => 'ssl',
+					        				),
+					        			),
+					        			'may_terminate'    => true,
+					        			'child_routes'     => array(
+					        				'edit' => array(
+					        					'type'    => 'Segment',
+					        					'options' => array(
+					        						'route'         => '/[:action[/id/[:id]]]',
+					        						'constraints'   => array(
+					        							'action'    => '[a-zA-Z][a-zA-Z0-9_-]*',
+					        							'id'		=> '\d+'
+					        						),
+					        						'defaults'      => array(
+					        							'action'        => 'edit',
+					        							'force-ssl'     => 'ssl'
+					        						),
+					        					),
+					        				),
+					        				'page' => array(
+					        					'type'    => 'Segment',
+					        					'options' => array(
+					        						'route'         => '/page/[:page]',
+					        						'constraints'   => array(
+					        							'page'			=> '\d+'
+					        						),
+					        						'defaults'      => array(
+					        							'action'        => 'list',
+					        							'page'          => 1,
+					        							'force-ssl'     => 'ssl'
+					        						),
+					        					),
+					        				),
+					        			),
+					        		),
 					        	),
 					        ),
 					        'tax' => array(
@@ -715,47 +801,67 @@ return array(
 				            	'route' => 'admin/shop/product/edit',
 				            	'resource' => 'menu:admin'
 				            ),
-				        )
-				    ),
-				    'categories' => array(
-				    	'label' => 'Categories',
-				    	'action' => 'index',
-				    	'route' => 'admin/shop/category',
-				    	'resource' => 'menu:admin',
-				    	'pages' => array(
-				    		'list' => array(
-				    			'label' => 'List All Categories',
-				    			'action' => 'index',
-				    			'route' => 'admin/shop/category',
-				    			'resource' => 'menu:admin'
-				    		),
-				    		'add' => array(
-				    			'label' => 'Add New Category',
-				    			'action' => 'add',
-				    			'route' => 'admin/shop/category/edit',
-				    			'resource' => 'menu:admin'
-				    		),
-				    	)
-				    ),
-				    'images' => array(
-				    	'label' => 'Images',
-				    	'action' => 'index',
-				    	'route' => 'admin/shop/image',
-				    	'resource' => 'menu:admin',
-				    	'pages' => array(
-				    		'list' => array(
-				    			'label' => 'List All Images',
-				    			'action' => 'index',
-				    			'route' => 'admin/shop/image',
-				    			'resource' => 'menu:admin'
-				    		),
-				    		'add' => array(
-				    			'label' => 'Add New Image',
-				    			'action' => 'add',
-				    			'route' => 'admin/shop/image/edit',
-				    			'resource' => 'menu:admin'
-				    		),
-				    	)
+			        		'categories' => array(
+		        				'label' => 'Categories',
+		        				'action' => 'index',
+		        				'route' => 'admin/shop/category',
+		        				'resource' => 'menu:admin',
+		        				'pages' => array(
+	        						'list' => array(
+        								'label' => 'List All Categories',
+        								'action' => 'index',
+        								'route' => 'admin/shop/category',
+        								'resource' => 'menu:admin'
+	        						),
+	        						'add' => array(
+        								'label' => 'Add New Category',
+        								'action' => 'add',
+        								'route' => 'admin/shop/category/edit',
+        								'resource' => 'menu:admin'
+	        						),
+			        			),
+			        		),
+			        		'images' => array(
+		        				'label' => 'Images',
+		        				'action' => 'index',
+		        				'route' => 'admin/shop/image',
+		        				'resource' => 'menu:admin',
+		        				'pages' => array(
+	        						'list' => array(
+        								'label' => 'List All Images',
+        								'action' => 'index',
+        								'route' => 'admin/shop/image',
+        								'resource' => 'menu:admin'
+	        						),
+	        						'add' => array(
+        								'label' => 'Add New Image',
+        								'action' => 'add',
+        								'route' => 'admin/shop/image/edit',
+        								'resource' => 'menu:admin'
+	        						),
+		        				),
+			        		),
+				        	'price-groups' => array(
+				        		'label' => 'Price Groups',
+				        		'action' => 'index',
+				        		'route' => 'admin/shop/price-group',
+				        		'resource' => 'menu:admin',
+				        		'pages' => array(
+				        			'list' => array(
+				        				'label' => 'List All Price Groups',
+				        				'action' => 'index',
+				        				'route' => 'admin/shop/price-group',
+				        				'resource' => 'menu:admin'
+				        			),
+				        			'add' => array(
+				        				'label' => 'Add New Price Group',
+				        				'action' => 'add',
+				        				'route' => 'admin/shop/price-group/edit',
+				        				'resource' => 'menu:admin'
+				        			),
+				        		),
+				        	),
+				        ),
 				    ),
 				    'customers' => array(
 				    	'label' => 'Customers',
@@ -883,6 +989,26 @@ return array(
 			    					),
 			    				),
 			    			),
+			    			'units' => array(
+			    				'label' => 'Postage Units',
+			    				'action' => 'index',
+			    				'route' => 'admin/shop/post/unit',
+			    				'resource' => 'menu:admin',
+			    				'pages' => array(
+			    					'edit' => array(
+			    						'label' => 'List All Postage Units',
+			    						'action' => 'index',
+			    						'route' => 'admin/shop/post/unit',
+			    						'resource' => 'menu:admin'
+			    					),
+			    					'add' => array(
+			    						'label' => 'Add New Postage Unit',
+			    						'action' => 'add',
+			    						'route' => 'admin/shop/post/unit/edit',
+			    						'resource' => 'menu:admin'
+			    					),
+			    				),
+			    			),
 				    	),
 				    ),
 				    'tax' => array(
@@ -924,25 +1050,25 @@ return array(
 				    	    			'resource' => 'menu:admin'
 				    	    		),
 				    	    		'add' => array(
-				    	    			'label' => 'Add New Tax Code',
-				    	    			'action' => 'add',
-				    	    			'route' => 'admin/shop/tax/code/edit',
-				    	    			'resource' => 'menu:admin'
+				    	    			'label'		=> 'Add New Tax Code',
+				    	    			'action'	=> 'add',
+				    	    			'route' 	=> 'admin/shop/tax/code/edit',
+				    	    			'resource'	=> 'menu:admin'
 				    	    		),
 				    	    	),
 				    	    ),
 				    	),
 				    ),
 				),
-				'route' => 'admin/shop',
-				'resource' => 'menu:admin'
+				'route'		=> 'admin/shop',
+				'resource'	=> 'menu:admin'
 			)
 		)
 	),
 	'view_manager' => array(
 		'template_map' => array(
-			'cart/summary' => __DIR__ . '/../view/shop/cart/cart-summary.phtml',
-			'shop/cart' => __DIR__ . '/../view/shop/cart/cart.phtml',
+			'cart/summary'	=> __DIR__ . '/../view/shop/cart/cart-summary.phtml',
+			'shop/cart'		=> __DIR__ . '/../view/shop/cart/cart.phtml',
 		),
 		'template_path_stack' => array(
 			'Shop' => __DIR__ . '/../view'

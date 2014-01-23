@@ -70,7 +70,8 @@ class AbstractCollection implements Iterator, Countable, ArrayAccess
     }
      
     /**
-     * Get the current entity in the collection (implementation required by Iterator Interface)
+     * Get the current entity in the collection 
+     * (implementation required by Iterator Interface)
      */
     public function current()
     {
@@ -78,7 +79,8 @@ class AbstractCollection implements Iterator, Countable, ArrayAccess
     }
      
     /**
-     * Move to the next entity in the collection (implementation required by Iterator Interface)
+     * Move to the next entity in the collection 
+     * (implementation required by Iterator Interface)
      */
     public function next()
     {
@@ -86,7 +88,8 @@ class AbstractCollection implements Iterator, Countable, ArrayAccess
     }
      
     /**
-     * Get the key of the current entity in the collection (implementation required by Iterator Interface)
+     * Get the key of the current entity in the collection 
+     * (implementation required by Iterator Interface)
      */
     public function key()
     {
@@ -94,7 +97,8 @@ class AbstractCollection implements Iterator, Countable, ArrayAccess
     }
      
     /**
-     * Check if there're more entities in the collection (implementation required by Iterator Interface)
+     * Check if there're more entities in the collection 
+     * (implementation required by Iterator Interface)
      */
     public function valid()
     {
@@ -102,7 +106,8 @@ class AbstractCollection implements Iterator, Countable, ArrayAccess
     }
      
     /**
-     * Count the number of entities in the collection (implementation required by Countable Interface)
+     * Count the number of entities in the collection 
+     * (implementation required by Countable Interface)
      */
     public function count()
     {
@@ -110,31 +115,37 @@ class AbstractCollection implements Iterator, Countable, ArrayAccess
     }
      
     /**
-     * Add an entity to the collection (implementation required by ArrayAccess interface)
+     * Add an entity to the collection 
+     * (implementation required by ArrayAccess interface)
      */
     public function offsetSet($key, $entity)
     {
         if ($entity instanceof $this->entityClass) {
             if (!isset($key)) {
                 $this->entities[] = $entity;
-            }
-            else {
+            } else {
                 $this->entities[$key] = $entity;
             }
             return true;
         }
-        throw new CollectionException('The specified entity is not allowed for this collection.');
+        throw new CollectionException(
+            'The specified entity is not allowed for this collection.'
+        );
     }
      
     /**
-     * Remove an entity from the collection (implementation required by ArrayAccess interface)
+     * Remove an entity from the collection 
+     * (implementation required by ArrayAccess interface)
      */
     public function offsetUnset($key)
     {
         if ($key instanceof $this->entityClass) {
-            $this->entities = array_filter($this->entities, function ($v) use ($key) {
-                return $v !== $key;
-            });
+            $this->entities = array_filter(
+                $this->entities,
+                function ($v) use ($key) {
+                    return $v !== $key;
+                }
+            );
             return true;
         }
         if (isset($this->entities[$key])) {
@@ -145,7 +156,8 @@ class AbstractCollection implements Iterator, Countable, ArrayAccess
     }
      
     /**
-     * Get the specified entity in the collection (implementation required by ArrayAccess interface)
+     * Get the specified entity in the collection 
+     * (implementation required by ArrayAccess interface)
      */
     public function offsetGet($key)
     {
@@ -155,7 +167,8 @@ class AbstractCollection implements Iterator, Countable, ArrayAccess
     }
      
     /**
-     * Check if the specified entity exists in the collection (implementation required by ArrayAccess interface)
+     * Check if the specified entity exists in the collection 
+     * (implementation required by ArrayAccess interface)
      */
     public function offsetExists($key)
     {

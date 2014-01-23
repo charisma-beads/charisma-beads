@@ -1,4 +1,6 @@
 
+<?php $routeParams = (is_array($this->routeParams)) ? $this->routeParams : array(); ?>
+
 <a href="<?=$this->url($this->route, array(
 	'id' => $this->id
 )); ?>" class="btn">Edit</a>

@@ -1,4 +1,5 @@
 <?php
+$routeParams = (is_array($this->routeParams)) ? $this->routeParams : array();
 $form = $this->form;
 $routeArray = array('action' => $this->formAction);
 if (isset($this->primaryKey)) $routeArray['id'] = $this->primaryKey;
@@ -17,7 +18,7 @@ if (isset($this->primaryKey)) $routeArray['id'] = $this->primaryKey;
                 <button type="submit" class="btn btn-primary" data-loading-text="Please wait...">
                 	Submit
                 </button>
-                <button type="button" class="btn btn-warning"  data-loading-text="Please wait..." onClick="window.location = '<?=$this->url($this->cancelRoute) ?>';">
+                <button type="button" class="btn btn-warning"  data-loading-text="Please wait..." onClick="window.location = '<?=$this->url($this->cancelRoute);?>';">
                 	Cancel
                 </button>
             </div>
