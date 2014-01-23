@@ -3,7 +3,11 @@
 return array(
     'shared'        => array(
     	'Shop\Form\Country'						=> false,
-        'Shop\Form\Customer\Address'            => false,
+        'Shop\Form\Customer'                    => false,
+        'Shop\Form\CustomerAddress'             => false,
+        'Shop\Form\Order'                       => false,
+        'Shop\Form\OrderLine'                   => false,
+        'Shop\Form\OrderStatus'                 => false,
     	'Shop\Form\PostCost'					=> false,
     	'Shop\Form\PostLevel'					=> false,
         'Shop\Form\PostUnit'					=> false,
@@ -17,7 +21,11 @@ return array(
     ),
 	'invokables'    => array(
 		'Shop\Form\Country'						=> 'Shop\Form\Country',
-		'Shop\Form\CustomerAddress'				=> 'Shop\Form\Address',
+	    'Shop\Form\Customer'				    => 'Shop\Form\Customer',
+		'Shop\Form\CustomerAddress'				=> 'Shop\Form\Customer\Address',
+	    'Shop\Form\Order'                       => 'Shop\Form\Order',
+	    'Shop\Form\OrderLine'                   => 'Shop\Form\Order\Line',
+	    'Shop\Form\OrderStatus'                 => 'Shop\Form\Order\Status',
 		'Shop\Form\PostCost'					=> 'Shop\Form\Post\Cost',
 		'Shop\Form\PostLevel'					=> 'Shop\Form\Post\Level',
 	    'Shop\Form\PostUnit'					=> 'Shop\Form\Post\Unit',
@@ -30,6 +38,11 @@ return array(
 		'Shop\Form\TaxRate'						=> 'Shop\Form\Tax\Rate',
 		
 		'Shop\InputFilter\Country'				=> 'Shop\InputFilter\Country',
+	    'Shop\InputFilter\Customer'				=> 'Shop\InputFilter\Customer',
+	    'Shop\InputFilter\CustomerAddress'		=> 'Shop\InputFilter\Customer\Address',
+	    'Shop\InputFilter\Order'                => 'Shop\InputFilter\Order',
+	    'Shop\InputFilter\OrderLine'            => 'Shop\InputFilter\Order\Line',
+	    'Shop\InputFilter\OrderStatus'          => 'Shop\InputFilter\Order\Status',
 		'Shop\InputFilter\PostCost'				=> 'Shop\InputFilter\Post\Cost',
 		'Shop\InputFilter\PostLevel'			=> 'Shop\InputFilter\Post\Level',
 	    'Shop\InputFilter\PostUnit'	            => 'Shop\InputFilter\Post\Unit',
