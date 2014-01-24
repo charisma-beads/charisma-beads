@@ -1,7 +1,10 @@
 <?php
 namespace User\Service;
 
+use Zend\Form\Form;
+use Application\Model\AbstractModel;
 use Application\Service\AbstractService;
+use User\UserException;
 use User\Model\User as UserModel;
 
 class User extends AbstractService
@@ -9,7 +12,6 @@ class User extends AbstractService
 	protected $mapperClass = 'User\Mapper\User';
 	protected $form = 'User\Form\User';
 	protected $inputFilter = 'User\InputFilter\User';
-	protected $saveOverRide = 'saveUser';
     
     public function getUserByEmail($email, $ignore=null)
     {
@@ -17,35 +19,32 @@ class User extends AbstractService
     	return $this->getMapper()->getUserByEmail($email, $ignore);
     }
     
-    public function searchUsers($post = array())
+    public function edit(AbstractModel $model, array $post, Form $form = null)
     {
-        $email = (isset($post['email'])) ? (string) $post['email'] : '';
-        $user = (isset($post['user'])) ? (string) $post['user'] : '';
-        $sort = (isset($post['sort'])) ? (string) $post['sort'] : '';
+        if (!$model instanceof UserModel) {
+            throw new UserException('$model must be an instance of User\Model\User, ' . get_class($model) . ' given.');
+        }
         
-    	return $this->getMapper()->searchUsers($email, $user, $sort);
-    }
-    
-    public function editUser(UserModel $user, $post)
-    {
     	if (!isset($post['role'])) {
-    		$post['role'] = $user->getRole();
+    		$post['role'] = $model->getRole();
     	}
     	
-    	$form  = $this->getForm($user, $post);
+    	$model->setDateModified();
+    	
+    	$form  = $this->getForm($model, $post, true, true);
     	
     	$form->getInputFilter()->get('passwd')->setRequired(false);
     	$form->getInputFilter()->get('passwd')->setAllowEmpty(true);
 		
-		return $this->edit($user, $post, $form);
+		return parent::edit($model, $post, $form);
     }
     
-    public function saveUser(UserModel $user)
-    {
-    	$user->setDateModified();
-    	
-    	$data = $this->getMapper()->extract($user);
-    
+    public function save($data)
+    {	
+        if ($data instanceof UserModel) {
+            $data = $this->getMapper()->extract($data);
+        }
+        
     	if (array_key_exists('passwd', $data) && '' != $data['passwd']) {
     		$authOptions = $this->getConfig('user');
     		$hash = str_replace('(?)', '', strtolower($authOptions['auth']['credentialTreatment']));
@@ -56,6 +55,6 @@ class User extends AbstractService
     
     	// TODO check for existing email.
     
- 		return $this->save($data);
+ 		return parent::save($data);
     }
 }

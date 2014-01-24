@@ -8,11 +8,4 @@ class Session extends AbstractMapper
 	protected $model = 'Application\Model\Session';
 	protected $hydrator = 'Application\Hydrator\Session';
 	
-	public function fetchAllSessions($sort = '')
-	{
-		$select = $this->getSelect();
-		$select = $this->setSortOrder($select, $sort);
-		 
-    	return $this->fetchResult($select);
-	}
 }

@@ -2,6 +2,7 @@
 namespace User\Mapper;
 
 use Application\Mapper\AbstractMapper;
+use Zend\Db\Sql\Select;
 
 class User extends AbstractMapper
 { 
@@ -32,37 +33,8 @@ class User extends AbstractMapper
         return $row;
     }
     
-    public function searchUsers($email, $user, $sort = '')
-    {
-    	$this->getResultSet()->getHydrator()->emptyPassword();
-    	 
-    	$select = $this->getSelect();
-    
-    	if (!$user == '') {
-    		if (substr($user, 0, 1) == '=') {
-    			$id = (int) substr($user, 1);
-    			$select->where->equalTo('userId', $id);
-    		} else {
-    			$searchTerms = explode(' ', $user);
-    			$where = $select->where->nest();
-    			
-    			foreach ($searchTerms as $value) {
-    				$where->like('firstname', '%'.$value.'%')
-    					->or
-    					->like('lastname',  '%'.$value.'%');
-    			}
-    			
-    			$where->unnest();
-    		}
-    	}
-    
-    	if (!$email == '') {
-    		$select->where
-    		->nest()
-    		->like('email', '%'.$email.'%')
-    		->unnest();
-    	}
-    	
+    public function search(array $search, $sort, Select $select = null)
+    {	
     	if (str_replace('-', '', $sort) == 'name') {
     		if (strchr($sort,'-')) {
     			$sort = array('-lastname', '-firstname');
@@ -71,8 +43,6 @@ class User extends AbstractMapper
     		}
     	}
     
-    	$select = $this->setSortOrder($select, $sort);
-    	
-    	return $this->fetchResult($select);
+    	return parent::search($search, $sort, $select);
     }
 }

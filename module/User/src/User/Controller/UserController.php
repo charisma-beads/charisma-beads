@@ -24,7 +24,7 @@ class UserController extends AbstractController
         
         if ($request->isPost()) {
         	
-        	$post = $request->getPost();
+        	$post = $this->params()->fromPost();
         	$post['role'] = 'registered'; 
         
         	$result = $this->getUserService()->add($post);
@@ -73,7 +73,7 @@ class UserController extends AbstractController
 		$request = $this->getRequest();
 		if ($request->isPost()) {
 				
-			$result = $this->getUserService()->editUser($user, $request->getPost());
+			$result = $this->getUserService()->editUser($user, $this->params()->fromPost());
 				
 			if ($result instanceof UserForm) {
 

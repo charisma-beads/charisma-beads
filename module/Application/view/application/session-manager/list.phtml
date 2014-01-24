@@ -1,7 +1,7 @@
 <?php $this->headTitle('Sessions') ?>
 <?=$this->ztbFlashMessenger()->render();?>
 
-<?php if (count($this->sessions) > 0):?>
+<?php if (count($this->models) > 0):?>
 
 <table class="table table-hover table-bordered table-condensed sortable-table">
 	<thead>
@@ -15,7 +15,8 @@
 	</thead>
 	
 	<tbody>
-		<?php foreach($this->sessions as $row):?>
+	   <?php /* @var $row \Application\Model\Session */ ?>
+		<?php foreach($this->models as $row):?>
 		
 		<tr>
 			<td><?=$this->escapeHtml($row->getId());?></td>
@@ -68,7 +69,7 @@
 
 
 <?=$this->paginationControl(
-    $this->sessions,
+    $this->models,
     'Elastic',
     'paginate',
 	array('route' => 'admin/session/page')

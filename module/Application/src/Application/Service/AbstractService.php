@@ -5,7 +5,7 @@ use Application\Model\AbstractModel;
 use Zend\Form\Form;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Exception;
+use Application\Service\ServiceException;
 
 class AbstractService implements ServiceLocatorAwareInterface
 {
@@ -33,11 +33,6 @@ class AbstractService implements ServiceLocatorAwareInterface
 	 * @var string
 	 */
 	protected $mapperClass;
-	
-	/**
-	 * @var string
-	 */
-	protected $saveOverRide;
 	
 	/**
 	 * return just one record from database
@@ -129,20 +124,17 @@ class AbstractService implements ServiceLocatorAwareInterface
 		$form  = ($form) ? $form : $this->getForm($model, $post, true, true);
 		
 		if (!$form->isValid()) {
-		    \FB::info($form);
 			return $form;
 		}
 		
-		$save = ($this->saveOverRide) ? : 'save';
-		
-		return $this->$save($form->getData());
+		return $this->save($form->getData());
 	}
 	
 	/**
 	 * updates a row if id is supplied else insert a new row
 	 * 
 	 * @param array|AbstractModel $data
-	 * @throws Exception
+	 * @throws ServiceException
 	 * @return int $reults number of rows affected or insertId
 	 */
 	public function save($data)
@@ -160,7 +152,7 @@ class AbstractService implements ServiceLocatorAwareInterface
 			if ($this->getById($id)) {
 				$result = $this->getMapper()->update($data, array($pk => $id));
 			} else {
-				throw new Exception('Id ' . $id . ' does not exist');
+				throw new ServiceException('Id ' . $id . ' does not exist');
 			}
 		}
 		

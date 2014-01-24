@@ -1,8 +1,15 @@
-<?php $this->headTitle('Edit User') ?>
+<?php $this->headTitle('Add User') ?>
 <?=$this->ztbFlashMessenger()->render(); ?>
 
-<?=$this->partial('user/admin/user-form', array(
-	'form' => $this->form,
-	'formAction' => 'edit',
-	'userId' => $this->user->getUserId()
+<?=$this->partial('partial/add-edit-form', array(
+	'form' 			=> $this->form,
+	'formAction' 	=> 'edit',
+	'formName'		=> 'User',
+    'primaryKey'    => $this->model->getUserId(),
+	'postRoute'		=> 'admin/user/edit',
+	'cancelRoute'	=> 'admin/user',
+	'formElements'	=> array(
+		'firstname', 'lastname', 'email', 'passwd',
+        'role', 'userId',
+	),
 )); ?>

@@ -1,4 +1,4 @@
-<?php $this->headScript()->appendFile($this->basePath() . '/js/admin/user.js'); ?>
+
 <div class="tab-wrap">
 <!-- 
 	<ul id="userTabs" class="nav nav-tabs">
@@ -9,19 +9,32 @@
 	    <div class="tab-pane" id="admin-user">
 	    -->
 	    	<div class="row-fluid">
-		    	<form id="search-user" class="form-search" method="post">
-		    	    <input type="email" name="email" placeholder="Email:">
-		    	    <input type="text" name="user" placeholder="User:">
-		    	    <button type="submit" class="btn btn-primary"><i class="icon-search icon-white"></i> Search</button>
-		    	    <button type="reset" class="btn">Reset</button>
-		    	</form>
+		    	<?=$this->partial('partial/search', array(
+		    		'name'			=> 'user',
+		    		'searchInputs'	=> array(
+		    			'Email' => 'email',
+                        'User'  => 'firstname-lastname',
+		    		),
+		    	));?>
 	    	</div>
 	    	
 	    	<div id="table-user" class="row-fluid table-wrap">
 		    	<?php echo $this->partial('user/admin/list', array(
-		    	    'users' => $this->users
+		    	    'models' => $this->models
 		    	)); ?>
 	    	</div>
 	    <!-- </div>
 	</div> -->
 </div>
+
+<?php $this->headScript()->captureStart(); ?>
+$(document).ready(function(){
+	$('#table-user').dataGrid({
+    	url : 'user/list',
+    	query: { sort : 'name' },
+    	searchForm : $('#search-user'),
+    	paging : 'links',
+    	columnSort: true
+	});
+});
+<?php $this->headScript()->captureEnd(); ?>
