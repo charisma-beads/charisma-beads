@@ -22,6 +22,11 @@ class Order extends AbstractModel
     protected $orderStatusId;
     
     /**
+     * @var int
+     */
+    protected $orderNumber;
+    
+    /**
      * @var string
      */
     protected $txnId;
@@ -46,10 +51,15 @@ class Order extends AbstractModel
      */
     protected $vatTotal = 0.00;
     
+    /**
+     * @var boolean
+     */
+    protected $vatInvoice = false;
+    
 	/**
 	 * @return number $orderId
 	 */
-	public function getOrderId ()
+	public function getOrderId()
 	{
 		return $this->orderId;
 	}
@@ -57,7 +67,7 @@ class Order extends AbstractModel
 	/**
 	 * @param number $orderId
 	 */
-	public function setOrderId ($orderId)
+	public function setOrderId($orderId)
 	{
 		$this->orderId = $orderId;
 		return $this;
@@ -66,7 +76,7 @@ class Order extends AbstractModel
 	/**
 	 * @return number $userId
 	 */
-	public function getUserId ()
+	public function getUserId()
 	{
 		return $this->userId;
 	}
@@ -74,7 +84,7 @@ class Order extends AbstractModel
 	/**
 	 * @param number $userId
 	 */
-	public function setUserId ($userId)
+	public function setUserId($userId)
 	{
 		$this->userId = $userId;
 		return $this;
@@ -83,7 +93,7 @@ class Order extends AbstractModel
 	/**
 	 * @return number $orderStatusId
 	 */
-	public function getOrderStatusId ()
+	public function getOrderStatusId()
 	{
 		return $this->orderStatusId;
 	}
@@ -91,11 +101,27 @@ class Order extends AbstractModel
 	/**
 	 * @param number $orderStatusId
 	 */
-	public function setOrderStatusId ($orderStatusId)
+	public function setOrderStatusId($orderStatusId)
 	{
 		$this->orderStatusId = $orderStatusId;
 		return $this;
 	}
+
+	/**
+     * @return the $orderNumber
+     */
+    public function getOrderNumber()
+    {
+        return $this->orderNumber;
+    }
+
+	/**
+     * @param int $orderNumber
+     */
+    public function setOrderNumber($orderNumber)
+    {
+        $this->orderNumber = $orderNumber;
+    }
 
 	/**
 	 * @return string $txnId
@@ -108,7 +134,7 @@ class Order extends AbstractModel
 	/**
 	 * @param string $txnId
 	 */
-	public function setTxnId ($txnId)
+	public function setTxnId($txnId)
 	{
 		$this->txnId = $txnId;
 		return $this;
@@ -117,7 +143,7 @@ class Order extends AbstractModel
 	/**
 	 * @return number $total
 	 */
-	public function getTotal ()
+	public function getTotal()
 	{
 		return $this->total;
 	}
@@ -125,7 +151,7 @@ class Order extends AbstractModel
 	/**
 	 * @param number $total
 	 */
-	public function setTotal ($total)
+	public function setTotal($total)
 	{
 		$this->total = $total;
 		return $this;
@@ -134,7 +160,7 @@ class Order extends AbstractModel
 	/**
 	 * @return DateTime $orderDate
 	 */
-	public function getOrderDate ()
+	public function getOrderDate()
 	{
 		return $this->orderDate;
 	}
@@ -142,7 +168,7 @@ class Order extends AbstractModel
 	/**
 	 * @param DateTime $orderDate
 	 */
-	public function setOrderDate ($orderDate)
+	public function setOrderDate($orderDate)
 	{
 		$this->orderDate = $orderDate;
 		return $this;
@@ -151,7 +177,7 @@ class Order extends AbstractModel
 	/**
 	 * @return number $shipping
 	 */
-	public function getShipping ()
+	public function getShipping()
 	{
 		return $this->shipping;
 	}
@@ -159,7 +185,7 @@ class Order extends AbstractModel
 	/**
 	 * @param number $shipping
 	 */
-	public function setShipping ($shipping)
+	public function setShipping($shipping)
 	{
 		$this->shipping = $shipping;
 		return $this;
@@ -168,7 +194,7 @@ class Order extends AbstractModel
 	/**
 	 * @return number $vatTotal
 	 */
-	public function getVatTotal ()
+	public function getVatTotal()
 	{
 		return $this->vatTotal;
 	}
@@ -176,9 +202,26 @@ class Order extends AbstractModel
 	/**
 	 * @param number $vatTotal
 	 */
-	public function setVatTotal ($vatTotal)
+	public function setVatTotal($vatTotal)
 	{
 		$this->vatTotal = $vatTotal;
 		return $this;
-	}  
+	}
+	
+	/**
+     * @return the $vatInvoice
+     */
+    public function getVatInvoice()
+    {
+        return $this->vatInvoice;
+    }
+
+	/**
+     * @param boolean $vatInvoice
+     */
+    public function setVatInvoice($vatInvoice)
+    {
+        $this->vatInvoice = $vatInvoice;
+    }
+  
 }

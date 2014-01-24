@@ -3,6 +3,7 @@ namespace Shop\Hydrator;
 
 use Application\Hydrator\AbstractHydrator;
 use Application\Hydrator\Strategy\DateTime as DateTimeStrategy;
+use Application\Hydrator\Strategy\TrueFalse as TrueFalseStrategy;
 
 class Order extends AbstractHydrator
 {
@@ -19,6 +20,7 @@ class Order extends AbstractHydrator
         
         $this->useRelationships = $useRelationships;
         $this->addStrategy('orderDate', new DateTimeStrategy());
+        $this->addStrategy('vatInvoice', new TrueFalseStrategy());
     }
     
     /**
@@ -32,11 +34,13 @@ class Order extends AbstractHydrator
             'orderId'       => $object->getOrderId(),
             'userId'        => $object->getUserId(),
             'orderStatusId' => $object->getOrderStatusId(),
+            'orderNumber'   => $object->getOrderNumber(),
             'txnId'         => $object->getTxnId(),
             'total'         => $object->getTotal(),
             'orderDate'     => $this->extractValue('orderDate', $object->getOrderDate()),
             'shipping'      => $object->getShipping(),
             'vatTotal'      => $object->getVatTotal(),
+            'vatInvoice'    => $this->extractValue('vatInvoice', $object->getVatInvoice()),
         );
     }
 }

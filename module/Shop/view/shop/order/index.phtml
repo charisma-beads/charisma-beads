@@ -1,1 +1,39 @@
-<h2>Not yet implemented</h2>
+
+<div class="tab-wrap">
+<!-- 
+	<ul id="orderTabs" class="nav nav-tabs">
+	    <li><a href="#admin-order">Orders</a></li>
+	</ul>
+	
+	<div id="orderTabContent" class="tab-content">
+	    <div class="tab-pane" id="admin-order">
+	    -->
+	    	<div class="row-fluid">
+		    	<?=$this->partial('partial/search', array(
+		    		'name'			=> 'order',
+		    		'searchInputs'	=> array(
+		    			'Order' => 'invoice',
+		    		),
+		    	));?>
+	    	</div>
+	    	
+	    	<div id="table-order" class="row-fluid table-wrap">
+		    	<?=$this->partial('shop/order/list', array(
+		    	    'models' => $this->models
+		    	)); ?>
+	    	</div>
+	    <!-- </div>
+	</div> -->
+</div>
+
+<?php $this->headScript()->captureStart(); ?>
+$(document).ready(function(){
+	$('#table-order').dataGrid({
+	    url : 'order/list',
+	    query: { sort : 'invoice' },
+	    searchForm : $('#search-order'),
+	    paging : 'links',
+	    columnSort: true,
+	});
+});
+<?php $this->headScript()->captureEnd(); ?>

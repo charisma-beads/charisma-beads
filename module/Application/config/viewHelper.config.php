@@ -1,9 +1,10 @@
 <?php
 
 return array(
-	'invokables' => array(
-		'FormatDate'			=> 'Application\View\FormatDate',
-		'GlyphIcons'			=> 'Application\View\GlyphIcons',
-		'Request'				=> 'Application\View\Request',
-	),
+    'invokables' => array(
+	    'DecodeSession'        => 'Application\View\DecodeSession',
+	    'FormatDate'           => 'Application\View\FormatDate',
+	    'GlyphIcons'           => 'Application\View\GlyphIcons',
+	    'Request'              => 'Application\View\Request',
+    ),
 );
