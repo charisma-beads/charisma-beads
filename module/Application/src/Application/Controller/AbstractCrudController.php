@@ -6,7 +6,6 @@ use Application\Controller\AbstractController;
 use Zend\Form\Form;
 use Zend\View\Model\ViewModel;
 
-
 abstract class AbstractCrudController extends AbstractController
 {   
 	const ADD_ERROR			= 'record could not be saved to table %s due to a database error.';

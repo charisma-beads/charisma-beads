@@ -3,7 +3,7 @@ namespace Application\Mapper;
 
 use Application\Model\AbstractModel;
 use Application\Mapper\DbAdapterAwareInterface;
-use Zend\Db\Adapter\Adapter as DbAdapter;
+use Zend\Db\Adapter\AdapterAwareTrait;
 use Zend\Db\ResultSet\HydratingResultSet;
 use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\Select;
@@ -14,6 +14,8 @@ use Zend\Stdlib\Hydrator\HydratorInterface;
 
 class AbstractMapper implements DbAdapterAwareInterface
 {
+    use AdapterAwareTrait;
+    
 	/**
 	 * Name of table
 	 *
@@ -39,11 +41,6 @@ class AbstractMapper implements DbAdapterAwareInterface
 	 * @var Sql
 	 */
 	protected $sql;
-	
-	/**
-	 * @var Adapter
-	 */
-	protected $dbAdapter;
 	
 	/**
 	 * @var string
@@ -266,7 +263,7 @@ class AbstractMapper implements DbAdapterAwareInterface
 	public function paginate(Select $select, $resultSet=null)
 	{
 		$resultSet = $resultSet ?: $this->getResultSet();
-		$adapter = new DbSelect($select, $this->getDbAdapter(), $resultSet);
+		$adapter = new DbSelect($select, $this->getAdapter(), $resultSet);
 		$paginator = new Paginator($adapter);
 		
 		$options = $this->getPaginatorOptions();
@@ -420,28 +417,18 @@ class AbstractMapper implements DbAdapterAwareInterface
 	protected function getSql()
 	{
 		if (!$this->sql) {
-			$this->sql = new Sql($this->getDbAdapter());
+			$this->sql = new Sql($this->getAdapter());
 		}
 	
 		return $this->sql;
 	}
 	
 	/**
-	 * @return dbAdapter
+	 * @return \Zend\Db\Adapter\Adapter
 	 */
-    public function getDbAdapter()
+    public function getAdapter()
     {
-        return $this->dbAdapter;
-    }
-
-    /**
-	 * @param DbAdapter $dbAdapter
-	 * @return self
-	 */
-    public function setDbAdapter(DbAdapter $dbAdapter)
-    {
-        $this->dbAdapter = $dbAdapter;
-        return $this;
+        return $this->adapter;
     }
     
     /**
@@ -466,7 +453,7 @@ class AbstractMapper implements DbAdapterAwareInterface
      */
     public function getSqlString(Select $select)
     {
-    	$adapterPlatform	= $this->getSql()->getAdapter()->getPlatform();
+    	$adapterPlatform	= $this->getAdapter()->getPlatform();
     	$sqlString			= $select->getSqlString($adapterPlatform);
     	
     	return $sqlString;

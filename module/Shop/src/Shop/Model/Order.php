@@ -2,6 +2,8 @@
 namespace Shop\Model;
 
 use Application\Model\AbstractModel;
+use Shop\Model\Order\Line;
+use Shop\Model\Order\Status;
 use DateTime;
 
 class Order extends AbstractModel
@@ -55,6 +57,16 @@ class Order extends AbstractModel
      * @var boolean
      */
     protected $vatInvoice = false;
+    
+    /**
+     * @var Status
+     */
+    protected $orderStatus;
+    
+    /**
+     * @var array
+     */
+    protected $orderLines = array();
     
 	/**
 	 * @return number $orderId
@@ -223,5 +235,44 @@ class Order extends AbstractModel
     {
         $this->vatInvoice = $vatInvoice;
     }
-  
+    
+	/**
+     * @return the $orderStatus
+     */
+    public function getOrderStatus()
+    {
+        return $this->orderStatus;
+    }
+
+	/**
+     * @param Status $orderStatus
+     */
+    public function setOrderStatus(Status $orderStatus)
+    {
+        $this->orderStatus = $orderStatus;
+    }
+
+	/**
+     * @return the $orderLines
+     */
+    public function getOrderLines()
+    {
+        return $this->orderLines;
+    }
+
+	/**
+     * @param array $orderLine
+     */
+    public function setOrderLines(array $orderLines)
+    {
+        $this->orderLines = $orderLines;
+    }
+    
+    /**
+     * @param Line $orderLine
+     */
+    public function setOrderLine(Line $orderLine)
+    {
+        $this->orderLines[] = $orderLine;
+    }
 }

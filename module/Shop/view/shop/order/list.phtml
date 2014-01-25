@@ -1,4 +1,4 @@
-<?php $this->headTitle('Orders') ?>
+<?php $this->headTitle('Orders'); ?>
 <?php echo $this->ztbFlashMessenger()->render(); ?>
 
 <?php if (count($this->models) > 0): ?>
@@ -7,7 +7,9 @@
 	<thead>
 		<tr>
 			<th data-field="orderId">Order Id</th>
+			<th data-field="orderNumber">Order Number</th>
 			<th data-field="total">Total</th>
+			<th data-field="orderDate">Order Date</th>
 			<th>Actions</th>
 		</tr>
 	</thead>
@@ -16,8 +18,10 @@
 		<?php /* @var $row \Shop\Model\Order */ ?>
 		<?php foreach($this->models as $row): ?>
 		<tr>
-			<td><?=$this->escapeHtml($row->getOrderId()); ?></td>
-			<td><?=$this->priceFormat($this->escapeHtml($row->getTotal())); ?></td>
+			<td><?=$this->escapeHtml($row->getOrderId());?></td>
+			<td><?=$this->escapeHtml($row->getOrderNumber());?></td>
+			<td><?=$this->priceFormat($this->escapeHtml($row->getTotal()));?></td>
+			<td><?=$this->formatDate($this->escapeHtml($row->getOrderDate()));?>
 			<td>
                 <?=$this->partial('partial/edit-actions', array(
                 	'pk'		=> 'orderId',
