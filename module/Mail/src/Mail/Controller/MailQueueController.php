@@ -1,5 +1,5 @@
 <?php
-namespace Application\Controller;
+namespace Mail\Controller;
  
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Console\Request as ConsoleRequest;

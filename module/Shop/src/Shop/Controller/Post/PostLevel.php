@@ -1,9 +1,9 @@
 <?php
-namespace Shop\Controller;
+namespace Shop\Controller\Post;
 
 use Application\Controller\AbstractCrudController;
 
-class PostLevelController extends AbstractCrudController
+class PostLevel extends AbstractCrudController
 {
 	protected $searchDefaultParams = array('sort' => 'postLevel');
 	protected $serviceName = 'Shop\Service\PostLevel';

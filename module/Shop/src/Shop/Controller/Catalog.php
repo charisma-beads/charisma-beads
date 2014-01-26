@@ -1,11 +1,11 @@
 <?php
 namespace Shop\Controller;
 
-use Application\Controller\AbstractController;
 use Shop\ShopException;
+use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
-class CatalogController extends AbstractController
+class Catalog extends AbstractActionController
 {
     /**
 	 * @var \Shop\Service\Product

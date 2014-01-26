@@ -1,10 +1,10 @@
 <?php
-namespace Shop\Controller;
+namespace Shop\Controller\Product;
 
 use Application\Controller\AbstractCrudController;
 use Zend\View\Model\ViewModel;
 
-class ProductController extends AbstractCrudController
+class Product extends AbstractCrudController
 {
 	protected $searchDefaultParams = array('sort' => 'name');
 	protected $serviceName = 'Shop\Service\Product';

@@ -1,9 +1,9 @@
 <?php
 namespace Shop\Controller;
 
-use Application\Controller\AbstractController;
+use Zend\Mvc\Controller\AbstractActionController;
 
-class PaymentController extends AbstractController
+class Payment extends AbstractActionController
 {
     public function payCheckAction()
     {

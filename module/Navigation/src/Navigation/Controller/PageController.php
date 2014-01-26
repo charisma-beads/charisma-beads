@@ -2,11 +2,11 @@
 
 namespace Navigation\Controller;
 
-use Application\Controller\AbstractController;
+use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Navigation\Form\Page as PageForm;
 
-class PageController extends AbstractController
+class PageController extends AbstractActionController
 {
 	/**
 	 * @var \Navigation\Service\Page;

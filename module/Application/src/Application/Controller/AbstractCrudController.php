@@ -2,11 +2,12 @@
 namespace Application\Controller;
 
 use Exception;
-use Application\Controller\AbstractController;
+use Application\Controller\SetExceptionMessages;
 use Zend\Form\Form;
+use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
-abstract class AbstractCrudController extends AbstractController
+abstract class AbstractCrudController extends AbstractActionController
 {   
 	const ADD_ERROR			= 'record could not be saved to table %s due to a database error.';
 	const ADD_SUCCESS		= 'row %s has been saved to database table %s.';
@@ -21,6 +22,8 @@ abstract class AbstractCrudController extends AbstractController
     protected $serviceName;
     protected $service;
     protected $route;
+    
+    use SetExceptionMessages;
     
     public function indexAction()
     {
@@ -110,7 +113,7 @@ abstract class AbstractCrudController extends AbstractController
 	    
 	    	if ($request->isPost()) {
 	    		
-	    		// primary key ids must match.
+	    		// primary key ids must match. If not throw eception.
 	    		$pk = $this->getService()->getMapper()->getPrimaryKey();
 	    		$tableName = $this->getService()->getMapper()->getTable();
 	    		$modelMethod = 'get' . ucwords($pk);

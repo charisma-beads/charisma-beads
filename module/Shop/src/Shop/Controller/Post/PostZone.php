@@ -1,9 +1,9 @@
 <?php
-namespace Shop\Controller;
+namespace Shop\Controller\Post;
 
 use Application\Controller\AbstractCrudController;
 
-class PostZoneController extends AbstractCrudController
+class PostZone extends AbstractCrudController
 {
 	protected $searchDefaultParams = array('sort' => 'zone');
 	protected $serviceName = 'Shop\Service\PostZone';

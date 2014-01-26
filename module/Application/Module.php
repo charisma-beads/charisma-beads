@@ -11,16 +11,11 @@ namespace Application;
 
 use Exception;
 use Application\Event\MvcListener;
-use Zend\Console\Adapter\AdapterInterface as Console;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
-use Zend\ModuleManager\Feature\ConsoleUsageProviderInterface;
-use Zend\ModuleManager\Feature\ConsoleBannerProviderInterface;
 use Zend\Session\Container;
 
-class Module implements
-    ConsoleUsageProviderInterface,
-    ConsoleBannerProviderInterface
+class Module
 {
     public function onBootstrap(MvcEvent $event)
     {
@@ -69,22 +64,6 @@ class Module implements
     		echo '</pre';
     		exit();
     	}
-    }
-    
-    public function getConsoleUsage(Console $console)
-    {
-        return array(
-            'mailqueue send' => 'send the next batch of mail in the mail queue',
-        );
-    }
-    
-    public function getConsoleBanner(Console $console){
-        return
-            "==------------------------------------------------------==\n" .
-            "        Welcome to my ZF2 Console-enabled app             \n" .
-            "==------------------------------------------------------==\n" .
-            "Version 1.0\n"
-        ;
     }
 
     public function getConfig()

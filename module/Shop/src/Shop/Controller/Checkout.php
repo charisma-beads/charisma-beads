@@ -1,11 +1,11 @@
 <?php
 namespace Shop\Controller;
 
-use Application\Controller\AbstractController;
 use User\Form\Login as LoginForm;
+use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
-class CheckoutController extends AbstractController
+class Checkout extends AbstractActionController
 {
     /**
      * @var \Shop\Service\Cart

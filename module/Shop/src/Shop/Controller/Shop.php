@@ -9,10 +9,10 @@
 
 namespace Shop\Controller;
 
-use Application\Controller\AbstractController;
+use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
-class ShopController extends AbstractController
+class Shop extends AbstractActionController
 {
 	/**
 	 * @var \Shop\Service\ProductCategory

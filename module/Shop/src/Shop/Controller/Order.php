@@ -3,7 +3,7 @@ namespace Shop\Controller;
 
 use Application\Controller\AbstractCrudController;
 
-class OrderController extends AbstractCrudController
+class Order extends AbstractCrudController
 {
 	protected $searchDefaultParams = array('sort' => 'order');
 	protected $serviceName = 'Shop\Service\Order';

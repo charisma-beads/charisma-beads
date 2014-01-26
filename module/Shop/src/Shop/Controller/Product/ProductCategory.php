@@ -1,9 +1,9 @@
 <?php
-namespace Shop\Controller;
+namespace Shop\Controller\Product;
 
 use Application\Controller\AbstractCrudController;
 
-class ProductCategoryController extends AbstractCrudController
+class ProductCategory extends AbstractCrudController
 {
     protected $searchDefaultParams = array('sort' => 'lft');
     protected $serviceName = 'Shop\Service\ProductCategory';

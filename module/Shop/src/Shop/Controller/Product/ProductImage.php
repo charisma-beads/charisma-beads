@@ -1,9 +1,9 @@
 <?php
-namespace Shop\Controller;
+namespace Shop\Controller\Product;
 
 use Application\Controller\AbstractCrudController;
 
-class ProductImageController extends AbstractCrudController
+class ProductImage extends AbstractCrudController
 {
 	protected $searchDefaultParams = array('sort' => 'productImageId');
 	protected $serviceName = 'Shop\Service\ProductImage';

@@ -2,11 +2,11 @@
 
 namespace Navigation\Controller;
 
-use Application\Controller\AbstractController;
+use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Navigation\Form\Menu as MenuForm;
 
-class MenuController extends AbstractController
+class MenuController extends AbstractActionController
 {
 	/**
 	 * @var \Navigation\Service\Menu;

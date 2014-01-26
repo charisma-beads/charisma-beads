@@ -1,9 +1,9 @@
 <?php
-namespace Shop\Controller;
+namespace Shop\Controller\Post;
 
 use Application\Controller\AbstractCrudController;
 
-class PostCostController extends AbstractCrudController
+class PostCost extends AbstractCrudController
 {
 	protected $searchDefaultParams = array('sort' => 'cost');
 	protected $serviceName = 'Shop\Service\PostCost';

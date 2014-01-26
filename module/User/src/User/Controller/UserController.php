@@ -2,11 +2,11 @@
 
 namespace User\Controller;
 
-use Application\Controller\AbstractController;
+use Zend\Mvc\Controller\AbstractActionController;
 use User\Form\User as UserForm;
 use Zend\View\Model\ViewModel;
 
-class UserController extends AbstractController
+class UserController extends AbstractActionController
 {
 	/**
 	 * @var \User\Service\User

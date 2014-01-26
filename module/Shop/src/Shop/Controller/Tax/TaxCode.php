@@ -1,9 +1,9 @@
 <?php
-namespace Shop\Controller;
+namespace Shop\Controller\Tax;
 
 use Application\Controller\AbstractCrudController;
 
-class TaxCodeController extends AbstractCrudController
+class TaxCode extends AbstractCrudController
 {
 	protected $searchDefaultParams = array('sort' => 'taxCodeId');
 	protected $serviceName = 'Shop\Service\TaxCode';

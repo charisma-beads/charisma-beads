@@ -2,10 +2,10 @@
 namespace Application\Service;
 
 use Application\Model\AbstractModel;
+use Application\Service\ServiceException;
 use Zend\Form\Form;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Application\Service\ServiceException;
 
 class AbstractService implements ServiceLocatorAwareInterface
 {

@@ -135,22 +135,6 @@ return array(
             ),
         ),
     ),
-    'console' => array(
-        'router' => array(
-            'routes' => array(
-                'mail/queue/send' => array(
-                    'options' => array(
-                        'route' => 'mailqueue send', 
-                        'defaults' => array(
-                            '__NAMESPACE__' => 'Application\Controller',
-                            'controller' => 'MailQueue',
-                            'action' => 'send'
-                        ),
-                    ),
-                ),
-            ),
-        ),
-    ),
     'navigation' => array(
     	'admin' => array(
     		'dashboard' => array(

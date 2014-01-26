@@ -3,10 +3,10 @@
 namespace Article\Controller;
 
 use Article\Form\Article as ArticleForm;
-use Application\Controller\AbstractController;
+use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
-class ArticleController extends AbstractController
+class ArticleController extends AbstractActionController
 {
 	/**
 	 * @var \Article\Service\Article;
