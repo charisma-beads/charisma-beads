@@ -7,6 +7,7 @@ $modules = array(
 	'Admin',
 	'Application',
 	'Article',
+    'Mail',
 	'Navigation',
 	'Shop',
 	'User',

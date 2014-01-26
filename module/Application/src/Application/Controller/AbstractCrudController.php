@@ -165,7 +165,7 @@ abstract class AbstractCrudController extends AbstractActionController
     
     	$tableName = $this->getService()->getMapper()->getTable();
     	$pk = $this->getService()->getMapper()->getPrimaryKey();
-    	$id = (int) $request->getPost($pk);
+    	$id = $request->getPost($pk);
     
     	if (!$id) {
     		return $this->redirect()->toRoute($this->getRoute());
