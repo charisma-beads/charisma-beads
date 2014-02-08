@@ -1,5 +1,43 @@
 <?php
 return array(
+    'shop' => array(
+        'checkout_options'  => array(
+            'payCheck'          => true,
+            'collectInstore'    => true,
+            'payCreditCard'     => true,
+            'payPhone'          => true,
+            'payPaypal'         => true,
+        ),
+        'paypal_options'    => array(
+            'cancelReturnUrl'   => '',
+            'currentyCode'      => '',
+            'deploy'            => 'test',
+            'imageUrl'          => '',
+            'ipnLog'            => '',
+            'merchantId'        => '',
+            'notifyUrl'         => '',
+            'paypalIPN'         => true,
+            'returnUrl'         => '',
+            'returnMethod'      => '',
+        ),
+        'shop_options'      => array(
+            'alert'             => false,
+            'alertText'         => '',
+            'orderEmail'        => '',
+            'postState'         => false,
+            'productsPerPage'   => 24,
+            'stockControl'      => false,
+            'vatNumber'         => '',
+            'vatState'          => false,
+        ),
+        'cart_cookie'       => array(
+            'expiry'            => 3600,            // Cookie expiry time in mins
+            'domain'            => null,            // Set to null this defaults to the current domain
+            'secure'            => false,           // Should the cookie be secure only?
+            'url'               => '/',             // Location to set in the cookie - default to root
+            'cookieName'        => 'ShoppingCart'   // Cookie Name
+        )
+    ),
 	'userAcl' => array(
 		'userRoles' => array(
 			'guest' => array(

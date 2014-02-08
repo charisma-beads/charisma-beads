@@ -27,11 +27,10 @@ class Shipping
         $this->postWeight = 0;
         $this->shippingTax = 0;
         
-        $taxService = $this->getTaxService();
-        
-        foreach ($cart as $item) {
-            if ($item->getAddPostage() === true) {
-            	$this->postWeight += $item->getPostunit() * $item->getQty();
+        /* @var $item \Shop\Model\Cart\Item */
+        foreach ($cart->getCart() as $item) {
+            if ($item->getMetadata()->getAddPostage() === true) {
+            	$this->postWeight += $item->getMetadata()->getPostUnit() * $item->getQuantity();
             } else {
             	$this->noShipping += $cart->getLineCost($item);
             }

@@ -256,7 +256,7 @@ class Product extends AbstractModel
 	    
 	    if (true === $this->isDiscounted() && true === $withDiscount) {
 	    	$discount = $this->getDiscountPercent();
-	    	$discounted = ($price*$discount)/100;
+	    	$discounted = ($price * $discount) / 100;
 	    	$price = round($price - $discounted, 2);
 	    }
 	    

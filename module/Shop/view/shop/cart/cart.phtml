@@ -12,16 +12,17 @@
 		<?php endif; ?>
 	</tr>
 	
+	<?php /* @var $item \Shop\Model\Cart\Item */ ?>
 	<?php foreach ($this->cart()->getCart() as $item): ?>
 	<tr>
-		<td><?=$item->getName();?></td>
-		<td><?=$item->getCategory();?> / <?=$item->getShortDescription();?></td>
+		<td><?=$item->getMetadata()->getName();?></td>
+		<td><?=$item->getMetadata()->getCategory();?> / <?=$item->getDescription();?></td>
 		<td><?=$this->cart()->formatAmount($item->getPrice());?></td>
 		<td>
 		    <?php if (!$checkout): ?>
-			<input type="number" name="quantity[<?=$item->getProductId();?>]" class="input-mini" value="<?=$item->getQty();?>">
+			<input type="number" name="quantity[<?=$item->getMetadata()->getProductId();?>]" class="input-mini" value="<?=$item->getQuantity();?>">
 			<?php else: ?>
-			<?=$item->getQty();?>
+			<?=$item->getQuantity();?>
 			<?php endif; ?>
 		</td>
 		<td><?=$this->cart()->getLineCost($item);?></td>
@@ -29,7 +30,7 @@
 		<td>
             <a href="<?=$this->url('shop/cart', array(
                 'action'	=> 'remove',
-                'id'		=> $item->getProductId()
+                'id'		=> $item->getCartItemId()
             ));?>"><?=$this->ztbIcon('remove');?></a>
         </td>
         <?php endif; ?>

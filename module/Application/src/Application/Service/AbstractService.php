@@ -5,14 +5,11 @@ use Application\Model\AbstractModel;
 use Application\Service\ServiceException;
 use Zend\Form\Form;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\ServiceLocatorAwareTrait;
 
 class AbstractService implements ServiceLocatorAwareInterface
 {
-	/**
-	 * @var ServiceLocatorInterface
-	 */
-	protected $serviceLocator;
+    use ServiceLocatorAwareTrait;
 	
 	/**
 	 * @var \Application\Mapper\AbstractMapper
@@ -237,27 +234,5 @@ class AbstractService implements ServiceLocatorAwareInterface
 	{
 		$this->getMapper()->usePaginator($options);
 		return $this;
-	}
-	
-	/**
-	 * Set the service locator.
-	 *
-	 * @param ServiceLocatorInterface $serviceLocator
-	 * @return AbstractModel
-	 */
-	public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
-	{
-		$this->serviceLocator = $serviceLocator;
-		return $this;
-	}
-	
-	/**
-	 * Get the service locator.
-	 *
-	 * @return ServiceLocatorInterface
-	 */
-	public function getServiceLocator()
-	{
-		return $this->serviceLocator;
 	}
 }

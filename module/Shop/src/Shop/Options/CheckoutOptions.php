@@ -8,42 +8,42 @@ class CheckoutOptions extends AbstractOptions
     /**
      * @var boolean
      */
-    protected $PayCheck;
+    protected $payCheck;
     
     /**
      * @var boolean
      */
-    protected $CollectInstore;
+    protected $collectInstore;
     
     /**
      * @var boolean
      */
-    protected $PayCreditCard;
+    protected $payCreditCard;
     
     /**
      * @var boolean
      */
-    protected $PayPhone;
+    protected $payPhone;
     
     /**
      * @var boolean
      */
-    protected $PayPaypal;
+    protected $payPaypal;
     
 	/**
 	 * @return boolean $PayCheck
 	 */
 	public function getPayCheck()
 	{
-		return $this->PayCheck;
+		return $this->payCheck;
 	}
 
 	/**
-	 * @param boolean $PayCheck
+	 * @param boolean $payCheck
 	 */
-	public function setPayCheck($PayCheck)
+	public function setPayCheck($payCheck)
 	{
-		$this->PayCheck = $PayCheck;
+		$this->payCheck = $payCheck;
 		return $this;
 	}
 
@@ -52,15 +52,15 @@ class CheckoutOptions extends AbstractOptions
 	 */
 	public function getCollectInstore()
 	{
-		return $this->CollectInstore;
+		return $this->collectInstore;
 	}
 
 	/**
-	 * @param boolean $CollectInstore
+	 * @param boolean $collectInstore
 	 */
-	public function setCollectInstore($CollectInstore)
+	public function setCollectInstore($collectInstore)
 	{
-		$this->CollectInstore = $CollectInstore;
+		$this->collectInstore = $collectInstore;
 		return $this;
 	}
 
@@ -69,15 +69,15 @@ class CheckoutOptions extends AbstractOptions
 	 */
 	public function getPayCreditCard()
 	{
-		return $this->PayCreditCard;
+		return $this->payCreditCard;
 	}
 
 	/**
-	 * @param boolean $PayCreditCard
+	 * @param boolean $payCreditCard
 	 */
-	public function setPayCreditCard($PayCreditCard)
+	public function setPayCreditCard($payCreditCard)
 	{
-		$this->PayCreditCard = $PayCreditCard;
+		$this->payCreditCard = $payCreditCard;
 		return $this;
 	}
 
@@ -86,15 +86,15 @@ class CheckoutOptions extends AbstractOptions
 	 */
 	public function getPayPhone()
 	{
-		return $this->PayPhone;
+		return $this->payPhone;
 	}
 
 	/**
-	 * @param boolean $PayPhone
+	 * @param boolean $payPhone
 	 */
-	public function setPayPhone($PayPhone)
+	public function setPayPhone($payPhone)
 	{
-		$this->PayPhone = $PayPhone;
+		$this->payPhone = $payPhone;
 		return $this;
 	}
 
@@ -103,15 +103,15 @@ class CheckoutOptions extends AbstractOptions
 	 */
 	public function getPayPaypal()
 	{
-		return $this->PayPaypal;
+		return $this->payPaypal;
 	}
 
 	/**
-	 * @param boolean $PayPaypal
+	 * @param boolean $payPaypal
 	 */
-	public function setPayPaypal($PayPaypal)
+	public function setPayPaypal($payPaypal)
 	{
-		$this->PayPaypal = $PayPaypal;
+		$this->payPaypal = $payPaypal;
 		return $this;
 	}
 }

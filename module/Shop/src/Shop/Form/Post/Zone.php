@@ -2,10 +2,14 @@
 
 namespace Shop\Form\Post;
 
-use Application\Form\AbstractForm;
+use Zend\Form\Form;
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorAwareTrait;
 
-class Zone extends AbstractForm
+class Zone extends Form implements ServiceLocatorAwareInterface
 {	
+    use ServiceLocatorAwareTrait;
+   
 	public function init()
 	{
 		$this->add(array(

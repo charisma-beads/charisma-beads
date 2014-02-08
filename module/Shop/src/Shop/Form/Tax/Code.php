@@ -2,10 +2,14 @@
 
 namespace Shop\Form\Tax;
 
-use Application\Form\AbstractForm;
+use Zend\Form\Form;
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorAwareTrait;
 
-class Code extends AbstractForm
-{
+class Code extends Form implements ServiceLocatorAwareInterface
+{	
+    use ServiceLocatorAwareTrait;
+    
 	public function init()
 	{
 		$this->add(array(

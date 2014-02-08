@@ -16,7 +16,7 @@ class Address extends AbstractHydrator
 	public Function __construct($useRelationships)
 	{
 		parent::__construct();
-		$this->useRelationships = useRelationships;
+		$this->useRelationships = $useRelationships;
 		
 		$dateTime = new DateTimeStrategy();
 		

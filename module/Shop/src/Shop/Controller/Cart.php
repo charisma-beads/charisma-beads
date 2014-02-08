@@ -18,9 +18,9 @@ class Cart extends AbstractActionController
 	protected $productService;
 	
 	/**
-	 * @var \Shop\Service\Customer
+	 * @var \Shop\Service\Customer\Address
 	 */
-	protected $customerService;
+	protected $customerAddressService;
 	
 	public function addAction()
 	{
@@ -50,8 +50,7 @@ class Cart extends AbstractActionController
 	public function viewAction()
 	{
 	    if ($this->identity()) {
-	        \FB::info($this->getCustomerService()->getDeliveryAddress($this->identity()->getUserId()));
-	       //$countryId = $this->getCustomerService()->getDeliveryAddress($this->identity()->getUserId())->getCountryId();
+	       $countryId = $this->getCustomerAddressService()->getDeliveryAddressByUserId($this->identity()->getUserId())->getCountryId();
 	    } else {
 	        $countryId = null;
 	    }
@@ -64,10 +63,9 @@ class Cart extends AbstractActionController
 	public function removeAction()
 	{
 		$id = $this->params()->fromRoute('id', 0);
-		$product = $this->getProductService()->getById($id);
 		
-		if ($product) {
-			$this->getCart()->removeItem($product);
+		if ($id) {
+			$this->getCart()->removeItem($id);
 		}
 		
 		return $this->redirect()->toRoute('shop/cart', array(
@@ -132,15 +130,15 @@ class Cart extends AbstractActionController
 	}
 	
 	/**
-	 * @return \Shop\Service\Customer
+	 * @return \Shop\Service\Customer\Address
 	 */
-	public function getCustomerService()
+	public function getCustomerAddressService()
 	{
-		if (!$this->customerService) {
+		if (!$this->customerAddressService) {
 			$sl = $this->getServiceLocator();
-			$this->customerService = $sl->get('Shop\Service\Customer');
+			$this->customerAddressService = $sl->get('Shop\Service\CustomerAddress');
 		}
 		 
-		return $this->customerService;
+		return $this->customerAddressService;
 	}
 }

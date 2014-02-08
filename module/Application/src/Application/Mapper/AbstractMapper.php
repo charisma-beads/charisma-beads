@@ -367,10 +367,13 @@ class AbstractMapper implements DbAdapterAwareInterface
 		if (is_array($dataOrModel)) {
 			return $dataOrModel;
 		}
+		
 		if (!$dataOrModel instanceOf AbstractModel) {
-			throw new \InvalidArgumentException('need nstance of AbstractModel got: ' . getType($dataOrModel));
+			throw new \InvalidArgumentException('need instance of AbstractModel got: ' . getType($dataOrModel));
 		}
+		
 		$hydrator = $hydrator ?: $this->getHydrator();
+		
 		return $hydrator->extract($dataOrModel);
 	}
 	

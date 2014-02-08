@@ -8,7 +8,7 @@ class Customer extends AbstractHydrator
 {
     protected $hydratorMap = array(
     	'User\Hydrator\User'               => 'User\Model\User',
-    	'Shop\Hydrator\Custome\Prefix'     => 'Shop\Model\Customer\Prefix',
+    	'Shop\Hydrator\Customer\Prefix'    => 'Shop\Model\Customer\Prefix',
     );
     
     protected $prefix = 'customer.';

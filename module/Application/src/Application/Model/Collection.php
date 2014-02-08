@@ -1,19 +1,16 @@
 <?php
 namespace Application\Model;
 
-use ArrayAccess;
-use Countable;
-use Iterator;
 use Application\Model\CollectionException;
 
-class AbstractCollection implements Iterator, Countable, ArrayAccess
+trait Collection
 {
     /**
      * collection of entities.
      * 
      * @var array
      */
-    protected $entities = array();
+    protected $entities = [];
     
     /**
      * entity class name
@@ -25,11 +22,12 @@ class AbstractCollection implements Iterator, Countable, ArrayAccess
     /**
      * Constructor
      */
-    public function  __construct(array $entities = array())
+    public function init(array $entities = [])
     {
         if (!empty($entities)) {
-            $this->entities = $entities;
+            $this->setEntities($entities);
         }
+        
         $this->rewind();
     }
     
@@ -46,6 +44,16 @@ class AbstractCollection implements Iterator, Countable, ArrayAccess
     }
     
     /**
+     * Set the entities stored in the collection
+     * 
+     * @param array $entities
+     */
+    public function setEntities(array $entities)
+    {
+        $this->entities = $entities;
+    }
+    
+    /**
      * Get the entities stored in the collection
      */
     public function getEntities()
@@ -54,11 +62,27 @@ class AbstractCollection implements Iterator, Countable, ArrayAccess
     }
      
     /**
+     * @return the $entityClass
+     */
+    public function getEntityClass()
+    {
+        return $this->entityClass;
+    }
+
+	/**
+     * @param string $entityClass
+     */
+    public function setEntityClass($entityClass)
+    {
+        $this->entityClass = $entityClass;
+    }
+
+	/**
      * Clear the collection
      */
     public function clear()
     {
-        $this->entities = array();
+        $this->entities = [];
     }
     
     /**
@@ -148,10 +172,12 @@ class AbstractCollection implements Iterator, Countable, ArrayAccess
             );
             return true;
         }
+        
         if (isset($this->entities[$key])) {
             unset($this->entities[$key]);
             return true;
         }
+        
         return false;
     }
      
@@ -162,8 +188,8 @@ class AbstractCollection implements Iterator, Countable, ArrayAccess
     public function offsetGet($key)
     {
         return isset($this->entities[$key]) ?
-        $this->entities[$key] :
-        null;
+            $this->entities[$key] :
+            null;
     }
      
     /**
@@ -173,5 +199,25 @@ class AbstractCollection implements Iterator, Countable, ArrayAccess
     public function offsetExists($key)
     {
         return isset($this->entities[$key]);
+    }
+    
+    /**
+     * Seek to the given index.
+     *
+     * @param int $index seek index
+     */
+    public function seek($index)
+    {
+        $this->rewind();
+        $position = 0;
+    
+        while ($position < $index && $this->valid()) {
+            $this->next();
+            $position++;
+        }
+    
+        if (!$this->valid()) {
+            throw new CollectionException('Invalid seek position');
+        }
     }
 }

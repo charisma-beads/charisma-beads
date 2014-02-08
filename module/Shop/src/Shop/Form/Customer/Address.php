@@ -1,10 +1,14 @@
 <?php
 namespace Shop\Form\Customer;
 
-use Application\Form\AbstractForm;
+use Zend\Form\Form;
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorAwareTrait;
 
-class Address extends AbstractForm
-{
+class Address extends Form implements ServiceLocatorAwareInterface
+{	
+    use ServiceLocatorAwareTrait;
+    
     public function init()
     {   
         $this->add(array(

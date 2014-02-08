@@ -56,6 +56,8 @@ return array(
 		'Shop\InputFilter\TaxCode'				=> 'Shop\InputFilter\Tax\Code',
 		'Shop\InputFilter\TaxRate'				=> 'Shop\InputFilter\Tax\Rate',
 	    
+	    'Shop\Mapper\Cart'                      => 'Shop\Mapper\Cart',
+	    'Shop\Mapper\CartItem'                  => 'Shop\Mapper\Cart\Item',
 	    'Shop\Mapper\Country'                   => 'Shop\Mapper\Country',
 	    'Shop\Mapper\Customer'                  => 'Shop\Mapper\Customer',
 	    'Shop\Mapper\CustomerAddress'           => 'Shop\Mapper\Customer\Address',
@@ -76,6 +78,8 @@ return array(
 		'Shop\Mapper\TaxCode'				    => 'Shop\Mapper\Tax\Code',
 		'Shop\Mapper\TaxRate'				    => 'Shop\Mapper\Tax\Rate',
 		
+	    'Shop\Service\Cart'                     => 'Shop\Service\Cart',
+	    'Shop\Service\CartItem'                 => 'Shop\Service\Cart\Item',
 	    'Shop\Service\Country'                  => 'Shop\Service\Country',
 	    'Shop\Service\Customer'                 => 'Shop\Service\Customer',
 	    'Shop\Service\CustomerAddress'          => 'Shop\Service\Customer\Address',
@@ -98,11 +102,12 @@ return array(
 	    'Shop\Service\TaxRate'                  => 'Shop\Service\Tax\Rate',
 	),
     'factories' => array(
+        'Shop\Options\CartCookieOptions'        => 'Shop\Service\Factory\CartCookieOptions',
         'Shop\Options\Checkout'                 => 'Shop\Service\Factory\CheckoutOptions',
         'Shop\Options\Paypal'                   => 'Shop\Service\Factory\PaypalOptions',
         'Shop\Options\Shop'                     => 'Shop\Service\Factory\ShopOptions',
         
-        'Shop\Service\Cart'                     => 'Shop\Service\Factory\Cart',
+        'Shop\Service\CartCookie'               => 'Shop\Service\Factory\CartCookie',
         'Shop\Service\Shipping'                 => 'Shop\Service\Factory\Shipping',
     ),
 );

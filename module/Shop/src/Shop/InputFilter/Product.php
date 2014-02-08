@@ -7,6 +7,17 @@ class Product extends InputFilter
 {
     public function __construct()
     {
+        $this->add(array(
+        	'name'         => 'productId',
+            'filters'      => array(
+                array('name' => 'StripTags'),
+                array('name' => 'StringTrim'),
+            ),
+            'validators'   => array(
+            	array('name' => 'Int'),
+            ),
+        ));
+        
     	$this->add(array(
     		'name'       => 'ident',
     		'required'   => true,

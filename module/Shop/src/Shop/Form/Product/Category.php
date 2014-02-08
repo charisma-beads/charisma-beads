@@ -1,11 +1,15 @@
 <?php
 namespace Shop\Form\Product;
 
-use Application\Form\AbstractForm;
 use Application\Mapper\AbstractNestedSet as NestedSet;
+use Zend\Form\Form;
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorAwareTrait;
 
-class Category extends AbstractForm
+class Category extends Form implements ServiceLocatorAwareInterface
 {	
+    use ServiceLocatorAwareTrait;
+   
 	/**
 	 * @var int
 	 */

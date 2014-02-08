@@ -3,7 +3,7 @@ namespace Shop\Mapper\Customer;
 
 use Application\Mapper\AbstractMapper;
 
-class Address extends AbstractMapper
+class Prefix extends AbstractMapper
 {
     protected $table = 'customerPrefix';
     protected $primary = 'prefixId';

@@ -41,12 +41,12 @@ class Cart extends AbstractViewHelper
 	 */
 	public function getCart()
 	{
-		return $this->cartService;
+		return $this->cartService->getCart();
 	}
 	
 	public function countItems()
 	{
-		return count($this->cartService);
+		return count($this->getCart());
 	}
 	
 	public function getSummary()
@@ -59,19 +59,19 @@ class Cart extends AbstractViewHelper
 	
 	public function getLineCost($item)
 	{
-	    $amount = $this->getCart()->getLineCost($item);
+	    $amount = $this->cartService->getLineCost($item);
 	    return $this->formatAmount($amount);
 	}
 	
 	public function getSubTotal()
 	{
-	    $amount = $this->getCart()->getSubTotal();
+	    $amount = $this->cartService->getSubTotal();
 	    return $this->formatAmount($amount);
 	}
 	
 	public function getTotal()
 	{
-		$amount = $this->getCart()->getTotal();
+		$amount = $this->cartService->getTotal();
 		return $this->formatAmount($amount);
 	}
 	
@@ -79,10 +79,10 @@ class Cart extends AbstractViewHelper
 	{
 	    $countryId = (int) $countryId;
 	    $shipping = $this->getShippingService()->setCountryId($countryId);
-	    $cost = $shipping->calculateShipping($this->getCart());
-	    $this->getCart()->setShippingCost($cost);
+	    $cost = $shipping->calculateShipping($this->cartService);
+	    $this->cartService->setShippingCost($cost);
 	    
-	    return $this->formatAmount($this->getCart()->getShippingCost());
+	    return $this->formatAmount($this->cartService->getShippingCost());
 	}
 	
 	public function formatAmount($amount)

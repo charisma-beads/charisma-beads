@@ -8,7 +8,7 @@
 namespace Application\View;
 
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Zend\Stdlib\Exception\InvalidArgumentException;
 use Zend\View\Helper\AbstractHelper;
 
@@ -17,10 +17,7 @@ use Zend\View\Helper\AbstractHelper;
  */
 class AbstractViewHelper extends AbstractHelper implements ServiceLocatorAwareInterface
 {
-    /**
-     * @var ServiceLocatorInterface
-     */
-    protected $serviceLocator;
+    use ServiceLocatorAwareTrait;
     
     /**
      * @var array
@@ -60,27 +57,5 @@ class AbstractViewHelper extends AbstractHelper implements ServiceLocatorAwareIn
         $this->config = $this->serviceLocator->getServiceLocator()
             ->getServiceLocator()->get('config');
         return $this;
-    }
-    
-    /**
-     * Set the service locator.
-     *
-     * @param ServiceLocatorInterface $serviceLocator
-     * @return \Application\View\AbstractHelper
-     */
-    public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
-    {
-    	$this->serviceLocator = $serviceLocator;
-    	return $this;
-    }
-    
-    /**
-     * Get the service locator.
-     *
-     * @return \Zend\ServiceManager\ServiceLocatorInterface
-     */
-    public function getServiceLocator()
-    {
-    	return $this->serviceLocator;
     }
 }

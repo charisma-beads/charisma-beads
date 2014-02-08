@@ -3,7 +3,7 @@ namespace Shop\Hydrator\Customer;
 
 use Application\Hydrator\AbstractHydrator;
 
-class Address extends AbstractHydrator
+class Prefix extends AbstractHydrator
 {
     protected $prefix = 'prefix.';
     
