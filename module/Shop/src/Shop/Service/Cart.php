@@ -189,6 +189,7 @@ class Cart extends AbstractService
     public function persist()
     {
         $cart = $this->getCart();
+        $cart->setDateModified();
         
         $result = $this->save($cart);
         

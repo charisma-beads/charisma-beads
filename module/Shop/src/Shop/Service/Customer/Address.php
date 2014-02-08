@@ -11,7 +11,7 @@ class Address extends AbstractService
     
     public function getBillingAddressByUserId($userId)
     {
-        return $this->getMapper()->getBillingAddress($userId);
+        return $this->getMapper()->getBillingAddressByUserId($userId);
     }
     
     public function getDeliveryAddressByUserId($userId)

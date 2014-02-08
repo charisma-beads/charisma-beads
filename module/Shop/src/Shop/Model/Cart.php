@@ -31,7 +31,7 @@ class Cart extends AbstractModel implements Iterator, Countable, ArrayAccess, Se
     /**
      * @var DateTime
      */
-    protected $dateCreated;
+    protected $dateModified;
     
     /**
      * Total before shipping
@@ -123,18 +123,18 @@ class Cart extends AbstractModel implements Iterator, Countable, ArrayAccess, Se
     /**
      * @return DateTime
      */
-	public function getDateCreated()
+	public function getDateModified()
     {
-        return $this->dateCreated;
+        return $this->dateModified;
     }
 
     /**
-     * @param DateTime $dateCreated
+     * @param DateTime $dateModified
      * @return \Shop\Model\Cart
      */
-	public function setDateCreated(DateTime $dateCreated = null)
+	public function setDateModified(DateTime $dateModified = null)
     {
-        $this->dateCreated = $dateCreated;
+        $this->dateModified = $dateModified;
         return $this;
     }
 

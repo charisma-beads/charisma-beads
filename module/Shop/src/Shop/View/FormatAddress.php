@@ -14,7 +14,7 @@ class FormatAddress extends AbstractViewHelper
             $userId = $this->getIdentity()->getUserId();
         }
         
-        $address = $this->getCustomerAddressService()->getDeliveryAddress($userId);
+        $address = $this->getCustomerAddressService()->getDeliveryAddressByUserId($userId);
         return $this->formatAddress($address);
     }
     
@@ -24,7 +24,7 @@ class FormatAddress extends AbstractViewHelper
         	$userId = $this->getIdentity()->getUserId();
         }
         
-        $address = $this->getCustomerAddressService()->getBillingAddress($userId);
+        $address = $this->getCustomerAddressService()->getBillingAddressByUserId($userId);
         return $this->formatAddress($address, true);
     }
     

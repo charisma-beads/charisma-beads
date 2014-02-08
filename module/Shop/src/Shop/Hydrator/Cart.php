@@ -12,7 +12,7 @@ class Cart extends AbstractHydrator
     
         $this->useRelationships = $useRelationships;
     
-        $this->addStrategy('dateCreated', new DateTimeStrategy());
+        $this->addStrategy('dateModified', new DateTimeStrategy());
     }
     
     /**
@@ -26,7 +26,7 @@ class Cart extends AbstractHydrator
         	'cartId'        => $object->getCartId(),
             'verifyId'      => $object->getVerifyId(),
             'expires'       => $object->getExpires(),
-            'dateCreated'   => $this->extractValue('dateCreated', $object->getDateCreated()),
+            'dateModified'  => $this->extractValue('dateModified', $object->getDateModified()),
         );
     }
 }
