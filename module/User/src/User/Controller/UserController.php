@@ -47,7 +47,7 @@ class UserController extends AbstractActionController
         			// log user in
         			$this->getServiceLocator()
         			     ->get('Zend\Authentication\AuthenticationService')
-        			     ->authenticate($post);
+        			     ->doAuthentication($post);
         			
         			$return = ($post['returnTo']) ? $post['returnTo'] : 'user/thank-you';
         			

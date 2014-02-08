@@ -71,6 +71,11 @@ class AuthController extends AbstractActionController
         }
         
         $return = ($post['returnTo']) ? $post['returnTo'] : 'home';
+        
+        if ('admin' === $this->identity()->getRole() && !isset($post['returnTo'])) {
+            return $this->redirect()->toRoute('admin');
+        }
+        
         return $this->redirect()->toRoute($return);
     }
 }

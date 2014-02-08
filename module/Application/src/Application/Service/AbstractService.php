@@ -143,7 +143,7 @@ class AbstractService implements ServiceLocatorAwareInterface
 		$pk = $this->getMapper()->getPrimaryKey();
 		$id = $data[$pk];
 		
-		if (0 === $id || null === $id) {
+		if (0 === $id || null === $id || '' === $id) {
 			$result = $this->getMapper()->insert($data);
 		} else {
 			if ($this->getById($id)) {
@@ -196,11 +196,13 @@ class AbstractService implements ServiceLocatorAwareInterface
 	public function getForm(AbstractModel $model=null, array $data=null, $useInputFilter=false, $useHydrator=false)
 	{
 		$sl = $this->getServiceLocator();
+		/* @var $form \Zend\Form\Form */
 		$form = $sl->get($this->form);
 		$form->init();
 		
 		if ($useInputFilter) {
 			$form->setInputFilter($sl->get($this->inputFilter));
+			$form->getInputFilter()->init();
 		}
 		
 		if ($useHydrator) {

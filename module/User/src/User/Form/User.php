@@ -62,6 +62,17 @@ class User extends Form
 		));
 		
 		$this->add(array(
+		    'name' => 'passwd-confirm',
+		    'type' => 'password',
+		    'attributes' => array(
+		        'placeholder' 	=> 'Repeat Password:',
+		    ),
+		    'options' => array(
+		        'label' => 'Confirm Password:',
+		    ),
+		));
+		
+		$this->add(array(
 			'name' => 'role',
 			'type'  => 'select',
 			'attributes' => array(

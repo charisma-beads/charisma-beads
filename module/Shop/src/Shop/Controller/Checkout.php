@@ -10,7 +10,7 @@ class Checkout extends AbstractActionController
     /**
      * @var \Shop\Service\Cart
      */
-    protected $cart;
+    protected $cartService;
     
     /**
      * @var \Shop\Service\CustomerAddress
@@ -19,7 +19,7 @@ class Checkout extends AbstractActionController
     
 	public function indexAction()
 	{
-	    if (!$this->getCart()->count()) {
+	    if (!$this->getCartService()->getCart()->count()) {
 	        return $this->redirect()->toRoute('shop');
 	    }
 	    
@@ -75,14 +75,14 @@ class Checkout extends AbstractActionController
 	/**
 	 * @return \Shop\Service\Cart
 	 */
-	protected function getCart()
+	protected function getCartService()
 	{
-	    if (!$this->cart) {
+	    if (!$this->cartService) {
 	        $sl = $this->getServiceLocator();
-	        $this->cart = $sl->get('Shop\Service\Cart');
+	        $this->cartService = $sl->get('Shop\Service\Cart');
 	    }
 	
-	    return $this->cart;
+	    return $this->cartService;
 	}
 	
 	public function getLoginForm()

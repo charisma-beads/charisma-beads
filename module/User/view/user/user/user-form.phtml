@@ -57,6 +57,18 @@ $routeArray = array('action' => $this->formAction);
         </div>
     </div>
     
+    <div class="control-group<?php if ($form->get('passwd-confirm')->getMessages()) echo ' error'; ?>">
+        <label class="control-label" for="title">Confirm Password:</label>
+        <div class="controls">
+            <?php echo $this->formPassword($form->get('passwd-confirm')); ?>
+            <span class="help-block">
+            <?php echo $this->formElementErrors($form->get('passwd-confirm'), array(
+                'class' => 'unstyled'
+            )); ?>
+            </span>
+        </div>
+    </div>
+    
     <?php echo $this->formElement($form->get('userId')); ?>
     <?php echo $this->formElement($form->get('dateCreated')); ?>
    	
