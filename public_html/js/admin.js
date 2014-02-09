@@ -55,12 +55,9 @@ $(document).ready(function(){
         },
         ajaxStop: function() {
         	$('button[type=submit]').button('reset');
-        	//$('input[placeholder], textarea[placeholder]').placeholder();
             $('body').removeClass("loading");
         }    
     });
-    
-    //$('input[placeholder], textarea[placeholder]').placeholder();
     
     $('button[type=submit]').click(function(){
         $(this).button('loading');

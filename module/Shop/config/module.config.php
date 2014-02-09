@@ -117,10 +117,11 @@ return array(
 				),
 				'may_terminate' => true,
 				'child_routes'  => array(
+				    
 					'catalog'  => array(
 						'type'    => 'Segment',
 						'options' => array(
-							'route'          => '/[:categoryIdent]',
+							'route'          => '[/:categoryIdent]',
 							'constraints'    => array(
 								'categoryIdent' => '[a-zA-Z0-9][a-zA-Z0-9_-]*'
 							),
@@ -157,11 +158,38 @@ return array(
 									'defaults' => array(
 										'page' => 1,
 										'force-ssl' => 'http'
-									)
-								)
-							)
-						)
+									),
+								),
+							),
+						),
 					),
+				    'search' => array(
+				        'type' => 'Segment',
+				        'options' => array(
+				            'route' => '/search',
+				            'defaults' => array(
+				                'controller' => 'Catalog',
+				                'action' => 'search',
+				                'force-ssl' => 'http'
+				            )
+				        ),
+				        'may_terminate' => true,
+				        'child_routes' => array(
+				            'page' => array(
+				                'type' => 'Segment',
+				                'options' => array(
+				                    'route' => '/page/[:page]',
+				                    'constraints' => array(
+				                        'page' => '\d+'
+				                    ),
+				                    'defaults' => array(
+				                        'page' => 1,
+				                        'force-ssl' => 'http'
+				                    ),
+				                ),
+				            ),
+				        ),
+				    ),
 					'cart' => array(
 						'type' => 'Segment',
 						'options' => array(

@@ -1,11 +1,7 @@
-<?php $this->headtitle($this->escapehtml($this->category->getCategory())); ?>
+<?php $this->headtitle('Shop Search'); ?>
 
-<h2>
-    <?=$this->escapehtml($this->category->getCategory()); ?>
-</h2>
-<div>
-    <?=$this->breadcrumbs(); ?>
-</div>
+<h2>Product Search Results</h2>
+
 <?php if (count($this->products) > 0):?>
 <ul class="thumbnails">
 <?php foreach ($this->products as $row): ?>
@@ -30,20 +26,14 @@
     </li>
 <?php endforeach; ?>
 </ul>
-
 <?=$this->paginationControl(
     $this->products,
     'Elastic',
     'paginate',
-	array(
-		'route'		=> 'shop/catalog/page',
-		'routeParams' 	=> array(
-			'categoryIdent' => $this->category->getIdent()
-		)
-	)
+	array('route' => 'shop/search/page')
 ); ?>
-
 <?php else: ?>
-<h4>There are no products in this category.</h4>
+<h4>No Products returned from your search.</h4>
 <?php endif; ?>
-		
+<div class="loading ajax-loading"><!-- Place at bottom of page --></div>
+

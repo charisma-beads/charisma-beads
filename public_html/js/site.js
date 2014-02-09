@@ -1,14 +1,15 @@
 
 $(document).ready(function(){
 
-    $('body').on({
+	$(document).on({
         ajaxStart: function() { 
-            $(this).addClass("loading"); 
+            $('#content').addClass("loading"); 
         },
         ajaxStop: function() {
         	$('button[type=submit]').button('reset');
         	$('input[placeholder], textarea[placeholder]').placeholder();
-            $(this).removeClass("loading");
+            $('#content').removeClass("loading");
+            Holder.run();
         }    
     });
     
@@ -26,5 +27,11 @@ $(document).ready(function(){
     $('#showPassword').click(function(){
 		var change = $(this).is(":checked") ? "text" : "password";
 		document.getElementById('password').type = change;
+	});
+    
+    $('#content').searchForm({
+	    url : 'shop/search',
+	    searchForm : $('#search-catalog'),
+	    paging : 'links'
 	});
 });

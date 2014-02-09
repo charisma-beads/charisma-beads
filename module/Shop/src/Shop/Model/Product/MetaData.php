@@ -2,7 +2,7 @@
 namespace Shop\Model\Product;
 
 class MetaData
-{
+{   
     /**
      * @var int
      */

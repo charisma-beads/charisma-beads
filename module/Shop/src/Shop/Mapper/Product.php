@@ -78,63 +78,11 @@ class Product extends AbstractMapper
 		return parent::search($search, $sort, $select);
 	}
 	
-	public function searchProducts($product, $category, $sort)
+	public function searchProducts(array $search)
 	{
-	    $select = $this->getSql()->select();
-	    $select->from($this->table)
-	    ->join(
-	    	'productCategory',
-	    	'product.productCategoryId=productCategory.productCategoryId',
-	    	array('category'),
-	    	Select::JOIN_INNER
-	    )
-	    ->join(
-	    	'productGroupPrice',
-	    	'product.productGroupId=productGroupPrice.productGroupId',
-	    	array('group'),
-	    	Select::JOIN_LEFT
-	    );
-	    
-	    //$select->where->isNotNull('category');
-	    
-	    if (!$product == '') {
-	    	if (substr($product, 0, 1) == '=') {
-	    		$id = (int) substr($product, 1);
-	    		$select->where->equalTo($this->primary, $id);
-	    	} else {
-	    		$searchTerms = explode(' ', $product);
-	    		$where = $select->where->nest();
-	    		 
-	    		foreach ($searchTerms as $value) {
-	    			$where->like('name', '%'.$value.'%')
-	    			->or
-	    			->like('shortDescription',  '%'.$value.'%');
-	    		}
-	    		 
-	    		$where->unnest();
-	    	}
-	    }
-	    
-	    if (!$category == '') {
-	    	$select->where
-	    	->nest()
-	    	->like('category', '%'.$category.'%')
-	    	->unnest();
-	    }
-	    
-	    if ($this->getFetchEnabled()) {
-	    	$select->where->and->equalTo('product.enabled', 1);
-	    }
-	    
-	    if ($this->getFetchDisabled()) {
-	    	$select->where->and->equalTo('product.discontinued', 1);
-	    } else {
-	    	$select->where->and->equalTo('product.discontinued', 0);
-	    }
-	    
-	    $select = $this->setSortOrder($select, $sort);
-	     
-	    return $this->fetchResult($select);
+	   $select = $this->getFullSelect();
+	   
+	   return parent::search($search, '', $select);
 	}
 	
 	/**
@@ -153,12 +101,12 @@ class Product extends AbstractMapper
 	    	'postUnit',
 	    	'product.postUnitId=postUnit.postUnitId',
 	    	array('postUnit.postUnit' => 'postUnit'),
-	    	Select::JOIN_INNER
+	    	Select::JOIN_LEFT
 	    )->join(
 	    	'productSize',
 	    	'product.productSizeId=productSize.productSizeId',
 	    	array('productSize.size' => 'size'),
-	    	Select::JOIN_INNER
+	    	Select::JOIN_LEFT
 	    )->join(
 	    	'productGroupPrice',
 	    	'product.productGroupId=productGroupPrice.productGroupId',
@@ -168,15 +116,15 @@ class Product extends AbstractMapper
 	    	'taxCode',
 	    	'product.taxCodeId=taxCode.taxCodeId',
 	    	array('taxCode.taxCode' => 'taxCode'),
-	    	Select::JOIN_INNER
+	    	Select::JOIN_LEFT
 	    )->join(
 	    	'taxRate',
 	    	'taxCode.taxRateId=taxRate.taxRateId',
 	    	array('taxRate.taxRate' => 'taxRate'),
-	    	Select::JOIN_INNER
+	    	Select::JOIN_LEFT
 	    );
 	    
-	    $select->where->isNotNull('category');
+	    //$select->where->isNotNull('category');
 	    
 	    if ($this->getFetchEnabled()) {
 	    	$select->where->and->equalTo('product.enabled', 1);

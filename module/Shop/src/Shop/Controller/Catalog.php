@@ -2,6 +2,8 @@
 namespace Shop\Controller;
 
 use Shop\ShopException;
+use Shop\Form\Catalog\Search as SearchForm;
+use Shop\InputFilter\Catalog\Search as SearchFilter;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
@@ -62,8 +64,6 @@ class Catalog extends AbstractActionController
 		$category = $this->getProductCategoryService()->getCategoryByIdent(
 			$this->params('categoryIdent', '')
 		);
-	
-		//$this->getBreadcrumb($category);
 		
 		$view = new ViewModel(array(
 			'product' => $product,
@@ -73,6 +73,31 @@ class Catalog extends AbstractActionController
 			->headTitle(ucfirst($product->getName()));
 	
 		return $view;
+	}
+	
+	public function searchAction()
+	{
+	    $page = $this->params()->fromPost('page', 1);
+	    
+	    $form = new SearchForm();
+	    $form->setInputFilter(new SearchFilter());
+	    $form->setData($this->params()->fromPost());
+	    $form->isValid();
+	    
+	    $products = $this->getProductService()->usePaginator(array(
+	        'limit' => $this->getShopOptions()->getProductsPerPage(),
+	        'page'  => $page
+	    ))->searchProducts($form->getData());
+	    
+	    $viewModel = new ViewModel(array(
+	        'products' => $products,
+	    ));
+	    
+	    if ($this->getRequest()->isXmlHttpRequest()) {
+	        $viewModel->setTerminal(true);
+	    }
+	    
+	    return $viewModel;
 	}
 	
 	public function getBreadcrumb($category)

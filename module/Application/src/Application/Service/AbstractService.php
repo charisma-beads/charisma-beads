@@ -61,7 +61,7 @@ class AbstractService implements ServiceLocatorAwareInterface
 	 */
 	public function search(array $post)
 	{
-		$sort = (isset($post['sort'])) ? (string) $post['sort']: '';
+		$sort = (isset($post['sort'])) ? (string) $post['sort'] : '';
 		unset($post['sort'], $post['count'], $post['offset'], $post['page']);
 		
 		$searches = array();

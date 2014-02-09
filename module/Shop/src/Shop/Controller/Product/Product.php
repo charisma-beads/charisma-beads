@@ -1,6 +1,7 @@
 <?php
 namespace Shop\Controller\Product;
 
+use Exception;
 use Application\Controller\AbstractCrudController;
 use Zend\View\Model\ViewModel;
 
@@ -41,7 +42,7 @@ class Product extends AbstractCrudController
 		    /* @var $product \Shop\Model\Product */
 			$product = $this->getService()->getById($id);
 			$result = $this->getService()->toggleEnabled($product);
-		} catch (\Exception $e) {
+		} catch (Exception $e) {
 		    $this->setExceptionMessages($e);
 			return $this->redirect()->toRoute($this->getRoute(), array(
 				'action' => 'list'

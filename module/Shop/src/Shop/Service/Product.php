@@ -93,6 +93,20 @@ class Product extends AbstractService
 	    return $products;
 	}
 	
+	public function searchProducts(array $search)
+	{
+	    $search = array(array(
+            'searchString'  => $search['productSearch'],
+            'columns'       => array(
+                'name', 'shortDescription', 'productCategory.category'
+            ),
+        ));
+	    
+	    $this->getMapper()->useModelRelationships(true);
+	    
+	    return $this->getMapper()->searchProducts($search);
+	}
+	
 	/**
 	 * @param ProductModel $model
 	 * @param bool|array $children

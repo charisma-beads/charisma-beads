@@ -18,21 +18,22 @@
         <!-- Scripts -->
         <?=$this->headScript()
 			->prependFile($this->basePath() . '/js/site.js')
+			->prependFile($this->basePath() . '/js/jquery.searchForm.js')
 			->prependFile($this->basePath() . '/js/jquery.placeholder.min.js')
 			->prependFile($this->basePath() . '/js/holder.js')
 			->prependFile($this->basePath() . '/js/html5.js', 'text/javascript', array('conditional' => 'lt IE 9',))
 			->prependFile($this->basePath() . '/js/bootstrap.js')
-            ->prependFile('//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js') ?>
+            ->prependFile('//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js') ?>
 
     </head>
     <body>
     	<div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
                 <div id="top-bar-nav" class="container">
-                    <form class="form-search navbar-search pull-left">
+                    <form id="search-catalog" class="form-search navbar-search pull-left" method="post" action="<?=$this->url('shop/search');?>">
                         <div class="input-append">
-							<input type="text" class="search-query" placeholder="Type your search...">
-						  <button class="btn"><i class="icon-search"></i></button>
+						  <input name="productSearch" type="text" class="search-query" placeholder="Type your search...">
+						  <button type="submit" class="btn"><i class="icon-search"></i> Search</button>
 						</div>
                     </form>
                     <div class="dropdown">
@@ -129,9 +130,10 @@
             		</ul>
             	</div>
             	
-            	<div class="span9">
+            	<div id="content" class="span9">
             		<?=$this->content; ?>
             	</div>
+            	
             </div>
             
             <hr>
@@ -139,6 +141,7 @@
                 <p>&copy; 2005 - <?=date('Y'); ?> by Charisma Beads Ltd. All rights reserved.</p>
             </footer>
         </div> <!-- /container -->
+        
         <?=$this->inlineScript() ?>
     </body>
 </html>

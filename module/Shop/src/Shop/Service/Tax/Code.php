@@ -40,7 +40,10 @@ class Code extends AbstractService
      */
     public function populate($model, $children = false)
     {
-        $model->setRelationalModel($this->getTaxRateService()->getById($model->getTaxRateId()));
+        $model->setRelationalModel(
+            $this->getTaxRateService()
+                ->getById($model->getTaxRateId())
+        );
     }
     
     public function getTaxRateService()
