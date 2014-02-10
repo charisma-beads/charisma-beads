@@ -2,10 +2,13 @@
 
 namespace Navigation\Model;
 
-use Application\Model\AbstractModel;
+use Application\Model\Model;
+use Application\Model\ModelInterface;
 
-class Page extends AbstractModel
+class Page implements ModelInterface
 {   
+    use Model;
+    
 	/**
 	 * @var int
 	 */

@@ -1,7 +1,7 @@
 <?php
 namespace Shop\Service\Product;
 
-use Application\Model\AbstractModel;
+use Application\Model\ModelInterface;
 use Application\Service\AbstractService;
 use Shop\ShopException;
 use Shop\Model\Product\Category as CategoryModel;
@@ -104,7 +104,7 @@ class Category extends AbstractService
 	/**
 	 * @param CategoryModel $model
 	 */
-	public function edit(AbstractModel $model, array $post, Form $form = null)
+	public function edit(ModelInterface $model, array $post, Form $form = null)
 	{
 		if (!$model instanceof CategoryModel) {
 			throw new ShopException('$model must be an instance of Shop\Model\Product\Category, ' . get_class($model) . ' given.');
@@ -166,7 +166,7 @@ class Category extends AbstractService
 		return $this->getMapper()->toggleEnabled($category);
 	}
 	
-	public function getForm(AbstractModel $model=null, array $data=null, $useInputFilter=false, $useHydrator=false)
+	public function getForm(ModelInterface $model=null, array $data=null, $useInputFilter=false, $useHydrator=false)
 	{
 		$sl = $this->getServiceLocator();
 		$form = $sl->get($this->form);

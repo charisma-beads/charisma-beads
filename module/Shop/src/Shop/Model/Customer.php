@@ -1,11 +1,14 @@
 <?php
 namespace Shop\Model;
 
-use Application\Model\AbstractModel;
+use Application\Model\Model;
+use Application\Model\ModelInterface;
 use DateTime;
 
-class Customer extends AbstractModel
+class Customer implements ModelInterface
 {
+    use Model;
+    
     /**
      * @var int
      */

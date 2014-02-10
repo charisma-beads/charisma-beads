@@ -1,12 +1,15 @@
 <?php
 namespace User\Model;
 
-use Application\Model\AbstractModel;
+use Application\Model\ModelInterface;
+use Application\Model\Model;
 use Zend\Permissions\Acl\Role\RoleInterface;
 use DateTime;
 
-class User extends AbstractModel implements RoleInterface
+class User implements RoleInterface, ModelInterface
 {   
+    use Model;
+    
 	/**
 	 * @var int
 	 */

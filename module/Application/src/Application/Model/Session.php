@@ -1,10 +1,10 @@
 <?php
 namespace Application\Model;
 
-use Application\Model\AbstractModel;
-
-class Session extends AbstractModel
+class Session implements ModelInterface
 {
+    use Model;
+    
 	/**
      * ID Column
      * @var string

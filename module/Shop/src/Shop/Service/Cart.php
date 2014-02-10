@@ -10,20 +10,18 @@ use Shop\Service\Cart\Cookie as CartCookie;
 use Shop\Service\Cart\Item;
 use Shop\Service\Tax;
 use Zend\Session\Container;
+use Zend\Stdlib\InitializableInterface;
 
-class Cart extends AbstractService
+class Cart extends AbstractService implements InitializableInterface
 {
-
     protected $mapperClass = 'Shop\Mapper\Cart';
 
     /**
-     *
      * @var Container
      */
     protected $container;
 
     /**
-     *
      * @var Tax
      */
     protected $taxService;
@@ -35,19 +33,16 @@ class Cart extends AbstractService
     protected $cartItemService;
 
     /**
-     *
      * @var CartCookie
      */
     protected $cartCookieService;
 
     /**
-     *
      * @var CartModel
      */
     protected $cart;
 
     /**
-     *
      * @var boolean
      */
     protected $isInitialized = false;
@@ -80,7 +75,7 @@ class Cart extends AbstractService
      */
     protected $taxTotal = 0;
 
-    public function initialize()
+    public function init()
     {
         if ($this->isInitialized) {
             return;
@@ -137,7 +132,7 @@ class Cart extends AbstractService
      */
     public function addItem(ProductModel $product, $qty)
     {
-        $this->initialize();
+        $this->init();
         
         if (0 > $qty) {
             return false;
@@ -243,6 +238,7 @@ class Cart extends AbstractService
         
         $result = $this->save($cart);
         
+        /* @var $cartItem \Shop\Model\Cart\Item */
         foreach ($cart as $cartItem) {
             $this->getCartItemService()->save($cartItem);
         }
@@ -256,7 +252,7 @@ class Cart extends AbstractService
      */
     public function getCart()
     {
-        $this->initialize();
+        $this->init();
         return $this->cart;
     }
 
@@ -290,8 +286,8 @@ class Cart extends AbstractService
         
         if (true === $item->getMetadata()->getTaxable()) {
             $taxService = $this->getTaxService();
-            $taxService->setTaxInc($item->getVatInc());
-            $price = $taxService->addTax($price, $item->getTaxRate(true));
+            $taxService->setTaxInc($item->getMetadata()->getVatInc());
+            $price = $taxService->addTax($price, $item->getTax());
             $this->taxTotal += $price['tax'] * $item->getQuantity();
         }
         

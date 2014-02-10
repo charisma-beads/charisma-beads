@@ -1,10 +1,13 @@
 <?php
 namespace Shop\Model\Post;
 
-use Application\Model\AbstractModel;
+use Application\Model\Model;
+use Application\Model\ModelInterface;
 
-class Zone extends AbstractModel
+class Zone implements ModelInterface
 {
+    use Model;
+    
     /**
      * @var int
      */

@@ -1,7 +1,7 @@
 <?php
 namespace Application\Mapper;
 
-use Application\Model\AbstractModel;
+use Application\Model\ModelInterface;
 use Application\Mapper\DbAdapterAwareInterface;
 use Zend\Db\Adapter\AdapterAwareTrait;
 use Zend\Db\ResultSet\HydratingResultSet;
@@ -368,8 +368,8 @@ class AbstractMapper implements DbAdapterAwareInterface
 			return $dataOrModel;
 		}
 		
-		if (!$dataOrModel instanceOf AbstractModel) {
-			throw new \InvalidArgumentException('need instance of AbstractModel got: ' . getType($dataOrModel));
+		if (!$dataOrModel instanceOf ModelInterface) {
+			throw new \InvalidArgumentException('need instance of AbstractModel or AbstractOptions  got: ' . getType($dataOrModel));
 		}
 		
 		$hydrator = $hydrator ?: $this->getHydrator();

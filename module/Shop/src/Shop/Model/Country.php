@@ -1,10 +1,14 @@
 <?php
 namespace Shop\Model;
 
-use Application\Model\AbstractModel;
+use Application\Model\Model;
+use Application\Model\ModelInterface;
+use Application\Model\RelationalModel;
 
-class Country extends AbstractModel
+class Country implements ModelInterface
 {
+    use Model, RelationalModel;
+    
 	/**
 	 * @var int
 	 */

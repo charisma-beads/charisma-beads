@@ -1,10 +1,13 @@
 <?php
 namespace Shop\Model\Tax;
 
-use Application\Model\AbstractModel;
+use Application\Model\Model;
+use Application\Model\ModelInterface;
 
-class Rate extends AbstractModel
+class Rate implements ModelInterface
 {
+    use Model;
+    
 	/**
 	 * @var int
 	 */

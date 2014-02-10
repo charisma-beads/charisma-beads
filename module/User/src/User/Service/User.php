@@ -2,7 +2,7 @@
 namespace User\Service;
 
 use Zend\Form\Form;
-use Application\Model\AbstractModel;
+use Application\Model\ModelInterface;
 use Application\Service\AbstractService;
 use User\UserException;
 use User\Model\User as UserModel;
@@ -19,7 +19,7 @@ class User extends AbstractService
     	return $this->getMapper()->getUserByEmail($email, $ignore);
     }
     
-    public function edit(AbstractModel $model, array $post, Form $form = null)
+    public function edit(ModelInterface $model, array $post, Form $form = null)
     {
         if (!$model instanceof UserModel) {
             throw new UserException('$model must be an instance of User\Model\User, ' . get_class($model) . ' given.');

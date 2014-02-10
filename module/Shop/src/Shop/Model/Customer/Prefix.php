@@ -1,10 +1,13 @@
 <?php
 namespace Shop\Model\Customer;
 
-use Application\Model\AbstractModel;
+use Application\Model\Model;
+use Application\Model\ModelInterface;
 
-class Prefix extends AbstractModel
+class Prefix implements ModelInterface
 {
+    use Model;
+    
     /**
      * @var int
      */

@@ -1,10 +1,14 @@
 <?php
 namespace Shop\Model\Post;
 
-use Application\Model\AbstractModel;
+use Application\Model\Model;
+use Application\Model\ModelInterface;
+use Application\Model\RelationalModel;
 
-class Cost extends AbstractModel
+class Cost implements ModelInterface
 {
+    use Model, RelationalModel;
+    
     /**
      * @var int
      */

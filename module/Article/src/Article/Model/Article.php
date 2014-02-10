@@ -2,11 +2,14 @@
 
 namespace Article\Model;
 
-use Application\Model\AbstractModel;
+use Application\Model\Model;
+use Application\Model\ModelInterface;
 use DateTime;
 
-class Article extends AbstractModel
+class Article implements ModelInterface
 {
+    use Model;
+    
 	/**
 	 * @var int
 	 */

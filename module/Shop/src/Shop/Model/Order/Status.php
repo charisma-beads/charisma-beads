@@ -1,10 +1,13 @@
 <?php
 namespace Shop\Model\Order;
 
-use Application\Model\AbstractModel;
+use Application\Model\Model;
+use Application\Model\ModelInterface;
 
-class Status extends AbstractModel
+class Status implements ModelInterface
 {
+    use Model;
+    
     /**
      * @var int
      */

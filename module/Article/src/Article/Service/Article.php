@@ -4,6 +4,8 @@ namespace Article\Service;
 
 use Article\Model\Article as ArticleModel;
 use Application\Service\AbstractService;
+use Application\Model\ModelInterface;
+use Zend\Form\Form;
 
 class Article extends AbstractService
 {	
@@ -55,7 +57,7 @@ class Article extends AbstractService
         }
 	}
 	
-	public function add($post)
+	public function add(array $post)
 	{
 		if (!$post['slug']) {
 			$post['slug'] = $post['title'];
@@ -73,7 +75,7 @@ class Article extends AbstractService
 		return $insertId;
 	}
 	
-	public function edit(ArticleModel $article, $post)
+	public function edit(ModelInterface $article, array $post, Form $form = NULL)
 	{
 		
 		$result = parent::edit($article, $post);

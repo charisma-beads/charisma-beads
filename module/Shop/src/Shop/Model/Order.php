@@ -1,13 +1,16 @@
 <?php
 namespace Shop\Model;
 
-use Application\Model\AbstractModel;
+use Application\Model\Model;
+use Application\Model\ModelInterface;
 use Shop\Model\Order\Line;
 use Shop\Model\Order\Status;
 use DateTime;
 
-class Order extends AbstractModel
+class Order implements ModelInterface
 {
+    use Model;
+    
     /**
      * @var int
      */

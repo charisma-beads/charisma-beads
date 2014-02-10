@@ -6,12 +6,13 @@ use Countable;
 use DateTime;
 use Iterator;
 use SeekableIterator;
-use Application\Model\AbstractModel;
 use Application\Model\Collection;
+use Application\Model\Model;
+use Application\Model\ModelInterface;
 
-class Cart extends AbstractModel implements Iterator, Countable, ArrayAccess, SeekableIterator
+class Cart implements Iterator, Countable, ArrayAccess, SeekableIterator, ModelInterface
 {
-    use Collection;
+    use Collection, Model;
     
     /**
      * @var int

@@ -2,10 +2,13 @@
 
 namespace Shop\Model\Product;
 
-use Application\Model\AbstractModel;
+use Application\Model\Model;
+use Application\Model\ModelInterface;
 
-class GroupPrice extends AbstractModel
+class GroupPrice implements ModelInterface
 {
+    use Model;
+    
     /**
      * @var int
      */

@@ -15,7 +15,7 @@ Features To Add
 	* ~~Admin tax list and edit~~
 	* ~~Public product list~~
 	* Indivual product page
-	* Shopping cart
+	* ~~Shopping cart~~
 	* Checkout process
 	* Paypal IPN
 * ~~Navigation Module, create and edit menus, add DB routes~~.

@@ -1,7 +1,7 @@
 <?php
 namespace Application\Service;
 
-use Application\Model\AbstractModel;
+use Application\Model\ModelInterface;
 use Application\Service\ServiceException;
 use Zend\Form\Form;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
@@ -111,12 +111,12 @@ class AbstractService implements ServiceLocatorAwareInterface
 	/**
 	 * prepare data to be updated and saved into database.
 	 * 
-	 * @param AbstractModel $model
+	 * @param ModelInterface $model
 	 * @param array $post
 	 * @param Form $form
 	 * @return int results from self::save()
 	 */
-	public function edit(AbstractModel $model, array $post, Form $form = null)
+	public function edit(ModelInterface $model, array $post, Form $form = null)
 	{
 		$form  = ($form) ? $form : $this->getForm($model, $post, true, true);
 		
@@ -130,13 +130,13 @@ class AbstractService implements ServiceLocatorAwareInterface
 	/**
 	 * updates a row if id is supplied else insert a new row
 	 * 
-	 * @param array|AbstractModel $data
+	 * @param array|ModelInterface $data
 	 * @throws ServiceException
 	 * @return int $reults number of rows affected or insertId
 	 */
 	public function save($data)
 	{
-		if ($data instanceof AbstractModel) {
+		if ($data instanceof ModelInterface) {
 			$data = $this->getMapper()->extract($data);
 		}
 		
@@ -187,13 +187,13 @@ class AbstractService implements ServiceLocatorAwareInterface
 	/**
 	 * Gets the default form for the service.
 	 * 
-	 * @param AbstractModel $model
+	 * @param ModelInterface $model
 	 * @param array $data
 	 * @param bool $useInputFilter
 	 * @param bool $useHydrator
 	 * @return Form $form
 	 */
-	public function getForm(AbstractModel $model=null, array $data=null, $useInputFilter=false, $useHydrator=false)
+	public function getForm(ModelInterface $model=null, array $data=null, $useInputFilter=false, $useHydrator=false)
 	{
 		$sl = $this->getServiceLocator();
 		/* @var $form \Zend\Form\Form */

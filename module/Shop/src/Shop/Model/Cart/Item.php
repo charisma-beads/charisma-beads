@@ -1,12 +1,15 @@
 <?php
 namespace Shop\Model\Cart;
 
-use Application\Model\AbstractModel;
+use Application\Model\ModelInterface;
+use Application\Model\Model;
 use Shop\Model\Product\MetaData as ProductMetaData;
 use Shop\Model\Product\MetaData;
 
-class Item  extends AbstractModel
-{
+class Item implements ModelInterface
+{   
+    use Model;
+    
     /**
      * @var int
      */
@@ -167,5 +170,4 @@ class Item  extends AbstractModel
         $this->metadata = $metadata;
         return $this;
     }
-
 }

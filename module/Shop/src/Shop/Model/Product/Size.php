@@ -1,10 +1,13 @@
 <?php
 namespace Shop\Model\Product;
 
-use Application\Model\AbstractModel;
+use Application\Model\Model;
+use Application\Model\ModelInterface;
 
-class Size extends AbstractModel
+class Size implements ModelInterface
 {
+    use Model;
+    
 	/**
 	 * @var int
 	 */

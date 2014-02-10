@@ -1,10 +1,14 @@
 <?php
 namespace Shop\Model\Tax;
 
-use Application\Model\AbstractModel;
+use Application\Model\Model;
+use Application\Model\ModelInterface;
+use Application\Model\RelationalModel;
 
-class Code extends AbstractModel
+class Code implements ModelInterface
 {
+    use Model, RelationalModel;
+    
 	/**
 	 * @var int
 	 */

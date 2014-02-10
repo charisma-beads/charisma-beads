@@ -1,7 +1,7 @@
 <?php
 namespace Shop\Service;
 
-use Application\Model\AbstractModel;
+use Application\Model\ModelInterface;
 use Application\Service\AbstractService;
 use Shop\Model\Product as ProductModel;
 use Shop\ShopException;
@@ -157,7 +157,7 @@ class Product extends AbstractService
 	/**
 	 * @param ProductModel $model
 	 */
-	public function edit(AbstractModel $model, array $post, Form $form = null)
+	public function edit(ModelInterface $model, array $post, Form $form = null)
 	{
 		if (!$model instanceof ProductModel) {
 			throw new ShopException('$model must be an instance of Shop\Model\Product, ' . get_class($model) . ' given.');

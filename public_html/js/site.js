@@ -13,7 +13,7 @@ $(document).ready(function(){
         }    
     });
     
-    $('[data-toggle="tooltip"]').tooltip({'placement': 'top'});
+    $('.siteTip').tooltip({'placement': 'top'});
 
     $('input[placeholder], textarea[placeholder]').placeholder();
     

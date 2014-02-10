@@ -1,7 +1,7 @@
 <?php 
 $articleTitle = $this->escapehtml($this->page->getTitle());
 $this->headTitle($articleTitle);
-$splitTitle = split(' ', $articleTitle);
+$splitTitle = explode(' ', $articleTitle);
 $title2 = end($splitTitle);
 array_pop($splitTitle);
 $title1 = implode(' ', $splitTitle);
