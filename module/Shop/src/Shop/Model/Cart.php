@@ -33,34 +33,6 @@ class Cart extends AbstractModel implements Iterator, Countable, ArrayAccess, Se
      */
     protected $dateModified;
     
-    /**
-     * Total before shipping
-     *
-     * @var float
-     */
-    protected $subTotal = 0;
-    
-    /**
-     * Total with shipping
-     *
-     * @var float
-     */
-    protected $total = 0;
-    
-    /**
-     * The shipping cost
-     *
-     * @var float
-     */
-    protected $shipping = 0;
-    
-    /**
-     * Total of tax
-     *
-     * @var float
-     */
-    protected $taxTotal = 0;
-    
     public function __construct()
     {
         $this->setEntityClass('Shop\Model\Cart\Item');
@@ -135,78 +107,6 @@ class Cart extends AbstractModel implements Iterator, Countable, ArrayAccess, Se
 	public function setDateModified(DateTime $dateModified = null)
     {
         $this->dateModified = $dateModified;
-        return $this;
-    }
-
-    /**
-     * @return float
-     */
-	public function getSubTotal()
-    {
-        return $this->subTotal;
-    }
-
-    /**
-     * @param float $subTotal
-     * @return \Shop\Model\Cart
-     */
-	public function setSubTotal($subTotal)
-    {
-        $this->subTotal = $subTotal;
-        return $this;
-    }
-
-    /**
-     * @return number
-     */
-	public function getTotal()
-    {
-        return $this->total;
-    }
-
-    /**
-     * @param float $total
-     * @return \Shop\Model\Cart
-     */
-	public function setTotal($total)
-    {
-        $this->total = $total;
-        return $this;
-    }
-
-    /**
-     * @return number
-     */
-	public function getShipping()
-    {
-        return $this->shipping;
-    }
-
-    /**
-     * @param float $shipping
-     * @return \Shop\Model\Cart
-     */
-	public function setShipping($shipping)
-    {
-        $this->shipping = $shipping;
-        return $this;
-    }
-
-    /**
-     * @return number
-     */
-	public function getTaxTotal()
-    {
-        return $this->taxTotal;
-    }
-
-    /**
-     * @param float $taxTotal
-     * @return \Shop\Model\Cart
-     */
-	public function setTaxTotal($taxTotal)
-    {
-        $this->taxTotal = $taxTotal;
         return $this;
     }
 }

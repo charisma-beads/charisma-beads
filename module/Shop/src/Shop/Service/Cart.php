@@ -11,8 +11,6 @@ use Shop\Service\Cart\Item;
 use Shop\Service\Tax;
 use Zend\Session\Container;
 
-use FB;
-
 class Cart extends AbstractService
 {
 
@@ -53,6 +51,34 @@ class Cart extends AbstractService
      * @var boolean
      */
     protected $isInitialized = false;
+    
+    /**
+     * Total before shipping
+     *
+     * @var float
+     */
+    protected $subTotal = 0;
+    
+    /**
+     * Total with shipping
+     *
+     * @var float
+     */
+    protected $total = 0;
+    
+    /**
+     * The shipping cost
+     *
+     * @var float
+     */
+    protected $shipping = 0;
+    
+    /**
+     * Total of tax
+     *
+     * @var float
+     */
+    protected $taxTotal = 0;
 
     public function initialize()
     {
@@ -60,7 +86,33 @@ class Cart extends AbstractService
             return;
         }
         
-        $this->loadCart();
+        $cart = null;
+        
+        // check first if there is a cartId in the session data,
+        // else try to retrieve the cartId from cookie verifier.
+        if (isset($this->getContainer()->cartId)) {
+            $cartId = $this->getContainer()->cartId;
+            $cart = $this->getById($cartId);
+        } else {
+            $verifier = $this->getCartCookieService()->retrieveCartVerifierCookie();
+            
+            if ($verifier) {
+                $cart = $this->getCartByVerifier($verifier);
+            }
+        }
+        
+        // load any cart items
+        if ($cart) {
+            $items = $this->getCartItemService()->getCartItemsByCartId($cart->getCartId());
+            
+            /* @var $item \Shop\Model\Cart\Item */
+            foreach ($items as $item) {
+                $cart->offsetSet($item->getMetadata()->getProductId(), $item);  
+            }
+        }
+        
+        $this->setCart($cart);
+        $this->isInitialized = true;
     }
 
     /**
@@ -191,46 +243,11 @@ class Cart extends AbstractService
         
         $result = $this->save($cart);
         
-        foreach ($cart->getEntities() as $cartItem) {
+        foreach ($cart as $cartItem) {
             $this->getCartItemService()->save($cartItem);
         }
         
         $this->getContainer()->cartId = $cart->getCartId();
-    }
-
-    /**
-     * Load any presisted data
-     */
-    public function loadCart()
-    {
-        $cart = null;
-        
-        // check first if there is a cartId in the session data,
-        // else try to retrieve the cartId from cookie verifier.
-        if (isset($this->getContainer()->cartId)) {
-            $cartId = $this->getContainer()->cartId;
-            $cart = $this->getById($cartId);
-        } else {
-            $verifier = $this->getCartCookieService()->retrieveCartVerifierCookie();
-            
-            if ($verifier) {
-                $cart = $this->getCartByVerifier($verifier);
-            }
-        }
-        
-        // load any cart items
-        if ($cart) {
-            
-            $items = $this->getCartItemService()->getCartItemsByCartId($cart->getCartId());
-            
-            /* @var $item \Shop\Model\Cart\Item */
-            foreach ($items as $item) {
-                $cart->offsetSet($item->getMetadata()->getProductId(), $item);  
-            }
-        }
-        
-        $this->setCart($cart);
-        $this->isInitialized = true;
     }
 
     /**
@@ -287,14 +304,14 @@ class Cart extends AbstractService
     public function calculateTotals()
     {
         $sub = 0;
-        $this->getCart()->setTaxTotal(0);
+        $this->taxTotal = 0;
         
-        foreach($this->getCart()->getEntities() as $item) {
-            $sub = $sub + $this->getLineCost($item);
+        foreach($this->getCart() as $cartItem) {
+            $sub = $sub + $this->getLineCost($cartItem);
         }
         
-        $this->getCart()->setSubTotal($sub);
-        $this->getCart()->setTotal($this->getCart()->getSubTotal() + $this->getCart()->getShipping());
+        $this->subTotal = $sub;
+        $this->total = $this->subTotal + $this->shipping;
     }
 
     /**
@@ -304,7 +321,7 @@ class Cart extends AbstractService
      */
     public function setShippingCost($cost)
     {
-        $this->getCart()->setShipping($cost);
+        $this->shipping = $cost;
         $this->calculateTotals();
         $this->persist();
     }
@@ -317,7 +334,7 @@ class Cart extends AbstractService
     public function getShippingCost()
     {
         $this->calculateTotals();
-        return $this->getCart()->getShipping();
+        return $this->shipping;
     }
 
     /**
@@ -328,7 +345,7 @@ class Cart extends AbstractService
     public function getSubTotal()
     {
         $this->calculateTotals();
-        return $this->getCart()->getSubTotal();
+        return $this->subTotal;
     }
 
     /**
@@ -339,7 +356,7 @@ class Cart extends AbstractService
     public function getTotal()
     {
         $this->calculateTotals();
-        return $this->getCart()->getTotal();
+        return $this->total;
     }
 
     /**
