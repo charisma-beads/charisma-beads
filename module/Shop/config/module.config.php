@@ -145,8 +145,8 @@ return array(
 										'action' => 'view',
 										'productIdent' => '',
 										'force-ssl' => 'http'
-									)
-								)
+									),
+								),
 							),
 							'page' => array(
 								'type' => 'Segment',

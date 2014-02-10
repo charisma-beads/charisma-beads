@@ -91,9 +91,9 @@ class Cart extends AbstractService
             return false;
         }
         
-        $cartItems = $this->getCart()->getEntities();
+        $cart = $this->getCart();
         
-        $cartItem = ($cartItems[$product->getProductId()]) ? : new CartItem();
+        $cartItem = ($cart->offsetExists($product->getProductId())) ? $cart->offsetGet($product->getProductId()): new CartItem();
         
         if (0 == $qty) {
             $this->removeItem($cartItem->getCartItemId());
@@ -107,9 +107,7 @@ class Cart extends AbstractService
             ->setMetadata($this->getProductMetaData($product))
             ->setCartId($this->getCart()->getCartId());
         
-        $cartItems[$product->getProductId()] = $cartItem;
-        
-        $this->getCart()->setEntities($cartItems);
+        $cart->offsetSet($product->getProductId(), $cartItem);
         
         $this->persist();
         
@@ -222,15 +220,13 @@ class Cart extends AbstractService
         
         // load any cart items
         if ($cart) {
-            $entities = [];
+            
             $items = $this->getCartItemService()->getCartItemsByCartId($cart->getCartId());
             
             /* @var $item \Shop\Model\Cart\Item */
             foreach ($items as $item) {
-                $entities[$item->getMetadata()->getProductId()] = $item;
+                $cart->offsetSet($item->getMetadata()->getProductId(), $item);  
             }
-            
-            $cart->setEntities($entities);
         }
         
         $this->setCart($cart);
