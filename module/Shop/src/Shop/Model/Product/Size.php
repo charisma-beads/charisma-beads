@@ -2,11 +2,12 @@
 namespace Shop\Model\Product;
 
 use Application\Model\Model;
+use Application\Model\RelationalModel;
 use Application\Model\ModelInterface;
 
 class Size implements ModelInterface
 {
-    use Model;
+    use Model, RelationalModel;
     
 	/**
 	 * @var int
