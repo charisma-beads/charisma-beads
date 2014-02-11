@@ -29,9 +29,4 @@ $(document).ready(function(){
 		document.getElementById('password').type = change;
 	});
     
-    $('#content').searchForm({
-	    url : 'shop/search',
-	    searchForm : $('#search-catalog'),
-	    paging : 'links'
-	});
 });

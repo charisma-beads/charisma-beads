@@ -37,3 +37,13 @@
 <?php endif; ?>
 <div class="loading ajax-loading"><!-- Place at bottom of page --></div>
 
+<?php $this->headScript()->captureStart(); ?>
+$(document).ready(function(){
+    $('#content').searchForm({
+        url : 'search',
+        searchForm : $('#search-catalog'),
+        paging : 'links'
+    });
+});
+<?php $this->headScript()->captureEnd(); ?>
+
