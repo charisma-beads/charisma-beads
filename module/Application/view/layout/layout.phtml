@@ -32,7 +32,7 @@
                 <div id="top-bar-nav" class="container">
                     <form id="search-catalog" class="form-search navbar-search pull-left" method="post" action="<?=$this->url('shop/search');?>">
                         <div class="input-append">
-						  <input name="productSearch" type="text" class="search-query" placeholder="Type your search...">
+						  <?=$this->formElement($this->productSearch()->get('productSearch'));?>
 						  <button type="submit" class="btn"><i class="icon-search"></i> Search</button>
 						</div>
                     </form>

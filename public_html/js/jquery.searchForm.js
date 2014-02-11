@@ -5,18 +5,21 @@
 	    this.$element = $(element);
 	    this.id = this.$element.attr('id');
 	    this.options = options;
+	    
+	    this.init();
 	    if (this.options.searchForm) {
     		this.options.searchForm.submit(function(e){
     			e.preventDefault();
     			this.search(e);
     		}.bind(this));
+    		
+    		this.setSearchParams(this.options.searchForm);
     	}
-	    this.init();
 	};
 
 	SearchForm.prototype = {
-        init : function(){
-        	
+        init : function()
+        {
         	if (this.options.paging && typeof this.options.paging == 'string') {
         		switch(this.options.paging){
         			case 'links':
@@ -29,19 +32,21 @@
         	}
         },
         
-        search : function(search)
+        setSearchParams : function(searchForm)
         {
-            this.options.query.page = 1;
-        	id = $(search.target).attr('id');
-        	params = $(search.target).serializeArray();
-        	
         	data = {};
-        	
-        	for(var i=0; i<params.length; i++){
+	    	params = $(searchForm).serializeArray();
+	    	
+        	for(var i=0; i<params.length; i++) {
         		data[params[i].name] = params[i].value;
         	}
         	
         	$.extend(this.options.query, data);
+        },
+        
+        search : function(search)
+        {
+        	this.setSearchParams(search.target);
         	
         	this.ajaxCall();
         	

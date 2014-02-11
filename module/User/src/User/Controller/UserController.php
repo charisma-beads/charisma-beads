@@ -33,6 +33,8 @@ class UserController extends AbstractActionController
         		$this->flashMessenger()->addInfoMessage(
         			'There were one or more isues with your submission. Please correct them as indicated below.'
         		);
+        		
+        		\FB::info($result->getData());
         
         		return new ViewModel(array(
         			'form' => $result
@@ -68,12 +70,19 @@ class UserController extends AbstractActionController
 
 	public function editAction()
 	{
+	    /* @var $user \User\Model\User */
 		$user = $this->identity();
 
 		$request = $this->getRequest();
 		if ($request->isPost()) {
-				
-			$result = $this->getUserService()->editUser($user, $this->params()->fromPost());
+			$params = $this->params()->fromPost();
+			
+		    if ($params['userId'] === $user->getUserId()) {
+                $result = $this->getUserService()->edit($user, $params);
+            } else {
+                // Redirect to user
+                return $this->redirect()->toRoute('user');
+            }
 				
 			if ($result instanceof UserForm) {
 

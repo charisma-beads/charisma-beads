@@ -20,6 +20,7 @@ return array(
     	'Shop\Form\TaxRate'						=> false,
     ),
 	'invokables'    => array(
+	    'Shop\Form\CatalogSearch'               => 'Shop\Form\Catalog\Search',
 		'Shop\Form\Country'						=> 'Shop\Form\Country',
 	    'Shop\Form\Customer'				    => 'Shop\Form\Customer',
 		'Shop\Form\CustomerAddress'				=> 'Shop\Form\Customer\Address',
@@ -37,6 +38,7 @@ return array(
 		'Shop\Form\TaxCode'						=> 'Shop\Form\Tax\Code',
 		'Shop\Form\TaxRate'						=> 'Shop\Form\Tax\Rate',
 		
+	    'Shop\InputFilter\CatalogSearch'        => 'Shop\InputFilter\Catalog\Search',
 		'Shop\InputFilter\Country'				=> 'Shop\InputFilter\Country',
 	    'Shop\InputFilter\Customer'				=> 'Shop\InputFilter\Customer',
 	    'Shop\InputFilter\CustomerAddress'		=> 'Shop\InputFilter\Customer\Address',

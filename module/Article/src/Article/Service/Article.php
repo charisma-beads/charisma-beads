@@ -75,7 +75,7 @@ class Article extends AbstractService
 		return $insertId;
 	}
 	
-	public function edit(ModelInterface $article, array $post, Form $form = NULL)
+	public function edit(ModelInterface $article, array $post, Form $form = null)
 	{
 		
 		$result = parent::edit($article, $post);

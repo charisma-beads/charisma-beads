@@ -10,5 +10,6 @@ return array(
 		'PercentFormat'	=> 'Shop\View\PercentFormat',
 	    'PriceFormat'   => 'Shop\View\PriceFormat',
 	    'ProductPrice'  => 'Shop\View\ProductPrice',
+	    'ProductSearch' => 'Shop\View\ProductSearch',
 	),
 );

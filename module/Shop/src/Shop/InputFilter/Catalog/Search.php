@@ -8,7 +8,7 @@ class Search extends InputFilter
     public function __construct()
     {
         $this->add(array(
-        	'name' => 'searchString',
+        	'name' => 'productSearch',
             'required'   => false,
             'filters'    => array(
                 array('name' => 'StripTags'),

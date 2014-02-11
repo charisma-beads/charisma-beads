@@ -2,7 +2,6 @@
 namespace Shop\Controller;
 
 use Shop\ShopException;
-use Shop\Form\Catalog\Search as SearchForm;
 use Shop\InputFilter\Catalog\Search as SearchFilter;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
@@ -79,8 +78,8 @@ class Catalog extends AbstractActionController
 	{
 	    $page = $this->params()->fromPost('page', 1);
 	    
-	    $form = new SearchForm();
-	    $form->setInputFilter(new SearchFilter());
+	    $form = $this->getServiceLocator()->get('Shop\Form\CatalogSearch');
+	    $form->setInputFilter($this->getServiceLocator()->get('Shop\InputFilter\CatalogSearch'));
 	    $form->setData($this->params()->fromPost());
 	    $form->isValid();
 	    
@@ -90,7 +89,7 @@ class Catalog extends AbstractActionController
 	    ))->searchProducts($form->getData());
 	    
 	    $viewModel = new ViewModel(array(
-	        'products' => $products,
+	        'products' => $products
 	    ));
 	    
 	    if ($this->getRequest()->isXmlHttpRequest()) {

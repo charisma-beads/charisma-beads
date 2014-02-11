@@ -98,7 +98,7 @@ class ArticleController extends AbstractActionController
 		$request = $this->getRequest();
 		if ($request->isPost()) {
 			
-			$result = $this->getArticleService()->edit($article, $request->getPost());
+			$result = $this->getArticleService()->edit($article, $this->params()->fromPost());
 			
 			if ($result instanceof ArticleForm) {
 				

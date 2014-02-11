@@ -19,6 +19,14 @@ class User extends AbstractService
     	return $this->getMapper()->getUserByEmail($email, $ignore);
     }
     
+    /**
+	 * prepare data to be updated and saved into database.
+	 * 
+	 * @param UserModel $model
+	 * @param array $post
+	 * @param Form $form
+	 * @return int results from self::save()
+	 */
     public function edit(ModelInterface $model, array $post, Form $form = null)
     {
         if (!$model instanceof UserModel) {
@@ -33,8 +41,30 @@ class User extends AbstractService
     	
     	$form  = $this->getForm($model, $post, true, true);
     	
+    	// we need to find if this email has changed,
+    	// if not then exclude it from validation,
+    	// if changed then revalidate it.
+    	if ($model->getEmail() === $post['email']) {
+    	    
+    	    $validatorChain = $form->getInputFilter()
+    	       ->get('email')
+    	       ->getValidatorChain()
+    	       ->getValidators();
+    	    
+    	    foreach ($validatorChain as $validator) {
+    	        if ($validator['instance'] instanceof \Zend\Validator\Db\NoRecordExists) {
+    	            $validator['instance']->setExclude(array(
+	                    'field' => 'email',
+	                    'value' => $model->getEmail(),
+    	            ));
+    	        }
+    	    }
+    	}
+    	
     	$form->getInputFilter()->get('passwd')->setRequired(false);
     	$form->getInputFilter()->get('passwd')->setAllowEmpty(true);
+    	$form->getInputFilter()->get('passwd-confirm')->setRequired(false);
+    	$form->getInputFilter()->get('passwd-confirm')->setAllowEmpty(true);
 		
 		return parent::edit($model, $post, $form);
     }
