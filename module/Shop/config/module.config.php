@@ -55,6 +55,7 @@ return array(
 					array('controller' => 'Shop\Controller\Cart', 'action' => 'all'),
 					array('controller' => 'Shop\Controller\Catalog', 'action' => 'all'),
 					array('controller' => 'Shop\Controller\Checkout', 'action' => 'all'),
+				    array('controller' => 'Shop\Controller\Order', 'action' => array('process', 'cancel')),
 					array('controller' => 'Shop\Controller\Payment', 'action' => 'all'),
 					array('controller' => 'Shop\Controller\Paypal', 'action' => array('process', 'success', 'cancel')),
 					array('controller' => 'Shop\Controller\Product', 'action' => array('view')),
@@ -219,6 +220,20 @@ return array(
 							)
 						)
 					),
+				    'order' => array(
+				        'type' => 'Segment',
+				        'options' => array(
+				            'route' => '/order[/:action]',
+				            'constraints' => array(
+				                'action' => '[a-zA-Z0-9][a-zA-Z0-9_-]*',
+				            ),
+				            'defaults' => array(
+				                'controller' => 'Order',
+				                'action'     => 'index',
+				                'force-ssl' => 'ssl'
+				            )
+				        )
+				    ),
 					'payment' => array(
 						'type' => 'Segment',
 						'options' => array(
@@ -228,6 +243,9 @@ return array(
                             ),
 						    'defaults' => array(
 								'controller' => 'Payment',
+						        'action' => 'payment',
+						        'option' => 'payPaypal',
+						        'cartId' => 0,
 						        'force-ssl' => 'ssl'
 							)
 						)

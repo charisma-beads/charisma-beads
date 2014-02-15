@@ -8,14 +8,19 @@ use Zend\View\Model\ViewModel;
 class Checkout extends AbstractActionController
 {
     /**
+     * @var \Shop\Service\Order
+     */
+    protected $orderService;
+    
+    /**
      * @var \Shop\Service\Cart
      */
     protected $cartService;
     
     /**
-     * @var \Shop\Service\CustomerAddress
+     * @var \Shop\Service\Customer
      */
-    protected $customerAddressService;
+    protected $customerService;
     
 	public function indexAction()
 	{
@@ -42,34 +47,81 @@ class Checkout extends AbstractActionController
 	
 	public function confirmOrderAction()
 	{
-	    $countryId = $this->getCustomerAddressService()
-            ->getDeliveryAddressByUserId(
-                $this->identity()->getUserId()
-		)->getCountryId();
+	    $params = $this->params()->fromPost();
+	    $submit = $this->params()->fromPost('submit', null);
+	    $collect = $this->params()->fromPost('collect-instore', null);
+	    
+	    $customer = $this->getCustomerService()->setUser($this->identity())
+	       ->getCustomerDetailsFromUserId();
+	    
+	    /* @var $form \Zend\Form\Form */
+	    $form = $this->getServiceLocator()->get('Shop\Form\OrderConfirm');
+	    $form->setInputFilter($this->getServiceLocator()->get('Shop\InputFilter\OrderConfirm'));
+	    $form->init();
+	    
+	    if ($this->request->isPost() && 'placeOrder' === $submit) {
+            $form->setData($params);
+             
+            if ($form->isValid()) {
+                $result = $this->getOrderService()->processOrderFromCart($customer, $collect);
+                
+                if ($result) {
+                    $this->getCartService()->clear();
+                    // need to email order,
+                    // add params to session and redirect to payment page.
+                    $this->redirect()->toRoute('shop/payment', array(
+                        'option' => $params['payment-option'],
+                        'cartId' => $result,
+                    ));
+                }
+            }
+	    }
 	    
 	    return new ViewModel(array(
-			'countryId' => $countryId
+			'countryId' => $customer->getDeliveryAddress()->getCountryId(),
+	        'form'      => $form,
 	    ));
 	}
 	
-	public function processOrderAction()
+	public function cancelOrderAction()
 	{
-	    // this is where we add the order to the database,
-	    // send email order, offer a printable version of order
-	    // and redirect to payment choice.
+	    if ($this->request->isPost()) {
+	        $submit = $this->params()->fromPost('submit', null);
+	        
+	        if ('cancelOrder' === $submit) {
+	            $this->getCartService()->clear();
+	            $this->flashmessenger()->addSuccessMessage('You have successfully canceled your order.');
+	            return $this->redirect()->toRoute('shop');
+	        }
+	    }
+	    
+	    return $this->redirect()->toRoute('shop');
 	}
 	
 	/**
-	 * @return \Shop\Service\CustomerAddress
+	 * @return \Shop\Service\Customer
 	 */
-	public function getCustomerAddressService()
+	public function getCustomerService()
 	{
-	    if (!$this->customerAddressService) {
+	    if (!$this->customerService) {
 	    	$sl = $this->getServiceLocator();
-	    	$this->customerAddressService = $sl->get('Shop\Service\CustomerAddress');
+	    	$this->customerService = $sl->get('Shop\Service\Customer');
 	    }
 	    
-	    return $this->customerAddressService;
+	    return $this->customerService;
+	}
+	
+	/**
+	 * @return \Shop\Service\Order
+	 */
+	protected function getOrderService()
+	{
+	    if (!$this->orderService) {
+	        $sl = $this->getServiceLocator();
+	        $this->orderService = $sl->get('Shop\Service\Order');
+	    }
+	
+	    return $this->orderService;
 	}
 	
 	/**

@@ -6,7 +6,6 @@ use Shop\Form\Cart\Add;
 use Zend\I18n\View\Helper\CurrencyFormat;
 use Shop\Service\Cart as CartService;
 use Zend\View\Model\ViewModel;
-use Shop\Service\Shipping;
 
 class Cart extends AbstractViewHelper
 {
@@ -14,11 +13,6 @@ class Cart extends AbstractViewHelper
 	 * @var Shop\Service\Cart
 	 */
 	protected $cartService;
-	
-	/**
-	 * @var Shop\Service\Shipping
-	 */
-	protected $shippingService;
 	
 	/**
 	 * @var CurrencyFormat
@@ -77,10 +71,7 @@ class Cart extends AbstractViewHelper
 	
 	public function getShippingTotal($countryId)
 	{
-	    $countryId = (int) $countryId;
-	    $shipping = $this->getShippingService()->setCountryId($countryId);
-	    $cost = $shipping->calculateShipping($this->cartService);
-	    $this->cartService->setShippingCost($cost);
+	    $this->cartService->setShippingCost($countryId);
 	    
 	    return $this->formatAmount($this->cartService->getShippingCost());
 	}
@@ -108,20 +99,6 @@ class Cart extends AbstractViewHelper
 		));
 	
 		return $form;
-	}
-	
-	/**
-	 * @return \Shop\Service\Shipping
-	 */
-	protected function getShippingService()
-	{
-	    if (!$this->shippingService instanceof Shipping) {
-	        $this->shippingService = $this->getServiceLocator()
-	           ->getServiceLocator()
-	           ->get('Shop\Service\Shipping');
-	    }
-	    
-	    return $this->shippingService;
 	}
 	
 	/**

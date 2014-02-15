@@ -54,6 +54,26 @@ class Customer implements ModelInterface
      */
     protected $dateModified;
     
+    /**
+     * @var \User\Model\User
+     */
+    protected $user;
+    
+    /**
+     * @var \Shop\Model\Customer\Prefix
+     */
+    protected $prefix;
+    
+    /**
+     * @var \Shop\Model\Customer\Address
+     */
+    protected $billingAddress;
+    
+    /**
+     * @var \Shop\Model\Customer\Address
+     */
+    protected $deliveryAddress;
+    
 	/**
 	 * @return number $customerId
 	 */
@@ -205,6 +225,78 @@ class Customer implements ModelInterface
 	{
 		$this->dateModified = $dateModified;
 		return $this;
+	}
+	
+	/**
+	 * @return \User\Model\User
+	 */
+	public function getUser()
+	{
+	    return $this->user;
+	}
+	
+	/**
+	 * @param \User\Model\User $user
+	 * @return \Shop\Model\Customer
+	 */
+	public function setUser($user)
+	{
+	    $this->user = $user;
+	    return $this;
+	}
+	
+	/**
+	 * @return \Shop\Model\Customer\Prefix
+	 */
+	public function getPrefix()
+	{
+	    return $this->prefix;
+	}
+	
+	/**
+	 * @param \Shop\Model\Custome\Prefix $prefix
+	 * @return \Shop\Model\Customer
+	 */
+	public function setPrefix($prefix)
+	{
+	    $this->prefix = $prefix;
+	    return $this;
+	}
+	
+	/**
+	 * @return \Shop\Model\Customer\Address
+	 */
+	public function getBillingAddress()
+	{
+	    return $this->billingAddress;
+	}
+	
+	/**
+	 * @param \Shop\Model\Customer\Address $billingAddress
+	 * @return \Shop\Model\Customer
+	 */
+	public function setBillingAddress($billingAddress)
+	{
+	    $this->billingAddress = $billingAddress;
+	    return $this;
+	}
+	
+	/**
+	 * @return \Shop\Model\Customer\Address
+	 */
+	public function getDeliveryAddress()
+	{
+	    return $this->deliveryAddress;
+	}
+	
+	/**
+	 * @param \Shop\Model\Customer\Address $deliveryAddress
+	 * @return \Shop\Model\Customer
+	 */
+	public function setDeliveryAddress($deliveryAddress)
+	{
+	    $this->deliveryAddress = $deliveryAddress;
+	    return $this;
 	}
 	
 	public function getFullName()

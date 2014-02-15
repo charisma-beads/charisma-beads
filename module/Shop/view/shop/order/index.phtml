@@ -12,7 +12,7 @@
 		    	<?=$this->partial('partial/search', array(
 		    		'name'			=> 'order',
 		    		'searchInputs'	=> array(
-		    			'Order' => 'invoice',
+		    			'Order' => 'orderNumber',
 		    		),
 		    	));?>
 	    	</div>
@@ -30,7 +30,7 @@
 $(document).ready(function(){
 	$('#table-order').dataGrid({
 	    url : 'order/list',
-	    query: { sort : 'invoice' },
+	    query: { sort : 'orderNumber' },
 	    searchForm : $('#search-order'),
 	    paging : 'links',
 	    columnSort: true,

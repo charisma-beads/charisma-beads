@@ -6,3 +6,42 @@
 	'checkout' => true,
     'countryId' => $this->countryId
 )); ?>
+
+<form class="form" method="post" action="<?=$this->url('shop/checkout', array(
+	'action' => 'confirm-order',
+)); ?>">
+    <?=$this->ztbFormElement($this->form->get('payment-option'));?>
+    <?=$this->ztbFormElement($this->form->get('collect-instore'));?>
+    <?=$this->ztbFormElement($this->form->get('requirements'));?>
+    <?=$this->ztbFormElement($this->form->get('terms'));?>
+    <div class="control-group">
+        <div class="controls">
+            <button type="submit" name="submit" class="btn btn-primary" value="placeOrder" data-loading-text="Please wait...">
+            	Place Order
+            </button>
+            <a href="#cancelOrderModel" class="btn btn-danger" data-toggle="modal">
+                Cancel Order
+            </a>
+        </div>
+    </div>
+</form>
+
+<!-- Modal -->
+<div class="modal hide fade" id="cancelOrderModel">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h3 id="cancelOrderModelLabel">Cancel Order</h3>
+  </div>
+    <form class="form-horizontal"  method="post" action="<?=$this->url('shop/checkout', array(
+        'action' => 'cancelOrder',
+    )) ?>">
+        <div class="modal-body">
+            <p>Are you sure you want to cancel your order.</p>
+            <p class="label label-important">This action cannot be undone</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">No Don't Do It</button>
+            <button type="submit" name="submit" class="btn btn-danger" value="cancelOrder">Yes I want to cancel</button>
+        </div>
+    </form>
+</div>

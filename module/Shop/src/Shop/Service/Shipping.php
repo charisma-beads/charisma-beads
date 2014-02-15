@@ -59,13 +59,17 @@ class Shipping
         	}
         }
         
-        $taxService = $this->getTaxService()->setTaxInc($taxInc);
+        $taxService = $this->getTaxService()
+            ->setTaxInc($taxInc);
         
-        $price = $taxService->addTax($this->shippingTotal, $taxRate);
+        $taxService->addTax($this->shippingTotal, $taxRate);
         
-        $this->setShippingTax($price['tax']);
+        $this->setShippingTax($taxService->getTax());
         
-        return $price['price'] + $price['tax'];
+        $price = $taxService->getPrice();
+        $tax = $taxService->getTax();
+        
+        return ($taxInc) ? $price + $tax : $price;
     }
     
     /**

@@ -21,11 +21,6 @@ class Item implements ModelInterface
     protected $cartId;
     
     /**
-     * @var string
-     */
-    protected $description;
-    
-    /**
      * @var int
      */
 	protected $quantity;
@@ -82,24 +77,6 @@ class Item implements ModelInterface
     }
 
 	/**
-	 * @return string
-	 */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-	/**
-	 * @param unknown $description
-	 * @return \Shop\Model\Cart\Item
-	 */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-        return $this;
-    }
-
-	/**
 	 * @return number
 	 */
     public function getQuantity()
@@ -138,9 +115,9 @@ class Item implements ModelInterface
 	/**
 	 * @return float
 	 */
-    public function getTax()
-    {
-        return $this->tax;
+    public function getTax($formatPercent=false)
+	{
+		return (true === $formatPercent) ? $this->tax / 100 : $this->tax;
     }
 
 	/**

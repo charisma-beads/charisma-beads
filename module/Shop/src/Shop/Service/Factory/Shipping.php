@@ -10,8 +10,12 @@ class Shipping implements FactoryInterface
 
 	public function createService(ServiceLocatorInterface $serviceLocator)
 	{
+	    /* @var $shopOptions \Shop\Options\ShopOptions */
+	    $shopOptions = $serviceLocator->get('Shop\Options\Shop');
 	    $taxService = $serviceLocator->get('Shop\Service\Tax');
 	    $countryService = $serviceLocator->get('Shop\Service\Country');
+	    
+	    $taxService->setTaxState($shopOptions->getVatState());
 	    
 	    $shippingService = new ShippingService();
 	    $shippingService->setCountryService($countryService);

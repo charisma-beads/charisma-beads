@@ -29,6 +29,11 @@ class MetaData
     protected $category;
     
     /**
+     * @var string
+     */
+    protected $description;
+    
+    /**
      * @var boolean
      */
     protected $taxable;
@@ -133,6 +138,10 @@ class MetaData
         return $this->category;
     }
 
+    /**
+     * @param string $category
+     * @return \Shop\Model\Product\MetaData
+     */
 	public function setCategory($category)
     {
         $this->category = $category;
@@ -140,6 +149,24 @@ class MetaData
     }
 
     /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     * @return \Shop\Model\Product\MetaData
+     */
+	public function setDescription($description)
+    {
+        $this->description = $description;
+        return $this;
+    }
+
+	/**
      * @return boolean
      */
 	public function getTaxable()

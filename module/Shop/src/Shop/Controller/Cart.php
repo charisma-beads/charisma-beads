@@ -50,7 +50,10 @@ class Cart extends AbstractActionController
 	public function viewAction()
 	{
 	    if ($this->identity()) {
-	       $countryId = $this->getCustomerAddressService()->getDeliveryAddressByUserId($this->identity()->getUserId())->getCountryId();
+	       $countryId = $this->getCustomerAddressService()
+                ->getDeliveryAddressByUserId(
+                    $this->identity()->getUserId()
+                )->getCountryId();
 	    } else {
 	        $countryId = null;
 	    }

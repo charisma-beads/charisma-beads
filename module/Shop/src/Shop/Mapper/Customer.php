@@ -23,4 +23,13 @@ class Customer extends AbstractMapper
     	 
     	return parent::search($search, $sort);
     }
+    
+    public function getCustomerByUserId($userId)
+    {
+        $select = $this->getSelect();
+        $select->where->equalTo('userId', $userId);
+        $resultSet = $this->fetchResult($select);
+        $row = $resultSet->current();
+        return $row;
+    }
 }

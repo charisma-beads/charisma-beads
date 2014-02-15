@@ -3,6 +3,7 @@ namespace Shop\Model\Order;
 
 use Application\Model\Model;
 use Application\Model\ModelInterface;
+use Shop\Model\Product\MetaData;
 
 class Line implements ModelInterface
 {
@@ -21,11 +22,6 @@ class Line implements ModelInterface
     /**
      * @var int
      */
-    protected $productId;
-    
-    /**
-     * @var int
-     */
     protected $qty = 0;
     
     /**
@@ -36,7 +32,12 @@ class Line implements ModelInterface
     /**
      * @var float
      */
-    protected $vatPercent = 0.00;
+    protected $tax = 0.00;
+    
+    /**
+     * @var \Shop\Model\Product\MetaData
+     */
+    protected $metadata;
     
 	/**
 	 * @return number $orderLineId
@@ -69,23 +70,6 @@ class Line implements ModelInterface
 	public function setOrderId ($orderId)
 	{
 		$this->orderId = $orderId;
-		return $this;
-	}
-
-	/**
-	 * @return number $productId
-	 */
-	public function getProductId ()
-	{
-		return $this->productId;
-	}
-
-	/**
-	 * @param number $productId
-	 */
-	public function setProductId ($productId)
-	{
-		$this->productId = $productId;
 		return $this;
 	}
 
@@ -124,20 +108,37 @@ class Line implements ModelInterface
 	}
 
 	/**
-	 * @return number $vatPercent
+	 * @return number $tax
 	 */
-	public function getVatPercent ()
+	public function getTax ()
 	{
-		return $this->vatPercent;
+		return $this->tax;
 	}
 
 	/**
-	 * @param number $vatPercent
+	 * @param number $tax
 	 */
-	public function setVatPercent ($vatPercent)
+	public function setTax($tax)
 	{
-		$this->vatPercent = $vatPercent;
+		$this->tax = $tax;
 		return $this;
 	}
-
+	
+	/**
+	 * @return \Shop\Model\Product\MetaData
+	 */
+	public function getMetadata()
+	{
+	    return $this->metadata;
+	}
+	
+	/**
+	 * @param MetaData $metadata
+	 * @return \Shop\Model\Order\Line
+	 */
+	public function setMetadata(MetaData $metadata)
+	{
+	    $this->metadata = $metadata;
+	    return $this;
+	}
 }

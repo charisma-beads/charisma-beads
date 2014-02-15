@@ -14,9 +14,14 @@ class Tax
     protected $taxState = false;
     
     /**
-     * @var decimal
+     * @var float
      */
-    protected $taxTotal;
+    protected $tax;
+    
+    /**
+     * @var float
+     */
+    protected $price;
     
     public function addTax($price, $taxRate=0)
     {   
@@ -24,10 +29,10 @@ class Tax
         	$taxRate = $taxRate + 1;
         	
             if (!$this->taxInc) {
-                $pat = round(($price*($taxRate)), 2);
+                $pat = round($price*$taxRate, 2);
                 $tax = $pat - $price;
             } else {
-                $pbt = round(($price/($taxRate)), 2);
+                $pbt = round($price/$taxRate, 2);
                 $tax = $price - $pbt;
                 $price = $pbt;
             }
@@ -35,10 +40,8 @@ class Tax
             $tax = 0;
         }
         
-        return array(
-            'tax'   => number_format($tax, 2),
-            'price' => number_format($price, 2),
-        );
+        $this->setTax(number_format($tax, 2))
+            ->setPrice(number_format($price, 2));
     }
 
 	/**
@@ -76,20 +79,38 @@ class Tax
     }
     
 	/**
-	 * @return \float $taxTotal
+	 * @return number
 	 */
-	public function getTaxTotal()
+	public function getTax()
 	{
-		return $this->taxTotal;
+		return $this->tax;
 	}
 
 	/**
 	 * @param float $taxTotal
 	 */
-	public function setTaxTotal($taxTotal)
+	public function setTax($tax)
 	{
-		$this->taxTotal = $taxTotal;
+		$this->tax = $tax;
 		return $this;
 	}
+	
+	/**
+	 * @return number
+	 */
+	public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * @param float $price
+     */
+	public function setPrice($price)
+    {
+        $this->price = $price;
+        return $this;
+    }
+
 
 }

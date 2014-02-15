@@ -18,11 +18,6 @@ class Address implements ModelInterface
     /**
      * @var int
      */
-    protected $userId;
-    
-    /**
-     * @var int
-     */
     protected $countryId;
     
     /**
@@ -58,11 +53,6 @@ class Address implements ModelInterface
     /**
      * @var string
      */
-    protected $country;
-    
-    /**
-     * @var string
-     */
     protected $phone;
     
     /**
@@ -74,6 +64,11 @@ class Address implements ModelInterface
      * @var DateTime
      */
     protected $dateModified;
+    
+    /**
+     * @var \Shop\Model\Country
+     */
+    protected $country;
     
 	/**
 	 * @return number $customerAddressId
@@ -89,23 +84,6 @@ class Address implements ModelInterface
 	public function setCustomerAddressId ($addressId)
 	{
 		$this->customerAddressId = $addressId;
-		return $this;
-	}
-
-	/**
-	 * @return number $userId
-	 */
-	public function getUserId ()
-	{
-		return $this->userId;
-	}
-
-	/**
-	 * @param number $userId
-	 */
-	public function setUserId ($userId)
-	{
-		$this->userId = $userId;
 		return $this;
 	}
 
@@ -229,23 +207,6 @@ class Address implements ModelInterface
 	}
 
 	/**
-	 * @return string $country
-	 */
-	public function getCountry()
-	{
-		return $this->country;
-	}
-
-	/**
-	 * @param string $country
-	 */
-	public function setCountry($country)
-	{
-		$this->country = $country;
-		return $this;
-	}
-
-	/**
 	 * @return string $phone
 	 */
 	public function getPhone ()
@@ -294,5 +255,23 @@ class Address implements ModelInterface
 	{
 		$this->dateModified = $dateModified;
 		return $this;
+	}
+	
+	/**
+	 * @return \Shop\Model\Country
+	 */
+	public function getCountry()
+	{
+	    return $this->country;
+	}
+	
+	/**
+	 * @param \Shop\Model\Country $country
+	 * @return \Shop\Model\Customer\Address
+	 */
+	public function setCountry($country)
+	{
+	    $this->country = $country;
+	    return $this;
 	}
 }

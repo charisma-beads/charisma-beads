@@ -77,9 +77,13 @@ class Product extends AbstractService
 			$categoryId = (null === $ids) ? $categoryId : $ids;
 		}
 		
-		$this->getMapper()->useModelRelationships(true);
+		$products = $this->getMapper()->getProductsByCategory($categoryId, $order);
+		
+		foreach ($products as $product) {
+		    $this->populate($product, true);
+		}
 	
-		return $this->getMapper()->getProductsByCategory($categoryId, $order);
+		return $products;
 	}
 	
 	public function search(array $post)
@@ -102,9 +106,13 @@ class Product extends AbstractService
             ),
         ));
 	    
-	    $this->getMapper()->useModelRelationships(true);
+	    $products = $this->getMapper()->searchProducts($search);
 	    
-	    return $this->getMapper()->searchProducts($search);
+	    foreach ($products as $product) {
+	        $this->populate($product, true);
+	    }
+	    
+	    return $products;
 	}
 	
 	/**

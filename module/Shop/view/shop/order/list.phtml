@@ -21,7 +21,7 @@
 			<td><?=$this->escapeHtml($row->getOrderId());?></td>
 			<td><?=$this->escapeHtml($row->getOrderNumber());?></td>
 			<td><?=$this->priceFormat($this->escapeHtml($row->getTotal()));?></td>
-			<td><?=$this->formatDate($this->escapeHtml($row->getOrderDate()));?>
+			<td><?=$this->formatDate($row->getOrderDate());?>
 			<td>
                 <?=$this->partial('partial/edit-actions', array(
                 	'pk'		=> 'orderId',

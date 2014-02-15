@@ -2,7 +2,6 @@
 namespace Shop\Controller;
 
 use Shop\ShopException;
-use Shop\InputFilter\Catalog\Search as SearchFilter;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 

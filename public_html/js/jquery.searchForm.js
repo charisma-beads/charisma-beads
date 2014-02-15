@@ -5,8 +5,8 @@
 	    this.$element = $(element);
 	    this.id = this.$element.attr('id');
 	    this.options = options;
-	    
 	    this.init();
+	    
 	    if (this.options.searchForm) {
     		this.options.searchForm.submit(function(e){
     			e.preventDefault();
@@ -46,6 +46,7 @@
         
         search : function(search)
         {
+        	this.options.query.page = 1;
         	this.setSearchParams(search.target);
         	
         	this.ajaxCall();

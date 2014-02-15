@@ -32,7 +32,7 @@ class Order extends AbstractHydrator
     {
         return array(
             'orderId'       => $object->getOrderId(),
-            'userId'        => $object->getUserId(),
+            'customerId'    => $object->getCustomerId(),
             'orderStatusId' => $object->getOrderStatusId(),
             'orderNumber'   => $object->getOrderNumber(),
             'txnId'         => $object->getTxnId(),

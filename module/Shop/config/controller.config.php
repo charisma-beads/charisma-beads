@@ -6,7 +6,7 @@ return array(
         'Shop\Controller\Checkout'          => 'Shop\Controller\Checkout',
         'Shop\Controller\Country'           => 'Shop\Controller\Country',
         'Shop\Controller\Customer'          => 'Shop\Controller\Customer',
-        'Shop\Controller\Order'             => 'Shop\Controller\Order',
+        'Shop\Controller\Order'             => 'Shop\Controller\Order\Order',
         'Shop\Controller\Payment'           => 'Shop\Controller\Payment',
         'Shop\Controller\Paypal'            => 'Shop\Controller\Paypal',
         'Shop\Controller\PostCost'          => 'Shop\Controller\Post\PostCost',

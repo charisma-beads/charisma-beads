@@ -16,9 +16,15 @@ class Search extends Form
 				'required' => false,
 			),
 			'attributes' => array(
-				'class'          => 'search-query',	
-			    'placeholder'    => 'Type your search...',
+				'class'             => 'search-query',	
+			    'placeholder'       => 'Type your search...',
+			    'autocapitalize'	=> 'off',
 			)
         ));
+        
+        /**
+         * autocapitalize="off"
+         * autocorrect="off"
+         */
     }
 }

@@ -26,7 +26,6 @@ class Item extends AbstractHydrator
         return array(
         	'cartItemId'    => $object->getCartItemId(),
             'cartId'        => $object->getCartId(),
-            'description'   => $object->getDescription(),
             'quantity'      => $object->getQuantity(),
             'price'         => $object->getPrice(),
             'tax'           => $this->extractValue('tax', $object->getTax()),

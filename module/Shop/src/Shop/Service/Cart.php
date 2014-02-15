@@ -8,6 +8,7 @@ use Shop\Model\Product as ProductModel;
 use Shop\Model\Product\MetaData as ProductMetaData;
 use Shop\Service\Cart\Cookie as CartCookie;
 use Shop\Service\Cart\Item;
+use \Shop\Service\Shipping;
 use Shop\Service\Tax;
 use Zend\Session\Container;
 use Zend\Stdlib\InitializableInterface;
@@ -20,6 +21,11 @@ class Cart extends AbstractService implements InitializableInterface
      * @var Container
      */
     protected $container;
+    
+    /**
+     * @var Shipping
+     */
+    protected $shippingService;
 
     /**
      * @var Tax
@@ -69,6 +75,13 @@ class Cart extends AbstractService implements InitializableInterface
     protected $shipping = 0;
     
     /**
+     * Total shipping tax
+     * 
+     * @var float
+     */
+    protected $shippingTax = 0;
+    
+    /**
      * Total of tax
      *
      * @var float
@@ -89,7 +102,8 @@ class Cart extends AbstractService implements InitializableInterface
             $cartId = $this->getContainer()->cartId;
             $cart = $this->getById($cartId);
         } else {
-            $verifier = $this->getCartCookieService()->retrieveCartVerifierCookie();
+            $verifier = $this->getCartCookieService()
+                ->retrieveCartVerifierCookie();
             
             if ($verifier) {
                 $cart = $this->getCartByVerifier($verifier);
@@ -98,11 +112,13 @@ class Cart extends AbstractService implements InitializableInterface
         
         // load any cart items
         if ($cart) {
-            $items = $this->getCartItemService()->getCartItemsByCartId($cart->getCartId());
+            $items = $this->getCartItemService()
+                ->getCartItemsByCartId($cart->getCartId());
             
             /* @var $item \Shop\Model\Cart\Item */
             foreach ($items as $item) {
-                $cart->offsetSet($item->getMetadata()->getProductId(), $item);  
+                $cart->offsetSet($item->getMetadata()
+                    ->getProductId(), $item);  
             }
         }
         
@@ -140,15 +156,14 @@ class Cart extends AbstractService implements InitializableInterface
         
         $cart = $this->getCart();
         
-        $cartItem = ($cart->offsetExists($product->getProductId())) ? $cart->offsetGet($product->getProductId()): new CartItem();
+        $cartItem = ($cart->offsetExists($product->getProductId())) ? $cart->offsetGet($product->getProductId()) : new CartItem();
         
         if (0 == $qty) {
             $this->removeItem($cartItem->getCartItemId());
             return false;
         }
         
-        $cartItem->setDescription($product->getShortDescription())
-            ->setPrice($product->getPrice())
+        $cartItem->setPrice($product->getPrice())
             ->setQuantity($qty)
             ->setTax($product->getTaxRate())
             ->setMetadata($this->getProductMetaData($product))
@@ -173,6 +188,7 @@ class Cart extends AbstractService implements InitializableInterface
         $metadata->setProductId($product->getProductId())
             ->setName($product->getName())
             ->setCategory($product->getCategory())
+            ->setDescription($product->getShortDescription())
             ->setTaxable($product->getTaxable())
             ->setVatInc($product->getVatInc())
             ->setAddPostage($product->getAddPostage())
@@ -282,16 +298,24 @@ class Cart extends AbstractService implements InitializableInterface
      */
     public function getLineCost(CartItem $item)
     {
-        $price = $item->getPrice(true);
+        $price = $item->getPrice();
+        $tax = 0;
         
         if (true === $item->getMetadata()->getTaxable()) {
-            $taxService = $this->getTaxService();
-            $taxService->setTaxInc($item->getMetadata()->getVatInc());
-            $price = $taxService->addTax($price, $item->getTax());
-            $this->taxTotal += $price['tax'] * $item->getQuantity();
+            $taxService = $this->getTaxService()
+                ->setTaxState($this->getShopOptions()->getVatState())
+                ->setTaxInc($item->getMetadata()->getVatInc());
+            $taxService->addTax($price, $item->getTax(true));
+            
+            $price = $taxService->getPrice();
+            $tax = $taxService->getTax();
+            
+            $this->taxTotal += $tax * $item->getQuantity();
         }
         
-        return ($price['price'] + $price['tax']) * $item->getQuantity();
+        $price = ($item->getMetadata()->getVatInc()) ? $price + $tax : $price;
+        
+        return $price * $item->getQuantity();
     }
 
     /**
@@ -313,13 +337,26 @@ class Cart extends AbstractService implements InitializableInterface
     /**
      * Set the shipping cost
      *
-     * @param float $cost            
+     * @param int $countryId          
      */
-    public function setShippingCost($cost)
+    public function setShippingCost($countryId = null)
     {
+        if ($countryId) {
+            $countryId = (int) $countryId;
+            $shipping = $this->getShippingService()
+                ->setCountryId($countryId);
+        
+            $cost = $shipping->calculateShipping($this);
+        
+            $this->shippingTax = $shipping->getShippingTax();
+        } else {
+            $cost = 0;
+            $this->shippingTax = 0;
+        }
+        
         $this->shipping = $cost;
-        $this->calculateTotals();
-        $this->persist();
+        
+        return $this;
     }
 
     /**
@@ -353,6 +390,38 @@ class Cart extends AbstractService implements InitializableInterface
     {
         $this->calculateTotals();
         return $this->total;
+    }
+    
+    /**
+     * Get the tax total
+     * 
+     * @return float
+     */
+    public function getTaxTotal()
+    {
+        $this->calculateTotals();
+        return $this->taxTotal + $this->shippingTax;
+    }
+    
+    /**
+     * @return \Shop\Options\ShopOptions
+     */
+    public function getShopOptions()
+    {
+        return $this->getServiceLocator()->get('Shop\Options\Shop');
+    }
+    
+    /**
+     * @return \Shop\Service\Shipping
+     */
+    protected function getShippingService()
+    {
+        if (!$this->shippingService instanceof Shipping) {
+            $this->shippingService = $this->getServiceLocator()
+                ->get('Shop\Service\Shipping');
+        }
+         
+        return $this->shippingService;
     }
 
     /**

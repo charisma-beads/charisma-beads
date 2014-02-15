@@ -19,7 +19,7 @@ class Order implements ModelInterface
     /**
      * @var int
      */
-    protected $userId;
+    protected $customerId;
     
     /**
      * @var int
@@ -89,19 +89,19 @@ class Order implements ModelInterface
 	}
 
 	/**
-	 * @return number $userId
+	 * @return number $customerId
 	 */
-	public function getUserId()
+	public function getCustomerId()
 	{
-		return $this->userId;
+		return $this->customerId;
 	}
 
 	/**
-	 * @param number $userId
+	 * @param number $customerId
 	 */
-	public function setUserId($userId)
+	public function setCustomerId($customerId)
 	{
-		$this->userId = $userId;
+		$this->customerId = $customerId;
 		return $this;
 	}
 
@@ -183,7 +183,7 @@ class Order implements ModelInterface
 	/**
 	 * @param DateTime $orderDate
 	 */
-	public function setOrderDate($orderDate)
+	public function setOrderDate(DateTime $orderDate = null)
 	{
 		$this->orderDate = $orderDate;
 		return $this;
