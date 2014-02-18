@@ -2,12 +2,14 @@
 namespace Shop\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\Session\Container;
 
 class Payment extends AbstractActionController
 {   
     public function paymentAction()
     {
-        $params = $this->params()->fromRoute('shop/payment');
+        $container = new Container('order_completed');
+        $params = $container->order;
         \FB::info($params);
     }
     

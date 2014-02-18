@@ -10,8 +10,8 @@
 <form class="form" method="post" action="<?=$this->url('shop/checkout', array(
 	'action' => 'confirm-order',
 )); ?>">
-    <?=$this->ztbFormElement($this->form->get('payment-option'));?>
-    <?=$this->ztbFormElement($this->form->get('collect-instore'));?>
+    <?=$this->ztbFormElement($this->form->get('payment_option'));?>
+    <?=$this->ztbFormElement($this->form->get('collect_instore'));?>
     <?=$this->ztbFormElement($this->form->get('requirements'));?>
     <?=$this->ztbFormElement($this->form->get('terms'));?>
     <div class="control-group">

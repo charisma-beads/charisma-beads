@@ -4,6 +4,7 @@ namespace Shop\Controller;
 use User\Form\Login as LoginForm;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Zend\Session\Container;
 
 class Checkout extends AbstractActionController
 {
@@ -49,7 +50,7 @@ class Checkout extends AbstractActionController
 	{
 	    $params = $this->params()->fromPost();
 	    $submit = $this->params()->fromPost('submit', null);
-	    $collect = $this->params()->fromPost('collect-instore', null);
+	    $collect = $this->params()->fromPost('collect_instore', null);
 	    
 	    $customer = $this->getCustomerService()->setUser($this->identity())
 	       ->getCustomerDetailsFromUserId();
@@ -63,16 +64,27 @@ class Checkout extends AbstractActionController
             $form->setData($params);
              
             if ($form->isValid()) {
-                $result = $this->getOrderService()->processOrderFromCart($customer, $collect);
+                $orderId = $this->getOrderService()->processOrderFromCart($customer, $collect);
                 
-                if ($result) {
+                if ($orderId) {
                     $this->getCartService()->clear();
+                    $formValues = $form->getData();
+                    
                     // need to email order,
                     // add params to session and redirect to payment page.
-                    $this->redirect()->toRoute('shop/payment', array(
-                        'option' => $params['payment-option'],
-                        'cartId' => $result,
-                    ));
+                    $orderParams = array(
+                    	'orderId' => $orderId,
+                        'collect' => $collect,
+                        'requirements' => $formValues['requirements'],
+                        'payment_option' => $formValues['payment_option']
+                    );
+                    
+                    /* @var $container \Zend\Session\AbstractContainer */
+                    $container = new Container('order_completed');
+                    $container->setExpirationHops(1, null);
+                    $container->order = $orderParams;
+                    
+                    $this->redirect()->toRoute('shop/payment');
                 }
             }
 	    }

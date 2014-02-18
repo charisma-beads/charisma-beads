@@ -8,7 +8,7 @@ class Confirm extends InputFilter
     public function __construct()
     {
         $this->add(array(
-        	'name' => 'payment-option',
+        	'name' => 'payment_option',
             'required' => true,
             'filters' => array(
                 array('name' => 'StripTags'),

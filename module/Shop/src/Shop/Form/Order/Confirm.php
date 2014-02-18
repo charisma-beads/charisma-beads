@@ -15,7 +15,7 @@ class Confirm extends Form implements ServiceLocatorAwareInterface
         $options = $this->getCheckoutOptions();
         
         $this->add(array(
-            'name'		=> 'payment-option',
+            'name'		=> 'payment_option',
             'type'		=> 'radio',
             'options'	=> array(
                 'label'			=> 'Choose Payment Option:',
@@ -26,7 +26,7 @@ class Confirm extends Form implements ServiceLocatorAwareInterface
         
         if ($options->getCollectInstore()) {
             $this->add(array(
-                'name'			=> 'collect-instore',
+                'name'			=> 'collect_instore',
                 'type'			=> 'checkbox',
                 'options'		=> array(
                     'label'			=> 'Collect Instore:',
