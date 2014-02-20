@@ -15,7 +15,7 @@ class Status extends AbstractHydrator
     {
         return array(
         	'orderStatusId'    => $object->getOrderStatusId(),
-            'status'           => $object->getStatus(),
+            'orderStatus'      => $object->getOrderStatus(),
         );
     }
 }

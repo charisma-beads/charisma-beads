@@ -20,7 +20,7 @@ abstract class AbstractCrudController extends AbstractActionController
     
     protected $searchDefaultParams;
     protected $serviceName;
-    protected $service;
+    protected $service = [];
     protected $route;
     
     use SetExceptionMessages;
@@ -197,41 +197,26 @@ abstract class AbstractCrudController extends AbstractActionController
     	return $this->serviceName;
     }
     
+    public function setServiceName($serviceName)
+    {
+        $this->serviceName = $serviceName;
+        return $this;
+    }
+    
     /**
      * @param string $service
      * @return \Application\Service\AbstractService
      */
     protected function getService($service = null)
     {
-    	if (!$this->service) {
-    		$service = (is_string($service)) ?: $this->getServiceName();
+        $service = (is_string($service)) ?: $this->getServiceName();
+        
+    	if (!isset($this->service[$service])) {
     		$sl = $this->getServiceLocator();
-    		$this->service = $sl->get($service);
+    		$this->service[$service] = $sl->get($service);
     	}
     
-    	return $this->service;
-    }
-    
-    public function getModels()
-    {
-    	return $this->models;
-    }
-    
-    public function setModels($models)
-    {
-    	$this->models = $models;
-    	return $this;
-    }
-    
-    public function getModel()
-    {
-    	return $this->model;
-    }
-    
-    public function setModel($model)
-    {
-    	$this->model = $model;
-    	return $this;
+    	return $this->service[$service];
     }
     
     public function getSearchDefaultParams()
@@ -242,12 +227,6 @@ abstract class AbstractCrudController extends AbstractActionController
     public function setSearchDefaultParams($searchDefaultParams)
     {
     	$this->searchDefaultParams = $searchDefaultParams;
-    	return $this;
-    }
-    
-    public function setServiceName($serviceName)
-    {
-    	$this->serviceName = $serviceName;
     	return $this;
     }
     

@@ -1,0 +1,98 @@
+<?php $this->headTitle('View Order') ?>
+<div class="row">
+    <h4>
+        <a href="<?=$this->url('shop/order');?>">Back to orders</a>
+    </h4>
+    <div class="row">
+        <div class="span9 panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    Order Details
+                </h4>
+            </div>
+            <div class="row">
+                <div class="span4">
+                    <div class="panel-body">
+                        Order ID: <span>#<?=$this->order->getOrderId();?></span><br>
+                        Date Ordered: <span><?=$this->formatDate($this->order->getOrderDate())->setFormat('d/m/Y');?></span>
+                    </div>
+                </div>
+                <div class="span1">&nbsp;</div>
+                <div class="span4">
+                    <div class="panel-body">
+                        Status: <span><?=$this->escapeHtml($this->order->getOrderStatus()->getOrderStatus());?></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="span4 panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    Billing Address
+                </h4>
+            </div>
+            <div class="panel-body">
+                <address>
+                    <?=$this->formatAddress()
+                        ->formatAddress(
+                            $this->order->getCustomer()
+                                ->getBillingAddress()
+                    );?>
+                </address>
+            </div>
+        </div>
+        <div class="span1">&nbsp;</div>
+        <div class="span4 panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    Delivery Address
+                </h4>
+            </div>
+            <div class="panel-body">
+                <address>
+                    <?=$this->formatAddress()
+                        ->formatAddress(
+                            $this->order->getCustomer()
+                                ->getDeliveryAddress()
+                    );?>
+                </address>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="span9 panel panel-default">
+            <table class="table table-striped">
+                <tr>
+            		<th>Product</th>
+            		<th>Description</th>
+            		<th>Price</th>
+            		<th>Quantity</th>
+            		<th>Total</th>
+            	</tr>
+            	
+            	<?php /* @var $item \Shop\Model\Order\Line */ ?>
+            	<?php foreach ($this->order->getOrderlines() as $item): ?>
+            	<tr>
+            		<td><?=$item->getMetadata()->getName();?></td>
+            		<td><?=$item->getMetadata()->getCategory();?> / <?=$item->getMetadata()->getDescription();?></td>
+            		<td><?=$this->priceFormat($item->getPrice());?></td>
+            		<td><?=$item->getQty();?></td>
+            		<td><?=$item->getPrice();?></td>
+            	</tr>
+            	<?php endforeach; ?>
+            	<tr>
+                    <td colspan="2">&nbsp;</td>
+            	    <th colspan="2"><p class="text-right">Postage:</p></th>
+            	    <td><?=$this->order->getShipping();?></td>
+            	</tr>
+            	<tr>
+                    <td colspan="2">&nbsp;</td>
+            	    <th colspan="2"><p class="text-right">Total:</p></th>
+            	    <td><?=$this->order->getTotal();?></td>
+            	</tr>
+            </table>
+        </div>
+    </div>
+</div>

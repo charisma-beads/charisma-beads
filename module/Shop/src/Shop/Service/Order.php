@@ -11,6 +11,11 @@ class Order extends AbstractService
     protected $inputFilter = 'Shop\InputFilter\Order';
     
     /**
+     * @var Shop\Service\Customer
+     */
+    protected $customerService;
+    
+    /**
      * @var \Shop\Service\Order\Line
      */
     protected $orderLineService;
@@ -72,6 +77,78 @@ class Order extends AbstractService
         }
         
         return $orderId;
+    }
+    
+    public function getCustomerOrderByUserId($id, $userId)
+    {
+        $id = (int) $id;
+        $userId = (int) $userId;
+        $order = $this->getMapper()->getOrderByUserId($id, $userId);
+        
+        $this->populate($order, true);
+        
+        return $order;
+    }
+    
+    public function getCustomerOrdersByUserId($userId)
+    {
+        $userId = (int) $userId;
+        $orders = $this->getMapper()->getOrdersByUserId($userId);
+        
+        foreach ($orders as $order) {
+            $order = $this->populate($order, array('orderStatus'));
+        }
+        
+        return $orders;
+    }
+    
+    /**
+     * @param \Shop\Model\Order $model
+     * @param bool $children
+     * @return \Shop\Model\Order $model
+     */
+    public function populate($model, $children = false)
+    {
+        $allChildren = ($children === true) ? true : false;
+        $children = (is_array($children)) ? $children : array();
+        
+        if ($allChildren || in_array('customer', $children)) {
+            $id = $model->getCustomerId();
+            $model->setCustomer($this->getCustomerService()->getCustomerDetailsByCustomerId($id));
+        }
+        
+        if ($allChildren || in_array('orderStatus', $children)) {
+            $id = $model->getOrderStatusId();
+            $model->setOrderStatus($this->getOrderStatusService()->getById($id));
+        }
+        	
+        if ($allChildren || in_array('orderLines', $children)) {
+            $id = $model->getOrderId();
+            $model->setOrderLines($this->getOrderLineService()->getOrderLinesByOrderId($id));
+        }
+    }
+    
+    public function emailCustomerOrder()
+    {
+        
+    }
+    
+    public function emailMerchantOrder()
+    {
+        
+    }
+    
+    /**
+     * @return \Shop\Service\Customer
+     */
+    public function getCustomerService()
+    {
+        if (!$this->customerService) {
+            $sl = $this->getServiceLocator();
+            $this->customerService = $sl->get('Shop\Service\Customer');
+        }
+    
+        return $this->customerService;
     }
     
     /**

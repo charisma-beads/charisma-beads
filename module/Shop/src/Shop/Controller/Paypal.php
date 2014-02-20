@@ -19,9 +19,4 @@ class Paypal extends AbstractActionController
     {
         
     }
-    
-    public function ipnAction()
-    {
-        
-    }
 }

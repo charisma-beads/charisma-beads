@@ -7,15 +7,21 @@ use Application\View\AbstractViewHelper;
 class FormatAddress extends AbstractViewHelper
 {
     protected $customerAddressService;
+    protected $address;
     
     public function getDeliveryAddress($userId=null)
     {
         if (!$userId) {
             $userId = $this->getIdentity()->getUserId();
+            $this->address = $this->getCustomerAddressService()->getDeliveryAddressByUserId($userId);
         }
         
-        $address = $this->getCustomerAddressService()->getDeliveryAddressByUserId($userId);
-        return $this->formatAddress($address);
+        return $this;
+    }
+    
+    public function __toString()
+    {
+        $this->formatAddress($this->address);
     }
     
     public function getBillingAddress($userId=null)
@@ -46,13 +52,12 @@ class FormatAddress extends AbstractViewHelper
         $html .= $address->getCounty() . '<br>';
         $html .= $address->getCity() . '<br>';
         $html .= $address->getPostcode() . '<br>';
-        $html .= $address->getCountry() .'<br><br>';
+        $html .= $address->getCountry()->getCountry() .'<br><br>';
         $html .= $address->getPhone() . '<br>';
         
         if ($includeEmail) {
             $html .= $identity()->getEmail();
         }
-        
         
         return $html;
     }

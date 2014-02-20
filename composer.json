@@ -51,7 +51,7 @@
 		"mwillbanks/zfc-twitter-bootstrap" : "master-dev"
 	},
 	"require-dev" : {
-	    "twitter/bootstrap" : "~2",
+	    "twitter/bootstrap" : "~3",
 		"firephp/firephp-core" : "0.4.0",
 		"zendframework/zend-developer-tools" : "dev-master",
 		"bjyoungblood/bjy-profiler" : "dev-master"

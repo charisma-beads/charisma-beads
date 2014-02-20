@@ -45,7 +45,7 @@ return array(
 					array('controller' => 'Shop\Controller\Cart', 'action' => 'all'),
 					array('controller' => 'Shop\Controller\Catalog', 'action' => 'all'),
 					array('controller' => 'Shop\Controller\Checkout', 'action' => array('index')),
-					array('controller' => 'Shop\Controller\Paypal', 'action' => array('ipn')),
+					//array('controller' => 'Shop\Controller\Paypal', 'action' => array('ipn')),
 					array('controller' => 'Shop\Controller\Product', 'action' => array('view')),
 					array('controller' => 'Shop\Controller\Shop', 'action' => array('shop-front')),
 				),
@@ -55,7 +55,7 @@ return array(
 					array('controller' => 'Shop\Controller\Cart', 'action' => 'all'),
 					array('controller' => 'Shop\Controller\Catalog', 'action' => 'all'),
 					array('controller' => 'Shop\Controller\Checkout', 'action' => 'all'),
-				    array('controller' => 'Shop\Controller\Order', 'action' => array('process', 'cancel')),
+				    array('controller' => 'Shop\Controller\Order', 'action' => array('cancel', 'my-orders', 'view')),
 					array('controller' => 'Shop\Controller\Payment', 'action' => 'all'),
 					array('controller' => 'Shop\Controller\Paypal', 'action' => array('process', 'success', 'cancel')),
 					array('controller' => 'Shop\Controller\Product', 'action' => array('view')),
@@ -118,7 +118,6 @@ return array(
 				),
 				'may_terminate' => true,
 				'child_routes'  => array(
-				    
 					'catalog'  => array(
 						'type'    => 'Segment',
 						'options' => array(
@@ -217,22 +216,48 @@ return array(
 								'controller' => 'Checkout',
 								'action' => 'index',
 								'force-ssl' => 'ssl'
-							)
-						)
+							),
+						),
 					),
 				    'order' => array(
 				        'type' => 'Segment',
 				        'options' => array(
-				            'route' => '/order[/:action]',
-				            'constraints' => array(
-				                'action' => '[a-zA-Z0-9][a-zA-Z0-9_-]*',
-				            ),
+				            'route' => '/order[/]',
 				            'defaults' => array(
 				                'controller' => 'Order',
-				                'action'     => 'index',
+				                'action'     => 'my-orders',
 				                'force-ssl' => 'ssl'
-				            )
-				        )
+				            ),
+				        ),
+				        'may_terminate' => true,
+				        'child_routes' => array(
+				            'view' => array(
+				                'type'    => 'Segment',
+				                'options' => array(
+				                    'route'         => 'view/[:orderId]',
+				                    'constraints'   => array(
+				                        'orderId'		=> '\d+'
+				                    ),
+				                    'defaults'      => array(
+				                        'action'        => 'view',
+				                        'force-ssl'     => 'ssl'
+				                    ),
+				                ),
+				            ),
+				            'page' => array(
+				                'type' => 'Segment',
+				                'options' => array(
+				                    'route' => 'page/[:page]',
+				                    'constraints' => array(
+				                        'page' => '\d+'
+				                    ),
+				                    'defaults' => array(
+				                        'page' => 1,
+				                        'force-ssl' => 'https'
+				                    ),
+				                ),
+				            ),
+				        ),
 				    ),
 					'payment' => array(
 						'type' => 'Segment',
@@ -859,6 +884,13 @@ return array(
 		),
 	),
 	'navigation' => array(
+	    'user' => array(
+            'orders' => array(
+                'label' => 'View Orders',
+                'route' => 'shop/order',
+                'resource' => 'menu:user',
+	    	),
+        ),
 		'admin' => array(
 			'shop' => array(
 				'label' => 'Shop',

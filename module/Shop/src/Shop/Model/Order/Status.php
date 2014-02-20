@@ -16,7 +16,7 @@ class Status implements ModelInterface
     /**
      * @var string
      */
-    protected $status;
+    protected $orderStatus;
     
 	/**
 	 * @return number $orderStatusId
@@ -36,19 +36,19 @@ class Status implements ModelInterface
 	}
 
 	/**
-	 * @return string $status
+	 * @return string $orderStatus
 	 */
-	public function getStatus ()
+	public function getOrderStatus ()
 	{
-		return $this->status;
+		return $this->orderStatus;
 	}
 
 	/**
-	 * @param string $status
+	 * @param string $orderStatus
 	 */
-	public function setStatus ($status)
+	public function setOrderStatus ($orderStatus)
 	{
-		$this->status = $status;
+		$this->orderStatus = $orderStatus;
 		return $this;
 	}
 }

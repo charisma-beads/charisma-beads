@@ -13,4 +13,39 @@ class Order extends AbstractCrudController
 	{
 	    // cancel order.
 	}
+	
+	public function myOrdersAction()
+	{
+	    $userId = $this->identity()->getUserId();
+	    $page = $this->params()->fromRoute('page', 1);
+	    
+	    /* @var $service \Shop\Service\Order */
+	    $service = $this->getService()->usePaginator(array(
+			'limit'	=> 6,
+			'page'	=> $page
+		));
+	    
+	    $orders = $service->getCustomerOrdersByUserId($userId);
+	    
+	    return array(
+	    	'orders' => $orders,
+	    );
+	}
+	
+	public function viewAction()
+	{
+	    // make sure we only get order for the logged in user
+	    $id = $this->params()->fromRoute('orderId', 0);
+	    $userId = $this->identity()->getUserId();
+	    
+        /* @var $service \Shop\Service\Order */
+	    $service = $this->getService();
+	    $order = $service->getCustomerOrderByUserId($id, $userId);
+	    
+	    \FB::info($order);
+	    
+	    return array(
+	    	'order' => $order,
+	    );
+	}
 }

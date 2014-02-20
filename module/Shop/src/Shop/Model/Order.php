@@ -3,6 +3,7 @@ namespace Shop\Model;
 
 use Application\Model\Model;
 use Application\Model\ModelInterface;
+use Shop\Model\Customer;
 use Shop\Model\Order\Line;
 use Shop\Model\Order\Status;
 use DateTime;
@@ -62,12 +63,17 @@ class Order implements ModelInterface
     protected $vatInvoice = false;
     
     /**
+     * @var Customer
+     */
+    protected $customer;
+    
+    /**
      * @var Status
      */
     protected $orderStatus;
     
     /**
-     * @var array
+     * @var array|object
      */
     protected $orderLines = array();
     
@@ -239,6 +245,24 @@ class Order implements ModelInterface
         $this->vatInvoice = $vatInvoice;
     }
     
+    /**
+     * @return \Shop\Model\Customer
+     */
+	public function getCustomer()
+    {
+        return $this->customer;
+    }
+
+    /**
+     * @param Customer $customer
+     * @return \Shop\Model\Order
+     */
+	public function setCustomer($customer)
+    {
+        $this->customer = $customer;
+        return $this;
+    }
+
 	/**
      * @return the $orderStatus
      */
@@ -264,9 +288,9 @@ class Order implements ModelInterface
     }
 
 	/**
-     * @param array $orderLine
+     * @param array|object $orderLine
      */
-    public function setOrderLines(array $orderLines)
+    public function setOrderLines($orderLines)
     {
         $this->orderLines = $orderLines;
     }

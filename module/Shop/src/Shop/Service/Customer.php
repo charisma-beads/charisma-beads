@@ -31,6 +31,19 @@ class Customer extends AbstractService
     protected $customerAddressService;
     
     /**
+     * @param int $id
+     * @return \Shop\Model\Customer
+     */
+    public function getCustomerDetailsByCustomerId($id)
+    {
+        $customer = $this->getById($id);
+        
+        $this->populate($customer, true);
+        
+        return $customer;
+    }
+    
+    /**
      * @return \Shop\Model\Customer
      */
     public function getCustomerDetailsFromUserId()
@@ -113,7 +126,7 @@ class Customer extends AbstractService
             $this->userService = $sl->get('User\Service\User');
         }
     
-        return $ts->userService;
+        return $this->userService;
     }
     
     /**

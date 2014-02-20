@@ -76,15 +76,19 @@ class Checkout extends AbstractActionController
                     	'orderId' => $orderId,
                         'collect' => $collect,
                         'requirements' => $formValues['requirements'],
-                        'payment_option' => $formValues['payment_option']
                     );
                     
+                    $filter = new \Zend\Filter\Word\UnderscoreToCamelCase();
+                    $action = $filter->filter($formValues['payment_option']);
+                    
                     /* @var $container \Zend\Session\AbstractContainer */
-                    $container = new Container('order_completed');
+                    $container = new Container('order');
                     $container->setExpirationHops(1, null);
                     $container->order = $orderParams;
                     
-                    $this->redirect()->toRoute('shop/payment');
+                    $this->redirect()->toRoute('shop/payment', array(
+                        'action' => lcfirst($action),
+                    ));
                 }
             }
 	    }

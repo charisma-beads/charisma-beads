@@ -8,14 +8,15 @@
         <?=$this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0')
         	->appendName('X-UA-Compatible', 'IE=edge') ?>
 
-        <!-- Le styles -->
+        <!-- styles -->
         <?=$this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
             ->prependStylesheet($this->basePath() . '/css/style.css')
+            ->prependStylesheet($this->basePath() . '/css/panels.css')
             ->prependStylesheet($this->basepath() . '/css/glyphicons.css')
             ->prependStylesheet($this->basePath() . '/css/bootstrap-responsive.css')
             ->prependStylesheet($this->basePath() . '/css/bootstrap.css') ?>
 
-        <!-- Scripts -->
+        <!-- scripts -->
         <?=$this->headScript()
 			->prependFile($this->basePath() . '/js/site.js')
 			->prependFile($this->basePath() . '/js/jquery.searchForm.js')
@@ -44,19 +45,7 @@
 	    					        <?=$this->ztbIcon()->user(); ?> <?=$this->identity()->getFullName(); ?> 
 	    					        <b class="caret"></b>
 	    				        </a>
-	    				        
-	                            <ul class="dropdown-menu">
-	                                <li>
-	                                    <a href="<?=$this->url('user/default', array(
-	                	                    'action' => 'edit'
-	            	                    )); ?>">Edit Profile
-	    				                </a>
-	                                </li>
-	                                <li>
-	                                    <a href="<?=$this->url('user/logout'); ?>">Logout</a>
-	                                </li>
-	                            </ul>
-	
+	    				        <?=$this->aclMenu('User\Navigation')->setUlClass('dropdown-menu'); ?>
 	                	    </li>
 	                	</ul>
 	                	<?php endif; ?>
@@ -83,7 +72,7 @@
                         <span class="icon-bar"></span>
                     </a>
 					<div class="nav-collapse">
-	            		<?=$this->aclMenu('model', 'top menu'); ?>
+	            		<?=$this->aclMenu('model')->setMenu('top menu')->setUlClass('nav'); ?>
 	            		<ul class="nav pull-right">
 							<li class="divider-vertical"></li>
 							<li class="dropdown">
@@ -133,7 +122,6 @@
             	<div id="content" class="span9">
             		<?=$this->content; ?>
             	</div>
-            	
             </div>
             
             <hr>

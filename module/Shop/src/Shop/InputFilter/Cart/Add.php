@@ -3,7 +3,7 @@ namespace Shop\Form\Cart;
 
 use Zend\InputFilter\InputFilter;
 
-class AddFilter extends InputFilter
+class Add extends InputFilter
 {
 	public function __construct()
 	{
@@ -33,7 +33,6 @@ class AddFilter extends InputFilter
 			'filters' => array(
 				array('name' => 'StripTags'),
 				array('name' => 'StringTrim'),
-				array('name' => 'Alpha')
 			)
 		));
 	}

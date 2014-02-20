@@ -9,34 +9,80 @@ use Application\View\AbstractViewHelper;
 
 class AclMenu extends AbstractViewHelper
 {
-	public function __invoke($container = null, $menu = null, $partial = null, $useZtb = true)
-    {
-    	/* @var $acl \User\Service\Acl */
-        $acl = $this->getServiceLocator()->getServiceLocator()->get('User\Service\Acl');
+    /**
+     * @var string
+     */
+    protected $ulClass;
+    
+    /**
+     * @var string
+     */
+    protected $menu;
+    
+    /**
+     * @var string
+     */
+    protected $partial;
+    
+    /**
+     * @var bool
+     */
+    protected $useZtb = true;
+    
+    /**
+     * @var string|\Zend\View\Helper\Navigation\Menu
+     */
+    protected $container;
+    
+	public function __invoke($container)
+    {   
+        $this->setUlClass(null);
+        $this->setContainer($container);
         
-        if ($container == 'model') {
-            $container = $this->getPages($menu);
+    	return $this;
+    }
+    
+    public function __toString()
+    {
+        try {
+            return $this->render();
+        } catch (\Exception $e) {
+            $msg = get_class($e) . ': ' . $e->getMessage();
+            trigger_error($msg, E_USER_ERROR);
+            return '';
+        }
+    }
+    
+    public function render()
+    {   
+        $acl = $this->getServiceLocator()
+            ->getServiceLocator()
+            ->get('User\Service\Acl');
+        
+        $container = ($this->getContainer() !== 'model') ? $this->getContainer() : $this->getPages($this->getMenu());
+        
+        $n = ($this->useZtb) ? 'ztbNavigation' : 'Navigation';
+        $m = ($this->useZtb) ? 'ztbMenu' : 'Menu';
+        
+        $nav = $this->view->$n($container);
+         
+        // must set acl before partial.
+        $identity = $this->view->plugin('identity');
+        $role = ($identity()) ? $identity()->getRole() : 'guest';
+        $nav->setAcl($acl)->setRole($role);
+        $partial = $this->getPartial();
+        
+        if ($partial) {
+            if (is_string($partial)) {
+                $partial = array($partial, 'default');
+            }
+        
+            $nav->$m()->setPartial($partial);
         }
         
-        $n = ($useZtb) ? 'ztbNavigation' : 'Navigation';
-        $m = ($useZtb) ? 'ztbMenu' : 'Menu';
-        
-    	$nav = $this->view->$n($container) ;
-    	
-    	// must set acl before partial.
-    	$identity = $this->view->plugin('identity');
-    	$role = ($identity()) ? $identity()->getRole() : 'guest';
-    	$nav->setAcl($acl)->setRole($role);
-    	
-    	if ($partial) {
-    		if (is_string($partial)) {
-    			$partial = array($partial, 'default');
-    		}
-    		
-    		$nav->$m()->setPartial($partial);
-    	}
-    	
-    	return $nav->$m()->render();
+        $ulClass = ($this->getUlClass()) ?: $nav->$m()->getUlClass();
+         
+        return $nav->$m()->setUlClass($ulClass)->render();
     }
     
     protected function getPages($menu)
@@ -132,5 +178,60 @@ class AclMenu extends AbstractViewHelper
             }
         }
         return $pages;
+    }
+    
+	public function getUlClass()
+    {
+        return $this->ulClass;
+    }
+
+	public function setUlClass($ulClass)
+    {
+        $this->ulClass = $ulClass;
+        return $this;
+    }
+
+	public function getMenu()
+    {
+        return $this->menu;
+    }
+
+	public function setMenu($menu)
+    {
+        $this->menu = $menu;
+        return $this;
+    }
+
+	public function getPartial()
+    {
+        return $this->partial;
+    }
+
+	public function setPartial($partial)
+    {
+        $this->partial = $partial;
+        return $this;
+    }
+
+	public function getUseZtb()
+    {
+        return $this->useZtb;
+    }
+
+	public function setUseZtb($useZtb)
+    {
+        $this->useZtb = $useZtb;
+        return $this;
+    }
+
+	public function getContainer()
+    {
+        return $this->container;
+    }
+
+	public function setContainer($container)
+    {
+        $this->container = $container;
+        return $this;
     }
 }

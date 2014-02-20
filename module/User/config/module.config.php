@@ -200,6 +200,20 @@ return array(
                 'resource' => 'menu:admin'
             ),
 		),
+	    'user' => array(
+	       'edit_profile' => array(
+	           'label' => 'Edit Profile',
+	           'action' => 'edit',
+	           'route' => 'user/default',
+	           'resource' => 'menu:user',
+	       ),
+	        'logout' => array(
+	            'label' => 'Logout',
+	            'action' => 'logout',
+	            'route' => 'user/logout',
+	            'resource' => 'menu:user',
+	        ),
+        ),
 	),
     'view_manager' => array(
     	'template_map' => include __DIR__  .'/../template_map.php',

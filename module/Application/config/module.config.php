@@ -169,6 +169,7 @@ return array(
             'error/404'                     => __DIR__ . '/../view/error/404.phtml',
             'error/index'                   => __DIR__ . '/../view/error/index.phtml',
             'paginate'                      => __DIR__ . '/../view/layout/paginate.phtml',
+            'pager'                         => __DIR__ . '/../view/layout/pager.phtml',
             'session/list'                  => __DIR__ . '/../view/application/session-manager/list.phtml',
         ),
         'template_path_stack' => array(

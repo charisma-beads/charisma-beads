@@ -21,6 +21,41 @@ class Order extends AbstractMapper
         
         $resultSet = $this->fetchResult($select, new ResultSet());
         $row = $resultSet->current();
+        
         return $row;
+    }
+    
+    public function getOrderByUserId($id, $userId)
+    {
+        $select = $this->getCustomerOrderSelect();
+        $select->where
+            ->equalTo('userId', $userId)
+            ->and->equalTo('orderId', $id);
+        
+        $resultSet = $this->fetchResult($select);
+        $row = $resultSet->current();
+        
+        return $row;
+    }
+    
+    public function getOrdersByUserId($id)
+    {
+        $select = $this->getCustomerOrderSelect();
+        $select->where->equalTo('userId', $id);
+        $select = $this->setSortOrder($select, array('-orderDate'));
+        
+        return $this->fetchResult($select);
+    }
+    
+    public function getCustomerOrderSelect()
+    {
+        $select = $this->getSql()->select($this->table);
+        $select->join(
+            'customer',
+            'order.customerId=customer.customerId',
+            array()
+        );
+        
+        return $select;
     }
 }
