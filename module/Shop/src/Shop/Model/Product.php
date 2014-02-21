@@ -68,7 +68,7 @@ class Product implements ModelInterface
 	/**
 	 * @var int
 	 */
-	protected $quantity;
+	protected $quantity = -1;
 	
 	/**
 	 * @var bool
@@ -88,7 +88,7 @@ class Product implements ModelInterface
 	/**
 	 * @var int
 	 */
-	protected $hits;
+	protected $hits = 0;
 	
 	/**
 	 * @var bool

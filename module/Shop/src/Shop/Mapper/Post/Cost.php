@@ -18,13 +18,13 @@ class Cost extends AbstractMapper
     	$select->join(
 	    	'postLevel',
 	    	'postCost.postLevelId=postLevel.postLevelId',
-	    	array('postLevel'),
+	    	array(),
 	    	Select::JOIN_INNER
 	    )
 	    ->join(
 	    	'postZone',
 	    	'postCost.postZoneId=postZone.postZoneId',
-	    	array('zone'),
+	    	array(),
 	    	Select::JOIN_LEFT
 	    );
     	 

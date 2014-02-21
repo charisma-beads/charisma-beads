@@ -9,6 +9,7 @@ class Product extends InputFilter
     {
         $this->add(array(
         	'name'         => 'productId',
+            'required'     => false,
             'filters'      => array(
                 array('name' => 'StripTags'),
                 array('name' => 'StringTrim'),

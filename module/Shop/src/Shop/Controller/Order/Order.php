@@ -47,8 +47,6 @@ class Order extends AbstractCrudController
 	        return $this->redirect()->toRoute('shop/order');
 	    }
 	    
-	    \FB::info($order);
-	    
 	    return array(
 	    	'order' => $order,
 	    );

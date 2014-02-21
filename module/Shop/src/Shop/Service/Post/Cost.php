@@ -31,8 +31,8 @@ class Cost extends AbstractService
 		return $costs;
 	}
 	
-	/*
-	 * @param Shop\Model\Post\Cost $model
+	/**
+	 * @param \Shop\Model\Post\Cost $model
 	 */
 	public function populate($model, $children = false)
 	{
@@ -41,12 +41,12 @@ class Cost extends AbstractService
 		
 		if ($allChildren || in_array('postLevel', $children)) {
 			$id = $model->getPostLevelId();
-			$model->setRelationalModel($this->getPostLevelService()->getById($id));
+			$model->setPostLevel($this->getPostLevelService()->getById($id));
 		}
 		
 		if ($allChildren || in_array('postZone', $children)) {
 			$id = $model->getPostZoneId();
-			$model->setRelationalModel($this->getPostZoneService()->getById($id));
+			$model->setPostZone($this->getPostZoneService()->getById($id));
 		}
 	}
 	

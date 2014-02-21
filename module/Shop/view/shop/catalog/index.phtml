@@ -1,11 +1,10 @@
 <?php $this->headtitle($this->escapehtml($this->category->getCategory())); ?>
-
 <h2>
     <?=$this->escapehtml($this->category->getCategory()); ?>
 </h2>
-<div>
-    <?=$this->breadcrumbs(); ?>
-</div>
+
+<?=$this->breadcrumbs(); ?>
+
 <?php if (count($this->products) > 0):?>
 <ul class="thumbnails">
 <?php foreach ($this->products as $row): ?>

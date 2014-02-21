@@ -142,6 +142,7 @@ class AbstractService implements ServiceLocatorAwareInterface
 		
 		$pk = $this->getMapper()->getPrimaryKey();
 		$id = $data[$pk];
+		unset($data[$pk]);
 		
 		if (0 === $id || null === $id || '' === $id) {
 			$result = $this->getMapper()->insert($data);

@@ -3,11 +3,12 @@ namespace Shop\Model\Post;
 
 use Application\Model\Model;
 use Application\Model\ModelInterface;
-use Application\Model\RelationalModel;
+use Shop\Model\Post\Level;
+use Shop\Model\Post\Zone;
 
 class Cost implements ModelInterface
 {
-    use Model, RelationalModel;
+    use Model;
     
     /**
      * @var int
@@ -33,6 +34,16 @@ class Cost implements ModelInterface
      * @var bool
      */
     protected $vatInc;
+    
+    /**
+     * @var Level
+     */
+    protected $postLevel;
+    
+    /**
+     * @var Zone
+     */
+    protected $postZone;
     
 	/**
 	 * @return number $postCostId
@@ -118,4 +129,41 @@ class Cost implements ModelInterface
 		$this->vatInc = $vatInc;
 		return $this;
 	}
+	
+	/**
+	 * @return \Shop\Model\Post\Level
+	 */
+	public function getPostLevel()
+    {
+        return $this->postLevel;
+    }
+
+    /**
+     * @param Level $postLevel
+     * @return \Shop\Model\Post\Cost
+     */
+	public function setPostLevel(Level $postLevel)
+    {
+        $this->postLevel = $postLevel;
+        return $this;
+    }
+
+    /**
+     * @return \Shop\Model\Post\Zone
+     */
+	public function getPostZone()
+    {
+        return $this->postZone;
+    }
+
+    /**
+     * @param Zone $postZone
+     * @return \Shop\Model\Post\Cost
+     */
+	public function setPostZone(Zone $postZone)
+    {
+        $this->postZone = $postZone;
+        return $this;
+    }
+
 }

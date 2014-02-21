@@ -35,7 +35,7 @@ class Article extends AbstractService
 	protected function savePage($article, $post)
 	{
 	    if ($post['position'] && $post['menuInsertType'] != 'noInsert') {
-    		$ids = split('-', $post['position']);
+    		$ids = explode('-', $post['position']);
     		$data = array(
     			'menuId' => $ids[0],
     			'label' => $article->getTitle(),

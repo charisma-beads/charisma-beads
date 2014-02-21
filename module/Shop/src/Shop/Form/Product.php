@@ -91,10 +91,12 @@ class Product extends Form implements ServiceLocatorAwareInterface
         		'autofocus'	=> true,
         		'min'		=> '-1',
         		'step'		=> '1',
+        	    'value'     => '-1',
         	),
         	'options'		=> array(
         		'label'	=> 'Quantity:',
         	),
+            
         ));
         
         $this->add(array(
@@ -129,6 +131,7 @@ class Product extends Form implements ServiceLocatorAwareInterface
         		'min'		=> '0.00',
         		'max'		=> '100.00',
         		'step'		=> '0.01',
+        	    'value'     => '0',
         	),
         	'options'		=> array(
         		'label'			=> 'Product Discount:',
@@ -211,7 +214,6 @@ class Product extends Form implements ServiceLocatorAwareInterface
     		'options'	=> array(
     			'label'			=> 'Price Group:',
     			'required'		=> true,
-    			'empty_option'	=> '--Please select a price group---',
     			'value_options'	=> $this->getGroupPriceList(),
     		),
     	));

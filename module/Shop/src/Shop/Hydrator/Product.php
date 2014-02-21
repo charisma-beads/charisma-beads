@@ -4,6 +4,7 @@ namespace Shop\Hydrator;
 use Application\Hydrator\AbstractHydrator;
 use Application\Hydrator\Strategy\DateTime as DateTimeStrategy;
 use Application\Hydrator\Strategy\TrueFalse;
+use Application\Hydrator\Strategy\Null as NullStrategy;
 use Shop\Hydrator\Strategy\Percent;
 
 
@@ -28,6 +29,7 @@ class Product extends AbstractHydrator
 		$dateTime = new DateTimeStrategy();
 		$trueFalse = new TrueFalse();
 		
+		$this->addStrategy('productGroupId', new NullStrategy());
 		$this->addStrategy('taxable', $trueFalse);
 		$this->addStrategy('discountPercent', new Percent());
 		$this->addStrategy('addPostage', $trueFalse);
@@ -50,7 +52,7 @@ class Product extends AbstractHydrator
 			'productSizeId'			=> $object->getProductSizeId(),
 			'taxCodeId'				=> $object->getTaxCodeId(),
 			'postUnitId'			=> $object->getPostUnitId(),
-			'productGroupId'		=> $object->getProductGroupId(),
+			'productGroupId'		=> $this->extractValue('productGroupId', $object->getProductGroupId()),
 			'ident'					=> $object->getIdent(),
 			'name'					=> $object->getName(),
 			'price'					=> $object->getPrice(false),

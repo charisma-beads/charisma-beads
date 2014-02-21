@@ -38,7 +38,8 @@
                     <?=$this->formatAddress()
                         ->formatAddress(
                             $this->order->getCustomer()
-                                ->getBillingAddress()
+                                ->getBillingAddress(),
+                                true
                     );?>
                 </address>
             </div>
@@ -56,7 +57,7 @@
                         ->formatAddress(
                             $this->order->getCustomer()
                                 ->getDeliveryAddress()
-                    );?>
+                    );?><br>
                 </address>
             </div>
         </div>
