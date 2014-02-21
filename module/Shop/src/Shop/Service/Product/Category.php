@@ -38,7 +38,9 @@ class Category extends AbstractService
 	{
 		$ident = (string) $ident;
 	
-		return $this->getMapper()->getCategoryByIdent($ident);
+		$cat = $this->getMapper()->getCategoryByIdent($ident);
+		
+		return $cat;
 	}
 	
 	public function getCategoryChildrenIds($categoryId, $recursive=false)

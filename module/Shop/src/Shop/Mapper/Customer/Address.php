@@ -11,52 +11,22 @@ class Address extends AbstractMapper
     protected $model = 'Shop\Model\Customer\Address';
     protected $hydrator = 'Shop\Hydrator\Customer\Address';
     
-    public function getDeliveryAddressByUserId($id)
+    public function getAddressByUserId($id, $billingOrDelivery)
     {
         $id = (int) $id;
+        $billingOrDelivery = strtolower($billingOrDelivery) . 'AddressId';
     
         $select = $this->getSql()->select();
         $select->from($this->table)
         ->join(
             'customer',
-            'customerAddress.customerAddressId = customer.deliveryAddressId',
-            array(Select::SQL_STAR),
+            'customerAddress.customerAddressId=customer.' . $billingOrDelivery,
+            array(),
             Select::JOIN_LEFT
-        )->join(
-            'country',
-            'customerAddress.countryId=country.countryId',
-            array('country' => 'country'),
-            Select::JOIN_LEFT
-        )->where
-        ->equalTo('userId', $id);
+        )->where->equalTo('userId', $id);
     
         $resultSet = $this->fetchResult($select);
         $row = $resultSet->current();
         return $row;
     }
-    
-    public function getBillingAddressByUserId($id)
-    {
-        $id = (int) $id;
-    
-        $select = $this->getSql()->select();
-        $select->from($this->table)
-        ->join(
-            'customer',
-            'customerAddress.customerAddressId = customer.billingAddressId',
-            array(Select::SQL_STAR),
-            Select::JOIN_LEFT
-        )->join(
-            'country',
-            'customerAddress.countryId=country.countryId',
-            array('country' => 'country'),
-            Select::JOIN_LEFT
-        )->where
-        ->equalTo('userId', $id);
-    
-        $resultSet = $this->fetchResult($select);
-        $row = $resultSet->current();
-        return $row;
-    }
-    
 }

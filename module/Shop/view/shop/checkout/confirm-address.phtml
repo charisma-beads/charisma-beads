@@ -1,24 +1,55 @@
 <?php $this->headTitle('Checkout - Comfirm Address') ?>
-<h2>Comfirm Address</h2>
-<div class="row">
 
-    <div class="span4 pull-left">
-        <h3>Billing Address</h3>
-        <address>
-            <?=$this->formatAddress()->getBillingAddress()?>
-        </address>
+<div class="row">
+    <h2>Comfirm Address</h2>
+    <div class="row">
+        <div class="span4 panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    Billing Address
+                </h4>
+            </div>
+            <div class="panel-body">
+                <address>
+                    <?=$this->formatAddress()->getAddress('billing', true)?>
+                </address>
+            </div>
+            <div class="panel-footer">
+                <form class="form-inline" method="post" action="<?php echo $this->url('shop/checkout', array(
+                    'action' => 'edit'
+                )) ?>">
+                    <button type="submit" name="submit" class="btn btn-primary" value="billing">Edit Address</button>
+                </form>
+            </div>
+        </div>
+        <div class="span1">&nbsp;</div>
+        <div class="span4 panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    Delivery Address
+                </h4>
+            </div>
+            <div class="panel-body">
+                <address>
+                    <?=$this->formatAddress()->getAddress('delivery')?>
+                    <br>
+                </address>
+            </div>
+            <div class="panel-footer">
+                <form class="form-inline" method="post" action="<?php echo $this->url('shop/checkout', array(
+                    'action' => 'edit'
+                )) ?>">
+                    <button type="submit" name="submit" class="btn btn-primary" value="delivery">Edit Address</button>
+                </form>
+            </div>
+        </div>
     </div>
     
-    <div class="span4 pull-right">
-        <h3>Delivery Address</h3>
-        <address>
-            <?=$this->formatAddress()->getDeliveryAddress()?>
-        </address>
-    </div>
+    <form method="post" action="<?php echo $this->url('shop/checkout', array(
+        'action' => 'confirm-order',
+    )) ?>">
+        <button type="submit" name="submit" class="btn btn-primary" value="confirmAddress">Check &amp; Confirm Order</button>
+    </form>
 </div>
 
-<form method="post" action="<?php echo $this->url('shop/checkout', array(
-    'action' => 'confirm-order',
-)) ?>">
-    <button type="submit" name="submit" class="btn btn-primary" value="confirmAddress">Check &amp; Confirm Order</button>
-</form>
+

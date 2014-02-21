@@ -25,6 +25,17 @@ class Address extends AbstractService
         
     }
     
+    public function getAddressByUserId($userId, $billingOrDelivery)
+    {
+        $userId = (int) $userId;
+        $billingOrDelivery = (string) $billingOrDelivery;
+    
+        $address = $this->getMapper()->getAddressByUserId($userId, $billingOrDelivery);
+        $this->populate($address, true);
+    
+        return $address;
+    }
+    
     /**
      * @param $model \Shop\Model\Customer\Address
      * @param $children bool|array
@@ -40,16 +51,6 @@ class Address extends AbstractService
                     ->getById($model->getCountryId())
             );
         }
-    }
-    
-    public function getBillingAddressByUserId($userId)
-    {
-        return $this->getMapper()->getBillingAddressByUserId($userId);
-    }
-    
-    public function getDeliveryAddressByUserId($userId)
-    {
-        return $this->getMapper()->getDeliveryAddressByUserId($userId);
     }
     
     /**

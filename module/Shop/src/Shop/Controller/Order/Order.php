@@ -42,6 +42,11 @@ class Order extends AbstractCrudController
 	    $service = $this->getService();
 	    $order = $service->getCustomerOrderByUserId($id, $userId);
 	    
+	    // if order returns false then return to my-order
+	    if (false === $order) {
+	        return $this->redirect()->toRoute('shop/order');
+	    }
+	    
 	    \FB::info($order);
 	    
 	    return array(

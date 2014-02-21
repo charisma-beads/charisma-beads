@@ -85,7 +85,9 @@ class Order extends AbstractService
         $userId = (int) $userId;
         $order = $this->getMapper()->getOrderByUserId($id, $userId);
         
-        $this->populate($order, true);
+        if ($order) {
+            $this->populate($order, true);
+        }
         
         return $order;
     }

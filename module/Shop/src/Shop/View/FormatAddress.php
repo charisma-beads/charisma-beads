@@ -7,34 +7,18 @@ use Application\View\AbstractViewHelper;
 class FormatAddress extends AbstractViewHelper
 {
     protected $customerAddressService;
-    protected $address;
     
-    public function getDeliveryAddress($userId=null)
+    public function getAddress($billingOrDelivery, $includeEmail = false, $userId = null)
     {
         if (!$userId) {
             $userId = $this->getIdentity()->getUserId();
-            $this->address = $this->getCustomerAddressService()->getDeliveryAddressByUserId($userId);
         }
-        
-        return $this;
+    
+        $address = $this->getCustomerAddressService()->getAddressByUserId($userId, $billingOrDelivery);
+        return $this->formatAddress($address, $includeEmail);
     }
     
-    public function __toString()
-    {
-        $this->formatAddress($this->address);
-    }
-    
-    public function getBillingAddress($userId=null)
-    {
-        if (!$userId) {
-        	$userId = $this->getIdentity()->getUserId();
-        }
-        
-        $address = $this->getCustomerAddressService()->getBillingAddressByUserId($userId);
-        return $this->formatAddress($address, true);
-    }
-    
-    public function formatAddress(Address $address, $includeEmail=false)
+    public function formatAddress(Address $address, $includeEmail = false)
     {
         $identity = $this->view->plugin('identity');
         $html = $identity()->getFullName() . '<br>';

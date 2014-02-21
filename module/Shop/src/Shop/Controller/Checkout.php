@@ -52,7 +52,8 @@ class Checkout extends AbstractActionController
 	    $submit = $this->params()->fromPost('submit', null);
 	    $collect = $this->params()->fromPost('collect_instore', null);
 	    
-	    $customer = $this->getCustomerService()->setUser($this->identity())
+	    $customer = $this->getCustomerService()
+	       ->setUser($this->identity())
 	       ->getCustomerDetailsFromUserId();
 	    
 	    /* @var $form \Zend\Form\Form */

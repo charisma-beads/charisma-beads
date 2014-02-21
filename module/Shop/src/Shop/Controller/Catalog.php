@@ -24,23 +24,21 @@ class Catalog extends AbstractActionController
 	
 	public function indexAction()
 	{
-		$ident = $this->params('categoryIdent', 0);
-		$page = $this->params('page', 1);
+		$ident = $this->params()->fromRoute('categoryIdent', 0);
+		$page = $this->params()->fromRoute('page', 1);
+	
+		$category = $this->getProductCategoryService()
+            ->getCategoryByIdent($ident);
+	
+		// make more gracefull with setExceptionMessages trait.
+		if (!$category) {
+			throw new ShopException('Unknown category ' . $ident);
+		}
 		
 		$products = $this->getProductService()->usePaginator(array(
 		    'limit' => $this->getShopOptions()->getProductsPerPage(),
 		    'page'  => $page
-		))->getProductsByCategory($ident);
-	
-		$category = $this->getProductCategoryService()->getCategoryByIdent(
-			$this->params('categoryIdent', '')
-		);
-	
-		if (null === $category) {
-			throw new ShopException(
-				'Unknown category ' . $this->params('categoryIdent')
-			);
-		}
+		))->getProductsByCategory($category->getIdent());
 	
 		return new ViewModel(array(
 			'bread'			=> $this->getBreadcrumb($category->getProductCategoryId()),
