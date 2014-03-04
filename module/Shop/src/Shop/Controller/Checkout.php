@@ -65,11 +65,11 @@ class Checkout extends AbstractActionController
             $form->setData($params);
              
             if ($form->isValid()) {
-                $orderId = $this->getOrderService()->processOrderFromCart($customer, $collect);
+                $formValues = $form->getData();
+                $orderId = $this->getOrderService()->processOrderFromCart($customer, $formValues);
                 
                 if ($orderId) {
                     $this->getCartService()->clear();
-                    $formValues = $form->getData();
                     
                     // need to email order,
                     // add params to session and redirect to payment page.
@@ -79,7 +79,7 @@ class Checkout extends AbstractActionController
                         'requirements' => $formValues['requirements'],
                     );
                     
-                    $filter = new \Zend\Filter\Word\UnderscoreToCamelCase();
+                    $filter = new \Zend\Filter\Word\UnderscoreToDash();
                     $action = $filter->filter($formValues['payment_option']);
                     
                     /* @var $container \Zend\Session\AbstractContainer */

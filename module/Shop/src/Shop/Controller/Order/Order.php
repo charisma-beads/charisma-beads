@@ -2,6 +2,7 @@
 namespace Shop\Controller\Order;
 
 use Application\Controller\AbstractCrudController;
+use Zend\View\Model\ViewModel;
 
 class Order extends AbstractCrudController
 {
@@ -27,18 +28,34 @@ class Order extends AbstractCrudController
 	    
 	    $orders = $service->getCustomerOrdersByUserId($userId);
 	    
-	    return array(
-	    	'orders' => $orders,
-	    );
+	    return ['orders' => $orders];
 	}
 	
 	public function viewAction()
 	{
+	    $order = $this->getCustomerOrder();
+	    
+	    return ['order' => $order];
+	}
+	
+	public function printAction()
+	{
+	    $order = $this->getCustomerOrder();
+	    
+	    $viewModel = new ViewModel(['order' => $order]);
+	    
+	    $viewModel->setTerminal(true);
+	    
+	    return $viewModel;
+	}
+	
+	private function getCustomerOrder()
+	{
 	    // make sure we only get order for the logged in user
 	    $id = $this->params()->fromRoute('orderId', 0);
 	    $userId = $this->identity()->getUserId();
-	    
-        /* @var $service \Shop\Service\Order */
+	     
+	    /* @var $service \Shop\Service\Order */
 	    $service = $this->getService();
 	    $order = $service->getCustomerOrderByUserId($id, $userId);
 	    
@@ -47,8 +64,6 @@ class Order extends AbstractCrudController
 	        return $this->redirect()->toRoute('shop/order');
 	    }
 	    
-	    return array(
-	    	'order' => $order,
-	    );
+	    return $order;
 	}
 }

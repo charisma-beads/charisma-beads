@@ -4,7 +4,6 @@ namespace Shop\Model\Cart;
 use Application\Model\ModelInterface;
 use Application\Model\Model;
 use Shop\Model\Product\MetaData as ProductMetaData;
-use Shop\Model\Product\MetaData;
 
 class Item implements ModelInterface
 {   
@@ -139,10 +138,10 @@ class Item implements ModelInterface
     }
 
     /**
-     * @param MetaData $metadata
+     * @param ProductMetaData $metadata
      * @return \Shop\Model\Cart\Item
      */
-    public function setMetadata(MetaData $metadata)
+    public function setMetadata(ProductMetaData $metadata)
     {
         $this->metadata = $metadata;
         return $this;

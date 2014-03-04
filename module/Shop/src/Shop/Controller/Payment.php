@@ -3,7 +3,6 @@ namespace Shop\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Session\Container;
-use Zend\View\Model\ViewModel;
 
 class Payment extends AbstractActionController
 {   
@@ -16,7 +15,6 @@ class Payment extends AbstractActionController
     {
         $order = $this->getOrderFromSession();
         \FB::info($order);
-        
     }
     
     public function payPhoneAction()
@@ -24,7 +22,7 @@ class Payment extends AbstractActionController
         
     }
     
-    public function payCreditcardAction()
+    public function payCreditCardAction()
     {
         
     }

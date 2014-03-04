@@ -3,7 +3,7 @@ namespace Shop\Model\Order;
 
 use Application\Model\Model;
 use Application\Model\ModelInterface;
-use Shop\Model\Product\MetaData;
+use Shop\Model\Product\MetaData as ProductMetaData;
 
 class Line implements ModelInterface
 {
@@ -133,10 +133,10 @@ class Line implements ModelInterface
 	}
 	
 	/**
-	 * @param MetaData $metadata
+	 * @param ProductMetaData $metadata
 	 * @return \Shop\Model\Order\Line
 	 */
-	public function setMetadata(MetaData $metadata)
+	public function setMetadata(ProductMetaData $metadata)
 	{
 	    $this->metadata = $metadata;
 	    return $this;

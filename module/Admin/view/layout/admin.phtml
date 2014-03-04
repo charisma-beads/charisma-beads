@@ -6,7 +6,9 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <?=$this->headTitle('Control Panel')->setSeparator(' - ')->setAutoEscape(false);?>
 
-        <?=$this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0');?> 
+        <?=$this->headMeta()
+            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+            ->appendName('rating', 'general');?> 
         
         <!-- Styles -->
         <?=$this->headLink(array(

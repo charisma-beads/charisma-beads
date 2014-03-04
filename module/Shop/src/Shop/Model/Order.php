@@ -5,6 +5,7 @@ use Application\Model\Model;
 use Application\Model\ModelInterface;
 use Shop\Model\Customer;
 use Shop\Model\Order\Line;
+use Shop\Model\Order\Metadata as OrderMetaData;
 use Shop\Model\Order\Status;
 use DateTime;
 
@@ -33,19 +34,9 @@ class Order implements ModelInterface
     protected $orderNumber;
     
     /**
-     * @var string
-     */
-    protected $txnId;
-    
-    /**
      * @var float
      */
     protected $total = 0.00;
-    
-    /**
-     * @var DateTime
-     */
-    protected $orderDate;
     
     /**
      * @var float
@@ -55,12 +46,17 @@ class Order implements ModelInterface
     /**
      * @var float
      */
-    protected $vatTotal = 0.00;
+    protected $taxTotal = 0.00;
     
     /**
-     * @var boolean
+     * @var DateTime
      */
-    protected $vatInvoice = false;
+    protected $orderDate;
+    
+    /**
+     * @var \Shop\Model\Order\MetaData
+     */
+    protected $metadata;
     
     /**
      * @var Customer
@@ -145,23 +141,6 @@ class Order implements ModelInterface
     }
 
 	/**
-	 * @return string $txnId
-	 */
-	public function getTxnId ()
-	{
-		return $this->txnId;
-	}
-
-	/**
-	 * @param string $txnId
-	 */
-	public function setTxnId($txnId)
-	{
-		$this->txnId = $txnId;
-		return $this;
-	}
-
-	/**
 	 * @return number $total
 	 */
 	public function getTotal()
@@ -175,23 +154,6 @@ class Order implements ModelInterface
 	public function setTotal($total)
 	{
 		$this->total = $total;
-		return $this;
-	}
-
-	/**
-	 * @return DateTime $orderDate
-	 */
-	public function getOrderDate()
-	{
-		return $this->orderDate;
-	}
-
-	/**
-	 * @param DateTime $orderDate
-	 */
-	public function setOrderDate(DateTime $orderDate = null)
-	{
-		$this->orderDate = $orderDate;
 		return $this;
 	}
 
@@ -213,39 +175,58 @@ class Order implements ModelInterface
 	}
 
 	/**
-	 * @return number $vatTotal
+	 * @return number $taxTotal
 	 */
-	public function getVatTotal()
+	public function getTaxTotal()
 	{
-		return $this->vatTotal;
+		return $this->taxTotal;
 	}
 
 	/**
-	 * @param number $vatTotal
+	 * @param number $taxTotal
 	 */
-	public function setVatTotal($vatTotal)
+	public function setTaxTotal($taxTotal)
 	{
-		$this->vatTotal = $vatTotal;
+		$this->taxTotal = $taxTotal;
 		return $this;
 	}
 	
 	/**
-     * @return the $vatInvoice
-     */
-    public function getVatInvoice()
+	 * @return DateTime $orderDate
+	 */
+	public function getOrderDate()
+	{
+		return $this->orderDate;
+	}
+
+	/**
+	 * @param DateTime $orderDate
+	 */
+	public function setOrderDate(DateTime $orderDate = null)
+	{
+		$this->orderDate = $orderDate;
+		return $this;
+	}
+
+	/**
+	 * @return \Shop\Model\Order\MetaData
+	 */
+	public function getMetadata()
     {
-        return $this->vatInvoice;
+        return $this->metadata;
+    }
+
+    /**
+     * @param OrderMetaData $metadata
+     * @return \Shop\Model\Order
+     */
+	public function setMetadata(OrderMetaData $metadata)
+    {
+        $this->metadata = $metadata;
+        return $this;
     }
 
 	/**
-     * @param boolean $vatInvoice
-     */
-    public function setVatInvoice($vatInvoice)
-    {
-        $this->vatInvoice = $vatInvoice;
-    }
-    
-    /**
      * @return \Shop\Model\Customer
      */
 	public function getCustomer()

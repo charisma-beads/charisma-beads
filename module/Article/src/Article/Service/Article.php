@@ -75,9 +75,15 @@ class Article extends AbstractService
 		return $insertId;
 	}
 	
+	/**
+     * @param \Article\Model\Article $article
+     * @param array $post
+     * @param \Article\Form\Article
+     * @return int $result
+	 */
 	public function edit(ModelInterface $article, array $post, Form $form = null)
 	{
-		
+		$article->setDateModified();
 		$result = parent::edit($article, $post);
 		
 		// find page first, if exists delete it before updating.

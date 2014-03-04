@@ -3,6 +3,7 @@ namespace Shop\Service;
 
 use Application\Service\AbstractService;
 use Shop\Model\Customer as CustomerModel;
+use Shop\Model\Order\MetaData;
 
 class Order extends AbstractService
 {
@@ -30,11 +31,11 @@ class Order extends AbstractService
      */
     protected $cartService;
     
-    public function processOrderFromCart(CustomerModel $customer, $collect = null)
+    public function processOrderFromCart(CustomerModel $customer, array $postData)
     {
         $cart = $this->getCartService();
         
-        $countryId = (!$collect) ? $customer->getDeliveryAddress()->getCountryId() : null;
+        $countryId = (0 == $postData['collect_instore']) ? $customer->getDeliveryAddress()->getCountryId() : null;
         $cart->setShippingCost($countryId);
         
         $shipping = $cart->getShippingCost();
@@ -45,15 +46,31 @@ class Order extends AbstractService
         $orderStatus = $this->getOrderStatusService()->getStatusByName('Pending');
         $orderNumber = $this->getMapper()->getMaxOrderNumber()['orderNumber'] + 1;
         
-        $data = array(
+        $metadata = new MetaData();
+        
+        $paymentOption = ucwords(str_replace(
+            '_',
+            ' ',
+            str_replace('pay_', '', $postData['payment_option'])
+        ));
+        
+        $metadata->setPaymentMethod($paymentOption)
+            ->setTaxInvoice($this->getShopOptions()->getVatState())
+            ->setRequirements($postData['requirements']);
+        
+        if (1 == $postData['collect_instore']) {
+            $metadata->setShippingMethod('Collect At Store');
+        }
+        
+        $data = [
         	'customerId'    => $customer->getCustomerId(),
             'orderStatusId' => $orderStatus->getOrderStatusId(),
             'orderNumber'   => $orderNumber,
             'total'         => $cartTotal,
             'shipping'      => $shipping,
-            'vatTotal'      => $taxTotal,
-            'vatInvoice'    => $this->getShopOptions()->getVatState(),
-        );
+            'taxTotal'      => $taxTotal,
+            'metadata'      => $metadata,
+        ];
         
         $order = $this->getMapper()->getModel($data);
         
@@ -61,13 +78,13 @@ class Order extends AbstractService
         
         /* @var $item \Shop\Model\Cart\Item */
         foreach($cart->getCart() as $item) {
-            $lineData = array(
+            $lineData = [
             	'orderId'  => $orderId,
                 'qty'      => $item->getQuantity(),
                 'price'    => $item->getPrice(),
                 'tax'      => $item->getTax(),
                 'metadata' => $item->getMetadata(),
-            );
+            ];
             
             $orderLine = $this->getOrderLineService()
                 ->getMapper()
@@ -112,7 +129,7 @@ class Order extends AbstractService
     public function populate($model, $children = false)
     {
         $allChildren = ($children === true) ? true : false;
-        $children = (is_array($children)) ? $children : array();
+        $children = (is_array($children)) ? $children : [];
         
         if ($allChildren || in_array('customer', $children)) {
             $id = $model->getCustomerId();

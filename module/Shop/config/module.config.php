@@ -244,6 +244,19 @@ return array(
 				                    ),
 				                ),
 				            ),
+				            'print' => array(
+				                'type'    => 'Segment',
+				                'options' => array(
+				                    'route'         => 'print/[:orderId]',
+				                    'constraints'   => array(
+				                        'orderId'		=> '\d+'
+				                    ),
+				                    'defaults'      => array(
+				                        'action'        => 'print',
+				                        'force-ssl'     => 'ssl'
+				                    ),
+				                ),
+				            ),
 				            'page' => array(
 				                'type' => 'Segment',
 				                'options' => array(
@@ -1180,14 +1193,15 @@ return array(
 				),
 				'route'		=> 'admin/shop',
 				'resource'	=> 'menu:admin'
-			)
-		)
+			),
+		),
 	),
 	'view_manager' => array(
 		'template_map' => array(
-			'cart/summary'	=> __DIR__ . '/../view/shop/cart/cart-summary.phtml',
-			'shop/cart'		=> __DIR__ . '/../view/shop/cart/cart.phtml',
-		),
+			'cart/summary'       => __DIR__ . '/../view/shop/cart/cart-summary.phtml',
+			'shop/cart'          => __DIR__ . '/../view/shop/cart/cart.phtml',
+            'shop/order/details' => __DIR__ . '/../view/shop/order/order-details.phtml',
+    		),
 		'template_path_stack' => array(
 			'Shop' => __DIR__ . '/../view'
 		)

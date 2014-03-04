@@ -1,6 +1,6 @@
 
 $(document).ready(function(){
-
+	
 	$(document).on({
         ajaxStart: function() { 
             $('#content').addClass("loading"); 
@@ -28,5 +28,10 @@ $(document).ready(function(){
 		var change = $(this).is(":checked") ? "text" : "password";
 		document.getElementById('password').type = change;
 	});
+    
+    $('.new-window').click(function(event) {
+        event.preventDefault();
+        window.open($(this).attr("href"), "popupWindow", "width=800,height=600,scrollbars=yes");
+    });
     
 });
