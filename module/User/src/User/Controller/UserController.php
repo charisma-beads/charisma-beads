@@ -3,6 +3,7 @@
 namespace User\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
+use User\Form\Password as PasswordForm;
 use User\Form\User as UserForm;
 use Zend\View\Model\ViewModel;
 
@@ -33,8 +34,6 @@ class UserController extends AbstractActionController
         		$this->flashMessenger()->addInfoMessage(
         			'There were one or more isues with your submission. Please correct them as indicated below.'
         		);
-        		
-        		\FB::info($result->getData());
         
         		return new ViewModel(array(
         			'form' => $result
@@ -66,6 +65,33 @@ class UserController extends AbstractActionController
         return new ViewModel(array(
         	'form' => $this->getUserService()->getForm(),
         ));
+	}
+	
+	public function passwordAction()
+	{
+	    $request = $this->getRequest();
+	    /* @var $user \User\Model\User */
+	    $user = $this->identity();
+	    
+	    if ($request->isPost()) {
+	        $params = $this->params()->fromPost();
+	        
+	        $result = $this->getUserService()->changePasswd($params, $user);
+	        
+	        if ($result instanceof PasswordForm) {
+	            $this->flashMessenger()->addInfoMessage(
+	               'There were one or more isues with your submission. Please correct them as indicated below.'
+                );
+	            
+	            return array(
+	                'form' => $result,
+	            );
+	        }
+	    }
+	    
+	    return array(
+	        'form' => $this->getServiceLocator()->get('User\Form\Password'),
+	    );
 	}
 
 	public function editAction()

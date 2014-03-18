@@ -48,9 +48,7 @@ class AuthController extends AbstractActionController
         $form = $this->form;
         $form->setData($post);
         
-        $viewModel = new ViewModel(array(
-            'form' => $form
-        ));
+        $viewModel = new ViewModel();
         
         $viewModel->setTemplate('user/auth/login');
 
@@ -59,20 +57,22 @@ class AuthController extends AbstractActionController
         		'There were one or more isues with your submission. Please correct them as indicated below.'
         	);
         	
-            return $viewModel; // re-render the login form
+            return $viewModel->setVariables(['form' => $form]); // re-render the login form
         }
 
-        if (false === $this->auth->doAuthentication($form->getData())) {
+        $data = $form->getData();
+        
+        if (false === $this->auth->doAuthentication($data['email'], $data['passwd'])) {
         	$this->flashMessenger()->addErrorMessage(
         		'Login failed, Please try again.'
         	);
 
-            return $viewModel; // re-render the login form
+            return $viewModel->setVariables(['form' => $form]); // re-render the login form
         }
         
         $return = ($post['returnTo']) ? $post['returnTo'] : 'home';
         
-        if ('admin' === $this->identity()->getRole() && !isset($post['returnTo'])) {
+        if ('admin' === $this->identity()->getRole()) {
             return $this->redirect()->toRoute('admin');
         }
         

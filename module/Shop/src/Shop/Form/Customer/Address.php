@@ -25,8 +25,9 @@ class Address extends Form implements ServiceLocatorAwareInterface
         	'name' => 'address1',
         	'type'  => 'text',
         	'attributes' => array(
-        		'placeholder' => 'Address Line 1:',
-        		'autofocus' => true
+        		'placeholder'    => 'Address Line 1:',
+        		'autofocus'      => true,
+        	    'autocapitalize' => 'words'
         	),
         	'options' => array(
         		'label' => 'Address Line 1:',
@@ -37,8 +38,9 @@ class Address extends Form implements ServiceLocatorAwareInterface
         	'name' => 'address2',
         	'type'  => 'text',
         	'attributes' => array(
-        		'placeholder' => 'Address Line 2:',
-        		'autofocus' => true
+        		'placeholder'      => 'Address Line 2:',
+        		'autofocus'        => true,
+        	    'autocapitalize'   => 'words'
         	),
         	'options' => array(
         		'label' => 'Address Line 2:',
@@ -49,8 +51,9 @@ class Address extends Form implements ServiceLocatorAwareInterface
         	'name' => 'address3',
         	'type'  => 'text',
         	'attributes' => array(
-        		'placeholder' => 'Address Line 3:',
-        		'autofocus' => true
+        		'placeholder'     => 'Address Line 3:',
+        		'autofocus'       => true,
+        	    'autocapitalize'  => 'words'
         	),
         	'options' => array(
         		'label' => 'Address Line 3:',
@@ -61,8 +64,9 @@ class Address extends Form implements ServiceLocatorAwareInterface
         	'name' => 'city',
         	'type'  => 'text',
         	'attributes' => array(
-        		'placeholder' => 'City\Town:',
-        		'autofocus' => true
+        		'placeholder'     => 'City\Town:',
+        		'autofocus'       => true,
+        	    'autocapitalize'  => 'words'
         	),
         	'options' => array(
         		'label' => 'City\Town:',
@@ -74,7 +78,8 @@ class Address extends Form implements ServiceLocatorAwareInterface
         	'type'  => 'county',
         	'attributes' => array(
         		'placeholder' => 'County:',
-        		'autofocus' => true
+        		'autofocus' => true,
+        	    'autocapitalize'	=> 'words'
         	),
         	'options' => array(
         		'label' => 'County:',
@@ -85,8 +90,9 @@ class Address extends Form implements ServiceLocatorAwareInterface
         	'name' => 'postcode',
         	'type'  => 'text',
         	'attributes' => array(
-        		'placeholder' => 'PostCode:',
-        		'autofocus' => true
+        		'placeholder'       => 'PostCode:',
+        		'autofocus'         => true,
+        	    'autocapitalize'	=> 'characters'
         	),
         	'options' => array(
         		'label' => 'Postcode:',

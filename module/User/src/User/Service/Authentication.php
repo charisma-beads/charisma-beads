@@ -1,10 +1,10 @@
 <?php
 namespace User\Service;
 
+use User\Model\User as UserModel;
 use User\Service\User;
 use Zend\Authentication\AuthenticationService as ZendAuthenticationService;
-use Zend\Authentication\Adapter\DbTable as AuthAdapter;
-use Zend\Db\Adapter\Adapter as DbAapter;
+use User\Authentication\Adapter as AuthAdapter;
 
 class Authentication extends ZendAuthenticationService
 {
@@ -12,11 +12,6 @@ class Authentication extends ZendAuthenticationService
      * @var AuthAdapter
      */
     protected $authAdapter;
-    
-    /**
-     * @var DbAapter
-     */
-    protected $dbAdapter;
     
     /**
      * @var User
@@ -32,18 +27,6 @@ class Authentication extends ZendAuthenticationService
      * Auth options
      */
     protected $options;
-    
-    /**
-     *  Sets the db adapter
-     *  
-     * @param DbAapter $dbAdapter
-     * @return \User\Model\Authentication
-     */
-    public function setDbAdapter(DbAapter $dbAdapter)
-    {
-        $this->dbAdapter = $dbAdapter;
-        return $this;
-    }
     
     /**
      * Set the user mapper
@@ -70,21 +53,38 @@ class Authentication extends ZendAuthenticationService
     /**
      * Authenticate a user
      *
-     * @param  array $credentials Matched pair array containing email/passwd
+     * @param  string $email
+     * @param string $password
      * @return boolean
      */
-    public function doAuthentication($credentials)
+    public function doAuthentication($email, $password)
     {
-    	$adapter    = $this->getAuthAdapter($credentials);
+        $user = $this->userService->getUserByEmail($email, null, false);
+        
+        if (!$user) {
+            return false;
+        }
+        
+        // hash the password and verify.
+        
+    	$adapter    = $this->getAuthAdapter($password, $user);
     	$result     = $this->authenticate($adapter);
     
     	if (!$result->isValid()) {
     		return false;
     	}
     	
-    	$user = $this->userService
-    		->getUserByEmail($credentials['email']);
-    
+    	/* @var $user UserModel */
+    	$user = $result->getIdentity();
+    	
+    	if (in_array('update password', $result->getMessages())) {
+    		$user->setPasswd($password);
+    		$user->setDateModified();
+    		$this->userService->save($user);
+    	}
+    	
+    	$user->setPasswd(null);
+
     	$this->getStorage()->write($user);
     
     	return true;
@@ -111,29 +111,26 @@ class Authentication extends ZendAuthenticationService
     /**
      * Get and configure the auth adapter
      *
-     * @param  array $value Array of user credentials
+     * @param  string $email
+     * @param string $password
+     * @param UserModel $user
      * @return AuthAdapter
      */
-    public function getAuthAdapter($values)
+    public function getAuthAdapter($password, UserModel $user)
     {
     	if (null === $this->authAdapter) {
-    
-    		$authAdapter = new AuthAdapter(
-    			$this->dbAdapter,
-    			$this->options['dbTable'],
-    			$this->options['identity'],
-    			$this->options['credential'],
-    			$this->options['credentialTreatment']
-    		);
-    
+    	    
+    		$authAdapter = new AuthAdapter();
+            
     		$this->setAuthAdapter($authAdapter);
-    		$this->authAdapter->setIdentity(
-    			$values['email']
-    		);
-    
-    		$this->authAdapter->setCredential(
-    			$values['passwd']
-    		);
+    		$this->authAdapter->setIdentity($user);
+    		$this->authAdapter->setCredential($password);
+    		$this->authAdapter->setCredentialTreatment($this->options['credentialTreatment']);
+    		
+    		if ($this->options['useFallbackTreatment']) {
+    		    $this->authAdapter->setUseFallback($this->options['useFallbackTreatment']);
+    		    $this->authAdapter->setFallbackCredentialTreatment($this->options['fallbackCredentialTreatment']);
+    		}
     	}
     
     	return $this->authAdapter;

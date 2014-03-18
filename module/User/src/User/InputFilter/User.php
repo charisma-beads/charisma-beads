@@ -20,14 +20,14 @@ class User extends InputFilter implements ServiceLocatorAwareInterface
                 array('name'    => 'StringTrim'),
             ),
             'validators' => array(
-                array(
-                    'name'    => 'StringLength',
-                    'options' => array(
-                        'encoding' => 'UTF-8',
-                        'min'      => 2,
-                        'max'      => 255,
-                    ),
-                ),
+                array('name' => 'Alpha', 'options' => array(
+                    'allowWhiteSpace' => true,
+                )),
+                array('name'    => 'StringLength', 'options' => array(
+                    'encoding' => 'UTF-8',
+                    'min'      => 2,
+                    'max'      => 255,
+                )),
             ),
         ));
 		
@@ -39,14 +39,14 @@ class User extends InputFilter implements ServiceLocatorAwareInterface
                 array('name'    => 'StringTrim'),
             ),
             'validators' => array(
-                array(
-                    'name'    => 'StringLength',
-                    'options' => array(
-                        'encoding' => 'UTF-8',
-                        'min'      => 2,
-                        'max'      => 255,
-                    ),
-                ),
+                array('name' => 'Alpha', 'options' => array(
+                    'allowWhiteSpace' => true,
+                )),
+                array('name'    => 'StringLength', 'options' => array(
+                    'encoding' => 'UTF-8',
+                    'min'      => 2,
+                    'max'      => 255,
+                )),
             ),
         ));
 		
@@ -54,8 +54,12 @@ class User extends InputFilter implements ServiceLocatorAwareInterface
             'name'       => 'passwd',
             'required'   => true,
             'filters'    => array(
-                array('name'    => 'StripTags'),
-                array('name'    => 'StringTrim'),
+                array('name' => 'StripTags'),
+                array('name' => 'StringTrim'),
+                array('name' => 'StringLength', 'options' => array(
+                    'min'       => 8,
+                    'encoding'  => 'UTF-8',
+                ))
             ),
         ));
 		

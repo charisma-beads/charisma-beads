@@ -19,8 +19,9 @@ class User extends Form
 			'name' => 'firstname',
 			'type'  => 'text',
 			'attributes' => array(
-				'placeholder' => 'Forename:',
-				'autofocus' => true
+				'placeholder'    => 'Forename:',
+				'autofocus'      => true,
+			    'autocapitalize' => 'words'
 			),
 			'options' => array(
 				'label' => 'Forename:',
@@ -31,7 +32,8 @@ class User extends Form
 			'name' => 'lastname',
 			'type'  => 'text',
 			'attributes' => array(
-				'placeholder' => 'Surname:',
+				'placeholder'    => 'Surname:',
+			    'autocapitalize' => 'words'
 			),
 			'options' => array(
 				'label' => 'Surname:',

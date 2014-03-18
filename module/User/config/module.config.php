@@ -2,10 +2,9 @@
 return array(
 	'user' => array(
 		'auth' => array(
-			'dbTable' => '',
-			'identity' => '',
-			'credential' => '',
-			'credentialTreatment' => ''
+			'credentialTreatment'          => '',
+		    'useFallbackTreatment'         => false,
+		    'fallbackCredentialTreatment'  => '',
 		),
 	),
 	'userAcl' => array(
@@ -24,7 +23,7 @@ return array(
 				'parent'        => null,
 				'privileges'    => array(
 					array('controller' => 'User\Controller\Auth', 'action' => array('logout')),
-					array('controller' => 'User\Controller\User', 'action' => array('edit')),
+					array('controller' => 'User\Controller\User', 'action' => array('edit', 'password')),
 				),
 				'resources' => array('menu:user')
 			),
@@ -201,12 +200,18 @@ return array(
             ),
 		),
 	    'user' => array(
-	       'edit_profile' => array(
-	           'label' => 'Edit Profile',
-	           'action' => 'edit',
-	           'route' => 'user/default',
-	           'resource' => 'menu:user',
-	       ),
+            'edit_profile' => array(
+                'label' => 'Edit Profile',
+                'action' => 'edit',
+                'route' => 'user/default',
+                'resource' => 'menu:user',
+            ),
+            'password' => array(
+            	'label' => 'Password',
+                'action' => 'password',
+                'route' => 'user/default',
+                'resource' => 'menu:user',
+            ),
 	        'logout' => array(
 	            'label' => 'Logout',
 	            'action' => 'logout',

@@ -42,6 +42,7 @@ $routeArray = array('action' => $this->formAction);
         </div>
     </div>
     
+    <?php if($this->formAction === 'add'):?>
     <div class="control-group<?php if ($form->get('passwd')->getMessages()) echo ' error'; ?>">
         <label class="control-label" for="title">Password:</label>
         <div class="controls">
@@ -68,6 +69,7 @@ $routeArray = array('action' => $this->formAction);
             </span>
         </div>
     </div>
+    <?php endif;?>
     
     <?php echo $this->formElement($form->get('userId')); ?>
    	

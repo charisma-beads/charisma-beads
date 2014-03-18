@@ -6,6 +6,7 @@ use Application\Model\ModelInterface;
 use Application\Service\AbstractService;
 use User\UserException;
 use User\Model\User as UserModel;
+use Zend\Crypt\Password\PasswordInterface;
 
 class User extends AbstractService
 {   
@@ -13,10 +14,10 @@ class User extends AbstractService
 	protected $form = 'User\Form\User';
 	protected $inputFilter = 'User\InputFilter\User';
     
-    public function getUserByEmail($email, $ignore=null)
+    public function getUserByEmail($email, $ignore=null, $emptyPassword = true)
     {
     	$email = (string) $email;
-    	return $this->getMapper()->getUserByEmail($email, $ignore);
+    	return $this->getMapper()->getUserByEmail($email, $ignore, $emptyPassword);
     }
     
     /**
@@ -61,12 +62,40 @@ class User extends AbstractService
     	    }
     	}
     	
-    	$form->getInputFilter()->get('passwd')->setRequired(false);
-    	$form->getInputFilter()->get('passwd')->setAllowEmpty(true);
-    	$form->getInputFilter()->get('passwd-confirm')->setRequired(false);
-    	$form->getInputFilter()->get('passwd-confirm')->setAllowEmpty(true);
+    	$form->setValidationGroup('firstname', 'lastname', 'email', 'userId');
 		
 		return parent::edit($model, $post, $form);
+    }
+    
+    /**
+     * @param array $post
+     * @param UserModel $user
+     * @return Ambigous <object, multitype:, \User\Form\Password>
+     */
+    public function changePasswd(array $post, UserModel $user)
+    {
+        $sl = $this->getServiceLocator();
+        $form = $sl->get('User\Form\Password');
+        
+        $form->setInputFilter($sl->get('User\InputFilter\Password'));
+        $form->setData($post);
+        $form->setHydrator($this->getMapper()->getHydrator());
+        $form->bind($user);
+        
+        if (!$form->isValid()) {
+            return $form;
+        }
+        
+        /* @var $data UserModel */
+        $data = $form->getData();
+        $data->setDateModified();
+        
+        return $this->save($data);
+    }
+    
+    public function resetPassword()
+    {
+        
     }
     
     public function save($data)
@@ -76,15 +105,31 @@ class User extends AbstractService
         }
         
     	if (array_key_exists('passwd', $data) && '' != $data['passwd']) {
-    		$authOptions = $this->getConfig('user');
-    		$hash = str_replace('(?)', '', strtolower($authOptions['auth']['credentialTreatment']));
-    		$data['passwd'] = $hash($data['passwd']);
+    		$data['passwd'] = $this->createPassword($data['passwd']);
     	} else {
     		unset($data['passwd']);
     	}
     
-    	// TODO check for existing email.
-    
  		return parent::save($data);
+    }
+    
+    public function createPassword($password)
+    {
+        $authOptions = $this->getConfig('user');
+        
+        if (!class_exists($authOptions['auth']['credentialTreatment'])) {
+            throw new UserException('Credential treatment must be an class name');
+        } else {
+            /* @var $crypt PasswordInterface */
+            $crypt = new $authOptions['auth']['credentialTreatment'];
+        }
+        
+        if (!$crypt instanceof PasswordInterface) {
+            throw new UserException('Credential treatment must be an instance of Zend\Crypt\Password\PasswordInterface');
+        }
+        
+        $password = $crypt->create($password);
+        
+        return $password;
     }
 }

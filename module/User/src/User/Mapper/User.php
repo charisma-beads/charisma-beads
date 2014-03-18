@@ -17,9 +17,12 @@ class User extends AbstractMapper
 		return parent::getById($id);
 	}
     
-    public function getUserByEmail($email, $ignore=null)
+    public function getUserByEmail($email, $ignore=null, $emptyPassword = true)
     {
-    	$this->getResultSet()->getHydrator()->emptyPassword();
+        if ($emptyPassword) {
+            $this->getResultSet()->getHydrator()->emptyPassword();
+        }
+    	
         $select = $this->getSelect()
         	->where(array('email' => $email));
         

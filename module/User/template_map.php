@@ -11,6 +11,7 @@ return array(
     'user/auth/login-form' => __DIR__ . '/view/user/auth/login-form.phtml',
     'user/user/edit'       => __DIR__ . '/view/user/user/edit.phtml',
     'user/user/index'      => __DIR__ . '/view/user/user/index.phtml',
+    'user/user/password'   => __DIR__ . '/view/user/user/password.phtml',
     'user/user/register'   => __DIR__ . '/view/user/user/register.phtml',
     'user/user/thank-you'  => __DIR__ . '/view/user/user/thank-you.phtml',
     'user/user/user-form'  => __DIR__ . '/view/user/user/user-form.phtml',
