@@ -20,10 +20,6 @@
 		{
             "type": "composer",
             "url": "https://packages.zendframework.com/"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/shaun-freeman/ZfcTwitterBootstrap"
         }
     ],
 	"require" : {
@@ -47,8 +43,7 @@
 		"zendframework/zend-serializer": "2.*",
 		"zendframework/zend-session": "2.*",
     	"zendframework/zend-view": "2.*",
-		"zendframework/zend-version": "2.*",
-		"mwillbanks/zfc-twitter-bootstrap" : "master-dev"
+		"zendframework/zend-version": "2.*"
 	},
 	"require-dev" : {
 	    "twitter/bootstrap" : "~3",
