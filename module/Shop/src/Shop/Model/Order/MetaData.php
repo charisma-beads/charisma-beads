@@ -1,6 +1,8 @@
 <?php
 namespace Shop\Model\Order;
 
+use Shop\Model\Customer\Address;
+
 class MetaData
 {
     /**
@@ -27,6 +29,21 @@ class MetaData
      * @var string
      */
     protected $requirements;
+    
+    /**
+     * @var string
+     */
+    protected $customerName;
+    
+    /**
+     * @var Shop\Model\Customer\Address
+     */
+    protected $deliveryAddress;
+    
+    /**
+     * @var Shop\Model\Customer\Address
+     */
+    protected $billingAddress;
     
     /**
      * @return boolean
@@ -117,5 +134,54 @@ class MetaData
         $this->requirements = $requirements;
         return $this;
     }
+    
+	public function getCustomerName()
+    {
+        return $this->customerName;
+    }
 
+    /**
+     * @param string $customerName
+     * @param string $prefix
+     * @return \Shop\Model\Order\MetaData
+     */
+	public function setCustomerName($customerName, $prefix=null)
+    {
+        if ($prefix) {
+            $prefix = (string) $prefix . ' ';
+        }
+        
+        $this->customerName = $prefix . $customerName;
+        return $this;
+    }
+
+	public function getDeliveryAddress()
+    {
+        return $this->deliveryAddress;
+    }
+
+    /**
+     * @param Address $deliveryAddress
+     * @return \Shop\Model\Order\MetaData
+     */
+	public function setDeliveryAddress(Address $deliveryAddress)
+    {
+        $this->deliveryAddress = $deliveryAddress;
+        return $this;
+    }
+
+	public function getBillingAddress()
+    {
+        return $this->billingAddress;
+    }
+
+    /**
+     * @param Address $billingAddress
+     * @return \Shop\Model\Order\MetaData
+     */
+	public function setBillingAddress(Address $billingAddress)
+    {
+        $this->billingAddress = $billingAddress;
+        return $this;
+    }
 }

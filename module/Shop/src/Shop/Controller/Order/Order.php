@@ -35,6 +35,8 @@ class Order extends AbstractCrudController
 	{
 	    $order = $this->getCustomerOrder();
 	    
+	    \FB::info($order);
+	    
 	    return ['order' => $order];
 	}
 	

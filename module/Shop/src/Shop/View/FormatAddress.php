@@ -2,11 +2,23 @@
 namespace Shop\View;
 
 use Shop\Model\Customer\Address;
+use Shop\Model\Order;
 use Application\View\AbstractViewHelper;
 
 class FormatAddress extends AbstractViewHelper
 {
     protected $customerAddressService;
+    
+    /**
+     * @var Order
+     */
+    protected $order;
+    
+    public function __invoke(Order $obect = null)
+    {
+        $this->order = $obect;
+        return $this;
+    }
     
     public function getAddress($billingOrDelivery, $includeEmail = false, $userId = null)
     {
@@ -21,7 +33,12 @@ class FormatAddress extends AbstractViewHelper
     public function formatAddress(Address $address, $includeEmail = false)
     {
         $identity = $this->view->plugin('identity');
-        $html = $identity()->getFullName() . '<br>';
+        
+        if ($this->order instanceof Order) {
+            $html = $this->order->getMetadata()->getCustomerName() . '<br>';
+        } else {
+            $html = $identity()->getFullName() . '<br>';
+        }
         
         $html .= $address->getAddress1() . '<br>';
         
@@ -40,7 +57,7 @@ class FormatAddress extends AbstractViewHelper
         $html .= $address->getPhone() . '<br>';
         
         if ($includeEmail) {
-            $html .= $identity()->getEmail();
+            $html .= $address->getEmail();
         }
         
         return $html;

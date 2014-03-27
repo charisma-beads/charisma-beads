@@ -33,9 +33,9 @@
         </div>
         <div class="panel-body">
             <address>
-                <?=$this->formatAddress()
+                <?=$this->formatAddress($this->order)
                     ->formatAddress(
-                        $this->order->getCustomer()
+                        $this->order->getMetadata()
                             ->getBillingAddress(),
                             true
                 );?>
@@ -51,9 +51,9 @@
         </div>
         <div class="panel-body">
             <address>
-                <?=$this->formatAddress()
+                <?=$this->formatAddress($this->order)
                     ->formatAddress(
-                        $this->order->getCustomer()
+                        $this->order->getMetadata()
                             ->getDeliveryAddress()
                 );?><br>
             </address>

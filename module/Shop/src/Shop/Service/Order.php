@@ -56,7 +56,10 @@ class Order extends AbstractService
         
         $metadata->setPaymentMethod($paymentOption)
             ->setTaxInvoice($this->getShopOptions()->getVatState())
-            ->setRequirements($postData['requirements']);
+            ->setRequirements($postData['requirements'])
+            ->setCustomerName($customer->getFullName(), $customer->getPrefix()->getPrefix())
+            ->setBillingAddress($customer->getBillingAddress())
+            ->setDeliveryAddress($customer->getDeliveryAddress());
         
         if (1 == $postData['collect_instore']) {
             $metadata->setShippingMethod('Collect At Store');
@@ -103,7 +106,7 @@ class Order extends AbstractService
         $order = $this->getMapper()->getOrderByUserId($id, $userId);
         
         if ($order) {
-            $this->populate($order, true);
+            $this->populate($order, array('orderStatus', 'orderLines'));
         }
         
         return $order;

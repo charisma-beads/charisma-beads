@@ -56,6 +56,11 @@ class Address implements ModelInterface
     protected $phone;
     
     /**
+     * @var string
+     */
+    protected $email;
+    
+    /**
      * @var DateTime
      */
     protected $dateCreated;
@@ -222,6 +227,24 @@ class Address implements ModelInterface
 		$this->phone = $phone;
 		return $this;
 	}
+
+	/**
+	 * @return string
+	 */
+	public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $email
+     * @return \Shop\Model\Customer\Address
+     */
+	public function setEmail($email)
+    {
+        $this->email = $email;
+        return $this;
+    }
 
 	/**
 	 * @return DateTime $dateCreated
