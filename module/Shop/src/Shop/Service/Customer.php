@@ -46,10 +46,10 @@ class Customer extends AbstractService
     /**
      * @return \Shop\Model\Customer
      */
-    public function getCustomerDetailsFromUserId()
+    public function getCustomerDetailsFromUserId($userId = null)
     {
-        
-        $customer = $this->getMapper()->getCustomerByUserId($this->getUser()->getUserId());
+        $userId = ($userId) ? $userId : $this->getUser()->getUserId();
+        $customer = $this->getMapper()->getCustomerByUserId($userId);
         
         $this->populate($customer, true);
         

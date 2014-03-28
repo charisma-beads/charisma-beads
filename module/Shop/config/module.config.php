@@ -55,6 +55,7 @@ return array(
 					array('controller' => 'Shop\Controller\Cart', 'action' => 'all'),
 					array('controller' => 'Shop\Controller\Catalog', 'action' => 'all'),
 					array('controller' => 'Shop\Controller\Checkout', 'action' => 'all'),
+				    array('controller' => 'Shop\Controller\Customer', 'action' => array()),
 				    array('controller' => 'Shop\Controller\Order', 'action' => array('cancel', 'my-orders', 'view')),
 					array('controller' => 'Shop\Controller\Payment', 'action' => 'all'),
 					array('controller' => 'Shop\Controller\Paypal', 'action' => array('process', 'success', 'cancel')),
@@ -899,10 +900,15 @@ return array(
 	'navigation' => array(
 	    'user' => array(
             'orders' => array(
-                'label' => 'View Orders',
+                'label' => 'My Orders',
                 'route' => 'shop/order',
                 'resource' => 'menu:user',
 	    	),
+	        'address' => array(
+            	'label' => 'My Addresses',
+	            'route' => 'shop',
+	            'resource' => 'menu:user',
+            ),
         ),
 		'admin' => array(
 			'shop' => array(

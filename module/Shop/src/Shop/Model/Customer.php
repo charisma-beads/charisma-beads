@@ -221,7 +221,7 @@ class Customer implements ModelInterface
 	/**
 	 * @param DateTime $dateModified
 	 */
-	public function setDateModified($dateModified)
+	public function setDateModified($dateModified = null)
 	{
 		$this->dateModified = $dateModified;
 		return $this;

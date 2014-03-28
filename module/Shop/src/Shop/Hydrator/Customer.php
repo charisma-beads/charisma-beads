@@ -35,10 +35,10 @@ class Customer extends AbstractHydrator
     		'customerId'         => $object->getCustomerId(),
     		'userId'             => $object->getUserId(),
     	    'prefixId'           => $object->getPrefixId(),
-    		'firstname'          => $object->getFristName(),
-    	    'lastname'           => $object->getLastName(),
+    		'firstname'          => $object->getFirstname(),
+    	    'lastname'           => $object->getLastname(),
     	    'billingAddressId'   => $object->getBillingAddressId(),
-    	    'diliveryAddressId'  => $object->getDeliveryAddressId(),
+    	    'deliveryAddressId'  => $object->getDeliveryAddressId(),
     		'dateCreated'        => $this->extractValue('dateCreated', $object->getDateCreated()),
     		'dateModified'       => $this->extractValue('dateModified', $object->getDateModified())
     	);

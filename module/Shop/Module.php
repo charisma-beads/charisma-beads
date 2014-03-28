@@ -9,8 +9,21 @@
 
 namespace Shop;
 
+use Zend\Mvc\MvcEvent;
+
 class Module
 {
+    public function onBootStrap(MvcEvent $e)
+    {
+        $app = $e->getApplication();
+        $sharedEventManager = $app->getEventManager()->getSharedManager();
+        
+        //$locator = $app->getServiceManager();
+        //$this->setServiceManager($locator);
+        //$em->attach('ImageUploader\Service\Uploader', 'fileupload.pre',  array('SpeckCatalog\Event\FileUpload', 'preFileUpload'));
+        $sharedEventManager->attach('User\Service\User', 'user.edit', array('Shop\Event\UserEvent', 'userEdit'));
+    }
+    
 	public function getAutoloaderConfig()
     {
         return array(

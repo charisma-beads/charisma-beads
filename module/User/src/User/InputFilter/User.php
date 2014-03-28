@@ -56,10 +56,12 @@ class User extends InputFilter implements ServiceLocatorAwareInterface
             'filters'    => array(
                 array('name' => 'StripTags'),
                 array('name' => 'StringTrim'),
-                array('name' => 'StringLength', 'options' => array(
-                    'min'       => 8,
-                    'encoding'  => 'UTF-8',
-                ))
+            ),
+		    'validators' => array(
+		        array('name' => 'StringLength', 'options' => array(
+		            'min'       => 8,
+		            'encoding'  => 'UTF-8',
+		        )),
             ),
         ));
 		

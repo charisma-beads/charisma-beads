@@ -7,9 +7,13 @@ use Application\Service\AbstractService;
 use User\UserException;
 use User\Model\User as UserModel;
 use Zend\Crypt\Password\PasswordInterface;
+use Zend\EventManager\EventManagerAwareInterface;
+use Zend\EventManager\EventManagerAwareTrait;
 
-class User extends AbstractService
+class User extends AbstractService implements EventManagerAwareInterface
 {   
+    use EventManagerAwareTrait;
+    
 	protected $mapperClass = 'User\Mapper\User';
 	protected $form = 'User\Form\User';
 	protected $inputFilter = 'User\InputFilter\User';
@@ -18,6 +22,17 @@ class User extends AbstractService
     {
     	$email = (string) $email;
     	return $this->getMapper()->getUserByEmail($email, $ignore, $emptyPassword);
+    }
+    
+    public function add(array $post)
+    {
+        $saved = parent::add($post);
+        
+        if ($saved) {
+            $this->getEventManager()->trigger('user.add', $this, $post);
+        }
+        
+        return $saved;
     }
     
     /**
@@ -64,7 +79,13 @@ class User extends AbstractService
     	
     	$form->setValidationGroup('firstname', 'lastname', 'email', 'userId');
 		
-		return parent::edit($model, $post, $form);
+		$saved = parent::edit($model, $post, $form);
+		
+		if ($saved) {
+		    $this->getEventManager()->trigger('user.edit', $this, $post);
+		}
+		
+		return $saved;
     }
     
     /**

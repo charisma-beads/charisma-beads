@@ -42,6 +42,7 @@ class Address extends AbstractHydrator
 			'county'             => $object->getCounty(),
 			'postcode'           => $object->getPostcode(),
 			'phone'              => $object->getPhone(),
+		    'email'              => $object->getEmail(),
 			'dateCreated'        => $this->extractValue('dateCreated', $object->getDateCreated()),
 			'dateModified'       => $this->extractValue('dateModified', $object->getDateModified())
 		);

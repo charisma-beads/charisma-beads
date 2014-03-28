@@ -18,6 +18,11 @@ class Address implements ModelInterface
     /**
      * @var int
      */
+    protected $customerId;
+    
+    /**
+     * @var int
+     */
     protected $countryId;
     
     /**
@@ -78,24 +83,42 @@ class Address implements ModelInterface
 	/**
 	 * @return number $customerAddressId
 	 */
-	public function getCustomerAddressId ()
+	public function getCustomerAddressId()
 	{
-		return $this->addressId;
+		return $this->customerAddressId;
 	}
 
 	/**
 	 * @param number $customerAddressId
 	 */
-	public function setCustomerAddressId ($addressId)
+	public function setCustomerAddressId($addressId)
 	{
 		$this->customerAddressId = $addressId;
 		return $this;
 	}
 
 	/**
+	 * @return number
+	 */
+	public function getCustomerId()
+    {
+        return $this->customerId;
+    }
+
+    /**
+     * @param int $customerId
+     * @return \Shop\Model\Customer\Address
+     */
+	public function setCustomerId($customerId)
+    {
+        $this->customerId = $customerId;
+        return $this;
+    }
+
+	/**
 	 * @return number $countryId
 	 */
-	public function getCountryId ()
+	public function getCountryId()
 	{
 		return $this->countryId;
 	}
@@ -103,7 +126,7 @@ class Address implements ModelInterface
 	/**
 	 * @param number $countryId
 	 */
-	public function setCountryId ($countryId)
+	public function setCountryId($countryId)
 	{
 		$this->countryId = $countryId;
 		return $this;
@@ -112,7 +135,7 @@ class Address implements ModelInterface
 	/**
 	 * @return string $address1
 	 */
-	public function getAddress1 ()
+	public function getAddress1()
 	{
 		return $this->address1;
 	}
@@ -120,7 +143,7 @@ class Address implements ModelInterface
 	/**
 	 * @param string $address1
 	 */
-	public function setAddress1 ($address1)
+	public function setAddress1($address1)
 	{
 		$this->address1 = $address1;
 		return $this;
@@ -129,7 +152,7 @@ class Address implements ModelInterface
 	/**
 	 * @return string $address2
 	 */
-	public function getAddress2 ()
+	public function getAddress2()
 	{
 		return $this->address2;
 	}
@@ -137,7 +160,7 @@ class Address implements ModelInterface
 	/**
 	 * @param string $address2
 	 */
-	public function setAddress2 ($address2)
+	public function setAddress2($address2)
 	{
 		$this->address2 = $address2;
 		return $this;
@@ -146,7 +169,7 @@ class Address implements ModelInterface
 	/**
 	 * @return string $address3
 	 */
-	public function getAddress3 ()
+	public function getAddress3()
 	{
 		return $this->address3;
 	}
@@ -154,7 +177,7 @@ class Address implements ModelInterface
 	/**
 	 * @param string $address3
 	 */
-	public function setAddress3 ($address3)
+	public function setAddress3($address3)
 	{
 		$this->address3 = $address3;
 		return $this;
@@ -163,7 +186,7 @@ class Address implements ModelInterface
 	/**
 	 * @return string $city
 	 */
-	public function getCity ()
+	public function getCity()
 	{
 		return $this->city;
 	}
@@ -171,7 +194,7 @@ class Address implements ModelInterface
 	/**
 	 * @param string $city
 	 */
-	public function setCity ($city)
+	public function setCity($city)
 	{
 		$this->city = $city;
 		return $this;
@@ -180,7 +203,7 @@ class Address implements ModelInterface
 	/**
 	 * @return string $county
 	 */
-	public function getCounty ()
+	public function getCounty()
 	{
 		return $this->county;
 	}
@@ -188,7 +211,7 @@ class Address implements ModelInterface
 	/**
 	 * @param string $county
 	 */
-	public function setCounty ($county)
+	public function setCounty($county)
 	{
 		$this->county = $county;
 		return $this;
@@ -197,7 +220,7 @@ class Address implements ModelInterface
 	/**
 	 * @return string $postcode
 	 */
-	public function getPostcode ()
+	public function getPostcode()
 	{
 		return $this->postcode;
 	}
@@ -205,7 +228,7 @@ class Address implements ModelInterface
 	/**
 	 * @param string $postcode
 	 */
-	public function setPostcode ($postcode)
+	public function setPostcode($postcode)
 	{
 		$this->postcode = $postcode;
 		return $this;
@@ -214,7 +237,7 @@ class Address implements ModelInterface
 	/**
 	 * @return string $phone
 	 */
-	public function getPhone ()
+	public function getPhone()
 	{
 		return $this->phone;
 	}
@@ -222,7 +245,7 @@ class Address implements ModelInterface
 	/**
 	 * @param string $phone
 	 */
-	public function setPhone ($phone)
+	public function setPhone($phone)
 	{
 		$this->phone = $phone;
 		return $this;
@@ -249,7 +272,7 @@ class Address implements ModelInterface
 	/**
 	 * @return DateTime $dateCreated
 	 */
-	public function getDateCreated ()
+	public function getDateCreated()
 	{
 		return $this->dateCreated;
 	}
@@ -257,7 +280,7 @@ class Address implements ModelInterface
 	/**
 	 * @param DateTime $dateCreated
 	 */
-	public function setDateCreated ($dateCreated)
+	public function setDateCreated($dateCreated)
 	{
 		$this->dateCreated = $dateCreated;
 		return $this;
@@ -266,7 +289,7 @@ class Address implements ModelInterface
 	/**
 	 * @return DateTime $dateModified
 	 */
-	public function getDateModified ()
+	public function getDateModified()
 	{
 		return $this->dateModified;
 	}
@@ -274,7 +297,7 @@ class Address implements ModelInterface
 	/**
 	 * @param DateTime $dateModified
 	 */
-	public function setDateModified ($dateModified)
+	public function setDateModified($dateModified = null)
 	{
 		$this->dateModified = $dateModified;
 		return $this;

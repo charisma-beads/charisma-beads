@@ -127,7 +127,7 @@ class UserController extends AbstractActionController
 					);
 					
 					// Redirect to user
-					return $this->redirect()->toRoute('user');
+					//return $this->redirect()->toRoute('user');
 					
 				} else {
 					$this->flashMessenger()->addErrorMessage(
