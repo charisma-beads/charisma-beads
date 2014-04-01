@@ -45,6 +45,11 @@ class Customer implements ModelInterface
     protected $deliveryAddressId;
     
     /**
+     * @var string
+     */
+    protected $email;
+    
+    /**
      * @var DateTime
      */
     protected $dateCreated;
@@ -191,6 +196,24 @@ class Customer implements ModelInterface
 	{
 		$this->deliveryAddressId = $deliveryAddressId;
 		return $this;
+	}
+	
+	/**
+	 * @return string
+	 */
+	public function getEmail()
+	{
+	    return $this->email;
+	}
+	
+	/**
+	 * @param string $email
+	 * @return \Shop\Model\Customer
+	 */
+	public function setEmail($email)
+	{
+	    $this->email = $email;
+	    return $this;
 	}
 
 	/**

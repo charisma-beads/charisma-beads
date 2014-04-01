@@ -111,6 +111,4 @@ class Tax
         $this->price = $price;
         return $this;
     }
-
-
 }

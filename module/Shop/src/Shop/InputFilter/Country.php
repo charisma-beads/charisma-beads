@@ -26,6 +26,23 @@ class Country extends InputFilter
 		));
 		
 		$this->add(array(
+		    'name'       => 'code',
+		    'required'   => true,
+		    'filters'    => array(
+		        array('name' => 'StripTags'),
+		        array('name' => 'StringTrim'),
+		        array('name' => 'Application\Filter\StringToUpper'),
+		    ),
+		    'validators' => array(
+		        array('name' => 'StringLength', 'options' => array(
+		            'encoding' => 'UTF-8',
+		            'min'      => 2,
+		            'max'      => 2,
+		        )),
+		    ),
+		));
+		
+		$this->add(array(
 			'name'			=> 'postZoneId',
 			'required'		=> true,
 			'filters'		=> array(

@@ -31,8 +31,8 @@
 			<td><?=$this->escapeHtml($row->getName()); ?></td>
 			<td><?=$this->escapeHtml($row->getShortDescription()); ?></td>
 			<td><?=$this->priceFormat($row->getPrice(false)); ?>
-			<td><?=$this->escapeHtml($row->getGroup()); ?>
-			<td><?=$this->escapeHtml($row->getCategory()); ?></td>
+			<td><?=$this->escapeHtml($row->getProductGroup()->getGroup()); ?>
+			<td><?=$this->escapeHtml($row->getProductCategory()->getCategory()); ?></td>
 			<td><?=$this->escapeHtml($this->formatDate($row->getDateCreated())); ?></td>
 			<td><?=$this->escapeHtml($this->formatDate($row->getDateModified())); ?></td>
 			<td>

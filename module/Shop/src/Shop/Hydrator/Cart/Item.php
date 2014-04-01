@@ -7,11 +7,9 @@ use Shop\Hydrator\Strategy\Percent;
 
 class Item extends AbstractHydrator
 {
-    public Function __construct($useRelationships)
+    public Function __construct()
     {
         parent::__construct();
-    
-        $this->useRelationships = $useRelationships;
         
         $this->addStrategy('metadata', new Serialize());
         $this->addStrategy('tax', new Percent());

@@ -46,7 +46,8 @@ class Shipping
             return;
         }
         
-        $shippingLevels = $this->getCountryService()->getCountryPostalRates($this->getCountryId());
+        $shippingLevels = $this->getCountryService()
+            ->getCountryPostalRates($this->getCountryId());
         
         $postVatInc = 0;
         $postTaxRate = 0;

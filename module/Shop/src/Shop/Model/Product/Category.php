@@ -2,13 +2,12 @@
 namespace Shop\Model\Product;
 
 use Application\Model\Model;
-use Application\Model\RelationalModel;
 use Application\Model\ModelInterface;
 use DateTime;
 
 class Category implements ModelInterface
 {
-    use Model, RelationalModel;
+    use Model;
     
 	/**
 	 * @var int

@@ -8,8 +8,6 @@ use Application\Hydrator\Strategy\TrueFalse;
 
 class Category extends AbstractHydrator
 {
-    protected $prefix = 'productCategory.';
-    
 	protected $addDepth = false;
 	
 	public function __construct()

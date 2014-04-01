@@ -165,7 +165,7 @@ class Cart extends AbstractService implements InitializableInterface
         
         $cartItem->setPrice($product->getPrice())
             ->setQuantity($qty)
-            ->setTax($product->getTaxRate())
+            ->setTax($product->getTaxCode()->getTaxRate()->getTaxRate())
             ->setMetadata($this->getProductMetaData($product))
             ->setCartId($this->getCart()->getCartId());
         
@@ -187,12 +187,12 @@ class Cart extends AbstractService implements InitializableInterface
         
         $metadata->setProductId($product->getProductId())
             ->setName($product->getName())
-            ->setCategory($product->getCategory())
+            ->setCategory($product->getProductCategory()->getCategory())
             ->setDescription($product->getShortDescription())
             ->setTaxable($product->getTaxable())
             ->setVatInc($product->getVatInc())
             ->setAddPostage($product->getAddPostage())
-            ->setPostUnit($product->getPostUnit());
+            ->setPostUnit($product->getPostUnit()->getPostUnit());
         
         return $metadata;
     }

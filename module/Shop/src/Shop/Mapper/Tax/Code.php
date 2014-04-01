@@ -18,7 +18,7 @@ class Code extends AbstractMapper
 		->join(
 			'taxRate',
 			'taxCode.taxRateId=taxRate.taxRateId',
-			array('taxRate'),
+			array(),
 			Select::JOIN_INNER
 		);
 		

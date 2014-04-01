@@ -59,7 +59,8 @@ class Order extends AbstractService
             ->setRequirements($postData['requirements'])
             ->setCustomerName($customer->getFullName(), $customer->getPrefix()->getPrefix())
             ->setBillingAddress($customer->getBillingAddress())
-            ->setDeliveryAddress($customer->getDeliveryAddress());
+            ->setDeliveryAddress($customer->getDeliveryAddress())
+            ->setEmail($customer->getEmail());
         
         if (1 == $postData['collect_instore']) {
             $metadata->setShippingMethod('Collect At Store');

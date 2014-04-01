@@ -125,26 +125,43 @@ class Product extends AbstractService
 		$children = (is_array($children)) ? $children : array();
 		 
 		if ($allChildren || in_array('category', $children)) {
-		    $id = $model->getProductCategoryId();
-			$model->setRelationalModel($this->getCategoryService()->getById($id));
+			$model->setProductCategory(
+			    $this->getCategoryService()
+                    ->getById($model->getProductCategoryId())
+		  );
 		}
 		 
 		if ($allChildren || in_array('size', $children)) {
-			$model->setRelationalModel($this->getSizeService()->getById($model->getProductSizeId()));
+			$model->setProductSize(
+			    $this->getSizeService()
+                    ->getById($model->getProductSizeId())
+		    );
 		}
 		 
 		if ($allChildren || in_array('taxCode', $children)) {
-			$model->setRelationalModel($this->getTaxCodeService()->getById($model->getTaxCodeId()));
+			$model->setTaxCode(
+			    $this->getTaxCodeService()
+                    ->getById($model->getTaxCodeId())
+            );
 		}
 		 
 		if ($allChildren || in_array('postUnit', $children)) {
-			$model->setRelationalModel($this->getPostUnitService()->getById($model->getPostUnitId()));
+			$model->setPostUnit(
+			    $this->getPostUnitService()
+                    ->getById($model->getPostUnitId())
+            );
 		}
 		 
 		if ($allChildren || in_array('group', $children)) {
 		    $id = $model->getProductGroupId();
-		    if (0 !== $id) {
-		        $model->setRelationalModel($this->getGroupPriceService()->getById($id));
+		    if ($id) {
+		        $model->setProductGroup(
+		            $this->getGroupPriceService()->getById($id)
+                );
+		    } else {
+		        $model->setProductGroup(
+		            $this->getGroupPriceService()->getMapper()->getModel()
+		        );
 		    }
 		}
 		 

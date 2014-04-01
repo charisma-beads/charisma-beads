@@ -21,7 +21,7 @@ class Level implements ModelInterface
 	/**
 	 * @return number $postLevelId
 	 */
-	public function getPostLevelId ()
+	public function getPostLevelId()
 	{
 		return $this->postLevelId;
 	}
@@ -29,7 +29,7 @@ class Level implements ModelInterface
 	/**
 	 * @param number $postLevelId
 	 */
-	public function setPostLevelId ($postLevelId)
+	public function setPostLevelId($postLevelId)
 	{
 		$this->postLevelId = $postLevelId;
 		return $this;
@@ -38,7 +38,7 @@ class Level implements ModelInterface
 	/**
 	 * @return number $postLevel
 	 */
-	public function getPostLevel ()
+	public function getPostLevel()
 	{
 		return $this->postLevel;
 	}
@@ -46,7 +46,7 @@ class Level implements ModelInterface
 	/**
 	 * @param number $postLevel
 	 */
-	public function setPostLevel ($postLevel)
+	public function setPostLevel($postLevel)
 	{
 		$this->postLevel = $postLevel;
 		return $this;

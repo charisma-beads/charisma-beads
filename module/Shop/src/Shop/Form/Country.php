@@ -31,6 +31,19 @@ class Country extends Form implements ServiceLocatorAwareInterface
         ));
 		
 		$this->add(array(
+		    'name'		=> 'code',
+		    'type'		=> 'text',
+		    'options'	=> array(
+		        'placeholder'	=> 'Country Code:',
+        		'autofocus'		=> true,
+		    ),
+		    'options'		=> array(
+		        'label'		=> 'Country Code:',
+		        'required'	=> true,
+		    ),
+		));
+		
+		$this->add(array(
 			'name'		=> 'postZoneId',
 			'type'		=> 'select',
 			'options'	=> array(

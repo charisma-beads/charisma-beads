@@ -17,7 +17,7 @@ class Code extends AbstractService
     public function getById($id)
     {
         $taxCode = parent::getById($id);
-        $this->populate($taxCode);
+        $this->populate($taxCode, true);
         
         return $taxCode;
     }
@@ -29,7 +29,7 @@ class Code extends AbstractService
         $models = parent::search($post);
         
         foreach ($models as $model) {
-        	$this->populate($model);
+        	$this->populate($model, true);
         }
      
         return $models;
@@ -40,11 +40,17 @@ class Code extends AbstractService
      */
     public function populate($model, $children = false)
     {
-        $model->setRelationalModel(
-            $this->getTaxRateService()
-                ->getById($model->getTaxRateId())
-        );
+        $allChildren = ($children === true) ? true : false;
+        $children = (is_array($children)) ? $children : array();
+        	
+        if ($allChildren || in_array('taxRate', $children)) {
+            $model->setTaxRate(
+                $this->getTaxRateService()
+                    ->getById($model->getTaxRateId())
+            );
+        }
     }
+    
     
     public function getTaxRateService()
     {

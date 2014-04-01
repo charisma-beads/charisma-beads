@@ -5,8 +5,6 @@ use Application\Hydrator\AbstractHydrator;
 
 class Option extends AbstractHydrator
 {
-    protected $prefix = 'productOption.';
-    
 	/**
 	 * @param \Shop\Model\Product\Option $object
 	 * @return array $data

@@ -6,13 +6,9 @@ use Shop\Hydrator\Strategy\Percent;
 
 class Rate extends AbstractHydrator
 {
-    protected $prefix = 'taxRate.';
-    
-    public Function __construct($useRelationships)
+    public Function __construct()
     {
     	parent::__construct();
-    	
-    	$this->useRelationships = $useRelationships;
     
     	$this->addStrategy('taxRate', new Percent());
     }

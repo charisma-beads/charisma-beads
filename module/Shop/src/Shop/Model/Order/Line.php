@@ -42,7 +42,7 @@ class Line implements ModelInterface
 	/**
 	 * @return number $orderLineId
 	 */
-	public function getOrderLineId ()
+	public function getOrderLineId()
 	{
 		return $this->orderLineId;
 	}
@@ -50,7 +50,7 @@ class Line implements ModelInterface
 	/**
 	 * @param number $orderLineId
 	 */
-	public function setOrderLineId ($orderLineId)
+	public function setOrderLineId($orderLineId)
 	{
 		$this->orderLineId = $orderLineId;
 		return $this;
@@ -59,7 +59,7 @@ class Line implements ModelInterface
 	/**
 	 * @return number $orderId
 	 */
-	public function getOrderId ()
+	public function getOrderId()
 	{
 		return $this->orderId;
 	}
@@ -67,7 +67,7 @@ class Line implements ModelInterface
 	/**
 	 * @param number $orderId
 	 */
-	public function setOrderId ($orderId)
+	public function setOrderId($orderId)
 	{
 		$this->orderId = $orderId;
 		return $this;
@@ -76,7 +76,7 @@ class Line implements ModelInterface
 	/**
 	 * @return number $qty
 	 */
-	public function getQty ()
+	public function getQty()
 	{
 		return $this->qty;
 	}
@@ -84,7 +84,7 @@ class Line implements ModelInterface
 	/**
 	 * @param number $qty
 	 */
-	public function setQty ($qty)
+	public function setQty($qty)
 	{
 		$this->qty = $qty;
 		return $this;
@@ -93,7 +93,7 @@ class Line implements ModelInterface
 	/**
 	 * @return number $price
 	 */
-	public function getPrice ()
+	public function getPrice()
 	{
 		return $this->price;
 	}
@@ -101,7 +101,7 @@ class Line implements ModelInterface
 	/**
 	 * @param number $price
 	 */
-	public function setPrice ($price)
+	public function setPrice($price)
 	{
 		$this->price = $price;
 		return $this;
@@ -110,7 +110,7 @@ class Line implements ModelInterface
 	/**
 	 * @return number $tax
 	 */
-	public function getTax ()
+	public function getTax()
 	{
 		return $this->tax;
 	}

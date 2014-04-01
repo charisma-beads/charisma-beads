@@ -8,6 +8,7 @@
 		<tr>
 			<th data-field="countryId">Country Id</th>
 			<th data-field="country">Country</th>
+			<th data-field="code">Country Code</th>
 			<th data-field="zone">Post Zone</th>
 			<th>Actions</th>
 		</tr>
@@ -19,7 +20,8 @@
 		<tr>
 			<td><?=$this->escapeHtml($row->getCountryId()); ?></td>
 			<td><?=$this->escapeHtml($row->getCountry()); ?></td>
-			<td><?=$this->escapeHtml($row->getZone()); ?></td>
+			<td><?=$this->escapeHtml($row->getCode()); ?></td>
+			<td><?=$this->escapeHtml($row->getPostZone()->getZone()); ?></td>
 			<td>
                 <?=$this->partial('partial/edit-actions', array(
                 	'pk'		=> 'countryId',

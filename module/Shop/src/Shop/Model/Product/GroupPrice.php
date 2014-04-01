@@ -4,11 +4,10 @@ namespace Shop\Model\Product;
 
 use Application\Model\Model;
 use Application\Model\ModelInterface;
-use Application\Model\RelationalModel;
 
 class GroupPrice implements ModelInterface
 {
-    use Model, RelationalModel;
+    use Model;
     
     /**
      * @var int

@@ -21,7 +21,7 @@
 		<?php foreach($this->models as $row): ?>
 		<tr>
 			<td><?=$this->escapeHtml($row->getProductImageId()); ?></td>
-			<td><?=$this->escapeHtml($row->getName()); ?></td>
+			<td><?=$this->escapeHtml($row->getProduct()->getName()); ?></td>
 			<td><?=$this->escapeHtml($row->getFull()); ?></td>
 			<td><?=$this->escapeHtml($row->isDefaultImage()); ?></td>
 			<td><?=$this->escapeHtml($this->formatDate($row->getDateCreated())); ?></td>

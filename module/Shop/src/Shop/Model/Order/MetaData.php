@@ -46,6 +46,11 @@ class MetaData
     protected $billingAddress;
     
     /**
+     * @var string
+     */
+    protected $email;
+    
+    /**
      * @return boolean
      */
     public function getTaxInvoice()
@@ -145,7 +150,7 @@ class MetaData
      * @param string $prefix
      * @return \Shop\Model\Order\MetaData
      */
-	public function setCustomerName($customerName, $prefix=null)
+	public function setCustomerName($customerName, $prefix = null)
     {
         if ($prefix) {
             $prefix = (string) $prefix . ' ';
@@ -182,6 +187,24 @@ class MetaData
 	public function setBillingAddress(Address $billingAddress)
     {
         $this->billingAddress = $billingAddress;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+    
+    /**
+     * @param string $email
+     * @return \Shop\Model\Order\MetaData
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
         return $this;
     }
 }

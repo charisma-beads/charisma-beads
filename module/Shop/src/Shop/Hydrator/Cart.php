@@ -6,11 +6,9 @@ use Application\Hydrator\Strategy\DateTime as DateTimeStrategy;
 
 class Cart extends AbstractHydrator
 {
-    public Function __construct($useRelationships)
+    public Function __construct()
     {
         parent::__construct();
-    
-        $this->useRelationships = $useRelationships;
     
         $this->addStrategy('dateModified', new DateTimeStrategy());
     }

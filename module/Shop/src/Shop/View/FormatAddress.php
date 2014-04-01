@@ -32,12 +32,12 @@ class FormatAddress extends AbstractViewHelper
     
     public function formatAddress(Address $address, $includeEmail = false)
     {
-        $identity = $this->view->plugin('identity');
+        $identity = $this->getIdentity();
         
         if ($this->order instanceof Order) {
             $html = $this->order->getMetadata()->getCustomerName() . '<br>';
         } else {
-            $html = $identity()->getFullName() . '<br>';
+            $html = $identity->getFullName() . '<br>';
         }
         
         $html .= $address->getAddress1() . '<br>';
@@ -57,7 +57,7 @@ class FormatAddress extends AbstractViewHelper
         $html .= $address->getPhone() . '<br>';
         
         if ($includeEmail) {
-            $html .= $address->getEmail();
+            $html .= ($this->order instanceof Order) ? $this->order->getMetadata()->getEmail() : $identity->getEmail();
         }
         
         return $html;

@@ -3,11 +3,11 @@ namespace Shop\Model\Tax;
 
 use Application\Model\Model;
 use Application\Model\ModelInterface;
-use Application\Model\RelationalModel;
+use Shop\Model\Tax\Rate;
 
 class Code implements ModelInterface
 {
-    use Model, RelationalModel;
+    use Model;
     
 	/**
 	 * @var int
@@ -28,6 +28,11 @@ class Code implements ModelInterface
 	 * @var string
 	 */
 	protected $description;
+	
+	/**
+	 * @var Rate
+	 */
+	protected $taxRate;
 	
 	/**
 	 * @return the $taxCodeId
@@ -96,4 +101,23 @@ class Code implements ModelInterface
 		$this->description = $description;
 		return $this;
 	}
+	
+	/**
+	 * @return \Shop\Model\Tax\Rate
+	 */
+	public function getTaxRate()
+    {
+        return $this->taxRate;
+    }
+
+    /**
+     * @param Rate $taxRate
+     * @return \Shop\Model\Tax\Code
+     */
+	public function setTaxRate(Rate $taxRate)
+    {
+        $this->taxRate = $taxRate;
+        return $this;
+    }
+
 }

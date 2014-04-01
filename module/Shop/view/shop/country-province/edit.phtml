@@ -1,0 +1,15 @@
+<?php $this->headTitle('Edit Country Province') ?>
+<?=$this->ztbFlashMessenger()->render(); ?>
+
+<?=$this->partial('partial/add-edit-form', array(
+	'form' 			=> $this->form,
+	'formAction' 	=> 'edit',
+	'primaryKey'	=> $this->model->getCountryProvinceId(),
+	'formName'		=> 'Country Province',
+	'postRoute'		=> 'admin/shop/country/province/edit',
+	'cancelRoute'	=> 'admin/shop/country/province',
+	'formElements'	=> array(
+		'countryProvinceId', 'countryId', 'countryProvinceCode',
+        'provinceName', 'provinceAlternateNames',
+	),
+)); ?>

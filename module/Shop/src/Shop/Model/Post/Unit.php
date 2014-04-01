@@ -3,11 +3,10 @@ namespace Shop\Model\Post;
 
 use Application\Model\Model;
 use Application\Model\ModelInterface;
-use Application\Model\RelationalModel;
 
 class Unit implements ModelInterface
 {
-    use Model, RelationalModel;
+    use Model;
     
 	/**
 	 * @var int

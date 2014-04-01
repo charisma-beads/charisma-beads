@@ -7,18 +7,10 @@ use Application\Hydrator\Strategy\Serialize;
 
 class Order extends AbstractHydrator
 {
-    protected $hydratorMap = array(
-    	'User\Hydrator\User'            => 'User\Model\User',
-        'Shop\Hydrator\Order\Status'    => 'Shop\Model\Order\Status',
-    );
-    
-    protected $prefix = 'order.';
-    
-    public function __construct($useRelationships)
+    public function __construct()
     {
         parent::__construct();
         
-        $this->useRelationships = $useRelationships;
         $this->addStrategy('orderDate', new DateTimeStrategy());
         $this->addStrategy('metadata', new Serialize());
     }

@@ -6,18 +6,10 @@ use Application\Hydrator\Strategy\DateTime as DateTimeStrategy;
 
 class Customer extends AbstractHydrator
 {
-    protected $hydratorMap = array(
-    	'User\Hydrator\User'               => 'User\Model\User',
-    	'Shop\Hydrator\Customer\Prefix'    => 'Shop\Model\Customer\Prefix',
-    );
-    
-    protected $prefix = 'customer.';
-    
-    public Function __construct($useRelationships)
+    public Function __construct()
     {
     	parent::__construct();
     	
-    	$this->useRelationships = $useRelationships;
     	$dateTime = new DateTimeStrategy();
     
     	$this->addStrategy('dateCreated', $dateTime);
@@ -39,6 +31,7 @@ class Customer extends AbstractHydrator
     	    'lastname'           => $object->getLastname(),
     	    'billingAddressId'   => $object->getBillingAddressId(),
     	    'deliveryAddressId'  => $object->getDeliveryAddressId(),
+    	    'email'              => $object->getEmail(),
     		'dateCreated'        => $this->extractValue('dateCreated', $object->getDateCreated()),
     		'dateModified'       => $this->extractValue('dateModified', $object->getDateModified())
     	);

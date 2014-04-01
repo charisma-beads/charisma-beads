@@ -48,7 +48,7 @@ class Cost implements ModelInterface
 	/**
 	 * @return number $postCostId
 	 */
-	public function getPostCostId ()
+	public function getPostCostId()
 	{
 		return $this->postCostId;
 	}
@@ -56,7 +56,7 @@ class Cost implements ModelInterface
 	/**
 	 * @param number $postCostId
 	 */
-	public function setPostCostId ($postCostId)
+	public function setPostCostId($postCostId)
 	{
 		$this->postCostId = $postCostId;
 		return $this;
@@ -65,7 +65,7 @@ class Cost implements ModelInterface
 	/**
 	 * @return number $postLevelId
 	 */
-	public function getPostLevelId ()
+	public function getPostLevelId()
 	{
 		return $this->postLevelId;
 	}
@@ -73,7 +73,7 @@ class Cost implements ModelInterface
 	/**
 	 * @param number $postLevelId
 	 */
-	public function setPostLevelId ($postLevelId)
+	public function setPostLevelId($postLevelId)
 	{
 		$this->postLevelId = $postLevelId;
 		return $this;
@@ -82,7 +82,7 @@ class Cost implements ModelInterface
 	/**
 	 * @return number $postZoneId
 	 */
-	public function getPostZoneId ()
+	public function getPostZoneId()
 	{
 		return $this->postZoneId;
 	}
@@ -90,7 +90,7 @@ class Cost implements ModelInterface
 	/**
 	 * @param number $postZoneId
 	 */
-	public function setPostZoneId ($postZoneId)
+	public function setPostZoneId($postZoneId)
 	{
 		$this->postZoneId = $postZoneId;
 		return $this;
@@ -99,7 +99,7 @@ class Cost implements ModelInterface
 	/**
 	 * @return number $cost
 	 */
-	public function getCost ()
+	public function getCost()
 	{
 		return $this->cost;
 	}
@@ -107,7 +107,7 @@ class Cost implements ModelInterface
 	/**
 	 * @param number $cost
 	 */
-	public function setCost ($cost)
+	public function setCost($cost)
 	{
 		$this->cost = $cost;
 		return $this;
@@ -116,7 +116,7 @@ class Cost implements ModelInterface
 	/**
 	 * @return boolean $vatInc
 	 */
-	public function getVatInc ()
+	public function getVatInc()
 	{
 		return $this->vatInc;
 	}
@@ -124,7 +124,7 @@ class Cost implements ModelInterface
 	/**
 	 * @param boolean $vatInc
 	 */
-	public function setVatInc ($vatInc)
+	public function setVatInc($vatInc)
 	{
 		$this->vatInc = $vatInc;
 		return $this;

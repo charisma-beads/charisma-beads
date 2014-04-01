@@ -48,11 +48,6 @@ class AbstractMapper implements DbAdapterAwareInterface
 	protected $hydrator;
 	
 	/**
-	 * @var bool
-	 */
-	protected $useModelRelationships = false;
-	
-	/**
 	 * @var HydratingResultSet
 	 */
 	protected $resultSetProtype;
@@ -383,18 +378,10 @@ class AbstractMapper implements DbAdapterAwareInterface
 	public function getHydrator()
 	{
 		if (is_string($this->hydrator) && class_exists($this->hydrator)) {
-			return new $this->hydrator($this->useModelRelationships);
+			return new $this->hydrator();
 		} else {
 			return new ClassMethods();
 		}
-	}
-	
-	/**
-	 * @param bool $bool
-	 */
-	public function useModelRelationships($bool)
-	{
-	    $this->useModelRelationships = (bool) $bool;
 	}
 	
 	/**

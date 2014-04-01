@@ -3,12 +3,12 @@ namespace Shop\Model\Product;
 
 use Application\Model\Model;
 use Application\Model\ModelInterface;
-use Application\Model\RelationalModel;
+use Shop\Model\Product;
 use DateTime;
 
 class Image implements ModelInterface
 {
-    use Model, RelationalModel;
+    use Model;
     
 	/**
 	 * @var int
@@ -44,6 +44,11 @@ class Image implements ModelInterface
 	 * @var DateTime
 	 */
 	protected $dateModified;
+	
+	/**
+	 * @var Product
+	 */
+	protected $product;
 	
 	/**
 	 * @return the $productImageId
@@ -165,8 +170,30 @@ class Image implements ModelInterface
 		return $this;
 	}
 	
+	/**
+	 * @return string
+	 */
 	public function isDefaultImage()
 	{
 		return ($this->getIsDefault()) ? 'Yes' : 'No';
 	}
+	
+	/**
+	 * @return \Shop\Model\Product
+	 */
+	public function getProduct()
+    {
+        return $this->product;
+    }
+
+    /**
+     * @param Product $product
+     * @return \Shop\Model\Product\Image
+     */
+	public function setProduct(Product $product)
+    {
+        $this->product = $product;
+        return $this;
+    }
+
 }

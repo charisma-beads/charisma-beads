@@ -7,8 +7,6 @@ use Shop\Hydrator\Strategy\Percent;
 
 class Line extends AbstractHydrator
 {
-    protected $prefix = 'orderLine.';
-    
     public function __construct()
     {
         parent::__construct();

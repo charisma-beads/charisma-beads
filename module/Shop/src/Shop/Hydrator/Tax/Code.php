@@ -5,18 +5,6 @@ use Application\Hydrator\AbstractHydrator;
 
 class Code extends AbstractHydrator
 {
-    protected $hydratorMap = array(
-    	'Shop\Hydrator\Tax\Rate' => 'Shop\Model\Tax\Rate',
-    );
-    
-    protected $prefix = 'taxCode.';
-    
-    public function __construct($useRelationships)
-    {
-        parent::__construct();
-        $this->useRelationships = $useRelationships;
-    }
-    
 	/**
 	 * @param \Shop\Model\Tax\Code $object
 	 * @return array $data

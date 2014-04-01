@@ -5,8 +5,6 @@ use Application\Hydrator\AbstractHydrator;
 
 class Level extends AbstractHydrator
 {
-    protected $prefix = 'postLevel.';
-    
     /**
      * @param \Shop\Model\Post\Level $object
      * @return array $data

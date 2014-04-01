@@ -1,14 +1,18 @@
 <?php
 namespace Shop\Model;
 
-use Application\Model\RelationalModel;
 use Application\Model\Model;
 use Application\Model\ModelInterface;
+use Shop\Model\Post\Unit;
+use Shop\Model\Product\Category;
+use Shop\Model\Product\Size;
+use Shop\Model\Product\GroupPrice;
+use Shop\Model\Tax\Code;
 use DateTime;
 
 class Product implements ModelInterface
 {
-    use Model, RelationalModel;
+    use Model;
     
 	/**
 	 * @var int
@@ -114,6 +118,31 @@ class Product implements ModelInterface
 	 * @var DateTime
 	 */
 	protected $dateModified;
+	
+	/**
+	 * @var Category
+	 */
+	protected $productCategory;
+	
+	/**
+	 * @var Size
+	 */
+	protected $productSize;
+	
+	/**
+	 * @var Code
+	 */
+	protected $taxCode;
+	
+	/**
+	 * @var Unit
+	 */
+	protected $postUnit;
+	
+	/**
+	 * @var GroupPrice
+	 */
+	protected $productGroup;
 	
 	/**
 	 * @return number $productId
@@ -483,5 +512,95 @@ class Product implements ModelInterface
     public function isDiscounted()
     {
         return (0 == $this->getDiscountPercent()) ? false : true;
+    }
+    
+    /**
+     * @return \Shop\Model\Product\Category
+     */
+	public function getProductCategory()
+    {
+        return $this->productCategory;
+    }
+
+    /**
+     * @param Category $productCategory
+     * @return \Shop\Model\Product
+     */
+	public function setProductCategory(Category $productCategory)
+    {
+        $this->productCategory = $productCategory;
+        return $this;
+    }
+
+    /**
+     * @return \Shop\Model\Product\Size
+     */
+	public function getProductSize()
+    {
+        return $this->productSize;
+    }
+
+    /**
+     * @param Size $productSize
+     * @return \Shop\Model\Product
+     */
+	public function setProductSize(Size $productSize)
+    {
+        $this->productSize = $productSize;
+        return $this;
+    }
+
+    /**
+     * @return \Shop\Model\Tax\Code
+     */
+	public function getTaxCode()
+    {
+        return $this->taxCode;
+    }
+
+    /**
+     * @param Code $taxCode
+     * @return \Shop\Model\Product
+     */
+	public function setTaxCode(Code $taxCode)
+    {
+        $this->taxCode = $taxCode;
+        return $this;
+    }
+
+    /**
+     * @return \Shop\Model\Post\Unit
+     */
+	public function getPostUnit()
+    {
+        return $this->postUnit;
+    }
+
+    /**
+     * @param Unit $postUnit
+     * @return \Shop\Model\Product
+     */
+	public function setPostUnit(Unit $postUnit)
+    {
+        $this->postUnit = $postUnit;
+        return $this;
+    }
+
+    /**
+     * @return \Shop\Model\Product\GroupPrice
+     */
+	public function getProductGroup()
+    {
+        return $this->productGroup;
+    }
+
+    /**
+     * @param GroupPrice $productGroup
+     * @return \Shop\Model\Product
+     */
+	public function setProductGroup(GroupPrice $productGroup)
+    {
+        $this->productGroup = $productGroup;
+        return $this;
     }
 }

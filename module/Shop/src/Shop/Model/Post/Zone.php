@@ -26,7 +26,7 @@ class Zone implements ModelInterface
 	/**
 	 * @return number $postZoneId
 	 */
-	public function getPostZoneId ()
+	public function getPostZoneId()
 	{
 		return $this->postZoneId;
 	}
@@ -34,7 +34,7 @@ class Zone implements ModelInterface
 	/**
 	 * @param number $postZoneId
 	 */
-	public function setPostZoneId ($postZoneId)
+	public function setPostZoneId($postZoneId)
 	{
 		$this->postZoneId = $postZoneId;
 		return $this;
@@ -43,7 +43,7 @@ class Zone implements ModelInterface
 	/**
 	 * @return number $taxCodeId
 	 */
-	public function getTaxCodeId ()
+	public function getTaxCodeId()
 	{
 		return $this->taxCodeId;
 	}
@@ -51,7 +51,7 @@ class Zone implements ModelInterface
 	/**
 	 * @param number $taxCodeId
 	 */
-	public function setTaxCodeId ($taxCodeId)
+	public function setTaxCodeId($taxCodeId)
 	{
 		$this->taxCodeId = $taxCodeId;
 		return $this;
@@ -60,7 +60,7 @@ class Zone implements ModelInterface
 	/**
 	 * @return string $zone
 	 */
-	public function getZone ()
+	public function getZone()
 	{
 		return $this->zone;
 	}
@@ -68,7 +68,7 @@ class Zone implements ModelInterface
 	/**
 	 * @param string $zone
 	 */
-	public function setZone ($zone)
+	public function setZone($zone)
 	{
 		$this->zone = $zone;
 		return $this;

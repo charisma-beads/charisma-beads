@@ -7,8 +7,6 @@ use Application\Hydrator\Strategy\TrueFalse;
 
 class Image extends AbstractHydrator
 {
-    protected $prefix = 'productImage.';
-    
 	public function __construct()
 	{
 		parent::__construct();

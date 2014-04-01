@@ -5,8 +5,6 @@ use Application\Hydrator\AbstractHydrator;
 
 class Prefix extends AbstractHydrator
 {
-    protected $prefix = 'prefix.';
-    
 	/**
 	 *
 	 * @param \Shop\Model\Customer\Prefix $object        	

@@ -3,6 +3,7 @@
 return array(
     'shared'        => array(
     	'Shop\Form\Country'						=> false,
+        'Shop\Form\CountryProvince'             => false,
         'Shop\Form\Customer'                    => false,
         'Shop\Form\CustomerAddress'             => false,
         'Shop\Form\Order'                       => false,
@@ -22,6 +23,7 @@ return array(
 	'invokables'    => array(
 	    'Shop\Form\CatalogSearch'               => 'Shop\Form\Catalog\Search',
 		'Shop\Form\Country'						=> 'Shop\Form\Country',
+	    'Shop\Form\CountryProvince'             => 'Shop\Form\Country\Province',
 	    'Shop\Form\Customer'				    => 'Shop\Form\Customer',
 		'Shop\Form\CustomerAddress'				=> 'Shop\Form\Customer\Address',
 	    'Shop\Form\Order'                       => 'Shop\Form\Order',
@@ -41,6 +43,7 @@ return array(
 		
 	    'Shop\InputFilter\CatalogSearch'        => 'Shop\InputFilter\Catalog\Search',
 		'Shop\InputFilter\Country'				=> 'Shop\InputFilter\Country',
+	    'Shop\InputFilter\CountryProvince'      => 'Shop\InputFilter\Country\Province',
 	    'Shop\InputFilter\Customer'				=> 'Shop\InputFilter\Customer',
 	    'Shop\InputFilter\CustomerAddress'		=> 'Shop\InputFilter\Customer\Address',
 	    'Shop\InputFilter\Order'                => 'Shop\InputFilter\Order',
@@ -63,6 +66,7 @@ return array(
 	    'Shop\Mapper\Cart'                      => 'Shop\Mapper\Cart',
 	    'Shop\Mapper\CartItem'                  => 'Shop\Mapper\Cart\Item',
 	    'Shop\Mapper\Country'                   => 'Shop\Mapper\Country',
+	    'Shop\Mapper\CountryProvince'           => 'Shop\Mapper\Country\Province',
 	    'Shop\Mapper\Customer'                  => 'Shop\Mapper\Customer',
 	    'Shop\Mapper\CustomerAddress'           => 'Shop\Mapper\Customer\Address',
 	    'Shop\Mapper\CustomerPrefix'            => 'Shop\Mapper\Customer\Prefix',
@@ -85,6 +89,7 @@ return array(
 	    'Shop\Service\Cart'                     => 'Shop\Service\Cart',
 	    'Shop\Service\CartItem'                 => 'Shop\Service\Cart\Item',
 	    'Shop\Service\Country'                  => 'Shop\Service\Country',
+	    'Shop\Service\CountryProvince'          => 'Shop\Service\Country\Province',
 	    'Shop\Service\Customer'                 => 'Shop\Service\Customer',
 	    'Shop\Service\CustomerAddress'          => 'Shop\Service\Customer\Address',
 	    'Shop\Service\CustomerPrefix'           => 'Shop\Service\Customer\Prefix',

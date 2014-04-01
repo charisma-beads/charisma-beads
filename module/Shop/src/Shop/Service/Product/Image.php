@@ -19,7 +19,7 @@ class Image extends AbstractService
     	$models = parent::search($post);
     	
     	foreach ($models as $model) {
-    	    $this->populate($model);
+    	    $this->populate($model, true);
     	}
     	
     	return $models;
@@ -31,7 +31,15 @@ class Image extends AbstractService
     */
     public function populate($model, $children = false)
     {
-    	$model->setRelationalModel($this->getProductService()->getById($model->getProductId()));
+        $allChildren = ($children === true) ? true : false;
+        $children = (is_array($children)) ? $children : array();
+        	
+        if ($allChildren || in_array('product', $children)) {
+            $model->setProduct(
+                $this->getProductService()
+                    ->getById($model->getProductId())
+            );
+        }
     }
     
     /**

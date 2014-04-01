@@ -3,11 +3,11 @@ namespace Shop\Model;
 
 use Application\Model\Model;
 use Application\Model\ModelInterface;
-use Application\Model\RelationalModel;
+use Shop\Model\Post\Zone;
 
 class Country implements ModelInterface
 {
-    use Model, RelationalModel;
+    use Model;
     
 	/**
 	 * @var int
@@ -23,6 +23,16 @@ class Country implements ModelInterface
 	 * @var string
 	 */
 	protected $country;
+	
+	/**
+	 * @var string
+	 */
+	protected $code;
+	
+	/**
+	 * @var Zone
+	 */
+	protected $postZone;
 	
 	/**
 	 * @return number $countryId
@@ -74,4 +84,38 @@ class Country implements ModelInterface
 		$this->country = $country;
 		return $this;
 	}
+	
+	/**
+	 * @return string
+	 */
+	public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * @param string $code
+     */
+	public function setCode($code)
+    {
+        $this->code = $code;
+    }
+    
+    /**
+     * @return \Shop\Model\Post\Zone
+     */
+	public function getPostZone()
+    {
+        return $this->postZone;
+    }
+
+    /**
+     * @param Zone $zone
+     * @return \Shop\Model\Country
+     */
+	public function setPostZone(Zone $zone)
+    {
+        $this->postZone = $zone;
+        return $this;
+    }
 }

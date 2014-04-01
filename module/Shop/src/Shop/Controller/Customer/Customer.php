@@ -1,5 +1,5 @@
 <?php
-namespace Shop\Controller;
+namespace Shop\Controller\Customer;
 
 use Application\Controller\AbstractCrudController;
 

@@ -5,8 +5,6 @@ use Application\Hydrator\AbstractHydrator;
 
 class GroupPrice extends AbstractHydrator
 {
-    protected $prefix = 'productGroupPrice.';
-    
     /**
      * @param \Shop\Model\Product\GroupPrice $object
      * @return array
