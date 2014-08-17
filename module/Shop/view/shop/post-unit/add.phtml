@@ -1,13 +1,12 @@
 <?php $this->headTitle('Add Post Unit') ?>
-<?=$this->ztbFlashMessenger()->render(); ?>
 
-<?=$this->partial('partial/add-edit-form', array(
+<?=$this->partial('uthando-admin/partial/add-edit-form', [
 	'form' 			=> $this->form,
 	'formAction' 	=> 'add',
 	'formName'		=> 'Post Unit',
 	'postRoute'		=> 'admin/shop/post/unit/edit',
 	'cancelRoute'	=> 'admin/shop/post/unit',
-	'formElements'	=> array(
+	'formElements'	=> [
 		'postUnit',
-	),
-)); ?>
+	],
+]); ?>

@@ -1,8 +1,8 @@
 <?php
 namespace Shop\Model\Product;
 
-use Application\Model\Model;
-use Application\Model\ModelInterface;
+use UthandoCommon\Model\Model;
+use UthandoCommon\Model\ModelInterface;
 
 class Option implements ModelInterface
 {
@@ -17,6 +17,11 @@ class Option implements ModelInterface
 	 * @var int
 	 */
 	protected $productId;
+	
+	/**
+	 * @var int $postUnitId
+	 */
+	protected $postUnitId;
 	
 	/**
 	 * @var string
@@ -60,6 +65,22 @@ class Option implements ModelInterface
 	{
 		$this->productId = $productId;
 		return $this;
+	}
+
+	/**
+	 * @return the $postUnitId
+	 */
+	public function getPostUnitId()
+	{
+		return $this->postUnitId;
+	}
+
+	/**
+	 * @param number $postUnitId
+	 */
+	public function setPostUnitId($postUnitId)
+	{
+		$this->postUnitId = $postUnitId;
 	}
 
 	/**

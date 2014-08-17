@@ -1,7 +1,7 @@
 <?php
 namespace Shop\Mapper\Customer;
 
-use Application\Mapper\AbstractMapper;
+use UthandoCommon\Mapper\AbstractMapper;
 use Zend\Db\Sql\Select;
 
 class Address extends AbstractMapper
@@ -10,6 +10,16 @@ class Address extends AbstractMapper
     protected $primary = 'customerAddressId';
     protected $model = 'Shop\Model\Customer\Address';
     protected $hydrator = 'Shop\Hydrator\Customer\Address';
+    
+    public function getAllByCustomerId($id)
+    {
+        $id = (int) $id;
+        $select = $this->getSelect();
+        $select->where->equalTo('customerId', $id);
+        
+        $resultSet = $this->fetchResult($select);
+        return $resultSet;
+    }
     
     public function getAddressByUserId($id, $billingOrDelivery)
     {

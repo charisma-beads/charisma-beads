@@ -2,12 +2,12 @@
 
 namespace Shop\Service\Post;
 
-use Application\Service\AbstractService;
+use UthandoCommon\Service\AbstractService;
 
 class Level extends AbstractService
 {
-	protected $mapperClass = 'Shop\Mapper\PostLevel';
-	protected $form = 'Shop\Form\PostLevel';
-	protected $inputFilter = 'Shop\InputFilter\PostLevel';
+	protected $mapperClass = 'Shop\Mapper\Post\Level';
+	protected $form = 'Shop\Form\Post\Level';
+	protected $inputFilter = 'Shop\InputFilter\Post\Level';
 	
 }

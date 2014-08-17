@@ -9,12 +9,12 @@ class Enabled extends AbstractHelper
     {
         $id = 'get' . ucfirst($params['table']) . 'Id';
         
-    	$url = $this->view->url($params['route'], array(
+    	$url = $this->view->url($params['route'], [
     		'action'   => 'set-enabled',
     		'id'       => $model->$id()
-    	));
+    	]);
     
-    	$format = '<p class="'.$params['table'].'-status"><a href="%s" class="glyphicons %s '.$params['table'].'-%s">&nbsp;</a></p>';
+    	$format = '<p class="'.$params['table'].'-status"><a href="%s" class="glyphicon glyphicon-%s '.$params['table'].'-%s">&nbsp;</a></p>';
     
     	if ($model->getEnabled()) {
     		$icon = 'ok';

@@ -12,7 +12,7 @@ class CheckoutOptions implements FactoryInterface
 	{
 	    $config = $serviceLocator->get('config');
 	    $options = isset($config['shop']['checkout_options']) ? $config['shop']['checkout_options'] : array();
-	     
+	    
 	    return new Options($options);
 	}
 }

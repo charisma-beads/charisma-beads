@@ -8,25 +8,25 @@ class Rate extends Form
 {
 	public function init()
 	{
-		$this->add(array(
+		$this->add([
 			'name'	=> 'taxRateId',
 			'type'	=> 'hidden',
-		));
+		]);
 		
-		$this->add(array(
+		$this->add([
 			'name'			=> 'taxRate',
 			'type'			=> 'number',
-			'attributes'	=> array(
+			'attributes'	=> [
 				'placeholder'	=> 'Tax Rate:',
 				'autofocus'		=> true,
 				'min'			=> '0.00',
 				'max'			=> '100.00',
 				'step'			=> '0.01',
-			),
-			'options'		=> array(
+			],
+			'options'		=> [
 				'label' => 'Tax Rate:',
 				'help-inline'	=> 'Do not include the % sign.'
-			),
-		));
+			],
+		]);
 	}
 }

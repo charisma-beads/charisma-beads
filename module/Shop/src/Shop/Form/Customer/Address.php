@@ -2,168 +2,136 @@
 namespace Shop\Form\Customer;
 
 use Zend\Form\Form;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
 
-class Address extends Form implements ServiceLocatorAwareInterface
+class Address extends Form
 {	
-    use ServiceLocatorAwareTrait;
-    
     public function init()
-    {   
-        $this->add(array(
+    {
+        $this->add([
             'name'  => 'customerAddressId',
             'type'  => 'hidden',
-        ));
+        ]);
         
-        $this->add(array(
-        	'name'  => 'userId',
+        $this->add([
+        	'name'  => 'customerId',
         	'type'  => 'hidden',
-        ));
+        ]);
         
-        $this->add(array(
+        $this->add([
         	'name' => 'address1',
         	'type'  => 'text',
-        	'attributes' => array(
+        	'attributes' => [
         		'placeholder'    => 'Address Line 1:',
         		'autofocus'      => true,
-        	    'autocapitalize' => 'words'
-        	),
-        	'options' => array(
+        	    'autocapitalize' => 'words',
+                'required'      => true,
+        	],
+        	'options' => [
         		'label' => 'Address Line 1:',
-        	),
-        ));
+        	],
+        ]);
         
-        $this->add(array(
+        $this->add([
         	'name' => 'address2',
         	'type'  => 'text',
-        	'attributes' => array(
+        	'attributes' => [
         		'placeholder'      => 'Address Line 2:',
         		'autofocus'        => true,
         	    'autocapitalize'   => 'words'
-        	),
-        	'options' => array(
+        	],
+        	'options' => [
         		'label' => 'Address Line 2:',
-        	),
-        ));
+        	],
+        ]);
         
-        $this->add(array(
+        $this->add([
         	'name' => 'address3',
         	'type'  => 'text',
-        	'attributes' => array(
+        	'attributes' => [
         		'placeholder'     => 'Address Line 3:',
         		'autofocus'       => true,
         	    'autocapitalize'  => 'words'
-        	),
-        	'options' => array(
+        	],
+        	'options' => [
         		'label' => 'Address Line 3:',
-        	),
-        ));
+        	],
+        ]);
         
-        $this->add(array(
+        $this->add([
         	'name' => 'city',
         	'type'  => 'text',
-        	'attributes' => array(
+        	'attributes' => [
         		'placeholder'     => 'City\Town:',
         		'autofocus'       => true,
-        	    'autocapitalize'  => 'words'
-        	),
-        	'options' => array(
+        	    'autocapitalize'  => 'words',
+                'required'      => true,
+        	],
+        	'options' => [
         		'label' => 'City\Town:',
-        	),
-        ));
+        	],
+        ]);
         
-        $this->add(array(
-        	'name' => 'county',
-        	'type'  => 'county',
-        	'attributes' => array(
-        		'placeholder' => 'County:',
-        		'autofocus' => true,
-        	    'autocapitalize'	=> 'words'
-        	),
-        	'options' => array(
-        		'label' => 'County:',
-        	),
-        ));
-        
-        $this->add(array(
+        $this->add([
+            'name' => 'provinceId',
+            'type'  => 'CountryProvinceList',
+            'attributes' => [
+                'id'       => 'provinceId',
+                'required' => true,
+            ],
+            'options' => [
+                'label' => 'County\Province:',
+                'country_id' => 1,
+            ],
+		]);
+                
+        $this->add([
         	'name' => 'postcode',
         	'type'  => 'text',
-        	'attributes' => array(
+        	'attributes' => [
         		'placeholder'       => 'PostCode:',
         		'autofocus'         => true,
-        	    'autocapitalize'	=> 'characters'
-        	),
-        	'options' => array(
+        	    'autocapitalize'	=> 'characters',
+                'required'      => true,
+        	],
+        	'options' => [
         		'label' => 'Postcode:',
-        	),
-        ));
+        	],
+        ]);
         
-        $this->add(array(
-        	'name' => 'country',
-        	'type' => 'select',
-        	'options' => array(
+        $this->add([
+        	'name' => 'countryId',
+        	'type' => 'CountryList',
+            'attributes' => [
+                'id' => 'countryId',
+                'required'      => true,
+            ],
+        	'options' => [
         		'label' => 'Country',
-        		'required' => true,
-        		'empty_option' => '---Please select a country---',
-        		'value_options' => $this->getCountryList()
-        	),
-        ));
+                'country_id' => 1,
+        	],
+        ]);
         
-        $this->add(array(
+        $this->add([
         	'name'			=> 'phone',
-        	'type'			=> 'tel',
-        	'attributes'	=> array(
+        	'type'			=> 'text',
+        	'attributes'	=> [
         		'placeholder'	=> 'Phone No.:',
         		'autofocus'		=> true,
         		'required'      => true,
-        	),
-        	'options'		=> array(
+        	],
+        	'options'		=> [
         		'label' => 'Phone No.:',
-        	),
-        ));
+        	],
+        ]);
         
-        $this->add(array(
-        	'name'			=> 'email',
-        	'type'			=> 'email',
-        	'attributes'	=> array(
-        		'placeholder'	=> 'Email:',
-        		'autofocus'		=> true,
-        		'required'		=> true,
-        	),
-        	'options'		=> array(
-        		'label'	=> 'Email',
-        	),
-        ));
-        
-        $this->add(array(
+        $this->add([
         	'name' => 'dateCreated',
         	'type' => 'hidden',
-        ));
+        ]);
         
-        $this->add(array(
+        $this->add([
         	'name' => 'dateModified',
         	'type' => 'hidden',
-        ));
-    }
-    
-    public function getCountryList()
-    {
-        $countries = $this->getCountryService()->fetchAll();
-        $countryOptions = array();
-         
-        foreach($countries as $country) {
-        	$countryOptions[$country->getCountryId()] = $country->getCountry();
-        }
-        
-        return $countryOptions;
-    }
-    
-    /**
-     * @return \Shop\Service\Country
-     */
-    public function getCountryService()
-    {
-    	return $this->getServiceLocator()->get('Shop\Service\Country');
+        ]);
     }
 }

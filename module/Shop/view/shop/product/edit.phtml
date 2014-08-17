@@ -1,8 +1,7 @@
 <?php $this->headTitle('Edit Product') ?>
-<?=$this->ztbFlashMessenger()->render(); ?>
 
-<?=$this->partial('shop/product/product-form', array(
+<?=$this->partial('shop/product/product-form', [
 	'form' => $this->form,
 	'formAction' => 'edit',
 	'productId' => $this->model->getProductId()
-)); ?>
+]); ?>

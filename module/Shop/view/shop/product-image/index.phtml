@@ -1,33 +1,19 @@
 
-<div class="tab-wrap">
-<!-- 
-	<ul id="imageTabs" class="nav nav-tabs">
-	    <li><a href="#admin-image">Images</a></li>
-	</ul>
-	
-	<div id="imageTabContent" class="tab-content">
-	    <div class="tab-pane" id="admin-image">
-	    -->
-	    	<div class="row-fluid">
-		    	<?=$this->partial('partial/search', array(
-		    		'name'			=> 'productImage',
-		    		'searchInputs'	=> array(
-		    			'Image'		=> 'full-thumbnail',
-						'Product'	=> 'name',
-		    		),
-		    	));?>
-	    	</div>
+<?=$this->partial('uthando-admin/partial/search', [
+	'name'			=> 'productImage',
+	'searchInputs'	=> [
+		'Image'		=> 'full-thumbnail',
+		'Product'	=> 'name',
+	],
+]);?>
 	    	
-	    	<div id="table-productImage" class="row-fluid table-wrap">
-		    	<?=$this->partial('shop/product-image/list', array(
-		    	    'models' => $this->models
-		    	)); ?>
-	    	</div>
-	    <!-- </div>
-	</div> -->
+<div id="table-productImage">
+	<?=$this->partial('shop/product-image/list', [
+	    'models' => $this->models
+	]); ?>
 </div>
 
-<?php $this->headScript()->captureStart(); ?>
+<?php $this->inlineScript()->captureStart(); ?>
 $(document).ready(function(){
 	$('#table-productImage').dataGrid({
 	    url : 'image/list',
@@ -38,4 +24,4 @@ $(document).ready(function(){
 	    //rowClick : admin.product.rowClick
 	});
 });
-<?php $this->headScript()->captureEnd(); ?>
+<?php $this->inlineScript()->captureEnd(); ?>

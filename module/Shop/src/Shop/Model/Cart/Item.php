@@ -1,8 +1,8 @@
 <?php
 namespace Shop\Model\Cart;
 
-use Application\Model\ModelInterface;
-use Application\Model\Model;
+use UthandoCommon\Model\ModelInterface;
+use UthandoCommon\Model\Model;
 use Shop\Model\Product\MetaData as ProductMetaData;
 
 class Item implements ModelInterface

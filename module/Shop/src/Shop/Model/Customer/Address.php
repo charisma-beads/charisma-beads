@@ -1,8 +1,10 @@
 <?php
 namespace Shop\Model\Customer;
 
-use Application\Model\Model;
-use Application\Model\ModelInterface;
+use Shop\Model\Country;
+use Shop\Model\Country\Province;
+use UthandoCommon\Model\Model;
+use UthandoCommon\Model\ModelInterface;
 use DateTime;
 
 
@@ -24,6 +26,11 @@ class Address implements ModelInterface
      * @var int
      */
     protected $countryId;
+    
+    /**
+     * @var int
+     */
+    protected $provinceId;
     
     /**
      * @var string
@@ -61,6 +68,11 @@ class Address implements ModelInterface
     protected $phone;
     
     /**
+     * @var string
+     */
+    protected $email;
+    
+    /**
      * @var DateTime
      */
     protected $dateCreated;
@@ -74,6 +86,11 @@ class Address implements ModelInterface
      * @var \Shop\Model\Country
      */
     protected $country;
+    
+    /**
+     * @var \Shop\Model\Country\Province
+     */
+    protected $province;
     
 	/**
 	 * @return number $customerAddressId
@@ -124,6 +141,24 @@ class Address implements ModelInterface
 	public function setCountryId($countryId)
 	{
 		$this->countryId = $countryId;
+		return $this;
+	}
+
+	/**
+	 * @return number
+	 */
+	public function getProvinceId()
+	{
+		return $this->provinceId;
+	}
+
+	/**
+	 * @param int $provinceId
+	 * @return \Shop\Model\Customer\Address
+	 */
+	public function setProvinceId($provinceId)
+	{
+		$this->provinceId = $provinceId;
 		return $this;
 	}
 
@@ -247,6 +282,23 @@ class Address implements ModelInterface
 	}
 
 	/**
+	 * @return string $email
+	 */
+	public function getEmail()
+	{
+		return $this->email;
+	}
+
+	/**
+	 * @param string $email
+	 */
+	public function setEmail($email)
+	{
+		$this->email = $email;
+		return $this;
+	}
+
+	/**
 	 * @return DateTime $dateCreated
 	 */
 	public function getDateCreated()
@@ -292,9 +344,28 @@ class Address implements ModelInterface
 	 * @param \Shop\Model\Country $country
 	 * @return \Shop\Model\Customer\Address
 	 */
-	public function setCountry($country)
+	public function setCountry(Country $country)
 	{
 	    $this->country = $country;
 	    return $this;
 	}
+	
+	/**
+	 * @return \Shop\Model\Country\Province
+	 */
+	public function getProvince()
+	{
+		return $this->province;
+	}
+
+	/**
+	 * @param Province $province
+	 * @return \Shop\Model\Customer\Address
+	 */
+	public function setProvince(Province $province)
+	{
+		$this->province = $province;
+		return $this;
+	}
+
 }

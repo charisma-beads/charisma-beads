@@ -1,14 +1,12 @@
 <?php $this->headTitle('View Order') ?>
 
 <div class="row">
-    <div class="row">
-        <h4 class="span9">
-            <a href="<?=$this->url('shop/order');?>">Back to orders</a>
-            <a href="<?=$this->url('shop/order/print', [
-                'orderId' => $this->order->getOrderId(),
-            ]);?>" class="siteTip pull-right new-window" title="click to print order"><i class="glyphicons print">&nbsp;</i></a>
-        </h4>
-    </div>
+    <h4 class="col-sm-12">
+        <a href="<?=$this->url('shop/order');?>">Back to orders</a>
+        <a href="<?=$this->url('shop/order/print', [
+            'orderId' => $this->order->getOrderId(),
+        ]);?>" class="siteTip pull-right new-window" title="click to print order"><i class="glyphicon glyphicon-print">&nbsp;</i></a>
+    </h4>
 
     <?=$this->partial('shop/order/details');?>
 </div>

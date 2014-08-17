@@ -1,7 +1,7 @@
 <?php
 namespace Shop\Mapper\Product;
 
-use Application\Mapper\AbstractMapper;
+use UthandoCommon\Mapper\AbstractMapper;
 use Zend\Db\Sql\Select;
 
 class Image extends AbstractMapper

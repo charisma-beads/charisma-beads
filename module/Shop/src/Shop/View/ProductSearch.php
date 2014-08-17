@@ -1,15 +1,16 @@
 <?php
 namespace Shop\View;
 
-use Application\View\AbstractViewHelper;
+use UthandoCommon\View\AbstractViewHelper;
 
 class ProductSearch extends AbstractViewHelper
 {
     public function __invoke()
     {
     	$sl = $this->getServiceLocator()->getServiceLocator();
-    	$form = $sl->get('Shop\Form\CatalogSearch');
-    	$inputFilter = $sl->get('Shop\InputFilter\CatalogSearch');
+    	$formManager = $sl->get('FormElementManager');
+    	$form = $formManager->get('Shop\Form\Catalog\Search');
+    	$inputFilter = $sl->get('Shop\InputFilter\Catalog\Search');
     	$form->setInputFilter($inputFilter);
         return $form;
     }

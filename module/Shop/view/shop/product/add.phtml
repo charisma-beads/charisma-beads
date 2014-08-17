@@ -1,7 +1,6 @@
 <?php $this->headTitle('Add Product') ?>
-<?=$this->ztbFlashMessenger()->render(); ?>
 
-<?=$this->partial('shop/product/product-form', array(
+<?=$this->partial('shop/product/product-form', [
 	'form' => $this->form,
 	'formAction' => 'add',
-)); ?>
+]); ?>

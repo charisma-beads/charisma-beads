@@ -1,7 +1,7 @@
 <?php
 namespace Shop\Service;
 
-use Application\Service\AbstractService;
+use UthandoCommon\Service\AbstractService;
 use Shop\Model\Customer as CustomerModel;
 use Shop\Model\Order\MetaData;
 
@@ -30,6 +30,17 @@ class Order extends AbstractService
      * @var \Shop\Service\Cart
      */
     protected $cartService;
+    
+    public function search(array $post)
+    {
+    	$orders = parent::search($post);
+    	 
+    	foreach ($orders as $order) {
+    		$this->populate($order, true);
+    	}
+    	 
+    	return $orders;
+    }
     
     public function processOrderFromCart(CustomerModel $customer, array $postData)
     {
@@ -107,7 +118,7 @@ class Order extends AbstractService
         $order = $this->getMapper()->getOrderByUserId($id, $userId);
         
         if ($order) {
-            $this->populate($order, array('orderStatus', 'orderLines'));
+            $this->populate($order, ['orderStatus', 'orderLines']);
         }
         
         return $order;
@@ -119,7 +130,7 @@ class Order extends AbstractService
         $orders = $this->getMapper()->getOrdersByUserId($userId);
         
         foreach ($orders as $order) {
-            $order = $this->populate($order, array('orderStatus'));
+            $order = $this->populate($order, ['orderStatus']);
         }
         
         return $orders;
@@ -149,6 +160,8 @@ class Order extends AbstractService
             $id = $model->getOrderId();
             $model->setOrderLines($this->getOrderLineService()->getOrderLinesByOrderId($id));
         }
+        
+        return $model;
     }
     
     public function emailCustomerOrder()
@@ -159,6 +172,28 @@ class Order extends AbstractService
     public function emailMerchantOrder()
     {
         
+    }
+    
+    public function cancelOrder($id, $userId)
+    {
+    	$id = (int) $id;
+    	$userId = (int) $userId;
+    	
+    	/* @var $order \Shop\Model\Order */
+    	$order = $this->getMapper()->getOrderByUserId($id, $userId);
+    
+    	if ($order) {
+    		$orderStatus = $this->getOrderStatusService()
+                ->getStatusByName('Cancelled');
+    		$order->setOrderStatus($orderStatus->getOrderStatusId());
+    		$result = $this->save($order);
+    		
+    		if ($result) {
+    		    return true;
+    		}
+    	}
+    
+    	return false;
     }
     
     /**
@@ -181,7 +216,7 @@ class Order extends AbstractService
     {
         if (!$this->orderLineService) {
             $sl = $this->getServiceLocator();
-            $this->orderLineService = $sl->get('Shop\Service\OrderLine');
+            $this->orderLineService = $sl->get('Shop\Service\Order\Line');
         }
     
         return $this->orderLineService;
@@ -202,7 +237,7 @@ class Order extends AbstractService
     {
         if (!$this->orderStatusService) {
             $sl = $this->getServiceLocator();
-            $this->orderStatusService = $sl->get('Shop\Service\OrderStatus');
+            $this->orderStatusService = $sl->get('Shop\Service\Order\Status');
         }
     
         return $this->orderStatusService;

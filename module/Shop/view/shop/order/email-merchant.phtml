@@ -1,0 +1,26 @@
+
+<?php $this->bootstrap()->enable(); ?>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <?=$this->headTitle('Charisma Beads Ltd - Order Details # ' . $this->order->getOrderNumber()) ?>
+
+        <?=$this->headMeta()
+            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+        	->appendName('X-UA-Compatible', 'IE=edge')
+            ->appendName('rating', 'general'); ?>
+
+        <?=$this->headLink()
+            ->appendStylesheet($this->basePath('/themes/charisma/assets/css/print.css'), 'screen,print') ?>
+    </head>
+    <body>
+        <div id="main-content" class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <?=$this->partial('shop/order/details');?>
+                </div>
+            </div>
+        </div>
+        <script>window.print();</script>
+    </body>
+</html>

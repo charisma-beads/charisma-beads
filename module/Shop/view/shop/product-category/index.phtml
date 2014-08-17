@@ -1,31 +1,19 @@
-<div class="tab-wrap">
-<!-- 
-	<ul id="categoryTabs" class="nav nav-tabs">
-	    <li><a href="#admin-user">Categories</a></li>
-	</ul>
-	
-	<div id="categoryTabContent" class="tab-content">
-	    <div class="tab-pane" id="admin-category">
-	    -->
-	    	<div class="row-fluid">
-		    	<?=$this->partial('partial/search', array(
-		    		'name'			=> 'productCategory',
-		    		'searchInputs'	=> array(
-		    			'Category' => 'category',
-		    		),
-		    	));?>
-	    	</div>
-	    	
-	    	<div id="table-productCategory" class="row-fluid table-wrap">
-		    	<?=$this->partial('shop/product-category/list', array(
-		    	    'models' => $this->models
-		    	)); ?>
-	    	</div>
-	    <!-- </div>
-	</div> -->
+
+<?=$this->partial('uthando-admin/partial/search', [
+	'name'			=> 'productCategory',
+	'searchInputs'	=> [
+		'Category' => 'category',
+	],
+]);?>
+
+<div id="table-productCategory">
+	<?=$this->partial('shop/product-category/list', [
+	    'models' => $this->models
+	]); ?>
 </div>
 
-<?php $this->headScript()->captureStart(); ?>
+
+<?php $this->inlineScript()->captureStart(); ?>
 $(document).ready(function(){
 	$('#table-productCategory').dataGrid({
 	    url : 'category/list',
@@ -36,4 +24,4 @@ $(document).ready(function(){
 	    //rowClick : admin.product.rowClick
 	});
 });
-<?php $this->headScript()->captureEnd(); ?>
+<?php $this->inlineScript()->captureEnd(); ?>

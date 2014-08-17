@@ -57,7 +57,7 @@ class CartCookieOptions extends AbstractOptions
     }
 
 	/**
-	 * @param unknown $domain
+	 * @param string $domain
 	 * @return \Shop\Options\CartCookieOptions
 	 */
     public function setDomain($domain)

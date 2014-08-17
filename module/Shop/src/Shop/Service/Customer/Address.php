@@ -1,18 +1,28 @@
 <?php
 namespace Shop\Service\Customer;
 
-use Application\Service\AbstractService;
+use UthandoCommon\Service\AbstractService;
 
 class Address extends AbstractService
 {
-    protected $mapperClass = 'Shop\Mapper\CustomerAddress';
-    protected $form = 'Shop\Form\CustomerAddress';
-    protected $inputFilter = 'Shop\InputFilter\CustomerAddress';
+    protected $mapperClass = 'Shop\Mapper\Customer\Address';
+    protected $form = 'Shop\Form\Customer\Address';
+    protected $inputFilter = 'Shop\InputFilter\Customer\Address';
     
     /**
      * @var \Shop\Service\Country
      */
     protected $countryService;
+    
+    /**
+     * @var \Shop\Service\Country\Province
+     */
+    protected $provinceService;
+    
+    /**
+     * @var \Shop\Service\Customer
+     */
+    protected $customerService;
     
     public function getFullAddressById($id)
     {
@@ -23,6 +33,30 @@ class Address extends AbstractService
         
         return $address;
         
+    }
+    
+    public function getAllAddressesByCustomerId($customerId)
+    {
+        $customerId = (int) $customerId;
+        
+        $addresses = $this->getMapper()->getAllByCustomerId($customerId);
+        
+        foreach ($addresses as $address) {
+        	$address = $this->populate($address, true);
+        }
+        
+        return $addresses;
+    }
+    
+    public function getAllUserAddresses($userId)
+    {
+        $userId = (int) $userId;
+        
+        $customerId = $this->getCustomerService()
+            ->getCustomerByUserId($userId)
+            ->getCustomerId();
+        
+        return $this->getAllAddressesByCustomerId($customerId);
     }
     
     public function getAddressByUserId($userId, $billingOrDelivery)
@@ -51,6 +85,13 @@ class Address extends AbstractService
                     ->getById($model->getCountryId())
             );
         }
+        
+        if ($allChildren || in_array('country', $children)) {
+        	$model->setProvince(
+        			$this->getProvinceService()
+                        ->getById($model->getProvinceId())
+        	);
+        }
     }
     
     /**
@@ -64,5 +105,31 @@ class Address extends AbstractService
         }
     
         return $this->countryService;
+    }
+    
+    /**
+     * @return \Shop\Service\Country\Province
+     */
+    public function getProvinceService()
+    {
+    	if (!$this->provinceService) {
+    		$sl = $this->getServiceLocator();
+    		$this->provinceService = $sl->get('Shop\Service\Country\Province');
+    	}
+    
+    	return $this->provinceService;
+    }
+    
+    /**
+     * @return \Shop\Service\Customer
+     */
+    public function getCustomerService()
+    {
+    	if (!$this->customerService) {
+    		$sl = $this->getServiceLocator();
+    		$this->customerService = $sl->get('Shop\Service\Customer');
+    	}
+    
+    	return $this->customerService;
     }
 }

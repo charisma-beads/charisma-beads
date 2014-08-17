@@ -1,32 +1,19 @@
 
-<div class="tab-wrap">
-<!-- 
-	<ul id="productGroupPriceTabs" class="nav nav-tabs">
-	    <li><a href="#admin-productGroupPrice">Group Prices</a></li>
-	</ul>
-	
-	<div id="productGroupPriceTabContent" class="tab-content">
-	    <div class="tab-pane" id="admin-productGroupPrice">
-	    -->
-	    	<div class="row-fluid">
-		    	<?=$this->partial('partial/search', array(
-		    		'name'			=> 'productGroupPrice',
-		    		'searchInputs'	=> array(
-		    			'Group'		=> 'group',
-		    		),
-		    	));?>
-	    	</div>
+<?=$this->partial('uthando-admin/partial/search', [
+	'name'			=> 'productGroupPrice',
+	'searchInputs'	=> [
+		'Group'		=> 'group',
+	],
+]);?>
+
 	    	
-	    	<div id="table-productGroupPrice" class="row-fluid table-wrap">
-		    	<?=$this->partial('shop/product-group-price/list', array(
-		    	    'models' => $this->models
-		    	)); ?>
-	    	</div>
-	    <!-- </div>
-	</div> -->
+<div id="table-productGroupPrice">
+	<?=$this->partial('shop/product-group-price/list', [
+	    'models' => $this->models
+	]); ?>
 </div>
 
-<?php $this->headScript()->captureStart(); ?>
+<?php $this->inlineScript()->captureStart(); ?>
 $(document).ready(function(){
 	$('#table-productGroupPrice').dataGrid({
 	    url : 'group-price/list',
@@ -36,4 +23,4 @@ $(document).ready(function(){
 	    columnSort: true
 	});
 });
-<?php $this->headScript()->captureEnd(); ?>
+<?php $this->inlineScript()->captureEnd(); ?>

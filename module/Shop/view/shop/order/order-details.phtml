@@ -1,20 +1,20 @@
 
-<div class="row">
-    <div class="span9 panel panel-default">
+<div class="col-md-12">
+    <div class="panel panel-default order-details">
         <div class="panel-heading">
             <h4 class="panel-title">
                 Order Details
             </h4>
         </div>
         <div class="row">
-            <div class="span4">
+            <div class="col-md-6">
                 <div class="panel-body">
                     Order ID: <span>#<?=$this->order->getOrderNumber();?></span><br>
                     Date Ordered: <span><?=$this->formatDate($this->order->getOrderDate())->setFormat('d/m/Y');?></span>
                 </div>
             </div>
-            <div class="span1">&nbsp;</div>
-            <div class="span4">
+            
+            <div class="col-md-6">
                 <div class="panel-body">
                     Status: <span><?=$this->escapeHtml($this->order->getOrderStatus()->getOrderStatus());?></span><br>
                     Payment Method: <span><?=$this->escapeHtml($this->order->getMetaData()->getPaymentMethod());?></span><br>
@@ -24,8 +24,9 @@
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="span4 panel panel-default">
+
+<div class="col-md-6">
+    <div class="panel panel-default">
         <div class="panel-heading">
             <h4 class="panel-title">
                 Billing Address
@@ -33,17 +34,20 @@
         </div>
         <div class="panel-body">
             <address>
-                <?=$this->formatAddress($this->order)
+                <?=$this->customerAddress($this->order)
+                    ->includeName()
+                    ->includeEmail()
                     ->formatAddress(
                         $this->order->getMetadata()
-                            ->getBillingAddress(),
-                            true
+                            ->getBillingAddress()
                 );?>
             </address>
         </div>
     </div>
-    <div class="span1">&nbsp;</div>
-    <div class="span4 panel panel-default">
+</div>
+
+<div class="col-md-6">
+    <div class="panel panel-default">
         <div class="panel-heading">
             <h4 class="panel-title">
                 Delivery Address
@@ -51,7 +55,8 @@
         </div>
         <div class="panel-body">
             <address>
-                <?=$this->formatAddress($this->order)
+                <?=$this->customerAddress($this->order)
+                    ->includeName()
                     ->formatAddress(
                         $this->order->getMetadata()
                             ->getDeliveryAddress()
@@ -60,10 +65,11 @@
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="span9 panel panel-default">
+
+<div class="col-md-12">
+    <div class="panel panel-default">
         <table class="table table-bordered table-striped">
-            <tr>
+            <tr class="first-row">
         		<th>Product</th>
         		<th>Description</th>
         		<th>Price</th>
@@ -78,24 +84,25 @@
         		<td><?=$item->getMetadata()->getCategory();?> / <?=$item->getMetadata()->getDescription();?></td>
         		<td><?=$this->priceFormat($item->getPrice());?></td>
         		<td><?=$item->getQty();?></td>
-        		<td><?=$item->getPrice();?></td>
+        		<td><?=$this->priceFormat($item->getPrice());?></td>
         	</tr>
         	<?php endforeach; ?>
         	<tr>
                 <td colspan="2">&nbsp;</td>
         	    <th colspan="2"><p class="text-right">Postage:</p></th>
-        	    <td><?=$this->order->getShipping();?></td>
+        	    <td><?=$this->priceFormat($this->order->getShipping());?></td>
         	</tr>
         	<tr>
                 <td colspan="2">&nbsp;</td>
         	    <th colspan="2"><p class="text-right">Total:</p></th>
-        	    <td><?=$this->order->getTotal();?></td>
+        	    <td><?=$this->priceFormat($this->order->getTotal());?></td>
         	</tr>
         </table>
     </div>
 </div>
-<div class="row">
-    <div class="span9 panel panel-default">
+
+<div class="col-md-12">
+    <div class="panel panel-default">
         <div class="panel-heading">
             <h4 class="panel-title">Requirements</h4>
         </div>
@@ -104,4 +111,3 @@
         </div>
     </div>
 </div>
-

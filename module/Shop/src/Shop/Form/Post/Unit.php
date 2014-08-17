@@ -7,24 +7,24 @@ class Unit extends Form
 {
     public function init()
     {
-        $this->add(array(
+        $this->add([
             'name'	=> 'postUnitId',
             'type'	=> 'hidden',
-        ));
+        ]);
         
-        $this->add(array(
+        $this->add([
             'name'			=> 'postUnit',
             'type'			=> 'number',
-            'attributes'	=> array(
+            'attributes'	=> [
                 'placeholder'	=> 'Unit:',
                 'autofocus'		=> true,
                 'step'			=> '0.01'
-            ),
-            'options'		=> array(
+            ],
+            'options'		=> [
                 'label'			=> 'Cost:',
                 'required'		=> true,
                 'help-inline'	=> 'This should be weight in grams.',
-            ),
-        ));
+            ],
+        ]);
     }
 }

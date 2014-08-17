@@ -1,32 +1,20 @@
 
-<div class="tab-wrap">
-<!-- 
-	<ul id="taxRateTabs" class="nav nav-tabs">
-	    <li><a href="#admin-taxRate">Tax Rates</a></li>
-	</ul>
-	
-	<div id="taxRateTabContent" class="tab-content">
-	    <div class="tab-pane" id="admin-taxRate">
-	    -->
-	    	<div class="row-fluid">
-		    	<?=$this->partial('partial/search', array(
-		    		'name'			=> 'taxRate',
-		    		'searchInputs'	=> array(
-		    			'Tax Rate' => 'taxRate',
-		    		),
-		    	));?>
-	    	</div>
-	    	
-	    	<div id="table-taxRate" class="row-fluid table-wrap">
-		    	<?=$this->partial('shop/tax-rate/list', array(
-		    	    'models' => $this->models
-		    	)); ?>
-	    	</div>
-	    <!-- </div>
-	</div> -->
+
+<?=$this->partial('uthando-admin/partial/search', [
+	'name'			=> 'taxRate',
+	'searchInputs'	=> [
+		'Tax Rate' => 'taxRate',
+	],
+]);?>
+
+
+<div id="table-taxRate">
+	<?=$this->partial('shop/tax-rate/list', [
+	    'models' => $this->models
+	]); ?>
 </div>
 
-<?php $this->headScript()->captureStart(); ?>
+<?php $this->inlineScript()->captureStart(); ?>
 $(document).ready(function(){
 	$('#table-taxRate').dataGrid({
 	    url : 'rate/list',
@@ -37,7 +25,7 @@ $(document).ready(function(){
 	    //rowClick : admin.dataTable.rowClick
 	});
 });
-<?php $this->headScript()->captureEnd(); ?>
+<?php $this->inlineScript()->captureEnd(); ?>
 
 
 

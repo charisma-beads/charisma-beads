@@ -3,10 +3,10 @@
 <h2>Product Search Results</h2>
 
 <?php if (count($this->products) > 0):?>
-<ul class="thumbnails">
+<div class="row">
 <?php /* @var $row \Shop\Model\Product */ ?>
 <?php foreach ($this->products as $row): ?>
-    <li class="span3">
+    <div class="col-md-4">
     	<div class="thumbnail text-center product-item-box">
     		<img data-src="holder.js/200x100/auto" alt="<?=$this->escapehtml($row->getName()); ?>">
     		<h5><?=$this->escapehtml($row->getName());?> <?=$this->escapehtml($row->getProductSize()->getSize()); ?></h5>
@@ -14,31 +14,33 @@
     		<p><b><?=$this->productPrice($row); ?></b> for <?=$this->escapehtml(number_format($row->getPostUnit()->getPostUnit())); ?>g</p>
     		<?php $form = $this->cart()->addForm($row); ?>
 		    <?=$this->form()->openTag($form); ?>
-			    <div class="input-append">
-			    <?=$this->formInput($form->get('qty')); ?>
-			    <button type="submit" name="buy-item" class="btn" value="">
-                    add to<i class="icon-shopping-cart"></i>
-                </button>
+			    <div class="input-group">
+    			    <?=$this->formInput($form->get('qty')->setAttribute('class', 'form-control')); ?>
+    			    <span class="input-group-btn">
+        			    <button type="submit" name="buy-item" class="btn btn-default" value="">
+                            add to <i class="glyphicon glyphicon-shopping-cart"></i>
+                        </button>
+                    </span>
 			    </div>
 			    <?=$this->formHidden($form->get('productId')); ?>
 			    <?=$this->formHidden($form->get('returnTo')); ?>
 		    <?=$this->form()->closeTag(); ?>
     	</div>
-    </li>
+    </div>
 <?php endforeach; ?>
-</ul>
+</div>
 <?=$this->paginationControl(
     $this->products,
     'Elastic',
-    'paginate',
-	array('route' => 'shop/search/page')
+    'application/partial/paginate',
+	['route' => 'shop/search/page']
 ); ?>
 <?php else: ?>
 <h4>No Products returned from your search.</h4>
 <?php endif; ?>
 <div class="loading ajax-loading"><!-- Place at bottom of page --></div>
 
-<?php $this->headScript()->captureStart(); ?>
+<?php $this->inlineScript()->captureStart(); ?>
 $(document).ready(function(){
     $('#content').searchForm({
         url : 'search',
@@ -46,5 +48,5 @@ $(document).ready(function(){
         paging : 'links'
     });
 });
-<?php $this->headScript()->captureEnd(); ?>
+<?php $this->inlineScript()->captureEnd(); ?>
 

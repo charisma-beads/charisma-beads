@@ -1,13 +1,13 @@
 <?php
 namespace Shop\Service\Order;
 
-use Application\Service\AbstractService;
+use UthandoCommon\Service\AbstractService;
 
 class Line extends AbstractService
 {
-    protected $mapperClass = 'Shop\Mapper\OrderLine';
-    protected $form = 'Shop\Form\OrderLine';
-    protected $inputFilter = 'Shop\InputFilter\OrderLine';
+    protected $mapperClass = 'Shop\Mapper\Order\Line';
+    protected $form = 'Shop\Form\Order\Line';
+    protected $inputFilter = 'Shop\InputFilter\Order\Line';
     
     public function getOrderLinesByOrderId($orderId)
     {

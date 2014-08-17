@@ -7,10 +7,9 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 
 class Shipping implements FactoryInterface
 {
-
 	public function createService(ServiceLocatorInterface $serviceLocator)
 	{
-	    /* @var $shopOptions \Shop\Options\ShopOptions */
+	    /* @var $shopOptions \Shop\Options\CharismaShopOptions */
 	    $shopOptions = $serviceLocator->get('Shop\Options\Shop');
 	    $taxService = $serviceLocator->get('Shop\Service\Tax');
 	    $countryService = $serviceLocator->get('Shop\Service\Country');

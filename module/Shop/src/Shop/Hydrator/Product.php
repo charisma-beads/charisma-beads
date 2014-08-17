@@ -1,12 +1,11 @@
 <?php
 namespace Shop\Hydrator;
 
-use Application\Hydrator\AbstractHydrator;
-use Application\Hydrator\Strategy\DateTime as DateTimeStrategy;
-use Application\Hydrator\Strategy\TrueFalse;
-use Application\Hydrator\Strategy\Null as NullStrategy;
+use UthandoCommon\Hydrator\AbstractHydrator;
+use UthandoCommon\Hydrator\Strategy\DateTime as DateTimeStrategy;
+use UthandoCommon\Hydrator\Strategy\TrueFalse;
+use UthandoCommon\Hydrator\Strategy\Null as NullStrategy;
 use Shop\Hydrator\Strategy\Percent;
-
 
 class Product extends AbstractHydrator
 {   
@@ -19,12 +18,12 @@ class Product extends AbstractHydrator
 		
 		$this->addStrategy('productGroupId', new NullStrategy());
 		$this->addStrategy('taxable', $trueFalse);
-		$this->addStrategy('discountPercent', new Percent());
+		$this->addStrategy('percent', new Percent());
 		$this->addStrategy('addPostage', $trueFalse);
 		$this->addStrategy('enabled', $trueFalse);
 		$this->addStrategy('discontinued', $trueFalse);
 		$this->addStrategy('vatInc', $trueFalse);
-		$this->addStrategy('dateCreated', $dateTime);
+		$this->addStrategy('dateCreated',$dateTime);
 		$this->addStrategy('dateModified', $dateTime);
 	}
 	

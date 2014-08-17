@@ -1,8 +1,8 @@
 <?php
 namespace Shop\Model\Customer;
 
-use Application\Model\Model;
-use Application\Model\ModelInterface;
+use UthandoCommon\Model\Model;
+use UthandoCommon\Model\ModelInterface;
 
 class Prefix implements ModelInterface
 {

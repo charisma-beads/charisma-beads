@@ -5,4 +5,4 @@ cd $DIR
 cd ../
 
 php composer.phar self-update
-php composer.phar --prefer-dist update
+php composer.phar --no-dev update

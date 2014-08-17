@@ -7,39 +7,39 @@ class GroupPrice extends Form
 {	
     public function init()
     {
-    	$this->add(array(
+    	$this->add([
     		'name'	=> 'productGroupId',
     		'type'	=> 'hidden',
-    	));
+    	]);
     	
-    	$this->add(array(
+    	$this->add([
     		'name'			=> 'group',
     		'type'			=> 'text',
-    		'attributes'	=> array(
+    		'attributes'	=> [
     			'placeholder'		=> 'Group:',
     			'autofocus'			=> true,
     			'autocapitalize'	=> 'on',
-    		),
-    		'options'		=> array(
+    		],
+    		'options'		=> [
     			'label'      => 'Group:',
     		    'required'   => true,
-    		)
-    	));
+    		],
+    	]);
     	
-    	$this->add(array(
+    	$this->add([
     		'name'			=> 'price',
     		'type'			=> 'number',
-    		'attributes'	=> array(
+    		'attributes'	=> [
     			'placehoder'		=> 'Price:',
     			'autofocus'			=> true,
     		    'min'               => '0.00',
     			'step'			    => '0.01'
-    		),
-    		'options'		=> array(
+    		],
+    		'options'		=> [
     			'label'			=> 'Price:',
     			'required'		=> true,
         		'help-inline'	=> 'Do not include the currency sign or commas.',
-    		),
-    	));
+    		],
+    	]);
     }
 }

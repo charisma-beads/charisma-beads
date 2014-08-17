@@ -1,29 +1,16 @@
 
-<div class="tab-wrap">
-<!-- 
-	<ul id="countryProvinceTabs" class="nav nav-tabs">
-	    <li><a href="#admin-postCost">Post Costs</a></li>
-	</ul>
-	
-	<div id="countryProvinceTabContent" class="tab-content">
-	    <div class="tab-pane" id="admin-countryProvince">
-	    -->
-	    	<div class="row-fluid">
-		    	<?=$this->partial('partial/search', array(
-		    		'name'			=> 'countryProvince',
-		    		'searchInputs'	=> array(
-		    			'Province' => 'provinceName',
-		    		),
-		    	));?>
-	    	</div>
+
+<?=$this->partial('uthando-admin/partial/search', [
+	'name'			=> 'countryProvince',
+	'searchInputs'	=> [
+		'Province' => 'provinceName',
+	],
+]);?>
 	    	
-	    	<div id="table-countryProvince" class="row-fluid table-wrap">
-		    	<?=$this->partial('shop/country-province/list', array(
-		    	    'models' => $this->models
-		    	)); ?>
-	    	</div>
-	    <!-- </div>
-	</div> -->
+<div id="table-countryProvince" class="row-fluid table-wrap">
+	<?=$this->partial('shop/country-province/list', [
+	    'models' => $this->models
+	]); ?>
 </div>
 
 <?php $this->headScript()->captureStart(); ?>

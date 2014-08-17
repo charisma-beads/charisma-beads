@@ -3,76 +3,49 @@
 namespace Shop\Form\Tax;
 
 use Zend\Form\Form;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
 
-class Code extends Form implements ServiceLocatorAwareInterface
+class Code extends Form
 {	
-    use ServiceLocatorAwareTrait;
-    
 	public function init()
 	{
-		$this->add(array(
+		$this->add([
 			'name'	=> 'taxCodeId',
 			'type'	=> 'hidden',
-		));
+		]);
 		
-		$this->add(array(
+		$this->add([
 			'name'			=> 'taxCode',
 			'type'			=> 'text',
-			'attributes'	=> array(
+			'attributes'	=> [
 				'placeholder'		=> 'Tax Code:',
 				'autofocus'			=> true,
 				'autocapitalize'	=> 'on',
-			),
-			'options'		=> array(
+			],
+			'options'		=> [
 				'label' => 'Tax Code:',
-			),
-		));
+			],
+		]);
 		
-		$this->add(array(
+		$this->add([
 			'name'			=> 'description',
 			'type'			=> 'text',
-			'attributes'	=> array(
+			'attributes'	=> [
 				'placeholder'		=> 'Description:',
 				'autofocus'			=> true,
 				'autocapitalise'	=> 'on',
-			),
-			'options'		=> array(
+			],
+			'options'		=> [
 				'label'	=> 'Description:',
-			),
-		));
+			],
+		]);
 		
-		$this->add(array(
+		$this->add([
 			'name'		=> 'taxRateId',
-			'type'		=> 'select',
-			'options'	=> array(
+			'type'		=> 'TaxRateList',
+			'options'	=> [
 				'label'			=> 'Tax Rate:',
 				'required'		=> true,
-				'empty_option'	=> '---Please select a tax rate---',
-				'value_options'	=> $this->getTaxRateList(),
-			),
-		));
-	}
-	
-	public function getTaxRateList()
-	{
-		$taxRates = $this->getTaxRateService()->fetchAll();
-		$taxRateOptions = array();
-		
-		/* @var $taxRate \Shop\Model\Tax\Rate */
-		foreach ($taxRates as $taxRate) {
-			$taxRateOptions[$taxRate->getTaxRateId()] = $taxRate->getTaxRate();
-		}
-		
-		return $taxRateOptions;
-	}
-	
-	/**
-	 * @return \Shop\Service\Tax\Rate
-	 */
-	public function getTaxRateService()
-	{
-		return $this->getServiceLocator()->get('Shop\Service\TaxRate');
+			],
+		]);
 	}
 }

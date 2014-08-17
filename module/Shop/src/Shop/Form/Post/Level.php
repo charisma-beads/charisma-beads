@@ -8,24 +8,24 @@ class Level extends Form
 {
 	public function init()
 	{
-		$this->add(array(
+		$this->add([
 			'name'	=> 'postLevelId',
 			'type'	=> 'hidden',
-		));
+		]);
 		
-		$this->add(array(
+		$this->add([
 			'name'			=> 'postLevel',
 			'type'			=> 'number',
-			'attributes'	=> array(
+			'attributes'	=> [
         		'placeholder'	=> 'Level Price:',
         		'autofocus'		=> true,
         		'step'			=> '0.01'
-        	),
-        	'options'		=> array(
+        	],
+        	'options'		=> [
         		'label'			=> 'Post Level Price:',
         		'required'		=> true,
         		'help-inline'	=> 'Do not include the currency sign or commas.',
-        	),
-		));
+        	],
+		]);
 	}
 }

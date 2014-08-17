@@ -1,12 +1,11 @@
 <?php
 namespace Shop\Hydrator\Customer;
 
-use Application\Hydrator\AbstractHydrator;
+use UthandoCommon\Hydrator\AbstractHydrator;
 
 class Prefix extends AbstractHydrator
 {
 	/**
-	 *
 	 * @param \Shop\Model\Customer\Prefix $object        	
 	 * @return array $data
 	 */

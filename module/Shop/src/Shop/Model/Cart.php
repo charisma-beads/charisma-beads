@@ -6,13 +6,13 @@ use Countable;
 use DateTime;
 use Iterator;
 use SeekableIterator;
-use Application\Model\Collection;
-use Application\Model\Model;
-use Application\Model\ModelInterface;
+use UthandoCommon\Model\Collection;
+use UthandoCommon\Model\Model;
+use UthandoCommon\Model\ModelInterface;
 
-class Cart implements Iterator, Countable, ArrayAccess, SeekableIterator, ModelInterface
+class Cart extends Collection implements Iterator, Countable, ArrayAccess, SeekableIterator, ModelInterface
 {
-    use Collection, Model;
+    use Model;
     
     /**
      * @var int

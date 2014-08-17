@@ -1,7 +1,7 @@
 <?php
 namespace Shop\View;
 
-use Application\View\AbstractViewHelper;
+use UthandoCommon\View\AbstractViewHelper;
 use Zend\I18n\View\Helper\CurrencyFormat;
 
 class PriceFormat extends AbstractViewHelper

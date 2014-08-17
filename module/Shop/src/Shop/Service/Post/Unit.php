@@ -1,11 +1,11 @@
 <?php
 namespace Shop\Service\Post;
 
-use Application\Service\AbstractService;
+use UthandoCommon\Service\AbstractService;
 
 class Unit extends AbstractService
 {
-    protected $mapperClass = 'Shop\Mapper\PostUnit';
-    protected $form = 'Shop\Form\PostUnit';
-    protected $inputFilter = 'Shop\InputFilter\PostUnit';
+    protected $mapperClass = 'Shop\Mapper\Post\Unit';
+    protected $form = 'Shop\Form\Post\Unit';
+    protected $inputFilter = 'Shop\InputFilter\Post\Unit';
 }

@@ -1,14 +1,13 @@
 <?php $this->headTitle('Edit Tax Code') ?>
-<?=$this->ztbFlashMessenger()->render(); ?>
 
-<?=$this->partial('partial/add-edit-form', array(
+<?=$this->partial('uthando-admin/partial/add-edit-form', [
 	'form' 			=> $this->form,
 	'formAction' 	=> 'edit',
 	'primaryKey'	=> $this->model->getTaxCodeId(),
 	'formName'		=> 'Tax Code',
 	'postRoute'		=> 'admin/shop/tax/code/edit',
 	'cancelRoute'	=> 'admin/shop/tax/code',
-	'formElements'	=> array(
+	'formElements'	=> [
 		'taxCode', 'description', 'taxRateId', 'taxCodeId',
-	),
-)); ?>
+	],
+]); ?>

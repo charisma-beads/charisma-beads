@@ -1,74 +1,260 @@
 <?php
 $form = $this->form;
-$routeArray = array('action' => $this->formAction);
+$routeArray = ['action' => $this->formAction];
 if (isset($this->productId)) $routeArray['id'] = $this->productId;
 ?>
-<div>
-	<form class="form form-horizontal" method="post" action="<?=$this->url('admin/shop/product/edit', $routeArray) ?>">
+<div class="row">
+	<form class="col-sm-12 form-horizontal" method="post" action="<?=$this->url('admin/shop/product/edit', $routeArray) ?>">
 		<fieldset>
 			<legend><?=ucwords($this->formAction); ?> Product Form:</legend>
-			<div class="row-fluid">
-				<div class="span6">
+			<div class="row">
+				<div class="col-sm-6">
 					<fieldset>
 						<legend>Details:</legend>
-						<div class="row-fluid">
-							<div class="span6">
-								<?=$this->ztbFormElement($form->get('enabled'));?>
+						<div class="row">
+							<div class="col-sm-6 text-right">
+                                <label>
+                                    <?=$form->get('enabled')->getLabel();?>
+								    <?=$this->formCheckbox($form->get('enabled'));?>
+							    </label>
 							</div>
-							<div class="span6">
-								<?=$this->ztbFormElement($form->get('discontinued'));?>
+							<div class="col-sm-6 text-right">
+								<label>
+                                    <?=$form->get('discontinued')->getLabel();?>
+								    <?=$this->formCheckbox($form->get('discontinued'));?>
+							    </label>
 							</div>
 						</div>
-						<?=$this->ztbFormElement($form->get('name'));?>
-						<?=$this->ztbFormElement($form->get('productCategoryId'));?>
-						<?=$this->ztbFormElement($form->get('ident'));?>
-						<?=$this->ztbFormElement($form->get('shortDescription'));?>
-						<?=$this->ztbFormElement($form->get('description'));?>
+						
+						<div class="clearfix">&nbsp;</div>
+						
+						<div class="form-group<?php if ($form->get('name')->getMessages()) echo ' has-error'; ?>">
+                            <label class="col-sm-4 control-label" for="name"><?=$form->get('name')->getLabel();?></label>
+                            <div class="col-sm-8">
+                                <?=$this->formText($form->get('name')->setAttribute('class', 'form-control')); ?>
+                                <span class="help-block">
+                                    <?=$this->formElementErrors($form->get('name'), [
+                                        'class' => 'list-unstyled'
+                                    ]); ?>
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group<?php if ($form->get('productCategoryId')->getMessages()) echo ' has-error'; ?>">
+                            <label class="col-sm-4 control-label" for="productCategoryId"><?=$form->get('productCategoryId')->getLabel();?></label>
+                            <div class="col-sm-8">
+                                <?=$this->formSelect($form->get('productCategoryId')->setAttribute('class', 'form-control')); ?>
+                                <span class="help-block">
+                                    <?=$this->formElementErrors($form->get('productCategoryId'), [
+                                        'class' => 'list-unstyled'
+                                    ]); ?>
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group<?php if ($form->get('ident')->getMessages()) echo ' has-error'; ?>">
+                            <label class="col-sm-4 control-label" for="ident"><?=$form->get('ident')->getLabel();?></label>
+                            <div class="col-sm-8">
+                                <?=$this->formText($form->get('ident')->setAttribute('class', 'form-control')); ?>
+                                <span class="help-block">
+                                    If you leave this blank the the product name and short description will be used for the ident.
+                                    <?=$this->formElementErrors($form->get('ident'), [
+                                        'class' => 'list-unstyled'
+                                    ]); ?>
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group<?php if ($form->get('shortDescription')->getMessages()) echo ' has-error'; ?>">
+                            <label class="col-sm-4 control-label" for="shortDescription"><?=$form->get('shortDescription')->getLabel();?></label>
+                            <div class="col-sm-8">
+                                <?=$this->formText($form->get('shortDescription')->setAttribute('class', 'form-control')); ?>
+                                <span class="help-block">
+                                    <?=$this->formElementErrors($form->get('shortDescription'), [
+                                        'class' => 'list-unstyled'
+                                    ]); ?>
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group<?php if ($form->get('description')->getMessages()) echo ' has-error'; ?>">
+                            <label class="col-sm-4 control-label" for="description"><?=$form->get('description')->getLabel();?></label>
+                            <div class="col-sm-8">
+                                <?=$this->formTextarea($form->get('description')->setAttribute('class', 'form-control')); ?>
+                                <span class="help-block">
+                                    <?=$this->formElementErrors($form->get('description'), [
+                                        'class' => 'list-unstyled'
+                                    ]); ?>
+                                </span>
+                            </div>
+                        </div>
 					</fieldset>
 				</div>
-				<div class="span6">
+				
+				<div class="col-sm-6">
 					<fieldset>
 						<legend>Price:</legend>
-						<?=$this->ztbFormElement($form->get('productGroupId'));?>
-						<?=$this->ztbFormElement($form->get('price'));?>
-						<?=$this->ztbFormElement($form->get('discountPercent'));?>
-						<?=$this->ztbFormElement($form->get('quantity'));?>
-						<?=$this->ztbFormElement($form->get('taxCodeId'));?>
-						<div class="row-fluid">
-							<div class="span4">
-								<?=$this->ztbFormElement($form->get('addPostage'));?>
+						<div class="form-group<?php if ($form->get('productGroupId')->getMessages()) echo ' has-error'; ?>">
+                            <label class="col-sm-4 control-label" for="productGroupId"><?=$form->get('productGroupId')->getLabel();?></label>
+                            <div class="col-sm-8">
+                                <?=$this->formSelect($form->get('productGroupId')->setAttribute('class', 'form-control')); ?>
+                                <span class="help-block">
+                                    <?=$this->formElementErrors($form->get('productGroupId'), [
+                                        'class' => 'list-unstyled'
+                                    ]); ?>
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group<?php if ($form->get('price')->getMessages()) echo ' has-error'; ?>">
+                            <label class="col-sm-4 control-label" for="price"><?=$form->get('price')->getLabel();?></label>
+                            <div class="col-sm-8">
+                                <?=$this->formNumber($form->get('price')->setAttribute('class', 'form-control')); ?>
+                                <span class="help-block">
+                                    Do not include the currency sign or commas.
+                                    <?=$this->formElementErrors($form->get('price'), [
+                                        'class' => 'list-unstyled'
+                                    ]); ?>
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group<?php if ($form->get('discountPercent')->getMessages()) echo ' has-error'; ?>">
+                            <label class="col-sm-4 control-label" for="discountPercent"><?=$form->get('discountPercent')->getLabel();?></label>
+                            <div class="col-sm-8">
+                                <?=$this->formNumber($form->get('discountPercent')->setAttribute('class', 'form-control')); ?>
+                                <span class="help-block">
+                                    Do not include the % sign.
+                                    <?=$this->formElementErrors($form->get('discountPercent'), [
+                                        'class' => 'list-unstyled'
+                                    ]); ?>
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group<?php if ($form->get('quantity')->getMessages()) echo ' has-error'; ?>">
+                            <label class="col-sm-4 control-label" for="quantity"><?=$form->get('quantity')->getLabel();?></label>
+                            <div class="col-sm-8">
+                                <?=$this->formNumber($form->get('quantity')->setAttribute('class', 'form-control')); ?>
+                                <span class="help-block">
+                                    <?=$this->formElementErrors($form->get('quantity'), [
+                                        'class' => 'list-unstyled'
+                                    ]); ?>
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group<?php if ($form->get('taxCodeId')->getMessages()) echo ' has-error'; ?>">
+                            <label class="col-sm-4 control-label" for="taxCodeId"><?=$form->get('taxCodeId')->getLabel();?></label>
+                            <div class="col-sm-8">
+                                <?=$this->formSelect($form->get('taxCodeId')->setAttribute('class', 'form-control')); ?>
+                                <span class="help-block">
+                                    <?=$this->formElementErrors($form->get('taxCodeId'), [
+                                        'class' => 'list-unstyled'
+                                    ]); ?>
+                                </span>
+                            </div>
+                        </div>
+						
+						<div class="row">
+							<div class="col-sm-4 text-right">
+                                <label>
+                                    <?=$form->get('addPostage')->getLabel();?>
+								    <?=$this->formCheckbox($form->get('addPostage'));?>
+							    </label>
 							</div>
-							<div class="span4">
-								<?=$this->ztbFormElement($form->get('taxable'));?>
+							<div class="col-sm-4 text-right">
+                                <label>
+                                    <?=$form->get('taxable')->getLabel();?>
+								    <?=$this->formCheckbox($form->get('taxable'));?>
+							    </label>
 							</div>
-							<div class="span4">
-								<?=$this->ztbFormElement($form->get('vatInc'));?>
+							<div class="col-sm-4 text-right">
+                                <label>
+                                    <?=$form->get('vatInc')->getLabel();?>
+								    <?=$this->formCheckbox($form->get('vatInc'));?>
+							    </label>
 							</div>
 						</div>
 					</fieldset>
 				</div>
-				<div class="span6">
+				
+				<div class="clearfix"></div>
+				
+				<div class="col-sm-6">
 					<fieldset>
 						<legend>Attributes:</legend>
-						<?=$this->ztbFormElement($form->get('productSizeId'));?>
-						<?=$this->ztbFormElement($form->get('postUnitId'));?>
+						<div class="form-group<?php if ($form->get('productSizeId')->getMessages()) echo ' has-error'; ?>">
+                            <label class="col-sm-4 control-label" for="productSizeId"><?=$form->get('productSizeId')->getLabel();?></label>
+                            <div class="col-sm-8">
+                                <?=$this->formSelect($form->get('productSizeId')->setAttribute('class', 'form-control')); ?>
+                                <span class="help-block">
+                                    <?=$this->formElementErrors($form->get('productSizeId'), [
+                                        'class' => 'list-unstyled'
+                                    ]); ?>
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group<?php if ($form->get('postUnitId')->getMessages()) echo ' has-error'; ?>">
+                            <label class="col-sm-4 control-label" for="postUnitId"><?=$form->get('postUnitId')->getLabel();?></label>
+                            <div class="col-sm-8">
+                                <?=$this->formSelect($form->get('postUnitId')->setAttribute('class', 'form-control')); ?>
+                                <span class="help-block">
+                                    <?=$this->formElementErrors($form->get('postUnitId'), [
+                                        'class' => 'list-unstyled'
+                                    ]); ?>
+                                </span>
+                            </div>
+                        </div>
 					</fieldset>
 				</div>
+				
+				<div class="col-sm-6">
+					<fieldset>
+						<legend>Product Options:</legend>
+						<div class="form-group<?php if ($form->get('productSizeId')->getMessages()) echo ' has-error'; ?>">
+                            <label class="col-sm-4 control-label" for="productSizeId"><?=$form->get('productSizeId')->getLabel();?></label>
+                            <div class="col-sm-8">
+                                <?=$this->formSelect($form->get('productSizeId')->setAttribute('class', 'form-control')); ?>
+                                <span class="help-block">
+                                    <?=$this->formElementErrors($form->get('productSizeId'), [
+                                        'class' => 'list-unstyled'
+                                    ]); ?>
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group<?php if ($form->get('postUnitId')->getMessages()) echo ' has-error'; ?>">
+                            <label class="col-sm-4 control-label" for="postUnitId"><?=$form->get('postUnitId')->getLabel();?></label>
+                            <div class="col-sm-8">
+                                <?=$this->formSelect($form->get('postUnitId')->setAttribute('class', 'form-control')); ?>
+                                <span class="help-block">
+                                    <?=$this->formElementErrors($form->get('postUnitId'), [
+                                        'class' => 'list-unstyled'
+                                    ]); ?>
+                                </span>
+                            </div>
+                        </div>
+					</fieldset>
+				</div>
+				
 			</div>
 		
-			<?=$this->ztbFormElement($form->get('productId'));?>
+			<?=$this->formElement($form->get('productId'));?>
+			
 			<input type="hidden" name="action" value="<?=$this->formAction;?>">
 			
-			<div class="control-group">
-            <div class="controls">
-                <button type="submit" class="btn btn-primary" data-loading-text="Please wait...">
-                	Submit
-                </button>
-                <button type="button" class="btn btn-warning"  data-loading-text="Please wait..." onClick="window.location = '<?=$this->url('admin/shop/product') ?>';">
-                	Cancel
-                </button>
+			<div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary" data-loading-text="Please wait...">
+                    	Submit
+                    </button>
+                    <button type="button" class="btn btn-warning"  data-loading-text="Please wait..." onClick="window.location = '<?=$this->url('admin/shop/product') ?>';">
+                    	Cancel
+                    </button>
             </div>
-        </div>
+            </div>
 		</fieldset>
 	</form>
 </div>

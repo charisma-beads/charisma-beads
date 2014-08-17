@@ -1,7 +1,7 @@
 <?php
 namespace Shop\Mapper\Cart;
 
-use Application\Mapper\AbstractMapper;
+use UthandoCommon\Mapper\AbstractMapper;
 
 class Item extends AbstractMapper
 {

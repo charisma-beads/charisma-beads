@@ -1,0 +1,16 @@
+<?php $this->headTitle('Paypal Payment') ?>
+
+<div class="row">
+    <h4 class="col-sm-12">
+        <a href="<?=$this->url('shop/order');?>">Back to orders</a>
+        <a href="<?=$this->url('shop/order/print', [
+            'orderId' => $this->order->getOrderId(),
+        ]);?>" class="siteTip pull-right new-window" title="click to print order"><i class="glyphicon glyphicon-print">&nbsp;</i></a>
+    </h4>
+    
+    <div class="alert alert-danger col-sm-12">
+        A problem occurred while trying to contact PayPal, Please contact support to process your payment or try a different payment method.
+    </div>
+    
+    <?=$this->partial('shop/order/details');?>
+</div>

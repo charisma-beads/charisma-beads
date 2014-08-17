@@ -1,7 +1,7 @@
 <?php
 namespace Shop\Hydrator\Product;
 
-use Application\Hydrator\AbstractHydrator;
+use UthandoCommon\Hydrator\AbstractHydrator;
 
 class Option extends AbstractHydrator
 {

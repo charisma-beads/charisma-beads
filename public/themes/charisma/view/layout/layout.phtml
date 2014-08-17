@@ -1,0 +1,138 @@
+<?php $this->bootstrap()->enable(); ?>
+<?=$this->doctype(); ?>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <?=$this->headTitle('Charisma Beads Ltd')->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <?=$this->headMeta()
+            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+        	->appendName('X-UA-Compatible', 'IE=edge')
+            ->appendName('rating', 'general'); ?>
+
+        <!-- styles -->
+        <?=$this->headLink()
+            ->appendStylesheet($this->themePath('/assets/css/style.css'), 'screen,print')
+             ?>
+
+        <!-- scripts -->
+        <?=$this->headScript()
+            ->appendFile($this->basePath('/js/html5.js'), 'text/javascript', ['conditional' => 'lt IE 9'])
+            ->appendFile($this->themePath('/assets/js/jquery.backstretch.min.js'))
+            ->appendFile($this->themePath('/assets/js/site.js'))
+			->appendFile($this->themePath('/assets/js/jquery.searchForm.js'))
+            ->appendFile($this->basePath('/js/holder.js')); ?>
+
+    </head>
+    <body class="boxed" data-background="<?=$this->themePath('/assets/img/layout/bead_trays.jpg')?>">
+        <nav class="navbar navbar-default navbar-fixed-top">
+    		<div class="container">
+                
+                <form id="search-catalog" class="navbar-form navbar-left" method="post" action="<?=$this->url('shop/search');?>">
+                    <div class="form-group">
+                        <?=$this->formElement($this->productSearch()->get('productSearch')->setAttribute('class', 'form-control'));?>
+					</div>
+					<button type="submit" class="btn btn-default"><i class="icon-search"></i> Search</button>
+                </form>
+                
+    			<div>
+                    <?php if ($this->identity()):?>
+    				<div class="dropdown">
+    					<ul class="nav navbar-nav navbar-right">
+    						<li>
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#"> 
+                                    <i class="glyphicon glyphicon-user"></i> <?=$this->identity()->getFullName();?> 
+        					        <b class="caret"></b>
+                                </a>
+                            <?=$this->uthandoNavigation('UthandoUser\Navigation')->uthandoTbMenu()->setUlClass('dropdown-menu');?>
+    						</li>
+    					</ul>
+    				</div>
+                    <?php endif; ?>
+    			</div>
+    		</div>
+    	</nav>
+    	
+        <div id="main-content" class="container">
+			
+            <div id="header" class="row hidden-xs">
+                <h2 class="col-md-12">
+                    <a href="<?=$this->basePath(); ?>">
+                        <img alt="Charisma Beads Ltd" src="<?=$this->themePath('/assets/img/layout/logo.png'); ?>">
+                        <img alt="Charisma Beads Ltd" src="<?=$this->themePath('/assets/img/layout/charismabeads.png'); ?>">
+                    </a>
+                    <span class="pull-right"><i class="glyphicons phone_alt">&nbsp;</i><a href="tel:+441462454054">01462 454054</a></span>
+                </h2>
+            </div>
+            <nav class="navbar navbar-default">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#charisma-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                
+				<div class="collapse navbar-collapse" id="charisma-navbar-collapse-1">
+                    <?=$this->uthandoNavigation()->uthandoDbMenu('top menu')->setUlClass('nav navbar-nav'); ?>
+                    
+            		<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="glyphicon glyphicon-envelope"></i></a>
+							<div class="dropdown-menu">
+								<address>
+									<strong>CompanyName</strong><br>
+									Address 123<br>
+									Zipcode, State and City
+								</address>
+								<hr>
+								<strong>Phone</strong>: 012-345 67 89<br>
+								<a href="contact.html"><strong>E-mail</strong>: info@example.com</a>
+							</div>
+						</li>
+						<li class="dropdown shop-summary">
+							<a class="dropdown-toggle siteTip" data-toggle="dropdown" href="#" title="Click icon to show cart summery">
+								<i class="glyphicon glyphicon-shopping-cart"></i>
+								<span class="badge badge-inverse"><?=$this->cart()->countItems(); ?></span>
+							</a>
+							<div class="dropdown-menu">
+								<?=$this->cart()->getSummary(); ?>
+							</div>
+						</li>
+					</ul>
+				</div>
+            </nav>
+            
+            <div class="row">
+                <div class="col-md-12">
+            		<?=$this->tbFlashMessenger()->render(); ?>
+            	</div>
+                <div id="product-nav" class="col-md-3">	
+            		<h5>Categories</h5>
+            		<ul class="nav nav-list">
+            		<?php foreach ($this->category()->getChildCategories() as $cat): ?>
+                        <?php $liClass = ($cat->getDepth() == 0) ? 'nav-header' : ''; ?>
+                		<li class="<?=$liClass; ?>"><a href="<?=$this->url('shop/catalog', [
+                		    'categoryIdent' => $cat->getIdent()
+                		]); ?>"><?=$this->escapehtml($cat->getCategory()); ?></a></li>
+            		
+            		<?php endforeach; ?>
+            		</ul>
+            	</div>
+            	
+            	<div id="content" class="col-md-9">
+            		<?=$this->content; ?>
+            	</div>
+            </div>
+            
+            <hr>
+            <footer>
+                <p>&copy; 2005 - <?=date('Y'); ?> by Charisma Beads Ltd. All rights reserved.</p>
+            </footer>
+        </div> <!-- /container -->
+        
+        <?=$this->inlineScript() ?>
+    </body>
+</html>

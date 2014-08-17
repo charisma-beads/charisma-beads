@@ -4,23 +4,7 @@ namespace Shop\Options;
 use Zend\Stdlib\AbstractOptions;
 
 class PaypalOptions extends AbstractOptions
-{
-    const SANDBOX_URL   = 'https://www.sandbox.paypal.com/cgi-bin/webscr';
-    const LIVE_URL      = 'https://www.paypal.com/cgi-bin/webscr';
-    
-    const RETURN_METHOD_GET_ALL = 0;
-    const RETURN_METHOD_GET     = 1;
-    const RETURN_METHOD_POST    = 2;
-    
-    const CURRENCY_CODE_AUSTRALIAN_DOLLAR   = 'AUD';
-    const CURRENCY_CODE_POUNDS_STERLING     = 'GBP';
-    const CURRENCY_CODE_US_DOLLAR           = 'USD';
-    
-    /**
-     * @var string
-     */
-    protected $cancelReturnUrl;
-    
+{   
     /**
      * @var string
      */
@@ -29,64 +13,41 @@ class PaypalOptions extends AbstractOptions
     /**
      * @var string
      */
-    protected $deploy;
+    protected $mode = 'sandbox';
+    
+    /**
+     * @var bool
+     */
+    protected $logEnabled = false;
+    
+    /**
+     * @var bool
+     */
+    protected $log = '/data/PayPal.log';
+    
+    /**
+     * Logging level can be one of FINE, INFO, WARN or ERROR
+     * Logging is most verbose in the 'FINE' level and
+     * decreases as you proceed towards ERROR
+     * 
+     * @var string
+     */
+    protected  $logLevel = 'FINE';
     
     /**
      * @var string
      */
-    protected $imageUrl;
+    protected $clientId;
     
     /**
      * @var string
      */
-    protected $ipnLog;
+    protected $secret;
     
     /**
      * @var string
      */
-    protected $merchantId;
-    
-    /**
-     * @var string
-     */
-    protected $notifyUrl;
-    
-    /**
-     * @var boolean
-     */
-    protected $paypalIPN;
-    
-    /**
-     * @var string
-     */
-    protected $paypalUrl;
-    
-    /**
-     * @var string
-     */
-    protected $returnUrl;
-    
-    /**
-     * @var integer
-     */
-    protected $returnMethod;
-    
-	/**
-	 * @return string $cancelReturnUrl
-	 */
-	public function getCancelReturnUrl()
-	{
-		return $this->cancelReturnUrl;
-	}
-
-	/**
-	 * @param string $cancelReturn
-	 */
-	public function setCancelReturnUrl($cancelReturnUrl)
-	{
-		$this->cancelReturnUrl = $cancelReturnUrl;
-		return $this;
-	}
+    protected $paymentMethod = 'paypal';
 
 	/**
 	 * @return string $currencyCode
@@ -106,161 +67,116 @@ class PaypalOptions extends AbstractOptions
 	}
 
 	/**
-	 * @return string $deploy
+	 * @return string $mode
 	 */
-	public function getDeploy()
+	public function getMode()
 	{
-		return $this->deploy;
+		return $this->mode;
 	}
 
 	/**
-	 * @param string $deploy
+	 * @param string $mode
 	 */
-	public function setDeploy($deploy)
+	public function setMode($mode)
 	{
-		$this->deploy = $deploy;
+		$this->mode = $mode;
 		return $this;
 	}
 
 	/**
-	 * @return string $imageUrl
+	 * @return boolean
 	 */
-	public function getImageUrl()
+	public function getLogEnabled()
 	{
-		return $this->imageUrl;
+		return $this->logEnabled;
 	}
 
 	/**
-	 * @param string $imageUrl
+	 * @param boolean $logEnabled
 	 */
-	public function setImageUrl($imageUrl)
+	public function setLogEnabled($logEnabled)
 	{
-		$this->imageUrl = $imageUrl;
+		$this->logEnabled = $logEnabled;
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function getLog()
+	{
+		return $this->log;
+	}
+	
+	/**
+	 * @param boolean $log
+	 */
+	public function setLog($log)
+	{
+		$this->log = $log;
 		return $this;
 	}
 
 	/**
-	 * @return string $ipnLog
+	 * @return string
 	 */
-	public function getIpnLog()
+	public function getLogLevel()
 	{
-		return $this->ipnLog;
+		return $this->logLevel;
 	}
 
 	/**
-	 * @param string $ipnLog
+	 * @param string $logLevel
 	 */
-	public function setIpnLog($ipnLog)
+	public function setLogLevel($logLevel)
 	{
-		$this->ipnLog = $ipnLog;
-		return $this;
+		$this->logLevel = $logLevel;
+	}
+	
+	/**
+	 * @return string
+	 */
+	public function getPaymentMethod()
+	{
+		return $this->paymentMethod;
 	}
 
 	/**
-	 * @return string $merchantId
+	 * @param string $paymentMethod
 	 */
-	public function getMerchantId()
+	public function setPaymentMethod($paymentMethod)
 	{
-		return $this->merchantId;
+		$this->paymentMethod = $paymentMethod;
+	}
+	
+	/**
+	 * @return string
+	 */
+	public function getClientId()
+	{
+		return $this->clientId;
 	}
 
 	/**
-	 * @param string $merchantId
+	 * @param string $clientId
 	 */
-	public function setMerchantId($merchantId)
+	public function setClientId($clientId)
 	{
-		$this->merchantId = $merchantId;
-		return $this;
+		$this->clientId = $clientId;
 	}
 
 	/**
-	 * @return string $notifyUrl
+	 * @return string
 	 */
-	public function getNotifyUrl()
+	public function getSecret()
 	{
-		return $this->notifyUrl;
+		return $this->secret;
 	}
 
 	/**
-	 * @param string $notifyUrl
+	 * @param string $secret
 	 */
-	public function setNotifyUrl($notifyUrl)
+	public function setSecret($secret)
 	{
-		$this->notifyUrl = $notifyUrl;
-		return $this;
-	}
-
-	/**
-	 * @return boolean $paypalIPN
-	 */
-	public function getPaypalIPN()
-	{
-		return $this->paypalIPN;
-	}
-
-	/**
-	 * @param boolean $paypalIPN
-	 */
-	public function setPaypalIPN($paypalIPN)
-	{
-		$this->paypalIPN = $paypalIPN;
-		return $this;
-	}
-
-	/**
-	 * @return string $paypalUrl
-	 */
-	public function getPaypalUrl()
-	{
-	    if ($this->getDeploy() === 'test') {
-	    	$this->setPaypalUrl(self::SANDBOX_URL);
-	    } else {
-	        $this->setPaypalUrl(self::LIVE_URL);
-	    }
-	    
-		return $this->paypalUrl;
-	}
-
-	/**
-	 * @param string $paypalUrl
-	 */
-	public function setPaypalUrl($paypalUrl)
-	{
-		$this->paypalUrl = $paypalUrl;
-		return $this;
-	}
-
-	/**
-	 * @return string $return
-	 */
-	public function getReturnUrl()
-	{
-		return $this->returnUrl;
-	}
-
-	/**
-	 * @param string $return
-	 */
-	public function setReturnUrl($returnUrl)
-	{
-		$this->return = $returnUrl;
-		return $this;
-	}
-
-	/**
-	 * @return number $returnMethod
-	 */
-	public function getReturnMethod()
-	{
-		return $this->returnMethod;
-	}
-
-	/**
-	 * @param number $returnMethod
-	 */
-	public function setReturnMethod($returnMethod)
-	{
-		$this->returnMethod = $returnMethod;
-		return $this;
+		$this->secret = $secret;
 	}
 }

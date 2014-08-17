@@ -1,9 +1,10 @@
 <?php $this->headTitle('Checkout - Comfirm Address') ?>
 
 <div class="row">
-    <h2>Comfirm Address</h2>
-    <div class="row">
-        <div class="span4 panel panel-default">
+    <h2 class="col-md-12">Comfirm Address</h2>
+    
+    <div class="col-md-6">
+        <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
                     Billing Address
@@ -11,19 +12,24 @@
             </div>
             <div class="panel-body">
                 <address>
-                    <?=$this->formatAddress()->getAddress('billing', true)?>
+                    <?=$this->customerAddress()
+                        ->setAddress('billing')
+                        ->includeName()
+                        ->includeEmail()
+                        ->render();?>
                 </address>
             </div>
             <div class="panel-footer">
-                <form class="form-inline" method="post" action="<?php echo $this->url('shop/checkout', array(
-                    'action' => 'edit'
-                )) ?>">
-                    <button type="submit" name="submit" class="btn btn-primary" value="billing">Edit Address</button>
-                </form>
+                <a data-toggle="modal" href="<?=$this->url('shop/customer/address', [
+                    'action'    => 'edit-address',
+                    'id' => $this->customerAddress()->getAddress()->getCustomerAddressId(),
+                ]) ?>" data-target="#addressModel" class="btn btn-primary">Edit Address</a>
             </div>
         </div>
-        <div class="span1">&nbsp;</div>
-        <div class="span4 panel panel-default">
+    </div>
+    
+    <div class="col-md-6">
+        <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
                     Delivery Address
@@ -31,25 +37,35 @@
             </div>
             <div class="panel-body">
                 <address>
-                    <?=$this->formatAddress()->getAddress('delivery')?>
+                    <?=$this->customerAddress()
+                        ->setAddress('delivery')
+                        ->includeName()
+                        ->render();?>
                     <br>
                 </address>
             </div>
             <div class="panel-footer">
-                <form class="form-inline" method="post" action="<?php echo $this->url('shop/checkout', array(
-                    'action' => 'edit'
-                )) ?>">
-                    <button type="submit" name="submit" class="btn btn-primary" value="delivery">Edit Address</button>
-                </form>
+                <a data-toggle="modal" href="<?=$this->url('shop/customer/address', [
+                    'action'    => 'edit-address',
+                    'id' => $this->customerAddress()->getAddress()->getCustomerAddressId(),
+                ]) ?>" data-target="#addressModel" class="btn btn-primary">Edit Address</a>
             </div>
         </div>
     </div>
     
-    <form method="post" action="<?php echo $this->url('shop/checkout', array(
+    <form class="col-md-12" method="post" action="<?=$this->url('shop/checkout', [
         'action' => 'confirm-order',
-    )) ?>">
+    ]) ?>">
         <button type="submit" name="submit" class="btn btn-primary" value="confirmAddress">Check &amp; Confirm Order</button>
     </form>
+</div>
+
+<div id="addressModel" class="modal fade" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      ...
+    </div>
+  </div>
 </div>
 
 

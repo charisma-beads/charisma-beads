@@ -1,8 +1,8 @@
 <?php
 namespace Shop\Service;
 
-use Application\Service\AbstractService;
-use User\Model\User;
+use UthandoCommon\Service\AbstractService;
+use UthandoUser\Model\User;
 
 class Customer extends AbstractService
 {
@@ -29,6 +29,19 @@ class Customer extends AbstractService
      * @var \Shop\Service\Customer\Address
      */
     protected $customerAddressService;
+    
+    /**
+     * @param string $userId
+     * @return \Shop\Model\Customer
+     */
+    public function getCustomerByUserId($userId)
+    {
+        $userId = (int) $userId;
+        
+        $customer = $this->getMapper()->getCustomerByUserId($userId);
+        
+        return $customer;
+    }
     
     /**
      * @param int $id
@@ -123,7 +136,7 @@ class Customer extends AbstractService
     {
         if (!$this->userService) {
             $sl = $this->getServiceLocator();
-            $this->userService = $sl->get('User\Service\User');
+            $this->userService = $sl->get('UthandoUser\Service\User');
         }
     
         return $this->userService;
@@ -136,7 +149,7 @@ class Customer extends AbstractService
     {
         if (!$this->customerAddressService) {
             $sl = $this->getServiceLocator();
-            $this->customerAddressService = $sl->get('Shop\Service\CustomerAddress');
+            $this->customerAddressService = $sl->get('Shop\Service\Customer\Address');
         }
     
         return $this->customerAddressService;
@@ -149,7 +162,7 @@ class Customer extends AbstractService
     {
         if (!$this->customerPrefixService) {
             $sl = $this->getServiceLocator();
-            $this->customerPrefixService = $sl->get('Shop\Service\CustomerPrefix');
+            $this->customerPrefixService = $sl->get('Shop\Service\Customer\Prefix');
         }
     
         return $this->customerPrefixService;

@@ -1,41 +1,40 @@
 <?php $this->headTitle('Post Levels') ?>
-<?php echo $this->ztbFlashMessenger()->render(); ?>
 
 <?php if (count($this->models) > 0): ?>
-
-<table id="postLevel-list" class="table table-hover table-bordered table-condensed sortable-table">
-	<thead>
-		<tr>
-			<th data-field="postLevelId">Post Level Id</th>
-			<th data-field="postLevel">Post Level</th>
-			<th>Actions</th>
-		</tr>
-	</thead>
-	
-	<tbody>
-		<?php /* @var $row \Shop\Model\Post\Level */ ?>
-		<?php foreach($this->models as $row): ?>
-		<tr>
-			<td><?=$this->escapeHtml($row->getPostLevelId()); ?></td>
-			<td><?=$this->escapeHtml($row->getPostLevel()); ?></td>
-			<td>
-               <?=$this->partial('partial/edit-actions', array(
-                	'pk'		=> 'postLevelId',
-                	'id'		=> $row->getPostLevelId(),
-		    		'tableName'	=> 'postLevel',
-                	'route'		=> 'admin/shop/post/level/edit',
-		    	));?>
-			</td>
-		</tr>
-		<?php endforeach; ?>
-	</tbody>
-</table>
-
+<div class="panel panel-default">
+    <table id="postLevel-list" class="table table-hover table-bordered table-condensed sortable-table">
+    	<thead>
+    		<tr>
+    			<th data-field="postLevelId">Post Level Id</th>
+    			<th data-field="postLevel">Post Level</th>
+    			<th>Actions</th>
+    		</tr>
+    	</thead>
+    	
+    	<tbody>
+    		<?php /* @var $row \Shop\Model\Post\Level */ ?>
+    		<?php foreach($this->models as $row): ?>
+    		<tr>
+    			<td><?=$this->escapeHtml($row->getPostLevelId()); ?></td>
+    			<td><?=$this->escapeHtml($row->getPostLevel()); ?></td>
+    			<td>
+                   <?=$this->partial('uthando-admin/partial/edit-actions', [
+                    	'pk'		=> 'postLevelId',
+                    	'id'		=> $row->getPostLevelId(),
+    		    		'tableName'	=> 'postLevel',
+                    	'route'		=> 'admin/shop/post/level/edit',
+    		    	]);?>
+    			</td>
+    		</tr>
+    		<?php endforeach; ?>
+    	</tbody>
+    </table>
+</div>
 <?=$this->paginationControl(
     $this->models,
     'Elastic',
-    'paginate',
-	array('route' => 'admin/shop/post/level/page')
+    'application/partial/paginate',
+    ['route' => 'admin/shop/post/level/page']
 ); ?>
 
 <?php else: ?>

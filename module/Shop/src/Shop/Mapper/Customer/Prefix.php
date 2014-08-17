@@ -1,7 +1,7 @@
 <?php
 namespace Shop\Mapper\Customer;
 
-use Application\Mapper\AbstractMapper;
+use UthandoCommon\Mapper\AbstractMapper;
 
 class Prefix extends AbstractMapper
 {

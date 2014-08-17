@@ -1,7 +1,7 @@
 <?php
 namespace Shop\View;
 
-use Application\View\AbstractViewHelper;
+use UthandoCommon\View\AbstractViewHelper;
 use Shop\Service\Product\Category as ProductCategory;
 
 class Category extends AbstractViewHelper

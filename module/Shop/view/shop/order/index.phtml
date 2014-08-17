@@ -1,32 +1,19 @@
 
-<div class="tab-wrap">
-<!-- 
-	<ul id="orderTabs" class="nav nav-tabs">
-	    <li><a href="#admin-order">Orders</a></li>
-	</ul>
-	
-	<div id="orderTabContent" class="tab-content">
-	    <div class="tab-pane" id="admin-order">
-	    -->
-	    	<div class="row-fluid">
-		    	<?=$this->partial('partial/search', array(
-		    		'name'			=> 'order',
-		    		'searchInputs'	=> array(
-		    			'Order' => 'orderNumber',
-		    		),
-		    	));?>
-	    	</div>
+<?=$this->partial('uthando-admin/partial/search', [
+	'name'			=> 'order',
+	'searchInputs'	=> [
+		'Order' => 'orderNumber',
+	],
+]);?>
+
 	    	
-	    	<div id="table-order" class="row-fluid table-wrap">
-		    	<?=$this->partial('shop/order/list', array(
-		    	    'models' => $this->models
-		    	)); ?>
-	    	</div>
-	    <!-- </div>
-	</div> -->
+<div id="table-order">
+	<?=$this->partial('shop/order/list', [
+	    'models' => $this->models
+	]); ?>
 </div>
 
-<?php $this->headScript()->captureStart(); ?>
+<?php $this->inlineScript()->captureStart(); ?>
 $(document).ready(function(){
 	$('#table-order').dataGrid({
 	    url : 'order/list',
@@ -36,4 +23,4 @@ $(document).ready(function(){
 	    columnSort: true,
 	});
 });
-<?php $this->headScript()->captureEnd(); ?>
+<?php $this->inlineScript()->captureEnd(); ?>

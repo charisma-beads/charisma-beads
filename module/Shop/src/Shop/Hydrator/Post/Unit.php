@@ -1,7 +1,7 @@
 <?php
 namespace Shop\Hydrator\Post;
 
-use Application\Hydrator\AbstractHydrator;
+use UthandoCommon\Hydrator\AbstractHydrator;
 
 class Unit extends AbstractHydrator
 {

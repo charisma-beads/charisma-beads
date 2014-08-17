@@ -1,8 +1,8 @@
 <?php
 namespace Shop\Controller\Order;
 
-use Application\Controller\AbstractCrudController;
-use Zend\View\Model\ViewModel;
+use UthandoCommon\Controller\AbstractCrudController;
+use DOMPDFModule\View\Model\PdfModel;
 
 class Order extends AbstractCrudController
 {
@@ -42,11 +42,10 @@ class Order extends AbstractCrudController
 	{
 	    $order = $this->getCustomerOrder();
 	    
-	    $viewModel = new ViewModel(['order' => $order]);
+	    $pdf = new PdfModel(['order' => $order]);
+	    $pdf->setTerminal(true);
 	    
-	    $viewModel->setTerminal(true);
-	    
-	    return $viewModel;
+	    return $pdf;
 	}
 	
 	private function getCustomerOrder()

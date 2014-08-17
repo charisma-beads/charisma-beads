@@ -1,0 +1,14 @@
+<?php $this->headtitle('My Details'); ?>
+
+<?=$this->partial('uthando-admin/partial/add-edit-form', [
+	'form'         => $this->form,
+	'formName'     => 'My Details',
+	'postUrl'      => $this->url('shop/customer', [
+	    'action'   => 'my-details',
+	    'id'       => $this->model->getCustomerId(),
+    ]),
+	'formElements' => [
+		'customerId', 'userId', 'prefixId', 'firstname', 'lastname',
+        'billingAddressId', 'deliveryAddressId', 'email',
+	],
+]); ?>

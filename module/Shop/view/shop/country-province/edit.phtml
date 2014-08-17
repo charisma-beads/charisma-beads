@@ -1,7 +1,7 @@
 <?php $this->headTitle('Edit Country Province') ?>
 <?=$this->ztbFlashMessenger()->render(); ?>
 
-<?=$this->partial('partial/add-edit-form', array(
+<?=$this->partial('uthando-admin/partial/add-edit-form', array(
 	'form' 			=> $this->form,
 	'formAction' 	=> 'edit',
 	'primaryKey'	=> $this->model->getCountryProvinceId(),

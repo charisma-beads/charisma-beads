@@ -1,36 +1,45 @@
 <?php
-/**
- * Global Configuration Override
- *
- * You can use this file for overriding configuration values from modules, etc.
- * You would place values in here that are agnostic to the environment and not
- * sensitive to security.
- *
- * @NOTE: In practice, this file will typically be INCLUDED in your source
- * control, so do not include passwords or other sensitive information in this
- * file.
- */
 
-return array(
-    'session' => array(
-		'config' => array(
+return [
+    'db' => [
+        'driver'            => 'PDO_SQLITE',
+        'database'          => './data/sample.db',
+        'sqlite_contraints' => true,
+    ],
+	'session' => [
+		'config' => [
 			'class' => 'Zend\Session\Config\SessionConfig',
-			'options' => array(
-				'name' => 'charisma-beads',
-			),
-		),
+			'options' => [
+				'name'          => 'uthando-cms',
+				'save_handler'  => 'files',
+				'save_path'     => APPLICATION_PATH . '/data/sessions',
+			],
+		],
 		'storage' => 'Zend\Session\Storage\SessionArrayStorage',
-        'save_handler' => 'Application\SessionSaveHandler',
-		'validators' => array(
+		'validators' => [
 			'Zend\Session\Validator\RemoteAddr',
 			'Zend\Session\Validator\HttpUserAgent',
-		),
-    ),
-    'php_settings' => array(
-    	'display_startup_errors' => false,
-    	'display_errors' => true,
-    	'error_reporting' => E_ALL,
-    	'max_execution_time' => 60,
-    	'date.timezone' => 'Europe/London',
-    ),
-);
+		],
+	],
+	'cache' => [
+	   'adapter' => [
+            'name' => 'filesystem',
+            'options' => [
+                'ttl' => 60*60, // one hour
+                'dirLevel' => 0,
+                'cacheDir' => 'data/cache/db',
+                'dirPermission' => 0700,
+                'filePermission' => 0600,
+                'namespaceSeparator' => '-db-'
+            ],
+        ],
+        'plugins' => ['Serializer'],
+    ],
+	'php_settings' => [
+		'display_startup_errors'  => false,
+		'display_errors'          => true,
+		'error_reporting'         => E_ALL,
+		'max_execution_time'      => 60,
+		'date.timezone'           => 'Europe/London',
+	],
+];

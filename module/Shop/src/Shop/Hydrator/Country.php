@@ -1,7 +1,7 @@
 <?php
 namespace Shop\Hydrator;
 
-use Application\Hydrator\AbstractHydrator;
+use UthandoCommon\Hydrator\AbstractHydrator;
 
 class Country extends AbstractHydrator
 {

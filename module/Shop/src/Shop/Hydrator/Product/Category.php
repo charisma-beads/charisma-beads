@@ -1,10 +1,10 @@
 <?php
 namespace Shop\Hydrator\Product;
 
-use Application\Hydrator\AbstractHydrator;
-use Application\Hydrator\Strategy\DateTime as DateTimeStrategy;
-use Application\Hydrator\Strategy\Null as NullStrategy;
-use Application\Hydrator\Strategy\TrueFalse;
+use UthandoCommon\Hydrator\AbstractHydrator;
+use UthandoCommon\Hydrator\Strategy\DateTime as DateTimeStrategy;
+use UthandoCommon\Hydrator\Strategy\Null as NullStrategy;
+use UthandoCommon\Hydrator\Strategy\TrueFalse;
 
 class Category extends AbstractHydrator
 {

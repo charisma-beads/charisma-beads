@@ -1,7 +1,7 @@
 <?php
 namespace Shop\Hydrator\Country;
 
-use Application\Hydrator\AbstractHydrator;
+use UthandoCommon\Hydrator\AbstractHydrator;
 
 class Province extends AbstractHydrator
 {
@@ -11,8 +11,13 @@ class Province extends AbstractHydrator
      */
     public function extract ($object)
     {
-        return array(
-            
-        );
+        return [
+            'countryProvinceId'         => $object->getCountryProvinceId(),
+            'countryProvinceCode'       => $object->getCountryProvinceCode(),
+            'provinceName'              => $object->getProvinceName(),
+            'provinceAlternateNames'    => $object->getProvinceAlternateNames(),
+            'lft'                       => $object->getLft(),
+            'rgt'                       => $object->getRgt(),
+        ];
     }
 }

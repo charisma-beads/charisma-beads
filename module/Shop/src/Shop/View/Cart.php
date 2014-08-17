@@ -1,7 +1,7 @@
 <?php
 namespace Shop\View;
 
-use Application\View\AbstractViewHelper;
+use UthandoCommon\View\AbstractViewHelper;
 use Shop\Form\Cart\Add;
 use Zend\I18n\View\Helper\CurrencyFormat;
 use Shop\Service\Cart as CartService;
@@ -85,6 +85,7 @@ class Cart extends AbstractViewHelper
 	public function addForm($product)
 	{
 		$form = new Add();
+		$form->init();
 		
 		$form->setData(array(
 			'productId' => $product->getProductId(),
@@ -92,9 +93,9 @@ class Cart extends AbstractViewHelper
 		));
 		
 		$form->setAttributes(array(
-			'action' =>  $this->view->url('shop/cart', array(
+			'action' =>  $this->view->url('shop/cart', [
 				'action'   => 'add'
-			)),
+			]),
 			'class' => 'form-search'
 		));
 	

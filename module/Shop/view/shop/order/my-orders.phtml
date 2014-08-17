@@ -1,46 +1,42 @@
 <?php $this->headTitle('Order History') ?>
+
 <div class="row">
-    <h3>Order History For <?=$this->identity()->getFullName();?></h3>
+    <h3 class="col-md-12">Order History For <?=$this->identity()->getFullName();?></h3>
     <?php if (count($this->orders) > 0):?>
     <?php /* @var $order \Shop\Model\Order */ ?>
-    <div class="row">
-        <div class="span9">
-            <?=$this->paginationControl(
-                $this->orders,
-                'Elastic',
-                'pager',
-            	array('route' => 'shop/order/page')
-            ); ?>
-        </div>
+
+    <div class="col-md-12">
+        <?=$this->paginationControl(
+            $this->orders,
+            'Elastic',
+            'application/partial/pager',
+        	['route' => 'shop/order/page']
+        ); ?>
     </div>
-    <div class="row">
-        <?php $c = 1; ?>
-        <?php foreach($this->orders as $order):?>
-        <div class="span4 panel panel-default">
+
+    <?php foreach($this->orders as $order):?>
+    <div class="col-md-6">
+        <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
                     <span class="pull-right">Status: <?=$this->escapeHtml($order->getOrderStatus()->getOrderStatus());?></span>
-                    Order ID: <a href="<?=$this->url('shop/order/view', array(
+                    Order ID: <a href="<?=$this->url('shop/order/view', [
                     	'orderId' => $order->getOrderId(),
-                    ));?>">#<?=$this->escapeHtml($order->getOrderNumber());?></a>
+                    ]);?>">#<?=$this->escapeHtml($order->getOrderNumber());?></a>
                 </h4>
             </div>
             <div class="panel-body">
-                <a class="pull-right" href="<?=$this->url('shop/order/view', array(
+                <a class="pull-right siteTip" href="<?=$this->url('shop/order/view', [
                 	'orderId' => $order->getOrderId(),
-                ));?>">View Order</a>
+                ]);?>" title="Click to view order"><i class="fa fa-eye fa-2x"></i></a>
                 Date Ordered: <span><?=$this->formatDate($order->getOrderDate())->setFormat('d/m/Y');?></span><br>
                 Total: <span><?=$this->priceFormat($order->getTotal());?></span>
                 
             </div>
         </div>
-        <?php if ($c % 2):?>
-        <div class="span1">&nbsp;</div>
-        <?php endif;?>
-        <?php $c++;?>
-        <?php endforeach;?>
-        <?php else:?>
-        <h4>We have no orders from you at present.</h4>
-        <?php endif;?>
     </div>
+    <?php endforeach;?>
+    <?php else:?>
+    <h4 class="col-md-12">We have no orders from you at present.</h4>
+    <?php endif;?>
 </div>

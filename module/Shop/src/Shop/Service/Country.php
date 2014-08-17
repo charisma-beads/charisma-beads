@@ -1,7 +1,7 @@
 <?php
 namespace Shop\Service;
 
-use Application\Service\AbstractService;
+use UthandoCommon\Service\AbstractService;
 
 class Country extends AbstractService
 {
@@ -55,7 +55,7 @@ class Country extends AbstractService
     {
         if (!$this->PostZoneService) {
             $sl = $this->getServiceLocator();
-            $this->PostZoneService = $sl->get('Shop\Service\PostZone');
+            $this->PostZoneService = $sl->get('Shop\Service\Post\Zone');
         }
     
         return $this->PostZoneService;

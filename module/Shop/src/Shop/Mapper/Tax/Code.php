@@ -1,7 +1,7 @@
 <?php
 namespace Shop\Mapper\Tax;
 
-use Application\Mapper\AbstractMapper;
+use UthandoCommon\Mapper\AbstractMapper;
 use Zend\Db\Sql\Select;
 
 class Code extends AbstractMapper

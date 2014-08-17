@@ -1,13 +1,13 @@
 <?php
 namespace Shop\Service\Order;
 
-use Application\Service\AbstractService;
+use UthandoCommon\Service\AbstractService;
 
 class Status extends AbstractService
 {
-    protected $mapperClass = 'Shop\Mapper\OrderStatus';
-    protected $form = 'Shop\Form\OrderStatus';
-    protected $inputFilter = 'Shop\InputFilter\OrderStatus';
+    protected $mapperClass = 'Shop\Mapper\Order\Status';
+    protected $form = 'Shop\Form\Order\Status';
+    protected $inputFilter = 'Shop\InputFilter\Order\Status';
     
     public function getStatusByName($status)
     {

@@ -1,14 +1,8 @@
 <?php
-/**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/Shop for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- */
 
 namespace Shop;
 
+use Shop\Event\ServiceListener;
 use Zend\Mvc\MvcEvent;
 
 class Module
@@ -16,24 +10,27 @@ class Module
     public function onBootStrap(MvcEvent $e)
     {
         $app = $e->getApplication();
-        $sharedEventManager = $app->getEventManager()->getSharedManager();
+        $eventManager = $app->getEventManager();
+        $sharedEventManager = $eventManager->getSharedManager();
         
-        $sharedEventManager->attach('User\Service\User', 'user.add', array('Shop\Event\UserEvent', 'userAdd'));
-        $sharedEventManager->attach('User\Service\User', 'user.edit', array('Shop\Event\UserEvent', 'userEdit'));
+        $eventManager->attachAggregate(new ServiceListener());
+        
+        $sharedEventManager->attach('UthandoUser\Service\User', 'user.add', ['Shop\Event\UserEvent', 'userAdd']);
+        $sharedEventManager->attach('UthandoUser\Service\User', 'user.edit', ['Shop\Event\UserEvent', 'userEdit']);
     }
     
 	public function getAutoloaderConfig()
     {
-        return array(
-            'Zend\Loader\ClassMapAutoloader' => array(
+        return [
+            'Zend\Loader\ClassMapAutoloader' => [
                 __DIR__ . '/autoload_classmap.php'
-            ),
-            'Zend\Loader\StandardAutoloader' => array(
-                'namespaces' => array(
+            ],
+            'Zend\Loader\StandardAutoloader' => [
+                'namespaces' => [
                     __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
     }
 
 	public function getConfig()
@@ -54,5 +51,19 @@ class Module
     public function getControllerConfig()
     {
         return include __DIR__ . '/config/controller.config.php';
+    }
+    
+    public function getFormElementConfig()
+    {
+        return include __DIR__ . '/config/formElement.config.php';
+    }
+    
+    public function getControllerPluginConfig()
+    {
+        return [
+            'invokables' => [
+            	'Order' => 'Shop\Controller\Plugin\Order',
+            ],
+        ];
     }
 }

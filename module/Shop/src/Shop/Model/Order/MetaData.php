@@ -23,7 +23,7 @@ class MetaData
     /**
      * @var string
      */
-    protected $txnId;
+    protected $paymentId;
     
     /**
      * @var string
@@ -36,12 +36,12 @@ class MetaData
     protected $customerName;
     
     /**
-     * @var Shop\Model\Customer\Address
+     * @var \Shop\Model\Customer\Address
      */
     protected $deliveryAddress;
     
     /**
-     * @var Shop\Model\Customer\Address
+     * @var \Shop\Model\Customer\Address
      */
     protected $billingAddress;
     
@@ -107,18 +107,18 @@ class MetaData
     /**
      * @return string
      */
-	public function getTxnId()
+	public function getPaymentId()
     {
-        return $this->txnId;
+        return $this->paymentId;
     }
 
     /**
-     * @param string $txnId
+     * @param string $paymentId
      * @return \Shop\Model\Order\MetaData
      */
-	public function setTxnId($txnId)
+	public function setPaymentId($txnId)
     {
-        $this->txnId = $txnId;
+        $this->paymentId = $txnId;
         return $this;
     }
     
@@ -160,6 +160,9 @@ class MetaData
         return $this;
     }
 
+    /**
+     * @return \Shop\Model\Customer\Address
+     */
 	public function getDeliveryAddress()
     {
         return $this->deliveryAddress;
@@ -175,6 +178,9 @@ class MetaData
         return $this;
     }
 
+    /**
+     * @return \Shop\Model\Customer\Address
+     */
 	public function getBillingAddress()
     {
         return $this->billingAddress;

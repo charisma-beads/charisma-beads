@@ -1,7 +1,7 @@
 <?php
 namespace Shop\Mapper\Tax;
 
-use Application\Mapper\AbstractMapper;
+use UthandoCommon\Mapper\AbstractMapper;
 
 class Rate extends AbstractMapper
 {

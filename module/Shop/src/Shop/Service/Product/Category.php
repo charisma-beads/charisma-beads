@@ -1,17 +1,17 @@
 <?php
 namespace Shop\Service\Product;
 
-use Application\Model\ModelInterface;
-use Application\Service\AbstractService;
+use UthandoCommon\Model\ModelInterface;
+use UthandoCommon\Service\AbstractService;
 use Shop\ShopException;
 use Shop\Model\Product\Category as CategoryModel;
 use Zend\Form\Form;
 
 class Category extends AbstractService
 {
-	protected $mapperClass = 'Shop\Mapper\ProductCategory';
-	protected $form = 'Shop\Form\ProductCategory';
-	protected $inputFilter = 'Shop\InputFilter\ProductCategory';
+	protected $mapperClass = 'Shop\Mapper\Product\Category';
+	protected $form = 'Shop\Form\Product\Category';
+	protected $inputFilter = 'Shop\InputFilter\Product\Category';
 	
 	/**
 	 * @var \Shop\Service\Product\Image
@@ -83,7 +83,7 @@ class Category extends AbstractService
 		return parent::search($post);
 	}
 	
-	public function add(array $post)
+	public function add(array $post, Form $form = null)
 	{
 		if (!$post['ident']) {
 			$post['ident'] = $post['category'];
@@ -91,14 +91,14 @@ class Category extends AbstractService
 		
 		$page = $this->getMapper()->getModel();
 		$form  = $this->getForm($page, $post, true, true);
-		$position = (int) $post['parent'];
-		$insertType = (string) $post['categoryInsertType'];
 	
 		if (!$form->isValid()) {
 			return $form;
 		}
 	
 		$data = $this->getMapper()->extract($form->getData());
+		$position = (int) $post['parent'];
+		$insertType = (string) $post['categoryInsertType'];
 	
 		return $this->getMapper()->insertRow($data, $position, $insertType);
 	}
@@ -171,7 +171,9 @@ class Category extends AbstractService
 	public function getForm(ModelInterface $model=null, array $data=null, $useInputFilter=false, $useHydrator=false)
 	{
 		$sl = $this->getServiceLocator();
-		$form = $sl->get($this->form);
+		$formManager = $sl->get('FormElementManager');
+		/* @var $form \Zend\Form\Form */
+		$form = $formManager->get($this->form);
 		
 		if ($model) {
 			$form->setCategoryId($model->getProductCategoryId());
@@ -201,7 +203,7 @@ class Category extends AbstractService
 	{
 		if (!$this->imageService) {
 			$sl = $this->getServiceLocator();
-			$this->imageService = $sl->get('Shop\Service\ProductImage');
+			$this->imageService = $sl->get('Shop\Service\Product\Image');
 		}
 	
 		return $this->imageService;

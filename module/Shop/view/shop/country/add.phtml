@@ -1,13 +1,12 @@
 <?php $this->headTitle('Add Country') ?>
-<?=$this->ztbFlashMessenger()->render(); ?>
 
-<?=$this->partial('partial/add-edit-form', array(
+<?=$this->partial('uthando-admin/partial/add-edit-form', [
 	'form' 			=> $this->form,
 	'formAction' 	=> 'add',
 	'formName'		=> 'Country',
 	'postRoute'		=> 'admin/shop/country/edit',
 	'cancelRoute'	=> 'admin/shop/country',
-	'formElements'	=> array(
+	'formElements'	=> [
 		'country', 'code', 'postZoneId',
-	),
-)); ?>
+	],
+]); ?>

@@ -13,7 +13,7 @@ class Category extends InputFilter
     		'filters'    => array(
     			array('name' => 'StripTags'),
     			array('name' => 'StringTrim'),
-    			array('name' => 'Application\Filter\Ucwords'),
+    			array('name' => 'UthandoCommon\Filter\Ucwords'),
     		),
     		'validators' => array(
     			array('name' => 'StringLength', 'options' => array(
@@ -30,7 +30,7 @@ class Category extends InputFilter
     		'filters'    => array(
     			array('name' => 'StripTags'),
     			array('name' => 'StringTrim'),
-    			array('name' => 'Application\Filter\Slug')
+    			array('name' => 'UthandoCommon\Filter\Slug')
     		),
     		'validators' => array(
     			array('name' => 'StringLength', 'options' => array(

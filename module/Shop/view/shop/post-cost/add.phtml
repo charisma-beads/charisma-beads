@@ -1,13 +1,12 @@
 <?php $this->headTitle('Add Post Cost') ?>
-<?=$this->ztbFlashMessenger()->render(); ?>
 
-<?=$this->partial('partial/add-edit-form', array(
+<?=$this->partial('uthando-admin/partial/add-edit-form', [
 	'form' 			=> $this->form,
 	'formAction' 	=> 'add',
 	'formName'		=> 'Post Level',
 	'postRoute'		=> 'admin/shop/post/cost/edit',
 	'cancelRoute'	=> 'admin/shop/post/cost',
-	'formElements'	=> array(
+	'formElements'	=> [
 		'cost', 'vatInc', 'postLevelId', 'postZoneId',
-	),
-)); ?>
+	],
+]); ?>

@@ -1,49 +1,49 @@
 <?php $this->headTitle('Product Images') ?>
-<?php echo $this->ztbFlashMessenger()->render(); ?>
 
 <?php if (count($this->models) > 0): ?>
-
-<table id="productImage-list" class="table table-hover table-bordered table-condensed sortable-table">
-	<thead>
-		<tr>
-			<th data-field="productImageId">Product Image Id</th>
-			<th data-field="name">Product</th>
-			<th data-field="full">Image</th>
-			<th data-field="isDefault">Default</th>
-			<th data-field="dateCreated">Date Created</th>
-			<th data-field="dateModified">Date Modified</th>
-			<th>Actions</th>
-		</tr>
-	</thead>
-	
-	<tbody>
-	<?php /* @var $row \Shop\Model\Product\Image */ ?>
-		<?php foreach($this->models as $row): ?>
-		<tr>
-			<td><?=$this->escapeHtml($row->getProductImageId()); ?></td>
-			<td><?=$this->escapeHtml($row->getProduct()->getName()); ?></td>
-			<td><?=$this->escapeHtml($row->getFull()); ?></td>
-			<td><?=$this->escapeHtml($row->isDefaultImage()); ?></td>
-			<td><?=$this->escapeHtml($this->formatDate($row->getDateCreated())); ?></td>
-			<td><?=$this->escapeHtml($this->formatDate($row->getDateModified())); ?></td>
-			<td>
-                <?=$this->partial('partial/edit-actions', array(
-                	'pk'		=> 'productImageId',
-                	'id'		=> $row->getProductImageId(),
-		    		'tableName'	=> 'productImage',
-                	'route'		=> 'admin/shop/image/edit',
-		    	));?>
-			</td>
-		</tr>
-		<?php endforeach; ?>
-	</tbody>
-</table>
+<div class="panel panel-default">
+    <table id="productImage-list" class="table table-hover table-bordered table-condensed sortable-table">
+    	<thead>
+    		<tr>
+    			<th data-field="productImageId">Product Image Id</th>
+    			<th data-field="name">Product</th>
+    			<th data-field="full">Image</th>
+    			<th data-field="isDefault">Default</th>
+    			<th data-field="dateCreated">Date Created</th>
+    			<th data-field="dateModified">Date Modified</th>
+    			<th>Actions</th>
+    		</tr>
+    	</thead>
+    	
+    	<tbody>
+    	<?php /* @var $row \Shop\Model\Product\Image */ ?>
+    		<?php foreach($this->models as $row): ?>
+    		<tr>
+    			<td><?=$this->escapeHtml($row->getProductImageId()); ?></td>
+    			<td><?=$this->escapeHtml($row->getProduct()->getName()); ?></td>
+    			<td><?=$this->escapeHtml($row->getFull()); ?></td>
+    			<td><?=$this->escapeHtml($row->isDefaultImage()); ?></td>
+    			<td><?=$this->escapeHtml($this->formatDate($row->getDateCreated())); ?></td>
+    			<td><?=$this->escapeHtml($this->formatDate($row->getDateModified())); ?></td>
+    			<td>
+                    <?=$this->partial('uthando-admin/partial/edit-actions', [
+                    	'pk'		=> 'productImageId',
+                    	'id'		=> $row->getProductImageId(),
+    		    		'tableName'	=> 'productImage',
+                    	'route'		=> 'admin/shop/image/edit',
+    		    	]);?>
+    			</td>
+    		</tr>
+    		<?php endforeach; ?>
+    	</tbody>
+    </table>
+</div>
 
 <?=$this->paginationControl(
     $this->models,
     'Elastic',
-    'paginate',
-	array('route' => 'admin/shop/image/page')
+    'application/partial/paginate',
+	['route' => 'admin/shop/image/page']
 ); ?>
 
 <?php else: ?>

@@ -1,16 +1,18 @@
-<div class="row">
+
     <h2>Shopping Cart</h2>
     <?php if ($this->cart()->countItems()): ?>
-    <form method="post" action="<?=$this->url('shop/cart', array(
+    <form method="post" action="<?=$this->url('shop/cart', [
     	'action' => 'update'
-    ));?>">
+    ]);?>">
+        
         <?=$this->partial('shop/cart'); ?>
+        
         <div class="text-center">
-        	<button name="update" class="btn" value="update">Update Cart</button>
-        	<a href="<?=$this->url('shop/checkout');?>" class="btn">Check Out</a>
-        	<a href="<?=$this->url('shop/cart', array(
+        	<button name="update" class="btn btn-default" value="update">Update Cart</button>
+        	<a href="<?=$this->url('shop/checkout');?>" class="btn btn-primary">Check Out</a>
+        	<a href="<?=$this->url('shop/cart', [
         		'action' => 'empty'
-        	));?>" class="btn">Empty Cart</a>
+        	]);?>" class="btn btn-danger">Empty Cart</a>
         </div>
     </form>
     <?php else: ?>
@@ -18,4 +20,4 @@
     	<h4>No Items In Shopping Cart</h4>
     </div>
     <?php endif; ?>
-</div>
+

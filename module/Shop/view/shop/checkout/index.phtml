@@ -1,12 +1,12 @@
 <?php $this->headTitle('Checkout - Login or Register') ?>
 
 <div>
-    <?php echo $this->partial('user/auth/login-form', array(
-        'form' => $this->login,
-        'formAction' => 'register',
-        'legend' => 'Login To Checkout',
+    <?=$this->partial('uthando-user/user/login-form', [
+        'form'          => $this->login,
+        'formAction'    => 'register',
+        'legend'        => 'Login To Checkout',
         'returnTo'      => 'shop/checkout'
-    )); ?>
+    ]); ?>
 </div>
 
 <div id="checkout-or">
@@ -14,10 +14,10 @@
 </div>
 
 <div class="">
-    <?php echo $this->partial('user/user/user-form', array(
+    <?=$this->partial('uthando-user/user/user-form', [
         'form' => $this->register,
     	'formAction' => 'register',
         'legend' => 'Register As New Customer',
         'returnTo'      => 'shop/checkout'
-    )); ?>
+    ]); ?>
 </div>

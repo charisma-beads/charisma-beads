@@ -1,0 +1,24 @@
+
+<?php 
+/**
+ * $vars = array(
+        'element'           => $element,
+        'label'             => $label,
+        'labelAttributes'   => $this->labelAttributes,
+        'labelPosition'     => $this->labelPosition,
+        'renderErrors'      => $this->renderErrors,
+    );
+ */
+
+?>
+<div class="form-group<?php if ($this->element->getMessages()) echo ' has-error'; ?>">
+    <label class="<?=$this->formRowWidth;?> control-label" for="name"><?=$this->label();?></label>
+    <div class="col-sm-8">
+        <?=$this->element->setAttribute('class', 'form-control'); ?>
+        <span class="help-block">
+            <?=$this->formElementErrors($form->get('name'), [
+                'class' => 'list-unstyled'
+            ]); ?>
+        </span>
+    </div>
+</div>

@@ -1,32 +1,20 @@
 
-<div class="tab-wrap">
-<!-- 
-	<ul id="postUnitTabs" class="nav nav-tabs">
-	    <li><a href="#admin-postUnit">Post Units</a></li>
-	</ul>
-	
-	<div id="postUnitTabContent" class="tab-content">
-	    <div class="tab-pane" id="admin-postUnit">
-	    -->
-	    	<div class="row-fluid">
-		    	<?=$this->partial('partial/search', array(
-		    		'name'			=> 'postUnit',
-		    		'searchInputs'	=> array(
-		    			'Post Unit' => 'postUnit',
-		    		),
-		    	));?>
-	    	</div>
+<?=$this->partial('uthando-admin/partial/search', [
+	'name'			=> 'postUnit',
+	'searchInputs'	=> [
+		'Post Unit' => 'postUnit',
+	],
+]);?>
+
 	    	
-	    	<div id="table-postUnit" class="row-fluid table-wrap">
-		    	<?=$this->partial('shop/post-unit/list', array(
-		    	    'models' => $this->models
-		    	)); ?>
-	    	</div>
-	    <!-- </div>
-	</div> -->
+<div id="table-postUnit">
+	<?=$this->partial('shop/post-unit/list', [
+	    'models' => $this->models
+	]); ?>
 </div>
 
-<?php $this->headScript()->captureStart(); ?>
+
+<?php $this->inlineScript()->captureStart(); ?>
 $(document).ready(function(){
 	$('#table-postUnit').dataGrid({
 	    url : 'unit/list',
@@ -36,4 +24,4 @@ $(document).ready(function(){
 	    columnSort: true,
 	});
 });
-<?php $this->headScript()->captureEnd(); ?>
+<?php $this->inlineScript()->captureEnd(); ?>

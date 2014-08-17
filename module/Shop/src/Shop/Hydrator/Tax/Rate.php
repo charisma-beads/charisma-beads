@@ -1,7 +1,7 @@
 <?php
 namespace Shop\Hydrator\Tax;
 
-use Application\Hydrator\AbstractHydrator;
+use UthandoCommon\Hydrator\AbstractHydrator;
 use Shop\Hydrator\Strategy\Percent;
 
 class Rate extends AbstractHydrator

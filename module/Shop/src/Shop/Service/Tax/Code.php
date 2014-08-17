@@ -1,13 +1,13 @@
 <?php
 namespace Shop\Service\Tax;
 
-use Application\Service\AbstractService;
+use UthandoCommon\Service\AbstractService;
 
 class Code extends AbstractService
 {
-    protected $mapperClass = 'Shop\Mapper\TaxCode';
-    protected $form = 'Shop\Form\TaxCode';
-    protected $inputFilter = 'Shop\InputFilter\TaxCode';
+    protected $mapperClass = 'Shop\Mapper\Tax\Code';
+    protected $form = 'Shop\Form\Tax\Code';
+    protected $inputFilter = 'Shop\InputFilter\Tax\Code';
     
     /**
      * @var \Shop\Service\Tax\Rate
@@ -21,8 +21,6 @@ class Code extends AbstractService
         
         return $taxCode;
     }
-    
-    
     
     public function search(array $post)
     {
@@ -56,7 +54,7 @@ class Code extends AbstractService
     {
         if (!$this->taxRateService) {
             $sl = $this->getServiceLocator();
-            $this->taxRateService = $sl->get('Shop\Service\TaxRate');
+            $this->taxRateService = $sl->get('Shop\Service\Tax\Rate');
         }
         
         return $this->taxRateService;

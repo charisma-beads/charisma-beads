@@ -1,14 +1,14 @@
 <?php
 namespace Shop\Service;
 
-use Application\Service\AbstractService;
+use UthandoCommon\Service\AbstractService;
 use Shop\Model\Cart as CartModel;
 use Shop\Model\Cart\Item as CartItem;
 use Shop\Model\Product as ProductModel;
 use Shop\Model\Product\MetaData as ProductMetaData;
 use Shop\Service\Cart\Cookie as CartCookie;
 use Shop\Service\Cart\Item;
-use \Shop\Service\Shipping;
+use Shop\Service\Shipping;
 use Shop\Service\Tax;
 use Zend\Session\Container;
 use Zend\Stdlib\InitializableInterface;

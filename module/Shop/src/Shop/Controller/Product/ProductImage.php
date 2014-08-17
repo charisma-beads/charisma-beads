@@ -1,12 +1,12 @@
 <?php
 namespace Shop\Controller\Product;
 
-use Application\Controller\AbstractCrudController;
+use UthandoCommon\Controller\AbstractCrudController;
 
 class ProductImage extends AbstractCrudController
 {
 	protected $searchDefaultParams = array('sort' => 'productImageId');
-	protected $serviceName = 'Shop\Service\ProductImage';
+	protected $serviceName = 'Shop\Service\Product\Image';
 	protected $route = 'admin/shop/image';
 	
 }

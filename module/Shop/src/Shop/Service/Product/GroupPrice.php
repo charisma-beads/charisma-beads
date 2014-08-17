@@ -1,11 +1,11 @@
 <?php
 namespace Shop\Service\Product;
 
-use Application\Service\AbstractService;
+use UthandoCommon\Service\AbstractService;
 
 class GroupPrice extends AbstractService
 {
-    protected $mapperClass = 'Shop\Mapper\ProductGroupPrice';
-    protected $form = 'Shop\Form\ProductGroupPrice';
-    protected $inputFilter = 'Shop\InputFilter\ProductGroupPrice';
+    protected $mapperClass = 'Shop\Mapper\Product\GroupPrice';
+    protected $form = 'Shop\Form\Product\GroupPrice';
+    protected $inputFilter = 'Shop\InputFilter\Product\GroupPrice';
 }

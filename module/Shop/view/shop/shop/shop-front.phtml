@@ -2,20 +2,20 @@
 
 <h2>Shop Front</h2>
 
-<ul class="thumbnails">
+<div class="row">
 <?php foreach ($this->cats as $row): ?>
-    <li class="span3">
+    <div class="col-sm-4">
     	<div class="thumbnail text-center category-item-box">
     		<img data-src="holder.js/200x100/auto" alt="">
-    		<h5>
-                <a href="<?php echo $this->url('shop/catalog', array(
-        			'categoryIdent' => $row->getIdent()
-        		)); ?>" class="btn"><?=$this->escapehtml($row->getCategory());?></a>
-    		</h5>
-    		
+    		<div class="caption">
+        		<h5>
+                    <a href="<?php echo $this->url('shop/catalog', [
+            			'categoryIdent' => $row->getIdent()
+            		]); ?>" class="btn btn-default"><?=$this->escapehtml($row->getCategory());?></a>
+        		</h5>
+    		</div>
     	</div>
-    	
-    </li>
+    </div>
 <?php endforeach; ?>
-</ul>
+</div>
 

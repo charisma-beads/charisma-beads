@@ -5,45 +5,43 @@ use Zend\Form\Form;
 
 class Add extends Form
 {
-	public function __construct()
+	public function init()
 	{
-		parent::__construct();
-		
-		$this->add(array(
+		$this->add([
 			'name' => 'qty',
 			'type' => 'number',
-			'options' => array(
+			'options' => [
 				'label' => 'Quantity:',
 				'required' => true,
-			),
-			'attributes' => array(
+			],
+			'attributes' => [
 				'class' => 'input-mini',
 				'min'  => '0',
 				'step' => '1',
-				'value' => 1		
-			)
-		));
+				'value' => 1,		
+			],
+		]);
 		
-		$this->add(array(
+		$this->add([
 			'name' => 'buy-item',
 			'type' => 'submit',
-			'options' => array(
+			'options' => [
 				'label' => 'Add to Cart',
 				
-			),
-			'attributes' => array(
+			],
+			'attributes' => [
 				'class' => 'btn',
-			),
-		));
+			],
+		]);
 		
-		$this->add(array(
+		$this->add([
 			'name' => 'productId',
-			'type' => 'hidden'
-		));
+			'type' => 'hidden',
+		]);
 	
-		$this->add(array(
+		$this->add([
 			'name' => 'returnTo',
-			'type' => 'hidden'
-		));
+			'type' => 'hidden',
+		]);
 	}
 }

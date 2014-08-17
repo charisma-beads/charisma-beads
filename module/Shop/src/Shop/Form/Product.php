@@ -2,344 +2,215 @@
 namespace Shop\Form;
 
 use Zend\Form\Form;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
 
-class Product extends Form implements ServiceLocatorAwareInterface
+class Product extends Form
 {	
-    use ServiceLocatorAwareTrait;
-    
     public function init()
     {
-        $this->add(array(
+        $this->add([
         	'name'	=> 'productId',
         	'type'	=> 'hidden',
-        ));
+        ]);
         
-        $this->add(array(
+        $this->add([
         	'name'			=> 'ident',
         	'type'			=> 'text',
-        	'attributes'	=> array(
+        	'attributes'	=> [
         		'placehoder'		=> 'Ident:',
         		'autofocus'			=> true,
         		'autocapitalize'	=> 'off'
-        	),
-        	'options'		=> array(
+        	],
+        	'options'		=> [
         		'label'			=> 'Ident:',
-        		'help-inline'	=> 'If you leave this blank the the product name and short description will be used for the ident.'
-        	),
-        ));
+        	],
+        ]);
         
-        $this->add(array(
+        $this->add([
         	'name'			=> 'name',
         	'type'			=> 'text',
-        	'attributes'	=> array(
+        	'attributes'	=> [
         		'placeholder'	=> 'Product Name:',
         		'autofocus'		=> true,
-        	),
-        	'options'		=> array(
+        	],
+        	'options'		=> [
         		'label'		=> 'Product Name/Number:',
         		'required'	=> true,
-        	),
-        ));
+        	],
+        ]);
         
-        $this->add(array(
+        $this->add([
         	'name'			=> 'price',
         	'type'			=> 'number',
-        	'attributes'	=> array(
+        	'attributes'	=> [
         		'placeholder'	=> 'Price:',
         		'autofocus'		=> true,
         		'step'			=> '0.01'
-        	),
-        	'options'		=> array(
+        	],
+        	'options'		=> [
         		'label'			=> 'Price:',
         		'required'		=> true,
-        		'help-inline'	=> 'Do not include the currency sign or commas.',
-        	),
-        ));
+        	],
+        ]);
         
-        $this->add(array(
+        $this->add([
         	'name'			=> 'description',
         	'type'			=> 'textarea',
-        	'attributes'	=> array(
+        	'attributes'	=> [
         		'placeholder'	=> 'Product Description:',
         		'autofocus'		=> true,	
-        	),
-        	'options'		=> array(
+        	],
+        	'options'		=> [
         		'label'		=> 'Description:',
         		'required'	=> true,
-        	),
-        ));
+        	],
+        ]);
         
-        $this->add(array(
+        $this->add([
         	'name'			=> 'shortDescription',
         	'type'			=> 'text',
-        	'attributes'	=> array(
+        	'attributes'	=> [
         		'placeholder'	=> 'Short Description:',
         		'autofocus'		=> true,
-        	),
-        	'options'		=> array(
+        	],
+        	'options'		=> [
         		'label'		=> 'Short Description:',
         		'required'	=> true,
-        	),
-        ));
+        	],
+        ]);
         
-        $this->add(array(
+        $this->add([
         	'name'			=> 'quantity',
         	'type'			=> 'number',
-        	'attributes'	=> array(
+        	'attributes'	=> [
         		'autofocus'	=> true,
         		'min'		=> '-1',
         		'step'		=> '1',
         	    'value'     => '-1',
-        	),
-        	'options'		=> array(
+        	],
+        	'options'		=> [
         		'label'	=> 'Quantity:',
-        	),
+        	],
             
-        ));
+        ]);
         
-        $this->add(array(
+        $this->add([
         	'name'			=> 'taxable',
         	'type'			=> 'checkbox',
-        	'options'		=> array(
+        	'options'		=> [
         		'label'			=> 'Taxable:',
         		'required' 		=> true,
         		'use_hidden_element' => true,
         		'checked_value' => '1',
         		'unchecked_value' => '0',
-        	),
-        ));
+        	],
+        ]);
         
-        $this->add(array(
+        $this->add([
         	'name'			=> 'addPostage',
         	'type'			=> 'checkbox',
-        	'options'		=> array(
+        	'options'		=> [
         		'label'			=> 'Add Postage:',
         		'required' 		=> true,
         		'use_hidden_element' => true,
         		'checked_value' => '1',
         		'unchecked_value' => '0',
-        	),
-        ));
+        	],
+        ]);
         
-        $this->add(array(
+        $this->add([
         	'name'			=> 'discountPercent',
         	'type'			=> 'number',
-        	'attributes'	=> array(
+        	'attributes'	=> [
         		'autofocus'	=> true,
         		'min'		=> '0.00',
         		'max'		=> '100.00',
         		'step'		=> '0.01',
         	    'value'     => '0',
-        	),
-        	'options'		=> array(
+        	],
+        	'options'		=> [
         		'label'			=> 'Product Discount:',
-        		'help-inline'	=> 'Do not include the % sign.'
-        	)
-        ));
+        	]
+        ]);
         
-        $this->add(array(
+        $this->add([
         	'name'			=> 'enabled',
         	'type'			=> 'checkbox',
-        	'options'		=> array(
+        	'options'		=> [
         		'label'			=> 'Enabled:',
         		'use_hidden_element' => true,
         		'checked_value' => '1',
         		'unchecked_value' => '0',
         		'required' 		=> true,
-        	),
-        ));
+        	],
+        ]);
         
-        $this->add(array(
+        $this->add([
         	'name'			=> 'discontinued',
         	'type'			=> 'checkbox',
-        	'options'		=> array(
+        	'options'		=> [
         		'label'			=> 'Discontinued:',
         		'required' 		=> true,
         		'use_hidden_element' => true,
         		'checked_value' => '1',
         		'unchecked_value' => '0',
-        	),
-        ));
+        	],
+        ]);
         
-        $this->add(array(
+        $this->add([
         	'name'			=> 'vatInc',
         	'type'			=> 'checkbox',
-        	'options'		=> array(
+        	'options'		=> [
         		'label'			=> 'Vat Included:',
         		'required' 		=> true,
         		'use_hidden_element' => true,
         		'checked_value' => '1',
         		'unchecked_value' => '0',
-        	),
-        ));
+        	],
+        ]);
     		
-    	$this->add(array(
+    	$this->add([
     		'name'		=> 'productCategoryId',
-    		'type'		=> 'select',
-    		'options'	=> array(
+    		'type'		=> 'ProductCategoryList',
+    		'options'	=> [
     			'label'			=> 'Category:',
     			'required'		=> true,
-    			'empty_option'	=> '---Please select a category---',
-    			'value_options'	=> $this->getCategoryList(),
-    		),
-    	));
+    		],
+    	]);
     	
-    	$this->add(array(
+    	$this->add([
     		'name'		=> 'productSizeId',
-    		'type'		=> 'select',
-    		'options'	=> array(
+    		'type'		=> 'ProductSizeList',
+    		'options'	=> [
     			'label'			=> 'Size:',
     			'required'		=> true,
-    			'empty_option'	=> '---Please select a size---',
-    			'value_options'	=> $this->getSizeList(),
-    		),
-    	));
+    		],
+    	]);
     	
-    	$this->add(array(
+    	$this->add([
     		'name'		=> 'postUnitId',
-    		'type'		=> 'select',
-    		'options'	=> array(
+    		'type'		=> 'PostUnitList',
+    		'options'	=> [
     			'label'			=> 'Weight:',
     			'required'		=> true,
-    			'empty_option'	=> '---Please select a weight---',
-    			'value_options'	=> $this->getPostUnitList(),
-    		),
-    	));
+    		],
+    	]);
     	
-    	$this->add(array(
+    	$this->add([
     		'name'		=> 'productGroupId',
-    		'type'		=> 'select',
-    		'options'	=> array(
+    		'type'		=> 'ProductGroupPriceList',
+    		'options'	=> [
     			'label'			=> 'Price Group:',
     			'required'		=> true,
-    			'value_options'	=> $this->getGroupPriceList(),
-    		),
-    	));
+    		],
+    	]);
     	
-    	$this->add(array(
+    	$this->add([
     		'name'		=> 'taxCodeId',
-    		'type'		=> 'select',
-    		'options'	=> array(
+    		'type'		=> 'TaxCodeList',
+    		'options'	=> [
     			'label'			=> 'Tax Code:',
     			'required'		=> true,
-    			'empty_option'	=> '---Please select a tax code---',
-    			'value_options'	=> $this->getTaxCodeList(),
-    		),
-    	));
+    		],
+    	]);
     }
-    
-    protected function getCategoryList()
-    {
-    	$cats = $this->getCategoryService()->fetchAll();
-    	$categoryOptions = array();
-    	$parent = 0;
-    	
-    	/* @var $cat \Shop\Model\Product\Category */
-    	foreach($cats as $cat) {
-    		
-    		if (0 == $cat->getDepth()) {
-    			$parent = $cat->getProductCategoryId();
-    			$categoryOptions[$parent]['options'][$cat->getProductCategoryId()] = $cat->getCategory();
-    			$categoryOptions[$parent]['label'] = $cat->getCategory();
-    		} else {
-    			$categoryOptions[$parent]['options'][$cat->getProductCategoryId()] = $cat->getCategory();
-    		}
-    	}
-    	
-    	return $categoryOptions;
-    }
-    
-    protected function getGroupPriceList()
-    {
-    	$groups = $this->getGroupPriceService()->fetchAll();
-    	$groupPriceOptions = array('0' => 'None');
-    	
-    	/* @var $group \Shop\Model\Product\GroupPrice */
-    	foreach($groups as $group) {
-    		$groupPriceOptions[$group->getProductGroupId()] = $group->getGroup() . ' - ' . $group->getPrice();
-    	}
-    	
-    	return $groupPriceOptions;
-    }
-    
-    protected function getPostUnitList()
-    {
-    	$postUnits = $this->getPostUnitService()->fetchAll();
-    	$postUnitOptions = array();
-    	
-    	/* @var $postUnit \Shop\Model\Post\Unit */
-    	foreach($postUnits as $postUnit) {
-    		$postUnitOptions[$postUnit->getPostUnitId()] = $postUnit->getPostUnit();
-    	}
-    	
-    	return $postUnitOptions;
-    }
-    
-    protected function getSizeList()
-    {
-    	$sizes = $this->getSizeService()->fetchAll();
-    	$sizeOptions = array();
-    	
-    	/* @var $size \Shop\Model\Product\Size */
-    	foreach($sizes as $size) {
-    		$sizeOptions[$size->getProductSizeId()] = $size->getSize(); 
-    	}
-    	
-    	return $sizeOptions;
-    }
-    
-    protected function getTaxCodeList()
-    {
-    	$taxCodes = $this->getTaxCodeService()->fetchAll();
-    	$taxCodeOptions = array();
-    	
-    	/* @var $taxCode \Shop\Model\Tax\Code */
-    	foreach($taxCodes as $taxCode) {
-    		$taxCodeOptions[$taxCode->getTaxCodeId()] = $taxCode->getTaxCode() . ' - ' . $taxCode->getDescription();
-    	}
-    	
-    	return $taxCodeOptions;
-    }
-    
-    /**
-     * @return \Shop\Service\Product\Category
-     */
-    public function getCategoryService()
-    {
-    	return $this->getServiceLocator()->get('Shop\Service\ProductCategory');
-    }
-    
-    /**
-     * @return \Shop\Service\Product\GroupPrice
-     */
-	public function getGroupPriceService()
-	{
-		return $this->getServiceLocator()->get('Shop\Service\ProductGroupPrice');
-	}
-	
-    /**
-     * @return Shop\Service\Post\Unit
-     */
-	public function getPostUnitService()
-	{
-		return $this->getServiceLocator()->get('Shop\Service\PostUnit');
-	}
-	    
-    /**
-     * @return \Shop\Service\Product\Size
-     */
-	public function getSizeService()
-	{
-		return $this->getServiceLocator()->get('Shop\Service\ProductSize');
-	}
-	
-	/**
-	 * @return \Shop\Service\Tax\Code
-	 */
-	public function getTaxCodeService()
-	{
-		return $this->getServiceLocator()->get('Shop\Service\TaxCode');
-	}
 }

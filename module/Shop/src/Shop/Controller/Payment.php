@@ -2,45 +2,37 @@
 namespace Shop\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
-use Zend\Session\Container;
 
 class Payment extends AbstractActionController
-{   
-    /**
-     * @var Container
-     */
-    protected $container;
-    
+{
     public function payCheckAction()
     {
-        $order = $this->getOrderFromSession();
-        \FB::info($order);
+        $order = $this->getOrder();
     }
-    
+
     public function payPhoneAction()
     {
-        
+        $order = $this->getOrder();
     }
-    
+
     public function payCreditCardAction()
     {
-        
+        $order = $this->getOrder();
     }
-    
+
     public function payPaypalAction()
     {
-        
+        return $this->redirect()->toRoute('shop/paypal', [
+            'action' => 'process'
+        ]);
     }
     
-    /**
-     * @return array
-     */
-    public function getOrderFromSession()
+    private function getOrder()
     {
-        if (!$this->container instanceof Container) {
-            $this->container = new Container('order');
-        }
+        $orderId = $this->order()->getOrderFromSession()['orderId'];
+        $userId = $this->identity()->getUserId();
         
-        return $this->container->order;
+        $order = $this->getOrderService()
+            ->getCustomerOrderByUserId($orderId, $userId);
     }
 }

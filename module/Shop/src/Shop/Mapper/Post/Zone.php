@@ -1,7 +1,7 @@
 <?php
 namespace Shop\Mapper\Post;
 
-use Application\Mapper\AbstractMapper;
+use UthandoCommon\Mapper\AbstractMapper;
 
 class Zone extends AbstractMapper
 {

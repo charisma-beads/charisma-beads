@@ -1,14 +1,13 @@
 <?php $this->headTitle('Edit Group Price') ?>
-<?=$this->ztbFlashMessenger()->render(); ?>
 
-<?=$this->partial('partial/add-edit-form', array(
+<?=$this->partial('uthando-admin/partial/add-edit-form', [
 	'form' 			=> $this->form,
 	'formAction' 	=> 'edit',
     'primaryKey'	=> $this->model->getProductGroupId(),
 	'formName'		=> 'Group Price',
 	'postRoute'		=> 'admin/shop/group-price/edit',
 	'cancelRoute'	=> 'admin/shop/group-price',
-	'formElements'	=> array(
+	'formElements'	=> [
 		'productGroupId', 'group', 'price',
-	),
-)); ?>
+	],
+]); ?>

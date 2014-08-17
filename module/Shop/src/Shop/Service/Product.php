@@ -1,11 +1,8 @@
 <?php
 namespace Shop\Service;
 
-use Application\Model\ModelInterface;
-use Application\Service\AbstractService;
+use UthandoCommon\Service\AbstractService;
 use Shop\Model\Product as ProductModel;
-use Shop\ShopException;
-use Zend\Form\Form;
 
 class Product extends AbstractService
 {
@@ -60,7 +57,7 @@ class Product extends AbstractService
 	}
 	
 	public function getProductsByCategory($category, $order=null, $deep=true)
-	{
+	{   
 		if (is_string($category)) {
 			$cat = $this->getCategoryService()->getCategoryByIdent($category);
 			$categoryId = (null === $cat) ? 0 : $cat->getProductCategoryId();
@@ -80,7 +77,7 @@ class Product extends AbstractService
 		$products = $this->getMapper()->getProductsByCategory($categoryId, $order);
 		
 		foreach ($products as $product) {
-		    $this->populate($product, true);
+		    $product = $this->populate($product, true);
 		}
 	
 		return $products;
@@ -168,47 +165,18 @@ class Product extends AbstractService
 		if ($allChildren || in_array('image', $children)) {
 			 
 		}
-	}
-	
-	public function add(array $post)
-	{
-		if (!$post['ident']) {
-			$post['ident'] = $post['name'] . ' ' . $post['shortDescription'];
-		}
 		
-		return parent::add($post);
-	}
-	
-	/**
-	 * @param ProductModel $model
-	 */
-	public function edit(ModelInterface $model, array $post, Form $form = null)
-	{
-		if (!$model instanceof ProductModel) {
-			throw new ShopException('$model must be an instance of Shop\Model\Product, ' . get_class($model) . ' given.');
-		}
-		
-		if (!$post['ident']) {
-			$post['ident'] = $post['name'] . ' ' . $post['shortDescription'];
-		}
-		
-		$model->setDateModified();
-		
-		return parent::edit($model, $post);
+		return $model;
 	}
 	
 	public function toggleEnabled(ProductModel $product)
 	{
+		$enabled = (true === $product->getEnabled()) ? 0 : 1;
+		
+		$form  = $this->getForm($product, ['enabled' => $enabled], true, true);
+		$form->setValidationGroup('enabled');
 	
-		if (true === $product->getEnabled()) {
-			$product->setEnabled(false);
-		} else {
-			$product->setEnabled(true);
-		}
-	
-		$product->setDateModified();
-	
-		return $this->getMapper()->toggleEnabled($product);
+		return parent::edit($product, [], $form);
 	}
 	
 	/**
@@ -218,7 +186,7 @@ class Product extends AbstractService
 	{
 		if (!$this->categoryService) {
 			$sl = $this->getServiceLocator();
-			$this->categoryService = $sl->get('Shop\Service\ProductCategory');
+			$this->categoryService = $sl->get('Shop\Service\Product\Category');
 		}
 		
 		return $this->categoryService;
@@ -231,7 +199,7 @@ class Product extends AbstractService
 	{
 		if (!$this->sizeService) {
 			$sl = $this->getServiceLocator();
-			$this->sizeService = $sl->get('Shop\Service\ProductSize');
+			$this->sizeService = $sl->get('Shop\Service\Product\Size');
 		}
 	
 		return $this->sizeService;
@@ -244,7 +212,7 @@ class Product extends AbstractService
 	{
 		if (!$this->taxCodeService) {
 			$sl = $this->getServiceLocator();
-			$this->taxCodeService = $sl->get('Shop\Service\TaxCode');
+			$this->taxCodeService = $sl->get('Shop\Service\Tax\Code');
 		}
 	
 		return $this->taxCodeService;
@@ -257,7 +225,7 @@ class Product extends AbstractService
 	{
 		if (!$this->postUnitService) {
 			$sl = $this->getServiceLocator();
-			$this->postUnitService = $sl->get('Shop\Service\PostUnit');
+			$this->postUnitService = $sl->get('Shop\Service\Post\Unit');
 		}
 	
 		return $this->postUnitService;
@@ -270,7 +238,7 @@ class Product extends AbstractService
 	{
 		if (!$this->groupPriceService) {
 			$sl = $this->getServiceLocator();
-			$this->groupPriceService = $sl->get('Shop\Service\ProductGroupPrice');
+			$this->groupPriceService = $sl->get('Shop\Service\ProductGroup\Price');
 		}
 	
 		return $this->groupPriceService;
@@ -283,7 +251,7 @@ class Product extends AbstractService
 	{
 		if (!$this->imageService) {
 			$sl = $this->getServiceLocator();
-			$this->imageService = $sl->get('Shop\Service\ProductImage');
+			$this->imageService = $sl->get('\Service\Product\Image');
 		}
 	
 		return $this->imageService;

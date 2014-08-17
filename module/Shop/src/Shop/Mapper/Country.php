@@ -1,7 +1,7 @@
 <?php
 namespace Shop\Mapper;
 
-use Application\Mapper\AbstractMapper;
+use UthandoCommon\Mapper\AbstractMapper;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\Sql\Select;
 

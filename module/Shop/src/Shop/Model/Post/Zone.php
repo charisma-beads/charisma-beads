@@ -1,8 +1,8 @@
 <?php
 namespace Shop\Model\Post;
 
-use Application\Model\Model;
-use Application\Model\ModelInterface;
+use UthandoCommon\Model\Model;
+use UthandoCommon\Model\ModelInterface;
 
 class Zone implements ModelInterface
 {

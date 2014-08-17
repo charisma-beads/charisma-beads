@@ -15,7 +15,7 @@ class Breadcrumb extends AbstractHelper
 			
 			$html = '<ul class="breadcrumb">';
 			
-			$html .= '<li><a href="' . $urlHelper('shop') . '">Shop Front</a><span class="divider">/</span></li>';
+			$html .= '<li><a href="' . $urlHelper('shop') . '">Shop Front</a></li>';
 			
 			foreach ($bread as $category) {
 				
@@ -24,7 +24,7 @@ class Breadcrumb extends AbstractHelper
 				));
 				
 				if (null === $product && $this->view->category->getIdent() !== $category->getIdent()) {
-					$crumbs[] = '<li><a href="' . $href . '">' . $escapeHtml($category->getCategory()) . '</a> <span class="divider">/</span></li>';
+					$crumbs[] = '<li><a href="' . $href . '">' . $escapeHtml($category->getCategory()) . '</a></li>';
 				} else {
 					$crumbs[] = '<li class="active">' . $escapeHtml($category->getCategory()) . '</li>';
 				}

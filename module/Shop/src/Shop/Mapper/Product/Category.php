@@ -1,7 +1,7 @@
 <?php
 namespace Shop\Mapper\Product;
 
-use Application\Mapper\AbstractNestedSet;
+use UthandoCommon\Mapper\AbstractNestedSet;
 use Shop\Model\Product\Category as CategoryModel;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Where;

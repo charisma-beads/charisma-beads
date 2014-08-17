@@ -1,9 +1,0 @@
-<?php $this->headTitle('Edit Page') ?>
-<?=$this->ztbFlashMessenger()->render(); ?>
-
-<?=$this->partial('page/page-form', array(
-	'form' => $this->form,
-	'formAction' => 'edit',
-    'pageId' => $this->page->getPageId(),
-	'menuId' => $this->page->getMenuId()
-));?>

@@ -1,11 +1,11 @@
 <?php
 namespace Shop\Service\Customer;
 
-use Application\Service\AbstractService;
+use UthandoCommon\Service\AbstractService;
 
 class Prefix extends AbstractService
 {
-    protected $mapperClass = 'Shop\Mapper\CustomerPrefix';
-    protected $form = 'Shop\Form\CustomerPrefix';
-    protected $inputFilter = 'Shop\InputFilter\CustomerPrefix';
+    protected $mapperClass = 'Shop\Mapper\Customer\Prefix';
+    protected $form = 'Shop\Form\Customer\Prefix';
+    protected $inputFilter = 'Shop\InputFilter\Customer\Prefix';
 }

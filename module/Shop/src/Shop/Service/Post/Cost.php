@@ -2,13 +2,13 @@
 
 namespace Shop\Service\Post;
 
-use Application\Service\AbstractService;
+use UthandoCommon\Service\AbstractService;
 
 class Cost extends AbstractService
 {
-	protected $mapperClass = 'Shop\Mapper\PostCost';
-	protected $form = 'Shop\Form\PostCost';
-	protected $inputFilter = 'Shop\InputFilter\PostCost';
+	protected $mapperClass = 'Shop\Mapper\Post\Cost';
+	protected $form = 'Shop\Form\Post\Cost';
+	protected $inputFilter = 'Shop\InputFilter\Post\Cost';
 	
 	/**
 	 * @var \Shop\Service\Post\Level

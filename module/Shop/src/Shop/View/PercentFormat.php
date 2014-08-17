@@ -3,7 +3,7 @@
 namespace Shop\View;
 
 use NumberFormatter;
-use Application\View\AbstractViewHelper;
+use UthandoCommon\View\AbstractViewHelper;
 use Zend\I18n\View\Helper\NumberFormat;
 
 class PercentFormat extends AbstractViewHelper

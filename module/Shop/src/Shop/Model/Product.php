@@ -1,8 +1,10 @@
 <?php
 namespace Shop\Model;
 
-use Application\Model\Model;
-use Application\Model\ModelInterface;
+use UthandoCommon\Model\DateCreatedTrait;
+use UthandoCommon\Model\DateModifiedTrait;
+use UthandoCommon\Model\Model;
+use UthandoCommon\Model\ModelInterface;
 use Shop\Model\Post\Unit;
 use Shop\Model\Product\Category;
 use Shop\Model\Product\Size;
@@ -13,6 +15,8 @@ use DateTime;
 class Product implements ModelInterface
 {
     use Model;
+    use DateCreatedTrait;
+    use DateModifiedTrait;
     
 	/**
 	 * @var int
@@ -108,16 +112,6 @@ class Product implements ModelInterface
 	 * @var bool
 	 */
 	protected $vatInc;
-	
-	/**
-	 * @var DateTime
-	 */
-	protected $dateCreated;
-	
-	/**
-	 * @var DateTime
-	 */
-	protected $dateModified;
 	
 	/**
 	 * @var Category
@@ -472,40 +466,6 @@ class Product implements ModelInterface
 	public function setVatInc($vatInc)
 	{
 		$this->vatInc = $vatInc;
-		return $this;
-	}
-
-	/**
-	 * @return DateTime $dateCreated
-	 */
-	public function getDateCreated()
-	{
-		return $this->dateCreated;
-	}
-
-	/**
-	 * @param DateTime $dateCreated
-	 */
-	public function setDateCreated(DateTime $dateCreated = null)
-	{
-		$this->dateCreated = $dateCreated;
-		return $this;
-	}
-
-	/**
-	 * @return DateTime $dateModified
-	 */
-	public function getDateModified()
-	{
-		return $this->dateModified;
-	}
-
-	/**
-	 * @param DateTime $dateModified
-	 */
-	public function setDateModified(DateTime $dateModified = null)
-	{
-		$this->dateModified = $dateModified;
 		return $this;
 	}
 

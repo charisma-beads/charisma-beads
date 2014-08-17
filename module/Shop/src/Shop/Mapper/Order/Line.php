@@ -1,7 +1,7 @@
 <?php
 namespace Shop\Mapper\Order;
 
-use Application\Mapper\AbstractMapper;
+use UthandoCommon\Mapper\AbstractMapper;
 
 class Line extends AbstractMapper
 {

@@ -5,22 +5,20 @@ use Zend\Form\Form;
 
 class Search extends Form
 {
-    public function __construct()
+    public function init()
     {
-        parent::__construct();
-        
-        $this->add(array(
+        $this->add([
         	'name'      => 'productSearch',
             'type'      => 'text',
-            'options'   => array(
+            'options'   => [
 				'required' => false,
-			),
-			'attributes' => array(
+			],
+			'attributes' => [
 				'class'             => 'search-query',	
 			    'placeholder'       => 'Type your search...',
 			    'autocapitalize'	=> 'off',
-			)
-        ));
+			],
+        ]);
         
         /**
          * autocapitalize="off"

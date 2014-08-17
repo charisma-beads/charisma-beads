@@ -1,12 +1,12 @@
 <?php
 namespace Shop\Controller\Product;
 
-use Application\Controller\AbstractCrudController;
+use UthandoCommon\Controller\AbstractCrudController;
 
 class ProductCategory extends AbstractCrudController
 {
     protected $searchDefaultParams = array('sort' => 'lft');
-    protected $serviceName = 'Shop\Service\ProductCategory';
+    protected $serviceName = 'Shop\Service\Product\Category';
     protected $route = 'admin/shop/category';
     
     public function indexAction()

@@ -1,43 +1,43 @@
 <?php $this->headTitle('Product Group prices') ?>
-<?php echo $this->ztbFlashMessenger()->render(); ?>
 
 <?php if (count($this->models) > 0): ?>
-
-<table id="productGroupPrice-list" class="table table-hover table-bordered table-condensed sortable-table">
-	<thead>
-		<tr>
-			<th data-field="productGroupId">Product Group Id</th>
-			<th data-field="group">Group</th>
-			<th data-field="price">Price</th>
-			<th>Actions</th>
-		</tr>
-	</thead>
-	
-	<tbody>
-	<?php /* @var $row \Shop\Model\Product\GroupPrice */ ?>
-		<?php foreach($this->models as $row): ?>
-		<tr>
-			<td><?=$this->escapeHtml($row->getProductGroupId()); ?></td>
-			<td><?=$this->escapeHtml($row->getGroup()); ?></td>
-			<td><?=$this->priceFormat($this->escapeHtml($row->getPrice())); ?></td>
-			<td>
-                <?=$this->partial('partial/edit-actions', array(
-                	'pk'		=> 'productGroupId',
-                	'id'		=> $row->getProductGroupId(),
-		    		'tableName'	=> 'productGroupPrice',
-                	'route'		=> 'admin/shop/group-price/edit',
-		    	));?>
-			</td>
-		</tr>
-		<?php endforeach; ?>
-	</tbody>
-</table>
+<div class="panel panel-default">
+    <table id="productGroupPrice-list" class="table table-hover table-bordered table-condensed sortable-table">
+    	<thead>
+    		<tr>
+    			<th data-field="productGroupId">Product Group Id</th>
+    			<th data-field="group">Group</th>
+    			<th data-field="price">Price</th>
+    			<th>Actions</th>
+    		</tr>
+    	</thead>
+    	
+    	<tbody>
+    	<?php /* @var $row \Shop\Model\Product\GroupPrice */ ?>
+    		<?php foreach($this->models as $row): ?>
+    		<tr>
+    			<td><?=$this->escapeHtml($row->getProductGroupId()); ?></td>
+    			<td><?=$this->escapeHtml($row->getGroup()); ?></td>
+    			<td><?=$this->priceFormat($this->escapeHtml($row->getPrice())); ?></td>
+    			<td>
+                    <?=$this->partial('uthando-admin/partial/edit-actions', [
+                    	'pk'		=> 'productGroupId',
+                    	'id'		=> $row->getProductGroupId(),
+    		    		'tableName'	=> 'productGroupPrice',
+                    	'route'		=> 'admin/shop/group-price/edit',
+    		    	]);?>
+    			</td>
+    		</tr>
+    		<?php endforeach; ?>
+    	</tbody>
+    </table>
+</div>
 
 <?=$this->paginationControl(
     $this->models,
     'Elastic',
-    'paginate',
-	array('route' => 'admin/shop/group-price/page')
+    'application/partial/paginate',
+	['route' => 'admin/shop/group-price/page']
 ); ?>
 
 <?php else: ?>

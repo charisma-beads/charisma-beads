@@ -1,9 +1,9 @@
 <?php
 namespace Shop\Hydrator;
 
-use Application\Hydrator\AbstractHydrator;
-use Application\Hydrator\Strategy\DateTime as DateTimeStrategy;
-use Application\Hydrator\Strategy\Serialize;
+use UthandoCommon\Hydrator\AbstractHydrator;
+use UthandoCommon\Hydrator\Strategy\DateTime as DateTimeStrategy;
+use UthandoCommon\Hydrator\Strategy\Serialize;
 
 class Order extends AbstractHydrator
 {

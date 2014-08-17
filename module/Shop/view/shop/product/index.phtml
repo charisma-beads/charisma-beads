@@ -1,32 +1,20 @@
-<div class="tab-wrap">
-<!-- 
-	<ul id="productTabs" class="nav nav-tabs">
-	    <li><a href="#admin-user">Products</a></li>
-	</ul>
-	
-	<div id="productTabContent" class="tab-content">
-	    <div class="tab-pane" id="admin-product">
-	    -->
-	    	<div class="row-fluid">
-	    		<?=$this->partial('partial/search', array(
-		    		'name'			=> 'product',
-		    		'searchInputs'	=> array(
-		    			'Product'	=> 'name-shortDescription',
-						'Category'	=> 'category',
-		    		),
-		    	));?>
-	    	</div>
-	    	
-	    	<div id="table-product" class="row-fluid table-wrap">
-		    	<?=$this->partial('shop/product/list', array(
-		    	    'models' => $this->models
-		    	)); ?>
-	    	</div>
-	    <!-- </div>
-	</div> -->
+
+<?=$this->partial('uthando-admin/partial/search', [
+	'name'			=> 'product',
+	'searchInputs'	=> [
+		'Product'	=> 'name-shortDescription',
+		'Category'	=> 'category',
+	],
+]);?>
+
+<div id="table-product">
+	<?=$this->partial('shop/product/list', [
+	    'models' => $this->models
+	]); ?>
 </div>
 
-<?php $this->headScript()->captureStart(); ?>
+
+<?php $this->inlineScript()->captureStart(); ?>
 $(document).ready(function(){
 	$('#table-product').dataGrid({
 	    url : 'product/list',
@@ -36,4 +24,4 @@ $(document).ready(function(){
 	    columnSort: true
 	});
 });
-<?php $this->headScript()->captureEnd(); ?>
+<?php $this->inlineScript()->captureEnd(); ?>

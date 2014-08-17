@@ -1,8 +1,8 @@
 <?php
 namespace Shop\Model\Product;
 
-use Application\Model\Model;
-use Application\Model\ModelInterface;
+use UthandoCommon\Model\Model;
+use UthandoCommon\Model\ModelInterface;
 use Shop\Model\Product;
 use DateTime;
 

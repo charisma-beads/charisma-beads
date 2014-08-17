@@ -1,13 +1,12 @@
 <?php $this->headTitle('Add Group Price') ?>
-<?=$this->ztbFlashMessenger()->render(); ?>
 
-<?=$this->partial('partial/add-edit-form', array(
+<?=$this->partial('uthando-partial/add-edit-form', [
 	'form' 			=> $this->form,
 	'formAction' 	=> 'add',
 	'formName'		=> 'Group Price',
 	'postRoute'		=> 'admin/shop/group-price/edit',
 	'cancelRoute'	=> 'admin/shop/group-price',
-	'formElements'	=> array(
+	'formElements'	=> [
 		'group', 'price',
-	),
-)); ?>
+	],
+]); ?>

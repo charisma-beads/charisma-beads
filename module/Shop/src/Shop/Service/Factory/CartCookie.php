@@ -12,7 +12,7 @@ class CartCookie implements FactoryInterface
 	{
 	    $request = $serviceLocator->get('Request');
 	    $response = $serviceLocator->get('Response');
-	    $cookieConfig = $serviceLocator->get('Shop\Options\CartCookieOptions');
+	    $cookieConfig = $serviceLocator->get('Shop\Options\CartCookie');
 	    
         $cartCookieService = new CartCookieService();
         

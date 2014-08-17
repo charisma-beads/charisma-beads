@@ -1,58 +1,57 @@
 <?php $this->headTitle('Product Categories') ?>
-<?php echo $this->ztbFlashMessenger()->render(); ?>
 
 <?php if (count($this->models) > 0): ?>
-
-<table id="productCategory-list" class="table table-hover table-bordered table-condensed sortable-table">
-	<thead>
-		<tr>
-		    <th data-field="enabled">&nbsp;</th>
-			<th data-field="productCategoryId">Product Category Id</th>
-			<th data-field="category">Category</th>
-			<th data-field="lft">Lft</th>
-			<th data-field="rgt">Rgt</th>
-			<th data-field="dateCreated">Date Created</th>
-			<th data-field="dateModified">Date Modified</th>
-			<th>Actions</th>
-		</tr>
-	</thead>
-	
-	<tbody>
-		<?php /* @var $row \Shop\Model\Product\Category */ ?>
-		<?php foreach($this->models as $row): ?>
-		<?php 
-			$indent = 'indent' . ($row->getDepth() + 1);
-    		$parent = ($row->hasChildren() || $row->getDepth() == 0) ? 'bold ' : '';
-		?>
-		<tr>
-		    <td><?=$this->enabled($row, array(
-		    	'table' => 'productCategory',
-		        'route' => 'admin/shop/category/edit',
-		    )); ?></td>
-			<td><?=$this->escapeHtml($row->getProductCategoryId()); ?></td>
-			<td class="<?=$parent . $indent;?>"><?=$this->escapeHtml($row->getCategory()); ?></td>
-			<td><?=$this->escapeHtml($row->getLft()); ?></td>
-			<td><?=$this->escapeHtml($row->getRgt()); ?></td>
-			<td><?=$this->escapeHtml($this->formatDate($row->getDateCreated())); ?></td>
-			<td><?=$this->escapeHtml($this->formatDate($row->getDateModified())); ?></td>
-			<td>
-                <?=$this->partial('partial/edit-actions', array(
-                	'pk'		=> 'productCategoryId',
-                	'id'		=> $row->getProductCategoryId(),
-		    		'tableName'	=> 'productCategory',
-                	'route'		=> 'admin/shop/category/edit',
-		    	));?>
-			</td>
-		</tr>
-		<?php endforeach; ?>
-	</tbody>
-</table>
-
+<div class="panel panel-default">
+    <table id="productCategory-list" class="table table-hover table-bordered table-condensed sortable-table">
+    	<thead>
+    		<tr>
+    		    <th data-field="enabled">&nbsp;</th>
+    			<th data-field="productCategoryId">Product Category Id</th>
+    			<th data-field="category">Category</th>
+    			<th data-field="lft">Lft</th>
+    			<th data-field="rgt">Rgt</th>
+    			<th data-field="dateCreated">Date Created</th>
+    			<th data-field="dateModified">Date Modified</th>
+    			<th>Actions</th>
+    		</tr>
+    	</thead>
+    	
+    	<tbody>
+    		<?php /* @var $row \Shop\Model\Product\Category */ ?>
+    		<?php foreach($this->models as $row): ?>
+    		<?php 
+    			$indent = 'indent' . ($row->getDepth() + 1);
+        		$parent = ($row->hasChildren() || $row->getDepth() == 0) ? 'bold ' : '';
+    		?>
+    		<tr>
+    		    <td><?=$this->enabled($row, [
+    		    	'table' => 'productCategory',
+    		        'route' => 'admin/shop/category/edit',
+    		    ]); ?></td>
+    			<td><?=$this->escapeHtml($row->getProductCategoryId()); ?></td>
+    			<td class="<?=$parent . $indent;?>"><?=$this->escapeHtml($row->getCategory()); ?></td>
+    			<td><?=$this->escapeHtml($row->getLft()); ?></td>
+    			<td><?=$this->escapeHtml($row->getRgt()); ?></td>
+    			<td><?=$this->escapeHtml($this->formatDate($row->getDateCreated())); ?></td>
+    			<td><?=$this->escapeHtml($this->formatDate($row->getDateModified())); ?></td>
+    			<td>
+                    <?=$this->partial('uthando-admin/partial/edit-actions', [
+                    	'pk'		=> 'productCategoryId',
+                    	'id'		=> $row->getProductCategoryId(),
+    		    		'tableName'	=> 'productCategory',
+                    	'route'		=> 'admin/shop/category/edit',
+    		    	]);?>
+    			</td>
+    		</tr>
+    		<?php endforeach; ?>
+    	</tbody>
+    </table>
+</div>
 <?=$this->paginationControl(
     $this->models,
     'Elastic',
-    'paginate',
-	array('route' => 'admin/shop/category/page')
+    'application/partial/paginate',
+	['route' => 'admin/shop/category/page']
 ); ?>
 
 <?php else: ?>

@@ -1,8 +1,8 @@
 <?php
 namespace Shop\Hydrator;
 
-use Application\Hydrator\AbstractHydrator;
-use Application\Hydrator\Strategy\DateTime as DateTimeStrategy;
+use UthandoCommon\Hydrator\AbstractHydrator;
+use UthandoCommon\Hydrator\Strategy\DateTime as DateTimeStrategy;
 
 class Cart extends AbstractHydrator
 {

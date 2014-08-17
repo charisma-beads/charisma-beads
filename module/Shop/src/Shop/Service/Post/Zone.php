@@ -2,12 +2,12 @@
 
 namespace Shop\Service\Post;
 
-use Application\Service\AbstractService;
+use UthandoCommon\Service\AbstractService;
 
 class Zone extends AbstractService
 {
-	protected $mapperClass = 'Shop\Mapper\PostZone';
-	protected $form = 'Shop\Form\PostZone';
-	protected $inputFilter = 'Shop\InputFilter\PostZone';
+	protected $mapperClass = 'Shop\Mapper\Post\Zone';
+	protected $form = 'Shop\Form\Post\Zone';
+	protected $inputFilter = 'Shop\InputFilter\Post\Zone';
 	
 }

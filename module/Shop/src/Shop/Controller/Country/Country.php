@@ -1,7 +1,7 @@
 <?php
 namespace Shop\Controller\Country;
 
-use Application\Controller\AbstractCrudController;
+use UthandoCommon\Controller\AbstractCrudController;
 
 class Country extends AbstractCrudController
 {

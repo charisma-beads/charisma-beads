@@ -1,7 +1,7 @@
 <?php
 namespace Shop\Hydrator\Order;
 
-use Application\Hydrator\AbstractHydrator;
+use UthandoCommon\Hydrator\AbstractHydrator;
 
 class Status extends AbstractHydrator
 {

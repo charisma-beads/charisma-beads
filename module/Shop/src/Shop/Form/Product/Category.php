@@ -1,7 +1,7 @@
 <?php
 namespace Shop\Form\Product;
 
-use Application\Mapper\AbstractNestedSet as NestedSet;
+use UthandoCommon\Mapper\AbstractNestedSet as NestedSet;
 use Zend\Form\Form;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
@@ -103,7 +103,11 @@ class Category extends Form implements ServiceLocatorAwareInterface
     	);
     	
     	if ($this->getCategoryId()) {
-    		$categoryInsertOptions['noInsert'] = 'no change';
+    		$categoryInsertOptions['noInsert'] = [
+                'value' => 'noInsert',
+                'selected' => true,
+                'label' => 'no change',
+    		];
     	}
     	
     	$this->add(array(
@@ -184,6 +188,6 @@ class Category extends Form implements ServiceLocatorAwareInterface
 	 */
 	public function getCategoryService()
 	{
-		return $this->getServiceLocator()->get('Shop\Service\ProductCategory');
+		return $this->getServiceLocator()->getServiceLocator()->get('Shop\Service\Product\Category');
 	}
 }

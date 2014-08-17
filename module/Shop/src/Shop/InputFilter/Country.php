@@ -14,7 +14,7 @@ class Country extends InputFilter
 			'filters'    => array(
 				array('name' => 'StripTags'),
 				array('name' => 'StringTrim'),
-				array('name' => 'Application\Filter\Ucwords'),
+				array('name' => 'UthandoCommon\Filter\Ucwords'),
 			),
 			'validators' => array(
 				array('name' => 'StringLength', 'options' => array(
@@ -31,7 +31,7 @@ class Country extends InputFilter
 		    'filters'    => array(
 		        array('name' => 'StripTags'),
 		        array('name' => 'StringTrim'),
-		        array('name' => 'Application\Filter\StringToUpper'),
+		        array('name' => 'StringToUpper'),
 		    ),
 		    'validators' => array(
 		        array('name' => 'StringLength', 'options' => array(

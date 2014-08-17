@@ -1,8 +1,8 @@
 <?php
 namespace Shop\Hydrator\Order;
 
-use Application\Hydrator\AbstractHydrator;
-use Application\Hydrator\Strategy\Serialize;
+use UthandoCommon\Hydrator\AbstractHydrator;
+use UthandoCommon\Hydrator\Strategy\Serialize;
 use Shop\Hydrator\Strategy\Percent;
 
 class Line extends AbstractHydrator

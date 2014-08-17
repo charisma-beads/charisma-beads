@@ -1,14 +1,13 @@
 <?php $this->headTitle('Edit Post Zone') ?>
-<?=$this->ztbFlashMessenger()->render(); ?>
 
-<?=$this->partial('partial/add-edit-form', array(
+<?=$this->partial('uthando-admin/partial/add-edit-form', [
 	'form' 			=> $this->form,
 	'formAction' 	=> 'edit',
 	'primaryKey'	=> $this->model->getPostZoneId(),
 	'formName'		=> 'Post Zone',
 	'postRoute'		=> 'admin/shop/post/zone/edit',
 	'cancelRoute'	=> 'admin/shop/post/zone',
-	'formElements'	=> array(
+	'formElements'	=> [
 		'zone', 'taxCodeId', 'postZoneId',
-	),
-)); ?>
+	],
+]); ?>

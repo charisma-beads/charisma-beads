@@ -1,32 +1,18 @@
 
-<div class="tab-wrap">
-<!-- 
-	<ul id="postLevelTabs" class="nav nav-tabs">
-	    <li><a href="#admin-postLevel">Post Levels</a></li>
-	</ul>
-	
-	<div id="postLevelTabContent" class="tab-content">
-	    <div class="tab-pane" id="admin-postLevel">
-	    -->
-	    	<div class="row-fluid">
-		    	<?=$this->partial('partial/search', array(
-		    		'name'			=> 'postLevel',
-		    		'searchInputs'	=> array(
-		    			'Post Level' => 'postLevel',
-		    		),
-		    	));?>
-	    	</div>
+<?=$this->partial('uthando-admin/partial/search', [
+	'name'			=> 'postLevel',
+	'searchInputs'	=> [
+		'Post Level' => 'postLevel',
+	],
+]);?>
 	    	
-	    	<div id="table-postLevel" class="row-fluid table-wrap">
-		    	<?=$this->partial('shop/post-level/list', array(
-		    	    'models' => $this->models
-		    	)); ?>
-	    	</div>
-	    <!-- </div>
-	</div> -->
+<div id="table-postLevel">
+	<?=$this->partial('shop/post-level/list', [
+	    'models' => $this->models
+	]); ?>
 </div>
 
-<?php $this->headScript()->captureStart(); ?>
+<?php $this->inlineScript()->captureStart(); ?>
 $(document).ready(function(){
 	$('#table-postLevel').dataGrid({
 	    url : 'level/list',
@@ -37,4 +23,4 @@ $(document).ready(function(){
 	    //rowClick : admin.product.rowClick
 	});
 });
-<?php $this->headScript()->captureEnd(); ?>
+<?php $this->inlineScript()->captureEnd(); ?>

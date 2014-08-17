@@ -7,9 +7,9 @@ class Image extends Form
 {
     public function init()
     {
-        $this->add(array(
+        $this->add([
         	'name'	=> 'productImageId',
         	'type'	=> 'hidden',
-        ));
+        ]);
     }
 }

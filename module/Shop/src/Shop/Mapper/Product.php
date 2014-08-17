@@ -1,10 +1,8 @@
 <?php
 namespace Shop\Mapper;
 
-use Application\Mapper\AbstractMapper;
-use Shop\Model\Product as ProductModel;
+use UthandoCommon\Mapper\AbstractMapper;
 use Zend\Db\Sql\Select;
-use Zend\Db\Sql\Where;
 
 class Product extends AbstractMapper
 {       
@@ -137,21 +135,6 @@ class Product extends AbstractMapper
 	    }
 	    
 	    return $select;
-	}
-	
-	public function toggleEnabled(ProductModel $model)
-	{
-		$data = $this->extract($model);
-		
-		$where = new Where();
-		$where->equalTo($this->getPrimaryKey(), $model->getProductId());
-		
-		$data = array(
-			'enabled'		=> $data['enabled'],
-			'dateModified'	=> $data['dateModified']
-		);
-		
-		return $this->update($data, $where);
 	}
 	
 	public function getFetchEnabled()

@@ -1,32 +1,19 @@
 
-<div class="tab-wrap">
-<!-- 
-	<ul id="countryTabs" class="nav nav-tabs">
-	    <li><a href="#admin-country">Countries</a></li>
-	</ul>
-	
-	<div id="countryTabContent" class="tab-content">
-	    <div class="tab-pane" id="admin-country">
-	    -->
-	    	<div class="row-fluid">
-		    	<?=$this->partial('partial/search', array(
-		    		'name'			=> 'country',
-		    		'searchInputs'	=> array(
-		    			'Country' => 'country',
-		    		),
-		    	));?>
-	    	</div>
+<?=$this->partial('uthando-admin/partial/search', [
+	'name'			=> 'country',
+	'searchInputs'	=> [
+		'Country' => 'country-code',
+	],
+]);?>
+
 	    	
-	    	<div id="table-country" class="row-fluid table-wrap">
-		    	<?=$this->partial('shop/country/list', array(
-		    	    'models' => $this->models
-		    	)); ?>
-	    	</div>
-	    <!-- </div>
-	</div> -->
+<div id="table-country">
+	<?=$this->partial('shop/country/list', [
+	    'models' => $this->models
+	]); ?>
 </div>
 
-<?php $this->headScript()->captureStart(); ?>
+<?php $this->inlineScript()->captureStart(); ?>
 $(document).ready(function(){
 	$('#table-country').dataGrid({
 	    url : 'country/list',
@@ -37,4 +24,4 @@ $(document).ready(function(){
 	    //rowClick : admin.product.rowClick
 	});
 });
-<?php $this->headScript()->captureEnd(); ?>
+<?php $this->inlineScript()->captureEnd(); ?>

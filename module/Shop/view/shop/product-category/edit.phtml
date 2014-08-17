@@ -1,8 +1,7 @@
 <?php $this->headTitle('Edit Category') ?>
-<?=$this->ztbFlashMessenger()->render(); ?>
 
-<?=$this->partial('shop/product-category/category-form', array(
+<?=$this->partial('shop/product-category/category-form', [
 	'form' => $this->form,
 	'formAction' => 'edit',
 	'productCategoryId' => $this->model->getProductCategoryId()
-)); ?>
+]); ?>

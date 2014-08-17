@@ -1,8 +1,8 @@
 <?php
 namespace Shop\Model;
 
-use Application\Model\Model;
-use Application\Model\ModelInterface;
+use UthandoCommon\Model\Model;
+use UthandoCommon\Model\ModelInterface;
 use Shop\Model\Customer;
 use Shop\Model\Order\Line;
 use Shop\Model\Order\Metadata as OrderMetaData;

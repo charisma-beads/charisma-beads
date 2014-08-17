@@ -1,7 +1,7 @@
 <?php
 namespace Shop\Mapper\Product;
 
-use Application\Mapper\AbstractMapper;
+use UthandoCommon\Mapper\AbstractMapper;
 
 class GroupPrice extends AbstractMapper
 {

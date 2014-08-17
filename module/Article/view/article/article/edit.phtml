@@ -1,8 +1,0 @@
-<?php $this->headTitle('Edit Article') ?>
-<?php echo $this->ztbFlashMessenger()->render(); ?>
-
-<?php echo $this->partial('article/article-form', array(
-	'form' => $this->form,
-	'formAction' => 'edit',
-	'articleId' => $this->article->getArticleId()
-)); ?>

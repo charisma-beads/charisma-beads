@@ -1,32 +1,20 @@
 
-<div class="tab-wrap">
-<!-- 
-	<ul id="postZoneTabs" class="nav nav-tabs">
-	    <li><a href="#admin-postZone">Post Zones</a></li>
-	</ul>
-	
-	<div id="postZoneTabContent" class="tab-content">
-	    <div class="tab-pane" id="admin-postZone">
-	    -->
-	    	<div class="row-fluid">
-		    	<?=$this->partial('partial/search', array(
-		    		'name'			=> 'postZone',
-		    		'searchInputs'	=> array(
-		    			'Zone' => 'zone',
-		    		),
-		    	));?>
-	    	</div>
+
+<?=$this->partial('uthando-admin/partial/search', [
+	'name'			=> 'postZone',
+	'searchInputs'	=> [
+		'Zone' => 'zone',
+	],
+]);?>
 	    	
-	    	<div id="table-postZone" class="row-fluid table-wrap">
-		    	<?=$this->partial('shop/post-zone/list', array(
-		    	    'models' => $this->models
-		    	)); ?>
-	    	</div>
-	    <!-- </div>
-	</div> -->
+<div id="table-postZone">
+	<?=$this->partial('shop/post-zone/list', [
+	    'models' => $this->models
+	]); ?>
 </div>
 
-<?php $this->headScript()->captureStart(); ?>
+
+<?php $this->inlineScript()->captureStart(); ?>
 $(document).ready(function(){
 	$('#table-postZone').dataGrid({
 	    url : 'zone/list',
@@ -37,5 +25,5 @@ $(document).ready(function(){
 	    //rowClick : admin.product.rowClick
 	});
 });
-<?php $this->headScript()->captureEnd(); ?>
+<?php $this->inlineScript()->captureEnd(); ?>
 

@@ -1,102 +1,67 @@
 <?php
-/**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/ZendSkeletonApplication for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- */
 
 namespace Application;
 
-use Exception;
-use Application\Event\MvcListener;
-use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
-use Zend\Session\Container;
+use Zend\ModuleManager\ModuleEvent;
+use Zend\ModuleManager\ModuleManager;
 
 class Module
 {
+    public function init(ModuleManager $moduleManager)
+    {
+        $eventManager = $moduleManager->getEventManager();
+        
+        $eventManager->attach(ModuleEvent::EVENT_MERGE_CONFIG, [$this, 'setPhpSettings']);
+    }
+    
     public function onBootstrap(MvcEvent $event)
     {
-        $app                 = $event->getApplication();
-        $eventManager        = $app->getEventManager();
-        $moduleRouteListener = new ModuleRouteListener();
+        $app                    = $event->getApplication();
+        $eventManager           = $app->getEventManager();
+        $moduleRouteListener    = $app->getServiceManager()
+            ->get('ModuleRouteListener');
+        
         $moduleRouteListener->attach($eventManager);
-        
-        $sharedEventManager  = $eventManager->getSharedManager();
-        $config              = $app->getConfig();
-        
-        $eventManager->attach(new MvcListener());
-        
-        $this->setPhpSettings($event);
-        $this->startSession($event);
+        //$eventManager->attach(MvcEvent::EVENT_ROUTE, [$this, 'setPhpSettings']);
     }
-    
-    public function setPhpSettings(MvcEvent $event)
+
+    public function setPhpSettings(ModuleEvent $event)
     {
-    	$config = $event->getApplication()->getConfig();
-    	 
-    	if (isset($config['php_settings'])) {
-    		foreach ($config['php_settings'] as $key => $value) {
-    			ini_set($key, $value);
-    		}
-    	}
-    }
-    
-    public function startSession(MvcEvent $event)
-    {
-    	try {
-    		$session = $event->getApplication()
-    			->getServiceManager()
-    			->get('Application\SessionManager');
-    		$session->start();
-    		 
-    		$container = new Container();
-    
-    		if (!isset($container->init)) {
-    			$session->regenerateId(true);
-    			$container->init = 1;
-    		}
-    	} catch (Exception $e) {
-    		echo '<pre>';
-    		echo $e->getMessage();
-    		echo '</pre';
-    		exit();
-    	}
+        // we could have different setting for different route.
+        // in this case we would set it up in 'onBootstrap' method
+        // and attach it to the MvcEvent::EVENT_ROUTE
+        $phpSettings = $event->getConfigListener()
+            ->getMergedConfig(true)
+            ->get('php_settings');
+        
+        if ($phpSettings) {
+            foreach ($phpSettings as $key => $value) {
+                ini_set($key, $value);
+            }
+        }
     }
 
     public function getConfig()
     {
         return include __DIR__ . '/config/module.config.php';
     }
-    
-    public function getServiceConfig()
-    {
-    	return include __DIR__ . '/config/service.config.php';
-    }
-    
-    public function getViewHelperConfig()
-    {
-        return include __DIR__ . '/config/viewHelper.config.php';
-    }
-    
+
     public function getControllerConfig()
     {
-        return include __DIR__ . '/config/controller.config.php';
+        return [
+            'invokables' => [
+                'Application\Controller\Index' => 'Application\Controller\IndexController'
+            ],
+        ];
     }
 
-	public function getAutoloaderConfig()
+    public function getAutoloaderConfig()
     {
-        return array(
-            'Zend\Loader\ClassMapAutoloader' => array(
+        return [
+            'Zend\Loader\ClassMapAutoloader' => [
                 __DIR__ . '/autoload_classmap.php'
-            ),
-            'Zend\Loader\StandardAutoloader' => array(
-                'namespaces' => array(
-                    __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
-                ),
-            ),
-        );
+            ]
+        ];
     }
 }

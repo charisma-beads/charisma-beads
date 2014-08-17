@@ -2,12 +2,12 @@
 namespace Shop\Controller\Product;
 
 use Exception;
-use Application\Controller\AbstractCrudController;
+use UthandoCommon\Controller\AbstractCrudController;
 use Zend\View\Model\ViewModel;
 
 class Product extends AbstractCrudController
 {
-	protected $searchDefaultParams = array('sort' => 'name');
+	protected $searchDefaultParams = ['sort' => 'name'];
 	protected $serviceName = 'Shop\Service\Product';
 	protected $route = 'admin/shop/product';
 	
@@ -33,9 +33,9 @@ class Product extends AbstractCrudController
 	   $id = (int) $this->params('id', 0);
 	   
 		if (!$id) {
-			return $this->redirect()->toRoute($this->getRoute(), array(
+			return $this->redirect()->toRoute($this->getRoute(), [
 				'action' => 'list'
-			));
+			]);
 		}
 		
 		try {
@@ -44,13 +44,13 @@ class Product extends AbstractCrudController
 			$result = $this->getService()->toggleEnabled($product);
 		} catch (Exception $e) {
 		    $this->setExceptionMessages($e);
-			return $this->redirect()->toRoute($this->getRoute(), array(
+			return $this->redirect()->toRoute($this->getRoute(), [
 				'action' => 'list'
-			));
+			]);
 		}
 		
-		return $this->redirect()->toRoute($this->getRoute(), array(
+		return $this->redirect()->toRoute($this->getRoute(), [
 			'action' => 'list'
-		));
+		]);
 	}
 }
