@@ -1,12 +1,17 @@
 
 /data/*
-data/cache/*
+!data/do_not_remove
+!data/fonts
+!data/cache
+!data/sessions
+/data/cache/*
+!data/cache/do_not_remove
+/data/sessions/*
+!data/sessions/do_not_remove
 /logs/
 /public_html/admin/tmp/*
-/ssl/
 /vendor/
-/sample/
-.htaccess
+/public/.htaccess
 .buildpath
 .DS_Store
 .project
