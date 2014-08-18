@@ -15,6 +15,7 @@
     "zendframework/zend-http" : "2.*",
     "zendframework/zend-i18n" : "2.*",
     "zendframework/zend-navigation" : "2.*",
+    "zendframework/zend-version" : "2.*",
     "uthando-cms/uthando-article" : "1.*",
     "uthando-cms/uthando-contact" : "1.*",
     "uthando-cms/uthando-mail" : "1.*",
