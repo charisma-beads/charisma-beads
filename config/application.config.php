@@ -3,6 +3,19 @@
 return [
     'modules' => [
         'Application',
+        'UthandoCommon',
+        'UthandoAdmin',
+        'UthandoSessionManager',
+        'UthandoThemeManager',
+        'UthandoArticle',
+        'UthandoNavigation',
+        'UthandoUser',
+        'UthandoContact',
+        'UthandoFileManager',
+        'UthandoMail',
+        'UthandoTwitter',
+        'Shop',
+        'DOMPDFModule'
     ],
     'module_listener_options' => [
         'module_paths' => [
@@ -22,10 +35,10 @@ return [
     ],
     'service_manager' => [
         'invokables' => [
-            'ModuleRouteListener' => 'Zend\Mvc\ModuleRouteListener',
+            'ModuleRouteListener' => 'Zend\Mvc\ModuleRouteListener'
         ],
         'factories' => [
-            'Navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
-        ],
-    ],
+            'Navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory'
+        ]
+    ]
 ];

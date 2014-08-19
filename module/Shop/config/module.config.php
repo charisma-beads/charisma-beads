@@ -34,83 +34,85 @@ return [
             'cookieName' => 'CharismaShoppingCart' // Cookie Name
                 ]
     ],
-    'userAcl' => [
-        'userRoles' => [
-            'guest' => [
-                'privileges' => [
-                    'allow' => [
-                        ['controller' => 'Shop\Controller\Cart', 'action' => 'all'],
-                        ['controller' => 'Shop\Controller\Catalog', 'action' => 'all'],
-                        ['controller' => 'Shop\Controller\Checkout','action' => ['index']],
-                        //['controller' => 'Shop\Controller\Paypal', 'action' => ['ipn']],
-                        ['controller' => 'Shop\Controller\Product','action' => [ 'view']],
-                        ['controller' => 'Shop\Controller\Shop', 'action' => ['shop-front']],
+    'uthando_user' => [
+        'acl' => [
+            'roles' => [
+                'guest' => [
+                    'privileges' => [
+                        'allow' => [
+                            'controllers' => [
+                                'Shop\Controller\Cart' => ['action' => 'all'],
+                                'Shop\Controller\Catalog' => ['action' => 'all'],
+                                'Shop\Controller\Checkout' => ['action' => ['index']],
+                                'Shop\Controller\Product' => ['action' => [ 'view']],
+                                'Shop\Controller\Shop' => ['action' => ['shop-front']],
+                            ],
+                        ],
+                    ],
+                ],
+                'registered' => [
+                    'privileges' => [
+                        'allow' => [
+                            'controllers' => [
+                                'Shop\Controller\Country\Province' => ['action' => ['country-province-list']],
+                                'Shop\Controller\Customer' => ['action' => ['my-details']],
+                                'Shop\Controller\Customer\Address' => ['action' => ['my-addresses', 'edit-address', 'add-address', 'delete-address']],
+                                'Shop\Controller\Order' => ['action' => ['cancel', 'my-orders', 'view']],
+                                'Shop\Controller\Payment' => ['action' => 'all'],
+                                'Shop\Controller\Paypal' => ['action' => ['process', 'success', 'cancel']],
+                            ],
+                        ],
+                    ],
+                ],
+                'admin' => [
+                    'privileges' => [
+                        'allow' => [
+                            'controllers' => [
+                                'Shop\Controller\Country' => ['action' => 'all'],
+                                'Shop\Controller\Country\Province' => ['action' => 'all'],
+                                'Shop\Controller\Customer' => ['action' => 'all'],
+                                'Shop\Controller\Customer\Address' => ['action' => 'all'],
+                                'Shop\Controller\Order' => ['action' => 'all'],
+                                'Shop\Controller\Post\Cost' => ['action' => 'all'],
+                                'Shop\Controller\Post\Level' => ['action' => 'all'],
+                                'Shop\Controller\Post\Unit' => ['action' => 'all'],
+                                'Shop\Controller\Post\Zone' => ['action' => 'all'],
+                                'Shop\Controller\Product' => ['action' => 'all'],
+                                'Shop\Controller\Product\Category' => ['action' => 'all'],
+                                'Shop\Controller\Product\Image' => ['action' => 'all'],
+                                'Shop\Controller\Product\GroupPrice' => ['action' => 'all'],
+                                'Shop\Controller\Shop' => ['action' => 'all'],
+                                'Shop\Controller\Tax\Code' => ['action' => 'all'],
+                                'Shop\Controller\Tax\Rate' => ['action' => 'all'],
+                            ],
+                        ],
                     ],
                 ],
             ],
-            'registered' => [
-                'privileges' => [
-                    'allow' => [
-                        ['controller' => 'Shop\Controller\Cart', 'action' => 'all'],
-                        ['controller' => 'Shop\Controller\Catalog', 'action' => 'all'],
-                        ['controller' => 'Shop\Controller\Checkout', 'action' => 'all'],
-                        ['controller' => 'Shop\Controller\Country\Province', 'action' => 'country-province-list'],
-                        ['controller' => 'Shop\Controller\Customer', 'action' => 'my-details'],
-                        ['controller' => 'Shop\Controller\Customer\Address', 'action' => ['my-addresses', 'edit-address', 'add-address', 'delete-address']],
-                        ['controller' => 'Shop\Controller\Order', 'action' => ['cancel', 'my-orders', 'view']],
-                        ['controller' => 'Shop\Controller\Payment', 'action' => 'all'],
-                        ['controller' => 'Shop\Controller\Paypal', 'action' => ['process', 'success', 'cancel']],
-                        ['controller' => 'Shop\Controller\Product', 'action' => ['view']],
-                        ['controller' => 'Shop\Controller\Shop', 'action' => ['shop-front']],
-                    ],
-                ],
+            'resources' => [
+                'Shop\Controller\Cart',
+                'Shop\Controller\Catalog',
+                'Shop\Controller\Checkout',
+                'Shop\Controller\Country',
+                'Shop\Controller\Country\Province',
+                'Shop\Controller\Customer',
+                'Shop\Controller\Customer\Address',
+                'Shop\Controller\Order',
+                'Shop\Controller\Payment',
+                'Shop\Controller\Paypal',
+                'Shop\Controller\Post\Cost',
+                'Shop\Controller\Post\Level',
+                'Shop\Controller\Post\Unit',
+                'Shop\Controller\Post\Zone',
+                'Shop\Controller\Product',
+                'Shop\Controller\Product\Category',
+                'Shop\Controller\Product\Image',
+                'Shop\Controller\Product\GroupPrice',
+                'Shop\Controller\Shop',
+                'Shop\Controller\Tax\Code',
+                'Shop\Controller\Tax\Rate'
             ],
-            'admin' => [
-                'privileges' => [
-                    'allow' => [
-                        ['controller' => 'Shop\Controller\Country', 'action' => 'all'],
-                        ['controller' => 'Shop\Controller\Country\Province', 'action' => 'all'],
-                        ['controller' => 'Shop\Controller\Customer', 'action' => 'all'],
-                        ['controller' => 'Shop\Controller\Customer\Address', 'action' => 'all'],
-                        ['controller' => 'Shop\Controller\Order', 'action' => 'all'],
-                        ['controller' => 'Shop\Controller\Post\Cost', 'action' => 'all'],
-                        ['controller' => 'Shop\Controller\Post\Level', 'action' => 'all'],
-                        ['controller' => 'Shop\Controller\Post\Unit', 'action' => 'all'],
-                        ['controller' => 'Shop\Controller\Post\Zone', 'action' => 'all'],
-                        ['controller' => 'Shop\Controller\Product', 'action' => 'all'],
-                        ['controller' => 'Shop\Controller\Product\Category', 'action' => 'all'],
-                        ['controller' => 'Shop\Controller\Product\Image', 'action' => 'all'],
-                        ['controller' => 'Shop\Controller\Product\GroupPrice', 'action' => 'all'],
-                        ['controller' => 'Shop\Controller\Shop', 'action' => 'all'],
-                        ['controller' => 'Shop\Controller\Tax\Code', 'action' => 'all'],
-                        ['controller' => 'Shop\Controller\Tax\Rate', 'action' => 'all'],
-                    ],
-                ]
-            ]
         ],
-        'userResources' => [
-            'Shop\Controller\Cart',
-            'Shop\Controller\Catalog',
-            'Shop\Controller\Checkout',
-            'Shop\Controller\Country',
-            'Shop\Controller\Country\Province',
-            'Shop\Controller\Customer',
-            'Shop\Controller\Customer\Address',
-            'Shop\Controller\Order',
-            'Shop\Controller\Payment',
-            'Shop\Controller\Paypal',
-            'Shop\Controller\Post\Cost',
-            'Shop\Controller\Post\Level',
-            'Shop\Controller\Post\Unit',
-            'Shop\Controller\Post\Zone',
-            'Shop\Controller\Product',
-            'Shop\Controller\Product\Category',
-            'Shop\Controller\Product\Image',
-            'Shop\Controller\Product\GroupPrice',
-            'Shop\Controller\Shop',
-            'Shop\Controller\Tax\Code',
-            'Shop\Controller\Tax\Rate'
-        ]
     ],
     'router' => [
         'routes' => [

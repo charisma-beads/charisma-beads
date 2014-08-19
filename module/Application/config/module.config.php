@@ -6,14 +6,18 @@ return [
             'guest' => [
                 'privileges' => [
                     'allow' => [
-                        ['controller' => 'Application\Controller\Index', 'action' => ['index']],
+                        'controllers' => [
+                            'Application\Controller\Index' => ['action' => ['index']],
+                        ]
                     ]
                 ],
             ],
             'registered' => [
                 'privileges' => [
                     'allow' => [
-                        ['controller' => 'Application\Controller\Index', 'action' => ['index']],
+                        'controllers' => [
+                            'Application\Controller\Index' => ['action' => ['index']],
+                        ],
                     ],
                 ],
             ],
