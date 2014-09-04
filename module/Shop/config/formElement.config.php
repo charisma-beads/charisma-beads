@@ -6,6 +6,7 @@ return [
         'CountryProvinceList'   => 'Shop\Form\Element\CountryProvinceList',
         'CustomerAddressList'   => 'Shop\Form\Element\CustomerAddressList',
         'CustomerPrefixList'    => 'Shop\Form\Element\CustomerPrefixList',
+        'OrderStatusList'       => 'Shop\Form\Element\OrderStatusList',
         'PayOptionsList'        => 'Shop\Form\Element\PayOptionsList',
         'PostLevelList'         => 'Shop\Form\Element\PostLevelList',
         'PostUnitList'          => 'Shop\Form\Element\PostUnitList',

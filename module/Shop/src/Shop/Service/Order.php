@@ -12,7 +12,7 @@ class Order extends AbstractService
     protected $inputFilter = 'Shop\InputFilter\Order';
     
     /**
-     * @var Shop\Service\Customer
+     * @var \Shop\Service\Customer
      */
     protected $customerService;
     
@@ -110,6 +110,19 @@ class Order extends AbstractService
         
         return $orderId;
     }
+
+    public function updateOrderStatus($orderNumber, $orderStatus)
+    {
+        $orderNumber = (int) $orderNumber;
+        $orderStatus = (int) $orderStatus;
+
+        $order = $this->getMapper()->getOrderByOrderNumber($orderNumber);
+
+        $order->setOrderStatusId($orderStatus);
+        $result = $this->save($order);
+
+        return $result;
+    }
     
     public function getCustomerOrderByUserId($id, $userId)
     {
@@ -133,6 +146,17 @@ class Order extends AbstractService
             $order = $this->populate($order, ['orderStatus']);
         }
         
+        return $orders;
+    }
+
+    public function getCurrentOrders()
+    {
+        $orders = $this->getMapper()->getCurrentOrders();
+
+        foreach ($orders as $order) {
+            $order = $this->populate($order, ['customer', 'orderStatus']);
+        }
+
         return $orders;
     }
     

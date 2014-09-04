@@ -1,0 +1,32 @@
+
+<?php if (count($this->models) > 0): ?>
+<table class="table table-hover table-bordered table-condensed">
+    <thead>
+        <tr>
+            <th>Customer</th>
+            <th>Order Number</th>
+            <th>Order Status</th>
+            <th>Order Date</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <?php /* @var $row \Shop\Model\Order */ ?>
+        <?php foreach($this->models as $row): ?>
+            <tr>
+                <td><?=$this->escapeHtml($row->getCustomer()->getFullName());?></td>
+                <td title="order-number"><?=$this->escapeHtml($row->getOrderNumber());?></td>
+                <td>
+                    <?=$this->formSelect(
+                        $this->statusFormElement->setValue($row->getOrderStatusId())
+                                                ->setAttribute('class', 'form-control input-sm')
+                    );?>
+                </td>
+                <td><?=$this->formatDate($row->getOrderDate())->setFormat('d/m/Y');?></td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+<?php else: ?>
+<h4>No New Orders Currently</h4>
+<?php endif; ?>

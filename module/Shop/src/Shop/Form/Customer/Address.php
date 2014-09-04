@@ -133,5 +133,10 @@ class Address extends Form
         	'name' => 'dateModified',
         	'type' => 'hidden',
         ]);
+
+        $this->add([
+            'name' => 'returnTo',
+            'type' => 'hidden',
+        ]);
     }
 }

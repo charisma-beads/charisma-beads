@@ -60,7 +60,7 @@ class Customer implements ModelInterface
     protected $dateModified;
     
     /**
-     * @var \User\Model\User
+     * @var \UthandoUser\Model\User
      */
     protected $user;
     
@@ -251,7 +251,7 @@ class Customer implements ModelInterface
 	}
 	
 	/**
-	 * @return \User\Model\User
+	 * @return \UthandoUser\Model\User
 	 */
 	public function getUser()
 	{
@@ -259,7 +259,7 @@ class Customer implements ModelInterface
 	}
 	
 	/**
-	 * @param \User\Model\User $user
+	 * @param \UthandoUser\Model\User $user
 	 * @return \Shop\Model\Customer
 	 */
 	public function setUser($user)
@@ -277,7 +277,7 @@ class Customer implements ModelInterface
 	}
 	
 	/**
-	 * @param \Shop\Model\Custome\Prefix $prefix
+	 * @param \Shop\Model\Customer\Prefix $prefix
 	 * @return \Shop\Model\Customer
 	 */
 	public function setPrefix($prefix)

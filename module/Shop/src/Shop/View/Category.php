@@ -31,7 +31,7 @@ class Category extends AbstractViewHelper
 		return $this->service->getById($id);
 	}
 	
-	public function getChildCategories($id = 0)
+	public function getChildCategories()
 	{
 		return $this->service->fetchAll();
 	}

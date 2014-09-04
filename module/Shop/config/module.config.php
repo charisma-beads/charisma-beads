@@ -14,7 +14,7 @@ return [
             'logEnabled'        => false,
             'clientId'          => '',
             'secret'            => '',
-            'paymenMethod'      => 'paypal',
+            'paymentMethod'      => 'paypal',
         ],
         'shop_options' => [
             'alert' => false,
@@ -32,7 +32,7 @@ return [
             'secure' => false, // Should the cookie be secure only?
             'url' => '/', // Location to set in the cookie - default to root
             'cookieName' => 'CharismaShoppingCart' // Cookie Name
-                ]
+        ],
     ],
     'uthando_user' => [
         'acl' => [
@@ -54,6 +54,7 @@ return [
                     'privileges' => [
                         'allow' => [
                             'controllers' => [
+                                'Shop\Controller\Checkout' => ['action' => 'all'],
                                 'Shop\Controller\Country\Province' => ['action' => ['country-province-list']],
                                 'Shop\Controller\Customer' => ['action' => ['my-details']],
                                 'Shop\Controller\Customer\Address' => ['action' => ['my-addresses', 'edit-address', 'add-address', 'delete-address']],
@@ -245,8 +246,8 @@ return [
                             'address' => [
                                 'type' => 'Segment',
                                 'options' => [
-                                    'route' => 'address[/][:action[/[:id]]]',
-                                    'contraints' => [
+                                    'route' => 'address[/][:action[/[:id][/[:return]]]]',
+                                    'constraints' => [
                                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                         'id' => '\d+',
                                     ],
@@ -1260,6 +1261,9 @@ return [
         ]
     ],
     'view_manager' => [
+        'strategies' => [
+            'ViewJsonStrategy',
+        ],
         'template_map' => [
             'cart/summary'         => __DIR__ . '/../view/shop/cart/cart-summary.phtml',
             'shop/cart'            => __DIR__ . '/../view/shop/cart/cart.phtml',

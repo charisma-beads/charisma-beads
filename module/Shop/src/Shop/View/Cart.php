@@ -10,7 +10,7 @@ use Zend\View\Model\ViewModel;
 class Cart extends AbstractViewHelper
 {
 	/**
-	 * @var Shop\Service\Cart
+	 * @var \Shop\Service\Cart
 	 */
 	protected $cartService;
 	

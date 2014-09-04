@@ -9,7 +9,7 @@ return [
                         'allow' => [
                             'controllers' => [
                                 'Application\Controller\Index' => ['action' => ['index']],
-                            ]
+                            ],
                         ]
                     ],
                 ],

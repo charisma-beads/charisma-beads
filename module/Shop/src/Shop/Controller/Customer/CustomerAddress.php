@@ -8,7 +8,7 @@ use Zend\View\Model\ViewModel;
 
 class CustomerAddress extends AbstractCrudController
 {
-    protected $searchDefaultParams = array('sort' => 'postcaode');
+    protected $searchDefaultParams = array('sort' => 'postcode');
     protected $serviceName = 'Shop\Service\Customer\Address';
     protected $userRoute = 'shop/customer/address';
     protected $route = 'admin/shop/customer/address';
@@ -92,9 +92,7 @@ class CustomerAddress extends AbstractCrudController
     		if ($model->getCustomerId() != $customerId) {
     		    return $this->redirect()->toRoute($this->userRoute); 
     		}
-    
-	    	
-	    
+
 	    	if ($request->isPost()) {
 	    		
 	    		// primary key ids must match. If not throw exception.
@@ -122,12 +120,17 @@ class CustomerAddress extends AbstractCrudController
 	    			} else {
 	    				$this->flashMessenger()->addErrorMessage('Your changes could not be save due to database error.');
 	    			}
+
+                    if ($post['returnTo']) {
+                        return $this->redirect()->toUrl($post['returnTo']);
+                    }
 	                
 	    			return $this->redirect()->toRoute($this->userRoute);
 	    		}
 	    	}
 	    	
 	    	$form = $this->getService()->getForm($model);
+            $form->get('returnTo')->setValue(html_entity_decode($this->params('return', null)));
 	    	
     	} catch (Exception $e) {
     		$this->setExceptionMessages($e);

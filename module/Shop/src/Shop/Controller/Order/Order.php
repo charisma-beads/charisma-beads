@@ -3,12 +3,57 @@ namespace Shop\Controller\Order;
 
 use UthandoCommon\Controller\AbstractCrudController;
 use DOMPDFModule\View\Model\PdfModel;
+use Shop\ShopException;
+use Zend\View\Model\ViewModel;
+use Zend\View\Model\JsonModel;
 
 class Order extends AbstractCrudController
 {
 	protected $searchDefaultParams = array('sort' => 'orderNumber');
 	protected $serviceName = 'Shop\Service\Order';
 	protected $route = 'admin/shop/order';
+
+    public function currentOrdersAction()
+    {
+        $request = $this->getRequest();
+
+        if ($request->isXmlHttpRequest()) {
+
+            $viewModel = $this->getCurrentOrders();
+
+            return $viewModel;
+        }
+
+        throw new ShopException('Not Allowed');
+    }
+
+    public function updateStatusAction()
+    {
+        $request = $this->getRequest();
+
+        if ($request->isXmlHttpRequest() && $request->isPost()) {
+            /* @var $service \Shop\Service\Order */
+            $service = $this->getService();
+            $result = $service->updateOrderStatus(
+                $this->params()->fromPost('orderNumber', null),
+                $this->params()->fromPost('orderStatusId', null)
+            );
+
+            $jsonModel = new JsonModel();
+
+            if ($result) {
+                $viewRenderer = $this->getService('ViewRenderer');
+                return $jsonModel->setVariables([
+                    'html' => $viewRenderer->render($this->getCurrentOrders()),
+                    'success' => true
+                ]);
+            } else {
+                return $jsonModel->setVariable('success', false);
+            }
+        }
+
+        throw new ShopException('Not Allowed');
+    }
 	
 	public function cancelOrderAction()
 	{
@@ -47,6 +92,23 @@ class Order extends AbstractCrudController
 	    
 	    return $pdf;
 	}
+
+    private function getCurrentOrders()
+    {
+        $formElement = $this->getServiceLocator()
+            ->get('FormElementManager')
+            ->get('OrderStatusList');
+        $formElement->setName('orderStatusId');
+
+        $viewModel = new ViewModel([
+            'models' => $this->getService()->getCurrentOrders(),
+            'statusFormElement' => $formElement,
+        ]);
+
+        $viewModel->setTerminal(true);
+        $viewModel->setTemplate('shop/order/current-orders');
+        return $viewModel;
+    }
 	
 	private function getCustomerOrder()
 	{

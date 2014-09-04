@@ -111,11 +111,12 @@ class Product extends AbstractService
 	    
 	    return $products;
 	}
-	
-	/**
-	 * @param ProductModel $model
-	 * @param bool|array $children
-	 */
+
+    /**
+     * @param ProductModel $model
+     * @param bool|array $children
+     * @return \Shop\Model\Product|\UthandoCommon\Service\AbstractModel
+     */
 	public function populate($model, $children = false)
 	{
 		$allChildren = ($children === true) ? true : false;
