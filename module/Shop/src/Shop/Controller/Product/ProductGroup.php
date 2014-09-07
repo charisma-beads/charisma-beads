@@ -3,10 +3,10 @@ namespace Shop\Controller\Product;
 
 use UthandoCommon\Controller\AbstractCrudController;
 
-class ProductGroupPrice extends AbstractCrudController
+class ProductGroup extends AbstractCrudController
 {
 	protected $searchDefaultParams = array('sort' => 'productGroupId');
-	protected $serviceName = 'Shop\Service\Product\GroupPrice';
-	protected $route = 'admin/shop/group-price';
+	protected $serviceName = 'Shop\Service\Product\Group';
+	protected $route = 'admin/shop/group';
 	
 }

@@ -81,7 +81,7 @@ return [
                                 'Shop\Controller\Product' => ['action' => 'all'],
                                 'Shop\Controller\Product\Category' => ['action' => 'all'],
                                 'Shop\Controller\Product\Image' => ['action' => 'all'],
-                                'Shop\Controller\Product\GroupPrice' => ['action' => 'all'],
+                                'Shop\Controller\Product\Group' => ['action' => 'all'],
                                 'Shop\Controller\Shop' => ['action' => 'all'],
                                 'Shop\Controller\Tax\Code' => ['action' => 'all'],
                                 'Shop\Controller\Tax\Rate' => ['action' => 'all'],
@@ -108,7 +108,7 @@ return [
                 'Shop\Controller\Product',
                 'Shop\Controller\Product\Category',
                 'Shop\Controller\Product\Image',
-                'Shop\Controller\Product\GroupPrice',
+                'Shop\Controller\Product\Group',
                 'Shop\Controller\Shop',
                 'Shop\Controller\Tax\Code',
                 'Shop\Controller\Tax\Rate'
@@ -456,12 +456,12 @@ return [
                                     ]
                                 ]
                             ],
-                            'group-price' => [
+                            'group' => [
                                 'type' => 'Segment',
                                 'options' => [
-                                    'route' => '/group-price',
+                                    'route' => '/group',
                                     'defaults' => [
-                                        'controller' => 'Product\GroupPrice',
+                                        'controller' => 'Product\Group',
                                         'action' => 'index',
                                         'force-ssl' => 'ssl'
                                     ]
@@ -1036,22 +1036,22 @@ return [
                                     ]
                                 ]
                             ],
-                            'group-prices' => [
-                                'label' => 'Group Prices',
+                            'groups' => [
+                                'label' => 'Groups',
                                 'action' => 'index',
-                                'route' => 'admin/shop/group-price',
+                                'route' => 'admin/shop/group',
                                 'resource' => 'menu:admin',
                                 'pages' => [
                                     'list' => [
                                         'label' => 'List All Group Prices',
                                         'action' => 'index',
-                                        'route' => 'admin/shop/group-price',
+                                        'route' => 'admin/shop/group',
                                         'resource' => 'menu:admin'
                                     ],
                                     'add' => [
                                         'label' => 'Add New Group Price',
                                         'action' => 'add',
-                                        'route' => 'admin/shop/group-price/edit',
+                                        'route' => 'admin/shop/group/edit',
                                         'resource' => 'menu:admin'
                                     ]
                                 ]

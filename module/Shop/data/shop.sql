@@ -282,8 +282,8 @@ CREATE TABLE IF NOT EXISTS `productCategory` (
 -- Table structure for table `productGroupPrice`
 --
 
-DROP TABLE IF EXISTS `productGroupPrice`;
-CREATE TABLE IF NOT EXISTS `productGroupPrice` (
+DROP TABLE IF EXISTS `productGroup`;
+CREATE TABLE IF NOT EXISTS `productGroup` (
   `productGroupId` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `group` varchar(5) DEFAULT '0',
   `price` decimal(4,2) DEFAULT '0.00',

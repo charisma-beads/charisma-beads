@@ -24,9 +24,11 @@ class Product extends AbstractMapper
 	
 	public function getFullProductById($id)
 	{
-	    $select = $this->getFullSelect();
+	    $select = $this->getSelect();
 	    $select->where
 	       ->equalTo('product.productId', $id);
+
+        $select = $this->setFilter($select);
 	    
 	    $resultSet = $this->fetchResult($select);
 	    $row = $resultSet->current();
@@ -35,9 +37,11 @@ class Product extends AbstractMapper
 	
 	public function getProductsByCategory(array $categoryId, $order=null)
 	{
-	    $select = $this->getFullSelect();
-		$where = $select->where
-            ->in('product.productCategoryId', $categoryId);
+	    $select = $this->getSelect();
+		$select->where
+            ->in('productCategoryId', $categoryId);
+
+        $select = $this->setFilter($select);
 		
 		if ($order) {
 		    $select = $this->setSortOrder($select, $order);
@@ -50,92 +54,64 @@ class Product extends AbstractMapper
 	{
 		$select = $this->getSql()->select();
 		$select->from($this->table)
-		->join(
-				'productCategory',
-				'product.productCategoryId=productCategory.productCategoryId',
-				array('category'),
-				Select::JOIN_INNER
-		)
-		->join(
-				'productGroupPrice',
-				'product.productGroupId=productGroupPrice.productGroupId',
-				array('group'),
-				Select::JOIN_LEFT
-		);
+            ->join(
+                'productCategory',
+                'product.productCategoryId=productCategory.productCategoryId',
+                array(),
+                Select::JOIN_LEFT
+            )
+            ->join(
+                'productGroup',
+                'product.productGroupId=productGroup.productGroupId',
+                array(),
+                Select::JOIN_LEFT
+            );
 		
-		if ($this->getFetchEnabled()) {
-			$select->where->and->equalTo('product.enabled', 1);
-		}
-		 
-		if ($this->getFetchDisabled()) {
-			$select->where->and->equalTo('product.discontinued', 1);
-		} else {
-			$select->where->and->equalTo('product.discontinued', 0);
-		}
+		$select = $this->setFilter($select);
 		
 		return parent::search($search, $sort, $select);
 	}
 	
 	public function searchProducts(array $search)
 	{
-	   $select = $this->getFullSelect();
+        $select = $this->getSql()->select();
+        $select->from($this->table)
+            ->join(
+                'productCategory',
+                'product.productCategoryId=productCategory.productCategoryId',
+                array(),
+                Select::JOIN_LEFT
+            )->join(
+                'postUnit',
+                'product.postUnitId=postUnit.postUnitId',
+                array(),
+                Select::JOIN_LEFT
+            )->join(
+                'productSize',
+                'product.productSizeId=productSize.productSizeId',
+                array(),
+                Select::JOIN_LEFT
+            );
+
+        $select = $this->setFilter($select);
 	   
 	   return parent::search($search, '', $select);
 	}
-	
-	/**
-	 * @return \Zend\Db\Sql\Select
-	 */
-	public function getFullSelect()
-	{
-	    $select = $this->getSql()->select();
-	    $select->from($this->table)
-	    ->join(
-	        'productCategory',
-	        'product.productCategoryId=productCategory.productCategoryId',
-	        array('productCategory.category' => 'category'),
-	        Select::JOIN_INNER
-        )->join(
-	    	'postUnit',
-	    	'product.postUnitId=postUnit.postUnitId',
-	    	array('postUnit.postUnit' => 'postUnit'),
-	    	Select::JOIN_LEFT
-	    )->join(
-	    	'productSize',
-	    	'product.productSizeId=productSize.productSizeId',
-	    	array('productSize.size' => 'size'),
-	    	Select::JOIN_LEFT
-	    )->join(
-	    	'productGroupPrice',
-	    	'product.productGroupId=productGroupPrice.productGroupId',
-	    	array('productGroupPrice.group' => 'group'),
-	    	Select::JOIN_LEFT
-	    )->join(
-	    	'taxCode',
-	    	'product.taxCodeId=taxCode.taxCodeId',
-	    	array('taxCode.taxCode' => 'taxCode'),
-	    	Select::JOIN_LEFT
-	    )->join(
-	    	'taxRate',
-	    	'taxCode.taxRateId=taxRate.taxRateId',
-	    	array('taxRate.taxRate' => 'taxRate'),
-	    	Select::JOIN_LEFT
-	    );
-	    
-	    //$select->where->isNotNull('category');
-	    
-	    if ($this->getFetchEnabled()) {
-	    	$select->where->and->equalTo('product.enabled', 1);
-	    }
-	     
-	    if ($this->getFetchDisabled()) {
-	    	$select->where->and->equalTo('product.discontinued', 1);
-	    } else {
-	        $select->where->and->equalTo('product.discontinued', 0);
-	    }
-	    
-	    return $select;
-	}
+
+    public function setFilter(Select $select)
+    {
+        if ($this->getFetchEnabled()) {
+            $select->where->equalTo('product.enabled', 1);
+        }
+
+        if ($this->getFetchDisabled()) {
+            $select->where->equalTo('product.discontinued', 1);
+        } else {
+            $select->where->equalTo('product.discontinued', 0);
+        }
+
+        return $select;
+    }
 	
 	public function getFetchEnabled()
 	{

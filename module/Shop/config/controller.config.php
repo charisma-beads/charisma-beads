@@ -18,7 +18,7 @@ return [
         'Shop\Controller\Product'               => 'Shop\Controller\Product\Product',
         'Shop\Controller\Product\Category'      => 'Shop\Controller\Product\ProductCategory',
         'Shop\Controller\Product\Image'         => 'Shop\Controller\Product\ProductImage',
-        'Shop\Controller\Product\GroupPrice'    => 'Shop\Controller\Product\ProductGroupPrice',
+        'Shop\Controller\Product\Group'         => 'Shop\Controller\Product\ProductGroup',
         'Shop\Controller\Shop'                  => 'Shop\Controller\Shop',
         'Shop\Controller\Tax\Code'              => 'Shop\Controller\Tax\TaxCode',
         'Shop\Controller\Tax\Rate'              => 'Shop\Controller\Tax\TaxRate'

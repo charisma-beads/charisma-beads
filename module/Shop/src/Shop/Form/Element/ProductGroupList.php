@@ -5,7 +5,7 @@ use Zend\Form\Element\Select;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
 
-class ProductGroupPriceList extends Select implements ServiceLocatorAwareInterface
+class ProductGroupList extends Select implements ServiceLocatorAwareInterface
 { 
     use ServiceLocatorAwareTrait;
     
@@ -13,17 +13,17 @@ class ProductGroupPriceList extends Select implements ServiceLocatorAwareInterfa
     {
         $groups = $this->getServiceLocator()
             ->getServiceLocator()
-            ->get('Shop\Service\Product\GroupPrice')
+            ->get('Shop\Service\Product\Group')
             ->fetchAll();
         
-        $groupPriceOptions = ['0' => 'None'];
+        $groupOptions = ['0' => 'None'];
     	
-    	/* @var $group \Shop\Model\Product\GroupPrice */
+    	/* @var $group \Shop\Model\Product\Group */
     	foreach($groups as $group) {
-    		$groupPriceOptions[$group->getProductGroupId()] = $group->getGroup() . ' - ' . $group->getPrice();
+    		$groupOptions[$group->getProductGroupId()] = $group->getGroup() . ' - ' . $group->getPrice();
     	}
         
-        $this->setValueOptions($groupPriceOptions);
+        $this->setValueOptions($groupOptions);
     }
 
 }

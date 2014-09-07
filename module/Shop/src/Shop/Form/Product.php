@@ -197,7 +197,7 @@ class Product extends Form
     	
     	$this->add([
     		'name'		=> 'productGroupId',
-    		'type'		=> 'ProductGroupPriceList',
+    		'type'		=> 'ProductGroupList',
     		'options'	=> [
     			'label'			=> 'Price Group:',
     			'required'		=> true,

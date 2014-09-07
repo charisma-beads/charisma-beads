@@ -12,7 +12,7 @@ return [
         'PostUnitList'          => 'Shop\Form\Element\PostUnitList',
         'PostZoneList'          => 'Shop\Form\Element\PostZoneList',
         'ProductCategoryList'   => 'Shop\Form\Element\ProductCategoryList',
-        'ProductGroupPriceList' => 'Shop\Form\Element\ProductGroupPriceList',
+        'ProductGroupList'      => 'Shop\Form\Element\ProductGroupList',
         'ProductSizeList'       => 'Shop\Form\Element\ProductSizeList',
         'TaxCodeList'           => 'Shop\Form\Element\TaxCodeList',
         'TaxRateList'           => 'Shop\Form\Element\TaxRateList',

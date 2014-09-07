@@ -2,7 +2,7 @@
 
 <?php if (count($this->models) > 0): ?>
 <div class="panel panel-default">
-    <table id="productGroupPrice-list" class="table table-hover table-bordered table-condensed sortable-table">
+    <table id="productGroup-list" class="table table-hover table-bordered table-condensed sortable-table">
     	<thead>
     		<tr>
     			<th data-field="productGroupId">Product Group Id</th>
@@ -24,7 +24,7 @@
                     	'pk'		=> 'productGroupId',
                     	'id'		=> $row->getProductGroupId(),
     		    		'tableName'	=> 'productGroupPrice',
-                    	'route'		=> 'admin/shop/group-price/edit',
+                    	'route'		=> 'admin/shop/group/edit',
     		    	]);?>
     			</td>
     		</tr>
@@ -37,7 +37,7 @@
     $this->models,
     'Elastic',
     'application/partial/paginate',
-	['route' => 'admin/shop/group-price/page']
+	['route' => 'admin/shop/group/page']
 ); ?>
 
 <?php else: ?>

@@ -1,16 +1,17 @@
 <?php
 namespace Shop\Model;
 
+use Shop\Model\Product\Category;
+use Shop\Model\Product\Group;
+use Shop\Model\Product\Image;
+use Shop\Model\Product\Size;
+use Shop\Model\Product\Option;
+use Shop\Model\Post\Unit;
+use Shop\Model\Tax\Code;
 use UthandoCommon\Model\DateCreatedTrait;
 use UthandoCommon\Model\DateModifiedTrait;
 use UthandoCommon\Model\Model;
 use UthandoCommon\Model\ModelInterface;
-use Shop\Model\Post\Unit;
-use Shop\Model\Product\Category;
-use Shop\Model\Product\Size;
-use Shop\Model\Product\GroupPrice;
-use Shop\Model\Tax\Code;
-use DateTime;
 
 class Product implements ModelInterface
 {
@@ -134,9 +135,19 @@ class Product implements ModelInterface
 	protected $postUnit;
 	
 	/**
-	 * @var GroupPrice
+	 * @var Group
 	 */
 	protected $productGroup;
+
+    /**
+     * @var array
+     */
+    protected $productOption;
+
+    /**
+     * @var array
+     */
+    protected $productImage;
 	
 	/**
 	 * @return number $productId
@@ -146,10 +157,11 @@ class Product implements ModelInterface
 		return $this->productId;
 	}
 
-	/**
-	 * @param number $productId
-	 */
-	public function setProductId($productId)
+    /**
+     * @param $productId
+     * @return $this
+     */
+    public function setProductId($productId)
 	{
 		$this->productId = $productId;
 		return $this;
@@ -163,10 +175,11 @@ class Product implements ModelInterface
 		return $this->productCategoryId;
 	}
 
-	/**
-	 * @param number $productCategoryId
-	 */
-	public function setProductCategoryId($productCategoryId)
+    /**
+     * @param $productCategoryId
+     * @return $this
+     */
+    public function setProductCategoryId($productCategoryId)
 	{
 		$this->productCategoryId = $productCategoryId;
 		return $this;
@@ -180,10 +193,11 @@ class Product implements ModelInterface
 		return $this->productSizeId;
 	}
 
-	/**
-	 * @param number $productSizeId
-	 */
-	public function setProductSizeId($productSizeId)
+    /**
+     * @param $productSizeId
+     * @return $this
+     */
+    public function setProductSizeId($productSizeId)
 	{
 		$this->productSizeId = $productSizeId;
 		return $this;
@@ -197,10 +211,11 @@ class Product implements ModelInterface
 		return $this->taxCodeId;
 	}
 
-	/**
-	 * @param number $taxCodeId
-	 */
-	public function setTaxCodeId($taxCodeId)
+    /**
+     * @param $taxCodeId
+     * @return $this
+     */
+    public function setTaxCodeId($taxCodeId)
 	{
 		$this->taxCodeId = $taxCodeId;
 		return $this;
@@ -214,10 +229,11 @@ class Product implements ModelInterface
 		return $this->postUnitId;
 	}
 
-	/**
-	 * @param number $postUnitId
-	 */
-	public function setPostUnitId($postUnitId)
+    /**
+     * @param $postUnitId
+     * @return $this
+     */
+    public function setPostUnitId($postUnitId)
 	{
 		$this->postUnitId = $postUnitId;
 		return $this;
@@ -231,10 +247,11 @@ class Product implements ModelInterface
 		return $this->productGroupId;
 	}
 
-	/**
-	 * @param number $productGroupId
-	 */
-	public function setProductGroupId($productGroupId)
+    /**
+     * @param $productGroupId
+     * @return $this
+     */
+    public function setProductGroupId($productGroupId)
 	{
 		$this->productGroupId = $productGroupId;
 		return $this;
@@ -248,10 +265,11 @@ class Product implements ModelInterface
 		return $this->ident;
 	}
 
-	/**
-	 * @param string $ident
-	 */
-	public function setIdent($ident)
+    /**
+     * @param $ident
+     * @return $this
+     */
+    public function setIdent($ident)
 	{
 		$this->ident = $ident;
 		return $this;
@@ -265,19 +283,21 @@ class Product implements ModelInterface
 		return $this->name;
 	}
 
-	/**
-	 * @param string $name
-	 */
-	public function setName($name)
+    /**
+     * @param $name
+     * @return $this
+     */
+    public function setName($name)
 	{
 		$this->name = $name;
 		return $this;
 	}
 
-	/**
-	 * @return number $price
-	 */
-	public function getPrice($withDiscount = true)
+    /**
+     * @param bool $withDiscount
+     * @return float
+     */
+    public function getPrice($withDiscount = true)
 	{
 	    $price = $this->price;
 	    
@@ -290,10 +310,11 @@ class Product implements ModelInterface
 		return $price;
 	}
 
-	/**
-	 * @param number $price
-	 */
-	public function setPrice($price)
+    /**
+     * @param $price
+     * @return $this
+     */
+    public function setPrice($price)
 	{
 		$this->price = $price;
 		return $this;
@@ -307,10 +328,11 @@ class Product implements ModelInterface
 		return $this->description;
 	}
 
-	/**
-	 * @param string $description
-	 */
-	public function setDescription($description)
+    /**
+     * @param $description
+     * @return $this
+     */
+    public function setDescription($description)
 	{
 		$this->description = $description;
 		return $this;
@@ -324,10 +346,11 @@ class Product implements ModelInterface
 		return $this->shortDescription;
 	}
 
-	/**
-	 * @param string $shortDescription
-	 */
-	public function setShortDescription($shortDescription)
+    /**
+     * @param $shortDescription
+     * @return $this
+     */
+    public function setShortDescription($shortDescription)
 	{
 		$this->shortDescription = $shortDescription;
 		return $this;
@@ -341,10 +364,11 @@ class Product implements ModelInterface
 		return $this->quantity;
 	}
 
-	/**
-	 * @param number $quantity
-	 */
-	public function setQuantity($quantity)
+    /**
+     * @param $quantity
+     * @return $this
+     */
+    public function setQuantity($quantity)
 	{
 		$this->quantity = $quantity;
 		return $this;
@@ -358,10 +382,11 @@ class Product implements ModelInterface
 		return $this->taxable;
 	}
 
-	/**
-	 * @param boolean $taxable
-	 */
-	public function setTaxable($taxable)
+    /**
+     * @param $taxable
+     * @return $this
+     */
+    public function setTaxable($taxable)
 	{
 		$this->taxable = $taxable;
 		return $this;
@@ -375,27 +400,30 @@ class Product implements ModelInterface
 		return $this->addPostage;
 	}
 
-	/**
-	 * @param boolean $addPostage
-	 */
-	public function setAddPostage($addPostage)
+    /**
+     * @param $addPostage
+     * @return $this
+     */
+    public function setAddPostage($addPostage)
 	{
 		$this->addPostage = $addPostage;
 		return $this;
 	}
 
-	/**
-	 * @return number $discountPercent
-	 */
-	public function getDiscountPercent($formatPercent=false)
+    /**
+     * @param bool $formatPercent
+     * @return float|int
+     */
+    public function getDiscountPercent($formatPercent=false)
 	{
 		return (true === $formatPercent) ? $this->discountPercent / 100 : $this->discountPercent;
 	}
 
-	/**
-	 * @param number $discountPercent
-	 */
-	public function setDiscountPercent($discountPercent)
+    /**
+     * @param $discountPercent
+     * @return $this
+     */
+    public function setDiscountPercent($discountPercent)
 	{
 		$this->discountPercent = $discountPercent;
 		return $this;
@@ -409,10 +437,11 @@ class Product implements ModelInterface
 		return $this->hits;
 	}
 
-	/**
-	 * @param number $hits
-	 */
-	public function setHits($hits)
+    /**
+     * @param $hits
+     * @return $this
+     */
+    public function setHits($hits)
 	{
 		$this->hits = $hits;
 		return $this;
@@ -426,10 +455,11 @@ class Product implements ModelInterface
 		return $this->enabled;
 	}
 
-	/**
-	 * @param boolean $enabled
-	 */
-	public function setEnabled($enabled)
+    /**
+     * @param $enabled
+     * @return $this
+     */
+    public function setEnabled($enabled)
 	{
 		$this->enabled = $enabled;
 		return $this;
@@ -443,10 +473,11 @@ class Product implements ModelInterface
 		return $this->discontinued;
 	}
 
-	/**
-	 * @param boolean $discontinued
-	 */
-	public function setDiscontinued($discontinued)
+    /**
+     * @param $discontinued
+     * @return $this
+     */
+    public function setDiscontinued($discontinued)
 	{
 		$this->discontinued = $discontinued;
 		return $this;
@@ -460,10 +491,11 @@ class Product implements ModelInterface
 		return $this->vatInc;
 	}
 
-	/**
-	 * @param boolean $vatInc
-	 */
-	public function setVatInc($vatInc)
+    /**
+     * @param $vatInc
+     * @return $this
+     */
+    public function setVatInc($vatInc)
 	{
 		$this->vatInc = $vatInc;
 		return $this;
@@ -547,7 +579,7 @@ class Product implements ModelInterface
     }
 
     /**
-     * @return \Shop\Model\Product\GroupPrice
+     * @return \Shop\Model\Product\Group
      */
 	public function getProductGroup()
     {
@@ -555,12 +587,47 @@ class Product implements ModelInterface
     }
 
     /**
-     * @param GroupPrice $productGroup
+     * @param Group $productGroup
      * @return \Shop\Model\Product
      */
-	public function setProductGroup(GroupPrice $productGroup)
+	public function setProductGroup(Group $productGroup)
     {
         $this->productGroup = $productGroup;
+        return $this;
+    }
+
+    /**
+     * @param Option $productOption
+     */
+    public function setProductOption($productOption)
+    {
+        if ($productOption instanceof Option) {
+            $productOption = [$productOption];
+        }
+        $this->productOption = $productOption;
+    }
+
+    /**
+     * @return array
+     */
+    public function getProductOption()
+    {
+        return $this->productOption;
+    }
+
+    public function getProductImage()
+    {
+        return $this->productImage;
+    }
+
+    public function setProductImage($images)
+    {
+        if ($images instanceof Image) {
+            $images = [$images];
+        }
+
+        $this->productImage = $images;
+
         return $this;
     }
 }

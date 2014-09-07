@@ -32,45 +32,47 @@ class Option implements ModelInterface
 	 * @var float
 	 */
 	protected $price;
-	
-	/**
-	 * @return the $productOptionId
-	 */
-	public function getProductOptionId()
+
+    /**
+     * @return int
+     */
+    public function getProductOptionId()
 	{
 		return $this->productOptionId;
 	}
 
-	/**
-	 * @param number $productOptionId
-	 */
-	public function setProductOptionId($productOptionId)
+    /**
+     * @param $productOptionId
+     * @return $this
+     */
+    public function setProductOptionId($productOptionId)
 	{
 		$this->productOptionId = $productOptionId;
 		return $this;
 	}
 
-	/**
-	 * @return the $productId
-	 */
-	public function getProductId()
+    /**
+     * @return int
+     */
+    public function getProductId()
 	{
 		return $this->productId;
 	}
 
-	/**
-	 * @param number $productId
-	 */
-	public function setProductId($productId)
+    /**
+     * @param $productId
+     * @return $this
+     */
+    public function setProductId($productId)
 	{
 		$this->productId = $productId;
 		return $this;
 	}
 
-	/**
-	 * @return the $postUnitId
-	 */
-	public function getPostUnitId()
+    /**
+     * @return int
+     */
+    public function getPostUnitId()
 	{
 		return $this->postUnitId;
 	}
@@ -83,35 +85,37 @@ class Option implements ModelInterface
 		$this->postUnitId = $postUnitId;
 	}
 
-	/**
-	 * @return the $option
-	 */
-	public function getOption()
+    /**
+     * @return string
+     */
+    public function getOption()
 	{
 		return $this->option;
 	}
 
-	/**
-	 * @param string $option
-	 */
-	public function setOption($option)
+    /**
+     * @param $option
+     * @return $this
+     */
+    public function setOption($option)
 	{
 		$this->option = $option;
 		return $this;
 	}
 
-	/**
-	 * @return the $price
-	 */
-	public function getPrice()
+    /**
+     * @return float
+     */
+    public function getPrice()
 	{
 		return $this->price;
 	}
 
-	/**
-	 * @param number $price
-	 */
-	public function setPrice($price)
+    /**
+     * @param $price
+     * @return $this
+     */
+    public function setPrice($price)
 	{
 		$this->price = $price;
 		return $this;

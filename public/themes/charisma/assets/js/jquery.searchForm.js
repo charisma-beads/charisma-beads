@@ -145,7 +145,7 @@
         	count : 25,
         	page : 1
     	},
-    	paging : 'links',
+    	paging : 'links'
     };
     
     $.fn.searchForm.Constructor = SearchForm;

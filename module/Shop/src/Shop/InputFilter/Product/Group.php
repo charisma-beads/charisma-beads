@@ -3,7 +3,7 @@ namespace Shop\InputFilter\Product;
 
 use Zend\InputFilter\InputFilter;
 
-class GroupPrice extends InputFilter
+class Group extends InputFilter
 {
     public function __construct()
     {

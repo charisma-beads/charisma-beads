@@ -3,10 +3,10 @@ namespace Shop\Hydrator\Product;
 
 use UthandoCommon\Hydrator\AbstractHydrator;
 
-class GroupPrice extends AbstractHydrator
+class Group extends AbstractHydrator
 {
     /**
-     * @param \Shop\Model\Product\GroupPrice $object
+     * @param \Shop\Model\Product\Group $object
      * @return array
      */
     public function extract($object)

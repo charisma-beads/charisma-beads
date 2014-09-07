@@ -3,7 +3,7 @@ namespace Shop\Form\Product;
 
 use Zend\Form\Form;
 
-class GroupPrice extends Form
+class Group extends Form
 {	
     public function init()
     {

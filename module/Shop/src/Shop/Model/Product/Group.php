@@ -5,7 +5,7 @@ namespace Shop\Model\Product;
 use UthandoCommon\Model\Model;
 use UthandoCommon\Model\ModelInterface;
 
-class GroupPrice implements ModelInterface
+class Group implements ModelInterface
 {
     use Model;
     
@@ -32,10 +32,11 @@ class GroupPrice implements ModelInterface
 		return $this->productGroupId;
 	}
 
-	/**
-	 * @param number $groupId
-	 */
-	public function setProductGroupId($productGroupId)
+    /**
+     * @param $productGroupId
+     * @return $this
+     */
+    public function setProductGroupId($productGroupId)
 	{
 		$this->productGroupId = $productGroupId;
 		return $this;
@@ -49,10 +50,11 @@ class GroupPrice implements ModelInterface
 		return $this->group;
 	}
 
-	/**
-	 * @param string $group
-	 */
-	public function setGroup($group)
+    /**
+     * @param $group
+     * @return $this
+     */
+    public function setGroup($group)
 	{
 		$this->group = $group;
 		return $this;
@@ -66,10 +68,11 @@ class GroupPrice implements ModelInterface
 		return $this->price;
 	}
 
-	/**
-	 * @param number $price
-	 */
-	public function setPrice($price)
+    /**
+     * @param $price
+     * @return $this
+     */
+    public function setPrice($price)
 	{
 		$this->price = $price;
 		return $this;
