@@ -2,8 +2,7 @@
 namespace Shop\View;
 
 use Zend\Form\View\Helper\AbstractHelper;
-use Shop\View\PriceFormat;
-use Shop\Model\Product;
+use Shop\Model\Product\Product;
 
 class ProductPrice extends AbstractHelper
 {

@@ -1,16 +1,16 @@
 <?php
 namespace Shop\View;
 
-use UthandoCommon\View\AbstractViewHelper;
 use Shop\Form\Cart\Add;
+use UthandoCommon\View\AbstractViewHelper;
 use Zend\I18n\View\Helper\CurrencyFormat;
-use Shop\Service\Cart as CartService;
+use Shop\Service\Cart\Cart as CartService;
 use Zend\View\Model\ViewModel;
 
 class Cart extends AbstractViewHelper
 {
 	/**
-	 * @var \Shop\Service\Cart
+	 * @var \Shop\Service\Cart\Cart
 	 */
 	protected $cartService;
 	
@@ -31,7 +31,7 @@ class Cart extends AbstractViewHelper
 	}
 	
 	/**
-	 * @return \Shop\Service\Cart
+	 * @return \Shop\Model\Cart\Cart
 	 */
 	public function getCart()
 	{

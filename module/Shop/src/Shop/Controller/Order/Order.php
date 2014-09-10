@@ -79,6 +79,11 @@ class Order extends AbstractCrudController
 	public function viewAction()
 	{
 	    $order = $this->getCustomerOrder();
+
+        // if order returns false then return to my-order
+        if (false === $order) {
+            return $this->redirect()->toRoute('shop/order');
+        }
 	    
 	    return ['order' => $order];
 	}
@@ -119,11 +124,6 @@ class Order extends AbstractCrudController
 	    /* @var $service \Shop\Service\Order */
 	    $service = $this->getService();
 	    $order = $service->getCustomerOrderByUserId($id, $userId);
-	    
-	    // if order returns false then return to my-order
-	    if (false === $order) {
-	        return $this->redirect()->toRoute('shop/order');
-	    }
 	    
 	    return $order;
 	}

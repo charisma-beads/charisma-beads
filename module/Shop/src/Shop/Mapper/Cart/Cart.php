@@ -1,5 +1,5 @@
 <?php
-namespace Shop\Mapper;
+namespace Shop\Mapper\Cart;
 
 use UthandoCommon\Mapper\AbstractMapper;
 
@@ -7,12 +7,25 @@ class Cart extends AbstractMapper
 {
     protected $table = 'cart';
     protected $primary = 'cartId';
-    protected $model = 'Shop\Model\Cart';
-    protected $hydrator = 'Shop\Hydrator\Cart';
+    protected $model = 'Shop\Model\Cart\Cart';
+    protected $hydrator = 'Shop\Hydrator\Cart\Cart';
+
+    /**
+     * @param $id
+     * @return \Shop\Model\Cart\Cart|null
+     */
+    public function getCartById($id)
+    {
+        $select = $this->getSelect()->where(['cartId' => $id]);
+        $resultSet = $this->fetchResult($select);
+        $row = $resultSet->current();
+
+        return $row;
+    }
     
     /**
      * @param string $verifier
-     * @return \Shop\Model\Cart
+     * @return \Shop\Model\Cart\Cart
      */
     public function getCartByVerifier($verifier)
     {

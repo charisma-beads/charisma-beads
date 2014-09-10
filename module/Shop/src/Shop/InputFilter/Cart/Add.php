@@ -1,5 +1,5 @@
 <?php
-namespace Shop\Form\Cart;
+namespace Shop\InputFilter\Cart;
 
 use Zend\InputFilter\InputFilter;
 

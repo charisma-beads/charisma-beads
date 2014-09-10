@@ -1,11 +1,6 @@
 <?php
-namespace Shop\Model;
+namespace Shop\Model\Product;
 
-use Shop\Model\Product\Category;
-use Shop\Model\Product\Group;
-use Shop\Model\Product\Image;
-use Shop\Model\Product\Size;
-use Shop\Model\Product\Option;
 use Shop\Model\Post\Unit;
 use Shop\Model\Tax\Code;
 use UthandoCommon\Model\DateCreatedTrait;
@@ -516,9 +511,9 @@ class Product implements ModelInterface
 
     /**
      * @param Category $productCategory
-     * @return \Shop\Model\Product
+     * @return $this
      */
-	public function setProductCategory(Category $productCategory)
+    public function setProductCategory(Category $productCategory)
     {
         $this->productCategory = $productCategory;
         return $this;
@@ -534,9 +529,9 @@ class Product implements ModelInterface
 
     /**
      * @param Size $productSize
-     * @return \Shop\Model\Product
+     * @return $this
      */
-	public function setProductSize(Size $productSize)
+    public function setProductSize(Size $productSize)
     {
         $this->productSize = $productSize;
         return $this;
@@ -552,9 +547,9 @@ class Product implements ModelInterface
 
     /**
      * @param Code $taxCode
-     * @return \Shop\Model\Product
+     * @return $this
      */
-	public function setTaxCode(Code $taxCode)
+    public function setTaxCode(Code $taxCode)
     {
         $this->taxCode = $taxCode;
         return $this;
@@ -570,9 +565,9 @@ class Product implements ModelInterface
 
     /**
      * @param Unit $postUnit
-     * @return \Shop\Model\Product
+     * @return $this
      */
-	public function setPostUnit(Unit $postUnit)
+    public function setPostUnit(Unit $postUnit)
     {
         $this->postUnit = $postUnit;
         return $this;
@@ -588,9 +583,9 @@ class Product implements ModelInterface
 
     /**
      * @param Group $productGroup
-     * @return \Shop\Model\Product
+     * @return $this
      */
-	public function setProductGroup(Group $productGroup)
+    public function setProductGroup(Group $productGroup)
     {
         $this->productGroup = $productGroup;
         return $this;
@@ -615,11 +610,18 @@ class Product implements ModelInterface
         return $this->productOption;
     }
 
+    /**
+     * @return array
+     */
     public function getProductImage()
     {
         return $this->productImage;
     }
 
+    /**
+     * @param $images
+     * @return $this
+     */
     public function setProductImage($images)
     {
         if ($images instanceof Image) {

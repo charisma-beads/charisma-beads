@@ -66,10 +66,10 @@ class MetaData
         return $this->productId;
     }
 
-	/**
-	 * @param int $productId
-	 * @return \Shop\Model\Product\MetaData
-	 */
+    /**
+     * @param $productId
+     * @return $this
+     */
     public function setProductId($productId)
     {
         $this->productId = $productId;
@@ -79,40 +79,40 @@ class MetaData
     /**
      * @return string
      */
-	public function getName()
+    public function getName()
     {
         return $this->name;
     }
 
     /**
-     * @param string $name
-     * @return \Shop\Model\Product\MetaData
+     * @param $name
+     * @return $this
      */
-	public function setName($name)
+    public function setName($name)
     {
         $this->name = $name;
         return $this;
     }
 
     /**
-     * @return number
+     * @return float
      */
-	public function getPostUnit()
+    public function getPostUnit()
     {
         return $this->postUnit;
     }
 
     /**
-     * @param number $postUnit
-     * @return \Shop\Model\Product\MetaData
+     * @param $postUnit
+     * @return $this
      */
-	public function setPostUnit($postUnit)
+    public function setPostUnit($postUnit)
     {
         $this->postUnit = $postUnit;
         return $this;
     }
 
-	/**
+    /**
      * @return string
      */
     public function getImage()
@@ -120,10 +120,10 @@ class MetaData
         return $this->image;
     }
 
-	/**
-	 * @param string $image
-	 * @return \Shop\Model\Product\MetaData
-	 */
+    /**
+     * @param $image
+     * @return $this
+     */
     public function setImage($image)
     {
         $this->image = $image;
@@ -133,16 +133,16 @@ class MetaData
     /**
      * @return string
      */
-	public function getCategory()
+    public function getCategory()
     {
         return $this->category;
     }
 
     /**
-     * @param string $category
-     * @return \Shop\Model\Product\MetaData
+     * @param $category
+     * @return $this
      */
-	public function setCategory($category)
+    public function setCategory($category)
     {
         $this->category = $category;
         return $this;
@@ -157,70 +157,70 @@ class MetaData
     }
 
     /**
-     * @param string $description
-     * @return \Shop\Model\Product\MetaData
+     * @param $description
+     * @return $this
      */
-	public function setDescription($description)
+    public function setDescription($description)
     {
         $this->description = $description;
         return $this;
     }
 
-	/**
-     * @return boolean
+    /**
+     * @return bool
      */
-	public function getTaxable()
+    public function getTaxable()
     {
         return $this->taxable;
     }
 
     /**
-     * @param boolean $taxable
-     * @return \Shop\Model\Product\MetaData
+     * @param $taxable
+     * @return $this
      */
-	public function setTaxable($taxable)
+    public function setTaxable($taxable)
     {
         $this->taxable = $taxable;
         return $this;
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
-	public function getVatInc()
+    public function getVatInc()
     {
         return $this->vatInc;
     }
 
     /**
-     * @param boolean $vatInc
-     * @return \Shop\Model\Product\MetaData
+     * @param $vatInc
+     * @return $this
      */
-	public function setVatInc($vatInc)
+    public function setVatInc($vatInc)
     {
         $this->vatInc = $vatInc;
         return $this;
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
-	public function getAddPostage()
+    public function getAddPostage()
     {
         return $this->addPostage;
     }
 
     /**
-     * @param boolean $addPostage
-     * @return \Shop\Model\Product\MetaData
+     * @param $addPostage
+     * @return $this
      */
-	public function setAddPostage($addPostage)
+    public function setAddPostage($addPostage)
     {
         $this->addPostage = $addPostage;
         return $this;
     }
 
-	/**
+    /**
      * @return string
      */
     public function getOptionName()
@@ -228,17 +228,17 @@ class MetaData
         return $this->optionName;
     }
 
-	/**
-	 * @param string $optionName
-	 * @return \Shop\Model\Product\MetaData
-	 */
+    /**
+     * @param $optionName
+     * @return $this
+     */
     public function setOptionName($optionName)
     {
         $this->optionName = $optionName;
         return $this;
     }
 
-	/**
+    /**
      * @return array
      */
     public function getOptions()
@@ -246,10 +246,10 @@ class MetaData
         return $this->options;
     }
 
-	/**
-	 * @param array $options
-	 * @return \Shop\Model\Product\MetaData
-	 */
+    /**
+     * @param array $options
+     * @return $this
+     */
     public function setOptions(array $options)
     {
         $this->options = $options;

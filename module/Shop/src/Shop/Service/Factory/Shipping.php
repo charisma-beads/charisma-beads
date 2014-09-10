@@ -9,7 +9,7 @@ class Shipping implements FactoryInterface
 {
 	public function createService(ServiceLocatorInterface $serviceLocator)
 	{
-	    /* @var $shopOptions \Shop\Options\CharismaShopOptions */
+	    /* @var $shopOptions \Shop\Options\ShopOptions */
 	    $shopOptions = $serviceLocator->get('Shop\Options\Shop');
 	    $taxService = $serviceLocator->get('Shop\Service\Tax');
 	    $countryService = $serviceLocator->get('Shop\Service\Country');

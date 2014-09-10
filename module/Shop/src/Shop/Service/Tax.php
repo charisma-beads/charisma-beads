@@ -4,7 +4,7 @@ namespace Shop\Service;
 class Tax
 {   
     /**
-     * @var int
+     * @var bool
      */
     protected $taxInc;
     
@@ -44,16 +44,17 @@ class Tax
             ->setPrice(number_format($price, 2));
     }
 
-	/**
-     * @return number $taxInc
+    /**
+     * @return bool
      */
     public function getTaxInc()
     {
         return $this->taxInc;
     }
 
-	/**
-     * @param number $taxInc
+    /**
+     * @param $taxInc
+     * @return $this
      */
     public function setTaxInc($taxInc)
     {
@@ -61,52 +62,55 @@ class Tax
         return $this;
     }
 
-	/**
-     * @return boolean $taxState
+    /**
+     * @return bool
      */
     public function getTaxState()
     {
         return $this->taxState;
     }
 
-	/**
-     * @param boolean $taxState
+    /**
+     * @param $taxState
+     * @return $this
      */
     public function setTaxState($taxState)
     {
         $this->taxState = $taxState;
         return $this;
     }
-    
-	/**
-	 * @return number
-	 */
-	public function getTax()
+
+    /**
+     * @return float
+     */
+    public function getTax()
 	{
 		return $this->tax;
 	}
 
-	/**
-	 * @param float $taxTotal
-	 */
-	public function setTax($tax)
+    /**
+     * @param $tax
+     * @return $this
+     */
+    public function setTax($tax)
 	{
 		$this->tax = $tax;
 		return $this;
 	}
-	
-	/**
-	 * @return number
-	 */
-	public function getPrice()
+
+    /**
+     * @return float
+     */
+    public function getPrice()
     {
         return $this->price;
     }
 
     /**
-     * @param float $price
+     * @param $price
+     * @return $this
      */
-	public function setPrice($price)
+    public function setPrice($price)
     {
         $this->price = $price;
         return $this;

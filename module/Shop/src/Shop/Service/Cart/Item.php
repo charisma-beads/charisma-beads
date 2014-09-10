@@ -6,9 +6,10 @@ use UthandoCommon\Service\AbstractService;
 class Item extends AbstractService
 {
     protected $mapperClass = 'Shop\Mapper\Cart\Item';
-    
+
     /**
-     * @param int $cartId
+     * @param $cartId
+     * @return mixed
      */
     public function getCartItemsByCartId($cartId)
     {

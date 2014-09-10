@@ -1,5 +1,5 @@
 <?php
-namespace Shop\Hydrator;
+namespace Shop\Hydrator\Product;
 
 use UthandoCommon\Hydrator\AbstractHydrator;
 use UthandoCommon\Hydrator\Strategy\DateTime as DateTimeStrategy;
@@ -28,7 +28,7 @@ class Product extends AbstractHydrator
 	}
 	
 	/**
-	 * @param \Shop\Model\Product $object
+	 * @param \Shop\Model\Product\Product $object
 	 * @return array $data
 	 */
 	public function extract($object)

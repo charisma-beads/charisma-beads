@@ -1,13 +1,12 @@
 <?php
-namespace Shop\Service;
+namespace Shop\Service\Cart;
 
 use UthandoCommon\Service\AbstractService;
-use Shop\Model\Cart as CartModel;
+use Shop\Model\Cart\Cart as CartModel;
 use Shop\Model\Cart\Item as CartItem;
-use Shop\Model\Product as ProductModel;
+use Shop\Model\Product\Product as ProductModel;
 use Shop\Model\Product\MetaData as ProductMetaData;
 use Shop\Service\Cart\Cookie as CartCookie;
-use Shop\Service\Cart\Item;
 use Shop\Service\Shipping;
 use Shop\Service\Tax;
 use Zend\Session\Container;
@@ -98,9 +97,15 @@ class Cart extends AbstractService implements InitializableInterface
         
         // check first if there is a cartId in the session data,
         // else try to retrieve the cartId from cookie verifier.
+        /** @noinspection PhpUndefinedFieldInspection */
         if (isset($this->getContainer()->cartId)) {
+            /** @noinspection PhpUndefinedFieldInspection */
             $cartId = $this->getContainer()->cartId;
-            $cart = $this->getById($cartId);
+            /* @var $cartMapper \Shop\Mapper\Cart\Cart */
+            $cartMapper = $this->getMapper();
+            $cart = $cartMapper->getCartById($cartId);
+
+
         } else {
             $verifier = $this->getCartCookieService()
                 ->retrieveCartVerifierCookie();
@@ -109,11 +114,11 @@ class Cart extends AbstractService implements InitializableInterface
                 $cart = $this->getCartByVerifier($verifier);
             }
         }
-        
+
         // load any cart items
         if ($cart) {
-            $items = $this->getCartItemService()
-                ->getCartItemsByCartId($cart->getCartId());
+            $itemsService = $this->getCartItemService();
+            $items = $itemsService->getCartItemsByCartId($cart->getCartId());
             
             /* @var $item \Shop\Model\Cart\Item */
             foreach ($items as $item) {
@@ -127,14 +132,15 @@ class Cart extends AbstractService implements InitializableInterface
     }
 
     /**
-     *
-     * @param string $verifier            
-     * @return \Shop\Model\Cart
+     * @param $verifier
+     * @return CartModel
      */
     public function getCartByVerifier($verifier)
     {
         $verifier = (string) $verifier;
-        $cart = $this->getMapper()->getCartByVerifier($verifier);
+        /* @var $cartMapper \Shop\Mapper\Cart\Cart */
+        $cartMapper = $this->getMapper();
+        $cart = $cartMapper->getCartByVerifier($verifier);
         
         return $cart;
     }
@@ -155,7 +161,9 @@ class Cart extends AbstractService implements InitializableInterface
         }
         
         $cart = $this->getCart();
-        
+
+
+        /** @var $cartItem \Shop\Model\Cart\Item */
         $cartItem = ($cart->offsetExists($product->getProductId())) ? $cart->offsetGet($product->getProductId()) : new CartItem();
         
         if (0 == $qty) {
@@ -200,7 +208,7 @@ class Cart extends AbstractService implements InitializableInterface
     /**
      * Remove an item for the shopping cart
      *
-     * @param ProductModel $product            
+     * @param $id
      */
     public function removeItem($id)
     {
@@ -219,9 +227,7 @@ class Cart extends AbstractService implements InitializableInterface
     }
 
     /**
-     * Setter for the session namespace
-     *
-     * @param Zend\Session\Container $ns            
+     * @param Container $ns
      */
     public function setContainer(Container $ns)
     {
@@ -229,9 +235,7 @@ class Cart extends AbstractService implements InitializableInterface
     }
 
     /**
-     * Getter for session namespace
-     *
-     * @return Zend\Session\Container
+     * @return Container
      */
     public function getContainer()
     {
@@ -244,7 +248,7 @@ class Cart extends AbstractService implements InitializableInterface
 
     /**
      * Persist the cart data in the session and in
-     * the database, then set a cookie for persistance after
+     * the database, then set a cookie for persistence after
      * session has been expired.
      */
     public function persist()
@@ -252,18 +256,18 @@ class Cart extends AbstractService implements InitializableInterface
         $cart = $this->getCart();
         $cart->setDateModified();
         
-        $result = $this->save($cart);
+        $this->save($cart);
         
         /* @var $cartItem \Shop\Model\Cart\Item */
         foreach ($cart as $cartItem) {
             $this->getCartItemService()->save($cartItem);
         }
-        
+
+        /** @noinspection PhpUndefinedFieldInspection */
         $this->getContainer()->cartId = $cart->getCartId();
     }
 
     /**
-     *
      * @return CartModel
      */
     public function getCart()
@@ -284,6 +288,7 @@ class Cart extends AbstractService implements InitializableInterface
                 ->setVerifyId($this->getCartCookieService()->setCartVerifierCookie());
             $cartId = $this->save($cart);
             $cart->setCartId($cartId);
+            /** @noinspection PhpUndefinedFieldInspection */
             $this->getContainer()->cartId = $cartId;
         }
         
@@ -291,7 +296,7 @@ class Cart extends AbstractService implements InitializableInterface
     }
 
     /**
-     * calulates the item line price
+     * calculates the item line price
      *
      * @param CartItem $item            
      * @return number
@@ -337,14 +342,15 @@ class Cart extends AbstractService implements InitializableInterface
     /**
      * Set the shipping cost
      *
-     * @param int $countryId          
+     * @param null $countryId
+     * @return $this
      */
     public function setShippingCost($countryId = null)
     {
         if ($countryId) {
             $countryId = (int) $countryId;
-            $shipping = $this->getShippingService()
-                ->setCountryId($countryId);
+            $shipping = $this->getShippingService();
+            $shipping->setCountryId($countryId);
         
             $cost = $shipping->calculateShipping($this);
         
@@ -402,17 +408,17 @@ class Cart extends AbstractService implements InitializableInterface
         $this->calculateTotals();
         return $this->taxTotal + $this->shippingTax;
     }
-    
+
     /**
-     * @return \Shop\Options\ShopOptions
+     * @return array|object
      */
     public function getShopOptions()
     {
         return $this->getServiceLocator()->get('Shop\Options\Shop');
     }
-    
+
     /**
-     * @return \Shop\Service\Shipping
+     * @return Shipping
      */
     protected function getShippingService()
     {
@@ -425,8 +431,7 @@ class Cart extends AbstractService implements InitializableInterface
     }
 
     /**
-     *
-     * @return Tax $taxService
+     * @return Tax
      */
     public function getTaxService()
     {
@@ -439,28 +444,26 @@ class Cart extends AbstractService implements InitializableInterface
     }
 
     /**
-     *
-     * @return Item $cartItemService
+     * @return Item
      */
     public function getCartItemService()
     {
         if (! $this->cartItemService instanceof Item) {
             $sl = $this->getServiceLocator();
-            $this->cartItemService = $sl->get('Shop\Service\CartItem');
+            $this->cartItemService = $sl->get('Shop\Service\Cart\Item');
         }
         
         return $this->cartItemService;
     }
 
     /**
-     *
-     * @return CartCookie $cartCookieService
+     * @return CartCookie
      */
     public function getCartCookieService()
     {
         if (! $this->cartCookieService instanceof CartCookie) {
             $sl = $this->getServiceLocator();
-            $this->cartCookieService = $sl->get('Shop\Service\CartCookie');
+            $this->cartCookieService = $sl->get('Shop\Service\Cart\Cookie');
         }
         
         return $this->cartCookieService;

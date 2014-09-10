@@ -1,5 +1,5 @@
 <?php
-namespace Shop\Hydrator;
+namespace Shop\Hydrator\Cart;
 
 use UthandoCommon\Hydrator\AbstractHydrator;
 use UthandoCommon\Hydrator\Strategy\DateTime as DateTimeStrategy;
@@ -15,7 +15,7 @@ class Cart extends AbstractHydrator
     
     /**
      *
-     * @param \Shop\Model\Cart $object            
+     * @param \Shop\Model\Cart\Cart $object
      * @return array $data
      */
     public function extract($object)

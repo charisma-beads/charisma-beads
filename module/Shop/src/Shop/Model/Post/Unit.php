@@ -17,36 +17,38 @@ class Unit implements ModelInterface
 	 * @var float
 	 */
 	protected $postUnit;
-	
-	/**
-	 * @return the $postUnitId
-	 */
-	public function getPostUnitId()
+
+    /**
+     * @return int
+     */
+    public function getPostUnitId()
 	{
 		return $this->postUnitId;
 	}
 
-	/**
-	 * @param number $postUnitId
-	 */
-	public function setPostUnitId($postUnitId)
+    /**
+     * @param $postUnitId
+     * @return $this
+     */
+    public function setPostUnitId($postUnitId)
 	{
 		$this->postUnitId = $postUnitId;
 		return $this;
 	}
 
-	/**
-	 * @return the $postUnit
-	 */
-	public function getPostUnit()
+    /**
+     * @return float
+     */
+    public function getPostUnit()
 	{
 		return $this->postUnit;
 	}
 
-	/**
-	 * @param number $postUnit
-	 */
-	public function setPostUnit($postUnit)
+    /**
+     * @param $postUnit
+     * @return $this
+     */
+    public function setPostUnit($postUnit)
 	{
 		$this->postUnit = $postUnit;
 		return $this;

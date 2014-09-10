@@ -8,19 +8,16 @@ use Zend\View\Model\ViewModel;
 class Cart extends AbstractActionController
 {
     /**
-     *
-     * @var \Shop\Model\Cart
+     * @var \Shop\Model\Cart\Cart
      */
     protected $cart;
 
     /**
-     *
-     * @var \Shop\Service\Product
+     * @var \Shop\Service\Product|Product
      */
     protected $productService;
 
     /**
-     *
      * @var \Shop\Service\Customer\Address
      */
     protected $customerAddressService;

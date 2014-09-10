@@ -47,91 +47,92 @@ class Item implements ModelInterface
         return $this->cartItemId;
     }
 
-	/**
-	 * @param int $cartItemId
-	 * @return \Shop\Model\Cart\Item
-	 */
+    /**
+     * @param $cartItemId
+     * @return $this
+     */
     public function setCartItemId($cartItemId)
     {
         $this->cartItemId = $cartItemId;
         return $this;
     }
 
-	/**
-	 * @return number
-	 */
+    /**
+     * @return int
+     */
     public function getCartId()
     {
         return $this->cartId;
     }
 
-	/**
-	 * @param int $cartId
-	 * @return \Shop\Model\Cart\Item
-	 */
+    /**
+     * @param $cartId
+     * @return $this
+     */
     public function setCartId($cartId)
     {
         $this->cartId = $cartId;
         return $this;
     }
 
-	/**
-	 * @return number
-	 */
+    /**
+     * @return int
+     */
     public function getQuantity()
     {
         return $this->quantity;
     }
 
-	/**
-	 * @param number $quantity
-	 * @return \Shop\Model\Cart\Item
-	 */
+    /**
+     * @param $quantity
+     * @return $this
+     */
     public function setQuantity($quantity)
     {
         $this->quantity = $quantity;
         return $this;
     }
 
-	/**
-	 * @return float
-	 */
+    /**
+     * @return float
+     */
     public function getPrice()
     {
         return $this->price;
     }
 
-	/**
-	 * @param float $price
-	 * @return \Shop\Model\Cart\Item
-	 */
+    /**
+     * @param $price
+     * @return $this
+     */
     public function setPrice($price)
     {
         $this->price = $price;
         return $this;
     }
 
-	/**
-	 * @return float
-	 */
+    /**
+     * @param bool $formatPercent
+     * @return float
+     */
     public function getTax($formatPercent=false)
 	{
 		return (true === $formatPercent) ? $this->tax / 100 : $this->tax;
     }
 
-	/**
-	 * @param float $tax
-	 * @return \Shop\Model\Cart\Item
-	 */
+    /**
+     * @param $tax
+     * @return $this
+     */
     public function setTax($tax)
     {
         $this->tax = $tax;
         return $this;
     }
 
-	/**
-	 * @return \Shop\Model\Product\MetaData
-	 */
+    /**
+     * @return ProductMetaData
+     */
     public function getMetadata()
     {
         return $this->metadata;
@@ -139,7 +140,7 @@ class Item implements ModelInterface
 
     /**
      * @param ProductMetaData $metadata
-     * @return \Shop\Model\Cart\Item
+     * @return $this
      */
     public function setMetadata(ProductMetaData $metadata)
     {

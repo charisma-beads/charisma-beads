@@ -1,5 +1,5 @@
 <?php
-namespace Shop\Mapper;
+namespace Shop\Mapper\Product;
 
 use UthandoCommon\Mapper\AbstractMapper;
 use Zend\Db\Sql\Select;
@@ -8,8 +8,8 @@ class Product extends AbstractMapper
 {       
 	protected $table = 'product';
 	protected $primary = 'productId';
-	protected $model = 'Shop\Model\Product';
-	protected $hydrator = 'Shop\Hydrator\Product';
+	protected $model = 'Shop\Model\Product\Product';
+	protected $hydrator = 'Shop\Hydrator\Product\Product';
 	protected $fetchEnabled = true;
 	protected $fetchDisabled = false;
 	

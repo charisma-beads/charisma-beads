@@ -1,13 +1,13 @@
 <?php
-namespace Shop\Service;
+namespace Shop\Service\Product;
 
-use Shop\Model\Product as ProductModel;
+use Shop\Model\Product\Product as ProductModel;
 use UthandoCommon\Service\RelationalService;
 
 class Product extends RelationalService
 {
     protected $mapperClass  = 'Shop\Mapper\Product';
-	protected $form         = 'Shop\Form\Product';
+	protected $form         = 'Shop\Form\Product\Product';
 	protected $inputFilter  = 'Shop\InputFilter\Product';
     protected $referenceMap = [
         'productCategory'   => [
@@ -53,14 +53,14 @@ class Product extends RelationalService
 	
 	public function getProductByIdent($ident)
 	{
-        /* @var $mapper \Shop\Mapper\Product */
+        /* @var $mapper \Shop\Mapper\Product\Product */
         $mapper = $this->getMapper();
 		return $mapper->getProductByIdent($ident);
 	}
 	
 	public function getProductsByCategory($category, $order=null, $deep=true)
 	{
-        /* @var $mapper \Shop\Mapper\Product */
+        /* @var $mapper \Shop\Mapper\Product\Product */
         $mapper = $this->getMapper();
 
         /* @var $categoryService \Shop\Service\Product\Category */
@@ -95,9 +95,12 @@ class Product extends RelationalService
 	public function search(array $post)
 	{
 	    $products = parent::search($post);
-	    
+
 	    foreach ($products as $product) {
-	        $this->populate($product, true);
+	        $this->populate($product, [
+                'productCategory',
+                'productGroup',
+            ]);
 	    }
 	    
 	    return $products;
@@ -112,7 +115,7 @@ class Product extends RelationalService
             ),
         ));
 
-        /* @var $mapper \Shop\Mapper\Product */
+        /* @var $mapper \Shop\Mapper\Product\Product */
         $mapper = $this->getMapper();
 	    
 	    $products = $mapper->searchProducts($search);

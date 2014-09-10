@@ -1,5 +1,5 @@
 <?php
-namespace Shop\Form;
+namespace Shop\Form\Product;
 
 use Zend\Form\Form;
 

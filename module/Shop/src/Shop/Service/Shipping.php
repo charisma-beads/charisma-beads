@@ -1,26 +1,54 @@
 <?php
 namespace Shop\Service;
 
-use Shop\Service\Cart;
+use Shop\Service\Cart\Cart;
 
 class Shipping
 {
+    /**
+     * @var \Shop\Service\Country
+     */
     protected $countryService;
-    
+
+    /**
+     * @var \Shop\Service\Tax
+     */
     protected $taxService;
-    
+
+    /**
+     * @var int
+     */
     protected $countryId;
-    
+
+    /**
+     * @var int
+     */
     protected $postWeight = 0;
-    
+
+    /**
+     * @var int
+     */
     protected $noShipping = 0;
-    
+
+    /**
+     * @var int
+     */
     protected $shippingTax = 0;
-    
+
+    /**
+     * @var int
+     */
     protected $shippingTotal = 0;
-    
+
+    /**
+     * @var bool
+     */
     protected $shippingByWeight = false;
-    
+
+    /**
+     * @param Cart $cart
+     * @return number
+     */
     public function calculateShipping(Cart $cart)
     {
         $this->noShipping = 0;
@@ -43,14 +71,14 @@ class Shipping
         }
         
         if ($itemLevel == $this->getNoShipping()) {
-            return;
+            return 0;
         }
         
         $shippingLevels = $this->getCountryService()
             ->getCountryPostalRates($this->getCountryId());
-        
-        $postVatInc = 0;
-        $postTaxRate = 0;
+
+        $taxInc = 0;
+        $taxRate = 0;
         
         foreach ($shippingLevels as $row) {
         	if ($itemLevel > $row->postLevel) {
@@ -72,119 +100,126 @@ class Shipping
         
         return ($taxInc) ? $price + $tax : $price;
     }
-    
+
     /**
-	 * @return field_type $countryCode
-	 */
-	public function getCountryId()
+     * @return int
+     */
+    public function getCountryId()
 	{
 		return $this->countryId;
 	}
 
-	/**
-	 * @param field_type $countryId
-	 */
-	public function setCountryId($countryId)
+    /**
+     * @param $countryId
+     * @return $this
+     */
+    public function setCountryId($countryId)
 	{
 		$this->countryId = $countryId;
 		return $this;
 	}
 
-	/**
-	 * @return field_type $postWeight
-	 */
-	public function getPostWeight()
+    /**
+     * @return int
+     */
+    public function getPostWeight()
 	{
 		return $this->postWeight;
 	}
 
-	/**
-	 * @param field_type $postWeight
-	 */
-	public function setPostWeight($postWeight)
+    /**
+     * @param $postWeight
+     * @return $this
+     */
+    public function setPostWeight($postWeight)
 	{
 		$this->postWeight = $postWeight;
 		return $this;
 	}
 
-	/**
-	 * @return number $noShipping
-	 */
-	public function getNoShipping()
+    /**
+     * @return int
+     */
+    public function getNoShipping()
 	{
 		return $this->noShipping;
 	}
 
-	/**
-	 * @param number $noShipping
-	 */
-	public function setNoShipping($noShipping)
+    /**
+     * @param $noShipping
+     * @return $this
+     */
+    public function setNoShipping($noShipping)
 	{
 		$this->noShipping = $noShipping;
 		return $this;
 	}
 
-	/**
-	 * @return number $shippingTax
-	 */
-	public function getShippingTax()
+    /**
+     * @return int
+     */
+    public function getShippingTax()
 	{
 		return $this->shippingTax;
 	}
 
-	/**
-	 * @param number $shippingTax
-	 */
-	public function setShippingTax($shippingTax)
+    /**
+     * @param $shippingTax
+     * @return $this
+     */
+    public function setShippingTax($shippingTax)
 	{
 		$this->shippingTax = $shippingTax;
 		return $this;
 	}
 
-	/**
-	 * @return boolean $shippingByWeight
-	 */
-	public function getShippingByWeight()
+    /**
+     * @return bool
+     */
+    public function getShippingByWeight()
 	{
 		return $this->shippingByWeight;
 	}
 
-	/**
-	 * @param boolean $shippingByWeight
-	 */
-	public function setShippingByWeight($shippingByWeight)
+    /**
+     * @param $shippingByWeight
+     * @return $this
+     */
+    public function setShippingByWeight($shippingByWeight)
 	{
 		$this->shippingByWeight = $shippingByWeight;
 		return $this;
 	}
 
-	/**
-     * @return \Shop\Service\Country $countryService
+    /**
+     * @return Country
      */
     public function getCountryService()
     {
     	return $this->countryService;
     }
-    
+
     /**
-     * @param \Shop\Service\Country $countryervice
+     * @param $countryService
+     * @return $this
      */
     public function setCountryService($countryService)
     {
     	$this->countryService = $countryService;
     	return $this;
     }
-    
+
     /**
-     * @return \Shop\Service\Tax $taxService
+     * @return Tax
      */
     public function getTaxService()
     {
     	return $this->taxService;
     }
-    
+
     /**
-     * @param \Shop\Service\Tax $taxService
+     * @param $taxService
+     * @return $this
      */
     public function setTaxService($taxService)
     {
