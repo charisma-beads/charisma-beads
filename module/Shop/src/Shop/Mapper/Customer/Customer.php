@@ -1,5 +1,5 @@
 <?php
-namespace Shop\Mapper;
+namespace Shop\Mapper\Customer;
 
 use UthandoCommon\Mapper\AbstractMapper;
 use Zend\Db\Sql\Select;
@@ -8,8 +8,8 @@ class Customer extends AbstractMapper
 {
     protected $table = 'customer';
     protected $primary = 'customerId';
-    protected $model = 'Shop\Model\Customer';
-    protected $hydrator = 'Shop\Hydrator\Customer';
+    protected $model = 'Shop\Model\Customer\Customer';
+    protected $hydrator = 'Shop\Hydrator\Customer\Customer';
     
     public function search(array $search, $sort, Select $select = null)
     {	

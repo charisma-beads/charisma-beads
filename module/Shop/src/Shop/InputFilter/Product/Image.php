@@ -5,7 +5,7 @@ use Zend\InputFilter\InputFilter;
 
 class Image extends InputFilter
 {
-    public function __construct()
+    public function init()
     {
         
     }

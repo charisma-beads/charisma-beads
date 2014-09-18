@@ -1,5 +1,5 @@
 <?php
-namespace Shop\Service;
+namespace Shop\Service\Tax;
 
 class Tax
 {   

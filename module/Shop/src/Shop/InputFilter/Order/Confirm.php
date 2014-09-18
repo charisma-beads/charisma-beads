@@ -5,7 +5,7 @@ use Zend\InputFilter\InputFilter;
 
 class Confirm extends InputFilter
 {
-    public function __construct()
+    public function init()
     {
         $this->add(array(
         	'name' => 'payment_option',

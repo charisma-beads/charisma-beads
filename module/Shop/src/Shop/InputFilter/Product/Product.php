@@ -5,7 +5,7 @@ use Zend\InputFilter\InputFilter;
 
 class Product extends InputFilter
 {
-    public function __construct()
+    public function init()
     {
         $this->add(array(
         	'name'         => 'productId',
@@ -25,7 +25,7 @@ class Product extends InputFilter
     		'filters'    => array(
     			array('name' => 'StripTags'),
     			array('name' => 'StringTrim'),
-    			array('name' => 'UthandoCommon\Filter\Slug')
+    			array('name' => 'UthandoSlug')
     		),
     		'validators' => array(
     			array('name' => 'StringLength', 'options' => array(
@@ -42,7 +42,7 @@ class Product extends InputFilter
     		'filters'    => array(
     			array('name' => 'StripTags'),
     			array('name' => 'StringTrim'),
-    			array('name' => 'UthandoCommon\Filter\Ucwords'),
+    			array('name' => 'UthandoUcwords'),
     		),
     		'validators' => array(
     			array('name' => 'StringLength', 'options' => array(

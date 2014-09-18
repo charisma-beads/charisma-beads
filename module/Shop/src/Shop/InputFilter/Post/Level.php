@@ -6,7 +6,7 @@ use Zend\InputFilter\InputFilter;
 
 class Level extends InputFilter 
 {
-	public function __construct()
+	public function init()
 	{
 		$this->add(array(
 			'name'			=> 'postLevel',

@@ -1,13 +1,15 @@
 <?php
 namespace Shop\Service\Tax;
 
-use UthandoCommon\Service\AbstractService;
+use UthandoCommon\Service\AbstractMapperService;
 
-class Code extends AbstractService
+class Code extends AbstractMapperService
 {
     protected $mapperClass = 'Shop\Mapper\Tax\Code';
     protected $form = 'Shop\Form\Tax\Code';
     protected $inputFilter = 'Shop\InputFilter\Tax\Code';
+
+    protected $serviceAlias = 'ShopTaxCode';
     
     /**
      * @var \Shop\Service\Tax\Rate

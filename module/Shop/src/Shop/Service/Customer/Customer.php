@@ -1,14 +1,16 @@
 <?php
-namespace Shop\Service;
+namespace Shop\Service\Customer;
 
-use UthandoCommon\Service\AbstractService;
+use UthandoCommon\Service\AbstractMapperService;
 use UthandoUser\Model\User;
 
-class Customer extends AbstractService
+class Customer extends AbstractMapperService
 {
     protected $mapperClass = 'Shop\Mapper\Customer';
     protected $form = 'Shop\Form\Customer';
-    protected $inputFilter = 'Shop\InputFilter\Customer';
+    protected $inputFilter = 'Shop\InputFilter\Customer\Customer';
+
+    protected $serviceAlias = 'ShopCustomer';
     
     /**
      * @var User

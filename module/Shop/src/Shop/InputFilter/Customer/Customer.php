@@ -1,11 +1,11 @@
 <?php
-namespace Shop\InputFilter;
+namespace Shop\InputFilter\Customer;
 
 use Zend\InputFilter\InputFilter;
 
 class Customer extends InputFilter
 {
-    public function __construct()
+    public function init()
     {
         $this->add([
             'name' => 'customerId',

@@ -1,13 +1,15 @@
 <?php
 namespace Shop\Service\Product;
 
-use UthandoCommon\Service\AbstractService;
+use UthandoCommon\Service\AbstractMapperService;
 
-class Image extends AbstractService
+class Image extends AbstractMapperService
 {
     protected $mapperClass = 'Shop\Mapper\Product\Image';
     protected $form = 'Shop\Form\Product\Image';
     protected $inputFilter = 'Shop\InputFilter\Product\Image';
+
+    protected $serviceAlias = 'ShopProductImage';
     
     /**
      * @var \Shop\Service\Product

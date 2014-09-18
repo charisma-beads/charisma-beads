@@ -1,6 +1,6 @@
 <?php
 
-namespace Shop\Form;
+namespace Shop\Form\Customer;
 
 use Zend\Form\Form;
 

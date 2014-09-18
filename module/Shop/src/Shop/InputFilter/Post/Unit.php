@@ -5,7 +5,7 @@ use Zend\InputFilter\InputFilter;
 
 class Unit extends InputFilter
 {
-    public function __construct()
+    public function init()
     {
         $this->add(array(
             'name'			=> 'postUnit',

@@ -1,13 +1,15 @@
 <?php
-namespace Shop\Service;
+namespace Shop\Service\Country;
 
-use UthandoCommon\Service\AbstractService;
+use UthandoCommon\Service\AbstractMapperService;
 
-class Country extends AbstractService
+class Country extends AbstractMapperService
 {
     protected $mapperClass = 'Shop\Mapper\Country';
     protected $form = 'Shop\Form\Country';
-    protected $inputFilter = 'Shop\InputFilter\Country';
+    protected $inputFilter = 'Shop\InputFilter\Country\Country';
+
+    protected $serviceAlias = 'ShopCountry';
     
     /**
      * @var \Shop\Service\Post\Zone

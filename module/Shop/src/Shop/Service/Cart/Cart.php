@@ -1,7 +1,7 @@
 <?php
 namespace Shop\Service\Cart;
 
-use UthandoCommon\Service\AbstractService;
+use UthandoCommon\Service\AbstractMapperService;
 use Shop\Model\Cart\Cart as CartModel;
 use Shop\Model\Cart\Item as CartItem;
 use Shop\Model\Product\Product as ProductModel;
@@ -12,9 +12,9 @@ use Shop\Service\Tax;
 use Zend\Session\Container;
 use Zend\Stdlib\InitializableInterface;
 
-class Cart extends AbstractService implements InitializableInterface
+class Cart extends AbstractMapperService implements InitializableInterface
 {
-    protected $mapperClass = 'Shop\Mapper\Cart';
+    protected $serviceAlias = 'ShopCart';
 
     /**
      * @var Container

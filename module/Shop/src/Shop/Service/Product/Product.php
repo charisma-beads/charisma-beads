@@ -2,41 +2,40 @@
 namespace Shop\Service\Product;
 
 use Shop\Model\Product\Product as ProductModel;
-use UthandoCommon\Service\RelationalService;
+use UthandoCommon\Service\AbstractRelationalMapperService;
 
-class Product extends RelationalService
+class Product extends AbstractRelationalMapperService
 {
-    protected $mapperClass  = 'Shop\Mapper\Product';
-	protected $form         = 'Shop\Form\Product\Product';
-	protected $inputFilter  = 'Shop\InputFilter\Product';
+    protected $serviceAlias = 'ShopProduct';
+
     protected $referenceMap = [
         'productCategory'   => [
             'refCol'    => 'productCategoryId',
-            'refClass'  => 'Shop\Service\Product\Category',
+            'service'   => 'Shop\Service\Product\Category',
         ],
         'productSize'       => [
             'refCol'    => 'productSizeId',
-            'refClass'  => 'Shop\Service\Product\Size',
+            'service'   => 'Shop\Service\Product\Size',
         ],
         'taxCode'           => [
             'refCol'    => 'taxCodeId',
-            'refClass'  => 'Shop\Service\Tax\Code',
+            'service'   => 'Shop\Service\Tax\Code',
         ],
         'postUnit'          => [
             'refCol'    => 'postUnitId',
-            'refClass'  => 'Shop\Service\Post\Unit',
+            'service'   => 'Shop\Service\Post\Unit',
         ],
         'productGroup'      => [
             'refCol'    => 'productGroupId',
-            'refClass'  => 'Shop\Service\Product\Group',
+            'service'   => 'Shop\Service\Product\Group',
         ],
         'productImage'      => [
             'refCol'    => 'productId',
-            'refClass'  => 'Shop\Service\Product\Image',
+            'service'   => 'Shop\Service\Product\Image',
         ],
         'productOption' => [
             'refCol'    => 'productId',
-            'refClass'  => 'Shop\Service\Product\Option',
+            'service'   => 'Shop\Service\Product\Option',
         ],
     ];
 	

@@ -1,5 +1,5 @@
 <?php
-namespace Shop\Hydrator;
+namespace Shop\Hydrator\Customer;
 
 use UthandoCommon\Hydrator\AbstractHydrator;
 use UthandoCommon\Hydrator\Strategy\DateTime as DateTimeStrategy;

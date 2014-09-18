@@ -11,7 +11,7 @@ class Image implements ModelInterface
     use Model,
         DateCreatedTrait,
         DateModifiedTrait;
-    
+
 	/**
 	 * @var int
 	 */

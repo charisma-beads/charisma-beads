@@ -14,7 +14,7 @@ class Cookie
     protected $request;
     
     /**
-     * @var Reponse
+     * @var Response
      */
     protected $response;
     
@@ -88,9 +88,9 @@ class Cookie
         return $this;
     }
 
-	/**
-	 * @return \Shop\Service\Cart\Reponse
-	 */
+    /**
+     * @return Response
+     */
     public function getResponse()
     {
         return $this->response;

@@ -1,5 +1,5 @@
 <?php
-namespace Shop\Mapper;
+namespace Shop\Mapper\Country;
 
 use UthandoCommon\Mapper\AbstractMapper;
 use Zend\Db\ResultSet\ResultSet;
@@ -9,8 +9,8 @@ class Country extends AbstractMapper
 {
     protected $table = 'country';
     protected $primary = 'countryId';
-    protected $model = 'Shop\Model\Country';
-    protected $hydrator = 'Shop\Hydrator\Country';
+    protected $model = 'Shop\Model\Country\Country';
+    protected $hydrator = 'Shop\Hydrator\Country\Country';
     
     public function search(array $search, $sort, Select $select = null)
     {

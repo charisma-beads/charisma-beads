@@ -1,7 +1,6 @@
 <?php
 namespace Shop\Model\Country;
 
-use Shop\Model\Country;
 use UthandoCommon\Model\Model;
 use UthandoCommon\Model\ModelInterface;
 
@@ -45,7 +44,7 @@ class Province implements ModelInterface
     protected $rgt;
     
     /**
-     * @var \Shop\Model\Country
+     * @var Country
      */
     protected $country;
     
@@ -176,7 +175,7 @@ class Province implements ModelInterface
 	}
 
 	/**
-	 * @return \Shop\Model\Country
+	 * @return Country
 	 */
 	public function getCountry()
 	{
@@ -184,7 +183,7 @@ class Province implements ModelInterface
 	}
 
 	/**
-	 * @param \Shop\Model\Country $country
+	 * @param Country $country
 	 * @return \Shop\Model\Country\Province
 	 */
 	public function setCountry(Country $country)

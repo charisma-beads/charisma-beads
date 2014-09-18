@@ -16,7 +16,7 @@ class Product extends Form
         	'name'			=> 'ident',
         	'type'			=> 'text',
         	'attributes'	=> [
-        		'placehoder'		=> 'Ident:',
+        		'placeholder'		=> 'Ident:',
         		'autofocus'			=> true,
         		'autocapitalize'	=> 'off'
         	],

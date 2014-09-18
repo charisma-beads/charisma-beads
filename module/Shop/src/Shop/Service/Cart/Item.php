@@ -1,11 +1,13 @@
 <?php
 namespace Shop\Service\Cart;
 
-use UthandoCommon\Service\AbstractService;
+use UthandoCommon\Service\AbstractMapperService;
 
-class Item extends AbstractService
+class Item extends AbstractMapperService
 {
     protected $mapperClass = 'Shop\Mapper\Cart\Item';
+
+    protected $serviceAlias = 'ShopCartItem';
 
     /**
      * @param $cartId

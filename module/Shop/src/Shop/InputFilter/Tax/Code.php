@@ -6,7 +6,7 @@ use Zend\InputFilter\InputFilter;
 
 class Code extends InputFilter
 {
-	public function __constract()
+	public function init()
 	{
 		$this->add(array(
 			'name'       => 'taxCode',

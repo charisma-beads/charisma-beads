@@ -1,15 +1,30 @@
 <?php
-namespace Shop\Service;
+namespace Shop\Service\Order;
 
-use UthandoCommon\Service\AbstractService;
 use Shop\Model\Customer as CustomerModel;
 use Shop\Model\Order\MetaData;
+use UthandoCommon\Service\AbstractRelationalMapperService;
 
-class Order extends AbstractService
+class Order extends AbstractRelationalMapperService
 {
-    protected $mapperClass = 'Shop\Mapper\Order';
-    protected $form = 'Shop\Form\Order';
-    protected $inputFilter = 'Shop\InputFilter\Order';
+    protected $serviceAlias = 'ShopOrder';
+
+    protected $referenceMap = [
+        'customer'      => [
+            'refCol'        => 'customerId',
+            'service'       => 'Shop\Service\Customer',
+            'getMethod'     => 'getCustomerDetailsByCustomerId',
+        ],
+        'orderStatus'   => [
+            'refCol'        => 'orderStatusId',
+            'service'       => 'Shop\Service\Order\Status',
+        ],
+        'orderLines'    => [
+            'refCol'        => 'orderId',
+            'service'       => 'Shop\Service\Order\Lines',
+            'getMethod'     => 'getOrderLinesByOrderId',
+        ],
+    ];
     
     /**
      * @var \Shop\Service\Customer
@@ -36,7 +51,7 @@ class Order extends AbstractService
     	$orders = parent::search($post);
     	 
     	foreach ($orders as $order) {
-    		$this->populate($order, true);
+    		$this->populate($order, ['orderStatus']);
     	}
     	 
     	return $orders;
@@ -131,7 +146,7 @@ class Order extends AbstractService
         $order = $this->getMapper()->getOrderByUserId($id, $userId);
         
         if ($order) {
-            $this->populate($order, ['orderStatus', 'orderLines']);
+            //$this->populate($order, ['orderStatus', 'orderLines']);
         }
         
         return $order;
@@ -143,7 +158,7 @@ class Order extends AbstractService
         $orders = $this->getMapper()->getOrdersByUserId($userId);
         
         foreach ($orders as $order) {
-            $order = $this->populate($order, ['orderStatus']);
+            $this->populate($order, ['orderStatus']);
         }
         
         return $orders;
@@ -154,38 +169,10 @@ class Order extends AbstractService
         $orders = $this->getMapper()->getCurrentOrders();
 
         foreach ($orders as $order) {
-            $order = $this->populate($order, ['customer', 'orderStatus']);
+            $this->populate($order, ['customer', 'orderStatus']);
         }
 
         return $orders;
-    }
-    
-    /**
-     * @param \Shop\Model\Order $model
-     * @param bool $children
-     * @return \Shop\Model\Order $model
-     */
-    public function populate($model, $children = false)
-    {
-        $allChildren = ($children === true) ? true : false;
-        $children = (is_array($children)) ? $children : [];
-        
-        if ($allChildren || in_array('customer', $children)) {
-            $id = $model->getCustomerId();
-            $model->setCustomer($this->getCustomerService()->getCustomerDetailsByCustomerId($id));
-        }
-        
-        if ($allChildren || in_array('orderStatus', $children)) {
-            $id = $model->getOrderStatusId();
-            $model->setOrderStatus($this->getOrderStatusService()->getById($id));
-        }
-        	
-        if ($allChildren || in_array('orderLines', $children)) {
-            $id = $model->getOrderId();
-            $model->setOrderLines($this->getOrderLineService()->getOrderLinesByOrderId($id));
-        }
-        
-        return $model;
     }
     
     public function emailCustomerOrder()

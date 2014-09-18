@@ -2,16 +2,18 @@
 namespace Shop\Service\Product;
 
 use UthandoCommon\Model\ModelInterface;
-use UthandoCommon\Service\AbstractService;
+use UthandoCommon\Service\AbstractMapperService;
 use Shop\ShopException;
 use Shop\Model\Product\Category as CategoryModel;
 use Zend\Form\Form;
 
-class Category extends AbstractService
+class Category extends AbstractMapperService
 {
 	protected $mapperClass = 'Shop\Mapper\Product\Category';
 	protected $form = 'Shop\Form\Product\Category';
 	protected $inputFilter = 'Shop\InputFilter\Product\Category';
+
+    protected $serviceAlias = 'ShopProductCategory';
 	
 	/**
 	 * @var \Shop\Service\Product\Image
@@ -89,8 +91,12 @@ class Category extends AbstractService
 			$post['ident'] = $post['category'];
 		}
 		
-		$page = $this->getMapper()->getModel();
-		$form  = $this->getForm($page, $post, true, true);
+		$model = $this->getMapper()->getModel();
+        $options = [
+            'categoryId' => $model->getProductCategoryId(),
+        ];
+
+		$form  = $this->getForm($model, $post, $options, true, true);
 	
 		if (!$form->isValid()) {
 			return $form;
@@ -102,10 +108,15 @@ class Category extends AbstractService
 	
 		return $this->getMapper()->insertRow($data, $position, $insertType);
 	}
-	
-	/**
-	 * @param CategoryModel $model
-	 */
+
+    /**
+     * @param ModelInterface $model
+     * @param array $post
+     * @param Form $form
+     * @return int|Form
+     * @throws ShopException
+     * @throws \UthandoCommon\Service\ServiceException
+     */
 	public function edit(ModelInterface $model, array $post, Form $form = null)
 	{
 		if (!$model instanceof CategoryModel) {
@@ -117,8 +128,11 @@ class Category extends AbstractService
 		}
 		
 		$model->setDateModified();
+        $options = [
+            'categoryId' => $model->getProductCategoryId(),
+        ];
 		
-		$form = $this->getForm($model, $post, true, true);
+		$form = $this->getForm($model, $post, $options, true, true);
 	
 		if (!$form->isValid()) {
 			return $form;
@@ -127,9 +141,9 @@ class Category extends AbstractService
 		$category = $this->getById($model->getProductCategoryId());
 	
 		if ($category) {
-			// if category postion has changed then we need to delete it
+			// if category position has changed then we need to delete it
 			// and reinsert it in the new position else just update it.
-			// no this should update, no reinseting and deleting thank you.
+			// no this should update, no reinserting and deleting thank you.
 			// move this to the mapper class.
 			if ('noInsert' !== $post['categoryInsertType']) {
 				// TODO find children and move them as well.
@@ -147,8 +161,9 @@ class Category extends AbstractService
 	public function toggleEnabled(CategoryModel $category)
 	{	
 		//check for parent and if it's enabled or not, if disabled don't update.
-		$parents = $this->getParentCategories($category->getProductCategoryId())
-						->toArray();
+		$parents = $this->getParentCategories(
+            $category->getProductCategoryId()
+        )->toArray();
 		
 		array_pop($parents);
 		$parent = array_slice($parents, -1, 1);
@@ -166,34 +181,6 @@ class Category extends AbstractService
 		$category->setDateModified();
 		
 		return $this->getMapper()->toggleEnabled($category);
-	}
-	
-	public function getForm(ModelInterface $model=null, array $data=null, $useInputFilter=false, $useHydrator=false)
-	{
-		$sl = $this->getServiceLocator();
-		$formManager = $sl->get('FormElementManager');
-		/* @var $form \Zend\Form\Form */
-		$form = $formManager->get($this->form);
-		
-		if ($model) {
-			$form->setCategoryId($model->getProductCategoryId());
-			$form->init();
-			$form->bind($model);
-		}
-	
-		if ($useInputFilter) {
-			$form->setInputFilter($sl->get($this->inputFilter));
-		}
-	
-		if ($useHydrator) {
-			$form->setHydrator($this->getMapper()->getHydrator());
-		}
-			
-		if ($data) {
-			$form->setData($data);
-		}
-	
-		return $form;
 	}
 	
 	/**

@@ -5,7 +5,7 @@ use Zend\InputFilter\InputFilter;
 
 class Add extends InputFilter
 {
-	public function __construct()
+	public function init()
 	{
 		$this->add(array(
 			'name' => 'qty',

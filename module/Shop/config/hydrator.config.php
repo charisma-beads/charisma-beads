@@ -1,0 +1,31 @@
+<?php
+
+return [
+    'invokables' => [
+        'ShopCart'              => 'Shop\Hydrator\Cart\Cart',
+        'ShopCartItem'          => 'Shop\Hydrator\Cart\Item',
+        'ShopCountry'           => 'Shop\Hydrator\Country\Country',
+        'ShopCountryProvince'   => 'Shop\Hydrator\Country\Province',
+        'ShopCustomer'          => 'Shop\Hydrator\Customer\Customer',
+        'ShopCustomerAddress'   => 'Shop\Hydrator\Customer\Address',
+        'ShopCustomerPrefix'    => 'Shop\Hydrator\Customer\Prefix',
+        'ShopOrder'             => 'Shop\Hydrator\Order\Order',
+        'ShopOrderLine'         => 'Shop\Hydrator\Order\Line',
+        'ShopOrderStatus'       => 'Shop\Hydrator\Order\Status',
+        'ShopPayPal'            => 'Shop\Hydrator\Paypal\PaypalHydrator',
+        'ShopPayPalItemList'    => 'Shop\Hydrator\Paypal\ItemList',
+        'ShopPayPalAggregate'   => 'Shop\Hydrator\Paypal\PaypalAggregate',
+        'ShopPostCost'          => 'Shop\Hydrator\Post\Cost',
+        'ShopPostLevel'         => 'Shop\Hydrator\Post\Level',
+        'ShopPostUnit'          => 'Shop\Hydrator\Post\Unit',
+        'ShopPostZone'          => 'Shop\Hydrator\Post\Zone',
+        'ShopProduct'           => 'Shop\Hydrator\Product\Product',
+        'ShopProductCategory'   => 'Shop\Hydrator\Product\Category',
+        'ShopProductGroup'      => 'Shop\Hydrator\Product\Group',
+        'ShopProductImage'      => 'Shop\Hydrator\Product\Image',
+        'ShopProductOption'     => 'Shop\Hydrator\Product\Option',
+        'ShopProductSize'       => 'Shop\Hydrator\Product\Size',
+        'ShopTaxCode'           => 'Shop\Hydrator\Tax\Code',
+        'ShopTaxRate'           => 'Shop\Hydrator\Tax\Rate',
+    ],
+];

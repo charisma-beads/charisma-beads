@@ -1,12 +1,11 @@
 <?php
 namespace Shop\Model\Customer;
 
-use Shop\Model\Country;
+use Shop\Model\Country\Country;
 use Shop\Model\Country\Province;
 use UthandoCommon\Model\Model;
 use UthandoCommon\Model\ModelInterface;
 use DateTime;
-
 
 class Address implements ModelInterface
 {
@@ -83,7 +82,7 @@ class Address implements ModelInterface
     protected $dateModified;
     
     /**
-     * @var \Shop\Model\Country
+     * @var \Shop\Model\Country\Country
      */
     protected $country;
     
@@ -100,9 +99,10 @@ class Address implements ModelInterface
 		return $this->customerAddressId;
 	}
 
-	/**
-	 * @param number $customerAddressId
-	 */
+    /**
+     * @param $addressId
+     * @return $this
+     */
 	public function setCustomerAddressId($addressId)
 	{
 		$this->customerAddressId = $addressId;
@@ -135,9 +135,10 @@ class Address implements ModelInterface
 		return $this->countryId;
 	}
 
-	/**
-	 * @param number $countryId
-	 */
+    /**
+     * @param $countryId
+     * @return $this
+     */
 	public function setCountryId($countryId)
 	{
 		$this->countryId = $countryId;
@@ -170,9 +171,10 @@ class Address implements ModelInterface
 		return $this->address1;
 	}
 
-	/**
-	 * @param string $address1
-	 */
+    /**
+     * @param $address1
+     * @return $this
+     */
 	public function setAddress1($address1)
 	{
 		$this->address1 = $address1;
@@ -187,9 +189,10 @@ class Address implements ModelInterface
 		return $this->address2;
 	}
 
-	/**
-	 * @param string $address2
-	 */
+    /**
+     * @param string $address2
+     * @return $this
+     */
 	public function setAddress2($address2)
 	{
 		$this->address2 = $address2;
@@ -204,9 +207,10 @@ class Address implements ModelInterface
 		return $this->address3;
 	}
 
-	/**
-	 * @param string $address3
-	 */
+    /**
+     * @param string $address3
+     * @return $this
+     */
 	public function setAddress3($address3)
 	{
 		$this->address3 = $address3;
@@ -221,9 +225,10 @@ class Address implements ModelInterface
 		return $this->city;
 	}
 
-	/**
-	 * @param string $city
-	 */
+    /**
+     * @param string $city
+     * @return $this
+     */
 	public function setCity($city)
 	{
 		$this->city = $city;
@@ -238,9 +243,10 @@ class Address implements ModelInterface
 		return $this->county;
 	}
 
-	/**
-	 * @param string $county
-	 */
+    /**
+     * @param string $county
+     * @return $this
+     */
 	public function setCounty($county)
 	{
 		$this->county = $county;
@@ -255,9 +261,10 @@ class Address implements ModelInterface
 		return $this->postcode;
 	}
 
-	/**
-	 * @param string $postcode
-	 */
+    /**
+     * @param string $postcode
+     * @return $this
+     */
 	public function setPostcode($postcode)
 	{
 		$this->postcode = $postcode;
@@ -272,9 +279,10 @@ class Address implements ModelInterface
 		return $this->phone;
 	}
 
-	/**
-	 * @param string $phone
-	 */
+    /**
+     * @param string $phone
+     * @return $this
+     */
 	public function setPhone($phone)
 	{
 		$this->phone = $phone;
@@ -289,9 +297,10 @@ class Address implements ModelInterface
 		return $this->email;
 	}
 
-	/**
-	 * @param string $email
-	 */
+    /**
+     * @param string $email
+     * @return $this
+     */
 	public function setEmail($email)
 	{
 		$this->email = $email;
@@ -306,9 +315,10 @@ class Address implements ModelInterface
 		return $this->dateCreated;
 	}
 
-	/**
-	 * @param DateTime $dateCreated
-	 */
+    /**
+     * @param DateTime $dateCreated
+     * @return $this
+     */
 	public function setDateCreated($dateCreated)
 	{
 		$this->dateCreated = $dateCreated;
@@ -323,9 +333,10 @@ class Address implements ModelInterface
 		return $this->dateModified;
 	}
 
-	/**
-	 * @param DateTime $dateModified
-	 */
+    /**
+     * @param DateTime $dateModified
+     * @return $this
+     */
 	public function setDateModified($dateModified = null)
 	{
 		$this->dateModified = $dateModified;
@@ -333,7 +344,7 @@ class Address implements ModelInterface
 	}
 	
 	/**
-	 * @return \Shop\Model\Country
+	 * @return \Shop\Model\Country\Country
 	 */
 	public function getCountry()
 	{
@@ -341,7 +352,7 @@ class Address implements ModelInterface
 	}
 	
 	/**
-	 * @param \Shop\Model\Country $country
+	 * @param \Shop\Model\Country\Country $country\
 	 * @return \Shop\Model\Customer\Address
 	 */
 	public function setCountry(Country $country)

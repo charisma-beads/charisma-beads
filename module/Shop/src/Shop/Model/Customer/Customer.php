@@ -1,5 +1,5 @@
 <?php
-namespace Shop\Model;
+namespace Shop\Model\Customer;
 
 use UthandoCommon\Model\Model;
 use UthandoCommon\Model\ModelInterface;

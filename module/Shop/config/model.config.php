@@ -1,0 +1,30 @@
+<?php
+
+return [
+    'invokables' => [
+        'ShopCart'              => 'Shop\Model\Cart\Cart',
+        'ShopCartItem'          => 'Shop\Model\Cart\Item',
+        'ShopCountry'           => 'Shop\Model\Country\Country',
+        'ShopCountryProvince'   => 'Shop\Model\Country\Province',
+        'ShopCustomer'          => 'Shop\Model\Customer\Customer',
+        'ShopCustomerAddress'   => 'Shop\Model\Customer\Address',
+        'ShopCustomerPrefix'    => 'Shop\Model\Customer\Prefix',
+        'ShopOrder'             => 'Shop\Model\Order\Order',
+        'ShopOrderLine'         => 'Shop\Model\Order\Line',
+        'ShopOrderMetaData'     => 'Shop\Model\Order\MetaData',
+        'ShopOrderStatus'       => 'Shop\Model\Order\Status',
+        'ShopPostCost'          => 'Shop\Model\Post\Cost',
+        'ShopPostLevel'         => 'Shop\Model\Post\Level',
+        'ShopPostUnit'          => 'Shop\Model\Post\Unit',
+        'ShopPostZone'          => 'Shop\Model\Post\Zone',
+        'ShopProduct'           => 'Shop\Model\Product\Product',
+        'ShopProductCategory'   => 'Shop\Model\Product\Category',
+        'ShopProductGroup'      => 'Shop\Model\Product\Group',
+        'ShopProductImage'      => 'Shop\Model\Product\Image',
+        'ShopProductMetaData'   => 'Shop\Model\Product\MetaData',
+        'ShopProductOption'     => 'Shop\Model\Product\Option',
+        'ShopProductSize'       => 'Shop\Model\Product\Size',
+        'ShopTaxCode'           => 'Shop\Model\Tax\Code',
+        'ShopTaxRate'           => 'Shop\Model\Tax\Rate',
+    ],
+];

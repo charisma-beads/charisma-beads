@@ -5,7 +5,7 @@ use Zend\InputFilter\InputFilter;
 
 class Group extends InputFilter
 {
-    public function __construct()
+    public function init()
     {
         $this->add(array(
             'name'       => 'group',

@@ -14,6 +14,19 @@ class Category extends Form implements ServiceLocatorAwareInterface
 	 * @var int
 	 */
 	protected $categoryId;
+
+    /**
+     * @param array|\Traversable $options
+     * @return \Zend\Form\Element|\Zend\Form\ElementInterface
+     */
+    public function setOptions($options)
+    {
+        if (isset($options['productCategoryId'])) {
+            $this->categoryId = $options['productCategoryId'];
+        }
+
+        return parent::setOptions($options);
+    }
 	
     public function init()
     {
@@ -39,7 +52,7 @@ class Category extends Form implements ServiceLocatorAwareInterface
     		'name'			=> 'ident',
     		'type'			=> 'text',
     		'attributes'	=> array(
-    			'placehoder'		=> 'Ident:',
+    			'placeholder'		=> 'Ident:',
     			'autofocus'			=> true,
     			'autocapitalize'	=> 'off'
     		),
@@ -144,6 +157,7 @@ class Category extends Form implements ServiceLocatorAwareInterface
     public function getImageList()
     {
     	$id = $this->getCategoryId();
+        \FB::info($id,__METHOD__);
     	$imageOptions = array();
     	
     	if (!0 == $id) {

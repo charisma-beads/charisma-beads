@@ -1,5 +1,5 @@
 <?php
-namespace Shop\Mapper;
+namespace Shop\Mapper\Order;
 
 use UthandoCommon\Mapper\AbstractMapper;
 use Zend\Db\ResultSet\ResultSet;
@@ -9,8 +9,8 @@ class Order extends AbstractMapper
 {
     protected $table = 'order';
     protected $primary = 'orderId';
-    protected $model = 'Shop\Model\Order';
-    protected $hydrator = 'Shop\Hydrator\Order';
+    protected $model = 'Shop\Model\Order\Order';
+    protected $hydrator = 'Shop\Hydrator\Order\Order';
 
     public function getCurrentOrders()
     {

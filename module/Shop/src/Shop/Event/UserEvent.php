@@ -10,7 +10,7 @@ class UserEvent
         $sl = $e->getTarget()->getServiceLocator();
         $data = $e->getParams();
         
-        /* @var $customerService \Shop\Service\Customer */
+        /* @var $customerService \Shop\Service\Customer\Customer */
         $customerService = $sl->get('Shop\Service\Customer');
         
         $customer = $customerService->getCustomerDetailsFromUserId($data['userId']);
