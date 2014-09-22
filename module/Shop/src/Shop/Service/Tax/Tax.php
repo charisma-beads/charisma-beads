@@ -22,7 +22,11 @@ class Tax
      * @var float
      */
     protected $price;
-    
+
+    /**
+     * @param float $price
+     * @param int $taxRate
+     */
     public function addTax($price, $taxRate=0)
     {   
         if ($this->taxState && $taxRate != 0) {

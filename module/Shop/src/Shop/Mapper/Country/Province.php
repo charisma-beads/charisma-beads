@@ -7,8 +7,6 @@ class Province extends AbstractMapper
 {
     protected $table = 'countryProvince';
     protected $primary = 'countryProvinceId';
-    protected $model = 'Shop\Model\Country\Province';
-    protected $hydrator = 'Shop\Hydrator\Country\Province';
     
     public function getProvincesByCountryId($id)
     {

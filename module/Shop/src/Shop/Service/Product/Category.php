@@ -2,76 +2,134 @@
 namespace Shop\Service\Product;
 
 use UthandoCommon\Model\ModelInterface;
-use UthandoCommon\Service\AbstractMapperService;
 use Shop\ShopException;
 use Shop\Model\Product\Category as CategoryModel;
+use UthandoCommon\Service\AbstractRelationalMapperService;
 use Zend\Form\Form;
 
-class Category extends AbstractMapperService
+class Category extends AbstractRelationalMapperService
 {
-	protected $mapperClass = 'Shop\Mapper\Product\Category';
-	protected $form = 'Shop\Form\Product\Category';
-	protected $inputFilter = 'Shop\InputFilter\Product\Category';
-
+    /**
+     * @var string
+     */
     protected $serviceAlias = 'ShopProductCategory';
+
+    /**
+     * @var array
+     */
+    protected $referenceMap = [
+        'productImage'  => [
+            'refCol'    => 'productImageId',
+            'service'   => 'Shop\Service\Product\Image',
+        ],
+    ];
 	
 	/**
 	 * @var \Shop\Service\Product\Image
 	 */
 	protected $imageService;
-	
+
+    /**
+     * @param bool $topLevelOnly
+     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     */
 	public function fetchAll($topLevelOnly=false)
 	{
+        /* @var $mapper \Shop\Mapper\Product\Category */
+        $mapper = $this->getMapper();
+
 	    if ($topLevelOnly) {
-	    	return $this->getMapper()->getTopLevelCategories();
+	    	return $mapper->getTopLevelCategories();
 	    } else {
-	    	return $this->getMapper()->getAllCategories();
+	    	return $mapper->getAllCategories();
 	    }
 	}
-	
+
+    /**
+     * @param $parentId
+     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     */
 	public function getCategoriesByParentId($parentId)
 	{
 		$parentId = (int) $parentId;
+
+        /* @var $mapper \Shop\Mapper\Product\Category */
+        $mapper = $this->getMapper();
 	
-		return ($parentId != 0) ? $this->getMapper()->getSubCategoriesByParentId($parentId) : $this->fetchAll(true);
+		return ($parentId != 0) ? $mapper->getSubCategoriesByParentId($parentId) : $this->fetchAll(true);
 	}
-	
+
+    /**
+     * @param string $ident
+     * @return \Shop\Model\Product\Category|false
+     */
 	public function getCategoryByIdent($ident)
 	{
 		$ident = (string) $ident;
-	
-		$cat = $this->getMapper()->getCategoryByIdent($ident);
+
+        /* @var $mapper \Shop\Mapper\Product\Category */
+        $mapper = $this->getMapper();
+
+		$cat = $mapper->getCategoryByIdent($ident);
 		
 		return $cat;
 	}
-	
+
+    /**
+     * @param int $categoryId
+     * @param bool $recursive
+     * @return array
+     */
 	public function getCategoryChildrenIds($categoryId, $recursive=false)
 	{
-		$categories = $this->getMapper()
-			->getSubCategoriesByParentId($categoryId, $recursive);
+        /* @var $mapper \Shop\Mapper\Product\Category */
+        $mapper = $this->getMapper();
+
+		$categories = $mapper->getSubCategoriesByParentId($categoryId, $recursive);
 		
 		$cats = array();
-	
+
+        /* @var $category \Shop\Model\Product\Category */
 		foreach ($categories as $category) {
 			$cats[] = $category->getProductCategoryId();
 		}
 	
 		return $cats;
 	}
-	
+
+    /**
+     * @param int $categoryId
+     * @param bool $recursive
+     * @return mixed
+     */
 	public function getCategoryImages($categoryId, $recursive=false)
 	{
 		$ids = $this->getCategoryChildrenIds($categoryId, $recursive);
-		$images = $this->getImageService()->getMapper()->getImagesByCategoryIds($ids);
+
+        /* @var $mapper \Shop\Mapper\Product\Image */
+        $mapper = $this->getMapper('ShopProductImage');
+
+		$images = $mapper->getImagesByCategoryIds($ids);
 		
 		return $images;
 	}
-	
+
+    /**
+     * @param $categoryId
+     * @return mixed
+     */
 	public function getParentCategories($categoryId)
 	{
-		return $this->getMapper()->getBreadCrumbs($categoryId);
+        /* @var $mapper \Shop\Mapper\Product\Category */
+        $mapper = $this->getMapper();
+
+		return $mapper->getBreadCrumbs($categoryId);
 	}
-	
+
+    /**
+     * @param array $post
+     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     */
 	public function search(array $post)
 	{
 		foreach ($post as $key => $value) {
@@ -84,14 +142,24 @@ class Category extends AbstractMapperService
 		
 		return parent::search($post);
 	}
-	
+
+    /**
+     * @param array $post
+     * @param Form $form
+     * @return int|Form
+     */
 	public function add(array $post, Form $form = null)
 	{
 		if (!$post['ident']) {
 			$post['ident'] = $post['category'];
 		}
-		
-		$model = $this->getMapper()->getModel();
+
+        /* @var $mapper \Shop\Mapper\Product\Category */
+        $mapper = $this->getMapper();
+
+        /* @var $model \Shop\Model\Product\Category */
+		$model = $mapper->getModel();
+
         $options = [
             'categoryId' => $model->getProductCategoryId(),
         ];
@@ -102,20 +170,20 @@ class Category extends AbstractMapperService
 			return $form;
 		}
 	
-		$data = $this->getMapper()->extract($form->getData());
+		$data = $mapper->extract($form->getData());
 		$position = (int) $post['parent'];
 		$insertType = (string) $post['categoryInsertType'];
 	
-		return $this->getMapper()->insertRow($data, $position, $insertType);
+		return $mapper->insertRow($data, $position, $insertType);
 	}
 
     /**
-     * @param ModelInterface $model
+     * @param CategoryModel|ModelInterface $model
      * @param array $post
      * @param Form $form
-     * @return int|Form
      * @throws ShopException
      * @throws \UthandoCommon\Service\ServiceException
+     * @return int|Form
      */
 	public function edit(ModelInterface $model, array $post, Form $form = null)
 	{
@@ -126,7 +194,7 @@ class Category extends AbstractMapperService
 		if (!$post['ident']) {
 			$post['ident'] = $post['category'];
 		}
-		
+
 		$model->setDateModified();
         $options = [
             'categoryId' => $model->getProductCategoryId(),
@@ -157,7 +225,12 @@ class Category extends AbstractMapperService
 	
 		return $result;
 	}
-	
+
+    /**
+     * @param CategoryModel $category
+     * @return mixed
+     * @throws ShopException
+     */
 	public function toggleEnabled(CategoryModel $category)
 	{	
 		//check for parent and if it's enabled or not, if disabled don't update.
@@ -179,20 +252,10 @@ class Category extends AbstractMapperService
 		}
 		
 		$category->setDateModified();
+
+        /* @var $mapper \Shop\Mapper\Product\Category */
+        $mapper = $this->getMapper();
 		
-		return $this->getMapper()->toggleEnabled($category);
-	}
-	
-	/**
-	 * @return \Shop\Service\Product\Image
-	 */
-	public function getImageService()
-	{
-		if (!$this->imageService) {
-			$sl = $this->getServiceLocator();
-			$this->imageService = $sl->get('Shop\Service\Product\Image');
-		}
-	
-		return $this->imageService;
+		return $mapper->toggleEnabled($category);
 	}
 }

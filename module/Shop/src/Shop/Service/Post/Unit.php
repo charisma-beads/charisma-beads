@@ -5,9 +5,8 @@ use UthandoCommon\Service\AbstractMapperService;
 
 class Unit extends AbstractMapperService
 {
-    protected $mapperClass = 'Shop\Mapper\Post\Unit';
-    protected $form = 'Shop\Form\Post\Unit';
-    protected $inputFilter = 'Shop\InputFilter\Post\Unit';
-
+    /**
+     * @var string
+     */
     protected $serviceAlias = 'ShopPostUnit';
 }

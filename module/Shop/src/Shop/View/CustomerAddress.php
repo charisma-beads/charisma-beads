@@ -40,7 +40,7 @@ class CustomerAddress extends AbstractViewHelper
     
     public function __invoke()
     {
-        // reset some varibles on each call.
+        // reset some variables on each call.
     	$this->includeEmail = false;
     	$this->includeName = false;
     	

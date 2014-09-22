@@ -2,6 +2,7 @@
 namespace Shop\Controller;
 
 use UthandoUser\Form\User as LoginForm;
+use Zend\Filter\Word\UnderscoreToDash;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Session\Container;
@@ -10,19 +11,19 @@ class Checkout extends AbstractActionController
 {
     /**
      *
-     * @var \Shop\Service\Order
+     * @var \Shop\Service\Order\Order
      */
     protected $orderService;
 
     /**
      *
-     * @var \Shop\Service\Cart
+     * @var \Shop\Service\Cart\Cart
      */
     protected $cartService;
 
     /**
      *
-     * @var \Shop\Service\Customer
+     * @var \Shop\Service\Customer\Customer
      */
     protected $customerService;
 
@@ -64,10 +65,12 @@ class Checkout extends AbstractActionController
         /* @var $form \Zend\Form\Form */
         $form = $this->getServiceLocator()
             ->get('FormElementManager')
-            ->get('Shop\Form\Order\Confirm');
+            ->get('ShopOrderConfirm');
         
         $form->init();
+
         $form->setInputFilter($this->getServiceLocator()
+            ->get('InputFilterManager')
             ->get('Shop\InputFilter\Order\Confirm'));
         
         
@@ -89,7 +92,7 @@ class Checkout extends AbstractActionController
                         'requirements' => $formValues['requirements']
                     ];
                     
-                    $filter = new \Zend\Filter\Word\UnderscoreToDash();
+                    $filter = new UnderscoreToDash();
                     $action = $filter->filter($formValues['payment_option']);
                     
                     /* @var $container \Zend\Session\AbstractContainer */
@@ -127,7 +130,7 @@ class Checkout extends AbstractActionController
 
     /**
      *
-     * @return \Shop\Service\Customer
+     * @return \Shop\Service\Customer\Customer
      */
     public function getCustomerService()
     {
@@ -141,7 +144,7 @@ class Checkout extends AbstractActionController
 
     /**
      *
-     * @return \Shop\Service\Order
+     * @return \Shop\Service\Order\Order
      */
     protected function getOrderService()
     {
@@ -155,7 +158,7 @@ class Checkout extends AbstractActionController
 
     /**
      *
-     * @return \Shop\Service\Cart
+     * @return \Shop\Service\Cart\Cart
      */
     protected function getCartService()
     {

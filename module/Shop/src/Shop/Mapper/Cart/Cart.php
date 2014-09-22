@@ -7,8 +7,6 @@ class Cart extends AbstractMapper
 {
     protected $table = 'cart';
     protected $primary = 'cartId';
-    protected $model = 'Shop\Model\Cart\Cart';
-    protected $hydrator = 'Shop\Hydrator\Cart\Cart';
 
     /**
      * @param $id

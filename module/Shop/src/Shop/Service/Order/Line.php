@@ -5,16 +5,22 @@ use UthandoCommon\Service\AbstractMapperService;
 
 class Line extends AbstractMapperService
 {
-    protected $mapperClass = 'Shop\Mapper\Order\Line';
-    protected $form = 'Shop\Form\Order\Line';
-    protected $inputFilter = 'Shop\InputFilter\Order\Line';
-
+    /**
+     * @var string
+     */
     protected $serviceAlias = 'ShopOrderLine';
-    
+
+    /**
+     * @param int $orderId
+     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     */
     public function getOrderLinesByOrderId($orderId)
     {
         $orderId = (int) $orderId;
-        $orderLines = $this->getMapper()->getOrderLinesByOrderId($orderId);
+        /* @var $mapper \Shop\Mapper\Order\Line */
+        $mapper = $this->getMapper();
+        $orderLines = $mapper->getOrderLinesByOrderId($orderId);
+
         return $orderLines;
     }
 }

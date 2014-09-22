@@ -6,9 +6,8 @@ use UthandoCommon\Service\AbstractMapperService;
 
 class Option extends AbstractMapperService
 {
-    protected $mapperClass = 'Shop\Mapper\Product\Option';
-    protected $form = 'Shop\Form\Product\Option';
-    protected $inputFilter = 'Shop\InputFilter\Product\Option';
-
+    /**
+     * @var string
+     */
     protected $serviceAlias = 'ShopProductOption';
 } 

@@ -8,8 +8,6 @@ class Cost extends AbstractMapper
 {
     protected $table = 'postCost';
     protected $primary = 'postCostId';
-    protected $model = 'Shop\Model\Post\Cost';
-    protected $hydrator = 'Shop\Hydrator\Post\Cost';
     
     public function search(array $search, $sort, Select $select = null)
     {

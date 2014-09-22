@@ -5,9 +5,8 @@ use UthandoCommon\Service\AbstractMapperService;
 
 class Size extends AbstractMapperService
 {
-    protected $mapperClass = 'Shop\Mapper\Product\Size';
-    protected $form = '';
-    protected $inputFilter = '';
-
+    /**
+     * @var string
+     */
     protected $serviceAlias = 'ShopProductSize';
 }

@@ -9,8 +9,6 @@ class Country extends AbstractMapper
 {
     protected $table = 'country';
     protected $primary = 'countryId';
-    protected $model = 'Shop\Model\Country\Country';
-    protected $hydrator = 'Shop\Hydrator\Country\Country';
     
     public function search(array $search, $sort, Select $select = null)
     {

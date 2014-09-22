@@ -1,65 +1,50 @@
 <?php
 namespace Shop\Service\Country;
 
-use UthandoCommon\Service\AbstractMapperService;
+use UthandoCommon\Service\AbstractRelationalMapperService;
 
-class Country extends AbstractMapperService
+class Country extends AbstractRelationalMapperService
 {
-    protected $mapperClass = 'Shop\Mapper\Country';
-    protected $form = 'Shop\Form\Country';
-    protected $inputFilter = 'Shop\InputFilter\Country\Country';
-
-    protected $serviceAlias = 'ShopCountry';
-    
     /**
-     * @var \Shop\Service\Post\Zone
+     * @var string
      */
-    protected $PostZoneService;
-    
+    protected $serviceAlias = 'ShopCountry';
+
+    /**
+     * @var array
+     */
+    protected $referenceMap = [
+        'postZone'  => [
+            'refCol'    => 'postZoneId',
+            'service'   => 'Shop\Service\Post\Zone',
+        ],
+    ];
+
+    /**
+     * @param $id
+     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     */
     public function getCountryPostalRates($id)
     {
         $id = (int) $id;
-        return $this->getMapper()->getCountryPostalRates($id);
+        /* @var $mapper \Shop\Mapper\Country\Country */
+        $mapper = $this->getMapper();
+
+        return $mapper->getCountryPostalRates($id);
     }
-    
+
+    /**
+     * @param array $post
+     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     */
     public function search(array $post)
     {
     	$countries = parent::search($post);
-    	
+
     	foreach ($countries as $country) {
-    	    $this->populate($country, true);
+            $this->populate($country, true);
     	}
     	
     	return $countries;
-    }
-    
-    /**
-     * @param \Shop\Model\Country $model
-     * @param bool $children
-     */
-    public function populate($model, $children = false)
-    {
-        $allChildren = ($children === true) ? true : false;
-        $children = (is_array($children)) ? $children : array();
-        	
-        if ($allChildren || in_array('zone', $children)) {
-            $model->setPostZone(
-                $this->getPostZoneService()
-                    ->getById($model->getPostZoneId())
-            );
-        }
-    }
-    
-    /**
-     * @return \Shop\Service\Post\Zone
-     */
-    public function getPostZoneService()
-    {
-        if (!$this->PostZoneService) {
-            $sl = $this->getServiceLocator();
-            $this->PostZoneService = $sl->get('Shop\Service\Post\Zone');
-        }
-    
-        return $this->PostZoneService;
     }
 }

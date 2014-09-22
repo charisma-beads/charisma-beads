@@ -1,7 +1,7 @@
 <?php
 namespace Shop\Service;
 
-use Shop\Model\Order as OrderModel;
+use Shop\Model\Order\Order as OrderModel;
 use Shop\Options\PaypalOptions;
 use PayPal\Api\Amount;
 use PayPal\Api\Details;

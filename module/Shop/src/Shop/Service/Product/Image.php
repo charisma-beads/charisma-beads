@@ -1,59 +1,38 @@
 <?php
 namespace Shop\Service\Product;
 
-use UthandoCommon\Service\AbstractMapperService;
+use UthandoCommon\Service\AbstractRelationalMapperService;
 
-class Image extends AbstractMapperService
+class Image extends AbstractRelationalMapperService
 {
-    protected $mapperClass = 'Shop\Mapper\Product\Image';
-    protected $form = 'Shop\Form\Product\Image';
-    protected $inputFilter = 'Shop\InputFilter\Product\Image';
-
-    protected $serviceAlias = 'ShopProductImage';
-    
     /**
-     * @var \Shop\Service\Product
+     * @var string
      */
-    protected $productService;
-    
+    protected $serviceAlias = 'ShopProductImage';
+
+    /**
+     * @var array
+     */
+    protected $referenceMap = [
+        'product'   => [
+            'refCol'    => 'productId',
+            'service'   => 'Shop\Service\Product',
+        ],
+    ];
+
+    /**
+     * @param array $post
+     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     */
     public function search(array $post)
     {	 
     	$models = parent::search($post);
-    	
+
+        /* @var $model \Shop\Model\Product\Image */
     	foreach ($models as $model) {
     	    $this->populate($model, true);
     	}
     	
     	return $models;
-    }
-    
-    /**
-    *
-    * @param \Shop\Model\Product\Image $model
-    */
-    public function populate($model, $children = false)
-    {
-        $allChildren = ($children === true) ? true : false;
-        $children = (is_array($children)) ? $children : array();
-        	
-        if ($allChildren || in_array('product', $children)) {
-            $model->setProduct(
-                $this->getProductService()
-                    ->getById($model->getProductId())
-            );
-        }
-    }
-    
-    /**
-     * @return \Shop\Service\Product
-     */
-    public function getProductService()
-    {
-    	if (!$this->productService) {
-    		$sl = $this->getServiceLocator();
-    		$this->productService = $sl->get('Shop\Service\Product');
-    	}
-    
-    	return $this->productService;
     }
 }

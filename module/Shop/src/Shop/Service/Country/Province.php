@@ -5,17 +5,23 @@ use UthandoCommon\Service\AbstractMapperService;
 
 class Province extends AbstractMapperService
 {
-    protected $mapperClass = 'Shop\Mapper\Country\Province';
-    protected $form = 'Shop\Form\Country\Province';
-    protected $inputFilter = 'Shop\InputFilter\Country\Province';
-
+    /**
+     * @var string
+     */
     protected $serviceAlias = 'ShopCountryProvince';
-    
+
+    /**
+     * @param $id
+     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     */
     public function getProvincesByCountryId($id)
     {
         $id = (int) $id;
+
+        /* @var $mapper \Shop\Mapper\Country\Province */
+        $mapper = $this->getMapper();
         
-        $provinces = $this->getMapper()->getProvincesByCountryId($id);
+        $provinces = $mapper->getProvincesByCountryId($id);
         
         return $provinces;
     }

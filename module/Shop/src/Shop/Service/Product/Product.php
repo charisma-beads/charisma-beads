@@ -38,7 +38,11 @@ class Product extends AbstractRelationalMapperService
             'service'   => 'Shop\Service\Product\Option',
         ],
     ];
-	
+
+    /**
+     * @param int $id
+     * @return array|mixed|\UthandoCommon\Model\ModelInterface
+     */
 	public function getFullProductById($id)
 	{
 	    $id = (int) $id;
@@ -49,14 +53,25 @@ class Product extends AbstractRelationalMapperService
 	    return $product;
 	    
 	}
-	
+
+    /**
+     * @param string $ident
+     * @return array|\ArrayObject|null|object
+     */
 	public function getProductByIdent($ident)
 	{
         /* @var $mapper \Shop\Mapper\Product\Product */
         $mapper = $this->getMapper();
 		return $mapper->getProductByIdent($ident);
 	}
-	
+
+    /**
+     * @param string|int $category
+     * @param null $order
+     * @param bool $deep
+     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     * @throws \UthandoCommon\Service\ServiceException
+     */
 	public function getProductsByCategory($category, $order=null, $deep=true)
 	{
         /* @var $mapper \Shop\Mapper\Product\Product */
@@ -90,7 +105,11 @@ class Product extends AbstractRelationalMapperService
 	
 		return $products;
 	}
-	
+
+    /**
+     * @param array $post
+     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     */
 	public function search(array $post)
 	{
 	    $products = parent::search($post);
@@ -104,7 +123,11 @@ class Product extends AbstractRelationalMapperService
 	    
 	    return $products;
 	}
-	
+
+    /**
+     * @param array $search
+     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     */
 	public function searchProducts(array $search)
 	{
 	    $search = array(array(
@@ -118,14 +141,18 @@ class Product extends AbstractRelationalMapperService
         $mapper = $this->getMapper();
 	    
 	    $products = $mapper->searchProducts($search);
-	    
+
 	    foreach ($products as $product) {
 	        $this->populate($product, true);
 	    }
 	    
 	    return $products;
 	}
-	
+
+    /**
+     * @param ProductModel $product
+     * @return int
+     */
 	public function toggleEnabled(ProductModel $product)
 	{
 		$enabled = (true === $product->getEnabled()) ? 0 : 1;

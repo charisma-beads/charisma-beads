@@ -9,8 +9,6 @@ class Order extends AbstractMapper
 {
     protected $table = 'order';
     protected $primary = 'orderId';
-    protected $model = 'Shop\Model\Order\Order';
-    protected $hydrator = 'Shop\Hydrator\Order\Order';
 
     public function getCurrentOrders()
     {

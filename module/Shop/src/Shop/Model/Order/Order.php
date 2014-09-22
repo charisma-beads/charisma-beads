@@ -268,8 +268,8 @@ class Order implements ModelInterface
         return $this->orderLines;
     }
 
-	/**
-     * @param array|object $orderLine
+    /**
+     * @param $orderLines
      */
     public function setOrderLines($orderLines)
     {

@@ -7,8 +7,6 @@ class Item extends AbstractMapper
 {
     protected $table = 'cartItem';
     protected $primary = 'cartItemId';
-    protected $model = 'Shop\Model\Cart\Item';
-    protected $hydrator = 'Shop\Hydrator\Cart\Item';
     
     public function getCartItemsByCartId($cartId)
     {

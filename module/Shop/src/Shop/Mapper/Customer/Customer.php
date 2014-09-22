@@ -8,8 +8,6 @@ class Customer extends AbstractMapper
 {
     protected $table = 'customer';
     protected $primary = 'customerId';
-    protected $model = 'Shop\Model\Customer\Customer';
-    protected $hydrator = 'Shop\Hydrator\Customer\Customer';
     
     public function search(array $search, $sort, Select $select = null)
     {	

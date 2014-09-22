@@ -1,31 +1,33 @@
 <?php
 namespace Shop\Service\Customer;
 
-use UthandoCommon\Service\AbstractMapperService;
+use UthandoCommon\Service\AbstractRelationalMapperService;
 
-class Address extends AbstractMapperService
+class Address extends AbstractRelationalMapperService
 {
-    protected $mapperClass = 'Shop\Mapper\Customer\Address';
-    protected $form = 'Shop\Form\Customer\Address';
-    protected $inputFilter = 'Shop\InputFilter\Customer\Address';
-
+    /**
+     * @var string
+     */
     protected $serviceAlias = 'ShopCustomerAddress';
-    
+
     /**
-     * @var \Shop\Service\Country
+     * @var array
      */
-    protected $countryService;
-    
+    protected $referenceMap = [
+        'country'           => [
+            'refCol'    => 'countryId',
+            'service'   => 'Shop\Service\Country',
+        ],
+        'province'   => [
+            'refCol'    => 'provinceId',
+            'service'   => 'Shop\Service\Country\Province',
+        ],
+    ];
+
     /**
-     * @var \Shop\Service\Country\Province
+     * @param int $id
+     * @return array|mixed|\UthandoCommon\Model\ModelInterface
      */
-    protected $provinceService;
-    
-    /**
-     * @var \Shop\Service\Customer
-     */
-    protected $customerService;
-    
     public function getFullAddressById($id)
     {
         $id = (int) $id;
@@ -34,104 +36,62 @@ class Address extends AbstractMapperService
         $this->populate($address, true);
         
         return $address;
-        
     }
-    
+
+    /**
+     * @param int $customerId
+     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     */
     public function getAllAddressesByCustomerId($customerId)
     {
         $customerId = (int) $customerId;
-        
-        $addresses = $this->getMapper()->getAllByCustomerId($customerId);
+
+        /* @var $mapper \Shop\Mapper\Customer\Address */
+        $mapper = $this->getMapper();
+
+        $addresses = $mapper->getAllByCustomerId($customerId);
         
         foreach ($addresses as $address) {
-        	$address = $this->populate($address, true);
+        	$this->populate($address, true);
         }
         
         return $addresses;
     }
-    
+
+    /**
+     * @param int $userId
+     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     */
     public function getAllUserAddresses($userId)
     {
         $userId = (int) $userId;
+
+        /* @var $service \Shop\Mapper\Customer\Customer */
+        $service = $this->getService('Shop\Service\Customer');
         
-        $customerId = $this->getCustomerService()
+        $customerId = $service
             ->getCustomerByUserId($userId)
             ->getCustomerId();
         
         return $this->getAllAddressesByCustomerId($customerId);
     }
-    
+
+    /**
+     * @param int $userId
+     * @param string $billingOrDelivery
+     * @return array|\ArrayObject|null|object
+     */
     public function getAddressByUserId($userId, $billingOrDelivery)
     {
         $userId = (int) $userId;
         $billingOrDelivery = (string) $billingOrDelivery;
+
+        /* @var $mapper \Shop\Mapper\Customer\Address */
+        $mapper = $this->getMapper();
     
-        $address = $this->getMapper()->getAddressByUserId($userId, $billingOrDelivery);
+        $address = $mapper->getAddressByUserId($userId, $billingOrDelivery);
         $this->populate($address, true);
     
         return $address;
-    }
-    
-    /**
-     * @param $model \Shop\Model\Customer\Address
-     * @param $children bool|array
-     */
-    public function populate($model, $children = false)
-    {
-        $allChildren = ($children === true) ? true : false;
-        $children = (is_array($children)) ? $children : array();
-        
-        if ($allChildren || in_array('country', $children)) {
-            $model->setCountry(
-                $this->getCountryService()
-                    ->getById($model->getCountryId())
-            );
-        }
-        
-        if ($allChildren || in_array('country', $children)) {
-        	$model->setProvince(
-        			$this->getProvinceService()
-                        ->getById($model->getProvinceId())
-        	);
-        }
-    }
-    
-    /**
-     * @return \Shop\Service\Country
-     */
-    public function getCountryService()
-    {
-        if (!$this->countryService) {
-            $sl = $this->getServiceLocator();
-            $this->countryService = $sl->get('Shop\Service\Country');
-        }
-    
-        return $this->countryService;
-    }
-    
-    /**
-     * @return \Shop\Service\Country\Province
-     */
-    public function getProvinceService()
-    {
-    	if (!$this->provinceService) {
-    		$sl = $this->getServiceLocator();
-    		$this->provinceService = $sl->get('Shop\Service\Country\Province');
-    	}
-    
-    	return $this->provinceService;
-    }
-    
-    /**
-     * @return \Shop\Service\Customer
-     */
-    public function getCustomerService()
-    {
-    	if (!$this->customerService) {
-    		$sl = $this->getServiceLocator();
-    		$this->customerService = $sl->get('Shop\Service\Customer');
-    	}
-    
-    	return $this->customerService;
     }
 }

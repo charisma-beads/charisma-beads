@@ -8,8 +8,6 @@ class Product extends AbstractMapper
 {       
 	protected $table = 'product';
 	protected $primary = 'productId';
-	protected $model = 'Shop\Model\Product\Product';
-	protected $hydrator = 'Shop\Hydrator\Product\Product';
 	protected $fetchEnabled = true;
 	protected $fetchDisabled = false;
 	

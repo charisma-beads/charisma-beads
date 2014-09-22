@@ -5,15 +5,21 @@ use UthandoCommon\Service\AbstractMapperService;
 
 class Status extends AbstractMapperService
 {
-    protected $mapperClass = 'Shop\Mapper\Order\Status';
-    protected $form = 'Shop\Form\Order\Status';
-    protected $inputFilter = 'Shop\InputFilter\Order\Status';
-
+    /**
+     * @var string
+     */
     protected $serviceAlias = 'ShopOrderStatus';
-    
+
+    /**
+     * @param string $status
+     * @return array|\ArrayObject|null|object
+     */
     public function getStatusByName($status)
     {
         $status = (string) $status;
-        return $this->getMapper()->getStatusByName($status);
+        /* @var $mapper \Shop\Mapper\Order\Status */
+        $mapper = $this->getMapper();
+
+        return $mapper->getStatusByName($status);
     }
 }

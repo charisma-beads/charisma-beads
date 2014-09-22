@@ -1,21 +1,29 @@
 <?php
 namespace Shop\Service\Tax;
 
-use UthandoCommon\Service\AbstractMapperService;
+use UthandoCommon\Service\AbstractRelationalMapperService;
 
-class Code extends AbstractMapperService
+class Code extends AbstractRelationalMapperService
 {
-    protected $mapperClass = 'Shop\Mapper\Tax\Code';
-    protected $form = 'Shop\Form\Tax\Code';
-    protected $inputFilter = 'Shop\InputFilter\Tax\Code';
-
-    protected $serviceAlias = 'ShopTaxCode';
-    
     /**
-     * @var \Shop\Service\Tax\Rate
+     * @var string
      */
-    protected $taxRateService;
-    
+    protected $serviceAlias = 'ShopTaxCode';
+
+    /**
+     * @var array
+     */
+    protected $referenceMap = [
+        'taxRate'   => [
+            'refCol'    => 'taxRateId',
+            'service'   => 'Shop\Service\Tax\Rate',
+        ],
+    ];
+
+    /**
+     * @param int $id
+     * @return array|mixed|\UthandoCommon\Model\ModelInterface
+     */
     public function getById($id)
     {
         $taxCode = parent::getById($id);
@@ -23,42 +31,20 @@ class Code extends AbstractMapperService
         
         return $taxCode;
     }
-    
+
+    /**
+     * @param array $post
+     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     */
     public function search(array $post)
     {
         $models = parent::search($post);
-        
+
+        /* @var $model \Shop\Model\Tax\Code */
         foreach ($models as $model) {
         	$this->populate($model, true);
         }
      
         return $models;
-    }
-    
-    /**
-     * @param \Shop\Model\Tax\Code $model
-     */
-    public function populate($model, $children = false)
-    {
-        $allChildren = ($children === true) ? true : false;
-        $children = (is_array($children)) ? $children : array();
-        	
-        if ($allChildren || in_array('taxRate', $children)) {
-            $model->setTaxRate(
-                $this->getTaxRateService()
-                    ->getById($model->getTaxRateId())
-            );
-        }
-    }
-    
-    
-    public function getTaxRateService()
-    {
-        if (!$this->taxRateService) {
-            $sl = $this->getServiceLocator();
-            $this->taxRateService = $sl->get('Shop\Service\Tax\Rate');
-        }
-        
-        return $this->taxRateService;
     }
 }

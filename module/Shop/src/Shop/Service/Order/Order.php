@@ -1,14 +1,20 @@
 <?php
 namespace Shop\Service\Order;
 
-use Shop\Model\Customer as CustomerModel;
+use Shop\Model\Customer\Customer as CustomerModel;
 use Shop\Model\Order\MetaData;
 use UthandoCommon\Service\AbstractRelationalMapperService;
 
 class Order extends AbstractRelationalMapperService
 {
+    /**
+     * @var string
+     */
     protected $serviceAlias = 'ShopOrder';
 
+    /**
+     * @var array
+     */
     protected $referenceMap = [
         'customer'      => [
             'refCol'        => 'customerId',
@@ -21,56 +27,53 @@ class Order extends AbstractRelationalMapperService
         ],
         'orderLines'    => [
             'refCol'        => 'orderId',
-            'service'       => 'Shop\Service\Order\Lines',
+            'service'       => 'Shop\Service\Order\Line',
             'getMethod'     => 'getOrderLinesByOrderId',
         ],
     ];
-    
+
     /**
-     * @var \Shop\Service\Customer
+     * @param array $post
+     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
      */
-    protected $customerService;
-    
-    /**
-     * @var \Shop\Service\Order\Line
-     */
-    protected $orderLineService;
-    
-    /**
-     * @var \Shop\Service\Order\Status
-     */
-    protected $orderStatusService;
-    
-    /**
-     * @var \Shop\Service\Cart
-     */
-    protected $cartService;
-    
     public function search(array $post)
     {
     	$orders = parent::search($post);
-    	 
+
     	foreach ($orders as $order) {
     		$this->populate($order, ['orderStatus']);
     	}
     	 
     	return $orders;
     }
-    
+
+    /**
+     * @param CustomerModel $customer
+     * @param array $postData
+     * @return int
+     * @throws \UthandoCommon\Service\ServiceException
+     */
     public function processOrderFromCart(CustomerModel $customer, array $postData)
     {
-        $cart = $this->getCartService();
-        
+        /* @var $mapper \Shop\Mapper\Order\Order */
+        $mapper = $this->getMapper();
+
+        /* @var $cart \Shop\Service\Cart\Cart */
+        $cart = $this->getService('Shop\Service\Cart');
+
         $countryId = (0 == $postData['collect_instore']) ? $customer->getDeliveryAddress()->getCountryId() : null;
         $cart->setShippingCost($countryId);
         
         $shipping = $cart->getShippingCost();
         $taxTotal = $cart->getTaxTotal();
         $cartTotal = $cart->getTotal();
+
+        /* @var $orderStatusService \Shop\Service\Order\Status */
+        $orderStatusService = $this->getService('Shop\Service\Order\Status');
         
         /* @var $orderStatus \Shop\Model\Order\Status */
-        $orderStatus = $this->getOrderStatusService()->getStatusByName('Pending');
-        $orderNumber = $this->getMapper()->getMaxOrderNumber()['orderNumber'] + 1;
+        $orderStatus = $orderStatusService->getStatusByName('Pending');
+        $orderNumber = $mapper->getMaxOrderNumber()['orderNumber'] + 1;
         
         $metadata = new MetaData();
         
@@ -79,9 +82,12 @@ class Order extends AbstractRelationalMapperService
             ' ',
             str_replace('pay_', '', $postData['payment_option'])
         ));
+
+        /* @var $shopOptions \Shop\Options\ShopOptions */
+        $shopOptions = $this->getService('Shop\Options\Shop');
         
         $metadata->setPaymentMethod($paymentOption)
-            ->setTaxInvoice($this->getShopOptions()->getVatState())
+            ->setTaxInvoice($shopOptions->getVatState())
             ->setRequirements($postData['requirements'])
             ->setCustomerName($customer->getFullName(), $customer->getPrefix()->getPrefix())
             ->setBillingAddress($customer->getBillingAddress())
@@ -115,47 +121,69 @@ class Order extends AbstractRelationalMapperService
                 'tax'      => $item->getTax(),
                 'metadata' => $item->getMetadata(),
             ];
-            
-            $orderLine = $this->getOrderLineService()
+
+            /* @var $orderLineService \Shop\Service\Order\Line */
+            $orderLineService = $this->getService('Shop\Service\Order\Line');
+            $orderLine = $orderLineService
                 ->getMapper()
                 ->getModel($lineData);
             
-            $this->getOrderLineService()->save($orderLine);
+            $orderLineService->save($orderLine);
         }
         
         return $orderId;
     }
 
+    /**
+     * @param int $orderNumber
+     * @param int $orderStatus
+     * @return int
+     * @throws \UthandoCommon\Service\ServiceException
+     */
     public function updateOrderStatus($orderNumber, $orderStatus)
     {
         $orderNumber = (int) $orderNumber;
         $orderStatus = (int) $orderStatus;
-
-        $order = $this->getMapper()->getOrderByOrderNumber($orderNumber);
+        /* @var $mapper \Shop\Mapper\Order\Order */
+        $mapper = $this->getMapper();
+        $order = $mapper->getOrderByOrderNumber($orderNumber);
 
         $order->setOrderStatusId($orderStatus);
         $result = $this->save($order);
 
         return $result;
     }
-    
+
+    /**
+     * @param int $id
+     * @param int $userId
+     * @return mixed
+     */
     public function getCustomerOrderByUserId($id, $userId)
     {
         $id = (int) $id;
         $userId = (int) $userId;
-        $order = $this->getMapper()->getOrderByUserId($id, $userId);
+        /* @var $mapper \Shop\Mapper\Order\Order */
+        $mapper = $this->getMapper();
+        $order = $mapper->getOrderByUserId($id, $userId);
         
         if ($order) {
-            //$this->populate($order, ['orderStatus', 'orderLines']);
+            $this->populate($order, true);
         }
-        
+        \FB::info($order);
         return $order;
     }
-    
+
+    /**
+     * @param $userId
+     * @return mixed
+     */
     public function getCustomerOrdersByUserId($userId)
     {
         $userId = (int) $userId;
-        $orders = $this->getMapper()->getOrdersByUserId($userId);
+        /* @var $mapper \Shop\Mapper\Order\Order */
+        $mapper = $this->getMapper();
+        $orders = $mapper->getOrdersByUserId($userId);
         
         foreach ($orders as $order) {
             $this->populate($order, ['orderStatus']);
@@ -164,9 +192,14 @@ class Order extends AbstractRelationalMapperService
         return $orders;
     }
 
+    /**
+     * @return mixed
+     */
     public function getCurrentOrders()
     {
-        $orders = $this->getMapper()->getCurrentOrders();
+        /* @var $mapper \Shop\Mapper\Order\Order */
+        $mapper = $this->getMapper();
+        $orders = $mapper->getCurrentOrders();
 
         foreach ($orders as $order) {
             $this->populate($order, ['customer', 'orderStatus']);
@@ -184,19 +217,30 @@ class Order extends AbstractRelationalMapperService
     {
         
     }
-    
+
+    /**
+     * @param int $id
+     * @param int $userId
+     * @return bool
+     * @throws \UthandoCommon\Service\ServiceException
+     */
     public function cancelOrder($id, $userId)
     {
     	$id = (int) $id;
     	$userId = (int) $userId;
+
+        /* @var $mapper \Shop\Mapper\Order\Order */
+        $mapper = $this->getMapper();
     	
-    	/* @var $order \Shop\Model\Order */
-    	$order = $this->getMapper()->getOrderByUserId($id, $userId);
+    	/* @var $order \Shop\Model\Order\Order */
+    	$order = $mapper->getOrderByUserId($id, $userId);
     
     	if ($order) {
-    		$orderStatus = $this->getOrderStatusService()
-                ->getStatusByName('Cancelled');
+            /* @var $orderStatusService \Shop\Service\Order\Status */
+            $orderStatusService = $this->getService('Shop\Service\Order\Status');
+    		$orderStatus = $orderStatusService->getStatusByName('Cancelled');
     		$order->setOrderStatus($orderStatus->getOrderStatusId());
+
     		$result = $this->save($order);
     		
     		if ($result) {
@@ -205,65 +249,5 @@ class Order extends AbstractRelationalMapperService
     	}
     
     	return false;
-    }
-    
-    /**
-     * @return \Shop\Service\Customer
-     */
-    public function getCustomerService()
-    {
-        if (!$this->customerService) {
-            $sl = $this->getServiceLocator();
-            $this->customerService = $sl->get('Shop\Service\Customer');
-        }
-    
-        return $this->customerService;
-    }
-    
-    /**
-     * @return \Shop\Service\Order\Line
-     */
-    public function getOrderLineService()
-    {
-        if (!$this->orderLineService) {
-            $sl = $this->getServiceLocator();
-            $this->orderLineService = $sl->get('Shop\Service\Order\Line');
-        }
-    
-        return $this->orderLineService;
-    }
-    
-    /**
-     * @return \Shop\Options\ShopOptions
-     */
-    public function getShopOptions()
-    {
-        return $this->getServiceLocator()->get('Shop\Options\Shop');
-    }
-    
-    /**
-     * @return \Shop\Service\Order\Status
-     */
-    public function getOrderStatusService()
-    {
-        if (!$this->orderStatusService) {
-            $sl = $this->getServiceLocator();
-            $this->orderStatusService = $sl->get('Shop\Service\Order\Status');
-        }
-    
-        return $this->orderStatusService;
-    }
-    
-    /**
-     * @return \Shop\Service\Cart
-     */
-    public function getCartService()
-    {
-        if (!$this->cartService) {
-            $sl = $this->getServiceLocator();
-            $this->cartService = $sl->get('Shop\Service\Cart');
-        }
-        
-        return $this->cartService;
     }
 }

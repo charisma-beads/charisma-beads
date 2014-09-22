@@ -2,80 +2,42 @@
 
 namespace Shop\Service\Post;
 
-use UthandoCommon\Service\AbstractMapperService;
+use UthandoCommon\Service\AbstractRelationalMapperService;
 
-class Cost extends AbstractMapperService
+class Cost extends AbstractRelationalMapperService
 {
-	protected $mapperClass = 'Shop\Mapper\Post\Cost';
-	protected $form = 'Shop\Form\Post\Cost';
-	protected $inputFilter = 'Shop\InputFilter\Post\Cost';
-
+    /**
+     * @var string
+     */
     protected $serviceAlias = 'ShopPostCost';
-	
-	/**
-	 * @var \Shop\Service\Post\Level
-	 */
-	protected $postLevelService;
-	
-	/**
-	 * @var \Shop\Service\Post\Zone
-	 */
-	protected $postZoneService;
-	
+
+    /**
+     * @var array
+     */
+    protected $referenceMap = [
+        'postLevel' => [
+            'refCol'    => 'postLevelId',
+            'service'   => 'Shop\Service\Post\Level',
+        ],
+        'postZone'  => [
+            'refCol'    => 'postZoneId',
+            'service'   => 'Shop\Service\Post\Zone',
+        ],
+    ];
+
+    /**
+     * @param array $post
+     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     */
 	public function search(array $post)
 	{
 		$costs = parent::search($post);
-		
+
+        /* @var $cost \Shop\Model\Post\Cost */
 		foreach ($costs as $cost) {
 			$this->populate($cost, true);
 		}
 	
 		return $costs;
 	}
-	
-	/**
-	 * @param \Shop\Model\Post\Cost $model
-	 */
-	public function populate($model, $children = false)
-	{
-		$allChildren = ($children === true) ? true : false;
-		$children = (is_array($children)) ? $children : array();
-		
-		if ($allChildren || in_array('postLevel', $children)) {
-			$id = $model->getPostLevelId();
-			$model->setPostLevel($this->getPostLevelService()->getById($id));
-		}
-		
-		if ($allChildren || in_array('postZone', $children)) {
-			$id = $model->getPostZoneId();
-			$model->setPostZone($this->getPostZoneService()->getById($id));
-		}
-	}
-	
-	/**
-	 * @return \Shop\Service\Post\Level
-	 */
-	public function getPostLevelService()
-	{
-		if (!$this->postLevelService) {
-			$sl = $this->getServiceLocator();
-			$this->postLevelService = $sl->get('Shop\Service\PostLevel');
-		}
-	
-		return $this->postLevelService;
-	}
-	
-	/**
-	 * @return \Shop\Service\Post\Zone
-	 */
-	public function getPostZoneService()
-	{
-		if (!$this->postZoneService) {
-			$sl = $this->getServiceLocator();
-			$this->postZoneService = $sl->get('Shop\Service\PostZone');
-		}
-		
-		return $this->postZoneService;
-	}
-	
 }

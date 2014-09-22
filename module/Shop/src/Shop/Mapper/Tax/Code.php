@@ -8,8 +8,6 @@ class Code extends AbstractMapper
 {
 	protected $table = 'taxCode';
 	protected $primary = 'taxCodeId';
-	protected $model = 'Shop\Model\Tax\Code';
-	protected $hydrator = 'Shop\Hydrator\Tax\Code';
 	
 	public function search(array $search, $sort, Select $select = null)
 	{

@@ -8,8 +8,6 @@ class Image extends AbstractMapper
 {
 	protected $table = 'productImage';
 	protected $primary = 'productImageId';
-	protected $model = 'Shop\Model\Product\Image';
-	protected $hydrator = 'Shop\Hydrator\Product\Image';
 	
 	public function getImagesByCategoryIds(array $ids)
 	{

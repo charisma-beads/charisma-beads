@@ -11,8 +11,6 @@ class Category extends AbstractNestedSet
 {
 	protected $table = 'productCategory';
 	protected $primary = 'productCategoryId';
-	protected $model = 'Shop\Model\Product\Category';
-	protected $hydrator = 'Shop\Hydrator\Product\Category';
 	protected $fetchEnabled = true;
 	protected $fetchDisabled = false;
 	
