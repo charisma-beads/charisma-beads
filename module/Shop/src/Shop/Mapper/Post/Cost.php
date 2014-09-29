@@ -1,10 +1,10 @@
 <?php
 namespace Shop\Mapper\Post;
 
-use UthandoCommon\Mapper\AbstractMapper;
+use UthandoCommon\Mapper\AbstractDbMapper;
 use Zend\Db\Sql\Select;
 
-class Cost extends AbstractMapper
+class Cost extends AbstractDbMapper
 {
     protected $table = 'postCost';
     protected $primary = 'postCostId';

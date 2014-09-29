@@ -1,9 +1,9 @@
 <?php
 namespace Shop\Mapper\Product;
 
-use UthandoCommon\Mapper\AbstractMapper;
+use UthandoCommon\Mapper\AbstractDbMapper;
 
-class Size extends AbstractMapper
+class Size extends AbstractDbMapper
 {
 	protected $table = 'productSize';
 	protected $primary = 'productSizeId';

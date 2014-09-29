@@ -107,10 +107,13 @@ class Category extends AbstractRelationalMapperService
 		$ids = $this->getCategoryChildrenIds($categoryId, $recursive);
 
         /* @var $mapper \Shop\Mapper\Product\Image */
-        $mapper = $this->getMapper('ShopProductImage');
+        $mapper = $this->getMapper('ShopProductImage', [
+            'model'     => 'ShopProductImage',
+            'hydrator'  => 'ShopProductImage',
+        ]);
 
 		$images = $mapper->getImagesByCategoryIds($ids);
-		
+
 		return $images;
 	}
 

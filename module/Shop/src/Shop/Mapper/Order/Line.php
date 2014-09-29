@@ -1,9 +1,9 @@
 <?php
 namespace Shop\Mapper\Order;
 
-use UthandoCommon\Mapper\AbstractMapper;
+use UthandoCommon\Mapper\AbstractDbMapper;
 
-class Line extends AbstractMapper
+class Line extends AbstractDbMapper
 {
     protected $table = 'orderLine';
     protected $primary = 'orderLineId';

@@ -1,9 +1,9 @@
 <?php
 namespace Shop\Mapper\Order;
 
-use UthandoCommon\Mapper\AbstractMapper;
+use UthandoCommon\Mapper\AbstractDbMapper;
 
-class Status extends AbstractMapper
+class Status extends AbstractDbMapper
 {
     protected $table = 'orderStatus';
     protected $primary = 'orderStatusId';

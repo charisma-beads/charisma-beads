@@ -1,1 +1,19 @@
-<h2>Not yet implemented</h2>
+
+<?php
+$this->headTitle('Add Customer');
+$this->form->get('firstname')->setAttribute('readonly', '');
+$this->form->get('lastname')->setAttribute('readonly', '');
+$this->form->get('email')->setAttribute('readonly', '');
+?>
+
+<?=$this->partial('uthando-admin/partial/add-edit-form', [
+    'form' 			=> $this->form,
+    'formAction' 	=> 'add',
+    'formName'		=> 'Customer',
+    'postRoute'		=> 'admin/shop/customer/edit',
+    'cancelUrl'      => $this->url('admin/shop/customer'),
+    'formElements' => [
+        'customerId', 'userId', 'prefixId', 'firstname', 'lastname',
+        'billingAddressId', 'deliveryAddressId', 'email',
+    ],
+]); ?>

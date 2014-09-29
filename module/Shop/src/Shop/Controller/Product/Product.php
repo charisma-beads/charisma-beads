@@ -39,7 +39,7 @@ class Product extends AbstractCrudController
 		}
 		
 		try {
-		    /* @var $product \Shop\Model\Product */
+		    /* @var $product \Shop\Model\Product\Product */
 			$product = $this->getService()->getById($id);
 			$result = $this->getService()->toggleEnabled($product);
 		} catch (Exception $e) {

@@ -1,9 +1,9 @@
 <?php
 namespace Shop\Mapper\Cart;
 
-use UthandoCommon\Mapper\AbstractMapper;
+use UthandoCommon\Mapper\AbstractDbMapper;
 
-class Cart extends AbstractMapper
+class Cart extends AbstractDbMapper
 {
     protected $table = 'cart';
     protected $primary = 'cartId';

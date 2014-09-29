@@ -14,7 +14,6 @@ class Zone extends InputFilter
 			'filters'    => array(
 				array('name' => 'StripTags'),
 				array('name' => 'StringTrim'),
-				array('name' => 'UthandoUcwords'),
 			),
 			'validators' => array(
 				array('name' => 'StringLength', 'options' => array(

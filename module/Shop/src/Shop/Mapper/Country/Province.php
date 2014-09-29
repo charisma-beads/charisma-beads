@@ -1,9 +1,9 @@
 <?php
 namespace Shop\Mapper\Country;
 
-use UthandoCommon\Mapper\AbstractMapper;
+use UthandoCommon\Mapper\AbstractDbMapper;
 
-class Province extends AbstractMapper
+class Province extends AbstractDbMapper
 {
     protected $table = 'countryProvince';
     protected $primary = 'countryProvinceId';

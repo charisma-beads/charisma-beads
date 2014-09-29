@@ -12,6 +12,22 @@ class CustomerAddress extends AbstractCrudController
     protected $serviceName = 'Shop\Service\Customer\Address';
     protected $userRoute = 'shop/customer/address';
     protected $route = 'admin/shop/customer/address';
+
+    public function listAction()
+    {
+        $customerId = $this->params()->fromRoute('id');
+
+        /* @var $service \Shop\Service\Customer\Address */
+        $service = $this->getService();
+        $addresses = $service->getAllAddressesByCustomerId($customerId);
+
+        $viewModel = new ViewModel([
+            'models' => $addresses,
+        ]);
+
+        $viewModel->setTerminal(true);
+        return $viewModel;
+    }
     
     public function myAddressesAction()
     {

@@ -608,6 +608,21 @@ return [
                                             ]
                                         ]
                                     ],
+                                    'address' => [
+                                        'type' => 'Segment',
+                                        'options' => [
+                                            'route' => '/address[/][:action[/[:id]]]',
+                                            'constraints' => [
+                                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                                'id' => '\d+',
+                                            ],
+                                            'defaults' => [
+                                                'controller' => 'Customer\Address',
+                                                'action' => 'list',
+                                                'force-ssl' => 'ssl'
+                                            ],
+                                        ],
+                                    ],
                                     'page' => [
                                         'type' => 'Segment',
                                         'options' => [

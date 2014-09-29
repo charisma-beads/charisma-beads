@@ -6,7 +6,7 @@ use Shop\Model\Customer\Address;
 class MetaData
 {
     /**
-     * @var boolean
+     * @var bool
      */
     protected $taxInvoice = false;
     
@@ -36,12 +36,12 @@ class MetaData
     protected $customerName;
     
     /**
-     * @var \Shop\Model\Customer\Address
+     * @var Address
      */
     protected $deliveryAddress;
     
     /**
-     * @var \Shop\Model\Customer\Address
+     * @var Address
      */
     protected $billingAddress;
     
@@ -49,9 +49,9 @@ class MetaData
      * @var string
      */
     protected $email;
-    
+
     /**
-     * @return boolean
+     * @return bool
      */
     public function getTaxInvoice()
     {
@@ -59,8 +59,8 @@ class MetaData
     }
 
     /**
-     * @param boolean $taxInvoice
-     * @return \Shop\Model\Order\MetaData
+     * @param bool $taxInvoice
+     * @return $this
      */
 	public function setTaxInvoice($taxInvoice)
     {
@@ -75,10 +75,10 @@ class MetaData
     {
         return $this->paymentMethod;
     }
-    
+
     /**
      * @param string $paymentMethod
-     * @return \Shop\Model\Order\MetaData
+     * @return $this
      */
     public function setPaymentMethod($paymentMethod)
     {
@@ -93,10 +93,10 @@ class MetaData
     {
         return $this->shippingMethod;
     }
-    
+
     /**
      * @param string $shippingMethod
-     * @return \Shop\Model\Order\MetaData
+     * @return $this
      */
     public function setShippingMethod($shippingMethod)
     {
@@ -113,8 +113,8 @@ class MetaData
     }
 
     /**
-     * @param string $paymentId
-     * @return \Shop\Model\Order\MetaData
+     * @param string $txnId
+     * @return $this
      */
 	public function setPaymentId($txnId)
     {
@@ -132,14 +132,17 @@ class MetaData
 
     /**
      * @param string $requirements
-     * @return \Shop\Model\Order\MetaData
+     * @return $this
      */
 	public function setRequirements($requirements)
     {
         $this->requirements = $requirements;
         return $this;
     }
-    
+
+    /**
+     * @return string
+     */
 	public function getCustomerName()
     {
         return $this->customerName;
@@ -147,8 +150,8 @@ class MetaData
 
     /**
      * @param string $customerName
-     * @param string $prefix
-     * @return \Shop\Model\Order\MetaData
+     * @param null|string $prefix
+     * @return $this
      */
 	public function setCustomerName($customerName, $prefix = null)
     {
@@ -161,7 +164,7 @@ class MetaData
     }
 
     /**
-     * @return \Shop\Model\Customer\Address
+     * @return Address
      */
 	public function getDeliveryAddress()
     {
@@ -170,7 +173,7 @@ class MetaData
 
     /**
      * @param Address $deliveryAddress
-     * @return \Shop\Model\Order\MetaData
+     * @return $this
      */
 	public function setDeliveryAddress(Address $deliveryAddress)
     {
@@ -179,7 +182,7 @@ class MetaData
     }
 
     /**
-     * @return \Shop\Model\Customer\Address
+     * @return Address
      */
 	public function getBillingAddress()
     {
@@ -188,7 +191,7 @@ class MetaData
 
     /**
      * @param Address $billingAddress
-     * @return \Shop\Model\Order\MetaData
+     * @return $this
      */
 	public function setBillingAddress(Address $billingAddress)
     {
@@ -203,10 +206,10 @@ class MetaData
     {
         return $this->email;
     }
-    
+
     /**
      * @param string $email
-     * @return \Shop\Model\Order\MetaData
+     * @return $this
      */
     public function setEmail($email)
     {

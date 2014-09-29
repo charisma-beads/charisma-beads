@@ -1,9 +1,9 @@
 <?php
 namespace Shop\Mapper\Post;
 
-use UthandoCommon\Mapper\AbstractMapper;
+use UthandoCommon\Mapper\AbstractDbMapper;
 
-class Zone extends AbstractMapper
+class Zone extends AbstractDbMapper
 {
     protected $table = 'postZone';
     protected $primary = 'postZoneId';

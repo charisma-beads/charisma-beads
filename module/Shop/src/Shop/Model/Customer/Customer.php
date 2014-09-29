@@ -1,13 +1,17 @@
 <?php
 namespace Shop\Model\Customer;
 
+use UthandoCommon\Model\DateCreatedTrait;
+use UthandoCommon\Model\DateModifiedTrait;
 use UthandoCommon\Model\Model;
 use UthandoCommon\Model\ModelInterface;
-use DateTime;
+use UthandoUser\Model\User;
 
 class Customer implements ModelInterface
 {
-    use Model;
+    use Model,
+        DateModifiedTrait,
+        DateCreatedTrait;
     
     /**
      * @var int
@@ -50,148 +54,145 @@ class Customer implements ModelInterface
     protected $email;
     
     /**
-     * @var DateTime
-     */
-    protected $dateCreated;
-    
-    /**
-     * @var DateTime
-     */
-    protected $dateModified;
-    
-    /**
-     * @var \UthandoUser\Model\User
+     * @var User
      */
     protected $user;
     
     /**
-     * @var \Shop\Model\Customer\Prefix
+     * @var Prefix
      */
     protected $prefix;
     
     /**
-     * @var \Shop\Model\Customer\Address
+     * @var Address
      */
     protected $billingAddress;
     
     /**
-     * @var \Shop\Model\Customer\Address
+     * @var Address
      */
     protected $deliveryAddress;
-    
-	/**
-	 * @return number $customerId
-	 */
+
+    /**
+     * @return int
+     */
 	public function getCustomerId()
 	{
 		return $this->customerId;
 	}
 
-	/**
-	 * @param number $customerId
-	 */
+    /**
+     * @param int $customerId
+     * @return $this
+     */
 	public function setCustomerId($customerId)
 	{
 		$this->customerId = $customerId;
 		return $this;
 	}
 
-	/**
-	 * @return number $userId
-	 */
+    /**
+     * @return int
+     */
 	public function getUserId()
 	{
 		return $this->userId;
 	}
 
-	/**
-	 * @param number $userId
-	 */
+    /**
+     * @param int $userId
+     * @return $this
+     */
 	public function setUserId($userId)
 	{
 		$this->userId = $userId;
 		return $this;
 	}
 
-	/**
-	 * @return number $prefixId
-	 */
+    /**
+     * @return int
+     */
 	public function getPrefixId()
 	{
 		return $this->prefixId;
 	}
 
-	/**
-	 * @param number $prefixId
-	 */
+    /**
+     * @param int $prefixId
+     * @return $this
+     */
 	public function setPrefixId($prefixId)
 	{
 		$this->prefixId = $prefixId;
 		return $this;
 	}
 
-	/**
-	 * @return string $firstname
-	 */
+    /**
+     * @return string
+     */
 	public function getFirstname()
 	{
 		return $this->firstname;
 	}
 
-	/**
-	 * @param string $firstname
-	 */
+    /**
+     * @param string $firstname
+     * @return $this
+     */
 	public function setFirstname($firstname)
 	{
 		$this->firstname = $firstname;
 		return $this;
 	}
 
-	/**
-	 * @return string $lastname
-	 */
+    /**
+     * @return string
+     */
 	public function getLastname()
 	{
 		return $this->lastname;
 	}
 
-	/**
-	 * @param string $lastname
-	 */
+    /**
+     * @param string $lastname
+     * @return $this
+     */
 	public function setLastname($lastname)
 	{
 		$this->lastname = $lastname;
 		return $this;
 	}
 
-	/**
-	 * @return number $billingAddressId
-	 */
+    /**
+     * @return int
+     */
 	public function getBillingAddressId()
 	{
 		return $this->billingAddressId;
 	}
 
-	/**
-	 * @param number $billingAddressId
-	 */
+    /**
+     * @param int $billingAddressId
+     * @return $this
+     */
 	public function setBillingAddressId($billingAddressId)
 	{
 		$this->billingAddressId = $billingAddressId;
 		return $this;
 	}
 
-	/**
-	 * @return number $deliveryAddressId
-	 */
+    /**
+     * @return int
+     */
 	public function getDeliveryAddressId()
 	{
 		return $this->deliveryAddressId;
 	}
 
-	/**
-	 * @param number $deliveryAddressId
-	 */
+    /**
+     * @param int $deliveryAddressId
+     * @return $this
+     */
 	public function setDeliveryAddressId($deliveryAddressId)
 	{
 		$this->deliveryAddressId = $deliveryAddressId;
@@ -205,128 +206,100 @@ class Customer implements ModelInterface
 	{
 	    return $this->email;
 	}
-	
-	/**
-	 * @param string $email
-	 * @return \Shop\Model\Customer
-	 */
+
+    /**
+     * @param string $email
+     * @return $this
+     */
 	public function setEmail($email)
 	{
 	    $this->email = $email;
 	    return $this;
 	}
 
-	/**
-	 * @return DateTime $dateCreated
-	 */
-	public function getDateCreated()
-	{
-		return $this->dateCreated;
-	}
-
-	/**
-	 * @param DateTime $dateCreated
-	 */
-	public function setDateCreated($dateCreated)
-	{
-		$this->dateCreated = $dateCreated;
-		return $this;
-	}
-
-	/**
-	 * @return DateTime $dateModified
-	 */
-	public function getDateModified()
-	{
-		return $this->dateModified;
-	}
-
-	/**
-	 * @param DateTime $dateModified
-	 */
-	public function setDateModified($dateModified = null)
-	{
-		$this->dateModified = $dateModified;
-		return $this;
-	}
-	
-	/**
-	 * @return \UthandoUser\Model\User
-	 */
+    /**
+     * @return User
+     */
 	public function getUser()
 	{
 	    return $this->user;
 	}
-	
-	/**
-	 * @param \UthandoUser\Model\User $user
-	 * @return \Shop\Model\Customer
-	 */
-	public function setUser($user)
+
+    /**
+     * @param User $user
+     * @return $this
+     */
+	public function setUser(User $user)
 	{
 	    $this->user = $user;
 	    return $this;
 	}
-	
-	/**
-	 * @return \Shop\Model\Customer\Prefix
-	 */
+
+    /**
+     * @return Prefix
+     */
 	public function getPrefix()
 	{
 	    return $this->prefix;
 	}
-	
-	/**
-	 * @param \Shop\Model\Customer\Prefix $prefix
-	 * @return \Shop\Model\Customer
-	 */
-	public function setPrefix($prefix)
+
+    /**
+     * @param Prefix $prefix
+     * @return $this
+     */
+	public function setPrefix(Prefix $prefix)
 	{
 	    $this->prefix = $prefix;
 	    return $this;
 	}
-	
-	/**
-	 * @return \Shop\Model\Customer\Address
-	 */
+
+    /**
+     * @return Address
+     */
 	public function getBillingAddress()
 	{
 	    return $this->billingAddress;
 	}
-	
-	/**
-	 * @param \Shop\Model\Customer\Address $billingAddress
-	 * @return \Shop\Model\Customer
-	 */
-	public function setBillingAddress($billingAddress)
+
+    /**
+     * @param Address $billingAddress
+     * @return $this
+     */
+	public function setBillingAddress(Address $billingAddress)
 	{
 	    $this->billingAddress = $billingAddress;
 	    return $this;
 	}
-	
-	/**
-	 * @return \Shop\Model\Customer\Address
-	 */
+
+    /**
+     * @return Address
+     */
 	public function getDeliveryAddress()
 	{
 	    return $this->deliveryAddress;
 	}
-	
-	/**
-	 * @param \Shop\Model\Customer\Address $deliveryAddress
-	 * @return \Shop\Model\Customer
-	 */
-	public function setDeliveryAddress($deliveryAddress)
+
+    /**
+     * @param Address $deliveryAddress
+     * @return $this
+     */
+	public function setDeliveryAddress(Address $deliveryAddress)
 	{
 	    $this->deliveryAddress = $deliveryAddress;
 	    return $this;
 	}
-	
+
+    /**
+     * @return string
+     */
 	public function getFullName()
 	{
 		return $this->getFirstname() . ' ' . $this->getLastname();
 	}
-	
+
+    /**
+     * @return string
+     */
 	public function getLastNameFirst()
 	{
 		return $this->getLastname() . ', ' . $this->getFirstname();

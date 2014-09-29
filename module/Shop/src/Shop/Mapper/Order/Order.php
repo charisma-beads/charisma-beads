@@ -1,11 +1,11 @@
 <?php
 namespace Shop\Mapper\Order;
 
-use UthandoCommon\Mapper\AbstractMapper;
+use UthandoCommon\Mapper\AbstractDbMapper;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\Sql\Expression;
 
-class Order extends AbstractMapper
+class Order extends AbstractDbMapper
 {
     protected $table = 'order';
     protected $primary = 'orderId';

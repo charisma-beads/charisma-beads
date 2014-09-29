@@ -157,7 +157,6 @@ class Category extends Form implements ServiceLocatorAwareInterface
     public function getImageList()
     {
     	$id = $this->getCategoryId();
-        \FB::info($id,__METHOD__);
     	$imageOptions = array();
     	
     	if (!0 == $id) {

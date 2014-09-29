@@ -1,10 +1,10 @@
 <?php
 namespace Shop\Mapper\Tax;
 
-use UthandoCommon\Mapper\AbstractMapper;
+use UthandoCommon\Mapper\AbstractDbMapper;
 use Zend\Db\Sql\Select;
 
-class Code extends AbstractMapper
+class Code extends AbstractDbMapper
 {
 	protected $table = 'taxCode';
 	protected $primary = 'taxCodeId';

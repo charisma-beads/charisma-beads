@@ -1,11 +1,11 @@
 <?php
 namespace Shop\Mapper\Country;
 
-use UthandoCommon\Mapper\AbstractMapper;
+use UthandoCommon\Mapper\AbstractDbMapper;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\Sql\Select;
 
-class Country extends AbstractMapper
+class Country extends AbstractDbMapper
 {
     protected $table = 'country';
     protected $primary = 'countryId';

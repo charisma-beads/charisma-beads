@@ -1,10 +1,10 @@
 <?php
 namespace Shop\Mapper\Customer;
 
-use UthandoCommon\Mapper\AbstractMapper;
+use UthandoCommon\Mapper\AbstractDbMapper;
 use Zend\Db\Sql\Select;
 
-class Address extends AbstractMapper
+class Address extends AbstractDbMapper
 {
     protected $table = 'customerAddress';
     protected $primary = 'customerAddressId';

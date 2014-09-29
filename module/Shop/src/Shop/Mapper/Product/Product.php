@@ -1,10 +1,10 @@
 <?php
 namespace Shop\Mapper\Product;
 
-use UthandoCommon\Mapper\AbstractMapper;
+use UthandoCommon\Mapper\AbstractDbMapper;
 use Zend\Db\Sql\Select;
 
-class Product extends AbstractMapper
+class Product extends AbstractDbMapper
 {       
 	protected $table = 'product';
 	protected $primary = 'productId';

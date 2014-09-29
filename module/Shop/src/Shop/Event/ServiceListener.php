@@ -15,12 +15,16 @@ class ServiceListener implements ListenerAggregateInterface
         $events = $events->getSharedManager();
         
         $this->listeners[] = $events->attach([
-            'Shop\Service\Customer',
+            'Shop\Service\Customer\Customer',
             'Shop\Service\Customer\Address',
         ], 'form.init', [$this, 'formInit']);
+
+        $this->listeners[] = $events->attach([
+            'Shop\Service\Product\Category',
+        ], 'pre.form', [$this, 'preForm']);
         
         $this->listeners[] = $events->attach([
-            'Shop\Service\Product'
+            'Shop\Service\Product\Product'
         ], ['pre.add', 'pre.edit'], [$this, 'setProductIdent']);
         
         $this->listeners[] = $events->attach([
@@ -43,7 +47,6 @@ class ServiceListener implements ListenerAggregateInterface
     {
         $form = $e->getParam('form');
         $post = $e->getParam('post');
-        $model = $e->getParam('model');
         
         /* @var $service \Shop\Service\Country */
         $service = $e->getTarget()->getCountryService();
@@ -59,6 +62,16 @@ class ServiceListener implements ListenerAggregateInterface
         $phone->setCountry($country->getCode());
         $postcode->setCountry($country->getCode());
     }
+
+    public function preForm(Event $e)
+    {
+        $model = $e->getParam('model');
+        $service = $e->getTarget();
+
+        $service->setFormOptions([
+            'productCategoryId' => $model->getProductCategoryId(),
+        ]);
+    }
     
     public function formInit(Event $e)
     {
@@ -67,13 +80,21 @@ class ServiceListener implements ListenerAggregateInterface
         $model = $e->getParam('model');
         
         switch (get_class($model)) {
-        	case 'Shop\Model\Customer':
+        	case 'Shop\Model\Customer\Customer':
         	    $this->customerForm($form, $model);
         	    break;
         	case 'Shop\Model\Customer\Address':
         	    $this->customerAddressForm($form, $model, $data);
         	    break;
+            case 'Shop\Model\Product\Category':
+                $this->categoryForm($form, $model);
+                break;
         }
+    }
+
+    public function categoryForm($form, $model)
+    {
+        $form->setCategoryId($model->getProductCategoryId());
     }
     
     public function customerForm($form, $model)
