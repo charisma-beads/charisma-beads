@@ -1,0 +1,31 @@
+
+<div id="alerts" class="col-md-12">
+    <?=$this->tbFlashMessenger()->render(); ?>
+</div>
+
+<div class="col-md-12">
+    <?=$this->partial('uthando-admin/partial/add-edit-form', [
+        'form'         => $this->form,
+        'formElements' => [
+            'customerAddressId', 'customerId', 'address1', 'address2',
+            'address3', 'city', 'provinceId', 'postcode', 'countryId', 'phone',
+        ],
+        'helperOptions' => [
+            'labelWidth'    => '4',
+            'elementWidth'  => '8',
+        ],
+    ]); ?>
+</div>
+<script>
+
+    $('#countryId').change(function() {
+        $.ajax({
+            url : '/shop/country/province',
+            data : {countryId : this.value},
+            type : 'POST'
+        }).done(function(data){
+            $('#provinceId').html( data );
+        });
+    });
+
+</script>

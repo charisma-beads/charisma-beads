@@ -22,10 +22,10 @@ class CountryProvince extends AbstractCrudController
     	/* @var $service \Shop\Service\Country\Province */
     	$service = $this->getService();
     	
-    	$provices = $service->getProvincesByCountryId($countryId);
+    	$provinces = $service->getProvincesByCountryId($countryId);
         
     	$viewModel = new ViewModel([
-            'models' => $provices,
+            'models' => $provinces,
 		]);
     	
     	$viewModel->setTerminal(true);

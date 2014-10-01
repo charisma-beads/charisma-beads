@@ -30,6 +30,20 @@ class ServiceListener implements ListenerAggregateInterface
         $this->listeners[] = $events->attach([
     		'Shop\Service\Customer\Address'
 		], ['pre.add', 'pre.edit'], [$this, 'setCountryValidation']);
+
+        $this->listeners[] = $events->attach([
+            'Shop\Controller\Customer\CustomerAddress',
+        ], ['add.action'], [$this, 'addAction']);
+    }
+
+    public function addAction(Event $e)
+    {
+        /* @var $controller \Shop\Controller\Customer\CustomerAddress */
+        $controller = $e->getTarget();
+        $params = $controller->params()->fromRoute('id', null);
+        $form = $e->getParam('form');
+        $form->get('customerId')->setValue($params);
+
     }
     
     public function setProductIdent(Event $e)
@@ -48,8 +62,8 @@ class ServiceListener implements ListenerAggregateInterface
         $form = $e->getParam('form');
         $post = $e->getParam('post');
         
-        /* @var $service \Shop\Service\Country */
-        $service = $e->getTarget()->getCountryService();
+        /* @var $service \Shop\Service\Country\Country */
+        $service = $e->getTarget()->getService('Shop\Service\Country');
         $countryId = $post['countryId'];
         
         $country = $service->getById($countryId);

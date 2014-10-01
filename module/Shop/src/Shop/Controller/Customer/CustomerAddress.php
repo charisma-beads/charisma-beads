@@ -28,6 +28,28 @@ class CustomerAddress extends AbstractCrudController
         $viewModel->setTerminal(true);
         return $viewModel;
     }
+
+    public function addressListAction()
+    {
+        if (!$this->getRequest()->isXmlHttpRequest()) {
+            throw new ShopException('Not Allowed');
+        }
+
+        $customer = $this->params()->fromPost('customerId', 0);
+
+        /* @var $service \Shop\Service\Customer\Address */
+        $service = $this->getService();
+
+        $addresses = $service->getAllAddressesByCustomerId($customer);
+
+        $viewModel = new ViewModel([
+            'models' => $addresses,
+        ]);
+
+        $viewModel->setTerminal(true);
+
+        return $viewModel;
+    }
     
     public function myAddressesAction()
     {
@@ -92,11 +114,6 @@ class CustomerAddress extends AbstractCrudController
     	}
     	
     	$viewModel = new ViewModel();
-    	
-    	if ($request->isXmlHttpRequest()) {
-    	    $viewModel->setTerminal(true);
-    	    $viewModel->setTemplate('shop/customer-address/ajax-address-form');
-    	}
     
     	try {
     		$model = $this->getService()->getById($id);

@@ -1,6 +1,4 @@
 
-<?php \FB::info($this->models); ?>
-
 <?php /* @var $address \Shop\Model\Customer\Address */ ?>
 <?php foreach ($this->models as $address):?>
     <div class="col-md-6">
@@ -14,19 +12,19 @@
                 <a href="<?=$this->url('shop/customer/address', [
                     'action'    => 'edit-address',
                     'id' => $address->getCustomerAddressId(),
-                ]);?>" class="btn btn-primary">Edit</a>
+                ]);?>" class="btn btn-primary edit-address-button">Edit</a>
                 <a href="#deleteAddressModel<?=$address->getCustomerAddressId();?>" class="btn btn-danger" data-toggle="modal" data-target="#deleteAddressModel<?=$address->getCustomerAddressId();?>">Delete</a>
             </div>
         </div>
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="deleteAddressModel<?=$address->getCustomerAddressId();?>">
+    <div class="modal fade edit-modal" id="deleteAddressModel<?=$address->getCustomerAddressId();?>">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h3 id="deleteAddressModelLabel<?=$address->getCustomerAddressId();?>">Cancel Order</h3>
+                    <h3 id="deleteAddressModelLabel<?=$address->getCustomerAddressId();?>">Delete Address</h3>
                 </div>
 
                 <form class="form-horizontal"  method="post" action="<?=$this->url('shop/customer/address', [
