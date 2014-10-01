@@ -1,6 +1,5 @@
 
 $(document).ready(function(){
-    console.log('shop');
 
     admin.widgetPanelLoad(
         $('#current-orders .panel-widget'),

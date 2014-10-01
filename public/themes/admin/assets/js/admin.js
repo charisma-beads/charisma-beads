@@ -30,7 +30,8 @@ var admin = {
 	
 	tabs : {},
 	
-	setupTabs : function(id) {
+	setupTabs : function(id)
+    {
 		$('#'+id).on('click', 'a', function(e) {
         	e.preventDefault();
         	$(this).tab('show');
@@ -46,36 +47,50 @@ var admin = {
     	});
 	},
 
-    widgetPanelLoad : function($element, url, query) {
-        $element.load(url, query, function (responseText, textStatus, req) {
+    widgetPanelLoad : function(element, url, query)
+    {
+        element.load(url, query, function (responseText, textStatus, req) {
             if (textStatus == "error") {
-                $element.css('padding', '10px');
-                $element.html(responseText);
+                element.css('padding', '10px');
+                element.html(responseText);
             }
         });
     },
 
-    addAlert : function(message, type) {
+    addAlert : function(message, type)
+    {
         $('#alerts').append(
             '<div class="alert alert-' + type + '">' +
             '<button type="button" class="close" data-dismiss="alert">' +
             '&times;</button>' + message + '</div>'
         );
+    },
+
+    ajaxModalForm : function(el, url)
+    {
+        $.ajax({
+            url: url,
+            data:  $(el).find('form').serialize(),
+            type: 'POST',
+            success: function (response) {
+                if ($.isPlainObject(response)) {
+                    admin.addAlert(response.messages, response.status);
+                    $(el).modal('hide');
+                    return;
+                } else {
+                    $(el).find('.modal-body').html(response);
+                }
+            },
+            error: function (response) {
+                admin.addAlert(response.error, 'danger');
+                $(el).modal('hide');
+            }
+        });
     }
 };
 
 $(document).ready(function(){
 
-    $(document).on({
-        ajaxStart: function() { 
-            $('body').addClass("loading"); 
-        },
-        ajaxStop: function() {
-        	$('button[type=submit]').button('reset');
-            $('body').removeClass("loading");
-        }    
-    });
-    
     $('button[type=submit]').click(function(){
         $(this).button('loading');
         $('input').focus(function(){
