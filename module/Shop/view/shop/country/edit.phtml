@@ -92,11 +92,15 @@
 
     $provinces();
 
-    $('#country-provinces').on('click', 'a', function(event) {
+    console.log($('#country-provinces a'));
+
+    $('#country-provinces').on('click', '.edit-button', function(event) {
         event.preventDefault();
 
         var el = $('#edit-province-model');
         var url = $(this).attr('href').replace('-province', '');
+
+        console.log($(this));
 
         el.on('show.bs.modal', function() {
             $(this).find('.modal-body').load(url);
