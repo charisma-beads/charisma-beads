@@ -5,8 +5,7 @@ namespace Shop\Form\Country;
 use Zend\Form\Form;
 
 class Country extends Form
-{	
-   
+{
 	public function init()
 	{
 		$this->add([

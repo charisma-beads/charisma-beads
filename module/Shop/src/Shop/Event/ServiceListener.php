@@ -33,17 +33,28 @@ class ServiceListener implements ListenerAggregateInterface
 
         $this->listeners[] = $events->attach([
             'Shop\Controller\Customer\CustomerAddress',
+            'Shop\Controller\Country\CountryProvince',
         ], ['add.action'], [$this, 'addAction']);
+
+        $this->listeners[] = $events->attach([
+            'Shop\Service\Customer\Customer',
+        ], ['pre.add'], [$this, 'setCustomerValidation']);
     }
 
     public function addAction(Event $e)
     {
-        /* @var $controller \Shop\Controller\Customer\CustomerAddress */
         $controller = $e->getTarget();
         $params = $controller->params()->fromRoute('id', null);
         $form = $e->getParam('form');
-        $form->get('customerId')->setValue($params);
 
+        switch (get_class($controller)) {
+            case 'Shop\Controller\Customer\CustomerAddress':
+                $form->get('customerId')->setValue($params);
+                break;
+            case 'Shop\Controller\Country\CountryProvince':
+                $form->get('countryId')->setValue($params);
+                break;
+        }
     }
     
     public function setProductIdent(Event $e)
@@ -55,6 +66,12 @@ class ServiceListener implements ListenerAggregateInterface
         }
         
         $e->setParam('post', $post);
+    }
+
+    public function setCustomerValidation(Event $e)
+    {
+        $form = $e->getParam('form');
+        $form->setValidationGroup('prefixId', 'firstname', 'lastname', 'email');
     }
     
     public function setCountryValidation(Event $e)

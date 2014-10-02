@@ -32,19 +32,4 @@ class Country extends AbstractRelationalMapperService
 
         return $mapper->getCountryPostalRates($id);
     }
-
-    /**
-     * @param array $post
-     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
-     */
-    public function search(array $post)
-    {
-    	$countries = parent::search($post);
-
-    	foreach ($countries as $country) {
-            $this->populate($country, true);
-    	}
-    	
-    	return $countries;
-    }
 }

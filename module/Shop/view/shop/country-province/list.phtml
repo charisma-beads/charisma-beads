@@ -2,47 +2,40 @@
 
 <?php if (count($this->models) > 0): ?>
 
-<div class="panel panel-default">
-    <table id="countryProvince-list" class="table table-hover table-bordered table-condensed sortable-table">
-    	<thead>
-    		<tr>
-    			<th data-field="postCostId">Post Level Id</th>
-    			<th data-field="cost">Cost</th>
-    			<th data-field="postLevel">Post Level</th>
-    			<th data-field="zone">Post Zone</th>
-    			<th>Actions</th>
-    		</tr>
-    	</thead>
-    	
-    	<tbody>
-    		<?php /* @var $row \Shop\Model\CountryProvince */ ?>
-    		<?php foreach($this->models as $row): ?>
-    		<tr>
-    			<td><?=$this->escapeHtml($row->getPostCostId()); ?></td>
-    			<td><?=$this->escapeHtml($row->getCost()); ?></td>
-    			<td><?=$this->escapeHtml($row->getPostLevel()->getPostLevel()); ?></td>
-    			<td><?=$this->escapeHtml($row->getPostZone()->getZone()); ?></td>
-    			<td>
-                    <?=$this->partial('uthando-admin/partial/edit-actions', [
-                    	'pk'		=> 'countryProvinceId',
-                    	'id'		=> $row->getCountryProvinceId(),
-    		    		'tableName'	=> 'countryProvince',
-                    	'route'		=> 'admin/shop/country/province/edit',
-    		    	]);?>
-    			</td>
-    		</tr>
-    		<?php endforeach; ?>
-    	</tbody>
-    </table>
-</div>
+<table id="countryProvince-list" class="table table-hover table-bordered table-condensed sortable-table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Code</th>
+            <th>Name</th>
+            <th style="min-width: 125px;">Actions</th>
+        </tr>
+    </thead>
 
-<?=$this->paginationControl(
-    $this->models,
-    'Elastic',
-    'paginate',
-	['route' => 'admin/shop/country/province/page']
-); ?>
+    <tbody>
+        <?php /* @var $row \Shop\Model\Country\Province */ ?>
+        <?php foreach($this->models as $row): ?>
+        <tr>
+            <td><?=$this->escapeHtml($row->getCountryProvinceId()); ?></td>
+            <td><?=$this->escapeHtml($row->getCountryProvinceCode()); ?></td>
+            <td><?=$this->escapeHtml($row->getProvinceName()); ?></td>
+            <td>
+                <?=$this->partial('uthando-admin/partial/edit-actions', [
+                    'pk'		=> 'countryProvinceId',
+                    'id'		=> $row->getCountryProvinceId(),
+                    'tableName'	=> 'countryProvince',
+                    'route'		=> 'admin/shop/country/province',
+                    'routeParams'   => [
+                        'action'    => 'edit'
+                    ],
+                    'buttonSize'=> 'btn-sm',
+                ]);?>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
 
 <?php else: ?>
-<h4>No Post Costs where returned by search.</h4>
+<h4>No provinces yet.</h4>
 <?php endif; ?>

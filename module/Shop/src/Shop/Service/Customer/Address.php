@@ -39,6 +39,20 @@ class Address extends AbstractRelationalMapperService
     }
 
     /**
+     * @param array $post
+     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     * @throws ShopException
+     */
+    public function search(array $post)
+    {
+        if (!isset($post['customerId'])) {
+            throw new ShopException('customerId needs to be set.');
+        }
+
+        return $this->getAllAddressesByCustomerId($post['customerId']);
+    }
+
+    /**
      * @param int $customerId
      * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
      */

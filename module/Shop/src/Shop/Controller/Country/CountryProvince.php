@@ -10,6 +10,7 @@ class CountryProvince extends AbstractCrudController
     protected $searchDefaultParams = array('sort' => 'countryCode');
     protected $serviceName = 'Shop\Service\Country\Province';
     protected $route = 'admin/shop/country/province';
+    protected $paginate = false;
     
     public function countryProvinceListAction()
     {
@@ -31,6 +32,5 @@ class CountryProvince extends AbstractCrudController
     	$viewModel->setTerminal(true);
     	
     	return $viewModel;
-    	
     }
 }

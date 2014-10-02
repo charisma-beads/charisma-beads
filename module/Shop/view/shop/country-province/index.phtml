@@ -1,27 +1,7 @@
 
-
-<?=$this->partial('uthando-admin/partial/search', [
-	'name'			=> 'countryProvince',
-	'searchInputs'	=> [
-		'Province' => 'provinceName',
-	],
-]);?>
 	    	
-<div id="table-countryProvince" class="row-fluid table-wrap">
+<div id="table-countryProvince" class="table-wrap">
 	<?=$this->partial('shop/country-province/list', [
 	    'models' => $this->models
 	]); ?>
 </div>
-
-<?php $this->headScript()->captureStart(); ?>
-$(document).ready(function(){
-	$('#table-countryProvince').dataGrid({
-	    url : 'province/list',
-	    query: { sort : 'countryCode' },
-	    searchForm : $('#search-countryProvince'),
-	    paging : 'links',
-	    columnSort: true,
-	    //rowClick : admin.product.rowClick
-	});
-});
-<?php $this->headScript()->captureEnd(); ?>

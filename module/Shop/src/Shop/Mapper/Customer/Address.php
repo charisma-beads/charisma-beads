@@ -1,6 +1,7 @@
 <?php
 namespace Shop\Mapper\Customer;
 
+use Shop\ShopException;
 use UthandoCommon\Mapper\AbstractDbMapper;
 use Zend\Db\Sql\Select;
 
@@ -8,7 +9,11 @@ class Address extends AbstractDbMapper
 {
     protected $table = 'customerAddress';
     protected $primary = 'customerAddressId';
-    
+
+    /**
+     * @param $id
+     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     */
     public function getAllByCustomerId($id)
     {
         $id = (int) $id;
@@ -18,7 +23,12 @@ class Address extends AbstractDbMapper
         $resultSet = $this->fetchResult($select);
         return $resultSet;
     }
-    
+
+    /**
+     * @param $id
+     * @param $billingOrDelivery
+     * @return array|\ArrayObject|null|object
+     */
     public function getAddressByUserId($id, $billingOrDelivery)
     {
         $id = (int) $id;

@@ -1,13 +1,163 @@
 <?php $this->headTitle('Edit Country') ?>
 
-<?=$this->partial('uthando-admin/partial/add-edit-form', [
-	'form' 			=> $this->form,
-	'formAction' 	=> 'edit',
-	'primaryKey'	=> $this->model->getCountryId(),
-	'formName'		=> 'Country',
-	'postRoute'		=> 'admin/shop/country/edit',
-	'cancelRoute'	=> 'admin/shop/country',
-	'formElements'	=> [
-		'country', 'code', 'postZoneId', 'countryId',
-	],
-]); ?>
+<div class="col-md-12">
+    <?=$this->partial('uthando-admin/partial/add-edit-form', [
+        'form' 			=> $this->form,
+        'formAction' 	=> 'edit',
+        'primaryKey'	=> $this->model->getCountryId(),
+        'formName'		=> 'Country',
+        'postUrl'		=> $this->url('admin/shop/country/edit', [
+            'id'        => $this->model->getCountryId(),
+        ]),
+        'cancelUrl'     => $this->url('admin/shop/country'),
+        'formElements'	=> [
+            'country', 'code', 'postZoneId', 'countryId',
+        ],
+        'formWidth'     => '6',
+        'helperOptions' => [
+            'labelWidth'    => '4',
+            'elementWidth'  => '8',
+        ],
+    ]); ?>
+
+    <div class="col-md-6">
+        <div id="country-provinces" class="panel panel-info">
+            <!-- Default panel contents -->
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    Provinces&nbsp;
+                    <button id="add-province-button" class="btn btn-default" data-toggle="modal"
+                            data-target="#add-province-model">
+                        Add Province
+                    </button>
+                </h4>
+            </div>
+            <div class="panel-table">
+                <div class="text-center">
+                    <i class="fa fa-spinner fa-spin"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="add-province-model" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add Province</h4>
+            </div>
+            <div class="modal-body">
+                <i class="fa fa-spinner fa-spin"></i>&nbsp;Loading
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="add-province-save" type="button" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="edit-province-model" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Edit Address</h4>
+            </div>
+            <div class="modal-body">
+                <i class="fa fa-spinner fa-spin"></i>&nbsp;Loading
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="edit-province-save" type="button" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="clearfix"></div>
+
+<script>
+    var $provinces = function(){
+        admin.widgetPanelLoad(
+            $('#country-provinces .panel-table'),
+            '<?=$this->url('admin/shop/country/province', [
+                'action' => 'list'
+]           );?>',
+            {countryId : '<?=$this->model->getCountryId();?>'}
+        );
+    }
+
+    $provinces();
+
+    $('#country-provinces').on('click', 'a', function(event) {
+        event.preventDefault();
+
+        var el = $('#edit-province-model');
+        var url = $(this).attr('href').replace('-province', '');
+
+        el.on('show.bs.modal', function() {
+            $(this).find('.modal-body').load(url);
+        });
+
+        el.on('hide.bs.modal', function(e){
+            $(this).find('.modal-body').html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Loading');
+            $provinces();
+            el.off('show.bs.modal hide.bs.modal');
+            $('#edit-province-save').off('click');
+        });
+
+        $('#edit-province-save').on('click', function() {
+            admin.ajaxModalForm(el, url);
+        });
+
+        el.modal('show');
+
+    });
+
+    $('#country-provinces').on('submit', 'form', function(event) {
+        event.preventDefault();
+        var url = '<?=$this->url('admin/shop/country/province', [
+            'action'    => 'delete',
+        ]);?>';
+        var params = $(this).serialize() + '&submit=delete';
+        var el = $(this).parent().parent().parent();
+
+        $.ajax({
+            url: url,
+            data:  params,
+            type: 'POST',
+            success: function (response) {
+                admin.addAlert(response.messages, response.status);
+                $(el).modal('hide');
+                setTimeout('$provinces()',500);
+            },
+            error: function (response) {
+                admin.addAlert(response.error, 'danger');
+                $(el).modal('hide');
+                setTimeout('$provinces()',500);
+            }
+        });
+    });
+
+    $('#add-province-model').on('show.bs.modal', function(){
+        $(this).find('.modal-body').load('<?=$this->url('admin/shop/country/province', [
+            'action'    => 'add',
+            'id'        => $this->model->getCountryId(),
+        ]);?>');
+    });
+
+    $('#add-province-model').on('hide.bs.modal', function(e){
+        $(this).find('.modal-body').html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Loading');
+        $provinces();
+    });
+
+    $('#add-province-save').on('click', function() {
+        admin.ajaxModalForm('#add-province-model', '<?=$this->url('admin/shop/country/province', [
+            'action'    => 'add',
+        ]);?>');
+    });
+
+</script>

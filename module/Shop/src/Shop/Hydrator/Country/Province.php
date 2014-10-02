@@ -13,6 +13,7 @@ class Province extends AbstractHydrator
     {
         return [
             'countryProvinceId'         => $object->getCountryProvinceId(),
+            'countryId'                 => $object->getCountryId(),
             'countryProvinceCode'       => $object->getCountryProvinceCode(),
             'provinceName'              => $object->getProvinceName(),
             'provinceAlternateNames'    => $object->getProvinceAlternateNames(),

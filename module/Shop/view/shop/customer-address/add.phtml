@@ -6,6 +6,7 @@
 <div class="col-md-12">
     <?=$this->partial('uthando-admin/partial/add-edit-form', [
         'form'         => $this->form,
+        'formAction' 	=> 'add',
         'formElements' => [
             'customerAddressId', 'customerId', 'address1', 'address2',
             'address3', 'city', 'provinceId', 'postcode', 'countryId', 'phone',

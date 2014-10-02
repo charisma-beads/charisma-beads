@@ -10,7 +10,9 @@ $this->form->get('email')->setAttribute('readonly', '');
         'form' 			=> $this->form,
         'formAction' 	=> 'edit',
         'formName'		=> 'Customer',
-        'postUrl'		=> $this->url('admin/shop/customer/edit'),
+        'postUrl'		=> $this->url('admin/shop/customer/edit', [
+            'id'        => $this->model->getCustomerId(),
+        ]),
         'cancelUrl'     => $this->url('admin/shop/customer'),
         'formElements'  => [
             'customerId', 'userId', 'prefixId', 'firstname', 'lastname',
@@ -88,9 +90,9 @@ $this->form->get('email')->setAttribute('readonly', '');
         admin.widgetPanelLoad(
             $('#customer-addresses .panel-body'),
             '<?=$this->url('admin/shop/customer/address', [
-                'id' => $this->model->getCustomerId(),
-            ]);?>',
-            null
+                'action' => 'list'
+]           );?>',
+            {customerId : '<?=$this->model->getCustomerId();?>'}
         );
     }
 

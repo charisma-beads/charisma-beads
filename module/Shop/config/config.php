@@ -566,6 +566,21 @@ return [
                                             ]
                                         ]
                                     ],
+                                    'province' => [
+                                        'type' => 'Segment',
+                                        'options' => [
+                                            'route' => '/province[/][:action[/[:id]]]',
+                                            'constraints' => [
+                                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                                'id' => '\d+',
+                                            ],
+                                            'defaults' => [
+                                                'controller' => 'Country\Province',
+                                                'action' => 'list',
+                                                'force-ssl' => 'ssl'
+                                            ],
+                                        ],
+                                    ],
                                     'page' => [
                                         'type' => 'Segment',
                                         'options' => [
