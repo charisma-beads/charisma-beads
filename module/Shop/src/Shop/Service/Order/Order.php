@@ -32,6 +32,20 @@ class Order extends AbstractRelationalMapperService
         ],
     ];
 
+    public function getCustomerOrdersByCustomerId($id)
+    {
+        $id = (int) $id;
+        /* @var $mapper \Shop\Mapper\Order\Order */
+        $mapper = $this->getMapper();
+
+        $orders = $mapper->getOrdersByCustomerId($id);
+        foreach ($orders as $order) {
+            $this->populate($order, true);
+        }
+
+        return $orders;
+    }
+
     /**
      * @param array $post
      * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator

@@ -3,13 +3,16 @@ namespace Shop\Model\Customer;
 
 use Shop\Model\Country\Country;
 use Shop\Model\Country\Province;
+use UthandoCommon\Model\DateCreatedTrait;
+use UthandoCommon\Model\DateModifiedTrait;
 use UthandoCommon\Model\Model;
 use UthandoCommon\Model\ModelInterface;
-use DateTime;
 
 class Address implements ModelInterface
 {
-    use Model;
+    use Model,
+        DateCreatedTrait,
+        DateModifiedTrait;
     
     /**
      * @var int
@@ -70,16 +73,6 @@ class Address implements ModelInterface
      * @var string
      */
     protected $email;
-    
-    /**
-     * @var DateTime
-     */
-    protected $dateCreated;
-    
-    /**
-     * @var DateTime
-     */
-    protected $dateModified;
     
     /**
      * @var \Shop\Model\Country\Country
@@ -304,42 +297,6 @@ class Address implements ModelInterface
 	public function setEmail($email)
 	{
 		$this->email = $email;
-		return $this;
-	}
-
-	/**
-	 * @return DateTime $dateCreated
-	 */
-	public function getDateCreated()
-	{
-		return $this->dateCreated;
-	}
-
-    /**
-     * @param DateTime $dateCreated
-     * @return $this
-     */
-	public function setDateCreated($dateCreated)
-	{
-		$this->dateCreated = $dateCreated;
-		return $this;
-	}
-
-	/**
-	 * @return DateTime $dateModified
-	 */
-	public function getDateModified()
-	{
-		return $this->dateModified;
-	}
-
-    /**
-     * @param DateTime $dateModified
-     * @return $this
-     */
-	public function setDateModified($dateModified = null)
-	{
-		$this->dateModified = $dateModified;
 		return $this;
 	}
 	

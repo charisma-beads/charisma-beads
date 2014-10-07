@@ -1,6 +1,4 @@
 
-<?=$this->headScript()->appendFile($this->themePath('/assets/js/shop.js')) ?>
-
 <div class="row">
     <!-- new orders -->
     <div class="col-md-6">
@@ -9,7 +7,22 @@
             <div class="panel-heading">
                 <h4 class="panel-title">Current Orders</h4>
             </div>
-            <div class="panel-body panel-widget">
+            <div class="panel-table panel-widget">
+                <div class="text-center">
+                    <i class="fa fa-spinner fa-spin"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- new customer -->
+    <div class="col-md-6">
+        <div id="new-customers" class="panel panel-info">
+            <!-- Default panel contents -->
+            <div class="panel-heading">
+                <h4 class="panel-title">New Customers This Month&nbsp;<span id="new-customer-count"></span></h4>
+            </div>
+            <div class="panel-table panel-widget">
                 <div class="text-center">
                     <i class="fa fa-spinner fa-spin"></i>
                 </div>
@@ -19,3 +32,38 @@
 </div>
 
 <div class="clearfix"></div>
+
+<script>
+    $('#current-orders .panel-widget').ajaxWidgetPanel({
+        url : '/admin/shop/order/current-orders'
+    });
+
+    $('#new-customers .panel-widget').ajaxWidgetPanel({
+        url : '<?=$this->url('admin/shop/customer/edit', [
+            'action' => 'list-new',
+        ]);?>'
+    });
+
+    $('#current-orders .panel-widget').on('change', 'select', function(){
+        var orderNumber = $(this).parent().prev().text();
+        var orderStatusId = this.value;
+        $.ajax({
+            url : '/admin/shop/order/update-status',
+            data : {
+                'orderStatusId' : orderStatusId,
+                'orderNumber' : orderNumber
+            },
+            type : 'POST',
+            success : function(json) {
+                if (json.html) {
+                    $('#current-orders .panel-widget').html(json.html);
+                } else {
+                    admin.addAlert('Failed to update order status due to database error', 'danger');
+                }
+            },
+            error : function(response) {
+                admin.addAlert(response.responseText, 'danger');
+            }
+        });
+    });
+</script>

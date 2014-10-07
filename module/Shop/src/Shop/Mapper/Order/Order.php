@@ -29,6 +29,15 @@ class Order extends AbstractDbMapper
         return $resultSet;
     }
 
+    public function getOrdersByCustomerId($id)
+    {
+        $select = $this->getSelect();
+        $select->where->equalTo('customerId', $id);
+        $resultSet = $this->fetchResult($select);
+
+        return $resultSet;
+    }
+
     public function getOrderByOrderNumber($orderNumber)
     {
         $select = $this->getSelect();

@@ -14,16 +14,13 @@
 	]); ?>
 </div>
 
-<?php $this->inlineScript()->captureStart(); ?>
-$(document).ready(function(){
+<script>
+
 	$('#table-customer').dataGrid({
 	    url : 'customer/list',
 	    query: { sort : 'name' },
 	    searchForm : $('#search-customer'),
-	    paging : 'links',
-	    columnSort: true,
-	    //rowClick : admin.product.rowClick
+	    columnSort: true
 	});
-});
-<?php $this->inlineScript()->captureEnd(); ?>
 
+</script>

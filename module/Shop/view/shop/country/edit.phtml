@@ -26,7 +26,7 @@
             <div class="panel-heading">
                 <h4 class="panel-title">
                     Provinces&nbsp;
-                    <button id="add-province-button" class="btn btn-default" data-toggle="modal"
+                    <button id="add-province-button" class="btn btn-default btn-xs" data-toggle="modal"
                             data-target="#add-province-model">
                         Add Province
                     </button>
@@ -80,19 +80,12 @@
 <div class="clearfix"></div>
 
 <script>
-    var $provinces = function(){
-        admin.widgetPanelLoad(
-            $('#country-provinces .panel-table'),
-            '<?=$this->url('admin/shop/country/province', [
-                'action' => 'list'
-]           );?>',
-            {countryId : '<?=$this->model->getCountryId();?>'}
-        );
-    }
-
-    $provinces();
-
-    console.log($('#country-provinces a'));
+    var provinces = $('#country-provinces .panel-table').ajaxWidgetPanel({
+        url :  '<?=$this->url('admin/shop/country/province', [
+            'action' => 'list'
+        ]);?>',
+        data : {countryId : '<?=$this->model->getCountryId();?>'}
+    });
 
     $('#country-provinces').on('click', '.edit-button', function(event) {
         event.preventDefault();
@@ -100,15 +93,13 @@
         var el = $('#edit-province-model');
         var url = $(this).attr('href').replace('-province', '');
 
-        console.log($(this));
-
         el.on('show.bs.modal', function() {
             $(this).find('.modal-body').load(url);
         });
 
         el.on('hide.bs.modal', function(e){
             $(this).find('.modal-body').html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Loading');
-            $provinces();
+            provinces;
             el.off('show.bs.modal hide.bs.modal');
             $('#edit-province-save').off('click');
         });
@@ -136,12 +127,12 @@
             success: function (response) {
                 admin.addAlert(response.messages, response.status);
                 $(el).modal('hide');
-                setTimeout('$provinces()',500);
+                setTimeout('provinces',500);
             },
             error: function (response) {
                 admin.addAlert(response.error, 'danger');
                 $(el).modal('hide');
-                setTimeout('$provinces()',500);
+                setTimeout('provinces',500);
             }
         });
     });
@@ -155,7 +146,7 @@
 
     $('#add-province-model').on('hide.bs.modal', function(e){
         $(this).find('.modal-body').html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Loading');
-        $provinces();
+        provinces;
     });
 
     $('#add-province-save').on('click', function() {

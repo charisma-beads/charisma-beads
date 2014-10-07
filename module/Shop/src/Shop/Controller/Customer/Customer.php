@@ -1,9 +1,11 @@
 <?php
 namespace Shop\Controller\Customer;
 
+use Shop\ShopException;
 use UthandoCommon\Controller\AbstractCrudController;
 use Zend\Form\Form;
 use Zend\Http\PhpEnvironment\Response;
+use Zend\View\Model\ViewModel;
 
 class Customer extends AbstractCrudController
 {
@@ -11,7 +13,27 @@ class Customer extends AbstractCrudController
 	protected $serviceName = 'Shop\Service\Customer';
 	protected $userRoute = 'shop/customer';
 	protected $route = 'admin/shop/customer';
-	
+
+    public function listNewAction()
+    {
+        if (!$this->getRequest()->isXmlHttpRequest()) {
+            throw new ShopException('Action not allowed');
+        }
+
+        /* @var $service \Shop\Service\Customer\Customer */
+        $service = $this->getService();
+
+        $viewModel = new ViewModel();
+        $viewModel->setTerminal(true);
+
+        return $viewModel->setVariables([
+            'models' => $service->getCustomersByMonth(date('m')),
+        ]);
+    }
+
+    /**
+     * @return array|\Zend\Http\Response
+     */
 	public function myDetailsAction()
 	{
 	    $prg = $this->prg($this->userRoute);

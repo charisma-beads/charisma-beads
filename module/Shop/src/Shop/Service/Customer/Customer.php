@@ -87,6 +87,29 @@ class Customer extends AbstractRelationalMapperService
     }
 
     /**
+     * @param $month
+     * @param null $year
+     * @return \Zend\Db\ResultSet\HydratingResultSet
+     */
+    public function getCustomersByMonth($month, $year = null)
+    {
+        $month = (int) $month;
+        $year = ($year) ?: date('Y');
+        $date = new \DateTime(join('-',[
+            $year, $month
+        ]));
+        $startDate = $date->format('Y-m-01');
+        $endDate = $date->format('Y-m-t');
+
+        /* @var $mapper \Shop\Mapper\Customer\Customer */
+        $mapper = $this->getMapper();
+
+        $customers = $mapper->getCustomersByDate($startDate, $endDate);
+
+        return $customers;
+    }
+
+    /**
      * @return \UthandoUser\Model\User
      */
     public function getUser()

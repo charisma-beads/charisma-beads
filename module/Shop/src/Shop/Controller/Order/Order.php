@@ -27,6 +27,27 @@ class Order extends AbstractCrudController
         throw new ShopException('Not Allowed');
     }
 
+    public function orderListAction()
+    {
+        if (!$this->getRequest()->isXmlHttpRequest()) {
+            return $this->redirect()->toRoute($this->getRoute(), $this->params()->fromRoute());
+        }
+
+        $customerId = $this->params()->fromPost('customerId');
+
+        /* @var $service \Shop\Service\Order\Order */
+        $service = $this->getService();
+        $models = $service->getCustomerOrdersByCustomerId($customerId);
+
+        $viewModel = new ViewModel([
+            'models' => $models
+        ]);
+        $viewModel->setTerminal(true);
+
+        return $viewModel;
+
+    }
+
     public function updateStatusAction()
     {
         $request = $this->getRequest();
@@ -121,7 +142,7 @@ class Order extends AbstractCrudController
 	    $id = $this->params()->fromRoute('orderId', 0);
 	    $userId = $this->identity()->getUserId();
 	     
-	    /* @var $service \Shop\Service\Order */
+	    /* @var $service \Shop\Service\Order\Order */
 	    $service = $this->getService();
 	    $order = $service->getCustomerOrderByUserId($id, $userId);
 	    

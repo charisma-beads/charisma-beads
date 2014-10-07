@@ -11,11 +11,23 @@
     </thead>
 
     <tbody>
-        <?php /* @var $row \Shop\Model\Order */ ?>
+        <?php /* @var $row \Shop\Model\Order\Order */ ?>
         <?php foreach($this->models as $row): ?>
             <tr>
-                <td><?=$this->escapeHtml($row->getCustomer()->getFullName());?></td>
-                <td title="order-number"><?=$this->escapeHtml($row->getOrderNumber());?></td>
+                <td>
+                    <a href="<?=$this->url('admin/shop/customer/edit', [
+                        'id' => $row->getCustomerId(),
+                    ]);?>">
+                        <?=$this->escapeHtml($row->getCustomer()->getFullName());?>
+                    </a>
+                </td>
+                <td title="order-number">
+                    <a href="<?=$this->url('admin/shop/order/edit', [
+                        'id' => $row->getOrderId(),
+                    ]);?>">
+                        <?=$this->escapeHtml($row->getOrderNumber());?>
+                    </a>
+                </td>
                 <td>
                     <?=$this->formSelect(
                         $this->statusFormElement->setValue($row->getOrderStatusId())
@@ -28,5 +40,7 @@
     </tbody>
 </table>
 <?php else: ?>
-<h4 class="text-center">No New Orders Currently</h4>
+<div class="panel-body">
+    <h4 class="text-center">No New Orders Currently</h4>
+</div>
 <?php endif; ?>
