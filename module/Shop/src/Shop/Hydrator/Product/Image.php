@@ -13,7 +13,7 @@ class Image extends AbstractHydrator
 		
 		$dateTime = new DateTimeStrategy();
 		
-		$this->addStrategy('default', new TrueFalse());
+		$this->addStrategy('isDefault', new TrueFalse());
 		$this->addStrategy('dateCreated', $dateTime);
 		$this->addStrategy('dateModified', $dateTime);
 	}
@@ -29,7 +29,7 @@ class Image extends AbstractHydrator
 			'productId'			=> $object->getProductId(),
 			'thumbnail'			=> $object->getThumbnail(),
 			'full'				=> $object->getFull(),
-			'default'			=> $this->extractValue('default', $object->getDefault()),
+			'isDefault'			=> $this->extractValue('isDefault', $object->getIsDefault()),
 			'dateCreated'		=> $this->extractValue('dateCreated', $object->getDateCreated()),
 			'dateModified'		=> $this->extractValue('dateCreated', $object->getDateModified())
 		);

@@ -82,6 +82,7 @@ return [
                                 'Shop\Controller\Product\Category' => ['action' => 'all'],
                                 'Shop\Controller\Product\Image' => ['action' => 'all'],
                                 'Shop\Controller\Product\Group' => ['action' => 'all'],
+                                'Shop\Controller\Product\Option' => ['action' => 'all'],
                                 'Shop\Controller\Shop' => ['action' => 'all'],
                                 'Shop\Controller\Tax\Code' => ['action' => 'all'],
                                 'Shop\Controller\Tax\Rate' => ['action' => 'all'],
@@ -109,6 +110,7 @@ return [
                 'Shop\Controller\Product\Category',
                 'Shop\Controller\Product\Image',
                 'Shop\Controller\Product\Group',
+                'Shop\Controller\Product\Option',
                 'Shop\Controller\Shop',
                 'Shop\Controller\Tax\Code',
                 'Shop\Controller\Tax\Rate'
@@ -398,6 +400,36 @@ return [
                                             ]
                                         ]
                                     ],
+                                    'image' => [
+                                        'type' => 'Segment',
+                                        'options' => [
+                                            'route' => '/image[/][:action[/[:id]]]',
+                                            'constraints' => [
+                                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                                'id' => '\d+',
+                                            ],
+                                            'defaults' => [
+                                                'controller' => 'Product\Image',
+                                                'action' => 'list',
+                                                'force-ssl' => 'ssl'
+                                            ],
+                                        ],
+                                    ],
+                                    'option' => [
+                                        'type' => 'Segment',
+                                        'options' => [
+                                            'route' => '/option[/][:action[/[:id]]]',
+                                            'constraints' => [
+                                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                                'id' => '\d+',
+                                            ],
+                                            'defaults' => [
+                                                'controller' => 'Product\Option',
+                                                'action' => 'list',
+                                                'force-ssl' => 'ssl'
+                                            ],
+                                        ],
+                                    ],
                                     'page' => [
                                         'type' => 'Segment',
                                         'options' => [
@@ -462,48 +494,6 @@ return [
                                     'route' => '/group',
                                     'defaults' => [
                                         'controller' => 'Product\Group',
-                                        'action' => 'index',
-                                        'force-ssl' => 'ssl'
-                                    ]
-                                ],
-                                'may_terminate' => true,
-                                'child_routes' => [
-                                    'edit' => [
-                                        'type' => 'Segment',
-                                        'options' => [
-                                            'route' => '/[:action[/id/[:id]]]',
-                                            'constraints' => [
-                                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                                'id' => '\d+'
-                                            ],
-                                            'defaults' => [
-                                                'action' => 'edit',
-                                                'force-ssl' => 'ssl'
-                                            ]
-                                        ]
-                                    ],
-                                    'page' => [
-                                        'type' => 'Segment',
-                                        'options' => [
-                                            'route' => '/page/[:page]',
-                                            'constraints' => [
-                                                'page' => '\d+'
-                                            ],
-                                            'defaults' => [
-                                                'action' => 'list',
-                                                'page' => 1,
-                                                'force-ssl' => 'ssl'
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ],
-                            'image' => [
-                                'type' => 'Segment',
-                                'options' => [
-                                    'route' => '/image',
-                                    'defaults' => [
-                                        'controller' => 'Product\Image',
                                         'action' => 'index',
                                         'force-ssl' => 'ssl'
                                     ]
@@ -1042,26 +1032,6 @@ return [
                                         'label' => 'Add New Category',
                                         'action' => 'add',
                                         'route' => 'admin/shop/category/edit',
-                                        'resource' => 'menu:admin'
-                                    ]
-                                ]
-                            ],
-                            'images' => [
-                                'label' => 'Images',
-                                'action' => 'index',
-                                'route' => 'admin/shop/image',
-                                'resource' => 'menu:admin',
-                                'pages' => [
-                                    'list' => [
-                                        'label' => 'List All Images',
-                                        'action' => 'index',
-                                        'route' => 'admin/shop/image',
-                                        'resource' => 'menu:admin'
-                                    ],
-                                    'add' => [
-                                        'label' => 'Add New Image',
-                                        'action' => 'add',
-                                        'route' => 'admin/shop/image/edit',
                                         'resource' => 'menu:admin'
                                     ]
                                 ]

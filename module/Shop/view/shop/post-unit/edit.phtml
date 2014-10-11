@@ -2,11 +2,11 @@
 
 <?=$this->partial('uthando-admin/partial/add-edit-form', [
 	'form' 			=> $this->form,
-	'formAction' 	=> 'edit',
-	'primaryKey'	=> $this->model->getPostUnitId(),
 	'formName'		=> 'Post Unit',
-	'postRoute'		=> 'admin/shop/post/unit/edit',
-	'cancelRoute'	=> 'admin/shop/post/unit',
+    'postUrl'		=> $this->url('admin/shop/post/unit/edit', [
+        'id'        => $this->model->getPostUnitId(),
+    ]),
+    'cancelUrl'     => $this->url('admin/shop/post/unit'),
 	'formElements'	=> [
 		'postUnit', 'postUnitId',
 	],

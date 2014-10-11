@@ -80,12 +80,16 @@
 <div class="clearfix"></div>
 
 <script>
-    var provinces = $('#country-provinces .panel-table').ajaxWidgetPanel({
-        url :  '<?=$this->url('admin/shop/country/province', [
-            'action' => 'list'
-        ]);?>',
-        data : {countryId : '<?=$this->model->getCountryId();?>'}
-    });
+    var provinces = function() {
+
+        admin.ajaxWidgetPanel(
+            $('#country-provinces .panel-table'),
+            '<?=$this->url('admin/shop/country/province', [
+                'action' => 'list'
+            ]);?>',
+            {countryId : '<?=$this->model->getCountryId();?>'}
+        );
+    }
 
     $('#country-provinces').on('click', '.edit-button', function(event) {
         event.preventDefault();
@@ -99,7 +103,7 @@
 
         el.on('hide.bs.modal', function(e){
             $(this).find('.modal-body').html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Loading');
-            provinces;
+            provinces();
             el.off('show.bs.modal hide.bs.modal');
             $('#edit-province-save').off('click');
         });
@@ -127,12 +131,12 @@
             success: function (response) {
                 admin.addAlert(response.messages, response.status);
                 $(el).modal('hide');
-                setTimeout('provinces',500);
+                setTimeout('provinces()',500);
             },
             error: function (response) {
                 admin.addAlert(response.error, 'danger');
                 $(el).modal('hide');
-                setTimeout('provinces',500);
+                setTimeout('provinces()',500);
             }
         });
     });
@@ -146,7 +150,7 @@
 
     $('#add-province-model').on('hide.bs.modal', function(e){
         $(this).find('.modal-body').html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Loading');
-        provinces;
+        provinces();
     });
 
     $('#add-province-save').on('click', function() {
@@ -154,5 +158,7 @@
             'action'    => 'add',
         ]);?>');
     });
+
+    provinces();
 
 </script>

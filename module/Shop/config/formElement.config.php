@@ -15,7 +15,7 @@ return [
         'ShopPaymentCreditCard' => 'Shop\Form\Payment\CreditCard',
         'ShopPostCost'          => 'Shop\Form\Post\Cost',
         'ShopPostLevel'         => 'Shop\Form\Post\Level',
-        'ShopPostUnit'          => 'Shop\Form\Post\Level',
+        'ShopPostUnit'          => 'Shop\Form\Post\Unit',
         'ShopPostZone'          => 'Shop\Form\Post\Zone',
         'ShopProduct'           => 'Shop\Form\Product\Product',
         'ShopProductCategory'   => 'Shop\Form\Product\Category',

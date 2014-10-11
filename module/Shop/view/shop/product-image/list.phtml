@@ -1,16 +1,14 @@
-<?php $this->headTitle('Product Images') ?>
 
 <?php if (count($this->models) > 0): ?>
 <div class="panel panel-default">
     <table id="productImage-list" class="table table-hover table-bordered table-condensed sortable-table">
     	<thead>
     		<tr>
-    			<th data-field="productImageId">Product Image Id</th>
-    			<th data-field="name">Product</th>
-    			<th data-field="full">Image</th>
-    			<th data-field="isDefault">Default</th>
-    			<th data-field="dateCreated">Date Created</th>
-    			<th data-field="dateModified">Date Modified</th>
+    			<th>Id</th>
+    			<th>Image</th>
+    			<th>Default</th>
+    			<th>Date Created</th>
+    			<th>Date Modified</th>
     			<th>Actions</th>
     		</tr>
     	</thead>
@@ -20,7 +18,6 @@
     		<?php foreach($this->models as $row): ?>
     		<tr>
     			<td><?=$this->escapeHtml($row->getProductImageId()); ?></td>
-    			<td><?=$this->escapeHtml($row->getProduct()->getName()); ?></td>
     			<td><?=$this->escapeHtml($row->getFull()); ?></td>
     			<td><?=$this->escapeHtml($row->isDefaultImage()); ?></td>
     			<td><?=$this->escapeHtml($this->formatDate($row->getDateCreated())); ?></td>
@@ -30,7 +27,10 @@
                     	'pk'		=> 'productImageId',
                     	'id'		=> $row->getProductImageId(),
     		    		'tableName'	=> 'productImage',
-                    	'route'		=> 'admin/shop/image/edit',
+                    	'route'		=> 'admin/shop/product/image',
+                        'routeParams'   => [
+                            'action'    => 'edit'
+                        ],
     		    	]);?>
     			</td>
     		</tr>
@@ -39,13 +39,6 @@
     </table>
 </div>
 
-<?=$this->paginationControl(
-    $this->models,
-    'Elastic',
-    'application/partial/paginate',
-	['route' => 'admin/shop/image/page']
-); ?>
-
 <?php else: ?>
-<h4>No Images where returned by search.</h4>
+<h4>No Images have been uploaded yet.</h4>
 <?php endif; ?>

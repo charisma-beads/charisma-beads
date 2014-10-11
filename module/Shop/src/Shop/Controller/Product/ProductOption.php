@@ -1,17 +1,17 @@
 <?php
 namespace Shop\Controller\Product;
 
+use Shop\ShopException;
 use UthandoCommon\Controller\AbstractCrudController;
 use Zend\View\Model\ViewModel;
 
-class ProductImage extends AbstractCrudController
+class ProductOption extends AbstractCrudController
 {
-	protected $searchDefaultParams = array('sort' => 'productImageId');
-	protected $serviceName = 'Shop\Service\Product\Image';
-	protected $route = 'admin/shop/product/image';
+    protected $serviceName = 'Shop\Service\Product\Option';
+    protected $route = 'admin/shop/product/option';
     protected $paginate = false;
 
-    public function imageListAction()
+    public function optionListAction()
     {
         if (!$this->getRequest()->isXmlHttpRequest()) {
             throw new ShopException('Not Allowed');
@@ -19,10 +19,10 @@ class ProductImage extends AbstractCrudController
 
         $productId = $this->params()->fromPost('productId', 0);
 
-        /* @var $service \Shop\Service\Product\Image */
+        /* @var $service \Shop\Service\Product\Option */
         $service = $this->getService();
 
-        $options = $service->getImagesByProductId($productId);
+        $options = $service->getOptionsByProductId($productId);
 
         $viewModel = new ViewModel([
             'models' => $options,
@@ -30,9 +30,8 @@ class ProductImage extends AbstractCrudController
         ]);
 
         $viewModel->setTerminal(true);
-        $viewModel->setTemplate('shop/product-image/list');
+        $viewModel->setTemplate('shop/product-option/list');
 
         return $viewModel;
     }
-	
-}
+} 

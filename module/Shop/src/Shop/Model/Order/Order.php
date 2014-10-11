@@ -3,10 +3,7 @@ namespace Shop\Model\Order;
 
 use UthandoCommon\Model\Model;
 use UthandoCommon\Model\ModelInterface;
-use Shop\Model\Customer;
-use Shop\Model\Order\Line;
-use Shop\Model\Order\Metadata as OrderMetaData;
-use Shop\Model\Order\Status;
+use Shop\Model\Customer\Customer;
 use DateTime;
 
 class Order implements ModelInterface
@@ -52,9 +49,9 @@ class Order implements ModelInterface
      * @var DateTime
      */
     protected $orderDate;
-    
+
     /**
-     * @var \Shop\Model\Order\MetaData
+     * @var MetaData
      */
     protected $metadata;
     
@@ -69,38 +66,40 @@ class Order implements ModelInterface
     protected $orderStatus;
     
     /**
-     * @var array|object
+     * @var array
      */
     protected $orderLines = array();
-    
-	/**
-	 * @return number $orderId
-	 */
+
+    /**
+     * @return int
+     */
 	public function getOrderId()
 	{
 		return $this->orderId;
 	}
 
-	/**
-	 * @param number $orderId
-	 */
+    /**
+     * @param $orderId
+     * @return $this
+     */
 	public function setOrderId($orderId)
 	{
 		$this->orderId = $orderId;
 		return $this;
 	}
 
-	/**
-	 * @return number $customerId
-	 */
+    /**
+     * @return int
+     */
 	public function getCustomerId()
 	{
 		return $this->customerId;
 	}
 
-	/**
-	 * @param number $customerId
-	 */
+    /**
+     * @param $customerId
+     * @return $this
+     */
 	public function setCustomerId($customerId)
 	{
 		$this->customerId = $customerId;
@@ -115,17 +114,18 @@ class Order implements ModelInterface
 		return $this->orderStatusId;
 	}
 
-	/**
-	 * @param number $orderStatusId
-	 */
+    /**
+     * @param $orderStatusId
+     * @return $this
+     */
 	public function setOrderStatusId($orderStatusId)
 	{
 		$this->orderStatusId = $orderStatusId;
 		return $this;
 	}
 
-	/**
-     * @return the $orderNumber
+    /**
+     * @return int
      */
     public function getOrderNumber()
     {
@@ -140,51 +140,54 @@ class Order implements ModelInterface
         $this->orderNumber = $orderNumber;
     }
 
-	/**
-	 * @return number $total
-	 */
+    /**
+     * @return float
+     */
 	public function getTotal()
 	{
 		return $this->total;
 	}
 
-	/**
-	 * @param number $total
-	 */
+    /**
+     * @param $total
+     * @return $this
+     */
 	public function setTotal($total)
 	{
 		$this->total = $total;
 		return $this;
 	}
 
-	/**
-	 * @return number $shipping
-	 */
+    /**
+     * @return float
+     */
 	public function getShipping()
 	{
 		return $this->shipping;
 	}
 
-	/**
-	 * @param number $shipping
-	 */
+    /**
+     * @param $shipping
+     * @return $this
+     */
 	public function setShipping($shipping)
 	{
 		$this->shipping = $shipping;
 		return $this;
 	}
 
-	/**
-	 * @return number $taxTotal
-	 */
+    /**
+     * @return float
+     */
 	public function getTaxTotal()
 	{
 		return $this->taxTotal;
 	}
 
-	/**
-	 * @param number $taxTotal
-	 */
+    /**
+     * @param $taxTotal
+     * @return $this
+     */
 	public function setTaxTotal($taxTotal)
 	{
 		$this->taxTotal = $taxTotal;
@@ -199,35 +202,36 @@ class Order implements ModelInterface
 		return $this->orderDate;
 	}
 
-	/**
-	 * @param DateTime $orderDate
-	 */
+    /**
+     * @param DateTime $orderDate
+     * @return $this
+     */
 	public function setOrderDate(DateTime $orderDate = null)
 	{
 		$this->orderDate = $orderDate;
 		return $this;
 	}
 
-	/**
-	 * @return \Shop\Model\Order\MetaData
-	 */
+    /**
+     * @return MetaData
+     */
 	public function getMetadata()
     {
         return $this->metadata;
     }
 
     /**
-     * @param OrderMetaData $metadata
-     * @return \Shop\Model\Order
+     * @param Metadata $metadata
+     * @return $this
      */
-	public function setMetadata(OrderMetaData $metadata)
+	public function setMetadata(MetaData $metadata)
     {
         $this->metadata = $metadata;
         return $this;
     }
 
-	/**
-     * @return \Shop\Model\Customer
+    /**
+     * @return Customer
      */
 	public function getCustomer()
     {
@@ -235,8 +239,8 @@ class Order implements ModelInterface
     }
 
     /**
-     * @param Customer $customer
-     * @return \Shop\Model\Order
+     * @param $customer
+     * @return $this
      */
 	public function setCustomer($customer)
     {
@@ -244,15 +248,15 @@ class Order implements ModelInterface
         return $this;
     }
 
-	/**
-     * @return the $orderStatus
+    /**
+     * @return Status
      */
     public function getOrderStatus()
     {
         return $this->orderStatus;
     }
 
-	/**
+    /**
      * @param Status $orderStatus
      */
     public function setOrderStatus(Status $orderStatus)
@@ -260,8 +264,8 @@ class Order implements ModelInterface
         $this->orderStatus = $orderStatus;
     }
 
-	/**
-     * @return the $orderLines
+    /**
+     * @return array
      */
     public function getOrderLines()
     {
@@ -275,7 +279,7 @@ class Order implements ModelInterface
     {
         $this->orderLines = $orderLines;
     }
-    
+
     /**
      * @param Line $orderLine
      */

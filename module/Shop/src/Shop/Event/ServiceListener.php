@@ -34,6 +34,7 @@ class ServiceListener implements ListenerAggregateInterface
         $this->listeners[] = $events->attach([
             'Shop\Controller\Customer\CustomerAddress',
             'Shop\Controller\Country\CountryProvince',
+            'Shop\Controller\Product\ProductOption',
         ], ['add.action'], [$this, 'addAction']);
 
         $this->listeners[] = $events->attach([
@@ -53,6 +54,9 @@ class ServiceListener implements ListenerAggregateInterface
                 break;
             case 'Shop\Controller\Country\CountryProvince':
                 $form->get('countryId')->setValue($params);
+                break;
+            case 'Shop\Controller\Product\ProductOption':
+                $form->get('productId')->setValue($params);
                 break;
         }
     }

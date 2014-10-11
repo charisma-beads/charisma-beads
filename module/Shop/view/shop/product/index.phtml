@@ -14,14 +14,13 @@
 </div>
 
 
-<?php $this->inlineScript()->captureStart(); ?>
-$(document).ready(function(){
+<script>
+
 	$('#table-product').dataGrid({
 	    url : 'product/list',
 	    query: { sort : 'name' },
 	    searchForm : $('#search-product'),
-	    paging : 'links',
 	    columnSort: true
 	});
-});
-<?php $this->inlineScript()->captureEnd(); ?>
+
+</script>

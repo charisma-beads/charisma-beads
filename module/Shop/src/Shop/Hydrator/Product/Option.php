@@ -14,6 +14,7 @@ class Option extends AbstractHydrator
 		return array(
 			'productOptionId'	=> $object->getProductOptionId(),
 			'productId'			=> $object->getProductId(),
+            'postUnitId'        => $object->getPostUnitId(),
 			'option'			=> $object->getOption(),
 			'price'				=> $object->getPrice()
 		);

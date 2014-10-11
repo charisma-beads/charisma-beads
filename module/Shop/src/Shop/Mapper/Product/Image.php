@@ -8,6 +8,19 @@ class Image extends AbstractDbMapper
 {
 	protected $table = 'productImage';
 	protected $primary = 'productImageId';
+
+    /**
+     * @param $id
+     * @return \Zend\Db\ResultSet\HydratingResultSet
+     */
+    public function getImagesByProductId($id)
+    {
+        $id = (int) $id;
+
+        $select = $this->getSelect();
+        $select->where->equalTo('productId', $id);
+        return $this->fetchResult($select);
+    }
 	
 	public function getImagesByCategoryIds(array $ids)
 	{

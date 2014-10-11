@@ -21,7 +21,7 @@ class Unit extends Form
                 'step'			=> '0.01'
             ],
             'options'		=> [
-                'label'			=> 'Cost:',
+                'label'			=> 'Unit:',
                 'required'		=> true,
                 'help-inline'	=> 'This should be weight in grams.',
             ],
