@@ -1,6 +1,7 @@
 <?php
 namespace Shop\Model\Product;
 
+use Shop\Model\Post\Unit;
 use UthandoCommon\Model\Model;
 use UthandoCommon\Model\ModelInterface;
 
@@ -32,6 +33,11 @@ class Option implements ModelInterface
 	 * @var float
 	 */
 	protected $price;
+
+    /**
+     * @var \Shop\Model\Post\Unit
+     */
+    protected $postUnit;
 
     /**
      * @return int
@@ -120,4 +126,22 @@ class Option implements ModelInterface
 		$this->price = $price;
 		return $this;
 	}
+
+    /**
+     * @return \Shop\Model\Post\Unit
+     */
+    public function getPostUnit()
+    {
+        return $this->postUnit;
+    }
+
+    /**
+     * @param Unit $postUnit
+     * @return $this
+     */
+    public function setPostUnit(Unit $postUnit)
+    {
+        $this->postUnit = $postUnit;
+        return $this;
+    }
 }

@@ -1,7 +1,7 @@
 <?php
 namespace Shop\View;
 
-use Zend\Form\View\Helper\AbstractHelper;
+use Zend\View\Helper\AbstractHelper;
 
 class Breadcrumb extends AbstractHelper
 {

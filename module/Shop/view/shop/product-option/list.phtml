@@ -7,6 +7,7 @@
                 <th>Id</th>
                 <th>Option</th>
                 <th>Price</th>
+                <th>Weight (gms)</th>
                 <th>Actions</th>
             </tr>
             </thead>
@@ -18,6 +19,7 @@
                     <td><?=$this->escapeHtml($row->getProductOptionId()); ?></td>
                     <td><?=$this->escapeHtml($row->getOption()); ?></td>
                     <td><?=$this->escapeHtml($this->priceFormat($row->getPrice(false))); ?></td>
+                    <td><?=$this->escapeHtml($row->getPostUnit()->getPostUnit());?></td>
                     <td>
                         <?=$this->partial('uthando-admin/partial/edit-actions', [
                             'pk'		=> 'productOptionId',

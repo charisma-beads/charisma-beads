@@ -137,12 +137,12 @@ class Product implements ModelInterface
     /**
      * @var array
      */
-    protected $productOption;
+    protected $productOption = [];
 
     /**
      * @var array
      */
-    protected $productImage;
+    protected $productImage = [];
 	
 	/**
 	 * @return number $productId
@@ -597,17 +597,33 @@ class Product implements ModelInterface
     public function setProductOption($productOption)
     {
         if ($productOption instanceof Option) {
-            $productOption = [$productOption];
+            $productOption[] = [$productOption];
         }
+
         $this->productOption = $productOption;
     }
 
     /**
-     * @return array
+     * @param int|null $id
+     * @return array|null|Option
      */
-    public function getProductOption()
+    public function getProductOption($id = null)
     {
-        return $this->productOption;
+        $productOptionOrOptions = null;
+
+        if (is_int($id)) {
+            /* @var $option Option */
+            foreach ($this->productOption as $option) {
+                if ($id === $option->getProductOptionId()) {
+                    $productOptionOrOptions = $option;
+                    break;
+                }
+            }
+        } else {
+            $productOptionOrOptions = $this->productOption;
+        }
+
+        return $productOptionOrOptions;
     }
 
     /**

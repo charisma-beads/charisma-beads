@@ -7,10 +7,9 @@
 
 <?php if (count($this->products) > 0):?>
 <div class="row">
-<?php /* @var $row \Shop\Model\Product */ ?>
+<?php /* @var $row \Shop\Model\Product\Product */ ?>
 <?php foreach ($this->products as $row): ?>
-    <?php \FB::info($row, __FILE__);?>
-    <div class="col-md-4">
+    <div class="col-xs-4">
     	<div class="thumbnail text-center product-item-box">
     		<img src="<?=$this->basePath('/userfiles/shop/images/'.$row->getProductImage()[0]->getThumbnail());
             ?>" data-src="holder.js/200x100" alt="<?=$this->escapehtml($row->getName()); ?>">

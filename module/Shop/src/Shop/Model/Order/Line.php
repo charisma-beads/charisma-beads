@@ -35,107 +35,112 @@ class Line implements ModelInterface
     protected $tax = 0.00;
     
     /**
-     * @var \Shop\Model\Product\MetaData
+     * @var ProductMetaData
      */
     protected $metadata;
-    
-	/**
-	 * @return number $orderLineId
-	 */
+
+    /**
+     * @return int
+     */
 	public function getOrderLineId()
 	{
 		return $this->orderLineId;
 	}
 
-	/**
-	 * @param number $orderLineId
-	 */
+    /**
+     * @param $orderLineId
+     * @return $this
+     */
 	public function setOrderLineId($orderLineId)
 	{
 		$this->orderLineId = $orderLineId;
 		return $this;
 	}
 
-	/**
-	 * @return number $orderId
-	 */
+    /**
+     * @return int
+     */
 	public function getOrderId()
 	{
 		return $this->orderId;
 	}
 
-	/**
-	 * @param number $orderId
-	 */
+    /**
+     * @param $orderId
+     * @return $this
+     */
 	public function setOrderId($orderId)
 	{
 		$this->orderId = $orderId;
 		return $this;
 	}
 
-	/**
-	 * @return number $qty
-	 */
+    /**
+     * @return int
+     */
 	public function getQty()
 	{
 		return $this->qty;
 	}
 
-	/**
-	 * @param number $qty
-	 */
+    /**
+     * @param $qty
+     * @return $this
+     */
 	public function setQty($qty)
 	{
 		$this->qty = $qty;
 		return $this;
 	}
 
-	/**
-	 * @return number $price
-	 */
+    /**
+     * @return float
+     */
 	public function getPrice()
 	{
 		return $this->price;
 	}
 
-	/**
-	 * @param number $price
-	 */
+    /**
+     * @param $price
+     * @return $this
+     */
 	public function setPrice($price)
 	{
 		$this->price = $price;
 		return $this;
 	}
 
-	/**
-	 * @return number $tax
-	 */
+    /**
+     * @return float
+     */
 	public function getTax()
 	{
 		return $this->tax;
 	}
 
-	/**
-	 * @param number $tax
-	 */
+    /**
+     * @param $tax
+     * @return $this
+     */
 	public function setTax($tax)
 	{
 		$this->tax = $tax;
 		return $this;
 	}
-	
-	/**
-	 * @return \Shop\Model\Product\MetaData
-	 */
+
+    /**
+     * @return ProductMetaData
+     */
 	public function getMetadata()
 	{
 	    return $this->metadata;
 	}
-	
-	/**
-	 * @param ProductMetaData $metadata
-	 * @return \Shop\Model\Order\Line
-	 */
+
+    /**
+     * @param ProductMetaData $metadata
+     * @return $this
+     */
 	public function setMetadata(ProductMetaData $metadata)
 	{
 	    $this->metadata = $metadata;

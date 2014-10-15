@@ -1,8 +1,8 @@
 <?php
 namespace Shop\View;
 
-use Zend\Form\View\Helper\AbstractHelper;
 use Shop\Model\Product\Product;
+use Zend\View\Helper\AbstractHelper;
 
 class ProductPrice extends AbstractHelper
 {
@@ -11,7 +11,13 @@ class ProductPrice extends AbstractHelper
     public function __invoke(Product $product)
     {
         $currency = $this->getPriceFormatHelper();
-        $formatted = $currency($product->getPrice());
+        $formatted = '';
+
+        if ($product->getProductOption()) {
+            $formatted .= 'From ';
+        }
+
+        $formatted .= $currency($product->getPrice());
         
         if ($product->isDiscounted()) {
         	$formatted .= ' was <del>' . $currency($product->getPrice(false)) . '</del>';

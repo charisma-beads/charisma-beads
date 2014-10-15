@@ -26,9 +26,10 @@ class Size implements ModelInterface
 		return $this->productSizeId;
 	}
 
-	/**
-	 * @param number $productSizeId
-	 */
+    /**
+     * @param $productSizeId
+     * @return $this
+     */
 	public function setProductSizeId($productSizeId)
 	{
 		$this->productSizeId = $productSizeId;
@@ -43,9 +44,10 @@ class Size implements ModelInterface
 		return $this->size;
 	}
 
-	/**
-	 * @param string $size
-	 */
+    /**
+     * @param $size
+     * @return $this
+     */
 	public function setSize($size)
 	{
 		$this->size = $size;

@@ -15,7 +15,7 @@ class PaypalAggregate extends AggregateHydrator
         'transaction'
     ];
     
-    public function __contruct()
+    public function __construct()
     {
         foreach ($this->hydrators as $hydrator) {
             $this->add(new PaypalHydrator($hydrator));

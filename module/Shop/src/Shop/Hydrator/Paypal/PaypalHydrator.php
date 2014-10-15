@@ -24,7 +24,7 @@ class PaypalHydrator extends AbstractHydrator
     public function hydrate(array $data, $object)
     {
         $model = $this->getModelName();
-        \FB::info($model, __METHOD__);
+
     	if (!$object instanceof $model) {
     		return $object;
     	}

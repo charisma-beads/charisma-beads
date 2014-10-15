@@ -87,6 +87,10 @@ class Paypal implements ServiceLocatorAwareInterface
      * @param OrderModel $order
      * @return multitype:OrderModel unknown
      */
+    /**
+     * @param OrderModel $order
+     * @return array
+     */
     public function createPayment(OrderModel $order)
     {   
         $options = $this->getOpions();

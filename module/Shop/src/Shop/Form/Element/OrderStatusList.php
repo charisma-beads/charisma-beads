@@ -23,9 +23,6 @@ class OrderStatusList extends Select implements ServiceLocatorAwareInterface
     		$statusOptions[$status->getOrderStatusId()] = $status->getOrderStatus();
     	}
 
-
-        
         $this->setValueOptions($statusOptions);
     }
-
 }

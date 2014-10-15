@@ -1,4 +1,5 @@
 <?php
+
 namespace Shop\Model\Product;
 
 class MetaData
@@ -49,14 +50,9 @@ class MetaData
     protected $addPostage;
     
     /**
-     * @var string
+     * @var Option
      */
-    protected $optionName;
-    
-    /**
-     * @var array
-     */
-    protected $options = [];
+    protected $option;
     
 	/**
      * @return int
@@ -221,38 +217,20 @@ class MetaData
     }
 
     /**
-     * @return string
+     * @return Option
      */
-    public function getOptionName()
+    public function getOption()
     {
-        return $this->optionName;
+        return $this->option;
     }
 
     /**
-     * @param $optionName
+     * @param Option $option
      * @return $this
      */
-    public function setOptionName($optionName)
+    public function setOption(Option $option)
     {
-        $this->optionName = $optionName;
-        return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function getOptions()
-    {
-        return $this->options;
-    }
-
-    /**
-     * @param array $options
-     * @return $this
-     */
-    public function setOptions(array $options)
-    {
-        $this->options = $options;
+        $this->option = $option;
         return $this;
     }
 }

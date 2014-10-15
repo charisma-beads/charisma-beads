@@ -20,8 +20,6 @@ class ItemList extends AbstractHydrator
     	
         $itemList = $data['transactions'][0]['itemList'];
         
-        \FB::info($itemList);
-        
         $items = [];
         
         foreach ($itemList['items'] as $item) {

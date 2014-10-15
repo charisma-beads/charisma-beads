@@ -15,12 +15,19 @@ class Add extends Form
 				'required' => true,
 			],
 			'attributes' => [
-				'class' => 'input-mini',
 				'min'  => '0',
 				'step' => '1',
 				'value' => 1,		
 			],
 		]);
+
+        $this->add([
+           'name' => 'options',
+           'type' => 'select',
+            'options' => [
+                'label' => 'Product Options',
+            ]
+        ]);
 		
 		$this->add([
 			'name' => 'buy-item',
