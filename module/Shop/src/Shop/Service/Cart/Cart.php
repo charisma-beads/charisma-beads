@@ -87,6 +87,9 @@ class Cart extends AbstractMapperService implements InitializableInterface
      */
     protected $taxTotal = 0;
 
+    /**
+     * @throws \UthandoCommon\Model\CollectionException
+     */
     public function init()
     {
         if ($this->isInitialized) {

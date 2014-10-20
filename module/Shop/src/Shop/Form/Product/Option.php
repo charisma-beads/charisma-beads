@@ -53,5 +53,20 @@ class Option extends Form
                 'required'		=> true,
             ],
         ]);
+
+        $this->add([
+            'name'			=> 'discountPercent',
+            'type'			=> 'number',
+            'attributes'	=> [
+                'autofocus'	=> true,
+                'min'		=> '0.00',
+                'max'		=> '100.00',
+                'step'		=> '0.01',
+                'value'     => '0',
+            ],
+            'options'		=> [
+                'label'			=> 'Product Discount:',
+            ]
+        ]);
     }
 } 

@@ -15,7 +15,7 @@
             ?>" data-src="holder.js/200x100" alt="<?=$this->escapehtml($row->getName()); ?>">
     		<h5><?=$this->escapehtml($row->getName());?> <?=$this->escapehtml($row->getProductSize()->getSize()); ?></h5>
     		<p><?=$this->escapehtml($row->getShortDescription()); ?></p>
-    		<p><b><?=$this->productPrice($row); ?></b> for <?=$this->escapehtml(number_format($row->getPostUnit()->getPostUnit())); ?>g</p>
+    		<?=$this->productPrice($row); ?>
     		<?php $form = $this->cart()->addForm($row); ?>
 		    <?=$this->form()->openTag($form); ?>
 			    <div class="input-group">

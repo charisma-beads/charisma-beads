@@ -165,6 +165,7 @@ $this->form->get('email')->setAttribute('readonly', '');
 
             el.off('show.bs.modal hide.bs.modal');
             $('#edit-address-save').off('click');
+            addresses();
         });
 
         $('#edit-address-save').on('click', function() {
@@ -190,15 +191,13 @@ $this->form->get('email')->setAttribute('readonly', '');
             type: 'POST',
             success: function (response) {
                 admin.addAlert(response.messages, response.status);
-                $(el).modal('hide');
-                setTimeout('addresses()',500);
             },
             error: function (response) {
                 admin.addAlert(response.error, 'danger');
-                $(el).modal('hide');
-                setTimeout('addresses()',500);
             },
             complete: function() {
+                $(el).modal('hide');
+                addresses();
                 updateAddressLists();
             }
         });

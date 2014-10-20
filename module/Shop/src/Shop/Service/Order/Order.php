@@ -184,7 +184,7 @@ class Order extends AbstractRelationalMapperService
         if ($order) {
             $this->populate($order, true);
         }
-        \FB::info($order);
+
         return $order;
     }
 

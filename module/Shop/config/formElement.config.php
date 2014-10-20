@@ -36,6 +36,7 @@ return [
         'PostZoneList'          => 'Shop\Form\Element\PostZoneList',
         'ProductCategoryList'   => 'Shop\Form\Element\ProductCategoryList',
         'ProductGroupList'      => 'Shop\Form\Element\ProductGroupList',
+        'ProductOptionList'     => 'Shop\Form\Element\ProductOptionsList',
         'ProductSizeList'       => 'Shop\Form\Element\ProductSizeList',
         'TaxCodeList'           => 'Shop\Form\Element\TaxCodeList',
         'TaxRateList'           => 'Shop\Form\Element\TaxRateList',

@@ -9,6 +9,6 @@ class ProductOptions extends AbstractViewHelper
 {
     public function __invoke(Product $product)
     {
-        
+
     }
 } 

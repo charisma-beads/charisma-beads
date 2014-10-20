@@ -18,7 +18,7 @@ class Product extends AbstractHydrator
 		
 		$this->addStrategy('productGroupId', new NullStrategy());
 		$this->addStrategy('taxable', $trueFalse);
-		$this->addStrategy('percent', new Percent());
+		$this->addStrategy('discountPercent', new Percent());
 		$this->addStrategy('addPostage', $trueFalse);
 		$this->addStrategy('enabled', $trueFalse);
 		$this->addStrategy('discontinued', $trueFalse);

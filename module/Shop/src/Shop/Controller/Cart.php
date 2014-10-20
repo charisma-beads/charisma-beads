@@ -106,7 +106,7 @@ class Cart extends AbstractActionController
 
     /**
      *
-     * @return \Shop\Model\Cart
+     * @return \Shop\Model\Cart\Cart
      */
     protected function getCart()
     {

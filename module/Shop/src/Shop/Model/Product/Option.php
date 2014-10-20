@@ -35,6 +35,11 @@ class Option implements ModelInterface
 	protected $price;
 
     /**
+     * @var int
+     */
+    protected $discountPercent;
+
+    /**
      * @var \Shop\Model\Post\Unit
      */
     protected $postUnit;
@@ -110,22 +115,58 @@ class Option implements ModelInterface
 	}
 
     /**
+     * @param bool $withDiscount
      * @return float
      */
-    public function getPrice()
-	{
-		return $this->price;
-	}
+    public function getPrice($withDiscount = true)
+    {
+        $price = $this->price;
+
+        if (true === $this->isDiscounted() && true === $withDiscount) {
+            $discount = $this->getDiscountPercent();
+            $discounted = ($price * $discount) / 100;
+            $price = round($price - $discounted, 2);
+        }
+
+        return $price;
+    }
 
     /**
      * @param $price
      * @return $this
      */
     public function setPrice($price)
-	{
-		$this->price = $price;
-		return $this;
-	}
+    {
+        $this->price = $price;
+        return $this;
+    }
+
+    /**
+     * @param bool $formatPercent
+     * @return float|int
+     */
+    public function getDiscountPercent($formatPercent=false)
+    {
+        return (true === $formatPercent) ? $this->discountPercent / 100 : $this->discountPercent;
+    }
+
+    /**
+     * @param $discountPercent
+     * @return $this
+     */
+    public function setDiscountPercent($discountPercent)
+    {
+        $this->discountPercent = $discountPercent;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isDiscounted()
+    {
+        return (0 == $this->getDiscountPercent()) ? false : true;
+    }
 
     /**
      * @return \Shop\Model\Post\Unit

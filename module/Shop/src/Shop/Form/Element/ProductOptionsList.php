@@ -4,13 +4,24 @@ namespace Shop\Form\Element;
 
 use Shop\Model\Product\Product;
 use Zend\Form\Element\Select;
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorAwareTrait;
 
-class ProductOptions extends Select
+class ProductOptionsList extends Select implements ServiceLocatorAwareInterface
 {
+    use ServiceLocatorAwareTrait;
+
     /**
      * @var Product
      */
     protected $product;
+
+    /**
+     * @var array
+     */
+    protected $attributes = [
+        'class' => 'form-control',
+    ];
 
     /**
      * @param array|\Traversable $options
@@ -38,12 +49,17 @@ class ProductOptions extends Select
      */
     public function getProductOptions()
     {
+        $viewHelperManager = $this->getServiceLocator()->getServiceLocator()->get('ViewHelperManager');
+        $priceFormat = $viewHelperManager->get('PriceFormat');
+
+        $product = $this->getProduct();
+
         $selectOptions = [];
 
         /* @var $option \Shop\Model\Product\Option */
-        foreach($this->getProduct()->getProductOption() as $option) {
+        foreach($product->getProductOption() as $option) {
             $selectOptions[] = [
-                'label' => $option->getOption() . ' - ' . $option->getPrice(),
+                'label' => $option->getOption() . ' - ' . $priceFormat($option->getPrice()),
                 'value' => $option->getProductId() . '-' . $option->getProductOptionId(),
             ];
         }
