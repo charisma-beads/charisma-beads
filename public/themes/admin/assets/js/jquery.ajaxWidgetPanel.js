@@ -13,15 +13,12 @@
     AjaxWidgetPanel.prototype = {
         init : function()
         {
-            this.el.load(this.options.url, this.options.data, this.complete);
-        },
-
-        complete : function(responseText, textStatus)
-        {
-            if (textStatus == "error") {
-                this.el.css('padding', '10px');
-                this.el.html(responseText);
-            }
+            this.el.load(this.options.url, this.options.data, function(responseText, textStatus) {
+                if (textStatus == "error") {
+                    this.el.css('padding', '10px');
+                    this.el.html(responseText);
+                }
+            });
         }
     };
 
