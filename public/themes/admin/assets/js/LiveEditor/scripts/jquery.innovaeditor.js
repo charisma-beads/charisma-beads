@@ -1,6 +1,6 @@
 /***********************************************************
 JQuery Wrapper for InnovaStudio Live Editor
-© 2012, InnovaStudio (www.innovastudio.com). All rights reserved.
+ï¿½ 2012, InnovaStudio (www.innovastudio.com). All rights reserved.
 
 Files to include:
 
@@ -112,7 +112,6 @@ var _editorobj9 = new InnovaEditor("_editorobj9");
             _editorobj.mode = plugin.settings.mode;
             _editorobj.enableTableAutoformat = plugin.settings.enableTableAutoformat;
 
-            /*
             var arrSnippetItems = [["FormattedText", "modalDialog('" + _editorobj.dialogPath + "bootstrap_text.htm',800,458,'Insert Formatted Text');", "Formatted Text"],
                 ["Icons", "modalDialog('" + _editorobj.dialogPath + "bootstrap_icons.htm',800,458,'Insert Icons');", "Icons"],
                 ["LabelsBadges", "modalDialog('" + _editorobj.dialogPath + "bootstrap_labels.htm',500,223,'Insert Labels & Badges');", "Labels & Badges"],
@@ -130,7 +129,7 @@ var _editorobj9 = new InnovaEditor("_editorobj9");
                         _editorobj.arrCustomButtons.push(["Snippets", "", "Snippets", "btnSnippets.gif", 37, arrSnippetItems]);
                     }
                 }
-            }*/
+            }
 
         }
         plugin.getActiveEditorId = function () {

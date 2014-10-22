@@ -1,53 +1,54 @@
 {
-  "name" : "charisma-beads/charisma-beads",
-  "description" : "Base App for Uthando CMS",
-  "version" : "2.0",
-  "require" : {
-    "php" : ">=5.4",
-    "zendframework/zend-modulemanager" : "2.*",
-    "zendframework/zend-mvc" : "2.*",
-    "zendframework/zend-view" : "2.*",
-    "zendframework/zend-config" : "2.*",
-    "zendframework/zend-form" : "2.*",
-    "zendframework/zend-serializer" : "2.*",
-    "zendframework/zend-log" : "2.*",
-    "zendframework/zend-console" : "2.*",
-    "zendframework/zend-http" : "2.*",
-    "zendframework/zend-i18n" : "2.*",
-    "zendframework/zend-navigation" : "2.*",
-    "uthando-cms/uthando-article" : "1.*",
-    "uthando-cms/uthando-contact" : "1.*",
-    "uthando-cms/uthando-mail" : "1.*",
-    "uthando-cms/uthando-navigation" : "1.*",
-    "uthando-cms/uthando-session-manager" : "1.*",
-    "uthando-cms/uthando-theme-manager" : "1.*",
-    "uthando-cms/uthando-user" : "1.*",
-    "dino/dompdf-module" : "dev-master",
-    "paypal/rest-api-sdk-php" : "0.7.*"
-  },
-  "require-dev" : {
-    "firephp/firephp-core" : "0.4.0",
-    "zendframework/zend-developer-tools" : "dev-master",
-    "bjyoungblood/bjy-profiler" : "dev-master",
-    "zendframework/zendframework" : "2.*",
-    "zendframework/zendoauth" : "dev-master",
-    "zendframework/zendservice-twitter" : "2.*"
-  },
-  "authors" : [ {
-    "name" : "Shaun Freeman",
-    "email" : "shaun@shaunfreeman.co.uk",
-    "homepage" : "https://github.com/shaunfreeman",
-    "role" : "Developer"
-  } ],
-  "keywords" : [ "framework", "zf2", "cms", "uthando" ],
-  "suggest" : {
-    "uthando-cms/uthando-common" : "For abstract classes.",
-    "uthando-cms/uthando-user" : "User management",
-    "uthando-cms/uthando-navigation" : "Navigation management.",
-    "uthando-cms/uthando-theme-manager" : "Simple theme changer.",
-    "uthando-cms/uthando-admin" : "Admin operation.s",
-    "uthando-cms/uthando-session-manager" : "Session management."
-  },
-  "license" : "BSD-3-Clause",
-  "homepage" : "http://shaunfreeman.name/"
+    "name" : "charisma-beads/charisma-beads",
+    "description" : "Base App for Uthando CMS",
+    "version" : "2.0",
+    "require" : {
+        "php" : ">=5.4",
+        "zendframework/zend-modulemanager" : "2.*",
+        "zendframework/zend-mvc" : "2.*",
+        "zendframework/zend-view" : "2.*",
+        "zendframework/zend-config" : "2.*",
+        "zendframework/zend-form" : "2.*",
+        "zendframework/zend-serializer" : "2.*",
+        "zendframework/zend-log" : "2.*",
+        "zendframework/zend-console" : "2.*",
+        "zendframework/zend-http" : "2.*",
+        "zendframework/zend-i18n" : "2.*",
+        "zendframework/zend-navigation" : "2.*",
+        "uthando-cms/uthando-article" : "1.*",
+        "uthando-cms/uthando-contact" : "1.*",
+        "uthando-cms/uthando-mail" : "1.*",
+        "uthando-cms/uthando-navigation" : "1.*",
+        "uthando-cms/uthando-session-manager" : "1.*",
+        "uthando-cms/uthando-theme-manager" : "1.*",
+        "uthando-cms/uthando-file-manager" : "1.*",
+        "uthando-cms/uthando-user" : "1.*",
+        "dino/dompdf-module" : "dev-master",
+        "paypal/rest-api-sdk-php" : "*"
+    },
+    "require-dev" : {
+        "firephp/firephp-core" : "0.4.0",
+        "zendframework/zend-developer-tools" : "dev-master",
+        "bjyoungblood/bjy-profiler" : "dev-master",
+        "zendframework/zendframework" : "2.*",
+        "zendframework/zendoauth" : "dev-master",
+        "zendframework/zendservice-twitter" : "2.*"
+    },
+    "authors" : [ {
+        "name" : "Shaun Freeman",
+        "email" : "shaun@shaunfreeman.co.uk",
+        "homepage" : "https://github.com/shaunfreeman",
+        "role" : "Developer"
+    } ],
+    "keywords" : [ "framework", "zf2", "cms", "uthando" ],
+    "suggest" : {
+        "uthando-cms/uthando-common" : "For abstract classes.",
+        "uthando-cms/uthando-user" : "User management",
+        "uthando-cms/uthando-navigation" : "Navigation management.",
+        "uthando-cms/uthando-theme-manager" : "Simple theme changer.",
+        "uthando-cms/uthando-admin" : "Admin operation.s",
+        "uthando-cms/uthando-session-manager" : "Session management."
+    },
+    "license" : "BSD-3-Clause",
+    "homepage" : "http://shaunfreeman.name/"
 }
