@@ -35,7 +35,9 @@
 
 <script>
     $('#current-orders .panel-widget').ajaxWidgetPanel({
-        url : '/admin/shop/order/current-orders'
+        url : '<?=$this->url('admin/shop/order/edit', [
+            'action' => 'current-orders',
+        ]);?>'
     });
 
     $('#new-customers .panel-widget').ajaxWidgetPanel({
@@ -48,7 +50,9 @@
         var orderNumber = $(this).parent().prev().text();
         var orderStatusId = this.value;
         $.ajax({
-            url : '/admin/shop/order/update-status',
+            url : '<?=$this->url('admin/shop/order/edit', [
+                'action' => 'update-status',
+            ]);?>',
             data : {
                 'orderStatusId' : orderStatusId,
                 'orderNumber' : orderNumber
