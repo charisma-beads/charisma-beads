@@ -12,6 +12,7 @@ return [
         'UthandoUser',
         'UthandoContact',
         'UthandoMail',
+        'UthandoFileManager',
         'Shop',
         'DOMPDFModule'
     ],

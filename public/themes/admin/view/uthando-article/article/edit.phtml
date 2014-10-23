@@ -27,7 +27,7 @@
                 ["group4", "", ["LinkDialog", "ImageDialog", "TableDialog", "Emoticons", "Snippets"]],
                 ["group5", "", ["Undo", "Redo", "FullScreen", "SourceDialog"]]
             ] /* Toolbar configuration */ ,
-            fileBrowser: '/admin/asset-manager'
+            fileBrowser: '<?=$this->basePath('/admin/asset-manager')?>'
         });
         $('#article-content-textarea').data('liveEdit').startedit(); /* Run the Editor */
     });
