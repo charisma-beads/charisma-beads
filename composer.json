@@ -22,6 +22,7 @@
         "uthando-cms/uthando-session-manager" : "1.*",
         "uthando-cms/uthando-theme-manager" : "1.*",
         "uthando-cms/uthando-file-manager" : "1.*",
+        "uthando-cms/uthando-testimonial" : "1.*",
         "uthando-cms/uthando-user" : "1.*",
         "dino/dompdf-module" : "dev-master",
         "paypal/rest-api-sdk-php" : "*"

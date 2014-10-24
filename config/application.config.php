@@ -13,6 +13,7 @@ return [
         'UthandoContact',
         'UthandoMail',
         'UthandoFileManager',
+        'UthandoTestimonial',
         'Shop',
         'DOMPDFModule'
     ],
