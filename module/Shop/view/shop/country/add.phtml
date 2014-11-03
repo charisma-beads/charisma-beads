@@ -4,8 +4,10 @@
 	'form' 			=> $this->form,
 	'formAction' 	=> 'add',
 	'formName'		=> 'Country',
-	'postRoute'		=> 'admin/shop/country/edit',
-	'cancelRoute'	=> 'admin/shop/country',
+    'postUrl'		=> $this->url('admin/shop/country/edit', [
+        'action' => 'add',
+    ]),
+    'cancelUrl'     => $this->url('admin/shop/country'),
 	'formElements'	=> [
 		'country', 'code', 'postZoneId',
 	],

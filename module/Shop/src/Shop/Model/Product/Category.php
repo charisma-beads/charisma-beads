@@ -9,17 +9,15 @@ use UthandoCommon\Model\NestedSet;
 
 class Category extends NestedSet implements ModelInterface
 {
-    use Model, DateModifiedTrait, DateCreatedTrait;
+    use Model,
+        ProductImageTrait,
+        DateModifiedTrait,
+        DateCreatedTrait;
     
 	/**
 	 * @var int
 	 */
 	protected $productCategoryId;
-	
-	/**
-	 * @var int
-	 */
-	protected $productImageId;
 	
 	/**
 	 * @var string

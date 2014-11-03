@@ -4,7 +4,6 @@
     <?=$this->partial('uthando-admin/partial/add-edit-form', [
         'form' 			=> $this->form,
         'formAction' 	=> 'edit',
-        'primaryKey'	=> $this->model->getCountryId(),
         'formName'		=> 'Country',
         'postUrl'		=> $this->url('admin/shop/country/edit', [
             'id'        => $this->model->getCountryId(),

@@ -10,9 +10,11 @@ use UthandoCommon\Model\ModelInterface;
 
 class Product implements ModelInterface
 {
-    use Model;
-    use DateCreatedTrait;
-    use DateModifiedTrait;
+    use Model,
+        ProductImageTrait,
+        ProductOptionTrait,
+        DateCreatedTrait,
+        DateModifiedTrait;
     
 	/**
 	 * @var int
@@ -133,16 +135,6 @@ class Product implements ModelInterface
 	 * @var Group
 	 */
 	protected $productGroup;
-
-    /**
-     * @var array
-     */
-    protected $productOption = [];
-
-    /**
-     * @var array
-     */
-    protected $productImage = [];
 	
 	/**
 	 * @return number $productId
@@ -588,64 +580,6 @@ class Product implements ModelInterface
     public function setProductGroup(Group $productGroup)
     {
         $this->productGroup = $productGroup;
-        return $this;
-    }
-
-    /**
-     * @param Option $productOption
-     */
-    public function setProductOption($productOption)
-    {
-        if ($productOption instanceof Option) {
-            $productOption[] = [$productOption];
-        }
-
-        $this->productOption = $productOption;
-    }
-
-    /**
-     * @param int|null $id
-     * @return array|null|Option
-     */
-    public function getProductOption($id = null)
-    {
-        $productOptionOrOptions = null;
-
-        if (is_int($id)) {
-            /* @var $option Option */
-            foreach ($this->productOption as $option) {
-                if ($id === $option->getProductOptionId()) {
-                    $productOptionOrOptions = $option;
-                    break;
-                }
-            }
-        } else {
-            $productOptionOrOptions = $this->productOption;
-        }
-
-        return $productOptionOrOptions;
-    }
-
-    /**
-     * @return array
-     */
-    public function getProductImage()
-    {
-        return $this->productImage;
-    }
-
-    /**
-     * @param $images
-     * @return $this
-     */
-    public function setProductImage($images)
-    {
-        if ($images instanceof Image) {
-            $images = [$images];
-        }
-
-        $this->productImage = $images;
-
         return $this;
     }
 }

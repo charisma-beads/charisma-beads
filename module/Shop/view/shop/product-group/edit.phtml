@@ -2,11 +2,11 @@
 
 <?=$this->partial('uthando-admin/partial/add-edit-form', [
 	'form' 			=> $this->form,
-	'formAction' 	=> 'edit',
-    'primaryKey'	=> $this->model->getProductGroupId(),
 	'formName'		=> 'Group Price',
-	'postRoute'		=> 'admin/shop/group/edit',
-	'cancelRoute'	=> 'admin/shop/group',
+    'postUrl'		=> $this->url('admin/shop/group/edit', [
+        'id' => $this->model->getProductGroupId(),
+    ]),
+    'cancelUrl'     => $this->url('admin/shop/group'),
 	'formElements'	=> [
 		'productGroupId', 'group', 'price',
 	],

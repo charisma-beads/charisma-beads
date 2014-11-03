@@ -2,11 +2,11 @@
 
 <?=$this->partial('uthando-admin/partial/add-edit-form', [
 	'form' 			=> $this->form,
-	'formAction' 	=> 'edit',
-	'primaryKey'	=> $this->model->getPostZoneId(),
 	'formName'		=> 'Post Zone',
-	'postRoute'		=> 'admin/shop/post/zone/edit',
-	'cancelRoute'	=> 'admin/shop/post/zone',
+    'postUrl'		=> $this->url('admin/shop/post/zone/edit', [
+        'id' => $this->model->getPostZoneId(),
+    ]),
+    'cancelUrl'     => $this->url('admin/shop/post/zone'),
 	'formElements'	=> [
 		'zone', 'taxCodeId', 'postZoneId',
 	],

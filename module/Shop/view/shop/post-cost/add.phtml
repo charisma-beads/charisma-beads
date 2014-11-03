@@ -2,10 +2,11 @@
 
 <?=$this->partial('uthando-admin/partial/add-edit-form', [
 	'form' 			=> $this->form,
-	'formAction' 	=> 'add',
 	'formName'		=> 'Post Level',
-	'postRoute'		=> 'admin/shop/post/cost/edit',
-	'cancelRoute'	=> 'admin/shop/post/cost',
+    'postUrl'		=> $this->url('admin/shop/post/cost/edit', [
+        'action'    => 'add',
+    ]),
+    'cancelUrl'     => $this->url('admin/shop/post/cost'),
 	'formElements'	=> [
 		'cost', 'vatInc', 'postLevelId', 'postZoneId',
 	],

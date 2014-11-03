@@ -2,10 +2,11 @@
 
 <?=$this->partial('uthando-admin/partial/add-edit-form', [
 	'form' 			=> $this->form,
-	'formAction' 	=> 'add',
 	'formName'		=> 'Tax Rate',
-	'postRoute'		=> 'admin/shop/tax/rate/edit',
-	'cancelRoute'	=> 'admin/shop/tax/rate',
+    'postUrl'		=> $this->url('admin/shop/tax/rate/edit', [
+        'action'    => 'add',
+    ]),
+    'cancelUrl'     => $this->url('admin/shop/tax/rate'),
 	'formElements'	=> [
 		'taxRate',
 	],
