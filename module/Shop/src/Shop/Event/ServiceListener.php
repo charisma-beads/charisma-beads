@@ -40,6 +40,56 @@ class ServiceListener implements ListenerAggregateInterface
         $this->listeners[] = $events->attach([
             'Shop\Service\Customer\Customer',
         ], ['pre.add'], [$this, 'setCustomerValidation']);
+
+        $this->listeners[] = $events->attach([
+            'UthandoFileManager\Service\ImageUploader',
+        ], ['pre.upload'], [$this, 'preImageUpload']);
+
+        $this->listeners[] = $events->attach([
+            'UthandoFileManager\Service\ImageUploader',
+        ], ['post.upload'], [$this, 'postImageUpload']);
+
+        $this->listeners[] = $events->attach([
+            'Shop\Service\Product\Image',
+        ], ['post.delete'], [$this, 'deleteImage']);
+    }
+
+    public function deleteImage(Event $e)
+    {
+        /* @var $model \Shop\Model\Product\Image */
+        $model = $e->getParam('model');
+        $file = './public/userfiles/shop/images/' . $model->getFull();
+        $thumb = './public/userfiles/shop/images/' . $model->getThumbnail();
+        unlink($file);
+        // TODO: generate thumbnail to delete.
+        //unlink($thumb);
+    }
+
+    public function preImageUpload(Event $e)
+    {
+        /* @var $options \UthandoFileManager\Options\FileManagerOptions */
+        $options = $e->getParam('options');
+        $path = $options->getDestination() . 'shop/images/';
+        $options->setDestination($path);
+    }
+
+    public function postImageUpload(Event $e)
+    {
+        $data = $e->getParam('data');
+
+        /* @var $model \UthandoFileManager\Model\Image */
+        $model = $e->getParam('model');
+
+        /* @var $service \Shop\Service\Product\Image */
+        $service = $e->getTarget()->getService('Shop\Service\Product\Image');
+        $post = [
+            'productId' => $data['productId'],
+            'thumbnail' => $model->getFileName(),
+            'full'      => $model->getFileName(),
+            'isDefault' => 0,
+        ];
+
+        $service->add($post);
     }
 
     public function addAction(Event $e)

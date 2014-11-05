@@ -80,6 +80,42 @@
     </div>
 </div>
 
+<div id="add-product-image-model" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add Product Image</h4>
+            </div>
+            <div class="modal-body">
+                <i class="fa fa-spinner fa-spin"></i>&nbsp;Loading
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="add-product-image-save" type="button" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="edit-product-image-model" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Edit Product Image</h4>
+            </div>
+            <div class="modal-body">
+                <i class="fa fa-spinner fa-spin"></i>&nbsp;Loading
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="edit-product-image-save" type="button" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
 
    var productOptions = function(){
@@ -152,7 +188,58 @@
        });
    });
 
-    $('#add-product-option-model').on('show.bs.modal', function () {
+   $('#product-image').on('click', '.edit-button', function(event) {
+       event.preventDefault();
+
+       var el = $('#edit-product-image-model');
+       var url = $(this).attr('href');
+
+       el.on('show.bs.modal', function() {
+           $(this).find('.modal-body').load(url);
+       });
+
+       el.on('hide.bs.modal', function(e){
+           $(this).find('.modal-body').html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Loading');
+           productImages();
+           el.off('show.bs.modal hide.bs.modal');
+           $('#edit-product-image-save').off('click');
+       });
+
+       $('#edit-product-image-save').on('click', function() {
+           admin.ajaxModalForm(el, url);
+       });
+
+       el.modal('show');
+
+   });
+
+   $('#product-image').on('submit', 'form', function(event) {
+       event.preventDefault();
+       var url = '<?=$this->url('admin/shop/product/image', [
+            'action'    => 'delete',
+        ]);?>';
+       var params = $(this).serialize() + '&submit=delete';
+       var el = $(this).parent().parent().parent();
+
+       $.ajax({
+           url: url,
+           data:  params,
+           type: 'POST',
+           success: function (response) {
+               admin.addAlert(response.messages, response.status);
+               $(el).modal('hide');
+               setTimeout('productImages()',500);
+           },
+           error: function (response) {
+               admin.addAlert(response.error, 'danger');
+               $(el).modal('hide');
+               setTimeout('productImages()',500);
+           }
+       });
+   });
+
+
+   $('#add-product-option-model').on('show.bs.modal', function () {
         $(this).find('.modal-body').load('<?=$this->url('admin/shop/product/option', [
             'action'    => 'add',
             'id'        => $this->model->getProductId(),
@@ -169,6 +256,25 @@
             'action'    => 'add',
         ]);?>');
     });
+
+   $('#add-product-image-model').on('show.bs.modal', function () {
+       $(this).find('.modal-body').load('<?=$this->url('admin/uploader', [
+            'action'    => 'upload-form',
+        ]);?>', function(){
+           $('#upload-form').append(
+               '<input type="hidden" name="productId" value="<?=$this->model->getProductId();?>">'
+           );
+       });
+   });
+
+   $('#add-product-image-model').on('hide.bs.modal', function (e) {
+       $(this).find('.modal-body').html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Loading');
+       setTimeout('productImages()',500);
+   });
+
+   $('#add-product-image-save').on('click', function () {
+       $('#upload-form').submit();
+   });
 
     productOptions();
     productImages();

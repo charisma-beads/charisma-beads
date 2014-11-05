@@ -31,11 +31,11 @@ class Option extends Form
             'name'			=> 'option',
             'type'			=> 'text',
             'attributes'	=> [
-                'placeholder'	=> 'Option:',
+                'placeholder'	=> 'Options:',
                 'autofocus'		=> true,
             ],
             'options'		=> [
-                'label'		=> 'Option:',
+                'label'		=> 'Options:',
                 'required'	=> true,
             ],
         ]);

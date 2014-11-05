@@ -11,7 +11,7 @@ class Confirm extends Form
             'name'		=> 'payment_option',
             'type'		=> 'PayOptionsList',
             'options'	=> [
-                'label'			=> 'Choose Payment Option:',
+                'label'			=> 'Choose Payment Options:',
                 'required'		=> true,
             ],
         ]);

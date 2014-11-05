@@ -275,8 +275,8 @@ class Paypal implements ServiceLocatorAwareInterface
     public function getOpions()
     {
         if (!$this->options instanceof PaypalOptions) {
-            $opions = $this->getServiceLocator()->get('Shop\Options\Paypal');
-            $this->options = $opions;
+            $options = $this->getServiceLocator()->get('Shop\Options\Paypal');
+            $this->options = $options;
         }
         
         return $this->options;
