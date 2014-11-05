@@ -75,5 +75,17 @@ class Customer extends InputFilter
                 ]],
     		],
 		]);
+
+        $this->add([
+            'name' => 'email',
+            'required' => false,
+            'filters' => [
+                ['name' => 'StripTags'],
+                ['name' => 'StringTrim'],
+            ],
+            'validators' => [
+
+            ],
+        ]);
     }
 }

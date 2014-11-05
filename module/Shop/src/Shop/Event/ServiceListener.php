@@ -1,6 +1,7 @@
 <?php
 namespace Shop\Event;
 
+use Shop\Model\Customer\Customer;
 use Zend\EventManager\Event;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
@@ -18,6 +19,10 @@ class ServiceListener implements ListenerAggregateInterface
             'Shop\Service\Customer\Customer',
             'Shop\Service\Customer\Address',
         ], 'form.init', [$this, 'formInit']);
+
+        $this->listeners[] = $events->attach([
+            'Shop\Service\Customer\Customer',
+        ], ['pre.form', 'post.add'], [$this, 'checkCustomerNumber']);
 
         $this->listeners[] = $events->attach([
             'Shop\Service\Product\Category',
@@ -166,7 +171,7 @@ class ServiceListener implements ListenerAggregateInterface
         
         switch (get_class($model)) {
         	case 'Shop\Model\Customer\Customer':
-        	    $this->customerForm($form, $model);
+        	    $this->customerForm($form, $model, $e);
         	    break;
         	case 'Shop\Model\Customer\Address':
         	    $this->customerAddressForm($form, $model, $data);
@@ -181,8 +186,38 @@ class ServiceListener implements ListenerAggregateInterface
     {
         $form->setCategoryId($model->getProductCategoryId());
     }
-    
-    public function customerForm($form, $model)
+
+    /**
+     * BC add customer numbers as we go.
+     *
+     * @param Event $e
+     * @return mixed
+     */
+    public function checkCustomerNumber(Event $e)
+    {
+        $model = $e->getParam('model');
+        $insertId = $e->getParam('saved');
+
+        if (!$model && $insertId) {
+            $model = $e->getTarget()->getById($insertId);
+        }
+
+
+        if (!$model instanceof Customer) {
+            return $model;
+        }
+
+        if (!$model->getNumber() && $model->getCustomerId()) {
+            $cusNum = $e->getTarget()->generateCustomerNumber($model);
+            $model->setNumber($cusNum);
+            $e->getTarget()->save($model);
+            $model = $e->getTarget()->getById($model->getCustomerId());
+        }
+
+        return $model;
+    }
+
+    public function customerForm($form, $model, $e)
     {
     	$form->get('billingAddressId')->setCustomerId($model->getCustomerId());
     	$form->get('deliveryAddressId')->setCustomerId($model->getCustomerId());

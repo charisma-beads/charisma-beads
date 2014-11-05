@@ -8,8 +8,7 @@ $this->form->get('email')->setAttribute('readonly', '');
 <div class="col-md-12">
     <?=$this->partial('uthando-admin/partial/add-edit-form', [
         'form' 			=> $this->form,
-        'formAction' 	=> 'edit',
-        'formName'		=> 'Customer',
+        'formName'		=> 'Customer ' . $this->model->getNumber(),
         'postUrl'		=> $this->url('admin/shop/customer/edit', [
             'id'        => $this->model->getCustomerId(),
         ]),
@@ -132,7 +131,9 @@ $this->form->get('email')->setAttribute('readonly', '');
 
     var updateAddressLists = function() {
         $.ajax({
-            url : '/admin/shop/customer/address/address-list',
+            url : '<?=$this->url('admin/shop/customer/address', [
+                'action' => 'address-list'
+]           );?>',
             data : {customerId : <?=$this->model->getCustomerId();?>},
             type : 'POST'
         }).done(function(data){
@@ -191,14 +192,15 @@ $this->form->get('email')->setAttribute('readonly', '');
             type: 'POST',
             success: function (response) {
                 admin.addAlert(response.messages, response.status);
+                $(el).modal('hide');
+                setTimeout('addresses()',500);
+                setTimeout('updateAddressLists()',500);
             },
             error: function (response) {
                 admin.addAlert(response.error, 'danger');
-            },
-            complete: function() {
                 $(el).modal('hide');
-                addresses();
-                updateAddressLists();
+                setTimeout('addresses()',500);
+                setTimeout('updateAddressLists()',500);
             }
         });
     });

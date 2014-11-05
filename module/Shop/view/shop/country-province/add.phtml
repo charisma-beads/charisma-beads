@@ -4,17 +4,15 @@
 </div>
 
 <div class="col-md-12">
-    <?=$this->partial('uthando-admin/partial/add-edit-form', array(
+    <?=$this->partial('uthando-admin/partial/add-edit-form', [
         'form' 			=> $this->form,
-        'formAction' 	=> 'add',
-        'formName'		=> 'Country Province',
-        'formElements'	=> array(
+        'formElements'	=> [
             'countryProvinceId', 'countryId', 'countryProvinceCode',
             'provinceName', 'provinceAlternateNames',
-        ),
+        ],
         'helperOptions' => [
             'labelWidth'    => '4',
             'elementWidth'  => '8',
         ],
-    )); ?>
+    ]); ?>
 </div>

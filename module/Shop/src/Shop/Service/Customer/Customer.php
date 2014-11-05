@@ -1,8 +1,11 @@
 <?php
 namespace Shop\Service\Customer;
 
+use \Shop\Model\Customer\Customer as CustomerModel;
 use UthandoCommon\Service\AbstractRelationalMapperService;
 use UthandoUser\Model\User;
+use Zend\Math\BigInteger\BigInteger;
+use Zend\Math\Rand;
 
 class Customer extends AbstractRelationalMapperService
 {
@@ -107,6 +110,31 @@ class Customer extends AbstractRelationalMapperService
         $customers = $mapper->getCustomersByDate($startDate, $endDate);
 
         return $customers;
+    }
+
+    /**
+     * Generate a customer number with check digit at end
+     * to test use simple test:
+     *
+     * $pass = ($checkDigit === $num % 11) ? true : false
+     *
+     * @param CustomerModel $customer
+     * @return string
+     */
+    public function generateCustomerNumber(CustomerModel $customer)
+    {
+        $part1 = $customer->getDateCreated()->format('Y');
+        $part2 = sprintf('%06d', $customer->getCustomerId());;
+        $part3 = Rand::getString(4, '0123456789');
+
+        $num = join('', [
+            $part1, $part2, $part3
+        ]);
+
+        $bigInt = BigInteger::factory('bcmath');
+        $checkDigit = $bigInt->mod($num, 11);
+
+        return $num . $checkDigit;
     }
 
     /**

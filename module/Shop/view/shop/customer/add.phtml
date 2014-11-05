@@ -8,7 +8,6 @@ $this->form->get('email')->setAttribute('readonly', '');
 
 <?=$this->partial('uthando-admin/partial/add-edit-form', [
     'form' 			=> $this->form,
-    'formAction' 	=> 'add',
     'formName'		=> 'New Customer',
     'postUrl'		=> $this->url('admin/shop/customer/edit', [
         'action' => 'add',

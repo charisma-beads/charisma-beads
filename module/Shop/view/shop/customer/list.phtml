@@ -6,6 +6,7 @@
     	<thead>
     		<tr>
     			<th data-field="customerId">Customer Id</th>
+                <th data-field="number">Customer No.</th>
     			<th data-field="name">Name</th>
     			<th data-field="dateCreated">Date Created</th>
     			<th data-field="dateModified">Date Modified</th>
@@ -14,10 +15,11 @@
     	</thead>
     	
     	<tbody>
-    		<?php /* @var $row \Shop\Model\Customer */ ?>
+    		<?php /* @var $row \Shop\Model\Customer\Customer */ ?>
     		<?php foreach($this->models as $row): ?>
     		<tr>
     			<td><?=$this->escapeHtml($row->getCustomerId());?></td>
+                <td><?=$this->escapeHtml($row->getNumber());?></td>
     			<td><?=$this->escapeHtml($row->getLastNameFirst());?></td>
     			<td><?=$this->escapeHtml($this->formatDate($row->getDateCreated())); ?></td>
     			<td><?=$this->escapeHtml($this->formatDate($row->getDateModified())); ?></td>

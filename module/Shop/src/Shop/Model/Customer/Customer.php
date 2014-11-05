@@ -27,6 +27,11 @@ class Customer implements ModelInterface
      * @var int
      */
     protected $prefixId;
+
+    /**
+     * @var int
+     */
+    protected $number;
     
     /**
      * @var string
@@ -126,6 +131,24 @@ class Customer implements ModelInterface
 		$this->prefixId = $prefixId;
 		return $this;
 	}
+
+    /**
+     * @return int
+     */
+    public function getNumber()
+    {
+        return $this->number;
+    }
+
+    /**
+     * @param $number
+     * @return $this
+     */
+    public function setNumber($number)
+    {
+        $this->number = $number;
+        return $this;
+    }
 
     /**
      * @return string

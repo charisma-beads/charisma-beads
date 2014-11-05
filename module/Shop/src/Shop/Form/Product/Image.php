@@ -23,6 +23,9 @@ class Image extends Form
             'options' => [
                 'label' => 'Thumbnail:'
             ],
+            'attributes' => [
+                'readonly' => true,
+            ],
         ]);
 
         $this->add([
@@ -30,7 +33,10 @@ class Image extends Form
             'type' => 'text',
             'options' => [
                 'label' => 'Full Image:'
-            ]
+            ],
+            'attributes' => [
+                'readonly' => true,
+            ],
         ]);
 
         $this->add([
