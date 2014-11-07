@@ -25,6 +25,10 @@ class ServiceListener implements ListenerAggregateInterface
         ], ['pre.form', 'post.add'], [$this, 'checkCustomerNumber']);
 
         $this->listeners[] = $events->attach([
+            'Shop\Service\Order\Order',
+        ], ['post.add'], [$this, 'generateOrderNumber']);
+
+        $this->listeners[] = $events->attach([
             'Shop\Service\Product\Category',
         ], 'pre.form', [$this, 'preForm']);
         
@@ -215,6 +219,13 @@ class ServiceListener implements ListenerAggregateInterface
         }
 
         return $model;
+    }
+
+    public function generateOrderNumber(Event $e)
+    {
+        $insertId = $e->getParam('saved');
+        $model = $e->getTarget()->getById($insertId);
+        $e->getTarget()->generateOrderNumber($model);
     }
 
     public function customerForm($form, $model, $e)

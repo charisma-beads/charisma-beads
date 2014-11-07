@@ -17,6 +17,14 @@ class Customer extends Form
             'name' => 'userId',
 	        'type' => 'hidden',
 	    ]);
+
+        $this->add([
+            'name'      => 'redirectToEdit',
+            'type'      => 'hidden',
+            'attributes'   => [
+                'value' => true,
+            ],
+        ]);
 	    
 	    $this->add([
             'name' => 'prefixId',

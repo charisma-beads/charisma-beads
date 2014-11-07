@@ -3,6 +3,7 @@ namespace Shop\Hydrator\Order;
 
 use UthandoCommon\Hydrator\AbstractHydrator;
 use UthandoCommon\Hydrator\Strategy\DateTime as DateTimeStrategy;
+use UthandoCommon\Hydrator\Strategy\Null;
 use UthandoCommon\Hydrator\Strategy\Serialize;
 
 class Order extends AbstractHydrator
@@ -13,11 +14,12 @@ class Order extends AbstractHydrator
         
         $this->addStrategy('orderDate', new DateTimeStrategy());
         $this->addStrategy('metadata', new Serialize());
+        $this->addStrategy('orderNumber', new Null());
     }
     
     /**
      *
-     * @param \Shop\Model\Order $object            
+     * @param \Shop\Model\Order\Order $object
      * @return array $data
      */
     public function extract($object)
@@ -26,7 +28,7 @@ class Order extends AbstractHydrator
             'orderId'       => $object->getOrderId(),
             'customerId'    => $object->getCustomerId(),
             'orderStatusId' => $object->getOrderStatusId(),
-            'orderNumber'   => $object->getOrderNumber(),
+            'orderNumber'   => $this->extractValue('orderNumber', $object->getOrderNumber()),
             'total'         => $object->getTotal(),
             'orderDate'     => $this->extractValue('orderDate', $object->getOrderDate()),
             'shipping'      => $object->getShipping(),

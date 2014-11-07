@@ -595,7 +595,7 @@ return [
                                         'controller' => 'Customer',
                                         'action' => 'index',
                                         'force-ssl' => 'ssl'
-                                    ]
+                                    ],
                                 ],
                                 'may_terminate' => true,
                                 'child_routes' => [

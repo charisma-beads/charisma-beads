@@ -3,7 +3,9 @@ namespace Shop\Service\Order;
 
 use Shop\Model\Customer\Customer as CustomerModel;
 use Shop\Model\Order\MetaData;
+use Shop\Model\Order\Order as OrderModel;
 use UthandoCommon\Service\AbstractRelationalMapperService;
+use Zend\Math\BigInteger\BigInteger;
 
 class Order extends AbstractRelationalMapperService
 {
@@ -69,9 +71,6 @@ class Order extends AbstractRelationalMapperService
      */
     public function processOrderFromCart(CustomerModel $customer, array $postData)
     {
-        /* @var $mapper \Shop\Mapper\Order\Order */
-        $mapper = $this->getMapper();
-
         /* @var $cart \Shop\Service\Cart\Cart */
         $cart = $this->getService('Shop\Service\Cart');
 
@@ -87,7 +86,6 @@ class Order extends AbstractRelationalMapperService
         
         /* @var $orderStatus \Shop\Model\Order\Status */
         $orderStatus = $orderStatusService->getStatusByName('Pending');
-        $orderNumber = $mapper->getMaxOrderNumber()['orderNumber'] + 1;
         
         $metadata = new MetaData();
         
@@ -115,7 +113,7 @@ class Order extends AbstractRelationalMapperService
         $data = [
         	'customerId'    => $customer->getCustomerId(),
             'orderStatusId' => $orderStatus->getOrderStatusId(),
-            'orderNumber'   => $orderNumber,
+            //'orderNumber'   => $orderNumber,
             'total'         => $cartTotal,
             'shipping'      => $shipping,
             'taxTotal'      => $taxTotal,
@@ -125,6 +123,8 @@ class Order extends AbstractRelationalMapperService
         $order = $this->getMapper()->getModel($data);
         
         $orderId = $this->save($order);
+        $this->generateOrderNumber($orderId);
+
         
         /* @var $item \Shop\Model\Cart\Item */
         foreach($cart->getCart() as $item) {
@@ -146,6 +146,34 @@ class Order extends AbstractRelationalMapperService
         }
         
         return $orderId;
+    }
+
+    /**
+     * Generate simple order number with check digit.
+     * This allows for 999999 orders
+     * Format <Date><OrderId padded to 6 digits><Check Digit>
+     *
+     * @param OrderModel|int $orderModelOrId
+     * @return void
+     */
+    public function generateOrderNumber($orderModelOrId)
+    {
+        if (!$orderModelOrId instanceof OrderModel) {
+            $orderModelOrId = (int) $orderModelOrId;
+            $orderModelOrId = $this->getById($orderModelOrId);
+        }
+
+        $part1 = $orderModelOrId->getOrderDate()->format('Ymd');
+        $part2 = sprintf('%06d', $orderModelOrId->getOrderId());
+
+        $num = join('', [
+            $part1, $part2
+        ]);
+
+        $bigInt = BigInteger::factory('bcmath');
+        $orderModelOrId->setOrderNumber($num . $bigInt->mod($num, 11));
+
+        $this->save($orderModelOrId);
     }
 
     /**
@@ -246,7 +274,7 @@ class Order extends AbstractRelationalMapperService
         /* @var $mapper \Shop\Mapper\Order\Order */
         $mapper = $this->getMapper();
     	
-    	/* @var $order \Shop\Model\Order\Order */
+    	/* @var $order OrderModel */
     	$order = $mapper->getOrderByUserId($id, $userId);
     
     	if ($order) {

@@ -120,8 +120,9 @@
             </tr>
             <tr>
                 <td class="col-6 panel-body">
-                    Order ID: <span>#<?=$this->order->getOrderNumber();?></span><br>
-                    Date Ordered: <span><?=$this->formatDate($this->order->getOrderDate())->setFormat('d/m/Y');?></span>
+                    Order No:&nbsp;<span><?=$this->escapeHtml($this->order->getOrderNumber());?></span><br>
+                    Customer No:&nbsp;<span><?=$this->escapeHtml($this->order->getCustomer()->getNumber());?></span><br>
+                    Date Ordered:&nbsp;<span><?=$this->formatDate($this->order->getOrderDate())->setFormat('d/m/Y');?></span>
                 </td>
                 <td>&nbsp;</td>
                 <td class="col-6 panel-body">

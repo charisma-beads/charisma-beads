@@ -105,7 +105,7 @@ class CustomerAddress extends AbstractViewHelper
     }
     
     /**
-     * @return \Shop\Model\Order
+     * @return \Shop\Model\Order\Order
      */
     public function getOrder()
     {

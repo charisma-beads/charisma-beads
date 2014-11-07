@@ -17,7 +17,7 @@
                     <a href="<?=$this->url('admin/shop/customer/edit', [
                         'id' => $row->getCustomerId(),
                     ]);?>">
-                        <?=$this->escapeHtml($row->getCustomer()->getFullName());?>
+                        <?=$this->escapeHtml($row->getFullName());?>
                     </a>
                 </td>
                 <td><?=$this->escapeHtml($row->getLastNameFirst());?></td>
