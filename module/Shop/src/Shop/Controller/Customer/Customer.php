@@ -5,6 +5,7 @@ use Shop\ShopException;
 use UthandoCommon\Controller\AbstractCrudController;
 use Zend\Form\Form;
 use Zend\Http\PhpEnvironment\Response;
+use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
 
 class Customer extends AbstractCrudController
@@ -13,6 +14,9 @@ class Customer extends AbstractCrudController
 	protected $serviceName = 'Shop\Service\Customer';
 	protected $userRoute = 'shop/customer';
 	protected $route = 'admin/shop/customer';
+    protected $routes = [
+        'edit' => 'admin/shop/customer/edit',
+    ];
 
     public function listNewAction()
     {
@@ -29,6 +33,35 @@ class Customer extends AbstractCrudController
         return $viewModel->setVariables([
             'models' => $service->getCustomersByMonth(date('m')),
         ]);
+    }
+
+    public function updateAddressAction()
+    {
+        if (!$this->getRequest()->isXmlHttpRequest()) {
+            throw new ShopException('Action not allowed');
+        }
+
+        $jsonModel = new JsonModel();
+
+        /* @var $service \Shop\Service\Customer\Customer */
+        $service = $this->getService();
+
+        try {
+            $post = $this->params()->fromPost();
+            $result = $service->setCustomerAddress($post);
+
+            return $jsonModel->setVariables([
+                'status'    => ($result) ? 'success' : 'danger',
+                'messages'  => ($result) ?
+                    'Address was saved to database' :
+                    'Could not save address due to an error',
+            ]);
+        } catch (\Exception $e) {
+            return $jsonModel->setVariables([
+                'status'    => 'danger',
+                'messages'  => $e->getMessage(),
+            ]);
+        }
     }
 
     /**

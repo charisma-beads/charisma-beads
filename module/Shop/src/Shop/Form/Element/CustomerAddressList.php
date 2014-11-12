@@ -10,8 +10,6 @@ class CustomerAddressList extends Select implements ServiceLocatorAwareInterface
     
     use ServiceLocatorAwareTrait;
     
-    protected $emptyOption = '---Please select an address---';
-    
     protected $customerId;
     
     public function setOptions($options)
@@ -35,7 +33,9 @@ class CustomerAddressList extends Select implements ServiceLocatorAwareInterface
             ->get('Shop\Service\Customer\Address')
             ->getAllAddressesByCustomerId($this->getCustomerId());
         
-        $addressOptions = [];
+        $addressOptions = [
+            0 => '---Please select an address---',
+        ];
         
         /* @var $address \Shop\Model\Customer\Address */
         foreach($addresses as $address) {

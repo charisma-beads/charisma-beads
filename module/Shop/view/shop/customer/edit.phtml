@@ -30,8 +30,9 @@ $this->form->get('email')->setAttribute('readonly', '');
                 <!-- Default panel contents -->
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Customer
-                            Addresses</a>&nbsp;
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                            Customer Addresses
+                        </a>&nbsp;
                         <button id="add-address-button" class="btn btn-default btn-xs" data-toggle="modal"
                                 data-target="#add-address-model">
                             Add Address
@@ -53,6 +54,9 @@ $this->form->get('email')->setAttribute('readonly', '');
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
                             Customer Orders
                         </a>&nbsp;
+                        <button id="add-order-button" class="btn btn-default btn-xs">
+                            Create Order
+                        </button>
                     </h4>
                 </div>
                 <div id="collapseTwo" class="panel-collapse collapse in">
@@ -150,6 +154,41 @@ $this->form->get('email')->setAttribute('readonly', '');
             delAd.val(delAdVal);
         });
     };
+
+    $('select').on('change', function(){
+        var formData = {
+            customerId : <?=$this->model->getCustomerId();?>
+        };
+        var column = $(this).attr('name');
+        var value = $(this).val();
+        formData[column] = value;
+
+         $.ajax({
+            url : '<?=$this->url('admin/shop/customer/edit', [
+                'action' => 'update-address'
+            ]);?>',
+            data : formData,
+            type : 'POST',
+            complete : function(xhr) {
+                admin.addAlert(xhr.responseJSON.messages, xhr.responseJSON.status);
+            }
+        });
+    });
+
+    $('#add-order-button').on('click', function(){
+        var billAddress = $('select[name=billingAddressId]').val();
+        var deliveryAddress = $('select[name=deliveryAddressId]').val();
+
+        if (billAddress == 0 || deliveryAddress == 0) {
+            bootbox.alert('You need to add a delivery & billing address before creating an order.');
+            return;
+        }
+
+        window.location = '<?=$this->url('admin/shop/order/edit', [
+            'action'    => 'create-order',
+            'id'        => $this->model->getCustomerId(),
+        ]);?>';
+    });
 
     $('#customer-addresses').on('click', '.edit-address-button', function(event) {
         event.preventDefault();

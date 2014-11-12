@@ -1271,6 +1271,6 @@ return [
         ],
         'template_path_stack' => [
             'charisma-shop' => __DIR__ . '/../view'
-        ]
-    ]
+        ],
+    ],
 ];

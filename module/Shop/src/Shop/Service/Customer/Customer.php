@@ -3,6 +3,7 @@ namespace Shop\Service\Customer;
 
 use \Shop\Model\Customer\Customer as CustomerModel;
 use UthandoCommon\Service\AbstractRelationalMapperService;
+use UthandoCommon\Service\ServiceException;
 use UthandoUser\Model\User;
 use Zend\Math\BigInteger\BigInteger;
 use Zend\Math\Rand;
@@ -110,6 +111,27 @@ class Customer extends AbstractRelationalMapperService
         $customers = $mapper->getCustomersByDate($startDate, $endDate);
 
         return $customers;
+    }
+
+    /**
+     * Update or set customer default address for billing or delivery.
+     *
+     * @param array $post
+     * @return int
+     * @throws ServiceException
+     */
+    public function setCustomerAddress(array $post)
+    {
+        $id = (isset($post['customerId'])) ? (int) $post['customerId'] : null;
+
+        $form = $this->getForm($this->getById($id), $post, true, true);
+        $form->setValidationGroup(array_keys($post));
+
+        if (!$form->isValid()) {
+            throw new ServiceException('values not valid');
+        }
+
+        return $this->save($form->getData());
     }
 
     /**

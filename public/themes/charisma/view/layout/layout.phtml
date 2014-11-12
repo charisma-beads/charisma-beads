@@ -76,7 +76,9 @@
                 </div>
                 
 				<div class="collapse navbar-collapse" id="charisma-navbar-collapse-1">
-                    <?=$this->uthandoNavigation()->uthandoDbMenu('top menu')->setUlClass('nav navbar-nav'); ?>
+                    <?=$this->uthandoNavigation()
+                        ->uthandoTbDbMenu('top menu')
+                        ->setUlClass('nav navbar-nav'); ?>
                     
             		<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown">
