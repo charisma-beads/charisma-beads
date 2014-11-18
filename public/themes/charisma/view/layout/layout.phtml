@@ -44,7 +44,9 @@
                                     <i class="glyphicon glyphicon-user"></i> <?=$this->identity()->getFullName();?> 
         					        <b class="caret"></b>
                                 </a>
-                            <?=$this->uthandoNavigation('UthandoUser\Navigation')->uthandoTbMenu()->setUlClass('dropdown-menu');?>
+                            <?=$this->uthandoNavigation('UthandoUser\Navigation')
+                                ->uthandoTbMenu()
+                                ->setUlClass('dropdown-menu');?>
     						</li>
     					</ul>
     				</div>
@@ -100,7 +102,7 @@
 								<span class="badge badge-inverse"><?=$this->cart()->countItems(); ?></span>
 							</a>
 							<div class="dropdown-menu">
-								<?=$this->cart()->getSummary(); ?>
+								<?=$this->cart()->getSummary('cart/summary'); ?>
 							</div>
 						</li>
 					</ul>

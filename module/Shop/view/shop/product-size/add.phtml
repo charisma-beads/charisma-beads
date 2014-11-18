@@ -1,0 +1,19 @@
+<?php $this->headTitle('Add Product Size') ?>
+
+<div id="alerts" class="col-md-12">
+    <?=$this->tbFlashMessenger()->render(); ?>
+</div>
+
+<div class="col-md-12">
+    <?=$this->partial('uthando-admin/partial/add-edit-form', [
+        'form' 			=> $this->form,
+        'formName'		=> 'Product Size',
+        'formElements'	=> [
+            'productSizeId', 'size',
+        ],
+        'postUrl'		=> $this->url('admin/shop/product/size/edit', [
+            'action'    => 'add',
+        ]),
+        'cancelUrl'     => $this->url('admin/shop/product/size'),
+    ]); ?>
+</div>

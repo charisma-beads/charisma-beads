@@ -31,7 +31,7 @@ return [
             'domain' => null, // Set to null this defaults to the current domain
             'secure' => false, // Should the cookie be secure only?
             'url' => '/', // Location to set in the cookie - default to root
-            'cookieName' => 'CharismaShoppingCart' // Cookie Name
+            'cookieName' => '' // Cookie Name
         ],
     ],
     'uthando_user' => [
@@ -83,6 +83,7 @@ return [
                                 'Shop\Controller\Product\Image' => ['action' => 'all'],
                                 'Shop\Controller\Product\Group' => ['action' => 'all'],
                                 'Shop\Controller\Product\Option' => ['action' => 'all'],
+                                'Shop\Controller\Product\Size' => ['action' => 'all'],
                                 'Shop\Controller\Shop' => ['action' => 'all'],
                                 'Shop\Controller\Tax\Code' => ['action' => 'all'],
                                 'Shop\Controller\Tax\Rate' => ['action' => 'all'],
@@ -111,6 +112,7 @@ return [
                 'Shop\Controller\Product\Image',
                 'Shop\Controller\Product\Group',
                 'Shop\Controller\Product\Option',
+                'Shop\Controller\Product\Size',
                 'Shop\Controller\Shop',
                 'Shop\Controller\Tax\Code',
                 'Shop\Controller\Tax\Rate'
@@ -427,6 +429,48 @@ return [
                                                 'controller' => 'Product\Option',
                                                 'action' => 'list',
                                                 'force-ssl' => 'ssl'
+                                            ],
+                                        ],
+                                    ],
+                                    'size' => [
+                                        'type' => 'Segment',
+                                        'options' => [
+                                            'route' => '/size',
+                                            'defaults' => [
+                                                'controller' => 'Product\Size',
+                                                'action' => 'index',
+                                                'force-ssl' => 'ssl'
+                                            ],
+                                        ],
+                                        'may_terminate' => true,
+                                        'child_routes' => [
+                                            'edit' => [
+                                                'type' => 'Segment',
+                                                'options' => [
+                                                    'route' => '/[:action[/id/[:id]]]',
+                                                    'constraints' => [
+                                                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                                        'id' => '\d+'
+                                                    ],
+                                                    'defaults' => [
+                                                        'action' => 'edit',
+                                                        'force-ssl' => 'ssl'
+                                                    ],
+                                                ],
+                                            ],
+                                            'page' => [
+                                                'type' => 'Segment',
+                                                'options' => [
+                                                    'route' => '/page/[:page]',
+                                                    'constraints' => [
+                                                        'page' => '\d+'
+                                                    ],
+                                                    'defaults' => [
+                                                        'action' => 'list',
+                                                        'page' => 1,
+                                                        'force-ssl' => 'ssl'
+                                                    ],
+                                                ],
                                             ],
                                         ],
                                     ],
@@ -1032,6 +1076,26 @@ return [
                                         'label' => 'Add New Category',
                                         'action' => 'add',
                                         'route' => 'admin/shop/category/edit',
+                                        'resource' => 'menu:admin'
+                                    ]
+                                ]
+                            ],
+                            'sizes' => [
+                                'label' => 'Product Sizes',
+                                'action' => 'index',
+                                'route' => 'admin/shop/product/size',
+                                'resource' => 'menu:admin',
+                                'pages' => [
+                                    'list' => [
+                                        'label' => 'List All Sizes',
+                                        'action' => 'index',
+                                        'route' => 'admin/shop/product/size',
+                                        'resource' => 'menu:admin'
+                                    ],
+                                    'add' => [
+                                        'label' => 'Add New Size',
+                                        'action' => 'add',
+                                        'route' => 'admin/shop/product/size/edit',
                                         'resource' => 'menu:admin'
                                     ]
                                 ]

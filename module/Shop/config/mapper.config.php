@@ -21,7 +21,7 @@ return [
         'ShopProductGroup'      => 'Shop\Mapper\Product\Group',
         'ShopProductImage'      => 'Shop\Mapper\Product\Image',
         'ShopProductOption'     => 'Shop\Mapper\Product\Option',
-        'Shop\ProductSize'      => 'Shop\Mapper\Product\Size',
+        'ShopProductSize'       => 'Shop\Mapper\Product\Size',
         'ShopTaxCode'           => 'Shop\Mapper\Tax\Code',
         'ShopTaxRate'           => 'Shop\Mapper\Tax\Rate',
     ],

@@ -15,8 +15,8 @@ class Module
         
         $eventManager->attachAggregate(new ServiceListener());
         
-        $sharedEventManager->attach('UthandoUser\Service\User', 'user.add', ['Shop\Event\UserEvent', 'userAdd']);
-        $sharedEventManager->attach('UthandoUser\Service\User', 'user.edit', ['Shop\Event\UserEvent', 'userEdit']);
+        //$sharedEventManager->attach('UthandoUser\Service\User', 'user.add', ['Shop\Event\UserEvent', 'userAdd']);
+        //$sharedEventManager->attach('UthandoUser\Service\User', 'user.edit', ['Shop\Event\UserEvent', 'userEdit']);
     }
 
     public function getConfig()

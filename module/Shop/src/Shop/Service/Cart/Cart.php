@@ -203,7 +203,8 @@ class Cart extends AbstractMapperService implements InitializableInterface
             ->setTaxable($product->getTaxable())
             ->setVatInc($product->getVatInc())
             ->setAddPostage($product->getAddPostage())
-            ->setPostUnit($product->getPostUnit()->getPostUnit());
+            ->setPostUnit($product->getPostUnit()->getPostUnit())
+            ->setImage($product->getDefaultImage());
         
         return $metadata;
     }

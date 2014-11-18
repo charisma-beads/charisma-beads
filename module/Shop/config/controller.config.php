@@ -20,6 +20,7 @@ return [
         'Shop\Controller\Product\Image'         => 'Shop\Controller\Product\ProductImage',
         'Shop\Controller\Product\Group'         => 'Shop\Controller\Product\ProductGroup',
         'Shop\Controller\Product\Option'        => 'Shop\Controller\Product\ProductOption',
+        'Shop\Controller\Product\Size'          => 'Shop\Controller\Product\ProductSize',
         'Shop\Controller\Shop'                  => 'Shop\Controller\Shop',
         'Shop\Controller\Tax\Code'              => 'Shop\Controller\Tax\TaxCode',
         'Shop\Controller\Tax\Rate'              => 'Shop\Controller\Tax\TaxRate'

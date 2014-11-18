@@ -18,9 +18,9 @@ class MetaData
      * @var float
      */
     protected $postUnit;
-    
+
     /**
-     * @var string
+     * @var Image
      */
     protected $image;
     
@@ -109,7 +109,7 @@ class MetaData
     }
 
     /**
-     * @return string
+     * @return Image
      */
     public function getImage()
     {
@@ -117,10 +117,10 @@ class MetaData
     }
 
     /**
-     * @param $image
+     * @param Image $image
      * @return $this
      */
-    public function setImage($image)
+    public function setImage(Image $image)
     {
         $this->image = $image;
         return $this;

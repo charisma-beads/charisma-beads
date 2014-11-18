@@ -11,6 +11,24 @@ trait ProductImageTrait
     protected $productImage = [];
 
     /**
+     * @return null|Image
+     */
+    public function getDefaultImage()
+    {
+        $image = null;
+
+        /* @var $image Image */
+        foreach ($this->getProductImage() as $row) {
+            if ($row->getIsDefault()) {
+                $image = $row;
+                break;
+            }
+        }
+
+        return $image;
+    }
+
+    /**
      * @return array
      */
     public function getProductImage()

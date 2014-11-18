@@ -22,6 +22,7 @@ return [
         'ShopProductGroup'      => 'Shop\Form\Product\Group',
         'ShopProductImage'      => 'Shop\Form\Product\Image',
         'ShopProductOption'     => 'Shop\Form\Product\Option',
+        'ShopProductSize'       => 'Shop\Form\Product\Size',
         'ShopTaxCode'           => 'Shop\Form\Tax\Code',
         'ShopTaxRate'           => 'Shop\Form\Tax\Rate',
 

@@ -43,10 +43,10 @@ class Cart extends AbstractViewHelper
 		return count($this->getCart());
 	}
 	
-	public function getSummary()
+	public function getSummary($template)
 	{
 		$view = new ViewModel();
-		$view->setTemplate('cart/summary');
+		$view->setTemplate($template);
 		
 		return $this->getView()->render($view);
 	}
