@@ -16,6 +16,7 @@ class Size extends InputFilter
     {
         $this->add([
             'name' => 'productSizeId',
+            'required' => false,
             'filters' => [
                 ['name' => 'StripTags'],
                 ['name' => 'StringTrim'],

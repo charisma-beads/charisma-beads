@@ -1,4 +1,13 @@
 <?php
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   UthandoCommon
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @link      https://github.com/uthando-cms for the canonical source repository
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
 namespace Shop\Service\Product;
 
 use UthandoCommon\Model\ModelInterface;
@@ -7,6 +16,10 @@ use Shop\Model\Product\Category as CategoryModel;
 use UthandoCommon\Service\AbstractRelationalMapperService;
 use Zend\Form\Form;
 
+/**
+ * Class Category
+ * @package Shop\Service\Product
+ */
 class Category extends AbstractRelationalMapperService
 {
     /**
@@ -174,6 +187,10 @@ class Category extends AbstractRelationalMapperService
 		}
 	
 		$data = $mapper->extract($form->getData());
+
+        $pk = $this->getMapper()->getPrimaryKey();
+        unset($data[$pk]);
+
 		$position = (int) $post['parent'];
 		$insertType = (string) $post['categoryInsertType'];
 	

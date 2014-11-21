@@ -1325,9 +1325,6 @@ return [
         ]
     ],
     'view_manager' => [
-        'strategies' => [
-            'ViewJsonStrategy',
-        ],
         'template_map' => [
             'cart/summary'         => __DIR__ . '/../view/shop/cart/cart-summary.phtml',
             'shop/cart'            => __DIR__ . '/../view/shop/cart/cart.phtml',

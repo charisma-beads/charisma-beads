@@ -2,6 +2,7 @@
 namespace Shop\Event;
 
 use Shop\Model\Customer\Customer;
+use Shop\Model\Product\Category;
 use Zend\EventManager\Event;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
@@ -177,9 +178,11 @@ class ServiceListener implements ListenerAggregateInterface
         $model = $e->getParam('model');
         $service = $e->getTarget();
 
-        $service->setFormOptions([
-            'productCategoryId' => $model->getProductCategoryId(),
-        ]);
+        if ($model instanceof Category) {
+            $service->setFormOptions([
+                'productCategoryId' => $model->getProductCategoryId(),
+            ]);
+        }
     }
     
     public function formInit(Event $e)
