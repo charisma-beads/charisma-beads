@@ -229,13 +229,16 @@ class Category extends AbstractRelationalMapperService
 		$category = $this->getById($model->getProductCategoryId());
 	
 		if ($category) {
-			// if category position has changed then we need to delete it
-			// and reinsert it in the new position else just update it.
-			// no this should update, no reinserting and deleting thank you.
-			// move this to the mapper class.
 			if ('noInsert' !== $post['categoryInsertType']) {
-				// TODO find children and move them as well.
-				return $form;
+
+                $data = $data = $this->getMapper()
+                    ->extract($form->getData());
+
+                $position = (int) $post['parent'];
+                $insertType = (string) $post['categoryInsertType'];
+
+                $result = $this->getMapper()->move($data, $position, $insertType);
+
 			} else {
 				$result = $this->save($model);
 			}

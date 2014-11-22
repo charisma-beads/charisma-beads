@@ -6,6 +6,12 @@
 	],
 ]);?>
 
+<a href="<?=$this->url('admin/shop/category/edit', [
+    'action' => 'add',
+]);?>" class="btn btn-default">Add Category</a>
+<div class="clearfix">&nbsp;</div>
+
+
 <div id="table-productCategory">
 	<?=$this->partial('shop/product-category/list', [
 	    'models' => $this->models

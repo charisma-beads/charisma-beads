@@ -160,9 +160,11 @@ class Category extends Form implements ServiceLocatorAwareInterface
     	$imageOptions = array();
     	
     	if (!0 == $id) {
-    		$images = $this->getCategoryService()->getCategoryImages($id);
+    		$images = $this->getCategoryService()
+                ->getCategoryImages($id);
     		
-    		if ($images) {
+    		if ($images->count() > 0) {
+
     			/* @var $image \Shop\Model\Product\Image */
     			foreach($images as $image) {
     				$imageOptions[$image->getProductImageId()] = $image->getThumbnail();
