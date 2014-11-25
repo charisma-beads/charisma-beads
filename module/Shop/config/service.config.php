@@ -25,7 +25,7 @@ return [
         'Shop\Service\Product\Size'             => 'Shop\Service\Product\Size',
         'Shop\Service\Tax'                      => 'Shop\Service\Tax\Tax',
         'Shop\Service\Tax\Code'                 => 'Shop\Service\Tax\Code',
-        'Shop\Service\Tax\Rate'                 => 'Shop\Service\Tax\Rate'
+        'Shop\Service\Tax\Rate'                 => 'Shop\Service\Tax\Rate',
     ],
     'factories' => [
         'Shop\Options\CartCookie'               => 'Shop\Service\Factory\CartCookieOptions',

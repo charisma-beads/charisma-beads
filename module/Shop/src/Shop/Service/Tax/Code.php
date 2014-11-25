@@ -22,29 +22,14 @@ class Code extends AbstractRelationalMapperService
 
     /**
      * @param int $id
+     * @param null $col
      * @return array|mixed|\UthandoCommon\Model\ModelInterface
      */
-    public function getById($id)
+    public function getById($id, $col = null)
     {
-        $taxCode = parent::getById($id);
+        $taxCode = parent::getById($id, $col);
         $this->populate($taxCode, true);
         
         return $taxCode;
-    }
-
-    /**
-     * @param array $post
-     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
-     */
-    public function search(array $post)
-    {
-        $models = parent::search($post);
-
-        /* @var $model \Shop\Model\Tax\Code */
-        foreach ($models as $model) {
-        	$this->populate($model, true);
-        }
-     
-        return $models;
     }
 }

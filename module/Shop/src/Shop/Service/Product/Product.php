@@ -32,12 +32,12 @@ class Product extends AbstractRelationalMapperService
         'productImage'      => [
             'refCol'    => 'productId',
             'service'   => 'Shop\Service\Product\Image',
-            'getMethod' => 'getImagesByProductId',
+            //'getMethod' => 'getImagesByProductId',
         ],
         'productOption' => [
             'refCol'    => 'productId',
             'service'   => 'Shop\Service\Product\Option',
-            'getMethod' => 'getOptionsByProductId',
+            //'getMethod' => 'getOptionsByProductId',
         ],
     ];
 
@@ -106,24 +106,6 @@ class Product extends AbstractRelationalMapperService
 		}
 	
 		return $products;
-	}
-
-    /**
-     * @param array $post
-     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
-     */
-	public function search(array $post)
-	{
-	    $products = parent::search($post);
-
-	    foreach ($products as $product) {
-	        $this->populate($product, [
-                'productCategory',
-                'productGroup',
-            ]);
-	    }
-	    
-	    return $products;
 	}
 
     /**

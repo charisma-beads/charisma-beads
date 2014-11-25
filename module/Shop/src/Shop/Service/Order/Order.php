@@ -49,21 +49,6 @@ class Order extends AbstractRelationalMapperService
     }
 
     /**
-     * @param array $post
-     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
-     */
-    public function search(array $post)
-    {
-    	$orders = parent::search($post);
-
-    	foreach ($orders as $order) {
-    		$this->populate($order, ['orderStatus']);
-    	}
-    	 
-    	return $orders;
-    }
-
-    /**
      * @param CustomerModel $customer
      * @param array $postData
      * @return int

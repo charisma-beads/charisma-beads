@@ -21,22 +21,6 @@ class Image extends AbstractRelationalMapperService
     ];
 
     /**
-     * @param array $post
-     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
-     */
-    public function search(array $post)
-    {	 
-    	$models = parent::search($post);
-
-        /* @var $model \Shop\Model\Product\Image */
-    	foreach ($models as $model) {
-    	    $this->populate($model, true);
-    	}
-    	
-    	return $models;
-    }
-
-    /**
      * @param $id
      * @return \Zend\Db\ResultSet\HydratingResultSet
      */
@@ -46,8 +30,8 @@ class Image extends AbstractRelationalMapperService
 
         /* @var $mapper \Shop\Mapper\Product\Image */
         $mapper = $this->getMapper();
-        $options = $mapper->getImagesByProductId($id);
+        $images = $mapper->getImagesByProductId($id);
 
-        return $options;
+        return $images;
     }
 }

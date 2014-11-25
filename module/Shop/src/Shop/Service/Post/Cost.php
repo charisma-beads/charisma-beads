@@ -24,20 +24,4 @@ class Cost extends AbstractRelationalMapperService
             'service'   => 'Shop\Service\Post\Zone',
         ],
     ];
-
-    /**
-     * @param array $post
-     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
-     */
-	public function search(array $post)
-	{
-		$costs = parent::search($post);
-
-        /* @var $cost \Shop\Model\Post\Cost */
-		foreach ($costs as $cost) {
-			$this->populate($cost, true);
-		}
-	
-		return $costs;
-	}
 }

@@ -1,17 +1,12 @@
 <?php
 namespace Shop\Model\Cart;
 
-use UthandoCommon\Model\Collection;
+use UthandoCommon\Model\AbstractCollection;
 use UthandoCommon\Model\DateModifiedTrait;
 use UthandoCommon\Model\Model;
 use UthandoCommon\Model\ModelInterface;
 
-class Cart extends Collection implements
-    \Iterator,
-    \Countable,
-    \ArrayAccess,
-    \SeekableIterator,
-    ModelInterface
+class Cart extends AbstractCollection implements ModelInterface
 {
     use Model,
         DateModifiedTrait;

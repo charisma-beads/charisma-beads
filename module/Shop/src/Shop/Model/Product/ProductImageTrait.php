@@ -55,6 +55,9 @@ trait ProductImageTrait
     public function setProductImage($images)
     {
         if ($images instanceof Image) {
+            if (!$images->getProductImageId()) {
+                return $this;
+            }
             $images = [$images];
         }
 

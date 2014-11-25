@@ -16,7 +16,10 @@ trait ProductOptionTrait
     public function setProductOption($productOption)
     {
         if ($productOption instanceof Option) {
-            $productOption[] = [$productOption];
+            if (!$productOption->getProductOptionId()) {
+                return null;
+            }
+            $productOption = [$productOption];
         }
 
         $this->productOption = $productOption;
