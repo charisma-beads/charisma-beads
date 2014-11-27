@@ -2,6 +2,7 @@
 namespace Shop\Mapper\Cart;
 
 use UthandoCommon\Mapper\AbstractDbMapper;
+use Zend\Db\Sql\Where;
 
 class Cart extends AbstractDbMapper
 {
@@ -33,5 +34,17 @@ class Cart extends AbstractDbMapper
         $resultSet = $this->fetchResult($select);
         
         return $resultSet->current();
+    }
+
+    /**
+     * @param $time
+     * @return \Zend\Db\Adapter\Driver\ResultInterface
+     */
+    public function clearExpiredCarts($time)
+    {
+        $where = new Where();
+        $where->lessThan('dateModified', $time);
+        return $this->delete($where);
+
     }
 }

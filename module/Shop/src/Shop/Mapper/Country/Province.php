@@ -6,7 +6,7 @@ use UthandoCommon\Mapper\AbstractDbMapper;
 class Province extends AbstractDbMapper
 {
     protected $table = 'countryProvince';
-    protected $primary = 'countryProvinceId';
+    protected $primary = 'provinceId';
     
     public function getProvincesByCountryId($id)
     {

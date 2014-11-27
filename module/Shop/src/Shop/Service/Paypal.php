@@ -93,7 +93,7 @@ class Paypal implements ServiceLocatorAwareInterface
      */
     public function createPayment(OrderModel $order)
     {   
-        $options = $this->getOpions();
+        $options = $this->getOptions();
         
         // set payement method
         $payer = new Payer();
@@ -223,7 +223,7 @@ class Paypal implements ServiceLocatorAwareInterface
     public function getApiContent()
     {
         if (!$this->apiContext instanceof ApiContext) {
-            $options = $this->getOpions();
+            $options = $this->getOptions();
             
             $apiContext = new ApiContext(new OAuthTokenCredential(
             		$options->getClientId(),
@@ -272,7 +272,7 @@ class Paypal implements ServiceLocatorAwareInterface
     /**
      * @return PaypalOptions
      */
-    public function getOpions()
+    public function getOptions()
     {
         if (!$this->options instanceof PaypalOptions) {
             $options = $this->getServiceLocator()->get('Shop\Options\Paypal');

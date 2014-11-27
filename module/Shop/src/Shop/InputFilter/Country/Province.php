@@ -20,7 +20,7 @@ class Province extends InputFilter
         ]);
 
         $this->add([
-            'name'       => 'countryProvinceCode',
+            'name'       => 'provinceCode',
             'required'   => true,
             'filters'    => [
                 ['name' => 'StripTags'],

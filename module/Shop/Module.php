@@ -3,9 +3,11 @@
 namespace Shop;
 
 use Shop\Event\ServiceListener;
+use Zend\Console\Adapter\AdapterInterface as Console;
+use Zend\ModuleManager\Feature\ConsoleUsageProviderInterface;
 use Zend\Mvc\MvcEvent;
 
-class Module
+class Module implements ConsoleUsageProviderInterface
 {
     public function onBootStrap(MvcEvent $e)
     {
@@ -17,6 +19,13 @@ class Module
         
         //$sharedEventManager->attach('UthandoUser\Service\User', 'user.add', ['Shop\Event\UserEvent', 'userAdd']);
         //$sharedEventManager->attach('UthandoUser\Service\User', 'user.edit', ['Shop\Event\UserEvent', 'userEdit']);
+    }
+
+    public function getConsoleUsage(Console $console)
+    {
+        return [
+            'shopping-cart gc' => 'delete old and forgotten shopping carts in database',
+        ];
     }
 
     public function getConfig()
@@ -72,6 +81,11 @@ class Module
     public function getUthandoModelConfig()
     {
         return include __DIR__ . '/config/model.config.php';
+    }
+
+    public function getUthandoServiceConfig()
+    {
+        return include __DIR__ . '/config/uthandoServices.config.php';
     }
 
     public function getAutoloaderConfig()

@@ -2,7 +2,6 @@
 
 return [
     'invokables' => [
-        'Shop\Service\Cart'                     => 'Shop\Service\Cart\Cart',
         'Shop\Service\Cart\Item'                => 'Shop\Service\Cart\Item',
         'Shop\Service\Country'                  => 'Shop\Service\Country\Country',
         'Shop\Service\Country\Province'         => 'Shop\Service\Country\Province',

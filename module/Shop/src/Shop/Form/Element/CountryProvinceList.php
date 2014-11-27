@@ -42,13 +42,13 @@ class CountryProvinceList extends Select implements ServiceLocatorAwareInterface
             $provinces = $service->fetchAll();
         }
         
-        $proviceOptions = [];
+        $provinceOptions = [];
          
         foreach($provinces as $province) {
-        	$proviceOptions[$province->getCountryProvinceId()] = $province->getProvinceName();
+        	$provinceOptions[$province->getProvinceId()] = $province->getProvinceName();
         }
         
-        return $proviceOptions;
+        return $provinceOptions;
     }
     
 	/**

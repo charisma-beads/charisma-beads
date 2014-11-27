@@ -8,7 +8,7 @@ class Province extends Form
     public function init()
     {
         $this->add([
-            'name'	=> 'countryProvinceId',
+            'name'	=> 'provinceId',
             'type'	=> 'hidden',
         ]);
 
@@ -18,7 +18,7 @@ class Province extends Form
         ]);
 
         $this->add([
-            'name'			=> 'countryProvinceCode',
+            'name'			=> 'provinceCode',
             'type'			=> 'text',
             'attributes'	=> [
                 'placeholder'	=> 'Province Code:',

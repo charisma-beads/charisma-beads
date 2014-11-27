@@ -8,7 +8,7 @@ use Shop\Model\Product\Product as ProductModel;
 use Shop\Model\Product\MetaData as ProductMetaData;
 use Shop\Service\Cart\Cookie as CartCookie;
 use Shop\Service\Shipping;
-use Shop\Service\Tax;
+use Shop\Service\Tax\Tax;
 use Zend\Session\Container;
 use Zend\Stdlib\InitializableInterface;
 
@@ -134,6 +134,11 @@ class Cart extends AbstractMapperService implements InitializableInterface
         $this->isInitialized = true;
     }
 
+    public function attachEvents()
+    {
+
+    }
+
     /**
      * @param $verifier
      * @return CartModel
@@ -157,7 +162,7 @@ class Cart extends AbstractMapperService implements InitializableInterface
      */
     public function addItem(ProductModel $product, $qty)
     {
-        $this->init();
+        //$this->init();
         
         if (0 > $qty) {
             return false;
@@ -276,7 +281,7 @@ class Cart extends AbstractMapperService implements InitializableInterface
      */
     public function getCart()
     {
-        $this->init();
+        //$this->init();
         return $this->cart;
     }
 
@@ -287,7 +292,8 @@ class Cart extends AbstractMapperService implements InitializableInterface
     public function setCart($cart = null)
     {
         if (! $cart instanceof CartModel) {
-            $cart = $this->getMapper()->getModel();
+            /* @var $cart \Shop\Model\Cart\Cart */
+            $cart = $this->getModel();
             $cart->setExpires($this->getCartCookieService()->getCookieConfig()->getExpiry())
                 ->setVerifyId($this->getCartCookieService()->setCartVerifierCookie());
             $cartId = $this->save($cart);
@@ -411,6 +417,30 @@ class Cart extends AbstractMapperService implements InitializableInterface
     {
         $this->calculateTotals();
         return $this->taxTotal + $this->shippingTax;
+    }
+
+    /**
+     * Clear old, forgotten and abandoned shopping carts.
+     *
+     * @return int
+     */
+    public function clearExpired()
+    {
+        /* @var $cartMapper \Shop\Mapper\Cart\Cart */
+        $cartMapper = $this->getMapper();
+        /* @var $cartCookie \Shop\Options\CartCookieOptions */
+        $cartCookie = $this->getService('Shop\Options\CartCookie');
+        $expiry = $cartCookie->getExpiry();
+
+        $date = new \DateTime();
+        $timestamp = $date->getTimestamp();
+        $expiry  = $timestamp - $expiry;
+        $date->setTimestamp($expiry);
+        // TODO: add date format to shop options.
+        $expiryDate = $date->format('Y-m-d H:i:s');
+
+        return $cartMapper->clearExpiredCarts($expiryDate);
+
     }
 
     /**

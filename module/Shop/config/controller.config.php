@@ -1,7 +1,8 @@
 <?php
 return [
     'invokables' => [
-        'Shop\Controller\Cart'                  => 'Shop\Controller\Cart',
+        'Shop\Controller\Cart'                  => 'Shop\Controller\Cart\Cart',
+        'Shop\Controller\Cart\Console'          => 'Shop\Controller\Cart\Console',
         'Shop\Controller\Catalog'               => 'Shop\Controller\Catalog',
         'Shop\Controller\Checkout'              => 'Shop\Controller\Checkout',
         'Shop\Controller\Country'               => 'Shop\Controller\Country\Country',

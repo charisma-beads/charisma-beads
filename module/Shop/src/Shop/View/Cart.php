@@ -18,15 +18,19 @@ class Cart extends AbstractViewHelper
 	 * @var CurrencyFormat
 	 */
 	protected $currencyHelper;
-	
-	public function __invoke()
+
+    /**
+     * @return $this
+     */
+    public function __invoke()
 	{
 		if (!$this->cartService instanceof CartService) {
 			$this->cartService = $this->getServiceLocator()
 				->getServiceLocator()
-				->get('Shop\Service\Cart');
+                ->get('UthandoServiceManager')
+                ->get('Shop\Service\Cart');
 		}
-	
+
 		return $this;
 	}
 	

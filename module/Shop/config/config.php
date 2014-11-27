@@ -987,8 +987,8 @@ return [
                                                     'defaults' => [
                                                         'action' => 'edit',
                                                         'force-ssl' => 'ssl'
-                                                    ]
-                                                ]
+                                                    ],
+                                                ],
                                             ],
                                             'page' => [
                                                 'type' => 'Segment',
@@ -1001,18 +1001,34 @@ return [
                                                         'action' => 'list',
                                                         'page' => 1,
                                                         'force-ssl' => 'ssl'
-                                                    ]
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
-            ]
+                                                    ],
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
         ]
+    ],
+    'console' => [
+        'router' => [
+            'routes' => [
+                'shop/cart/gc' => [
+                    'options' => [
+                        'route' => 'shopping-cart gc',
+                        'defaults' => array(
+                            '__NAMESPACE__' => 'Shop\Controller\Cart',
+                            'controller' => 'Console',
+                            'action' => 'gc'
+                        ),
+                    ],
+                ],
+            ],
+        ],
     ],
     'navigation' => [
         'user' => [

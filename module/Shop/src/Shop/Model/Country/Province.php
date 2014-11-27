@@ -11,7 +11,7 @@ class Province implements ModelInterface
     /**
      * @var int
      */
-    protected $countryProvinceId;
+    protected $provinceId;
     
     /**
      * @var int
@@ -21,7 +21,7 @@ class Province implements ModelInterface
     /**
      * @var string
      */
-    protected $countryProvinceCode;
+    protected $provinceCode;
     
     /**
      * @var string
@@ -51,18 +51,18 @@ class Province implements ModelInterface
     /**
      * @return number
      */
-	public function getCountryProvinceId()
+	public function getProvinceId()
 	{
-		return $this->countryProvinceId;
+		return $this->provinceId;
 	}
 
 	/**
-	 * @param int $countryProvinceId
+	 * @param int $provinceId
 	 * @return \Shop\Model\Country\Province
 	 */
-	public function setCountryProvinceId($countryProvinceId)
+	public function setProvinceId($provinceId)
 	{
-		$this->countryProvinceId = $countryProvinceId;
+		$this->provinceId = $provinceId;
 		return $this;
 	}
 
@@ -87,18 +87,18 @@ class Province implements ModelInterface
 	/**
 	 * @return string
 	 */
-	public function getCountryProvinceCode()
+	public function getProvinceCode()
 	{
-		return $this->countryProvinceCode;
+		return $this->provinceCode;
 	}
 
 	/**
 	 * @param string $countryProvinceCode
 	 * @return \Shop\Model\Country\Province
 	 */
-	public function setCountryProvinceCode($countryProvinceCode)
+	public function setProvinceCode($countryProvinceCode)
 	{
-		$this->countryProvinceCode = $countryProvinceCode;
+		$this->provinceCode = $countryProvinceCode;
 		return $this;
 	}
 

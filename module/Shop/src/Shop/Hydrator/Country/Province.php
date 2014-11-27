@@ -12,9 +12,9 @@ class Province extends AbstractHydrator
     public function extract ($object)
     {
         return [
-            'countryProvinceId'         => $object->getCountryProvinceId(),
+            'provinceId'                => $object->getProvinceId(),
             'countryId'                 => $object->getCountryId(),
-            'countryProvinceCode'       => $object->getCountryProvinceCode(),
+            'provinceCode'              => $object->getProvinceCode(),
             'provinceName'              => $object->getProvinceName(),
             'provinceAlternateNames'    => $object->getProvinceAlternateNames(),
             'lft'                       => $object->getLft(),

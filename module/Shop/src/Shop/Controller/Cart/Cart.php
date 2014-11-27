@@ -1,41 +1,57 @@
 <?php
-namespace Shop\Controller;
+namespace Shop\Controller\Cart;
 
+use Shop\Service\Cart\Cart as CartService;
+use Shop\Service\Customer\Address;
+use Shop\Service\Product\Product;
 use Shop\ShopException;
+use UthandoCommon\Controller\ServiceTrait;
+use Zend\Http\Request;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
+/**
+ * Class Cart
+ * @package Shop\Controller\Cart
+ * @method Request getRequest()
+ */
 class Cart extends AbstractActionController
 {
+    use ServiceTrait;
+
     /**
-     * @var \Shop\Model\Cart\Cart
+     * @var CartService
      */
     protected $cart;
 
     /**
-     * @var \Shop\Service\Product|Product
+     * @var Product
      */
     protected $productService;
 
     /**
-     * @var \Shop\Service\Customer\Address
+     * @var Address
      */
     protected $customerAddressService;
 
     public function addAction()
     {
-        if (! $this->request->isPost()) {
+        if (! $this->getRequest()->isPost()) {
             return $this->redirect()->toRoute('shop');
         }
-        
-        $product = $this->getProductService()->getFullProductById($this->params()
+
+        /* @var $productService Product */
+        $productService = $this->getService('Shop\Service\Product');
+        $product = $productService->getFullProductById($this->params()
             ->fromPost('productId'));
         
         if (null === $product) {
             throw new ShopException('Product could not be added to cart as it does not exist');
         }
-        
-        $this->getCart()->addItem($product, $this->params()
+
+        /* @var $cart CartService */
+        $cart = $this->getService('Shop\Service\Cart');
+        $cart->addItem($product, $this->params()
             ->fromPost('qty'));
         
         $this->flashMessenger()->addInfoMessage('You have added ' . $this->params()
@@ -48,7 +64,9 @@ class Cart extends AbstractActionController
     public function viewAction()
     {
         if ($this->identity()) {
-            $countryId = $this->getCustomerAddressService()
+            /* @var $customerAddress Address */
+            $customerAddress = $this->getService('Shop\Service\Customer\Address');
+            $countryId = $customerAddress
                 ->getAddressByUserId($this->identity()
                 ->getUserId(), 'delivery')
                 ->getCountryId();
@@ -64,9 +82,12 @@ class Cart extends AbstractActionController
     public function removeAction()
     {
         $id = $this->params()->fromRoute('id', 0);
+
+        /* @var $cart CartService */
+        $cart = $this->getService('Shop\Service\Cart');
         
         if ($id) {
-            $this->getCart()->removeItem($id);
+            $cart->removeItem($id);
         }
         
         return $this->redirect()->toRoute('shop/cart', [
@@ -76,17 +97,24 @@ class Cart extends AbstractActionController
 
     public function updateAction()
     {
-        if (! $this->request->isPost()) {
+        if (! $this->getRequest()->isPost()) {
             return $this->redirect()->toRoute('shop/cart', [
                 'action' => 'view'
             ]);
         }
+
+        /* @var $productService Product */
+        $productService = $this->getService('Shop\Service\Product');
+
+        /* @var $cart CartService */
+        $cart = $this->getService('Shop\Service\Cart');
         
         foreach ($this->params()->fromPost('quantity') as $id => $value) {
-            $product = $this->getProductService()->getFullProductById($id);
+
+            $product = $productService->getFullProductById($id);
             
             if (null !== $product) {
-                $this->getCart()->addItem($product, $value);
+                $cart->addItem($product, $value);
             }
         }
         
@@ -97,52 +125,13 @@ class Cart extends AbstractActionController
 
     public function emptyAction()
     {
-        $this->getCart()->clear();
+        /* @var $cart CartService */
+        $cart = $this->getService('Shop\Service\Cart');
+
+        $cart->clear();
         
         return $this->redirect()->toRoute('shop/cart', [
             'action' => 'view'
         ]);
-    }
-
-    /**
-     *
-     * @return \Shop\Model\Cart\Cart
-     */
-    protected function getCart()
-    {
-        if (! $this->cart) {
-            $sl = $this->getServiceLocator();
-            $this->cart = $sl->get('Shop\Service\Cart');
-        }
-        
-        return $this->cart;
-    }
-
-    /**
-     *
-     * @return \Shop\Service\Product
-     */
-    protected function getProductService()
-    {
-        if (! $this->productService) {
-            $sl = $this->getServiceLocator();
-            $this->productService = $sl->get('Shop\Service\Product');
-        }
-        
-        return $this->productService;
-    }
-
-    /**
-     *
-     * @return \Shop\Service\Customer\Address
-     */
-    public function getCustomerAddressService()
-    {
-        if (! $this->customerAddressService) {
-            $sl = $this->getServiceLocator();
-            $this->customerAddressService = $sl->get('Shop\Service\Customer\Address');
-        }
-        
-        return $this->customerAddressService;
     }
 }
