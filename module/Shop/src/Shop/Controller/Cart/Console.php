@@ -11,11 +11,15 @@
 
 namespace Shop\Controller\Cart;
 
+use Shop\Service\Cart\Cart;
+use UthandoCommon\Controller\ServiceTrait;
 use Zend\Console\Request;
 use Zend\Mvc\Controller\AbstractActionController;
 
 class Console extends AbstractActionController
 {
+    use ServiceTrait;
+
     /**
      * Clears all old expired carts
      */
@@ -27,9 +31,8 @@ class Console extends AbstractActionController
             throw new \RuntimeException('You can only use this action from a console!');
         }
 
-        $sl = $this->getServiceLocator();
-        /* @var $service \Shop\Service\Cart\Cart */
-        $service = $sl->get('Shop\Service\Cart');
+        /* @var $service Cart */
+        $service = $this->getService('Shop\Service\Cart', ['initialize' => false]);
 
         $result = $service->clearExpired();
 

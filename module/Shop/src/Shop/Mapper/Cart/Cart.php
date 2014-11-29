@@ -38,13 +38,24 @@ class Cart extends AbstractDbMapper
 
     /**
      * @param $time
-     * @return \Zend\Db\Adapter\Driver\ResultInterface
+     * @return \Zend\Db\ResultSet\HydratingResultSet
      */
-    public function clearExpiredCarts($time)
+    public function getExpiredCarts($time)
+    {
+        $select = $this->getSelect();
+        $select->where->lessThan('dateModified', $time);
+
+        return $this->fetchResult($select);
+    }
+
+    /**
+     * @param array $ids
+     * @return int
+     */
+    public function deleteCartsByIds(array $ids)
     {
         $where = new Where();
-        $where->lessThan('dateModified', $time);
+        $where->in('cartId', $ids);
         return $this->delete($where);
-
     }
 }

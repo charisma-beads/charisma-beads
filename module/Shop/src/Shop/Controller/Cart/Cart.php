@@ -1,6 +1,7 @@
 <?php
 namespace Shop\Controller\Cart;
 
+use Shop\Model\Cart\Item;
 use Shop\Service\Cart\Cart as CartService;
 use Shop\Service\Customer\Address;
 use Shop\Service\Product\Product;
@@ -19,21 +20,6 @@ class Cart extends AbstractActionController
 {
     use ServiceTrait;
 
-    /**
-     * @var CartService
-     */
-    protected $cart;
-
-    /**
-     * @var Product
-     */
-    protected $productService;
-
-    /**
-     * @var Address
-     */
-    protected $customerAddressService;
-
     public function addAction()
     {
         if (! $this->getRequest()->isPost()) {
@@ -42,8 +28,9 @@ class Cart extends AbstractActionController
 
         /* @var $productService Product */
         $productService = $this->getService('Shop\Service\Product');
-        $product = $productService->getFullProductById($this->params()
-            ->fromPost('productId'));
+        $product = $productService->getFullProductById(
+            $this->params()->fromPost('productId')
+        );
         
         if (null === $product) {
             throw new ShopException('Product could not be added to cart as it does not exist');
@@ -51,11 +38,17 @@ class Cart extends AbstractActionController
 
         /* @var $cart CartService */
         $cart = $this->getService('Shop\Service\Cart');
-        $cart->addItem($product, $this->params()
-            ->fromPost('qty'));
-        
-        $this->flashMessenger()->addInfoMessage('You have added ' . $this->params()
-            ->fromPost('qty') . ' X ' . $product->getName() . ' to your cart');
+        $result = $cart->addItem(
+            $product,
+            $this->params()->fromPost('qty')
+        );
+
+        if ($result instanceof Item) {
+            $this->flashMessenger()->addInfoMessage(
+                'You have added ' . $result->getQuantity() . ' X ' . $result->getMetadata()->getName() . ' to your cart'
+            );
+        }
+
         
         return $this->redirect()->toUrl($this->params()
             ->fromPost('returnTo'));

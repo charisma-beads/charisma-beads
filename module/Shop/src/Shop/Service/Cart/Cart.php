@@ -1,7 +1,8 @@
 <?php
 namespace Shop\Service\Cart;
 
-use UthandoCommon\Service\AbstractMapperService;
+use Shop\Service\StockControl;
+use UthandoCommon\Model\CollectionException;
 use Shop\Model\Cart\Cart as CartModel;
 use Shop\Model\Cart\Item as CartItem;
 use Shop\Model\Product\Product as ProductModel;
@@ -9,11 +10,15 @@ use Shop\Model\Product\MetaData as ProductMetaData;
 use Shop\Service\Cart\Cookie as CartCookie;
 use Shop\Service\Shipping;
 use Shop\Service\Tax\Tax;
+use UthandoCommon\Service\AbstractMapperService;
 use Zend\Session\Container;
 use Zend\Stdlib\InitializableInterface;
 
 class Cart extends AbstractMapperService implements InitializableInterface
 {
+    /**
+     * @var string
+     */
     protected $serviceAlias = 'ShopCart';
 
     /**
@@ -88,14 +93,26 @@ class Cart extends AbstractMapperService implements InitializableInterface
     protected $taxTotal = 0;
 
     /**
-     * @throws \UthandoCommon\Model\CollectionException
+     * Attach events
+     */
+    public function attachEvents()
+    {
+        /* @var $stockControl StockControl */
+        $stockControl = $this->getServiceLocator()->get('Shop\Service\StockControl');
+
+        $this->getEventManager()->attach('stock.check', [$stockControl, 'check']);
+        $this->getEventManager()->attach('stock.restore', [$stockControl, 'restore']);
+    }
+
+    /**
+     * @throws CollectionException
      */
     public function init()
     {
         if ($this->isInitialized) {
             return;
         }
-        
+
         $cart = null;
         
         // check first if there is a cartId in the session data,
@@ -120,23 +137,32 @@ class Cart extends AbstractMapperService implements InitializableInterface
 
         // load any cart items
         if ($cart) {
-            $itemsService = $this->getCartItemService();
-            $items = $itemsService->getCartItemsByCartId($cart->getCartId());
-            
-            /* @var $item \Shop\Model\Cart\Item */
-            foreach ($items as $item) {
-                $cart->offsetSet($item->getMetadata()
-                    ->getProductId(), $item);  
-            }
+            $cart = $this->loadCartItems($cart);
         }
         
         $this->setCart($cart);
         $this->isInitialized = true;
     }
 
-    public function attachEvents()
+    /**
+     * @param CartModel $cart
+     * @return CartModel
+     * @throws CollectionException
+     */
+    public function loadCartItems(CartModel $cart)
     {
+        $itemsService = $this->getCartItemService();
+        $items = $itemsService->getCartItemsByCartId($cart->getCartId());
 
+        /* @var $item \Shop\Model\Cart\Item */
+        foreach ($items as $item) {
+            $cart->offsetSet(
+                $item->getMetadata()->getProductId(),
+                $item
+            );
+        }
+
+        return $cart;
     }
 
     /**
@@ -162,17 +188,21 @@ class Cart extends AbstractMapperService implements InitializableInterface
      */
     public function addItem(ProductModel $product, $qty)
     {
-        //$this->init();
-        
         if (0 > $qty) {
             return false;
         }
         
         $cart = $this->getCart();
 
-
         /** @var $cartItem \Shop\Model\Cart\Item */
         $cartItem = ($cart->offsetExists($product->getProductId())) ? $cart->offsetGet($product->getProductId()) : new CartItem();
+
+        $argv = compact('product', 'qty', 'cartItem');
+        $argv = $this->prepareEventArguments($argv);
+
+        $this->getEventManager()->trigger('stock.check', $this, $argv);
+
+        $qty = $argv['qty'];
         
         if (0 == $qty) {
             $this->removeItem($cartItem->getCartItemId());
@@ -281,7 +311,6 @@ class Cart extends AbstractMapperService implements InitializableInterface
      */
     public function getCart()
     {
-        //$this->init();
         return $this->cart;
     }
 
@@ -291,7 +320,7 @@ class Cart extends AbstractMapperService implements InitializableInterface
      */
     public function setCart($cart = null)
     {
-        if (! $cart instanceof CartModel) {
+        if (!$cart instanceof CartModel) {
             /* @var $cart \Shop\Model\Cart\Cart */
             $cart = $this->getModel();
             $cart->setExpires($this->getCartCookieService()->getCookieConfig()->getExpiry())
@@ -439,7 +468,23 @@ class Cart extends AbstractMapperService implements InitializableInterface
         // TODO: add date format to shop options.
         $expiryDate = $date->format('Y-m-d H:i:s');
 
-        return $cartMapper->clearExpiredCarts($expiryDate);
+        $carts = $this->getMapper()->getExpiredCarts($expiryDate);
+
+        if ($carts->count() == 0) {
+            return 0;
+        }
+
+        foreach ($carts as $cart) {
+            $this->loadCartItems($cart);
+        }
+
+        $ids = [];
+        $argv = compact('carts', 'ids');
+        $argv = $this->prepareEventArguments($argv);
+        $this->getEventManager()->trigger('stock.restore', $this, $argv);
+        $ids = $argv['ids'];
+
+        return $cartMapper->deleteCartsByIds($ids);
 
     }
 

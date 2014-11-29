@@ -22,6 +22,7 @@ return [
         'Shop\Service\Product\Image'            => 'Shop\Service\Product\Image',
         'Shop\Service\Product\Option'           => 'Shop\Service\Product\Option',
         'Shop\Service\Product\Size'             => 'Shop\Service\Product\Size',
+        'Shop\Service\StockControl'             => 'Shop\Service\StockControl',
         'Shop\Service\Tax'                      => 'Shop\Service\Tax\Tax',
         'Shop\Service\Tax\Code'                 => 'Shop\Service\Tax\Code',
         'Shop\Service\Tax\Rate'                 => 'Shop\Service\Tax\Rate',
