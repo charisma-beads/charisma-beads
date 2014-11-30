@@ -82,7 +82,7 @@ class Checkout extends AbstractActionController
                 $orderId = $this->getOrderService()->processOrderFromCart($customer, $formValues);
                 
                 if ($orderId) {
-                    $this->getCartService()->clear();
+                    $this->getCartService()->clear(false);
                     
                     // need to email order,
                     // add params to session and redirect to payment page.

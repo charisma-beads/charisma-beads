@@ -259,7 +259,7 @@ class Cart extends AbstractMapperService implements InitializableInterface
     public function removeItem($id)
     {
         $cartItem = $this->getCartItemService()->getById($id);;
-        
+
         $argv = compact('cartItem');
         $argv = $this->prepareEventArguments($argv);
 
@@ -269,16 +269,20 @@ class Cart extends AbstractMapperService implements InitializableInterface
 
     /**
      * clears shopping cart of all items
+     * @param bool $restoreStock
      */
-    public function clear()
+    public function clear($restoreStock = true)
     {
         $cart = $this->getCart();
-        $argv = compact('cart');
-        $argv = $this->prepareEventArguments($argv);
 
-        $this->getEventManager()->trigger('stock.restore.cart', $this, $argv);
+        if ($restoreStock) {
+            $argv = compact('cart');
+            $argv = $this->prepareEventArguments($argv);
 
-        $this->getCart()->clear();
+            $this->getEventManager()->trigger('stock.restore.cart', $this, $argv);
+        }
+
+        $cart->clear();
         $this->delete($this->getCart()->getCartId());
         $this->getCartCookieService()->removeCartVerifierCookie();
         unset($this->cart);
