@@ -12,8 +12,9 @@
 namespace Shop\Service;
 
 use Shop\Model\Cart\Cart;
-use Shop\Model\Cart\Item;
-use Shop\Model\Product\Product;
+use Shop\Model\Cart\Item as CartItem;
+use Shop\Model\Product\Product as ProductModel;
+use Shop\Service\Product\Product;
 use Zend\EventManager\Event;
 
 /**
@@ -23,17 +24,54 @@ use Zend\EventManager\Event;
 class StockControl
 {
     /**
+     * @var Product
+     */
+    protected $productService;
+
+    /**
+     * @var Event
+     */
+    protected $event;
+
+    public function init(Event $e)
+    {
+        $this->productService = $e->getTarget()
+            ->getService('Shop\Service\Product');
+
+        $this->event = $e;
+        $event = $e->getName();
+
+        switch ($event) {
+            case 'stock.check':
+                $this->check();
+                break;
+            case 'stock.save':
+                $this->save($this->event->getParam('product'));
+                break;
+            case 'stock.restore':
+                $this->restore($this->event->getParam('cartItem'));
+                break;
+            case 'stock.restore.cart':
+                $this->restoreStockFromOneCart($this->event->getParam('cart'));
+                break;
+            case 'stock.restore.carts':
+                $this->restoreStockFromManyCarts($this->event->getParam('carts'));
+                break;
+        }
+    }
+
+    /**
      * Check if product is out of stock
      *
-     * @param Event $e
+     * @internal param Event $e
      */
-    public function check(Event $e)
+    public function check()
     {
-        /* @var $cartItem Item */
-        $cartItem = $e->getParam('cartItem');
-        /* @var $product Product */
-        $product = $e->getParam('product');
-        $qty     = $e->getParam('qty');
+        /* @var $cartItem CartItem */
+        $cartItem = $this->event->getParam('cartItem');
+        /* @var $product ProductModel */
+        $product = $this->event->getParam('product');
+        $qty     = $this->event->getParam('qty');
 
         $currentCartQuantity = $cartItem->getQuantity();
         // calculate the difference that's in the cart and what is asked for.
@@ -64,49 +102,79 @@ class StockControl
         }
 
         // set the adjusted params
-        $e->setParam('qty', $qty);
-        $e->setParam('product', $product);
-
-        // update levels in database.
-        /* @var $productService \Shop\Service\Product\Product */
-        $productService = $e->getTarget()->getService('Shop\Service\Product');
-
-        $productService->save($product);
+        $this->event->setParam('qty', $qty);
+        $this->event->setParam('product', $product);
     }
 
     /**
-     * Restore unwanted product quantities
+     * Put back any unwanted quantities of a product
      *
-     * @param Event $e
+     * @param CartItem $item
+     * @throws \UthandoCommon\Service\ServiceException
      */
-    public function restore(Event $e)
+    public function restore(CartItem $item)
     {
-        $ids = $e->getParam('ids');
-        $carts = $e->getParam('carts');
-        /* @var $productService \Shop\Service\Product\Product */
-        $productService = $e->getTarget()->getService('Shop\Service\Product');
+        /* @var $product ProductModel */
+        $product = $this->productService->getById(
+            $item->getMetadata()->getProductId()
+        );
+
+        // restore stock items and ignore the rest
+        if ($product->getQuantity() >= 0) {
+            $product->setQuantity(
+                $product->getQuantity() + $item->getQuantity()
+            );
+            $this->productService->save($product);
+        }
+    }
+
+    /**
+     * restore unwanted product quantities from one cart.
+     * @param $cart
+     */
+    public function restoreStockFromOneCart($cart)
+    {
+        $this->processCart($cart);
+    }
+
+    /**
+     * saves product to database
+     *
+     * @param Product $product
+     * @throws \UthandoCommon\Service\ServiceException
+     */
+    public function save($product)
+    {
+        $this->productService->save($product);
+    }
+
+    /**
+     * Restore unwanted product quantities from many carts
+     *
+     * @param array $carts
+     */
+    public function restoreStockFromManyCarts($carts)
+    {
+        $ids = [];
 
         /* @var $cart Cart */
         foreach ($carts as $cart) {
             $ids[] = $cart->getCartId();
-
-            /* @var $item Item */
-            foreach ($cart as $item) {
-                /* @var $product Product */
-                $product = $productService->getById(
-                    $item->getMetadata()->getProductId()
-                );
-
-                // restore stock items and ignore the rest
-                if ($product->getQuantity() >= 0) {
-                    $product->setQuantity(
-                        $product->getQuantity() + $item->getQuantity()
-                    );
-                    $productService->save($product);
-                }
-            }
+            $this->processCart($cart);
         }
 
-        $e->setParam('ids', $ids);
+        $this->event->setParam('ids', $ids);
+    }
+
+    /**
+     * @param Cart $cart
+     * @throws \UthandoCommon\Service\ServiceException
+     */
+    public function processCart(Cart $cart)
+    {
+        /* @var $item CartItem */
+        foreach ($cart as $item) {
+            $this->restore($item);
+        }
     }
 } 

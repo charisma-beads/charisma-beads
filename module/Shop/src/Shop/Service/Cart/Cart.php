@@ -100,8 +100,13 @@ class Cart extends AbstractMapperService implements InitializableInterface
         /* @var $stockControl StockControl */
         $stockControl = $this->getServiceLocator()->get('Shop\Service\StockControl');
 
-        $this->getEventManager()->attach('stock.check', [$stockControl, 'check']);
-        $this->getEventManager()->attach('stock.restore', [$stockControl, 'restore']);
+        $this->getEventManager()->attach([
+            'stock.check',
+            'stock.save',
+            'stock.restore',
+            'stock.restore.cart',
+            'stock.restore.carts'
+        ], [$stockControl, 'init']);
     }
 
     /**
@@ -218,6 +223,8 @@ class Cart extends AbstractMapperService implements InitializableInterface
         $cart->offsetSet($product->getProductId(), $cartItem);
         
         $this->persist();
+
+        $this->getEventManager()->trigger('stock.save', $this, $argv);
         
         return $cartItem;
     }
@@ -251,6 +258,12 @@ class Cart extends AbstractMapperService implements InitializableInterface
      */
     public function removeItem($id)
     {
+        $cartItem = $this->getCartItemService()->getById($id);;
+        
+        $argv = compact('cartItem');
+        $argv = $this->prepareEventArguments($argv);
+
+        $this->getEventManager()->trigger('stock.restore', $this, $argv);
         $this->getCartItemService()->delete($id);
     }
 
@@ -259,6 +272,12 @@ class Cart extends AbstractMapperService implements InitializableInterface
      */
     public function clear()
     {
+        $cart = $this->getCart();
+        $argv = compact('cart');
+        $argv = $this->prepareEventArguments($argv);
+
+        $this->getEventManager()->trigger('stock.restore.cart', $this, $argv);
+
         $this->getCart()->clear();
         $this->delete($this->getCart()->getCartId());
         $this->getCartCookieService()->removeCartVerifierCookie();
@@ -478,10 +497,9 @@ class Cart extends AbstractMapperService implements InitializableInterface
             $this->loadCartItems($cart);
         }
 
-        $ids = [];
-        $argv = compact('carts', 'ids');
+        $argv = compact('carts');
         $argv = $this->prepareEventArguments($argv);
-        $this->getEventManager()->trigger('stock.restore', $this, $argv);
+        $this->getEventManager()->trigger('stock.restore.carts', $this, $argv);
         $ids = $argv['ids'];
 
         return $cartMapper->deleteCartsByIds($ids);
