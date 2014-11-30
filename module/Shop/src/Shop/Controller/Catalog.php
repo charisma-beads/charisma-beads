@@ -78,8 +78,9 @@ class Catalog extends AbstractActionController
         
         $sl = $this->getServiceLocator();
         
-        $form = $sl->get('FormElementManager')->get('Shop\Form\Catalog\Search');
-        $form->setInputFilter($sl->get('Shop\InputFilter\Catalog\Search'));
+        $form = $sl->get('FormElementManager')->get('ShopCatalogSearch');
+        $inputFilter = $sl->get('InputFilterManager')->get('ShopCatalogSearch');
+        $form->setInputFilter($inputFilter);
         $form->setData($this->params()->fromPost());
         $form->isValid();
         
