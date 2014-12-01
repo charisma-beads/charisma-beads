@@ -48,7 +48,7 @@ class Product extends AbstractDbMapper
 		return $this->fetchResult($select);
 	}
 	
-	public function search(array $search, $sort, Select $select = null)
+	public function search(array $search, $sort, $select = null)
 	{
 		$select = $this->getSql()->select();
 		$select->from($this->table)

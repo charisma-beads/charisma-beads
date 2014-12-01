@@ -70,7 +70,7 @@ class Category extends AbstractNestedSet
 	    return $this->fetchResult($select);
 	}
 	
-	public function search(array $search, $sort, Select $select = null)
+	public function search(array $search, $sort, $select = null)
 	{
 	    $select = $this->getFullTree();
 	    

@@ -9,7 +9,7 @@ class Code extends AbstractDbMapper
 	protected $table = 'taxCode';
 	protected $primary = 'taxCodeId';
 	
-	public function search(array $search, $sort, Select $select = null)
+	public function search(array $search, $sort, $select = null)
 	{
 		$select = $this->getSql()->select();
 		$select->from($this->getTable())

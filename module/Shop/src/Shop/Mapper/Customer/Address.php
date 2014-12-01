@@ -1,7 +1,6 @@
 <?php
 namespace Shop\Mapper\Customer;
 
-use Shop\ShopException;
 use UthandoCommon\Mapper\AbstractDbMapper;
 use Zend\Db\Sql\Select;
 

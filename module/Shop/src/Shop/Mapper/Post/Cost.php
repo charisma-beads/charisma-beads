@@ -9,7 +9,7 @@ class Cost extends AbstractDbMapper
     protected $table = 'postCost';
     protected $primary = 'postCostId';
     
-    public function search(array $search, $sort, Select $select = null)
+    public function search(array $search, $sort, $select = null)
     {
     	$select = $this->getSql()->select($this->table);
     	

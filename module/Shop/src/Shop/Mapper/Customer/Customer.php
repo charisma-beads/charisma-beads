@@ -22,7 +22,7 @@ class Customer extends AbstractDbMapper
      * @param Select $select
      * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
      */
-    public function search(array $search, $sort, Select $select = null)
+    public function search(array $search, $sort, $select = null)
     {	
     	if (str_replace('-', '', $sort) == 'name') {
     		if (strchr($sort,'-')) {

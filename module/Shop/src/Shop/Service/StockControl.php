@@ -15,6 +15,7 @@ use Shop\Model\Cart\Cart;
 use Shop\Model\Cart\Item as CartItem;
 use Shop\Model\Product\Product as ProductModel;
 use Shop\Service\Product\Product;
+use UthandoCommon\Service\ServiceException;
 use Zend\EventManager\Event;
 
 /**
@@ -33,6 +34,11 @@ class StockControl
      */
     protected $event;
 
+    /**
+     * Set up the events to listen for
+     *
+     * @param Event $e
+     */
     public function init(Event $e)
     {
         $this->productService = $e->getTarget()
@@ -86,7 +92,7 @@ class StockControl
         // set quantity according to stock availability
         // and update product quantity
         if ($currentCartQuantity < $qty) {
-            // if request is more than we have in stock
+            // if request is more than we have in stock, only allow what is in stock
             if ($product->getQuantity() < $diff) {
                 $diff = $product->getQuantity();
                 $qty = $currentCartQuantity + $diff;
@@ -95,7 +101,7 @@ class StockControl
             $product->setQuantity($product->getQuantity() - $diff);
         }
 
-        // if we reduce the cart quantity, then put it back into stock
+        // if we reduce the cart quantity, then put excess back into stock
         if ($currentCartQuantity > $qty) {
             $qty = $currentCartQuantity - $diff;
             $product->setQuantity($product->getQuantity() + $diff);
@@ -110,7 +116,7 @@ class StockControl
      * Put back any unwanted quantities of a product
      *
      * @param CartItem $item
-     * @throws \UthandoCommon\Service\ServiceException
+     * @throws ServiceException
      */
     public function restore(CartItem $item)
     {
@@ -130,6 +136,7 @@ class StockControl
 
     /**
      * restore unwanted product quantities from one cart.
+     *
      * @param $cart
      */
     public function restoreStockFromOneCart($cart)
@@ -138,10 +145,8 @@ class StockControl
     }
 
     /**
-     * saves product to database
-     *
-     * @param Product $product
-     * @throws \UthandoCommon\Service\ServiceException
+     * @param $product
+     * @throws ServiceException
      */
     public function save($product)
     {
@@ -168,7 +173,7 @@ class StockControl
 
     /**
      * @param Cart $cart
-     * @throws \UthandoCommon\Service\ServiceException
+     * @throws ServiceException
      */
     public function processCart(Cart $cart)
     {

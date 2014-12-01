@@ -10,7 +10,7 @@ class Country extends AbstractDbMapper
     protected $table = 'country';
     protected $primary = 'countryId';
     
-    public function search(array $search, $sort, Select $select = null)
+    public function search(array $search, $sort, $select = null)
     {
     	$select = $this->getSql()->select($this->table);
     	$select->join(

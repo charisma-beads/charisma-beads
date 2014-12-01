@@ -1,15 +1,17 @@
 <?php
 namespace Shop\Service\Cart;
 
-use Shop\Service\StockControl;
-use UthandoCommon\Model\CollectionException;
+use Shop\Mapper\Cart\Cart as CartMapper;
 use Shop\Model\Cart\Cart as CartModel;
 use Shop\Model\Cart\Item as CartItem;
 use Shop\Model\Product\Product as ProductModel;
 use Shop\Model\Product\MetaData as ProductMetaData;
+use Shop\Options\CartCookieOptions;
 use Shop\Service\Cart\Cookie as CartCookie;
 use Shop\Service\Shipping;
+use Shop\Service\StockControl;
 use Shop\Service\Tax\Tax;
+use UthandoCommon\Model\CollectionException;
 use UthandoCommon\Service\AbstractMapperService;
 use Zend\Session\Container;
 use Zend\Stdlib\InitializableInterface;
@@ -126,7 +128,7 @@ class Cart extends AbstractMapperService implements InitializableInterface
         if (isset($this->getContainer()->cartId)) {
             /** @noinspection PhpUndefinedFieldInspection */
             $cartId = $this->getContainer()->cartId;
-            /* @var $cartMapper \Shop\Mapper\Cart\Cart */
+            /* @var $cartMapper CartMapper */
             $cartMapper = $this->getMapper();
             $cart = $cartMapper->getCartById($cartId);
 
@@ -159,7 +161,7 @@ class Cart extends AbstractMapperService implements InitializableInterface
         $itemsService = $this->getCartItemService();
         $items = $itemsService->getCartItemsByCartId($cart->getCartId());
 
-        /* @var $item \Shop\Model\Cart\Item */
+        /* @var $item CartItem */
         foreach ($items as $item) {
             $cart->offsetSet(
                 $item->getMetadata()->getProductId(),
@@ -177,7 +179,7 @@ class Cart extends AbstractMapperService implements InitializableInterface
     public function getCartByVerifier($verifier)
     {
         $verifier = (string) $verifier;
-        /* @var $cartMapper \Shop\Mapper\Cart\Cart */
+        /* @var $cartMapper CartMapper */
         $cartMapper = $this->getMapper();
         $cart = $cartMapper->getCartByVerifier($verifier);
         
@@ -199,7 +201,7 @@ class Cart extends AbstractMapperService implements InitializableInterface
         
         $cart = $this->getCart();
 
-        /** @var $cartItem \Shop\Model\Cart\Item */
+        /** @var $cartItem CartItem */
         $cartItem = ($cart->offsetExists($product->getProductId())) ? $cart->offsetGet($product->getProductId()) : new CartItem();
 
         $argv = compact('product', 'qty', 'cartItem');
@@ -283,7 +285,7 @@ class Cart extends AbstractMapperService implements InitializableInterface
         }
 
         $cart->clear();
-        $this->delete($this->getCart()->getCartId());
+        $this->delete($cart->getCartId());
         $this->getCartCookieService()->removeCartVerifierCookie();
         unset($this->cart);
     }
@@ -320,7 +322,7 @@ class Cart extends AbstractMapperService implements InitializableInterface
         
         $this->save($cart);
         
-        /* @var $cartItem \Shop\Model\Cart\Item */
+        /* @var $cartItem CartItem */
         foreach ($cart as $cartItem) {
             $this->getCartItemService()->save($cartItem);
         }
@@ -344,7 +346,7 @@ class Cart extends AbstractMapperService implements InitializableInterface
     public function setCart($cart = null)
     {
         if (!$cart instanceof CartModel) {
-            /* @var $cart \Shop\Model\Cart\Cart */
+            /* @var $cart CartModel */
             $cart = $this->getModel();
             $cart->setExpires($this->getCartCookieService()->getCookieConfig()->getExpiry())
                 ->setVerifyId($this->getCartCookieService()->setCartVerifierCookie());
@@ -478,9 +480,9 @@ class Cart extends AbstractMapperService implements InitializableInterface
      */
     public function clearExpired()
     {
-        /* @var $cartMapper \Shop\Mapper\Cart\Cart */
+        /* @var $cartMapper CartMapper */
         $cartMapper = $this->getMapper();
-        /* @var $cartCookie \Shop\Options\CartCookieOptions */
+        /* @var $cartCookie CartCookieOptions */
         $cartCookie = $this->getService('Shop\Options\CartCookie');
         $expiry = $cartCookie->getExpiry();
 
@@ -491,12 +493,13 @@ class Cart extends AbstractMapperService implements InitializableInterface
         // TODO: add date format to shop options.
         $expiryDate = $date->format('Y-m-d H:i:s');
 
-        $carts = $this->getMapper()->getExpiredCarts($expiryDate);
+        $carts = $cartMapper->getExpiredCarts($expiryDate);
 
         if ($carts->count() == 0) {
             return 0;
         }
 
+        /* @var $cart CartModel */
         foreach ($carts as $cart) {
             $this->loadCartItems($cart);
         }
