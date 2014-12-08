@@ -39,11 +39,9 @@ class Catalog extends AbstractActionController
         
         $products = $this->getProductService()
             ->usePaginator([
-            'limit' => $this->getShopOptions()
-                ->getProductsPerPage(),
+            'limit' => $this->getShopOptions()->getProductsPerPage(),
             'page' => $page
-        ])
-            ->getProductsByCategory($category->getIdent());
+        ])->getProductsByCategory($category->getIdent());
         
         return new ViewModel([
             'bread' => $this->getBreadcrumb($category->getProductCategoryId()),
@@ -60,16 +58,10 @@ class Catalog extends AbstractActionController
             throw new ShopException('Unknown product' . $this->params('productIdent'));
         }
         
-        $category = $this->getProductCategoryService()->getCategoryByIdent($this->params('categoryIdent', ''));
-        
-        $view = new ViewModel(array(
-            'product' => $product
-        ));
-        
-        $view->headTitle(ucfirst($category->getName()))
-            ->headTitle(ucfirst($product->getName()));
-        
-        return $view;
+        return new ViewModel([
+            'bread' => $this->getBreadcrumb($product->getProductCategory()),
+            'product' => $product,
+        ]);
     }
 
     public function searchAction()
@@ -83,19 +75,19 @@ class Catalog extends AbstractActionController
         $form->setInputFilter($inputFilter);
         $form->setData($this->params()->fromPost());
         $form->isValid();
+
+        $this->layout()->setVariable('searchData', $form->getData());
         
         $products = $this->getProductService()
-            ->usePaginator(array(
-            'limit' => $this->getShopOptions()
-                ->getProductsPerPage(),
+            ->usePaginator([
+            'limit' => $this->getShopOptions()->getProductsPerPage(),
             'page' => $page
-        ))
-            ->searchProducts($form->getData());
+        ])->searchProducts($form->getData());
         
-        $viewModel = new ViewModel(array(
-            'products' => $products
-        ));
-        
+        $viewModel = new ViewModel([
+            'products' => $products,
+        ]);
+
         if ($this->getRequest()->isXmlHttpRequest()) {
             $viewModel->setTerminal(true);
         }
@@ -124,7 +116,7 @@ class Catalog extends AbstractActionController
 
     /**
      *
-     * @return \Shop\Service\Product
+     * @return \Shop\Service\Product\Product
      */
     protected function getProductService()
     {
@@ -138,7 +130,7 @@ class Catalog extends AbstractActionController
 
     /**
      *
-     * @return \Shop\Service\ProductCategory
+     * @return \Shop\Service\Product\Category
      */
     protected function getProductCategoryService()
     {

@@ -1,6 +1,9 @@
 <?php
 
 return [
+    'shared'        => [
+        'ShopCatalogSearch'     => true,
+    ],
     'invokables' => [
         'ShopCartAdd'           => 'Shop|InputFilter\Cart\Add',
         'ShopCatalogSearch'     => 'Shop\InputFilter\Catalog\Search',

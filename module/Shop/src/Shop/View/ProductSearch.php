@@ -11,11 +11,11 @@ class ProductSearch extends AbstractViewHelper
     	$formManager = $sl->get('FormElementManager');
         $inputFilterManager = $sl->get('InputFilterManager');
 
-        $form = $formManager->get('ShopCatalogSearch');
+        $searchBox = $formManager->get('ShopCatalogSearch',['name' => 'search-catalog']);
     	$inputFilter = $inputFilterManager->get('ShopCatalogSearch');
 
-    	$form->setInputFilter($inputFilter);
+    	$searchBox->setInputFilter($inputFilter);
 
-        return $form;
+        return $searchBox;
     }
 }

@@ -58,13 +58,15 @@ class Product extends AbstractRelationalMapperService
 
     /**
      * @param string $ident
-     * @return array|\ArrayObject|null|object
+     * @return \Shop\Model\Product\Product
      */
 	public function getProductByIdent($ident)
 	{
         /* @var $mapper \Shop\Mapper\Product\Product */
         $mapper = $this->getMapper();
-		return $mapper->getProductByIdent($ident);
+		$product = $mapper->getProductByIdent($ident);
+        $this->populate($product, true);
+        return $product;
 	}
 
     /**

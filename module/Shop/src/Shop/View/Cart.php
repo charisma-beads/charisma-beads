@@ -76,7 +76,6 @@ class Cart extends AbstractViewHelper
 	public function getShippingTotal($countryId)
 	{
 	    $this->cartService->setShippingCost($countryId);
-	    
 	    return $this->formatAmount($this->cartService->getShippingCost());
 	}
 	

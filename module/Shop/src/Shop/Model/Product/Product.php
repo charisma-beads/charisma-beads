@@ -488,9 +488,20 @@ class Product implements ModelInterface
 		return $this;
 	}
 
+    /**
+     * @return bool
+     */
     public function isDiscounted()
     {
         return (0 == $this->getDiscountPercent()) ? false : true;
+    }
+
+    /**
+     * @return bool
+     */
+    public function inStock()
+    {
+        return ($this->getQuantity() == 0) ? false : true;
     }
     
     /**

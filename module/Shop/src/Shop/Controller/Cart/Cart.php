@@ -64,7 +64,7 @@ class Cart extends AbstractActionController
                 ->getUserId(), 'delivery')
                 ->getCountryId();
         } else {
-            $countryId = null;
+            $countryId = $this->params()->fromPost('countryId', null);
         }
         
         return new ViewModel(array(

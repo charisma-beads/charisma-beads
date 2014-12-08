@@ -52,10 +52,16 @@ class Category extends AbstractRelationalMapperService
         $mapper = $this->getMapper();
 
 	    if ($topLevelOnly) {
-	    	return $mapper->getTopLevelCategories();
+	    	$cats =  $mapper->getTopLevelCategories();
 	    } else {
-	    	return $mapper->getAllCategories();
+	    	$cats =  $mapper->getAllCategories();
 	    }
+
+        foreach($cats as $category) {
+            $this->populate($category, true);
+        }
+
+        return $cats;
 	}
 
     /**

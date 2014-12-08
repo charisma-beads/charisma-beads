@@ -10,11 +10,15 @@ class Product extends AbstractDbMapper
 	protected $primary = 'productId';
 	protected $fetchEnabled = true;
 	protected $fetchDisabled = false;
-	
+
+    /**
+     * @param $ident
+     * @return \Shop\Model\Product\Product|\UthandoCommon\Model\Model
+     */
 	public function getProductByIdent($ident)
 	{
 		$ident = (string) $ident;
-		$select = $this->getSelect()->where(array('ident', $ident));
+		$select = $this->getSelect()->where(['ident' => $ident]);
 		$resultSet = $this->fetchResult($select);
 		$row = $resultSet->current();
 		return $row;

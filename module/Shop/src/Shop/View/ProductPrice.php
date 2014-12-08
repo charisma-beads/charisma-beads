@@ -9,9 +9,10 @@ class ProductPrice extends AbstractViewHelper
     /**
      * @var string
      */
-    protected $format = '<p><b>%s</b> for %s gms</p>%s';
+    protected $format = '<p><b>%s</b>%s for %s gms</p>';
 
-    protected $productOptions = '<p>%s</p>';
+    protected $discountFormat = ' was <del>%s</del>';
+
     /**
      * @var PriceFormat
      */
@@ -36,43 +37,63 @@ class ProductPrice extends AbstractViewHelper
     /**
      * @return string
      */
+    public function getFormat()
+    {
+        return $this->format;
+    }
+
+    /**
+     * @param string $format
+     * @return $this
+     */
+    public function setFormat($format)
+    {
+        $this->format = $format;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDiscountFormat()
+    {
+        return $this->discountFormat;
+    }
+
+    /**
+     * @param string $discountFormat
+     * @return $this
+     */
+    public function setDiscountFormat($discountFormat)
+    {
+        $this->discountFormat = $discountFormat;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
     public function render()
     {
         $product = $this->product;
 
         $currency = $this->getPriceFormatHelper();
         $formatted = '';
-        $options = null;
+        $discount = '';
 
         if ($product->getProductOption()) {
             $formatted .= 'From ';
-            $options = sprintf($this->productOptions, $this->getProductOptions());
         }
 
         $formatted .= $currency($product->getPrice());
 
         if ($product->isDiscounted()) {
-            $formatted .= ' was <del>' . $currency($product->getPrice(false)) . '</del>';
+            $discount = sprintf($this->discountFormat, $currency($product->getPrice(false)));
         }
 
-        return sprintf($this->format, $formatted, $product->getPostUnit()->getPostUnit(), $options);
-    }
-
-    /**
-     * @return \Shop\Form\Element\ProductOptions
-     */
-    public function getProductOptions()
-    {
-        $sl = $this->getServiceLocator()->getServiceLocator();
-        $formManager = $sl->get('FormElementManager');
-
-        $options = $formManager->get('ProductOptionList', [
-            'product' => $this->product,
-        ]);
-
-        $select = $this->view->plugin('formSelect');
-
-        return $select($options);
+        return sprintf($this->format, $formatted, $discount, number_format($product->getPostUnit()->getPostUnit()));
     }
     
     /**
