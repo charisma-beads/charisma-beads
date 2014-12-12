@@ -1,6 +1,7 @@
 <?php
 namespace Shop\Controller;
 
+use UthandoCommon\Controller\ServiceTrait;
 use UthandoUser\Form\User as LoginForm;
 use Zend\Filter\Word\UnderscoreToDash;
 use Zend\Mvc\Controller\AbstractActionController;
@@ -9,17 +10,13 @@ use Zend\Session\Container;
 
 class Checkout extends AbstractActionController
 {
+    use ServiceTrait;
+
     /**
      *
      * @var \Shop\Service\Order\Order
      */
     protected $orderService;
-
-    /**
-     *
-     * @var \Shop\Service\Cart\Cart
-     */
-    protected $cartService;
 
     /**
      *
@@ -29,9 +26,9 @@ class Checkout extends AbstractActionController
 
     public function indexAction()
     {
-        if (! $this->getCartService()
-            ->getCart()
-            ->count()) {
+        $service = $this->getService('Shop\Service\Cart');
+
+        if (!$service->getCart()->count()) {
             return $this->redirect()->toRoute('shop');
         }
         
@@ -82,7 +79,7 @@ class Checkout extends AbstractActionController
                 $orderId = $this->getOrderService()->processOrderFromCart($customer, $formValues);
                 
                 if ($orderId) {
-                    $this->getCartService()->clear(false);
+                    $this->getService('Shop\Service\Cart')->clear(false);
                     
                     // need to email order,
                     // add params to session and redirect to payment page.
@@ -119,7 +116,7 @@ class Checkout extends AbstractActionController
             $submit = $this->params()->fromPost('submit', null);
             
             if ('cancelOrder' === $submit) {
-                $this->getCartService()->clear();
+                $this->getService('Shop\Service\Cart')->clear();
                 $this->flashmessenger()->addSuccessMessage('You have successfully canceled your order.');
                 return $this->redirect()->toRoute('shop');
             }
@@ -156,23 +153,11 @@ class Checkout extends AbstractActionController
         return $this->orderService;
     }
 
-    /**
-     *
-     * @return \Shop\Service\Cart\Cart
-     */
-    protected function getCartService()
-    {
-        if (! $this->cartService) {
-            $sl = $this->getServiceLocator();
-            $this->cartService = $sl->get('Shop\Service\Cart');
-        }
-        
-        return $this->cartService;
-    }
-
     public function getLoginForm()
     {
-        $form = new LoginForm();
+        $form = $this->getServiceLocator()
+            ->get('FormElementManager')
+            ->get('UthandoUserLogin');
         $form->setData(array(
             'returnTo' => 'shop/checkout'
         ));
