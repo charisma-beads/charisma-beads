@@ -27,8 +27,7 @@ class Product extends AbstractDbMapper
 	public function getFullProductById($id)
 	{
 	    $select = $this->getSelect();
-	    $select->where
-	       ->equalTo('product.productId', $id);
+	    $select->where->equalTo('product.productId', $id);
 
         $select = $this->setFilter($select);
 	    
@@ -40,8 +39,7 @@ class Product extends AbstractDbMapper
 	public function getProductsByCategory(array $categoryId, $order=null)
 	{
 	    $select = $this->getSelect();
-		$select->where
-            ->in('productCategoryId', $categoryId);
+		$select->where->in('productCategoryId', $categoryId);
 
         $select = $this->setFilter($select);
 		
@@ -54,9 +52,8 @@ class Product extends AbstractDbMapper
 	
 	public function search(array $search, $sort, $select = null)
 	{
-		$select = $this->getSql()->select();
-		$select->from($this->table)
-            ->join(
+		$select = $this->getSelect();
+		$select->join(
                 'productCategory',
                 'product.productCategoryId=productCategory.productCategoryId',
                 array(),
@@ -76,9 +73,8 @@ class Product extends AbstractDbMapper
 	
 	public function searchProducts(array $search)
 	{
-        $select = $this->getSql()->select();
-        $select->from($this->table)
-            ->join(
+        $select = $this->getSelect();
+        $select->join(
                 'productCategory',
                 'product.productCategoryId=productCategory.productCategoryId',
                 array(),
