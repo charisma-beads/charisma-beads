@@ -1,0 +1,61 @@
+<div id="captcha">
+    <form class="captcha" name="captcha1" action="<?=$this->https?>/php/login.php" method="post">
+        <?=$this->formHidden($this->form->get('referer_link'));?>
+        <table border="0">
+            <tr>
+                <td colspan="2">
+                    <p>Your browser must allow cookies in order to login.</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="captcha_notvalid">
+                        <?php foreach ($this->form->getMessages() as $errors):?>
+                        	<?php foreach ($errors as $error): ?>
+                        	<p><?=$error;?></p>
+                        	<?php endforeach;?>
+                        <?php endforeach;?>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                	<table>
+                    	<tr class="<?php if ($this->form->get('email')->getMessages()) echo ' has-error'; ?>">
+                    		<td class="label"><b><?=$this->form->get('email')->getLabel()?></b></td>
+                    		<td><?=$this->formEmail($this->form->get('email'));?></td>
+                    		
+                    	</tr>
+                    	<tr>
+                    		<td colspan="2" class="errors"><?=$this->formElementErrors($this->form->get('email')); ?></td>
+                    	</tr>
+                    	<tr class="<?php if ($this->form->get('password')->getMessages()) echo ' has-error'; ?>">
+                    		<td class="label"><b><?=$this->form->get('password')->getLabel()?></b></td>
+                    		<td>
+                    			<?=$this->formPassword($this->form->get('password'));?>
+                    		</td>
+                    	</tr>
+                    	<tr>
+                    		<td colspan="2" class="errors"><?=$this->formElementErrors($this->form->get('password')); ?></td>
+                    	</tr>
+                    	<tr>
+                    		<td colspan="2"><input type="checkbox" onchange="document.getElementById('password').type = this.checked ? 'text' : 'password'"> Show password</td>
+                    	</tr>
+                    	<tr>
+                    		<td colspan="2" class="button"><a href="/php/forgot_password.php" title="Forgot Password">Forgot Password</a></td>
+                    	</tr>
+                    </table>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2">
+                    <p>
+                        <input tabindex="5" type="submit" name="submit" value="Submit" class="button" />
+                        <?=$this->formHidden($this->form->get('security'));?>
+                    </p>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>

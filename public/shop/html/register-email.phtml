@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <title>Charisma Beads Ltd - Registration</title>
+    </head>
+    <body>
+        <p>Thank you <?=$this->name;?> your account has been created, you can login with the following credentials
+        after you have activated your account by pressing the url below.</p>
+
+        <p>Email: <?=$this->email;?></p>
+        <p>Password: <?=$this->password;?></p>
+
+        <p>Please click this link to activate your account:</p>
+        <a href="<?=$this->https;?>/shop/users/activate.php?email=<?=$this->email;?>&hash=<?=$this->hash;?>">
+            <?=$this->https;?>/shop/users/activate.php?email=<?=$this->email;?>&hash=<?=$this->hash;?>
+        </a>
+
+        <p>Thank You</p>
+
+        <p><?=$this->merchant_name;?></p>
+
+    </body>
+</html>

@@ -1,23 +1,10 @@
 
 /data/*
-/logs/*
-!do_not_remove
-/ssl/*
-/sample/
-
+/public/admin/tmp/*.*
+/public/shop/images/*.*
+/public/userfiles/*
 /vendor/*
 .idea/*
-.buildpath
 .DS_Store
-.project
-.settings
-local.php
 *.local.php
-
-!/assets/*
-!/public/*
-!composer.json
-!LICENCE.txt
-!README.md
-/public_html/admin/tmp/*.*
-/public_html/shop/images/*.*
+!do_not_remove

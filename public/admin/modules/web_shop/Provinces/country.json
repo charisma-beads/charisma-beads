@@ -1,0 +1,198 @@
+[
+  {
+    "code" : "GB",
+    "country" : "United Kingdom",
+    "countryId" : "1",
+    "postZoneId" : "1",
+    "sort" : "<null>"
+  },
+  {
+    "code" : "FR",
+    "country" : "France",
+    "countryId" : "2",
+    "postZoneId" : "2",
+    "sort" : "<null>"
+  },
+  {
+    "code" : "AT",
+    "country" : "Austria",
+    "countryId" : "3",
+    "postZoneId" : "2",
+    "sort" : "<null>"
+  },
+  {
+    "code" : "BE",
+    "country" : "Belgium",
+    "countryId" : "4",
+    "postZoneId" : "2",
+    "sort" : "<null>"
+  },
+  {
+    "code" : "BG",
+    "country" : "Bulgaria",
+    "countryId" : "5",
+    "postZoneId" : "2",
+    "sort" : "<null>"
+  },
+  {
+    "code" : "CY",
+    "country" : "Cyprus",
+    "countryId" : "6",
+    "postZoneId" : "2",
+    "sort" : "<null>"
+  },
+  {
+    "code" : "CZ",
+    "country" : "Czech Republic",
+    "countryId" : "7",
+    "postZoneId" : "2",
+    "sort" : "<null>"
+  },
+  {
+    "code" : "DK",
+    "country" : "Denmark",
+    "countryId" : "8",
+    "postZoneId" : "2",
+    "sort" : "<null>"
+  },
+  {
+    "code" : "EE",
+    "country" : "Estonia",
+    "countryId" : "9",
+    "postZoneId" : "2",
+    "sort" : "<null>"
+  },
+  {
+    "code" : "FI",
+    "country" : "Finland",
+    "countryId" : "10",
+    "postZoneId" : "2",
+    "sort" : "<null>"
+  },
+  {
+    "code" : "DE",
+    "country" : "Germany",
+    "countryId" : "11",
+    "postZoneId" : "2",
+    "sort" : "<null>"
+  },
+  {
+    "code" : "GR",
+    "country" : "Greece",
+    "countryId" : "12",
+    "postZoneId" : "2",
+    "sort" : "<null>"
+  },
+  {
+    "code" : "HU",
+    "country" : "Hungary",
+    "countryId" : "13",
+    "postZoneId" : "2",
+    "sort" : "<null>"
+  },
+  {
+    "code" : "IE",
+    "country" : "Ireland",
+    "countryId" : "14",
+    "postZoneId" : "2",
+    "sort" : "<null>"
+  },
+  {
+    "code" : "IT",
+    "country" : "Italy",
+    "countryId" : "15",
+    "postZoneId" : "2",
+    "sort" : "<null>"
+  },
+  {
+    "code" : "LV",
+    "country" : "Latvia",
+    "countryId" : "16",
+    "postZoneId" : "2",
+    "sort" : "<null>"
+  },
+  {
+    "code" : "LT",
+    "country" : "Lithuania",
+    "countryId" : "17",
+    "postZoneId" : "2",
+    "sort" : "<null>"
+  },
+  {
+    "code" : "LU",
+    "country" : "Luxembourg",
+    "countryId" : "18",
+    "postZoneId" : "2",
+    "sort" : "<null>"
+  },
+  {
+    "code" : "MT",
+    "country" : "Malta",
+    "countryId" : "19",
+    "postZoneId" : "2",
+    "sort" : "<null>"
+  },
+  {
+    "code" : "NL",
+    "country" : "Netherlands",
+    "countryId" : "20",
+    "postZoneId" : "2",
+    "sort" : "<null>"
+  },
+  {
+    "code" : "PL",
+    "country" : "Poland",
+    "countryId" : "21",
+    "postZoneId" : "2",
+    "sort" : "<null>"
+  },
+  {
+    "code" : "PT",
+    "country" : "Portugal",
+    "countryId" : "22",
+    "postZoneId" : "2",
+    "sort" : "<null>"
+  },
+  {
+    "code" : "RO",
+    "country" : "Romania",
+    "countryId" : "23",
+    "postZoneId" : "2",
+    "sort" : "<null>"
+  },
+  {
+    "code" : "SK",
+    "country" : "Slovakia",
+    "countryId" : "24",
+    "postZoneId" : "2",
+    "sort" : "<null>"
+  },
+  {
+    "code" : "SI",
+    "country" : "Slovenia",
+    "countryId" : "25",
+    "postZoneId" : "2",
+    "sort" : "<null>"
+  },
+  {
+    "code" : "ES",
+    "country" : "Spain",
+    "countryId" : "26",
+    "postZoneId" : "2",
+    "sort" : "<null>"
+  },
+  {
+    "code" : "SE",
+    "country" : "Sweden",
+    "countryId" : "27",
+    "postZoneId" : "2",
+    "sort" : "<null>"
+  },
+  {
+    "code" : "HR",
+    "country" : "Croatia",
+    "countryId" : "28",
+    "postZoneId" : "2",
+    "sort" : "<null>"
+  }
+]

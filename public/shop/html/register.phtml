@@ -1,0 +1,236 @@
+
+<h2>Create An Account</h2>
+
+<div id="captcha">
+    <form class="captcha" name="captcha1" action="<?=$this->https?>/shop/users/register.php" method="post">
+        <?=$this->formHidden($this->form->get('referer_link'));?>
+        <table>
+            <tr>
+                <td colspan="2">
+                    <p>Your browser must allow cookies in order to login.</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="captcha_notvalid">
+                        <?php foreach ($this->form->getMessages() as $errors):?>
+                        	<?php foreach ($errors as $error): ?>
+                        	<p><?=$error;?></p>
+                        	<?php endforeach;?>
+                        <?php endforeach;?>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+            	<td colspan="2">
+	                <table>
+	                	<tr>
+	                		<td colspan="3">
+	                			<h2 style="margin-left:1em;text-align:left">Contact Information</h2>
+	                		</td>
+	                	</tr>
+	                	<tr>
+	                		<td colspan="3"><span class="required">*</span> Required fields</td>
+                		<tr>
+                		<tr>
+                			<td align="right<?php if ($this->form->get('prefix_id')->getMessages()) echo ' has-error'; ?>"><b><?=$this->form->get('prefix_id')->getLabel();?></b></td>
+                			<td align="left<?php if ($this->form->get('prefix_id')->getMessages()) echo ' has-error'; ?>"><?=$this->formSelect($this->form->get('prefix_id'));?><span class="required">*</span></td>
+                			<td rowspan="28" valign="top">
+                				<div class="notes">
+                					<h3>Personal Information</h3>
+                					<p>Please enter your name, address, telephone number and email address.</p>
+                				</div>
+                			</td>
+                		</tr>
+                		<tr>
+                    		<td colspan="2" class="errors"><?=$this->formElementErrors($this->form->get('prefix_id')); ?></td>
+                    	</tr>
+                    	<tr class="<?php if ($this->form->get('first_name')->getMessages()) echo ' has-error'; ?>">
+                			<td align="right"><b><?=$this->form->get('first_name')->getLabel();?></b></td>
+                			<td align="left"><?=$this->formText($this->form->get('first_name'));?><span class="required">*</span></td>
+                		</tr>
+                		<tr>
+                    		<td colspan="2" class="errors"><?=$this->formElementErrors($this->form->get('first_name')); ?></td>
+                    	</tr>
+                    	<tr class="<?php if ($this->form->get('last_name')->getMessages()) echo ' has-error'; ?>">
+                			<td align="right"><b><?=$this->form->get('last_name')->getLabel();?></b></td>
+                			<td align="left"><?=$this->formText($this->form->get('last_name'));?><span class="required">*</span></td>
+                		</tr>
+                		<tr>
+                    		<td colspan="2" class="errors"><?=$this->formElementErrors($this->form->get('last_name')); ?></td>
+                    	</tr>
+                		<tr class="<?php if ($this->form->get('address1')->getMessages()) echo ' has-error'; ?>">
+                			<td align="right"><b><?=$this->form->get('address1')->getLabel();?></b></td>
+                			<td align="left"><?=$this->formText($this->form->get('address1'));?><span class="required">*</span></td>
+                		</tr>
+                		<tr>
+                    		<td colspan="2" class="errors"><?=$this->formElementErrors($this->form->get('address1')); ?></td>
+                    	</tr>
+                    	<tr class="<?php if ($this->form->get('address2')->getMessages()) echo ' has-error'; ?>">
+                			<td align="right"><b><?=$this->form->get('address2')->getLabel();?></b></td>
+                			<td align="left"><?=$this->formText($this->form->get('address2'));?><span>(Optional)</span></td>
+                		</tr>
+                		<tr>
+                    		<td colspan="2" class="errors"><?=$this->formElementErrors($this->form->get('address2')); ?></td>
+                    	</tr>
+                    	<tr class="<?php if ($this->form->get('address3')->getMessages()) echo ' has-error'; ?>">
+                			<td align="right"><b><?=$this->form->get('address3')->getLabel();?></b></td>
+                			<td align="left"><?=$this->formText($this->form->get('address3'));?><span>(Optional)</span></td>
+                		</tr>
+                		<tr>
+                    		<td colspan="2" class="errors"><?=$this->formElementErrors($this->form->get('address3')); ?></td>
+                    	</tr>
+                    	<tr class="<?php if ($this->form->get('city')->getMessages()) echo ' has-error'; ?>">
+                			<td align="right"><b><?=$this->form->get('city')->getLabel();?></b></td>
+                			<td align="left"><?=$this->formText($this->form->get('city'));?><span class="required">*</span></td>
+                		</tr>
+                		<tr>
+                    		<td colspan="2" class="errors"><?=$this->formElementErrors($this->form->get('city')); ?></td>
+                    	</tr>
+                    	<tr class="<?php if ($this->form->get('county')->getMessages()) echo ' has-error'; ?>">
+                			<td align="right"><b><?=$this->form->get('county')->getLabel();?></b></td>
+                			<td align="left"><?=$this->formSelect($this->form->get('county'));?><span class="required">*</span></td>
+                		</tr>
+                		<tr>
+                    		<td colspan="2" class="errors"><?=$this->formElementErrors($this->form->get('county')); ?></td>
+                    	</tr>
+                    	<tr class="<?php if ($this->form->get('post_code')->getMessages()) echo ' has-error'; ?>">
+                			<td align="right"><b><?=$this->form->get('post_code')->getLabel();?></b></td>
+                			<td align="left"><?=$this->formText($this->form->get('post_code'));?><span class="required">*</span></td>
+                		</tr>
+                		<tr>
+                    		<td colspan="2" class="errors"><?=$this->formElementErrors($this->form->get('post_code')); ?></td>
+                    	</tr>
+                    	<tr class="<?php if ($this->form->get('country_id')->getMessages()) echo ' has-error'; ?>">
+                			<td align="right"><b><?=$this->form->get('country_id')->getLabel();?></b></td>
+                			<td align="left"><?=$this->formSelect($this->form->get('country_id'));?><span class="required">*</span></td>
+                		</tr>
+                		<tr>
+                    		<td colspan="2" class="errors"><?=$this->formElementErrors($this->form->get('country_id')); ?></td>
+                    	</tr>
+                    	<tr class="<?php if ($this->form->get('phone')->getMessages()) echo ' has-error'; ?>">
+                			<td align="right"><b><?=$this->form->get('phone')->getLabel();?></b></td>
+                			<td align="left"><?=$this->formTel($this->form->get('phone'));?><span class="required">*</span></td>
+                		</tr>
+                		<tr>
+                    		<td colspan="2" class="errors"><?=$this->formElementErrors($this->form->get('phone')); ?></td>
+                    	</tr>
+                    	<tr class="<?php if ($this->form->get('email')->getMessages()) echo ' has-error'; ?>">
+                			<td align="right"><b><?=$this->form->get('email')->getLabel();?></b></td>
+                			<td align="left"><?=$this->formEmail($this->form->get('email'));?><span class="required">*</span></td>
+                		</tr>
+                		<tr>
+                    		<td colspan="2" class="errors"><?=$this->formElementErrors($this->form->get('email')); ?></td>
+                    	</tr>
+                    	<tr class="<?php if ($this->form->get('confirm-email')->getMessages()) echo ' has-error'; ?>">
+                			<td align="right"><b><?=$this->form->get('confirm-email')->getLabel();?></b></td>
+                			<td align="left"><?=$this->formEmail($this->form->get('confirm-email'));?><span class="required">*</span></td>
+                		</tr>
+                		<tr>
+                    		<td colspan="2" class="errors"><?=$this->formElementErrors($this->form->get('confirm-email')); ?></td>
+                    	</tr>
+                    	<tr class="<?php if ($this->form->get('ad_referrer')->getMessages()) echo ' has-error'; ?>">
+                			<td align="right"><b><?=$this->form->get('ad_referrer')->getLabel();?></b></td>
+                			<td align="left"><?=$this->formSelect($this->form->get('ad_referrer'));?><span class="required">*</span></td>
+                		</tr>
+                		<tr>
+                    		<td colspan="2" class="errors"><?=$this->formElementErrors($this->form->get('ad_referrer')); ?></td>
+                    	</tr>
+                    	<tr>
+                    		<td colspan="3"><hr style="border:0px;border-top:1px dashed black; width:75%;"/></td>
+                    	</tr>
+                    	<tr>
+                    		<td colspan="3"><h2 style="margin-left:1em;text-align:left">Newsletter Sign Up</h2></td>
+                    	</tr>
+                    	<tr>
+                			<td align="right<?php if ($this->form->get('newsletter')->getMessages()) echo ' has-error'; ?>"><b><?=$this->form->get('newsletter')->getLabel();?></b></td>
+                			<td align="left<?php if ($this->form->get('newsletter')->getMessages()) echo ' has-error'; ?>"><?=$this->formSelect($this->form->get('newsletter'));?><span class="required">*</span></td>
+                    		<td rowspan="2">
+                    			<div class="notes">
+                    				<h3>Newsletter</h3>
+                    				<p>When you sign up to our newsletter we will email you from time to time with product related information. We 
+                    				<span style="font-weight:bold;">WILL NOT</span> give your email address to anyone else.</p>
+                    			</div>
+                    		</td>
+                    	</tr>
+                    	<tr>
+                    		<td colspan="2" class="errors"><?=$this->formElementErrors($this->form->get('newsletter')); ?></td>
+                    	</tr>
+                    	<tr>
+                    		<td colspan="3"><hr style="border:0px;border-top:1px dashed black; width:75%;"/></td>
+                    	</tr>
+                    	<tr>
+                    		<td colspan="3"><h2 style="margin-left:1em;text-align:left"><?=$this->merchantName;?> Account Login</h2></td>
+                    	</tr>
+                    	<tr>
+                    		<td align="right<?php if ($this->form->get('password')->getMessages()) echo ' has-error'; ?>"><b><?=$this->form->get('password')->getLabel();?></b></td>
+                    		<td align="left<?php if ($this->form->get('password')->getMessages()) echo ' has-error'; ?>"><?=$this->formPassword($this->form->get('password'));?><span class="required">*</span></td>
+                    		<td rowspan="4">
+                    			<div id="password-text" class="notes password">
+                    				<h3>Password</h3>
+                    				<p>Here you must choose a password that only you will know.</p><br />
+                    				<p>You will use these to log in to <?=$this->merchant_name;?>.</p><br />
+                    				<p>Your password must be between 4 and 20 characters long and is case-sensitive with no spaces. You may use numbers, 
+                    				letters and the underscore character. Passwords may use special characters as well 
+                    				(see <a id="special" href="#special_characters">special characters</a> below). 
+                    				Please do not enter accented characters.</p><br /><p id="special_characters">password special characters 
+                    				are:<br />! &pound; $ % &amp; / \ ( ) = ? + * # - . , ; :</p><br />
+                    				<h3 style="font-size:1.10em;">Password Security Information</h3>
+                    				<p>A password can only be considered secure when the following criteria are met:</p>
+                    				<ul>
+                    					<li>Contains at least 7 characters. The more characters a password contains, the more secure it is considered to be.</li>
+                    					<li>Change your password regularly. Every 90 days you should change your password.</li>
+                    					<li>Change your password immediately, if there is a chance that someone may know what it is.</li>
+                    					<li>Always use a combination of letters, digits, and any special characters that are allowed by the system.</li>
+                    					<li>Never write down your password.</li>
+                    					<li>Never use personal data or data concerning those you know. For example, your or loved ones birthdays, 
+                    					your own name or names of those close to you, etc. should not be used.</li>
+                    				</ul>
+                    			</div>
+                    		</td>
+                    	</tr>
+                    	<tr>
+                    		<td colspan="2" class="errors"><?=$this->formElementErrors($this->form->get('password')); ?></td>
+                    	</tr>
+                    	<tr class="<?php if ($this->form->get('confirm-password')->getMessages()) echo ' has-error'; ?>">
+                			<td align="right"><b><?=$this->form->get('confirm-password')->getLabel();?></b></td>
+                			<td align="left"><?=$this->formPassword($this->form->get('confirm-password'));?><span class="required">*</span></td>
+                		</tr>
+                    	<tr>
+                    		<td colspan="2" class="errors"><?=$this->formElementErrors($this->form->get('confirm-password')); ?></td>
+                    	</tr>
+                    	<tr>
+                    		<td colspan="3"><hr style="border:0px;border-top:1px dashed black; width:75%;"/></td>
+                    	</tr>
+	                </table>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <p>
+                        <input tabindex="5" type="submit" name="submit" value="Submit" class="button" />
+                        <?=$this->formHidden($this->form->get('security'));?>
+                    </p>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<script type="text/javascript">
+	var scroll = new Fx.Scroll('password-text', {
+		wait: false,
+			duration: 1500,
+			transition: Fx.Transitions.Quad.easeInOut
+	});
+
+	$('special').addEvent('click', function(event) {
+		event = new Event(event).stop();
+		scroll.toElement('special_characters');
+	});
+
+	$('country_select').addEvent('change', function(e) {
+		$('provinces').load('/shop/users/province-list.php', {
+			'country_id' : this.value
+		});
+	});
+</script>
