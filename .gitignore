@@ -1,12 +1,12 @@
-*
-/data/
-/logs/
+
+/data/*
+/logs/*
 !do_not_remove
-/ssl/
+/ssl/*
 /sample/
 
-data/*
-vendor/*
+/vendor/*
+.idea/*
 .buildpath
 .DS_Store
 .project
@@ -15,10 +15,9 @@ local.php
 *.local.php
 
 !/assets/*
-!/public_html/*
+!/public/*
 !composer.json
-!init_autoloader.php
 !LICENCE.txt
 !README.md
 /public_html/admin/tmp/*.*
-/public_html/shaop/images/*.*
+/public_html/shop/images/*.*
