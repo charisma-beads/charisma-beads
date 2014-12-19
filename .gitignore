@@ -2,7 +2,7 @@
 !data/do_not_remove
 !data/cache
 /data/cache/*
-/data/cache/do_not_remove
+!/data/cache/do_not_remove
 !data/cache/db
 data/cache/db/*
 !data/cache/db/do_not_remove
@@ -11,9 +11,10 @@ data/cache/db/*
 /data/sessions/*
 !data/sessions/do_not_remove
 /logs/
-/public_html/admin/tmp/*
+/public/admin/tmp/*
 /vendor/
 /public/.htaccess
+/public/userfiles/
 .buildpath
 .DS_Store
 .idea
