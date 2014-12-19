@@ -2,7 +2,7 @@
 !data/fonts/*
 /vendor/*
 /public/shop/images/*
-/public/userfiles/
+/public/userfiles/*
 .DS_Store
 .idea
 *.local.php
