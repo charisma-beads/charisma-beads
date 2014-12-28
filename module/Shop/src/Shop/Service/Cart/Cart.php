@@ -215,7 +215,7 @@ class Cart extends AbstractMapperService implements InitializableInterface
             $this->removeItem($cartItem->getCartItemId());
             return false;
         }
-        
+
         $cartItem->setPrice($product->getPrice())
             ->setQuantity($qty)
             ->setTax($product->getTaxCode()->getTaxRate()->getTaxRate())

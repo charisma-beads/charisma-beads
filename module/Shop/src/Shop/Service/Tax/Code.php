@@ -28,6 +28,7 @@ class Code extends AbstractRelationalMapperService
     public function getById($id, $col = null)
     {
         $taxCode = parent::getById($id, $col);
+        
         $this->populate($taxCode, true);
         
         return $taxCode;
