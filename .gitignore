@@ -1,4 +1,6 @@
 
+/assets/.ssh/*
+/assets/ssl/*
 /data/*
 /public/admin/tmp/*.*
 /public/shop/images/*.*
