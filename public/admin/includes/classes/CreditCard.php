@@ -53,7 +53,7 @@ class CreditCard
         $this->view->setScriptPath($_SERVER['DOCUMENT_ROOT'] . $this->_template);
         
         $this->form = new CreditCardForm();
-        
+
         $this->form->setView($this->view);
     }
 
