@@ -30,7 +30,7 @@ set_include_path($_SERVER['DOCUMENT_ROOT'].'/admin/includes/classes'
 $zf2Autoloader = include $_SERVER['DOCUMENT_ROOT'].'/../vendor/autoload.php';
 
 // Auto load classes.
-function CBAutoLoader ($class_name)
+/*function CBAutoLoader ($class_name)
 {
 	$class_name = explode("_", $class_name);
 	$class_path = null;
@@ -40,6 +40,6 @@ function CBAutoLoader ($class_name)
 	$class_path = substr($class_path, 1);
 	return include($class_path . '.php');
 };
-spl_autoload_register('CBAutoLoader');
-//$errors = ErrorLogging::getInstance();
+spl_autoload_register('CBAutoLoader');*/
+$errors = ErrorLogging::getInstance();
 ?>
