@@ -20,7 +20,7 @@
  * along with Charisma Beads.  If not, see <http ://www.gnu.org/licenses/>.
  */
 
-include_once('Zend\View.php');
+include_once('Zend/View.php');
 
 /**
  * Description of CreditCard

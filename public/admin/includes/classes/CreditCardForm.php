@@ -1,6 +1,7 @@
 <?php
 
 require_once ('Zend/Form.php');
+require_once ('Zend/View/Interface.php');
 
 class CreditCardForm extends Zend_Form
 {   
