@@ -23,7 +23,7 @@
 // Set include paths.
 set_include_path($_SERVER['DOCUMENT_ROOT'].'/admin/includes/classes'
     .PATH_SEPARATOR.
-    $_SERVER['DOCUMENT_ROOT'].'/../php'
+    realpath($_SERVER['DOCUMENT_ROOT'].'/../php')
 );
 
 // Setup zf2 autoloading
@@ -38,7 +38,7 @@ $autoload = function ($class_name)
 		$class_path .= '/'.$value;
 	}
 	$class_path = substr($class_path, 1);
-	require ($class_path . '.php');
+	require_once($class_path . '.php');
 };
 spl_autoload_register($autoload);
 //$errors = ErrorLogging::getInstance();
