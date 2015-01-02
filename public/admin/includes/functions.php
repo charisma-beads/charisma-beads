@@ -38,7 +38,7 @@ function CBAutoLoader ($class_name)
 		$class_path .= '/'.$value;
 	}
 	$class_path = substr($class_path, 1);
-	require_once($class_path . '.php');
+	return include($class_path . '.php');
 };
 spl_autoload_register('CBAutoLoader');
 //$errors = ErrorLogging::getInstance();
