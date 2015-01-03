@@ -77,7 +77,6 @@ class ErrorLogging
 	 */
 	private function __construct()
 	{
-		error_reporting(0);
 		set_error_handler(array($this,'getCustomError'));
 		register_shutdown_function(array($this, 'getFatalError'));
 	}
@@ -179,11 +178,14 @@ class ErrorLogging
 		
 		if (ERROR_LOGGING) error_log($errorMessage, 3, ERROR_LOGGING_FILE);
 		
-		if (DEBUGGING):
-			echo '<div class="error">'.$errorMessage.'</div>';
-		else:
-			echo SITE_GENERIC_ERROR_MSG;
-		endif;
+		if (DEBUGGING) {
+			echo '<div class="error">' . $errorMessage . '</div>';
+		} else {
+			if (!$this->errorType[$errNo] === E_NOTICE || !$this->errorType[$errNo] === E_STRICT || !$this->errorType[$errNo] === E_DEPRECATED) {
+				echo SITE_GENERIC_ERROR_MSG;
+			}
+		}
+
 		
 		if (IS_WARNING_FATAL) exit;
 	}

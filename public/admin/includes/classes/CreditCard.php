@@ -46,7 +46,7 @@ class CreditCard
     public function __construct($dbc)
     {
         $this->_db = $dbc;
-        $this->_error = ErrorLogging::getInstance();
+        //$this->_error = ErrorLogging::getInstance();
         $this->_year = date('Y');
 
         $this->view = new \Zend_View();
