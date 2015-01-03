@@ -36,7 +36,7 @@ if ($request->isPost() && $request->getPost('submit') != 'Log-in') {
         	// check against md5 first then bcrypt.
         	$md5 = new Md5();
         	$bcrypt = new \Zend\Crypt\Password\Bcrypt();
-        	
+
         	if ($md5->verify($data['password'], $row['password'])) {
         		
         		$pass = true;

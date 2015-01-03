@@ -20,8 +20,6 @@
  * along with Charisma Beads.  If not, see <http ://www.gnu.org/licenses/>.
  */
 
-include_once('Zend/View.php');
-
 /**
  * Description of CreditCard
  *
@@ -48,10 +46,11 @@ class CreditCard
     public function __construct($dbc)
     {
         $this->_db = $dbc;
-        $this->_error = ErrorLogging::getInstance();
+        //$this->_error = ErrorLogging::getInstance();
         $this->_year = date('Y');
-        
-        $this->view = new Zend_View();
+
+        $this->view = new \Zend_View();
+
         $this->view->setScriptPath($_SERVER['DOCUMENT_ROOT'] . $this->_template);
         
         $this->form = new CreditCardForm();
@@ -95,14 +94,14 @@ class CreditCard
     {
         global $https;
         $registeredBillingAddresses = $this->getOptions('billingAddresses');
-        $this->url = $https;
+        //$this->url = $https;
         
         $this->view->assign(array(
-        		'https'							=> $https,
-        		'form'							=> $this->form,
-        		'invoiceNumber'					=> $this->invoiceNumber,
-        		'registeredBillingAddresses'	=> $registeredBillingAddresses
-        		));
+            'https'							=> $https,
+            'form'							=> $this->form,
+            'invoiceNumber'					=> $this->invoiceNumber,
+            'registeredBillingAddresses'	=> $registeredBillingAddresses
+        ));
 
         return $this->view->render('creditCard.phtml');
     }

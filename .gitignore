@@ -1,6 +1,7 @@
 
 /assets/.ssh/*
 /assets/ssl/*
+/assets/error.log
 /data/*
 /public/admin/tmp/*.*
 /public/shop/images/*.*

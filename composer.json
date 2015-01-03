@@ -1,5 +1,6 @@
 {
     "require": {
+        "zendframework/zendframework1": "1.12.*",
         "zendframework/zendframework": "2.3.*"
     }
 }

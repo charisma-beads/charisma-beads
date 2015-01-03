@@ -195,6 +195,7 @@ if (isset($_POST['oid']) && isset($_SESSION['cid'])) {
             
         } else {
         	$content .= '<h3 class="errors">Some errors occurred, please check your entries again.</h3>';
+
             $content .= $card->toString();
         }
     }

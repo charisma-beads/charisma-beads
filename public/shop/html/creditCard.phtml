@@ -1,3 +1,4 @@
+
 <?php $errors = $this->form->getMessages(); ?>
 <form method="post" action="<?= $this->https; ?>/shop/credit_card.php">
     <table cellspacing="0" cellpadding="0" align="center">
@@ -14,8 +15,8 @@
                             <b>Order Reference:</b>
                         </td>
                         <td>
-                            <b><?= $this->invoiceNumber; ?></b>
-                            <?= $this->form->getElement('oid'); ?>
+                            <b><?=$this->invoiceNumber; ?></b>
+                            <?=$this->form->getElement('oid'); ?>
                         </td>
                     </tr>
                     <tr>
@@ -23,7 +24,7 @@
                             <b>Order Total:</b>
                         </td>
                         <td>
-                            <b>&pound;<?= $this->form->getElement('total')->getValue(); ?></b>
+                            <b>&pound;<?=$this->form->getElement('total')->getValue(); ?></b>
                         </td>
                     </tr>
                     <tr>
@@ -31,7 +32,7 @@
                             <b>Name of Card Holder:</b>
                         </td>
                         <td>
-                            <?= $this->form->getElement('ccName'); ?>
+                            <?=$this->form->getElement('ccName'); ?>
                         </td>
                     </tr>
                     <tr>
@@ -63,13 +64,13 @@
                             <b>Expiry Date:</b>
                         </td>
                         <td>
-                            <?= $this->form->getElement('ccExpiryMonth'); ?>
-                            <?= $this->form->getElement('ccExpiryYear'); ?>
+                            <?=$this->form->getElement('ccExpiryMonth'); ?>
+                            <?=$this->form->getElement('ccExpiryYear'); ?>
                             <ul class="errors">
-                            	<? if (isset($errors['ccExpiryMonth'])): ?>
-                            	<li><?=  $errors['ccExpiryMonth'][0]; ?></li>
+                            	<?php if (isset($errors['ccExpiryMonth'])): ?>
+                            	<li><?=$errors['ccExpiryMonth'][0]; ?></li>
                             	<?php endif; ?>
-                            	<? if (isset($errors['ccExpiryYear'])): ?>
+                            	<?php if (isset($errors['ccExpiryYear'])): ?>
                             	<li><?=  $errors['ccExpiryYear'][0]; ?></li>
                             	<?php endif; ?>
                             </ul>
@@ -83,7 +84,7 @@
                             <span>
                                 Last 3-digits on the back of your card.
                             </span><br />
-                            <?= $this->form->getElement('ccCardVerificationNumber'); ?>
+                            <?=$this->form->getElement('ccCardVerificationNumber'); ?>
                             <img class="middle" src="/shop/html/img/mini_cvv2.gif" />
                             <span>
                                 <a href="#" rel="threeDigit" class="viewCCHelp">Help finding your Card Verification Number</a> |
@@ -108,11 +109,11 @@
                         	<?= $this->form->getElement('ccStartMonth'); ?>
                            	<?= $this->form->getElement('ccStartYear'); ?>
                            	<ul class="errors">
-                            	<? if (isset($errors['ccStartMonth'])): ?>
-                            	<li><?=  $errors['ccStartMonth'][0]; ?></li>
+                            	<?php if (isset($errors['ccStartMonth'])): ?>
+                            	<li><?=$errors['ccStartMonth'][0]; ?></li>
                             	<?php endif; ?>
-                            	<? if (isset($errors['ccStartYear'])): ?>
-                            	<li><?=  $errors['ccStartYear'][0]; ?></li>
+                            	<?php if (isset($errors['ccStartYear'])): ?>
+                            	<li><?=$errors['ccStartYear'][0]; ?></li>
                             	<?php endif; ?>
                             </ul>
                         </td>

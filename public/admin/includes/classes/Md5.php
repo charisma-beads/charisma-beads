@@ -7,7 +7,7 @@ class Md5 implements PasswordInterface
     public function verify($password, $hash)
     {
     	$result = $this->create($password);
-    	
+
     	if ($hash === $result) {
     	    return true;
     	}

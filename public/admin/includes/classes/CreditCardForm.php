@@ -1,9 +1,6 @@
 <?php
 
-require_once ('Zend/Form.php');
-require_once ('Zend/View/Interface.php');
-
-class CreditCardForm extends Zend_Form
+class CreditCardForm extends \Zend_Form
 {   
 	protected $_months = array(
 			'0'		=> '--Month--',
@@ -26,7 +23,7 @@ class CreditCardForm extends Zend_Form
 		'Errors'
     );
 	
-	public function setView(Zend_View_Interface $view = null)
+	public function setView(\Zend_View_Interface $view = null)
 	{
 		parent::setView($view);
 		foreach ($this as $item) {
