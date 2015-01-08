@@ -188,7 +188,7 @@ if (isset($_POST['oid']) && isset($_SESSION['cid'])) {
                     'address' => $CIA['email'],
                 ),
                 'subject' => 'Card Details Sent To Charisma Beads Ltd [Order ' . $card->invoiceNumber .']',
-                'html' => $card->view->render('email.phtml'),
+                'html' => $card->view->render('admin.phtml'),
             ));
 	        
 	        $content .= '<h2>Thank you, we will process your order as soon as your card has cleared.</h2>';
