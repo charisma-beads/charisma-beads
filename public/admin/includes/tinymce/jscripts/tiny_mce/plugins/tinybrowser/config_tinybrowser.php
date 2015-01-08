@@ -26,9 +26,9 @@ $tinybrowser = array();
 $tinybrowser['docroot'] = $_SERVER['DOCUMENT_ROOT'];
 
 // File upload paths
-$tinybrowser['path']['image'] = '/UserFiles/Image/'; // Image files location - also create a 'thumbs' directory within this path to hold the image thumbnails
-$tinybrowser['path']['media'] = '/UserFiles/Media/'; // Media files location
-$tinybrowser['path']['file']  = '/UserFiles/File/'; // Other files location
+$tinybrowser['path']['image'] = '/userfiles/Image/'; // Image files location - also create a 'thumbs' directory within this path to hold the image thumbnails
+$tinybrowser['path']['media'] = '/userfiles/Media/'; // Media files location
+$tinybrowser['path']['file']  = '/userfiles/File/'; // Other files location
 
 // File upload size limit (0 is unlimited)
 $tinybrowser['maxsize']['image'] = 0; // Image file maximum size
