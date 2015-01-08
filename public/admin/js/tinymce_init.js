@@ -32,7 +32,7 @@ tinyMCE.init({
 	theme : "advanced",
 	relative_urls : false,
  	remove_script_host : false,
- 	document_base_url : "http://www.charismabeads.co.uk/",
+ 	document_base_url : "https://www.charismabeads.co.uk/",
 	file_browser_callback : "tinyBrowser",
 	force_br_newlines : true,
 	width: '100%',
