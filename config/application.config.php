@@ -14,6 +14,8 @@ return [
         'UthandoMail',
         'UthandoFileManager',
         'UthandoTestimonial',
+        'UthandoNews',
+        'UthandoTwitter',
         'Shop',
         'DOMPDFModule'
     ],

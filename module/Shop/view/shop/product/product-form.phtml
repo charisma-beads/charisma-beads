@@ -211,6 +211,10 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
 
         </div>
 
+        <?php if ($this->formAction == 'add'): ?>
+        <?=$this->formElement($form->get('redirectToEdit'));?>
+        <?php endif; ?>
+
         <?=$this->formElement($form->get('productId'));?>
 
         <input type="hidden" name="action" value="<?=$this->formAction;?>">

@@ -1,0 +1,119 @@
+
+<?php /* @var $product \Shop\Model\Product\Product */ ?>
+<?php $product = $this->product; ?>
+<?php $this->headTitle($product->getName())->append($product->getProductCategory()->getCategory()); ?>
+
+<div class="row">
+    <div class="col-md-3 hidden-sm">
+        <?=$this->partial('shop/product-nav');?>
+    </div>
+    <div class="col-md-9">
+        <div class="row">
+            <div class="col-md-4 col-sm-4">
+
+                <figure class="product-view-image"><!-- product image -->
+                    <a href="<?=$this->productImage($product);?>" class="lightbox img-thumbnail" data-plugin-options='{"type":"image"}'>
+                        <img id="product-main-image" class="img-responsive" src="<?=$this->productImage($product);?>" width="620" height="620" alt="">
+                    </a>
+
+                    <p class="fsize11 margin-top30">
+                        <?=$product->getShortDescription();?>
+                    </p>
+                </figure>
+            </div>
+            <div class="col-md-8 col-sm-8">
+
+                <h1 class="product-view-title"><?=$product->getName();?> <?=$product->getShortDescription();?></h1>
+
+                <h3 class="product-view-price"><em><?=$this->productPrice($product);?></em></h3>
+                <p><?=$product->getDescription();?></p>
+
+                <hr class="half-margins" />
+
+                <?php if ($product->inStock()) : ?>
+                    <span class="shop-stock-info stock-yes"><!-- stock -->
+                        <i class="fa fa-check"></i> <span class="text-muted">
+                            <?=($product->getQuantity() > 0) ? $product->getQuantity() : '';?>
+                        </span> in stock
+                    </span><!-- /stock -->
+                <?php else: ?>
+                    <span class="shop-stock-info stock-no"><!-- stock -->
+                        <i class="fa fa-times"></i> out of stock
+                    </span><!-- /stock -->
+                <?php endif; ?>
+
+                <!-- see the bottom of the page for the script -->
+                <section class="product-view-colors">
+                <?php foreach($product->getProductImage() as $image): ?>
+                    <a data-color="white" data-stock="yes" data-src="<?=$this->productImage($product);?>" class="active" href="#">
+                        <img src="<?=$this->productImage($product);?>" height="70" alt="" />
+                    </a>
+                <?php endforeach; ?>
+                </section>
+
+                <?php $form = $this->cart()->addForm($product)->setAttribute('class', 'form-inline margin-top30 nopadding clearfix'); ?>
+
+                <?=$this->form()->openTag($form); ?>
+                    <?=$this->formHidden($form->get('productId')); ?>
+                    <?=$this->formHidden($form->get('returnTo')); ?>
+
+                    <div class="btn-group pull-left product-opt-qty">
+                        <?=$this->formInput($form->get('qty')->setAttribute('class', 'form-control')); ?>
+                    </div>
+
+                    <?php if ($product->getProductOption()): ?>
+                    <div class="btn-group pull-left product-opt-size">
+                        <?=$this->productOptions($product);?>
+                    </div><!-- /btn-group -->
+                    <?php endif; ?>
+
+                    <button type="submit" name="buy-item" class="btn btn-primary pull-left">
+                        ADD TO CART
+                    </button>
+
+                <?=$this->form()->closeTag(); ?>
+
+            </div>
+        </div>
+
+        <hr>
+    </div>
+</div>
+
+<?php $this->inlineScript()->captureStart();?>
+$(document).ready(function(){
+    $('section.product-view-colors a').bind("click", function(e) {
+        e.preventDefault();
+
+        /** Reset the selected thumbnail **/
+        jQuery('.product-view-colors a').removeClass('active');
+        jQuery(this).addClass('active');
+
+        /** add the color (value) to the hidden input, inside the form **/
+        jQuery("input#color").val(jQuery(this).attr('data-color').trim());
+
+
+        /** CHANGE BIG IMAGE **/
+        jQuery("#product-main-image").attr('src', jQuery(this).attr('data-src'));
+
+
+        /**
+         @CHANGE STOCK INFO
+         **/
+        /* stock color */
+        //var data_stock = jQuery(this).attr('data-stock').trim();
+        //jQuery("#product-view-stock-info").removeClass('stock-yes stock-no');
+        //jQuery("#product-view-stock-info").addClass('stock-' + data_stock);
+
+        /* stock icon */
+        /*jQuery("#product-view-stock-info i").removeClass('fa-check fa-times');
+        if(data_stock == 'yes') {
+            jQuery("#product-view-stock-info i").addClass('fa-check');
+        } else {
+            jQuery("#product-view-stock-info i").addClass('fa-times');
+        }*/
+
+    });
+});
+
+<?php $this->inlineScript()->captureEnd();?>

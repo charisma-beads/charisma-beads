@@ -1,0 +1,12 @@
+
+<?php $this->placeholder('page-top')->captureStart();?>
+
+<?=$this->partial('shop/parallax');?>
+
+<?php $this->placeholder('page-top')->captureEnd();?>
+
+<?=$this->partial('uthando-user/user/login',[
+    'loginForm' => $this->login,
+    'registerForm' => $this->register,
+    'renderPageTitle' => false,
+]);?>

@@ -1,0 +1,41 @@
+
+<a class="dropdown-toggle">
+    <i class="fa fa-shopping-cart"></i>&nbsp;
+    <?=$this->cart()->countItems(); ?>&nbsp;ITEMS&nbsp;-&nbsp;<?=$this->cart()->getTotal(); ?>&nbsp;<i class="fa fa-angle-down"></i>
+</a>
+<ul class="dropdown-menu pull-right">
+    <li>
+        <p><i class="fa fa-warning"></i> You have <?=$this->cart()->countItems(); ?> products on your cart</p>
+
+        <!-- CART CONTENT -->
+        <div class="quick-cart-content">
+            <?php /* @var $item \Shop\Model\Cart\Item */ ?>
+            <?php foreach ($this->cart()->getCart() as $item): ?>
+            <a class="quick-cart-item" href="<?=$this->url('shop/cart', [
+                'action' => 'view'
+            ]);?>"><!-- item -->
+                <img class="pull-left" src="<?=$this->basePath('/userfiles/shop/images/' . $item->getMetadata()->getImage()->getThumbnail());?>" width="40" alt="quick cart">
+                <div class="inline-block">
+                    <span class="title block"><?=$item->getMetadata()->getName();?></span>
+                    <span class="price block"><?=$item->getQuantity();?> &times; <?=$this->cart()->getLineCost($item);?></span>
+                </div>
+            </a><!-- /item -->
+
+            <?php endforeach; ?>
+
+            <div class="row cart-footer"><!-- cart footer -->
+                <div class="col-md-6 nopadding-right">
+                    <a href="<?=$this->url('shop/cart', [
+                        'action' => 'view'
+                    ]);?>" class="btn btn-primary fullwidth">VIEW CART</a>
+                </div>
+                <div class="col-md-6 nopadding-left">
+                    <a href="<?=$this->url('shop/checkout');?>" class="btn btn-info fullwidth">CHECKOUT</a>
+                </div>
+            </div><!-- /cart footer -->
+
+        </div>
+        <!-- /CART CONTENT -->
+
+    </li>
+</ul>

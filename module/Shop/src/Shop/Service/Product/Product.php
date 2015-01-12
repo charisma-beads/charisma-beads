@@ -11,32 +11,32 @@ class Product extends AbstractRelationalMapperService
     protected $referenceMap = [
         'productCategory'   => [
             'refCol'    => 'productCategoryId',
-            'service'   => 'Shop\Service\Product\Category',
+            'service'   => 'ShopProductCategory',
         ],
         'productSize'       => [
             'refCol'    => 'productSizeId',
-            'service'   => 'Shop\Service\Product\Size',
+            'service'   => 'ShopProductSize',
         ],
         'taxCode'           => [
             'refCol'    => 'taxCodeId',
-            'service'   => 'Shop\Service\Tax\Code',
+            'service'   => 'ShopTaxCode',
         ],
         'postUnit'          => [
             'refCol'    => 'postUnitId',
-            'service'   => 'Shop\Service\Post\Unit',
+            'service'   => 'ShopPostUnit',
         ],
         'productGroup'      => [
             'refCol'    => 'productGroupId',
-            'service'   => 'Shop\Service\Product\Group',
+            'service'   => 'ShopProductGroup',
         ],
         'productImage'      => [
             'refCol'    => 'productId',
-            'service'   => 'Shop\Service\Product\Image',
+            'service'   => 'ShopProductImage',
             //'getMethod' => 'getImagesByProductId',
         ],
         'productOption' => [
             'refCol'    => 'productId',
-            'service'   => 'Shop\Service\Product\Option',
+            'service'   => 'ShopProductOption',
             //'getMethod' => 'getOptionsByProductId',
         ],
     ];

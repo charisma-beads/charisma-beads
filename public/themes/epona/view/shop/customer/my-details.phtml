@@ -1,0 +1,102 @@
+
+<?php $this->placeholder('page-top')->captureStart();?>
+
+<?=$this->partial('layout/page-title', [
+    'pageTitle' => 'Account Settings'
+]);?>
+
+<?php $this->placeholder('page-top')->captureEnd();?>
+
+<div class="row">
+
+    <div class="col-md-4">
+        <?=$this->uthandoNavigation()
+            ->uthandoTbDbMenu('user-menu')
+            ->setUlClass('side-nav list-group')
+            ->setAddClassToListItem();?>
+    </div>
+
+    <div class="col-md-8">
+
+        <!-- personal settings -->
+        <form action="#" method="post" class="sky-form boxed">
+            <header>Personal Settings <span class="pull-right">
+                    Cus No: <?=$this->escapeHtml($model->getNumber());?>
+                </span>
+            </header>
+
+            <fieldset>
+                <div class="row">
+                    <section class="col col-md-6">
+                        <label class="label">First Name</label>
+                        <label class="input">
+                            <i class="icon-append fa fa-user"></i>
+                            <input required type="text">
+                            <b class="tooltip tooltip-bottom-right">Only latin characters and numbers</b>
+                        </label>
+                    </section>
+                    <section class="col col-md-6">
+                        <label class="label">Last Name</label>
+                        <label class="input">
+                            <i class="icon-append fa fa-user"></i>
+                            <input required type="text">
+                            <b class="tooltip tooltip-bottom-right">Only latin characters and numbers</b>
+                        </label>
+                    </section>
+                </div>
+
+                <div class="row">
+                    <section class="col col-md-6">
+                        <label class="label">Email</label>
+                        <label class="input">
+                            <i class="icon-append fa fa-envelope"></i>
+                            <input required type="text">
+                            <b class="tooltip tooltip-bottom-right">Valid email address</b>
+                        </label>
+                    </section>
+                    <section class="col col-md-6">
+                        <label class="label">Phone</label>
+                        <label class="input">
+                            <i class="icon-append fa fa-phone"></i>
+                            <input type="text">
+                            <b class="tooltip tooltip-bottom-right">Valid phone number</b>
+                        </label>
+                    </section>
+                </div>
+
+                <label class="label">Address</label>
+                <label class="textarea">
+                    <i class="icon-append fa fa-pencil-square-o"></i>
+                    <textarea rows="3"></textarea>
+                    <b class="tooltip tooltip-bottom-right">Only latin characters and numbers</b>
+                </label>
+
+                <div class="form-group">
+                    <div class="col-md-6 nopadding">
+                        <label class="checkbox"><input type="checkbox" name="checkbox" checked><i></i>Monthly Newsletter</label>
+                    </div>
+
+                    <div class="col-md-6 nopadding">
+                        <div class="row">
+                            <div class="col-md-4 col-sm-4 col-xs-4">
+                                <label class="radio"><input type="radio" name="radio-inline" checked><i></i>Male</label>
+                            </div>
+                            <div class="col-md-8 col-sm-8 col-xs-8">
+                                <label class="radio"><input type="radio" name="radio-inline"><i></i>Female</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </fieldset>
+
+            <footer>
+                <button type="submit" class="button"><i class="fa fa-check"></i> Save Changes</button>
+            </footer>
+
+        </form>
+        <!-- /personal settings -->
+    </div>
+
+</div>

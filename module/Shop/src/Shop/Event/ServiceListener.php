@@ -101,12 +101,12 @@ class ServiceListener implements ListenerAggregateInterface
         $model = $e->getParam('model');
 
         /* @var $service \Shop\Service\Product\Image */
-        $service = $e->getTarget()->getService('Shop\Service\Product\Image');
+        $service = $e->getTarget()->getService('ShopProductImage');
+
         $post = [
             'productId' => $data['productId'],
             'thumbnail' => $model->getFileName(),
             'full'      => $model->getFileName(),
-            'isDefault' => 0,
         ];
 
         $service->add($post);

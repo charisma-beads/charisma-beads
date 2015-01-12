@@ -1,0 +1,68 @@
+
+<?php $this->placeholder('header')->captureStart();?>
+<?=$this->partial('shop/options', [
+    'title' => $this->escapehtml($this->category->getCategory()),
+    'bread' => $this->bread,
+    'category' => $this->category,
+]);?>
+<?php $this->placeholder('header')->captureEnd();?>
+
+<div class="row">
+    <div class="col-md-3 hidden-sm">
+        <?=$this->partial('shop/product-nav');?>
+    </div>
+    <div class="col-md-9">
+        <!-- PRODUCT LIST -->
+        <div class="row">
+            <?php /* @var $row \Shop\Model\Product\Product */ ?>
+            <?php foreach ($this->products as $row): ?>
+            <div class="col-md-4 col-sm-4"><!-- item -->
+                <a class="shop-item-list" href="<?=$this->url('shop/catalog/product', [
+                    'categoryIdent' => $row->getProductCategory()->getIdent(),
+                    'productIdent' => $row->getIdent(),
+                ]);?>">
+                    <figure><!-- image -->
+                        <img class="img-responsive" src="<?=$this->productImage($row);?>" alt="" />
+                    </figure><!-- /image -->
+                    <?php if ($row->inStock()) : ?>
+                    <span class="shop-stock-info stock-yes"><!-- stock -->
+                        <span class="text-muted"><?=$this->escapehtml($row->getName());?></span>
+                        <i class="fa fa-check"></i>
+                        <span class="text-muted">
+                            <?=($row->getQuantity() > 0) ? $row->getQuantity() :'';?>
+                        </span> in stock
+                    </span><!-- /stock -->
+                    <?php else: ?>
+                    <span class="shop-stock-info stock-no"><!-- stock -->
+                        <span class="text-muted"><?=$this->escapehtml($row->getName());?></span>
+                        <i class="fa fa-times"></i> out of stock
+                    </span><!-- /stock -->
+                    <?php endif; ?>
+                    <div class="product-info"><!-- title and price -->
+                        <h2>
+                            <span class="product-name"><?=$row->getShortDescription();?></span>
+                            <?=$this->productPrice($row)
+                                ->setFormat('<span class="bold">%s</span> %s for %s gms ')
+                                ->setDiscountFormat('<span class="line-through">%s</span>'); ?>
+
+                        </h2>
+                    </div><!-- /title and price -->
+                </a>
+            </div><!-- /item -->
+            <?php endforeach; ?>
+        </div><!-- /PRODUCT LIST -->
+    </div>
+</div>
+
+<!-- PAGINATION -->
+<?=$this->paginationControl(
+    $this->products,
+    'Elastic',
+    'application/partial/paginate',
+    [
+        'route'		=> 'shop/catalog/page',
+        'routeParams' 	=> [
+            'categoryIdent' => $this->category->getIdent()
+        ]
+    ]
+); ?><!-- /PAGINATION -->

@@ -53,7 +53,11 @@ class Catalog extends AbstractActionController
     public function viewAction()
     {
         $product = $this->getProductService()->getProductByIdent($this->params('productIdent', 0));
-        
+
+        if (!$product) {
+            return $this->redirect()->toRoute('shop');
+        }
+
         if (null === $product) {
             throw new ShopException('Unknown product' . $this->params('productIdent'));
         }

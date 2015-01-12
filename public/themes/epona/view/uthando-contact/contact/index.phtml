@@ -1,0 +1,131 @@
+
+<?php $this->placeholder('page-top')->captureStart();?>
+
+<?=$this->partial('layout/page-title', [
+    'pageTitle' => 'Contact Us'
+]);?>
+
+<?php $this->placeholder('page-top')->captureEnd();?>
+
+<div class="row">
+
+    <!-- FORM -->
+    <div class="col-md-9">
+        <?php if ($this->contact('google_map')): ?>
+        <div id="gmap" class="<?=$this->contact('google_map.color');?> gmap-half margin-bottom60"><!-- google map --></div>
+        <script type="text/javascript">
+            var	$googlemap_latitude 	= <?=$this->contact('google_map.latitude');?>,
+                $googlemap_longitude	= <?=$this->contact('google_map.longitude');?>,
+                $googlemap_zoom			= <?=$this->contact('google_map.zoom');?>;
+        </script>
+        <?php endif; ?>
+        <h3>Drop us a line or just say <strong><em>Hello!</em></strong></h3>
+
+        <form id="contactForm"  method="post" action="<?=$this->url('contact/process') ?>">
+
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-6<?php if ($this->form->get('name')->getMessages()) echo ' has-error'; ?>">
+                        <label>Name *</label>
+                        <?=$this->formInput($this->form->get('name')); ?>
+                        <span class="help-block">
+                            <?=$this->formElementErrors($this->form->get('name'), [
+                                'class' => 'list-unstyled note note-error'
+                            ]); ?>
+                        </span>
+                    </div>
+                    <div class="col-md-6<?php if ($this->form->get('email')->getMessages()) echo ' has-error'; ?>">
+                        <label>Email *</label>
+                        <?=$this->formEmail($this->form->get('email')); ?>
+                        <span class="help-block">
+                            <?=$this->formElementErrors($this->form->get('email'), [
+                                'class' => 'list-unstyled note note-error'
+                            ]); ?>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-12<?php if ($this->form->get('subject')->getMessages()) echo ' has-error'; ?>">
+                        <label>Subject *</label>
+                        <?=$this->formInput($this->form->get('subject')); ?>
+                        <span class="help-block">
+                            <?=$this->formElementErrors($this->form->get('subject'), [
+                                'class' => 'list-unstyled note note-error'
+                            ]); ?>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-12<?php if ($this->form->get('body')->getMessages()) echo ' has-error'; ?>">
+                        <label>Message *</label>
+                        <?=$this->formTextarea($this->form->get('body')); ?>
+                        <span class="help-block">
+                            <?=$this->formElementErrors($this->form->get('body'), [
+                                'class' => 'list-unstyled note note-error'
+                            ]); ?>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-12<?php if ($this->form->get('captcha')->getMessages()) echo ' has-error'; ?>">
+                        <label>Please verify you are human *</label>
+                        <?=$this->formCaptcha($this->form->get('captcha')); ?>
+                        <span class="help-block">
+                            <?=$this->formElementErrors($this->form->get('captcha'), [
+                                'class' => 'list-unstyled note note-error'
+                            ]); ?>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <?=$this->formHidden($this->form->get('csrf')); ?>
+                    <button type="submit" class="btn btn-primary btn-lg" data-loading-text="Please wait...">Send</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- /FORM -->
+
+    <!-- INFO -->
+    <div class="col-md-3">
+
+        <h2>Visit Us</h2>
+
+        <p><?=$this->contact('details.visit_us');?></p>
+
+        <div class="divider half-margins"><!-- divider --></div>
+
+        <p class="nomargin-bottom">
+            <span class="block">
+                <strong><i class="fa fa-map-marker"></i> Address:</strong>&nbsp;
+                <?=$this->contact('details.address.line1');?>
+                <?=$this->contact('details.address.line2');?>,
+                <?=$this->contact('details.address.county');?>, <?=$this->contact('details.address.county');?>
+            </span>
+            <span class="block">
+                <strong><i class="fa fa-phone"></i> Phone:</strong>&nbsp;
+                <a href="tel:1800-555-1234"><?=$this->contact('details.phone');?></a>
+            </span>
+            <span class="block">
+                <strong><i class="fa fa-envelope"></i> Email:</strong>&nbsp;
+                <a href="mailto:<?=$this->contact('details.email');?>"><?=$this->contact('details.email');?></a>
+            </span>
+        </p>
+
+        <div class="divider half-margins"><!-- divider --></div>
+
+        <h4 class="font300">Business Hours</h4>
+        <p><?=$this->partial('uthando-contact/business-hours');?></p>
+
+
+    </div>
+    <!-- /INFO -->
+</div>

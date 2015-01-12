@@ -21,7 +21,7 @@ class Shop extends AbstractActionController
     public function shopFrontAction()
     {
         $cats = $this->getProductCategoryService()->fetchAll(true);
-
+        
         return new ViewModel([
             'cats' => $cats
         ]);

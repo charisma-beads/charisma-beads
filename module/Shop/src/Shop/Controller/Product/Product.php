@@ -8,7 +8,7 @@ use Zend\View\Model\ViewModel;
 class Product extends AbstractCrudController
 {
 	protected $searchDefaultParams = ['sort' => 'name'];
-	protected $serviceName = 'Shop\Service\Product';
+	protected $serviceName = 'ShopProduct';
 	protected $route = 'admin/shop/product';
 	
 	public function viewAction()

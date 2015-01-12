@@ -11,6 +11,14 @@ class Product extends Form
         	'name'	=> 'productId',
         	'type'	=> 'hidden',
         ]);
+
+		$this->add([
+			'name'      => 'redirectToEdit',
+			'type'      => 'hidden',
+			'attributes'   => [
+				'value' => true,
+			],
+		]);
         
         $this->add([
         	'name'			=> 'ident',

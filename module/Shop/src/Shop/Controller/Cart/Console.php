@@ -32,7 +32,7 @@ class Console extends AbstractActionController
         }
 
         /* @var $service Cart */
-        $service = $this->getService('Shop\Service\Cart', ['initialize' => false]);
+        $service = $this->getService('ShopCart', ['initialize' => false]);
 
         $result = $service->clearExpired();
 

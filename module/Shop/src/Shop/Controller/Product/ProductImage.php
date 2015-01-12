@@ -7,7 +7,7 @@ use Zend\View\Model\ViewModel;
 class ProductImage extends AbstractCrudController
 {
 	protected $searchDefaultParams = array('sort' => 'productImageId');
-	protected $serviceName = 'Shop\Service\Product\Image';
+	protected $serviceName = 'ShopProductImage';
 	protected $route = 'admin/shop/product/image';
     protected $paginate = false;
 

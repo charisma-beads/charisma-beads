@@ -1,0 +1,281 @@
+<?=$this->doctype();?>
+<!--[if IE 8]>			<html class="ie ie8"> <![endif]-->
+<!--[if IE 9]>			<html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->	<html> <!--<![endif]-->
+    <head>
+        <?=$this->headMeta()
+            ->setCharset('utf-8')
+            // mobile settings
+            ->appendName('viewport', 'width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0')
+            ->appendName('rating', 'general')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ;?>
+
+        <?=$this->headTitle($this->themeOptions('site_name'))
+            ->setSeparator(' - ')
+            ->setAutoEscape(false);?>
+
+        <!-- Favicon -->
+        <?=$this->headLink([
+            'rel'  => 'shortcut icon',
+            'href' => $this->themePath('assets/images/demo/favicon.ico')])
+            // WEB FONTS
+            ->appendStylesheet('https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800&amp;subset=latin,latin-ext')
+            // CORE CSS
+            ->appendStylesheet($this->themePath('/assets/plugins/bootstrap/css/bootstrap.min.css'))
+            ->appendStylesheet($this->themePath('/assets/css/font-awesome.css'))
+            ->appendStylesheet($this->themePath('/assets/css/sky-forms.css'))
+            ->appendStylesheet($this->themePath('/assets/css/weather-icons.min.css'))
+            ->appendStylesheet($this->themePath('/assets/css/line-icons.css'))
+            ->appendStylesheet($this->themePath('/assets/plugins/owl-carousel/owl.pack.css'))
+            ->appendStylesheet($this->themePath('/assets/plugins/magnific-popup/magnific-popup.css'))
+            ->appendStylesheet($this->themePath('/assets/css/animate.css'))
+            ->appendStylesheet($this->themePath('/assets/css/flexslider.css'))
+            // REVOLUTION SLIDER
+            ->appendStylesheet($this->themePath('/assets/css/revolution-slider.css'))
+            ->appendStylesheet($this->themePath('/assets/css/layerslider.css'))
+            // SHOP
+            //->appendStylesheet($this->themePath('/assets/css/layout-shop.css'))
+            // THEME CSS
+            ->appendStylesheet($this->themePath('/assets/css/essentials.css'))
+            ->appendStylesheet($this->themePath('/assets/css/layout.css'))
+            //->appendStylesheet($this->themePath('/assets/css/header-default.css'))
+            ->appendStylesheet($this->themePath('/assets/css/header-5.css'))
+            ->appendStylesheet($this->themePath('/assets/css/footer-default.css'))
+            ->appendStylesheet($this->themePath('/assets/css/color_scheme/yellow.css'), 'screen', false, ['id' => 'color_scheme'])
+            // Morenizr
+            ->appendStylesheet($this->themePath('/assets/plugins/modernizr.min.js'))
+            // IE 8
+            ->appendStylesheet($this->themePath('/assets/plugins/respond.js'), 'screen', 'lt IE 9')
+            // SHOP
+            ->appendStylesheet($this->themePath('/assets/css/layout-shop.css'))
+        ;?>
+        <style>
+            /* Theme overrides */
+            #header.sticky.affix #topBar {
+                display:block;
+            }
+
+            .shop-item-list {
+                height:328px;
+            }
+
+            .shop-item-list span.product-name {
+                white-space: initial;
+            }
+        </style>
+    </head>
+
+    <!--
+        Available body classes:
+            smoothscroll			= enable chrome browser smooth scroll
+            grey 					= grey content background
+            boxed 					= boxed style
+            pattern1 ... pattern10 	= background pattern
+
+        Background Image - add to body:
+            data-background="assets/images/boxed_background/1.jpg"
+    -->
+    <body class="smoothscroll">
+
+        <div id="wrapper">
+            <div id="header"><!-- class="sticky" for sticky menu -->
+                <!-- Top Bar -->
+                <header id="topBar" class="styleBackgroundColor">
+                    <div class="container">
+
+                        <div id="barMain" class="block text-right">
+
+                            <nav class="nav-second">
+                                <?=$this->uthandoNavigation()
+                                    ->uthandoTbDbMenu('top-menu')
+                                    ->setPartial('uthando-navigation/top-menu');
+                                ?>
+                            </nav>
+
+                            Call Us Today: <strong><?=$this->contact('details.phone');?></strong>
+							<span class="hide_mobile">
+								&bull; <a href="mailto:<?=$this->contact('details.email');?>"><?=$this->contact('details.email');?></a>
+							</span>
+
+                        </div>
+
+                        <!-- Logo -->
+                        <a class="logo" href="<?=$this->url('home');?>" style="text-decoration: none;">
+                            <img src="<?=$this->basePath($this->themeOptions('logo'));?>" height="50" alt="logo">
+                            <img src="<?=$this->basePath($this->themeOptions('logo2'));?>" height="50" alt="logo" >
+                        </a>
+
+                    </div><!-- /.container -->
+                </header>
+                <!-- /Top Bar -->
+
+                <!-- Top Nav -->
+                <header id="topNav">
+                    <div class="container">
+
+                        <!-- Mobile Menu Button -->
+                        <button class="btn btn-mobile" data-toggle="collapse" data-target=".nav-main-collapse">
+                            <i class="fa fa-bars"></i>
+                        </button>
+
+                        <!-- Search -->
+                        <form id="search-catalog" class="search" method="post" action="<?=$this->url('shop/search');?>">
+                            <?=$this->formElement(
+                                $this->productSearch()
+                                    ->get('productSearch')
+                                    ->setValue($this->searchData['productSearch'])
+                            );?>
+                            <button type="submit" class="fa fa-search"></button>
+                        </form>
+                        <!-- /Search -->
+
+                        <!-- Top Nav -->
+                        <div class="navbar-collapse nav-main-collapse collapse">
+                            <nav class="nav-main">
+                                <?=$this->uthandoNavigation()
+                                    ->uthandoTbDbMenu('main-menu')
+                                    ->setPartial('uthando-navigation/main-menu');
+                                ?>
+
+                            </nav>
+                        </div>
+                        <!-- /Top Nav -->
+
+                    </div><!-- /.container -->
+                </header>
+                <!-- /Top Nav -->
+
+            </div>
+
+            <?=$this->placeholder('page-top');?>
+
+            <!-- CONTENT -->
+            <section>
+                <div class="container">
+                    <!-- header -->
+                    <?=$this->placeholder('header');?>
+                    <!-- /header -->
+
+                    <!-- messages -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <?=$this->tbFlashMessenger()->render(); ?>
+                        </div>
+                    </div>
+                    <!-- /messages -->
+
+                    <?=$this->content;?>
+                </div>
+            </section>
+            <!-- /CONTENT -->
+
+            <!-- FOOTER -->
+            <footer id="footer">
+                <div class="container">
+
+                    <div class="row">
+
+                        <!-- col #1 -->
+                        <div class="logo_footer dark col-md-3">
+
+                            <img alt="<?=$this->themeOptions('site_name');?>" src="<?=$this->basePath($this->themeOptions('logo2'));?>" height="50" class="logo" />
+
+                            <p class="block">
+                                <?=$this->contact('details.address.line1');?>,&nbsp;
+                                <?=$this->contact('details.address.line2');?><br />
+                                <?=$this->contact('details.address.town');?>&nbsp;
+                                <?=$this->contact('details.address.county');?>&nbsp;
+                                <?=$this->contact('details.address.postcode');?><br />
+                                Email:&nbsp;<?=$this->contact('details.email');?><br />
+                                Phone:&nbsp;<?=$this->contact('details.phone');?><br />
+                            </p>
+
+                            <p class="block"><!-- social -->
+                                <?=$this->socialLinks();?>
+                            </p><!-- /social -->
+                        </div>
+                        <!-- /col #1 -->
+
+                        <!-- col #2 -->
+                        <div class="spaced col-md-3 col-sm-4">
+                            <h4>Recent <strong>Posts</strong></h4>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <a class="block" href="">New CSS3 Transitions this Year</a>
+                                    <small>June 29, 2014</small>
+                                </li>
+                                <li>
+                                    <a class="block" href="">Inteligent Transitions In UX Design</a>
+                                    <small>June 29, 2014</small>
+                                </li>
+                                <li>
+                                    <a class="block" href="">Lorem Ipsum Dolor</a>
+                                    <small>June 29, 2014</small>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- /col #2 -->
+
+                        <!-- col #3 -->
+                        <div class="spaced col-md-3 col-sm-4">
+                            <?=$this->tweetFeed()->render();?>
+                        </div>
+                        <!-- /col #3 -->
+
+                        <!-- col #4 -->
+                        <div class="spaced col-md-3 col-sm-4">
+                            <h4>About <strong>Us</strong></h4>
+                            <p>
+                                Here is something about us.
+                            </p>
+
+                            <h4><small><strong>Subscribe to our Newsletter</strong></small></h4>
+                            <form id="newsletterSubscribe" method="post" action="php/newsletter.php" class="input-group">
+                                <input required type="email" class="form-control" name="newsletter_email" id="newsletter_email" value="" placeholder="E-mail Address">
+								<span class="input-group-btn">
+									<button class="btn btn-primary">SUBMIT</button>
+								</span>
+                            </form>
+
+                        </div>
+                        <!-- /col #4 -->
+
+                    </div>
+
+                </div>
+
+                <hr />
+
+                <div class="copyright">
+                    <div class="container text-center fsize12">
+                        Designed by <a href="http://www.shaunfreeman.co.uk" target="_blank" title="e-commerse websites" class="copyright">
+                            Shaun Freeman
+                        </a> &bull; All Right Reserved &copy; <?=$this->themeOptions('site_name');?>. &nbsp;
+                        <a href="page-privacy.html" class="fsize11">Privacy Policy</a> &bull;
+                        <a href="page-terms.html" class="fsize11">Terms of Service</a>
+                    </div>
+                </div>
+            </footer>
+            <!-- /FOOTER -->
+
+            <a href="#" id="toTop"></a>
+        </div><!-- /#wrapper -->
+
+        <!-- JAVASCRIPT FILES -->
+        <?=$this->inlineScript()
+            ->prependFile($this->themePath('/assets/js/scripts.js'))
+            ->prependFile($this->themePath('/assets/js/revolution_slider.js'))
+            ->prependFile($this->themePath('/assets/plugins/revolution-slider/js/jquery.themepunch.revolution.min.js'))
+            ->prependFile($this->themePath('/assets/plugins/revolution-slider/js/jquery.themepunch.tools.min.js'))
+            ->prependFile($this->themePath('/assets/plugins/flexslider/jquery.flexslider-min.js'))
+            ->prependFile($this->themePath('/assets/plugins/knob/js/jquery.knob.js'))
+            ->prependFile($this->themePath('/assets/plugins/owl-carousel/owl.carousel.min.js'))
+            ->prependFile($this->themePath('/assets/plugins/magnific-popup/jquery.magnific-popup.min.js'))
+            ->prependFile($this->themePath('/assets/plugins/bootstrap/js/bootstrap.min.js'))
+            ->prependFile($this->themePath('/assets/plugins/masonry.js'))
+            ->prependFile($this->themePath('/assets/plugins/jquery.isotope.js'))
+            ->prependFile($this->themePath('/assets/plugins/jquery-2.1.1.min.js'))
+        ;?>
+    </body>
+</html>

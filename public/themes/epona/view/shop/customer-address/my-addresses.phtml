@@ -1,0 +1,21 @@
+
+<?php $this->placeholder('page-top')->captureStart();?>
+
+<?=$this->partial('layout/page-title', [
+    'pageTitle' => 'My Addresses'
+]);?>
+
+<?php $this->placeholder('page-top')->captureEnd();?>
+
+<div class="row">
+
+    <div class="col-md-4">
+        <?=$this->uthandoNavigation()
+            ->uthandoTbDbMenu('user-menu')
+            ->setUlClass('side-nav list-group')
+            ->setAddClassToListItem();?>
+    </div>
+
+    <div class="col-md-8">
+    </div>
+</div>
