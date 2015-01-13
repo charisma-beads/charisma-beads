@@ -27,7 +27,7 @@ class Cart extends AbstractActionController
         }
 
         /* @var $productService Product */
-        $productService = $this->getService('Shop\Service\Product');
+        $productService = $this->getService('ShopProduct');
         $product = $productService->getFullProductById(
             $this->params()->fromPost('productId')
         );
@@ -37,7 +37,7 @@ class Cart extends AbstractActionController
         }
 
         /* @var $cart CartService */
-        $cart = $this->getService('Shop\Service\Cart');
+        $cart = $this->getService('ShopCart');
         $result = $cart->addItem(
             $product,
             $this->params()->fromPost('qty')
@@ -77,7 +77,7 @@ class Cart extends AbstractActionController
         $id = $this->params()->fromRoute('id', 0);
 
         /* @var $cart CartService */
-        $cart = $this->getService('Shop\Service\Cart');
+        $cart = $this->getService('ShopCart');
         
         if ($id) {
             $cart->removeItem($id);
@@ -97,10 +97,10 @@ class Cart extends AbstractActionController
         }
 
         /* @var $productService Product */
-        $productService = $this->getService('Shop\Service\Product');
+        $productService = $this->getService('ShopProduct');
 
         /* @var $cart CartService */
-        $cart = $this->getService('Shop\Service\Cart');
+        $cart = $this->getService('ShopCart');
         
         foreach ($this->params()->fromPost('quantity') as $id => $value) {
 
@@ -119,7 +119,7 @@ class Cart extends AbstractActionController
     public function emptyAction()
     {
         /* @var $cart CartService */
-        $cart = $this->getService('Shop\Service\Cart');
+        $cart = $this->getService('ShopCart');
 
         $cart->clear();
         

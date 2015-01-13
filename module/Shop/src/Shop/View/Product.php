@@ -26,7 +26,8 @@ class Product extends AbstractViewHelper
         if (!$this->service instanceof ProductService) {
             $this->service = $this->getServiceLocator()
                 ->getServiceLocator()
-                ->get('Shop\Service\Product');
+                ->get('UthandoServiceManager')
+                ->get('ShopProduct');
         }
 
         return $this->service->getFullProductById($productId);

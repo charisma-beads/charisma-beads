@@ -2,11 +2,14 @@
 namespace Shop\Controller;
 
 use Shop\ShopException;
+use UthandoCommon\Controller\ServiceTrait;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
 class Catalog extends AbstractActionController
 {
+    use ServiceTrait;
+
     /**
      *
      * @var \Shop\Service\Product
@@ -124,12 +127,7 @@ class Catalog extends AbstractActionController
      */
     protected function getProductService()
     {
-        if (! $this->productService) {
-            $sl = $this->getServiceLocator();
-            $this->productService = $sl->get('Shop\Service\Product');
-        }
-        
-        return $this->productService;
+        return $this->getService('ShopProduct');
     }
 
     /**
@@ -138,11 +136,6 @@ class Catalog extends AbstractActionController
      */
     protected function getProductCategoryService()
     {
-        if (! $this->productCategoryService) {
-            $sl = $this->getServiceLocator();
-            $this->productCategoryService = $sl->get('Shop\Service\Product\Category');
-        }
-        
-        return $this->productCategoryService;
+        return $this->getService('ShopProductCategory');
     }
 }

@@ -16,7 +16,8 @@ class Category extends AbstractViewHelper
 		if (!$this->service instanceof ProductCategory) {
 			$this->service = $this->getServiceLocator()
 				->getServiceLocator()
-				->get('Shop\Service\Product\Category');
+				->get('UthandoServiceManager')
+				->get('ShopProductCategory');
 		}
 		
 		return $this;

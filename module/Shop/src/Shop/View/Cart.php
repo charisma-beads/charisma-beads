@@ -28,7 +28,7 @@ class Cart extends AbstractViewHelper
 			$this->cartService = $this->getServiceLocator()
 				->getServiceLocator()
                 ->get('UthandoServiceManager')
-                ->get('Shop\Service\Cart');
+                ->get('ShopCart');
 		}
 
 		return $this;
