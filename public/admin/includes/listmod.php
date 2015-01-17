@@ -45,7 +45,7 @@ function menu () {
 	// Finsh Table.
 
 	print "<tr>";
-	print "<td height=\"25\" class=\"menuLink\" onMouseOver=\"this.className='navbar'\" onMouseOut=\"this.className='menuLink'\"><p><a href=\"$https/plesk-stat/webstat/\" class=\"menuLink\" target=\"_blank\">:: Web Statistics</a></p>";
+	print "<td height=\"25\" class=\"menuLink\" onMouseOver=\"this.className='navbar'\" onMouseOut=\"this.className='menuLink'\"><p><a href=\"$https/awstats/awstats.pl\" class=\"menuLink\" target=\"_blank\">:: Web Statistics</a></p>";
 	print "</td>";
 	print "</tr>";
 	print "<tr>";
