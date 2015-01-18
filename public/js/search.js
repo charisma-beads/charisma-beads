@@ -93,10 +93,10 @@ function productSearch(s, np, id, Query, searchtype) {
   		}
 	}).send().chain(function(){
 	
-		if (!Browser.Platform.ios && !Browser.Platform.android && !Browser.Platform.webos) {
+		/*if (!Browser.Platform.ios && !Browser.Platform.android && !Browser.Platform.webos) {
         	miniShop.removeEvents();
 			miniShop.setupEvents();
-		}
+		}*/
 		
 		var scroll = new Fx.Scroll(window, {
 			duration: 1500,

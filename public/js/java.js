@@ -33,5 +33,10 @@ window.addEvent('domready', function() {
 		});
 		
 	}
+
+	window.addEvent('scroll', function(){
+		var sTop = window.getScrollTop();
+		$('mini_cart').setStyle('top', sTop + 5 + 'px');
+	});
 });
 
