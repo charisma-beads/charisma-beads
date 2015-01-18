@@ -157,7 +157,7 @@ if (!isset($_SESSION['cid'])) {
 			
 			// Check for town/city.
     		if (preg_match ("/^[[:alpha:].' -]{2,30}$/i", stripslashes(trim($_POST['delivery_city'])))) {
-        		$delivery_city = escape_data(ucwords (strtolower($_POST['city'])));
+        		$delivery_city = escape_data(ucwords (strtolower($_POST['delivery_city'])));
     		} else {
         		$error = TRUE;
         		$content .= "<span class=\"smcap\"><p class=\"fail\"><img src=\"/admin/images/actionno.png\" /> Please enter your delivery Town or City!</p></span>";
@@ -255,7 +255,8 @@ if (!isset($_SESSION['cid'])) {
 					WHERE delivery_address_id=$DAId
 					LIMIT 1
 					";
-					
+					print_r($_POST);
+					print_r($query);
 					$result = mysql_query ($query);
 				}
 			

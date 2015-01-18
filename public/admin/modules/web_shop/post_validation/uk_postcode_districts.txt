@@ -1,0 +1,1987 @@
+AB 
+ Aberdeen AB10, AB11, AB12, AB15, AB16, AB21, AB22, AB23, AB24, AB25 Scotland 
+ Milltimber AB13 
+ Peterculter AB14 
+ Laurencekirk AB30 
+ Banchory AB31 
+ Westhill AB32 
+ Alford AB33 
+ Aboyne AB34 
+ Ballater AB35 
+ Strathdon AB36 
+ Ballindalloch AB37 
+ Aberlour AB38 
+ Stonehaven AB39 
+ Ellon AB41 
+ Peterhead AB42 
+ Fraserburgh AB43 
+ Macduff AB44 
+ Banff AB45 
+ Inverurie AB51 
+ Insch AB52 
+ Turriff AB53 
+ Huntly AB54 
+ Keith AB55 
+ Buckie AB56 
+
+--------------------------------------------------------------------------------
+ 
+AL 
+ St. Albans AL1, AL2, AL3, AL4 England 
+ Harpenden AL5 
+ Welwyn AL6 
+ Welwyn Garden City AL7, AL8 
+ Hatfield AL9, AL10 
+
+B
+Area Post town Districts  
+B Birmingham B1, B2, B3, B4, B5, B6, B7, B8, B9, B10, B11, B12, B13, B14, B15, B16, B17, B18, B19, B20, B21, B22, B23, B24, B25, B26, B27, B28, B29, B30, B31, B32, B33, B34, B35, B36, B37, B38, B40, B42, B43, B44, B45, B46, B47, B48 England 
+ Alcester B49, B50 
+ Bromsgrove B60, B61 
+ Halesowen B62, B63 
+ Cradley Heath B64 
+ Rowley Regis B65 
+ Smethwick B66, B67 
+ Oldbury B68, B69 
+ West Bromwich B70, B71 
+ Sutton Coldfield B72, B73, B74, B75, B76 
+ Tamworth B77, B78, B79 
+ Studley B80 
+ Solihull B90, B91, B92, B93, B94, B95 
+ Redditch B96, B97, B98 
+
+--------------------------------------------------------------------------------
+ 
+BA 
+ Bath BA1, BA2 England 
+ Radstock BA3 
+ Shepton Mallet BA4 
+ Wells BA5 
+ Glastonbury BA6 
+ Castle Cary BA7 
+ Templecombe BA8 
+ Wincanton BA9 
+ Bruton BA10 
+ Frome BA11 
+ Warminster BA12 
+ Westbury BA13 
+ Trowbridge BA14 
+ Bradford on Avon BA15 
+ Street BA16 
+ Yeovil BA20, BA21, BA22 
+
+--------------------------------------------------------------------------------
+ 
+BB 
+ Blackburn BB1, BB2 England 
+ Darwen BB3 
+ Rossendale BB4 
+ Accrington BB5 
+ Blackburn BB6 
+ Clitheroe BB7 
+ Colne BB8 
+ Nelson BB9 
+ Burnley BB10, BB11, BB12 
+ Barnoldswick BB18 
+
+--------------------------------------------------------------------------------
+ 
+BD Bradford BD1, BD2, BD3, BD4, BD5, BD6, BD7, BD8, BD9, BD10, BD11, BD12, BD13, BD14, BD15 England 
+ Bingley BD16 
+ Shipley BD17, BD18 
+ Cleckheaton BD19 
+ Keighley BD20, BD21, BD22 
+ Skipton BD23 
+ Settle BD24 
+ Bingley BD97 
+ Shipley BD98 
+ Bradford BD99 
+
+--------------------------------------------------------------------------------
+ 
+BH Bournemouth BH1, BH2, BH3, BH4, BH5, BH6, BH7, BH8, BH9, BH10, BH11 England 
+ Poole BH12, BH13, BH14, BH15, BH16, BH17 
+ Broadstone BH18 
+ Swanage BH19 
+ Wareham BH20 
+ Wimborne BH21 
+ Ferndown BH22 
+ Christchurch BH23 
+ Ringwood BH24 
+ New Milton BH25 
+ Verwood BH31 
+
+--------------------------------------------------------------------------------
+ 
+BL Bury BL0 England 
+ Bolton BL1, BL2, BL3, BL4, BL5, BL6, BL7  
+ Bury BL8, BL9 
+
+--------------------------------------------------------------------------------
+ 
+BN Brighton BN1, BN2 England 
+ Hove BN3 
+ Henfield BN5 
+ Hassocks BN6 
+ Lewes BN7, BN8 
+ Newhaven BN9 
+ Peacehaven BN10 
+ Worthing BN11, BN12, BN13, BN14 
+ Lancing BN15 
+ Littlehampton BN16, BN17 
+ Arundel BN18 
+ Eastbourne BN20, BN21, BN22, BN23 
+ Pevensey BN24 
+ Seaford BN25 
+ Polegate BN26 
+ Hailsham BN27 
+ Brighton BN41, BN42 
+ Shoreham-by-Sea BN43 
+ Steyning BN44 
+ Brighton BN45 
+
+--------------------------------------------------------------------------------
+ 
+BR Bromley BR1 England 
+ Keston BR2 
+ Beckenham BR3 
+ West Wickham BR4 
+ Orpington BR5, BR6 
+ Chislehurst BR7 
+ Swanley BR8 
+
+--------------------------------------------------------------------------------
+ 
+BS Bristol BS1, BS2, BS3, BS4, BS5, BS6, BS7, BS8, BS9, BS10, BS11, BS13, BS14, BS15, BS16, BS20, BS30, BS31, BS34, BS35, BS39, BS40, BS41 England 
+ Clevedon BS21 
+ Weston-super-Mare BS22, BS23, BS24 
+ Winscombe BS25 
+ Axbridge BS26 
+ Cheddar BS27 
+ Wedmore BS28 
+ Banwell BS29 
+ Nailsea and Backwell BS48 
+ Yatton BS49 
+
+--------------------------------------------------------------------------------
+ 
+BT Belfast BT1, BT2, BT3, BT4, BT5, BT6, BT7, BT8, BT9, BT10, BT11, BT12, BT13, BT14, BT15, BT16, BT17 Northern Ireland 
+ Holywood BT18 
+ Bangor BT19, BT20 
+ Donaghadee BT21 
+ Newtownards BT22, BT23 
+ Ballynahinch BT24 
+ Dromore BT25 
+ Hillsborough BT26 
+ Lisburn BT27, BT28 
+ Belfast, Crumlin BT29 
+ Downpatrick BT30 
+ Castlewellan BT31 
+ Banbridge BT32 
+ Newcastle BT33 
+ Newry BT34, BT35 
+ Newtownabbey BT37 
+ Carrickfergus BT38 
+ Ballyclare BT39 
+ Larne BT40 
+ Antrim BT41 
+ Ballymena BT42, BT43, BT44 
+ Magherafelt BT45 
+ Maghera BT46 
+ Derry BT47, BT48 
+ Limavady BT49 
+ Coleraine BT51, BT52 
+ Ballymoney BT53 
+ Ballycastle BT54 
+ Portstewart BT55 
+ Portrush BT56 
+ Bushmills BT57 
+ NI Businesses BT58 
+ Armagh BT60, BT61 
+ Craigavon BT62, BT63, BT64, BT65, BT66, BT67 
+ Caledon BT68 
+ Aughnacloy BT69 
+ Dungannon BT70, BT71 
+ Enniskillen BT74 
+ Fivemiletown BT75 
+ Clogher BT76 
+ Augher BT77 
+ Omagh BT78, BT79 
+ Cookstown BT80 
+ Castlederg BT81 
+ Strabane BT82 
+ Enniskillen BT92, BT93, BT94 
+[edit]
+C
+Area Post town Districts  
+CA Carlisle CA1, CA2, CA3, CA4, CA5, CA6 England 
+ Wigton CA7 
+ Brampton CA8 
+ Alston CA9 
+ Penrith CA10, CA11 
+ Keswick CA12 
+ Cockermouth CA13 
+ Workington CA14 
+ Maryport CA15 
+ Appleby-in-Westmorland CA16 
+ Kirkby Stephen CA17 
+ Ravenglass CA18 
+ Holmrook CA19 
+ Seascale CA20 
+ Beckermet CA21 
+ Egremont CA22 
+ Cleator CA23 
+ Moor Row CA24 
+ Cleator Moor CA25 
+ Frizington CA26 
+ St. Bees CA27 
+ Whitehaven CA28 
+
+--------------------------------------------------------------------------------
+ 
+CB Cambridge CB1, CB2, CB3, CB4, CB5 England 
+ Ely CB6, CB7 
+ Newmarket CB8 
+ Haverhill CB9 
+ Saffron Walden CB10, CB11 
+
+--------------------------------------------------------------------------------
+ 
+CF Cardiff CF3, CF5, CF10, CF11, CF14, CF15, CF23, CF24 Wales 
+ Bridgend CF31, CF32, CF33 
+ Maesteg CF34 
+ Bridgend CF35 
+ Porthcawl CF36 
+ Pontypridd CF37, CF38 
+ Porth CF39 
+ Tonypandy CF40 
+ Pentre CF41 
+ Treorchy CF42 
+ Ferndale CF43 
+ Aberdare CF44 
+ Mountain Ash CF45 
+ Treharris CF46 
+ Merthyr Tydfil CF47, CF48 
+ Llantwit Major CF61 
+ Barry CF62, CF63 
+ Dinas Powys, Penarth CF64 
+ Cowbridge CF71 
+ Pontyclun CF72 
+ Bargoed CF81 
+ Hengoed CF82 
+ Caerphilly CF83 
+
+--------------------------------------------------------------------------------
+ 
+CH Chester CH1, CH2, CH3, CH4 England 
+ Deeside CH5 Wales 
+ Bagillt, Flint CH6 
+ Buckley, Mold CH7 
+ Holywell CH8 
+ Birkenhead CH41, CH42 England 
+ Prenton CH43 
+ Wallasey CH44, CH45 
+ Wirral CH46, CH47, CH48, CH49 … CH60, CH61, CH62, CH63 
+ Neston CH64 
+ Ellesmere Port CH65, CH66 
+
+--------------------------------------------------------------------------------
+ 
+CM Southminster CM0 England 
+ Chelmsford CM1, CM2, CM3 
+ Ingatestone CM4 
+ Ongar CM5 
+ Dunmow CM6 
+ Braintree CM7 
+ Witham CM8 
+ Maldon CM9 
+ Burnham-on-Crouch CM10 
+ Billericay CM11, CM12 
+ Brentwood CM13, CM14, CM15 
+ Epping CM16 
+ Harlow CM17, CM18, CM19, CM20 
+ Sawbridgeworth CM21 
+ Bishops Stortford CM22, CM23 
+ Stansted CM24 
+ Braintree CM77 
+
+--------------------------------------------------------------------------------
+ 
+CO Colchester CO1, CO2, CO3, CO4, CO5, CO6, CO7 England 
+ Bures CO8 
+ Halstead CO9 
+ Sudbury CO10 
+ Manningtree CO11 
+ Harwich CO12 
+ Frinton-on-Sea CO13 
+ Walton-on-the-Naze CO14 
+ Clacton-on-Sea CO15, CO16 
+
+--------------------------------------------------------------------------------
+ 
+CR Croydon CR0, CR9 England 
+ South Croydon CR2 
+ Caterham CR3 
+ Mitcham CR4 
+ Coulsdon CR5 
+ Warlingham CR6 
+ Thornton Heath CR7 
+ Purley CR8 
+
+--------------------------------------------------------------------------------
+ 
+CT Canterbury CT1, CT2, CT3, CT4 England 
+ Whitstable CT5 
+ Herne Bay CT6 
+ Birchington CT7 
+ Westgate CT8 
+ Margate CT9 
+ Broadstairs CT10 
+ Ramsgate CT11, CT12 
+ Sandwich CT13 
+ Deal CT14 
+ Dover CT15, CT16, CT17 
+ Folkestone CT18, CT19, CT20 
+ Hythe CT21 
+
+--------------------------------------------------------------------------------
+ 
+CV Coventry CV1, CV2, CV3, CV4, CV5, CV6, CV7 England 
+ Kenilworth CV8 
+ Atherstone CV9 
+ Nuneaton CV10, CV11 
+ Bedworth CV12 
+ Nuneaton CV13 
+ Rugby CV21, CV22, CV23 
+ Leamington Spa CV31, CV32, CV33 
+ Warwick CV34, CV35 
+ Shipston-on-Stour CV36 
+ Stratford-upon-Avon CV37 
+ Southam CV47 
+
+--------------------------------------------------------------------------------
+ 
+CW Crewe CW1, CW2, CW3, CW4 England 
+ Nantwich CW5 
+ Tarporley CW6 
+ Winsford CW7 
+ Northwich CW8, CW9 
+ Middlewich CW10 
+ Sandbach CW11 
+ Congleton CW12 
+[edit]
+D
+Area Post town Districts  
+DA Dartford DA1, DA2 England 
+ Longfield DA3 
+ Dartford DA4 
+ Bexley DA5 
+ Bexleyheath DA6, DA7 
+ Erith DA8 
+ Greenhithe DA9 
+ Swanscombe DA10 
+ Gravesend DA11, DA12, DA13, DA14 
+ Sidcup DA15 
+ Welling DA16 
+ Belvedere DA17 
+ Erith DA18 
+
+--------------------------------------------------------------------------------
+ 
+DD Dundee DD1, DD2, DD3, DD4, DD5 Scotland 
+ Montrose DD10 
+ Arbroath DD11 
+ Newport-on-Tay, Tayport DD6 
+ Carnoustie DD7 
+ Kirriemuir DD8 
+ Brechin DD9 
+
+--------------------------------------------------------------------------------
+ 
+DE Derby DE1, DE3 England 
+ Matlock DE4 
+ Ripley DE5 
+ Ashbourne DE6 
+ Ilkeston DE7 
+ Swadlincote DE11, DE12 
+ Burton-upon-Trent DE13, DE14, DE15 
+ Derby DE21, DE22, DE23, DE24 
+ Bakewell DE45 
+ Alfreton DE55 
+ Belper DE56 
+ Derby DE65 
+ Derby DE72, DE73, DE74 
+ Heanor DE75 
+ Businesses DE99 (DE99 3GG is Egg plc) 
+
+--------------------------------------------------------------------------------
+ 
+DG Dumfries DG1, DG2 Scotland 
+ Thornhill DG3 
+ Sanquhar DG4 
+ Dalbeattie DG5 
+ Kirkcudbright DG6 
+ Castle Douglas DG7 
+ Newton Stewart DG8 
+ Stranraer DG9 
+ Moffat DG10 
+ Lockerbie DG11 
+ Annan DG12 
+ Langholm DG13 
+ Canonbie DG14 
+ Gretna DG16 
+
+--------------------------------------------------------------------------------
+ 
+DH Durham DH1, DH6, DH7 England 
+ Chester le Street DH2, DH3 
+ Houghton le Spring DH4, DH5 
+ Consett DH8 
+ Stanley DH9 
+
+--------------------------------------------------------------------------------
+ 
+DL Darlington DL1, DL2, DL3 England 
+ Shildon DL4 
+ Newton Aycliffe DL5 
+ Northallerton DL6, DL7 
+ Bedale, Leyburn, Hawes DL8 
+ Catterick Garrison DL9 
+ Richmond DL10, DL11 
+ Barnard Castle DL12 
+ Bishop Auckland DL13, DL14 
+ Crook DL15 
+ Spennymoor DL16 
+ Ferryhill DL17 
+
+--------------------------------------------------------------------------------
+ 
+DN Doncaster DN1, DN2, DN3, DN4, DN5, DN6, DN7, DN8, DN9, DN10, DN11, DN12 England 
+ Goole DN14 
+ Scunthorpe DN15, DN16, DN17 
+ Barton-on-Humber DN18 
+ Barrow-upon-Humber DN19 
+ Brigg DN20 
+ Gainsborough DN21 
+ Retford DN22 
+ Grimsby DN31, DN32, DN33, DN34 
+ Cleethorpes DN35, DN36, DN37 
+ Barnetby DN38 
+ Ulceby DN39 
+ Immingham DN40 
+ Grimsby DN41 
+
+--------------------------------------------------------------------------------
+ 
+DT Dorchester DT1, DT2 England 
+ Weymouth DT3, DT4 
+ Isle of Portland DT5 
+ Bridport DT6 
+ Lyme Regis DT7 
+ Beaminster DT8 
+ Sherborne DT9 
+ Sturminster Newton DT10 
+ Blandford Forum DT11 
+
+--------------------------------------------------------------------------------
+ 
+DY Dudley DY1, DY2, DY3 England 
+ Tipton DY4 
+ Brierley Hill DY5 
+ Kingswinford DY6 
+ Stourbridge DY7, DY8, DY9 
+ Kidderminster DY10, DY11 
+ Bewdley DY12 
+ Stourport-on-Severn DY13, DY14 
+[edit]
+E
+Area Post town District Postal district  
+E London Aldgate E1 England 
+ London Bethnal Green E2 
+ London Bow E3 
+ London Chingford E4 
+ London Clapton E5 
+ London East Ham E6 
+ London Forest Gate E7 
+ London Hackney E8 
+ London Homerton E9 
+ London Leyton E10 
+ London Leytonstone E11 
+ London Manor Park E12 
+ London Plaistow E13 
+ London Poplar E14 
+ London Stratford E15 
+ London Victoria Dock E16 
+ London Walthamstow E17 
+ London Woodford E18 
+
+--------------------------------------------------------------------------------
+ 
+EC London Clerkenwell EC1 England 
+ London Liverpool Street EC2 
+ London Fenchurch Street EC3 
+ London Fleet Street EC4 
+
+--------------------------------------------------------------------------------
+ 
+Area Post town Districts  
+EH Edinburgh Old Town EH1 Scotland 
+ Edinburgh Princes Street, George Street, Queen Street and surrounding streets EH2 
+ Edinburgh New Town, West End and Tollcross areas EH3 
+ Edinburgh North West Edinburgh EH4 
+ Edinburgh Granton EH5 
+ Edinburgh Leith EH6 
+ Edinburgh Broughton, Leith Walk, Easter Road, Restalrig EH7 
+ Edinburgh University of Edinburgh, Southside, Pleasance, Canongate, Holyrood, Abbeyhill, Willowbrae, Northfield, Mountcastle EH8 
+ Edinburgh Marchmont, Grange EH9 
+ Edinburgh Merchiston, Morningside, Fairmilehead EH10 
+ Edinburgh Dalry, Gorgie, Stenhouse, Broomhouse, Sighthill, Bankhead EH11 
+ Edinburgh Murrayfield, Corstorphine, Gyle, Edinburgh Park EH12 
+ Edinburgh Colinton EH13 
+ Edinburgh Slateford, Longstone, Craiglockhart, Wester Hailes, Balerno, Currie, Juniper Green EH14 
+ Edinburgh Portobello, Duddingston, The Jewel, Fort Kinnaird EH15 
+ Edinburgh Liberton, Craigmillar, Niddrie EH16 
+ Edinburgh Gilmerton EH17 
+ Lasswade EH18 
+ Bonnyrigg EH19 
+ Loanhead EH20 
+ Musselburgh EH21 
+ Dalkeith EH22 
+ Gorebridge EH23 
+ Rosewell EH24 
+ Roslin EH25 
+ Penicuik EH26 
+ Kirknewton EH27 
+ Newbridge EH28 
+ Kirkliston EH29 
+ South Queensferry EH30 
+ Gullane EH31 
+ Longniddry, Prestonpans EH32 
+ Tranent EH33 
+ Pencaitland EH34 
+ Ormiston EH35 
+ Humbie EH36 
+ Pathhead EH37 
+ Heriot EH38 
+ North Berwick EH39 
+ East Linton EH40 
+ Haddington EH41 
+ Dunbar EH42 
+ Walkerburn EH43 
+ Innerleithen EH44 
+ Peebles EH45 
+ West Linton EH46 
+ Bathgate EH47, EH48 
+ Linlithgow EH49 
+ Bo'ness EH51 
+ Broxburn EH52 
+ Livingston EH53, EH54 
+ Calder, West EH55 
+
+--------------------------------------------------------------------------------
+ 
+EN Enfield EN1, EN2, EN3 England 
+ Barnet EN4, EN5 
+ Potters Bar EN6 
+ Waltham Cross EN7, EN8 
+ Waltham Abbey EN9 
+ Broxbourne EN10 
+ Hoddesdon EN11 
+
+--------------------------------------------------------------------------------
+ 
+EX Exeter EX1, EX2, EX3, EX4, EX5, EX6 England 
+ Dawlish EX7 
+ Exmouth EX8 
+ Budleigh Salterton EX9 
+ Sidmouth EX10 
+ Ottery St. Mary EX11 
+ Seaton EX12 
+ Axminster, Colyton EX13 
+ Honiton EX14 
+ Cullompton EX15 
+ Tiverton EX16 
+ Crediton EX17 
+ Chulmleigh EX18 
+ Winkleigh EX19 
+ North Tawton, Okehampton EX20 
+ Beaworthy EX21 
+ Holsworthy EX22 
+ Bude EX23 
+ Barnstaple EX31, EX32 
+ Braunton EX33 
+ Ilfracombe, Woolacombe EX34 
+ Lynmouth, Lynton EX35 
+ South Molton EX36 
+ Umberleigh EX37 
+ Torrington EX38 
+ Bideford EX39 
+[edit]
+F
+Area Post town Districts  
+FK Falkirk FK1, FK2 Scotland 
+ Grangemouth FK3 
+ Bonnybridge FK4 
+ Larbert FK5 
+ Denny FK6 
+ Stirling FK7, FK8 
+ Bridge of Allen FK9 
+ Alloa, Clackmannan FK10 
+ Menstrie FK11 
+ Alva FK12 
+ Tillicoutry FK13 
+ Dollar FK14 
+ Dunblane FK15 
+ Doune FK16 
+ Callander FK17 
+ Strathyre FK18 
+ Lochearnhead FK19 
+ Crianlarich FK20 
+ Killin FK21 
+
+--------------------------------------------------------------------------------
+ 
+FY Blackpool FY1, FY2, FY3, FY4 England 
+ Thornton-Cleveleys FY5 
+ Poulton-le-Fylde FY6 
+ Fleetwood FY7 
+ Lytham St. Annes FY8 
+[edit]
+G
+Area Post town Districts  
+G Glasgow G1, G2, G3, G4, G5,G9, G11, G12, G13, G14, G15, G20, G21, G22, G23, G30, G31, G32, G33, G34, G40, G41, G42,G43, G44, G45, G46, G51,G52,G53,G58, G60, G61, G62, G63, G64, G65, G66, G67, G68, G69, G70, G71, G72, G73, G74, G75, G76, G77, G78,G79 Scotland 
+ Clydebank G81 
+ Dumbarton G82 
+ Alexandria, Arrochar G83 
+ Helensburgh G84 
+
+--------------------------------------------------------------------------------
+ 
+GL Gloucester GL1, GL2, GL3, GL4 England 
+ Stroud GL5, GL6 
+ Cirencester, Fairford, Lechlade GL7 
+ Tetbury GL8 
+ Badminton GL9 
+ Stonehouse GL10 
+ Dursley GL11 
+ Wootton under Edge GL12 
+ Berkeley GL13 
+ Cinderford, Newnham, Westbury-on-Severn GL14 
+ Blakeney, Lydney GL15 
+ Coleford GL16 
+ Drybrook, Lydbrook, Ruardean GL17 
+ Dymock, Newent GL18 
+ Longhope, Mitcheldean GL19 
+ Tewkesbury GL20 
+ Cheltenham GL50, GL51, GL53, GL54 
+ Chipping Campden GL55 
+ Moreton in the Marsh GL56 
+
+--------------------------------------------------------------------------------
+ 
+GU Guildford GU1, GU2, GU3, GU4 England 
+ Cranleigh GU5, GU6 
+ Godalming GU7, GU8 
+ Farnham GU9, GU10 
+ Aldershot GU11, GU12, GU13 
+ Farnborough GU14, GU15 
+ Camberley GU16, GU17 
+ Lightwater GU18 
+ Bagshot GU19 
+ Windlesham GU20 
+ Woking GU21, GU22, GU23, GU24 
+ Virginia Water GU25 
+ Hindhead GU26 
+ Haslemere GU27 
+ Petworth GU28 
+ Midhurst GU29 
+ Liphook GU30 
+ Petersfield GU31, GU32 
+ Liss GU33 
+ Alton GU34 
+ Bordon Heath GU35 
+ Yateley GU46 
+ Sandhurst GU47 
+ Fleet GU50, GU51, GU52, GU53 
+[edit]
+H
+Area Post town Districts  
+HA Harrow HA1, HA2, HA3 England 
+ Ruislip HA4 
+ Pinner HA5 
+ Northwood HA6 
+ Stanmore HA7 
+ Edgware HA8 
+ Wembley HA9, HA0 
+
+--------------------------------------------------------------------------------
+ 
+HD Huddersfield HD1, HD2, HD3, HD4, HD5, HD7, HD8 England 
+ Brighouse HD6 
+ Holmfirth HD9 
+
+--------------------------------------------------------------------------------
+ 
+HG Harrogate HG1, HG2, HG3 England 
+ Ripon HG4 
+ Knaresborough HG5 
+
+--------------------------------------------------------------------------------
+ 
+HP Hemel Hempstead HP1, HP2, HP3 England 
+ Berkhamsted HP4 
+ Chesham HP5 
+ Amersham HP6, HP7 
+ Chalfont St. Giles HP8 
+ Beaconsfield HP9, HP10 
+ High Wycombe HP11, HP12 HP13, HP14, HP15 
+ Great Missenden HP16 
+ Aylesbury HP17, HP18, HP19, HP20, HP21, HP22 
+ Tring HP23 
+
+--------------------------------------------------------------------------------
+ 
+HR Hereford HR1, HR2, HR3, HR4 England 
+ Kington HR5 
+ Leominster HR6 
+ Bromyard HR7 
+ Ledbury HR8 
+ Ross-on-Wye HR9 
+
+--------------------------------------------------------------------------------
+ 
+HS Stornoway HS1 Scotland 
+ Isle of Lewis HS2 
+ Isle of Harris HS3 
+ Isle of Scalpay HS4 
+ Leverburgh HS5 
+ Isle of North Uist HS6 
+ Isle of Benbecula HS7 
+ Isle of South Uist HS8 
+ Castlebay (Isle of Barra) HS9 
+
+--------------------------------------------------------------------------------
+ 
+HU Hull HU1, HU2, HU3, HU4, HU5, HU6, HU7, HU8, HU9, HU10, HU11, HU12 England 
+ Hessle HU13 
+ North Ferriby HU14 
+ Brough HU15 
+ Cottingham HU16, HU20 
+ Beverley HU17 
+ Hornsea HU18 
+ Withernsea HU19 
+
+--------------------------------------------------------------------------------
+ 
+HX Halifax HX1, HX2, HX3, HX4 England 
+ Elland HX5 
+ Sowerby Bridge HX6 
+ Hebden Bridge HX7 
+[edit]
+I
+Area Post town Districts  
+IG Ilford IG1, IG2, IG3, IG4, IG5, IG6 England 
+ Chigwell IG7 
+ Woodford Green IG8 
+ Buckhurst Hill IG9 
+ Loughton IG10 
+ Barking IG11 
+
+--------------------------------------------------------------------------------
+ 
+IP Ipswich IP1, IP2, IP3, IP4, IP5, IP6, IP7, IP8, IP9, IP10 England 
+ Felixstowe IP11 
+ Woodbridge IP12, IP13 
+ Stowmarket IP14 
+ Aldeburgh IP15 
+ Leiston IP16 
+ Saxmundham IP17 
+ Southwold IP18 
+ Halesworth IP19 
+ Harleston IP20 
+ Diss IP21, IP22 
+ Eye IP23 
+ Thetford IP24, IP25, IP26 
+ Brandon IP27 
+ Bury St. Edmunds IP28, IP29, IP30, IP31, IP32, IP33 
+
+--------------------------------------------------------------------------------
+ 
+IV Inverness IV1, IV2, IV3, IV4, IV5 Scotland 
+ Beauly IV4 
+ Muir of Ord IV6 
+ Munlochy IV8 
+ Avoch IV9 
+ Fortrose IV10 
+ Cromarty IV11 
+ Nairn IV12 
+ Tomatin IV13 
+ Strathpeffer IV14 
+ Dingwall IV15, IV16 
+ Alness IV17 
+ Invergordon IV18 
+ Tain IV19, IV20 
+ Gairloch IV21 
+ Achnasheen IV22 
+ Garve IV23 
+ Ardgay IV24 
+ Dornoch IV25 
+ Ullapool IV26 
+ Lairg IV27 
+ Rogart IV28 
+ Elgin IV30 
+ Lossiemouth IV31 
+ Fochabers IV32 
+ Rothes IV33 
+ Carron IV34 
+ Knockando IV35 
+ Forres IV35, IV36 
+ Kyle IV40 
+ Sconser IV48 
+ Breakish, Broadford IV49 
+ Isle of Skye IV50 
+ Portree IV51 
+ Plockton IV52 
+ Strome Ferry IV53 
+ Strathcarron IV54 
+ Dunvegan IV55 
+ Struan IV56 
+[edit]
+J
+[edit]
+K
+Area Post town Districts  
+KA Kilmarnock KA1, KA2, KA3 Scotland 
+ Galston KA4 
+ Mauchline KA5 
+ Ayr KA6, KA7, KA8 
+ Prestwick KA9 
+ Troon KA10 
+ Irvine KA11, KA12 
+ Kilwinning KA13 
+ Beith KA14, KA15 
+ Newmilns KA16 
+ Darvel KA17 
+ Cumnock KA18 
+ Maybole KA19 
+ Stevenston KA20 
+ Saltcoats KA21 
+ Ardrossan KA22 
+ West Kilbride KA23 
+ Dalry KA24 
+ Kilbirnie KA25 
+ Girvan KA26 
+ Brodick KA27 
+ Millport KA28 
+ Largs KA29, KA30 
+
+--------------------------------------------------------------------------------
+ 
+KT Kingston upon Thames KT1, KT2 England 
+ New Malden KT3 
+ Worcester Park KT4 
+ Surbiton KT5, KT6 
+ Thames Ditton KT7 
+ East Molesey KT8 
+ Chessington KT9 
+ Esher KT10 
+ Cobham KT11 
+ Walton-on-Thames KT12 
+ Weybridge KT13, KT14, KT15 
+ Chertsey KT16 
+ Epsom KT17, KT18, KT19 
+ Tadworth KT20 
+ Ashtead KT21 
+ Leatherhead KT22 
+
+--------------------------------------------------------------------------------
+ 
+KW Wick KW1, KW2 Scotland 
+ Lybster KW3 
+ Latheron KW5 
+ Dunbeath KW6 
+ Berridale KW7 
+ Helmsdale KW8 
+ Brora KW9 
+ Golspie KW10 
+ Kinbrace KW11 
+ Halkirk KW12 
+ Forsinard KW13 
+ Stromness, Thurso KW14 
+ Kirkwall KW15 
+ Orkney Islands KW16, KW17 
+
+--------------------------------------------------------------------------------
+ 
+KY Kirkcaldy KY1, KY2 Scotland 
+ Thornton KY2 
+ Aberdour, Burntisland KY3 
+ Cowdenbeath, Kilty KY4 
+ Cardenden, Kinglassie, Lochgelly KY5 
+ Leslie, western half of Glenrothes KY6 
+ Markinch, eastern half of Glenrothes including Town Centre KY7 
+ Buckhaven, Lower Largo, Methil KY8 
+ Elie KY9 
+ Anstruther, Crail, St. Monans KY10 
+ Inverkeithing, Dalgety Bay KY11 
+ Dunfermline KY12 
+ Kinross KY13, KY14 
+ Auchtermuchty, Newburgh KY14 
+ Cupar KY15 
+ Guardbridge, Leuchars, St. Andrews KY16 
+ Leven KY9 
+[edit]
+L
+Area Post town Districts  
+L Liverpool L1, L2, L3, L4, L5, L6, L7, L8, L9, L10, L11, L12, L13, L14, L15, L16, L17, L18, L19, L21, L22, L23, L24, L25, L26, L27, L28, L31, L32, L33 England 
+ Bootle L20, L30 
+ Prescot L34, L35 
+ Ormskirk L36, L37, L38, L39, L40 
+
+--------------------------------------------------------------------------------
+ 
+LA Lancaster LA1, LA2 England 
+ Morecambe LA3, LA4 
+ Carnforth LA5, LA6 
+ Milnthorpe LA7 
+ Kendal LA8, LA9 
+ Sedbergh LA10 
+ Grange over Sands LA11 
+ Ulverston LA12 
+ Barrow in Furness LA13, LA14 
+ Dalton in Furness LA15 
+ Askham in Furness LA16 
+ Kirkby in Furness LA17 
+ Millom LA18, LA19 
+ Broughton in Furness LA20 
+ Coniston LA21 
+ Ambleside LA22 
+ Windermere LA23 
+
+--------------------------------------------------------------------------------
+ 
+LD Llandrindod Wells LD1 Wales 
+ Builth Wells LD2 
+ Brecon LD3 
+ Llangammarch Wells LD4 
+ Llanwrtyd Wells LD5 
+ Rhayader LD6 
+ Knighton LD7 
+ Presteigne LD8 
+
+--------------------------------------------------------------------------------
+ 
+LE Leicester LE1, LE2, LE3, LE4, LE5, LE6, LE7, LE8, LE9, LE19 England 
+ Hinckley LE10 
+ Loughborough LE11, LE12 
+ Melton Mowbray LE13, LE14 
+ Oakham LE15 
+ Market Harborough LE16 
+ Lutterworth LE17 
+ Wigston LE18 
+ Ashby de la Zouch LE65 
+ Coalville, Ibstock, Markfield LE67 
+
+--------------------------------------------------------------------------------
+ 
+LL Wrexham LL11, LL12, LL13, LL14 Wales 
+ Ruthin LL15 
+ Denbigh LL16 
+ St. Asaph LL17 
+ Rhyl LL18 
+ Prestatyn LL19 
+ Llangollen LL20 
+ Corwen LL21 
+ Abergele LL22 
+ Bala LL23 
+ Betws-y-Coed LL24 
+ Dolwyddelan LL25 
+ Llanrwst LL26 
+ Trefriw LL27 
+ Colwyn Bay LL28, LL29 
+ Llandudno LL30 
+ Llandudno Junction LL31 
+ Conwy LL31, LL32 
+ Llanfairfechan LL33 
+ Penmaenmawr LL34 
+ Aberdovey LL35 
+ Tywyn LL36 
+ Fairbourne LL38 
+ Arthog LL39 
+ Dolgellau LL40 
+ Blaenau Ffestiniog LL41 
+ Barmouth LL42 
+ Talybont LL43 
+ Dyffryn Ardudwy LL44 
+ Llanbedr LL45 
+ Harlech LL46 
+ Talsarnau LL47 
+ Penrhyndeudraeth LL48 
+ Porthmadog LL49 
+ Gardolbenmaes LL51 
+ Criccieth LL52 
+ Pwllheli LL53 
+ Caernarfon LL54, LL55 
+ Port Dinorwic LL56 
+ Bangor LL57 
+ Beaumaris LL58 
+ Menai Bridge LL59 
+ Gaerwen LL60 
+ Llanfair PG LL61 
+ Bodorgan LL62 
+ Tycroes LL63 
+ Rhosneigr LL64 
+ Holyhead LL65 
+ Rhosgoch LL66 
+ Cemaes Bay LL67 
+ Amlwch LL68 
+ Penysarn LL69 
+ Dulas LL70 
+ Llanerchymedd LL71 
+ Meolfre LL72 
+ Marianglas LL73 
+ Tynygongl LL74 
+ Pentraeth LL75 
+ Llanbedrgoch LL76 
+ Llangefni LL77 
+
+--------------------------------------------------------------------------------
+ 
+LN Lincoln LN1, LN2, LN3, LN4, LN5, LN6, LN7 England 
+ Market Rasen LN8 
+ Horncastle LN9 
+ Woodhall Spa LN10 
+ Louth LN11 
+ Mablethorpe LN12 
+ Alford LN13 
+ Grantham LN31, LN32, LN33 
+
+--------------------------------------------------------------------------------
+ 
+LS Leeds LS1, LS2, LS3, LS4, LS5, LS6, LS7, LS8, LS8, LS9, LS10, LS11, LS12, LS13, LS14, LS15, LS16, LS17, LS18, LS19, LS26 England 
+ Guiseley LS20 
+ Otley LS21 
+ Wetherby LS22, LS23 
+ Tadcaster LS24 
+ Aberford, South Milford LS25 
+ Morley LS27 
+ Pudsey LS28 
+ Ilkley LS29 
+
+--------------------------------------------------------------------------------
+ 
+LU Luton LU1, LU2, LU3, LU4, LU5 England 
+ Dunstable LU6 
+ Leighton Buzzard LU7 
+[edit]
+M
+Area Post town Districts  
+M Manchester M1, M2, M4, M8, M9, M11, M12, M13, M14, M15, M16, M17, M18, M19, M20, M21, M22, M23, M24, M25, M26, M27, M28, M29, M30, M31, M32, M34, M35, M38, M40, M41, M43, M44, M45, M46, M60 England 
+ Salford M3, M5, M6, M7, M50 
+ Sale M33 
+
+--------------------------------------------------------------------------------
+ 
+ME Rochester ME1, ME2, ME3 England 
+ Chatham ME4, ME5 
+ Snodland ME6 
+ Gillingham ME7, ME8 
+ Sittingbourne ME9, ME10 
+ Queenborough ME11 
+ Sheerness ME12 
+ Faversham ME13 
+ Maidstone ME14, ME15, ME16, ME17, ME18, ME19, ME20 
+
+--------------------------------------------------------------------------------
+ 
+MK Milton Keynes MK1, MK2, MK3, MK4, MK5, MK6, MK7, MK8, MK9, MK10, MK11, MK12, MK13, MK14, MK15, MK17, MK19 England 
+ Newport Pagnell MK16 
+ Buckingham MK18 
+ Bedford MK41, MK42, MK43, MK44, MK45 
+ Olney MK46 
+
+--------------------------------------------------------------------------------
+ 
+ML Motherwell ML1 Scotland 
+ Wishaw ML2 
+ Hamilton ML3 
+ Bellshill ML4 
+ Coatbridge ML5 
+ Airdrie ML6 
+ Shotts ML7 
+ Carluke ML8 
+ Larkhall ML9 
+ Strathaven ML10 
+ Lanark ML11 
+ Biggar ML12 
+[edit]
+N
+Area Post town District Postal district  
+N London Islington N1 England 
+ London East Finchley N2 
+ London Finchley N3 
+ London Finsbury Park N4 
+ London Highbury N5 
+ London Highgate N6 
+ London Holloway N7 
+ London Hornsey N8 
+ London Lower Edmonton N9 
+ London Muswell Hill N10 
+ London New Southgate N11 
+ London North Finchley N12 
+ London Palmers Green N13 
+ London Southgate N14 
+ London South Tottenham N15 
+ London Stoke Newington N16 
+ London Tottenham N17 
+ London Upper Edmonton N18 
+ London Upper Holloway N19 
+ London Whetstone N20 
+ London Winchmore Hill N21 
+ London Wood Green N22 
+
+--------------------------------------------------------------------------------
+ 
+Area Post town Districts  
+NE Newcastle upon Tyne NE1, NE2, NE3, NE4, NE5, NE6, NE7, NE12, NE13, NE14, NE15, NE16, NE17, NE18, NE19, NE20 England 
+ Gateshead NE8, NE9, NE10, NE11 
+ Blaydon NE21 
+ Bedlington NE22 
+ Cramlington NE23 
+ Blyth NE24 
+ Whitley Bay NE25, NE26, NE27 
+ Wallsend NE28 
+ North Shields NE29, NE30 
+ Hebburn NE31 
+ Jarrow NE32 
+ South Shields NE33, NE34 
+ Boldon Colliery NE35 
+ East Boldon NE36 
+ Washington NE37, NE38 
+ Rowlands Gill NE39 
+ Ryton NE40 
+ Wylam NE41 
+ Prudhoe NE42 
+ Stocksfield NE43 
+ Riding Mill NE44 
+ Corbridge NE45 
+ Hexham NE46, NE47, NE48 
+ Haltwhistle NE49 
+ Morpeth NE61, NE65 
+ Choppington NE62 
+ Ashington NE63 
+ Newbiggin NE64 
+ Alnwick NE66 
+ Chathill NE67 
+ Seahouses NE68 
+ Bamburgh NE69 
+ Belford NE70 
+ Wooler NE71 
+
+--------------------------------------------------------------------------------
+ 
+NG Nottingham NG1, NG2, NG3, NG4, NG5, NG6, NG7, NG8, NG9, NG10, NG11, NG12, NG13, NG14, NG15, NG16 England 
+ Sutton in Ashfield NG17 
+ Mansfield NG18, NG19, NG20, NG21 
+ Newark NG22, NG23, NG24 
+ Southwell NG25 
+ Sleaford NG34 
+
+--------------------------------------------------------------------------------
+ 
+NN Northampton NN1, NN2, NN3, NN4, NN5, NN6, NN7 England 
+ Wellingborough NN8, NN9 
+ Rushden NN10 
+ Daventry NN11 
+ Towcester NN12 
+ Brackley NN13 
+ Kettering NN14, NN15, NN16 
+ Corby NN17, NN18 
+
+--------------------------------------------------------------------------------
+ 
+NP Newport NP1, NP10, NP11, NP18, NP19, NP20 Wales 
+ Pontypool NP4 
+ Abergavenny NP7 
+ Crickhowell NP8 
+ Blackwood NP12 
+ Abertillery NP13 
+ Usk NP15 
+ Chepstow NP16 
+ Tredegar NP22 
+ Ebbw Vale NP23 
+ New Tredegar NP24 
+ Monmouth NP25 
+ Caldicot NP26 
+ Cwmbran NP44 
+
+--------------------------------------------------------------------------------
+ 
+NR Norwich NR1, NR2, NR3, NR4, NR5, NR6, NR7, NR8, NR9, NR10, NR11, NR12, NR13, NR14, NR15 England 
+ Attleborough NR16, NR17 
+ Wymondham NR18 
+ Dereham NR19, NR20 
+ Fakenham NR21 
+ Walsingham NR22 
+ Wells next the Sea NR23 
+ Melton Constable NR24 
+ Holt NR25 
+ Sheringham NR26 
+ Cromer NR27 
+ North Walsham NR28 
+ Great Yarmouth NR29, NR30, NR31 
+ Lowestoft NR32, NR33 
+ Beccles NR34 
+ Bungay NR35 
+
+--------------------------------------------------------------------------------
+ 
+Area Post town District Postal district  
+NW London Camden Town NW1 England 
+ London Cricklewood NW2 
+ London Hampstead NW3 
+ London Hendon NW4 
+ London Kentish Town NW5 
+ London Kilburn NW6 
+ London Mill Hill NW7 
+ London St John's Wood NW8 
+ London The Hyde NW9 
+ London Willesden NW10 
+ London Golders Green NW11 
+[edit]
+O
+Area Post town Districts  
+OL Oldham OL1, OL2, OL3, OL4, OL5, OL8, OL9 England 
+ Ashton under Lyne OL6, OL7 
+ Heywood OL10 
+ Rochdale OL11, OL12, OL16 
+ Bacup OL13 
+ Todmorden OL14 
+ Littleborough OL15 
+
+--------------------------------------------------------------------------------
+ 
+OX Oxford OX1, OX2, OX3, OX4, OX33, OX44 England 
+ Kidlington OX5 
+ Chipping Norton OX7 
+ Thame OX9 
+ Wallingford OX10 
+ Didcot OX11 
+ Wantage OX12 
+ Abingdon OX13, OX14 
+ Banbury OX15, OX16, OX17 
+ Burford OX18 
+ Bicester OX25, OX26, OX27 
+ Witney OX28, OX29 
+[edit]
+P
+Area Post town Districts  
+PA Paisley PA1, PA2 Scotland 
+ Auchterarder PA3 
+ Renfrew PA4 
+ Johnstone PA5, PA10 
+ Bishopton PA6, PA7 
+ Erskine PA8 
+ Bridge of Weir PA11 
+ Lochwinnoch PA12 
+ Kilmacolm PA13 
+ Port Glasgow PA14 
+ Greenock PA15, PA16 
+ Skelmorlie PA17 
+ Wemyss Bay PA18 
+ Gourock PA19 
+ Rothesay PA20 
+ Tighnabruaich PA21 
+ Colintraive PA22 
+ Dunoon PA23 
+ Lochgoilhead PA24 
+ Cairndow PA26, PA27 
+ Campbelltown PA28 
+ Tarbert PA29 
+ Ardrishaig PA30 
+ Lochgilphead PA31 
+ Inveraray PA32 
+ Dalmelly PA33 
+ Oban PA34 
+ Taynuilt PA35 
+ Acheracle, Bridge of Orchy PA36 
+ Connel PA37 
+ Appin PA38 
+ Arisaig, Ballachulish PA39 
+ Kinlochleven PA40 
+ Isle of Gigha PA41 
+ Port Ellen PA42 
+ Bowmore PA43 
+ Bridgend PA44 
+ Ballygrant PA45 
+ Port Askaig PA46 
+ Portnahaven PA47 
+ Port Charlotte PA48 
+ Bruichladdich PA49 
+ Craighouse PA60 
+ Isle of Colonsay PA61 
+ Isle of Mull PA62, PA63, PA64, PA65, PA66, PA67, PA68, PA69, PA70, PA71, PA72, PA73, PA74, PA75 
+ Isle of Iona PA76 
+ Scarinish PA77 
+ Isle of Coll PA78 
+
+--------------------------------------------------------------------------------
+ 
+PE Peterborough PE1, PE2, PE3, PE4, PE5, PE6, PE7, PE8 England 
+ Stamford PE9 
+ Bourne PE10 
+ Spalding PE11, PE12 
+ Wisbech PE13, PE14 
+ March PE15 
+ Chatteris PE16 
+ St. Neots PE19 
+ Boston PE20, PE21, PE22 
+ Spilsby PE23 
+ Skegness PE24, PE25 
+ Huntingdon PE26, PE28, PE29 
+ St. Ives PE27 
+ King's Lynn PE30, PE31, PE32, PE33, PE34 
+ Sandringham PE35 
+ Hunstanton PE36 
+ Swaffham PE37 
+ Downham Market PE38 
+
+--------------------------------------------------------------------------------
+ 
+PH Perth PH1, PH2 Scotland 
+ Crieff PH6, PH7 
+ Dunkeld PH8 
+ Blairgowrie PH10, PH11, PH12 
+ Coupar Angus PH13 
+ Aberfeldy PH15 
+ Pitlochry PH16 
+ Rannoch PH17 
+ Dalwhinnie PH19 
+ Newtonmore PH20 
+ Kingussie PH21 
+ Aviemore PH22 
+ Carr Bridge PH23 
+ Alyth PH24 
+ Boat of Garten PH24 
+ Nethy Bridge PH25 
+ Grantown-on-Spey PH26 
+ Corrour PH30 
+ Roy Bridge PH31 
+ Fort Augustus PH32 
+ Fort William PH33 
+ Invergarry PH35 
+ Tobermory PH36 
+ Glenfinnan PH37 
+ Lochailort PH38 
+ Mallaig PH40, PH41 
+ Isle of Eigg PH42 
+ Isle of Rhum PH43 
+ Isle of Canna PH44 
+
+--------------------------------------------------------------------------------
+ 
+PL Plymouth PL1, PL2, PL3, PL4, PL5, PL6, PL7, PL8, PL9, PL10 England 
+ Torpoint PL11 
+ Saltash PL12 
+ Looe PL13 
+ Liskeard PL14 
+ Launceston PL15 
+ Lifton PL16 
+ Callington PL17 
+ Calstock, Gunnislake PL18 
+ Tavistock PL19 
+ Yelverton PL20 
+ Ivybridge PL21 
+ Camelford, Lostwithiel PL22 
+ Fowey PL23 
+ St. Austell PL25, PL26 
+ Wadebridge PL27 
+ Padstow, Par PL28 
+ Port Isaac PL29 
+ Bodmin PL30, PL31 
+ Delabole PL33 
+ Tintagel PL34 
+ Boscastle PL35 
+
+--------------------------------------------------------------------------------
+ 
+PO Portsmouth PO1, PO2, PO3 England 
+ Southsea PO4, PO5 
+ Havant, Rowlands Castle PO9 
+ Emsworth PO10 
+ Hayling Island PO11 
+ Gosport PO12 
+ Lee-on-Solent PO13 
+ Fareham PO14, PO15, PO16, PO17 
+ Chichester PO18, PO19, PO20 
+ Bognor Regis PO21, PO22 
+ Newport PO30 
+ Cowes PO31 
+ East Cowes PO32 
+ Ryde PO33 
+ Seaview PO34 
+ Bembridge PO35 
+ Sandown PO36 
+ Shanklin PO37 
+ Ventnor PO38 
+ Totland Bay PO39 
+ Freshwater PO40 
+ Yarmouth PO41 
+
+--------------------------------------------------------------------------------
+ 
+PR Preston PR1, PR2, PR3, PR4, PR5 England 
+ Chorley PR6, PR7 
+ Southport PR8, PR9 
+ Leyland PR25, PR26 
+[edit]
+R
+Area Post town Districts  
+RG Reading RG1, RG2, RG4, RG5, RG6, RG7, RG8, RG10, RG11, RG30, RG31 England 
+ Henley-on-Thames RG9 
+ Bracknell RG12 
+ Newbury RG13, RG14, RG15, RG16 
+ Hungerford RG17 
+ Basingstoke RG21, RG22, RG23, RG24, RG25, RG26, RG27 
+ Whitchurch RG28 
+ Wokingham RG40, RG41 
+ Crowthorne RG45 
+
+--------------------------------------------------------------------------------
+ 
+RH Redhill RH1 England 
+ Reigate RH2 
+ Betchworth RH3 
+ Dorking RH4, RH5 
+ Horley RH6 
+ Lingfield RH7 
+ Oxted RH8 
+ Godstone RH9 
+ Crawley RH10, RH11, RH12 
+ Horsham RH13 
+ Billingshurst RH14 
+ Burgess Hill RH15 
+ Haywards Heath RH16, RH17 
+ Forest Row RH18 
+ East Grinstead RH19 
+ Pulborough RH20 
+
+--------------------------------------------------------------------------------
+ 
+RM Romford RM1, RM2, RM3, RM4, RM5, RM6, RM7 England 
+ Dagenham RM8, RM9, RM10 
+ Hornchurch RM11, RM12 
+ Rainham RM13 
+ Upminster RM14 
+ South Ockendon RM15 
+ Grays RM16, RM17, RM20 
+ Tilbury RM18 
+ Purfleet RM19 
+
+--------------------------------------------------------------------------------
+ 
+[edit]
+S
+Area Post town Districts  
+S Sheffield S1, S2, S3, S4, S5, S6, S7, S8, S9, S10, S11, S12, S13, S14, S15, S16, S17, S19, S20, S21, S22, S23, S24, S25, S26, S27, S28, S29, S30, S31, S32, S33, S34, S35, S36 England 
+ Dronfield S18 
+ Chesterfield S40, S41, S42, S43, S44, S45 
+ Rotherham S60, S61, S62, S63 … S65, S66 
+ Mexborough S64 
+ Barnsley S70, S71, S72, S73, S74, S75 
+ Worksop S80, S81 
+
+--------------------------------------------------------------------------------
+ 
+SA Swansea SA1, SA2, SA3, SA4, SA5, SA6, SA7, SA8, SA9 Wales 
+ Neath SA10, SA11 
+ Port Talbot SA12, SA13 
+ Llanelli SA14, SA15 
+ Burry Port SA16 
+ Kidwelly SA17 
+ Ammanford SA18 
+ Llanwrda SA19 
+ Llandeilo SA19 
+ Llandovery SA20 
+ Carmarthen SA31, SA32, SA33 
+ Whitland SA34 
+ Llanfyrgoch SA35 
+ Gloyne SA36 
+ Boncath SA37 
+ Newcastle Emlyn SA38 
+ Pencader SA39 
+ Llanybydder SA40 
+ Crymych SA41 
+ Newport SA42 
+ Cardigan SA43 
+ Llandysul SA44 
+ New Quay SA45 
+ Aberaeron SA46 
+ Llanarth SA47 
+ Lampeter SA48 
+ Haverfordwest SA61, SA62 
+ Clarbeston Road SA63 
+ Goodwick SA64 
+ Ferryside, Fishguard SA65 
+ Clynderwen SA66 
+ Narberth SA67 
+ Kilgetty SA68 
+ Saundersfoot SA69 
+ Tenby SA70 
+ Pembroke SA71 
+ Pembroke Dock SA72 
+ Milford Haven SA73 
+
+--------------------------------------------------------------------------------
+ 
+Area Post town District Postal district  
+SE London Waterloo SE1 England 
+ London Abbey Wood SE2 
+ London Blackheath SE3 
+ London Brockley SE4 
+ London Camberwell SE5 
+ London Catford SE6 
+ London Charlton SE7 
+ London Deptford SE8 
+ London Eltham SE9 
+ London Greenwich SE10 
+ London Kennington SE11 
+ London Lee SE12 
+ London Lewisham SE13 
+ London New Cross SE14 
+ London Peckham SE15 
+ London Rotherhithe SE16 
+ London Walworth SE17 
+ London Woolwich SE18 
+ London Upper Norwood SE19 
+ London Anerley SE20 
+ London Dulwich SE21 
+ London East Dulwich SE22 
+ London Forest Hill SE23 
+ London Herne Hill SE24 
+ London South Norwood SE25 
+ London Sydenham SE26 
+ London West Norwood SE27 
+ London Thamesmead SE28 
+
+--------------------------------------------------------------------------------
+ 
+Area Post town Districts  
+SG Stevenage SG1, SG2 England 
+ Knebworth SG3 
+ Hitchin SG4, SG5 
+ Letchworth SG6 
+ Baldock SG7 
+ Royston SG8 
+ Buntingford SG9 
+ Much Hadham SG10 
+ Ware SG11, SG12 
+ Hertford SG13, SG14 
+ Arlesey SG15 
+ Henlow SG16 
+ Shefford SG17 
+ Biggleswade SG18 
+ Sandy SG19 
+
+--------------------------------------------------------------------------------
+ 
+SK Stockport SK1, SK2, SK3, SK4, SK5, SK6, SK7 … SK12 England 
+ Cheadle SK8 
+ Alderley Edge, Wilmslow SK9 
+ Macclesfield SK10, SK11 
+ Glossop SK13 
+ Hyde SK14 
+ Stalybridge SK15 
+ Dukinfield SK16 
+ Buxton SK17 
+
+--------------------------------------------------------------------------------
+ 
+SL Iver SL0 England 
+ Slough SL1, SL2, SL3 
+ Windsor SL4 
+ Ascot SL5 
+ Maidenhead SL6 
+ Marlow SL7 
+ Bourne End SL8 
+ Gerrards Cross SL9 
+
+--------------------------------------------------------------------------------
+ 
+SM Sutton SM1, SM2, SM3 England 
+ Morden SM4 
+ Carshalton SM5 
+ Wallington SM6 
+ Banstead SM7 
+
+--------------------------------------------------------------------------------
+ 
+SN Swindon SN1, SN2, SN3, SN4, SN5, SN6, SN25 England 
+ Faringdon SN7 
+ Marlborough SN8 
+ Pewsey, Tidworth SN9 
+ Devizes SN10 
+ Calne SN11 
+ Melksham SN12 
+ Corsham SN13 
+ Chippenham SN14, SN15 
+ Malmesbury SN16 
+
+--------------------------------------------------------------------------------
+ 
+SO Southampton SO14, SO15, SO16, SO17, SO18, SO19, SO30, SO31, SO40 England 
+ Stockbridge SO20 
+ Winchester SO21, SO22, SO23 
+ Alresford SO24 
+ Lymington SO41 
+ Brockenhurst SO42 
+ Lyndhurst SO43 
+ Eastleigh SO50, SO53 
+ Romsey SO51, SO52 
+
+--------------------------------------------------------------------------------
+ 
+SP Salisbury SP1, SP2, SP3, SP4, SP5 England 
+ Fordingbridge SP6 
+ Shaftesbury SP7 
+ Gillingham SP8 
+ Andover SP10, SP11 
+
+--------------------------------------------------------------------------------
+ 
+SR Sunderland SR1, SR2, SR3, SR4, SR5, SR6 England 
+ Seaham SR7 
+ Peterlee SR8 
+
+--------------------------------------------------------------------------------
+ 
+SS Westcliff-on-Sea SS0 England 
+ Southend SS1, SS2, SS3 
+ Rochford SS4 
+ Hockley SS5 
+ Rayleigh SS6 
+ Benfleet SS7 
+ Canvey Island SS8 
+ Leigh-on-Sea SS9 
+ Wickford SS11, SS12 
+ Basildon SS13, SS14, SS15, SS16 
+ Stanford-le-Hope SS17 
+
+--------------------------------------------------------------------------------
+ 
+ST Stoke-on-Trent ST1, ST2, ST3, ST4 … ST6, ST7, ST8, ST9, ST10, ST11, ST12 England 
+ Newcastle-under-Lyme ST5 
+ Leek ST13 
+ Uttoxeter ST14 
+ Stone ST15 
+ Stafford ST16, ST17, ST18, ST19, ST20, ST21 
+
+--------------------------------------------------------------------------------
+ 
+Area Post town District Postal district  
+SW London Westminster SW1 England 
+ London Brixton SW2 
+ London Chelsea SW3 
+ London Clapham SW4 
+ London Earls Court SW5 
+ London Fulham SW6 
+ London Knightsbridge SW7 
+ London Nine Elms SW8 
+ London Stockwell SW9 
+ London West Brompton SW10 
+ London Battersea SW11 
+ London Balham SW12 
+ London Barnes SW13 
+ London Mortlake SW14 
+ London Putney SW15 
+ London Streatham SW16 
+ London Tooting SW17 
+ London Wandsworth SW18 
+ London Wimbledon SW19 
+ London West Wimbledon SW20 
+
+--------------------------------------------------------------------------------
+ 
+Area Post town Districts  
+SY Shrewsbury SY1, SY2, SY3, SY4, SY5 England 
+ Church Stretton SY6 
+ Bucknall, Craven Arms, Lydbury North SY7 
+ Ludlow SY8 
+ Bishops Castle SY9 
+ Oswestry SY10, SY11 
+ Ellesmere SY12 
+ Whitchurch SY13 
+ Malpas SY14 
+ Montgomery SY15 Wales 
+ Newtown SY16 
+ Caersws, Llandinam SY17 
+ Llanidloes SY18 
+ Llanbrynmair SY19 
+ Machynlleth SY20 
+ Welshpool SY21 
+ Llanfechain, Llanfyllin, Llansantffraid, Llanymynech, Meifod SY22 
+ Aberystwyth, Llanon, Llanhystyd SY23 
+ Borth, Bow Street, Talybont SY24 
+ Tregaron, Ystrad Meurig SY25 
+[edit]
+T
+Area Post town Districts  
+TA Taunton TA1, TA2, TA3, TA4, TA5 England 
+ Bridgwater TA6, TA7 
+ Burnham-on-Sea TA8 
+ Highbridge TA9 
+ Langport TA10 
+ Somerton TA11 
+ Martock TA12 
+ South Petherton TA13 
+ Stoke sub Hamdon TA14 
+ Montacute TA15 
+ Merriott TA16 
+ Hinton St George TA17 
+ Crewkerne TA18 
+ Ilminster TA19 
+ Chard TA20 
+ Wellington TA21 
+ Dulverton TA22 
+ Watchet TA23 
+ Minehead TA24 
+
+--------------------------------------------------------------------------------
+ 
+TD Galashiels TD1 Scotland 
+ Lauder TD2 
+ Gordon TD3 
+ Earlston TD4 
+ Kelso TD5 
+ Melrose TD6 
+ Selkirk TD7 
+ Jedburgh TD8 
+ Hawick, Newcastleton TD9 
+ Duns TD10, TD11 
+ Cockburnspath TD13 
+ Eyemouth TD14 
+ Coldstream, Cornhill-on-Tweed, Mindrum TD12 
+ Berwick-upon-Tweed TD15 England 
+
+--------------------------------------------------------------------------------
+ 
+TF Telford TF1, TF2, TF3, TF4, TF5, TF6, TF7, TF8 England 
+ Market Drayton TF9 
+ Newport TF10 
+ Shifnal TF11 
+ Broseley TF12 
+ Much Wenlock TF13 
+
+--------------------------------------------------------------------------------
+ 
+TN Tunbridge Wells TN1, TN2, TN3, TN4 England 
+ Wadhurst TN5 
+ Crowborough TN6 
+ Hartfield TN7 
+ Edenbridge TN8 
+ Tonbridge TN9, TN10, TN11, TN12 
+ Sevenoaks TN13, TN14, TN15 
+ Westerham TN16 
+ Cranbrook TN17, TN18 
+ Etchingham TN19 
+ Mayfield TN20 
+ Heathfield TN21 
+ Uckfield TN22 
+ Ashford TN23, TN24, TN25, TN26, TN27 
+ New Romney TN28 
+ Romney Marsh TN29 
+ Tenterden TN30 
+ Rye TN31 
+ Robertsbridge TN32 
+ Battle TN33 
+ Hastings TN34, TN35 
+ Winchelsea TN36 
+ St. Leonards TN37, TN38 
+ Bexhill TN39, TN40 
+
+--------------------------------------------------------------------------------
+ 
+TQ Torquay TQ1, TQ2 England 
+ Paignton TQ3, TQ4 
+ Brixham TQ5 
+ Dartmouth TQ6 
+ Kingsbridge TQ7 
+ Salcombe TQ8 
+ Totnes TQ9 
+ South Brent TQ10 
+ Buckfastleigh TQ11 
+ Newton Abbot TQ12, TQ13 
+ Teignmouth TQ14 
+
+--------------------------------------------------------------------------------
+ 
+TR Truro TR1, TR2, TR3, TR4 England 
+ St. Agnes TR5 
+ Perranporth TR6 
+ Newquay TR7, TR8 
+ St. Columb TR9 
+ Penryn TR10 
+ Falmouth TR11 
+ Helston TR12, TR13 
+ Camborne TR14 
+ Redruth TR15, TR16 
+ Marazion TR17 
+ Penzance TR18, TR19, TR20 
+ St Mary's TR21 
+ St Agnes TR22 
+ Bryher TR23 
+ Tresco TR24 
+ St Martin's TR25 
+ St Ives TR26 
+ Hayle TR27 
+
+--------------------------------------------------------------------------------
+ 
+TS Middlesbrough TS1, TS2, TS3, TS4, TS5, TS6, TS7, TS8, TS9 England 
+ Redcar TS10, TS11 
+ Saltburn TS12, TS13 
+ Guisborough TS14 
+ Yarm TS15 
+ Stockton-on-Tees TS16, TS17, TS18, TS19, TS20, TS21 
+ Billingham TS22, TS23 
+ Hartlepool TS24, TS25, TS26, TS27 
+ Wingate TS28 
+ Trimdon Station TS29 
+
+--------------------------------------------------------------------------------
+ 
+Area Post town Districts  
+TW Twickenham TW1, TW2 England 
+ Hounslow TW3, TW4, TW5 
+ Hounslow TW6 
+ Isleworth TW7 
+ Brentford TW8 
+ Richmond TW9, TW10 
+ Teddington TW11 
+ Hampton TW12 
+ Feltham TW13, TW14 
+ Ashford TW15 
+ Sunbury-on-Thames TW16 
+ Shepperton TW17 
+ Staines TW18, TW19 
+ Egham TW20 
+[edit]
+U
+Area Post town Districts  
+UB Southall UB1, UB2 England 
+ Hayes UB3, UB4 
+ Northolt UB5 
+ Greenford UB6 
+ West Drayton UB7 
+ Uxbridge UB8, UB9, UB10 
+
+--------------------------------------------------------------------------------
+ 
+[edit]
+W
+Area Post town District Postal district  
+W London Mayfair, Soho W1 England 
+ London Paddington W2 
+ London Acton W3 
+ London Chiswick W4 
+ London Ealing W5 
+ London Hammersmith W6 
+ London Hanwell W7 
+ London Kensington W8 
+ London Maida Vale W9 
+ London North Kensington W10 
+ London Notting Hill W11 
+ London Shepherd's Bush W12 
+ London West Ealing W13 
+ London West Kensington W14 
+
+--------------------------------------------------------------------------------
+ 
+Area Post town Districts  
+WA Warrington WA1, WA2, WA3, WA4, WA5, WA6 England 
+ Runcorn WA7 
+ Widnes WA8 
+ St Helens WA9, WA10, WA11 
+ Newton le Willows WA12 
+ Lymm WA13 
+ Altrincham WA14, WA15 
+ Knutsford WA16 
+
+--------------------------------------------------------------------------------
+ 
+Area Post town District Postal district  
+WC London Holborn WC1 England 
+ London Strand WC2 
+
+--------------------------------------------------------------------------------
+ 
+Area Post town Districts  
+WD Watford WD17, WD18, WD19, WD24, WD25 England 
+ Rickmansworth WD3 
+ Kings Langley WD4, WD5 
+ Borehamwood WD6 
+ Radlett WD7 
+ Bushey WD23 
+
+--------------------------------------------------------------------------------
+ 
+WF Wakefield WF1, WF2, WF3, WF4 England 
+ Ossett WF5 
+ Normanton WF6 
+ Pontefract WF7, WF8, WF9 
+ Castleford WF10 
+ Knottingley WF11 
+ Dewsbury WF12, WF13 
+ Mirfield WF14 
+ Liversedge WF15 
+ Heckmondwike WF16 
+ Batley WF17 
+
+--------------------------------------------------------------------------------
+ 
+WN Wigan WN1, WN2, WN3, WN4, WN5, WN6 England 
+ Leigh WN7 
+ Skelmersdale WN8 
+
+--------------------------------------------------------------------------------
+ 
+WR Worcester WR1, WR2, WR3, WR4, WR5, WR6, WR7, WR8 England 
+ Droitwich WR9 
+ Pershore WR10 
+ Evesham WR11 
+ Broadway WR12 
+ Malvern WR13, WR14 
+ Tenbury Wells WR15 
+
+--------------------------------------------------------------------------------
+ 
+WS Walsall WS1, WS2, WS3, WS4, WS5, WS6, WS7, WS8, WS9 England 
+ Wednesbury WS10 
+ Cannock WS11, WS12 
+ Lichfield WS13, WS14 
+ Rugeley WS15 
+
+--------------------------------------------------------------------------------
+ 
+WV Wolverhampton WV1, WV2, WV3, WV4, WV5, WV6, WV7, WV8, WV8, WV9, WV10, WV11 England 
+ Willenhall WV12, WV13 
+ Bilston WV14 
+ Bridgnorth WV15, WV16 
+[edit]
+Y
+Area Post town Districts  
+YO York YO1, YO2, YO3, YO4, YO5, YO6, YO19, YO23 England 
+ Thirsk YO7 
+ Selby YO8 
+ Scarborough YO11, YO12, YO13 
+ Filey YO14 
+ Bridlington YO15, YO16 
+ Malton YO17 
+ Pickering YO18 
+ Whitby YO21, YO22 
+ Driffield YO25 
+[edit]
+Z
+Area Post town Districts  
+ZE Lerwick ZE1 Scotland 
+ Shetland ZE2, ZE3 
