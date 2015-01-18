@@ -52,7 +52,7 @@ if (isset($_GET['action'])) {
 
 $cart->referer = $referer_link;
 
-$content .= Utility::returnLink('/shop/index.php?'.$referer_link, 'Continue Shopping');
+$content .= Utility::returnLink($referer_link, 'Continue Shopping');
 
 switch ($action) {
     case 'add':
