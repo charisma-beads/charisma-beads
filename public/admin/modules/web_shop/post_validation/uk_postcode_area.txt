@@ -1,0 +1,143 @@
+AL - St Albans 
+B - Birmingham 
+BA - Bath 
+BB - Blackburn 
+BD - Bradford 
+BH - Bournemouth 
+BL - Bolton 
+BN - Brighton 
+BR - Bromley 
+BS - Bristol 
+CA - Carlisle 
+CB - Cambridge 
+CH - Chester 
+CM - Chelmsford 
+CO - Colchester 
+CR - Croydon 
+CT - Canterbury 
+CV - Coventry 
+CW - Crewe 
+DA - Dartford 
+DE - Derby 
+DH - Durham 
+DL - Darlington 
+DN - Doncaster 
+DT - Dorchester 
+DY - Dudley 
+E - East London 
+EC - East Central London 
+EN - Enfield 
+EX - Exeter 
+FY - Blackpool (Fylde) 
+GL - Gloucester 
+GU - Guildford 
+HA - Harrow 
+HD - Huddersfield 
+HG - Harrogate 
+HP - Hemel Hempstead 
+HR - Hereford 
+HU - Kingston upon Hull 
+HX - Halifax 
+IG - Ilford 
+IP - Ipswich 
+L - Liverpool 
+LA - Lancaster 
+LE - Leicester 
+LN - Lincoln 
+LS - Leeds 
+LU - Luton 
+M - Manchester 
+ME - Medway Towns 
+MK - Milton Keynes 
+KT - Kingston-upon-Thames 
+N - North London 
+NE - Newcastle-upon-Tyne 
+NG - Nottingham 
+NN - Northampton 
+NR - Norwich 
+NW - North West London 
+OL - Oldham 
+OX - Oxford 
+PE - Peterborough 
+PL - Plymouth 
+PO - Portsmouth 
+PR - Preston 
+RG - Reading 
+RH - Redhill 
+RM - Romford 
+S - Sheffield 
+SE - South East London 
+SG - Stevenage 
+SK - Stockport 
+SL - Slough 
+SM - Sutton 
+SN - Swindon 
+SO - Southampton 
+SP - Salisbury 
+SR - Sunderland 
+SS - Southend on Sea 
+ST - Stoke-on-Trent 
+SW - South West London 
+SY - Shrewsbury 
+TA - Taunton 
+TF - Telford 
+TN - Tonbridge 
+TQ - Torquay 
+TR - Truro 
+TS - Middlesbrough (Teesside) 
+TW - Twickenham 
+UB - Uxbridge 
+W - West London 
+WA - Warrington 
+WC - West Central London 
+WD - Watford 
+WF - Wakefield 
+WN - Wigan 
+WR - Worcester 
+WS - Walsall 
+WV - Wolverhampton 
+YO - York 
+
+Scotland
+AB - Aberdeen 
+DD - Dundee 
+DG - Dumfries and Galloway 
+EH - Edinburgh 
+FK - Falkirk 
+G - Glasgow 
+HS - Outer Hebrides 
+IV - Inverness 
+KA - Kilmarnock 
+KW - Kirkwall 
+KY - Kirkcaldy 
+ML - Motherwell 
+PA - Paisley 
+PH - Perth 
+TD - Galashiels (River Tweed) 
+ZE - Shetland (Zetland) 
+
+Wales
+CF - Cardiff 
+LD - Llandrindod Wells 
+LL - Llandudno 
+NP - Newport 
+SA - Swansea 
+
+Northern Ireland
+BT - Belfast (covers the whole of Northern Ireland) 
+
+Crown Dependencies
+GY - Guernsey 
+JE - Jersey 
+IM - Isle of Man 
+
+Overseas Territories
+ASCN 1ZZ - Ascension Island 
+BBND 1ZZ - British Indian Ocean Territory 
+BIQQ 1ZZ - British Antarctic Territory 
+FIQQ 1ZZ - Falkland Islands 
+PCRN 1ZZ - Pitcairn Islands 
+SIQQ 1ZZ - South Georgia and the South Sandwich Islands 
+STHL 1ZZ - Saint Helena 
+TDCU 1ZZ - Tristan da Cunha 
+TKCA 1ZZ - Turks and Caicos Islands 
