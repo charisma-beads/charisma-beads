@@ -79,7 +79,7 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
                     <div class="form-group<?php if ($form->get('description')->getMessages()) echo ' has-error'; ?>">
                         <label class="col-sm-4 control-label" for="description"><?=$form->get('description')->getLabel();?></label>
                         <div class="col-sm-8">
-                            <?=$this->formTextarea($form->get('description')->setAttribute('class', 'form-control')); ?>
+                            <?=$this->formTextarea($form->get('description')); ?>
                             <span class="help-block">
                                 <?=$this->formElementErrors($form->get('description'), [
                                     'class' => 'list-unstyled'
@@ -178,8 +178,6 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
                 </fieldset>
             </div>
 
-            <div class="clearfix"></div>
-
             <div class="col-sm-6">
                 <fieldset>
                     <legend>Attributes:</legend>
@@ -227,8 +225,33 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
                 <button type="button" class="btn btn-warning"  data-loading-text="Please wait..." onClick="window.location = '<?=$this->url('admin/shop/product') ?>';">
                     Cancel
                 </button>
+                <?php if ($this->formAction == 'edit'): ?>
+                <a href="<?=$this->url('admin/shop/product/edit', [
+                    'action' => 'duplicate',
+                    'id'     => $this->productId,
+                ]);?>" class="btn btn-primary">Duplicate</a>
+                <?php endif; ?>
         </div>
         </div>
 
 	</form>
 </div>
+
+<?php $this->inlineScript()
+    ->appendFile($this->themePath('/assets/js/LiveEditor/scripts/innovaeditor.js'))
+    ->appendFile($this->themePath('/assets/js/LiveEditor/scripts/jquery.innovaeditor.js'));?>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#product-textarea').liveEdit({
+            height : 200,
+            groups: [
+                ["group1", "", ["Bold", "Italic", "RemoveFormat"]],
+                ["group2", "", ["Bullets", "Numbering", "Indent", "Outdent"]],
+                ["group3", "", ["LinkDialog"]],
+            ] /* Toolbar configuration */ ,
+            fileBrowser: '<?=$this->basePath('/admin/asset-manager')?>'
+        });
+        $('#product-textarea').data('liveEdit').startedit(); /* Run the Editor */
+    })
+</script>

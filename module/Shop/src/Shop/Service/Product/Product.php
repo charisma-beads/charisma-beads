@@ -43,7 +43,7 @@ class Product extends AbstractRelationalMapperService
 
     /**
      * @param int $id
-     * @return array|mixed|\UthandoCommon\Model\ModelInterface
+     * @return array|mixed|\UthandoCommon\Model\ModelInterface|ProductModel
      */
 	public function getFullProductById($id)
 	{
@@ -134,6 +134,23 @@ class Product extends AbstractRelationalMapperService
 	    
 	    return $products;
 	}
+
+    /**
+     * Make a new product based on a product.
+     *
+     * @param int $id
+     * @return ProductModel $product
+     */
+    public function makeDuplicate($id)
+    {
+        $product = $this->getFullProductById($id);
+
+        $product->setProductId(null)
+            ->setName(null)
+            ->setIdent(null);
+
+        return $product;
+    }
 
     /**
      * @param ProductModel $product

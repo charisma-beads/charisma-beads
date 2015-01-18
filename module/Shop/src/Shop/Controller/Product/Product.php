@@ -2,6 +2,8 @@
 namespace Shop\Controller\Product;
 
 use Exception;
+use Shop\Model\Product\Product as ProductModel;
+use Shop\ShopException;
 use UthandoCommon\Controller\AbstractCrudController;
 use Zend\View\Model\ViewModel;
 
@@ -27,6 +29,27 @@ class Product extends AbstractCrudController
 	    $this->getService()->getMapper()->setFetchEnabled(false);
 	    return parent::listAction();
 	}
+
+	public function duplicateAction()
+	{
+		/* @var $product ProductModel */
+		$product = $this->getService()->makeDuplicate($this->params('id', 0));
+
+		if (!$product instanceof ProductModel) {
+			throw new ShopException('No product was found with id: ' . $id);
+		}
+
+		$form = $this->getService()->getForm($product);
+
+		$viewModel = new ViewModel([
+			'form' => $form,
+			'routeParams' => $this->params()->fromRoute(),
+		]);
+
+		$viewModel->setTemplate('shop/product/add');
+
+		return $viewModel;
+	}
 	
 	public function setEnabledAction()
 	{
@@ -39,7 +62,7 @@ class Product extends AbstractCrudController
 		}
 		
 		try {
-		    /* @var $product \Shop\Model\Product\Product */
+		    /* @var $product ProductModel */
 			$product = $this->getService()->getById($id);
 			$result = $this->getService()->toggleEnabled($product);
 		} catch (Exception $e) {

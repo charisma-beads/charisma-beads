@@ -19,8 +19,7 @@
     	<tbody>
     		<?php /* @var $row \Shop\Model\Product\Category */ ?>
     		<?php foreach($this->models as $row): ?>
-    		<?php 
-    			$indent = 'indent' . ($row->getDepth() + 1);
+    		<?php
         		$parent = ($row->hasChildren() || $row->getDepth() == 0) ? 'bold ' : '';
     		?>
     		<tr>
@@ -29,7 +28,9 @@
     		        'route' => 'admin/shop/category/edit',
     		    ]); ?></td>
     			<td><?=$this->escapeHtml($row->getProductCategoryId()); ?></td>
-    			<td class="<?=$parent . $indent;?>"><?=$this->escapeHtml($row->getCategory()); ?></td>
+    			<td class="<?=$parent;?>" style="text-indent: <?=$row->getDepth();?>em;">
+					<?=$this->escapeHtml($row->getCategory()); ?>
+				</td>
     			<td><?=$this->escapeHtml($row->getLft()); ?></td>
     			<td><?=$this->escapeHtml($row->getRgt()); ?></td>
     			<td><?=$this->escapeHtml($this->formatDate($row->getDateCreated())); ?></td>

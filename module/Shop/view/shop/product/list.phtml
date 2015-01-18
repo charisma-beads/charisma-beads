@@ -20,7 +20,7 @@
         </thead>
 
         <tbody>
-            <?php /* @var $row \Shop\Model\Product */ ?>
+            <?php /* @var $row \Shop\Model\Product\Product */ ?>
             <?php foreach($this->models as $row): ?>
             <tr>
                 <td><?=$this->enabled($row, [
@@ -36,6 +36,10 @@
                 <td><?=$this->escapeHtml($this->formatDate($row->getDateCreated())); ?></td>
                 <td><?=$this->escapeHtml($this->formatDate($row->getDateModified())); ?></td>
                 <td width="140">
+                    <a href="<?=$this->url('admin/shop/product/edit', [
+                        'action' => 'duplicate',
+                        'id'     => $row->getProductId(),
+                    ]);?>" class="btn btn-primary">Duplicate</a>
                     <?=$this->partial('uthando-admin/partial/edit-actions', [
                         'pk'		=> 'productId',
                         'id'		=> $row->getProductId(),

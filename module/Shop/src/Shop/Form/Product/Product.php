@@ -65,7 +65,9 @@ class Product extends Form
         	'type'			=> 'textarea',
         	'attributes'	=> [
         		'placeholder'	=> 'Product Description:',
-        		'autofocus'		=> true,	
+        		'autofocus'		=> true,
+				'class'			=> 'form-control',
+				'id'			=> 'product-textarea'
         	],
         	'options'		=> [
         		'label'		=> 'Description:',
