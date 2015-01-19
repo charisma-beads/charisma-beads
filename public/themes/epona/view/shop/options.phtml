@@ -1,6 +1,6 @@
 
 <?php
-$title = $this->escapehtml($this->title);
+$title = $this->title;
 $this->headTitle($title);
 $splitTitle = explode(' ', $title);
 $title1 = $splitTitle[0];
@@ -18,7 +18,7 @@ $title2 = implode(' ', $splitTitle);
 
         <?php if ($this->bread):?>
         <!-- breadcrumb -->
-        <?=$this->breadCrumbs();?>
+        <?=$this->breadCrumbs($this->product);?>
         <!-- /breadcrumb -->
         <?php endif;?>
 

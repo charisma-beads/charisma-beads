@@ -32,8 +32,10 @@ class Product extends AbstractCrudController
 
 	public function duplicateAction()
 	{
+		$id = $this->params('id', 0);
+
 		/* @var $product ProductModel */
-		$product = $this->getService()->makeDuplicate($this->params('id', 0));
+		$product = $this->getService()->makeDuplicate($id);
 
 		if (!$product instanceof ProductModel) {
 			throw new ShopException('No product was found with id: ' . $id);

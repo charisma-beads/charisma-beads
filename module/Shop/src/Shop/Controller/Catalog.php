@@ -66,7 +66,7 @@ class Catalog extends AbstractActionController
         }
         
         return new ViewModel([
-            'bread' => $this->getBreadcrumb($product->getProductCategory()),
+            'bread' => $this->getBreadcrumb($product->getProductCategoryId()),
             'product' => $product,
         ]);
     }

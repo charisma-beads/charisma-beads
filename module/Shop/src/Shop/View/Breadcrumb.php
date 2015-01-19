@@ -9,6 +9,7 @@ class Breadcrumb extends AbstractHelper
 	{
         $crumbs = [];
         $bread = $this->view->bread;
+
         $urlHelper = $this->view->plugin('url');
         $escapeHtml = $this->view->plugin('escapeHtml');
 
@@ -22,7 +23,7 @@ class Breadcrumb extends AbstractHelper
                 'categoryIdent' => $category->getIdent(),
             ]);
 
-            if (null === $product && $this->view->category->getIdent() !== $category->getIdent()) {
+            if ($product || $this->view->category->getIdent() !== $category->getIdent()) {
                 $crumbs[] = '<li><a href="' . $href . '">' . $escapeHtml($category->getCategory()) . '</a></li>';
             } else {
                 $crumbs[] = '<li class="active">' . $escapeHtml($category->getCategory()) . '</li>';

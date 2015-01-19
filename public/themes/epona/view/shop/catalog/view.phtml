@@ -3,6 +3,15 @@
 <?php $product = $this->product; ?>
 <?php $this->headTitle($product->getName())->append($product->getProductCategory()->getCategory()); ?>
 
+<?php $this->placeholder('header')->captureStart();?>
+<?=$this->partial('shop/options', [
+    'title' => $this->escapehtml($product->getName()),
+    'bread' => $this->bread,
+    'product' => $product,
+    'category' => $product->getProductCategory(),
+]);?>
+<?php $this->placeholder('header')->captureEnd();?>
+
 <div class="row">
     <div class="col-md-3 hidden-sm">
         <?=$this->partial('shop/product-nav');?>
@@ -45,8 +54,8 @@
                 <!-- see the bottom of the page for the script -->
                 <section class="product-view-colors">
                 <?php foreach($product->getProductImage() as $image): ?>
-                    <a data-color="white" data-stock="yes" data-src="<?=$this->productImage($product);?>" class="active" href="#">
-                        <img src="<?=$this->productImage($product);?>" height="70" alt="" />
+                    <a data-color="white" data-stock="yes" data-src="<?=$this->productImage($image);?>" class="" href="#">
+                        <img src="<?=$this->productImage($image);?>" height="70" alt="" />
                     </a>
                 <?php endforeach; ?>
                 </section>
@@ -80,40 +89,40 @@
     </div>
 </div>
 
-<?php $this->inlineScript()->captureStart();?>
-$(document).ready(function(){
-    $('section.product-view-colors a').bind("click", function(e) {
-        e.preventDefault();
+<?php $this->inlineScript()->captureStart(); ?>
+    $(document).ready(function(){
+        $('section.product-view-colors a').bind("click", function(e) {
+            e.preventDefault();
 
-        /** Reset the selected thumbnail **/
-        jQuery('.product-view-colors a').removeClass('active');
-        jQuery(this).addClass('active');
+            /** Reset the selected thumbnail **/
+            jQuery('.product-view-colors a').removeClass('active');
+            jQuery(this).addClass('active');
 
-        /** add the color (value) to the hidden input, inside the form **/
-        jQuery("input#color").val(jQuery(this).attr('data-color').trim());
-
-
-        /** CHANGE BIG IMAGE **/
-        jQuery("#product-main-image").attr('src', jQuery(this).attr('data-src'));
+            /** add the color (value) to the hidden input, inside the form **/
+            jQuery("input#color").val(jQuery(this).attr('data-color').trim());
 
 
-        /**
-         @CHANGE STOCK INFO
-         **/
-        /* stock color */
-        //var data_stock = jQuery(this).attr('data-stock').trim();
-        //jQuery("#product-view-stock-info").removeClass('stock-yes stock-no');
-        //jQuery("#product-view-stock-info").addClass('stock-' + data_stock);
+            /** CHANGE BIG IMAGE **/
+            jQuery("#product-main-image").attr('src', jQuery(this).attr('data-src'));
+            jQuery("#product-main-image").parent().attr('href', jQuery(this).attr('data-src'));
 
-        /* stock icon */
-        /*jQuery("#product-view-stock-info i").removeClass('fa-check fa-times');
-        if(data_stock == 'yes') {
-            jQuery("#product-view-stock-info i").addClass('fa-check');
-        } else {
-            jQuery("#product-view-stock-info i").addClass('fa-times');
-        }*/
 
+            /**
+             @CHANGE STOCK INFO
+             **/
+            /* stock color */
+            //var data_stock = jQuery(this).attr('data-stock').trim();
+            //jQuery("#product-view-stock-info").removeClass('stock-yes stock-no');
+            //jQuery("#product-view-stock-info").addClass('stock-' + data_stock);
+
+            /* stock icon */
+            /*jQuery("#product-view-stock-info i").removeClass('fa-check fa-times');
+            if(data_stock == 'yes') {
+                jQuery("#product-view-stock-info i").addClass('fa-check');
+            } else {
+                jQuery("#product-view-stock-info i").addClass('fa-times');
+            }*/
+
+        });
     });
-});
-
-<?php $this->inlineScript()->captureEnd();?>
+<?php $this->inlineScript()->captureEnd(); ?>
