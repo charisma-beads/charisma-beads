@@ -51,7 +51,7 @@ class Cost extends Form
 		
 		$this->add([
 			'name'		=> 'postZoneId',
-			'type'		=> 'PostUnitList',
+			'type'		=> 'PostZoneList',
 			'options'	=> [
 				'label'			=> 'Post Zone:',
 				'required'		=> true,

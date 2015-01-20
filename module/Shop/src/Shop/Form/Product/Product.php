@@ -104,18 +104,6 @@ class Product extends Form
         ]);
         
         $this->add([
-        	'name'			=> 'taxable',
-        	'type'			=> 'checkbox',
-        	'options'		=> [
-        		'label'			=> 'Taxable:',
-        		'required' 		=> true,
-        		'use_hidden_element' => true,
-        		'checked_value' => '1',
-        		'unchecked_value' => '0',
-        	],
-        ]);
-        
-        $this->add([
         	'name'			=> 'addPostage',
         	'type'			=> 'checkbox',
         	'options'		=> [

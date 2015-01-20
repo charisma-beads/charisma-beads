@@ -18,7 +18,7 @@
     		<?php foreach($this->models as $row): ?>
     		<tr>
     			<td><?=$this->escapeHtml($row->getPostCostId()); ?></td>
-    			<td><?=$this->escapeHtml($row->getCost()); ?></td>
+    			<td><?=$this->escapeHtml($this->priceFormat($row->getCost())); ?></td>
     			<td><?=$this->escapeHtml($row->getPostLevel()->getPostLevel()); ?></td>
     			<td><?=$this->escapeHtml($row->getPostZone()->getZone()); ?></td>
     			<td>

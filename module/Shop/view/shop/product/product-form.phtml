@@ -164,12 +164,6 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
                         </div>
                         <div class="col-sm-4 text-right">
                             <label>
-                                <?=$form->get('taxable')->getLabel();?>
-                                <?=$this->formCheckbox($form->get('taxable'));?>
-                            </label>
-                        </div>
-                        <div class="col-sm-4 text-right">
-                            <label>
                                 <?=$form->get('vatInc')->getLabel();?>
                                 <?=$this->formCheckbox($form->get('vatInc'));?>
                             </label>
