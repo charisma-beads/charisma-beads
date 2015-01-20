@@ -12,13 +12,13 @@ class Catalog extends AbstractActionController
 
     /**
      *
-     * @var \Shop\Service\Product
+     * @var \Shop\Service\Product\Product
      */
     protected $productService;
 
     /**
      *
-     * @var \Shop\Service\ProductCategory
+     * @var \Shop\Service\Product\Category
      */
     protected $productCategoryService;
 

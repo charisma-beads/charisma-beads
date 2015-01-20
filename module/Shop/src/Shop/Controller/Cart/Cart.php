@@ -2,6 +2,7 @@
 namespace Shop\Controller\Cart;
 
 use Shop\Model\Cart\Item;
+use Shop\Model\Customer\Address as AddressModel;
 use Shop\Service\Cart\Cart as CartService;
 use Shop\Service\Customer\Address;
 use Shop\Service\Product\Product;
@@ -56,15 +57,18 @@ class Cart extends AbstractActionController
 
     public function viewAction()
     {
+        $countryId = $this->params()->fromPost('countryId', null);
+
         if ($this->identity()) {
-            /* @var $customerAddress Address */
-            $customerAddress = $this->getService('Shop\Service\Customer\Address');
-            $countryId = $customerAddress
-                ->getAddressByUserId($this->identity()
-                ->getUserId(), 'delivery')
-                ->getCountryId();
-        } else {
-            $countryId = $this->params()->fromPost('countryId', null);
+            /* @var $customerAddressService Address */
+            $customerAddressService = $this->getService('Shop\Service\Customer\Address');
+            $customerAddress = $customerAddressService->getAddressByUserId(
+                $this->identity()->getUserId(), 'delivery'
+            );
+
+            if ($customerAddress instanceof AddressModel) {
+                $countryId = $customerAddress->getCountryId();
+            }
         }
         
         return new ViewModel(array(

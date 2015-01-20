@@ -369,8 +369,8 @@ class Cart extends AbstractMapperService implements InitializableInterface
     {
         $price = $item->getPrice();
         $tax = 0;
-        
-        if (true === $item->getMetadata()->getTaxable()) {
+
+        if (true === $this->getShopOptions()->getVatState()) {
             $taxService = $this->getTaxService()
                 ->setTaxState($this->getShopOptions()->getVatState())
                 ->setTaxInc($item->getMetadata()->getVatInc());
@@ -514,7 +514,7 @@ class Cart extends AbstractMapperService implements InitializableInterface
     }
 
     /**
-     * @return array|object
+     * @return \Shop\Options\ShopOptions
      */
     public function getShopOptions()
     {

@@ -248,11 +248,24 @@ class Category extends AbstractRelationalMapperService
 			} else {
 				$result = $this->save($model);
 			}
+			$this->removeCacheItem($model->getProductCategoryId());
 		} else {
 			throw new ShopException('Product Category id does not exist');
 		}
 	
 		return $result;
+	}
+
+	public function delete($id)
+	{
+		$id = (int) $id;
+		$childIds = $this->getCategoryChildrenIds($id);
+
+		foreach ($childIds as $catId) {
+			$this->removeCacheItem($catId);
+		}
+
+		return parent::delete($id);
 	}
 
     /**

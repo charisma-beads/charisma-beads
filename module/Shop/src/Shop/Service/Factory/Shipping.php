@@ -19,6 +19,7 @@ class Shipping implements FactoryInterface
 	    $shippingService = new ShippingService();
 	    $shippingService->setCountryService($countryService);
 	    $shippingService->setTaxService($taxService);
+		$shippingService->setShippingByWeight($shopOptions->getPostState());
 	    
 	    return $shippingService;
 	}
