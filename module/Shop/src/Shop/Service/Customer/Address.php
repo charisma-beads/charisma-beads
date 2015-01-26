@@ -104,8 +104,11 @@ class Address extends AbstractRelationalMapperService
         $mapper = $this->getMapper();
     
         $address = $mapper->getAddressByUserId($userId, $billingOrDelivery);
-        $this->populate($address, true);
-    
+
+        if ($address) {
+            $this->populate($address, true);
+        }
+
         return $address;
     }
 }

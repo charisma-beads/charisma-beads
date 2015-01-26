@@ -62,6 +62,7 @@ class Cart extends AbstractActionController
         if ($this->identity()) {
             /* @var $customerAddressService Address */
             $customerAddressService = $this->getService('Shop\Service\Customer\Address');
+
             $customerAddress = $customerAddressService->getAddressByUserId(
                 $this->identity()->getUserId(), 'delivery'
             );
@@ -70,7 +71,7 @@ class Cart extends AbstractActionController
                 $countryId = $customerAddress->getCountryId();
             }
         }
-        
+
         return new ViewModel(array(
             'countryId' => $countryId
         ));

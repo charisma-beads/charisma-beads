@@ -56,7 +56,7 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
                         <div class="col-sm-8">
                             <?=$this->formText($form->get('ident')->setAttribute('class', 'form-control')); ?>
                             <span class="help-block">
-                                If you leave this blank the the product name and short description will be used for the ident.
+                                If you leave this blank the the product code and title will be used for the ident.
                                 <?=$this->formElementErrors($form->get('ident'), [
                                     'class' => 'list-unstyled'
                                 ]); ?>
@@ -70,18 +70,6 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
                             <?=$this->formText($form->get('shortDescription')->setAttribute('class', 'form-control')); ?>
                             <span class="help-block">
                                 <?=$this->formElementErrors($form->get('shortDescription'), [
-                                    'class' => 'list-unstyled'
-                                ]); ?>
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class="form-group<?php if ($form->get('description')->getMessages()) echo ' has-error'; ?>">
-                        <label class="col-sm-4 control-label" for="description"><?=$form->get('description')->getLabel();?></label>
-                        <div class="col-sm-8">
-                            <?=$this->formTextarea($form->get('description')); ?>
-                            <span class="help-block">
-                                <?=$this->formElementErrors($form->get('description'), [
                                     'class' => 'list-unstyled'
                                 ]); ?>
                             </span>
@@ -201,6 +189,18 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
                 </fieldset>
             </div>
 
+            <div class="col-md-12">
+                <fieldset>
+                    <legend><?=$form->get('description')->getLabel();?></legend>
+                    <?=$this->formTextarea($form->get('description')); ?>
+                    <span class="help-block<?php if ($form->get('description')->getMessages()) echo ' has-error'; ?>">
+                        <?=$this->formElementErrors($form->get('description'), [
+                            'class' => 'list-unstyled'
+                        ]); ?>
+                    </span>
+                </fieldset>
+            </div>
+
         </div>
 
         <?php if ($this->formAction == 'add'): ?>
@@ -238,11 +238,18 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
 <script type="text/javascript">
     $(document).ready(function(){
         $('#product-textarea').liveEdit({
-            height : 200,
+            height : 500,
+            css: [
+                'http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css',
+                'http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css',
+                'http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css'
+            ] /* Apply bootstrap css into the editing area */ ,
             groups: [
-                ["group1", "", ["Bold", "Italic", "RemoveFormat"]],
+                ["group1", "", ["Bold", "Italic", "Underline", "ForeColor", "RemoveFormat"]],
                 ["group2", "", ["Bullets", "Numbering", "Indent", "Outdent"]],
-                ["group3", "", ["LinkDialog"]],
+                ["group3", "", ["Paragraph", "FontSize", "FontDialog", "TextDialog"]],
+                ["group4", "", ["LinkDialog", "TableDialog", "Snippets"]],
+                ["group5", "", ["Undo", "Redo", "FullScreen"]]
             ] /* Toolbar configuration */ ,
             fileBrowser: '<?=$this->basePath('/admin/asset-manager')?>'
         });

@@ -8,10 +8,11 @@
             <tr>
                 <th data-field="enabled">&nbsp;</th>
                 <th data-field="productId">Product Id</th>
-                <th data-field="name">Name</th>
+                <th data-field="name">Product Code</th>
                 <th data-field="description">Description</th>
                 <th data-field="price">Price</th>
                 <th data-field="group">Group</th>
+                <th data-field="quantity">Stock</th>
                 <th data-field="category">Category</th>
                 <th style="width:190px;">Actions</th>
             </tr>
@@ -30,6 +31,7 @@
                 <td><?=$this->escapeHtml($row->getShortDescription()); ?></td>
                 <td><?=$this->priceFormat($row->getPrice(false)); ?>
                 <td><?=$this->escapeHtml($row->getProductGroup()->getGroup()); ?>
+                <td><?=$this->escapeHtml($row->getQuantity());?></td>
                 <td><?=$this->escapeHtml($row->getProductCategory()->getCategory()); ?></td>
                 <td width="140">
                     <a href="<?=$this->url('admin/shop/product/edit', [

@@ -146,7 +146,8 @@ class Category extends Form implements ServiceLocatorAwareInterface
     			'label'	=> $cat->getCategory(),
     			'value'	=> $cat->getProductCategoryId(),
     			'attributes'	=> array(
-    				'class'	=> $parent . $indent,
+    				'class'	=> $parent,
+					'style' => 'text-indent:' . $cat->getDepth() . 'em;',
     			)
     		);
     	}

@@ -41,9 +41,6 @@ class Customer extends Form
 	    $this->add([
             'name' => 'firstname',
 	        'type' => 'text',
-	        'attributes'	=> [
-	           'readonly' => true,
-	        ],
 	        'options'		=> [
 	           'label' => 'Firstname:'
 	        ],
@@ -52,9 +49,6 @@ class Customer extends Form
 	    $this->add([
             'name' => 'lastname',
             'type' => 'text',
-            'attributes'	=> [
-                'readonly' => true,
-            ],
             'options'		=> [
                 'label' => 'Lastname:'
             ],
@@ -79,9 +73,6 @@ class Customer extends Form
 	    $this->add([
             'name' => 'email',
             'type' => 'email',
-	        'attributes'	=> [
-	           'readonly' => true,
-	        ],
             'options' => [
                 'label' => 'Email:',
             ],

@@ -5,9 +5,15 @@ use \Shop\Model\Customer\Customer as CustomerModel;
 use UthandoCommon\Service\AbstractRelationalMapperService;
 use UthandoCommon\Service\ServiceException;
 use UthandoUser\Model\User;
+use Zend\EventManager\Event;
 use Zend\Math\BigInteger\BigInteger;
 use Zend\Math\Rand;
 
+/**
+ * Class Customer
+ * @package Shop\Service\Customer
+ * @method CustomerModel populate()
+ */
 class Customer extends AbstractRelationalMapperService
 {
     /**
@@ -43,6 +49,16 @@ class Customer extends AbstractRelationalMapperService
      * @var User
      */
     protected $user;
+
+    /**
+     * Attach events
+     */
+    public function attachEvents()
+    {
+        $this->getEventManager()->attach(
+            ['post.edit'], [$this, 'postEdit']
+        );
+    }
 
     /**
      * @param $userId
@@ -138,7 +154,7 @@ class Customer extends AbstractRelationalMapperService
      * Generate a customer number with check digit at end
      * to test use simple test:
      *
-     * $pass = ($checkDigit === $num % 11) ? true : false
+     * $pass = ($checkDigit === substr($num, 0, -1) % 11 % 10) ? true : false
      *
      * @param CustomerModel $customer
      * @return string
@@ -147,7 +163,7 @@ class Customer extends AbstractRelationalMapperService
     {
         $part1 = $customer->getDateCreated()->format('Y');
         $part2 = sprintf('%06d', $customer->getCustomerId());;
-        $part3 = Rand::getString(4, '0123456789');
+        $part3 = Rand::getString(5, '0123456789');
 
         $num = join('', [
             $part1, $part2, $part3
@@ -155,8 +171,31 @@ class Customer extends AbstractRelationalMapperService
 
         $bigInt = BigInteger::factory('bcmath');
         $checkDigit = $bigInt->mod($num, 11);
+        $checkDigit = $bigInt->mod($checkDigit, 10);
 
         return $num . $checkDigit;
+    }
+
+    /**
+     * @param Event $e
+     */
+    public function postEdit(Event $e)
+    {
+        /* @var CustomerModel $model */
+        $model = $e->getParam('model');
+        $post = $e->getParam('post');
+        $this->populate($model, ['user']);
+
+        $user = $model->getUser();
+
+        if ($user->getFirstname() != $model->getFirstname() ||
+            $user->getLastname() != $model->getLastname() ||
+            $user->getEmail() != $model->getEmail()) {
+
+            /* @var \UthandoUser\Service\User $userService */
+            $userService = $this->getService('UthandoUser\Service\User');
+            $userService->edit($user, $post);
+        }
     }
 
     /**

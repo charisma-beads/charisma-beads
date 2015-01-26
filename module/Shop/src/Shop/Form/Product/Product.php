@@ -37,11 +37,11 @@ class Product extends Form
         	'name'			=> 'name',
         	'type'			=> 'text',
         	'attributes'	=> [
-        		'placeholder'	=> 'Product Name:',
+        		'placeholder'	=> 'Product Code:',
         		'autofocus'		=> true,
         	],
         	'options'		=> [
-        		'label'		=> 'Product Name/Number:',
+        		'label'		=> 'Product Code/Number:',
         		'required'	=> true,
         	],
         ]);
@@ -79,11 +79,11 @@ class Product extends Form
         	'name'			=> 'shortDescription',
         	'type'			=> 'text',
         	'attributes'	=> [
-        		'placeholder'	=> 'Short Description:',
+        		'placeholder'	=> 'Product Title:',
         		'autofocus'		=> true,
         	],
         	'options'		=> [
-        		'label'		=> 'Short Description:',
+        		'label'		=> 'Product Title:',
         		'required'	=> true,
         	],
         ]);

@@ -11,7 +11,7 @@ use Zend\View\Model\ViewModel;
 class Customer extends AbstractCrudController
 {
 	protected $searchDefaultParams = array('sort' => 'name');
-	protected $serviceName = 'Shop\Service\Customer';
+	protected $serviceName = 'ShopCustomer';
 	protected $userRoute = 'shop/customer';
 	protected $route = 'admin/shop/customer';
     protected $routes = [
@@ -89,7 +89,7 @@ class Customer extends AbstractCrudController
             ];
 	    }
 	    
-	    $result = $this->getService()->edit($customer, $prg);
+	    $result = $service->edit($customer, $prg);
 	    
 	    if ($result instanceof Form) {
 	    	 
