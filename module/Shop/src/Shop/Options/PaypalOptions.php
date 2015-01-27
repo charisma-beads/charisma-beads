@@ -18,7 +18,7 @@ class PaypalOptions extends AbstractOptions
     /**
      * @var bool
      */
-    protected $logEnabled = true;
+    protected $logEnabled = false;
     
     /**
      * @var bool

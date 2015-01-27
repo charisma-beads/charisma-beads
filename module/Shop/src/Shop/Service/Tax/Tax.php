@@ -31,7 +31,7 @@ class Tax
     {   
         if ($this->taxState && $taxRate != 0) {
         	$taxRate = $taxRate + 1;
-        	\FB::info($taxRate);
+
             if (!$this->taxInc) {
                 $pat = round($price*$taxRate, 2);
                 $tax = $pat - $price;

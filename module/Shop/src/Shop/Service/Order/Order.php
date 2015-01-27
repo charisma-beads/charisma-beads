@@ -7,6 +7,11 @@ use Shop\Model\Order\Order as OrderModel;
 use UthandoCommon\Service\AbstractRelationalMapperService;
 use Zend\Math\BigInteger\BigInteger;
 
+/**
+ * Class Order
+ * @package Shop\Service\Order
+ * @method OrderModel populate()
+ */
 class Order extends AbstractRelationalMapperService
 {
     /**
@@ -216,7 +221,7 @@ class Order extends AbstractRelationalMapperService
         $orders = $mapper->getOrdersByUserId($userId);
         
         foreach ($orders as $order) {
-            $this->populate($order, ['orderStatus']);
+            $this->populate($order, true);
         }
         
         return $orders;
@@ -264,12 +269,13 @@ class Order extends AbstractRelationalMapperService
     	
     	/* @var $order OrderModel */
     	$order = $mapper->getOrderByUserId($id, $userId);
+        //$this->populate($order, true);
     
     	if ($order) {
             /* @var $orderStatusService \Shop\Service\Order\Status */
             $orderStatusService = $this->getService('Shop\Service\Order\Status');
     		$orderStatus = $orderStatusService->getStatusByName('Cancelled');
-    		$order->setOrderStatus($orderStatus->getOrderStatusId());
+    		$order->setOrderStatusId($orderStatus->getOrderStatusId());
 
     		$result = $this->save($order);
     		

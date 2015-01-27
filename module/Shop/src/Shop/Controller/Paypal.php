@@ -77,8 +77,14 @@ class Paypal extends AbstractActionController
         
         $result = $this->getOrderService()
             ->cancelOrder($orderId, $userId);
+
+        $order = (!$result) ?: $this->getOrderService()
+            ->getCustomerOrderByUserId($orderId, $userId);
         
-        return ['result' => $result];
+        return [
+            'order' => $order,
+            'result' => $result
+        ];
     }
     
     /**

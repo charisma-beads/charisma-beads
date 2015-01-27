@@ -1,6 +1,7 @@
 <?php
 namespace Shop\Service;
 
+use PayPal\Exception\PayPalConnectionException;
 use Shop\Model\Order\Order as OrderModel;
 use Shop\Options\PaypalOptions;
 use PayPal\Api\Amount;
@@ -90,10 +91,7 @@ class Paypal implements ServiceLocatorAwareInterface
                 ],
             ],
         ];
-     * @param OrderModel $order
-     * @return multitype:OrderModel unknown
-     */
-    /**
+     *
      * @param OrderModel $order
      * @return array
      */
@@ -200,7 +198,7 @@ class Paypal implements ServiceLocatorAwareInterface
         try {
             $payment->create($this->getApiContent());
 
-        } catch (\PayPal\Exception\PayPalConnectionException $ex) {
+        } catch (PayPalConnectionException $ex) {
             // Don't spit out errors or use "exit" like this in production code
             echo '<pre>';print_r(json_decode($payment->toJSON()));
             echo '<pre>';print_r(json_decode($ex->getData()));exit;
@@ -214,6 +212,8 @@ class Paypal implements ServiceLocatorAwareInterface
             ->getStatusByName('Paypal Payment Pending');
         
         $order->setOrderStatusId($orderStatus->getOrderStatusId());
+
+        $redirectUrl = null;
         
         foreach($payment->getLinks() as $link) {
         	if($link->getRel() == 'approval_url') {

@@ -21,7 +21,7 @@ $(document).ready(function(){
 		var data_background = jQuery('body').attr('data-background');
 		if(data_background) {
 			jQuery.backstretch(data_background);
-			jQuery('body').addClass('transparent'); // remove backround color of boxed class
+			jQuery('body').addClass('transparent'); // remove background color of boxed class
 		}
 	}
     
