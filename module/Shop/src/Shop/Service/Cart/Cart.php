@@ -418,16 +418,36 @@ class Cart extends AbstractMapperService implements InitializableInterface
         
             $cost = $shipping->calculateShipping($this);
         
-            $this->shippingTax = $shipping->getShippingTax();
+            $this->setShippingTax($shipping->getShippingTax());
         } else {
             $cost = 0;
-            $this->shippingTax = 0;
+            $this->setShippingTax(0);
         }
         
         $this->shipping = $cost;
         
         return $this;
     }
+
+    /**
+     * @return float
+     */
+    public function getShippingTax()
+    {
+        return $this->shippingTax;
+    }
+
+    /**
+     * @param float $shippingTax
+     * @return $this
+     */
+    public function setShippingTax($shippingTax)
+    {
+        $this->shippingTax = $shippingTax;
+        return $this;
+    }
+
+
 
     /**
      * Get the shipping cost

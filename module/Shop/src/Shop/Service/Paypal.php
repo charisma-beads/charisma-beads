@@ -15,6 +15,7 @@ use PayPal\Api\ShippingAddress;
 use PayPal\Api\Transaction;
 use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Rest\ApiContext;
+use Shop\Service\Tax\Tax;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
 
@@ -36,6 +37,11 @@ class Paypal implements ServiceLocatorAwareInterface
      * @var \Shop\Service\Order\Status
      */
     protected $orderStatusService;
+
+    /**
+     * @var Tax
+     */
+    protected $taxService;
     
     /**
      * Should this be done by hydrators?
@@ -95,16 +101,16 @@ class Paypal implements ServiceLocatorAwareInterface
     {   
         $options = $this->getOptions();
         
-        // set payement method
+        // set payment method
         $payer = new Payer();
         $payer->setPaymentMethod($options->getPaymentMethod());
         
         // set payment amount of order
         $details = new Details();
         $details->setShipping(number_format($order->getShipping(), 2));
-        $details->setTax(number_format($order->getTaxTotal(), 2));
+        $details->setTax(number_format($order->getTaxTotal() - $order->getMetadata()->getShippingTax(), 2));
         
-        $subtotal = $order->getTotal() - ($order->getShipping() + $order->getTaxTotal());
+        $subtotal = $order->getTotal() - ($order->getShipping() + ($order->getTaxTotal() - $order->getMetadata()->getShippingTax()));
         $details->setSubtotal(number_format($subtotal, 2));
         
         $amount = new Amount();
@@ -139,14 +145,30 @@ class Paypal implements ServiceLocatorAwareInterface
         
         // get order items.
         $items = [];
+
+        $taxService = $this->getTaxService();
         
         /* @var $orderItem \Shop\Model\Order\Line */
         foreach ($order->getOrderLines() as $orderItem) {
             $item = new Item();
+
+            if ($order->getMetadata()->getTaxInvoice()) {
+                $taxService->setTaxState($order->getMetadata()->getTaxInvoice())
+                    ->setTaxInc($orderItem->getMetadata()->getVatInc());
+
+                $taxService->addTax($orderItem->getPrice(), $orderItem->getTax(true));
+                $price = $taxService->getPrice();
+                $tax = $taxService->getTax();
+
+            } else {
+                $price = number_format($orderItem->getPrice(), 2);
+                $tax = number_format(0, 2);
+            }
             
             $item->setName($orderItem->getMetadata()->getDescription());
             $item->setSku($orderItem->getMetadata()->getName());
-            $item->setPrice(number_format($orderItem->getPrice(), 2));
+            $item->setPrice($price);
+            $item->setTax($tax);
             $item->setQuantity($orderItem->getQty());
             $item->setCurrency($options->getCurrencyCode());
             
@@ -174,8 +196,16 @@ class Paypal implements ServiceLocatorAwareInterface
         $payment->setPayer($payer);
         $payment->setRedirectUrls($redirectUrls);
         $payment->setTransactions([$transaction]);
-        
-        $payment->create($this->getApiContent());
+
+        try {
+            $payment->create($this->getApiContent());
+
+        } catch (\PayPal\Exception\PayPalConnectionException $ex) {
+            // Don't spit out errors or use "exit" like this in production code
+            echo '<pre>';print_r(json_decode($payment->toJSON()));
+            echo '<pre>';print_r(json_decode($ex->getData()));exit;
+        }
+
         
         $order->getMetadata()->setPaymentId($payment->getId());
         
@@ -267,6 +297,19 @@ class Paypal implements ServiceLocatorAwareInterface
         }
         
         return $this->orderStatusService;
+    }
+
+    /**
+     * @return Tax
+     */
+    public function getTaxService()
+    {
+        if (! $this->taxService instanceof Tax) {
+            $sl = $this->getServiceLocator();
+            $this->taxService = $sl->get('Shop\Service\Tax');
+        }
+
+        return $this->taxService;
     }
     
     /**

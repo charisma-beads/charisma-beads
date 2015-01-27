@@ -57,7 +57,7 @@ class Order extends AbstractRelationalMapperService
     public function processOrderFromCart(CustomerModel $customer, array $postData)
     {
         /* @var $cart \Shop\Service\Cart\Cart */
-        $cart = $this->getService('Shop\Service\Cart');
+        $cart = $this->getService('ShopCart');
 
         $countryId = (0 == $postData['collect_instore']) ? $customer->getDeliveryAddress()->getCountryId() : null;
         $cart->setShippingCost($countryId);
@@ -85,6 +85,7 @@ class Order extends AbstractRelationalMapperService
         
         $metadata->setPaymentMethod($paymentOption)
             ->setTaxInvoice($shopOptions->getVatState())
+            ->setShippingTax($cart->getShippingTax())
             ->setRequirements($postData['requirements'])
             ->setCustomerName($customer->getFullName(), $customer->getPrefix()->getPrefix())
             ->setBillingAddress($customer->getBillingAddress())
@@ -135,8 +136,8 @@ class Order extends AbstractRelationalMapperService
 
     /**
      * Generate simple order number with check digit.
-     * This allows for 999999 orders
-     * Format <Date><OrderId padded to 6 digits><Check Digit>
+     * This allows for 9999999 orders
+     * Format <Date><OrderId padded to 7 digits><Check Digit>
      *
      * @param OrderModel|int $orderModelOrId
      * @return void
@@ -149,14 +150,16 @@ class Order extends AbstractRelationalMapperService
         }
 
         $part1 = $orderModelOrId->getOrderDate()->format('Ymd');
-        $part2 = sprintf('%06d', $orderModelOrId->getOrderId());
+        $part2 = sprintf('%07d', $orderModelOrId->getOrderId());
 
         $num = join('', [
             $part1, $part2
         ]);
 
         $bigInt = BigInteger::factory('bcmath');
-        $orderModelOrId->setOrderNumber($num . $bigInt->mod($num, 11));
+        $checkSum = $bigInt->mod($num, 11);
+        $checkSum = $bigInt->mod($checkSum, 10);
+        $orderModelOrId->setOrderNumber($num . $checkSum);
 
         $this->save($orderModelOrId);
     }

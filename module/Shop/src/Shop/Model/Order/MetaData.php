@@ -19,6 +19,11 @@ class MetaData
      * @var string
      */
     protected $shippingMethod = 'Royal Mail';
+
+    /**
+     * @var float
+     */
+    protected $shippingTax = 0.00;
     
     /**
      * @var string
@@ -83,6 +88,24 @@ class MetaData
     public function setPaymentMethod($paymentMethod)
     {
         $this->paymentMethod = $paymentMethod;
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getShippingTax()
+    {
+        return $this->shippingTax;
+    }
+
+    /**
+     * @param float $shippingTax
+     * @return $this
+     */
+    public function setShippingTax($shippingTax)
+    {
+        $this->shippingTax = $shippingTax;
         return $this;
     }
     

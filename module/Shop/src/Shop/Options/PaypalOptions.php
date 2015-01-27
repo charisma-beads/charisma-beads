@@ -18,12 +18,12 @@ class PaypalOptions extends AbstractOptions
     /**
      * @var bool
      */
-    protected $logEnabled = false;
+    protected $logEnabled = true;
     
     /**
      * @var bool
      */
-    protected $log = '/data/PayPal.log';
+    protected $log = './data/PayPal.log';
     
     /**
      * Logging level can be one of FINE, INFO, WARN or ERROR

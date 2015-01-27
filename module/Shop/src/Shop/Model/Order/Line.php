@@ -111,12 +111,13 @@ class Line implements ModelInterface
 		return $this;
 	}
 
-    /**
-     * @return float
-     */
-	public function getTax()
+	/**
+	 * @param bool $formatPercent
+	 * @return float
+	 */
+	public function getTax($formatPercent=false)
 	{
-		return $this->tax;
+		return (true === $formatPercent) ? $this->tax / 100 : $this->tax;
 	}
 
     /**

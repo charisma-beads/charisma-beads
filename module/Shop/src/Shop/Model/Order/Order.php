@@ -28,7 +28,7 @@ class Order implements ModelInterface
     /**
      * @var int
      */
-    protected $orderNumber;
+    protected $orderNumber = 0;
     
     /**
      * @var float

@@ -14,19 +14,13 @@ class Checkout extends AbstractActionController
 
     /**
      *
-     * @var \Shop\Service\Order\Order
-     */
-    protected $orderService;
-
-    /**
-     *
      * @var \Shop\Service\Customer\Customer
      */
     protected $customerService;
 
     public function indexAction()
     {
-        $service = $this->getService('Shop\Service\Cart');
+        $service = $this->getService('ShopCart');
 
         if (!$service->getCart()->count()) {
             return $this->redirect()->toRoute('shop');
@@ -79,7 +73,7 @@ class Checkout extends AbstractActionController
                 $orderId = $this->getOrderService()->processOrderFromCart($customer, $formValues);
                 
                 if ($orderId) {
-                    $this->getService('Shop\Service\Cart')->clear(false);
+                    $this->getService('ShopCart')->clear(false);
                     
                     // need to email order,
                     // add params to session and redirect to payment page.
@@ -116,7 +110,7 @@ class Checkout extends AbstractActionController
             $submit = $this->params()->fromPost('submit', null);
             
             if ('cancelOrder' === $submit) {
-                $this->getService('Shop\Service\Cart')->clear();
+                $this->getService('ShopCart')->clear();
                 $this->flashmessenger()->addSuccessMessage('You have successfully canceled your order.');
                 return $this->redirect()->toRoute('shop');
             }
@@ -145,12 +139,7 @@ class Checkout extends AbstractActionController
      */
     protected function getOrderService()
     {
-        if (! $this->orderService) {
-            $sl = $this->getServiceLocator();
-            $this->orderService = $sl->get('Shop\Service\Order');
-        }
-        
-        return $this->orderService;
+        return $this->getService('ShopOrder');
     }
 
     public function getLoginForm()
