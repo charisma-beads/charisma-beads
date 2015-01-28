@@ -5,11 +5,12 @@
 		'Product'	=> 'name-shortDescription',
 		'Category'	=> 'category',
 	],
+	'params' 		=> $this->params,
 ]);?>
 
 <div id="table-product">
 	<?=$this->partial('shop/product/list', [
-	    'models' => $this->models
+	    'models' => $this->models,
 	]); ?>
 </div>
 
@@ -18,7 +19,7 @@
 
 	$('#table-product').dataGrid({
 	    url : 'product/list',
-	    query: { sort : 'name' },
+	    query: { sort : '<?=(isset($this->params['sort'])) ? $this->params['sort'] : 'name';?>' },
 	    searchForm : $('#search-product'),
 	    columnSort: true
 	});

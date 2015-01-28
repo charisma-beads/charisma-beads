@@ -124,14 +124,11 @@ class Cart extends AbstractMapperService implements InitializableInterface
         
         // check first if there is a cartId in the session data,
         // else try to retrieve the cartId from cookie verifier.
-        /** @noinspection PhpUndefinedFieldInspection */
-        if (isset($this->getContainer()->cartId)) {
-            /** @noinspection PhpUndefinedFieldInspection */
-            $cartId = $this->getContainer()->cartId;
+        if ($this->getContainer()->offsetExists('cartId')) {
+            $cartId = $this->getContainer()->offsetGet('cartId');
             /* @var $cartMapper CartMapper */
             $cartMapper = $this->getMapper();
             $cart = $cartMapper->getCartById($cartId);
-
 
         } else {
             $verifier = $this->getCartCookieService()
@@ -327,8 +324,7 @@ class Cart extends AbstractMapperService implements InitializableInterface
             $this->getCartItemService()->save($cartItem);
         }
 
-        /** @noinspection PhpUndefinedFieldInspection */
-        $this->getContainer()->cartId = $cart->getCartId();
+        $this->getContainer()->offsetSet('cartId', $cart->getCartId());
     }
 
     /**
@@ -352,8 +348,8 @@ class Cart extends AbstractMapperService implements InitializableInterface
                 ->setVerifyId($this->getCartCookieService()->setCartVerifierCookie());
             $cartId = $this->save($cart);
             $cart->setCartId($cartId);
-            /** @noinspection PhpUndefinedFieldInspection */
-            $this->getContainer()->cartId = $cartId;
+
+            $this->getContainer()->offsetSet('cartId', $cartId);
         }
         
         $this->cart = $cart;
