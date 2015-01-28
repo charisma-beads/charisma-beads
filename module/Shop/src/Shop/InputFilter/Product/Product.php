@@ -48,7 +48,7 @@ class Product extends InputFilter
     			array('name' => 'StringLength', 'options' => array(
     				'encoding' => 'UTF-8',
     				'min'      => 2,
-    				'max'      => 255,
+    				'max'      => 50,
     			)),
     		),
     	));
@@ -87,7 +87,7 @@ class Product extends InputFilter
     			array('name' => 'NotEmpty'),
     			array('name' => 'StringLength', 'options' => array(
     				'encoding'	=> 'UTF-8',
-    				'max'		=> 255
+    				'max'		=> 127
     			)),
     		),
     	));
