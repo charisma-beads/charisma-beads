@@ -71,6 +71,16 @@ class Customer extends AbstractRelationalMapperService
         /* @var $mapper \Shop\Mapper\Customer\Customer */
         $mapper = $this->getMapper();
         $customer = $mapper->getCustomerByUserId($userId);
+
+        // no customer is return create one base on the userId.
+        if(!$customer instanceof CustomerModel) {
+            /* @var \UthandoUser\Service\User $userService */
+            $userService = $this->getService('UthandoUser\Service\User');
+            $user = $userService->getById($userId);
+            $user = $userService->getMapper()->extract($user);
+            $customer = $this->getMapper()->getModel($user);
+            $this->save($customer);
+        }
         
         return $customer;
     }

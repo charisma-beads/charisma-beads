@@ -9,6 +9,9 @@ use Zend\View\Helper\Identity;
 
 class CustomerAddress extends AbstractViewHelper
 {
+    /**
+     * @var \Shop\Service\Customer\Address
+     */
     protected $customerAddressService;
     
     /**
