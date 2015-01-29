@@ -6,7 +6,7 @@ require_once ($_SERVER['DOCUMENT_ROOT'] . "/admin/includes/global_config.php");
 require_once ($_SERVER['DOCUMENT_ROOT'] . "/admin/includes/functions.php");
 require_once ($_SERVER['DOCUMENT_ROOT'] . "/../data/database.php");
 require_once ($_SERVER['DOCUMENT_ROOT'] . "/admin/includes/mysql_connect.php");
-$session = Session::getInstance(60*60*24);
+$session = new Session(86400, true);
 require_once ($_SERVER['DOCUMENT_ROOT'] . "/admin/includes/authentication.php");
 
 // Print a message based on authentication.
