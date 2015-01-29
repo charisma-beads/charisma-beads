@@ -25,7 +25,7 @@ class SiteMap
 		$tree = new NestedTree('product_category', $_GET['pcid'], 'category', $dbc);
 		
 		// Retrieve all children
-		$row = $tree->getTree();
+		$row = $tree->getTree(null, false, false);
 		
 		foreach ($row as $key => $value) {
 // 			$href = $merchant_website.'/shop/'.encodeurl($row[$key]['category']);

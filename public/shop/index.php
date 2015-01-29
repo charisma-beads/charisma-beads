@@ -116,7 +116,8 @@ if (isset($pcid))
 	
 	$content .= "<table  border=\"0\" cellpadding=\"30\" cellspacing=\"0\" style=\"margin-left:auto; margin-right:auto; text-align:center;\">"; // start table
 			
-	$row = $tree->getDecendants(TRUE);
+	$row = $tree->getDecendants(TRUE, false, false);
+
 	/*
 	if ($row) {
 		foreach ($row AS $key => $value) {
@@ -129,35 +130,35 @@ if (isset($pcid))
 	$num_rows = ceil(count($row)/$display);
 	
 	for ($n = 1; $n <= $num_rows; $n++) {
-		
+
 		$content .= "<tr>";
-		
+
 		for ($d = $start; $d < ($display + $start); $d++) {
-			
+
 			$content .= "<td valign=\"bottom\">";
-			
+
 			if (isset($row[$d])) {
-			
+
 				if ($row[$d]['image_status'] == 1) {
 					// Set picture directory.
 					$product_img_dir = "/shop/images/";
-				
+
 					$img = $product_img_dir.$row[$d]['image'];
                     $img = Utility::getShopImage($img);
-			
+
 					$content .= "<p style=\"margin-bottom:0px;\"><a href=\"/shop/{$row[$d]['ident']}\"><img src=\"$img\" style=\"border: 3px double #AFA582;\" /></a></p>";
 				}
-				
+
 				$content .= "<table align=\"center\"><tr><td class=\"button\"><a href=\"/shop/{$row[$d]['ident']}\">{$row[$d]['category']}</a></td></tr></table>";
-				
+
 			}
-				
+
 			$content .= "</td>";
 		}
-			
+
 		$content .= "</tr>";
 		$start = $start + $display;
-		
+
 	}
 		
 	$content .= "</table>"; // end table
@@ -168,11 +169,11 @@ if (isset($pcid))
 	require_once ('products.php');
 	$content .= "</div>";
 	
-} elseif ($tree->numTree() > 0) {
+} elseif ($tree->numTree(null, false, false) > 0) {
 	
 	$content .= "<table  border=\"0\" cellpadding=\"30\" cellspacing=\"0\" style=\"margin-left:auto; margin-right:auto; text-align:center;\">"; // start table
 	
-	$row = $tree->getTree();
+	$row = $tree->getTree(null, false, false);
 	foreach ($row as $key => $value) {
 		if ($value['depth'] != 0) {
 			unset ($row[$key]);
@@ -193,23 +194,23 @@ if (isset($pcid))
 		$content .= "<tr>";
 			
 		for ($d = $start; $d < ($display + $start); $d++) {
-			
+
 			$content .= "<td valign=\"bottom\">";
-			
+
 			if (isset($row[$d])) {
-				
+
 				if ($row[$d]['image_status'] == 1) {
-				
+
 					// Set picture directory.
 					$product_img_dir = "/shop/images/";
-				
+
 					$img = $product_img_dir.$row[$d]['image'];
-				
+
 					$img = Utility::getShopImage($img);
-				
+
 					$content .= "<p style=\"margin-bottom:0px;\"><img src=\"$img\" style=\"border: 3px double #AFA582;\" /></a></p>";
 				}
-				
+
 				$content .= "<table align=\"center\"><tr><td class=\"button\"><a href=\"/shop/{$row[$d]['ident']}\">{$row[$d]['category']}</a></td></tr></table>";
 			} else {
 				$content .= "&nbsp;";
