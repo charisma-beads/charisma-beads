@@ -22,20 +22,20 @@ class Menu
 		$tree = new NestedTree('product_category', 0, 'category', $this->db);
 		
 		// Retrieve all children
-		$row = $tree->getTree();
+		$row = $tree->getTree(null, false, false);
 		
 		foreach ($row as $key => $value) {
 			//$url = '/shop/'.encodeurl($row[$key]['category']);
 			$url = '/shop/'.$row[$key]['ident'];
 			$this->menu .= "<li>";
 			$this->menu .= "<a href=\"$url\">".$row[$key]['category']."</a>";
-			
+
 			$children = (($row[$key]['rgt'] - $row[$key]['lft']) - 1) / 2;
-					
+
 			if ($children > 0) $this->menu .= "<ul>";
-					
+
 			if ($row[$key]['depth'] > 0) {
-					
+
 				// find the end of the array.
 				$end = end($row);
 				// closures
@@ -47,10 +47,10 @@ class Menu
 					$this->menu .= "</li>";
 				} else {
 					if ($children == 0) $this->menu .= "</li>";
-				}	
+				}
 			} else {
 				if ($children == 0) $this->menu .= "</li>";
-			}	
+			}
 		}
 	}
 	

@@ -185,7 +185,7 @@ class NestedTree
 	}
 
 	// returns the tree and it's depth.
-	private function queryTree ($limit=NULL)
+	private function queryTree ($limit=NULL, $includeEnabled=true, $includeDiscontinued=true)
     {
 		// reset the tree array.
 		$this->full_tree = array();
@@ -198,14 +198,18 @@ class NestedTree
 		ORDER BY child.lft
 		*/
 
-		$result = mysql_query ("
+		$query = "
 			SELECT child.*, (COUNT(parent.".$this->category_field.") - 1) AS depth
 			FROM ".$this->table." AS child, ".$this->table." AS parent
-			WHERE child.lft BETWEEN parent.lft AND parent.rgt
-			GROUP BY child.category_id
+			WHERE child.lft BETWEEN parent.lft AND parent.rgt";
+		if ($includeEnabled == false) {$query .= " AND child.enabled = 1";}
+		if ($includeDiscontinued == false) {$query .= " AND child.discontinued = 0";}
+		$query .= " GROUP BY child.category_id
 			ORDER BY child.lft
 			".$limit."
-		", $this->db);
+		";
+
+		$result = mysql_query ($query, $this->db);
 
 		while ($row = mysql_fetch_assoc($result)) {
 			$this->full_tree[] = $row;
@@ -215,17 +219,17 @@ class NestedTree
 	}
 
 	// returns the tree as an array and it's depth.
-	public function getTree ($limit=NULL)
+	public function getTree ($limit=NULL, $includeEnabled=true, $includeDiscontinued=true)
     {
-		if (!$this->full_tree || $limit != NULL) $this->queryTree($limit);
+		if (!$this->full_tree || $limit != NULL) $this->queryTree($limit, $includeEnabled, $includeDiscontinued);
 
 		return $this->full_tree;
 	}
 
 	// returns number of rows returned by tree query.
-	public function numTree ($limit=NULL)
+	public function numTree ($limit=NULL, $includeEnabled=true, $includeDiscontinued=true)
     {
-		if (!$this->full_tree || $limit != NULL) $this->queryTree($limit);
+		if (!$this->full_tree || $limit != NULL) $this->queryTree($limit, $includeEnabled, $includeDiscontinued);
 
 		$c = count ($this->full_tree);
 
@@ -300,17 +304,17 @@ class NestedTree
 	}
 
 	// returns the tree as an array and it's depth.
-	public function getDecendants ($immediate_sub=FALSE)
+	public function getDecendants ($immediate_sub=FALSE, $includeEnabled=true, $includeDiscontinued=true)
     {
-		$this->queryDecendants ($immediate_sub);
+		$this->queryDecendants ($immediate_sub, $includeEnabled, $includeDiscontinued);
 
 		return $this->decendants;
 	}
 
 	// returns number of rows returned by decendant query.
-	public function numDecendants ($immediate_sub=FALSE)
+	public function numDecendants ($immediate_sub=FALSE, $includeEnabled=true, $includeDiscontinued=true)
     {
-		$this->queryDecendants ($immediate_sub);
+		$this->queryDecendants ($immediate_sub, $includeEnabled, $includeDiscontinued);
 
 		$c = count ($this->decendants);
 
@@ -318,7 +322,7 @@ class NestedTree
 	}
 
 	// returns all decendants and thier depth.
-	private function queryDecendants ($immediate_sub=FALSE)
+	private function queryDecendants ($immediate_sub=FALSE, $includeEnabled=true, $includeDiscontinued=true)
     {
 		// reset the decendants array.
 		$this->decendants = array();
@@ -329,14 +333,18 @@ class NestedTree
 				SELECT child.".$this->category_field.", (COUNT( parent.".$this->category_field.") -1) AS depth
 				FROM ".$this->table." AS child, ".$this->table." AS parent
 				WHERE child.lft BETWEEN parent.lft AND parent.rgt
-				AND child.".$this->category_field."_id = ".$this->id."
-				GROUP BY child.".$this->category_field."
+				AND child.".$this->category_field."_id = ".$this->id." ";
+				if ($includeEnabled == false) $query .= "AND child.enabled = 1 ";
+				if ($includeDiscontinued == false) $query .= "AND child.discontinued = 0 ";
+				$query .= "GROUP BY child.".$this->category_field."
 				ORDER BY child.lft
 			) AS sub_tree
 			WHERE child.lft BETWEEN parent.lft AND parent.rgt
 			AND child.lft BETWEEN sub_parent.lft AND sub_parent.rgt
-			AND sub_parent.".$this->category_field."= sub_tree.".$this->category_field."
-			GROUP BY child.category_id ";
+			AND sub_parent.".$this->category_field."= sub_tree.".$this->category_field." ";
+			if ($includeEnabled == false) $query .= "AND child.enabled = 1 ";
+			if ($includeDiscontinued == false) $query .= "AND child.discontinued = 0 ";
+			$query .= "GROUP BY child.category_id ";
 			if ($immediate_sub) $query .= "HAVING depth = 1 ";
 			$query .= "ORDER BY child.lft";
 
