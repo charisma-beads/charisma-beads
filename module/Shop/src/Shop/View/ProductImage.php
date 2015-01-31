@@ -11,9 +11,7 @@
 
 namespace Shop\View;
 
-use Shop\Model\Product\Category as CategoryModel;
 use Shop\Model\Product\Image as ImageModel;
-use Shop\Model\Product\Product as ProductModel;
 use Zend\View\Helper\AbstractHelper;
 
 /**
@@ -23,12 +21,22 @@ use Zend\View\Helper\AbstractHelper;
 class ProductImage extends AbstractHelper
 {
     /**
-     * @var Image
+     * @var ImageModel
      */
     protected $image;
+    
+    /**
+     * @var string
+     */
+    protected $imageDir = '/userfiles/shop/images/';
+    
+    /**
+     * @var string
+     */
+    protected $publicDir = './public';
 
     /**
-     * @param ProductModel|CategoryModel $model
+     * @param \Shop\Model\Product\Product|\Shop\Model\Product\Category $model
      * @return $this
      */
     public function __invoke($model)
@@ -37,14 +45,24 @@ class ProductImage extends AbstractHelper
         return $this;
     }
 
-    public function getImage()
+    public function getImage($withBasePath = true)
     {
         $basePath = $this->view->plugin('basepath');
         $defaultImage = ($this->image instanceof ImageModel) ? $this->image->getThumbnail() : 'no_image_available.jpeg';
+        $image = $this->imageDir . $defaultImage;
 
-        $image = $basePath('/userfiles/shop/images/' . $defaultImage);
+        if ($withBasePath) {
+            $image = $basePath($image);
+        }
 
         return $image;
+    }
+    
+    public function isUploaded()
+    {
+        $image = $this->getImage(false);
+        $fileExists = file_exists($this->publicDir.$image);
+        return $fileExists;
     }
 
     public function __toString()

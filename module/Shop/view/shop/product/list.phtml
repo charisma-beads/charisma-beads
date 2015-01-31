@@ -13,6 +13,7 @@
                 <th data-field="group">Group</th>
                 <th data-field="quantity">Stock</th>
                 <th data-field="category">Category</th>
+                <th>Image</th>
                 <th style="width:190px;">Actions</th>
             </tr>
         </thead>
@@ -32,6 +33,18 @@
                 <td><?=$this->escapeHtml($row->getProductGroup()->getGroup()); ?>
                 <td><?=$this->escapeHtml($row->getQuantity());?></td>
                 <td><?=$this->escapeHtml($row->getProductCategory()->getCategory()); ?></td>
+                <td>
+                    <?php if($this->productImage($row)->isUploaded()):?>
+                        <i class="fa fa-check"></i>
+                        <a tabindex="0" style="cursor: pointer;" role="button" data-toggle="popover" 
+                            data-trigger="focus" title="<?=$this->escapehtml($row->getDefaultImage()->getThumbnail())?>" 
+                            data-content="<img src='<?=$this->productImage($row);?>' width='150'>">
+                            <i class="fa fa-eye fa-lg"></i>
+                        </a>
+                    <?php else: ?>
+                        <i class="fa fa-times"></i>
+                    <?php endif; ?>
+                </td>
                 <td width="140">
                     <a href="<?=$this->url('admin/shop/product/edit', [
                         'action' => 'duplicate',
@@ -60,4 +73,12 @@
 <?php else: ?>
 <h4>No Products where returned by search.</h4>
 <?php endif; ?>
+
+<script>
+$(function () {
+	  $('[data-toggle="popover"]').popover({
+		  html: true
+	  })
+	})
+</script>
 

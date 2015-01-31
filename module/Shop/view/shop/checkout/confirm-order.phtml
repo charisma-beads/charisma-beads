@@ -16,12 +16,12 @@
         
         <div class="col-md-6">
         <?php $this->formRadio()->setSeparator('</div><div class="radio">');?>
-            <div class="form-group<?php if ($form->get('payment_option')->getMessages()) echo ' has-error'; ?>">
+            <div class="form-group<?php if ($this->form->get('payment_option')->getMessages()) echo ' has-error'; ?>">
                 <div class="radio">
 				    <?=$this->formRadio($this->form->get('payment_option'));?>
                 </div>
                 <span class="help-block">
-                    <?=$this->formElementErrors($form->get('payment_option'), [
+                    <?=$this->formElementErrors($this->form->get('payment_option'), [
                         'class' => 'list-unstyled'
                     ]); ?>
                 </span>
@@ -30,8 +30,8 @@
             <div class="form-group">
                 <div class="checkbox">
                     <label>
-    				    <?=$this->formElement($form->get('collect_instore'));?>
-    				    <?=$form->get('collect_instore')->getLabel();?>
+    				    <?=$this->formElement($this->form->get('collect_instore'));?>
+    				    <?=$this->form->get('collect_instore')->getLabel();?>
 				    </label>
 				    <span class="help-block">
 				        <span class="text-info">When collecting, postage will be removed from total.</span>
@@ -42,15 +42,15 @@
         </div>
         
         <div class="col-md-6">
-            <div class="form-group<?php if ($form->get('requirements')->getMessages()) echo ' has-error'; ?>">
-                <label class="control-label" for="requirements"><?=$form->get('requirements')->getLabel();?></label>
+            <div class="form-group<?php if ($this->form->get('requirements')->getMessages()) echo ' has-error'; ?>">
+                <label class="control-label" for="requirements"><?=$this->form->get('requirements')->getLabel();?></label>
                 <?=$this->formElement($this->form->get('requirements')->setAttribute('class', 'form-control'));?>
             </div>
-            <div class="form-group<?php if ($form->get('terms')->getMessages()) echo ' has-error'; ?>">
-                <label class="control-label" for="terms"><?=$form->get('terms')->getLabel();?></label>
+            <div class="form-group<?php if ($this->form->get('terms')->getMessages()) echo ' has-error'; ?>">
+                <label class="control-label" for="terms"><?=$this->form->get('terms')->getLabel();?></label>
                 <?=$this->formElement($this->form->get('terms')->setAttribute('class', 'form-control'));?>
                 <span class="help-block">
-                    <?=$this->formElementErrors($form->get('terms'), [
+                    <?=$this->formElementErrors($this->form->get('terms'), [
                         'class' => 'list-unstyled'
                     ]); ?>
                 </span>

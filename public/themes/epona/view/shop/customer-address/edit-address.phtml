@@ -1,0 +1,49 @@
+
+<?php $this->placeholder('page-top')->captureStart();?>
+
+<?=$this->partial('layout/page-title', [
+    'pageTitle' => 'Edit Address'
+]);?>
+
+<?php $this->placeholder('page-top')->captureEnd();?>
+
+<div class="row">
+
+    <div class="col-md-4">
+        <?=$this->uthandoNavigation()
+            ->uthandoTbDbMenu('user-menu')
+            ->setUlClass('side-nav list-group')
+            ->setAddClassToListItem();?>
+    </div>
+
+    <div class="col-md-8">
+        <?=$this->partial('partial/sky-form', [
+            'form'         => $this->form,
+            'formName'     => 'Edit Address',
+            'postUrl'      => $this->url('shop/customer/address', [
+                'action'   => 'edit-address',
+                'id'       => $this->model->getCustomerAddressId(),
+            ]),
+            'cancelUrl'    => $this->url('shop/customer/address'),
+            'formElements' => [
+                ['customerAddressId', 'address1', 'address2', 'address3',
+                'city', 'provinceId', 'postcode', 'countryId',
+                'phone', 'returnTo']
+            ],
+        ]); ?>
+    </div>
+</div>
+
+<?php $this->inlineScript()->captureStart(); ?>
+    $(document).ready(function(){
+        $('#countryId').change(function() {
+            $.ajax({
+                url : '/shop/country/province',
+                data : {countryId : this.value},
+                type : 'POST'
+            }).done(function(data){
+                $('#provinceId').html( data );
+            });
+        });
+    });
+<?php $this->inlineScript()->captureEnd(); ?>

@@ -1,11 +1,11 @@
 <?php
 namespace Shop\Controller;
 
-use PayPal\Exception\PPConnectionException;
 use Shop\Service\Paypal as PaypalService;
-use Shop\Service\Order as OrderService;
+use Shop\Service\Order\Order as OrderService;
 use UthandoCommon\Controller\SetExceptionMessages;
 use Zend\Mvc\Controller\AbstractActionController;
+use PayPal\Exception\PayPalConnectionException;
 
 class Paypal extends AbstractActionController
 {
@@ -34,7 +34,7 @@ class Paypal extends AbstractActionController
             
             $update = $this->getOrderService()->save($result['order']);
         }
-        catch (PPConnectionException $e) {
+        catch (PayPalConnectionException $e) {
         	$this->setExceptionMessages($e);
         	return ['order' => $order];
         }
@@ -64,7 +64,7 @@ class Paypal extends AbstractActionController
                 'payment' => $result['payment'],
             ];
         }
-        catch (PPConnectionException $e) {
+        catch (PayPalConnectionException $e) {
             $this->setExceptionMessages($e);
             return ['order' => $order];
         }
@@ -78,7 +78,7 @@ class Paypal extends AbstractActionController
         $result = $this->getOrderService()
             ->cancelOrder($orderId, $userId);
 
-        $order = (!$result) ?: $this->getOrderService()
+        $order = $this->getOrderService()
             ->getCustomerOrderByUserId($orderId, $userId);
         
         return [

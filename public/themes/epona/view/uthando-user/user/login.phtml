@@ -60,7 +60,7 @@ $registerForm = (null == $this->registerForm) ? $this->formManager('UthandoUserR
                 </section>
 
                 <section>
-                    <label class="checkbox"><input type="checkbox" name="checkbox-inline"><i></i>Keep me logged in</label>
+                    <label class="checkbox"><?=$this->formCheckbox($loginForm->get('rememberme'));?><i></i>Keep me logged in</label>
                 </section>
 
             </fieldset>

@@ -19,7 +19,7 @@
     <div class="col-md-8">
 
         <!-- personal settings -->
-        <form action="#" method="post" class="sky-form boxed">
+        <form action="<?=$this->url('shop/customer');?>" method="post" class="sky-form boxed">
             <header>Personal Settings <span class="pull-right">
                     Cus No: <?=$this->escapeHtml($model->getNumber());?>
                 </span>
@@ -27,67 +27,59 @@
 
             <fieldset>
                 <div class="row">
-                    <section class="col col-md-6">
-                        <label class="label">First Name</label>
+                    <section class="col col-md-2<?php if ($this->form->get('prefixId')->getMessages()) echo ' state-error'; ?>">
+                        <label class="label"><?=$this->form->get('prefixId')->getLabel();?></label>
+                        <label class="select">
+                            <?=$this->formSelect($this->form->get('prefixId'));?>
+                            <i></i>
+                        </label>
+                    </section>
+                    <section class="col col-md-5<?php if ($this->form->get('firstname')->getMessages()) echo ' state-error'; ?>">
+                        <label class="label"><?=$this->form->get('firstname')->getLabel();?></label>
                         <label class="input">
                             <i class="icon-append fa fa-user"></i>
-                            <input required type="text">
+                            <?=$this->formText($this->form->get('firstname'));?>
                             <b class="tooltip tooltip-bottom-right">Only latin characters and numbers</b>
                         </label>
                     </section>
-                    <section class="col col-md-6">
-                        <label class="label">Last Name</label>
+                    <section class="col col-md-5<?php if ($this->form->get('lastname')->getMessages()) echo ' state-error'; ?>">
+                        <label class="label"><?=$this->form->get('lastname')->getLabel();?></label>
                         <label class="input">
                             <i class="icon-append fa fa-user"></i>
-                            <input required type="text">
+                            <?=$this->formText($this->form->get('lastname'));?>
                             <b class="tooltip tooltip-bottom-right">Only latin characters and numbers</b>
                         </label>
                     </section>
                 </div>
 
                 <div class="row">
-                    <section class="col col-md-6">
-                        <label class="label">Email</label>
+                    <section class="col col-md-12<?php if ($this->form->get('email')->getMessages()) echo ' state-error'; ?>">
+                        <label class="label"><?=$this->form->get('email')->getLabel();?></label>
                         <label class="input">
                             <i class="icon-append fa fa-envelope"></i>
-                            <input required type="text">
+                            <?=$this->formEmail($this->form->get('email'));?>
                             <b class="tooltip tooltip-bottom-right">Valid email address</b>
                         </label>
                     </section>
-                    <section class="col col-md-6">
-                        <label class="label">Phone</label>
-                        <label class="input">
-                            <i class="icon-append fa fa-phone"></i>
-                            <input type="text">
-                            <b class="tooltip tooltip-bottom-right">Valid phone number</b>
+                </div>
+
+                <div class="row">
+                    <section class="col col-md-6<?php if ($this->form->get('billingAddressId')->getMessages()) echo ' state-error'; ?>">
+                        <label class="label"><?=$this->form->get('billingAddressId')->getLabel();?></label>
+                        <label class="select">
+                            <?=$this->formSelect($this->form->get('billingAddressId'));?>
+                            <i></i>
+                        </label>
+                    </section>
+
+                    <section class="col col-md-6<?php if ($this->form->get('deliveryAddressId')->getMessages()) echo ' state-error'; ?>">
+                        <label class="label"><?=$this->form->get('deliveryAddressId')->getLabel();?></label>
+                        <label class="select">
+                            <?=$this->formSelect($this->form->get('deliveryAddressId'));?>
+                            <i></i>
                         </label>
                     </section>
                 </div>
-
-                <label class="label">Address</label>
-                <label class="textarea">
-                    <i class="icon-append fa fa-pencil-square-o"></i>
-                    <textarea rows="3"></textarea>
-                    <b class="tooltip tooltip-bottom-right">Only latin characters and numbers</b>
-                </label>
-
-                <div class="form-group">
-                    <div class="col-md-6 nopadding">
-                        <label class="checkbox"><input type="checkbox" name="checkbox" checked><i></i>Monthly Newsletter</label>
-                    </div>
-
-                    <div class="col-md-6 nopadding">
-                        <div class="row">
-                            <div class="col-md-4 col-sm-4 col-xs-4">
-                                <label class="radio"><input type="radio" name="radio-inline" checked><i></i>Male</label>
-                            </div>
-                            <div class="col-md-8 col-sm-8 col-xs-8">
-                                <label class="radio"><input type="radio" name="radio-inline"><i></i>Female</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
 
             </fieldset>
 

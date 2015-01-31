@@ -2,7 +2,6 @@
 namespace Shop\Controller;
 
 use UthandoCommon\Controller\ServiceTrait;
-use UthandoUser\Form\User as LoginForm;
 use Zend\Filter\Word\UnderscoreToDash;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
