@@ -60,8 +60,8 @@ class ProductImage extends AbstractHelper
     
     public function isUploaded()
     {
-        $image = $this->getImage(false);
-        $fileExists = file_exists($this->publicDir.$image);
+        $image = ($this->image instanceof ImageModel) ? $this->getImage(false) : null;
+        $fileExists = is_file($this->publicDir.$image);
         return $fileExists;
     }
 
