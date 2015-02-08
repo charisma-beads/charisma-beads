@@ -3,6 +3,7 @@ namespace Shop\Controller\Product;
 
 use UthandoCommon\Controller\AbstractCrudController;
 use Zend\View\Model\ViewModel;
+use Shop\ShopException;
 
 class ProductImage extends AbstractCrudController
 {

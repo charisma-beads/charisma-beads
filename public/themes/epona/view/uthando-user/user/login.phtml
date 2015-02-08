@@ -56,7 +56,9 @@ $registerForm = (null == $this->registerForm) ? $this->formManager('UthandoUserR
                             ]); ?>
                         </span>
                     </label>
-                    <div class="note"><a href="#">Forgot Password?</a></div>
+                    <div class="note"><a href="<?=$this->url('user', [
+                        'action'    => 'forgot-password',
+                    ]);?>">Forgot Password?</a></div>
                 </section>
 
                 <section>

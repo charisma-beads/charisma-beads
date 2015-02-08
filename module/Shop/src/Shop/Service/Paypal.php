@@ -65,7 +65,7 @@ class Paypal implements ServiceLocatorAwareInterface
                                 'price' => '10.00',
                                 'quantity' => '1',
                                 'currency' => 'GBP',
-                            ],
+                                'description' => 'some description'                            ],
                         ],
                         'shippingAddress' => [
                             'line1' => '20 Bogus Lane',
