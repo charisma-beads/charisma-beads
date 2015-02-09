@@ -49,6 +49,11 @@ class Product implements ModelInterface
 	/**
 	 * @var string
 	 */
+	protected $sku;
+	
+	/**
+	 * @var string
+	 */
 	protected $ident;
 	
 	/**
@@ -245,6 +250,24 @@ class Product implements ModelInterface
 	}
 
 	/**
+     * @return string $sku
+     */
+    public function getSku()
+    {
+        return $this->sku;
+    }
+
+    /**
+     * @param string $sku
+     * @return $this
+     */
+    public function setSku($sku)
+    {
+        $this->sku = $sku;
+        return $this;
+    }
+
+    /**
 	 * @return string $ident
 	 */
 	public function getIdent()

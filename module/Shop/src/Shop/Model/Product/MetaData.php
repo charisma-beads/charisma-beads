@@ -12,6 +12,11 @@ class MetaData
     /**
      * @var string
      */
+    protected $sku;
+    
+    /**
+     * @var string
+     */
     protected $name;
     
     /**
@@ -69,6 +74,24 @@ class MetaData
     public function setProductId($productId)
     {
         $this->productId = $productId;
+        return $this;
+    }
+
+    /**
+     * @return string $sku
+     */
+    public function getSku()
+    {
+        return $this->sku;
+    }
+
+    /**
+     * @param string $sku
+     * @return $this
+     */
+    public function setSku($sku)
+    {
+        $this->sku = $sku;
         return $this;
     }
 

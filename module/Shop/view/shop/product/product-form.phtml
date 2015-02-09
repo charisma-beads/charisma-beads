@@ -26,6 +26,18 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
                     </div>
 
                     <div class="clearfix">&nbsp;</div>
+                    
+                    <div class="form-group<?php if ($form->get('sku')->getMessages()) echo ' has-error'; ?>">
+                        <label class="col-sm-4 control-label" for="sku"><?=$form->get('sku')->getLabel();?></label>
+                        <div class="col-sm-8">
+                            <?=$this->formText($form->get('sku')->setAttribute('class', 'form-control')); ?>
+                            <span class="help-block">
+                                <?=$this->formElementErrors($form->get('sku'), [
+                                    'class' => 'list-unstyled'
+                                ]); ?>
+                            </span>
+                        </div>
+                    </div>
 
                     <div class="form-group<?php if ($form->get('name')->getMessages()) echo ' has-error'; ?>">
                         <label class="col-sm-4 control-label" for="name"><?=$form->get('name')->getLabel();?></label>

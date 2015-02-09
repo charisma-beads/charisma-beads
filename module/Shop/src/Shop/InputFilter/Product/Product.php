@@ -37,18 +37,35 @@ class Product extends InputFilter
     	));
     	
     	$this->add(array(
+    	    'name'         => 'sku',
+    	    'required'     => false,
+    	    'filters'      => array(
+    	        array('name' => 'StripTags'),
+    	        array('name' => 'StringTrim'),
+    	        array('name' => 'StringToUpper'),
+    	    ),
+    	    'validators' => array(
+    			array('name' => 'StringLength', 'options' => array(
+    				'encoding' => 'UTF-8',
+    				'min'      => 2,
+    				'max'      => 50,
+    			)),
+    		),
+    	));
+    	
+    	$this->add(array(
     		'name'       => 'name',
     		'required'   => true,
     		'filters'    => array(
     			array('name' => 'StripTags'),
     			array('name' => 'StringTrim'),
-    			array('name' => 'StringToUpper'),
+    			array('name' => 'UthandoUcwords'),
     		),
     		'validators' => array(
     			array('name' => 'StringLength', 'options' => array(
     				'encoding' => 'UTF-8',
     				'min'      => 2,
-    				'max'      => 50,
+    				'max'      => 127,
     			)),
     		),
     	));
@@ -82,6 +99,7 @@ class Product extends InputFilter
     		'filters'		=> array(
     			array('name'	=> 'StripTags'),
     			array('name'	=> 'StringTrim'),
+    		    array('name'    => 'UthandoUcFirst'),
     		),
     		'validators'	=> array(
     			array('name' => 'NotEmpty'),

@@ -6,5 +6,10 @@
 /public/userfiles/*
 .DS_Store
 .idea
+.settings
+.buildpath
+.project
+deployment.properties
+deployment.xml
 *.local.php
 !do_not_remove

@@ -40,6 +40,7 @@ class Product extends AbstractHydrator
 			'taxCodeId'				=> $object->getTaxCodeId(),
 			'postUnitId'			=> $object->getPostUnitId(),
 			'productGroupId'		=> $this->extractValue('productGroupId', $object->getProductGroupId()),
+		    'sku'                   => $object->getSku(),
 			'ident'					=> $object->getIdent(),
 			'name'					=> $object->getName(),
 			'price'					=> $object->getPrice(false),

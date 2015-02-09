@@ -238,6 +238,7 @@ class Cart extends AbstractMapperService implements InitializableInterface
         $metadata = new ProductMetaData();
         
         $metadata->setProductId($product->getProductId())
+            ->setSku($product->getSku())
             ->setName($product->getName())
             ->setCategory($product->getProductCategory()->getCategory())
             ->setDescription($product->getShortDescription())

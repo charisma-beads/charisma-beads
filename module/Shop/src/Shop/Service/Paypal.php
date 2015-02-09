@@ -163,8 +163,9 @@ class Paypal implements ServiceLocatorAwareInterface
                 $tax = number_format(0, 2);
             }
             
-            $item->setName($orderItem->getMetadata()->getDescription());
-            $item->setSku($orderItem->getMetadata()->getName());
+            $item->setName($orderItem->getMetadata()->getName());
+            $item->setSku($orderItem->getMetadata()->getSku());
+            $item->setDescription($orderItem->getMetadata()->getDescription());
             $item->setPrice($price);
             $item->setTax($tax);
             $item->setQuantity($orderItem->getQty());

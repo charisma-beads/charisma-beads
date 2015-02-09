@@ -34,14 +34,27 @@ class Product extends Form
         ]);
         
         $this->add([
+            'name'			=> 'sku',
+            'type'			=> 'text',
+            'attributes'	=> [
+                'placeholder'	=> 'Product Code/SKU:',
+                'autofocus'		=> true,
+            ],
+            'options'		=> [
+                'label'		=> 'Product Code/SKU:',
+                'required'	=> false,
+            ],
+        ]);
+        
+        $this->add([
         	'name'			=> 'name',
         	'type'			=> 'text',
         	'attributes'	=> [
-        		'placeholder'	=> 'Product Code:',
+        		'placeholder'	=> 'Product Name/Title:',
         		'autofocus'		=> true,
         	],
         	'options'		=> [
-        		'label'		=> 'Product Code/Number:',
+        		'label'		=> 'Product Name/Title:',
         		'required'	=> true,
         	],
         ]);
@@ -79,11 +92,11 @@ class Product extends Form
         	'name'			=> 'shortDescription',
         	'type'			=> 'text',
         	'attributes'	=> [
-        		'placeholder'	=> 'Product Title:',
+        		'placeholder'	=> 'Short Description:',
         		'autofocus'		=> true,
         	],
         	'options'		=> [
-        		'label'		=> 'Product Title:',
+        		'label'		=> 'Short Description:',
         		'required'	=> true,
         	],
         ]);
