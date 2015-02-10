@@ -128,7 +128,7 @@ class CustomerRegisterInputFilter extends InputFilter
 				array('name' => 'Digits'),
 			),
 			'validators' => array(
-				array('name' => 'PhoneNumber', 'options' => array(
+				new PhoneNumber(array(
 					'country' => $country['code'],
 				)),
 			),
