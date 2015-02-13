@@ -2,7 +2,7 @@
 namespace Shop\View;
 
 use Shop\Model\Customer\Address;
-use Shop\Model\Order;
+use Shop\Model\Order\Order;
 use UthandoCommon\View\AbstractViewHelper;
 use Zend\Stdlib\Exception\InvalidArgumentException;
 use Zend\View\Helper\Identity;

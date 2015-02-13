@@ -7,6 +7,10 @@ use UthandoCommon\Service\AbstractRelationalMapperService;
 class Product extends AbstractRelationalMapperService
 {
     protected $serviceAlias = 'ShopProduct';
+    
+    protected $tags = [
+        'image',
+    ];
 
     protected $referenceMap = [
         'productCategory'   => [

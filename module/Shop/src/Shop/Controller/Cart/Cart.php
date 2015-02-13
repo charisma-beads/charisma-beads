@@ -8,14 +8,13 @@ use Shop\Service\Customer\Address;
 use Shop\Service\Product\Product;
 use Shop\ShopException;
 use UthandoCommon\Controller\ServiceTrait;
-use Zend\Http\Request;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
 /**
  * Class Cart
  * @package Shop\Controller\Cart
- * @method Request getRequest()
+ * @method \Zend\Http\Request getRequest()
  */
 class Cart extends AbstractActionController
 {

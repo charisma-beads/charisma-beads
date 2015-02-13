@@ -6,6 +6,8 @@ use Zend\Form\Form;
 
 class Customer extends Form
 {	
+    use CustomerTrait;
+    
 	public function init()
 	{
 	    $this->add([
@@ -27,34 +29,6 @@ class Customer extends Form
         ]);
 	    
 	    $this->add([
-            'name' => 'prefixId',
-	        'type' => 'CustomerPrefixList',
-	        'attributes'	=> [
-	           'autofocus'		=> true,
-	        ],
-	        'options'		=> [
-	           'label'		=> 'Prefix:',
-	           'required'	=> true,
-	        ],
-	    ]);
-	    
-	    $this->add([
-            'name' => 'firstname',
-	        'type' => 'text',
-	        'options'		=> [
-	           'label' => 'Firstname:'
-	        ],
-	    ]);
-	    
-	    $this->add([
-            'name' => 'lastname',
-            'type' => 'text',
-            'options'		=> [
-                'label' => 'Lastname:'
-            ],
-        ]);
-	    
-	    $this->add([
 	        'name' => 'billingAddressId',
 	        'type' => 'CustomerAddressList',
 	        'options' => [
@@ -70,12 +44,6 @@ class Customer extends Form
             ],
         ]);
 	    
-	    $this->add([
-            'name' => 'email',
-            'type' => 'email',
-            'options' => [
-                'label' => 'Email:',
-            ],
-        ]);
+	    $this->addElements();
 	}
 }

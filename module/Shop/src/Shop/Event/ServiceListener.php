@@ -166,11 +166,10 @@ class ServiceListener implements ListenerAggregateInterface
         
         $validator = $form->getInputFilter();
         
-        $phone = $validator->get('phone')->getValidatorChain()->getValidators()[0]['instance'];
-        $postcode = $validator->get('postcode')->getValidatorChain()->getValidators()[0]['instance'];
-        
-        $phone->setCountry($country->getCode());
-        $postcode->setCountry($country->getCode());
+        $validator->setCountryCode($country->getCode());
+        $validator->remove('phone');
+        $validator->remove('postcode');
+        $validator->init();
     }
 
     public function preForm(Event $e)

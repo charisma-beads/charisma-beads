@@ -2,6 +2,7 @@
 namespace Shop\Controller\Customer;
 
 use Exception;
+use Shop\ShopException;
 use UthandoCommon\Controller\AbstractCrudController;
 use Zend\Form\Form;
 use Zend\View\Model\ViewModel;

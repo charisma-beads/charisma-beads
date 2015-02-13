@@ -1,6 +1,7 @@
 <?php
 namespace Shop\Service\Customer;
 
+use Shop\ShopException;
 use UthandoCommon\Service\AbstractRelationalMapperService;
 
 class Address extends AbstractRelationalMapperService

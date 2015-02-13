@@ -2,9 +2,13 @@
 namespace Shop\InputFilter\Customer;
 
 use Zend\InputFilter\InputFilter;
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorAwareTrait;
 
-class Customer extends InputFilter
+class Customer extends InputFilter implements ServiceLocatorAwareInterface
 {
+    use ServiceLocatorAwareTrait;
+    
     public function init()
     {
         $this->add([
@@ -47,6 +51,40 @@ class Customer extends InputFilter
 		]);
         
         $this->add([
+            'name'       => 'firstname',
+            'required'   => true,
+            'filters'    => [
+                ['name'    => 'StripTags'],
+                ['name'    => 'StringTrim'],
+                ['name' => 'UthandoUcwords'],
+            ],
+            'validators' => [
+                ['name'    => 'StringLength', 'options' => [
+                    'encoding' => 'UTF-8',
+                    'min'      => 2,
+                    'max'      => 255,
+                ]],
+            ],
+        ]);
+        
+        $this->add([
+            'name'       => 'lastname',
+            'required'   => true,
+            'filters'    => [
+                ['name'    => 'StripTags'],
+                ['name'    => 'StringTrim'],
+                ['name' => 'UthandoUcwords'],
+            ],
+            'validators' => [
+                ['name'    => 'StringLength', 'options' => [
+                    'encoding' => 'UTF-8',
+                    'min'      => 2,
+                    'max'      => 255,
+                ]],
+            ],
+        ]);
+        
+        $this->add([
     		'name' => 'billingAddressId',
     		'required' => true,
     		'filters' => [
@@ -84,7 +122,7 @@ class Customer extends InputFilter
                 ['name' => 'StringTrim'],
             ],
             'validators' => [
-
+                
             ],
         ]);
     }

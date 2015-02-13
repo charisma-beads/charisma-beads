@@ -106,10 +106,7 @@ class Customer extends AbstractRelationalMapperService
     {
         $userId = ($userId) ? $userId : $this->getUser()->getUserId();
 
-        /* @var $mapper \Shop\Mapper\Customer\Customer */
-        $mapper = $this->getMapper();
-
-        $customer = $mapper->getCustomerByUserId($userId);
+        $customer = $this->getCustomerByUserId($userId);
         
         $this->populate($customer, true);
         

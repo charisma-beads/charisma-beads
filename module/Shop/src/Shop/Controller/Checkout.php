@@ -39,7 +39,38 @@ class Checkout extends AbstractActionController
 
     public function confirmAddressAction()
     {
-        return new ViewModel();
+        $userId = $this->identity()->getUserId();
+        $customer = $this->getCustomerService()->getCustomerByUserId($userId);
+        
+        if ($customer->getBillingAddressId() && $customer->getDeliveryAddressId()) {
+            return [];
+        }
+        
+        return $this->redirect()->toRoute('shop/checkout', [
+            'action' => 'customer-details',
+        ]);
+    }
+    
+    public function customerDetailsAction()
+    {
+        $userId = $this->identity()->getUserId();
+        $customer = $this->getCustomerService()
+            ->getCustomerDetailsFromUserId($userId);
+        
+        $form = $this->getService('FormElementManager')
+            ->get('ShopCustomerDetails');
+        
+        $inputFilter = $this->getService('InputFilterManager')
+            ->get('InputFilter');
+        
+        $form->setInputFilter($inputFilter);
+        
+        $form->bind($customer);
+        
+        return [
+            'countryId' => $customer->getDeliveryAddress()->getCountryId(),
+            'form' => $form,
+        ];
     }
 
     public function confirmOrderAction()

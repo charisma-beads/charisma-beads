@@ -19,15 +19,6 @@
                         ->render();?>
                 </address>
             </div>
-            <div class="panel-footer">
-                <a href="<?=$this->url('shop/customer/address', [
-                    'action'    => 'edit-address',
-                    'id' => $this->customerAddress()->getAddress()->getCustomerAddressId(),
-                    'return' => $this->url('shop/checkout', [
-                        'action' => 'confirm-address',
-                    ]),
-                ]) ?>" data-target="#addressModel" class="btn btn-primary">Edit Address</a>
-            </div>
         </div>
     </div>
     
@@ -47,23 +38,17 @@
                     <br>
                 </address>
             </div>
-            <div class="panel-footer">
-                <a href="<?=$this->url('shop/customer/address', [
-                    'action'    => 'edit-address',
-                    'id' => $this->customerAddress()->getAddress()->getCustomerAddressId(),
-                    'return' => $this->url('shop/checkout', [
-                         'action' => 'confirm-address',
-                    ]),
-                ]); ?>" data-target="#addressModel" class="btn btn-primary">Edit Address</a>
-            </div>
         </div>
     </div>
     
     <form class="col-md-12" method="post" action="<?=$this->url('shop/checkout', [
         'action' => 'confirm-order',
     ]) ?>">
+        <a href="<?=$this->url('shop/checkout', [
+            'action' => 'customer-details',
+        ]);?>" class="btn btn-info">Change Details</a>
         <button type="submit" name="submit" class="btn btn-primary" value="confirmAddress">
-            Check &amp; Confirm Order
+            <i class="fa fa-check"></i>Check &amp; Confirm Order
         </button>
     </form>
 </div>

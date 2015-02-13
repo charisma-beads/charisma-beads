@@ -33,8 +33,7 @@ class Paypal extends AbstractActionController
             $result = $this->getPaypalService()->createPayment($order);
             
             $update = $this->getOrderService()->save($result['order']);
-        }
-        catch (PayPalConnectionException $e) {
+        } catch (PayPalConnectionException $e) {
         	$this->setExceptionMessages($e);
         	return ['order' => $order];
         }

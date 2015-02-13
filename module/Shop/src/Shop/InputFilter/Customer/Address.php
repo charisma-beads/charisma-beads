@@ -5,6 +5,11 @@ use Zend\InputFilter\InputFilter;
 
 class Address extends InputFilter
 {
+    /**
+     * @var string
+     */
+    protected $countryCode;
+    
     public function init()
     {
         $this->add([
@@ -83,7 +88,7 @@ class Address extends InputFilter
     		],
     		'validators' => [
         		['name' => 'Shop\I18n\Validator\PostCode', 'options' => [
-                    'country' => 'GB',
+                    'country' => $this->getCountryCode(),
                 ]],
     		],
 		]);
@@ -110,12 +115,34 @@ class Address extends InputFilter
         		['name' => 'StripTags'],
         		['name' => 'StringTrim'],
                 ['name' => 'Digits'],
+    		    ['name' => 'UthandoPhoneNumber', 'options' => [
+    		        'country' => $this->getCountryCode(),
+    		    ]]
     		],
     		'validators' => [
         		['name' => 'PhoneNumber', 'options' => [
-                    'country' => 'GB',
+                    'country' => $this->getCountryCode(),
         		]],
     		],
 		]);
     }
+    
+    /**
+     * @return string $countryCode
+     */
+    public function getCountryCode()
+    {
+        return $this->countryCode;
+    }
+
+    /**
+     * @param string $countryCode
+     * @return $this
+     */
+    public function setCountryCode($countryCode)
+    {
+        $this->countryCode = $countryCode;
+        return $this;
+    }
+
 }
