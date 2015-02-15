@@ -4,7 +4,7 @@
 <?=$this->partial('layout/page-title', [
     'pageTitle' => 'Edit Address'
 ]);?>
-
+<?php \FB::info($this->form->getMessages());?>
 <?php $this->placeholder('page-top')->captureEnd();?>
 
 <div class="row">
@@ -38,7 +38,7 @@
     $(document).ready(function(){
         $('#countryId').change(function() {
             $.ajax({
-                url : '/shop/country/province',
+                url : '<?=$this->url('shop/country');?>',
                 data : {countryId : this.value},
                 type : 'POST'
             }).done(function(data){

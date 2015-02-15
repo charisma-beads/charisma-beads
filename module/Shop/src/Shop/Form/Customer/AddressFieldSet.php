@@ -2,9 +2,9 @@
 namespace Shop\Form\Customer;
 
 use Shop\Model\Customer\Address as AddressModel;
-use Shop\Hydrator\Customer\Address as AddressHydrator;
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
+use Zend\Stdlib\Hydrator\ClassMethods;
 
 class AddressFieldSet extends Fieldset implements InputFilterProviderInterface
 {
@@ -14,7 +14,7 @@ class AddressFieldSet extends Fieldset implements InputFilterProviderInterface
     {
         parent::__construct($name, $options);
     
-        $this->setHydrator(new AddressHydrator())
+        $this->setHydrator(new ClassMethods(false))
             ->setObject(new AddressModel());
     }
     

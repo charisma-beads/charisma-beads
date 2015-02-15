@@ -1,0 +1,285 @@
+
+<?php $this->placeholder('page-top')->captureStart();?>
+
+<?=$this->partial('shop/parallax');?>
+
+<?php $this->placeholder('page-top')->captureEnd();?>
+
+<?php
+
+$form->prepare();
+$customer = $this->form->get('customer');
+$billingAddress = $customer->get('billingAddress');
+$deliveryAddress = $customer->get('deliveryAddress');
+
+?>
+
+<form action="#" method="post" class="row sky-form cartContent">
+
+    <div class="col-md-9 checkout">
+
+        <!-- ACCORDION -->
+        <div class="accordion panel-group transparent" id="accordion2">
+
+            <!-- BILLING ADDRESS -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion2" href="#acordion_1">
+                            Billing Address
+                        </a>
+                    </h4>
+                </div>
+                <div id="acordion_1" class="collapse in">
+                    <div id="billingAddress" class="panel-body">
+                        
+                        <fieldset>					
+							<div class="row">
+							     <div class="col-md-2">
+									<label class="select">
+										<?=$this->formSelect($customer->get('prefixId')->setAttribute('class', 'pointer'));?>
+										<i></i>
+									</label>
+								</div>
+								<div class="col-md-5">
+									<label class="input">
+										<i class="icon-prepend fa fa-user"></i>
+										<?=$this->formText($customer->get('firstname'));?>
+									</label>
+								</div>
+								<div class="col-md-5">
+									<label class="input">
+										<i class="icon-prepend fa fa-user"></i>
+										<?=$this->formText($customer->get('lastname'));?>
+									</label>
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="col-md-12">
+									<label class="input">
+										<i class="icon-prepend fa fa-envelope"></i>
+										<?=$this->formEmail($customer->get('email'));?>
+									</label>
+								</div>
+							</div>
+						</fieldset>
+						
+						<fieldset>
+						  <div class="row">
+								<div class="col-md-4">
+									<label class="input">
+										<?=$this->formText($billingAddress->get('address1'));?>
+									</label>
+								</div>
+								<div class="col-md-4">
+									<label class="input">
+										<?=$this->formText($billingAddress->get('address2'));?>
+									</label>
+								</div>
+								<div class="col-md-4">
+									<label class="input">
+										<?=$this->formText($billingAddress->get('address3'));?>
+									</label>
+								</div>
+							</div>
+							<div class="row">
+                                <div class="col-md-4">
+									<label class="select">
+										<?=$this->formSelect($billingAddress->get('provinceId')->setAttributes([
+										    'class' => 'pointer',
+										    'id' => 'billing-address-province-id'
+										]));?>
+										<i></i>
+									</label>
+								</div>
+								<div class="col-md-4">
+									<label class="input">
+										<?=$this->formText($billingAddress->get('postcode'));?>
+										<i></i>
+									</label>
+								</div>
+								<div class="col-md-4">
+									<label class="select">
+										<?=$this->formSelect($billingAddress->get('countryId')->setAttributes([
+										    'class' => 'pointer',
+										    'id' => 'billing-address-country-id',
+										]));?>
+										<i></i>
+									</label>
+								</div>
+							</div>
+							<div class="row">
+                                <div class="col-md-12">
+									<label class="input">
+                                        <i class="icon-prepend fa fa-phone"></i>
+										<?=$this->formTel($billingAddress->get('phone'));?>
+										<i></i>
+									</label>
+								</div>
+							</div>
+						</fieldset>
+
+                        <footer class="nomargin">
+                            <a data-toggle="collapse" data-parent="#accordion2" href="#acordion_2" class="btn btn-warning pull-right">Continue</a>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+            <!-- /BILLING ADDRESS -->
+
+            <!-- SHIPPING ADDRESS -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion2" href="#acordion_2">
+                            Shipping Address
+                        </a>
+                    </h4>
+                </div>
+                <div id="acordion_2" class="collapse">
+                    <div class="panel-body">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label class="checkbox">
+                                    <?=$this->formCheckBox($this->form->get('shipToBilling'));?>
+                                    <i></i> Ship to billing address
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <fieldset>
+						  <div class="row">
+								<div class="col-md-4">
+									<label class="input">
+										<?=$this->formText($deliveryAddress->get('address1'));?>
+									</label>
+								</div>
+								<div class="col-md-4">
+									<label class="input">
+										<?=$this->formText($deliveryAddress->get('address2'));?>
+									</label>
+								</div>
+								<div class="col-md-4">
+									<label class="input">
+										<?=$this->formText($deliveryAddress->get('address3'));?>
+									</label>
+								</div>
+							</div>
+							<div class="row">
+                                <div class="col-md-4">
+									<label class="select">
+										<?=$this->formSelect($deliveryAddress->get('provinceId')->setAttributes([
+										    'class' => 'pointer',
+										    'id' => 'delivery-address-province-id'
+										]));?>
+										<i></i>
+									</label>
+								</div>
+								<div class="col-md-4">
+									<label class="input">
+										<?=$this->formText($deliveryAddress->get('postcode'));?>
+										<i></i>
+									</label>
+								</div>
+								<div class="col-md-4">
+									<label class="select">
+										<?=$this->formSelect($deliveryAddress->get('countryId')->setAttributes([
+										    'class' => 'pointer',
+										    'id' => 'delivery-address-country-id',
+										]));?>
+										<i></i>
+									</label>
+								</div>
+							</div>
+							<div class="row">
+                                <div class="col-md-12">
+									<label class="input">
+                                        <i class="icon-prepend fa fa-phone"></i>
+										<?=$this->formTel($deliveryAddress->get('phone'));?>
+										<i></i>
+									</label>
+								</div>
+							</div>
+						</fieldset>
+
+                        <footer class="nomargin">
+                            <a data-toggle="collapse" data-parent="#accordion2" href="#acordion_1" class="btn btn-default pull-left nomargin-left">Back</a>
+                        </footer>
+
+                    </div>
+                </div>
+            </div>
+            <!-- /SHIPPING ADDRESS -->
+
+        </div>
+        <!-- /ACCORDION -->
+
+        <button class="btn btn-primary btn-lg pull-right"><i class="fa fa-check"></i> Confirm Order</button>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <!-- cart totals -->
+        <div class="sky-form boxed cartContent">
+            <header class="styleColor">Cart Totals</header>
+
+            <fieldset>
+
+                <section class="clearfix cart_totals">
+                    <span class="pull-right fsize16"><?=$this->cart()->getSubTotal();?></span>
+                    <span class="bold">Cart Subtotal</span>
+                </section>
+
+                <section class="clearfix cart_totals">
+                    <span class="pull-right fsize16"><?=$this->cart()->getShippingTotal($this->countryId);?></span>
+                    <span class="bold">Shipping</span>
+                </section>
+
+                <section class="clearfix cart_totals">
+                    <span class="pull-right fsize16">- <?=$this->placeholder('discount-code')->set('£0.00');?></span>
+                    <span class="bold">Coupon Discount</span>
+                </section>
+
+                <section class="clearfix cart_totals noborder">
+                    <span class="pull-right fsize20 bold styleColor"><?=$this->cart()->getTotal();?></span>
+                    <span class="bold fsize18">ORDER TOTAL</span>
+                </section>
+
+            </fieldset>
+
+        </div>
+        <!-- /cart totals -->
+    </div>
+
+</form>
+<script>
+<?php $this->inlineScript()->captureStart(); ?>
+    $(document).ready(function(){
+        $('#billing-address-country-id').change(function() {
+            $.ajax({
+                url : '<?=$this->url('shop/country');?>',
+                data : {countryId : this.value},
+                type : 'POST'
+            }).done(function(data){
+                $('#billing-address-province-id').html( data );
+            });
+        });
+    });
+
+    $(document).ready(function(){
+        $('#delivery-address-country-id').change(function() {
+            $.ajax({
+                url : '<?=$this->url('shop/country');?>',
+                data : {countryId : this.value},
+                type : 'POST'
+            }).done(function(data){
+                $('#delivery-address-province-id').html( data );
+            });
+        });
+    });
+<?php $this->inlineScript()->captureEnd(); ?>
+</script>
+

@@ -58,14 +58,20 @@ class Checkout extends AbstractActionController
             ->getCustomerDetailsFromUserId($userId);
         
         $form = $this->getService('FormElementManager')
-            ->get('ShopCustomerDetails');
+            ->get('ShopCustomerDetails', [
+                'billing_country' => 'GB',
+                'delivery_country' => 'GB',
+            ]);
         
-        $inputFilter = $this->getService('InputFilterManager')
-            ->get('InputFilter');
         
-        $form->setInputFilter($inputFilter);
+        
+        $form->setData($this->params()->fromPost());
         
         $form->bind($customer);
+        
+        \FB::info($form->isValid());
+        \FB::info($form->getMessages());
+        \FB::info($form->getData());
         
         return [
             'countryId' => $customer->getDeliveryAddress()->getCountryId(),
