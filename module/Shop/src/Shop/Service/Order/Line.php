@@ -20,7 +20,7 @@ class Line extends AbstractMapperService
         /* @var $mapper \Shop\Mapper\Order\Line */
         $mapper = $this->getMapper();
         $orderLines = $mapper->getOrderLinesByOrderId($orderId);
-
+        
         return $orderLines;
     }
 }

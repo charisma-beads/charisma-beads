@@ -2,9 +2,11 @@
 <?php $this->placeholder('page-top')->captureStart();?>
 
 <?=$this->partial('layout/page-title', [
-    'pageTitle' => 'Edit Address'
+    'pageTitle' => 'Edit Address',
+    'bread' => [
+        'shop/customer/address' => 'My Addresses',
+    ],
 ]);?>
-<?php \FB::info($this->form->getMessages());?>
 <?php $this->placeholder('page-top')->captureEnd();?>
 
 <div class="row">

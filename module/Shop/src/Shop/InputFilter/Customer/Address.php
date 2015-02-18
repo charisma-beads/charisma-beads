@@ -30,6 +30,7 @@ class Address extends InputFilter
     		'filters' => [
         		['name' => 'StripTags'],
         		['name' => 'StringTrim'],
+    		    ['name' => 'UthandoUcwords'],
     		],
     		'validators' => [
         		['name' => 'NotEmpty'],
@@ -42,6 +43,7 @@ class Address extends InputFilter
     		'filters' => [
         		['name' => 'StripTags'],
         		['name' => 'StringTrim'],
+    		    ['name' => 'UthandoUcwords'],
     		],
     		'validators' => [
         		['name' => 'NotEmpty'],
@@ -54,11 +56,25 @@ class Address extends InputFilter
     		'filters' => [
         		['name' => 'StripTags'],
         		['name' => 'StringTrim'],
+    		    ['name' => 'UthandoUcwords'],
     		],
     		'validators' => [
         		['name' => 'NotEmpty'],
     		],
 		]);
+        
+        $this->add([
+            'name' => 'city',
+            'required' => true,
+            'filters' => [
+                ['name' => 'StripTags'],
+                ['name' => 'StringTrim'],
+                ['name' => 'UthandoUcwords'],
+            ],
+            'validators' => [
+                ['name' => 'NotEmpty'],
+            ],
+        ]);
         
         $this->add([
     		'name' => 'provinceId',
@@ -87,7 +103,7 @@ class Address extends InputFilter
                 ]],
     		],
     		'validators' => [
-        		['name' => 'Shop\I18n\Validator\PostCode', 'options' => [
+        		['name' => 'UthandoCommonPostCode', 'options' => [
                     'country' => $this->getCountryCode(),
                 ]],
     		],
@@ -115,12 +131,12 @@ class Address extends InputFilter
         		['name' => 'StripTags'],
         		['name' => 'StringTrim'],
                 ['name' => 'Digits'],
-    		    ['name' => 'UthandoPhoneNumber', 'options' => [
+    		    ['name' => 'UthandoCommonPhoneNumber', 'options' => [
     		        'country' => $this->getCountryCode(),
     		    ]]
     		],
     		'validators' => [
-        		['name' => 'PhoneNumber', 'options' => [
+        		['name' => 'UthandoCommonPhoneNumber', 'options' => [
                     'country' => $this->getCountryCode(),
         		]],
     		],

@@ -2,29 +2,44 @@
 <?php $this->placeholder('page-top')->captureStart();?>
 
 <?=$this->partial('layout/page-title', [
-    'pageTitle' => 'Order Summary'
+    'pageTitle' => 'Order Summary',
+    'bread' => [
+        'shop/order' => 'My Orders'
+    ],
 ]);?>
 
 <?php $this->placeholder('page-top')->captureEnd();?>
 
 <div class="row">
-    <div class="printable"><!-- note class 'printable' - this area is printable only! -->
-
+    <div><!-- note class 'printable' - this area is printable only! -->
         <!-- CALLOUT -->
-        <div class="alert alert-default fade in">
+        <div class="alert alert-default">
 
             <div class="row">
 
-                <div class="col-md-9 col-sm-9"><!-- left text -->
-                    <h4><strong>Order</strong> Date</h4>
+                <div class="col-md-6 col-sm-6"><!-- left text -->
+                    <h4>
+                        <strong>Order</strong> Date
+                        <span class="text-right">
+                            <a href="<?=$this->url('shop/paypal', [
+                                'action' => 'process',
+                                'orderId' => $this->order->getOrderId(),
+                            ]);?>"><i class="fa fa-paypal fa-3x"></i></a>
+                            <a href="<?=$this->url('shop/payment/process-credit-card', [
+                                'orderId' => $this->order->getOrderId(),
+                            ]);?>"><i class="fa fa-credit-card fa-3x"></i></a>
+                            <a href="<?=$this->url('shop/order/print', [
+                                'orderId' => $this->order->getOrderId(),
+                            ]);?>" target="_blank"><i class="fa fa-print fa-3x"></i></a>
+                        </span>
+                    </h4>
                     <p>
                         <?=$this->formatDate($this->order->getOrderDate())->setFormat('d/m/Y');?>
                     </p>
                 </div><!-- /left text -->
 
-
-                <div class="col-md-3 col-sm-3 text-right"><!-- right btn -->
-                    <a href="#" class="btn btn-primary btn-lg" onclick="window.print();">PRINT</a>
+                <div class="col-md-6 col-sm-6 text-right"><!-- right btn -->
+                   
                 </div><!-- /right btn -->
 
             </div>

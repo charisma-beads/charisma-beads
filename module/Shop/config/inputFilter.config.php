@@ -15,6 +15,7 @@ return [
         'ShopOrderConfirm'      => 'Shop\InputFilter\Order\Confirm',
         'ShopOrderLine'         => 'Shop\InputFilter\Order\Line',
         'ShopOrderStatus'       => 'Shop\InputFilter\Order\Status',
+        'ShopPaymentCreditCard' => 'Shop\InputFilter\Payment\CreditCard',
         'ShopPostCost'          => 'Shop\InputFilter\Post\Cost',
         'ShopPostLevel'         => 'Shop\InputFilter\Post\Level',
         'ShopPostUnit'          => 'Shop\InputFilter\Post\Unit',

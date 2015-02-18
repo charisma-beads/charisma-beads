@@ -99,7 +99,7 @@ class Product extends InputFilter
     		'filters'		=> array(
     			array('name'	=> 'StripTags'),
     			array('name'	=> 'StringTrim'),
-    		    array('name'    => 'UthandoUcFirst'),
+    		    array('name'    => 'UthandoUcwords'),
     		),
     		'validators'	=> array(
     			array('name' => 'NotEmpty'),

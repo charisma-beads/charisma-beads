@@ -10,7 +10,7 @@ use Zend\View\Model\ViewModel;
 class CustomerAddress extends AbstractCrudController
 {
     protected $searchDefaultParams = array('sort' => 'postcode');
-    protected $serviceName = 'Shop\Service\Customer\Address';
+    protected $serviceName = 'ShopCustomerAddress';
     protected $userRoute = 'shop/customer/address';
     protected $route = 'admin/shop/customer/address';
     protected $paginate = false;

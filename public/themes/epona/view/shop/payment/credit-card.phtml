@@ -1,0 +1,151 @@
+
+<?php $this->placeholder('page-top')->captureStart();?>
+
+<?=$this->partial('layout/page-title', [
+    'pageTitle' => 'Credit Card Details'
+]);?>
+
+<?php $this->placeholder('page-top')->captureEnd();?>
+<?php $this->form->prepare();?>
+
+<form action="<?=$this->url('shop/payment/process-credit-card', [
+    'orderId' => $this->order->getOrderId(),
+]);?>" method="post" class="sky-form boxed col-md-8">
+    <header>Please Enter Card Details Below</header>
+    <fieldset>
+        <section>
+			<div class="inline-group<?php if ($this->form->get('ccType')->getMessages()) echo ' state-error'; ?>">
+			     <?=$this->formRadio($this->form->get('ccType')->setLabelAttributes(['class' => 'radio']));?>
+			</div>
+			<span class="help-block">
+			   <?=$this->formElementErrors($this->form->get('ccType'), [
+                    'class' => 'list-unstyled note note-error'
+                ]); ?>
+			</span>
+		</section>	
+		
+		<section>
+    		<label class="input<?php if ($this->form->get('ccName')->getMessages()) echo ' state-error'; ?>">
+    			<?=$this->formText($this->form->get('ccName'));?>
+    		</label>
+    		<span class="help-block">
+			   <?=$this->formElementErrors($this->form->get('ccName'), [
+                    'class' => 'list-unstyled note note-error'
+                ]); ?>
+			</span>
+    	</section>
+    	
+    	<div class="row">
+    		<section class="col col-md-10">
+    			<label class="input<?php if ($this->form->get('ccNumber')->getMessages()) echo ' state-error'; ?>">
+    				<?=$this->formNumber($this->form->get('ccNumber'));?>
+    			</label>
+    			<span class="help-block">
+    			   <?=$this->formElementErrors($this->form->get('ccNumber'), [
+                        'class' => 'list-unstyled note note-error'
+                    ]); ?>
+    			</span>
+    		</section>
+    		<section class="col col-md-2">
+    			<label class="input<?php if ($this->form->get('cvv2')->getMessages()) echo ' state-error'; ?>">
+    				<?=$this->formNumber($this->form->get('cvv2'));?>
+    			</label>
+    			<span class="help-block">
+    			   <?=$this->formElementErrors($this->form->get('cvv2'), [
+                        'class' => 'list-unstyled note note-error'
+                    ]); ?>
+    			</span>
+    		</section>
+    	</div>
+    	
+    	<div class="row">
+    		<label class="label col col-md-9">Issue Number (if your card has one)</label>
+    		<section class="col col-md-3">
+    			<label class="input<?php if ($this->form->get('ccIssueNumber')->getMessages()) echo ' state-error'; ?>">
+                    <?=$this->formNumber($this->form->get('ccIssueNumber'));?>
+    				<i></i>
+    			</label>
+    			<span class="help-block">
+    			   <?=$this->formElementErrors($this->form->get('ccIssueNumber'), [
+                        'class' => 'list-unstyled note note-error'
+                    ]); ?>
+    			</span>
+    		</section>
+		</div>
+    	
+    	<div class="row">
+    		<label class="label col col-md-4">Expiration date</label>
+    		<section class="col col-md-5">
+    			<label class="select<?php if ($this->form->get('ccExpiryDate')->getMessages()) echo ' state-error'; ?>">
+                    <?=$this->monthYearSelect()->renderMonths($this->form->get('ccExpiryDate'));?>
+    				<i></i>
+    			</label>
+    		</section>
+    		<section class="col col-md-3">
+    			<label class="select<?php if ($this->form->get('ccStartDate')->getMessages()) echo ' state-error'; ?>">
+    				<?=$this->monthYearSelect()->renderYears($this->form->get('ccExpiryDate'));?>
+    				<i></i>
+    			</label>
+    		</section>
+    		<?php if ($this->formElementErrors($this->form->get('ccStartDate'))):?>
+    		<section class="col col-md-12">
+                <span class="help-block">
+    			   <?=$this->formElementErrors($this->form->get('ccExpiryDate'), [
+                        'class' => 'list-unstyled note note-error'
+                    ]); ?>
+    			</span>
+    		</section>
+    		<?php endif; ?>
+		</div>
+		
+		<div class="row">
+    		<label class="label col col-md-4">Satrt date</label>
+    		<section class="col col-md-5">
+    			<label class="select<?php if ($this->form->get('ccStartDate')->getMessages()) echo ' state-error'; ?>">
+                    <?=$this->monthYearSelect()->renderMonths($this->form->get('ccStartDate'));?>
+    				<i></i>
+    			</label>
+    		</section>
+    		<section class="col col-md-3">
+    			<label class="select<?php if ($this->form->get('ccStartDate')->getMessages()) echo ' state-error'; ?>">
+    				<?=$this->monthYearSelect()->renderYears($this->form->get('ccStartDate'));?>
+    				<i></i>
+    			</label>
+    		</section>
+    		<?php if ($this->formElementErrors($this->form->get('ccStartDate'))):?>
+    		<section class="col col-md-12">
+                <span class="help-block">
+    			   <?=$this->formElementErrors($this->form->get('ccStartDate'), [
+                        'class' => 'list-unstyled note note-error'
+                    ]); ?>
+    			</span>
+    		</section>
+    		<?php endif;?>
+		</div>
+    </fieldset>
+    
+    <?=$this->formHidden($this->form->get('orderId'));?>
+    <?=$this->formHidden($this->form->get('security'));?>
+    
+    <footer>
+		<button type="submit" class="button" data-loading-text="Please wait...">Submit Details</button>
+	</footer>
+</form>
+
+<div class="col-md-4">
+
+        <!-- cart totals -->
+        <div class="sky-form boxed cartContent">
+            <header class="styleColor">Order <?=$this->order->getOrderNumber();?></header>
+
+            <fieldset>
+                <section class="clearfix cart_totals noborder">
+                    <span class="pull-right fsize20 bold styleColor"><?=$this->priceFormat($this->order->getTotal());?></span>
+                    <span class="bold fsize18">Total To Debit Card</span>
+                </section>
+
+            </fieldset>
+
+        </div>
+        <!-- /cart totals -->
+    </div>

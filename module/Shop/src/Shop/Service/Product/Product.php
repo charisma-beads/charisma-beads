@@ -36,12 +36,12 @@ class Product extends AbstractRelationalMapperService
         'productImage'      => [
             'refCol'    => 'productId',
             'service'   => 'ShopProductImage',
-            //'getMethod' => 'getImagesByProductId',
+            'getMethod' => 'getImagesByProductId',
         ],
         'productOption' => [
             'refCol'    => 'productId',
             'service'   => 'ShopProductOption',
-            //'getMethod' => 'getOptionsByProductId',
+            'getMethod' => 'getOptionsByProductId',
         ],
     ];
 

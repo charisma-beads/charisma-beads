@@ -12,6 +12,7 @@ return [
         'ShopOrder'             => 'Shop\Service\Order\Order',
         'ShopOrderLine'         => 'Shop\Service\Order\Line',
         'ShopOrderStatus'       => 'Shop\Service\Order\Status',
+        'ShopPaymentCreditCard' => 'Shop\Service\Payment\CreditCard',
         'ShopPostCost'          => 'Shop\Service\Post\Cost',
         'ShopPostLevel'         => 'Shop\Service\Post\Level',
         'ShopPostUnit'          => 'Shop\Service\Post\Unit',

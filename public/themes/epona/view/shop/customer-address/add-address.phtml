@@ -1,7 +1,10 @@
 <?php $this->placeholder('page-top')->captureStart();?>
 
 <?=$this->partial('layout/page-title', [
-    'pageTitle' => 'Add Address'
+    'pageTitle' => 'Add Address',
+    'bread' => [
+        'shop/customer/address' => 'My Addresses',
+    ],
 ]);?>
 
 <?php $this->placeholder('page-top')->captureEnd();?>

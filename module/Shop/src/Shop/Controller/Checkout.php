@@ -6,6 +6,8 @@ use Zend\Filter\Word\UnderscoreToDash;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Session\Container;
+use Zend\Http\PhpEnvironment\Response;
+use Zend\Form\Form;
 
 class Checkout extends AbstractActionController
 {
@@ -21,7 +23,7 @@ class Checkout extends AbstractActionController
     {
         $service = $this->getService('ShopCart');
 
-        if (!$service->getCart()->count()) {
+        if (!$service->hasItems()) {
             return $this->redirect()->toRoute('shop');
         }
         
@@ -39,6 +41,10 @@ class Checkout extends AbstractActionController
 
     public function confirmAddressAction()
     {
+        if (!$this->getService('ShopCart')->hasItems()) {
+            return $this->redirect()->toRoute('shop');
+        }
+        
         $userId = $this->identity()->getUserId();
         $customer = $this->getCustomerService()->getCustomerByUserId($userId);
         
@@ -53,6 +59,12 @@ class Checkout extends AbstractActionController
     
     public function customerDetailsAction()
     {
+        if (!$this->getService('ShopCart')->hasItems()) {
+            return $this->redirect()->toRoute('shop');
+        }
+        
+        $prg = $this->prg();
+        
         $userId = $this->identity()->getUserId();
         $customer = $this->getCustomerService()
             ->getCustomerDetailsFromUserId($userId);
@@ -62,25 +74,53 @@ class Checkout extends AbstractActionController
                 'billing_country' => 'GB',
                 'delivery_country' => 'GB',
             ]);
-        
-        
-        
-        $form->setData($this->params()->fromPost());
-        
+            
         $form->bind($customer);
         
-        \FB::info($form->isValid());
-        \FB::info($form->getMessages());
-        \FB::info($form->getData());
+        if ($prg instanceof Response) {
+            return $prg; 
+        } elseif ($prg === false) {
+            if ($customer->getBillingAddressId() == $customer->getDeliveryAddressId()) {
+                $form->get('shipToBilling')->setValue('1');
+            }
+            return [
+                'countryId' => $customer->getDeliveryAddress()->getCountryId(),
+                'form' => $form,
+            ];
+        }
+        
+        $result = $this->getCustomerService()
+            ->updateCustomerDetails($form, $prg);
+        
+        if ($result instanceof Form) {
+            $form = $result;
+            $result = 'formError';
+        }
+        
+        if ('formError' === $result) {
+            $this->flashMessenger()->addErrorMessage('There were one or more issues with your submission. Please correct them as indicated below.');
+        } elseif ($result) {
+            $this->flashMessenger()->addSuccessMessage('Your changes were saved.');
+            return $this->redirect()->toRoute('shop/checkout', [
+                'action' => 'confirm-order',
+            ]);
+        } else {
+            $this->flashMessenger()->addErrorMessage('Your changes could not be save due to database error.');
+        }
         
         return [
             'countryId' => $customer->getDeliveryAddress()->getCountryId(),
             'form' => $form,
         ];
+        
     }
 
     public function confirmOrderAction()
-    {
+    {   
+        if (!$this->getService('ShopCart')->hasItems()) {
+            return $this->redirect()->toRoute('shop');
+        }
+        
         $params = $this->params()->fromPost();
         $submit = $this->params()->fromPost('submit', null);
         $collect = $this->params()->fromPost('collect_instore', null);
@@ -127,8 +167,8 @@ class Checkout extends AbstractActionController
                     $container->setExpirationHops(1, null);
                     $container->order = $orderParams;
                     
-                    $this->redirect()->toRoute('shop/payment', [
-                        'action' => lcfirst($action)
+                    $this->redirect()->toRoute('shop/payment/default', [
+                        'paymentOption' => lcfirst($action)
                     ]);
                 }
             }

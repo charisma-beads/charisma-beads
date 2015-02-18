@@ -8,6 +8,7 @@ use UthandoUser\Model\User;
 use Zend\EventManager\Event;
 use Zend\Math\BigInteger\BigInteger;
 use Zend\Math\Rand;
+use Shop\Form\Customer\CustomerDetails;
 
 /**
  * Class Customer
@@ -55,9 +56,22 @@ class Customer extends AbstractRelationalMapperService
      */
     public function attachEvents()
     {
-        $this->getEventManager()->attach(
-            ['post.edit'], [$this, 'postEdit']
-        );
+        $this->getEventManager()->attach([
+            'post.edit'
+        ], [$this, 'postEdit']);
+        
+        $this->getEventManager()->attach([
+            'pre.form',
+            'post.add'
+        ], [$this, 'checkCustomerNumber']);
+        
+        $this->getEventManager()->attach([
+            'pre.add'
+        ], [$this, 'setCustomerValidation']);
+        
+        $this->getEventManager()->attach([
+            'form.init'
+        ], [$this, 'formInit']);
     }
 
     /**
@@ -111,6 +125,63 @@ class Customer extends AbstractRelationalMapperService
         $this->populate($customer, true);
         
         return $customer;
+    }
+    
+    /**
+     * @param CustomerDetails $form
+     * @param array $data
+     * @return CustomerDetails|int|null
+     */
+    public function updateCustomerDetails(CustomerDetails $form, array $data)
+    {
+        if ($data['shipToBilling'] == 1) {
+            $data['customer']['deliveryAddress'] = $data['customer']['billingAddress'];
+        }
+        
+        $form->setData($data);
+        
+        if (!$form->isValid()) {
+            return $form;
+        }
+        
+        /* @var $customer \Shop\Model\Customer\Customer */
+        $customer = $form->getData();
+        
+        $customerId = $customer->getCustomerId();
+        
+        // not customer yet
+        if (!$customerId) {
+            $customerId = $this->add($customer->getArrayCopy());
+            $customer->setCustomerId($customerId);
+        }
+        
+        if (!$customer->getBillingAddress()->getCustomerId()) {
+            $customer->getBillingAddress()->setCustomerId($customerId);
+        }
+        
+        if (!$customer->getDeliveryAddress()->getCustomerId()) {
+            $customer->getDeliveryAddress()->setCustomerId($customerId);
+        }
+        
+        // add or update billing adn delivery address
+        /* @var $customerAddressService \Shop\Service\Customer\Address */
+        $customerAddressService = $this->getService('ShopCustomerAddress');
+        
+        $saveBillingAddress = $customerAddressService->save($customer->getBillingAddress());
+        
+        $billingAddressId = ($customer->getBillingAddressId()) ?: $saveBillingAddress;
+        
+        if ($data['shipToBilling'] == 0) {
+            $saveDeliveryAddress = $customerAddressService->save($customer->getDeliveryAddress());
+            $deliveryAddressId = ($customer->getDeliveryAddressId()) ?: $saveDeliveryAddress;
+        } else {
+            $deliveryAddressId = $billingAddressId;
+        }
+        
+        $customer->setBillingAddressId($billingAddressId)
+            ->setDeliveryAddressId($deliveryAddressId);
+        
+        return $this->edit($customer, $customer->getArrayCopy());
     }
 
     /**
@@ -182,6 +253,23 @@ class Customer extends AbstractRelationalMapperService
 
         return $num . $checkDigit;
     }
+    
+    /**
+     * Set billing and delivery customerId
+     * 
+     * @param Event $e
+     */
+    public function formInit(Event $e)
+    {
+        $form = $e->getParam('form');
+        $model = $e->getParam('model');
+        
+        if ($model instanceof CustomerModel) {
+            $customerId = $model->getCustomerId();
+            $form->get('billingAddressId')->setCustomerId($customerId);
+            $form->get('deliveryAddressId')->setCustomerId($customerId);
+        }
+    }
 
     /**
      * @param Event $e
@@ -203,6 +291,46 @@ class Customer extends AbstractRelationalMapperService
             $userService = $this->getService('UthandoUser\Service\User');
             $userService->edit($user, $post);
         }
+    }
+    
+    /**
+     * Set validation on customer forms.
+     * 
+     * @param Event $e
+     */
+    public function setCustomerValidation(Event $e)
+    {
+        $form = $e->getParam('form');
+        $form->setValidationGroup('prefixId', 'firstname', 'lastname', 'email');
+    }
+    
+    /**
+     * BC add customer numbers as we go.
+     *
+     * @param Event $e
+     * @return CustomerModel
+     */
+    public function checkCustomerNumber(Event $e)
+    {
+        $model = $e->getParam('model');
+        $insertId = $e->getParam('saved');
+    
+        if (!$model && $insertId) {
+            $model = $this->getById($insertId);
+        }
+        
+        if (!$model instanceof CustomerModel) {
+            return $model;
+        }
+    
+        if (!$model->getNumber() && $model->getCustomerId()) {
+            $cusNum = $this->generateCustomerNumber($model);
+            $model->setNumber($cusNum);
+            $this->save($model);
+            $model = $this->getById($model->getCustomerId());
+        }
+    
+        return $model;
     }
 
     /**

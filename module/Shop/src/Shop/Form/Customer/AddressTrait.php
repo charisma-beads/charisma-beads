@@ -12,7 +12,6 @@ trait AddressTrait
                 'placeholder'    => 'Address Line 1:',
                 'autofocus'      => true,
                 'autocapitalize' => 'words',
-                'required'      => true,
             ],
             'options' => [
                 'label' => 'Address Line 1:',
@@ -52,7 +51,6 @@ trait AddressTrait
                 'placeholder'     => 'City\Town:',
                 'autofocus'       => true,
                 'autocapitalize'  => 'words',
-                'required'      => true,
             ],
             'options' => [
                 'label' => 'City\Town:',
@@ -64,7 +62,6 @@ trait AddressTrait
             'type'  => 'CountryProvinceList',
             'attributes' => [
                 'id'       => 'provinceId',
-                'required' => true,
             ],
             'options' => [
                 'label' => 'County\Province:',
@@ -79,7 +76,6 @@ trait AddressTrait
                 'placeholder'       => 'PostCode:',
                 'autofocus'         => true,
                 'autocapitalize'	=> 'characters',
-                'required'      => true,
             ],
             'options' => [
                 'label' => 'Postcode:',
@@ -91,7 +87,6 @@ trait AddressTrait
             'type' => 'CountryList',
             'attributes' => [
                 'id' => 'countryId',
-                'required'      => true,
             ],
             'options' => [
                 'label' => 'Country',
@@ -105,7 +100,6 @@ trait AddressTrait
             'attributes'	=> [
                 'placeholder'	=> 'Phone No.:',
                 'autofocus'		=> true,
-                'required'      => true,
             ],
             'options'		=> [
                 'label' => 'Phone No.:',

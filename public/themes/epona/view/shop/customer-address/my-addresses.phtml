@@ -32,6 +32,10 @@
         <?php foreach ($this->addresses as $address):?>
             <div class="col-md-6">
                 <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <i class="fa fa-money"></i>
+                        <i class="fa fa-truck"></i>
+                    </div>
                     <div class="panel-body">
                         <address>
                             <?=$this->customerAddress()->formatAddress($address)?>

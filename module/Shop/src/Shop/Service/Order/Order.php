@@ -6,6 +6,7 @@ use Shop\Model\Order\MetaData;
 use Shop\Model\Order\Order as OrderModel;
 use UthandoCommon\Service\AbstractRelationalMapperService;
 use Zend\Math\BigInteger\BigInteger;
+use Zend\View\Model\ViewModel;
 
 /**
  * Class Order
@@ -136,6 +137,8 @@ class Order extends AbstractRelationalMapperService
             $orderLineService->save($orderLine);
         }
         
+        $this->sendEmail($orderId);
+        
         return $orderId;
     }
 
@@ -145,7 +148,7 @@ class Order extends AbstractRelationalMapperService
      * Format <Date><OrderId padded to 7 digits><Check Digit>
      *
      * @param OrderModel|int $orderModelOrId
-     * @return void
+     * @return OrderModel
      */
     public function generateOrderNumber($orderModelOrId)
     {
@@ -167,6 +170,8 @@ class Order extends AbstractRelationalMapperService
         $orderModelOrId->setOrderNumber($num . $checkSum);
 
         $this->save($orderModelOrId);
+        
+        return $orderModelOrId;
     }
 
     /**
@@ -243,14 +248,35 @@ class Order extends AbstractRelationalMapperService
         return $orders;
     }
     
-    public function emailCustomerOrder()
+    /**
+     * send order via email
+     * 
+     * @param unknown $orderId
+     */
+    public function sendEmail($orderId)
     {
+        $order = $this->getById($orderId);
+        $order = $this->populate($order, true);
         
-    }
-    
-    public function emailMerchantOrder()
-    {
+        $email = $order->getCustomer()->getEmail();
         
+        $emailView = new ViewModel([
+            'order' => $order,
+        ]);
+        
+        $emailView->setTemplate('shop/order/table-view');
+        
+        $this->getEventManager()->trigger('mail.send', $this, [
+            'recipient'        => [
+                'name'      => $order->getCustomer()->getFullName(),
+                'address'   => $email,
+            ],
+            'layout'           => 'shop/email/order',
+            'layout_params'    => ['order' => $order],
+            'body'             => $emailView,
+            'subject'          => 'Order No.:' . $order->getOrderNumber(),
+            'transport'        => 'default',
+        ]);
     }
 
     /**

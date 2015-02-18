@@ -1,7 +1,6 @@
 <?php
 namespace Shop\Event;
 
-use Shop\Model\Customer\Customer;
 use Shop\Model\Product\Category;
 use Zend\EventManager\Event;
 use Zend\EventManager\EventManagerInterface;
@@ -17,17 +16,8 @@ class ServiceListener implements ListenerAggregateInterface
         $events = $events->getSharedManager();
         
         $this->listeners[] = $events->attach([
-            'Shop\Service\Customer\Customer',
             'Shop\Service\Customer\Address',
         ], 'form.init', [$this, 'formInit']);
-
-        $this->listeners[] = $events->attach([
-            'Shop\Service\Customer\Customer',
-        ], ['pre.form', 'post.add'], [$this, 'checkCustomerNumber']);
-
-        $this->listeners[] = $events->attach([
-            'Shop\Service\Order\Order',
-        ], ['post.add'], [$this, 'generateOrderNumber']);
 
         $this->listeners[] = $events->attach([
             'Shop\Service\Product\Category',
@@ -46,10 +36,6 @@ class ServiceListener implements ListenerAggregateInterface
             'Shop\Controller\Country\CountryProvince',
             'Shop\Controller\Product\ProductOption',
         ], ['add.action'], [$this, 'addAction']);
-
-        $this->listeners[] = $events->attach([
-            'Shop\Service\Customer\Customer',
-        ], ['pre.add'], [$this, 'setCustomerValidation']);
 
         $this->listeners[] = $events->attach([
             'UthandoFileManager\Service\ImageUploader',
@@ -146,12 +132,6 @@ class ServiceListener implements ListenerAggregateInterface
         
         $e->setParam('data', $post);
     }
-
-    public function setCustomerValidation(Event $e)
-    {
-        $form = $e->getParam('form');
-        $form->setValidationGroup('prefixId', 'firstname', 'lastname', 'email');
-    }
     
     public function setCountryValidation(Event $e)
     {
@@ -191,9 +171,6 @@ class ServiceListener implements ListenerAggregateInterface
         $model = $e->getParam('model');
         
         switch (get_class($model)) {
-        	case 'Shop\Model\Customer\Customer':
-        	    $this->customerForm($form, $model);
-        	    break;
         	case 'Shop\Model\Customer\Address':
         	    $this->customerAddressForm($form, $model, $data);
         	    break;
@@ -206,49 +183,6 @@ class ServiceListener implements ListenerAggregateInterface
     public function categoryForm($form, $model)
     {
         $form->setCategoryId($model->getProductCategoryId());
-    }
-
-    /**
-     * BC add customer numbers as we go.
-     *
-     * @param Event $e
-     * @return mixed
-     */
-    public function checkCustomerNumber(Event $e)
-    {
-        $model = $e->getParam('model');
-        $insertId = $e->getParam('saved');
-
-        if (!$model && $insertId) {
-            $model = $e->getTarget()->getById($insertId);
-        }
-
-
-        if (!$model instanceof Customer) {
-            return $model;
-        }
-
-        if (!$model->getNumber() && $model->getCustomerId()) {
-            $cusNum = $e->getTarget()->generateCustomerNumber($model);
-            $model->setNumber($cusNum);
-            $e->getTarget()->save($model);
-            $model = $e->getTarget()->getById($model->getCustomerId());
-        }
-
-        return $model;
-    }
-
-    public function generateOrderNumber(Event $e)
-    {
-        $insertId = $e->getParam('saved');
-        $model = $e->getTarget()->getById($insertId);
-        $e->getTarget()->generateOrderNumber($model);
-    }
-
-    public function customerForm($form, $model)
-    {
-    	$form->get('billingAddressId')->setCustomerId($model->getCustomerId());
-    	$form->get('deliveryAddressId')->setCustomerId($model->getCustomerId());
     }
     
     public function customerAddressForm($form, $model, $data)

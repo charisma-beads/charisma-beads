@@ -182,6 +182,22 @@ class Cart extends AbstractMapperService implements InitializableInterface
         
         return $cart;
     }
+    
+    /**
+     * Checks if cart has any items.
+     * 
+     * @return boolean
+     */
+    public function hasItems()
+    {
+        $cart = $this->getCart();
+        
+        if ($cart->count() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     /**
      * Adds or updates an item contained with the shopping cart

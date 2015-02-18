@@ -23,7 +23,7 @@ class Paypal extends AbstractActionController
     
     public function processAction()
     {
-        $orderId = $this->order()->getOrderFromSession()['orderId'];
+        $orderId = $this->params()->fromRoute('orderId');
         $userId = $this->identity()->getUserId();
         
         $order = $this->getOrderService()

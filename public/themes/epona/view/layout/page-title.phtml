@@ -1,22 +1,22 @@
 
 <?=$this->headTitle($this->pageTitle);?>
+<?php if (!is_array($this->bread)) $this->bread = [];?>
 <!-- PAGE TOP -->
 <section class="page-title">
     <div class="container">
-
         <header>
-
             <ul class="breadcrumb"><!-- breadcrumb -->
                 <li><a href="<?=$this->url('home');?>">Home</a></li>
+                <?php foreach($this->bread as $route => $crumbs):?>
+                <li><a href="<?=$this->url($route);?>"><?=$crumbs;?></a></li>
+                <?php endforeach;?>
                 <li class="active"><?=$this->pageTitle;?></li>
             </ul><!-- /breadcrumb -->
 
             <h2><!-- Page Title -->
                 <?=$this->pageTitle;?>
             </h2><!-- /Page Title -->
-
         </header>
-
     </div>
 </section>
 <!-- /PAGE TOP -->

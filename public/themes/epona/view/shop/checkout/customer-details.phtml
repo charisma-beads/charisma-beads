@@ -7,14 +7,16 @@
 
 <?php
 
-$form->prepare();
+$this->form->prepare();
 $customer = $this->form->get('customer');
 $billingAddress = $customer->get('billingAddress');
 $deliveryAddress = $customer->get('deliveryAddress');
 
 ?>
 
-<form action="#" method="post" class="row sky-form cartContent">
+<form action="<?=$this->url('shop/checkout', [
+    'action' => 'customer-details',
+]);?>" method="post" class="row sky-form cartContent">
 
     <div class="col-md-9 checkout">
 
@@ -36,31 +38,51 @@ $deliveryAddress = $customer->get('deliveryAddress');
                         <fieldset>					
 							<div class="row">
 							     <div class="col-md-2">
-									<label class="select">
+									<label class="select<?php if ($customer->get('prefixId')->getMessages()) echo ' state-error'; ?>">
 										<?=$this->formSelect($customer->get('prefixId')->setAttribute('class', 'pointer'));?>
 										<i></i>
 									</label>
+									<span class="help-block">
+									   <?=$this->formElementErrors($customer->get('prefixId'), [
+                                            'class' => 'list-unstyled note note-error'
+                                        ]); ?>
+									</span>
 								</div>
 								<div class="col-md-5">
-									<label class="input">
+									<label class="input<?php if ($customer->get('firstname')->getMessages()) echo ' state-error'; ?>">
 										<i class="icon-prepend fa fa-user"></i>
 										<?=$this->formText($customer->get('firstname'));?>
 									</label>
+									<span class="help-block">
+									   <?=$this->formElementErrors($customer->get('firstname'), [
+                                            'class' => 'list-unstyled note note-error'
+                                        ]); ?>
+									</span>
 								</div>
 								<div class="col-md-5">
-									<label class="input">
+									<label class="input<?php if ($customer->get('lastname')->getMessages()) echo ' state-error'; ?>">
 										<i class="icon-prepend fa fa-user"></i>
 										<?=$this->formText($customer->get('lastname'));?>
 									</label>
+									<span class="help-block">
+									   <?=$this->formElementErrors($customer->get('lastname'), [
+                                            'class' => 'list-unstyled note note-error'
+                                        ]); ?>
+									</span>
 								</div>
 							</div>
 							
 							<div class="row">
 								<div class="col-md-12">
-									<label class="input">
+									<label class="input<?php if ($customer->get('email')->getMessages()) echo ' state-error'; ?>">
 										<i class="icon-prepend fa fa-envelope"></i>
 										<?=$this->formEmail($customer->get('email'));?>
 									</label>
+									<span class="help-block">
+									   <?=$this->formElementErrors($customer->get('email'), [
+                                            'class' => 'list-unstyled note note-error'
+                                        ]); ?>
+									</span>
 								</div>
 							</div>
 						</fieldset>
@@ -68,54 +90,101 @@ $deliveryAddress = $customer->get('deliveryAddress');
 						<fieldset>
 						  <div class="row">
 								<div class="col-md-4">
-									<label class="input">
+									<label class="input<?php if ($billingAddress->get('address1')->getMessages()) echo ' state-error'; ?>">
 										<?=$this->formText($billingAddress->get('address1'));?>
 									</label>
+									<span class="help-block">
+									   <?=$this->formElementErrors($billingAddress->get('address1'), [
+                                            'class' => 'list-unstyled note note-error'
+                                        ]); ?>
+									</span>
 								</div>
 								<div class="col-md-4">
-									<label class="input">
+									<label class="input<?php if ($billingAddress->get('address2')->getMessages()) echo ' state-error'; ?>">
 										<?=$this->formText($billingAddress->get('address2'));?>
 									</label>
+									<span class="help-block">
+									   <?=$this->formElementErrors($billingAddress->get('address2'), [
+                                            'class' => 'list-unstyled note note-error'
+                                        ]); ?>
+									</span>
 								</div>
 								<div class="col-md-4">
-									<label class="input">
+									<label class="input<?php if ($billingAddress->get('address3')->getMessages()) echo ' state-error'; ?>">
 										<?=$this->formText($billingAddress->get('address3'));?>
 									</label>
+									<span class="help-block">
+									   <?=$this->formElementErrors($billingAddress->get('address3'), [
+                                            'class' => 'list-unstyled note note-error'
+                                        ]); ?>
+									</span>
 								</div>
 							</div>
 							<div class="row">
-                                <div class="col-md-4">
-									<label class="select">
+                                <div class="col-md-6">
+									<label class="input<?php if ($billingAddress->get('city')->getMessages()) echo ' state-error'; ?>">
+										<?=$this->formText($billingAddress->get('city'));?>
+									</label>
+									<span class="help-block">
+									   <?=$this->formElementErrors($billingAddress->get('city'), [
+                                            'class' => 'list-unstyled note note-error'
+                                        ]); ?>
+									</span>
+								</div>
+                                <div class="col-md-6">
+									<label class="select<?php if ($billingAddress->get('provinceId')->getMessages()) echo ' state-error'; ?>">
 										<?=$this->formSelect($billingAddress->get('provinceId')->setAttributes([
 										    'class' => 'pointer',
 										    'id' => 'billing-address-province-id'
 										]));?>
 										<i></i>
 									</label>
+									<span class="help-block">
+									   <?=$this->formElementErrors($billingAddress->get('provinceId'), [
+                                            'class' => 'list-unstyled note note-error'
+                                        ]); ?>
+									</span>
 								</div>
-								<div class="col-md-4">
-									<label class="input">
+							</div>
+							<div class="row">
+                                <div class="col-md-6">
+									<label class="input<?php if ($billingAddress->get('postcode')->getMessages()) echo ' state-error'; ?>">
 										<?=$this->formText($billingAddress->get('postcode'));?>
 										<i></i>
 									</label>
+									<span class="help-block">
+									   <?=$this->formElementErrors($billingAddress->get('postcode'), [
+                                            'class' => 'list-unstyled note note-error'
+                                        ]); ?>
+									</span>
 								</div>
-								<div class="col-md-4">
-									<label class="select">
+								<div class="col-md-6">
+									<label class="select<?php if ($billingAddress->get('countryId')->getMessages()) echo ' state-error'; ?>">
 										<?=$this->formSelect($billingAddress->get('countryId')->setAttributes([
 										    'class' => 'pointer',
 										    'id' => 'billing-address-country-id',
 										]));?>
 										<i></i>
 									</label>
+									<span class="help-block">
+									   <?=$this->formElementErrors($billingAddress->get('countryId'), [
+                                            'class' => 'list-unstyled note note-error'
+                                        ]); ?>
+									</span>
 								</div>
 							</div>
 							<div class="row">
                                 <div class="col-md-12">
-									<label class="input">
+									<label class="input<?php if ($billingAddress->get('phone')->getMessages()) echo ' state-error'; ?>">
                                         <i class="icon-prepend fa fa-phone"></i>
 										<?=$this->formTel($billingAddress->get('phone'));?>
 										<i></i>
 									</label>
+									<span class="help-block">
+									   <?=$this->formElementErrors($billingAddress->get('phone'), [
+                                            'class' => 'list-unstyled note note-error'
+                                        ]); ?>
+									</span>
 								</div>
 							</div>
 						</fieldset>
@@ -150,56 +219,103 @@ $deliveryAddress = $customer->get('deliveryAddress');
                         </div>
                         
                         <fieldset>
-						  <div class="row">
+                            <div class="row">
 								<div class="col-md-4">
-									<label class="input">
+									<label class="input<?php if ($deliveryAddress->get('address1')->getMessages()) echo ' state-error'; ?>">
 										<?=$this->formText($deliveryAddress->get('address1'));?>
 									</label>
+									<span class="help-block">
+									   <?=$this->formElementErrors($deliveryAddress->get('address1'), [
+                                            'class' => 'list-unstyled note note-error'
+                                        ]); ?>
+									</span>
 								</div>
 								<div class="col-md-4">
-									<label class="input">
+									<label class="input<?php if ($deliveryAddress->get('address2')->getMessages()) echo ' state-error'; ?>">
 										<?=$this->formText($deliveryAddress->get('address2'));?>
 									</label>
+									<span class="help-block">
+									   <?=$this->formElementErrors($deliveryAddress->get('address2'), [
+                                            'class' => 'list-unstyled note note-error'
+                                        ]); ?>
+									</span>
 								</div>
 								<div class="col-md-4">
-									<label class="input">
+									<label class="input<?php if ($deliveryAddress->get('address3')->getMessages()) echo ' state-error'; ?>">
 										<?=$this->formText($deliveryAddress->get('address3'));?>
 									</label>
+									<span class="help-block">
+									   <?=$this->formElementErrors($deliveryAddress->get('address3'), [
+                                            'class' => 'list-unstyled note note-error'
+                                        ]); ?>
+									</span>
 								</div>
 							</div>
 							<div class="row">
-                                <div class="col-md-4">
-									<label class="select">
+                                <div class="col-md-6">
+									<label class="input<?php if ($deliveryAddress->get('city')->getMessages()) echo ' state-error'; ?>">
+										<?=$this->formText($deliveryAddress->get('city'));?>
+									</label>
+									<span class="help-block">
+									   <?=$this->formElementErrors($deliveryAddress->get('city'), [
+                                            'class' => 'list-unstyled note note-error'
+                                        ]); ?>
+									</span>
+								</div>
+                                <div class="col-md-6">
+									<label class="select<?php if ($deliveryAddress->get('provinceId')->getMessages()) echo ' state-error'; ?>">
 										<?=$this->formSelect($deliveryAddress->get('provinceId')->setAttributes([
 										    'class' => 'pointer',
-										    'id' => 'delivery-address-province-id'
+										    'id' => 'billing-address-province-id'
 										]));?>
 										<i></i>
 									</label>
+									<span class="help-block">
+									   <?=$this->formElementErrors($deliveryAddress->get('provinceId'), [
+                                            'class' => 'list-unstyled note note-error'
+                                        ]); ?>
+									</span>
 								</div>
-								<div class="col-md-4">
-									<label class="input">
+							</div>
+							<div class="row">
+                                <div class="col-md-6">
+									<label class="input<?php if ($deliveryAddress->get('postcode')->getMessages()) echo ' state-error'; ?>">
 										<?=$this->formText($deliveryAddress->get('postcode'));?>
 										<i></i>
 									</label>
+									<span class="help-block">
+									   <?=$this->formElementErrors($deliveryAddress->get('postcode'), [
+                                            'class' => 'list-unstyled note note-error'
+                                        ]); ?>
+									</span>
 								</div>
-								<div class="col-md-4">
-									<label class="select">
+								<div class="col-md-6">
+									<label class="select<?php if ($deliveryAddress->get('countryId')->getMessages()) echo ' state-error'; ?>">
 										<?=$this->formSelect($deliveryAddress->get('countryId')->setAttributes([
 										    'class' => 'pointer',
-										    'id' => 'delivery-address-country-id',
+										    'id' => 'billing-address-country-id',
 										]));?>
 										<i></i>
 									</label>
+									<span class="help-block">
+									   <?=$this->formElementErrors($deliveryAddress->get('countryId'), [
+                                            'class' => 'list-unstyled note note-error'
+                                        ]); ?>
+									</span>
 								</div>
 							</div>
 							<div class="row">
                                 <div class="col-md-12">
-									<label class="input">
+									<label class="input<?php if ($deliveryAddress->get('phone')->getMessages()) echo ' state-error'; ?>">
                                         <i class="icon-prepend fa fa-phone"></i>
 										<?=$this->formTel($deliveryAddress->get('phone'));?>
 										<i></i>
 									</label>
+									<span class="help-block">
+									   <?=$this->formElementErrors($deliveryAddress->get('phone'), [
+                                            'class' => 'list-unstyled note note-error'
+                                        ]); ?>
+									</span>
 								</div>
 							</div>
 						</fieldset>
@@ -216,7 +332,9 @@ $deliveryAddress = $customer->get('deliveryAddress');
         </div>
         <!-- /ACCORDION -->
 
-        <button class="btn btn-primary btn-lg pull-right"><i class="fa fa-check"></i> Confirm Order</button>
+        <button type="submit" class="btn btn-primary btn-lg pull-right" data-loading-text="Please wait...">
+            <i class="fa fa-check"></i> Confirm Order
+        </button>
 
     </div>
 
@@ -245,7 +363,7 @@ $deliveryAddress = $customer->get('deliveryAddress');
 
                 <section class="clearfix cart_totals noborder">
                     <span class="pull-right fsize20 bold styleColor"><?=$this->cart()->getTotal();?></span>
-                    <span class="bold fsize18">ORDER TOTAL</span>
+                    <span class="bold fsize18">Order Total</span>
                 </section>
 
             </fieldset>
@@ -255,6 +373,7 @@ $deliveryAddress = $customer->get('deliveryAddress');
     </div>
 
 </form>
+
 <script>
 <?php $this->inlineScript()->captureStart(); ?>
     $(document).ready(function(){
@@ -267,9 +386,7 @@ $deliveryAddress = $customer->get('deliveryAddress');
                 $('#billing-address-province-id').html( data );
             });
         });
-    });
-
-    $(document).ready(function(){
+        
         $('#delivery-address-country-id').change(function() {
             $.ajax({
                 url : '<?=$this->url('shop/country');?>',

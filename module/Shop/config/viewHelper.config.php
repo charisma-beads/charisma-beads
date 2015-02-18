@@ -15,5 +15,6 @@ return array(
         'ProductPrice'      => 'Shop\View\ProductPrice',
         'ProductSearch'     => 'Shop\View\ProductSearch',
         'CountrySelect'     => 'Shop\View\CountrySelect',
+        'MonthYearSelect'   => 'Shop\View\FormMonthSelect',
     ),
 );

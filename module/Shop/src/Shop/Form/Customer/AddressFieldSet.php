@@ -31,6 +31,7 @@ class AddressFieldSet extends Fieldset implements InputFilterProviderInterface
                 'filters' => [
                     ['name' => 'StripTags'],
                     ['name' => 'StringTrim'],
+                    ['name' => 'UthandoUcwords'],
                 ],
                 'validators' => [
                     ['name' => 'NotEmpty'],
@@ -42,6 +43,7 @@ class AddressFieldSet extends Fieldset implements InputFilterProviderInterface
                 'filters' => [
                     ['name' => 'StripTags'],
                     ['name' => 'StringTrim'],
+                    ['name' => 'UthandoUcwords'],
                 ],
                 'validators' => [
                     ['name' => 'NotEmpty'],
@@ -53,6 +55,19 @@ class AddressFieldSet extends Fieldset implements InputFilterProviderInterface
                 'filters' => [
                     ['name' => 'StripTags'],
                     ['name' => 'StringTrim'],
+                    ['name' => 'UthandoUcwords'],
+                ],
+                'validators' => [
+                    ['name' => 'NotEmpty'],
+                ],
+            ],
+            
+            'city' => [
+                'required' => true,
+                'filters' => [
+                    ['name' => 'StripTags'],
+                    ['name' => 'StringTrim'],
+                    ['name' => 'UthandoUcwords'],
                 ],
                 'validators' => [
                     ['name' => 'NotEmpty'],
@@ -84,7 +99,7 @@ class AddressFieldSet extends Fieldset implements InputFilterProviderInterface
                     ]],
                 ],
                 'validators' => [
-                    ['name' => 'Shop\I18n\Validator\PostCode', 'options' => [
+                    ['name' => 'UthandoCommonPostCode', 'options' => [
                         'country' => $this->getOption('country'),
                     ]],
                 ],
@@ -110,12 +125,12 @@ class AddressFieldSet extends Fieldset implements InputFilterProviderInterface
                     ['name' => 'StripTags'],
                     ['name' => 'StringTrim'],
                     ['name' => 'Digits'],
-                    ['name' => 'UthandoPhoneNumber', 'options' => [
+                    ['name' => 'UthandoCommonPhoneNumber', 'options' => [
                         'country' => $this->getOption('country'),
                     ]],
                 ],
                 'validators' => [
-                    ['name' => 'PhoneNumber', 'options' => [
+                    ['name' => 'UthandoCommonPhoneNumber', 'options' => [
                         'country' => $this->getOption('country'),
                     ]],
                 ],
