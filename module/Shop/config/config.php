@@ -331,18 +331,39 @@ return [
                     'payment' => [
                         'type' => 'Segment',
                         'options' => [
-                            'route' => '/payment[/:action]',
-                            'constraints' => [
-                                'action' => '[a-zA-Z0-9][a-zA-Z0-9_-]*'
-                            ],
+                            'route' => '/payment',
                             'defaults' => [
                                 'controller' => 'Payment',
-                                'action' => 'payment',
-                                'option' => 'payPaypal',
-                                'cartId' => 0,
                                 'force-ssl' => 'ssl'
-                            ]
-                        ]
+                            ],
+                        ],
+                        'may_terminate' => true,
+                        'child_routes' => [
+                            'default' => [
+                                'type' => 'Segment',
+                                'options' => [
+                                    'route' => '/:paymentOption',
+                                    'constraints' => [
+                                        'paymentOption' => '[a-zA-Z][a-zA-Z-]*',
+                                    ],
+                                    'defaults' => [
+                                        'action' => 'index',
+                                    ],
+                                ],
+                            ],
+                            'process-credit-card' => [
+                                'type' => 'Segment',
+                                'options' => [
+                                    'route' => '/process-credit-card/:orderId',
+                                    'constraints' => [
+                                        'orderId' => '\d+',
+                                    ],
+                                    'defaults' => [
+                                        'action' => 'process-credit-card',
+                                    ],
+                                ],
+                            ],
+                        ],
                     ],
                     'paypal' => [
                         'type' => 'Segment',
