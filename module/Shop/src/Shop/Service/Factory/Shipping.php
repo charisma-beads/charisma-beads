@@ -9,10 +9,13 @@ class Shipping implements FactoryInterface
 {
 	public function createService(ServiceLocatorInterface $serviceLocator)
 	{
+	    /* @var $serviceManager \UthandoCommon\Service\ServiceManager */
+	    $serviceManager = $this->get('UthandoServiceManager');
+	    
 	    /* @var $shopOptions \Shop\Options\ShopOptions */
 	    $shopOptions = $serviceLocator->get('Shop\Options\Shop');
 	    $taxService = $serviceLocator->get('Shop\Service\Tax');
-	    $countryService = $serviceLocator->get('Shop\Service\Country');
+	    $countryService = $serviceManager->get('ShopCountry');
 	    
 	    $taxService->setTaxState($shopOptions->getVatState());
 	    

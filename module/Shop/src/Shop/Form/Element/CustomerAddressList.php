@@ -30,7 +30,8 @@ class CustomerAddressList extends Select implements ServiceLocatorAwareInterface
     {
         $addresses = $this->getServiceLocator()
             ->getServiceLocator()
-            ->get('Shop\Service\Customer\Address')
+            ->get('UthandoServiceManager')
+            ->get('ShopCustomerAddress')
             ->getAllAddressesByCustomerId($this->getCustomerId());
         
         $addressOptions = [

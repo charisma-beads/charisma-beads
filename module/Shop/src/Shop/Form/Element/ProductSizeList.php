@@ -15,7 +15,8 @@ class ProductSizeList extends Select implements ServiceLocatorAwareInterface
     {
         $sizes = $this->getServiceLocator()
             ->getServiceLocator()
-            ->get('Shop\Service\Product\Size')
+            ->get('UthandoServiceManager')
+            ->get('ShopProductSize')
             ->fetchAll();
         
     	$sizeOptions = [];

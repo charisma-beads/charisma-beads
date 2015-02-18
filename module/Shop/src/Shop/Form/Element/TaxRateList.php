@@ -16,7 +16,8 @@ class TaxRateList extends Select implements ServiceLocatorAwareInterface
     {
         $taxRates = $this->getServiceLocator()
             ->getServiceLocator()
-            ->get('Shop\Service\Tax\Rate')
+            ->get('UthandoServiceManager')
+            ->get('ShopTaxRate')
             ->fetchAll();
         
         $taxRateOptions = [];

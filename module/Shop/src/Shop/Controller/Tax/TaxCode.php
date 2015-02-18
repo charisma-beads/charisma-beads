@@ -6,6 +6,6 @@ use UthandoCommon\Controller\AbstractCrudController;
 class TaxCode extends AbstractCrudController
 {
 	protected $searchDefaultParams = array('sort' => 'taxCodeId');
-	protected $serviceName = 'Shop\Service\Tax\Code';
+	protected $serviceName = 'ShopTaxCode';
 	protected $route = 'admin/shop/tax/code';
 }

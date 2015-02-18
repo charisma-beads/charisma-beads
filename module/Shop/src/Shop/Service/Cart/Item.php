@@ -5,8 +5,6 @@ use UthandoCommon\Service\AbstractMapperService;
 
 class Item extends AbstractMapperService
 {
-    protected $mapperClass = 'Shop\Mapper\Cart\Item';
-
     protected $serviceAlias = 'ShopCartItem';
 
     /**

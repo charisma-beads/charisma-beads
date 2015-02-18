@@ -13,7 +13,8 @@ class ProductGroupList extends Select implements ServiceLocatorAwareInterface
     {
         $groups = $this->getServiceLocator()
             ->getServiceLocator()
-            ->get('Shop\Service\Product\Group')
+            ->get('UthandoServiceManager')
+            ->get('ShopProductGroup')
             ->fetchAll();
         
         $groupOptions = ['0' => 'None'];

@@ -17,11 +17,11 @@ class Cost extends AbstractRelationalMapperService
     protected $referenceMap = [
         'postLevel' => [
             'refCol'    => 'postLevelId',
-            'service'   => 'Shop\Service\Post\Level',
+            'service'   => 'ShopPostLevel',
         ],
         'postZone'  => [
             'refCol'    => 'postZoneId',
-            'service'   => 'Shop\Service\Post\Zone',
+            'service'   => 'ShopPostZone',
         ],
     ];
 }

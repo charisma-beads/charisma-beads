@@ -29,6 +29,10 @@ class Image extends AbstractRelationalMapperService
         $this->getEventManager()->attach([
             'pre.form',
         ], [$this, 'preForm']);
+        
+        $this->getEventManager()->attach([
+            'post.delete'
+        ], [$this, 'deleteImage']);
     }
 
     /**
@@ -44,6 +48,21 @@ class Image extends AbstractRelationalMapperService
         $images = $mapper->getImagesByProductId($id);
 
         return $images;
+    }
+    
+    public function deleteImage(Event $e)
+    {
+        /* @var $model \Shop\Model\Product\Image */
+        $model = $e->getParam('model');
+        $file = './public/userfiles/shop/images/' . $model->getFull();
+        $thumb = './public/userfiles/shop/images/' . $model->getThumbnail();
+        
+        if (is_file($file) && file_exists($file)) {
+            unlink($file);
+        }
+        
+        // TODO: generate thumbnail to delete.
+        //unlink($thumb);
     }
 
     /**

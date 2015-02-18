@@ -16,7 +16,8 @@ class PostLevelList extends Select implements ServiceLocatorAwareInterface
     {
         $postLevels = $this->getServiceLocator()
             ->getServiceLocator()
-            ->get('Shop\Service\Post\Level')
+            ->get('UthandoServiceManager')
+            ->get('ShopPostLevel')
             ->fetchAll();
         
         $postLevelOptions = [];

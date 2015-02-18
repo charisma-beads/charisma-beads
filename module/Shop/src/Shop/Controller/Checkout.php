@@ -231,7 +231,7 @@ class Checkout extends AbstractActionController
 
     public function getRegisterForm()
     {
-        $userService = $this->getServiceLocator()->get('UthandoUser\Service\User');
+        $userService = $this->getServiceLocator()->get('UthandoUser');
         return $userService->getForm(null, [
             'returnTo' => 'shop/checkout'
         ]);

@@ -16,7 +16,7 @@ class Country extends AbstractRelationalMapperService
     protected $referenceMap = [
         'postZone'  => [
             'refCol'    => 'postZoneId',
-            'service'   => 'Shop\Service\Post\Zone',
+            'service'   => 'ShopPostZone',
         ],
     ];
 

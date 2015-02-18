@@ -54,7 +54,7 @@ class CustomerAddress extends AbstractCrudController
         if ($request->isPost()) {
         	try {
         		$params = $this->params()->fromPost();
-        		$customerId = $this->getService('Shop\Service\Customer')
+        		$customerId = $this->getService('ShopCustomer')
                     ->getCustomerByUserId($user->getUserId())
                     ->getCustomerId();
         		
@@ -103,7 +103,7 @@ class CustomerAddress extends AbstractCrudController
     
     	try {
     		$model = $this->getService()->getById($id);
-    		$customerId = $this->getService('Shop\Service\Customer')
+    		$customerId = $this->getService('ShopCustomer')
         		->getCustomerByUserId($this->getUserId())
         		->getCustomerId();
     		
@@ -173,7 +173,7 @@ class CustomerAddress extends AbstractCrudController
     	}
     	
     	$model = $this->getService()->getById($id);
-    	$customerId = $this->getService('Shop\Service\Customer')
+    	$customerId = $this->getService('ShopCustomer')
     	   ->getCustomerByUserId($this->getUserId())
     	   ->getCustomerId();
     	

@@ -15,7 +15,8 @@ class ProductCategoryList extends Select implements ServiceLocatorAwareInterface
     {
         $cats = $this->getServiceLocator()
             ->getServiceLocator()
-            ->get('Shop\Service\Product\Category')
+            ->get('UthandoServiceManager')
+            ->get('ShopProductCategory')
             ->fetchAll();
         
         $categoryOptions = [];

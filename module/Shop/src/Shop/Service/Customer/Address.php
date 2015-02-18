@@ -3,6 +3,7 @@ namespace Shop\Service\Customer;
 
 use Shop\ShopException;
 use UthandoCommon\Service\AbstractRelationalMapperService;
+use Zend\EventManager\Event;
 
 class Address extends AbstractRelationalMapperService
 {
@@ -17,13 +18,30 @@ class Address extends AbstractRelationalMapperService
     protected $referenceMap = [
         'country'           => [
             'refCol'    => 'countryId',
-            'service'   => 'Shop\Service\Country',
+            'service'   => 'ShopCountry',
         ],
         'province'   => [
             'refCol'    => 'provinceId',
-            'service'   => 'Shop\Service\Country\Province',
+            'service'   => 'ShopCountryProvince',
         ],
     ];
+    
+    /**
+     * (non-PHPdoc)
+     * @see \UthandoCommon\Service\AbstractService::attachEvents()
+     */
+    public function attachEvents()
+    {   
+        $this->getEventManager()->attach([
+            'form.init'
+        ], [$this, 'customerAddressForm']);
+        
+        $this->getEventManager()->attach([
+            'pre.add',
+            'pre.edit'
+        ], [$this, 'setCountryValidation']);
+        
+    }
 
     /**
      * @param int $id
@@ -82,7 +100,7 @@ class Address extends AbstractRelationalMapperService
         $userId = (int) $userId;
 
         /* @var $service \Shop\Mapper\Customer\Customer */
-        $service = $this->getService('Shop\Service\Customer');
+        $service = $this->getService('ShopCustomer');
         
         $customerId = $service
             ->getCustomerByUserId($userId)
@@ -111,5 +129,41 @@ class Address extends AbstractRelationalMapperService
         }
 
         return $address;
+    }
+    
+    public function setCountryValidation(Event $e)
+    {
+        $form = $e->getParam('form');
+        $post = $e->getParam('post');
+    
+        /* @var $service \Shop\Service\Country\Country */
+        $service = $this->getService('ShopCountry');
+        $countryId = $post['countryId'];
+    
+        $country = $service->getById($countryId);
+    
+        $validator = $form->getInputFilter();
+    
+        $validator->setCountryCode($country->getCode());
+        $validator->remove('phone');
+        $validator->remove('postcode');
+        $validator->init();
+    }
+    
+    public function customerAddressForm(Event $e)
+    {
+        $form = $e->getParam('form');
+        $data = $e->getParam('data');
+        $model = $e->getParam('model');
+        
+        if (isset($data['countryId'])) {
+            $countryId = $data['countryId'];
+        } elseif ($model) {
+            $countryId = $model->getCountryId();
+        } else {
+            $countryId = $form->get('countryId')->getCountryId();
+        }
+         
+        $form->get('provinceId')->setCountryId($countryId);
     }
 }

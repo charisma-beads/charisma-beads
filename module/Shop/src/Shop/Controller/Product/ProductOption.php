@@ -7,7 +7,7 @@ use Zend\View\Model\ViewModel;
 
 class ProductOption extends AbstractCrudController
 {
-    protected $serviceName = 'Shop\Service\Product\Option';
+    protected $serviceName = 'ShopProductOption';
     protected $route = 'admin/shop/product/option';
     protected $paginate = false;
 

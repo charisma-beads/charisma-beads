@@ -15,6 +15,7 @@ use Shop\ShopException;
 use Shop\Model\Product\Category as CategoryModel;
 use UthandoCommon\Service\AbstractRelationalMapperService;
 use Zend\Form\Form;
+use Zend\EventManager\Event;
 
 /**
  * Class Category
@@ -33,7 +34,7 @@ class Category extends AbstractRelationalMapperService
     protected $referenceMap = [
         'productImage'  => [
             'refCol'    => 'productImageId',
-            'service'   => 'Shop\Service\Product\Image',
+            'service'   => 'ShopProductImage',
         ],
     ];
 	
@@ -41,6 +42,20 @@ class Category extends AbstractRelationalMapperService
 	 * @var \Shop\Service\Product\Image
 	 */
 	protected $imageService;
+	
+	/**
+	 * Attach events
+	 */
+	public function attachEvents()
+	{
+	    $this->getEventManager()->attach([
+	        'form.init'
+	    ], [$this, 'categoryForm']);
+	    
+	    $this->getEventManager()->attach([
+	        'pre.form'
+        ], [$this, 'preForm']);
+	}
 
     /**
      * @param bool $topLevelOnly
@@ -299,5 +314,24 @@ class Category extends AbstractRelationalMapperService
         $mapper = $this->getMapper();
 		
 		return $mapper->toggleEnabled($category);
+	}
+	
+	public function categoryForm(Event $e)
+	{
+	    $form = $e->getParam('form');
+	    $model = $e->getParam('model');
+	    
+	    $form->setCategoryId($model->getProductCategoryId());
+	}
+	
+	public function preForm(Event $e)
+	{
+	    $model = $e->getParam('model');
+	
+	    if ($model instanceof Category) {
+	        $this->setFormOptions([
+	            'productCategoryId' => $model->getProductCategoryId(),
+	        ]);
+	    }
 	}
 }

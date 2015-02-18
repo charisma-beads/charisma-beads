@@ -16,7 +16,8 @@ class PostZoneList extends Select implements ServiceLocatorAwareInterface
     {
         $zones = $this->getServiceLocator()
             ->getServiceLocator()
-            ->get('Shop\Service\Post\Zone')
+            ->get('UthandoServiceManager')
+            ->get('ShopPostZone')
             ->fetchAll();
         
         $zoneOptions = [];

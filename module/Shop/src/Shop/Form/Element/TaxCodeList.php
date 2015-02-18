@@ -15,7 +15,8 @@ class TaxCodeList extends Select implements ServiceLocatorAwareInterface
     {
         $taxCodes = $this->getServiceLocator()
             ->getServiceLocator()
-            ->get('Shop\Service\Tax\Code')
+            ->get('UthandoServiceManager')
+            ->get('ShopTaxCode')
             ->fetchAll();
         
         $taxCodeOptions = [];

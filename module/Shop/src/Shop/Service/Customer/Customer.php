@@ -28,20 +28,20 @@ class Customer extends AbstractRelationalMapperService
     protected $referenceMap = [
         'user'              => [
             'refCol'    => 'userId',
-            'service'   => 'UthandoUser\Service\User',
+            'service'   => 'UthandoUser',
         ],
         'prefix'            => [
             'refCol'    => 'prefixId',
-            'service'   => 'Shop\Service\Customer\Prefix',
+            'service'   => 'ShopCustomerPrefix',
         ],
         'deliveryAddress'   => [
             'refCol'    => 'deliveryAddressId',
-            'service'   => 'Shop\Service\Customer\Address',
+            'service'   => 'ShopCustomerAddress',
             'getMethod' => 'getFullAddressById',
         ],
         'billingAddress'    => [
             'refCol'    => 'billingAddressId',
-            'service'   => 'Shop\Service\Customer\Address',
+            'service'   => 'ShopCustomerAddress',
             'getMethod' => 'getFullAddressById',
         ],
     ];
@@ -89,7 +89,7 @@ class Customer extends AbstractRelationalMapperService
         // no customer is return create one base on the userId.
         if(!$customer instanceof CustomerModel) {
             /* @var \UthandoUser\Service\User $userService */
-            $userService = $this->getService('UthandoUser\Service\User');
+            $userService = $this->getService('UthandoUser');
             $user = $userService->getById($userId);
             $user = $userService->getMapper()->extract($user);
             $customer = $this->getMapper()->getModel($user);

@@ -204,6 +204,9 @@ class Category extends Form implements ServiceLocatorAwareInterface
 	 */
 	public function getCategoryService()
 	{
-		return $this->getServiceLocator()->getServiceLocator()->get('Shop\Service\Product\Category');
+		return $this->getServiceLocator()
+            ->getServiceLocator()
+            ->get('UthandoServiceManager')
+            ->get('ShopProductCategory');
 	}
 }

@@ -6,6 +6,6 @@ use UthandoCommon\Controller\AbstractCrudController;
 
 class ProductSize extends AbstractCrudController
 {
-    protected $serviceName = 'Shop\Service\Product\Size';
+    protected $serviceName = 'ShopProductSize';
     protected $route = 'admin/shop/product/size';
 } 

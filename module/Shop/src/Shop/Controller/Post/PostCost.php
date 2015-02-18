@@ -6,6 +6,6 @@ use UthandoCommon\Controller\AbstractCrudController;
 class PostCost extends AbstractCrudController
 {
 	protected $searchDefaultParams = array('sort' => 'cost');
-	protected $serviceName = 'Shop\Service\Post\Cost';
+	protected $serviceName = 'ShopPostCost';
 	protected $route = 'admin/shop/post/cost';
 }

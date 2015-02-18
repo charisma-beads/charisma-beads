@@ -32,7 +32,8 @@ class CountryList extends Select implements ServiceLocatorAwareInterface
     {
         $countries = $this->getServiceLocator()
             ->getServiceLocator()
-            ->get('Shop\Service\Country')
+            ->get('UthandoServiceManager')
+            ->get('ShopCountry')
             ->fetchAll();
         
         $countryOptions = [];

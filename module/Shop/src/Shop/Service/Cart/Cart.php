@@ -100,7 +100,7 @@ class Cart extends AbstractMapperService implements InitializableInterface
     public function attachEvents()
     {
         /* @var $stockControl StockControl */
-        $stockControl = $this->getServiceLocator()->get('Shop\Service\StockControl');
+        $stockControl = $this->getService('Shop\Service\StockControl');
 
         $this->getEventManager()->attach([
             'stock.check',
@@ -587,7 +587,7 @@ class Cart extends AbstractMapperService implements InitializableInterface
     {
         if (! $this->cartItemService instanceof Item) {
             $sl = $this->getServiceLocator();
-            $this->cartItemService = $sl->get('Shop\Service\Cart\Item');
+            $this->cartItemService = $sl->get('ShopCartItem');
         }
         
         return $this->cartItemService;

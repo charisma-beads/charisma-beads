@@ -14,11 +14,11 @@ class Option extends AbstractRelationalMapperService
     protected $referenceMap = [
         'product'   => [
             'refCol'    => 'productId',
-            'service'   => 'Shop\Service\Product',
+            'service'   => 'ShopProduct',
         ],
         'postUnit'          => [
             'refCol'    => 'postUnitId',
-            'service'   => 'Shop\Service\Post\Unit',
+            'service'   => 'ShopPostUnit',
         ],
     ];
 

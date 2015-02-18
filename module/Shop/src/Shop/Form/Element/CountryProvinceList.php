@@ -34,7 +34,8 @@ class CountryProvinceList extends Select implements ServiceLocatorAwareInterface
     {
         $service = $this->getServiceLocator()
             ->getServiceLocator()
-            ->get('Shop\Service\Country\Province');
+            ->get('UthandoServiceManager')
+            ->get('ShopCountryProvince');
         
         if ($this->getCountryId()) {
             $provinces = $service->getProvincesByCountryId($this->getCountryId());

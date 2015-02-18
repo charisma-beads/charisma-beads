@@ -26,16 +26,16 @@ class Order extends AbstractRelationalMapperService
     protected $referenceMap = [
         'customer'      => [
             'refCol'        => 'customerId',
-            'service'       => 'Shop\Service\Customer',
+            'service'       => 'ShopCustomer',
             'getMethod'     => 'getCustomerDetailsByCustomerId',
         ],
         'orderStatus'   => [
             'refCol'        => 'orderStatusId',
-            'service'       => 'Shop\Service\Order\Status',
+            'service'       => 'ShopOrderStatus',
         ],
         'orderLines'    => [
             'refCol'        => 'orderId',
-            'service'       => 'Shop\Service\Order\Line',
+            'service'       => 'ShopOrderLine',
             'getMethod'     => 'getOrderLinesByOrderId',
         ],
     ];
@@ -73,7 +73,7 @@ class Order extends AbstractRelationalMapperService
         $cartTotal = $cart->getTotal();
 
         /* @var $orderStatusService \Shop\Service\Order\Status */
-        $orderStatusService = $this->getService('Shop\Service\Order\Status');
+        $orderStatusService = $this->getService('ShopOrderStatus');
         
         /* @var $orderStatus \Shop\Model\Order\Status */
         $orderStatus = $orderStatusService->getStatusByName('Pending');
@@ -129,7 +129,7 @@ class Order extends AbstractRelationalMapperService
             ];
 
             /* @var $orderLineService \Shop\Service\Order\Line */
-            $orderLineService = $this->getService('Shop\Service\Order\Line');
+            $orderLineService = $this->getService('ShopOrderLine');
             $orderLine = $orderLineService
                 ->getMapper()
                 ->getModel($lineData);
@@ -299,7 +299,7 @@ class Order extends AbstractRelationalMapperService
     
     	if ($order) {
             /* @var $orderStatusService \Shop\Service\Order\Status */
-            $orderStatusService = $this->getService('Shop\Service\Order\Status');
+            $orderStatusService = $this->getService('Shop\OrderStatus');
     		$orderStatus = $orderStatusService->getStatusByName('Cancelled');
     		$order->setOrderStatusId($orderStatus->getOrderStatusId());
 

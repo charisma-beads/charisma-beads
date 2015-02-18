@@ -13,7 +13,8 @@ class OrderStatusList extends Select implements ServiceLocatorAwareInterface
     {
         $statuses = $this->getServiceLocator()
             ->getServiceLocator()
-            ->get('Shop\Service\Order\Status')
+            ->get('UthandoServiceManager')
+            ->get('ShopOrderStatus')
             ->fetchAll();
         
     	$statusOptions = [];

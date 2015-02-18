@@ -60,7 +60,7 @@ class Cart extends AbstractActionController
 
         if ($this->identity()) {
             /* @var $customerAddressService Address */
-            $customerAddressService = $this->getService('Shop\Service\Customer\Address');
+            $customerAddressService = $this->getService('ShopCustomerAddress');
 
             $customerAddress = $customerAddressService->getAddressByUserId(
                 $this->identity()->getUserId(), 'delivery'

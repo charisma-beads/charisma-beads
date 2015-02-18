@@ -1,15 +1,17 @@
 <?php
 namespace Shop\Controller;
 
-use Shop\Service\Paypal as PaypalService;
+use Shop\Service\Payment\Paypal as PaypalService;
 use Shop\Service\Order\Order as OrderService;
 use UthandoCommon\Controller\SetExceptionMessages;
 use Zend\Mvc\Controller\AbstractActionController;
 use PayPal\Exception\PayPalConnectionException;
+use UthandoCommon\Controller\ServiceTrait;
 
 class Paypal extends AbstractActionController
 {
-    use SetExceptionMessages;
+    use SetExceptionMessages,
+        ServiceTrait;
     
     /**
      * @var PaypalService
@@ -92,7 +94,7 @@ class Paypal extends AbstractActionController
     public function getPaypalService()
     {
         if (!$this->paypalService instanceof PaypalService) {
-            $paypalService = $this->getServiceLocator()->get('Shop\Service\Paypal');
+            $paypalService = $this->getService('ShopPaymentPaypal');
             $this->paypalService = $paypalService;
         }
         
@@ -105,7 +107,7 @@ class Paypal extends AbstractActionController
     public function getOrderService()
     {
     	if (!$this->orderService instanceof OrderService) {
-    		$orderService = $this->getServiceLocator()->get('Shop\Service\Order');
+    		$orderService = $this->getService('ShopOrder');
     		$this->orderService = $orderService;
     	}
     

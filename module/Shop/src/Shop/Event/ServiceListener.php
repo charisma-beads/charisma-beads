@@ -1,7 +1,6 @@
 <?php
 namespace Shop\Event;
 
-use Shop\Model\Product\Category;
 use Zend\EventManager\Event;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
@@ -14,22 +13,6 @@ class ServiceListener implements ListenerAggregateInterface
     public function attach(EventManagerInterface $events)
     {
         $events = $events->getSharedManager();
-        
-        $this->listeners[] = $events->attach([
-            'Shop\Service\Customer\Address',
-        ], 'form.init', [$this, 'formInit']);
-
-        $this->listeners[] = $events->attach([
-            'Shop\Service\Product\Category',
-        ], 'pre.form', [$this, 'preForm']);
-        
-        $this->listeners[] = $events->attach([
-            'Shop\Service\Product\Product'
-        ], ['pre.form'], [$this, 'setProductIdent']);
-        
-        $this->listeners[] = $events->attach([
-    		'Shop\Service\Customer\Address'
-		], ['pre.add', 'pre.edit'], [$this, 'setCountryValidation']);
 
         $this->listeners[] = $events->attach([
             'Shop\Controller\Customer\CustomerAddress',
@@ -44,21 +27,6 @@ class ServiceListener implements ListenerAggregateInterface
         $this->listeners[] = $events->attach([
             'UthandoFileManager\Service\ImageUploader',
         ], ['post.upload'], [$this, 'postImageUpload']);
-
-        $this->listeners[] = $events->attach([
-            'Shop\Service\Product\Image',
-        ], ['post.delete'], [$this, 'deleteImage']);
-    }
-
-    public function deleteImage(Event $e)
-    {
-        /* @var $model \Shop\Model\Product\Image */
-        $model = $e->getParam('model');
-        $file = './public/userfiles/shop/images/' . $model->getFull();
-        $thumb = './public/userfiles/shop/images/' . $model->getThumbnail();
-        unlink($file);
-        // TODO: generate thumbnail to delete.
-        //unlink($thumb);
     }
 
     public function preImageUpload(Event $e)
@@ -115,86 +83,5 @@ class ServiceListener implements ListenerAggregateInterface
                 $form->get('productId')->setValue($params);
                 break;
         }
-    }
-    
-    public function setProductIdent(Event $e)
-    {
-
-        $post = $e->getParam('data');
-
-        if (null === $post) {
-            return;
-        }
-
-        if (!$post['ident']) {
-        	$post['ident'] = $post['name'] . ' ' . $post['shortDescription'];
-        }
-        
-        $e->setParam('data', $post);
-    }
-    
-    public function setCountryValidation(Event $e)
-    {
-        $form = $e->getParam('form');
-        $post = $e->getParam('post');
-        
-        /* @var $service \Shop\Service\Country\Country */
-        $service = $e->getTarget()->getService('Shop\Service\Country');
-        $countryId = $post['countryId'];
-        
-        $country = $service->getById($countryId);
-        
-        $validator = $form->getInputFilter();
-        
-        $validator->setCountryCode($country->getCode());
-        $validator->remove('phone');
-        $validator->remove('postcode');
-        $validator->init();
-    }
-
-    public function preForm(Event $e)
-    {
-        $model = $e->getParam('model');
-        $service = $e->getTarget();
-
-        if ($model instanceof Category) {
-            $service->setFormOptions([
-                'productCategoryId' => $model->getProductCategoryId(),
-            ]);
-        }
-    }
-    
-    public function formInit(Event $e)
-    {
-        $form = $e->getParam('form');
-        $data = $e->getParam('data');
-        $model = $e->getParam('model');
-        
-        switch (get_class($model)) {
-        	case 'Shop\Model\Customer\Address':
-        	    $this->customerAddressForm($form, $model, $data);
-        	    break;
-            case 'Shop\Model\Product\Category':
-                $this->categoryForm($form, $model);
-                break;
-        }
-    }
-
-    public function categoryForm($form, $model)
-    {
-        $form->setCategoryId($model->getProductCategoryId());
-    }
-    
-    public function customerAddressForm($form, $model, $data)
-    {
-        if (isset($data['countryId'])) {
-        	$countryId = $data['countryId'];
-        } elseif ($model) {
-        	$countryId = $model->getCountryId();
-        } else {
-        	$countryId = $form->get('countryId')->getCountryId();
-        }
-         
-        $form->get('provinceId')->setCountryId($countryId);
     }
 }

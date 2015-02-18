@@ -6,7 +6,7 @@ use UthandoCommon\Controller\AbstractCrudController;
 class ProductGroup extends AbstractCrudController
 {
 	protected $searchDefaultParams = array('sort' => 'productGroupId');
-	protected $serviceName = 'Shop\Service\Product\Group';
+	protected $serviceName = 'ShopProductGroup';
 	protected $route = 'admin/shop/group';
 	
 }

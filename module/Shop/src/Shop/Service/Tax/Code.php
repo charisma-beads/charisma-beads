@@ -16,7 +16,7 @@ class Code extends AbstractRelationalMapperService
     protected $referenceMap = [
         'taxRate'   => [
             'refCol'    => 'taxRateId',
-            'service'   => 'Shop\Service\Tax\Rate',
+            'service'   => 'ShopTaxRate',
         ],
     ];
 

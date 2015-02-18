@@ -13,6 +13,7 @@ return [
         'ShopOrderLine'         => 'Shop\Service\Order\Line',
         'ShopOrderStatus'       => 'Shop\Service\Order\Status',
         'ShopPaymentCreditCard' => 'Shop\Service\Payment\CreditCard',
+        'ShopPaymentPaypal'     => 'Shop\Service\Payment\Paypal',
         'ShopPostCost'          => 'Shop\Service\Post\Cost',
         'ShopPostLevel'         => 'Shop\Service\Post\Level',
         'ShopPostUnit'          => 'Shop\Service\Post\Unit',

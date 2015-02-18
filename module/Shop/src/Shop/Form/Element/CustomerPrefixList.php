@@ -16,7 +16,8 @@ class CustomerPrefixList extends Select implements ServiceLocatorAwareInterface
     {
         $prefixes = $this->getServiceLocator()
             ->getServiceLocator()
-            ->get('Shop\Service\Customer\Prefix')
+            ->get('UthandoServiceManager')
+            ->get('ShopCustomerPrefix')
             ->fetchAll();
         
     	$prefixOptions = [];

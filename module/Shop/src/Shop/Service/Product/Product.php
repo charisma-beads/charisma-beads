@@ -3,6 +3,7 @@ namespace Shop\Service\Product;
 
 use Shop\Model\Product\Product as ProductModel;
 use UthandoCommon\Service\AbstractRelationalMapperService;
+use Zend\EventManager\Event;
 
 class Product extends AbstractRelationalMapperService
 {
@@ -44,6 +45,16 @@ class Product extends AbstractRelationalMapperService
             'getMethod' => 'getOptionsByProductId',
         ],
     ];
+    
+    /**
+     * Attach events
+     */
+    public function attachEvents()
+    {
+        $this->getEventManager()->attach([
+            'pre.form'
+        ], [$this, 'setProductIdent']);
+    }
 
     /**
      * @param int $id
@@ -168,5 +179,20 @@ class Product extends AbstractRelationalMapperService
 		$form->setValidationGroup('enabled');
 	
 		return parent::edit($product, [], $form);
+	}
+	
+	public function setProductIdent(Event $e)
+	{
+	    $post = $e->getParam('data');
+	
+	    if (null === $post) {
+	        return;
+	    }
+	
+	    if (!$post['ident']) {
+	        $post['ident'] = $post['name'] . ' ' . $post['shortDescription'];
+	    }
+	
+	    $e->setParam('data', $post);
 	}
 }

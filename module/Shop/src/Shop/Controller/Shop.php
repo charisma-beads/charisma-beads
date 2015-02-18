@@ -4,9 +4,12 @@ namespace Shop\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use UthandoCommon\Controller\ServiceTrait;
 
 class Shop extends AbstractActionController
 {
+    use ServiceTrait;
+    
     /**
      *
      * @var \Shop\Service\Product\Category
@@ -34,8 +37,7 @@ class Shop extends AbstractActionController
     protected function getProductCategoryService()
     {
         if (! $this->productCategoryService) {
-            $sl = $this->getServiceLocator();
-            $this->productCategoryService = $sl->get('Shop\Service\Product\Category');
+            $this->productCategoryService = $this->getService('ShopProductCategory');
         }
         
         return $this->productCategoryService;
