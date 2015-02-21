@@ -36,6 +36,10 @@ return [
         'uthando-navigation/main-menu'                  => __DIR__ . '/view/uthando-navigation/main-menu.phtml',
         'uthando-navigation/top-menu'                   => __DIR__ . '/view/uthando-navigation/top-menu.phtml',
         'uthando-navigation/user-menu'                  => __DIR__ . '/view/uthando-navigation/user-menu.phtml',
+        
+        'uthando-news/news/news-item'                   => __DIR__ . '/view/uthando-news/news/news-item.phtml',
+        'uthando-news/news/paginate'                    => __DIR__ . '/view/uthando-news/news/paginate.phtml',
+        'uthando-news/news/view'                        => __DIR__ . '/view/uthando-news/news/view.phtml',
 
         'uthando-twitter/twitter/twitter-feed'          => __DIR__ . '/view/uthando-twitter/twitter/twitter-feed.phtml',
 

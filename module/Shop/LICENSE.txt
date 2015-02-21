@@ -12,8 +12,8 @@ DEVELOPER LICENSE AGREEMENT
 
     3. You have the right to use the Product in unlimited websites (personal or commercial).
 
-    4. If you use the Product for your client projects, You will be responsible for providing support
-       to your clients, and Shaun Freeman will not communicate directly with your clients under any circumstances.
+    4. If you use the Product for your client projects, You will be responsible for providing support to your clients, 
+       and Shaun Freeman will not communicate directly with your clients under any circumstances.
 
     5. You have the right to include/distribute the Product in 1 (one) project/application for sale
        (eg. CMS product, etc), without any royalty whatsoever, provided that :

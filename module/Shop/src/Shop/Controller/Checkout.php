@@ -202,8 +202,7 @@ class Checkout extends AbstractActionController
     public function getCustomerService()
     {
         if (! $this->customerService) {
-            $sl = $this->getServiceLocator();
-            $this->customerService = $sl->get('Shop\Service\Customer');
+            $this->customerService = $this->getService('ShopCustomer');
         }
         
         return $this->customerService;
@@ -220,8 +219,7 @@ class Checkout extends AbstractActionController
 
     public function getLoginForm()
     {
-        $form = $this->getServiceLocator()
-            ->get('FormElementManager')
+        $form = $this->getService('FormElementManager')
             ->get('UthandoUserLogin');
         $form->setData(array(
             'returnTo' => 'shop/checkout'
@@ -231,7 +229,7 @@ class Checkout extends AbstractActionController
 
     public function getRegisterForm()
     {
-        $userService = $this->getServiceLocator()->get('UthandoUser');
+        $userService = $this->getService('UthandoUser');
         return $userService->getForm(null, [
             'returnTo' => 'shop/checkout'
         ]);

@@ -42,7 +42,7 @@ class StockControl
     public function init(Event $e)
     {
         $this->productService = $e->getTarget()
-            ->getService('Shop\Service\Product');
+            ->getService('ShopProduct');
 
         $this->event = $e;
         $event = $e->getName();

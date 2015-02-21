@@ -1,0 +1,84 @@
+
+<?php $this->placeholder('page-top')->captureStart();?>
+
+<?=$this->partial('layout/page-title', [
+    'pageTitle' => 'Company News',
+]);?>
+
+<?php $this->placeholder('page-top')->captureEnd();?>
+
+<!-- BLOG -->
+<div id="blog" class="row">
+    <div class="col-md-3">
+        <?=$this->partial('shop/product-nav');?>
+    </div>
+    
+    <!-- BLOG ARTICLE LIST -->
+	<div class="col-md-9 col-sm-9">
+        <?php /* @var $row \UthandoNews\Model\News */ ?>
+        <?php foreach ($this->models as $row):?>
+        <!-- article - text -->
+		<div class="prev-article row">
+
+			<div class="col-md-9 col-sm-9">
+
+				<h2 class="article-title"><a href="<?=$this->url('news',[
+                        'news-item' => $row->getArticle()->getSlug(),
+                    ]);?>"><?=$this->escapeHtml($row->getArticle()->getTitle());?></a>
+                </h2>
+				
+                <?php if($row->getImage()):?>
+                <!-- image -->
+				<figure>
+					<a href="blog-single-sidebar.html">
+						<img src="<?=$this->basePath('/userfiles/' . $this->escapeHtml($row->getImage()));?>" class="img-responsive" alt="blog">
+					</a>
+				</figure>
+                <?php endif; ?>
+				<!-- blog short preview -->
+				<p>
+                    <?=strip_tags(substr($row->getArticle()->getContent(),0, strpos($row->getArticle()->getContent(), "</p>")+4));?> ...
+                </p>
+
+				<!-- read more button -->
+				<div class="text-right">
+					<a href="<?=$this->url('news',[
+                        'news-item' => $row->getArticle()->getSlug(),
+                    ]);?>" class="read-more btn btn-xs"><i class="fa fa-sign-out"></i> READ MORE</a>
+				</div>
+
+			</div>
+
+			<div class="blog-prev-date text-left col-md-3 col-sm-3">
+				<span class="date">
+					<?=$this->formatDate($row->getArticle()->getDateCreated(), 'j');?> 
+					<small><?=$this->formatDate($row->getArticle()->getDateCreated(), 'M Y');?></small>
+				</span>
+				<span class="info hidden-xs">
+					<span class="block"><i class="fa fa-user"></i> BY <?=$row->getArticle()->getUser()->getFullName();?></span>
+					<span class="block"><i class="fa fa-link"></i> <a href="<?=$this->url('news',[
+                        'news-item' => $row->getArticle()->getSlug(),
+                    ]);?>">PERMALINK</a></span>
+				</span>
+			</div>
+
+		</div>
+		<!-- /article - text -->
+		<?php endforeach;?>
+		
+		<!-- pagination -->
+		<div class="text-center">
+
+			<ul class="pagination">
+				<?=$this->paginationControl(
+                    $this->models,
+                    'Elastic',
+                    'uthando-news/news/paginate',
+                    ['route' => 'news-list/page']
+                ); ?>
+			</ul>
+
+		</div>
+		<!-- /pagination -->
+    </div>
+</div>

@@ -1,6 +1,6 @@
 /***********************************************************
-JQuery Wrapper for InnovaStudio Live Editor
-ï¿½ 2012, InnovaStudio (www.innovastudio.com). All rights reserved.
+JQuery Wrapper 1.2 for InnovaStudio Live Editor
+© 2013, InnovaStudio (www.innovastudio.com). All rights reserved.
 
 Files to include:
 
@@ -67,6 +67,7 @@ var _editorobj9 = new InnovaEditor("_editorobj9");
                     ["group5", "", ["Undo", "Redo", "FullScreen", "SourceDialog"]]
                     ],
             enableFlickr: false,
+            flickrUser: "ysw.insite",
             enableCssButtons: false,
             enableLightbox: false,
             enableTableAutoformat: false,
@@ -75,7 +76,6 @@ var _editorobj9 = new InnovaEditor("_editorobj9");
             arrCustomTag: [["First Name", "[%FIRSTNAME%]"], ["Last Name", "[%LASTNAME%]"], ["Email", "[%EMAIL%]"]],
             pasteTextOnCtrlV: false,
             mode: 'XHTMLBody',
-            enableTableAutoformat: true,
             onFoo: function () { }
         }
 
@@ -101,6 +101,7 @@ var _editorobj9 = new InnovaEditor("_editorobj9");
             _editorobj.toolbarMode = plugin.settings.toolbarMode;
             _editorobj.groups = plugin.settings.groups;
             _editorobj.enableFlickr = plugin.settings.enableFlickr;
+            _editorobj.flickrUser = plugin.settings.flickrUser;
             _editorobj.enableCssButtons = plugin.settings.enableCssButtons;
             _editorobj.enableLightbox = plugin.settings.enableLightbox;
             _editorobj.enableTableAutoformat = plugin.settings.enableTableAutoformat;
@@ -112,15 +113,16 @@ var _editorobj9 = new InnovaEditor("_editorobj9");
             _editorobj.mode = plugin.settings.mode;
             _editorobj.enableTableAutoformat = plugin.settings.enableTableAutoformat;
 
+            // Bootstrap Snippets Button. Note: translation: alert(getTxt("Snippets"))
             var arrSnippetItems = [["FormattedText", "modalDialog('" + _editorobj.dialogPath + "bootstrap_text.htm',800,458,'Insert Formatted Text');", "Formatted Text"],
                 ["Icons", "modalDialog('" + _editorobj.dialogPath + "bootstrap_icons.htm',800,458,'Insert Icons');", "Icons"],
-                ["LabelsBadges", "modalDialog('" + _editorobj.dialogPath + "bootstrap_labels.htm',500,223,'Insert Labels & Badges');", "Labels & Badges"],
-                ["Alerts", "modalDialog('" + _editorobj.dialogPath + "bootstrap_alerts.htm',670,355,'Insert Alerts');", "Alerts"],
-                ["LinkButtons", "modalDialog('" + _editorobj.dialogPath + "bootstrap_buttons.htm',810,410,'Insert Link Buttons');", "Link Buttons"],
-                ["ImageGallery", "modalDialog('" + _editorobj.dialogPath + "bootstrap_gallery.htm',750,400,'Insert Image/Gallery');", "Image/Gallery"],
-                ["Video", "modalDialog('" + _editorobj.dialogPath + "bootstrap_video.htm',500,590,'Insert Video');", "Video (Youtube, Vimeo)"],
-                ["Layout", "modalDialog('" + _editorobj.dialogPath + "bootstrap_layout.htm',800,453,'Insert Grid Layout');", "Grid Layout"]
-            ]
+                ["LabelsBadges", "modalDialog('" + _editorobj.dialogPath + "bootstrap_labels.htm',500,110,'Insert Labels');", "Labels"],
+                ["Alerts", "modalDialog('" + _editorobj.dialogPath + "bootstrap_alerts.htm',670,445,'Insert Alerts');", "Alerts"],
+                ["LinkButtons", "modalDialog('" + _editorobj.dialogPath + "bootstrap_buttons.htm',810,570,'Insert Link Buttons');", "Link Buttons"],
+                ["ImageGallery", "modalDialog('" + _editorobj.dialogPath + "bootstrap_gallery.htm',500,517,'Insert Images');", "Images"],
+                ["Video", "modalDialog('" + _editorobj.dialogPath + "bootstrap_video.htm',500,590,'Insert Videos');", "Videos"] /*,
+                ["Layout", "modalDialog('" + _editorobj.dialogPath + "bootstrap_layout.htm',800,453,'Insert Grid Layout');", "Grid Layout"]*/
+            ];
 
             for (var i = 0; i < plugin.settings.groups.length; i++) {
                 tmp = plugin.settings.groups[i];

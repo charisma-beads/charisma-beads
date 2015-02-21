@@ -220,7 +220,7 @@ class CustomerAddress extends AbstractViewHelper
     	if (!$this->customerAddressService) {
     		$sl = $this->getServiceLocator()
                 ->getServiceLocator()
-                ->get('UthandoServiceManger');
+                ->get('UthandoServiceManager');
     		$this->customerAddressService = $sl->get('ShopCustomerAddress');
     	}
     	 
