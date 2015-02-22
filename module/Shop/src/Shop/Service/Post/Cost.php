@@ -10,6 +10,10 @@ class Cost extends AbstractRelationalMapperService
      * @var string
      */
     protected $serviceAlias = 'ShopPostCost';
+    
+    protected $tags = [
+        'post-cost', 'post-level', 'post-zone',
+    ];
 
     /**
      * @var array

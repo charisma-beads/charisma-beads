@@ -10,6 +10,10 @@ class Province extends AbstractMapperService
      * @var string
      */
     protected $serviceAlias = 'ShopCountryProvince';
+    
+    protected $tags = [
+        'country-province',
+    ];
 
     /**
     * @param array $post

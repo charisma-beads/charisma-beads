@@ -11,6 +11,10 @@ class Address extends AbstractRelationalMapperService
      * @var string
      */
     protected $serviceAlias = 'ShopCustomerAddress';
+    
+    protected $tags = [
+        'customer-address', 'country', 'country-province',
+    ];
 
     /**
      * @var array

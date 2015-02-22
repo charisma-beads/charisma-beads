@@ -10,7 +10,9 @@ class Product extends AbstractRelationalMapperService
     protected $serviceAlias = 'ShopProduct';
     
     protected $tags = [
-        'image',
+        'product', 'image', 'category',
+        'group', 'size', 'tax-code',
+        'post-unit', 'option',
     ];
 
     protected $referenceMap = [
@@ -133,9 +135,9 @@ class Product extends AbstractRelationalMapperService
 	{
 	    $search = array(array(
             'searchString'  => $search['productSearch'],
-            'columns'       => array(
-                'name', 'shortDescription', 'productCategory.category'
-            ),
+            'columns'       => [
+               'sku', 'name', 'shortDescription', 'productCategory.category'
+            ],
         ));
 
         /* @var $mapper \Shop\Mapper\Product\Product */
@@ -183,16 +185,18 @@ class Product extends AbstractRelationalMapperService
 	
 	public function setProductIdent(Event $e)
 	{
-	    $post = $e->getParam('data');
+	    $data = $e->getParam('data');
 	
-	    if (null === $post) {
+	    if (null === $data) {
 	        return;
 	    }
-	
-	    if (!$post['ident']) {
-	        $post['ident'] = $post['name'] . ' ' . $post['shortDescription'];
+	    
+	    if ($data instanceof ProductModel) {
+	        $data->setIdent($data->getSku() . ' ' . $data->getName());
+	    } elseif (is_array($data)) {
+	        $data['ident'] = $data['sku'] . ' ' . $data['name'];
 	    }
 	
-	    $e->setParam('data', $post);
+	    $e->setParam('data', $data);
 	}
 }

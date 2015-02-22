@@ -9,7 +9,11 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
         <div class="row">
             <div class="col-sm-6">
                 <fieldset>
-                    <legend>Details:</legend>
+                    <legend>Details: 
+                    <?php if ($this->formAction == 'edit'):?>
+                    <small>(<?=$this->model->getProductId();?>)</small>
+                    <?php endif;?>
+                    </legend>
                     <div class="row">
                         <div class="col-sm-6 text-right">
                             <label>

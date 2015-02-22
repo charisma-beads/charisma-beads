@@ -21,6 +21,10 @@ class Customer extends AbstractRelationalMapperService
      * @var string
      */
     protected $serviceAlias = 'ShopCustomer';
+    
+    protected $tags = [
+        'customer', 'customer-prefix', 'customer-address',
+    ];
 
     /**
      * @var array

@@ -36,7 +36,8 @@ while($obj = $result->fetch_object()) {
 		'postUnitId'		    => $obj->postunit_id,
 		'productGroupId'		=> $obj->group_id,
 		'ident'					=> filterIdent($obj->product_name . ' ' . $obj->short_description),
-		'name'					=> $obj->product_name,
+	    'sku'                   => $obj->product_name,
+		'name'					=> $mysqli->real_escape_string($obj->short_description),
 		'price'					=> $obj->price,
 		'description'			=> $mysqli->real_escape_string($obj->description),
 		'shortDescription'		=> $mysqli->real_escape_string($obj->short_description),
@@ -54,7 +55,7 @@ while($obj = $result->fetch_object()) {
 $result->close();
 
 /* change db to new db */
-$mysqli->select_db("charisma-beads");
+$mysqli->select_db("uthando-cms");
 
 $result = $mysqli->query("TRUNCATE product");
 $c = 0;
@@ -87,4 +88,3 @@ foreach ($resultArray as $values) {
 
 print 'rows Inserted = ' . $c;
 
-$result->close();

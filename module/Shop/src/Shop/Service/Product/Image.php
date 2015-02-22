@@ -10,6 +10,10 @@ class Image extends AbstractRelationalMapperService
      * @var string
      */
     protected $serviceAlias = 'ShopProductImage';
+    
+    protected $tags = [
+        'image',
+    ];
 
     /**
      * @var array

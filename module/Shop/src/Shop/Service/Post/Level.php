@@ -10,5 +10,9 @@ class Level extends AbstractMapperService
      * @var string
      */
     protected $serviceAlias = 'ShopPostLevel';
+    
+    protected $tags = [
+       'post-level',
+    ];
 	
 }

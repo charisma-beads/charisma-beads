@@ -9,4 +9,8 @@ class Unit extends AbstractMapperService
      * @var string
      */
     protected $serviceAlias = 'ShopPostUnit';
+    
+    protected $tags = [
+        'post-unit',
+    ];
 }

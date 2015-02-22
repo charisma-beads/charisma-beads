@@ -9,6 +9,10 @@ class Country extends AbstractRelationalMapperService
      * @var string
      */
     protected $serviceAlias = 'ShopCountry';
+    
+    protected $tags = [
+        'country', 'post-zone',
+    ];
 
     /**
      * @var array

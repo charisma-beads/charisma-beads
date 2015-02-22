@@ -10,6 +10,10 @@ class Option extends AbstractRelationalMapperService
      * @var string
      */
     protected $serviceAlias = 'ShopProductOption';
+    
+    protected $tags = [
+        'product', 'post-unit', 'option',
+    ];
 
     protected $referenceMap = [
         'product'   => [

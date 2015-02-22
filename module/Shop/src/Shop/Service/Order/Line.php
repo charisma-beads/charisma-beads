@@ -9,6 +9,10 @@ class Line extends AbstractMapperService
      * @var string
      */
     protected $serviceAlias = 'ShopOrderLine';
+    
+    protected $tags = [
+        'order-line',
+    ];
 
     /**
      * @param int $orderId

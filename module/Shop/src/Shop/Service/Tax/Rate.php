@@ -10,4 +10,8 @@ class Rate extends AbstractMapperService
      */
     protected $serviceAlias = 'ShopTaxRate';
     
+    protected $tags = [
+        'tax-rate',
+    ];
+    
 }

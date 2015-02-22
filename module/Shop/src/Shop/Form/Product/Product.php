@@ -97,7 +97,7 @@ class Product extends Form
         	],
         	'options'		=> [
         		'label'		=> 'Short Description:',
-        		'required'	=> true,
+        		'required'	=> false,
         	],
         ]);
         

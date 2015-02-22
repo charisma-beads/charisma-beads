@@ -9,4 +9,8 @@ class Group extends AbstractMapperService
      * @var string
      */
     protected $serviceAlias = 'ShopProductGroup';
+    
+    protected $tags = [
+        'group',
+    ];
 }

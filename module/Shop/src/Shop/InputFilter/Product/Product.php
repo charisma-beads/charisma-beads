@@ -75,7 +75,8 @@ class Product extends InputFilter
     		'required'		=> true,
     		'filters'		=> array(
     			array('name' => 'StripTags'),
-    			array('name' => 'StringTrim')
+    			array('name' => 'StringTrim'),
+    		    array('name' => 'NumberFormat'),
     		),
     		'validators'	=> array(
     			array('name' => 'Float')
@@ -95,7 +96,7 @@ class Product extends InputFilter
     	
     	$this->add(array(
     		'name'			=> 'shortDescription',
-    		'required'		=> true,
+    		'required'		=> false,
     		'filters'		=> array(
     			array('name'	=> 'StripTags'),
     			array('name'	=> 'StringTrim'),

@@ -31,6 +31,11 @@ class ShopOptions extends AbstractOptions
     protected $productsPerPage;
     
     /**
+     * @var string
+     */
+    protected $productsOrderCol = '-sku';
+    
+    /**
      * @var boolean
      */
     protected $stockControl;
@@ -139,6 +144,24 @@ class ShopOptions extends AbstractOptions
 		$this->productsPerPage = $productsPerPage;
 		return $this;
 	}
+
+    /**
+     * @return string $productsOrderCol
+     */
+    public function getProductsOrderCol()
+    {
+        return $this->productsOrderCol;
+    }
+
+    /**
+     * @param string $productsOrderCol
+     * @return $this
+     */
+    public function setProductsOrderCol($productsOrderCol)
+    {
+        $this->productsOrderCol = $productsOrderCol;
+        return $this;
+    }
 
     /**
      * @return bool

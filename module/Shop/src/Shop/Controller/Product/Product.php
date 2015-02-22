@@ -9,7 +9,7 @@ use Zend\View\Model\ViewModel;
 
 class Product extends AbstractCrudController
 {
-	protected $searchDefaultParams = ['sort' => 'name'];
+	protected $controllerSearchOverrides = ['sort' => 'sku'];
 	protected $serviceName = 'ShopProduct';
 	protected $route = 'admin/shop/product';
 	

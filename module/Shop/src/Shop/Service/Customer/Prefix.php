@@ -9,4 +9,8 @@ class Prefix extends AbstractMapperService
      * @var string
      */
     protected $serviceAlias = 'ShopCustomerPrefix';
+    
+    protected $tags = [
+        'customer-prefix',
+    ];
 }

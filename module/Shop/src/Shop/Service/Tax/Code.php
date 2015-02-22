@@ -9,6 +9,10 @@ class Code extends AbstractRelationalMapperService
      * @var string
      */
     protected $serviceAlias = 'ShopTaxCode';
+    
+    protected $tags = [
+        'tax-code', 'tax-rate',
+    ];
 
     /**
      * @var array

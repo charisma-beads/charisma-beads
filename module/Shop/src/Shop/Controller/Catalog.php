@@ -32,6 +32,7 @@ class Catalog extends AbstractActionController
     {
         $ident = $this->params()->fromRoute('categoryIdent', 0);
         $page = $this->params()->fromRoute('page', 1);
+        $options = $this->getShopOptions();
         
         $category = $this->getProductCategoryService()->getCategoryByIdent($ident);
         
@@ -42,9 +43,9 @@ class Catalog extends AbstractActionController
         
         $products = $this->getProductService()
             ->usePaginator([
-                'limit' => $this->getShopOptions()->getProductsPerPage(),
+                'limit' => $options->getProductsPerPage(),
                 'page' => $page
-        ])->getProductsByCategory($category->getIdent(), 'name');
+        ])->getProductsByCategory($category->getIdent(), $options->getProductsOrderCol());
         
         return new ViewModel([
             'bread' => $this->getBreadcrumb($category->getProductCategoryId()),

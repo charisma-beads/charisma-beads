@@ -14,7 +14,8 @@
         <?=$this->partial('shop/product/product-form', [
             'form' => $this->form,
             'formAction' => 'edit',
-            'productId' => $this->model->getProductId()
+            'productId' => $this->model->getProductId(),
+            'model' => $this->model,
         ]); ?>
     </div>
 

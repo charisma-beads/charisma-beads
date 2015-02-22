@@ -19,7 +19,7 @@
 
 	$('#table-product').dataGrid({
 	    url : 'product/list',
-	    query: { sort : '<?=(isset($this->params['sort'])) ? $this->params['sort'] : 'name';?>' },
+	    query: { sort : '<?=(isset($this->params['sort'])) ? $this->params['sort'] : 'sku';?>' },
 	    searchForm : $('#search-product'),
 	    columnSort: true
 	});

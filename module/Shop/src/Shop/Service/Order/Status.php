@@ -9,6 +9,10 @@ class Status extends AbstractMapperService
      * @var string
      */
     protected $serviceAlias = 'ShopOrderStatus';
+    
+    protected $tags = [
+        'order-status',
+    ];
 
     /**
      * @param string $status

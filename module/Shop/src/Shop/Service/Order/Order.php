@@ -19,6 +19,11 @@ class Order extends AbstractRelationalMapperService
      * @var string
      */
     protected $serviceAlias = 'ShopOrder';
+    
+    protected $tags = [
+        'order', 'customer', 'order-lines',
+        'order-status',
+    ];
 
     /**
      * @var array

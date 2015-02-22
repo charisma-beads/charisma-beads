@@ -9,4 +9,8 @@ class Size extends AbstractMapperService
      * @var string
      */
     protected $serviceAlias = 'ShopProductSize';
+    
+    protected $tags = [
+        'size',
+    ];
 }
