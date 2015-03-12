@@ -4,7 +4,7 @@ namespace Shop\Form\Payment;
 use Zend\Form\Form;
 
 class CreditCard extends Form
-{
+{   
     /**
      * @var DateTime
      */
@@ -127,6 +127,15 @@ class CreditCard extends Form
             ],
             'options' => [
                 'label' => 'Issue Number',
+            ],
+        ]);
+        
+        $this->add([
+            'type' => 'ShopAddressFieldSet',
+            'name' => 'address',
+            'options' => [
+                'label' => 'Address',
+                'country' => $this->options['billing_country'],
             ],
         ]);
         

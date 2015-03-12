@@ -1,9 +1,11 @@
 
+
 <?=$this->partial('uthando-admin/partial/search', [
 	'name'			=> 'product',
 	'searchInputs'	=> [
 		'Product'	=> 'sku-name-shortDescription',
 		'Category'	=> 'category',
+	    'Category List' => $this->formManager('ProductCategoryList')->setName('productCategoryId'),
 	],
 	'params' 		=> $this->params,
 ]);?>

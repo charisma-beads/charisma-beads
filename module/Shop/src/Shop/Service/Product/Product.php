@@ -126,6 +126,28 @@ class Product extends AbstractRelationalMapperService
 	
 		return $products;
 	}
+	
+	public function search(array $post)
+	{
+	    if (isset($post['productCategoryId']) && $post['productCategoryId'] != '') {
+	        /* @var $categoryService \Shop\Service\Product\Category */
+	        $categoryService = $this->getRelatedService('productCategory');
+	        
+	        $ids = $categoryService->getCategoryChildrenIds(
+	            $post['productCategoryId'], true
+	        );
+	        
+	        if (!empty($ids)) {
+	            $ids[] = $post['productCategoryId'];
+	        }
+	        
+	        $categoryId = (empty($ids)) ? (array) $post['productCategoryId'] : $ids;
+	        
+	        $post['productCategoryId'] = $categoryId;
+	    }
+	    
+	    return parent::search($post);
+	}
 
     /**
      * @param array $search
@@ -163,6 +185,7 @@ class Product extends AbstractRelationalMapperService
         $product = $this->getFullProductById($id);
 
         $product->setProductId(null)
+            ->setSku(null)
             ->setName(null)
             ->setIdent(null);
 

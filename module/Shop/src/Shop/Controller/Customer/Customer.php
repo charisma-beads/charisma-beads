@@ -10,7 +10,7 @@ use Zend\View\Model\ViewModel;
 
 class Customer extends AbstractCrudController
 {
-	protected $searchDefaultParams = array('sort' => 'name');
+	protected $controllerSearchOverrides = array('sort' => 'name');
 	protected $serviceName = 'ShopCustomer';
 	protected $userRoute = 'shop/customer';
 	protected $route = 'admin/shop/customer';

@@ -5,7 +5,7 @@ use UthandoCommon\Controller\AbstractCrudController;
 
 class ProductCategory extends AbstractCrudController
 {
-    protected $searchDefaultParams = array('sort' => 'lft');
+    protected $controllerSearchOverrides = array('sort' => 'lft');
     protected $serviceName = 'ShopProductCategory';
     protected $route = 'admin/shop/category';
     

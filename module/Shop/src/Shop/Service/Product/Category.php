@@ -53,10 +53,6 @@ class Category extends AbstractRelationalMapperService
 	public function attachEvents()
 	{
 	    $this->getEventManager()->attach([
-	        'form.init'
-	    ], [$this, 'categoryForm']);
-	    
-	    $this->getEventManager()->attach([
 	        'pre.form'
         ], [$this, 'preForm']);
 	}
@@ -125,7 +121,7 @@ class Category extends AbstractRelationalMapperService
 
 		$categories = $mapper->getSubCategoriesByParentId($categoryId, $recursive);
 		
-		$cats = array();
+		$cats = [];
 
         /* @var $category \Shop\Model\Product\Category */
 		foreach ($categories as $category) {
@@ -320,19 +316,11 @@ class Category extends AbstractRelationalMapperService
 		return $mapper->toggleEnabled($category);
 	}
 	
-	public function categoryForm(Event $e)
-	{
-	    $form = $e->getParam('form');
-	    $model = $e->getParam('model');
-	    
-	    $form->setCategoryId($model->getProductCategoryId());
-	}
-	
 	public function preForm(Event $e)
 	{
 	    $model = $e->getParam('model');
-	
-	    if ($model instanceof Category) {
+        
+	    if ($model instanceof CategoryModel) {
 	        $this->setFormOptions([
 	            'productCategoryId' => $model->getProductCategoryId(),
 	        ]);

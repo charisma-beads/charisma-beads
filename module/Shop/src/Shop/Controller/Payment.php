@@ -5,6 +5,8 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use UthandoCommon\Controller\ServiceTrait;
 use Shop\Model\Order\Order;
+use Zend\Http\PhpEnvironment\Response;
+use Zend\Form\Form;
 
 class Payment extends AbstractActionController
 {
@@ -28,7 +30,7 @@ class Payment extends AbstractActionController
                 break;
             case 'pay-credit-card':
                 return $this->redirect()->toRoute('shop/payment/process-credit-card', [
-                    'orderId' => $order->getOrderId()
+                    'orderId' => $order->getOrderId(),
                 ]);
                 break;
             case 'pay-phone':
@@ -50,22 +52,50 @@ class Payment extends AbstractActionController
             return $this->redirect()->toRoute('shop/order');
         }
         
-        $viewModel = new ViewModel([
-            'order' => $order
-        ]);
+        $prg = $this->prg();
+        $service = $this->getService('ShopPaymentCreditCard');
         
-        $formElementManager = $this->getService('FormElementManager');
-        $form = $formElementManager->get('ShopPaymentCreditCard');
+        $viewModel = new ViewModel();
         $viewModel->setTemplate('shop/payment/credit-card');
-        $data = [
-            'total' => $order->getTotal(),
-        ];
         
-        $form->setData($data);
-        $viewModel->setVariable('form', $form);
+        if ($prg instanceof Response) {
+            return $prg;
+        } elseif ($prg === false) {
+            $data = [
+                'total' => $order->getTotal(),
+                'orderId' => $order->getOrderId(),
+                'address' => $order->getCustomer()->getBillingAddress()->getArrayCopy(),
+            ];
+            
+            $service->setFormOptions([
+                'billing_country' => $order->getCustomer()
+                    ->getBillingAddress()
+                    ->getCountry()
+                    ->getCode(),
+            ]);
+            
+            $viewModel->setVariables([
+                'order' => $order,
+                'form' => $service->getForm(null, $data, true, true),
+            ]);
+            
+            return $viewModel;
+        }
         
+        $result = $service->process($prg);
         
-        return $viewModel;
+        if ($result instanceof Form) {
+            $this->flashMessenger()->addErrorMessage('There were one or more issues with your submission. Please correct them as indicated below.');
+            $viewModel->setVariables([
+                'form' => $result,
+                'order' => $order,
+            ]);
+            
+            return $viewModel;
+        }
+        
+        $viewModel->setTemplate('shop/payment/credit-card-thank-you');
+        return $viewModel->setVariable('order', $order);
     }
     
     private function getOrder($orderId = null)

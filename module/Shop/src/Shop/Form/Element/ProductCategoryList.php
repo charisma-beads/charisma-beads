@@ -20,19 +20,20 @@ class ProductCategoryList extends Select implements ServiceLocatorAwareInterface
             ->fetchAll();
         
         $categoryOptions = [];
-        $parent = 0;
          
         /* @var $cat \Shop\Model\Product\Category */
-        foreach($cats as $cat) {
-        
-        	if (0 == $cat->getDepth()) {
-        		$parent = $cat->getProductCategoryId();
-        		$categoryOptions[$parent]['options'][$cat->getProductCategoryId()] = $cat->getCategory();
-        		$categoryOptions[$parent]['label'] = $cat->getCategory();
-        	} else {
-        		$categoryOptions[$parent]['options'][$cat->getProductCategoryId()] = $cat->getCategory();
-        	}
-        }
+    	foreach($cats as $cat) {
+    		$indent = 'indent' . ($cat->getDepth() + 1);
+    		$parent = ($cat->hasChildren() || $cat->getDepth() == 0) ? 'bold ' : '';
+    		$categoryOptions[] = [
+    			'label'	=> $cat->getCategory(),
+    			'value'	=> $cat->getProductCategoryId(),
+    			'attributes'	=> [
+    				'class'	=> $parent,
+					'style' => 'text-indent:' . $cat->getDepth() . 'em;',
+    			],
+    		];
+    	}
         
         $this->setValueOptions($categoryOptions);
     }

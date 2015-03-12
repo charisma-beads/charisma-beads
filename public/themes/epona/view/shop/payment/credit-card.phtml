@@ -6,6 +6,7 @@
 ]);?>
 
 <?php $this->placeholder('page-top')->captureEnd();?>
+<?php $billingAddress = $this->form->get('address');?>
 <?php $this->form->prepare();?>
 
 <form action="<?=$this->url('shop/payment/process-credit-card', [
@@ -124,6 +125,109 @@
 		</div>
     </fieldset>
     
+    <fieldset>
+        <div class="row">
+        	<div class="col-md-4">
+        		<label class="input<?php if ($billingAddress->get('address1')->getMessages()) echo ' state-error'; ?>">
+        			<?=$this->formText($billingAddress->get('address1'));?>
+        		</label>
+        		<span class="help-block">
+        		   <?=$this->formElementErrors($billingAddress->get('address1'), [
+                        'class' => 'list-unstyled note note-error'
+                    ]); ?>
+        		</span>
+        	</div>
+        	<div class="col-md-4">
+        		<label class="input<?php if ($billingAddress->get('address2')->getMessages()) echo ' state-error'; ?>">
+        			<?=$this->formText($billingAddress->get('address2'));?>
+        		</label>
+        		<span class="help-block">
+        		   <?=$this->formElementErrors($billingAddress->get('address2'), [
+                        'class' => 'list-unstyled note note-error'
+                    ]); ?>
+        		</span>
+        	</div>
+        	<div class="col-md-4">
+        		<label class="input<?php if ($billingAddress->get('address3')->getMessages()) echo ' state-error'; ?>">
+        			<?=$this->formText($billingAddress->get('address3'));?>
+        		</label>
+        		<span class="help-block">
+        		   <?=$this->formElementErrors($billingAddress->get('address3'), [
+                        'class' => 'list-unstyled note note-error'
+                    ]); ?>
+        		</span>
+        	</div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+        		<label class="input<?php if ($billingAddress->get('city')->getMessages()) echo ' state-error'; ?>">
+        			<?=$this->formText($billingAddress->get('city'));?>
+        		</label>
+        		<span class="help-block">
+        		   <?=$this->formElementErrors($billingAddress->get('city'), [
+                        'class' => 'list-unstyled note note-error'
+                    ]); ?>
+        		</span>
+        	</div>
+            <div class="col-md-6">
+        		<label class="select<?php if ($billingAddress->get('provinceId')->getMessages()) echo ' state-error'; ?>">
+        			<?=$this->formSelect($billingAddress->get('provinceId')->setAttributes([
+        			    'class' => 'pointer',
+        			    'id' => 'billing-address-province-id'
+        			]));?>
+        			<i></i>
+        		</label>
+        		<span class="help-block">
+        		   <?=$this->formElementErrors($billingAddress->get('provinceId'), [
+                        'class' => 'list-unstyled note note-error'
+                    ]); ?>
+        		</span>
+        	</div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+        		<label class="input<?php if ($billingAddress->get('postcode')->getMessages()) echo ' state-error'; ?>">
+        			<?=$this->formText($billingAddress->get('postcode'));?>
+        			<i></i>
+        		</label>
+        		<span class="help-block">
+        		   <?=$this->formElementErrors($billingAddress->get('postcode'), [
+                        'class' => 'list-unstyled note note-error'
+                    ]); ?>
+        		</span>
+        	</div>
+        	<div class="col-md-6">
+        		<label class="select<?php if ($billingAddress->get('countryId')->getMessages()) echo ' state-error'; ?>">
+        			<?=$this->formSelect($billingAddress->get('countryId')->setAttributes([
+        			    'class' => 'pointer',
+        			    'id' => 'billing-address-country-id',
+        			]));?>
+        			<i></i>
+        		</label>
+        		<span class="help-block">
+        		   <?=$this->formElementErrors($billingAddress->get('countryId'), [
+                        'class' => 'list-unstyled note note-error'
+                    ]); ?>
+        		</span>
+        	</div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+        		<label class="input<?php if ($billingAddress->get('phone')->getMessages()) echo ' state-error'; ?>">
+                    <i class="icon-prepend fa fa-phone"></i>
+        			<?=$this->formTel($billingAddress->get('phone'));?>
+        			<i></i>
+        		</label>
+        		<span class="help-block">
+        		   <?=$this->formElementErrors($billingAddress->get('phone'), [
+                        'class' => 'list-unstyled note note-error'
+                    ]); ?>
+    			</span>
+    		</div>
+    	</div>
+    </fieldset>
+    
+    <?=$this->formHidden($this->form->get('total'));?>
     <?=$this->formHidden($this->form->get('orderId'));?>
     <?=$this->formHidden($this->form->get('security'));?>
     

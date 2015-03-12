@@ -21,7 +21,7 @@ while($obj = $result->fetch_object()) {
 $result->close();
 
 /* change db to new db */
-$mysqli->select_db("charisma-beads");
+$mysqli->select_db("uthando-cms");
 
 $result = $mysqli->query("TRUNCATE productImage");
 $c = 0;

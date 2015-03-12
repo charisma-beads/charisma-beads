@@ -13,6 +13,7 @@ return [
         'ShopOrderLine'         => 'Shop\Model\Order\Line',
         'ShopOrderMetaData'     => 'Shop\Model\Order\MetaData',
         'ShopOrderStatus'       => 'Shop\Model\Order\Status',
+        'ShopPaymentCreditCard' => 'Shop\Model\Payment\CreditCard', 
         'ShopPostCost'          => 'Shop\Model\Post\Cost',
         'ShopPostLevel'         => 'Shop\Model\Post\Level',
         'ShopPostUnit'          => 'Shop\Model\Post\Unit',

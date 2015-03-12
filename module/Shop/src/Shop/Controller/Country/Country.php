@@ -5,7 +5,7 @@ use UthandoCommon\Controller\AbstractCrudController;
 
 class Country extends AbstractCrudController
 {
-	protected $searchDefaultParams = array('sort' => 'country');
+	protected $controllerSearchOverrides = array('sort' => 'country');
 	protected $serviceName = 'ShopCountry';
 	protected $route = 'admin/shop/country';
 }

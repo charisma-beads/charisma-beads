@@ -7,7 +7,7 @@ use Zend\View\Model\ViewModel;
 
 class CountryProvince extends AbstractCrudController
 {
-    protected $searchDefaultParams = array('sort' => 'countryCode');
+    protected $controllerSearchOverrides = array('sort' => 'countryCode');
     protected $serviceName = 'ShopCountryProvince';
     protected $route = 'admin/shop/country/province';
     protected $paginate = false;

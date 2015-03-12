@@ -26,7 +26,7 @@
                     </figure><!-- /image -->
                     <?php if ($row->inStock()) : ?>
                     <span class="shop-stock-info stock-yes"><!-- stock -->
-                        <span class="text-muted"><?=$this->escapehtml($row->getName());?></span>
+                        <span class="text-muted"><?=$this->escapehtml($row->getSku());?></span>
                         <i class="fa fa-check"></i>
                         <span class="text-muted">
                             <?=($row->getQuantity() > 0) ? $row->getQuantity() :'';?>
@@ -34,13 +34,13 @@
                     </span><!-- /stock -->
                     <?php else: ?>
                     <span class="shop-stock-info stock-no"><!-- stock -->
-                        <span class="text-muted"><?=$this->escapehtml($row->getName());?></span>
+                        <span class="text-muted"><?=$this->escapehtml($row->getSku());?></span>
                         <i class="fa fa-times"></i> out of stock
                     </span><!-- /stock -->
                     <?php endif; ?>
                     <div class="product-info"><!-- title and price -->
                         <h2>
-                            <span class="product-name"><?=$row->getShortDescription();?></span>
+                            <span class="product-name"><?=$row->getName();?></span>
                             <?=$this->productPrice($row)
                                 ->setFormat('<span class="bold">%s</span> %s for %s gms ')
                                 ->setDiscountFormat('<span class="line-through">%s</span>'); ?>

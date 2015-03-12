@@ -12,6 +12,7 @@ return [
         'ShopOrder'             => 'Shop\Hydrator\Order\Order',
         'ShopOrderLine'         => 'Shop\Hydrator\Order\Line',
         'ShopOrderStatus'       => 'Shop\Hydrator\Order\Status',
+        'ShopPaymentCreditCard' => 'Shop\Hydrator\Payment\CreditCard',
         'ShopPayPal'            => 'Shop\Hydrator\Paypal\PaypalHydrator',
         'ShopPayPalItemList'    => 'Shop\Hydrator\Paypal\ItemList',
         'ShopPayPalAggregate'   => 'Shop\Hydrator\Paypal\PaypalAggregate',

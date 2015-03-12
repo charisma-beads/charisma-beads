@@ -11,7 +11,7 @@
                 <th data-field="name">Name/Title</th>
                 <th data-field="description">Description</th>
                 <th data-field="price">Price</th>
-                <th data-field="group">Group</th>
+                <th data-field="productSizeId">Size</th>
                 <th data-field="quantity">Stock</th>
                 <th data-field="category">Category</th>
                 <th>Image</th>
@@ -32,7 +32,7 @@
                 <td><?=$this->escapeHtml($row->getName()); ?></td>
                 <td><?=$this->escapeHtml($row->getShortDescription()); ?></td>
                 <td><?=$this->priceFormat($row->getPrice(false)); ?>
-                <td><?=$this->escapeHtml($row->getProductGroup()->getGroup()); ?>
+                <td><?=$this->escapeHtml($row->getProductSize()->getSize()); ?>
                 <td><?=$this->escapeHtml($row->getQuantity());?></td>
                 <td><?=$this->escapeHtml($row->getProductCategory()->getCategory()); ?></td>
                 <td>

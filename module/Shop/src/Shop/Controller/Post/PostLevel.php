@@ -19,7 +19,7 @@ use UthandoCommon\Controller\AbstractCrudController;
  */
 class PostLevel extends AbstractCrudController
 {
-	protected $searchDefaultParams = ['sort' => 'postLevel'];
+	protected $controllerSearchOverrides = ['sort' => 'postLevel'];
 	protected $serviceName = 'ShopPostLevel';
 	protected $route = 'admin/shop/post/level';
 }

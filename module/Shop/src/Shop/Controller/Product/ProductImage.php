@@ -7,7 +7,7 @@ use Shop\ShopException;
 
 class ProductImage extends AbstractCrudController
 {
-	protected $searchDefaultParams = array('sort' => 'productImageId');
+	protected $controllerSearchOverrides = array('sort' => 'productImageId');
 	protected $serviceName = 'ShopProductImage';
 	protected $route = 'admin/shop/product/image';
     protected $paginate = false;

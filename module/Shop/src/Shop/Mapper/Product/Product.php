@@ -52,6 +52,13 @@ class Product extends AbstractDbMapper
 	
 	public function search(array $search, $sort, $select = null)
 	{
+	    $productCategoryId = null;
+	    
+	    if (isset($search[2])) {
+	        $productCategoryId = $search[2]['searchString'];
+	        unset($search[2]);
+	    }
+	    
 		$select = $this->getSelect();
 		$select->join(
                 'productCategory',
@@ -64,7 +71,17 @@ class Product extends AbstractDbMapper
                 'product.productGroupId=productGroup.productGroupId',
                 array(),
                 Select::JOIN_LEFT
+            )
+            ->join(
+                'productSize',
+                'product.productSizeId=productSize.productSizeId',
+                array(),
+                Select::JOIN_LEFT
             );
+		
+		if ($productCategoryId) {
+		    $select->where->in('product.productCategoryId', $productCategoryId);
+		}
 		
 		$select = $this->setFilter($select);
 		
