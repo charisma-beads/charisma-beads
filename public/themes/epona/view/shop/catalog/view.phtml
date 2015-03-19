@@ -26,13 +26,14 @@
                     </a>
 
                     <p class="fsize11 margin-top30">
+                        <?=$product->getSku();?>&nbsp;
                         <?=$product->getShortDescription();?>
                     </p>
                 </figure>
             </div>
             <div class="col-md-8 col-sm-8">
 
-                <h1 class="product-view-title"><?=$product->getName();?> <?=$product->getShortDescription();?></h1>
+                <h1 class="product-view-title"><?=$product->getSku();?> <?=$product->getName();?></h1>
 
                 <h3 class="product-view-price"><em><?=$this->productPrice($product);?></em></h3>
                 <p><?=$product->getDescription();?></p>

@@ -25,7 +25,7 @@ class Cart extends AbstractActionController
         if (! $this->getRequest()->isPost()) {
             return $this->redirect()->toRoute('shop');
         }
-
+        
         /* @var $productService Product */
         $productService = $this->getService('ShopProduct');
         $product = $productService->getFullProductById(
@@ -40,7 +40,7 @@ class Cart extends AbstractActionController
         $cart = $this->getService('ShopCart');
         $result = $cart->addItem(
             $product,
-            $this->params()->fromPost('qty')
+            $this->params()->fromPost()
         );
 
         if ($result instanceof Item) {
@@ -48,7 +48,6 @@ class Cart extends AbstractActionController
                 'You have added ' . $result->getQuantity() . ' X ' . $result->getMetadata()->getName() . ' to your cart'
             );
         }
-
         
         return $this->redirect()->toUrl($this->params()
             ->fromPost('returnTo'));

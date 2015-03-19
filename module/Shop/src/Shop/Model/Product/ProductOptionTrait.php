@@ -11,18 +11,17 @@ trait ProductOptionTrait
     protected $productOption = [];
 
     /**
-     * @param Option $productOption
+     * @param Option|array $productOptionOrOptions
      */
-    public function setProductOption($productOption)
-    {
-        if ($productOption instanceof Option) {
-            if (!$productOption->getProductOptionId()) {
-                return null;
-            }
-            $productOption = [$productOption];
+    public function setProductOption($productOptionOrOptions)
+    {   
+        if ($productOptionOrOptions instanceof Option) {
+            $productOptionOrOptions = [$productOptionOrOptions];
         }
-
-        $this->productOption = $productOption;
+        
+        foreach ($productOptionOrOptions as $option) {
+            $this->productOption[] = $option;
+        }
     }
 
     /**
@@ -36,7 +35,7 @@ trait ProductOptionTrait
         if (is_int($id)) {
             /* @var $option Option */
             foreach ($this->productOption as $option) {
-                if ($id === $option->getProductOptionId()) {
+                if ($id == $option->getProductOptionId()) {
                     $productOptionOrOptions = $option;
                     break;
                 }

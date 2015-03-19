@@ -15,6 +15,7 @@ use UthandoCommon\Model\CollectionException;
 use UthandoCommon\Service\AbstractMapperService;
 use Zend\Session\Container;
 use Zend\Stdlib\InitializableInterface;
+use Shop\Model\Product\Option as ProductOption;
 
 class Cart extends AbstractMapperService implements InitializableInterface
 {
@@ -203,19 +204,34 @@ class Cart extends AbstractMapperService implements InitializableInterface
      * Adds or updates an item contained with the shopping cart
      *
      * @param ProductModel $product            
-     * @param int $qty            
+     * @param array $post           
      * @return CartItem
      */
-    public function addItem(ProductModel $product, $qty)
+    public function addItem(ProductModel $product, $post)
     {
+        $qty = $post['qty'];
+        
         if (0 > $qty) {
             return false;
+        }
+        
+        $productClone = clone $product;
+        
+        $optionId = (isset($post['ProductOptionList'])) ? (int) substr(strrchr($post['ProductOptionList'], "-"), 1) : null;
+        
+        $productOption = ($optionId) ? $product->getProductOption($optionId) : null;
+        
+        if ($productOption instanceof ProductOption) {
+            $productClone->setPostUnitId($productOption->getPostUnitId())
+                ->setPostUnit($productOption->getPostUnit())
+                ->setPrice($productOption->getPrice())
+                ->setDiscountPercent($productOption->getDiscountPercent());
         }
         
         $cart = $this->getCart();
 
         /** @var $cartItem CartItem */
-        $cartItem = ($cart->offsetExists($product->getProductId())) ? $cart->offsetGet($product->getProductId()) : new CartItem();
+        $cartItem = ($cart->offsetExists($productClone->getProductId())) ? $cart->offsetGet($productClone->getProductId()) : new CartItem();
 
         $argv = compact('product', 'qty', 'cartItem');
         $argv = $this->prepareEventArguments($argv);
@@ -229,13 +245,13 @@ class Cart extends AbstractMapperService implements InitializableInterface
             return false;
         }
 
-        $cartItem->setPrice($product->getPrice())
+        $cartItem->setPrice($productClone->getPrice())
             ->setQuantity($qty)
-            ->setTax($product->getTaxCode()->getTaxRate()->getTaxRate())
-            ->setMetadata($this->getProductMetaData($product))
+            ->setTax($productClone->getTaxCode()->getTaxRate()->getTaxRate())
+            ->setMetadata($this->getProductMetaData($productClone, $optionId))
             ->setCartId($this->getCart()->getCartId());
         
-        $cart->offsetSet($product->getProductId(), $cartItem);
+        $cart->offsetSet($productClone->getProductId(), $cartItem);
         
         $this->persist();
 
@@ -245,11 +261,11 @@ class Cart extends AbstractMapperService implements InitializableInterface
     }
 
     /**
-     *
-     * @param ProductModel $product            
-     * @return ProductMetaData
+     * @param ProductModel $product
+     * @param int $optionId
+     * @return \Shop\Model\Product\MetaData
      */
-    public function getProductMetaData(ProductModel $product)
+    public function getProductMetaData(ProductModel $product, $optionId)
     {
         $metadata = new ProductMetaData();
         
@@ -263,6 +279,10 @@ class Cart extends AbstractMapperService implements InitializableInterface
             ->setAddPostage($product->getAddPostage())
             ->setPostUnit($product->getPostUnit()->getPostUnit())
             ->setImage($product->getDefaultImage());
+        
+        if ($optionId) {
+            $metadata->setOption($product->getProductOption($optionId));
+        }
         
         return $metadata;
     }

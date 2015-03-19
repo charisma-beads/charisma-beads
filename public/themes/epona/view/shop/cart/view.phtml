@@ -38,7 +38,11 @@
                 'productIdent' => $product->getIdent(),
             ]);?>" class="product_name">
                 <span><?=$item->getMetadata()->getName();?></span>
-                <small><?=$item->getMetadata()->getDescription();?>, Weight: <?=$item->getMetadata()->getPostUnit();?>gms</small>
+                <small><?=$item->getMetadata()->getDescription();?>
+                <?php if ($item->getMetadata()->getOption()): ?>
+                &nbsp;(<?=$item->getMetadata()->getOption()->getOption();?>)
+                <?php endif; ?>
+                </small>
             </a>
             <a href="<?=$this->url('shop/cart', array(
                 'action'	=> 'remove',

@@ -94,7 +94,7 @@ class Payment extends AbstractActionController
             return $viewModel;
         }
         
-        $viewModel->setTemplate('shop/payment/credit-card-thank-you');
+        $viewModel->setTemplate('shop/payment/credit-card-success');
         return $viewModel->setVariable('order', $order);
     }
     
