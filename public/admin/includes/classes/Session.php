@@ -57,9 +57,9 @@ class Session
 		$this->config['session']['config']['options']['remember_me_seconds'] = $lifetime;
 		
 		$session = $this->createSessionService();
-		
+
 		$session->start();
-		
+
 		if (isset($_SESSION['cid'])) $session->getConfig()->setCookieLifetime($lifetime);
 		 
 		$container = new Container();
@@ -68,7 +68,7 @@ class Session
 			$session->regenerateId(true);
 			$container->init = 1;
 		}
-		
+
 		return $session;
 	}
 	

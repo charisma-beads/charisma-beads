@@ -168,33 +168,34 @@ if (isset($_POST['oid']) && isset($_SESSION['cid'])) {
         		'invoiceNumber' => $card->invoiceNumber,
         		'customer' => $customer
         	));
-        	
-        	$transport = new Zend_Mail_Transport_Smtp($ccMail['host'], $ccMail['config']);
-        	
-        	$mail = new HtmlEmail();
-			
-	        $mail->setBodyHtml($card->view->render('email.phtml'), 'UTF-8', Zend_Mime::MULTIPART_RELATED);
-	        $mail->setFrom('payments@charismabeads.co.uk', 'Charisma Beads Ltd');
-	        $mail->addTo($CIA['email'], $customer);
-	        //$mail->addTo('shaun@shaunfreeman.co.uk', $customer);
-	        $mail->setSubject('Card Details Sent To Charisma Beads Ltd [Order ' . $card->invoiceNumber .']');
-	        $mail->buildHtml();
-	        $mail->send($transport);
-	
-	        $mail = new HtmlEmail();
-	
-	        $mail->setBodyHtml($card->view->render('admin.phtml'), 'UTF-8', Zend_Mime::MULTIPART_RELATED);
-	        $mail->setFrom($CIA['email'], $customer);
-	        $mail->addTo('payments@charismabeads.co.uk', 'Charisma Beads Ltd');
-	        //$mail->addTo('shaun@shaunfreeman.co.uk', $customer);
-	        $mail->setSubject('New Card Payment Received [Order ' . $card->invoiceNumber .']');
-	        $mail->buildHtml();
-	        $mail->send($transport);
+
+            $sendMail = new SendMail($sendMailconfig);
+
+            $sendMail->sendEmail(array(
+                'from' => $sendMailconfig['address_list']['payments'],
+                'to' => array(
+                    'name' => $customer,
+                    'address' => $CIA['email'],
+                ),
+                'subject' => 'Card Details Sent To Charisma Beads Ltd [Order ' . $card->invoiceNumber .']',
+                'html' => $card->view->render('email.phtml'),
+            ));
+
+            $sendMail->sendEmail(array(
+                'to' => $sendMailconfig['address_list']['payments'],
+                'from' => array(
+                    'name' => $customer,
+                    'address' => $CIA['email'],
+                ),
+                'subject' => 'Card Details Sent To Charisma Beads Ltd [Order ' . $card->invoiceNumber .']',
+                'html' => $card->view->render('admin.phtml'),
+            ));
 	        
 	        $content .= '<h2>Thank you, we will process your order as soon as your card has cleared.</h2>';
             
         } else {
         	$content .= '<h3 class="errors">Some errors occurred, please check your entries again.</h3>';
+
             $content .= $card->toString();
         }
     }
