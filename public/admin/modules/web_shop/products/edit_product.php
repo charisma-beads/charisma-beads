@@ -140,7 +140,7 @@ if (!$authorized) {
 		// Check for a product name.
 
 		//	[change_product_name]
-    	//	[product_name]
+		//	[product_name]
 		if ($_POST['change_product_name'] == 1) {
 
 			if (!empty($_POST['product_name'])) {
@@ -166,10 +166,10 @@ if (!$authorized) {
 		//[change_image] => 0
 		//[image] => array (
 		//		[name] =>
-   		//		[type] =>
-   		//		[tmp_name] =>
-   		//		[error] =>
-   		//		[size] =>
+		//		[type] =>
+		//		[tmp_name] =>
+		//		[error] =>
+		//		[size] =>
 		//	)
 
 		if ($_POST['change_image'] == 1) {
@@ -231,9 +231,9 @@ if (!$authorized) {
 		// Check for a image status.
 
 		//	[change_image_status]
-    	//	[image_status]
+		//	[image_status]
 
-    	if ($_POST['change_image_status'] == 1) {
+		if ($_POST['change_image_status'] == 1) {
 
 			$is = escape_data($_POST['image_status']);
 			$update_query['image_status'] = $is;
@@ -245,9 +245,9 @@ if (!$authorized) {
 		// Validate the product line.
 
 		// [change_product_lines] => 0
-   		// [product_lines] => pl_existing
-   		// [pl_existing] => 1
-   		// [product_line] =>
+		// [product_lines] => pl_existing
+		// [pl_existing] => 1
+		// [product_line] =>
 		// [parent] =>
 
 		if ($_POST['change_category'] == 1) {
@@ -271,10 +271,10 @@ if (!$authorized) {
 		// Validate the product size.
 
 		// [change_product_size] => 0
-   		// [product_size] => s_existing
-   		// [s_existing] => 1
-   		// [size] =>
-   		if ($_POST['change_product_size'] == 1) {
+		// [product_size] => s_existing
+		// [s_existing] => 1
+		// [size] =>
+		if ($_POST['change_product_size'] == 1) {
 			if ($_POST['product_size'] == 'new') {
 
 				// If it's a new product size, add the product size to the database.
@@ -327,9 +327,9 @@ if (!$authorized) {
 		// Validate the product weight.
 
 		// [change_product_postunit] => 0
-   		// [product_postunit] => w_existing
-   		// [w_existing] => 1
-   		// [postunit] =>
+		// [product_postunit] => w_existing
+		// [w_existing] => 1
+		// [postunit] =>
 
 		if ($_POST['change_product_postunit'] == 1) {
 
@@ -403,11 +403,11 @@ if (!$authorized) {
 		// Check for a price.
 
 		//[change_price] => 0
-    	//[price] => 2.70
-    	//[inc_vat] => 1
-    	//[tax_code_id] => 1
+		//[price] => 2.70
+		//[inc_vat] => 1
+		//[tax_code_id] => 1
 
-    	if ($_POST['change_price'] == 1) {
+		if ($_POST['change_price'] == 1) {
 
 			if (is_numeric($_POST['price'])) {
 				$pp = escape_data($_POST['price']);
@@ -445,7 +445,7 @@ if (!$authorized) {
 		}
 
 		// [change_description] => 0
-    	// [description] => Gunmetal
+		// [description] => Gunmetal
 
 		if (isset($_POST['use_short']) == "on") {
 
@@ -524,8 +524,8 @@ if (!$authorized) {
 					// empty image cache
 
 					if($pn && file_exists($img_dir.$image)) {
-                        print $img_dir.$image;
-                        print '<br />'. $img_dir.$pi;
+						print $img_dir.$image;
+						print '<br />'. $img_dir.$pi;
 						rename ($img_dir.$image, $img_dir.$pi);
 					}
 
@@ -662,273 +662,364 @@ if (!$authorized) {
 					<div style="border:1px solid black; padding:3px;">
 					<form enctype="multipart/form-data" action="edit_product.php" method="post">
 
-					<input type="hidden" name="MAX_FILE_SIZE" value="524288">
+						<input type="hidden" name="MAX_FILE_SIZE" value="524288">
 
-					<p style="text-align:center; background-color:skyblue; color:black; font-weight:bold;" >Fill out the form to edit a product</p>
+						<p style="text-align:center; background-color:skyblue; color:black; font-weight:bold;" >Fill out the form to edit a product</p>
 
-					<!-- Product Name -->
+						<!-- Product Name -->
+						<div style="border:1px dashed black; padding:3px; margin:2px">
+							<p class="bold">Change Product Name:
+								<span class="bold" style="display:block">
+									Yes:<input type="radio" name="change_product_name" value="1" onclick="show(document.getElementById('Name'));" />
+									No:<input type="radio" name="change_product_name" value="0" checked="checked" onclick="hide(document.getElementById('Name'));" />
+								</span>
+							</p>
 
-					<div style="border:1px dashed black; padding:3px; margin:2px">
-					<p class="bold">Change Product Name: <span class="bold" style="display:block"> Yes: <input type="radio" name="change_product_name" value="1" onclick="show(document.getElementById('Name'));" /> No: <input type="radio" name="change_product_name" value="0" checked="checked" onclick="hide(document.getElementById('Name'));" /></span></p>
+    						<span id="Name" style="display:none;" >
+        						<p>
+									<b>Product Name/Number:</b><br />
+									<input type="text" name="product_name" size="30" maxlength="60" value="" />
+								</p>
+    						</span>
+						</div>
 
-					<span id="Name" style="display:none;" >
-					<p><b>Product Name/Number:</b><br /><input type="text" name="product_name" size="30" maxlength="60" value="" /></p>
-					</span>
-					</div>
+						<!-- Product Image -->
 
-					<!-- Product Image -->
+						<div style="border:1px dashed black; padding:3px; margin:2px">
+							<p class="bold">Change Image:
+                                <span class="bold" style="display:block;">
+                                    Yes: <input type="radio" name="change_image" value="1" onclick="show(document.getElementById('Image'));" />
+                                    No: <input type="radio" name="change_image" value="0" checked="checked" onclick="hide(document.getElementById('Image'));" />
+                                </span>
+							</p>
 
-					<div style="border:1px dashed black; padding:3px; margin:2px">
-					<p class="bold">Change Image: <span class="bold" style="display:block;"> Yes: <input type="radio" name="change_image" value="1" onclick="show(document.getElementById('Image'));" /> No: <input type="radio" name="change_image" value="0" checked="checked" onclick="hide(document.getElementById('Image'));" /></span></p>
+                            <span id="Image" style="display:none;" >
+                                <p>
+									<b>Upload New Image File:</b><br />
+									<input type="file" name="image" />
+								</p>
+                            </span>
+						</div>
 
-					<span id="Image" style="display:none;" >
-					<p><b>Upload New Image File:</b><br /><input type="file" name="image" /></p>
-					</span>
-					</div>
+						<!-- Image Status -->
 
-					<!-- Image Status -->
+						<div style="border:1px dashed black; padding:3px; margin:2px">
+							<p class="bold">
+								Change Image Status:
+                                <span class="bold" style="display:block;">
+                                    Yes: <input type="radio" name="change_image_status" value="1" onclick="show(document.getElementById('Image_Status'));" />
+                                    No: <input type="radio" name="change_image_status" value="0" checked="checked" onclick="hide(document.getElementById('Image_Status'));" />
+                                </span>
+							</p>
 
-					<div style="border:1px dashed black; padding:3px; margin:2px">
-					<p class="bold">Change Image Status: <span class="bold" style="display:block;"> Yes: <input type="radio" name="change_image_status" value="1" onclick="show(document.getElementById('Image_Status'));" /> No: <input type="radio" name="change_image_status" value="0" checked="checked" onclick="hide(document.getElementById('Image_Status'));" /></span></p>
+                            <span id="Image_Status" style="display:none;" >
+                                <p>
+                                    <span class="bold" style="display:block;">
+                                        On: <input type="radio" name="image_status" value="1" <?php if ($image_status == 1) print 'checked="checked" ';?>/>
+                                        Off: <input type="radio" name="image_status" value="0" <?php if ($image_status == 0) print 'checked="checked" ';?>/>
+                                    </span>
+								</p>
+                            </span>
+						</div>
 
-					<span id="Image_Status" style="display:none;" >
-					<p><span class="bold" style="display:block;"> On: <input type="radio" name="image_status" value="1" <?php if ($image_status == 1) print "checked=\"checked\"";?>/> Off: <input type="radio" name="image_status" value="0" <?php if ($image_status == 0) print "checked=\"checked\"";?>/></span></p>
-					</span>
-					</div>
+						<!-- Product Line -->
 
-					<!-- Product Line -->
+						<div style="border:1px dashed black; padding:3px; margin:2px">
+							<p class="bold">Change Category:
+                                    <span class="bold" style="display:block">
+                                        Yes: <input type="radio" name="change_category" value="1" onclick="show(document.getElementById('Category'));" />
+                                        No: <input type="radio" name="change_category" value="0" checked="checked" onclick="hide(document.getElementById('Category'));" />
+                                    </span>
+							</p>
+							<span id="Category" style="display:none;" >
+								<!-- Product Category -->
+								<p>
+									<b>Product Category:</b>
+									<select name="product_category"><option>Select One</option>
+										<?php // Retrieve all the product lines and add to the pull down menu.
 
-					<div style="border:1px dashed black; padding:3px; margin:2px">
-					<p class="bold">Change Category: <span class="bold" style="display:block"> Yes: <input type="radio" name="change_category" value="1" onclick="show(document.getElementById('Category'));" /> No: <input type="radio" name="change_category" value="0" checked="checked" onclick="hide(document.getElementById('Category'));" /></span></p>
+										foreach ($tree->getTree() as $row) {
+											print '<option value="'.$row['category_id'].'">'.str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;',($row['depth']));
+											if ($row['depth'] > 0) print "&bull;&nbsp;";
+											print $row['category'].'</option>'.PHP_EOL;
+										}
+										?>
+									</select>
+								</p>
+							</span>
+						</div>
 
-					<span id="Category" style="display:none;" >
-					<!--
-					<p><b>Product Category:</b>
+						<!-- Product Size -->
 
-					<span style="display:block">Existing <input type="radio" name="product_category" value="pc_existing" checked="checked" onclick="show(document.getElementById('ExistingCategory'));hide(document.getElementById('NewCategory'));" /> New <input type="radio" name="product_category" value="new" onclick="show(document.getElementById('NewCategory'));hide(document.getElementById('ExistingCategory'));" /></span></p>
-					-->
-					<!--
-					<span id="ExistingCategory">
-					-->
-					<!-- Product Category -->
-					<p><b>Product Category:</b>
-					<select name="product_category"><option>Select One</option>
-					<?php // Retrieve all the product lines and add to the pull down menu.
+						<div style="border:1px dashed black; padding:3px; margin:2px">
+							<p class="bold">
+								Change Product Size:
+                                <span class="bold" style="display:block">
+                                    Yes: <input type="radio" name="change_product_size" value="1" onclick="show(document.getElementById('Size'));" />
+                                    No: <input type="radio" name="change_product_size" value="0" checked="checked" onclick="hide(document.getElementById('Size'));" />
+                                </span>
+							</p>
 
-					foreach ($tree->getTree() as $row) {
-						print "<option value=\"{$row['category_id']}\">".str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;',($row['depth']));
-						if ($row['depth'] > 0) print "&bull;&nbsp;";
-						print "{$row['category']}</option>\r\n";
-					}
-					?>
-					</select>
-					</p>
-					<!--
-					</span>
+					        <span id="Size" style="display:none;" >
+					            <p>
+									<b>Product Size:</b>
+                                    <span style="display:block">
+                                        Existing <input type="radio" name="product_size" value="s_existing" checked="checked" onclick="show(document.getElementById('ExistingSize'));hide(document.getElementById('NewSize'));" />
+                                        New <input type="radio" name="product_size" value="new" onclick="show(document.getElementById('NewSize'));hide(document.getElementById('ExistingSize'));" />
+                                    </span>
+								</p>
 
-					<span id="NewCategory" style="display:none;">
-					<p>
-					<b></b>Category Name: <input type="text" name="pc_new" size="20" maxlength="30" />
-					</p>
-					</span>
-					-->
-					</span>
-					</div>
+					            <span id="ExistingSize">
+					                <p>
+										<b>Size:</b><br />
+										<select name="s_existing"><option>Select One</option>
+											<?php // Retrieve all the product sizes and add to the pull down menu.
+											$query = "SELECT size_id, size FROM product_size ORDER BY size ASC";
+											$result = mysql_query ($query);
+											while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
+												echo "<option value=\"{$row['size_id']}\"";
 
-					<!-- Product Size -->
+												if ($row['size'] == $size) {
 
-					<div style="border:1px dashed black; padding:3px; margin:2px">
-					<p class="bold">Change Product Size: <span class="bold" style="display:block"> Yes: <input type="radio" name="change_product_size" value="1" onclick="show(document.getElementById('Size'));" /> No: <input type="radio" name="change_product_size" value="0" checked="checked" onclick="hide(document.getElementById('Size'));" /></span></p>
+													echo ' selected="selected"';
+												}
 
-					<span id="Size" style="display:none;" >
-					<p><b>Product Size:</b>
-					<span style="display:block">Existing <input type="radio" name="product_size" value="s_existing" checked="checked" onclick="show(document.getElementById('ExistingSize'));hide(document.getElementById('NewSize'));" /> New <input type="radio" name="product_size" value="new" onclick="show(document.getElementById('NewSize'));hide(document.getElementById('ExistingSize'));" /></span></p>
+												echo ">{$row['size']}</option>\r\n";
+											}
+											?>
+										</select>
+									</p>
+					            </span>
+                            </span>
 
-					<span id="ExistingSize">
-					<p><b>Size:</b><br />
-					<select name="s_existing"><option>Select One</option>
-					<?php // Retrieve all the product sizes and add to the pull down menu.
-					$query = "SELECT size_id, size FROM product_size ORDER BY size ASC";
-					$result = @mysql_query ($query);
-					while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-						echo "<option value=\"{$row['size_id']}\"";
+					        <span id="NewSize" style="display:none;" >
+					            <p>
+									<b>Size:</b><br />
+									<input type="text" name="size" size="20" maxlength="30" />
+								</p>
+					        </span>
+						</div>
 
-						if ($row['size'] == $size) {
+						<!-- Product Weight -->
+						<div style="border:1px dashed black; padding:3px; margin:2px">
+							<p class="bold">
+								Change Product Weight:
+                                <span class="bold" style="display:block">
+                                    Yes: <input type="radio" name="change_product_postunit" value="1" onclick="show(document.getElementById('Weight'));" />
+                                    No: <input type="radio" name="change_product_postunit" value="0" checked="checked" onclick="hide(document.getElementById('Weight'));" />
+                                </span>
+							</p>
 
-							echo 'selected="selected"';
-						}
+					        <span id="Weight" style="display:none;" >
+					            <p>
+									<b>Product Weight:</b>
+                                    <span style="display:block">
+                                        Existing <input type="radio" name="product_postunit" value="w_existing" checked="checked" onclick="show(document.getElementById('ExistingWeight'));hide(document.getElementById('NewWeight'));" />
+                                        New <input type="radio" name="product_postunit" value="new" onclick="show(document.getElementById('NewWeight'));hide(document.getElementById('ExistingWeight'));" />
+                                    </span>
+								</p>
 
-					echo ">{$row['size']}</option>\r\n";
-					}
-					?>
-					</select>
-					</p>
-					</span>
+                                <span id="ExistingWeight">
+					                <p>
+										<b>Size:</b><br />
+										<select name="w_existing"><option>Select One</option>
+											<?php // Retrieve all the product sizes and add to the pull down menu.
+											$query = "SELECT postunit_id, postunit FROM product_postunit ORDER BY postunit ASC";
+											$result = mysql_query ($query);
+											while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
+												echo "<option value=\"{$row['postunit_id']}\"";
 
-					<span id="NewSize" style="display:none;" >
-					<p><b>Size:</b><br /><input type="text" name="size" size="20" maxlength="30" />
-					</p>
-					</span>
-					</span>
-					</div>
+												if ($row['postunit'] == $postunit) {
 
-					<!-- Product Weight -->
-					<div style="border:1px dashed black; padding:3px; margin:2px">
-					<p class="bold">Change Product Weight: <span class="bold" style="display:block"> Yes: <input type="radio" name="change_product_postunit" value="1" onclick="show(document.getElementById('Weight'));" /> No: <input type="radio" name="change_product_postunit" value="0" checked="checked" onclick="hide(document.getElementById('Weight'));" /></span></p>
+													echo ' selected="selected"';
+												}
 
-					<span id="Weight" style="display:none;" >
-					<p><b>Product Weight:</b>
-					<span style="display:block">Existing <input type="radio" name="product_postunit" value="w_existing" checked="checked" onclick="show(document.getElementById('ExistingWeight'));hide(document.getElementById('NewWeight'));" /> New <input type="radio" name="product_postunit" value="new" onclick="show(document.getElementById('NewWeight'));hide(document.getElementById('ExistingWeight'));" /></span></p>
+												echo " >{$row['postunit']}</option>\r\n";
+											}
+											?>
+										</select>
+									</p>
+					            </span>
 
-					<span id="ExistingWeight">
-					<p><b>Size:</b><br />
-					<select name="w_existing"><option>Select One</option>
-					<?php // Retrieve all the product sizes and add to the pull down menu.
-					$query = "SELECT postunit_id, postunit FROM product_postunit ORDER BY postunit ASC";
-					$result = mysql_query ($query);
-					while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-						echo "<option value=\"{$row['postunit_id']}\"";
+					            <span id="NewWeight" style="display:none;" >
+					                <p>
+										<b>Size:</b><br />
+										<input type="text" name="postunit" size="20" maxlength="30" />
+									</p>
+					            </span>
+					        </span>
+						</div>
 
-						if ($row['postunit'] == $postunit) {
+						<!-- Stock Control -->
+						<?php
+						if ($StockControl) { ?>
+							<div style="border:1px dashed black; padding:3px; margin:2px">
+								<p class="bold">
+									Change Stock Control:
+                                <span class="bold" style="display:block">
+                                    Yes: <input type="radio" name="change_stock" value="1" onclick="show(document.getElementById('StockControl'));" />
+                                    No: <input type="radio" name="change_stock" value="0" checked="checked" onclick="hide(document.getElementById('StockControl'));" />
+                                </span>
+								</p>
 
-							echo 'selected="selected"';
-						}
+                            <span id="StockControl" style="display:none;" >
+                                <b>Stock Control:</b>
+                                <span style="display:block">
+                                    Non Stock <input id='non_stock' type="radio" name="stock" value="non_stock" <?php if ($quantity < 0) print 'checked="checked"'; ?> onclick="hide(document.getElementById('Stock'));document.getElementById('quantity').value = -1" />
+                                    Stock <input id="stock" type="radio" name="stock" value="stock" <?php if ($quantity >= 0) print 'checked="checked"'; ?> onclick="show(document.getElementById('Stock'));document.getElementById('quantity').value = <?=$quantity?>;" />
+                                </span>
 
-						echo " >{$row['postunit']}</option>\r\n";
-					}
-					?>
-					</select>
-					</p>
-					</span>
+                                <span id="Stock">
+                                    <p>
+										<b>Quantity:</b>
+										<input id="quantity" type="text" name="quantity" value="<?=$quantity?>" size="4"/>
+									</p>
+                                </span>
+                            </span>
+							</div>
+						<?php } else { ?>
+							<input type="hidden" name="quantity" value="-1" />
+						<?php } ?>
 
-					<span id="NewWeight" style="display:none;" >
-					<p><b>Size:</b><br /><input type="text" name="postunit" size="20" maxlength="30" />
-					</p>
-					</span>
-					</span>
-					</div>
+						<!-- Product Price -->
 
-					<!-- Stock Control -->
-					<?php
-					if ($StockControl) {
-					?>
-					<div style="border:1px dashed black; padding:3px; margin:2px">
-					<p class="bold">Change Stock Control: <span class="bold" style="display:block"> Yes: <input type="radio" name="change_stock" value="1" onclick="show(document.getElementById('StockControl'));" /> No: <input type="radio" name="change_stock" value="0" checked="checked" onclick="hide(document.getElementById('StockControl'));" /></span></p>
+						<div style="border:1px dashed black; padding:3px; margin:2px">
+							<p class="bold">
+								Change Price:
+                                <span class="bold" style="display:block">
+                                    Yes: <input type="radio" name="change_price" value="1" onclick="show(document.getElementById('Price'));" />
+                                    No: <input type="radio" name="change_price" value="0" checked="checked" onclick="hide(document.getElementById('Price'));" />
+                                </span>
+							</p>
 
-					<span id="StockControl" style="display:none;" >
-						<b>Stock Control:</b>
-						<span style="display:block">Non Stock <input id='non_stock' type="radio" name="stock" value="non_stock" <?php
-						if ($quantity < 0) print 'checked="checked"'; ?> onclick="hide(document.getElementById('Stock'));document.getElementById('quantity').value = -1" /> Stock <input id="stock" type="radio" name="stock" value="stock" <?php
-						if ($quantity >= 0) print 'checked="checked"'; ?> onclick="show(document.getElementById('Stock'));document.getElementById('quantity').value = <?=$quantity?>;" /></span>
+                            <span id="Price" style="display:none;" >
+                                <p>
+									<b>Price:</b>
+									<input type="text" name="price" size="10" maxlength="10" value="<?=$price?>"/><br />
+									<small>
+										<b style="color:red;">Do not include the currency sign or commas.</b>
+									</small>
+									<?php if ($VatState == 1) { ?>
+										<br /><b>Including Tax:</b> <input type="radio" name="inc_vat" value="1" <?php if ($vat_inc == 1) print 'checked="checked"'; ?> />
+										<br /><b>Excluding Tax:</b> <input type="radio" name="inc_vat" value="0" <?php if ($vat_inc == 0) print 'checked="checked"'; ?> />
+									<?php } else { ?>
+										<input type="hidden" name="inc_vat" value="1" />
+									<?php } ?>
+								</p>
 
-						<span id="Stock">
-						<p><b>Quantity:</b> <input id="quantity" type="text" name="quantity" value="<?=$quantity?>" size="4"/></p>
-						</span>
-					</span>
-					</div>
-					<?php } else {
-						echo "<input type=\"hidden\" name=\"quantity\" value=\"-1\" />";
-					} ?>
+                                <!-- Product Tax -->
+								<p>
+									<?php if ($VatState == 1) { ?>
+									<b>Sales Tax Code:</b>
+									<select name="tax_code_id">
+										<option>Select One</option>
+										<?php // Retrieve all the tax codes and add to the pull down menu.
+										$query = "SELECT tax_code_id, tax_code, description, tax_rate FROM tax_codes, tax_rates WHERE tax_codes.tax_rate_id=tax_rates.tax_rate_id";
+										$result = mysql_query ($query);
+										while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
+											if ($row['tax_rate'] > 0) {
+												$row['tax_rate'] = substr ($row['tax_rate'], 2);
+												$row['tax_rate'] = substr ($row['tax_rate'], 0, 2) . "." . substr ($row['tax_rate'], -1);
+												if (substr ($row['tax_rate'], 0, 1) == 0) {
+													$row['tax_rate'] = substr ($row['tax_rate'], 1);
+												}
 
-					<!-- Product Price -->
+												$row['tax_rate'] = number_format ($row['tax_rate'], 2);
 
-					<div style="border:1px dashed black; padding:3px; margin:2px">
-					<p class="bold">Change Price: <span class="bold" style="display:block"> Yes: <input type="radio" name="change_price" value="1" onclick="show(document.getElementById('Price'));" /> No: <input type="radio" name="change_price" value="0" checked="checked" onclick="hide(document.getElementById('Price'));" /></span></p>
+											} else {
+												$row['tax_rate'] = number_format ($row['tax_rate'], 2);
+											}
 
-					<span id="Price" style="display:none;" >
-					<p><b>Price:</b> <input type="text" name="price" size="10" maxlength="10" value="<?=$price?>"/>
-					<br /><small><b style="color:red;">Do not include the currency sign or commas.</b></small>
-					<?php
-						if ($VatState == 1) {
-					?>
-					<br /><b>Including Tax:</b> <input type="radio" name="inc_vat" value="1" <?php if ($vat_inc == 1){ print 'checked="checked"'; } ?> />
-					<br /><b>Excluding Tax:</b> <input type="radio" name="inc_vat" value="0" <?php if ($vat_inc == 0){ print 'checked="checked"'; } ?> />
-					<?php
-						} else {
-							echo "<input type=\"hidden\" name=\"inc_vat\" value=\"1\" />";
-						}
-					?>
-					</p>
+											echo "<option value=\"{$row['tax_code_id']}\"";
 
-					<!-- Product Tax -->
-					<?php
-						if ($VatState == 1) {
-					?>
-					<p><b>Sales Tax Code:</b>
-					<select name="tax_code_id"><option>Select One</option>
-					<?php // Retrieve all the tax codes and add to the pull down menu.
-						$query = "SELECT tax_code_id, tax_code, description, tax_rate FROM tax_codes, tax_rates WHERE tax_codes.tax_rate_id=tax_rates.tax_rate_id";
-						$result = @mysql_query ($query);
-						while ($row = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-							if ($row['tax_rate'] > 0) {
-								$row['tax_rate'] = substr ($row['tax_rate'], 2);
-								$row['tax_rate'] = substr ($row['tax_rate'], 0, 2) . "." . substr ($row['tax_rate'], -1);
-								if (substr ($row['tax_rate'], 0, 1) == 0) {
-									$row['tax_rate'] = substr ($row['tax_rate'], 1);
-								}
+											if ($row['tax_code'] == $tax_code) {
 
-								$row['tax_rate'] = number_format ($row['tax_rate'], 2);
+												echo 'selected="selected"';
+											}
 
-							} else {
-								$row['tax_rate'] = number_format ($row['tax_rate'], 2);
-							}
+											echo " >{$row['tax_code']} - {$row['description']} - {$row['tax_rate']}%</option>\r\n";
+										}
+										?>
+									</select>
+									<?php } else {
+										$query = "SELECT tax_code_id FROM tax_codes WHERE tax_code='N'";
+										$result = mysql_query ($query);
+										$row = mysql_fetch_array ($result, MYSQL_ASSOC);
+										echo '<input type="hidden" name="tax_code_id" value="'.$row['tax_code_id'].'" />';
+									} ?>
+								</p>
+                            </span>
+						</div>
 
-							echo "<option value=\"{$row['tax_code_id']}\"";
+						<!-- Postage State -->
 
-							if ($row['tax_code'] == $tax_code) {
+						<div style="border:1px dashed black; padding:3px; margin:2px">
+							<p class="bold">
+								Change Postage State:
+                                <span class="bold" style="display:block;">
+                                    Yes: <input type="radio" name="change_postage" value="1" onclick="show(document.getElementById('Postage'));" />
+                                    No: <input type="radio" name="change_postage" value="0" checked="checked" onclick="hide(document.getElementById('Postage'));" />
+                                </span>
+							</p>
 
-								echo 'selected="selected"';
-							}
+                            <span id="Postage" style="display:none;" >
+                                <p>
+                                    <span class="bold" style="display:block;">
+                                        On: <input type="radio" name="postage" value="1" <?php if ($postage == 1) print 'checked="checked"';?>/>
+                                        Off: <input type="radio" name="postage" value="0" <?php if ($postage == 0) print 'checked="checked"';?>/>
+                                    </span>
+								</p>
+                            </span>
+						</div>
 
-							echo " >{$row['tax_code']} - {$row['description']} - {$row['tax_rate']}%</option>\r\n";
-						}
-					?>
-					</select>
-					<?php
-						} else {
-							$query = "SELECT tax_code_id FROM tax_codes WHERE tax_code='N'";
-							$result = mysql_query ($query);
-							$row = mysql_fetch_array ($result, MYSQL_ASSOC);
-							echo "<input type=\"hidden\" name=\"tax_code_id\" value=\"{$row['tax_code_id']}\" />";
-						}
-					?>
-					</p>
-					</span>
-					</div>
+						<!-- Short Description -->
 
-					<!-- Postage State -->
+						<div style="border:1px dashed black; padding:3px; margin:2px">
+							<p class="bold">
+								Change Short Description:
+                                <span class="bold" style="display:block">
+                                    Yes: <input type="radio" name="change_short_description" value="1" onclick="show(document.getElementById('short_descript'));" />
+                                    No: <input type="radio" name="change_short_description" value="0" checked="checked" onclick="hide(document.getElementById('short_descript'));" />
+                                </span>
+							</p>
 
-					<div style="border:1px dashed black; padding:3px; margin:2px">
-					<p class="bold">Change Postage State: <span class="bold" style="display:block;"> Yes: <input type="radio" name="change_postage" value="1" onclick="show(document.getElementById('Postage'));" /> No: <input type="radio" name="change_postage" value="0" checked="checked" onclick="hide(document.getElementById('Postage'));" /></span></p>
+                            <span id="short_descript" style="display:none;" >
+                                <p>
+									<b>Short Description:</b><br />
+									<input type="text" name="short_description" size="30" maxlength="100" value="<?=$short_description?>" />
+								</p>
 
-					<span id="Postage" style="display:none;" >
-					<p><span class="bold" style="display:block;"> On: <input type="radio" name="postage" value="1" <?php if ($postage == 1) print "checked=\"checked\"";?>/> Off: <input type="radio" name="postage" value="0" <?php if ($postage == 0) print "checked=\"checked\"";?>/></span></p>
-					</span>
-					</div>
+                                <p>
+									<b>Use Short Description for Description:</b>
+									<input type="checkbox" id="use_short" name="use_short" />
+								</p>
+                            </span>
+						</div>
 
-					<!-- Product Description -->
+						<!-- Product Description -->
 
-					<!-- Short Description -->
+						<div style="border:1px dashed black; padding:3px; margin:2px">
+							<p class="bold">
+								Change Description:
+                                <span class="bold" style="display:block" >
+                                    Yes: <input type="radio" name="change_description" value="1" onclick="show(document.getElementById('prod_descript'));" />
+                                    No: <input type="radio" name="change_description" value="0" checked="checked" onclick="hide(document.getElementById('prod_descript'));" />
+                                </span>
+							</p>
 
-					<div style="border:1px dashed black; padding:3px; margin:2px">
-					<p class="bold">Change Short Description: <span class="bold" style="display:block"> Yes: <input type="radio" name="change_short_description" value="1" onclick="show(document.getElementById('short_descript'));" /> No: <input type="radio" name="change_short_description" value="0" checked="checked" onclick="hide(document.getElementById('short_descript'));" /></span></p>
+                            <span id="prod_descript" style="display:none;" >
+								<b>Description:<b>
+								<textarea name="description" cols="40" rows="5">
+									<?=$description?>
+								</textarea>
+                            </span>
+						</div>
 
-					<span id="short_descript" style="display:none;" >
-					<p><b>Short Description:</b><br /><input type="text" name="short_description" size="30" maxlength="100" value="<?=$short_description?>" /></p>
-					<p><b>Use Short Description for Description:</b>
-					<input type="checkbox" id="use_short" name="use_short" /> </p>
-					</span>
-					</div>
 
-					<div style="border:1px dashed black; padding:3px; margin:2px">
-					<p class="bold">Change Description: <span class="bold" style="display:block" > Yes: <input type="radio" name="change_description" value="1" onclick="show(document.getElementById('prod_descript'));" /> No: <input type="radio" name="change_description" value="0" checked="checked" onclick="hide(document.getElementById('prod_descript'));" /></span></p>
-
-					<span id="prod_descript" style="display:none;" >
-					<p><b>Description:<b> <textarea name="description" cols="40" rows="5"><?=$description?></textarea></p>
-					</span>
-					</div>
-					<input type="hidden" name="pid" value="<?=$pid;?>" />
-					<div align="center"><input type="submit" name="submit" value="Submit" /></div>
+						<input type="hidden" name="pid" value="<?=$pid;?>" />
+						<div align="center">
+							<input type="submit" name="submit" value="Submit" />
+						</div>
 
 					</form>
 					</div>

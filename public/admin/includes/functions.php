@@ -21,16 +21,22 @@
  */
 
 // Set include paths.
-set_include_path($_SERVER['DOCUMENT_ROOT'].'/admin/includes/classes'
-    .PATH_SEPARATOR.
-    $_SERVER['DOCUMENT_ROOT'].'/../php'
-);
+$Zf1Path = $_SERVER['DOCUMENT_ROOT'].'/../vendor/zendframework/zendframework1/library'
+;
+set_include_path(implode(PATH_SEPARATOR, array(
+	$Zf1Path,
+	$_SERVER['DOCUMENT_ROOT'].'/admin/includes/classes',
+	realpath($_SERVER['DOCUMENT_ROOT'].'/../php'),
+)));
 
 // Setup zf2 autoloading
-$zf2Autoloader = include $_SERVER['DOCUMENT_ROOT'].'/../vendor/autoload.php';
+$loader = include $_SERVER['DOCUMENT_ROOT'].'/../vendor/autoload.php';
+
+$loader->setUseIncludePath($Zf1Path);
+$loader->add('Zend_', $Zf1Path.'/Zend');
 
 // Auto load classes.
-$autoload = function ($class_name)
+function CBAutoLoader ($class_name)
 {
 	$class_name = explode("_", $class_name);
 	$class_path = null;
@@ -38,8 +44,9 @@ $autoload = function ($class_name)
 		$class_path .= '/'.$value;
 	}
 	$class_path = substr($class_path, 1);
-	require ($class_path . '.php');
+	return include($class_path . '.php');
 };
-spl_autoload_register($autoload);
-//$errors = ErrorLogging::getInstance();
+
+spl_autoload_register('CBAutoLoader');
+$errors = ErrorLogging::getInstance();
 ?>

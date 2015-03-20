@@ -17,17 +17,19 @@ class ViewRenderer
 		$config->configureServiceManager($this->plugins);
 		
 		$zfView->setResolver(new TemplateMapResolver(array(
-			'login' => $_SERVER['DOCUMENT_ROOT'] . '/shop/html/login.phtml',
-			'reset-password' => $_SERVER['DOCUMENT_ROOT'] . '/shop/html/forgot-password.phtml',
-			'register' => $_SERVER['DOCUMENT_ROOT'] . '/shop/html/register.phtml',
-			'change-password' => $_SERVER['DOCUMENT_ROOT'] . '/shop/html/change-password.phtml',
-			'contact' => $_SERVER['DOCUMENT_ROOT'] . '/shop/html/contact.phtml',
-			'thank-you' => $_SERVER['DOCUMENT_ROOT'] . '/shop/html/thank-you.phtml',
-			'register' => $_SERVER['DOCUMENT_ROOT'] . '/shop/html/register.phtml',
-			'province-select' => $_SERVER['DOCUMENT_ROOT'] . '/shop/html/province-select.phtml',
-			'register-email' => $_SERVER['DOCUMENT_ROOT'] . '/shop/html/register-email.phtml',
-            'register-thank-you' => $_SERVER['DOCUMENT_ROOT'] . '/shop/html/register-thank-you.phtml',
-            'activate' => $_SERVER['DOCUMENT_ROOT'] . '/shop/html/activate.phtml',
+			'login' 				=> $_SERVER['DOCUMENT_ROOT'] . '/shop/html/login.phtml',
+			'reset-password' 		=> $_SERVER['DOCUMENT_ROOT'] . '/shop/html/forgot-password.phtml',
+			'register' 				=> $_SERVER['DOCUMENT_ROOT'] . '/shop/html/register.phtml',
+			'change-password' 		=> $_SERVER['DOCUMENT_ROOT'] . '/shop/html/change-password.phtml',
+			'contact' 				=> $_SERVER['DOCUMENT_ROOT'] . '/shop/html/contact.phtml',
+			'thank-you' 			=> $_SERVER['DOCUMENT_ROOT'] . '/shop/html/thank-you.phtml',
+			'register' 				=> $_SERVER['DOCUMENT_ROOT'] . '/shop/html/register.phtml',
+			'province-select' 		=> $_SERVER['DOCUMENT_ROOT'] . '/shop/html/province-select.phtml',
+			'register-email' 		=> $_SERVER['DOCUMENT_ROOT'] . '/shop/html/register-email.phtml',
+            'register-thank-you' 	=> $_SERVER['DOCUMENT_ROOT'] . '/shop/html/register-thank-you.phtml',
+            'activate' 				=> $_SERVER['DOCUMENT_ROOT'] . '/shop/html/activate.phtml',
+			'email' 				=> $_SERVER['DOCUMENT_ROOT'] . '/shop/html/email.phtml',
+			'credit-card' 			=> $_SERVER['DOCUMENT_ROOT'] . '/shop/html/creditCard.phtml',
         )));
 	
 		$this->_view = $zfView;

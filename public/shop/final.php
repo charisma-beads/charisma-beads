@@ -135,27 +135,23 @@ if (isset($_SESSION['cid']) && $_GET['stage'] == 2 && $cart->getNumCartItems() !
 					mysql_query ("UPDATE products SET hits=$p_hits WHERE product_id={$row['product_id']}");
 				}
 
-				$transport = new Zend_Mail_Transport_Smtp($ordersMail['host'], $ordersMail['config']);
-        	
-            	$mail = new Zend_Mail();
-                
-                // mail invoice to customer.
-    	        $mail->setBodyHtml($email_message);
-    	        $mail->setFrom($merchant_email, 'Charisma Beads Ltd');
-    	        $mail->addTo($_SESSION['customer_email']);
-    	        $mail->setSubject($email_subject);
-    	        //$mail->buildHtml();
-    	        $mail->send($transport);
-    	
-    	        $mail = new Zend_Mail();
+				$sendMail = new SendMail($sendMailconfig);
+
+				// mail invoice to customer.
+				$sendMail->sendEmail(array(
+					'from' => $sendMailconfig['address_list']['orders'],
+					'to' => $_SESSION['customer_email'],
+					'subject' => $email_subject,
+					'html' => $email_message,
+				));
     	        
     	        // now mail order to merchant.
-    	        $mail->setBodyHtml($email_message);
-    	        $mail->setFrom($_SESSION['customer_email']);
-    	        $mail->addTo($orders_email, 'Charisma Beads Ltd');
-    	        $mail->setSubject($email_subject);
-    	        //$mail->buildHtml();
-    	        $mail->send($transport);
+				$sendMail->sendEmail(array(
+					'to' => $sendMailconfig['address_list']['orders'],
+					'from' => $_SESSION['customer_email'],
+					'subject' => $email_subject,
+					'html' => $email_message,
+				));
 
 				$email_sent = "<p>Your sales order receipt has been emailed to you.</p>";
 				
