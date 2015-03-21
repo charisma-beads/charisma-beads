@@ -16,8 +16,8 @@
         <div class="row">
             <?php /* @var $row \Shop\Model\Product\Product */ ?>
             <?php foreach ($this->products as $row): ?>
-            <div class="col-md-4 col-sm-4"><!-- item -->
-                <a class="shop-item-list" href="<?=$this->url('shop/catalog/product', [
+            <div class="col-md-4 col-sm-4 shop-item-list"><!-- item -->
+                <a href="<?=$this->url('shop/catalog/product', [
                     'categoryIdent' => $row->getProductCategory()->getIdent(),
                     'productIdent' => $row->getIdent(),
                 ]);?>">
@@ -48,6 +48,27 @@
                         </h2>
                     </div><!-- /title and price -->
                 </a>
+                
+                <?php $form = $this->cart()->addForm($row)->setAttribute('class', 'form-inline margin-top10 nopadding clearfix'); ?>
+                
+                <?=$this->form()->openTag($form); ?>
+                    <?=$this->formHidden($form->get('productId')); ?>
+                    <?=$this->formHidden($form->get('returnTo')); ?>
+                    
+                    <div class="btn-group product-opt-qty">
+                        <?=$this->formInput($form->get('qty')->setAttribute('class', 'form-control')); ?>
+                    </div>
+                    
+                    <?php if ($row->getProductOption()): ?>
+                    <div class="btn-group product-opt-size">
+                        <?=$this->productOptions($row);?>
+                    </div><!-- /btn-group -->
+                    <?php endif; ?>
+                    
+                    <button type="submit" name="buy-item" class="btn btn-primary">
+                        ADD TO CART
+                    </button>
+                <?=$this->form()->closeTag(); ?>
             </div><!-- /item -->
             <?php endforeach; ?>
         </div><!-- /PRODUCT LIST -->
