@@ -15,7 +15,7 @@
                 <th data-field="quantity">Stock</th>
                 <th data-field="category">Category</th>
                 <th>Image</th>
-                <th style="width:190px;">Actions</th>
+                <th>Actions</th>
             </tr>
         </thead>
 
@@ -48,10 +48,6 @@
                     <?php endif; ?>
                 </td>
                 <td width="140">
-                    <a href="<?=$this->url('admin/shop/product/edit', [
-                        'action' => 'duplicate',
-                        'id'     => $row->getProductId(),
-                    ]);?>" class="btn btn-primary btn-sm">Duplicate</a>
                     <?=$this->partial('uthando-admin/partial/edit-actions', [
                         'pk'		=> 'productId',
                         'id'		=> $row->getProductId(),

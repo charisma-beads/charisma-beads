@@ -28,6 +28,8 @@ return [
         'shop/product-nav'                              => __DIR__ . '/view/shop/product-nav.phtml',
         'shop/options'                                  => __DIR__ . '/view/shop/options.phtml',
         'shop/parallax'                                 => __DIR__ . '/view/shop/parallax.phtml',
+        
+        'uthando-article/article/view'                  => __DIR__ . '/view/uthando-article/article/view.phtml',
 
         'uthando-contact/contact/index'                 => __DIR__ . '/view/uthando-contact/contact/index.phtml',
         'uthando-contact/contact/thank-you'             => __DIR__ . '/view/uthando-contact/contact/thank-you.phtml',

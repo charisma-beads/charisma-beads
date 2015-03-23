@@ -235,13 +235,7 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
                 <button type="button" class="btn btn-warning"  data-loading-text="Please wait..." onClick="window.location = '<?=$this->url('admin/shop/product') ?>';">
                     Cancel
                 </button>
-                <?php if ($this->formAction == 'edit'): ?>
-                <a href="<?=$this->url('admin/shop/product/edit', [
-                    'action' => 'duplicate',
-                    'id'     => $this->productId,
-                ]);?>" class="btn btn-primary">Duplicate</a>
-                <?php endif; ?>
-        </div>
+            </div>
         </div>
 
 	</form>

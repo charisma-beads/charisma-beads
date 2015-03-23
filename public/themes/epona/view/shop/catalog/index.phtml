@@ -49,25 +49,29 @@
                     </div><!-- /title and price -->
                 </a>
                 
-                <?php $form = $this->cart()->addForm($row)->setAttribute('class', 'form-inline margin-top10 nopadding clearfix'); ?>
+                <?php $form = $this->cart()->addForm($row)->setAttribute('class', 'margin-top10 nopadding clearfix'); ?>
                 
                 <?=$this->form()->openTag($form); ?>
                     <?=$this->formHidden($form->get('productId')); ?>
                     <?=$this->formHidden($form->get('returnTo')); ?>
                     
-                    <div class="btn-group product-opt-qty">
-                        <?=$this->formInput($form->get('qty')->setAttribute('class', 'form-control')); ?>
-                    </div>
-                    
                     <?php if ($row->getProductOption()): ?>
-                    <div class="btn-group product-opt-size">
-                        <?=$this->productOptions($row);?>
-                    </div><!-- /btn-group -->
+                    <div class="row">
+                        <div class="col col-md-12">
+                            <?=$this->productOptions($row);?>
+                        </div><!-- /btn-group -->
+                    </div>
                     <?php endif; ?>
                     
-                    <button type="submit" name="buy-item" class="btn btn-primary">
-                        ADD TO CART
-                    </button>
+                    <div class="input-group">
+                        <?=$this->formInput($form->get('qty')->setAttribute('class', 'form-control')); ?>
+                        <span class="input-group-btn">
+                            <button type="submit" name="buy-item" class="btn btn-primary">
+                                ADD TO CART
+                            </button>
+                        </span>
+                    </div>
+                    
                 <?=$this->form()->closeTag(); ?>
             </div><!-- /item -->
             <?php endforeach; ?>
