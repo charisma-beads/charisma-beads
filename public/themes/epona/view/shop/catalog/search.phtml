@@ -49,6 +49,7 @@
                         
                         <?php $form = $this->cart()->addForm($row)->setAttribute('class', 'margin-top10 nopadding clearfix'); ?>
                         
+                         <?php if ($row->getQuantity() != 0):?>
                         <?=$this->form()->openTag($form); ?>
                             <?=$this->formHidden($form->get('productId')); ?>
                             <?=$this->formHidden($form->get('returnTo')); ?>
@@ -71,6 +72,7 @@
                             </div>
                             
                         <?=$this->form()->closeTag(); ?>
+                        <?php endif; ?>
                     </div><!-- /item -->
                 <?php endforeach; ?>
             </div><!-- /PRODUCT LIST -->
