@@ -1,0 +1,40 @@
+
+<?php $this->placeholder('page-top')->captureStart();?>
+
+<?=$this->partial('layout/page-title', [
+    'pageTitle' => 'Payment By Phone',
+]);?>
+<?php $this->placeholder('page-top')->captureEnd();?>
+
+<div class="col-md-8">
+    <h2>Thank you for your order.</h2>
+    
+    <p>To complete your order please phone 
+        <a href="tel:<?=$this->contact('details.phone')?>"><b><?=$this->contact('details.phone')?></b></a>, 
+        quoting your order number 
+        <a href="<?=$this->url('shop/order/view', [
+            'orderId' => $this->order->getOrderId(),
+        ]);?>"><b><?=$this->order->getOrderNumber();?></b></a>.
+    </p>
+    <p>Once your payment has been processed we will dispatch your order.</p>
+</div>
+
+<div class="col-md-4">
+
+    <!-- cart totals -->
+    <div class="sky-form boxed cartContent">
+        <header class="styleColor">Order <a href="<?=$this->url('shop/order/view', [
+            'orderId' => $this->order->getOrderId(),
+        ]);?>"><?=$this->order->getOrderNumber();?></a></header>
+
+        <fieldset>
+            <section class="clearfix cart_totals noborder">
+                <span class="pull-right fsize20 bold styleColor"><?=$this->priceFormat($this->order->getTotal());?></span>
+                <span class="bold fsize18">Total To Pay</span>
+            </section>
+
+        </fieldset>
+
+    </div>
+    <!-- /cart totals -->
+</div>

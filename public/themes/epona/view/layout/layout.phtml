@@ -72,6 +72,7 @@
                 border:0;
                 background-color:transparent;
             }
+            
         </style>
     </head>
 
@@ -260,8 +261,12 @@
                         Designed by <a href="http://www.shaunfreeman.co.uk" target="_blank" title="e-commerse websites" class="copyright">
                             Shaun Freeman
                         </a> &bull; All Right Reserved &copy; <?=$this->themeOptions('site_name');?>. &nbsp;
-                        <a href="page-privacy.html" class="fsize11">Privacy Policy</a> &bull;
-                        <a href="page-terms.html" class="fsize11">Terms of Service</a>
+                        <a href="<?=$this->url('article', [
+                            'slug' => 'cookie-policy',
+                        ])?>" class="fsize11">Cookie Policy</a> &bull;
+                        <a href="<?=$this->url('article', [
+                            'slug' => 'terms',
+                        ])?>" class="fsize11">Terms of Sale</a>
                     </div>
                 </div>
             </footer>
