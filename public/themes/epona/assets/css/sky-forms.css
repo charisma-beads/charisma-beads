@@ -144,34 +144,36 @@
 	opacity: 0;
 }
 
-
 /**/
 /* selects */
 /**/
 .sky-form .select i {
 	position: absolute;
-	top: 14px;
-	right: 14px;
-	width: 5px;
-	height: 11px;
+	top: 2px;
+	right: 2px;
+	width: 28px;
+	height: 35px;
 	background: #fff;
-	box-shadow: 0 0 0 12px #fff;
+	pointer-events: none;
 }
 .sky-form .select i:after,
 .sky-form .select i:before {
 	content: '';
 	position: absolute;
-	right: 0;
+	right: 10px;
 	border-right: 4px solid transparent;
 	border-left: 4px solid transparent;
 }
 .sky-form .select i:after {
-	bottom: 0;
+	bottom: 12px;
 	border-top: 4px solid #404040;
 }
 .sky-form .select i:before {
-	top: 0;
+	top: 12px;
 	border-bottom: 4px solid #404040;
+}
+.sky-form .select select {
+	padding-right: 28px;
 }
 .sky-form .select-multiple select {
 	height: auto;

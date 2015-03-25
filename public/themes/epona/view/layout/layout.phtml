@@ -101,7 +101,9 @@
                                 ?>
                             </nav>
 
-                            Call Us Today: <strong><?=$this->contact('details.phone');?></strong>
+                            Call Us Today: <strong><a href="tel:<?=$this->contact('details.phone');?>">
+                                <?=$this->contact('details.phone');?>
+                            </a></strong>
 							<span class="hide_mobile">
 								&bull; <a href="mailto:<?=$this->contact('details.email');?>"><?=$this->contact('details.email');?></a>
 							</span>
@@ -195,8 +197,10 @@
                                 <?=$this->contact('details.address.town');?>&nbsp;
                                 <?=$this->contact('details.address.county');?>&nbsp;
                                 <?=$this->contact('details.address.postcode');?><br />
-                                Email:&nbsp;<?=$this->contact('details.email');?><br />
-                                Phone:&nbsp;<?=$this->contact('details.phone');?><br />
+                                Email:&nbsp;<a href="mailto:<?=$this->contact('details.email');?>"><?=$this->contact('details.email');?></a><br />
+                                Phone:&nbsp;<a href="tel:<?=$this->contact('details.phone');?>">
+                                <?=$this->contact('details.phone');?>
+                            </a><br />
                             </p>
 
                             <p class="block"><!-- social -->
