@@ -42,6 +42,8 @@ return [
         'uthando-news/news/news-item'                   => __DIR__ . '/view/uthando-news/news/news-item.phtml',
         'uthando-news/news/paginate'                    => __DIR__ . '/view/uthando-news/news/paginate.phtml',
         'uthando-news/news/view'                        => __DIR__ . '/view/uthando-news/news/view.phtml',
+        
+        'uthando-testimonial/testimonial/view'          => __DIR__ . '/view/uthando-testimonial/testimonial/view.phtml',
 
         'uthando-twitter/twitter/twitter-feed'          => __DIR__ . '/view/uthando-twitter/twitter/twitter-feed.phtml',
 
