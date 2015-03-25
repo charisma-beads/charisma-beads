@@ -79,6 +79,20 @@ class Cart extends AbstractViewHelper
 	    return $this->formatAmount($this->cartService->getShippingCost());
 	}
 	
+	public function hasProductInCart($product)
+	{
+	    $items = $this->getCart()->getEntities();
+	    
+	    foreach ($items as $item) {
+	        if ($item->getMetaData()->getProductId() == $product->getProductId()) {
+	            $num = $item->getQuantity();
+	            return '<i class="fa fa-shopping-cart"></i>&nbsp;' . $num;
+	        }
+	    }
+	    
+	    return '';
+	}
+	
 	public function formatAmount($amount)
     {
         $currency = $this->getCurrencyHelper();

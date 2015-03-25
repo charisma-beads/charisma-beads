@@ -20,13 +20,17 @@ class Product extends AbstractCrudController
 	
 	public function indexAction()
 	{
-	    $this->getService()->getMapper()->setFetchEnabled(false);
+	    $this->getService()->getMapper()
+	       ->setFetchEnabled(false)
+	       ->setFetchDisabled(true);
 	    return parent::indexAction();
 	}
 	
 	public function listAction()
 	{
-	    $this->getService()->getMapper()->setFetchEnabled(false);
+	    $this->getService()->getMapper()
+	       ->setFetchEnabled(false)
+	       ->setFetchDisabled(true);
 	    return parent::listAction();
 	}
 

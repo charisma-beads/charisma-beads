@@ -22,7 +22,7 @@
     		<?php
         		$parent = ($row->hasChildren() || $row->getDepth() == 0) ? 'bold ' : '';
     		?>
-    		<tr>
+    		<tr class="<?=$this->ProductTableRowState($row);?>">
     		    <td><?=$this->enabled($row, [
     		    	'table' => 'productCategory',
     		        'route' => 'admin/shop/category/edit',

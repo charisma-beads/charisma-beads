@@ -69,6 +69,7 @@
                         <span class="input-group-btn">
                             <button type="submit" name="buy-item" class="btn btn-primary">
                                 ADD TO CART
+                                <?=$this->cart()->hasProductInCart($row);?>
                             </button>
                         </span>
                     </div>

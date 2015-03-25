@@ -13,11 +13,15 @@ class ProductCategoryList extends Select implements ServiceLocatorAwareInterface
     
     public function init()
     {
-        $cats = $this->getServiceLocator()
+        /* @var $categoryService \Shop\Service\Product\Category */
+        $categoryService = $this->getServiceLocator()
             ->getServiceLocator()
             ->get('UthandoServiceManager')
-            ->get('ShopProductCategory')
-            ->fetchAll();
+            ->get('ShopProductCategory');
+        
+        $categoryService->getMapper()
+            ->setFetchEnabled(false);
+        $cats = $categoryService->fetchAll();
         
         $categoryOptions = [];
          

@@ -119,9 +119,7 @@ class Product extends AbstractDbMapper
             $select->where->equalTo('product.enabled', 1);
         }
 
-        if ($this->getFetchDisabled()) {
-            $select->where->equalTo('product.discontinued', 1);
-        } else {
+        if (!$this->getFetchDisabled()) {
             $select->where->equalTo('product.discontinued', 0);
         }
 

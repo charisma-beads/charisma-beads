@@ -51,5 +51,3 @@ foreach ($resultArray as $values) {
 }
 
 print 'rows Inserted = ' . $c;
-
-$result->close();

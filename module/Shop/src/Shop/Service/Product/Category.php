@@ -295,6 +295,8 @@ class Category extends AbstractRelationalMapperService
             $category->getProductCategoryId()
         )->toArray();
 		
+		$this->removeCacheItem($category->getProductCategoryId());
+		
 		array_pop($parents);
 		$parent = array_slice($parents, -1, 1);
 		

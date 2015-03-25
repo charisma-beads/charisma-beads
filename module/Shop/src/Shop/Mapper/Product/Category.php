@@ -4,6 +4,7 @@ namespace Shop\Mapper\Product;
 use UthandoCommon\Mapper\AbstractNestedSet;
 use Shop\Model\Product\Category as CategoryModel;
 use Zend\Db\Sql\Where;
+use Zend\Db\Sql\Select;
 
 
 class Category extends AbstractNestedSet
@@ -27,15 +28,7 @@ class Category extends AbstractNestedSet
 		$select = $this->getFullTree();
 		$select->having('depth = 0');
 		
-		if ($this->getFetchEnabled()) {
-			$select->where->and->equalTo('child.enabled', 1);
-		}
-		 
-		if ($this->getFetchDisabled()) {
-			$select->where->and->equalTo('child.discontinued', 1);
-		} else {
-			$select->where->and->equalTo('child.discontinued', 0);
-		}
+		$select = $this->setFilter($select);
 		 
 		return $this->fetchResult($select);
 	}
@@ -44,15 +37,7 @@ class Category extends AbstractNestedSet
 	{
 	    $select = $this->getFullTree();
 	    
-	    if ($this->getFetchEnabled()) {
-	    	$select->where->and->equalTo('child.enabled', 1);
-	    }
-	    
-	    if ($this->getFetchDisabled()) {
-	    	$select->where->and->equalTo('child.discontinued', 1);
-	    } else {
-	    	$select->where->and->equalTo('child.discontinued', 0);
-	    }
+	    $select = $this->setFilter($select);
 	    
 	    return $this->fetchResult($select);
 	}
@@ -73,15 +58,7 @@ class Category extends AbstractNestedSet
 	{
 	    $select = $this->getFullTree();
 	    
-	    if ($this->getFetchEnabled()) {
-	    	$select->where->and->equalTo('child.enabled', 1);
-	    }
-	    
-	    if ($this->getFetchDisabled()) {
-	    	$select->where->and->equalTo('child.discontinued', 1);
-	    } else {
-	    	$select->where->and->equalTo('child.discontinued', 0);
-	    }
+	    $select = $this->setFilter($select);
 	    
 	    return parent::search($search, $sort, $select);
 	}
@@ -99,6 +76,19 @@ class Category extends AbstractNestedSet
 		);
 	
 		return $this->update($data, $where);
+	}
+	
+	public function setFilter(Select $select)
+	{
+	    if ($this->getFetchEnabled()) {
+	        $select->where->equalTo('child.enabled', 1);
+	    }
+	
+	    if (!$this->getFetchDisabled()) {
+	        $select->where->equalTo('child.discontinued', 0);
+	    }
+	
+	    return $select;
 	}
 	
 	public function getFetchEnabled()

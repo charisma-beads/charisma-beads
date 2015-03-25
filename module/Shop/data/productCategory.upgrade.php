@@ -47,4 +47,3 @@ foreach ($resultArray as $values) {
 	print "</pre>";
 }
 
-$result->close();

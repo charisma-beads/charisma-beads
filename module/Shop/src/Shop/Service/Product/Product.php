@@ -132,6 +132,7 @@ class Product extends AbstractRelationalMapperService
 	    if (isset($post['productCategoryId']) && $post['productCategoryId'] != '') {
 	        /* @var $categoryService \Shop\Service\Product\Category */
 	        $categoryService = $this->getRelatedService('productCategory');
+	        $categoryService->getMapper()->setFetchEnabled(false);
 	        
 	        $ids = $categoryService->getCategoryChildrenIds(
 	            $post['productCategoryId'], true
@@ -145,6 +146,8 @@ class Product extends AbstractRelationalMapperService
 	        
 	        $post['productCategoryId'] = $categoryId;
 	    }
+	    
+	    $this->getMapper()->setFetchEnabled(false);
 	    
 	    return parent::search($post);
 	}
@@ -198,6 +201,8 @@ class Product extends AbstractRelationalMapperService
      */
 	public function toggleEnabled(ProductModel $product)
 	{
+	    $this->removeCacheItem($product->getProductId());
+	    
 		$enabled = (true === $product->getEnabled()) ? 0 : 1;
 		
 		$form  = $this->getForm($product, ['enabled' => $enabled], true, true);
