@@ -3,10 +3,10 @@ namespace Shop\Controller\Cart;
 
 use Shop\Model\Cart\Item;
 use Shop\Model\Customer\Address as AddressModel;
+use Shop\Model\Product\Product as ProductModel;
 use Shop\Service\Cart\Cart as CartService;
 use Shop\Service\Customer\Address;
 use Shop\Service\Product\Product;
-use Shop\ShopException;
 use UthandoCommon\Controller\ServiceTrait;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
@@ -32,21 +32,19 @@ class Cart extends AbstractActionController
             $this->params()->fromPost('productId')
         );
         
-        if (null === $product) {
-            throw new ShopException('Product could not be added to cart as it does not exist');
-        }
-
-        /* @var $cart CartService */
-        $cart = $this->getService('ShopCart');
-        $result = $cart->addItem(
-            $product,
-            $this->params()->fromPost()
-        );
-
-        if ($result instanceof Item) {
-            $this->flashMessenger()->addInfoMessage(
-                'You have added ' . $result->getQuantity() . ' X ' . $result->getMetadata()->getName() . ' to your cart'
+        if ($product instanceof ProductModel) {
+            /* @var $cart CartService */
+            $cart = $this->getService('ShopCart');
+            $result = $cart->addItem(
+                $product,
+                $this->params()->fromPost()
             );
+    
+            if ($result instanceof Item) {
+                $this->flashMessenger()->addInfoMessage(
+                    'You have added ' . $result->getQuantity() . ' X ' . $result->getMetadata()->getName() . ' to your cart'
+                );
+            }
         }
         
         return $this->redirect()->toUrl($this->params()

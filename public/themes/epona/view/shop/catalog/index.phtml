@@ -51,7 +51,7 @@
                 
                 <?php $form = $this->cart()->addForm($row)->setAttribute('class', 'margin-top10 nopadding clearfix'); ?>
                 
-                <?php if ($row->getQuantity() != 0):?>
+                <?php if ($row->inStock()):?>
                 <?=$this->form()->openTag($form); ?>
                     <?=$this->formHidden($form->get('productId')); ?>
                     <?=$this->formHidden($form->get('returnTo')); ?>

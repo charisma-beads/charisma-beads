@@ -63,7 +63,7 @@
 
                 <?php $form = $this->cart()->addForm($product)->setAttribute('class', 'form-inline margin-top30 nopadding clearfix'); ?>
                 
-                <?php if ($product->getQuantity() != 0):?>
+                <?php if ($product->inStock()):?>
                 <?=$this->form()->openTag($form); ?>
                     <?=$this->formHidden($form->get('productId')); ?>
                     <?=$this->formHidden($form->get('returnTo')); ?>
