@@ -54,9 +54,9 @@ class Product extends AbstractDbMapper
 	{
 	    $productCategoryId = null;
 	    
-	    if (isset($search[2])) {
-	        $productCategoryId = $search[2]['searchString'];
-	        unset($search[2]);
+	    if (isset($search[1])) {
+	        $productCategoryId = $search[1]['searchString'];
+	        unset($search[1]);
 	    }
 	    
 		$select = $this->getSelect();
