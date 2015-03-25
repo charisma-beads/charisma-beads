@@ -14,8 +14,10 @@
 	
 	<div class="col-md-9 col-sm-9">
         <?php /* @var $row \UthandoTestimonial\Model\Testimonial */ ?>
+        <?php $c=0;?>
         <?php foreach($this->models as $row):?>
-    	<div class="col-md-6">
+        <?php $c++;?>
+    	<div class="col-md-4">
     		<div class="testimonial classic female">
     			<?=$row->getText()?>
     			<cite><strong><?=$row->getName();?></strong>
@@ -25,6 +27,9 @@
     			</cite>
     		</div>
     	</div>
+    	<?php if (($c % 3) === 0):?>
+    	<div class="clearfix"></div>
+    	<?php endif; ?>
     	<?php endforeach; ?>
 	</div>
 </div>
