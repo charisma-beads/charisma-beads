@@ -86,7 +86,7 @@ class Cart extends AbstractViewHelper
 	    foreach ($items as $item) {
 	        if ($item->getMetaData()->getProductId() == $product->getProductId()) {
 	            $num = $item->getQuantity();
-	            return '<i class="fa fa-shopping-cart"></i>&nbsp;' . $num;
+	            return '<i class="fa fa-shopping-cart"></i>&nbsp;(' . $num . ')';
 	        }
 	    }
 	    
