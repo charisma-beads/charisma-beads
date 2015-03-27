@@ -13,6 +13,8 @@
 </body>
 </html>
 <?php
+// close mysql
+mysql_close($dbc);
 // Flush the buffered output to the web browser.
 ob_end_flush();
 ?>

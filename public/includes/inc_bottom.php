@@ -47,5 +47,8 @@ unset($cart);
 //$html = preg_replace('/\s{2,}/',' ', $html);
 print $html;
 
+// close mysql
+mysql_close($dbc);
+
 ob_end_flush();
 ?>
