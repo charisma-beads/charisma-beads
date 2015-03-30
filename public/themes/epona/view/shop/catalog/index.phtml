@@ -16,7 +16,7 @@
         <div class="row">
             <?php /* @var $row \Shop\Model\Product\Product */ ?>
             <?php foreach ($this->products as $row): ?>
-            <div class="col-md-4 col-sm-4 shop-item-list"><!-- item -->
+            <div class="col-md-3 col-sm-3 shop-item-list"><!-- item -->
                 <a href="<?=$this->url('shop/catalog/product', [
                     'categoryIdent' => $row->getProductCategory()->getIdent(),
                     'productIdent' => $row->getIdent(),
