@@ -54,8 +54,6 @@ class Product extends AbstractDbMapper
 		    $select = $this->setSortOrder($select, $order);
 		}
 		
-		\FB::info($this->getSqlString($select));
-		
 		return $this->fetchResult($select);
 	}
 	
