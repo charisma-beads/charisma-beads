@@ -39,13 +39,22 @@ class Product extends AbstractDbMapper
 	public function getProductsByCategory(array $categoryId, $order=null)
 	{
 	    $select = $this->getSelect();
-		$select->where->in('productCategoryId', $categoryId);
+	    $select->join(
+	        'productCategory',
+	        'product.productCategoryId=productCategory.productCategoryId',
+	        array(),
+	        Select::JOIN_LEFT
+	    );
+	    
+		$select->where->in('product.productCategoryId', $categoryId);
 
         $select = $this->setFilter($select);
 		
 		if ($order) {
 		    $select = $this->setSortOrder($select, $order);
 		}
+		
+		\FB::info($this->getSqlString($select));
 		
 		return $this->fetchResult($select);
 	}
@@ -61,23 +70,23 @@ class Product extends AbstractDbMapper
 	    
 		$select = $this->getSelect();
 		$select->join(
-                'productCategory',
-                'product.productCategoryId=productCategory.productCategoryId',
-                array(),
-                Select::JOIN_LEFT
-            )
-            ->join(
-                'productGroup',
-                'product.productGroupId=productGroup.productGroupId',
-                array(),
-                Select::JOIN_LEFT
-            )
-            ->join(
-                'productSize',
-                'product.productSizeId=productSize.productSizeId',
-                array(),
-                Select::JOIN_LEFT
-            );
+            'productCategory',
+            'product.productCategoryId=productCategory.productCategoryId',
+            array(),
+            Select::JOIN_LEFT
+        )
+        ->join(
+            'productGroup',
+            'product.productGroupId=productGroup.productGroupId',
+            array(),
+            Select::JOIN_LEFT
+        )
+        ->join(
+            'productSize',
+            'product.productSizeId=productSize.productSizeId',
+            array(),
+            Select::JOIN_LEFT
+        );
 		
 		if ($productCategoryId) {
 		    $select->where->in('product.productCategoryId', $productCategoryId);
@@ -109,8 +118,10 @@ class Product extends AbstractDbMapper
             );
 
         $select = $this->setFilter($select);
+        
+        $sort = (isset($search['sort'])) ? $search['sort'] : ''; 
 	   
-	   return parent::search($search, '', $select);
+	   return parent::search($search, $sort, $select);
 	}
 
     public function setFilter(Select $select)
