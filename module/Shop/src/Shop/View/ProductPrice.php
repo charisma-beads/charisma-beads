@@ -9,7 +9,7 @@ class ProductPrice extends AbstractViewHelper
     /**
      * @var string
      */
-    protected $format = '<p><b>%s</b>%s for %s gms</p>';
+    protected $format = '<p><b>%s</b>%s %s</p>';
 
     protected $discountFormat = ' was <del>%s</del>';
 
@@ -86,6 +86,12 @@ class ProductPrice extends AbstractViewHelper
         if ($product->getProductOption()) {
             $formatted .= 'From ';
         }
+        
+        if ($product->getPostUnit()->getPostUnit() > 0) {
+            $weight = 'for ' . $product->getPostUnit()->getPostUnit() . ' grams';
+        } else {
+            $weight = null;
+        }
 
         $formatted .= $currency($product->getPrice());
 
@@ -93,7 +99,7 @@ class ProductPrice extends AbstractViewHelper
             $discount = sprintf($this->discountFormat, $currency($product->getPrice(false)));
         }
 
-        return sprintf($this->format, $formatted, $discount, number_format($product->getPostUnit()->getPostUnit()));
+        return sprintf($this->format, $formatted, $discount, $weight);
     }
     
     /**
