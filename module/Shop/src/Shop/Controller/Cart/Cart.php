@@ -108,13 +108,14 @@ class Cart extends AbstractActionController
             $product = $productService->getFullProductById($id);
             
             if (null !== $product) {
-                $cart->addItem($product, $value);
+                $cart->addItem($product, ['qty' => $value]);
             }
         }
         
         return $this->redirect()->toRoute('shop/cart', [
             'action' => 'view'
         ]);
+        
     }
 
     public function emptyAction()
