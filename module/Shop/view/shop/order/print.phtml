@@ -208,10 +208,15 @@
         	<?php foreach ($this->order->getOrderlines() as $item): ?>
         	<tr>
         		<td><?=$item->getMetadata()->getSku();?></td>
-        		<td><?=$item->getMetadata()->getCategory();?> / <?=$item->getMetadata()->getName();?></td>
+        		<td>
+        		  <?=$item->getMetadata()->getCategory();?> / <?=$item->getMetadata()->getName();?>
+        		  <?php if ($item->getMetadata()->getPostUnit() > 0): ?><br />
+                  &nbsp;(<?=$item->getMetadata()->getPostUnit();?> grams)
+                  <?php endif; ?>
+    		    </td>
         		<td><?=$this->priceFormat($item->getPrice());?></td>
         		<td><?=$item->getQty();?></td>
-        		<td><?=$this->priceFormat($item->getPrice());?></td>
+        		<td><?=$this->priceFormat($item->getPrice() * $item->getQty());?></td>
         	</tr>
         	<?php endforeach; ?>
         	<tr>

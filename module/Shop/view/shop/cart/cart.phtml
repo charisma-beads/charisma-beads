@@ -15,8 +15,13 @@
     	<?php /* @var $item \Shop\Model\Cart\Item */ ?>
     	<?php foreach ($this->cart()->getCart() as $item): ?>
     	<tr>
-    		<td><?=$item->getMetadata()->getName();?></td>
-    		<td><?=$item->getMetadata()->getCategory();?> / <?=$item->getMetadata()->getDescription();?></td>
+    		<td><?=$item->getMetadata()->getSku();?></td>
+    		<td>
+    		  <?=$item->getMetadata()->getCategory();?> / <?=$item->getMetadata()->getName();?>
+    		  <?php if ($item->getMetadata()->getPostUnit() > 0): ?>
+              &nbsp;(<?=$item->getMetadata()->getPostUnit();?> grams)
+              <?php endif; ?>
+		    </td>
     		<td><?=$this->cart()->formatAmount($item->getPrice());?></td>
     		<td>
     		    <?php if (!$checkout): ?>

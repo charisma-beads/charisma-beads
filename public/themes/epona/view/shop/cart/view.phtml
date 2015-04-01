@@ -40,8 +40,8 @@
                 'categoryIdent' => $product->getProductCategory()->getIdent(),
                 'productIdent' => $product->getIdent(),
             ]);?>" class="product_name">
-                <span><?=$item->getMetadata()->getName();?></span>
-                <small><?=$item->getMetadata()->getDescription();?>
+                <span><?=$item->getMetadata()->getSku();?></span>
+                <small><?=$item->getMetadata()->getName();?>
                 <?php if ($item->getMetadata()->getOption()): ?>
                 &nbsp;(<?=$item->getMetadata()->getOption()->getOption();?>)
                 <?php endif; ?>

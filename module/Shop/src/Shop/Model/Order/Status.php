@@ -51,4 +51,9 @@ class Status implements ModelInterface
 		$this->orderStatus = $orderStatus;
 		return $this;
 	}
+	
+	public function __toString()
+	{
+	    return 'Order Status: ' . $this->getOrderStatus();
+	}
 }

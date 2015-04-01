@@ -34,7 +34,8 @@
                         </span>
                     </h4>
                     <p>
-                        <?=$this->formatDate($this->order->getOrderDate())->setFormat('d/m/Y');?>
+                        <?=$this->formatDate($this->order->getOrderDate())->setFormat('d/m/Y');?><br>
+                        <?=$this->order->getOrderStatus();?>
                     </p>
                 </div><!-- /left text -->
 
@@ -97,14 +98,14 @@
             <div class="item">
                 <div class="cart_img"><img src="<?=$this->productImage($item->getMetadata()->getImage());?>" alt="" width="60" /></div>
                 <div class="product_name">
-                    <?=$item->getMetadata()->getName();?> /
+                    <?=$item->getMetadata()->getSku();?> /
                     <?=$item->getMetadata()->getCategory();?> /
-                    <?=$item->getMetadata()->getDescription();?>
-                    <?php if ($item->getMetadata()->getOption()): ?>
-                        &nbsp;(<?=$item->getMetadata()->getOption()->getOption();?>)
+                    <?=$item->getMetadata()->getName();?>
+                    <?php if ($item->getMetadata()->getPostUnit() > 0): ?>
+                        &nbsp;(<?=$item->getMetadata()->getPostUnit();?> grams)
                     <?php endif; ?>
                 </div>
-                <div class="total_price"><span><?=$this->priceFormat($item->getPrice());?></span></div>
+                <div class="total_price"><span><?=$this->priceFormat($item->getPrice() * $item->getQty());?></span></div>
                 <div class="qty"><?=$item->getQty();?> &times; <?=$this->priceFormat($item->getPrice());?></div>
                 <div class="clearfix"></div>
             </div>
