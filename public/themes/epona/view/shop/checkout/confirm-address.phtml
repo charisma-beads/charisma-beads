@@ -1,106 +1,96 @@
+<?php $this->headTitle('Checkout - Comfirm Address') ?>
 
 <?php $this->placeholder('page-top')->captureStart();?>
 
-<?=$this->partial('shop/parallax');?>
+<?=$this->partial('shop/parallax', [
+    'title' => 'Confirm Address', 
+]);?>
 
 <?php $this->placeholder('page-top')->captureEnd();?>
 
-<form action="#" method="post" class="row sky-form cartContent">
+<div class="col-md-9 checkout">
 
-    <div class="col-md-9 checkout">
-
-        <!-- ACCORDION -->
-        <div class="accordion panel-group transparent" id="accordion2">
-
-            <!-- BILLING ADDRESS -->
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion2" href="#acordion_1">
-                            Billing Address
-                        </a>
-                    </h4>
-                </div>
-                <div id="acordion_1" class="collapse in">
-                    <div id="billingAddress" class="panel-body">
-
-                        <footer class="nomargin">
-                            <a data-toggle="collapse" data-parent="#accordion2" href="#acordion_2" class="btn btn-warning pull-right">Continue</a>
-                        </footer>
-                    </div>
-                </div>
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    Billing Address
+                </h4>
             </div>
-            <!-- /BILLING ADDRESS -->
-
-            <!-- SHIPPING ADDRESS -->
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion2" href="#acordion_2">
-                            Shipping Address
-                        </a>
-                    </h4>
-                </div>
-                <div id="acordion_2" class="collapse">
-                    <div class="panel-body">
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <label class="checkbox">
-                                    <input type="checkbox" name="checkbox" checked="">
-                                    <i></i> Ship to billing address
-                                </label>
-                            </div>
-                        </div>
-
-                        <footer class="nomargin">
-                            <a data-toggle="collapse" data-parent="#accordion2" href="#acordion_1" class="btn btn-default pull-left nomargin-left">Back</a>
-                        </footer>
-
-                    </div>
-                </div>
+            <div class="panel-body">
+                <address>
+                    <?=$this->customerAddress()
+                        ->setAddress('billing')
+                        ->includeName()
+                        ->includeEmail()
+                        ->render();?>
+                </address>
             </div>
-            <!-- /SHIPPING ADDRESS -->
-
         </div>
-        <!-- /ACCORDION -->
+    </div>
+    
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    Delivery Address
+                </h4>
+            </div>
+            <div class="panel-body">
+                <address>
+                    <?=$this->customerAddress()
+                        ->setAddress('delivery')
+                        ->includeName()
+                        ->render();?>
+                    <br>
+                </address>
+            </div>
+        </div>
+    </div>
+    
+    <form class="col-md-12" method="post" action="<?=$this->url('shop/checkout', [
+        'action' => 'confirm-order',
+    ]) ?>">
+        <a href="<?=$this->url('shop/checkout', [
+            'action' => 'customer-details',
+        ]);?>" class="btn btn-info">Change Details</a>
+        <button type="submit" name="submit" class="btn btn-primary" value="confirmAddress">
+            <i class="fa fa-check"></i>Check &amp; Confirm Order
+        </button>
+    </form>
 
-        <button class="btn btn-primary btn-lg pull-right"><i class="fa fa-check"></i> CHECK &amp; CONFIRM ORDER</button>
+</div>
+
+<div class="col-md-3">
+
+    <!-- cart totals -->
+    <div class="sky-form boxed cartContent">
+        <header class="styleColor">Cart Totals</header>
+
+        <fieldset>
+
+            <section class="clearfix cart_totals">
+                <span class="pull-right fsize16"><?=$this->cart()->getSubTotal();?></span>
+                <span class="bold">Cart Subtotal</span>
+            </section>
+
+            <section class="clearfix cart_totals">
+                <span class="pull-right fsize16"><?=$this->cart()->getShippingTotal($this->countryId);?></span>
+                <span class="bold">Shipping</span>
+            </section>
+
+            <section class="clearfix cart_totals">
+                <span class="pull-right fsize16">- <?=$this->placeholder('discount-code')->set('£0.00');?></span>
+                <span class="bold">Coupon Discount</span>
+            </section>
+
+            <section class="clearfix cart_totals noborder">
+                <span class="pull-right fsize20 bold styleColor"><?=$this->cart()->getTotal();?></span>
+                <span class="bold fsize18">ORDER TOTAL</span>
+            </section>
+
+        </fieldset>
 
     </div>
-
-    <div class="col-md-3">
-
-        <!-- cart totals -->
-        <div class="sky-form boxed cartContent">
-            <header class="styleColor">Cart Totals</header>
-
-            <fieldset>
-
-                <section class="clearfix cart_totals">
-                    <span class="pull-right fsize16"><?=$this->cart()->getSubTotal();?></span>
-                    <span class="bold">Cart Subtotal</span>
-                </section>
-
-                <section class="clearfix cart_totals">
-                    <span class="pull-right fsize16"><?=$this->cart()->getShippingTotal($this->countryId);?></span>
-                    <span class="bold">Shipping</span>
-                </section>
-
-                <section class="clearfix cart_totals">
-                    <span class="pull-right fsize16">- <?=$this->placeholder('discount-code')->set('£0.00');?></span>
-                    <span class="bold">Coupon Discount</span>
-                </section>
-
-                <section class="clearfix cart_totals noborder">
-                    <span class="pull-right fsize20 bold styleColor"><?=$this->cart()->getTotal();?></span>
-                    <span class="bold fsize18">ORDER TOTAL</span>
-                </section>
-
-            </fieldset>
-
-        </div>
-        <!-- /cart totals -->
-    </div>
-
-</form>
+    <!-- /cart totals -->
+</div>

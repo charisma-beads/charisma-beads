@@ -13,6 +13,8 @@ return [
         'shop/catalog/index'                            => __DIR__ . '/view/shop/catalog/index.phtml',
         'shop/catalog/search'                           => __DIR__ . '/view/shop/catalog/search.phtml',
         'shop/catalog/view'                             => __DIR__ . '/view/shop/catalog/view.phtml',
+        'shop/checkout/confirm-address'                 => __DIR__ . '/view/shop/checkout/confirm-address.phtml',
+        'shop/checkout/confirm-order'                   => __DIR__ . '/view/shop/checkout/confirm-order.phtml',
         'shop/checkout/customer-details'                => __DIR__ . '/view/shop/checkout/customer-details.phtml',
         'shop/checkout/index'                           => __DIR__ . '/view/shop/checkout/index.phtml',
         'shop/customer/my-details'                      => __DIR__ . '/view/shop/customer/my-details.phtml',

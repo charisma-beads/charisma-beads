@@ -23,7 +23,7 @@ class PayOptionsList extends Radio implements ServiceLocatorAwareInterface
             
             if ('pay' === $ex_key[0]  && true === $value) {
                 $ex_key[0] = $ex_key[0] . ' by';
-                $optionsArray[$key] = ucwords(implode(' ', $ex_key));
+                $optionsArray[$key] = '<i></i>' . ucwords(implode(' ', $ex_key));
             }
         }
         

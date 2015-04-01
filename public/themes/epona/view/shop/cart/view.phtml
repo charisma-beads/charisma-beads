@@ -1,7 +1,9 @@
 
 <?php $this->placeholder('page-top')->captureStart();?>
 
-<?=$this->partial('shop/parallax');?>
+<?=$this->partial('shop/parallax', [
+    'title' => 'View Cart',
+]);?>
 
 <?php $this->placeholder('page-top')->captureEnd();?>
 

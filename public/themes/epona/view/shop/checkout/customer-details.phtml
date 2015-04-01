@@ -1,7 +1,10 @@
+<?php $this->headTitle('Checkout - Customer Details') ?>
 
 <?php $this->placeholder('page-top')->captureStart();?>
 
-<?=$this->partial('shop/parallax');?>
+<?=$this->partial('shop/parallax',[
+    'title' => 'Customer Details',
+]);?>
 
 <?php $this->placeholder('page-top')->captureEnd();?>
 

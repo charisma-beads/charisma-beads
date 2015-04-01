@@ -30,6 +30,16 @@ class CheckoutOptions extends AbstractOptions
      */
     protected $payPaypal;
     
+    /**
+     * @var string
+     */
+    protected $creditCardPaymentEmail;
+    
+    /**
+     * @var string
+     */
+    protected $orderEmail;
+    
 	/**
 	 * @return boolean $PayCheck
 	 */
@@ -114,4 +124,41 @@ class CheckoutOptions extends AbstractOptions
 		$this->payPaypal = $payPaypal;
 		return $this;
 	}
+    
+    /**
+     * @return string $creditCardPaymentEmail
+     */
+    public function getCreditCardPaymentEmail()
+    {
+        return $this->creditCardPaymentEmail;
+    }
+
+    /**
+     * @param string $creditCardPaymentEmail
+     * @return $this
+     */
+    public function setCreditCardPaymentEmail($creditCardPaymentEmail)
+    {
+        $this->creditCardPaymentEmail = $creditCardPaymentEmail;
+        return $this;
+    }
+
+    /**
+     * @return string $orderEmail
+     */
+    public function getOrderEmail()
+    {
+        return $this->orderEmail;
+    }
+
+    /**
+     * @param string $orderEmail
+     * @return $this
+     */
+    public function setOrderEmail($orderEmail)
+    {
+        $this->orderEmail = $orderEmail;
+        return $this;
+    }
+
 }

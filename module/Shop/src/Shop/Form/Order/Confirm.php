@@ -13,7 +13,15 @@ class Confirm extends Form
             'options'	=> [
                 'label'			=> 'Choose Payment Options:',
                 'required'		=> true,
+                'disable_inarray_validator' => true,
+                'label_options' => [
+                    'disable_html_escape' => true,
+                ],
+                'label_attributes' => [
+                    'class' => 'radio',
+                ],
             ],
+            
         ]);
         
         $this->add([
@@ -46,6 +54,7 @@ class Confirm extends Form
             'type'		=> 'select',
             'options'	=> [
                 'label'			=> 'I agree to the Terms of Service',
+                'disable_inarray_validator' => true,
                 'required'		=> true,
                 'empty_option'	=> 'No',
                 'value_options'	=> [

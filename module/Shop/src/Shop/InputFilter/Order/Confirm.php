@@ -41,7 +41,7 @@ class Confirm extends InputFilter
             ),
             'validators' => array(
             	array('name' => 'NotEmpty', 'options' => array(
-                    'messages' => array(
+                    'message' => array(
                         \Zend\Validator\NotEmpty::IS_EMPTY => 'You must agree to the terms to proceed with order.',
                     )
                 )),
