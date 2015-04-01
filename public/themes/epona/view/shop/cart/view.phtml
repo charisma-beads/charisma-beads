@@ -7,8 +7,9 @@
 
 <?php $this->placeholder('page-top')->captureEnd();?>
 
+<a href="<?=$this->url('shop');?>" class="btn btn-primary">Continue Shopping</a>
 
-<form class="cartContent clearfix" method="post" action="<?=$this->url('shop/cart', [
+<form class="cartContent margin-top20 clearfix" method="post" action="<?=$this->url('shop/cart', [
     'action' => 'update'
 ]);?>">
 

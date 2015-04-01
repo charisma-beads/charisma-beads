@@ -14,7 +14,7 @@
             <div class="row">
                 <?php /* @var $row \Shop\Model\Product\Product */ ?>
                 <?php foreach ($this->products as $row): ?>
-                    <div class="col-md-4 col-sm-4 shop-item-list"><!-- item -->
+                    <div class="col-md-3 col-sm-3 shop-item-list"><!-- item -->
                         <a href="<?=$this->url('shop/catalog/product', [
                             'categoryIdent' => $row->getProductCategory()->getIdent(),
                             'productIdent' => $row->getIdent(),
@@ -62,19 +62,21 @@
                             </div>
                             <?php endif; ?>
                             
-                            <div class="input-group">
-                                <?=$this->formInput($form->get('qty')->setAttribute('class', 'form-control')); ?>
-                                <span class="input-group-btn">
-                                    <button type="submit" name="buy-item" class="btn btn-primary">
-                                        ADD TO CART
-                                    </button>
-                                </span>
-                            </div>
+                            <?=$this->formInput($form->get('qty')->setAttribute('class', 'form-control')); ?>
+                    
+                            <button type="submit" name="buy-item" class="btn btn-primary col-md-12">
+                                ADD TO CART
+                                <?=$this->cart()->hasProductInCart($row);?>
+                            </button>
                             
                         <?=$this->form()->closeTag(); ?>
                         <?php endif; ?>
                     </div><!-- /item -->
                 <?php endforeach; ?>
+                
+                <?php if ($this->products->count() == 0):?>
+                    <h3>No products match your search.</h3>
+                <?php endif;?>
             </div><!-- /PRODUCT LIST -->
         </div>
     </div>

@@ -108,9 +108,35 @@
             .text-right {
             	text-align: right;
             }
+            
+            .footer {
+            	position: fixed;
+            	bottom: 0px;
+            	height: 30px;
+            	font-size:10px;
+            	text-align: center;
+            }
         </style>
     </head>
     <body>
+        <table class="col-12">
+            <tr>
+                <td class="col-6">
+                    <img src="<?=APPLICATION_PATH . '/public/' . $this->themeOptions('logo');?>" height="50" alt="logo">
+                    <img src="<?=APPLICATION_PATH . '/public/' . $this->themeOptions('logo2');?>" height="50" alt="logo" >
+                </td>
+                <td class="col-6 text-right">
+                    <?=$this->contact('details.address.line1');?><br />
+                    <?php if($this->contact('details.address.line2') != ''):?>
+                    <?=$this->contact('details.address.line2');?>,<br />
+                    <?php endif;?>
+                    <?=$this->contact('details.address.town');?>,<br />
+                    <?=$this->contact('details.address.county');?>, <?=$this->contact('details.address.postcode');?><br />
+                    <?=$this->contact('details.phone');?><br />
+                    <?=$this->contact('details.email');?>
+                </td>
+            </tr>
+        </table>
 
         <table class="col-12 panel panel-default">
             <tr>
@@ -181,8 +207,8 @@
         	<?php /* @var $item \Shop\Model\Order\Line */ ?>
         	<?php foreach ($this->order->getOrderlines() as $item): ?>
         	<tr>
-        		<td><?=$item->getMetadata()->getName();?></td>
-        		<td><?=$item->getMetadata()->getCategory();?> / <?=$item->getMetadata()->getDescription();?></td>
+        		<td><?=$item->getMetadata()->getSku();?></td>
+        		<td><?=$item->getMetadata()->getCategory();?> / <?=$item->getMetadata()->getName();?></td>
         		<td><?=$this->priceFormat($item->getPrice());?></td>
         		<td><?=$item->getQty();?></td>
         		<td><?=$this->priceFormat($item->getPrice());?></td>
@@ -212,5 +238,20 @@
                 </td>
             </tr>
         </table>
+        
+        <div class="footer">
+            <p>
+                Registered at Companies House, register number <?=$this->contact('company.number');?>.
+            </p>
+            <p>
+                Registered office address:
+                <?=$this->contact('company.address.line1');?>,
+                <?php if($this->contact('company.address.line2') != ''):?>
+                <?=$this->contact('company.address.line2');?>,
+                <?php endif;?>
+                <?=$this->contact('company.address.town');?>,
+                <?=$this->contact('company.address.county');?>, <?=$this->contact('details.address.postcode');?>
+            </p>
+        </div>
     </body>
 </html>

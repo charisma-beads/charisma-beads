@@ -107,9 +107,12 @@
         <p class="nomargin-bottom">
             <span class="block">
                 <strong><i class="fa fa-map-marker"></i> Address:</strong>&nbsp;
-                <?=$this->contact('details.address.line1');?>
+                <?=$this->contact('details.address.line1');?>,
+                <?php if($this->contact('details.address.line2') != ''):?>
                 <?=$this->contact('details.address.line2');?>,
-                <?=$this->contact('details.address.county');?>, <?=$this->contact('details.address.county');?>
+                <?php endif;?>
+                <?=$this->contact('details.address.town');?>, <?=$this->contact('details.address.county');?>.
+                <?=$this->contact('details.address.postcode');?>
             </span>
             <span class="block">
                 <strong><i class="fa fa-phone"></i> Phone:</strong>&nbsp;
