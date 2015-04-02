@@ -6,7 +6,7 @@ body {
 	background-attachment:fixed;
 	color:black;
 	font-family:verdana;
-	font-size:14px;
+	font-size:12pt;
     text-align: center;
 }
 
@@ -109,6 +109,10 @@ div {
 #Content {
 	padding: 15px;
 	text-align: justify;
+}
+
+table {
+    font-size: 12pt;
 }
 
 #Row2 {
