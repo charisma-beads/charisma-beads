@@ -36,6 +36,10 @@ trait ProductImageTrait
                 break;
             }
         }
+        
+        if (null === $image) {
+            $image = new Image();
+        }
 
         return $image;
     }

@@ -48,7 +48,14 @@ class ProductImage extends AbstractHelper
     public function getImage($withBasePath = true)
     {
         $basePath = $this->view->plugin('basepath');
-        $defaultImage = ($this->image instanceof ImageModel) ? $this->image->getThumbnail() : 'no_image_available.jpeg';
+        $defaultImage = 'no_image_available.jpeg';
+        
+        if ($this->image instanceof ImageModel) {
+            if ($this->image->getThumbnail()) {
+                $defaultImage = $this->image->getThumbnail();
+            }
+        }
+        
         $image = $this->imageDir . $defaultImage;
 
         if ($withBasePath) {
