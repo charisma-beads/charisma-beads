@@ -623,18 +623,11 @@ section.brands {
 	left:0; right:0; top:0; bottom:0;
 	background-image:url('../images/patterns/parallax_overlay.png');
 	background-repeat:repeat;
-	background-color:rgba(0,0,0,0.6);
+	background-color:rgba(0,0,0,0.1);
 	z-index:1;
 }
 .parallax .parallax-content {
 	z-index:2;
-}
-@media only screen and (max-width: 1024px) {
-	.parallax {
-		background-attachment: scroll !important;
-		background-position: center !important;
-		background-size: 1024px 100% !important;
-	}
 }
 
 /* footable */
