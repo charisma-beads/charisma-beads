@@ -156,8 +156,9 @@ if ($num > 0) { // If it ran OK, display the records.
             $content .= "</div>";
             $content .= "</td>";
 
+            $content .= "<td>";
             if ($row['image_status'] == 1) {
-                $content .= "<td>";
+
                 $content .= "<div>";
                 if ($avail) {
                 	$content .= "<a href=\"cart.php?action=add&pid={$row['product_id']}\">";
@@ -167,8 +168,9 @@ if ($num > 0) { // If it ran OK, display the records.
                 	$content .= "<img src=\"$img\" style=\"border: 3px double #AFA582;\" alt=\"{$row['product_name']}\" />";
                 }
                 $content .= "</div>";
-                $content .= "</td>";
+
             }
+            $content .= "</td>";
             unset($img);
             
             $content .= "<td style=\"width:90px;\">\r\n";
@@ -180,7 +182,7 @@ if ($num > 0) { // If it ran OK, display the records.
             $content .= "</td>\r\n";
             $content .= "</tr>\r\n"; // end row
 
-            $content .= "<tr><td></td><td colspan=\"3\"><hr /></td></tr></table></tr>\r\n";
+            $content .= "<tr><td colspan=\"4\"><hr /></td></tr>\r\n";
         //}
 	} // end of While loop
 	
