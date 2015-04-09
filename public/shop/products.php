@@ -180,7 +180,7 @@ if ($num > 0) { // If it ran OK, display the records.
             $content .= "</td>\r\n";
             $content .= "</tr>\r\n"; // end row
 
-            //$content .= "<tr><td></td><td colspan=\"3\"><hr /></td></tr></table></tr>\r\n";
+            $content .= "<tr><td></td><td colspan=\"3\"><hr /></td></tr></table></tr>\r\n";
         //}
 	} // end of While loop
 	
