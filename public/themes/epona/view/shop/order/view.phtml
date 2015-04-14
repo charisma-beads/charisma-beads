@@ -55,7 +55,8 @@
             <div class="col-md-6 col-sm-6">
                 <h5><strong>BILLING ADDRESS</strong></h5>
                 <p>
-                    <?=$this->customerAddress($this->order)
+                    <?=$this->customerAddress()
+                        ->setOrder($this->order)
                         ->includeName()
                         ->includeEmail()
                         ->formatAddress(
@@ -68,7 +69,8 @@
             <div class="col-md-6 col-sm-6">
                 <h5><strong>SHIPPING ADDRESS</strong></h5>
                 <p>
-                    <?=$this->customerAddress($this->order)
+                    <?=$this->customerAddress()
+                        ->setOrder($this->order)
                         ->includeName()
                         ->formatAddress(
                             $this->order->getMetadata()

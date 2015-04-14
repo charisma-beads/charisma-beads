@@ -100,6 +100,8 @@ class Customer extends AbstractRelationalMapperService
             $this->save($customer);
         }
         
+        $this->populate($customer, true);
+        
         return $customer;
     }
 

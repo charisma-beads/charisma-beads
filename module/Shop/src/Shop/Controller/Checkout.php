@@ -49,7 +49,9 @@ class Checkout extends AbstractActionController
         $customer = $this->getCustomerService()->getCustomerByUserId($userId);
         
         if ($customer->getBillingAddressId() && $customer->getDeliveryAddressId()) {
-            return [];
+            return [
+                'customer' => $customer,
+            ];
         }
         
         return $this->redirect()->toRoute('shop/checkout', [

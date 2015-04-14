@@ -17,7 +17,8 @@ return [
         'UthandoNews',
         'UthandoTwitter',
         'Shop',
-        'DOMPDFModule'
+        'DOMPDFModule',
+        'TwbBundle',
     ],
     'module_listener_options' => [
         'module_paths' => [

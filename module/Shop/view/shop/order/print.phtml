@@ -172,7 +172,8 @@
             <tr class="panel panel-default">
                 <td class="panel-body address-body">
                    <address>
-                        <?=$this->customerAddress($this->order)
+                        <?=$this->customerAddress()
+                            ->setOrder($this->order)
                             ->includeName()
                             ->includeEmail()
                             ->formatAddress(
@@ -184,7 +185,8 @@
                 <td>&nbsp;</td>
                 <td class="panel-body address-body">
                    <address>
-                        <?=$this->customerAddress($this->order)
+                        <?=$this->customerAddress()
+                            ->setOrder($this->order)
                             ->includeName()
                             ->formatAddress(
                                 $this->order->getMetadata()

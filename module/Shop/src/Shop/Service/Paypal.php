@@ -19,6 +19,7 @@ use PayPal\Rest\ApiContext;
 use Shop\Service\Tax\Tax;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
+use PayPal\Api\Measurement;
 
 class Paypal implements ServiceLocatorAwareInterface
 {
@@ -163,6 +164,14 @@ class Paypal implements ServiceLocatorAwareInterface
                 $tax = number_format(0, 2);
             }
             
+            $name = $orderItem->getMetadata()->getName();
+            
+            //if ($orderItem->getMetadata()->getPostUnit() > 0) {
+                $weight = new Measurement();
+                $weight->setValue($orderItem->getMetadata()->getPostUnit());
+                $weight->setUnit('grams');
+            //}
+            
             $item->setName($orderItem->getMetadata()->getName());
             $item->setSku($orderItem->getMetadata()->getSku());
             $item->setDescription($orderItem->getMetadata()->getDescription());
@@ -170,6 +179,7 @@ class Paypal implements ServiceLocatorAwareInterface
             $item->setTax($tax);
             $item->setQuantity($orderItem->getQty());
             $item->setCurrency($options->getCurrencyCode());
+            $item->setWeight($weight);
             
             $items[] = $item;
         }

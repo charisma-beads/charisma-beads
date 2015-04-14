@@ -6,6 +6,7 @@ use Shop\Model\Order\Order;
 use UthandoCommon\View\AbstractViewHelper;
 use Zend\Stdlib\Exception\InvalidArgumentException;
 use Zend\View\Helper\Identity;
+use Shop\Model\Customer\Customer;
 
 class CustomerAddress extends AbstractViewHelper
 {
@@ -13,6 +14,11 @@ class CustomerAddress extends AbstractViewHelper
      * @var \Shop\Service\Customer\Address
      */
     protected $customerAddressService;
+    
+    /**
+     * @var Customer
+     */
+    protected $customer;
     
     /**
      * @var Order
@@ -77,8 +83,19 @@ class CustomerAddress extends AbstractViewHelper
         $html = '';
         
         if ($this->includeName) {
+            
             if ($this->order instanceof Order) {
                 $html .= $this->order->getMetadata()->getCustomerName() . '<br>';
+            } elseif ($this->customer instanceof Customer) {
+                \FB::info($this->customer);
+                $prefix = $this->customer->getPrefix()->getPrefix();
+                $name = $this->customer->getFullName();
+                
+                $html .= join(' ', [
+                    $prefix,
+                    $name,
+                    '<br>',
+                ]);
             } else {
                 $html .= $identity->getFullName() . '<br>';
             }
@@ -127,6 +144,24 @@ class CustomerAddress extends AbstractViewHelper
     }
     
     /**
+     * @return Customer $customer
+     */
+    public function getCustomer()
+    {
+        return $this->customer;
+    }
+
+    /**
+     * @param Customer $customer
+     * @return $this
+     */
+    public function setCustomer(Customer $customer)
+    {
+        $this->customer = $customer;
+        return $this;
+    }
+
+ /**
      * @return \Shop\Model\Customer\Address
      */
     public function getAddress()

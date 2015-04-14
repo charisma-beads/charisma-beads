@@ -36,7 +36,8 @@
         </div>
         <div class="panel-body">
             <address>
-                <?=$this->customerAddress($this->order)
+                <?=$this->customerAddress()
+                    ->setOrder($this->order)
                     ->includeName()
                     ->includeEmail()
                     ->formatAddress(
@@ -57,7 +58,8 @@
         </div>
         <div class="panel-body">
             <address>
-                <?=$this->customerAddress($this->order)
+                <?=$this->customerAddress()
+                    ->setOrder($this->order)
                     ->includeName()
                     ->formatAddress(
                         $this->order->getMetadata()
