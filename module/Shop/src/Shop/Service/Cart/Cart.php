@@ -161,10 +161,14 @@ class Cart extends AbstractMapperService implements InitializableInterface
 
         /* @var $item CartItem */
         foreach ($items as $item) {
-            $cart->offsetSet(
-                $item->getMetadata()->getProductId(),
-                $item
-            );
+            $productId = $item->getMetadata()->getProductId();
+            $productOption = ($item->getMetadata()->getOption()) ?: null;
+            
+            if ($productOption instanceof ProductOption) {
+                $productId = $productId . '-' . $productOption->getProductOptionId();
+            }
+            
+            $cart->offsetSet($productId, $item);
         }
 
         return $cart;
@@ -217,6 +221,7 @@ class Cart extends AbstractMapperService implements InitializableInterface
         
         $productClone = clone $product;
         
+        $productId = $productClone->getProductId();
         $optionId = (isset($post['ProductOptionList'])) ? (int) substr(strrchr($post['ProductOptionList'], "-"), 1) : null;
         
         $productOption = ($optionId) ? $product->getProductOption($optionId) : null;
@@ -226,12 +231,14 @@ class Cart extends AbstractMapperService implements InitializableInterface
                 ->setPostUnit($productOption->getPostUnit())
                 ->setPrice($productOption->getPrice())
                 ->setDiscountPercent($productOption->getDiscountPercent());
+            $productId = $productId . '-' . $optionId;
         }
         
         $cart = $this->getCart();
+        
 
         /** @var $cartItem CartItem */
-        $cartItem = ($cart->offsetExists($productClone->getProductId())) ? $cart->offsetGet($productClone->getProductId()) : new CartItem();
+        $cartItem = ($cart->offsetExists($productId)) ? $cart->offsetGet($productId) : new CartItem();
         
         if ($this->getShopOptions()->getAutoIncrementCart()) {
             $qty = $qty + $cartItem->getQuantity();
@@ -255,7 +262,7 @@ class Cart extends AbstractMapperService implements InitializableInterface
             ->setMetadata($this->getProductMetaData($productClone, $optionId))
             ->setCartId($this->getCart()->getCartId());
         
-        $cart->offsetSet($productClone->getProductId(), $cartItem);
+        $cart->offsetSet($productId, $cartItem);
         
         $this->persist();
 

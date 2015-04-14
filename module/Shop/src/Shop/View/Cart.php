@@ -30,7 +30,7 @@ class Cart extends AbstractViewHelper
                 ->get('UthandoServiceManager')
                 ->get('ShopCart');
 		}
-
+		
 		return $this;
 	}
 	
