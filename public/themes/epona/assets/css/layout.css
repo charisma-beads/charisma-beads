@@ -623,7 +623,7 @@ section.brands {
 	left:0; right:0; top:0; bottom:0;
 	background-image:url('../images/patterns/parallax_overlay.png');
 	background-repeat:repeat;
-	background-color:rgba(0,0,0,0.1);
+	background-color:rgba(0,0,0,0.6);
 	z-index:1;
 }
 .parallax .parallax-content {

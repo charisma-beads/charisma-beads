@@ -54,6 +54,11 @@ class ShopOptions extends AbstractOptions
      * @var string
      */
     protected $customerNumberPrefix;
+    
+    /**
+     * @var bool
+     */
+    protected $autoIncrementCart;
 
     /**
      * @return bool
@@ -234,4 +239,23 @@ class ShopOptions extends AbstractOptions
         $this->customerNumberPrefix = $customerNumberPrefix;
         return $this;
     }
+ 
+    /**
+     * @return boolean $autoIncrementCart
+     */
+    public function getAutoIncrementCart()
+    {
+        return $this->autoIncrementCart;
+    }
+
+    /**
+     * @param boolean $autoIncrementCart
+     * @return $this
+     */
+    public function setAutoIncrementCart($autoIncrementCart)
+    {
+        $this->autoIncrementCart = $autoIncrementCart;
+        return $this;
+    }
+
 }

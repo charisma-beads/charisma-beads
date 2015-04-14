@@ -232,6 +232,10 @@ class Cart extends AbstractMapperService implements InitializableInterface
 
         /** @var $cartItem CartItem */
         $cartItem = ($cart->offsetExists($productClone->getProductId())) ? $cart->offsetGet($productClone->getProductId()) : new CartItem();
+        
+        if ($this->getShopOptions()->getAutoIncrementCart()) {
+            $qty = $qty + $cartItem->getQuantity();
+        }
 
         $argv = compact('product', 'qty', 'cartItem');
         $argv = $this->prepareEventArguments($argv);

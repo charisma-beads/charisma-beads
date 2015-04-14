@@ -282,6 +282,18 @@ class Order extends AbstractRelationalMapperService
             'subject'          => 'Order No.:' . $order->getOrderNumber(),
             'transport'        => 'default',
         ]);
+        
+        /*$this->getEventManager()->trigger('mail.send', $this, [
+            'sender'        => [
+                'name'      => $order->getCustomer()->getFullName(),
+                'address'   => $email,
+            ],
+            'layout'           => 'shop/email/order',
+            'layout_params'    => ['order' => $order],
+            'body'             => $emailView,
+            'subject'          => 'Order No.:' . $order->getOrderNumber(),
+            'transport'        => 'default',
+        ]);*/
     }
 
     /**
