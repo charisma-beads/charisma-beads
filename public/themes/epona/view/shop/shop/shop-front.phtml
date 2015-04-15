@@ -16,7 +16,7 @@
         <div class="row">
             <?php /* @var $row \Shop\Model\Product\Category */ ?>
             <?php foreach ($this->cats as $row): ?>
-                <div class="col-sm-3 col-md-3"><!-- category -->
+                <div class="col-sm-4 col-md-4"><!-- category -->
                     <div class="box-content thumbnail text-center">
                         <a href="<?php echo $this->url('shop/catalog', [
                             'categoryIdent' => $row->getIdent()
