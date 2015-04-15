@@ -87,7 +87,7 @@ class CustomerAddress extends AbstractViewHelper
             if ($this->order instanceof Order) {
                 $html .= $this->order->getMetadata()->getCustomerName() . '<br>';
             } elseif ($this->customer instanceof Customer) {
-                \FB::info($this->customer);
+                
                 $prefix = $this->customer->getPrefix()->getPrefix();
                 $name = $this->customer->getFullName();
                 
