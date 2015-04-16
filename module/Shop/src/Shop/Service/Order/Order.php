@@ -264,6 +264,9 @@ class Order extends AbstractRelationalMapperService
         $order = $this->populate($order, true);
         
         $email = $order->getCustomer()->getEmail();
+        /* @var $options \Shop\Options\CheckoutOptions */
+        $options = $this->getService('Shop\Options\Checkout');
+        
         
         $emailView = new ViewModel([
             'order' => $order,
@@ -280,20 +283,22 @@ class Order extends AbstractRelationalMapperService
             'layout_params'    => ['order' => $order],
             'body'             => $emailView,
             'subject'          => 'Order No.:' . $order->getOrderNumber(),
-            'transport'        => 'default',
+            'transport'        => $options->getOrderEmail(),
         ]);
         
-        /*$this->getEventManager()->trigger('mail.send', $this, [
-            'sender'        => [
-                'name'      => $order->getCustomer()->getFullName(),
-                'address'   => $email,
-            ],
-            'layout'           => 'shop/email/order',
-            'layout_params'    => ['order' => $order],
-            'body'             => $emailView,
-            'subject'          => 'Order No.:' . $order->getOrderNumber(),
-            'transport'        => 'default',
-        ]);*/
+        if ($options->getSendOrderToAdmin()) {
+            $this->getEventManager()->trigger('mail.send', $this, [
+                'sender'        => [
+                    'name'      => $order->getCustomer()->getFullName(),
+                    'address'   => $email,
+                ],
+                'layout'           => 'shop/email/order',
+                'layout_params'    => ['order' => $order],
+                'body'             => $emailView,
+                'subject'          => 'Order No.:' . $order->getOrderNumber(),
+                'transport'        => $options->getOrderEmail(),
+            ]);
+        }
     }
 
     /**

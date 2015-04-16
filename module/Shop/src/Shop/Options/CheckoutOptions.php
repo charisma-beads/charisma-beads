@@ -40,6 +40,11 @@ class CheckoutOptions extends AbstractOptions
      */
     protected $orderEmail;
     
+    /**
+     * @var bool
+     */
+    protected $sendOrderToAdmin;
+    
 	/**
 	 * @return boolean $PayCheck
 	 */
@@ -160,5 +165,22 @@ class CheckoutOptions extends AbstractOptions
         $this->orderEmail = $orderEmail;
         return $this;
     }
+ 
+    /**
+     * @return boolean $sendOrderToAdmin
+     */
+    public function getSendOrderToAdmin()
+    {
+        return $this->sendOrderToAdmin;
+    }
 
+    /**
+     * @param boolean $sendOrderToAdmin
+     * @return $this
+     */
+    public function setSendOrderToAdmin($sendOrderToAdmin)
+    {
+        $this->sendOrderToAdmin = $sendOrderToAdmin;
+        return $this;
+    }
 }
