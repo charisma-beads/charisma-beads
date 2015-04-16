@@ -9,7 +9,7 @@ use Zend\View\Model\JsonModel;
 
 class Order extends AbstractCrudController
 {
-	protected $controllerSearchOverrides = array('sort' => 'orderNumber');
+	protected $controllerSearchOverrides = ['sort' => '-orderDate'];
 	protected $serviceName = 'ShopOrder';
 	protected $route = 'admin/shop/order';
 

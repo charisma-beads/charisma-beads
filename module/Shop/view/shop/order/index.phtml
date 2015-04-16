@@ -17,7 +17,7 @@
 $(document).ready(function(){
 	$('#table-order').dataGrid({
 	    url : 'order/list',
-	    query: { sort : 'orderNumber' },
+	    query: { sort : '-orderDate' },
 	    searchForm : $('#search-order'),
 	    paging : 'links',
 	    columnSort: true,
