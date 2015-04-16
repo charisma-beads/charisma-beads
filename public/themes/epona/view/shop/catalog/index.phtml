@@ -15,7 +15,9 @@
         <!-- PRODUCT LIST -->
         <div class="row">
             <?php /* @var $row \Shop\Model\Product\Product */ ?>
+            <?php $c=0;?>
             <?php foreach ($this->products as $row): ?>
+            <?php $c++;?>
             <div class="col-md-3 col-sm-3 shop-item-list"><!-- item -->
                 <a href="<?=$this->url('shop/catalog/product', [
                     'categoryIdent' => $row->getProductCategory()->getIdent(),
@@ -58,7 +60,7 @@
                     
                     <?php if ($row->getProductOption()): ?>
                     <div class="row">
-                        <div class="col col-md-12">
+                        <div class="col-md-12">
                             <?=$this->productOptions($row);?>
                         </div><!-- /btn-group -->
                     </div>
@@ -66,7 +68,7 @@
                     
                     <?=$this->formInput($form->get('qty')->setAttribute('class', 'form-control')); ?>
                     
-                    <button type="submit" name="buy-item" class="btn btn-primary col-md-12">
+                    <button type="submit" name="buy-item" class="btn btn-primary col-sm-12 col-md-12">
                         ADD TO CART
                         <?=$this->cart()->hasProductInCart($row);?>
                     </button>
@@ -74,6 +76,9 @@
                 <?=$this->form()->closeTag(); ?>
                 <?php endif; ?>
             </div><!-- /item -->
+            <?php if (($c % 4) === 0):?>
+    	    <div class="clearfix"></div>
+    	    <?php endif;?>
             <?php endforeach; ?>
         </div><!-- /PRODUCT LIST -->
     </div>

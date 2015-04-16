@@ -15,7 +15,9 @@
         <!-- PRODUCT CATEGORIES -->
         <div class="row">
             <?php /* @var $row \Shop\Model\Product\Category */ ?>
+             <?php $c=0;?>
             <?php foreach ($this->cats as $row): ?>
+            <?php $c++;?>
                 <div class="col-sm-4 col-md-4"><!-- category -->
                     <div class="box-content thumbnail text-center">
                         <a href="<?php echo $this->url('shop/catalog', [
@@ -28,6 +30,9 @@
                         </div>
                     </div>
                 </div><!-- /category -->
+                <?php if (($c % 3) === 0):?>
+            	<div class="clearfix"></div>
+            	<?php endif; ?>
             <?php endforeach; ?>
         </div>
     </div>
