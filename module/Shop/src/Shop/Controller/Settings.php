@@ -35,8 +35,6 @@ class Settings extends AbstractActionController
             $config->toFile('./config/autoload/shop.local.php', ['shop' => $array]);
             
             $this->flashMessenger()->addSuccessMessage('Settings have been updated!');
-            
-            //return $this->redirect()->toRoute('admin/shop/settings');
         }
         
         return ['form' => $form,];

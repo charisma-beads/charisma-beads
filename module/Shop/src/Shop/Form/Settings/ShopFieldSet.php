@@ -137,6 +137,36 @@ class ShopFieldSet extends Fieldset implements InputFilterProviderInterface
     
     public function getInputFilterSpecification()
     {
-        return [];
+        return [
+            'alertText' => [
+                'required' => false,
+                'filters' => [
+                    ['name' => 'StripTags'],
+                    ['name' => 'StringTrim'],
+                ],
+            ],
+            'productsPerPage' => [
+                'filters' => [
+                    ['name' => 'StripTags'],
+                    ['name' => 'StringTrim'],
+                ],
+                'validators' => [
+                    ['name' => 'Int'],
+                ],
+            ],
+            'productsOrderCol' => [
+                'filters' => [
+                    ['name' => 'StripTags'],
+                    ['name' => 'StringTrim'],
+                ],
+            ],
+            'vatNumber' => [
+                'required' => false,
+                'filters' => [
+                    ['name' => 'StripTags'],
+                    ['name' => 'StringTrim'],
+                ],
+            ],
+        ];
     }
 }

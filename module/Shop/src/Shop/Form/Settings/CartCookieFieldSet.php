@@ -58,7 +58,7 @@ class CartCookieFieldSet extends Fieldset implements InputFilterProviderInterfac
             'name'			=> 'secure',
             'type'			=> 'checkbox',
             'options'		=> [
-                'label'			=> 'Sucure',
+                'label'			=> 'Secure',
                 'use_hidden_element' => true,
                 'checked_value' => '1',
                 'unchecked_value' => '0',
@@ -94,6 +94,38 @@ class CartCookieFieldSet extends Fieldset implements InputFilterProviderInterfac
     
     public function getInputFilterSpecification()
     {
-        return [];
+        return [
+            'expiry' => [
+                'required' => true,
+                'filters' => [
+                    ['name' => 'StripTags'],
+                    ['name' => 'StringTrim'],
+                ],
+                'validators' => [
+                    ['name' => 'Int'],
+                ],
+            ],
+            'domain' => [
+                'required' => false,
+                'filters' => [
+                    ['name' => 'StripTags'],
+                    ['name' => 'StringTrim'],
+                ],
+            ],
+            'url' => [
+                'required' => false,
+                'filters' => [
+                    ['name' => 'StripTags'],
+                    ['name' => 'StringTrim'],
+                ],
+            ],
+            'cookieName' => [
+                'required' => false,
+                'filters' => [
+                    ['name' => 'StripTags'],
+                    ['name' => 'StringTrim'],
+                ],
+            ],
+        ];
     }
 }

@@ -117,6 +117,36 @@ class PaypalFieldSet extends Fieldset implements InputFilterProviderInterface
     
     public function getInputFilterSpecification()
     {
-        return [];
+        return [
+            'currencyCode' => [
+                'required' => false,
+                'filters' => [
+                    ['name' => 'StripTags'],
+                    ['name' => 'StringTrim'],
+                    ['name' => 'StringToUpper']
+                ],
+                'validators' => [
+                    ['name' => 'StringLength', 'options' => [
+                        'max' => 3,
+                        'min' => 3,
+                        'encoding' => 'UTF-8',
+                    ]]
+                ],
+            ],
+            'clientId' => [
+                'required' => false,
+                'filters' => [
+                    ['name' => 'StripTags'],
+                    ['name' => 'StringTrim'],
+                ],
+            ],
+            'secret' => [
+                'required' => false,
+                'filters' => [
+                    ['name' => 'StripTags'],
+                    ['name' => 'StringTrim'],
+                ],
+            ],
+        ];
     }
 }
