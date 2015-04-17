@@ -66,7 +66,7 @@ class Category extends Form implements ServiceLocatorAwareInterface
     		'name'			=> 'enabled',
     		'type'			=> 'checkbox',
     		'options'		=> array(
-    			'label'			=> 'Enabled:',
+    			'label'			=> 'Enabled',
     			'use_hidden_element' => true,
     			'checked_value' => '1',
     			'unchecked_value' => '0',
@@ -78,7 +78,7 @@ class Category extends Form implements ServiceLocatorAwareInterface
     		'name'			=> 'discontinued',
     		'type'			=> 'checkbox',
     		'options'		=> array(
-    			'label'			=> 'Discontinued:',
+    			'label'			=> 'Discontinued',
     			'required' 		=> true,
     			'use_hidden_element' => true,
     			'checked_value' => '1',

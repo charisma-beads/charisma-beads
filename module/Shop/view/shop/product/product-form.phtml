@@ -17,13 +17,11 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
                     <div class="row">
                         <div class="col-sm-6 text-right">
                             <label>
-                                <?=$form->get('enabled')->getLabel();?>
                                 <?=$this->formCheckbox($form->get('enabled'));?>
                             </label>
                         </div>
                         <div class="col-sm-6 text-right">
                             <label>
-                                <?=$form->get('discontinued')->getLabel();?>
                                 <?=$this->formCheckbox($form->get('discontinued'));?>
                             </label>
                         </div>
@@ -162,13 +160,11 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
                     <div class="row">
                         <div class="col-sm-4 text-right">
                             <label>
-                                <?=$form->get('addPostage')->getLabel();?>
                                 <?=$this->formCheckbox($form->get('addPostage'));?>
                             </label>
                         </div>
                         <div class="col-sm-4 text-right">
                             <label>
-                                <?=$form->get('vatInc')->getLabel();?>
                                 <?=$this->formCheckbox($form->get('vatInc'));?>
                             </label>
                         </div>

@@ -32,7 +32,11 @@ class Customer extends Form
 	        'name' => 'billingAddressId',
 	        'type' => 'CustomerAddressList',
 	        'options' => [
+	            //'column-size' => 'md-4',
                 'label' => 'Billing Address:',
+	            //'label_attributes' => [
+	                //'class' => 'col-md-2 control-label',
+	            //],
 	       ],
 	    ]);
 	    
@@ -40,7 +44,11 @@ class Customer extends Form
             'name' => 'deliveryAddressId',
             'type' => 'CustomerAddressList',
             'options' => [
+                //'column-size' => 'md-4',
                 'label' => 'Delivery Address:',
+                //'label_attributes' => [
+                    //'class' => 'col-md-2 control-label',
+                //],
             ],
         ]);
 	    

@@ -120,7 +120,7 @@ class Product extends Form
         	'name'			=> 'addPostage',
         	'type'			=> 'checkbox',
         	'options'		=> [
-        		'label'			=> 'Add Postage:',
+        		'label'			=> 'Add Postage',
         		'required' 		=> true,
         		'use_hidden_element' => true,
         		'checked_value' => '1',
@@ -147,7 +147,7 @@ class Product extends Form
         	'name'			=> 'enabled',
         	'type'			=> 'checkbox',
         	'options'		=> [
-        		'label'			=> 'Enabled:',
+        		'label'			=> 'Enabled',
         		'use_hidden_element' => true,
         		'checked_value' => '1',
         		'unchecked_value' => '0',
@@ -159,7 +159,7 @@ class Product extends Form
         	'name'			=> 'discontinued',
         	'type'			=> 'checkbox',
         	'options'		=> [
-        		'label'			=> 'Discontinued:',
+        		'label'			=> 'Discontinued',
         		'required' 		=> true,
         		'use_hidden_element' => true,
         		'checked_value' => '1',
@@ -171,7 +171,7 @@ class Product extends Form
         	'name'			=> 'vatInc',
         	'type'			=> 'checkbox',
         	'options'		=> [
-        		'label'			=> 'Vat Included:',
+        		'label'			=> 'Vat Included',
         		'required' 		=> true,
         		'use_hidden_element' => true,
         		'checked_value' => '1',

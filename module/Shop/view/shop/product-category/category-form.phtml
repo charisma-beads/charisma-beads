@@ -13,16 +13,12 @@ if (isset($this->productCategoryId)) $routeArray['id'] = $this->productCategoryI
 				    <div class="row">
     				    <div class="col-md-6 text-right">
     				        <label>
-    				            <?=$form->get('enabled')->getLabel();?>
     				            <?=$this->FormCheckbox($form->get('enabled'));?>
-    				            
     				        </label>
     				    </div>
     				    <div class="col-md-6 text-right">
     				        <label>
-    				            <?=$form->get('discontinued')->getLabel();?>
     				            <?=$this->FormCheckbox($form->get('discontinued'));?>
-    				            
     				        </label>
     				    </div>
 				    </div>
@@ -81,16 +77,9 @@ if (isset($this->productCategoryId)) $routeArray['id'] = $this->productCategoryI
                         </div>
                     </div>
                     
-                    <?php $this->formRadio()->setSeparator('</div><div class="radio col-md-8 col-md-offset-4">'); ?>
-                    <div class="form-group<?php if ($form->get('categoryInsertType')->getMessages()) echo ' has-error'; ?>">
-                        <div class="radio col-md-8 col-md-offset-4">
-        				    <?=$this->formRadio($this->form->get('categoryInsertType'));?>
-                        </div>
-                        <span class="help-block col-md-8 col-md-offset-4">
-                            <?=$this->formElementErrors($form->get('categoryInsertType'), [
-                                'class' => 'list-unstyled'
-                            ]); ?>
-                        </span>
+                    
+                    <div class="col-md-8 col-md-offset-4">
+                        <?=$this->formRadio($this->form->get('categoryInsertType'));?>
                     </div>
                     
 				</div>
