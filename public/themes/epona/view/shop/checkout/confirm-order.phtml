@@ -36,7 +36,7 @@
             
             <section>
                 <label class="checkbox">
-				    <?=$this->formElement($this->form->get('collect_instore'));?><i></i>
+				    <?=$this->formCheckBox($this->form->get('collect_instore')->setOption('disable-twb', true));?><i></i>
 				    <?=$this->form->get('collect_instore')->getLabel();?>
 			    </label>
 			    <span class="help-block">

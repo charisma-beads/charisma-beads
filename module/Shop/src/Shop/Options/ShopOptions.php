@@ -44,11 +44,6 @@ class ShopOptions extends AbstractOptions
      * @var boolean
      */
     protected $vatState;
-
-    /**
-     * @var string
-     */
-    protected $customerNumberPrefix;
     
     /**
      * @var bool
@@ -198,24 +193,6 @@ class ShopOptions extends AbstractOptions
 		$this->vatState = $vatState;
 		return $this;
 	}
-
-    /**
-     * @return string
-     */
-    public function getCustomerNumberPrefix()
-    {
-        return $this->customerNumberPrefix;
-    }
-
-    /**
-     * @param $customerNumberPrefix
-     * @return $this
-     */
-    public function setCustomerNumberPrefix($customerNumberPrefix)
-    {
-        $this->customerNumberPrefix = $customerNumberPrefix;
-        return $this;
-    }
  
     /**
      * @return boolean $autoIncrementCart

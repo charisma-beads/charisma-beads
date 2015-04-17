@@ -19,7 +19,6 @@ return [
         'shop_options' => [
             'alert' => false,
             'alertText' => '',
-            'orderEmail' => '',
             'postState' => false,
             'productsPerPage' => 24,
             'stockControl' => false,
