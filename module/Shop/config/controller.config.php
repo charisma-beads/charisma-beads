@@ -24,6 +24,7 @@ return [
         'Shop\Controller\Product\Size'          => 'Shop\Controller\Product\ProductSize',
         'Shop\Controller\Shop'                  => 'Shop\Controller\Shop',
         'Shop\Controller\Tax\Code'              => 'Shop\Controller\Tax\TaxCode',
-        'Shop\Controller\Tax\Rate'              => 'Shop\Controller\Tax\TaxRate'
+        'Shop\Controller\Tax\Rate'              => 'Shop\Controller\Tax\TaxRate',
+        'Shop\Controller\Settings'              => 'Shop\Controller\Settings',
     ],
 ];

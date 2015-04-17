@@ -7,7 +7,6 @@ use Zend\ServiceManager\ServiceLocatorAwareTrait;
 
 class PostUnitList extends Select implements ServiceLocatorAwareInterface
 {
-    
     use ServiceLocatorAwareTrait;
     
     protected $emptyOption = '---Please select a weight---';

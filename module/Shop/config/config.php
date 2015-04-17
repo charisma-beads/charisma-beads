@@ -1,6 +1,6 @@
 <?php
 return [
-    'charisma_shop' => [
+    'shop' => [
         'checkout_options' => [
             'payCheck' => true,
             'collectInstore' => true,
@@ -87,6 +87,7 @@ return [
                                 'Shop\Controller\Shop' => ['action' => 'all'],
                                 'Shop\Controller\Tax\Code' => ['action' => 'all'],
                                 'Shop\Controller\Tax\Rate' => ['action' => 'all'],
+                                'Shop\Controller\Settings' => ['action' => 'all'],
                             ],
                         ],
                     ],
@@ -115,7 +116,8 @@ return [
                 'Shop\Controller\Product\Size',
                 'Shop\Controller\Shop',
                 'Shop\Controller\Tax\Code',
-                'Shop\Controller\Tax\Rate'
+                'Shop\Controller\Tax\Rate',
+                'Shop\Controller\Settings',
             ],
         ],
     ],
@@ -1029,6 +1031,21 @@ return [
                                     ],
                                 ],
                             ],
+                            'settings' => [
+                                'type' => 'Segment',
+                                'options' => [
+                                    'route' => '/settings[/:action]',
+                                    'constraints' => [
+                                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                    ],
+                                    'defaults' => [
+                                        'controller' => 'Settings',
+                                        'action' => 'index',
+                                        'force-ssl' => 'ssl'
+                                    ]
+                                ],
+                                'may_terminate' => true,
+                            ]
                         ],
                     ],
                 ],
@@ -1350,11 +1367,17 @@ return [
                                         'action' => 'add',
                                         'route' => 'admin/shop/tax/code/edit',
                                         'resource' => 'menu:admin'
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                    'shop-settings' => [
+                        'label' => 'Settings',
+                        'action' => 'index',
+                        'route' => 'admin/shop/settings',
+                        'resource' => 'menu:admin',
+                    ],
                 ],
                 'route' => 'admin/shop',
                 'resource' => 'menu:admin'

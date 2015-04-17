@@ -28,6 +28,12 @@ return [
         'ShopProductSize'       => 'Shop\Form\Product\Size',
         'ShopTaxCode'           => 'Shop\Form\Tax\Code',
         'ShopTaxRate'           => 'Shop\Form\Tax\Rate',
+        
+        'ShopSettings'          => 'Shop\Form\Settings\Settings',
+        'ShopFieldSet'          => 'Shop\Form\Settings\ShopFieldSet',
+        'ShopCheckoutFieldSet'  => 'Shop\Form\Settings\CheckoutFieldSet',
+        'ShopPaypalFieldSet'    => 'Shop\Form\Settings\PaypalFieldSet',
+        'ShopCartCookieFieldSet'=> 'Shop\Form\Settings\CartCookieFieldSet',
 
         'CountryList'           => 'Shop\Form\Element\CountryList',
         'CountryProvinceList'   => 'Shop\Form\Element\CountryProvinceList',

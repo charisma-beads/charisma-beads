@@ -16,11 +16,6 @@ class ShopOptions extends AbstractOptions
     protected $alertText;
     
     /**
-     * @var string
-     */
-    protected $orderEmail;
-    
-    /**
      * @var boolean
      */
     protected $postState;
@@ -93,24 +88,6 @@ class ShopOptions extends AbstractOptions
 	public function setAlertText($alertText)
 	{
 		$this->alertText = $alertText;
-		return $this;
-	}
-
-    /**
-     * @return string
-     */
-	public function getOrderEmail()
-	{
-		return $this->orderEmail;
-	}
-
-    /**
-     * @param $orderEmail
-     * @return $this
-     */
-	public function setOrderEmail($orderEmail)
-	{
-		$this->orderEmail = $orderEmail;
 		return $this;
 	}
 
