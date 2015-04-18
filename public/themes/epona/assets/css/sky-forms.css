@@ -149,31 +149,29 @@
 /**/
 .sky-form .select i {
 	position: absolute;
-	top: 2px;
-	right: 2px;
-	width: 28px;
-	height: 35px;
+	top: 14px;
+	right: 14px;
+	width: 5px;
+	height: 11px;
 	background: #fff;
 	pointer-events: none;
+	box-shadow: 0 0 0 12px #fff;
 }
 .sky-form .select i:after,
 .sky-form .select i:before {
 	content: '';
 	position: absolute;
-	right: 10px;
+	right: 0px;
 	border-right: 4px solid transparent;
 	border-left: 4px solid transparent;
 }
 .sky-form .select i:after {
-	bottom: 12px;
+	bottom: 0px;
 	border-top: 4px solid #404040;
 }
 .sky-form .select i:before {
-	top: 12px;
+	top: 0px;
 	border-bottom: 4px solid #404040;
-}
-.sky-form .select select {
-	padding-right: 28px;
 }
 .sky-form .select-multiple select {
 	height: auto;
