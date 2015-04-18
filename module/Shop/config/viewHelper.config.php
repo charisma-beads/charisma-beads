@@ -17,5 +17,6 @@ return [
         'CountrySelect'         => 'Shop\View\CountrySelect',
         'MonthYearSelect'       => 'Shop\View\FormMonthSelect',
         'ProductTableRowState'  => 'Shop\View\ProductTableRowState',
+        'ShopAlert'             => 'Shop\View\Alert',
     ],
 ];

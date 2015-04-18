@@ -1,38 +1,5 @@
 <?php
 return [
-    'shop' => [
-        'checkout_options' => [
-            'payCheck' => true,
-            'collectInstore' => true,
-            'payCreditCard' => true,
-            'payPhone' => true,
-            'payPaypal' => true
-        ],
-        'paypal_options' => [
-            'currencyCode'      => 'GBP',
-            'mode'              => 'sandbox',
-            'logEnabled'        => false,
-            'clientId'          => '',
-            'secret'            => '',
-            'paymentMethod'      => 'paypal',
-        ],
-        'shop_options' => [
-            'alert' => false,
-            'alertText' => '',
-            'postState' => false,
-            'productsPerPage' => 24,
-            'stockControl' => false,
-            'vatNumber' => '',
-            'vatState' => false
-        ],
-        'cart_cookie' => [
-            'expiry' => 3600, // Cookie expiry time in mins
-            'domain' => null, // Set to null this defaults to the current domain
-            'secure' => false, // Should the cookie be secure only?
-            'url' => '/', // Location to set in the cookie - default to root
-            'cookieName' => '' // Cookie Name
-        ],
-    ],
     'uthando_user' => [
         'acl' => [
             'roles' => [
