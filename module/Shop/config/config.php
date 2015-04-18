@@ -757,6 +757,7 @@ return [
                                 'options' => [
                                     'route' => '/post',
                                     'defaults' => [
+                                        'controller' => 'Post\Cost',
                                         'action' => 'index',
                                         'force-ssl' => 'ssl'
                                     ]
@@ -938,6 +939,7 @@ return [
                                 'options' => [
                                     'route' => '/tax',
                                     'defaults' => [
+                                        'controller' => 'Tax\Code',
                                         'action' => 'index',
                                         'force-ssl' => 'ssl'
                                     ]
