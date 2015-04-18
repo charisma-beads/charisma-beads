@@ -29,7 +29,7 @@ class Category extends AbstractRelationalMapperService
     protected $serviceAlias = 'ShopProductCategory';
     
     protected $tags = [
-        'image', 'category',
+        'image', 'category', 'product',
     ];
 
     /**
@@ -215,7 +215,9 @@ class Category extends AbstractRelationalMapperService
 		$position = (int) $post['parent'];
 		$insertType = (string) $post['categoryInsertType'];
 	
-		return $mapper->insertRow($data, $position, $insertType);
+		$result = $mapper->insertRow($data, $position, $insertType);
+		
+		return $result;
 	}
 
     /**
@@ -248,12 +250,12 @@ class Category extends AbstractRelationalMapperService
 		}
 		
 		$category = $this->getById($model->getProductCategoryId());
+		
+		$data = $this->getMapper()
+            ->extract($form->getData());
 	
 		if ($category) {
 			if ('noInsert' !== $post['categoryInsertType']) {
-
-                $data = $data = $this->getMapper()
-                    ->extract($form->getData());
 
                 $position = (int) $post['parent'];
                 $insertType = (string) $post['categoryInsertType'];
@@ -266,6 +268,24 @@ class Category extends AbstractRelationalMapperService
 			$this->removeCacheItem($model->getProductCategoryId());
 		} else {
 			throw new ShopException('Product Category id does not exist');
+		}
+		
+		// cascade enabled and/or discontinued if needed.
+		if ($result) {
+		    $ids = $this->getCategoryChildrenIds($category->getProductCategoryId(), true);
+		    $ids[] = $category->getProductCategoryId();
+		    
+		    if ($data['enabled'] != (int) $category->getEnabled()) {
+		        $this->getMapper()->toggleEnabled($category->setEnabled((bool) $data['enabled']));
+		        $this->getMapper()->cascadeEnabled($ids, $data['enabled']);
+		    }
+		    
+		    if ($data['discontinued'] != (int) $category->getDiscontinued()) {
+		        $this->getMapper()->toggleDiscontinued($category->setDiscontinued((bool) $data['discontinued']));
+		        $this->getMapper()->cascadeDiscontinued($ids, $data['discontinued']);
+		    }
+		    
+		    $this->removeCacheItem($model->getProductCategoryId());
 		}
 	
 		return $result;
@@ -315,7 +335,15 @@ class Category extends AbstractRelationalMapperService
         /* @var $mapper \Shop\Mapper\Product\Category */
         $mapper = $this->getMapper();
 		
-		return $mapper->toggleEnabled($category);
+		$result = $mapper->toggleEnabled($category);
+		
+		if ($result) {
+		    $ids = $this->getCategoryChildrenIds($category->getProductCategoryId(), true);
+		    $ids[] = $category->getProductCategoryId();
+		    $mapper->cascadeEnabled($ids, $category->getEnabled());
+		}
+		
+		return $result;
 	}
 	
 	public function preForm(Event $e)

@@ -8,17 +8,24 @@ class ProductCategory extends AbstractCrudController
     protected $controllerSearchOverrides = array('sort' => 'lft');
     protected $serviceName = 'ShopProductCategory';
     protected $route = 'admin/shop/category';
+    protected $routes = [
+        //'edit' => 'admin/shop/category/edit',
+    ];
     
     public function indexAction()
     {
-	    $this->getService()->getMapper()->setFetchEnabled(false);
+	    $this->getService()->getMapper()
+	       ->setFetchEnabled(false)
+	       ->setFetchDisabled(true);
 	    return parent::indexAction();
     }
     
     public function listAction()
     {
-       $this->getService()->getMapper()->setFetchEnabled(false);
-       return parent::listAction();
+        $this->getService()->getMapper()
+            ->setFetchEnabled(false)
+            ->setFetchDisabled(true);
+        return parent::listAction();
     }
     
     public function setEnabledAction()

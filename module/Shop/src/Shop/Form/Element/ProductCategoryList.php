@@ -20,7 +20,8 @@ class ProductCategoryList extends Select implements ServiceLocatorAwareInterface
             ->get('ShopProductCategory');
         
         $categoryService->getMapper()
-            ->setFetchEnabled(false);
+            ->setFetchEnabled(false)
+            ->setFetchDisabled(true);
         $cats = $categoryService->fetchAll();
         
         $categoryOptions = [];

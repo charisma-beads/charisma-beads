@@ -39,6 +39,7 @@ class CartCookieFieldSet extends Fieldset implements InputFilterProviderInterfac
                 'label_attributes' => [
                     'class' => 'col-md-4',
                 ],
+                'help-block' => 'This is the number of seconds the cart will expire.',
             ],
         ]);
         

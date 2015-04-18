@@ -63,6 +63,22 @@ class Category extends AbstractNestedSet
 	    return parent::search($search, $sort, $select);
 	}
 	
+	public function cascadeDiscontinued(array $ids, $value)
+	{
+	    $where = new Where();
+	    $where->in('productCategoryId', $ids);
+	     
+	    $this->update(['discontinued' => $value], $where, 'product');
+	}
+	
+	public function cascadeEnabled(array $ids, $value)
+	{
+	    $where = new Where();
+	    $where->in('productCategoryId', $ids);
+	    
+	    $this->update(['enabled' => $value], $where, 'product');
+	}
+	
 	public function toggleEnabled(CategoryModel $model)
 	{
 		$data = $this->extract($model);
@@ -76,6 +92,21 @@ class Category extends AbstractNestedSet
 		);
 	
 		return $this->update($data, $where);
+	}
+	
+	public function toggleDiscontinued(CategoryModel $model)
+	{
+	    $data = $this->extract($model);
+	
+	    $where = new Where();
+	    $where->between(self::COLUMN_LEFT, $data[self::COLUMN_LEFT], $data[self::COLUMN_RIGHT]);
+	
+	    $data = array(
+	        'discontinued'		=> $data['discontinued'],
+	        'dateModified'	=> $data['dateModified']
+	    );
+	
+	    return $this->update($data, $where);
 	}
 	
 	public function setFilter(Select $select)
