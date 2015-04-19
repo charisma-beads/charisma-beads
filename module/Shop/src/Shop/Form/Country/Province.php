@@ -27,6 +27,7 @@ class Province extends Form
             'options'		=> [
                 'label'		=> 'Province Code:',
                 'required'	=> true,
+                'help-block' => 'Please use the ISO-3166-2 code'
             ],
         ]);
 

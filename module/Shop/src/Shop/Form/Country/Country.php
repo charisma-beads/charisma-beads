@@ -36,6 +36,7 @@ class Country extends Form
 		    'options'		=> [
 		        'label'		=> 'Country Code:',
 		        'required'	=> true,
+		        'help-block' => 'Please use the ISO-3166 alpha 2 country code (two-letters)',
 		    ],
 		]);
 		

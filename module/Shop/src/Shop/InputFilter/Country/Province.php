@@ -31,7 +31,7 @@ class Province extends InputFilter
                 array('name' => 'StringLength', 'options' => [
                     'encoding' => 'UTF-8',
                     'min'      => 2,
-                    'max'      => 255,
+                    'max'      => 10,
                 ]),
             ],
         ]);
