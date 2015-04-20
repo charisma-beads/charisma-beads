@@ -13,7 +13,7 @@ return [
         'ShopCustomerDetails'   => 'Shop\Form\Customer\CustomerDetails',
         'ShopOrder'             => 'Shop\Form\Order\Order',
         'ShopOrderConfirm'      => 'Shop\Form\Order\Confirm',
-        'ShopOrderLine'         => 'Shop\Form\Order\Line',
+        'ShopOrderLineFieldSet' => 'Shop\Form\Order\LineFieldSet',
         'ShopOrderStatus'       => 'Shop\Form\Order\Status',
         'ShopPaymentCreditCard' => 'Shop\Form\Payment\CreditCard',
         'ShopPostCost'          => 'Shop\Form\Post\Cost',

@@ -39,8 +39,8 @@ class PaypalFieldSet extends Fieldset implements InputFilterProviderInterface
                     'class' => 'col-md-4',
                 ],
                 'value_options' => [
-                    'sandbox',
-                    'live',
+                    'sandbox'   => 'sandbox',
+                    'live'      => 'live',
                 ],
                 'column-size' => 'md-8',
             ],
