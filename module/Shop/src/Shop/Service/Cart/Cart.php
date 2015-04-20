@@ -414,7 +414,7 @@ class Cart extends AbstractMapperService implements InitializableInterface
         $price = $item->getPrice();
         $tax = 0;
 
-        if (true === $this->getShopOptions()->getVatState()) {
+        if (true == $this->getShopOptions()->getVatState()) {
             $taxService = $this->getTaxService()
                 ->setTaxState($this->getShopOptions()->getVatState())
                 ->setTaxInc($item->getMetadata()->getVatInc());

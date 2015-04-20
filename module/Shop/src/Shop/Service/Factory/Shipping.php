@@ -17,8 +17,6 @@ class Shipping implements FactoryInterface
 	    $taxService = $serviceLocator->get('Shop\Service\Tax');
 	    $countryService = $serviceManager->get('ShopCountry');
 	    
-	    $taxService->setTaxState($shopOptions->getVatState());
-	    
 	    $shippingService = new ShippingService();
 	    $shippingService->setCountryService($countryService);
 	    $shippingService->setTaxService($taxService);
