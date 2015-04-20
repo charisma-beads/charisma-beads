@@ -96,8 +96,6 @@ class Paypal extends AbstractService
     {   
         $options = $this->getOptions();
         
-        \FB::info($order);
-        
         // set payment method
         $payer = new Payer();
         $payer->setPaymentMethod($options->getPaymentMethod());
