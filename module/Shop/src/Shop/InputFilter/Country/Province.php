@@ -30,7 +30,7 @@ class Province extends InputFilter
             'validators' => [
                 array('name' => 'StringLength', 'options' => [
                     'encoding' => 'UTF-8',
-                    'min'      => 2,
+                    'min'      => 1,
                     'max'      => 10,
                 ]),
             ],

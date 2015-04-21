@@ -31,8 +31,17 @@ class Customer extends AbstractDbMapper
     			$sort = array('lastname', 'firstname');
     		}
     	}
+    	
+    	$select = $this->getSelect();
+    	
+    	$select->join(
+    	    'customerAddress',
+    	    'customer.customerId=customerAddress.customerId',
+    	    array(),
+    	    Select::JOIN_LEFT
+    	);
     	 
-    	return parent::search($search, $sort);
+    	return parent::search($search, $sort, $select);
     }
 
     /**
