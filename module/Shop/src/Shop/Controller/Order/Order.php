@@ -100,8 +100,6 @@ class Order extends AbstractCrudController
 	public function viewAction()
 	{
 	    $order = $this->getCustomerOrder();
-	    
-	    \FB::info($order);
 
         // if order returns false then return to my-order
         if (false === $order) {
