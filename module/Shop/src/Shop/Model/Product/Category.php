@@ -56,6 +56,11 @@ class Category extends NestedSet implements ModelInterface
 	 * @var bool
 	 */
 	protected $discontinued = false;
+	
+	/**
+	 * @var bool
+	 */
+	protected $showImage;
 
     /**
      * @return int
@@ -166,4 +171,23 @@ class Category extends NestedSet implements ModelInterface
 		$this->discontinued = $discontinued;
 		return $this;
 	}
+ 
+    /**
+     * @return bool $showImage
+     */
+    public function getShowImage()
+    {
+        return $this->showImage;
+    }
+
+    /**
+     * @param bool $showImage
+     * @return $this
+     */
+    public function setShowImage($showImage)
+    {
+        $this->showImage = (bool) $showImage;
+        return $this;
+    }
+
 }

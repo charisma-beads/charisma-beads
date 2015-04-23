@@ -19,9 +19,11 @@
                             'categoryIdent' => $row->getProductCategory()->getIdent(),
                             'productIdent' => $row->getIdent(),
                         ]);?>">
+                            <?php if ($row->getShowImage()):?>
                             <figure><!-- image -->
                                 <img class="" src="<?=$this->productImage($row);?>" alt="" />
                             </figure><!-- /image -->
+                            <?php endif;?>
                             <?php if ($row->inStock()) : ?>
                             <span class="shop-stock-info stock-yes"><!-- stock -->
                                 <span class="text-muted"><?=$this->escapehtml($row->getSku());?></span>

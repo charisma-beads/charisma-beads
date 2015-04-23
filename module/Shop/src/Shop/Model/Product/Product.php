@@ -117,6 +117,11 @@ class Product implements ModelInterface
 	protected $vatInc;
 	
 	/**
+	 * @var bool
+	 */
+	protected  $showImage;
+	
+	/**
 	 * @var Category
 	 */
 	protected $productCategory;
@@ -509,6 +514,24 @@ class Product implements ModelInterface
 	{
 		$this->vatInc = $vatInc;
 		return $this;
+	}
+	
+	/**
+	 * @return bool $showImage
+	 */
+	public function getShowImage()
+	{
+	    return $this->showImage;
+	}
+	
+	/**
+	 * @param bool $showImage
+	 * @return $this
+	 */
+	public function setShowImage($showImage)
+	{
+	    $this->showImage = (bool) $showImage;
+	    return $this;
 	}
 
     /**

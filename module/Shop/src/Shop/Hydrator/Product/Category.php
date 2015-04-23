@@ -20,6 +20,7 @@ class Category extends AbstractHydrator
 		$this->addStrategy('productImageId', new NullStrategy());
 		$this->addStrategy('enabled', $trueFalse);
 		$this->addStrategy('discontinued', $trueFalse);
+		$this->addStrategy('showImage', $trueFalse);
 		$this->addStrategy('dateCreated', $dateTime);
 		$this->addStrategy('dateModified', $dateTime);
 	}
@@ -44,6 +45,7 @@ class Category extends AbstractHydrator
 			'rgt'				=> $object->getRgt(),
 			'enabled'			=> $this->extractValue('enabled', $object->getEnabled()),
 			'discontinued'		=> $this->extractValue('discontinued', $object->getDiscontinued()),
+		    'showImage'		    => $this->extractValue('shaowImage', $object->getShowImage()),
 			'dateCreated'		=> $this->extractValue('dateCreated', $object->getDateCreated()),
 			'dateModified'		=> $this->extractValue('dateModified', $object->getDateModified())
 		);

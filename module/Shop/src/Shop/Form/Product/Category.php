@@ -87,6 +87,18 @@ class Category extends Form implements ServiceLocatorAwareInterface
     	));
     	
     	$this->add(array(
+    	    'name'			=> 'showImage',
+    	    'type'			=> 'checkbox',
+    	    'options'		=> array(
+    	        'label'			=> 'Show Image',
+    	        'required' 		=> true,
+    	        'use_hidden_element' => true,
+    	        'checked_value' => '1',
+    	        'unchecked_value' => '0',
+    	    ),
+    	));
+    	
+    	$this->add(array(
     		'name'		=> 'productImageId',
     		'type'		=> 'select',
     		'options'	=> array(

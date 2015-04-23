@@ -214,6 +214,23 @@ class Product extends InputFilter
     	));
     	
     	$this->add(array(
+    	    'name'			=> 'showImage',
+    	    'required'		=> true,
+    	    'filters'		=> array(
+    	        array('name' => 'StripTags'),
+    	        array('name' => 'StringTrim'),
+    	    ),
+    	    'validators'	=> array(
+    	        array('name' => 'Int'),
+    	        array('name' => 'Between', 'options' => array(
+    	            'min'		=> 0,
+    	            'max'		=> 1,
+    	            'inclusive'	=> true,
+    	        )),
+    	    ),
+    	));
+    	
+    	$this->add(array(
     		'name'			=> 'productCategoryId',
     		'required'		=> true,
     		'filters'		=> array(

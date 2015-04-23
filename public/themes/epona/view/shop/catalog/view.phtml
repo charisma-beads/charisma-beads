@@ -21,10 +21,11 @@
             <div class="col-md-4 col-sm-4">
 
                 <figure class="product-view-image"><!-- product image -->
+                    <?php if ($product->getShowImage()):?>
                     <a href="<?=$this->productImage($product);?>" class="lightbox img-thumbnail" data-plugin-options='{"type":"image"}'>
                         <img id="product-main-image" class="img-responsive" src="<?=$this->productImage($product);?>" width="620" alt="">
                     </a>
-
+                    <?php endif;?>
                     <p class="fsize11 margin-top30">
                         <?=$product->getSku();?>&nbsp;
                         <?=$product->getShortDescription();?>
@@ -53,6 +54,7 @@
                 <?php endif; ?>
 
                 <!-- see the bottom of the page for the script -->
+                <?php if ($product->getShowImage()):?>
                 <section class="product-view-colors">
                 <?php foreach($product->getProductImage() as $image): ?>
                     <a data-color="white" data-stock="yes" data-src="<?=$this->productImage($image);?>" class="" href="#">
@@ -60,6 +62,7 @@
                     </a>
                 <?php endforeach; ?>
                 </section>
+                <?php endif;?>
 
                 <?php $form = $this->cart()->addForm($product)->setAttribute('class', 'form-inline margin-top30 nopadding clearfix'); ?>
                 

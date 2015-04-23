@@ -175,6 +175,11 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
             <div class="col-sm-6">
                 <fieldset>
                     <legend>Attributes:</legend>
+                    <div class="col-md-12 col-md-offset-4">
+                        <label>
+                            <?=$this->FormCheckbox($form->get('showImage'));?>
+                        </label>
+                    </div>
                     <div class="form-group<?php if ($form->get('productSizeId')->getMessages()) echo ' has-error'; ?>">
                         <label class="col-sm-4 control-label" for="productSizeId"><?=$form->get('productSizeId')->getLabel();?></label>
                         <div class="col-sm-8">

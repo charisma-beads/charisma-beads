@@ -22,6 +22,7 @@ class Product extends AbstractHydrator
 		$this->addStrategy('addPostage', $trueFalse);
 		$this->addStrategy('enabled', $trueFalse);
 		$this->addStrategy('discontinued', $trueFalse);
+		$this->addStrategy('showImage', $trueFalse);
 		$this->addStrategy('vatInc', $trueFalse);
 		$this->addStrategy('dateCreated',$dateTime);
 		$this->addStrategy('dateModified', $dateTime);
@@ -54,6 +55,7 @@ class Product extends AbstractHydrator
 			'enabled'				=> $this->extractValue('enabled', $object->getEnabled()),
 			'discontinued'			=> $this->extractValue('discontinued', $object->getDiscontinued()),
 		    'vatInc'                => $this->extractValue('vatInc', $object->getVatInc()),
+		    'showImage'             => $this->extractValue('showImage', $object->getShowImage()),
 			'dateCreated'			=> $this->extractValue('dateCreated', $object->getDateCreated()),
 			'dateModified'			=> $this->extractValue('dateModified', $object->getDateModified())
 		);
