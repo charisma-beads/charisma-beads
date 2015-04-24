@@ -55,6 +55,11 @@ class MetaData
     protected $addPostage;
     
     /**
+     * @var bool
+     */
+    protected $showImage;
+    
+    /**
      * @var Option
      */
     protected $option;
@@ -239,6 +244,23 @@ class MetaData
         return $this;
     }
 
+    /**
+     * @return bool $showImage
+     */
+    public function getShowImage()
+    {
+        return $this->showImage;
+    }
+    
+    /**
+     * @param bool $showImage
+     * @return $this
+     */
+    public function setShowImage($showImage)
+    {
+        $this->showImage = (bool) $showImage;
+        return $this;
+    }
     /**
      * @return Option
      */

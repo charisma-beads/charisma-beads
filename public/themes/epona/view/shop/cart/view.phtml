@@ -31,7 +31,7 @@
         <?php foreach ($this->cart()->getCart() as $item): ?>
         <!-- cart item -->
         <div class="item">
-            <?php if ($item->getShowImage()):?>
+            <?php if ($item->getMetadata()->getShowImage()):?>
             <div class="cart_img">
                 <img src="<?=$this->productImage($item->getMetadata()->getImage());?>" alt="" width="60">
             </div>

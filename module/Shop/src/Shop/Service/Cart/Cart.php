@@ -289,6 +289,7 @@ class Cart extends AbstractMapperService implements InitializableInterface
             ->setVatInc($product->getVatInc())
             ->setAddPostage($product->getAddPostage())
             ->setPostUnit($product->getPostUnit()->getPostUnit())
+            ->setShowImage($product->getShowImage())
             ->setImage($product->getDefaultImage());
         
         if ($optionId) {
