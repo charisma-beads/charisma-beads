@@ -7,3 +7,5 @@ cd ../
 git stash
 git stash drop
 git pull
+
+php5 ./data/upgrade/upgrade-all.php
