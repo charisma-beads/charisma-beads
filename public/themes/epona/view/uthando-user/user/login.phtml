@@ -62,7 +62,10 @@ $registerForm = (null == $this->registerForm) ? $this->formManager('UthandoUserR
                 </section>
 
                 <section>
-                    <label class="checkbox"><?=$this->formCheckbox($loginForm->get('rememberme'));?><i></i>Keep me logged in</label>
+                    <label class="checkbox">
+                        <?=$this->formCheckbox($loginForm->get('rememberme')->setOption('disable-twb', true));?>
+                        <i></i>Keep me logged in
+                    </label>
                 </section>
 
             </fieldset>
