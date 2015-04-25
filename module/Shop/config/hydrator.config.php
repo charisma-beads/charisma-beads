@@ -2,6 +2,8 @@
 
 return [
     'invokables' => [
+        'ShopAdvert'            => 'Shop\Hydrator\Advert\Advert',
+        'ShopAdvertHit'         => 'Shop\Hydrator\Advert\Hit',
         'ShopCart'              => 'Shop\Hydrator\Cart\Cart',
         'ShopCartItem'          => 'Shop\Hydrator\Cart\Item',
         'ShopCountry'           => 'Shop\Hydrator\Country\Country',

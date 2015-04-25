@@ -2,6 +2,7 @@
 
 return [
     'invokables' => [
+        'ShopAdvert'            => 'Shop\Form\Advert',
         'ShopCartAdd'           => 'Shop\Form\Cart\Add',
         'ShopCatalogSearch'     => 'Shop\Form\Catalog\Search',
         'ShopCountry'           => 'Shop\Form\Country\Country',
@@ -35,6 +36,7 @@ return [
         'ShopPaypalFieldSet'    => 'Shop\Form\Settings\PaypalFieldSet',
         'ShopCartCookieFieldSet'=> 'Shop\Form\Settings\CartCookieFieldSet',
 
+        'AdvertList'            => 'Shop\Form\Element\AdvertList',
         'CountryList'           => 'Shop\Form\Element\CountryList',
         'CountryProvinceList'   => 'Shop\Form\Element\CountryProvinceList',
         'CustomerAddressList'   => 'Shop\Form\Element\CustomerAddressList',

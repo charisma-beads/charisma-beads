@@ -12,7 +12,8 @@
         <tbody>
         <?php /* @var $row \Shop\Model\Customer\Customer */ ?>
         <?php foreach($this->models as $row): ?>
-            <tr>
+            <?php $class = ($row->getUser()->getActive()) ? '' : 'danger';?>
+            <tr class="<?=$class;?>">
                 <td>
                     <a href="<?=$this->url('admin/shop/customer/edit', [
                         'id' => $row->getCustomerId(),

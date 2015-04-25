@@ -2,6 +2,8 @@
 
 return [
     'invokables' => [
+        'ShopAdvert'            => 'Shop\Model\Advert\Advert',
+        'ShopAdvertHit'         => 'Shop\Model\Advert\Hit',
         'ShopCart'              => 'Shop\Model\Cart\Cart',
         'ShopCartItem'          => 'Shop\Model\Cart\Item',
         'ShopCountry'           => 'Shop\Model\Country\Country',

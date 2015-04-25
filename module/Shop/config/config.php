@@ -35,6 +35,7 @@ return [
                     'privileges' => [
                         'allow' => [
                             'controllers' => [
+                                'Shop\Controller\Advert' => ['action' => 'all'],
                                 'Shop\Controller\Country' => ['action' => 'all'],
                                 'Shop\Controller\Country\Province' => ['action' => 'all'],
                                 'Shop\Controller\Customer' => ['action' => 'all'],
@@ -60,6 +61,7 @@ return [
                 ],
             ],
             'resources' => [
+                'Shop\Controller\Advert',
                 'Shop\Controller\Cart',
                 'Shop\Controller\Catalog',
                 'Shop\Controller\Checkout',

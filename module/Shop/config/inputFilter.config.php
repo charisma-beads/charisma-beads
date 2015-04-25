@@ -5,6 +5,7 @@ return [
         'ShopCatalogSearch'     => true,
     ],
     'invokables' => [
+        'ShopAdvert'            => 'Shop\InputFilter\Advert',
         'ShopCartAdd'           => 'Shop|InputFilter\Cart\Add',
         'ShopCatalogSearch'     => 'Shop\InputFilter\Catalog\Search',
         'ShopCountry'           => 'Shop\InputFilter\Country\Country',

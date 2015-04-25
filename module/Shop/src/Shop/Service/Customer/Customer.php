@@ -209,6 +209,10 @@ class Customer extends AbstractRelationalMapperService
         $mapper = $this->getMapper();
 
         $customers = $mapper->getCustomersByDate($startDate, $endDate);
+        
+        foreach($customers as $customer) {
+            $this->populate($customer, true);
+        }
 
         return $customers;
     }

@@ -2,6 +2,8 @@
 
 return [
     'invokables' => [
+        'ShopAdvert'            => 'Shop\Mapper\Advert\Advert',
+        'ShopAdvertHit'         => 'Shop\Mapper\Advert\Hit',
         'ShopCart'              => 'Shop\Mapper\Cart\Cart',
         'ShopCartItem'          => 'Shop\Mapper\Cart\Item',
         'ShopCountry'           => 'Shop\Mapper\Country\Country',
