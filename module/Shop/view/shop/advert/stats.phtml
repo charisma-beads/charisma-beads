@@ -34,13 +34,27 @@
 	font-size: 10px;
 	line-height: 1em;
 }
+
+.advert-container {
+	position : relative;
+}
+
+#hover {
+	position : absolute;
+	right: 5px;
+	bottom: 15px;
+	background-color: yellow;
+}
+
 </style>
 
 <script src="<?=$this->themePath('/assets/js/flot/jquery.flot.js');?>"></script>
-<script src="<?=$this->themePath('/assets/js/flot/jquery.flot.categories.js');?>"></script>
+<script src="<?=$this->themePath('/assets/js/flot/jquery.flot.pie.js');?>"></script>
+<script src="<?=$this->themePath('/assets/js/flot/jquery.flot.resize.js');?>"></script>
 
 <div class="advert-container">
 	<div id="placeholder" class="advert-placeholder"></div>
+	<div id="hover" class="text-right"></div>
 </div>
 
 <div id="footer"></div>
@@ -51,18 +65,42 @@
 
 		var data = <?=$this->stats;?>;
 
-		$.plot("#placeholder", [ data ], {
+		function suffixFormatter(val, axis) {
+		    return val.toFixed(axis.tickDecimals) + "%";
+		}
+
+		var placeholder = $("#placeholder");
+
+		$.plot(placeholder, data, {
 			series: {
-				bars: {
-					show: true,
-					barWidth: 0.6,
-					align: "center"
-				}
-			},
-			xaxis: {
-				mode: "categories",
-				tickLength: 0
+		        pie: {
+		            innerRadius: 0.5,
+		            show: true
+		        }
+		    },
+		    grid: {
+		        hoverable: true,
+		        clickable: true
+		    }
+		});
+
+		placeholder.bind("plothover", function(event, pos, obj) {
+
+			if (!obj) {
+				return;
 			}
+			
+			var percent = parseFloat(obj.series.percent).toFixed(2);
+			$("#hover").html("<span style='font-weight:bold; color:" + obj.series.color + "'>" + obj.series.label + " (" + percent + "%)</span>");
+		});
+
+		placeholder.bind("plotclick", function(event, pos, obj) {
+		    
+			if (!obj) {
+				return;
+			}
+			var percent = parseFloat(obj.series.percent).toFixed(2);
+			$("#hover").html("<span style='font-weight:bold; color:" + obj.series.color + "'>" + obj.series.label + " (" + percent + "%)</span>");
 		});
 
 		// Add the Flot version string to the footer
