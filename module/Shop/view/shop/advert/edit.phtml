@@ -1,0 +1,7 @@
+<?php $this->headTitle('Edit Advert') ?>
+
+<?=$this->partial('shop/advert/advert-form', [
+	'form' => $this->form,
+	'formAction' => 'edit',
+	'advertId' => $this->model->getAdvertId()
+]); ?>

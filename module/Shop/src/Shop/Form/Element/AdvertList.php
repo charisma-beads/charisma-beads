@@ -9,10 +9,12 @@ class AdvertList extends Select implements ServiceLocatorAwareInterface
 {
     use ServiceLocatorAwareTrait;
     
-protected $emptyOption = '---Please select an option---';
+    protected $emptyOption = 'Where did you hear about us (please select an option)';
     
     public function init()
     {
+        $this->setName('advertId');
+        
         $adverts = $this->getServiceLocator()
             ->getServiceLocator()
             ->get('UthandoServiceManager')
@@ -27,5 +29,15 @@ protected $emptyOption = '---Please select an option---';
     	}
         
         $this->setValueOptions($advertOptions);
+    }
+    
+    public function getInputSpecification()
+    {
+        $spec = parent::getInputSpecification();
+        
+        $spec['filters'][] = ['name' => 'StripTags'];
+        $spec['filters'][] = ['name' => 'StringTrim'];
+        
+        return $spec;
     }
 }

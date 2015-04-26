@@ -367,6 +367,48 @@ return [
                         ],
                         'may_terminate' => true,
                         'child_routes' => [
+                            'advert' => [
+                                'type' => 'Segment',
+                                'options' => [
+                                    'route' => '/advert',
+                                    'defaults' => [
+                                        'controller' => 'Advert',
+                                        'action' => 'index',
+                                        'force-ssl' => 'ssl'
+                                    ]
+                                ],
+                                'may_terminate' => true,
+                                'child_routes' => [
+                                    'edit' => [
+                                        'type' => 'Segment',
+                                        'options' => [
+                                            'route' => '/[:action[/id/[:id]]]',
+                                            'constraints' => [
+                                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                                'id' => '\d+'
+                                            ],
+                                            'defaults' => [
+                                                'action' => 'edit',
+                                                'force-ssl' => 'ssl'
+                                            ]
+                                        ]
+                                    ],
+                                    'page' => [
+                                        'type' => 'Segment',
+                                        'options' => [
+                                            'route' => '/page/[:page]',
+                                            'constraints' => [
+                                                'page' => '\d+'
+                                            ],
+                                            'defaults' => [
+                                                'action' => 'list',
+                                                'page' => 1,
+                                                'force-ssl' => 'ssl'
+                                            ]
+                                        ]
+                                    ]
+                                ]
+                            ],
                             'product' => [
                                 'type' => 'Segment',
                                 'options' => [
@@ -1342,6 +1384,26 @@ return [
                             ],
                         ],
                     ],
+                    'advert' => [
+                        'label' => 'Adverts',
+                        'action' => 'index',
+                        'route' => 'admin/shop/advert',
+                        'resource' => 'menu:admin',
+                        'pages' => [
+                            'list' => [
+                                'label' => 'List All Adverts',
+                                'action' => 'index',
+                                'route' => 'admin/shop/advert',
+                                'resource' => 'menu:admin'
+                            ],
+                            'add' => [
+                                'label' => 'Add New Advert',
+                                'action' => 'add',
+                                'route' => 'admin/shop/advert/edit',
+                                'resource' => 'menu:admin'
+                            ]
+                        ]
+                    ],
                     'shop-settings' => [
                         'label' => 'Settings',
                         'action' => 'index',
@@ -1361,7 +1423,7 @@ return [
             'shop/order/details'   => __DIR__ . '/../view/shop/order/order-details.phtml'
         ],
         'template_path_stack' => [
-            'charisma-shop' => __DIR__ . '/../view'
+            'shop' => __DIR__ . '/../view'
         ],
     ],
 ];

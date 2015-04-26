@@ -29,6 +29,7 @@ class Advert extends Form
                 'checked_value' => '1',
                 'unchecked_value' => '0',
                 'required' => false,
+                'column-size' => 'sm-8 col-sm-offset-4',
             ],
         ]);
     }

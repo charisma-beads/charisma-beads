@@ -11,6 +11,7 @@
 <?php
 $loginForm = (null == $this->loginForm) ? $this->formManager('UthandoUserLogin') : $this->loginForm;
 $registerForm = (null == $this->registerForm) ? $this->formManager('UthandoUserRegister') : $this->registerForm;
+$advertList = (false == $registerForm->has('advertId')) ? $this->formManager('AdvertList') : $registerForm->get('advertId');
 ?>
 
 <div class="row">
@@ -152,14 +153,28 @@ $registerForm = (null == $this->registerForm) ? $this->formManager('UthandoUserR
                         <label class="input<?php if ($registerForm->get('lastname')->getMessages()) echo ' state-error'; ?>">
                             <?=$this->formInput($registerForm->get('lastname'));?>
                             <span class="help-block">
-                            <?=$this->formElementErrors($registerForm->get('lastname'), array(
-                                'class' => 'list-unstyled note note-error'
-                            )); ?>
-                        </span>
+                                <?=$this->formElementErrors($registerForm->get('lastname'), array(
+                                    'class' => 'list-unstyled note note-error'
+                                )); ?>
+                            </span>
                         </label>
                     </section>
                 </div>
-
+                
+                <section class="<?php if ($advertList->getMessages()) echo ' state-error'; ?>">
+                    <label class="select">
+                        <?=$this->formSelect(
+                            $advertList->setAttribute('class', 'pointer')
+                        );?>
+                        <i></i>
+                    </label>
+                    <span class="help-block">
+                        <?=$this->formElementErrors($advertList, [
+                            'class' => 'list-unstyled note note-error'
+                        ]); ?>
+                    </span>
+                </section>
+                
                 <section>
                     <label class="checkbox"><input type="checkbox" name="checkbox" checked="checked">
                         <i></i>I want to receive news and  special offers

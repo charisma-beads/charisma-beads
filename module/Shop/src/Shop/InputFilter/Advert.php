@@ -9,7 +9,6 @@ class Advert extends InputFilter
     {
         $this->add([
             'name' => 'advertId',
-            'type' => 'hidden',
             'required' => false,
             'filters' => [
                 ['name' => 'StripTags'],
@@ -22,7 +21,6 @@ class Advert extends InputFilter
         
         $this->add([
             'name' => 'advert',
-            'type' => 'text',
             'required' => true,
             'filters' => [
                 ['name' => 'StripTags'],
@@ -39,7 +37,6 @@ class Advert extends InputFilter
         
         $this->add([
             'name' => 'enabled',
-            'type' => 'checkbox',
             'required' => false,
             'filters' => [
                 ['name' => 'StripTags'],

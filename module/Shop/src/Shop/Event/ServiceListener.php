@@ -27,6 +27,14 @@ class ServiceListener implements ListenerAggregateInterface
         $this->listeners[] = $events->attach([
             'UthandoFileManager\Service\ImageUploader',
         ], ['post.upload'], [$this, 'postImageUpload']);
+        
+        $this->listeners[] = $events->attach([
+            'UthandoUser\Service\User',
+        ], ['pre.add'], [$this, 'addAdvertList']);
+        
+        $this->listeners[] = $events->attach([
+            'UthandoUser\Service\User',
+        ], ['post.add'], [$this, 'addAdvertHit']);
     }
 
     public function preImageUpload(Event $e)
@@ -64,6 +72,53 @@ class ServiceListener implements ListenerAggregateInterface
         ];
 
         $service->add($post);
+    }
+    
+    public function addAdvertList(Event $e)
+    {
+        /* @var $advertList \Shop\Form\Element\AdvertList */
+        $advertList = $e->getTarget()
+            ->getServiceLocator()
+            ->get('FormElementManager')
+            ->get('AdvertList');
+        
+        $post = $e->getParam('post');
+        
+        /* @var $form \UthandoUser\Form\Register */
+        $form = $e->getParam('form');
+        
+        if (isset($post['advertId'])) {
+            $advertList->setValue($post['advertId']);
+        }
+        
+        $form->add($advertList);
+        
+        $inputFilter = $form->getInputFilter();
+        $inputFilter->add($advertList->getInputSpecification());
+        
+        $validationGroup = $form->getValidationGroup();
+        $validationGroup[] = 'advertId';
+        $form->setValidationGroup($validationGroup);
+        
+        $e->setParam('form', $form);
+    }
+    
+    public function addAdvertHit(Event $e)
+    {
+        $post = $e->getParam('post');
+        $userId = $e->getParam('saved');
+        
+        $sl = $e->getTarget()->getServiceLocator();
+        /* @var $service \Shop\Service\Advert\Hit */
+        $service = $sl->get('ShopAdvertHit');
+        
+        /* @var $model \Shop\Model\Advert\Hit */
+        $model = $service->getModel();
+        $model->setAdvertId($post['advertId'])
+            ->setUserId($userId);
+        
+        $service->save($model);
+        
     }
 
     public function addAction(Event $e)
