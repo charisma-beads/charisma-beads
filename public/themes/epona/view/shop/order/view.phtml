@@ -98,11 +98,13 @@
             <?php foreach ($this->order->getOrderlines() as $item): ?>
             <!-- cart item -->
             <div class="item">
-                <?php if ($item->getShowImage()):?>
+                
                 <div class="cart_img">
+                    <?php if ($item->getMetadata()->getShowImage()):?>
                     <img src="<?=$this->productImage($item->getMetadata()->getImage());?>" alt="" width="60" />
+                    <?php endif;?>
                 </div>
-                <?php endif;?>
+                
                 <div class="product_name">
                     <?=$item->getMetadata()->getSku();?> /
                     <?=$item->getMetadata()->getCategory();?> /
