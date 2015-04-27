@@ -11,5 +11,6 @@
 .project
 deployment.properties
 deployment.xml
+composer.lock
 *.local.php
 !do_not_remove
