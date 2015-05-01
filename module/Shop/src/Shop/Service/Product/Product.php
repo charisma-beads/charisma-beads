@@ -203,12 +203,11 @@ class Product extends AbstractRelationalMapperService
 	{
 	    $this->removeCacheItem($product->getProductId());
 	    
-		$enabled = (true === $product->getEnabled()) ? 0 : 1;
+		$enabled = (true === $product->getEnabled()) ? false : true;
 		
-		$form  = $this->getForm($product, ['enabled' => $enabled], true, true);
-		$form->setValidationGroup('enabled');
-	
-		return parent::edit($product, [], $form);
+		$product->setEnabled($enabled);
+		
+		return parent::save($product);
 	}
 	
 	public function setProductIdent(Event $e)
