@@ -18,5 +18,6 @@ return [
         'MonthYearSelect'       => 'Shop\View\FormMonthSelect',
         'ProductTableRowState'  => 'Shop\View\ProductTableRowState',
         'ShopAlert'             => 'Shop\View\Alert',
+        'ShopOption'            => 'Shop\View\ShopOption',
     ],
 ];

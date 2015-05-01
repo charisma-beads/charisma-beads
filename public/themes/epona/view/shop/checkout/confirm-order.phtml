@@ -34,6 +34,7 @@
                 </span>
             </section>
             
+            <?php if ($this->shopOption('collectInstore')):?>
             <section>
                 <label class="checkbox">
 				    <?=$this->formCheckBox($this->form->get('collect_instore')->setOption('disable-twb', true));?><i></i>
@@ -42,8 +43,8 @@
 			    <span class="help-block">
 			        <span class="text-info">When collecting, postage will be removed from total.</span>
 		        </span>
-				    
 		    </section>
+		    <?php endif;?>
         </div>
         
         <div class="col-md-6">
