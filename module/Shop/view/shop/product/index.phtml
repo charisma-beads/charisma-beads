@@ -52,4 +52,8 @@ $discontinued = new Element\Checkbox('discontinued', [
 		   $('#table-product').dataGrid('doSearch');
 	});
 
+	$('select[name=productCategoryId]').on('change', function(){
+		   $('#table-product').dataGrid('doSearch');
+	});
+
 </script>
