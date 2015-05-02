@@ -1,4 +1,12 @@
+<?php 
+use Zend\Form\Element; 
 
+$discontinued = new Element\Checkbox('discontinued', [
+    'checked_value' => '1',
+    'label' => 'discontinued',
+]);
+
+?>
 
 <?=$this->partial('uthando-admin/partial/search', [
 	'name'			=> 'product',
@@ -7,7 +15,17 @@
 		//'Category'	=> 'category',
 	    'Category List' => $this->formManager('ProductCategoryList')->setName('productCategoryId'),
 	],
-	'params' 		=> $this->params,
+    'secondRowInputs' => [
+        new Element\Checkbox('discontinued', [
+            'checked_value' => '1',
+            'label' => 'discontinued',
+        ]),
+        new Element\Checkbox('disabled', [
+            'checked_value' => '1',
+            'label' => 'disabled',
+        ]),
+    ],
+	'params'   => $this->params,
 ]);?>
 
 <div id="table-product">

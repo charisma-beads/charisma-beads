@@ -66,6 +66,16 @@ class Product extends AbstractDbMapper
 	        unset($search[1]);
 	    }
 	    
+	    if (isset($search[2])) {
+	        $discontinued = $search[2]['searchString'];;
+	        unset($search[2]);
+	    }
+	    
+        if (isset($search[3])) {
+	        $disabled = $search[3]['searchString'];
+	        unset($search[3]);
+	    }
+	    
 		$select = $this->getSelect();
 		$select->join(
             'productCategory',
@@ -88,6 +98,14 @@ class Product extends AbstractDbMapper
 		
 		if ($productCategoryId) {
 		    $select->where->in('product.productCategoryId', $productCategoryId);
+		}
+		
+		if ($disabled) {
+		    $select->where(['product.enabled' => 0]);
+		}
+		
+		if ($discontinued) {
+		    $select->where(['product.discontinued' => 1]);
 		}
 		
 		$select = $this->setFilter($select);
