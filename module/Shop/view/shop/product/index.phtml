@@ -44,4 +44,12 @@ $discontinued = new Element\Checkbox('discontinued', [
 	    columnSort: true
 	});
 
+	$('input[name=discontinued]').on('click', function(){
+		   $('#table-product').dataGrid('doSearch');
+	});
+
+	$('input[name=disabled]').on('click', function(){
+		   $('#table-product').dataGrid('doSearch');
+	});
+
 </script>
