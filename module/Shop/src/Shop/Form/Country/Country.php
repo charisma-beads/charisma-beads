@@ -14,6 +14,14 @@ class Country extends Form
 		]);
 		
 		$this->add([
+		    'name'      => 'redirectToEdit',
+		    'type'      => 'hidden',
+		    'attributes'   => [
+		        'value' => true,
+		    ],
+		]);
+		
+		$this->add([
         	'name'			=> 'country',
         	'type'			=> 'text',
         	'attributes'	=> [
