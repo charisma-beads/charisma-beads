@@ -18,14 +18,6 @@ class Report extends AbstractActionController
         return $viewModel;
     }
     
-    public function outOfStockListAction()
-    {
-        $jsonModel = new JsonModel(
-        );
-        
-        return $jsonModel;
-    }
-    
     public function productListAction()
     {
         /* @var $service \Shop\Service\Report */

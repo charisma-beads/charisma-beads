@@ -77,7 +77,14 @@ $minDepth = 0;
                el.modal('hide');
                bootbox.dialog({
             	   title: "Product List Download",
-            	   message: '<a href="' + response.url + '" target="_blank">' + response.report + '</a>',
+            	   message: '<h5>Please click on link below to download your report</h5>'
+                	   + '<a href="' + response.url + '" target="_blank">' + response.report + '</a>',
+            	   buttons: {
+                       main: {
+                           label: "Close",
+                           className: "btn-default"
+                       }
+                   }
         	   });
            },
            error: function (response) {
