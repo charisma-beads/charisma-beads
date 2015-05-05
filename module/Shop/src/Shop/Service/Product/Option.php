@@ -33,16 +33,23 @@ class Option extends AbstractRelationalMapperService
     public function getOptionsByProductId($id)
     {
         $id = (int) $id;
+        
+        $ProductOptions = $this->getCacheItem($id.'-productOptions');
 
-        /* @var $mapper \Shop\Mapper\Product\Option */
-        $mapper = $this->getMapper();
-        $options = $mapper->getOptionsByProductId($id);
-
-        foreach ($options as $row) {
-            $this->populate($row, ['postUnit']);
+        if (null === $ProductOptions) {
+            /* @var $mapper \Shop\Mapper\Product\Option */
+            $mapper = $this->getMapper();
+            $options = $mapper->getOptionsByProductId($id);
+            
+            $ProductOptions = [];
+            
+            foreach ($options as $row) {
+                $ProductOptions[] = $this->populate($row, ['postUnit']);
+            }
+            
+            $this->setCacheItem($id.'-productOptions', $ProductOptions);
         }
 
-
-        return $options;
+        return $ProductOptions;
     }
 } 

@@ -34,7 +34,7 @@
                 </span>
             </section>
             
-            <?php if ($this->shopOption('collectInstore')):?>
+            <?php if ($this->checkoutOption('collectInstore')):?>
             <section>
                 <label class="checkbox">
 				    <?=$this->formCheckBox($this->form->get('collect_instore')->setOption('disable-twb', true));?><i></i>

@@ -3,14 +3,14 @@ namespace Shop\View;
 
 use UthandoCommon\View\AbstractViewHelper;
 use Shop\ShopException;
-use Shop\Options\CheckoutOptions;
+use Shop\Options\ShopOptions;
 
 class ShopOption extends AbstractViewHelper
 {
     /**
-     * @var CheckoutOptions
+     * @var ShopOptions
      */
-    protected $checkoutOptions;
+    protected $shopOptions;
 
     /**
      * @param null $key
@@ -18,19 +18,19 @@ class ShopOption extends AbstractViewHelper
      */
     public function __invoke($key=null)
     {
-        if (!$this->checkoutOptions instanceof CheckoutOptions) {
+        if (!$this->shopOptions instanceof ShopOptions) {
             $service = $this->getServiceLocator()
                 ->getServiceLocator()
-                ->get('Shop\Options\Checkout');
-            $this->checkoutOptions = $service;
+                ->get('Shop\Options\Shop');
+            $this->shopOptions = $service;
         }
         
-        if (is_string($key) && isset($this->checkoutOptions->$key)) {
-            return $this->checkoutOptions->$key;
+        if (is_string($key) && isset($this->shopOptions->$key)) {
+            return $this->shopOptions->$key;
         } else {
             throw new ShopException('option ' . $key . ' does not exist.');
         }
 
-        return $this->checkoutOptions;
+        return $this->shopOptions;
     }
 }

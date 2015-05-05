@@ -2,6 +2,7 @@
 
 return [
     'invokables' => [
+        'Shop\Service\Report'                   => 'Shop\Service\Report',
         'Shop\Service\StockControl'             => 'Shop\Service\StockControl',
     ],
     'factories' => [

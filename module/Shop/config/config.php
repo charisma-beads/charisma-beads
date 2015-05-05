@@ -54,6 +54,7 @@ return [
                                 'Shop\Controller\Shop' => ['action' => 'all'],
                                 'Shop\Controller\Tax\Code' => ['action' => 'all'],
                                 'Shop\Controller\Tax\Rate' => ['action' => 'all'],
+                                'Shop\Controller\Report' => ['action' => 'all'],
                                 'Shop\Controller\Settings' => ['action' => 'all'],
                             ],
                         ],
@@ -85,6 +86,7 @@ return [
                 'Shop\Controller\Shop',
                 'Shop\Controller\Tax\Code',
                 'Shop\Controller\Tax\Rate',
+                'Shop\Controller\Report',
                 'Shop\Controller\Settings',
             ],
         ],
@@ -1043,6 +1045,21 @@ return [
                                     ],
                                 ],
                             ],
+                            'report' => [
+                                'type' => 'Segment',
+                                'options' => [
+                                    'route' => '/report[/:action[/:file]]',
+                                    'constraints' => [
+                                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                    ],
+                                    'defaults' => [
+                                        'controller' => 'Report',
+                                        'action' => 'index',
+                                        'force-ssl' => 'ssl'
+                                    ]
+                                ],
+                                'may_terminate' => true,
+                            ],
                             'settings' => [
                                 'type' => 'Segment',
                                 'options' => [
@@ -1057,7 +1074,7 @@ return [
                                     ]
                                 ],
                                 'may_terminate' => true,
-                            ]
+                            ],
                         ],
                     ],
                 ],
@@ -1185,7 +1202,7 @@ return [
                                         'resource' => 'menu:admin'
                                     ]
                                 ]
-                            ]
+                            ],
                         ]
                     ],
                     'customers' => [

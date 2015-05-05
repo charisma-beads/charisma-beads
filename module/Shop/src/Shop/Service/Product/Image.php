@@ -12,7 +12,7 @@ class Image extends AbstractRelationalMapperService
     protected $serviceAlias = 'ShopProductImage';
     
     protected $tags = [
-        'image',
+        'image', 'product',
     ];
 
     /**
@@ -47,11 +47,23 @@ class Image extends AbstractRelationalMapperService
     {
         $id = (int) $id;
 
-        /* @var $mapper \Shop\Mapper\Product\Image */
-        $mapper = $this->getMapper();
-        $images = $mapper->getImagesByProductId($id);
-
-        return $images;
+        $ProductImages = $this->getCacheItem($id.'-productImages');
+        
+        if (!$ProductImages) {
+            /* @var $mapper \Shop\Mapper\Product\Image */
+            $mapper = $this->getMapper();
+            $images = $mapper->getImagesByProductId($id);
+            
+            $ProductImages = [];
+            
+            foreach ($images as $image) {
+                $ProductImages[] = $image;
+            }
+            
+            $this->setCacheItem($id.'-productImages', $ProductImages);
+        }
+        
+        return $ProductImages;
     }
     
     public function deleteImage(Event $e)

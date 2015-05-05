@@ -60,20 +60,25 @@ class Product extends AbstractDbMapper
 	public function search(array $search, $sort, $select = null)
 	{
 	    $productCategoryId = null;
+	    $discontinued = null;
+	    $disabled = null;
 	    
-	    if (isset($search[1])) {
-	        $productCategoryId = $search[1]['searchString'];
-	        unset($search[1]);
-	    }
-	    
-	    if (isset($search[2])) {
-	        $discontinued = $search[2]['searchString'];;
-	        unset($search[2]);
-	    }
-	    
-        if (isset($search[3])) {
-	        $disabled = $search[3]['searchString'];
-	        unset($search[3]);
+	    foreach ($search as $key => $value) {
+	        
+	       switch($value['columns'][0]) {
+	           case 'productCategoryId':
+	               $productCategoryId = $value['searchString'];
+	               unset($search[$key]);
+	               break;
+	           case 'discontinued':
+	               $discontinued = $value['searchString'];
+	               unset($search[$key]);
+	               break;
+	           case 'disabled':
+	               $disabled = $value['searchString'];
+	               unset($search[$key]);
+	               break;
+	       }
 	    }
 	    
 		$select = $this->getSelect();
