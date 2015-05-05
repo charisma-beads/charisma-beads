@@ -1,8 +1,29 @@
+<?php 
 
-<?php $this->headtitle('Report Options');?>
+use Zend\Form\Element;
 
-<?=$this->formRow($this->formManager('ProductCategoryList')
-    ->setName('productCategoryId')
-    ->setEmptyOption('All Categories')
-);?>
+$discontinued = new Element\Checkbox('discontinued', [
+    'checked_value' => '1',
+    'label' => 'discontinued',
+    'use_hidden_element' => false,
+]);
+$disabled = new Element\Checkbox('disabled', [
+    'checked_value' => '1',
+    'label' => 'disabled',
+    'use_hidden_element' => false,
+]);
 
+?>
+
+<form id="product-report">
+    <?=$this->formRow($this->formManager('ProductCategoryList')
+        ->setName('productCategoryId')
+        ->setEmptyOption('All Categories')
+    );?>
+    
+    <?=$this->formRow($disabled);?>
+    <?=$this->formRow($discontinued);?>
+    
+    <input type="hidden" name="sort" value="<?=$this->shopOption('productsOrderCol');?>">
+    
+</form>

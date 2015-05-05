@@ -23,8 +23,13 @@ class Report implements ServiceLocatorAwareInterface
         
         $productService         = $this->getProductService();
         $productCategoryService = $this->getProductCategoryService();
+        
+        $productService->getMapper()
+            ->setFetchEnabled(false)
+            ->setFetchDisabled(true);
+        
         $products               = $productService->search($post);
-        $filename               = ($productCategoryService->getById($post['productCategoryId'])->getCategory()) ?: 'catelogue';
+        $filename               = ($productCategoryService->getById($post['productCategoryId'])->getIdent()) ?: 'catelogue';
         $fileExtension          = '.xlsx';
         $lastRowNumber          = $products->count() + 1;
         $c                      = 2;
@@ -55,6 +60,7 @@ class Report implements ServiceLocatorAwareInterface
                 $sheet->mergeCells('A'.$c.':F'.$c);
                 
                 $previousCategory = $currentCategory;
+                $lastRowNumber++;
                 $c++;
             }
             
