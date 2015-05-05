@@ -1,0 +1,115 @@
+
+<?php 
+$pages = $this->container->findBy('label', 'Products');
+$iterator = new RecursiveIteratorIterator($pages,
+    RecursiveIteratorIterator::SELF_FIRST); 
+    
+$minDepth = 0;
+?>
+    
+<ul class="dropdown-menu">
+
+<?php foreach ($iterator as $page):?>
+    <?php $currDepth = $iterator->getDepth();?>
+    <?php if ($currDepth > $minDepth || !$this->uthandoNavigation()->accept($page)) continue; ?>
+    <li>
+        <a href="<?=$page->getHref();?>">
+            <?=$page->getLabel();?>
+        </a>
+    </li>
+<?php endforeach;?>
+    
+    <li class="divider"></li>
+    <li><a href="#" id="get-product-list-link" data-toggle="modal" data-target="#product-list-model">
+        Export Product List
+    </a></li>
+    <li><a href="#" id="get-out-of-stock-list-link" data-toggle="modal" data-target="#get-out-of-stock-model">
+        Export Out of Stock List
+    </a></li>
+
+</ul>
+
+<div id="product-list-model" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Export Product List</h4>
+            </div>
+            <div class="modal-body">
+                <i class="fa fa-spinner fa-spin"></i>&nbsp;Loading
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="get-product-list" type="button" class="btn btn-primary">Download List</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="get-out-of-stock-model" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Export Out Of Stock List</h4>
+            </div>
+            <div class="modal-body">
+                <i class="fa fa-spinner fa-spin"></i>&nbsp;Loading
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="get-out-of-stock-list" type="button" class="btn btn-primary">Download List</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $('#product-list-model, #get-out-of-stock-model').on('show.bs.modal', function () {
+        $(this).find('.modal-body').load('<?=$this->url('admin/shop/report', [
+            'action'    => 'index',
+        ]);?>');
+    });
+
+    $('#product-list-model, #get-out-of-stock-model').on('hide.bs.modal', function () {
+        $(this).find('.modal-body').html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Loading');
+        $(this).find('.modal-content').loadingOverlay('remove');
+    });
+
+    $('#get-product-list').on('click', function () {
+        var url = '<?=$this->url('admin/shop/report', [
+            'action'    => 'product-list',
+        ]);?>';
+        
+        var el = $(this).parent().parent().parent().parent();
+        var cat = el.find('select').val();
+        
+        $.ajax({
+           url: url,
+           data:  {
+               productCategoryId : cat,
+               sort : '<?=$this->shopOption('productsOrderCol');?>'
+           },
+           type: 'POST',
+           beforeSend: function() {
+               el.find('.modal-content').loadingOverlay({
+            	   loadingText: 'Please wait while I prepare your report'
+               });
+           },
+           success: function (response) {
+               el.modal('hide');
+               bootbox.dialog({
+            	   title: "Product List Download",
+            	   message: '<a href="' + response.url + '" target="_blank">' + response.report + '</a>',
+        	   });
+           },
+           error: function (response) {
+               admin.addAlert(response.error, 'danger');
+               el.modal('hide');
+           }
+        });
+    });
+
+</script>
