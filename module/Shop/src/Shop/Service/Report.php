@@ -29,7 +29,7 @@ class Report implements ServiceLocatorAwareInterface
             ->setFetchDisabled(true);
         
         $products               = $productService->search($post);
-        $filename               = ($productCategoryService->getById($post['productCategoryId'])->getIdent()) ?: 'catelogue';
+        $filename               = ($productCategoryService->getById($post['productCategoryId'])->getIdent()) ?: 'all-products';
         $fileExtension          = '.xlsx';
         $lastRowNumber          = $products->count() + 1;
         $c                      = 2;

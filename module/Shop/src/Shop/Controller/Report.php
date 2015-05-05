@@ -63,5 +63,9 @@ class Report extends AbstractActionController
             
             return $response;
         }
+        
+        return [
+            'file' => $file,
+        ];
     }
 }
