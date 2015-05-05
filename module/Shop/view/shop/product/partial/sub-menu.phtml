@@ -56,6 +56,8 @@ $minDepth = 0;
         $(this).find('.modal-content').loadingOverlay('remove');
     });
 
+    var errorCount = 0;
+
     $('#get-product-list').on('click', function () {
         var url = '<?=$this->url('admin/shop/report', [
             'action'    => 'product-list',
@@ -63,7 +65,7 @@ $minDepth = 0;
         
         var el = $(this).parent().parent().parent().parent();
         var cat = el.find('select').val();
-        
+
         $.ajax({
            url: url,
            data:  $('#product-report').serialize(),
@@ -88,9 +90,16 @@ $minDepth = 0;
         	   });
            },
            error: function (response) {
-               admin.addAlert(response.error, 'danger');
-               el.modal('hide');
-           }
+               if (errorCount < 3) {
+            	   admin.addAlert('An error occured, trying again', 'info');
+            	   $('#get-product-list').trigger('click');
+            	   errorCount++;
+               } else {
+            	   admin.addAlert(response.error, 'danger');
+            	   el.modal('hide');
+            	   errorCount = 0;
+               }
+           },
         });
     });
 
