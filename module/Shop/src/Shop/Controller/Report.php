@@ -24,14 +24,24 @@ class Report extends AbstractActionController
         $service = $this->getService('Shop\Service\Report');
         
         $post = $this->params()->fromPost();
-        $report = $service->createProductList($post);
+
+        $jsonModel = new JsonModel();
+
+        try {
+            $report = $service->createProductList($post);
+        } catch (\Exception $e) {
+            return $jsonModel->setVariables([
+                'status' => 'error',
+                'message' => $e->getMessage(),
+            ]);
+        }
         
         $fileLink = $this->url()->fromRoute('admin/shop/report', [
             'action'    => 'download-report',
             'file'      => $report, 
         ]);
         
-        $jsonModel = new JsonModel([
+        $jsonModel->setVariables([
             'url' => $fileLink,
             'report' => $report,
             'status' => 'success',

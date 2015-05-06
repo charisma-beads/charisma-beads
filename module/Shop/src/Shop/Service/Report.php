@@ -4,14 +4,19 @@ namespace Shop\Service;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
 
-ini_set('memory_limit', '512M');
-
 class Report implements ServiceLocatorAwareInterface
 {
     use ServiceLocatorAwareTrait;
     
     public function createProductList($post)
     {
+        $memoryLimit = $this->getShopOptions()
+            ->getReportsMemoryLimit();
+
+        if ($memoryLimit) {
+            ini_set('memory_limit', $memoryLimit);
+        }
+
         $objPHPExcel = new \PHPExcel();
         
         $arrayData = [
@@ -33,6 +38,12 @@ class Report implements ServiceLocatorAwareInterface
         
         /* @var $product \Shop\Model\Product\Product */
         foreach ($products as $key => $product) {
+
+            if((str_replace('M','',ini_get('memory_limit'))*1048576) - memory_get_usage() < 1048576*16){ // 16 MB headroom
+                throw new \Exception('Almost out of memory, ' . (memory_get_usage(true) / 1024 / 1024) . ' MB used.
+                    Try increasing the "reports memory limit" in the shop settings.
+                    Current limit is: ' . ini_get('memory_limit') . '.' );
+            }
             
             $sheet = $objPHPExcel->getActiveSheet();
             
@@ -112,6 +123,17 @@ class Report implements ServiceLocatorAwareInterface
         $objWriter->save('./data/'.$filename.$fileExtension);
         
         return $filename.$fileExtension;
+    }
+
+    /**
+     * @return \Shop\Options\ShopOptions
+     */
+    public function getShopOptions()
+    {
+        $sl = $this->getServiceLocator();
+        $service = $sl->get('Shop/Options/Shop');
+
+        return $service;
     }
     
     /**

@@ -77,10 +77,16 @@ $minDepth = 0;
            },
            success: function (response) {
                el.modal('hide');
+               if (response.status == 'success') {
+                   message = '<h5>Please click on link below to download your report</h5>'
+                   + '<a href="' + response.url + '" target="_blank">' + response.report + '</a>';
+               } else {
+                   message = '<h5 class="text-danger">Error!</h5><span class="text-danger">' + response.message + '</span>';
+               }
+
                bootbox.dialog({
             	   title: "Product List Download",
-            	   message: '<h5>Please click on link below to download your report</h5>'
-                	   + '<a href="' + response.url + '" target="_blank">' + response.report + '</a>',
+            	   message: message,
             	   buttons: {
                        main: {
                            label: "Close",

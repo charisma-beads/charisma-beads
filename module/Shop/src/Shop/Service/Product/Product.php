@@ -10,9 +10,7 @@ class Product extends AbstractRelationalMapperService
     protected $serviceAlias = 'ShopProduct';
     
     protected $tags = [
-        'product', 'image', 'category',
-        'group', 'size', 'tax-code',
-        'post-unit', 'option',
+        'image', 'option',
     ];
 
     protected $referenceMap = [

@@ -51,6 +51,11 @@ class ShopOptions extends AbstractOptions
     protected $autoIncrementCart;
 
     /**
+     * @var string
+     */
+    protected $reportsMemoryLimit;
+
+    /**
      * @return bool
      */
 	public function getAlert()
@@ -212,4 +217,22 @@ class ShopOptions extends AbstractOptions
         return $this;
     }
 
+    /**
+     * @return string
+     */
+    public function getReportsMemoryLimit()
+    {
+        return $this->reportsMemoryLimit;
+    }
+
+    /**
+     * @param string $reportsMemoryLimit
+     * @return $this
+     */
+    public function setReportsMemoryLimit($reportsMemoryLimit)
+    {
+        $this->reportsMemoryLimit = $reportsMemoryLimit;
+
+        return $this;
+    }
 }

@@ -29,7 +29,7 @@ class Category extends AbstractRelationalMapperService
     protected $serviceAlias = 'ShopProductCategory';
     
     protected $tags = [
-        'image', 'category', 'product',
+        'product', 'image', 'option',
     ];
 
     /**
