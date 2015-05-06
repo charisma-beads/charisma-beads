@@ -58,28 +58,9 @@ class Product extends AbstractDbMapper
 	}
 	
 	public function search(array $search, $sort, $select = null)
-	{
-	    $productCategoryId = null;
-	    $discontinued = null;
-	    $disabled = null;
-	    
-	    foreach ($search as $key => $value) {
-	        
-	       switch($value['columns'][0]) {
-	           case 'productCategoryId':
-	               $productCategoryId = $value['searchString'];
-	               unset($search[$key]);
-	               break;
-	           case 'discontinued':
-	               $discontinued = $value['searchString'];
-	               unset($search[$key]);
-	               break;
-	           case 'disabled':
-	               $disabled = $value['searchString'];
-	               unset($search[$key]);
-	               break;
-	       }
-	    }
+    {
+	    $discontinued = 0;
+	    $enabled = 1;
 	    
 		$select = $this->getSelect();
 		$select->join(
@@ -100,20 +81,29 @@ class Product extends AbstractDbMapper
             array(),
             Select::JOIN_LEFT
         );
-		
-		if ($productCategoryId) {
-		    $select->where->in('product.productCategoryId', $productCategoryId);
-		}
-		
-		if ($disabled) {
-		    $select->where(['product.enabled' => 0]);
-		}
-		
-		if ($discontinued) {
-		    $select->where(['product.discontinued' => 1]);
-		}
-		
-		$select = $this->setFilter($select);
+
+        foreach ($search as $key => $value) {
+
+            switch ($value['columns'][0]) {
+                case 'productCategoryId':
+                    if ($value['searchString']) {
+                        $select->where->in('product.productCategoryId', (array)$value['searchString']);
+                    }
+                    unset($search[$key]);
+                    break;
+                case 'discontinued':
+                    $select->where->equalTo('product.discontinued', (int)$value['searchString']);;
+                    unset($search[$key]);
+                    break;
+                case 'disabled':
+                    $enabled = ($value['searchString']) ? 0 : 1;
+                    $select->where->equalTo('product.enabled', $enabled);
+                    unset($search[$key]);
+                    break;
+            }
+        }
+
+        \FB::info($this->getSqlString($select));
 		
 		return parent::search($search, $sort, $select);
 	}

@@ -17,22 +17,6 @@ class Product extends AbstractCrudController
 	{
 		return new ViewModel();
 	}
-	
-	public function indexAction()
-	{
-	    $this->getService()->getMapper()
-	       ->setFetchEnabled(false)
-	       ->setFetchDisabled(true);
-	    return parent::indexAction();
-	}
-	
-	public function listAction()
-	{
-	    $this->getService()->getMapper()
-	       ->setFetchEnabled(false)
-	       ->setFetchDisabled(true);
-	    return parent::listAction();
-	}
 
 	public function duplicateAction()
 	{

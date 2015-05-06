@@ -24,10 +24,6 @@ class Report implements ServiceLocatorAwareInterface
         $productService         = $this->getProductService();
         $productCategoryService = $this->getProductCategoryService();
         
-        $productService->getMapper()
-            ->setFetchEnabled(false)
-            ->setFetchDisabled(true);
-        
         $products               = $productService->search($post);
         $filename               = ($productCategoryService->getById($post['productCategoryId'])->getIdent()) ?: 'all-products';
         $fileExtension          = '.xlsx';
