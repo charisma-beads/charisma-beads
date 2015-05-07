@@ -3,6 +3,7 @@
 use Zend\InputFilter\InputFilter;
 use Zend\Validator\Hostname as HostnameValidator;
 use Zend\Db\Adapter\Adapter;
+use Zend\Validator\Identical;
 use Zend\Validator\NotEmpty;
 
 class CustomerRegisterInputFilter extends InputFilter
@@ -140,7 +141,7 @@ class CustomerRegisterInputFilter extends InputFilter
 			'filters' => array(
 				array('name' => 'StringTrim'),
 				array('name' => 'StripTags'),
-				array('name' => 'StringToLower'),
+				//array('name' => 'StringToLower'),
 			),
 			'validators' => array(
 				array('name' => 'NotEmpty', 'options' => array(
@@ -174,11 +175,14 @@ class CustomerRegisterInputFilter extends InputFilter
 			'filters' => array(
 				array('name' => 'StringTrim'),
 				array('name' => 'StripTags'),
-				array('name' => 'StringToLower'),
+				//array('name' => 'StringToLower'),
 			),
 			'validators' => array(
 				array('name' => 'Identical', 'options' => array(
 					'token' => 'email',
+                    'messages' => array(
+                        Identical::NOT_SAME => "Your email does not match your confirm email",
+                    ),
 				)),
 			),
 		));
