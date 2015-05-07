@@ -134,10 +134,10 @@ if (isset($_SESSION['cid']) && $_GET['stage'] == 2 && $cart->getNumCartItems() !
 					mysql_query ("UPDATE products SET hits=$p_hits WHERE product_id={$row['product_id']}");
 				}
 
-				//$sendMail = new SendMail($sendMailconfig);
+				$sendMail = new SendMail($sendMailconfig);
 
 				// mail invoice to customer.
-				/*$sendMail->sendEmail(array(
+				$sendMail->sendEmail(array(
 					'from' => $sendMailconfig['address_list']['orders'],
 					'to' => $_SESSION['customer_email'],
 					'subject' => $email_subject,
@@ -150,10 +150,10 @@ if (isset($_SESSION['cid']) && $_GET['stage'] == 2 && $cart->getNumCartItems() !
 					'from' => $_SESSION['customer_email'],
 					'subject' => $email_subject,
 					'html' => $email_message,
-				));*/
+				));
 
 				$email_sent = "<p>Your sales order receipt has been emailed to you.</p>";
-                $email_sent = "<p>Your sales order receipt can't emailed to you at the moment. We have received your order. If Paying by credit card please telephone your card details to us. Thank you</p>";
+                //$email_sent = "<p>Your sales order receipt can't emailed to you at the moment. We have received your order. If Paying by credit card please telephone your card details to us. Thank you</p>";
 				
 			} else {
 				$error = TRUE;
