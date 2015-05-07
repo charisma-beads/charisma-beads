@@ -153,7 +153,7 @@ if (isset($_SESSION['cid']) && $_GET['stage'] == 2 && $cart->getNumCartItems() !
 				));*/
 
 				$email_sent = "<p>Your sales order receipt has been emailed to you.</p>";
-                $email_sent = "<p>Your sales order receipt can't emailed to you at the moment. We have received your order.</p>";
+                $email_sent = "<p>Your sales order receipt can't emailed to you at the moment. We have received your order. If Paying by credit card please telephone your card details to us. Thank you</p>";
 				
 			} else {
 				$error = TRUE;
