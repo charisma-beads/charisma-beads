@@ -4,6 +4,11 @@ namespace Shop\Service;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
 
+/**
+ * Class Report
+ *
+ * @package Shop\Service
+ */
 class Report implements ServiceLocatorAwareInterface
 {
     use ServiceLocatorAwareTrait;

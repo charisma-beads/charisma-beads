@@ -314,7 +314,8 @@ class Product implements ModelInterface
      */
     public function getPrice($withDiscount = true)
 	{
-	    $price = $this->price;
+	    $price = ($this->getProductGroup() instanceof Group && $this->getProductGroup()->getPrice()) ?
+            $this->getProductGroup()->getPrice() : $this->price;
 	    
 	    if (true === $this->isDiscounted() && true === $withDiscount) {
 	    	$discount = $this->getDiscountPercent();

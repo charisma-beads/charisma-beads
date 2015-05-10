@@ -1,10 +1,23 @@
 <?php
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   Shop\Service\Product
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
 namespace Shop\Service\Product;
 
 use Shop\Model\Product\Product as ProductModel;
 use UthandoCommon\Service\AbstractRelationalMapperService;
 use Zend\EventManager\Event;
 
+/**
+ * Class Product
+ *
+ * @package Shop\Service\Product
+ */
 class Product extends AbstractRelationalMapperService
 {
     protected $serviceAlias = 'ShopProduct';

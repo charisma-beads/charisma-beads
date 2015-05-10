@@ -6,6 +6,11 @@ use Zend\View\Model\ViewModel;
 use Zend\View\Model\JsonModel;
 use UthandoCommon\Controller\ServiceTrait;
 
+/**
+ * Class Report
+ *
+ * @package Shop\Controller
+ */
 class Report extends AbstractActionController
 {
     use ServiceTrait;
