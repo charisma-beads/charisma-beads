@@ -1,4 +1,12 @@
 <?php
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   Shop\Model\Product
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
 namespace Shop\Model\Product;
 
 use Shop\Model\Post\Unit;
@@ -8,6 +16,11 @@ use UthandoCommon\Model\DateModifiedTrait;
 use UthandoCommon\Model\Model;
 use UthandoCommon\Model\ModelInterface;
 
+/**
+ * Class Product
+ *
+ * @package Shop\Model\Product
+ */
 class Product implements ModelInterface
 {
     use Model,
@@ -314,6 +327,7 @@ class Product implements ModelInterface
      */
     public function getPrice($withDiscount = true)
 	{
+        // if group price is set, use that instead.
 	    $price = ($this->getProductGroup() instanceof Group && $this->getProductGroup()->getPrice()) ?
             $this->getProductGroup()->getPrice() : $this->price;
 	    
