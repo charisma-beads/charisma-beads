@@ -29,7 +29,8 @@
         "uthando-cms/uthando-twitter" : "1.*",
         "dino/dompdf-module" : "dev-master",
         "paypal/rest-api-sdk-php" : "*",
-        "phpoffice/phpexcel": "1.*"
+        "phpoffice/phpexcel": "1.*",
+        "firephp/firephp-core": "0.4.*"
     },
     "require-dev" : {
         "firephp/firephp-core" : "0.4.0",
