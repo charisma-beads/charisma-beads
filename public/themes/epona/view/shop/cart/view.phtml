@@ -55,7 +55,7 @@
             ));?>" class="remove_item"><i class="fa fa-times"></i></a>
             <div class="total_price"><span><?=$this->cart()->getLineCost($item);?></span></div>
             <div class="qty">
-                <input type="number" value="<?=$item->getQuantity();?>" name="quantity[<?=$item->getMetadata()->getProductId();?>]" maxlength="3" />
+                <input type="number" value="<?=$item->getQuantity();?>" name="quantity[<?=$item->getCartItemId();?>]" maxlength="3" />
                 &times; <?=$this->cart()->formatAmount($item->getPrice());?>
             </div>
             <div class="clearfix"></div>

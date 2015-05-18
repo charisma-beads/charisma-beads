@@ -205,7 +205,7 @@ class Cart extends AbstractMapperService implements InitializableInterface
     }
 
     /**
-     * Adds or updates an item contained with the shopping cart
+     * Adds items contained with the shopping cart
      *
      * @param ProductModel $product            
      * @param array $post           
@@ -215,7 +215,7 @@ class Cart extends AbstractMapperService implements InitializableInterface
     {
         $qty = $post['qty'];
         
-        if (0 > $qty || $product->inStock() === false || $product->getDiscontinued() === true || $product->getEnabled() === false) {
+        if ($qty <= 0 || $product->inStock() === false || $product->getDiscontinued() === true || $product->getEnabled() === false) {
             return false;
         }
         
@@ -235,7 +235,6 @@ class Cart extends AbstractMapperService implements InitializableInterface
         }
         
         $cart = $this->getCart();
-        
 
         /** @var $cartItem CartItem */
         $cartItem = ($cart->offsetExists($productId)) ? $cart->offsetGet($productId) : new CartItem();
@@ -269,6 +268,57 @@ class Cart extends AbstractMapperService implements InitializableInterface
         $this->getEventManager()->trigger('stock.save', $this, $argv);
         
         return $cartItem;
+    }
+
+    /**
+     * Updates cart items.
+     *
+     * @param array $items
+     */
+    public function updateItem(array $items)
+    {
+        $cart = $this->getCart();
+
+        foreach ($items as $cartItemId => $qty) {
+
+            $cartItem = $cart->getCartItemById($cartItemId);
+
+            if (!$cartItem || $qty < 0) continue;
+
+            if ($qty == 0) {
+                $this->removeItem($cartItemId);
+            } else {
+
+                /* @var $productService \Shop\Service\Product\Product */
+                $productService = $this->getService('ShopProduct');
+                $product = $productService->getById($cartItem->getMetadata()->getProductId());
+
+                $argv = compact('product', 'qty', 'cartItem');
+                $argv = $this->prepareEventArguments($argv);
+
+                $this->getEventManager()->trigger('stock.check', $this, $argv);
+
+                $qty = $argv['qty'];
+
+                $cartItem->setQuantity($qty);
+
+                $offsetKey = $cartItem->getMetadata()->getProductId();
+
+                // check for option
+                if ($cartItem->getMetadata()->getOption() instanceof ProductOption) {
+                    $offsetKey = join('-', [
+                        $offsetKey,
+                        $cartItem->getMetadata()->getOption()->getProductOptionId()
+                    ]);
+                }
+
+                $cart->offsetSet($offsetKey, $cartItem);
+
+                $this->getEventManager()->trigger('stock.save', $this, $argv);
+            }
+        }
+
+        $this->persist();
     }
 
     /**
@@ -306,7 +356,7 @@ class Cart extends AbstractMapperService implements InitializableInterface
      */
     public function removeItem($id)
     {
-        $cartItem = $this->getCartItemService()->getById($id);;
+        $cartItem = $this->getCartItemService()->getById($id);
 
         $argv = compact('cartItem');
         $argv = $this->prepareEventArguments($argv);

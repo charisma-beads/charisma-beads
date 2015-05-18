@@ -97,20 +97,12 @@ class Cart extends AbstractActionController
             ]);
         }
 
-        /* @var $productService Product */
-        $productService = $this->getService('ShopProduct');
-
         /* @var $cart CartService */
         $cart = $this->getService('ShopCart');
-        
-        foreach ($this->params()->fromPost('quantity') as $id => $value) {
 
-            $product = $productService->getFullProductById($id);
-            
-            if (null !== $product) {
-                $cart->addItem($product, ['qty' => $value]);
-            }
-        }
+        $items = $this->params()->fromPost('quantity');
+
+        $cart->updateItem($items);
         
         return $this->redirect()->toRoute('shop/cart', [
             'action' => 'view'

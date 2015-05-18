@@ -32,6 +32,24 @@ class Cart extends AbstractCollection implements ModelInterface
     }
 
     /**
+     * Return cart item by its id
+     *
+     * @param $id
+     * @return bool|Item
+     */
+    public function getCartItemById($id)
+    {
+        /* @var $cartItem \Shop\Model\Cart\Item */
+        foreach ($this->getEntities() as $cartItem) {
+            if ($cartItem->getCartItemId() == $id) {
+                return $cartItem;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * @return int
      */
     public function getCartId()
