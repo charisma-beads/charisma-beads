@@ -3,7 +3,6 @@ Disallow: /admin/
 Disallow: /cgi-bin/
 Disallow: /error/
 Disallow: /php/
-Disallow: /shop/images/
 Disallow: /shop/cache/
 Disallow: /shop/html/
 Disallow: /shop/paypal/
