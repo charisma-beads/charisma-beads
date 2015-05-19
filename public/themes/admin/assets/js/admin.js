@@ -60,7 +60,7 @@ var admin = {
 
     ajaxModalForm : function(el, url)
     {
-        $.ajax({
+        response = $.ajax({
             url: url,
             data:  $(el).find('form').serialize(),
             type: 'POST',
@@ -68,7 +68,7 @@ var admin = {
                 if ($.isPlainObject(response)) {
                     admin.addAlert(response.messages, response.status);
                     $(el).modal('hide');
-                    return;
+                    return response;
                 } else {
                     $(el).find('.modal-body').html(response);
                 }
@@ -78,6 +78,8 @@ var admin = {
                 $(el).modal('hide');
             }
         });
+
+        return response;
     },
 
     ajaxWidgetPanel : function(el, url, data)

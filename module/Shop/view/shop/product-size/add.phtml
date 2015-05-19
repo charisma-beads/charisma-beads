@@ -1,4 +1,23 @@
-<?php $this->headTitle('Add Product Size') ?>
+<?php
+$postUrl = null;
+$cancelUrl = null;
+$helperOptions = null;
+$formName = null;
+
+if ($this->request()->isXmlHttpRequest()) {
+    $helperOptions = [
+        'labelWidth'    => '2',
+        'elementWidth'  => '10',
+    ];
+} else {
+    $this->headTitle('Add Product Size');
+    $postUrl = $this->url('admin/shop/product/size/edit', [
+        'action' => 'add',
+    ]);
+    $cancelUrl = $this->url('admin/shop/product/size');
+    $formName = 'Product Size';
+}
+?>
 
 <div id="alerts" class="col-md-12">
     <?=$this->tbFlashMessenger()->render(); ?>
@@ -7,13 +26,12 @@
 <div class="col-md-12">
     <?=$this->partial('uthando-admin/partial/add-edit-form', [
         'form' 			=> $this->form,
-        'formName'		=> 'Product Size',
+        'formName'		=> $formName,
         'formElements'	=> [
             'productSizeId', 'size',
         ],
-        'postUrl'		=> $this->url('admin/shop/product/size/edit', [
-            'action'    => 'add',
-        ]),
-        'cancelUrl'     => $this->url('admin/shop/product/size'),
+        'postUrl'		=> $postUrl,
+        'cancelUrl'     => $cancelUrl,
+        'helperOptions' => $helperOptions,
     ]); ?>
 </div>

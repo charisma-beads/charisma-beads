@@ -41,7 +41,7 @@ class Image extends AbstractRelationalMapperService
 
     /**
      * @param $id
-     * @return \Zend\Db\ResultSet\HydratingResultSet
+     * @return array
      */
     public function getImagesByProductId($id)
     {
@@ -94,7 +94,7 @@ class Image extends AbstractRelationalMapperService
 
         $images = $this->getImagesByProductId($productId);
 
-        if ($images->count() == 0) {
+        if (count($images) == 0) {
             $data['isDefault'] =  1;
         }
         

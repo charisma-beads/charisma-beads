@@ -183,7 +183,12 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
                     <div class="form-group<?php if ($form->get('productSizeId')->getMessages()) echo ' has-error'; ?>">
                         <label class="col-sm-4 control-label" for="productSizeId"><?=$form->get('productSizeId')->getLabel();?></label>
                         <div class="col-sm-8">
-                            <?=$this->formSelect($form->get('productSizeId')->setAttribute('class', 'form-control')); ?>
+                            <div class="input-group">
+                                <?=$this->formSelect($form->get('productSizeId')->setAttribute('class', 'form-control')); ?>
+                                <span class="input-group-btn">
+                                    <a href="#" id="add-size-button" class="btn btn-default" data-toggle="modal" data-target="#product-size-model">New Size</a>
+                                </span>
+                            </div>
                             <span class="help-block">
                                 <?=$this->formElementErrors($form->get('productSizeId'), [
                                     'class' => 'list-unstyled'
@@ -195,7 +200,12 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
                     <div class="form-group<?php if ($form->get('postUnitId')->getMessages()) echo ' has-error'; ?>">
                         <label class="col-sm-4 control-label" for="postUnitId"><?=$form->get('postUnitId')->getLabel();?></label>
                         <div class="col-sm-8">
-                            <?=$this->formSelect($form->get('postUnitId')->setAttribute('class', 'form-control')); ?>
+                            <div class="input-group">
+                                <?=$this->formSelect($form->get('postUnitId')->setAttribute('class', 'form-control')); ?>
+                                <span class="input-group-btn">
+                                    <a href="#" id="add-weight-button" class="btn btn-default" data-toggle="modal" data-target="#product-weight-model">New Weight</a>
+                                </span>
+                            </div>
                             <span class="help-block">
                                 <?=$this->formElementErrors($form->get('postUnitId'), [
                                     'class' => 'list-unstyled'
@@ -242,12 +252,49 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
 	</form>
 </div>
 
+<div id="product-size-model" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add Product Size</h4>
+            </div>
+            <div class="modal-body">
+                <i class="fa fa-spinner fa-spin"></i>&nbsp;Loading
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="edit-product-size-save" type="button" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="product-weight-model" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add Product Weight</h4>
+            </div>
+            <div class="modal-body">
+                <i class="fa fa-spinner fa-spin"></i>&nbsp;Loading
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="edit-product-weight-save" type="button" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <?php $this->inlineScript()
     ->appendFile($this->themePath('/assets/js/LiveEditor/scripts/innovaeditor.js'))
     ->appendFile($this->themePath('/assets/js/LiveEditor/scripts/jquery.innovaeditor.js'));?>
 
 <script type="text/javascript">
     $(document).ready(function(){
+        var loadSizes;
         $('#product-textarea').liveEdit({
             height : 500,
             css: [
@@ -265,5 +312,63 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
             fileBrowser: '<?=$this->basePath('/admin/asset-manager')?>'
         });
         $('#product-textarea').data('liveEdit').startedit(); /* Run the Editor */
-    })
+
+        $('#product-size-model').on('show.bs.modal', function(){
+            $(this).find('.modal-body').load('<?=$this->url('admin/shop/product/size/edit', [
+                'action'    => 'add',
+            ]);?>');
+        });
+
+        $('#product-size-model').on('hide.bs.modal', function (e) {
+            $(this).find('.modal-body').html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Loading');
+        });
+
+        $('#edit-product-size-save').on('click', function() {
+            response = admin.ajaxModalForm($('#product-size-model'), '<?=$this->url('admin/shop/product/size/edit', [
+                'action' => 'add',
+            ]);?>');
+
+            response.done(function(data){
+                if ($.isPlainObject(data)) {
+                    var selectElement = $('select[name=productSizeId]');
+                    selectElement.load('<?=$this->url('admin/shop/product/size/edit', [
+                        'action' => 'size-list',
+                    ]);?>', null, function(){
+                        selectElement.val(data.rowId);
+                    });
+
+                }
+            });
+
+        });
+
+        $('#product-weight-model').on('show.bs.modal', function(){
+            $(this).find('.modal-body').load('<?=$this->url('admin/shop/post/unit/edit', [
+                'action'    => 'add',
+            ]);?>');
+        });
+
+        $('#product-weight-model').on('hide.bs.modal', function (e) {
+            $(this).find('.modal-body').html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Loading');
+        });
+
+        $('#edit-product-weight-save').on('click', function() {
+            response = admin.ajaxModalForm($('#product-weight-model'), '<?=$this->url('admin/shop/post/unit/edit', [
+                'action' => 'add',
+            ]);?>');
+
+            response.done(function(data){
+                if ($.isPlainObject(data)) {
+                    var selectElement = $('select[name=postUnitId]');
+                    selectElement.load('<?=$this->url('admin/shop/post/unit/edit', [
+                        'action' => 'post-list',
+                    ]);?>', null, function(){
+                        selectElement.val(data.rowId);
+                    });
+
+                }
+            });
+
+        });
+    });
 </script>
