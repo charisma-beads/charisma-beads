@@ -324,7 +324,12 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
         });
 
         $('#edit-product-size-save').on('click', function() {
-            response = admin.ajaxModalForm($('#product-size-model'), '<?=$this->url('admin/shop/product/size/edit', [
+            el = $('#product-size-model');
+            el.find('.modal-content').loadingOverlay({
+                loadingText: 'Please wait while I update the database'
+            });
+
+            response = admin.ajaxModalForm(el, '<?=$this->url('admin/shop/product/size/edit', [
                 'action' => 'add',
             ]);?>');
 
@@ -340,6 +345,8 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
                 }
             });
 
+            el.find('.modal-content').loadingOverlay('remove');
+
         });
 
         $('#product-weight-model').on('show.bs.modal', function(){
@@ -353,7 +360,12 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
         });
 
         $('#edit-product-weight-save').on('click', function() {
-            response = admin.ajaxModalForm($('#product-weight-model'), '<?=$this->url('admin/shop/post/unit/edit', [
+            el = $('#product-weight-model');
+            el.find('.modal-content').loadingOverlay({
+                loadingText: 'Please wait while I update the database'
+            });
+
+            response = admin.ajaxModalForm(el, '<?=$this->url('admin/shop/post/unit/edit', [
                 'action' => 'add',
             ]);?>');
 
@@ -368,6 +380,8 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
 
                 }
             });
+
+            el.find('.modal-content').loadingOverlay('remove');
 
         });
     });
