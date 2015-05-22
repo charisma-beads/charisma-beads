@@ -288,7 +288,7 @@ class Customer extends AbstractRelationalMapperService
     {
         /* @var CustomerModel $model */
         $model = $e->getParam('model');
-        $post = $e->getParam('post');
+
         $this->populate($model, ['user']);
 
         $user = $model->getUser();
@@ -298,7 +298,13 @@ class Customer extends AbstractRelationalMapperService
             $user->getEmail() != $model->getEmail()) {
 
             /* @var \UthandoUser\Service\User $userService */
-            $userService = $this->getService('UthandoUser\Service\User');
+            $userService = $this->getService('UthandoUser');
+            $post = $user->getArrayCopy();
+
+            $post['firstname'] = $model->getFirstname();
+            $post['lastname'] = $model->getLastname();
+            $post['email'] = $model->getEmail();
+
             $userService->edit($user, $post);
         }
     }

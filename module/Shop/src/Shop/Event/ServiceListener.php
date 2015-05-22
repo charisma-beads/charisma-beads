@@ -35,6 +35,34 @@ class ServiceListener implements ListenerAggregateInterface
         $this->listeners[] = $events->attach([
             'UthandoUser\Service\User',
         ], ['post.add'], [$this, 'addAdvertHit']);
+
+        $this->listeners[] = $events->attach([
+            'UthandoUser\Service\User',
+        ], ['post.edit'], [$this, 'userEdit']);
+    }
+
+    public function userEdit(Event $e)
+    {
+        $sl = $e->getTarget()->getServiceLocator();
+        $data = $e->getParam('post');
+
+        /* @var $customerService \Shop\Service\Customer\Customer */
+        $customerService = $sl->get('ShopCustomer');
+
+        $customer = $customerService->getCustomerDetailsFromUserId($data['userId']);
+
+        if ($data['firstname'] != $customer->getFirstname() ||
+            $data['lastname'] != $customer->getLastname() ||
+            $data['email'] != $customer->getEmail()) {
+
+            $customer->setFirstname($data['firstname'])
+                ->setLastname($data['lastname'])
+                ->setEmail($data['email'])
+                ->setDateModified();
+
+            $customerService->save($customer);
+
+        }
     }
 
     public function preImageUpload(Event $e)
