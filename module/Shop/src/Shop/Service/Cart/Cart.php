@@ -215,7 +215,7 @@ class Cart extends AbstractMapperService implements InitializableInterface
     {
         $qty = $post['qty'];
         
-        if ($qty <= 0 || $product->inStock() === false || $product->getDiscontinued() === true || $product->getEnabled() === false) {
+        if ($qty <= 0 || $product->inStock() === false || $product->isDiscontinued() === true || $product->isEnabled() === false) {
             return false;
         }
         

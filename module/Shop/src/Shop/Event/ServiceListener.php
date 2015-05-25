@@ -61,7 +61,6 @@ class ServiceListener implements ListenerAggregateInterface
                 ->setDateModified();
 
             $customerService->save($customer);
-
         }
     }
 

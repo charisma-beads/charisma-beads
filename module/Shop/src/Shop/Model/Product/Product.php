@@ -480,7 +480,7 @@ class Product implements ModelInterface
 	/**
 	 * @return boolean $enabled
 	 */
-	public function getEnabled()
+	public function isEnabled()
 	{
 		return $this->enabled;
 	}
@@ -498,7 +498,7 @@ class Product implements ModelInterface
 	/**
 	 * @return boolean $discontinued
 	 */
-	public function getDiscontinued()
+	public function isDiscontinued()
 	{
 		return $this->discontinued;
 	}

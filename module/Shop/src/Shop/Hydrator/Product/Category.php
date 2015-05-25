@@ -43,8 +43,8 @@ class Category extends AbstractHydrator
 			'category'			=> $object->getCategory(),
 			'lft'				=> $object->getLft(),
 			'rgt'				=> $object->getRgt(),
-			'enabled'			=> $this->extractValue('enabled', $object->getEnabled()),
-			'discontinued'		=> $this->extractValue('discontinued', $object->getDiscontinued()),
+			'enabled'			=> $this->extractValue('enabled', $object->isEnabled()),
+			'discontinued'		=> $this->extractValue('discontinued', $object->isDiscontinued()),
 		    'showImage'		    => $this->extractValue('shaowImage', $object->getShowImage()),
 			'dateCreated'		=> $this->extractValue('dateCreated', $object->getDateCreated()),
 			'dateModified'		=> $this->extractValue('dateModified', $object->getDateModified())

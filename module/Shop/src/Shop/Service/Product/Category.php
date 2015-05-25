@@ -324,7 +324,7 @@ class Category extends AbstractRelationalMapperService
 			throw new ShopException("Can't change enabled status on child while parent is disabled. First enable the parent category");
 		}
 
-		if (true === $category->getEnabled()) {
+		if (true === $category->isEnabled()) {
 			$category->setEnabled(false);
 		} else {
 			$category->setEnabled(true);

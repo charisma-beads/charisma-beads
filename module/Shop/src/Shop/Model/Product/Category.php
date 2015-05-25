@@ -137,7 +137,7 @@ class Category extends NestedSet implements ModelInterface
     /**
      * @return bool
      */
-    public function getEnabled()
+    public function isEnabled()
 	{
 		return $this->enabled;
 	}
@@ -156,7 +156,7 @@ class Category extends NestedSet implements ModelInterface
     /**
      * @return bool
      */
-    public function getDiscontinued()
+    public function isDiscontinued()
 	{
 		return $this->discontinued;
 	}

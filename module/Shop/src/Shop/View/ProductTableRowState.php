@@ -11,11 +11,11 @@ class ProductTableRowState extends AbstractHelper
      */
     public function __invoke($model)
     {
-        if ($model->getDiscontinued()) {
+        if ($model->isDiscontinued()) {
             return 'danger';
         }
         
-        if (!$model->getEnabled()) {
+        if (!$model->isEnabled()) {
             return 'warning';
         }
         

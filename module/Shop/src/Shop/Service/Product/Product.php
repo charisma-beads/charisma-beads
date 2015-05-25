@@ -214,7 +214,7 @@ class Product extends AbstractRelationalMapperService
 	{
 	    $this->removeCacheItem($product->getProductId());
 	    
-		$enabled = (true === $product->getEnabled()) ? false : true;
+		$enabled = (true === $product->isEnabled()) ? false : true;
 		
 		$product->setEnabled($enabled);
 		
