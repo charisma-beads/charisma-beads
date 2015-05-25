@@ -27,6 +27,7 @@
         "uthando-cms/uthando-news" : "1.*",
         "uthando-cms/uthando-user" : "1.*",
         "uthando-cms/uthando-twitter" : "1.*",
+        "uthando-cms/uthando-newsletter" : "dev-master",
         "dino/dompdf-module" : "dev-master",
         "paypal/rest-api-sdk-php" : "*",
         "phpoffice/phpexcel": "1.*",

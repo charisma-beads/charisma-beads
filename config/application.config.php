@@ -16,6 +16,7 @@ return [
         'UthandoTestimonial',
         'UthandoNews',
         'UthandoTwitter',
+        'UthandoNewsletter',
         'Shop',
         'DOMPDFModule',
         'TwbBundle',
