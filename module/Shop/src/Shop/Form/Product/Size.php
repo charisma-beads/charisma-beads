@@ -8,6 +8,7 @@
 
 namespace Shop\Form\Product;
 
+use TwbBundle\Form\View\Helper\TwbBundleForm;
 use Zend\Form\Form;
 
 class Size extends Form
@@ -26,7 +27,12 @@ class Size extends Form
                 'placeholder' => 'Size:'
             ],
             'options' => [
-                'label' => 'Size:'
+                'label' => 'Size:',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'md-4',
+                'label_attributes' => [
+                    'class' => 'col-md-2',
+                ],
             ]
         ]);
     }

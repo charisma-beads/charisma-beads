@@ -94,6 +94,10 @@ class Image extends AbstractRelationalMapperService
 
         $images = $this->getImagesByProductId($productId);
 
+        if (!isset($data['isDefault'])) {
+            $data['isDefault'] =  0;
+        }
+
         if (count($images) == 0) {
             $data['isDefault'] =  1;
         }

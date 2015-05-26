@@ -2,6 +2,7 @@
 
 namespace Shop\Form\Product;
 
+use TwbBundle\Form\View\Helper\TwbBundleForm;
 use Zend\Form\Form;
 
 class Option extends Form
@@ -23,7 +24,11 @@ class Option extends Form
             'type'		=> 'PostUnitList',
             'options'	=> [
                 'label'			=> 'Weight:',
-                'required'		=> true,
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'md-8',
+                'label_attributes' => [
+                    'class' => 'col-md-4',
+                ],
             ],
         ]);
 
@@ -36,7 +41,11 @@ class Option extends Form
             ],
             'options'		=> [
                 'label'		=> 'Option:',
-                'required'	=> true,
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'md-8',
+                'label_attributes' => [
+                    'class' => 'col-md-4',
+                ],
             ],
         ]);
 
@@ -50,7 +59,11 @@ class Option extends Form
             ],
             'options'		=> [
                 'label'			=> 'Price:',
-                'required'		=> true,
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'md-8',
+                'label_attributes' => [
+                    'class' => 'col-md-4',
+                ],
             ],
         ]);
 
@@ -66,6 +79,11 @@ class Option extends Form
             ],
             'options'		=> [
                 'label'			=> 'Product Discount:',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'md-8',
+                'label_attributes' => [
+                    'class' => 'col-md-4',
+                ],
             ]
         ]);
     }

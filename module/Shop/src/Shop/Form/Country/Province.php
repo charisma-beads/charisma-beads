@@ -1,6 +1,7 @@
 <?php
 namespace Shop\Form\Country;
 
+use TwbBundle\Form\View\Helper\TwbBundleForm;
 use Zend\Form\Form;
 
 class Province extends Form
@@ -26,8 +27,12 @@ class Province extends Form
             ],
             'options'		=> [
                 'label'		=> 'Province Code:',
-                'required'	=> true,
-                'help-block' => 'Please use the ISO-3166-2 code'
+                'help-block' => 'Please use the ISO-3166-2 code',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'md-8',
+                'label_attributes' => [
+                    'class' => 'col-md-4',
+                ],
             ],
         ]);
 
@@ -40,7 +45,11 @@ class Province extends Form
             ],
             'options'		=> [
                 'label'		=> 'Name:',
-                'required'	=> true,
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'md-8',
+                'label_attributes' => [
+                    'class' => 'col-md-4',
+                ],
             ],
         ]);
 
@@ -53,7 +62,11 @@ class Province extends Form
             ],
             'options'		=> [
                 'label'		=> 'Alternate Name:',
-                'required'	=> true,
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'md-8',
+                'label_attributes' => [
+                    'class' => 'col-md-4',
+                ],
             ],
         ]);
     }

@@ -2,6 +2,7 @@
 
 namespace Shop\Form\Country;
 
+use TwbBundle\Form\View\Helper\TwbBundleForm;
 use Zend\Form\Form;
 
 class Country extends Form
@@ -30,14 +31,19 @@ class Country extends Form
         	],
         	'options'		=> [
         		'label'		=> 'Country:',
-        		'required'	=> true,
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'md-8',
+                'label_attributes' => [
+                    'class' => 'col-md-4',
+                ],
         	],
+
         ]);
 		
 		$this->add([
 		    'name'		=> 'code',
 		    'type'		=> 'text',
-		    'options'	=> [
+		    'attributes'	=> [
 		        'placeholder'	=> 'Country Code:',
         		'autofocus'		=> true,
 		    ],
@@ -45,6 +51,11 @@ class Country extends Form
 		        'label'		=> 'Country Code:',
 		        'required'	=> true,
 		        'help-block' => 'Please use the ISO-3166 alpha 2 country code (two-letters)',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'md-8',
+                'label_attributes' => [
+                    'class' => 'col-md-4',
+                ],
 		    ],
 		]);
 		
@@ -54,6 +65,11 @@ class Country extends Form
 			'options'	=> [
 				'label'     => 'Post Zone:',
 				'required'  => true,
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'md-8',
+                'label_attributes' => [
+                    'class' => 'col-md-4',
+                ],
 			],
 		]);
 	}

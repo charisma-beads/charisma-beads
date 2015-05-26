@@ -2,6 +2,7 @@
 
 namespace Shop\Form\Tax;
 
+use TwbBundle\Form\View\Helper\TwbBundleForm;
 use Zend\Form\Form;
 
 class Code extends Form
@@ -23,6 +24,11 @@ class Code extends Form
 			],
 			'options'		=> [
 				'label' => 'Tax Code:',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'md-4',
+                'label_attributes' => [
+                    'class' => 'col-md-2',
+                ],
 			],
 		]);
 		
@@ -36,6 +42,11 @@ class Code extends Form
 			],
 			'options'		=> [
 				'label'	=> 'Description:',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'md-4',
+                'label_attributes' => [
+                    'class' => 'col-md-2',
+                ],
 			],
 		]);
 		
@@ -44,7 +55,11 @@ class Code extends Form
 			'type'		=> 'TaxRateList',
 			'options'	=> [
 				'label'			=> 'Tax Rate:',
-				'required'		=> true,
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'md-4',
+                'label_attributes' => [
+                    'class' => 'col-md-2',
+                ],
 			],
 		]);
 	}

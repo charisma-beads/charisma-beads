@@ -2,6 +2,7 @@
 
 namespace Shop\Form\Post;
 
+use TwbBundle\Form\View\Helper\TwbBundleForm;
 use Zend\Form\Form;
 
 class Cost extends Form
@@ -23,8 +24,12 @@ class Cost extends Form
 			],
 			'options'		=> [
 				'label'			=> 'Cost:',
-				'required'		=> true,
 				'help-inline'	=> 'Do not include the currency sign or commas.',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'md-4',
+                'label_attributes' => [
+                    'class' => 'col-md-2',
+                ],
 			],
 		]);
 		
@@ -37,6 +42,8 @@ class Cost extends Form
 				'use_hidden_element' => true,
 				'checked_value' => '1',
 				'unchecked_value' => '0',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'md-4 col-md-offset-2',
 			],
 		]);
 		
@@ -45,7 +52,11 @@ class Cost extends Form
 			'type'		=> 'PostLevelList',
 			'options'	=> [
 				'label'			=> 'Post Level:',
-				'required'		=> true,
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'md-4',
+                'label_attributes' => [
+                    'class' => 'col-md-2',
+                ],
 			],
 		]);
 		
@@ -54,7 +65,11 @@ class Cost extends Form
 			'type'		=> 'PostZoneList',
 			'options'	=> [
 				'label'			=> 'Post Zone:',
-				'required'		=> true,
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'md-4',
+                'label_attributes' => [
+                    'class' => 'col-md-2',
+                ],
 			],
 		]);
 	}

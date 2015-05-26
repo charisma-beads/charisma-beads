@@ -1,6 +1,7 @@
 <?php
 namespace Shop\Form\Product;
 
+use TwbBundle\Form\View\Helper\TwbBundleForm;
 use Zend\Form\Form;
 
 class Image extends Form
@@ -21,7 +22,12 @@ class Image extends Form
             'name' => 'thumbnail',
             'type' => 'text',
             'options' => [
-                'label' => 'Thumbnail:'
+                'label' => 'Thumbnail:',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'md-',
+                'label_attributes' => [
+                    'class' => 'col-md-2',
+                ],
             ],
             'attributes' => [
                 'readonly' => true,
@@ -32,7 +38,12 @@ class Image extends Form
             'name' => 'full',
             'type' => 'text',
             'options' => [
-                'label' => 'Full Image:'
+                'label' => 'Full Image:',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'md-8',
+                'label_attributes' => [
+                    'class' => 'col-md-4',
+                ],
             ],
             'attributes' => [
                 'readonly' => true,
@@ -47,6 +58,11 @@ class Image extends Form
                 'value_options' => [
                     '0'	=> 'No',
                     '1'	=> 'Yes',
+                ],
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'md-8',
+                'label_attributes' => [
+                    'class' => 'col-md-4',
                 ],
             ],
         ]);

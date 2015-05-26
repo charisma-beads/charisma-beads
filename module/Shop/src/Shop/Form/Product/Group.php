@@ -1,6 +1,7 @@
 <?php
 namespace Shop\Form\Product;
 
+use TwbBundle\Form\View\Helper\TwbBundleForm;
 use Zend\Form\Form;
 
 class Group extends Form
@@ -22,7 +23,11 @@ class Group extends Form
     		],
     		'options'		=> [
     			'label'      => 'Group:',
-    		    'required'   => true,
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'md-4',
+                'label_attributes' => [
+                    'class' => 'col-md-2',
+                ],
     		],
     	]);
     	
@@ -37,8 +42,12 @@ class Group extends Form
     		],
     		'options'		=> [
     			'label'			=> 'Price:',
-    			'required'		=> true,
         		'help-inline'	=> 'Do not include the currency sign or commas.',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'md-4',
+                'label_attributes' => [
+                    'class' => 'col-md-2',
+                ],
     		],
     	]);
     }

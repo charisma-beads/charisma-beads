@@ -1,6 +1,8 @@
 <?php
 namespace Shop\Form\Customer;
 
+use TwbBundle\Form\View\Helper\TwbBundleForm;
+
 trait AddressTrait
 {
     public function addElements()
@@ -15,6 +17,11 @@ trait AddressTrait
             ],
             'options' => [
                 'label' => 'Address Line 1:',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'md-8',
+                'label_attributes' => [
+                    'class' => 'col-md-4',
+                ],
             ],
         ]);
         
@@ -28,6 +35,11 @@ trait AddressTrait
             ],
             'options' => [
                 'label' => 'Address Line 2:',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'md-8',
+                'label_attributes' => [
+                    'class' => 'col-md-4',
+                ],
             ],
         ]);
         
@@ -41,6 +53,11 @@ trait AddressTrait
             ],
             'options' => [
                 'label' => 'Address Line 3:',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'md-8',
+                'label_attributes' => [
+                    'class' => 'col-md-4',
+                ],
             ],
         ]);
         
@@ -54,6 +71,11 @@ trait AddressTrait
             ],
             'options' => [
                 'label' => 'City\Town:',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'md-8',
+                'label_attributes' => [
+                    'class' => 'col-md-4',
+                ],
             ],
         ]);
         
@@ -66,6 +88,11 @@ trait AddressTrait
             'options' => [
                 'label' => 'County\Province:',
                 'country_id' => 1,
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'md-8',
+                'label_attributes' => [
+                    'class' => 'col-md-4',
+                ],
             ],
         ]);
         
@@ -79,6 +106,11 @@ trait AddressTrait
             ],
             'options' => [
                 'label' => 'Postcode:',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'md-8',
+                'label_attributes' => [
+                    'class' => 'col-md-4',
+                ],
             ],
         ]);
         
@@ -91,6 +123,11 @@ trait AddressTrait
             'options' => [
                 'label' => 'Country',
                 'country_id' => 1,
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'md-8',
+                'label_attributes' => [
+                    'class' => 'col-md-4',
+                ],
             ],
         ]);
         
@@ -103,6 +140,11 @@ trait AddressTrait
             ],
             'options'		=> [
                 'label' => 'Phone No.:',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'md-8',
+                'label_attributes' => [
+                    'class' => 'col-md-4',
+                ],
             ],
         ]);
     }

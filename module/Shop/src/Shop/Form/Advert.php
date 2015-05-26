@@ -1,6 +1,7 @@
 <?php
 namespace Shop\Form;
 
+use TwbBundle\Form\View\Helper\TwbBundleForm;
 use Zend\Form\Form;
 
 class Advert extends Form
@@ -17,6 +18,11 @@ class Advert extends Form
             'type' => 'text',
             'options' => [
                 'label' => 'Advert Name',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'md-4',
+                'label_attributes' => [
+                    'class' => 'col-md-2',
+                ],
             ],
         ]);
         
@@ -28,8 +34,7 @@ class Advert extends Form
                 'use_hidden_element' => true,
                 'checked_value' => '1',
                 'unchecked_value' => '0',
-                'required' => false,
-                'column-size' => 'sm-8 col-sm-offset-4',
+                'column-size' => 'md-4 col-md-offset-2',
             ],
         ]);
     }

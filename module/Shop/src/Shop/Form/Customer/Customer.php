@@ -2,6 +2,7 @@
 
 namespace Shop\Form\Customer;
 
+use TwbBundle\Form\View\Helper\TwbBundleForm;
 use Zend\Form\Form;
 
 class Customer extends Form
@@ -32,11 +33,12 @@ class Customer extends Form
 	        'name' => 'billingAddressId',
 	        'type' => 'CustomerAddressList',
 	        'options' => [
-	            //'column-size' => 'md-4',
                 'label' => 'Billing Address:',
-	            //'label_attributes' => [
-	                //'class' => 'col-md-2 control-label',
-	            //],
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'md-8',
+                'label_attributes' => [
+                    'class' => 'col-md-4',
+                ],
 	       ],
 	    ]);
 	    
@@ -44,11 +46,13 @@ class Customer extends Form
             'name' => 'deliveryAddressId',
             'type' => 'CustomerAddressList',
             'options' => [
-                //'column-size' => 'md-4',
                 'label' => 'Delivery Address:',
-                //'label_attributes' => [
-                    //'class' => 'col-md-2 control-label',
-                //],
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'md-8',
+                'label_attributes' => [
+                    'class' => 'col-md-4',
+                ],
+
             ],
         ]);
 	    

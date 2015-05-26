@@ -2,6 +2,7 @@
 
 namespace Shop\Form\Post;
 
+use TwbBundle\Form\View\Helper\TwbBundleForm;
 use Zend\Form\Form;
 
 class Zone extends Form
@@ -22,7 +23,11 @@ class Zone extends Form
 			],
 			'options'		=> [
 				'label'		=> 'Post Zone:',
-				'required'	=> true,
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'md-4',
+                'label_attributes' => [
+                    'class' => 'col-md-2',
+                ],
 			],
 		]);
 	
@@ -31,7 +36,11 @@ class Zone extends Form
 			'type'		=> 'TaxCodeList',
 			'options'	=> [
 				'label'			=> 'Tax Code:',
-				'required'		=> true,
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'md-4',
+                'label_attributes' => [
+                    'class' => 'col-md-2',
+                ],
 			],
 		]);
 	}

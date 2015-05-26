@@ -1,6 +1,8 @@
 <?php
 namespace Shop\Form\Customer;
 
+use TwbBundle\Form\View\Helper\TwbBundleForm;
+
 trait CustomerTrait
 {
     public function addElements()
@@ -13,7 +15,11 @@ trait CustomerTrait
             ],
             'options'		=> [
                 'label'		=> 'Prefix:',
-                'required'	=> true,
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'md-8',
+                'label_attributes' => [
+                    'class' => 'col-md-4',
+                ],
             ],
         ]);
          
@@ -21,7 +27,12 @@ trait CustomerTrait
             'name' => 'firstname',
             'type' => 'text',
             'options'		=> [
-                'label' => 'Firstname:'
+                'label' => 'Firstname:',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'md-8',
+                'label_attributes' => [
+                    'class' => 'col-md-4',
+                ],
             ],
         ]);
          
@@ -29,7 +40,12 @@ trait CustomerTrait
             'name' => 'lastname',
             'type' => 'text',
             'options'		=> [
-                'label' => 'Lastname:'
+                'label' => 'Lastname:',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'md-8',
+                'label_attributes' => [
+                    'class' => 'col-md-4',
+                ],
             ],
         ]);
         
@@ -38,6 +54,11 @@ trait CustomerTrait
             'type' => 'email',
             'options' => [
                 'label' => 'Email:',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'md-8',
+                'label_attributes' => [
+                    'class' => 'col-md-4',
+                ],
             ],
         ]);
     }

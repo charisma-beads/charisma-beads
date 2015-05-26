@@ -1,6 +1,7 @@
 <?php
 namespace Shop\Form\Post;
 
+use TwbBundle\Form\View\Helper\TwbBundleForm;
 use Zend\Form\Form;
 
 class Unit extends Form
@@ -22,8 +23,12 @@ class Unit extends Form
             ],
             'options'		=> [
                 'label'			=> 'Unit:',
-                'required'		=> true,
                 'help-inline'	=> 'This should be weight in grams.',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'md-4',
+                'label_attributes' => [
+                    'class' => 'col-md-2',
+                ],
             ],
         ]);
     }

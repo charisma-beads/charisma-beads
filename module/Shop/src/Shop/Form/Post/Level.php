@@ -2,8 +2,14 @@
 
 namespace Shop\Form\Post;
 
+use TwbBundle\Form\View\Helper\TwbBundleForm;
 use Zend\Form\Form;
 
+/**
+ * Class Level
+ *
+ * @package Shop\Form\Post
+ */
 class Level extends Form
 {
 	public function init()
@@ -23,8 +29,12 @@ class Level extends Form
         	],
         	'options'		=> [
         		'label'			=> 'Post Level Price:',
-        		'required'		=> true,
         		'help-inline'	=> 'Do not include the currency sign or commas.',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'md-4',
+                'label_attributes' => [
+                    'class' => 'col-md-2',
+                ],
         	],
 		]);
 	}

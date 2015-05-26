@@ -2,6 +2,7 @@
 
 namespace Shop\Form\Tax;
 
+use TwbBundle\Form\View\Helper\TwbBundleForm;
 use Zend\Form\Form;
 
 class Rate extends Form
@@ -25,7 +26,12 @@ class Rate extends Form
 			],
 			'options'		=> [
 				'label' => 'Tax Rate:',
-				'help-inline'	=> 'Do not include the % sign.'
+				'help-inline'	=> 'Do not include the % sign.',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'md-4',
+                'label_attributes' => [
+                    'class' => 'col-md-2',
+                ],
 			],
 		]);
 	}
