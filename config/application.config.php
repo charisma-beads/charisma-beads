@@ -3,6 +3,7 @@
 return [
     'modules' => [
         'Application',
+        'AssetManager',
         'UthandoCommon',
         'UthandoAdmin',
         'UthandoSessionManager',
