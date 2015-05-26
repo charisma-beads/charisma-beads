@@ -20,7 +20,7 @@ class Advert extends AbstractHydrator
         return [
             'advertId'  => $object->getAdvertId(),
             'advert'    => $object->getAdvert(),
-            'enabled'   => $this->extractValue('enabled', $object->getEnabled()),
+            'enabled'   => $this->extractValue('enabled', $object->isEnabled()),
         ];
     }
 }

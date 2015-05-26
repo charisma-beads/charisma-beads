@@ -34,6 +34,7 @@ class Advert extends Form
                 'use_hidden_element' => true,
                 'checked_value' => '1',
                 'unchecked_value' => '0',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
                 'column-size' => 'md-4 col-md-offset-2',
             ],
         ]);

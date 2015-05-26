@@ -15,7 +15,7 @@
         <tbody>
             <?php /* @var $row \Shop\Model\Advert\Advert */ ?>
             <?php foreach($this->models as $row): ?>
-            <?php $class = ($row->getEnabled()) ? '' : 'danger';?>
+            <?php $class = ($row->isEnabled()) ? '' : 'danger';?>
             <tr class="<?=$class;?>">
                 <td><?=$this->enabled($row, [
                     'table' => 'advert',

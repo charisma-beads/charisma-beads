@@ -62,7 +62,7 @@ class Advert implements ModelInterface
     /**
      * @return bool $enabled
      */
-    public function getEnabled()
+    public function isEnabled()
     {
         return $this->enabled;
     }
