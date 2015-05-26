@@ -90,19 +90,21 @@ class Image extends AbstractRelationalMapperService
     {
         $data = $e->getParam('data');
 
-        $productId = $data['productId'];
+        if (!empty($data)) {
+            $productId = $data['productId'];
 
-        $images = $this->getImagesByProductId($productId);
+            $images = $this->getImagesByProductId($productId);
 
-        if (!isset($data['isDefault'])) {
-            $data['isDefault'] =  0;
+            if (!isset($data['isDefault'])) {
+                $data['isDefault'] =  0;
+            }
+
+            if (count($images) == 0) {
+                $data['isDefault'] =  1;
+            }
+
+
+            $e->setParam('data', $data);
         }
-
-        if (count($images) == 0) {
-            $data['isDefault'] =  1;
-        }
-        
-
-        $e->setParam('data', $data);
     }
 }

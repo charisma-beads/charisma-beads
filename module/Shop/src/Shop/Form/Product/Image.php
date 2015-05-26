@@ -24,9 +24,9 @@ class Image extends Form
             'options' => [
                 'label' => 'Thumbnail:',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-',
+                'column-size' => 'md-8',
                 'label_attributes' => [
-                    'class' => 'col-md-2',
+                    'class' => 'col-md-4',
                 ],
             ],
             'attributes' => [
