@@ -19,6 +19,7 @@
                             'categoryIdent' => $row->getProductCategory()->getIdent(),
                             'productIdent' => $row->getIdent(),
                         ]);?>">
+
                             <?php if ($row->getShowImage()):?>
                             <figure><!-- image -->
                                 <img class="" src="<?=$this->productImage($row);?>" alt="" />

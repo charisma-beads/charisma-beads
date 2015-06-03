@@ -59,9 +59,6 @@ class Product extends AbstractDbMapper
 	
 	public function search(array $search, $sort, $select = null)
     {
-	    $discontinued = 0;
-	    $enabled = 1;
-	    
 		$select = $this->getSelect();
 		$select->join(
             'productCategory',
@@ -130,7 +127,9 @@ class Product extends AbstractDbMapper
 
         $select = $this->setFilter($select);
         
-        $sort = (isset($search['sort'])) ? $search['sort'] : ''; 
+        $sort = (isset($search['sort'])) ? $search['sort'] : '';
+
+        //\FB::info($this->getSqlString($select));
 	   
 	   return parent::search($search, $sort, $select);
 	}

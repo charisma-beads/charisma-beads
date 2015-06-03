@@ -74,9 +74,11 @@ class Catalog extends AbstractActionController
 
     public function searchAction()
     {
+        $options = $this->getShopOptions();
         $page = $this->params()->fromPost('page', 1);
-        
+        $sort = $this->params()->fromPost('sort', $options->getProductsOrderCol());
         $sl = $this->getServiceLocator();
+
         
         $form = $sl->get('FormElementManager')->get('ShopCatalogSearch');
         $inputFilter = $sl->get('InputFilterManager')->get('ShopCatalogSearch');
@@ -86,10 +88,9 @@ class Catalog extends AbstractActionController
 
         $this->layout()->setVariable('searchData', $form->getData());
         
-        $products = $this->getProductService()
-            ->usePaginator([
-            'limit' => $this->getShopOptions()->getProductsPerPage(),
-            'page' => $page
+        $products = $this->getProductService()->usePaginator([
+            'limit' => $options->getProductsPerPage(),
+            'page' => $page,
         ])->searchProducts($form->getData());
         
         $viewModel = new ViewModel([

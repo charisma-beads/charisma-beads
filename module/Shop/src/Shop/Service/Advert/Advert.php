@@ -22,7 +22,7 @@ class Advert extends AbstractMapperService
         $statsArray = [];
         
         foreach ($resultSet as $value) {
-            $percentage = round(($value->numAdHits / $value->totalHits) * 100);
+            $percentage = round(($value->numAdHits / $value->totalHits) * 100, 2);
             $statsArray[] = ['label' => $value->advert, 'data' => $percentage];
         }
         
