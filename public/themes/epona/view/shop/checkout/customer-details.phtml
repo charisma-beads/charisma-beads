@@ -215,8 +215,8 @@ $deliveryAddress = $customer->get('deliveryAddress');
                         <div class="row">
                             <div class="col-md-12">
                                 <label class="checkbox">
-                                    <?=$this->formCheckBox($this->form->get('shipToBilling'));?>
-                                    <i></i> Ship to billing address
+                                    <?=$this->formCheckBox($this->form->get('shipToBilling')->setOption('disable-twb', true));?>
+                                    <i></i> <?=$this->form->get('shipToBilling')->getLabel();?>
                                 </label>
                             </div>
                         </div>
