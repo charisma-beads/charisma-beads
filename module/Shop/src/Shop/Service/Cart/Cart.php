@@ -229,7 +229,7 @@ class Cart extends AbstractMapperService implements InitializableInterface
         if ($productOption instanceof ProductOption) {
             $productClone->setPostUnitId($productOption->getPostUnitId())
                 ->setPostUnit($productOption->getPostUnit())
-                ->setPrice($productOption->getPrice())
+                ->setPrice($productOption->getPrice(false))
                 ->setDiscountPercent($productOption->getDiscountPercent());
             $productId = $productId . '-' . $optionId;
         }
