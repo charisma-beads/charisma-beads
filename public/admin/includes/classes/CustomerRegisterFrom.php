@@ -131,7 +131,7 @@ class CustomerRegisterFrom extends Form
 			'name' => 'post_code',
 			'type' => 'text',
 			'attributes' => array(
-				'required' => true,
+				//'required' => true,
 			),
 			'options' => array(
 				'label' => 'Postcode:',
