@@ -96,7 +96,7 @@
                     	</tr>
                     	<tr class="<?php if ($this->form->get('post_code')->getMessages()) echo ' has-error'; ?>">
                 			<td align="right"><b><?=$this->form->get('post_code')->getLabel();?></b></td>
-                			<td align="left"><?=$this->formText($this->form->get('post_code'));?><span class="required">*</span></td>
+                			<td align="left"><?=$this->formText($this->form->get('post_code'));?></td>
                 		</tr>
                 		<tr>
                     		<td colspan="2" class="errors"><?=$this->formElementErrors($this->form->get('post_code')); ?></td>

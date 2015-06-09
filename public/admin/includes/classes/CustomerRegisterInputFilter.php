@@ -95,7 +95,7 @@ class CustomerRegisterInputFilter extends InputFilter
 		
 		$this->add(array(
 			'name' => 'post_code',
-			'required' => true,
+			//'required' => true,
 			'filters' => array(
 				array('name' => 'StripTags'),
 				array('name' => 'StringTrim'),
