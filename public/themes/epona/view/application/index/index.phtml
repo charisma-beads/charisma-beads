@@ -1,6 +1,142 @@
-<?php $this->headTitle('Welcome');?>
 
-<h2>Welcome to <?=$this->themeOptions('site_name');?></h2>
+<?php $this->placeholder('page-top')->captureStart();?>
+<!-- REVOLUTION SLIDER -->
+<div class="slider fullwidthbanner-container roundedcorners">
+    <div class="fullwidthbanner">
+        <ul class="hide">
 
+            <!-- SLIDE  -->
+            <li data-transition="fade" data-slotamount="7" data-masterspeed="300" data-saveperformance="off" >
 
-<p>This can be shop list or an intro to <?=$this->themeOptions('site_name');?>.</p>
+                <img src="<?=$this->themePath('/assets/images/1x1.png');?>" data-lazyload="<?=$this->basePath('/userfiles/shop-front.jpg');?>" alt="" data-bgfit="cover" data-bgposition="center top" data-bgrepeat="no-repeat" />
+
+                <div class="tp-caption block_black sfl tp-resizeme"
+                     data-x="70"
+                     data-y="216"
+                     data-speed="750"
+                     data-start="1900"
+                     data-easing="easeOutExpo"
+                     data-splitin="none"
+                     data-splitout="none"
+                     data-elementdelay="0.1"
+                     data-endelementdelay="0.1"
+                     data-endspeed="300">We Stock 1000s of Miyuki Beads
+                </div>
+
+                <div class="tp-caption block_black sfr tp-resizeme"
+                     data-x="70"
+                     data-y="260"
+                     data-speed="750"
+                     data-start="2200"
+                     data-easing="easeOutExpo"
+                     data-splitin="none"
+                     data-splitout="none"
+                     data-elementdelay="0.1"
+                     data-endelementdelay="0.1"
+                     data-endspeed="300">Specialist Miyuki Bead Stockest
+                </div>
+
+            </li>
+
+            <!-- SLIDE  -->
+            <li data-transition="fade" data-slotamount="7" data-masterspeed="300" data-saveperformance="off" >
+
+                <img src="<?=$this->themePath('/assets/images/1x1.png');?>" data-lazyload="<?=$this->basePath('/userfiles/bead-museum.jpg');?>" alt="" data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat" />
+
+                <div class="tp-caption block_black sfl tp-resizeme"
+                     data-x="70"
+                     data-y="172"
+                     data-speed="750"
+                     data-start="1000"
+                     data-easing="easeOutExpo"
+                     data-splitin="none"
+                     data-splitout="none"
+                     data-elementdelay="0.1"
+                     data-endelementdelay="0.1"
+                     data-endspeed="300">Enjoy A Relaxed Shopping Experience
+                </div>
+
+                <div class="tp-caption block_black sfl tp-resizeme"
+                     data-x="70"
+                     data-y="216"
+                     data-speed="750"
+                     data-start="1400"
+                     data-easing="easeOutExpo"
+                     data-splitin="none"
+                     data-splitout="none"
+                     data-elementdelay="0.1"
+                     data-endelementdelay="0.1"
+                     data-endspeed="300">Take Time To Make Your Choices
+                </div>
+
+            </li>
+
+            <!-- SLIDE  -->
+            <li data-transition="fade" data-slotamount="14"  data-masterspeed="300" data-delay="10000">
+
+                <!-- COVER IMAGE -->
+                <img src="<?=$this->themePath('/assets/images/1x1.png');?>" data-lazyload="<?=$this->basePath('/userfiles/shop-area.jpg');?>" alt="" data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat" />
+
+                <div class="tp-caption medium_text lfl stl"
+                     data-x="60"
+                     data-y="200"
+                     data-speed="300"
+                     data-start="500"
+                     data-easing="easeOutExpo">A Spacious
+                </div>
+
+                <div class="tp-caption large_bold_white sft stb"
+                     data-x="60"
+                     data-y="223"
+                     data-speed="300"
+                     data-start="1000"
+                     data-easing="easeOutExpo">Well Lit
+                </div>
+
+                <div class="tp-caption small_light_white sft stb"
+                     data-x="76"
+                     data-y="286"
+                     data-speed="500"
+                     data-start="2000"
+                     data-easing="easeOutExpo">Shop To See Bead Colours
+                </div>
+
+            </li>
+
+        </ul>
+        <div class="tp-bannertimer"></div>
+    </div>
+</div>
+<!-- /REVOLUTION SLIDER -->
+<?php $this->placeholder('page-top')->captureEnd();?>
+
+<?php
+$post = $this->uthandoArticleGetPost('home-page');
+$this->headTitle($this->escapehtml($post->getTitle()));
+?>
+
+<div id="blog" class="row">
+
+    <!-- BLOG SIDEBAR -->
+    <div class="col-md-3 col-sm-3">
+        <?=$this->partial('shop/product-nav');?>
+    </div>
+    <!-- /BLOG SIDEBAR -->
+
+    <!-- BLOG ARTICLE -->
+    <div class="col-md-9 col-sm-9">
+
+        <div class="row">
+
+            <!-- article content -->
+            <article>
+                <?=$post->getContent();?>
+            </article>
+
+            <hr class="half-margins invisible" />
+        </div>
+
+    </div>
+    <!-- /BLOG ARTICLE -->
+
+</div>
