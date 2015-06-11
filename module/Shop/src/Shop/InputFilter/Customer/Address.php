@@ -90,10 +90,12 @@ class Address extends InputFilter
                 ]],
     		],
 		]);
+
+        $countryCode = $this->getCountryCode();
         
         $this->add([
     		'name' => 'postcode',
-    		'required' => true,
+    		'required' => ($countryCode == 'IE') ? false : true,
     		'filters' => [
     		    ['name' => 'StripTags'],
         		['name' => 'StringTrim'],
@@ -104,7 +106,7 @@ class Address extends InputFilter
     		],
     		'validators' => [
         		['name' => 'UthandoCommonPostCode', 'options' => [
-                    'country' => $this->getCountryCode(),
+                    'country' => $countryCode,
                 ]],
     		],
 		]);
