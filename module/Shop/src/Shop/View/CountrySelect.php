@@ -19,13 +19,17 @@ use UthandoCommon\View\AbstractViewHelper;
  */
 class CountrySelect extends AbstractViewHelper
 {
-    public function __invoke()
+    public function __invoke($countryId = null)
     {
+        /* @var \Shop\Form\Element\CountryList $select */
         $select = $this->getServiceLocator()
             ->getServiceLocator()
             ->get('FormElementManager')
             ->get('CountryList');
-        $select ->setName('countryId');
+
+        $select->setName('countryId');
+
+        $select->setCountryId($countryId);
 
         return $select;
     }

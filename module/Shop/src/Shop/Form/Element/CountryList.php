@@ -30,19 +30,29 @@ class CountryList extends Select implements ServiceLocatorAwareInterface
     
     public function getCountries()
     {
-        $countries = $this->getServiceLocator()
+        /* @var \Shop\Service\Country\Country $countryService */
+        $countryService = $this->getServiceLocator()
             ->getServiceLocator()
             ->get('UthandoServiceManager')
-            ->get('ShopCountry')
-            ->fetchAll();
+            ->get('ShopCountry');
+
+        $countries = $countryService->fetchAll();
         
         $countryOptions = [];
+
+        if ($this->getCountryId()) {
+            $countryId = $this->getCountryId();
+        } else {
+            $default = $countryService->getCountryByCountryCode('GB');
+
+            $countryId = $default->getCountryId();
+        }
          
         foreach($countries as $country) {
         	$countryOptions[] = [
         	   'label' => $country->getCountry(),
         	   'value' => $country->getCountryId(),
-        	   'selected' => ($this->getCountryId() == $country->getCountryId()) ? true : false,
+        	   'selected' => ($countryId == $country->getCountryId()) ? true : false,
         	];
         }
         

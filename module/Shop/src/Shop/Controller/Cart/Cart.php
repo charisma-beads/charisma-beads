@@ -8,6 +8,7 @@ use Shop\Service\Cart\Cart as CartService;
 use Shop\Service\Customer\Address;
 use Shop\Service\Product\Product;
 use UthandoCommon\Controller\ServiceTrait;
+use UthandoSessionManager\SessionContainerTrait;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
@@ -15,10 +16,12 @@ use Zend\View\Model\ViewModel;
  * Class Cart
  * @package Shop\Controller\Cart
  * @method \Zend\Http\Request getRequest()
+ * @method \Zend\Session\Container sessionContainer()
  */
 class Cart extends AbstractActionController
 {
-    use ServiceTrait;
+    use ServiceTrait,
+        SessionContainerTrait;
 
     public function addAction()
     {
@@ -53,9 +56,12 @@ class Cart extends AbstractActionController
 
     public function viewAction()
     {
-        $countryId = $this->params()->fromPost('countryId', null);
+        $session = $this->sessionContainer('ShopCart');
+        $countryId = $this->params()->fromPost('countryId', $session->offsetGet('countryId'));
 
-        if ($this->identity()) {
+        \FB::info($session->getArrayCopy(), __METHOD__);
+
+        if ($this->identity() && !$countryId) {
             /* @var $customerAddressService Address */
             $customerAddressService = $this->getService('ShopCustomerAddress');
 
@@ -67,6 +73,15 @@ class Cart extends AbstractActionController
                 $countryId = $customerAddress->getCountryId();
             }
         }
+
+        if (!$countryId) {
+            /* @var \Shop\Service\Country\Country $countryService */
+            $countryService = $this->getService('ShopCountry');
+            $country = $countryService->getCountryByCountryCode('GB');
+            $countryId = $country->getCountryId();
+        }
+
+        $session->offsetSet('countryId', $countryId);
 
         return new ViewModel(array(
             'countryId' => $countryId

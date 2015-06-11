@@ -17,6 +17,11 @@ use Zend\Session\Container;
 use Zend\Stdlib\InitializableInterface;
 use Shop\Model\Product\Option as ProductOption;
 
+/**
+ * Class Cart
+ *
+ * @package Shop\Service\Cart
+ */
 class Cart extends AbstractMapperService implements InitializableInterface
 {
     /**
@@ -400,7 +405,7 @@ class Cart extends AbstractMapperService implements InitializableInterface
     public function getContainer()
     {
         if (! $this->container instanceof Container) {
-            $this->setContainer(new Container(__CLASS__));
+            $this->setContainer(new Container($this->serviceAlias));
         }
         
         return $this->container;
@@ -506,6 +511,8 @@ class Cart extends AbstractMapperService implements InitializableInterface
      */
     public function setShippingCost($countryId = null)
     {
+        $countryId = ($countryId) ?: $this->getContainer()->offsetGet('countryId');
+
         if ($countryId) {
             $countryId = (int) $countryId;
             $shipping = $this->getShippingService();
@@ -541,9 +548,7 @@ class Cart extends AbstractMapperService implements InitializableInterface
         $this->shippingTax = $shippingTax;
         return $this;
     }
-
-
-
+    
     /**
      * Get the shipping cost
      *

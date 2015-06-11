@@ -3,6 +3,11 @@ namespace Shop\Service\Country;
 
 use UthandoCommon\Service\AbstractRelationalMapperService;
 
+/**
+ * Class Country
+ *
+ * @package Shop\Service\Country
+ */
 class Country extends AbstractRelationalMapperService
 {
     /**
@@ -23,6 +28,18 @@ class Country extends AbstractRelationalMapperService
             'service'   => 'ShopPostZone',
         ],
     ];
+
+    /**
+     * @param $code
+     * @return null|\Shop\Model\Country\Country
+     */
+    public function getCountryByCountryCode($code)
+    {
+        /* @var $mapper \Shop\Mapper\Country\Country */
+        $mapper = $this->getMapper();
+
+        return $mapper->getCountryByCountryCode($code);
+    }
 
     /**
      * @param $id
