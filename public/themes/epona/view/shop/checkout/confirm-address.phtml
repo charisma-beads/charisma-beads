@@ -77,7 +77,7 @@
             </section>
 
             <section class="clearfix cart_totals">
-                <span class="pull-right fsize16"><?=$this->cart()->getShippingTotal($this->countryId);?></span>
+                <span class="pull-right fsize16"><?=$this->cart()->getShippingTotal($this->customer->getDeliveryAddressId());?></span>
                 <span class="bold">Shipping</span>
             </section>
 

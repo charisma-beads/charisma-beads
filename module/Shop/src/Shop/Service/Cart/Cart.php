@@ -548,7 +548,7 @@ class Cart extends AbstractMapperService implements InitializableInterface
         $this->shippingTax = $shippingTax;
         return $this;
     }
-    
+
     /**
      * Get the shipping cost
      *
