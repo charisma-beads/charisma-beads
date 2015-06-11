@@ -9,7 +9,10 @@ use Zend\Stdlib\Hydrator\ClassMethods;
 class CustomerFieldSet extends Fieldset implements InputFilterProviderInterface
 {
     use CustomerTrait;
-    
+
+    /**
+     * @var int
+     */
     protected $country;
     
     public function __construct($name = null, $options = [])

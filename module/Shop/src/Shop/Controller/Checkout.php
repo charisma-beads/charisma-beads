@@ -70,11 +70,21 @@ class Checkout extends AbstractActionController
         $userId = $this->identity()->getUserId();
         $customer = $this->getCustomerService()
             ->getCustomerDetailsFromUserId($userId);
+        /* @var \Shop\Service\Country\Country $countryService */
+        $countryService = $this->getService('ShopCountry');
+
+        if (is_array($prg)) {
+            $billingCountry = $countryService->getById($prg['customer']['billingAddress']['countryId'])->getCode();
+            $deliveryCountry = $countryService->getById($prg['customer']['deliveryAddress']['countryId'])->getCode();
+        } else {
+            $billingCountry = $customer->getBillingAddress()->getCountry()->getCode();
+            $deliveryCountry = $customer->getDeliveryAddress()->getCountry()->getCode();
+        }
         
         $form = $this->getService('FormElementManager')
             ->get('ShopCustomerDetails', [
-                'billing_country' => 'GB',
-                'delivery_country' => 'GB',
+                'billing_country' => ($billingCountry) ?: 'GB',
+                'delivery_country' => ($deliveryCountry) ?: 'GB',
             ]);
             
         $form->bind($customer);
@@ -86,7 +96,7 @@ class Checkout extends AbstractActionController
                 $form->get('shipToBilling')->setValue('1');
             }
             return [
-                'countryId' => $customer->getDeliveryAddress()->getCountryId(),
+                'countryId' => $deliveryCountry,
                 'form' => $form,
             ];
         }
@@ -111,7 +121,7 @@ class Checkout extends AbstractActionController
         }
         
         return [
-            'countryId' => $customer->getDeliveryAddress()->getCountryId(),
+            'countryId' => $deliveryCountry,
             'form' => $form,
         ];
         

@@ -89,7 +89,7 @@ class AddressFieldSet extends Fieldset implements InputFilterProviderInterface
             ],
             
             'postcode' => [
-                'required' => true,
+                'required' => ($this->getOption('country') == 'IE') ? false : true,
                 'filters' => [
                     ['name' => 'StripTags'],
                     ['name' => 'StringTrim'],

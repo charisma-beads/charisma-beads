@@ -7,6 +7,7 @@ use UthandoCommon\Service\AbstractRelationalMapperService;
  * Class Country
  *
  * @package Shop\Service\Country
+ * @method null|\Shop\Model\Country\Country getById($id, $col=null);
  */
 class Country extends AbstractRelationalMapperService
 {

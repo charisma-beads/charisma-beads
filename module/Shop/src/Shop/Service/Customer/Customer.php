@@ -143,6 +143,16 @@ class Customer extends AbstractRelationalMapperService
         if ($data['shipToBilling'] == 1) {
             $data['customer']['deliveryAddress'] = $data['customer']['billingAddress'];
         }
+
+        $form->get('customer')
+            ->get('deliveryAddress')
+            ->get('provinceId')
+            ->setCountryId($data['customer']['deliveryAddress']['countryId']);
+
+        $form->get('customer')
+            ->get('billingAddress')
+            ->get('provinceId')
+            ->setCountryId($data['customer']['billingAddress']['countryId']);
         
         $form->setData($data);
         
@@ -169,7 +179,7 @@ class Customer extends AbstractRelationalMapperService
             $customer->getDeliveryAddress()->setCustomerId($customerId);
         }
         
-        // add or update billing adn delivery address
+        // add or update billing a delivery address
         /* @var $customerAddressService \Shop\Service\Customer\Address */
         $customerAddressService = $this->getService('ShopCustomerAddress');
         
