@@ -20,6 +20,7 @@ use Zend\EventManager\Event;
 /**
  * Class Category
  * @package Shop\Service\Product
+ * @method CategoryModel getById($id, $col = null)
  */
 class Category extends AbstractRelationalMapperService
 {
@@ -275,12 +276,12 @@ class Category extends AbstractRelationalMapperService
 		    $ids = $this->getCategoryChildrenIds($category->getProductCategoryId(), true);
 		    $ids[] = $category->getProductCategoryId();
 		    
-		    if ($data['enabled'] != (int) $category->getEnabled()) {
+		    if ($data['enabled'] != (int) $category->isEnabled()) {
 		        $this->getMapper()->toggleEnabled($category->setEnabled((bool) $data['enabled']));
 		        $this->getMapper()->cascadeEnabled($ids, $data['enabled']);
 		    }
 		    
-		    if ($data['discontinued'] != (int) $category->getDiscontinued()) {
+		    if ($data['discontinued'] != (int) $category->isDiscontinued()) {
 		        $this->getMapper()->toggleDiscontinued($category->setDiscontinued((bool) $data['discontinued']));
 		        $this->getMapper()->cascadeDiscontinued($ids, $data['discontinued']);
 		    }
