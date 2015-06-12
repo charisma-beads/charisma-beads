@@ -1,0 +1,6 @@
+@CHARSET "UTF-8";
+
+#paypal-field-set,
+#invoice-field-set {
+    clear: both;
+}

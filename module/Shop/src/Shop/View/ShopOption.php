@@ -1,4 +1,5 @@
 <?php
+
 namespace Shop\View;
 
 use UthandoCommon\View\AbstractViewHelper;
@@ -14,7 +15,8 @@ class ShopOption extends AbstractViewHelper
 
     /**
      * @param null $key
-     * @return $this|Config|string
+     * @return mixed|ShopOptions
+     * @throws ShopException
      */
     public function __invoke($key=null)
     {

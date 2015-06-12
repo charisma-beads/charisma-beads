@@ -1,5 +1,17 @@
 <?php
 return [
+    'asset_manager' => [
+        'resolver_configs' => [
+            'collections' => [
+                'css/uthando-admin.css' => [
+                    'css/shop.css'
+                ],
+            ],
+            'paths' => [
+                'Shop' => __DIR__ . '/../public',
+            ],
+        ],
+    ],
     'uthando_user' => [
         'acl' => [
             'roles' => [
@@ -158,11 +170,12 @@ return [
             'ShopTaxCode'           => 'Shop\Form\Tax\Code',
             'ShopTaxRate'           => 'Shop\Form\Tax\Rate',
 
-            'ShopSettings'          => 'Shop\Form\Settings\Settings',
-            'ShopFieldSet'          => 'Shop\Form\Settings\ShopFieldSet',
-            'ShopCheckoutFieldSet'  => 'Shop\Form\Settings\CheckoutFieldSet',
-            'ShopPaypalFieldSet'    => 'Shop\Form\Settings\PaypalFieldSet',
-            'ShopCartCookieFieldSet'=> 'Shop\Form\Settings\CartCookieFieldSet',
+            'ShopSettings'              => 'Shop\Form\Settings\Settings',
+            'ShopFieldSet'              => 'Shop\Form\Settings\ShopFieldSet',
+            'ShopCheckoutFieldSet'      => 'Shop\Form\Settings\CheckoutFieldSet',
+            'ShopPaypalFieldSet'        => 'Shop\Form\Settings\PaypalFieldSet',
+            'ShopCartCookieFieldSet'    => 'Shop\Form\Settings\CartCookieFieldSet',
+            'ShopInvoiceFieldSet'       => 'Shop\Form\Settings\InvoiceFieldSet',
 
             'AdvertList'            => 'Shop\Form\Element\AdvertList',
             'CountryList'           => 'Shop\Form\Element\CountryList',
@@ -253,6 +266,7 @@ return [
         'factories' => [
             'Shop\Options\CartCookie'   => 'Shop\Service\Factory\CartCookieOptions',
             'Shop\Options\Checkout'     => 'Shop\Service\Factory\CheckoutOptions',
+            'Shop\Options\Invoice'      => 'Shop\Service\Factory\InvoiceOptions',
             'Shop\Options\Paypal'       => 'Shop\Service\Factory\PaypalOptions',
             'Shop\Options\Shop'         => 'Shop\Service\Factory\ShopOptions',
 
@@ -361,6 +375,7 @@ return [
             'Category'              => 'Shop\View\Category',
             'Cart'                  => 'Shop\View\Cart',
             'CustomerAddress'       => 'Shop\View\CustomerAddress',
+            'NormaliseOrderNumber'  => 'Shop\View\NormaliseOrderNumber',
             'PercentFormat'         => 'Shop\View\PercentFormat',
             'PriceFormat'           => 'Shop\View\PriceFormat',
             'ProductHelper'         => 'Shop\View\Product',
@@ -372,7 +387,8 @@ return [
             'MonthYearSelect'       => 'Shop\View\FormMonthSelect',
             'ProductTableRowState'  => 'Shop\View\ProductTableRowState',
             'ShopAlert'             => 'Shop\View\Alert',
-            'checkoutOption'        => 'Shop\View\CheckoutOption',
+            'CheckoutOption'        => 'Shop\View\CheckoutOption',
+            'InvoiceOption'         => 'Shop\View\InvoiceOption',
             'ShopOption'            => 'Shop\View\ShopOption',
         ],
     ],

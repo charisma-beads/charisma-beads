@@ -25,13 +25,13 @@
                     <a href="<?=$this->url('admin/shop/order/edit', [
                         'id' => $row->getOrderId(),
                     ]);?>">
-                        <?=$this->escapeHtml($row->getOrderNumber());?>
+                        <?=$this->escapeHtml($this->normaliseOrderNumber($row->getOrderNumber()));?>
                     </a>
                 </td>
                 <td>
                     <?=$this->formSelect(
                         $this->statusFormElement->setValue($row->getOrderStatusId())
-                                                ->setAttribute('class', 'form-control input-sm')
+                            ->setAttribute('class', 'form-control input-sm')
                     );?>
                 </td>
                 <td><?=$this->formatDate($row->getOrderDate())->setFormat('d/m/Y');?></td>

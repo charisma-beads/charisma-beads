@@ -51,6 +51,18 @@ class Settings extends Form
                 'label' => 'Cart Cookie Options',
             ],
         ]);
+
+        $this->add([
+            'type' => 'ShopInvoiceFieldSet',
+            'name' => 'invoice_options',
+            'attributes' => [
+                'class' => 'col-md-6',
+                'id' => 'invoice-field-set',
+            ],
+            'options' => [
+                'label' => 'Invoice Options',
+            ],
+        ]);
         
         $this->add([
             'name' => 'button-submit',

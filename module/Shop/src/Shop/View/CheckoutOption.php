@@ -5,6 +5,11 @@ use UthandoCommon\View\AbstractViewHelper;
 use Shop\ShopException;
 use Shop\Options\CheckoutOptions;
 
+/**
+ * Class CheckoutOption
+ *
+ * @package Shop\View
+ */
 class CheckoutOption extends AbstractViewHelper
 {
     /**
@@ -14,7 +19,8 @@ class CheckoutOption extends AbstractViewHelper
 
     /**
      * @param null $key
-     * @return $this|Config|string
+     * @return mixed|CheckoutOptions
+     * @throws ShopException
      */
     public function __invoke($key=null)
     {

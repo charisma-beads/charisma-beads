@@ -1,13 +1,13 @@
 
 <style type="text/css">
     body {
-    	font-size: 12pt;
+    	font-size: <?=$this->invoiceOption('fontSize');?>;
     }
     
     h4 {
     	font-weight: bold;
         line-height: 1.1;
-    	font-size: 18px;
+    	font-size: <?=$this->invoiceOption('h4FontSize');?>;
     }
     
     td, th {
@@ -44,7 +44,7 @@
     .panel-title {
     	margin-top: 0;
     	margin-bottom: 0;
-    	font-size: 16px;
+    	font-size: <?=$this->invoiceOption('panelTitleFontSize');?>;
     	color: inherit;
     }
     
@@ -88,7 +88,6 @@
     
     .table th, .table td {
     	padding: 8px;
-    	line-height: 1.42857143;
     	border: 1px solid #ddd !important;
     }
     
@@ -107,7 +106,7 @@
     
     .footer {
     	height: 30px;
-    	font-size:10px;
+    	font-size: <?=$this->invoiceOption('footerFontSize');?>;
     	text-align: center;
     }
 </style>
