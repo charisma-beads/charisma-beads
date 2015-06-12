@@ -125,11 +125,18 @@ class Order implements ModelInterface
 	}
 
     /**
+     * @param bool $normaliseNumber
      * @return int
      */
-    public function getOrderNumber()
+    public function getOrderNumber($normaliseNumber = true)
     {
-        return $this->orderNumber;
+        $orderNumber = $this->orderNumber;
+
+        if ($normaliseNumber) {
+            $orderNumber = ltrim(substr($orderNumber, 8, -1), '0');
+        }
+
+        return $orderNumber;
     }
 
 	/**

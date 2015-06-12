@@ -22,6 +22,10 @@ class InvoiceOptions extends AbstractOptions
     /**
      * @var string
      */
+    protected $merchantName;
+    /**
+     * @var string
+     */
     protected $fontSize;
 
     /**
@@ -33,6 +37,24 @@ class InvoiceOptions extends AbstractOptions
      * @var string
      */
     protected $footerFontSize;
+
+    /**
+     * @return string
+     */
+    public function getMerchantName()
+    {
+        return $this->merchantName;
+    }
+
+    /**
+     * @param string $merchantName
+     * @return $this
+     */
+    public function setMerchantName($merchantName)
+    {
+        $this->merchantName = $merchantName;
+        return $this;
+    }
 
     /**
      * @return string

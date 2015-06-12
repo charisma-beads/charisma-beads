@@ -28,7 +28,7 @@ class Order extends AbstractHydrator
             'orderId'       => $object->getOrderId(),
             'customerId'    => $object->getCustomerId(),
             'orderStatusId' => $object->getOrderStatusId(),
-            'orderNumber'   => $this->extractValue('orderNumber', $object->getOrderNumber()),
+            'orderNumber'   => $this->extractValue('orderNumber', $object->getOrderNumber(false)),
             'total'         => $object->getTotal(),
             'orderDate'     => $this->extractValue('orderDate', $object->getOrderDate()),
             'shipping'      => $object->getShipping(),

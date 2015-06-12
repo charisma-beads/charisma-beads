@@ -25,7 +25,7 @@
                     <a href="<?=$this->url('admin/shop/order/edit', [
                         'id' => $row->getOrderId(),
                     ]);?>">
-                        <?=$this->escapeHtml($this->normaliseOrderNumber($row->getOrderNumber()));?>
+                        <?=$this->escapeHtml($row->getOrderNumber());?>
                     </a>
                 </td>
                 <td>

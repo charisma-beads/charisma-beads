@@ -38,7 +38,7 @@
                 <td>
                     <a href="<?=$this->url('shop/order/view', [
                         'orderId' => $order->getOrderId(),
-                    ]);?>"><?=$this->escapeHtml($this->normaliseOrderNumber($order->getOrderNumber()));?></a>
+                    ]);?>"><?=$this->escapeHtml($order->getOrderNumber());?></a>
                 </td>
                 <td><?=$this->formatDate($order->getOrderDate())->setFormat('d/m/Y');?></td>
                 <td><?=$this->priceFormat($order->getTotal());?> <small>(<?=count($order->getOrderLines());?> items)</small></td>

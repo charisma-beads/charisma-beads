@@ -266,13 +266,16 @@ class Order extends AbstractRelationalMapperService
         $email = $order->getCustomer()->getEmail();
         /* @var $options \Shop\Options\CheckoutOptions */
         $options = $this->getService('Shop\Options\Checkout');
-        
-        
+        /* @var $invoiceOptions \Shop\Options\InvoiceOptions */
+        $invoiceOptions = $this->getService('Shop\Options\Invoice');
+
         $emailView = new ViewModel([
             'order' => $order,
         ]);
         
         $emailView->setTemplate('shop/order/table-view');
+
+        $subject = 'Order Confirmation From %s Order No. %s';
         
         $this->getEventManager()->trigger('mail.send', $this, [
             'recipient'        => [
@@ -282,7 +285,7 @@ class Order extends AbstractRelationalMapperService
             'layout'           => 'shop/email/order',
             'layout_params'    => ['order' => $order],
             'body'             => $emailView,
-            'subject'          => 'Order No.:' . $order->getOrderNumber(),
+            'subject'          => sprintf($subject, $invoiceOptions->getMerchantName(), $order->getOrderNumber()),
             'transport'        => $options->getOrderEmail(),
         ]);
         
@@ -295,7 +298,7 @@ class Order extends AbstractRelationalMapperService
                 'layout'           => 'shop/email/order',
                 'layout_params'    => ['order' => $order],
                 'body'             => $emailView,
-                'subject'          => 'Order No.:' . $order->getOrderNumber(),
+                'subject'          => sprintf($subject, $order->getCustomer()->getFullName(), $order->getOrderNumber()),
                 'transport'        => $options->getOrderEmail(),
             ]);
         }

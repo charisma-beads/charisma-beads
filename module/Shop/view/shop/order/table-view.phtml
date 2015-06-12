@@ -10,7 +10,7 @@
 <table class="col-12 panel address">
     <tr class="panel panel-default">
         <td class="col-4 panel-heading address-heading">
-            <h4 class="panel-title"> Merchant Address</h4>
+            <h4 class="panel-title"> <?=$this->invoiceOption('merchantName');?></h4>
         </td>
         <td>&nbsp;</td>
         <td class="col-4 panel-heading address-heading">
@@ -72,7 +72,7 @@
     </tr>
     <tr>
         <td class="col-6 panel-body">
-            Order No:&nbsp;<span><?=$this->escapeHtml($this->normaliseOrderNumber($this->order->getOrderNumber()));?></span><br>
+            Order No:&nbsp;<span><?=$this->escapeHtml($this->order->getOrderNumber());?></span><br>
             Date Ordered:&nbsp;<span><?=$this->formatDate($this->order->getOrderDate())->setFormat('d/m/Y');?></span>
         </td>
         <td>&nbsp;</td>

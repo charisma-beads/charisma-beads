@@ -15,11 +15,11 @@
     	</thead>
     	
     	<tbody>
-    		<?php /* @var $row \Shop\Model\Order */ ?>
+    		<?php /* @var $row \Shop\Model\Order\Order */ ?>
     		<?php foreach($this->models as $row): ?>
     		<tr>
     			<td><?=$this->escapeHtml($row->getOrderId());?></td>
-    			<td><?=$this->escapeHtml($row->getOrderNumber());?></td>
+    			<td><?=$this->escapeHtml($row->getOrderNumber(false));?></td>
     			<td><?=$this->escapehtml($row->getOrderStatus()->getOrderStatus());?></td>
     			<td><?=$this->priceFormat($this->escapeHtml($row->getTotal()));?></td>
     			<td><?=$this->formatDate($row->getOrderDate());?>
