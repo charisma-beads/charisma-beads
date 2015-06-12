@@ -41,18 +41,7 @@ class InvoiceFieldSet extends Fieldset implements InputFilterProviderInterface
                 'label_attributes' => [
                     'class' => 'col-md-4',
                 ],
-            ],
-        ]);
-
-        $this->add([
-            'name' => 'h4FontSize',
-            'type' => 'text',
-            'options' => [
-                'label' => 'H4 Font Size',
-                'column-size' => 'md-8',
-                'label_attributes' => [
-                    'class' => 'col-md-4',
-                ],
+                'help-block' => 'Can be any css font-size value (eg. px,pt or %)',
             ],
         ]);
 
@@ -65,6 +54,7 @@ class InvoiceFieldSet extends Fieldset implements InputFilterProviderInterface
                 'label_attributes' => [
                     'class' => 'col-md-4',
                 ],
+                'help-block' => 'Can be any css font-size value (eg. px,pt or %)',
             ],
         ]);
 
@@ -77,6 +67,7 @@ class InvoiceFieldSet extends Fieldset implements InputFilterProviderInterface
                 'label_attributes' => [
                     'class' => 'col-md-4',
                 ],
+                'help-block' => 'Can be any css font-size value (eg. px,pt or %)',
             ],
         ]);
     }
@@ -85,13 +76,6 @@ class InvoiceFieldSet extends Fieldset implements InputFilterProviderInterface
     {
         return [
             'fontSize' => [
-                'required' => true,
-                'filters' => [
-                    ['name' => 'StripTags'],
-                    ['name' => 'StringTrim'],
-                ],
-            ],
-            'h4FontSize' => [
                 'required' => true,
                 'filters' => [
                     ['name' => 'StripTags'],

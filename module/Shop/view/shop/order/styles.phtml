@@ -4,12 +4,6 @@
     	font-size: <?=$this->invoiceOption('fontSize');?>;
     }
     
-    h4 {
-    	font-weight: bold;
-        line-height: 1.1;
-    	font-size: <?=$this->invoiceOption('h4FontSize');?>;
-    }
-    
     td, th {
     	vertical-align:top;
     }
@@ -42,6 +36,7 @@
     }
     
     .panel-title {
+        font-weight: bold;
     	margin-top: 0;
     	margin-bottom: 0;
     	font-size: <?=$this->invoiceOption('panelTitleFontSize');?>;
@@ -87,7 +82,7 @@
     }
     
     .table th, .table td {
-    	padding: 8px;
+    	padding: 4px;
     	border: 1px solid #ddd !important;
     }
     
@@ -105,7 +100,6 @@
     }
     
     .footer {
-    	height: 30px;
     	font-size: <?=$this->invoiceOption('footerFontSize');?>;
     	text-align: center;
     }

@@ -27,11 +27,6 @@ class InvoiceOptions extends AbstractOptions
     /**
      * @var string
      */
-    protected $h4FontSize;
-
-    /**
-     * @var string
-     */
     protected $panelTitleFontSize;
 
     /**
@@ -54,24 +49,6 @@ class InvoiceOptions extends AbstractOptions
     public function setFontSize($fontSize)
     {
         $this->fontSize = $fontSize;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getH4FontSize()
-    {
-        return $this->h4FontSize;
-    }
-
-    /**
-     * @param string $h4FontSize
-     * @return $this
-     */
-    public function setH4FontSize($h4FontSize)
-    {
-        $this->h4FontSize = $h4FontSize;
         return $this;
     }
 
