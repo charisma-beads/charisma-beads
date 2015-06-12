@@ -13,11 +13,15 @@
     }
     
     .col-6 {
-    	width: 45%;
+    	width: 50%;
+    }
+
+    .col-4 {
+        width: 33.33333333%;
     }
     
     .panel {
-    	margin-bottom: 20px;
+    	margin-bottom: 10px;
     	background-color: #fff;
     	border: 1px solid transparent;
     	border-radius: 4px;
@@ -25,11 +29,11 @@
     }
     
     .panel-body {
-    	padding: 15px;
+    	padding: 5px;
     }
     
     .panel-heading {
-    	padding: 10px 15px;
+    	padding: 5px;
     	border-bottom: 1px solid transparent;
     	border-top-left-radius: 3px;
     	border-top-right-radius: 3px;
@@ -66,6 +70,10 @@
     	border-bottom-left-radius: 3px;
     	border-bottom-right-radius: 3px;
     }
+
+    .spacer-row {
+        width: 10px;
+    }
     
     .panel .table {
     	margin-bottom: 0;
@@ -74,7 +82,7 @@
     .table {
     	width: 100%;
     	max-width: 100%;
-    	margin-bottom: 20px;
+    	margin-bottom: 10px;
     	text-align: left;
     	border-spacing: 0;
         border-collapse: collapse;
@@ -102,5 +110,9 @@
     .footer {
     	font-size: <?=$this->invoiceOption('footerFontSize');?>;
     	text-align: center;
+    }
+
+    .footer p {
+        margin: 2px;
     }
 </style>
