@@ -4,6 +4,7 @@ namespace Shop\Mapper\Order;
 use UthandoCommon\Mapper\AbstractDbMapper;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\Sql\Expression;
+use Zend\Db\Sql\Select;
 
 class Order extends AbstractDbMapper
 {
@@ -16,14 +17,14 @@ class Order extends AbstractDbMapper
         $select->join(
             'orderStatus',
             'order.orderStatusId=orderStatus.orderStatusId',
-            array()
+            []
         )->where
             ->notEqualTo('orderStatus', 'Cancelled')
             ->notEqualTo('orderStatus', 'Dispatched')
             ->notEqualTo('orderStatus', 'Acknowledged')
             ->notEqualTo('orderStatus', 'Ready For Collection');
 
-        $select     = $this->setSortOrder($select, array('-orderDate'));
+        $select     = $this->setSortOrder($select, ['-orderDate']);
         $resultSet  = $this->fetchResult($select);
 
         return $resultSet;
@@ -38,6 +39,41 @@ class Order extends AbstractDbMapper
         return $resultSet;
     }
 
+    /**
+     * @param null|string $startDate
+     * @param null|string $endDate
+     * @return \Zend\Db\ResultSet\HydratingResultSet|ResultSet|\Zend\Paginator\Paginator
+     */
+    public function getMonthlyTotals($startDate = null, $endDate = null)
+    {
+        $select = $this->getSelect();
+        $select->columns([
+            'numOrders' => new Expression('COUNT(order.orderId)'),
+            'total'     => new Expression('SUM(order.total)'),
+            'monthLong' => new Expression("DATE_FORMAT(order.orderDate, '%M')"),
+            'month'     => new Expression("DATE_FORMAT(order.orderDate, '%m')"),
+            'year'      => new Expression("DATE_FORMAT(order.orderDate, '%Y')"),
+
+        ])->join(
+            'orderStatus',
+            'order.orderStatusId=orderStatus.orderStatusId',
+            []
+        )->group([
+            'year', 'month'
+        ])->order([
+            'year ' . Select::ORDER_DESCENDING,
+            'month ' . Select::ORDER_DESCENDING,
+        ])->where->notEqualTo(
+            'orderStatus', 'Canceled'
+        );
+
+        if ($startDate && $endDate) {
+            $select->where->between('order.orderDate', $startDate, $endDate);
+        }
+
+        return $this->fetchResult($select, new ResultSet());
+    }
+
     public function getOrderByOrderNumber($orderNumber)
     {
         $select = $this->getSelect();
@@ -50,9 +86,9 @@ class Order extends AbstractDbMapper
     public function getMaxOrderNumber()
     {
         $select = $this->getSelect();
-        $select->columns(array(
+        $select->columns([
         	'orderNumber' => new Expression('(MAX(orderNumber))')
-        ));
+        ]);
         
         $resultSet = $this->fetchResult($select, new ResultSet());
         $row = $resultSet->current();
@@ -77,7 +113,7 @@ class Order extends AbstractDbMapper
     {
         $select = $this->getCustomerOrderSelect();
         $select->where->equalTo('userId', $id);
-        $select = $this->setSortOrder($select, array('-orderDate'));
+        $select = $this->setSortOrder($select, ['-orderDate']);
         
         return $this->fetchResult($select);
     }
@@ -88,7 +124,7 @@ class Order extends AbstractDbMapper
         $select->join(
             'customer',
             'order.customerId=customer.customerId',
-            array()
+            []
         );
         
         return $select;

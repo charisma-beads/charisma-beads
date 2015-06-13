@@ -5,6 +5,7 @@ use Shop\Model\Customer\Customer as CustomerModel;
 use Shop\Model\Order\MetaData;
 use Shop\Model\Order\Order as OrderModel;
 use UthandoCommon\Service\AbstractRelationalMapperService;
+use Zend\Json\Json;
 use Zend\Math\BigInteger\BigInteger;
 use Zend\View\Model\ViewModel;
 
@@ -12,6 +13,7 @@ use Zend\View\Model\ViewModel;
  * Class Order
  * @package Shop\Service\Order
  * @method OrderModel populate()
+ * @method \Shop\Mapper\Order\Order getMapper($mapperClass = null, array $options = [])
  */
 class Order extends AbstractRelationalMapperService
 {
@@ -251,6 +253,37 @@ class Order extends AbstractRelationalMapperService
         }
 
         return $orders;
+    }
+
+    public function getMonthlyTotals()
+    {
+        $startDate = new \DateTime('2011-01-01');
+        $endDate = new \DateTime();
+
+        $resultSet = $this->getMapper()->getMonthlyTotals(
+            $startDate->format('Y-01-01'), $endDate->format('Y-12-31')
+        );
+
+        $totalsArray = [];
+        $year = null;
+
+        $c = -1;
+
+        foreach ($resultSet as $row) {
+
+            if ($year != $row->year) {
+                $c++;
+                $totalsArray[$c]['label'] = $row->year;
+
+            }
+
+            $totalsArray[$c]['data'][] = [$row->month, $row->total];
+
+            $year = $row->year;
+
+        }
+
+        return Json::encode($totalsArray);
     }
     
     /**

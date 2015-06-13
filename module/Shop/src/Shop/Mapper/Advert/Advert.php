@@ -9,16 +9,12 @@ class Advert extends AbstractDbMapper
 {
     protected $table = 'advert';
     protected $primary = 'advertId';
-    
+
+    /**
+     * @return \Zend\Db\ResultSet\HydratingResultSet|ResultSet|\Zend\Paginator\Paginator
+     */
     public function getStats()
     {
-        /**
-         * SELECT advert, COUNT(advertHit.advertId), ( SELECT COUNT(*) FROM advertHit ) 
-         * FROM advertHit, advert 
-         * WHERE advert.advertId=advertHit.advertId 
-         * GROUP BY advertHit.advertId 
-         */
-    
         $select = $this->getSelect();
         $select->columns([
             'advert',

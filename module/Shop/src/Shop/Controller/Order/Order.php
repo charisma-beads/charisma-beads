@@ -7,6 +7,12 @@ use Shop\ShopException;
 use Zend\View\Model\ViewModel;
 use Zend\View\Model\JsonModel;
 
+/**
+ * Class Order
+ *
+ * @package Shop\Controller\Order
+ * @method \Shop\Service\Order\Order getService()
+ */
 class Order extends AbstractCrudController
 {
 	protected $controllerSearchOverrides = ['sort' => '-orderDate'];
@@ -25,6 +31,19 @@ class Order extends AbstractCrudController
         }
 
         throw new ShopException('Not Allowed');
+    }
+
+    public function monthlyTotalsAction()
+    {
+        $data = $this->getService()->getMonthlyTotals();
+
+        $viewModel = new ViewModel([
+            'monthlyTotals' => $data,
+        ]);
+
+        $viewModel->setTerminal(true);
+
+        return $viewModel;
     }
 
     public function orderListAction()
