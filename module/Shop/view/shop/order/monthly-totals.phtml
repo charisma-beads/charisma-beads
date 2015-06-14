@@ -39,9 +39,6 @@
 
 </style>
 
-<script src="<?=$this->basePath('js/flot/jquery.flot.js');?>"></script>
-<script src="<?=$this->basePath('js/flot/jquery.flot.resize.js');?>"></script>
-
 <div class="totals-container">
     <div id="totals-placeholder" class="totals-placeholder"></div>
 </div>
@@ -54,14 +51,68 @@
 
         var mtData = <?=$this->monthlyTotals;?>;
 
+        var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
         var ticks = [
-            ["01", "Jan"], ["02", "Feb"], ["03", "Mar"], ["04", "Apr"], ["05", "May"], ["06", "June"],
-            ["07", "July"], ["08", "Aug"], ["09", "Sept"], ["10", "Oct"], ["11", "Nov"], ["12", "Dec"]
+            ["01", monthNames[0]], ["02", monthNames[1]], ["03", monthNames[2]], ["04", monthNames[3]],
+            ["05", monthNames[4]], ["06", monthNames[5]], ["07", monthNames[6]], ["08", monthNames[7]],
+            ["09", monthNames[8]], ["10", monthNames[9]], ["11", monthNames[10]], ["12", monthNames[11]]
         ];
 
         var totalsPlaceholder = $("#totals-placeholder");
+        var previousPoint = null, previousLabel = null;
 
-        $.plot(totalsPlaceholder, mtData, {
+        $(this).bind("plotclick plothover", function (event, pos, item) {
+            if (item) {
+                if ((previousPoint != item.dataIndex) || (previousLabel != item.series.label)) {
+                    previousPoint = item.dataIndex;
+                    previousLabel = item.series.label;
+                    $("#tooltip").remove();
+
+                    var month = item.datapoint[0] - 1;
+                    var currentTotal = item.datapoint[1];
+
+                    var nextSeries = totalsPlot.getData()[item.seriesIndex + 1];
+                    var increaseDecrease = 0;
+
+                    if (nextSeries) {
+                        var nextTotal = nextSeries.data[item.dataIndex][1];
+                        increaseDecrease = ((currentTotal - nextTotal) / nextTotal) * 100;
+                    }
+
+                    var color = item.series.color;
+
+                    showTooltip(item.pageX,
+                        item.pageY,
+                        color,
+                        "<strong>" + item.series.label + "</strong><br>" + monthNames[month]
+                        + " : <strong>&pound;" + currentTotal + "</strong> +&#92;- (" + increaseDecrease.toFixed(2) + "%)");
+                }
+            } else {
+                $("#tooltip").remove();
+                previousPoint = null;
+                previousLabel = null;
+            }
+
+        });
+
+        function showTooltip(x, y, color, contents) {
+            $('<div id="tooltip">' + contents + '</div>').css({
+                position: 'absolute',
+                display: 'none',
+                top: y - 40,
+                left: x - 120,
+                border: '2px solid ' + color,
+                padding: '3px',
+                'font-size': '9px',
+                'border-radius': '5px',
+                'background-color': '#fff',
+                'font-family': 'Verdana, Arial, Helvetica, Tahoma, sans-serif',
+                opacity: 0.9
+            }).appendTo("body").fadeIn(200);
+        }
+
+        var totalsPlot = $.plot(totalsPlaceholder, mtData, {
             series : {
                 lines: {
                     show: true
@@ -75,7 +126,8 @@
                 ticks : ticks
             },
             grid : {
-                hoverable: true
+                hoverable: true,
+                clickable: true
             }
         });
 

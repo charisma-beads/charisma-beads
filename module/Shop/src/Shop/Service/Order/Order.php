@@ -259,6 +259,7 @@ class Order extends AbstractRelationalMapperService
     {
         $startDate = new \DateTime('2011-01-01');
         $endDate = new \DateTime();
+        $now = new \DateTime();
 
         $resultSet = $this->getMapper()->getMonthlyTotals(
             $startDate->format('Y-01-01'), $endDate->format('Y-12-31')
@@ -277,11 +278,15 @@ class Order extends AbstractRelationalMapperService
 
             }
 
+            $now->setDate($now->format('Y'), $row->month, 01);
+
             $totalsArray[$c]['data'][] = [$row->month, $row->total];
 
             $year = $row->year;
 
         }
+
+        \FB::info($totalsArray);
 
         return Json::encode($totalsArray);
     }
