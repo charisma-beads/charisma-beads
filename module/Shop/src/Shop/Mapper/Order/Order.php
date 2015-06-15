@@ -40,6 +40,23 @@ class Order extends AbstractDbMapper
     }
 
     /**
+     * @return array|\ArrayObject|null|object
+     */
+    public function getMinMaxYear()
+    {
+        $select = $this->getSelect();
+        $select->columns([
+            'minYear' => new Expression("MIN(DATE_FORMAT(order.orderDate, '%Y'))"),
+            'maxYear' => new Expression("MAX(DATE_FORMAT(order.orderDate, '%Y'))"),
+        ]);
+
+        $rowSet = $this->fetchResult($select, new ResultSet());
+        $row = $rowSet->current();
+
+        return $row;
+    }
+
+    /**
      * @param null|string $startDate
      * @param null|string $endDate
      * @return \Zend\Db\ResultSet\HydratingResultSet|ResultSet|\Zend\Paginator\Paginator
@@ -64,7 +81,7 @@ class Order extends AbstractDbMapper
             'year ' . Select::ORDER_DESCENDING,
             'month ' . Select::ORDER_ASCENDING,
         ])->where->notEqualTo(
-            'orderStatus', 'Canceled'
+            'orderStatus', 'Cancelled'
         );
 
         if ($startDate && $endDate) {

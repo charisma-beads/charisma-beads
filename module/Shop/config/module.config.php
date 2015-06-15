@@ -182,6 +182,7 @@ return [
             'CountryProvinceList'   => 'Shop\Form\Element\CountryProvinceList',
             'CustomerAddressList'   => 'Shop\Form\Element\CustomerAddressList',
             'CustomerPrefixList'    => 'Shop\Form\Element\CustomerPrefixList',
+            'MonthlyTotalYearList'  => 'Shop\Form\Element\MonthlyTotalYearList',
             'OrderStatusList'       => 'Shop\Form\Element\OrderStatusList',
             'PayOptionsList'        => 'Shop\Form\Element\PayOptionsList',
             'PostLevelList'         => 'Shop\Form\Element\PostLevelList',

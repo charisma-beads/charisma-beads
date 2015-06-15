@@ -255,15 +255,18 @@ class Order extends AbstractRelationalMapperService
         return $orders;
     }
 
-    public function getMonthlyTotals()
+    public function getMonthlyTotals($start = null, $end = null)
     {
-        $startDate = new \DateTime('2011-01-01');
-        $endDate = new \DateTime();
-        $now = new \DateTime();
+        $startDate = new \DateTime($start);
+        $start = $startDate->format('Y-m-d');
 
-        $resultSet = $this->getMapper()->getMonthlyTotals(
-            $startDate->format('Y-01-01'), $endDate->format('Y-12-31')
-        );
+        if ($end) {
+            $endDate = new \DateTime($end);
+            $end = $endDate->format('Y-m-d');
+        }
+
+        $resultSet = $this->getMapper()
+            ->getMonthlyTotals($start, $end);
 
         $totalsArray = [];
         $year = null;
@@ -272,21 +275,25 @@ class Order extends AbstractRelationalMapperService
 
         foreach ($resultSet as $row) {
 
+            // if we start with a new year.
             if ($year != $row->year) {
                 $c++;
                 $totalsArray[$c]['label'] = $row->year;
 
+                // if row doesn't start at beginning of year the pad missing months
+                if ($row->month != '01') {
+                    $month = ltrim($row->month, '0');
+
+                    for ($i=1; $i < $month; $i++) {
+                        $dateObj = \DateTime::createFromFormat('!m', $i);
+                        $totalsArray[$c]['data'][] = [$dateObj->format('F'), 0.00];
+                    }
+                }
             }
 
-            $now->setDate($now->format('Y'), $row->month, 01);
-
-            $totalsArray[$c]['data'][] = [$row->month, $row->total];
-
+            $totalsArray[$c]['data'][] = [$row->monthLong, $row->total];
             $year = $row->year;
-
         }
-
-        \FB::info($totalsArray);
 
         return Json::encode($totalsArray);
     }

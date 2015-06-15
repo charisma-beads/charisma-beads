@@ -1,72 +1,22 @@
 
-
-<style>
-#footer {
-	margin-top: 5px;
-	margin-bottom: 5px;
-	text-align: center;
-	font-size: 12px;
-	color: #999;
-}
-
-.advert-container {
-	box-sizing: border-box;
-	width: 100%;
-	height: 270px;
-	padding: 20px 15px 15px 15px;
-	border: 1px solid #ddd;
-	background: #fff;
-	background: linear-gradient(#f6f6f6 0, #fff 50px);
-	background: -o-linear-gradient(#f6f6f6 0, #fff 50px);
-	background: -ms-linear-gradient(#f6f6f6 0, #fff 50px);
-	background: -moz-linear-gradient(#f6f6f6 0, #fff 50px);
-	background: -webkit-linear-gradient(#f6f6f6 0, #fff 50px);
-	box-shadow: 0 3px 10px rgba(0,0,0,0.15);
-	-o-box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-	-ms-box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-	-moz-box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-	-webkit-box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-}
-
-.advert-placeholder {
-	width: 100%;
-	height: 100%;
-	font-size: 10px;
-	line-height: 1em;
-}
-
-.advert-container {
-	position : relative;
-}
-
-#hover {
-	position : absolute;
-	right: 5px;
-	bottom: 15px;
-}
-
-</style>
-
-<div class="advert-container">
-	<div id="placeholder" class="advert-placeholder"></div>
-	<div id="hover" class="text-right"></div>
+<div class="plot-container">
+	<div id="advert-placeholder" class="plot-placeholder"></div>
+	<div id="advert-hover" class="text-right"></div>
 </div>
-
-<div id="footer"></div>
 
 <script type="text/javascript">
 
 	$(function() {
 
-		var data = <?=$this->stats;?>;
+		var aData = <?=$this->stats;?>;
 
 		function suffixFormatter(val, axis) {
 		    return val.toFixed(axis.tickDecimals) + "%";
 		}
 
-		var placeholder = $("#placeholder");
+		var advertPlaceholder = $("#advert-placeholder");
 
-		$.plot(placeholder, data, {
+		$.plot(advertPlaceholder, aData, {
 			series: {
 		        pie: {
 		            innerRadius: 0.5,
@@ -79,28 +29,13 @@
 		    }
 		});
 
-		placeholder.bind("plothover", function(event, pos, obj) {
+        advertPlaceholder.bind("plothover plotclick", function(event, pos, obj) {
 
-			if (!obj) {
-				return;
-			}
+			if (!obj) return;
 			
 			var percent = parseFloat(obj.series.percent).toFixed(2);
-			$("#hover").html("<span style='font-weight:bold; color:" + obj.series.color + "'>" + obj.series.label + " (" + percent + "%)</span>");
+			$("#advert-hover").html("<span style='font-weight:bold; color:" + obj.series.color + "'>" + obj.series.label + " (" + percent + "%)</span>");
 		});
-
-		placeholder.bind("plotclick", function(event, pos, obj) {
-		    
-			if (!obj) {
-				return;
-			}
-			var percent = parseFloat(obj.series.percent).toFixed(2);
-			$("#hover").html("<span style='font-weight:bold; color:" + obj.series.color + "'>" + obj.series.label + " (" + percent + "%)</span>");
-		});
-
-		// Add the Flot version string to the footer
-
-		$("#footer").prepend("Flot " + $.plot.version);
 	});
 
 </script>

@@ -35,7 +35,11 @@ class Order extends AbstractCrudController
 
     public function monthlyTotalsAction()
     {
-        $data = $this->getService()->getMonthlyTotals();
+        $start = $this->params()->fromPost('start', null);
+        $end = $this->params()->fromPost('end', null);
+
+        $data = $this->getService()
+            ->getMonthlyTotals($start, $end);
 
         $viewModel = new ViewModel([
             'monthlyTotals' => $data,

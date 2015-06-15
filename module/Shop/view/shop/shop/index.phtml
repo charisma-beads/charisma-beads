@@ -1,8 +1,27 @@
+<?php
+
+$startYears = $this->formManager('MonthlyTotalYearList', [
+    'name' => 'start',
+    'label' => 'Start',
+    'minOrMax' => 'min',
+])->setAttributes([
+    'class' => 'input-sm',
+    'id' => 'startYears',
+]);
+
+$endYears = $this->formManager('MonthlyTotalYearList', [
+    'name' => 'end',
+    'label' => 'End',
+    'minOrMax' => 'max',
+])->setAttributes([
+    'class' => 'input-sm',
+    'id' => 'endYears',
+]);
+?>
 
 <script src="<?=$this->basePath('js/flot/jquery.flot.js');?>"></script>
 <script src="<?=$this->basePath('js/flot/jquery.flot.pie.js');?>"></script>
-<script src="<?=$this->basePath('js/flot/jquery.flot.time.js');?>"></script>
-<script src="<?=$this->basePath('js/flot/jquery.flot.orderBars.js');?>"></script>
+<script src="<?=$this->basePath('js/flot/jquery.flot.categories.js');?>"></script>
 <script src="<?=$this->basePath('js/flot/jquery.flot.resize.js');?>"></script>
 
 <div class="row">
@@ -11,7 +30,21 @@
         <div id="monthly-totals" class="panel panel-info">
             <!-- Default panel contents -->
             <div class="panel-heading">
-                <h4 class="panel-title">Monthly Totals</h4>
+                <h4 class="panel-title">
+                    Monthly Totals
+                    <div class="form-inline pull-right">
+                        <div class="monthly-stats start-year form-group">
+                            <span class="control-label"><?=$startYears->getLabel();?></span>
+                            <?=$this->formElement($startYears);?>
+                        </div>
+                        <div class="monthly-stats end-year form-group">
+                            <span class="control-label"><?=$endYears->getLabel();?></span>
+                            <?=$this->formElement($endYears);?>
+                        </div>
+                    </div>
+                </h4>
+
+
             </div>
             <div class="panel-table panel-widget">
                 <div class="text-center">
@@ -74,11 +107,24 @@
 <div class="clearfix"></div>
 
 <script>
-    $('#monthly-totals .panel-widget').ajaxWidgetPanel({
-        url : '<?=$this->url('admin/shop/order/edit', [
-            'action' => 'monthly-totals',
-        ]);?>'
-    });
+    function changeMonthlyStats() {
+        admin.ajaxWidgetPanel(
+            $('#monthly-totals .panel-widget'),
+            '<?=$this->url('admin/shop/order/edit', [
+                'action' => 'monthly-totals',
+            ]);?>',
+            {
+                start: $('#startYears').val(),
+                end: $('#endYears').val()
+            }
+        );
+    }
+
+    changeMonthlyStats();
+
+    $('#monthly-totals').on('change', 'select', function(){
+        changeMonthlyStats();
+    })
 
     $('#current-orders .panel-widget').ajaxWidgetPanel({
         url : '<?=$this->url('admin/shop/order/edit', [
