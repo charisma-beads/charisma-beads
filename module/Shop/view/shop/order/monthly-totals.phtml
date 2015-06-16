@@ -50,14 +50,14 @@
                     var month = item.series.data[item.datapoint[0]][0];
                     var currentTotal = item.datapoint[1];
 
-                    var nextSeries = totalsPlot.getData()[item.seriesIndex + 1];
+                    var prevSeries = totalsPlot.getData()[item.seriesIndex - 1];
                     var increaseDecrease = 0;
 
-                    if (nextSeries) {
-                        var nextTotal = nextSeries.data[item.dataIndex][1];
+                    if (prevSeries) {
+                        var prevTotal = prevSeries.data[item.dataIndex][1];
 
-                        if (nextTotal > 0) {
-                            increaseDecrease = ((currentTotal - nextTotal) / nextTotal) * 100;
+                        if (prevTotal > 0) {
+                            increaseDecrease = ((currentTotal - prevTotal) / prevTotal) * 100;
                         } else {
                             increaseDecrease = currentTotal;
                         }

@@ -78,7 +78,7 @@ class Order extends AbstractDbMapper
         )->group([
             'year', 'month'
         ])->order([
-            'year ' . Select::ORDER_DESCENDING,
+            'year ' . Select::ORDER_ASCENDING,
             'month ' . Select::ORDER_ASCENDING,
         ])->where->notEqualTo(
             'orderStatus', 'Cancelled'

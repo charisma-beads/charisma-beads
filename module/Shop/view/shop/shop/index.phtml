@@ -1,5 +1,4 @@
 <?php
-
 $startYears = $this->formManager('MonthlyTotalYearList', [
     'name' => 'start',
     'label' => 'Start',
@@ -32,6 +31,9 @@ $endYears = $this->formManager('MonthlyTotalYearList', [
             <div class="panel-heading">
                 <h4 class="panel-title">
                     Monthly Totals
+                    <button id="monthly-totals-report-button" class="btn btn-default btn-xs">
+                        Download Report
+                    </button>
                     <div class="form-inline pull-right">
                         <div class="monthly-stats start-year form-group">
                             <span class="control-label"><?=$startYears->getLabel();?></span>
@@ -165,6 +167,70 @@ $endYears = $this->formManager('MonthlyTotalYearList', [
             },
             error : function(response) {
                 admin.addAlert(response.responseText, 'danger');
+            }
+        });
+    });
+
+    $('#monthly-totals-report-button').on('click', function () {
+        var url = '<?=$this->url('admin/shop/report', [
+            'action'    => 'monthly-totals',
+        ]);?>';
+
+        var el = bootbox.dialog({
+            title: "Monthly Report Download",
+            message: 'test',
+            buttons: {
+                main: {
+                    label: "Close",
+                    className: "btn-default"
+                }
+            }
+        });
+
+        el.find('.modal-content').loadingOverlay({
+            loadingText: 'Please wait while I prepare your report'
+        });
+
+        //var el = $(this).parent().parent().parent().parent();
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            beforeSend: function() {
+                el.find('.modal-content').loadingOverlay({
+                    loadingText: 'Please wait while I prepare your report'
+                });
+            },
+            success: function (response) {
+                el.modal('hide');
+                if (response.status == 'success') {
+                    message = '<h5>Please click on link below to download your report</h5>'
+                    + '<a href="' + response.url + '" target="_blank">' + response.report + '</a>';
+                } else {
+                    message = '<h5 class="text-danger">Error!</h5><span class="text-danger">' + response.message + '</span>';
+                }
+
+                bootbox.dialog({
+                    title: "Monthly Report Download",
+                    message: message,
+                    buttons: {
+                        main: {
+                            label: "Close",
+                            className: "btn-default"
+                        }
+                    }
+                });
+            },
+            error: function (response) {
+                if (errorCount < 3) {
+                    admin.addAlert('An error occured, trying again', 'info');
+                    $('#get-product-list').trigger('click');
+                    errorCount++;
+                } else {
+                    admin.addAlert(response.error, 'danger');
+                    el.modal('hide');
+                    errorCount = 0;
+                }
             }
         });
     });

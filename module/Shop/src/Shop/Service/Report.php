@@ -1,6 +1,7 @@
 <?php
 namespace Shop\Service;
 
+use Zend\Json\Json;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
 
@@ -12,8 +13,8 @@ use Zend\ServiceManager\ServiceLocatorAwareTrait;
 class Report implements ServiceLocatorAwareInterface
 {
     use ServiceLocatorAwareTrait;
-    
-    public function createProductList($post)
+
+    public function setReportMemoryLimit()
     {
         $memoryLimit = $this->getShopOptions()
             ->getReportsMemoryLimit();
@@ -21,15 +22,26 @@ class Report implements ServiceLocatorAwareInterface
         if ($memoryLimit) {
             ini_set('memory_limit', $memoryLimit);
         }
+    }
+
+    public function checkMemoryLimit()
+    {
+        if((str_replace('M','',ini_get('memory_limit'))*1048576) - memory_get_usage() < 1048576*16){ // 16 MB headroom
+            throw new \Exception('Almost out of memory, ' . (memory_get_usage(true) / 1024 / 1024) . ' MB used.
+                    Try increasing the "reports memory limit" in the shop settings.
+                    Current limit is: ' . ini_get('memory_limit') . '.' );
+        }
+    }
+    
+    public function createProductList($post)
+    {
+        $this->setReportMemoryLimit();
 
         $objPHPExcel = new \PHPExcel();
         
         $arrayData = [
-            ['Sku', 'Product Name', 'Category', 'Price', 'Size', 'Weight'],
+            ['A' => 'Sku', 'B' => 'Product Name', 'C' => 'Category', 'D' => 'Price', 'E' => 'Size', 'F' => 'Weight'],
         ];
-        
-        $objPHPExcel->getActiveSheet()
-            ->fromArray($arrayData);
         
         $productService         = $this->getProductService();
         $productCategoryService = $this->getProductCategoryService();
@@ -40,17 +52,14 @@ class Report implements ServiceLocatorAwareInterface
         $lastRowNumber          = $products->count() + 1;
         $c                      = 2;
         $previousCategory       = '';
+        $sheet                  = $objPHPExcel->getActiveSheet();
+
+        $sheet->fromArray($arrayData);
         
         /* @var $product \Shop\Model\Product\Product */
         foreach ($products as $key => $product) {
 
-            if((str_replace('M','',ini_get('memory_limit'))*1048576) - memory_get_usage() < 1048576*16){ // 16 MB headroom
-                throw new \Exception('Almost out of memory, ' . (memory_get_usage(true) / 1024 / 1024) . ' MB used.
-                    Try increasing the "reports memory limit" in the shop settings.
-                    Current limit is: ' . ini_get('memory_limit') . '.' );
-            }
-            
-            $sheet = $objPHPExcel->getActiveSheet();
+            $this->checkMemoryLimit();
             
             $currentCategory = $product->getProductCategory()->getCategory();
             
@@ -97,37 +106,70 @@ class Report implements ServiceLocatorAwareInterface
             $c++;
         }
         
-        $objPHPExcel->getActiveSheet()
-            ->getStyle('A1:F1')
+        $sheet->getStyle('A1:F1')
             ->getAlignment()
             ->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         
-        $objPHPExcel->getActiveSheet()
-            ->getStyle('A1:F1')
+        $sheet->getStyle('A1:F1')
             ->getFont()
             ->setBold(true);
         
-        $objPHPExcel->getActiveSheet()
-            ->getStyle('D2:D'.$lastRowNumber)
+        $sheet->getStyle('D2:D'.$lastRowNumber)
             ->getNumberFormat()
             ->setFormatCode('£#,##0.00_-');
         
-        $objPHPExcel->getActiveSheet()
-            ->getStyle('F2:F'.$lastRowNumber)
+       $sheet->getStyle('F2:F'.$lastRowNumber)
             ->getNumberFormat()
             ->setFormatCode('0" gms"');
-        
-        $objPHPExcel->getActiveSheet()->getColumnDimension('A')->setAutoSize(true);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setAutoSize(true);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setAutoSize(true);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setAutoSize(true);
+
+        foreach ($arrayData[0] as $column => $title) {
+            $sheet->getColumnDimension($column)
+                ->setAutoSize(true);
+        }
         
         $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
         $objWriter->save('./data/'.$filename.$fileExtension);
         
         return $filename.$fileExtension;
+    }
+
+    public function createMonthlyTotals()
+    {
+        $this->setReportMemoryLimit();
+
+        $totals = $this->getOrderService()
+            ->getMonthlyTotals();
+
+        $totals = Json::decode($totals);
+
+        $objPHPExcel    = new \PHPExcel();
+        $sheet          = $objPHPExcel->getActiveSheet();
+        $column         = 1;
+
+        foreach ($totals as $row) {
+            $this->checkMemoryLimit();
+            $sheet->setCellValueByColumnAndRow($column, 1, $row->label);
+
+            $columnRow = 2;
+
+            foreach ($row->data as $data) {
+                $sheet->setCellValueByColumnAndRow(0, $columnRow, $data[0]);
+                $sheet->setCellValueByColumnAndRow($column, $columnRow, $data[1]);
+                $columnRow++;
+            }
+
+            $column++;
+        }
+
+        // footer totals
+
+        $sheet->getCell('A1')->setValue('Year');
+
+        $filename = 'monthly-totals.xlsx';
+        $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+        $objWriter->save('./data/' . $filename);
+
+        return $filename;
     }
 
     /**
@@ -162,6 +204,18 @@ class Report implements ServiceLocatorAwareInterface
         ->get('UthandoServiceManager');
         $service = $sl->get('ShopProductCategory');
     
+        return $service;
+    }
+
+    /**
+     * @return \Shop\Service\Order\Order
+     */
+    public function getOrderService()
+    {
+        $sl = $this->getServiceLocator()
+            ->get('UthandoServiceManager');
+        $service = $sl->get('ShopOrder');
+
         return $service;
     }
 }

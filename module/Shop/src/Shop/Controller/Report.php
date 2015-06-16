@@ -54,6 +54,42 @@ class Report extends AbstractActionController
         
         return $jsonModel;
     }
+
+    public function monthlyTotalsAction()
+    {
+        /* @var $service \Shop\Service\Report */
+        $service = $this->getService('Shop\Service\Report');
+
+        $jsonModel = new JsonModel();
+
+        try {
+            $report = $service->createMonthlyTotals();
+        } catch (\Exception $e) {
+            return $jsonModel->setVariables([
+                'status' => 'error',
+                'message' => $e->getMessage(),
+            ]);
+        }
+
+        $fileLink = $this->url()->fromRoute('admin/shop/report', [
+            'action'    => 'download-report',
+            'file'      => $report,
+        ]);
+
+        $jsonModel->setVariables([
+            'url' => $fileLink,
+            'report' => $report,
+            'status' => 'success',
+        ]);
+
+        return $jsonModel;
+
+    }
+
+    public function getReport($params = null)
+    {
+
+    }
     
     public function downloadReportAction()
     {
