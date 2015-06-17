@@ -178,7 +178,7 @@ $endYears = $this->formManager('MonthlyTotalYearList', [
 
         var el = bootbox.dialog({
             title: "Monthly Report Download",
-            message: 'test',
+            message: 'Preparing report',
             buttons: {
                 main: {
                     label: "Close",
@@ -190,8 +190,6 @@ $endYears = $this->formManager('MonthlyTotalYearList', [
         el.find('.modal-content').loadingOverlay({
             loadingText: 'Please wait while I prepare your report'
         });
-
-        //var el = $(this).parent().parent().parent().parent();
 
         $.ajax({
             url: url,

@@ -142,31 +142,67 @@ class Report implements ServiceLocatorAwareInterface
 
         $totals = Json::decode($totals);
 
-        $objPHPExcel    = new \PHPExcel();
-        $sheet          = $objPHPExcel->getActiveSheet();
-        $column         = 1;
+        $objPHPExcel        = new \PHPExcel();
+        $sheet              = $objPHPExcel->getActiveSheet();
+        $column             = 1;
+        $previousColumnRef  = null;
+
+        $sheet->getCell('A1')->setValue('Year');
+        $sheet->getCell('A16')->setValue('Total');
+        $sheet->getCell('A17')->setValue('Inc %');
 
         foreach ($totals as $row) {
             $this->checkMemoryLimit();
             $sheet->setCellValueByColumnAndRow($column, 1, $row->label);
 
-            $columnRow = 2;
+            $columnRow = 1;
 
             foreach ($row->data as $data) {
-                $sheet->setCellValueByColumnAndRow(0, $columnRow, $data[0]);
-                $sheet->setCellValueByColumnAndRow($column, $columnRow, $data[1]);
                 $columnRow++;
+                $sheet->setCellValueByColumnAndRow(0, $columnRow, $data[0]);
+                $dataCell = $sheet->getCellByColumnAndRow($column, $columnRow);
+                $dataCell->setValue($data[1]);
             }
 
+            // footer totals
+            $totalCell  = $sheet->getCellByColumnAndRow($column, 16);
+            $incCell    = $sheet->getCellByColumnAndRow($column, 17);
+            $columnRef  = $totalCell->getColumn();
+
+            $totalCell->setValue('=SUM(' . $columnRef . '2:' . $columnRef . '13)');
+
+            if ($columnRef == 'B') {
+                $incCell->setValue('=B16');
+            } else {
+                $incCell->setValue('=ROUND(((' . $columnRef . '16-' . $previousColumnRef . '16)/' . $previousColumnRef .'16)*100, 2)');
+            }
+
+            $previousColumnRef = $columnRef;
             $column++;
         }
 
-        // footer totals
+        // row totals
+        $totalColumns      = count($totals);
+        $incCol            = $totalColumns + 1;
+        $lastColumnData    = end($totals);
+        $rowCount          = 1;
 
-        $sheet->getCell('A1')->setValue('Year');
+        $sheet->setCellValueByColumnAndRow($incCol, $rowCount, 'Inc %');
 
-        $filename = 'monthly-totals.xlsx';
-        $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+        for($i=1;$i <= count($lastColumnData->data); $i++) {
+            $rowCount++;
+
+            $newCell    = $sheet->getCellByColumnAndRow($totalColumns, $rowCount)->getCoordinate();
+            $prevCell   = $sheet->getCellByColumnAndRow($totalColumns - 1, $rowCount)->getCoordinate();
+            $incCell    = $sheet->getCellByColumnAndRow($incCol, $rowCount);
+
+            $incCell->setValue(
+                '=ROUND(((' . $newCell . '-' . $prevCell . ')/' . $prevCell . ')*100, 2)'
+            );
+        }
+
+        $filename = 'monthly-totals.csv';
+        $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'CSV');
         $objWriter->save('./data/' . $filename);
 
         return $filename;
