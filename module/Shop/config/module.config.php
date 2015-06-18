@@ -174,6 +174,7 @@ return [
             'ShopFieldSet'              => 'Shop\Form\Settings\ShopFieldSet',
             'ShopCheckoutFieldSet'      => 'Shop\Form\Settings\CheckoutFieldSet',
             'ShopPaypalFieldSet'        => 'Shop\Form\Settings\PaypalFieldSet',
+            'ShopReportsFieldSet'       => 'Shop\Form\Settings\ReportsFieldSet',
             'ShopCartCookieFieldSet'    => 'Shop\Form\Settings\CartCookieFieldSet',
             'ShopInvoiceFieldSet'       => 'Shop\Form\Settings\InvoiceFieldSet',
 
@@ -269,6 +270,7 @@ return [
             'Shop\Options\Checkout'     => 'Shop\Service\Factory\CheckoutOptions',
             'Shop\Options\Invoice'      => 'Shop\Service\Factory\InvoiceOptions',
             'Shop\Options\Paypal'       => 'Shop\Service\Factory\PaypalOptions',
+            'Shop\Options\Reports'      => 'Shop\Service\Factory\ReportsOptions',
             'Shop\Options\Shop'         => 'Shop\Service\Factory\ShopOptions',
 
             'Shop\Service\Cart\Cookie'  => 'Shop\Service\Factory\CartCookie',

@@ -255,7 +255,7 @@ class Order extends AbstractRelationalMapperService
         return $orders;
     }
 
-    public function getMonthlyTotals($start = null, $end = null)
+    public function getMonthlyTotals($start = null, $end = null, $monthFormat = 'm')
     {
         $startDate = new \DateTime($start);
         $start = $startDate->format('Y-m-d');
@@ -286,12 +286,14 @@ class Order extends AbstractRelationalMapperService
 
                     for ($i=1; $i < $month; $i++) {
                         $dateObj = \DateTime::createFromFormat('!m', $i);
-                        $totalsArray[$c]['data'][] = [$dateObj->format('F'), 0.00];
+                        $totalsArray[$c]['data'][] = [$dateObj->format($monthFormat), 0.00];
                     }
                 }
             }
 
-            $totalsArray[$c]['data'][] = [$row->monthLong, $row->total];
+            $dateObj = \DateTime::createFromFormat('!m', $row->month);
+
+            $totalsArray[$c]['data'][] = [$dateObj->format($monthFormat), $row->total];
             $year = $row->year;
         }
 

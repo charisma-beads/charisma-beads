@@ -24,40 +24,6 @@ $endYears = $this->formManager('MonthlyTotalYearList', [
 <script src="<?=$this->basePath('js/flot/jquery.flot.resize.js');?>"></script>
 
 <div class="row">
-    <!-- monthly total -->
-    <div class="col-md-12">
-        <div id="monthly-totals" class="panel panel-info">
-            <!-- Default panel contents -->
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    Monthly Totals
-                    <button id="monthly-totals-report-button" class="btn btn-default btn-xs">
-                        Download Report
-                    </button>
-                    <div class="form-inline pull-right">
-                        <div class="monthly-stats start-year form-group">
-                            <span class="control-label"><?=$startYears->getLabel();?></span>
-                            <?=$this->formElement($startYears);?>
-                        </div>
-                        <div class="monthly-stats end-year form-group">
-                            <span class="control-label"><?=$endYears->getLabel();?></span>
-                            <?=$this->formElement($endYears);?>
-                        </div>
-                    </div>
-                </h4>
-
-
-            </div>
-            <div class="panel-table panel-widget">
-                <div class="text-center">
-                    <i class="fa fa-spinner fa-spin"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="row">
     <!-- new orders -->
     <div class="col-md-6">
         <div id="current-orders" class="panel panel-info">
@@ -96,6 +62,38 @@ $endYears = $this->formManager('MonthlyTotalYearList', [
             <!-- Default panel contents -->
             <div class="panel-heading">
                 <h4 class="panel-title">Advert Statistics</h4>
+            </div>
+            <div class="panel-table panel-widget">
+                <div class="text-center">
+                    <i class="fa fa-spinner fa-spin"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- monthly total -->
+    <div class="col-md-6">
+        <div id="monthly-totals" class="panel panel-info">
+            <!-- Default panel contents -->
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    Monthly Totals
+                    <button id="monthly-totals-report-button" class="btn btn-default btn-xs">
+                        Download Report
+                    </button>
+                    <div class="form-inline pull-right">
+                        <div class="monthly-stats start-year form-group">
+                            <span class="control-label"><?=$startYears->getLabel();?></span>
+                            <?=$this->formElement($startYears);?>
+                        </div>
+                        <div class="monthly-stats end-year form-group">
+                            <span class="control-label"><?=$endYears->getLabel();?></span>
+                            <?=$this->formElement($endYears);?>
+                        </div>
+                    </div>
+                </h4>
+
+
             </div>
             <div class="panel-table panel-widget">
                 <div class="text-center">

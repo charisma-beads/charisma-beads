@@ -38,8 +38,11 @@ class Order extends AbstractCrudController
         $start = $this->params()->fromPost('start', null);
         $end = $this->params()->fromPost('end', null);
 
+        /** @var \Shop\Options\ReportsOptions $options */
+        $options = $this->getService('Shop\Options\Reports');
+
         $data = $this->getService()
-            ->getMonthlyTotals($start, $end);
+            ->getMonthlyTotals($start, $end, $options->getMonthFormat());
 
         $viewModel = new ViewModel([
             'monthlyTotals' => $data,

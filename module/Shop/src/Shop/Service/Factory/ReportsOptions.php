@@ -10,22 +10,22 @@
 
 namespace Shop\Service\Factory;
 
-use Shop\Options\ShopOptions as Options;
+use Shop\Options\ReportsOptions as Options;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
- * Class ShopOptions
+ * Class ReportsOptions
  *
  * @package Shop\Service\Factory
  */
-class ShopOptions implements FactoryInterface
+class ReportsOptions implements FactoryInterface
 {
-	public function createService(ServiceLocatorInterface $serviceLocator)
-	{
-	    $config = $serviceLocator->get('config');
-	    $options = isset($config['shop']['shop_options']) ? $config['shop']['shop_options'] : array();
-	    
-	    return new Options($options);
-	}
+    public function createService(ServiceLocatorInterface $serviceLocator)
+    {
+        $config = $serviceLocator->get('config');
+        $options = isset($config['shop']['report_options']) ? $config['shop']['report_options'] : array();
+
+        return new Options($options);
+    }
 }

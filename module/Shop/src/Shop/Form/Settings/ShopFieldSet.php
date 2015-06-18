@@ -133,19 +133,6 @@ class ShopFieldSet extends Fieldset implements InputFilterProviderInterface
                 'column-size' => 'sm-8 col-sm-offset-4',
             ],
         ]);
-
-        $this->add([
-            'name' => 'reportsMemoryLimit',
-            'type' => 'text',
-            'options' => [
-                'label' => 'Reports Memory Limit',
-                'column-size' => 'md-8',
-                'label_attributes' => [
-                    'class' => 'col-md-4',
-                ],
-                'help-block' => 'If left blank will be the default PHP memory limit which is: ' . ini_get('memory_limit'),
-            ],
-        ]);
     }
     
     public function getInputFilterSpecification()
@@ -174,13 +161,6 @@ class ShopFieldSet extends Fieldset implements InputFilterProviderInterface
                 ],
             ],
             'vatNumber' => [
-                'required' => false,
-                'filters' => [
-                    ['name' => 'StripTags'],
-                    ['name' => 'StringTrim'],
-                ],
-            ],
-            'reportsMemoryLimit' => [
                 'required' => false,
                 'filters' => [
                     ['name' => 'StripTags'],

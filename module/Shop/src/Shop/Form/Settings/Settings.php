@@ -63,6 +63,17 @@ class Settings extends Form
                 'label' => 'Invoice Options',
             ],
         ]);
+
+        $this->add([
+            'type' => 'ShopReportsFieldSet',
+            'name' => 'report_options',
+            'attributes' => [
+                'class' => 'col-md-6',
+            ],
+            'options' => [
+                'label' => 'Reports Options',
+            ],
+        ]);
         
         $this->add([
             'name' => 'button-submit',

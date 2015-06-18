@@ -94,12 +94,22 @@ class Report extends AbstractActionController
     public function downloadReportAction()
     {
         $file = $this->params()->fromRoute('file', null);
+
+        $contentTypes = [
+            'csv'   => 'text/csv',
+            'html'  => 'text/html',
+            'ods'   => 'application/vnd.oasis.opendocument.spreadsheet',
+            'pdf'   => 'application/pdf',
+            'xls'   => 'application/vnd.ms-excel',
+            'xlsx'  => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        ];
         
         if (file_exists('./data/'. $file)) {
             $response = $this->getResponse();
-            
+            $ext = pathinfo($file, PATHINFO_EXTENSION);
+
             $response->getHeaders()->addHeaders([
-                'Content-Type'          => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                'Content-Type'          => $contentTypes[$ext],
                 'Content-Disposition'   => 'attachment;filename="' . $file .'"',
                 'Cache-Control'         => 'max-age=0',
                 'Cache-Control'         => 'max-age=1',

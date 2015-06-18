@@ -65,12 +65,12 @@ class Order extends AbstractDbMapper
     {
         $select = $this->getSelect();
         $select->columns([
-            'numOrders' => new Expression('COUNT(order.orderId)'),
-            'total'     => new Expression('SUM(order.total)'),
-            'monthLong' => new Expression("DATE_FORMAT(order.orderDate, '%M')"),
-            'month'     => new Expression("DATE_FORMAT(order.orderDate, '%m')"),
-            'year'      => new Expression("DATE_FORMAT(order.orderDate, '%Y')"),
-
+            'numOrders'     => new Expression('COUNT(order.orderId)'),
+            'total'         => new Expression('SUM(order.total)'),
+            //'monthLong'     => new Expression("DATE_FORMAT(order.orderDate, '%M')"),
+            //'monthShort'    => new Expression("DATE_FORMAT(order.orderDate, '%m')"),
+            'month'         => new Expression("DATE_FORMAT(order.orderDate, '%m')"),
+            'year'          => new Expression("DATE_FORMAT(order.orderDate, '%Y')"),
         ])->join(
             'orderStatus',
             'order.orderStatusId=orderStatus.orderStatusId',

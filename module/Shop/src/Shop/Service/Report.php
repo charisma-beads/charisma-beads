@@ -1,4 +1,13 @@
 <?php
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   Shop\Service
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
+
 namespace Shop\Service;
 
 use Zend\Json\Json;
@@ -14,16 +23,36 @@ class Report implements ServiceLocatorAwareInterface
 {
     use ServiceLocatorAwareTrait;
 
+    /**
+     * @var array
+     */
+    public static $writerTypeMap = [
+        'csv'   => 'CSV',
+        'html'  => 'HTML',
+        'ods'   => 'OpenDocument',
+        'pdf'   => 'PDF',
+        'xls'   => 'Excel5',
+        'xlsx'  => 'Excel2007',
+    ];
+
+    /**
+     * Set the PHP memory limit
+     */
     public function setReportMemoryLimit()
     {
-        $memoryLimit = $this->getShopOptions()
-            ->getReportsMemoryLimit();
+        $memoryLimit = $this->getReportsOptions()
+            ->getMemoryLimit();
 
         if ($memoryLimit) {
             ini_set('memory_limit', $memoryLimit);
         }
     }
 
+    /**
+     * Checks if we are running out of memory
+     *
+     * @throws \Exception
+     */
     public function checkMemoryLimit()
     {
         if((str_replace('M','',ini_get('memory_limit'))*1048576) - memory_get_usage() < 1048576*16){ // 16 MB headroom
@@ -32,10 +61,23 @@ class Report implements ServiceLocatorAwareInterface
                     Current limit is: ' . ini_get('memory_limit') . '.' );
         }
     }
-    
+
+    /**
+     * Create a product report
+     *
+     * @param $post
+     * @return string
+     * @throws \Exception
+     * @throws \PHPExcel_Exception
+     * @throws \PHPExcel_Reader_Exception
+     */
     public function createProductList($post)
     {
         $this->setReportMemoryLimit();
+
+        $options    = $this->getReportsOptions();
+        $writerExt  = $options->getWriterType();
+        $writerType = self::$writerTypeMap[$writerExt];
 
         $objPHPExcel = new \PHPExcel();
         
@@ -48,7 +90,7 @@ class Report implements ServiceLocatorAwareInterface
         
         $products               = $productService->search($post);
         $filename               = ($productCategoryService->getById($post['productCategoryId'])->getIdent()) ?: 'all-products';
-        $fileExtension          = '.xlsx';
+        $fileExtension          = '.' . $writerExt;
         $lastRowNumber          = $products->count() + 1;
         $c                      = 2;
         $previousCategory       = '';
@@ -66,7 +108,8 @@ class Report implements ServiceLocatorAwareInterface
             if ($previousCategory !== $currentCategory) {
                 $pathway = $productCategoryService->getParentCategories($product->getProductCategoryId());
                 $categoryTitle = [];
-                
+
+                /* @var $category \Shop\Model\Product\Category */
                 foreach ($pathway as $category) {
                     $categoryTitle[] = $category->getCategory();
                 }
@@ -126,19 +169,40 @@ class Report implements ServiceLocatorAwareInterface
             $sheet->getColumnDimension($column)
                 ->setAutoSize(true);
         }
+
+        if ($writerExt == 'pdf') {
+            \PHPExcel_Settings::setPdfRenderer(
+                \PHPExcel_Settings::PDF_RENDERER_DOMPDF,
+                './vendor/dompdf/dompdf'
+            );
+
+            $sheet->setShowGridLines(false);
+            $sheet->getPageSetup()
+                ->setOrientation(\PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);
+        }
         
-        $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+        $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, $writerType);
         $objWriter->save('./data/'.$filename.$fileExtension);
         
         return $filename.$fileExtension;
     }
 
+    /**
+     * Create a report on monthly sales totals
+     *
+     * @return string
+     * @throws \Exception
+     * @throws \PHPExcel_Exception
+     * @throws \PHPExcel_Reader_Exception
+     */
     public function createMonthlyTotals()
     {
         $this->setReportMemoryLimit();
 
+        $options = $this->getReportsOptions();
+
         $totals = $this->getOrderService()
-            ->getMonthlyTotals();
+            ->getMonthlyTotals(null, null, $options->getMonthFormat());
 
         $totals = Json::decode($totals);
 
@@ -164,7 +228,7 @@ class Report implements ServiceLocatorAwareInterface
                 $dataCell->setValue($data[1]);
             }
 
-            // footer totals
+            // column totals
             $totalCell  = $sheet->getCellByColumnAndRow($column, 16);
             $incCell    = $sheet->getCellByColumnAndRow($column, 17);
             $columnRef  = $totalCell->getColumn();
@@ -174,14 +238,14 @@ class Report implements ServiceLocatorAwareInterface
             if ($columnRef == 'B') {
                 $incCell->setValue('=B16');
             } else {
-                $incCell->setValue('=ROUND(((' . $columnRef . '16-' . $previousColumnRef . '16)/' . $previousColumnRef .'16)*100, 2)');
+                $incCell->setValue('=((' . $columnRef . '16-' . $previousColumnRef . '16)/' . $previousColumnRef .'16)*100');
             }
 
             $previousColumnRef = $columnRef;
             $column++;
         }
 
-        // row totals
+        // row increase percentage
         $totalColumns      = count($totals);
         $incCol            = $totalColumns + 1;
         $lastColumnData    = end($totals);
@@ -197,24 +261,51 @@ class Report implements ServiceLocatorAwareInterface
             $incCell    = $sheet->getCellByColumnAndRow($incCol, $rowCount);
 
             $incCell->setValue(
-                '=ROUND(((' . $newCell . '-' . $prevCell . ')/' . $prevCell . ')*100, 2)'
+                '=((' . $newCell . '-' . $prevCell . ')/' . $prevCell . ')*100'
             );
         }
 
-        $filename = 'monthly-totals.csv';
-        $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'CSV');
+        // format numbers
+        $lastColumn = $sheet->getHighestColumn();
+
+        $sheet->getStyle('B2:' . $lastColumn . '17')
+            ->getNumberFormat()
+            ->setFormatCode(\PHPExcel_Style_NumberFormat::FORMAT_NUMBER_00);
+
+        foreach($sheet->getColumnIterator() as $column) {
+            $sheet->getColumnDimension($column->getColumnIndex())
+                ->setAutoSize(true);
+        }
+
+        $writerExt  = $options->getWriterType();
+        $writerType = self::$writerTypeMap[$writerExt];
+        $filename   = 'monthly-totals.' . $writerExt;
+
+        if ($writerExt == 'pdf') {
+            \PHPExcel_Settings::setPdfRenderer(
+                \PHPExcel_Settings::PDF_RENDERER_DOMPDF,
+                './vendor/dompdf/dompdf'
+            );
+
+            $sheet->setShowGridLines(false);
+            $sheet->getPageSetup()
+                ->setOrientation(\PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);
+        }
+
+        $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, $writerType);
+
         $objWriter->save('./data/' . $filename);
 
         return $filename;
     }
 
     /**
-     * @return \Shop\Options\ShopOptions
+     * @return \Shop\Options\ReportsOptions
      */
-    public function getShopOptions()
+    public function getReportsOptions()
     {
         $sl = $this->getServiceLocator();
-        $service = $sl->get('Shop/Options/Shop');
+        $service = $sl->get('Shop/Options/Reports');
 
         return $service;
     }

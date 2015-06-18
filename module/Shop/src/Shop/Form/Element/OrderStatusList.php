@@ -14,6 +14,11 @@ use Zend\Form\Element\Select;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
 
+/**
+ * Class OrderStatusList
+ *
+ * @package Shop\Form\Element
+ */
 class OrderStatusList extends Select implements ServiceLocatorAwareInterface
 {
     use ServiceLocatorAwareTrait;
