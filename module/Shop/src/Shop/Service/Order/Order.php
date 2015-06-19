@@ -28,6 +28,25 @@ class Order extends AbstractRelationalMapperService
     ];
 
     /**
+     * @param $id
+     * @param null $col
+     * @return array|mixed|\Shop\Model\Order\Order
+     */
+    public function getById($id, $col = null)
+    {
+        $order = parent::getById($id, $col);
+
+        if ($order) {
+            $this->populate($order, true);
+        }
+
+        \FB::info($order, __METHOD__);
+
+        return $order;
+
+    }
+
+    /**
      * @var array
      */
     protected $referenceMap = [

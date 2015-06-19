@@ -138,6 +138,11 @@ class Order extends AbstractCrudController
 	public function printAction()
 	{
 	    $order = $this->getCustomerOrder();
+
+        // if order returns false then return to my-order
+        if (false === $order) {
+            return $this->redirect()->toRoute('shop/order');
+        }
 	    
 	    $pdf = new PdfModel(['order' => $order]);
 	    $pdf->setTerminal(true);
@@ -165,12 +170,20 @@ class Order extends AbstractCrudController
 	private function getCustomerOrder()
 	{
 	    // make sure we only get order for the logged in user
+        // if admin then allow access to all orders
 	    $id = $this->params()->fromRoute('orderId', 0);
 	    $userId = $this->identity()->getUserId();
 	     
 	    /* @var $service \Shop\Service\Order\Order */
 	    $service = $this->getService();
-	    $order = $service->getCustomerOrderByUserId($id, $userId);
+
+        if ($this->params()->fromRoute('is-admin', false)) {
+            $id = $this->params()->fromRoute('id', 0);
+            $order = $service->getById($id);
+        } else {
+            $order = $service->getCustomerOrderByUserId($id, $userId);
+        }
+
 	    
 	    return $order;
 	}
