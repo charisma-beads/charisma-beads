@@ -118,7 +118,7 @@
                                 <?=$this->contact('details.phone');?>
                             </a></strong>
 							<span class="hide_mobile">
-								&bull; <a href="mailto:<?=$this->contact('details.email');?>"><?=$this->contact('details.email');?></a>
+								&bull; <a href="<?=$this->url('contact');?>"><?=$this->contact('details.email');?></a>
 							</span>
 
                         </div>
@@ -218,7 +218,7 @@
                                 <?=$this->contact('details.address.town');?>&nbsp;
                                 <?=$this->contact('details.address.county');?>&nbsp;
                                 <?=$this->contact('details.address.postcode');?><br />
-                                Email:&nbsp;<a href="mailto:<?=$this->contact('details.email');?>"><?=$this->contact('details.email');?></a><br />
+                                Email:&nbsp;<a href="<?=$this->url('contact');?>"><?=$this->contact('details.email');?></a><br />
                                 Phone:&nbsp;<a href="tel:<?=$this->contact('details.phone');?>">
                                 <?=$this->contact('details.phone');?>
                             </a><br />
