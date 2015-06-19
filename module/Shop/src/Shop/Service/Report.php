@@ -63,15 +63,33 @@ class Report implements ServiceLocatorAwareInterface
     }
 
     /**
+     * @param $report
+     * @param null|array $params
+     * @return mixed
+     */
+    public function create($report, $params = null)
+    {
+        $reportMethod = 'create' . ucfirst($report);
+
+        if ($params) {
+            $report = $this->$reportMethod($params);
+        } else {
+            $report = $this->$reportMethod();
+        }
+
+        return $report;
+    }
+
+    /**
      * Create a product report
      *
-     * @param $post
+     * @param array $post
      * @return string
      * @throws \Exception
      * @throws \PHPExcel_Exception
      * @throws \PHPExcel_Reader_Exception
      */
-    public function createProductList($post)
+    public function createProductList(array $post)
     {
         $this->setReportMemoryLimit();
 

@@ -25,37 +25,18 @@ class Report extends AbstractActionController
     
     public function productListAction()
     {
-        /* @var $service \Shop\Service\Report */
-        $service = $this->getService('Shop\Service\Report');
-        
         $post = $this->params()->fromPost();
-
-        $jsonModel = new JsonModel();
-
-        try {
-            $report = $service->createProductList($post);
-        } catch (\Exception $e) {
-            return $jsonModel->setVariables([
-                'status' => 'error',
-                'message' => $e->getMessage(),
-            ]);
-        }
         
-        $fileLink = $this->url()->fromRoute('admin/shop/report', [
-            'action'    => 'download-report',
-            'file'      => $report, 
-        ]);
-        
-        $jsonModel->setVariables([
-            'url' => $fileLink,
-            'report' => $report,
-            'status' => 'success',
-        ]);
-        
-        return $jsonModel;
+        return $this->getReport('productList', $post);
     }
 
     public function monthlyTotalsAction()
+    {
+        return $this->getReport('monthlyTotals');
+
+    }
+
+    public function getReport($report, $params = null)
     {
         /* @var $service \Shop\Service\Report */
         $service = $this->getService('Shop\Service\Report');
@@ -63,7 +44,7 @@ class Report extends AbstractActionController
         $jsonModel = new JsonModel();
 
         try {
-            $report = $service->createMonthlyTotals();
+            $report = $service->create($report, $params);
         } catch (\Exception $e) {
             return $jsonModel->setVariables([
                 'status' => 'error',
@@ -83,12 +64,6 @@ class Report extends AbstractActionController
         ]);
 
         return $jsonModel;
-
-    }
-
-    public function getReport($params = null)
-    {
-
     }
     
     public function downloadReportAction()

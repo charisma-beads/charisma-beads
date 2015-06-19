@@ -82,11 +82,11 @@ $endYears = $this->formManager('MonthlyTotalYearList', [
                         Download Report
                     </button>
                     <div class="form-inline pull-right">
-                        <div class="monthly-stats start-year form-group">
+                        <div class="monthly-stats start-year form-group form-group-sm">
                             <span class="control-label"><?=$startYears->getLabel();?></span>
                             <?=$this->formElement($startYears);?>
                         </div>
-                        <div class="monthly-stats end-year form-group">
+                        <div class="monthly-stats end-year form-group form-group-sm">
                             <span class="control-label"><?=$endYears->getLabel();?></span>
                             <?=$this->formElement($endYears);?>
                         </div>

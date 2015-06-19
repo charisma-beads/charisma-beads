@@ -5,6 +5,22 @@
     clear: both;
 }
 
+/* Panel Styles */
+.panel-title {
+    position: relative;
+    vertical-align: middle;
+}
+.panel-title button {
+    position: absolute;
+    margin-left: 5px;
+    margin-top: -2px;
+}
+
+.panel-title select.input-sm {
+    height: 25px;
+    line-height: 25px;
+    padding: 5px 10px;
+}
 
 /* Graph styles */
 .plot-container {
