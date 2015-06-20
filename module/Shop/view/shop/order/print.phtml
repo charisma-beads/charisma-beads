@@ -3,7 +3,9 @@
     <head>
         <?=$this->headTitle($this->invoiceOption('merchantName') . ' - Order No. ' .$this->order->getOrderNumber()); ?>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <?=$this->partial('shop/order/styles');?>
+        <?=$this->partial('shop/order/styles', [
+            'print' => true,
+        ]);?>
     </head>
     <body>
         <?=$this->partial('shop/order/table-view', [

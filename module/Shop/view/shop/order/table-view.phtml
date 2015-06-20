@@ -149,4 +149,9 @@
         <?=$this->contact('company.address.county');?>, <?=$this->contact('details.address.postcode');?>
     </p>
 </div>
+
+<div class="page-footer">
+    Page: <span class="pagenum"></span> - Order No: <?=$this->order->getOrderNumber();?>
+    <span>- <?=$this->invoiceOption('merchantName');?></span>
+</div>
     

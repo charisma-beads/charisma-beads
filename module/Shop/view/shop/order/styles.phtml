@@ -115,4 +115,20 @@
     .footer p {
         margin: 2px;
     }
+
+    <?php if ($this->print): ?>
+    .page-footer {
+        position: fixed;
+        bottom: 0px;
+        width: 100%;
+    }
+
+    .pagenum:before {
+        content: counter(page);
+    }
+    <?php else: ?>
+    .page-footer {
+        display: none;
+    }
+    <?php endif; ?>
 </style>

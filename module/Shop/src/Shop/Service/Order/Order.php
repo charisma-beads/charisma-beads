@@ -40,8 +40,6 @@ class Order extends AbstractRelationalMapperService
             $this->populate($order, true);
         }
 
-        \FB::info($order, __METHOD__);
-
         return $order;
 
     }
