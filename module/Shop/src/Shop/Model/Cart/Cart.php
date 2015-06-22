@@ -32,6 +32,14 @@ class Cart extends AbstractCollection implements ModelInterface
     }
 
     /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->getCartId();
+    }
+
+    /**
      * Return cart item by its id
      *
      * @param $id

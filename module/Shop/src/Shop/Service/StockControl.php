@@ -13,6 +13,8 @@ namespace Shop\Service;
 
 use Shop\Model\Cart\Cart;
 use Shop\Model\Cart\Item as CartItem;
+use Shop\Model\Order\Line;
+use Shop\Model\Order\Order;
 use Shop\Model\Product\Product as ProductModel;
 use Shop\Service\Product\Product;
 use UthandoCommon\Service\ServiceException;
@@ -55,13 +57,13 @@ class StockControl
                 $this->save($this->event->getParam('product'));
                 break;
             case 'stock.restore':
-                $this->restore($this->event->getParam('cartItem'));
+                $this->restore($this->event->getParam('item'));
                 break;
-            case 'stock.restore.cart':
-                $this->restoreStockFromOneCart($this->event->getParam('cart'));
+            case 'stock.restore.one':
+                $this->restoreStockFromOne($this->event->getParam('model'));
                 break;
-            case 'stock.restore.carts':
-                $this->restoreStockFromManyCarts($this->event->getParam('carts'));
+            case 'stock.restore.many':
+                $this->restoreStockFromMany($this->event->getParam('models'));
                 break;
         }
     }
@@ -73,13 +75,13 @@ class StockControl
      */
     public function check()
     {
-        /* @var $cartItem CartItem */
-        $cartItem = $this->event->getParam('cartItem');
+        /* @var $item CartItem|Line */
+        $item = $this->event->getParam('item');
         /* @var $product ProductModel */
         $product = $this->event->getParam('product');
         $qty     = $this->event->getParam('qty');
 
-        $currentCartQuantity = $cartItem->getQuantity();
+        $currentCartQuantity = $item->getQuantity();
         // calculate the difference that's in the cart and what is asked for.
         $diff = ($currentCartQuantity < $qty) ? ($qty - $currentCartQuantity) : ($currentCartQuantity - $qty);
 
@@ -115,10 +117,10 @@ class StockControl
     /**
      * Put back any unwanted quantities of a product
      *
-     * @param CartItem $item
+     * @param CartItem|Line $item
      * @throws ServiceException
      */
-    public function restore(CartItem $item)
+    public function restore($item)
     {
         /* @var $product ProductModel */
         $product = $this->productService->getById(
@@ -135,13 +137,13 @@ class StockControl
     }
 
     /**
-     * restore unwanted product quantities from one cart.
+     * restore unwanted product quantities from one model.
      *
-     * @param $cart
+     * @param $model
      */
-    public function restoreStockFromOneCart($cart)
+    public function restoreStockFromOne($model)
     {
-        $this->processCart($cart);
+        $this->processCart($model);
     }
 
     /**
@@ -154,31 +156,31 @@ class StockControl
     }
 
     /**
-     * Restore unwanted product quantities from many carts
+     * Restore unwanted product quantities from many models
      *
-     * @param array $carts
+     * @param array $models
      */
-    public function restoreStockFromManyCarts($carts)
+    public function restoreStockFromMany($models)
     {
         $ids = [];
 
-        /* @var $cart Cart */
-        foreach ($carts as $cart) {
-            $ids[] = $cart->getCartId();
-            $this->processCart($cart);
+        /* @var $model Cart|Line */
+        foreach ($models as $model) {
+            $ids[] = $model->getId();
+            $this->processCart($model);
         }
 
         $this->event->setParam('ids', $ids);
     }
 
     /**
-     * @param Cart $cart
+     * @param Cart|Order $model
      * @throws ServiceException
      */
-    public function processCart(Cart $cart)
+    public function process($model)
     {
-        /* @var $item CartItem */
-        foreach ($cart as $item) {
+        /* @var $item CartItem|Line */
+        foreach ($model as $item) {
             $this->restore($item);
         }
     }

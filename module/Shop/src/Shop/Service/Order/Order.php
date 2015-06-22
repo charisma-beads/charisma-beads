@@ -145,11 +145,12 @@ class Order extends AbstractRelationalMapperService
         /* @var $item \Shop\Model\Cart\Item */
         foreach($cart->getCart() as $item) {
             $lineData = [
-            	'orderId'  => $orderId,
-                'qty'      => $item->getQuantity(),
-                'price'    => $item->getPrice(),
-                'tax'      => $item->getTax(),
-                'metadata' => $item->getMetadata(),
+            	'orderId'   => $orderId,
+                'productId' => $item->getMetadata()->getProductId(),
+                'qty'       => $item->getQuantity(),
+                'price'     => $item->getPrice(),
+                'tax'       => $item->getTax(),
+                'metadata'  => $item->getMetadata(),
             ];
 
             /* @var $orderLineService \Shop\Service\Order\Line */
@@ -206,6 +207,9 @@ class Order extends AbstractRelationalMapperService
      */
     public function updateOrderStatus($orderNumber, $orderStatus)
     {
+        /* @var $options \Shop\Options\CheckoutOptions */
+        $options = $this->getService('Shop\Options\Checkout');
+
         $orderNumber = (int) $orderNumber;
         $orderStatus = (int) $orderStatus;
         /* @var $mapper \Shop\Mapper\Order\Order */
@@ -214,6 +218,32 @@ class Order extends AbstractRelationalMapperService
 
         $order->setOrderStatusId($orderStatus);
         $result = $this->save($order);
+
+        if ($result && $options->isEmailCustomerOnStatusChange()) {
+            $this->populate($order, true);
+            /* @var $shopOptions \Shop\Options\ShopOptions */
+            $shopOptions = $this->getService('Shop\Options\Shop');
+
+            $subject = 'Order Status From %s Order No. %s';
+
+            $emailView = new ViewModel([
+                'order' => $order,
+            ]);
+
+            $emailView->setTemplate('shop/email/status-change');
+
+            $this->getEventManager()->trigger('mail.send', $this, [
+                'recipient'        => [
+                    'name'      => $order->getCustomer()->getFullName(),
+                    'address'   => $order->getCustomer()->getEmail(),
+                ],
+                'layout'           => 'shop/email/order',
+                'layout_params'    => ['order' => $order],
+                'body'             => $emailView,
+                'subject'          => sprintf($subject, $shopOptions->getMerchantName(), $order->getOrderNumber()),
+                'transport'        => $options->getOrderEmail(),
+            ]);
+        }
 
         return $result;
     }
@@ -332,6 +362,8 @@ class Order extends AbstractRelationalMapperService
         $options = $this->getService('Shop\Options\Checkout');
         /* @var $invoiceOptions \Shop\Options\InvoiceOptions */
         $invoiceOptions = $this->getService('Shop\Options\Invoice');
+        /* @var $shopOptions \Shop\Options\ShopOptions */
+        $shopOptions = $this->getService('Shop\Options\Shop');
 
         $emailView = new ViewModel([
             'order' => $order,
@@ -349,7 +381,7 @@ class Order extends AbstractRelationalMapperService
             'layout'           => 'shop/email/order',
             'layout_params'    => ['order' => $order],
             'body'             => $emailView,
-            'subject'          => sprintf($subject, $invoiceOptions->getMerchantName(), $order->getOrderNumber()),
+            'subject'          => sprintf($subject, $shopOptions->getMerchantName(), $order->getOrderNumber()),
             'transport'        => $options->getOrderEmail(),
         ]);
         

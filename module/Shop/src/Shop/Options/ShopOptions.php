@@ -20,6 +20,11 @@ use Zend\Stdlib\AbstractOptions;
 class ShopOptions extends AbstractOptions
 {
     /**
+     * @var string
+     */
+    protected $merchantName;
+
+    /**
      * @var boolean
      */
     protected $alert;
@@ -63,6 +68,24 @@ class ShopOptions extends AbstractOptions
      * @var bool
      */
     protected $autoIncrementCart;
+
+    /**
+     * @return string
+     */
+    public function getMerchantName()
+    {
+        return $this->merchantName;
+    }
+
+    /**
+     * @param string $merchantName
+     * @return $this
+     */
+    public function setMerchantName($merchantName)
+    {
+        $this->merchantName = $merchantName;
+        return $this;
+    }
 
     /**
      * @return bool

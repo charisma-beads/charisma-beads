@@ -10,7 +10,7 @@
 <table class="col-12 panel address">
     <tr class="panel panel-default">
         <td class="col-4 panel-heading address-heading">
-            <h4 class="panel-title"> <?=$this->invoiceOption('merchantName');?></h4>
+            <h4 class="panel-title"> <?=$this->shopOption('merchantName');?></h4>
         </td>
         <td>&nbsp;</td>
         <td class="col-4 panel-heading address-heading">
@@ -152,6 +152,6 @@
 
 <div class="page-footer">
     Page: <span class="pagenum"></span> - Order No: <?=$this->order->getOrderNumber();?>
-    <span>- <?=$this->invoiceOption('merchantName');?></span>
+    <span>- <?=$this->shopOption('merchantName');?></span>
 </div>
     

@@ -120,6 +120,19 @@ class CheckoutFieldSet extends Fieldset implements InputFilterProviderInterface
                 'column-size' => 'sm-8 col-sm-offset-4',
             ],
         ]);
+
+        $this->add([
+            'name'			=> 'emailCustomerOnStatusChange',
+            'type'			=> 'checkbox',
+            'options'		=> [
+                'label'			=> 'Email Customer On Order Status Change',
+                'use_hidden_element' => true,
+                'checked_value' => '1',
+                'unchecked_value' => '0',
+                'required' 		=> false,
+                'column-size' => 'sm-8 col-sm-offset-4',
+            ],
+        ]);
     }
     
     public function getInputFilterSpecification()

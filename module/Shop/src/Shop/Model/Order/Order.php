@@ -73,6 +73,14 @@ class Order implements ModelInterface
     /**
      * @return int
      */
+    public function getId()
+    {
+        return $this->getOrderId();
+    }
+
+    /**
+     * @return int
+     */
 	public function getOrderId()
 	{
 		return $this->orderId;

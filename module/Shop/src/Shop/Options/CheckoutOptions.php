@@ -58,6 +58,11 @@ class CheckoutOptions extends AbstractOptions
      * @var bool
      */
     protected $sendOrderToAdmin;
+
+    /**
+     * @var bool
+     */
+    protected $emailCustomerOnStatusChange;
     
 	/**
 	 * @return boolean $PayCheck
@@ -67,9 +72,10 @@ class CheckoutOptions extends AbstractOptions
 		return $this->payCheck;
 	}
 
-	/**
-	 * @param boolean $payCheck
-	 */
+    /**
+     * @param boolean $payCheck
+     * @return $this
+     */
 	public function setPayCheck($payCheck)
 	{
 		$this->payCheck = $payCheck;
@@ -84,9 +90,10 @@ class CheckoutOptions extends AbstractOptions
 		return $this->collectInstore;
 	}
 
-	/**
-	 * @param boolean $collectInstore
-	 */
+    /**
+     * @param boolean $collectInstore
+     * @return $this
+     */
 	public function setCollectInstore($collectInstore)
 	{
 		$this->collectInstore = $collectInstore;
@@ -101,9 +108,10 @@ class CheckoutOptions extends AbstractOptions
 		return $this->payCreditCard;
 	}
 
-	/**
-	 * @param boolean $payCreditCard
-	 */
+    /**
+     * @param $payCreditCard
+     * @return $this
+     */
 	public function setPayCreditCard($payCreditCard)
 	{
 		$this->payCreditCard = $payCreditCard;
@@ -118,9 +126,10 @@ class CheckoutOptions extends AbstractOptions
 		return $this->payPhone;
 	}
 
-	/**
-	 * @param boolean $payPhone
-	 */
+    /**
+     * @param $payPhone
+     * @return $this
+     */
 	public function setPayPhone($payPhone)
 	{
 		$this->payPhone = $payPhone;
@@ -135,9 +144,10 @@ class CheckoutOptions extends AbstractOptions
 		return $this->payPaypal;
 	}
 
-	/**
-	 * @param boolean $payPaypal
-	 */
+    /**
+     * @param $payPaypal
+     * @return $this
+     */
 	public function setPayPaypal($payPaypal)
 	{
 		$this->payPaypal = $payPaypal;
@@ -195,6 +205,24 @@ class CheckoutOptions extends AbstractOptions
     public function setSendOrderToAdmin($sendOrderToAdmin)
     {
         $this->sendOrderToAdmin = $sendOrderToAdmin;
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isEmailCustomerOnStatusChange()
+    {
+        return $this->emailCustomerOnStatusChange;
+    }
+
+    /**
+     * @param boolean $emailCustomerOnStatusChange
+     * @return $this
+     */
+    public function setEmailCustomerOnStatusChange($emailCustomerOnStatusChange)
+    {
+        $this->emailCustomerOnStatusChange = (bool) $emailCustomerOnStatusChange;
         return $this;
     }
 }

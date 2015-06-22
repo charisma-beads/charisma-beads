@@ -33,18 +33,6 @@ class InvoiceFieldSet extends Fieldset implements InputFilterProviderInterface
     public function init()
     {
         $this->add([
-            'name' => 'merchantName',
-            'type' => 'text',
-            'options' => [
-                'label' => 'Merchant Name',
-                'column-size' => 'md-8',
-                'label_attributes' => [
-                    'class' => 'col-md-4',
-                ],
-            ],
-        ]);
-
-        $this->add([
             'name' => 'fontSize',
             'type' => 'text',
             'options' => [
@@ -87,13 +75,6 @@ class InvoiceFieldSet extends Fieldset implements InputFilterProviderInterface
     public function getInputFilterSpecification()
     {
         return [
-            'merchantName' => [
-                'required' => true,
-                'filters' => [
-                    ['name' => 'StripTags'],
-                    ['name' => 'StringTrim'],
-                ],
-            ],
             'fontSize' => [
                 'required' => true,
                 'filters' => [

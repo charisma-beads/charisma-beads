@@ -91,6 +91,10 @@ class Order extends AbstractDbMapper
         return $this->fetchResult($select, new ResultSet());
     }
 
+    /**
+     * @param $orderNumber
+     * @return null|\Shop\Model\Order\Order
+     */
     public function getOrderByOrderNumber($orderNumber)
     {
         $select = $this->getSelect();

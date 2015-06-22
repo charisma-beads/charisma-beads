@@ -18,6 +18,11 @@ class Line implements ModelInterface
      * @var int
      */
     protected $orderId;
+
+    /**
+     * @var int|null
+     */
+    protected $productId;
     
     /**
      * @var int
@@ -74,6 +79,24 @@ class Line implements ModelInterface
 		$this->orderId = $orderId;
 		return $this;
 	}
+
+    /**
+     * @return int|null
+     */
+    public function getProductId()
+    {
+        return $this->productId;
+    }
+
+    /**
+     * @param int|null $productId
+     * @return $this
+     */
+    public function setProductId($productId)
+    {
+        $this->productId = $productId;
+        return $this;
+    }
 
     /**
      * @return int

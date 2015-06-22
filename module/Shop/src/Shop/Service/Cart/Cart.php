@@ -112,8 +112,8 @@ class Cart extends AbstractMapperService implements InitializableInterface
             'stock.check',
             'stock.save',
             'stock.restore',
-            'stock.restore.cart',
-            'stock.restore.carts'
+            'stock.restore.one',
+            'stock.restore.many'
         ], [$stockControl, 'init']);
     }
 
@@ -241,14 +241,14 @@ class Cart extends AbstractMapperService implements InitializableInterface
         
         $cart = $this->getCart();
 
-        /** @var $cartItem CartItem */
-        $cartItem = ($cart->offsetExists($productId)) ? $cart->offsetGet($productId) : new CartItem();
+        /** @var $item CartItem */
+        $item = ($cart->offsetExists($productId)) ? $cart->offsetGet($productId) : new CartItem();
         
         if ($this->getShopOptions()->getAutoIncrementCart()) {
-            $qty = $qty + $cartItem->getQuantity();
+            $qty = $qty + $item->getQuantity();
         }
 
-        $argv = compact('product', 'qty', 'cartItem');
+        $argv = compact('product', 'qty', 'item');
         $argv = $this->prepareEventArguments($argv);
 
         $this->getEventManager()->trigger('stock.check', $this, $argv);
@@ -256,23 +256,23 @@ class Cart extends AbstractMapperService implements InitializableInterface
         $qty = $argv['qty'];
         
         if (0 == $qty) {
-            $this->removeItem($cartItem->getCartItemId());
+            $this->removeItem($item->getCartItemId());
             return false;
         }
 
-        $cartItem->setPrice($productClone->getPrice())
+        $item->setPrice($productClone->getPrice())
             ->setQuantity($qty)
             ->setTax($productClone->getTaxCode()->getTaxRate()->getTaxRate())
             ->setMetadata($this->getProductMetaData($productClone, $optionId))
             ->setCartId($this->getCart()->getCartId());
         
-        $cart->offsetSet($productId, $cartItem);
+        $cart->offsetSet($productId, $item);
         
         $this->persist();
 
         $this->getEventManager()->trigger('stock.save', $this, $argv);
         
-        return $cartItem;
+        return $item;
     }
 
     /**
@@ -286,9 +286,9 @@ class Cart extends AbstractMapperService implements InitializableInterface
 
         foreach ($items as $cartItemId => $qty) {
 
-            $cartItem = $cart->getCartItemById($cartItemId);
+            $item = $cart->getCartItemById($cartItemId);
 
-            if (!$cartItem || $qty < 0) continue;
+            if (!$item || $qty < 0) continue;
 
             if ($qty == 0) {
                 $this->removeItem($cartItemId);
@@ -296,28 +296,28 @@ class Cart extends AbstractMapperService implements InitializableInterface
 
                 /* @var $productService \Shop\Service\Product\Product */
                 $productService = $this->getService('ShopProduct');
-                $product = $productService->getById($cartItem->getMetadata()->getProductId());
+                $product = $productService->getById($item->getMetadata()->getProductId());
 
-                $argv = compact('product', 'qty', 'cartItem');
+                $argv = compact('product', 'qty', 'item');
                 $argv = $this->prepareEventArguments($argv);
 
                 $this->getEventManager()->trigger('stock.check', $this, $argv);
 
                 $qty = $argv['qty'];
 
-                $cartItem->setQuantity($qty);
+                $item->setQuantity($qty);
 
-                $offsetKey = $cartItem->getMetadata()->getProductId();
+                $offsetKey = $item->getMetadata()->getProductId();
 
                 // check for option
-                if ($cartItem->getMetadata()->getOption() instanceof ProductOption) {
+                if ($item->getMetadata()->getOption() instanceof ProductOption) {
                     $offsetKey = join('-', [
                         $offsetKey,
-                        $cartItem->getMetadata()->getOption()->getProductOptionId()
+                        $item->getMetadata()->getOption()->getProductOptionId()
                     ]);
                 }
 
-                $cart->offsetSet($offsetKey, $cartItem);
+                $cart->offsetSet($offsetKey, $item);
 
                 $this->getEventManager()->trigger('stock.save', $this, $argv);
             }
@@ -361,9 +361,9 @@ class Cart extends AbstractMapperService implements InitializableInterface
      */
     public function removeItem($id)
     {
-        $cartItem = $this->getCartItemService()->getById($id);
+        $item = $this->getCartItemService()->getById($id);
 
-        $argv = compact('cartItem');
+        $argv = compact('item');
         $argv = $this->prepareEventArguments($argv);
 
         $this->getEventManager()->trigger('stock.restore', $this, $argv);
@@ -376,17 +376,17 @@ class Cart extends AbstractMapperService implements InitializableInterface
      */
     public function clear($restoreStock = true)
     {
-        $cart = $this->getCart();
+        $model = $this->getCart();
 
         if ($restoreStock) {
-            $argv = compact('cart');
+            $argv = compact('model');
             $argv = $this->prepareEventArguments($argv);
 
-            $this->getEventManager()->trigger('stock.restore.cart', $this, $argv);
+            $this->getEventManager()->trigger('stock.restore.one', $this, $argv);
         }
 
-        $cart->clear();
-        $this->delete($cart->getCartId());
+        $model->clear();
+        $this->delete($model->getCartId());
         $this->getCartCookieService()->removeCartVerifierCookie();
         unset($this->cart);
     }
@@ -613,20 +613,20 @@ class Cart extends AbstractMapperService implements InitializableInterface
         // TODO: add date format to shop options.
         $expiryDate = $date->format('Y-m-d H:i:s');
 
-        $carts = $cartMapper->getExpiredCarts($expiryDate);
+        $models = $cartMapper->getExpiredCarts($expiryDate);
 
-        if ($carts->count() == 0) {
+        if ($models->count() == 0) {
             return 0;
         }
 
         /* @var $cart CartModel */
-        foreach ($carts as $cart) {
+        foreach ($models as $cart) {
             $this->loadCartItems($cart);
         }
 
-        $argv = compact('carts');
+        $argv = compact('models');
         $argv = $this->prepareEventArguments($argv);
-        $this->getEventManager()->trigger('stock.restore.carts', $this, $argv);
+        $this->getEventManager()->trigger('stock.restore.many', $this, $argv);
         $ids = $argv['ids'];
 
         return $cartMapper->deleteCartsByIds($ids);

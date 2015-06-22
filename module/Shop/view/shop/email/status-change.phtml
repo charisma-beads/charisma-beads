@@ -1,0 +1,10 @@
+<?php
+/* @var $order \Shop\Model\Order\Order */
+$order = $this->order;
+?>
+
+<p>Dear <?=$order->getCustomer()->getFullName();?>,</p>
+<p>Your Order No. <?=$order->getOrderNumber();?></p>
+<p>Your order status is: <?=$order->getOrderStatus()->getOrderStatus();?></p>
+<p>Kind Regards</p>
+<p><?=$this->shopOption('merchantName');?> Orders Department.</p>
