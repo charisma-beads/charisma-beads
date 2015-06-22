@@ -26,7 +26,7 @@ class PostUnitList extends Select implements ServiceLocatorAwareInterface
             ->getServiceLocator()
             ->get('UthandoServiceManager')
             ->get('ShopPostUnit')
-            ->fetchAll();
+            ->fetchAll('postUnit');
         
     	$postUnitOptions = array();
     	
