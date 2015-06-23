@@ -59,9 +59,7 @@ class Cart extends AbstractActionController
         $session = $this->sessionContainer('ShopCart');
         $countryId = $this->params()->fromPost('countryId', $session->offsetGet('countryId'));
 
-        \FB::info($session->getArrayCopy(), __METHOD__);
-
-        if ($this->identity() && !$countryId) {
+        if ($this->identity()) {
             /* @var $customerAddressService Address */
             $customerAddressService = $this->getService('ShopCustomerAddress');
 

@@ -6,7 +6,7 @@ use Shop\Service\Cart\Cart;
 class Shipping
 {
     /**
-     * @var \Shop\Service\Country
+     * @var \Shop\Service\Country\Country
      */
     protected $countryService;
 

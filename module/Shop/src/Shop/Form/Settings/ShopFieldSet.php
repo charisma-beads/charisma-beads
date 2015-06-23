@@ -84,14 +84,32 @@ class ShopFieldSet extends Fieldset implements InputFilterProviderInterface
         
         $this->add([
             'name'			=> 'postState',
-            'type'			=> 'checkbox',
+            'type'			=> 'radio',
             'options'		=> [
-                'label'			=> 'Enable Postage',
-                'use_hidden_element' => true,
-                'checked_value' => '1',
-                'unchecked_value' => '0',
-                'required' 		=> false,
-                'column-size' => 'sm-8 col-sm-offset-4',
+                'label'			=> 'Post State',
+                'value_options' => [
+                    [
+                        'value' => '0',
+                        'label' => 'By Invoice Value',
+                        'label_attributes' => [
+                            'class' => 'col-md-8',
+                        ],
+
+                    ],
+                    [
+                        'value' => '1',
+                        'label' => 'By Invoice Weight',
+                        'label_attributes' => [
+                            'class' => 'col-md-8',
+                        ],
+
+                    ],
+                ],
+                'required' 		=> true,
+                'column-size' => 'md-8',
+                'label_attributes' => [
+                    'class' => 'col-md-4',
+                ],
             ],
         ]);
         
