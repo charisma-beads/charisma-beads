@@ -16,6 +16,7 @@ use Zend\View\Helper\AbstractHelper;
 
 /**
  * Class ProductImage
+ *
  * @package Shop\View
  */
 class ProductImage extends AbstractHelper

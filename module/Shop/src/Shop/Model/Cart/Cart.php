@@ -110,4 +110,19 @@ class Cart extends AbstractCollection implements ModelInterface
         $this->expires = $expires;
         return $this;
     }
+
+    /**
+     * @return int
+     */
+    public function count()
+    {
+        $numItems = null;
+
+        /* @var $item Item */
+        foreach ($this->entities as $item) {
+            $numItems += $item->getQuantity();
+        }
+
+        return $numItems;
+    }
 }

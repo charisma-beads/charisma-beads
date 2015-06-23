@@ -1,4 +1,14 @@
 <?php
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   Shop\View
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @link      https://github.com/uthando-cms for the canonical source repository
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
+
 namespace Shop\View;
 
 use Shop\Form\Cart\Add;
@@ -7,6 +17,11 @@ use Zend\I18n\View\Helper\CurrencyFormat;
 use Shop\Service\Cart\Cart as CartService;
 use Zend\View\Model\ViewModel;
 
+/**
+ * Class Cart
+ *
+ * @package Shop\View
+ */
 class Cart extends AbstractViewHelper
 {
 	/**
@@ -41,12 +56,20 @@ class Cart extends AbstractViewHelper
 	{
 		return $this->cartService->getCart();
 	}
-	
+
+    /**
+     * @return int
+     */
 	public function countItems()
 	{
-		return count($this->getCart());
+		return $this->getCart()
+            ->count();
 	}
-	
+
+    /**
+     * @param $template
+     * @return string
+     */
 	public function getSummary($template)
 	{
 		$view = new ViewModel();
@@ -54,51 +77,81 @@ class Cart extends AbstractViewHelper
 		
 		return $this->getView()->render($view);
 	}
-	
+
+    /**
+     * @param $item
+     * @return string
+     */
 	public function getLineCost($item)
 	{
 	    $amount = $this->cartService->getLineCost($item);
 	    return $this->formatAmount($amount);
 	}
-	
+
+    /**
+     * @return string
+     */
 	public function getSubTotal()
 	{
 	    $amount = $this->cartService->getSubTotal();
 	    return $this->formatAmount($amount);
 	}
-	
+
+    /**
+     * @return string
+     */
 	public function getTotal()
 	{
 		$amount = $this->cartService->getTotal();
 		return $this->formatAmount($amount);
 	}
-	
+
+    /**
+     * @param $countryId
+     * @return string
+     */
 	public function getShippingTotal($countryId)
 	{
 	    $this->cartService->setShippingCost($countryId);
 	    return $this->formatAmount($this->cartService->getShippingCost());
 	}
-	
+
+    /**
+     * @param $product
+     * @return string
+     */
 	public function hasProductInCart($product)
 	{
 	    $items = $this->getCart()->getEntities();
-	    
+        $numItems = null;
+
 	    foreach ($items as $item) {
 	        if ($item->getMetaData()->getProductId() == $product->getProductId()) {
-	            $num = $item->getQuantity();
-	            return '<i class="fa fa-shopping-cart"></i>&nbsp;(' . $num . ')';
+	            $numItems += $item->getQuantity();
 	        }
 	    }
+
+        if ($numItems) {
+            return '<i class="fa fa-shopping-cart"></i>&nbsp;(' . $numItems . ')';
+        }
 	    
 	    return '';
 	}
-	
+
+    /**
+     * @param $amount
+     * @return string
+     */
 	public function formatAmount($amount)
     {
         $currency = $this->getCurrencyHelper();
         return $currency($amount);
     }
-	
+
+    /**
+     * @param $product
+     * @return Add
+     */
 	public function addForm($product)
 	{
 		$form = new Add();

@@ -83,6 +83,7 @@
 
                     <button type="submit" name="buy-item" class="btn btn-primary pull-left">
                         ADD TO CART
+                        <?=$this->cart()->hasProductInCart($product);?>
                     </button>
 
                 <?=$this->form()->closeTag(); ?>

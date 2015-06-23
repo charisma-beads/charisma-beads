@@ -12,6 +12,11 @@ namespace Shop\View;
 use Zend\Form\ElementInterface;
 use Zend\Form\View\Helper\FormMonthSelect as ZendFormMonthSelect;
 
+/**
+ * Class FormMonthSelect
+ *
+ * @package Shop\View
+ */
 class FormMonthSelect extends ZendFormMonthSelect
 {   
     public function renderMonths(ElementInterface $element)

@@ -14,6 +14,11 @@ namespace Shop\View;
 use Shop\Service\Product\Product as ProductService;
 use UthandoCommon\View\AbstractViewHelper;
 
+/**
+ * Class Product
+ *
+ * @package Shop\View
+ */
 class Product extends AbstractViewHelper
 {
     /**
