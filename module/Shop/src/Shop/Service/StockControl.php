@@ -167,7 +167,7 @@ class StockControl
         /* @var $model Cart|Line */
         foreach ($models as $model) {
             $ids[] = $model->getId();
-            $this->processCart($model);
+            $this->process($model);
         }
 
         $this->event->setParam('ids', $ids);
