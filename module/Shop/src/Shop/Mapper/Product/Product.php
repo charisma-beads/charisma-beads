@@ -105,7 +105,7 @@ class Product extends AbstractDbMapper
 		return parent::search($search, $sort, $select);
 	}
 	
-	public function searchProducts(array $search)
+	public function searchProducts(array $search, $sort = null)
 	{
         $select = $this->getSelect();
         $select->join(
@@ -126,8 +126,6 @@ class Product extends AbstractDbMapper
             );
 
         $select = $this->setFilter($select);
-        
-        $sort = (isset($search['sort'])) ? $search['sort'] : '';
 
         //\FB::info($this->getSqlString($select));
 	   

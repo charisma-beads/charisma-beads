@@ -92,7 +92,7 @@ class ShopFieldSet extends Fieldset implements InputFilterProviderInterface
                         'value' => '0',
                         'label' => 'By Invoice Value',
                         'label_attributes' => [
-                            'class' => 'col-md-8',
+                            'class' => 'col-md-12',
                         ],
 
                     ],
@@ -100,7 +100,7 @@ class ShopFieldSet extends Fieldset implements InputFilterProviderInterface
                         'value' => '1',
                         'label' => 'By Invoice Weight',
                         'label_attributes' => [
-                            'class' => 'col-md-8',
+                            'class' => 'col-md-12',
                         ],
 
                     ],

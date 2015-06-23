@@ -164,22 +164,23 @@ class Product extends AbstractRelationalMapperService
 	}
 
     /**
-     * @param array $search
+     * @param $search
+     * @param null $sort
      * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
      */
-	public function searchProducts(array $search)
+	public function searchProducts($search, $sort = null)
 	{
-	    $search = array(array(
+	    $search = [[
             'searchString'  => $search['productSearch'],
             'columns'       => [
                'sku', 'name', 'shortDescription', 'productCategory.category'
             ],
-        ));
+        ]];
 
         /* @var $mapper \Shop\Mapper\Product\Product */
         $mapper = $this->getMapper();
 	    
-	    $products = $mapper->searchProducts($search);
+	    $products = $mapper->searchProducts($search, $sort);
 
 	    foreach ($products as $product) {
 	        $this->populate($product, true);

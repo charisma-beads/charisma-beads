@@ -91,7 +91,7 @@ class Catalog extends AbstractActionController
         $products = $this->getProductService()->usePaginator([
             'limit' => $options->getProductsPerPage(),
             'page' => $page,
-        ])->searchProducts($form->getData());
+        ])->searchProducts($form->getData(), $sort);
         
         $viewModel = new ViewModel([
             'products' => $products,
