@@ -143,7 +143,7 @@ class StockControl
      */
     public function restoreStockFromOne($model)
     {
-        $this->processCart($model);
+        $this->process($model);
     }
 
     /**
