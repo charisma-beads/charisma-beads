@@ -12,6 +12,7 @@
 namespace Shop\View;
 
 use Shop\Form\Cart\Add;
+use Shop\Model\Cart\Cart as CartModel;
 use UthandoCommon\View\AbstractViewHelper;
 use Zend\I18n\View\Helper\CurrencyFormat;
 use Shop\Service\Cart\Cart as CartService;
@@ -50,7 +51,7 @@ class Cart extends AbstractViewHelper
 	}
 	
 	/**
-	 * @return \Shop\Model\Cart\Cart
+	 * @return CartModel
 	 */
 	public function getCart()
 	{
@@ -62,8 +63,14 @@ class Cart extends AbstractViewHelper
      */
 	public function countItems()
 	{
-		return $this->getCart()
-            ->count();
+        $count = 0;
+
+        if ($this->getCart() instanceof CartModel) {
+            $count = $this->getCart()
+                ->count();
+        }
+
+		return $count;
 	}
 
     /**
