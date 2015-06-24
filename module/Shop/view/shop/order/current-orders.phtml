@@ -24,8 +24,10 @@
                 <td title="order-number">
                     <a href="<?=$this->url('admin/shop/order/edit', [
                         'id' => $row->getOrderId(),
-                    ]);?>">
-                        <?=$this->escapeHtml($row->getOrderNumber(false));?>
+                        'action' => 'print'
+                    ]);?>" target="_blank" class="current-order-link">
+                        <span><?=$this->escapeHtml($row->getOrderNumber());?></span>
+                        <i class="fa fa-print fa-2x"></i>
                     </a>
                 </td>
                 <td>
