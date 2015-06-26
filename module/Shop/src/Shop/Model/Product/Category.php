@@ -25,16 +25,11 @@ class Category extends NestedSet implements ModelInterface
     use Model,
         DateModifiedTrait,
         DateCreatedTrait;
-    
-	/**
-	 * @var int
-	 */
-	protected $productCategoryId;
 
     /**
      * @var int
      */
-    protected $productImageId;
+    protected $productCategoryId;
 
     /**
      * @var string
@@ -81,24 +76,6 @@ class Category extends NestedSet implements ModelInterface
     public function setProductCategoryId($productCategoryId)
 	{
 		$this->productCategoryId = $productCategoryId;
-		return $this;
-	}
-
-    /**
-     * @return int
-     */
-    public function getProductImageId()
-	{
-		return $this->productImageId;
-	}
-
-    /**
-     * @param $productImageId
-     * @return $this
-     */
-    public function setProductImageId($productImageId)
-	{
-		$this->productImageId = $productImageId;
 		return $this;
 	}
 
