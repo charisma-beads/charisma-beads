@@ -4,6 +4,12 @@ namespace Shop\Service\Product;
 use UthandoCommon\Service\AbstractRelationalMapperService;
 use Zend\EventManager\Event;
 
+/**
+ * Class Image
+ *
+ * @package Shop\Service\Product
+ * @method \Shop\Mapper\Product\Image getMapper($mapperClass = null, array $options = [])
+ */
 class Image extends AbstractRelationalMapperService
 {
     /**
@@ -41,6 +47,22 @@ class Image extends AbstractRelationalMapperService
 
     /**
      * @param $id
+     * @param bool $recursive
+     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     */
+    public function getImagesByCategoryId($id, $recursive = false)
+    {
+        /* @var $categoryService \Shop\Service\Product\Category */
+        $categoryService    = $this->getService('ShopProductCategory');
+        $ids                = $categoryService->getCategoryChildrenIds($id, $recursive);
+        array_push($ids, $id);
+        $images             = $this->getMapper()->getImagesByCategoryIds($ids);
+
+        return $images;
+    }
+
+    /**
+     * @param $id
      * @return array
      */
     public function getImagesByProductId($id)
@@ -71,7 +93,7 @@ class Image extends AbstractRelationalMapperService
         /* @var $model \Shop\Model\Product\Image */
         $model = $e->getParam('model');
         $file = './public/userfiles/shop/images/' . $model->getFull();
-        $thumb = './public/userfiles/shop/images/' . $model->getThumbnail();
+        //$thumb = './public/userfiles/shop/images/' . $model->getThumbnail();
         
         if (is_file($file) && file_exists($file)) {
             unlink($file);

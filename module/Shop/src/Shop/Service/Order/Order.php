@@ -1,4 +1,13 @@
 <?php
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   Shop\Service\Order
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
+
 namespace Shop\Service\Order;
 
 use Shop\Model\Customer\Customer as CustomerModel;
@@ -11,6 +20,7 @@ use Zend\View\Model\ViewModel;
 
 /**
  * Class Order
+ *
  * @package Shop\Service\Order
  * @method OrderModel populate()
  * @method \Shop\Mapper\Order\Order getMapper($mapperClass = null, array $options = [])
@@ -21,7 +31,10 @@ class Order extends AbstractRelationalMapperService
      * @var string
      */
     protected $serviceAlias = 'ShopOrder';
-    
+
+    /**
+     * @var array
+     */
     protected $tags = [
         'order', 'customer', 'order-lines',
         'order-status',
@@ -302,6 +315,12 @@ class Order extends AbstractRelationalMapperService
         return $orders;
     }
 
+    /**
+     * @param null|string $start
+     * @param null|string $end
+     * @param string $monthFormat
+     * @return string
+     */
     public function getMonthlyTotals($start = null, $end = null, $monthFormat = 'm')
     {
         $startDate = new \DateTime($start);
@@ -329,18 +348,23 @@ class Order extends AbstractRelationalMapperService
 
                 // if row doesn't start at beginning of year the pad missing months
                 if ($row->month != '01') {
-                    $month = ltrim($row->month, '0');
 
-                    for ($i=1; $i < $month; $i++) {
+                    $monthDigit = (int) ltrim($row->month, '0');
+
+                    for ($i=1; $i < $monthDigit; $i++) {
                         $dateObj = \DateTime::createFromFormat('!m', $i);
-                        $totalsArray[$c]['data'][] = [$dateObj->format($monthFormat), 0.00];
+                        $month = $dateObj->format($monthFormat);
+                        $totalsArray[$c]['data'][] = [$month, 0.00];
+                        $totalsArray[$c]['numOrders'][$month] = 0;
                     }
                 }
             }
 
             $dateObj = \DateTime::createFromFormat('!m', $row->month);
+            $month = $dateObj->format($monthFormat);
 
-            $totalsArray[$c]['data'][] = [$dateObj->format($monthFormat), $row->total];
+            $totalsArray[$c]['data'][] = [$month, $row->total];
+            $totalsArray[$c]['numOrders'][$month] = $row->numOrders;
             $year = $row->year;
         }
 
@@ -350,7 +374,7 @@ class Order extends AbstractRelationalMapperService
     /**
      * send order via email
      * 
-     * @param unknown $orderId
+     * @param int $orderId
      */
     public function sendEmail($orderId)
     {
@@ -360,8 +384,6 @@ class Order extends AbstractRelationalMapperService
         $email = $order->getCustomer()->getEmail();
         /* @var $options \Shop\Options\CheckoutOptions */
         $options = $this->getService('Shop\Options\Checkout');
-        /* @var $invoiceOptions \Shop\Options\InvoiceOptions */
-        $invoiceOptions = $this->getService('Shop\Options\Invoice');
         /* @var $shopOptions \Shop\Options\ShopOptions */
         $shopOptions = $this->getService('Shop\Options\Shop');
 

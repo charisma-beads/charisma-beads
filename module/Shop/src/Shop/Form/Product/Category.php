@@ -1,15 +1,27 @@
 <?php
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   Shop\Form\Product
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
+
 namespace Shop\Form\Product;
 
 use UthandoCommon\Mapper\AbstractNestedSet as NestedSet;
 use Zend\Form\Form;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
+use Zend\Form\FormElementManager;
 
-class Category extends Form implements ServiceLocatorAwareInterface
-{	
-    use ServiceLocatorAwareTrait;
-   
+/**
+ * Class Category
+ *
+ * @package Shop\Form\Product
+ * @method FormElementManager getServiceLocator()
+ */
+class Category extends Form
+{
 	/**
 	 * @var int
 	 */
@@ -27,105 +39,106 @@ class Category extends Form implements ServiceLocatorAwareInterface
 
         return parent::setOptions($options);
     }
-	
+
     public function init()
     {
-    	$this->add(array(
+    	$this->add([
     		'name'	=> 'productCategoryId',
     		'type'	=> 'hidden',
-    	));
+        ]);
     	
-    	$this->add(array(
+    	$this->add([
     		'name'			=> 'category',
     		'type'			=> 'text',
-    		'attributes'	=> array(
-    			'placeholder'		=> 'Category:',
+    		'attributes'	=> [
+    			'placeholder'		=> 'Category',
     			'autofocus'			=> true,
     			'autocapitalize'	=> 'on',
-    		),
-    		'options'		=> array(
-    			'label'	=> 'Category:',
-    		)
-    	));
+            ],
+    		'options'		=> [
+    			'label'	=> 'Category',
+            ]
+        ]);
     	
-    	$this->add(array(
+    	$this->add([
     		'name'			=> 'ident',
     		'type'			=> 'text',
-    		'attributes'	=> array(
-    			'placeholder'		=> 'Ident:',
+    		'attributes'	=> [
+    			'placeholder'		=> 'Ident',
     			'autofocus'			=> true,
     			'autocapitalize'	=> 'off'
-    		),
-    		'options'		=> array(
-    			'label'			=> 'Ident:',
+            ],
+    		'options'		=> [
+    			'label'			=> 'Ident',
     			'help-inline'	=> 'If you leave this blank the the category name will be used for the ident.'
-    		),
-    	));
+            ],
+        ]);
     	
-    	$this->add(array(
+    	$this->add([
     		'name'			=> 'enabled',
     		'type'			=> 'checkbox',
-    		'options'		=> array(
+    		'options'		=> [
     			'label'			=> 'Enabled',
     			'use_hidden_element' => true,
     			'checked_value' => '1',
     			'unchecked_value' => '0',
     			'required' 		=> true,
-    		),
-    	));
+            ],
+        ]);
     	
-    	$this->add(array(
+    	$this->add([
     		'name'			=> 'discontinued',
     		'type'			=> 'checkbox',
-    		'options'		=> array(
+    		'options'		=> [
     			'label'			=> 'Discontinued',
     			'required' 		=> true,
     			'use_hidden_element' => true,
     			'checked_value' => '1',
     			'unchecked_value' => '0',
-    		),
-    	));
+            ],
+        ]);
     	
-    	$this->add(array(
+    	$this->add([
     	    'name'			=> 'showImage',
     	    'type'			=> 'checkbox',
-    	    'options'		=> array(
+    	    'options'		=> [
     	        'label'			=> 'Show Image',
     	        'required' 		=> true,
     	        'use_hidden_element' => true,
     	        'checked_value' => '1',
     	        'unchecked_value' => '0',
-    	    ),
-    	));
+            ],
+        ]);
     	
-    	$this->add(array(
-    		'name'		=> 'productImageId',
-    		'type'		=> 'select',
-    		'options'	=> array(
-    			'label'			=> 'Category Image:',
-    			'required'		=> true,
-    			'value_options'	=> $this->getImageList(),
-    		),
-    	));
+    	$this->add([
+    		'name'		=> 'image',
+    		'type'		=> 'text',
+    		'options'	=> [
+    			'label'			=> 'Image',
+    			'required'		=> false,
+            ],
+            'attributes' => [
+                'id' => 'product-category-image',
+            ]
+        ]);
     	
-    	$this->add(array(
+    	$this->add([
     		'name'			=> 'parent',
-    		'type'			=> 'select',
-    		'attributes'	=> array(
+    		'type'			=> 'ProductCategoryList',
+    		'attributes'	=> [
     			'class' => 'input-xlarge',
-    		),
-    		'options'		=> array(
-    			'label'			=> 'Parent:',
-    			'required'		=> true,
-    			'value_options' => $this->getParentList()
-    		),
-    	));
+            ],
+    		'options'		=> [
+    			'label'			=> 'Parent',
+    			'required'		=> false,
+            ],
+        ]);
     	
-    	$categoryInsertOptions = array(
+    	$categoryInsertOptions = [
     		NestedSet::INSERT_NODE	=> 'insert after this category.',
     		NestedSet::INSERT_CHILD	=> 'insert as a new sub-category at the top.',
-    		
-    	);
+
+        ];
     	
     	if ($this->getCategoryId()) {
     		$categoryInsertOptions['noInsert'] = [
@@ -135,63 +148,16 @@ class Category extends Form implements ServiceLocatorAwareInterface
     		];
     	}
     	
-    	$this->add(array(
+    	$this->add([
     		'name'			=> 'categoryInsertType',
     		'type'			=> 'radio',
-    		'options'		=> array(
+    		'options'		=> [
     			'required'		=> true,
     			'value_options' => array_reverse($categoryInsertOptions, true),
-    		),
-    	));
+            ],
+        ]);
     }
-    
-    public function getParentList()
-    {
-    	$cats = $this->getCategoryService()->fetchAll();
-    	$parentOptions = array(0 => 'Top');
-    	
-    	/* @var $cat \Shop\Model\Product\Category */
-    	foreach($cats as $cat) {
-    		$indent = 'indent' . ($cat->getDepth() + 1);
-    		$parent = ($cat->hasChildren() || $cat->getDepth() == 0) ? 'bold ' : '';
-    		$parentOptions[] = array(
-    			'label'	=> $cat->getCategory(),
-    			'value'	=> $cat->getProductCategoryId(),
-    			'attributes'	=> array(
-    				'class'	=> $parent,
-					'style' => 'text-indent:' . $cat->getDepth() . 'em;',
-    			)
-    		);
-    	}
-    	
-    	return $parentOptions;
-    }
-    
-    public function getImageList()
-    {
-    	$id = $this->getCategoryId();
-    	$imageOptions = array();
-    	
-    	if (!0 == $id) {
-    		$images = $this->getCategoryService()
-                ->getCategoryImages($id);
-    		
-    		if ($images->count() > 0) {
 
-    			/* @var $image \Shop\Model\Product\Image */
-    			foreach($images as $image) {
-    				$imageOptions[$image->getProductImageId()] = $image->getThumbnail();
-    			}
-    		} else {
-    			$imageOptions[0] = 'No Images Uploaded';
-    		}
-    	} else {
-    		$imageOptions[0] = 'No Images Uploaded';
-    	}
-    	
-    	return $imageOptions;
-    }
-    
     /**
      * @return number
      */
@@ -199,7 +165,7 @@ class Category extends Form implements ServiceLocatorAwareInterface
 	{
 		return $this->categoryId;
 	}
-		
+
 	/**
 	 * @param int $categoryId
 	 * @return \Shop\Form\Product\Category
@@ -209,16 +175,5 @@ class Category extends Form implements ServiceLocatorAwareInterface
 		$categoryId = (int) $categoryId;
 		$this->categoryId = $categoryId;
 		return $this;
-	}
-	
-	/**
-	 * @return \Shop\Service\Product\Category
-	 */
-	public function getCategoryService()
-	{
-		return $this->getServiceLocator()
-            ->getServiceLocator()
-            ->get('UthandoServiceManager')
-            ->get('ShopProductCategory');
 	}
 }

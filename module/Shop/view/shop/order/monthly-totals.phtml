@@ -49,6 +49,7 @@
 
                     var month = item.series.data[item.datapoint[0]][0];
                     var currentTotal = item.datapoint[1];
+                    var numOrders = item.series.numOrders[month];
 
                     var prevSeries = totalsPlot.getData()[item.seriesIndex - 1];
                     var increaseDecrease = 0;
@@ -69,7 +70,9 @@
                         item.pageY,
                         color,
                         "<strong>" + item.series.label + "</strong><br>" + month
-                        + " : <strong>&pound;" + currentTotal + "</strong> +&#92;- (" + increaseDecrease.toFixed(2) + "%)");
+                        + " : <strong>&pound;" + currentTotal + "</strong> +&#92;- (" + increaseDecrease.toFixed(2) + "%)<br>"
+                        + "Number of Orders : " + numOrders
+                        );
                 }
             } else {
                 $("#tooltip").remove();
@@ -83,8 +86,8 @@
             $('<div id="tooltip">' + contents + '</div>').css({
                 position: 'absolute',
                 display: 'none',
-                top: y - 40,
-                left: x - 120,
+                top: y - 55,
+                left: x - 155,
                 border: '2px solid ' + color,
                 padding: '3px',
                 'font-size': '9px',

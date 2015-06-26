@@ -23,7 +23,6 @@ use UthandoCommon\Model\NestedSet;
 class Category extends NestedSet implements ModelInterface
 {
     use Model,
-        ProductImageTrait,
         DateModifiedTrait,
         DateCreatedTrait;
     
@@ -36,6 +35,11 @@ class Category extends NestedSet implements ModelInterface
      * @var int
      */
     protected $productImageId;
+
+    /**
+     * @var string
+     */
+    protected $image;
 	
 	/**
 	 * @var string
@@ -97,6 +101,24 @@ class Category extends NestedSet implements ModelInterface
 		$this->productImageId = $productImageId;
 		return $this;
 	}
+
+    /**
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param string $image
+     * @return $this
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+        return $this;
+    }
 
     /**
      * @return string

@@ -1,4 +1,5 @@
 <?php
+
 namespace Shop\Hydrator\Product;
 
 use UthandoCommon\Hydrator\AbstractHydrator;
@@ -39,13 +40,14 @@ class Category extends AbstractHydrator
 		$data = array(
 			'productCategoryId'	=> $object->getProductCategoryId(),
 			'productImageId'	=> $this->extractValue('productImageId', $object->getProductImageId()),
+            'image'             => $object->getImage(),
 			'ident'				=> $object->getIdent(),
 			'category'			=> $object->getCategory(),
 			'lft'				=> $object->getLft(),
 			'rgt'				=> $object->getRgt(),
 			'enabled'			=> $this->extractValue('enabled', $object->isEnabled()),
 			'discontinued'		=> $this->extractValue('discontinued', $object->isDiscontinued()),
-		    'showImage'		    => $this->extractValue('shaowImage', $object->getShowImage()),
+		    'showImage'		    => $this->extractValue('showImage', $object->getShowImage()),
 			'dateCreated'		=> $this->extractValue('dateCreated', $object->getDateCreated()),
 			'dateModified'		=> $this->extractValue('dateModified', $object->getDateModified())
 		);

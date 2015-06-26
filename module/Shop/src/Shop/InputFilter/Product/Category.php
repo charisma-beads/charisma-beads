@@ -1,127 +1,141 @@
 <?php
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   Shop\InputFilter\Product
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
+
 namespace Shop\InputFilter\Product;
 
 use Zend\InputFilter\InputFilter;
 
+/**
+ * Class Category
+ *
+ * @package Shop\InputFilter\Product
+ */
 class Category extends InputFilter
 {
     public function init()
     {
-    	$this->add(array(
+    	$this->add([
     		'name'       => 'category',
     		'required'   => true,
-    		'filters'    => array(
-    			array('name' => 'StripTags'),
-    			array('name' => 'StringTrim'),
-    			array('name' => 'UthandoUcwords'),
-    		),
-    		'validators' => array(
-    			array('name' => 'StringLength', 'options' => array(
+    		'filters'    => [
+    			['name' => 'StripTags'],
+    			['name' => 'StringTrim'],
+    			['name' => 'UthandoUcwords'],
+            ],
+    		'validators' => [
+    			['name' => 'StringLength', 'options' => [
     				'encoding' => 'UTF-8',
     				'min'      => 2,
     				'max'      => 255,
-    			)),
-    		),
-    	));
+                ]],
+            ],
+        ]);
     	
-    	$this->add(array(
+    	$this->add([
     		'name'       => 'ident',
     		'required'   => true,
-    		'filters'    => array(
-    			array('name' => 'StripTags'),
-    			array('name' => 'StringTrim'),
-    			array('name' => 'UthandoSlug')
-    		),
-    		'validators' => array(
-    			array('name' => 'StringLength', 'options' => array(
+    		'filters'    => [
+    			['name' => 'StripTags'],
+    			['name' => 'StringTrim'],
+    			['name' => 'UthandoSlug']
+            ],
+    		'validators' => [
+    			['name' => 'StringLength', 'options' => [
     				'encoding' => 'UTF-8',
     				'min'      => 2,
     				'max'      => 255,
-    			)),
-    		),
-    	));
+                ]],
+            ],
+        ]);
     	
-    	$this->add(array(
+    	$this->add([
     		'name'			=> 'enabled',
     		'required'		=> true,
-    		'filters'		=> array(
-    			array('name' => 'StripTags'),
-    			array('name' => 'StringTrim'),
-    		),
-    		'validators'	=> array(
-    			array('name' => 'Int'),
-    			array('name' => 'Between', 'options' => array(
+    		'filters'		=> [
+    			['name' => 'StripTags'],
+    			['name' => 'StringTrim'],
+            ],
+    		'validators'	=> [
+    			['name' => 'Int'],
+    			['name' => 'Between', 'options' => [
     				'min'		=> 0,
     				'max'		=> 1,
     				'inclusive'	=> true,
-    			)),
-    		),
-    	));
+                ]],
+            ],
+        ]);
     	 
-    	$this->add(array(
+    	$this->add([
     		'name'			=> 'discontinued',
     		'required'		=> true,
-    		'filters'		=> array(
-    			array('name' => 'StripTags'),
-    			array('name' => 'StringTrim'),
-    		),
-    		'validators'	=> array(
-    			array('name' => 'Int'),
-    			array('name' => 'Between', 'options' => array(
+    		'filters'		=> [
+    			['name' => 'StripTags'],
+    			['name' => 'StringTrim'],
+            ],
+    		'validators'	=> [
+    			['name' => 'Int'],
+    			['name' => 'Between', 'options' => [
     				'min'		=> 0,
     				'max'		=> 1,
     				'inclusive'	=> true,
-    			)),
-    		),
-    	));
+                ]],
+            ],
+        ]);
     	
-    	$this->add(array(
+    	$this->add([
     	    'name'			=> 'showImage',
     	    'required'		=> true,
-    	    'filters'		=> array(
-    	        array('name' => 'StripTags'),
-    	        array('name' => 'StringTrim'),
-    	    ),
-    	    'validators'	=> array(
-    	        array('name' => 'Int'),
-    	        array('name' => 'Between', 'options' => array(
+    	    'filters'		=> [
+    	        ['name' => 'StripTags'],
+    	        ['name' => 'StringTrim'],
+            ],
+    	    'validators'	=> [
+    	        ['name' => 'Int'],
+    	        ['name' => 'Between', 'options' => [
     	            'min'		=> 0,
     	            'max'		=> 1,
     	            'inclusive'	=> true,
-    	        )),
-    	    ),
-    	));
+                ]],
+            ],
+        ]);
     	
-    	$this->add(array(
-    		'name'			=> 'productImageId',
-    		'required'		=> true,
-    		'filters'		=> array(
-    			array('name' => 'StripTags'),
-    			array('name' => 'StringTrim'),
-    		),
-    		'validators'	=> array(
-    			array('name' => 'Int'),
-    			array('name' => 'GreaterThan', 'options' => array(
-    				'min' 		=> 0,
-    				'inclusive'	=> true,
-    			)),
-    		),
-    	));
+    	$this->add([
+    		'name'			=> 'image',
+    		'required'		=> false,
+    		'filters'		=> [
+    			['name' => 'StripTags'],
+    			['name' => 'StringTrim'],
+            ],
+            'validators' => [
+                ['name' => 'StringLength', 'options' => [
+                    'encoding' => 'UTF-8',
+                    'min'      => 2,
+                    'max'      => 255,
+                ]],
+            ],
+        ]);
     	
-    	$this->add(array(
+    	$this->add([
     		'name'			=> 'parent',
-    		'required'		=> true,
-    		'filters'		=> array(
-    			array('name' => 'StripTags'),
-    			array('name' => 'StringTrim'),
-    		),
-    		'validators'	=> array(
-    			array('name' => 'Int'),
-    			array('name' => 'GreaterThan', 'options' => array(
+    		'required'		=> false,
+    		'filters'		=> [
+    			['name' => 'StripTags'],
+    			['name' => 'StringTrim'],
+            ],
+    		'validators'	=> [
+    			['name' => 'Int'],
+    			['name' => 'GreaterThan', 'options' => [
     				'min' 		=> 0,
     				'inclusive'	=> true,
-    			)),
-    		),
-    	));
+                ]],
+            ],
+        ]);
     }
 }

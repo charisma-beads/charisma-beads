@@ -1,9 +1,24 @@
 <?php
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   Shop\Mapper\Product
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @link      https://github.com/uthando-cms for the canonical source repository
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
+
 namespace Shop\Mapper\Product;
 
 use UthandoCommon\Mapper\AbstractDbMapper;
 use Zend\Db\Sql\Select;
 
+/**
+ * Class Image
+ *
+ * @package Shop\Mapper\Product
+ */
 class Image extends AbstractDbMapper
 {
 	protected $table = 'productImage';
@@ -21,7 +36,11 @@ class Image extends AbstractDbMapper
         $select->where->equalTo('productId', $id);
         return $this->fetchResult($select);
     }
-	
+
+    /**
+     * @param array $ids
+     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     */
 	public function getImagesByCategoryIds(array $ids)
 	{
 		$select = $this->getSql()->select();
@@ -37,7 +56,13 @@ class Image extends AbstractDbMapper
 		
 		return $this->fetchResult($select);
 	}
-	
+
+    /**
+     * @param array $search
+     * @param string $sort
+     * @param null $select
+     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     */
 	public function search(array $search, $sort, $select = null)
 	{
 	    $select = $this->getSql()->select();

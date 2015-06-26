@@ -24,7 +24,7 @@
                             'categoryIdent' => $row->getIdent()
                         ]); ?>" class="item-image"><!-- image -->
                             <?php if ($row->getShowImage()):?>
-                            <img class="img-responsive" src="<?=$this->productImage($row);?>" alt="<?=$this->escapehtml($row->getCategory());?>">
+                            <img class="img-responsive" src="<?=$this->productCategoryImage($row);?>" alt="<?=$this->escapehtml($row->getCategory());?>">
                             <?php endif;?>
                         </a>
                         <div class="caption text-left"><!-- name -->

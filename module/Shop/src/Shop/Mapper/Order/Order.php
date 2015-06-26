@@ -1,4 +1,13 @@
 <?php
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   Shop\Mapper
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
+
 namespace Shop\Mapper\Order;
 
 use UthandoCommon\Mapper\AbstractDbMapper;
@@ -6,11 +15,19 @@ use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\Sql\Expression;
 use Zend\Db\Sql\Select;
 
+/**
+ * Class Order
+ *
+ * @package Shop\Mapper\Order
+ */
 class Order extends AbstractDbMapper
 {
     protected $table = 'order';
     protected $primary = 'orderId';
 
+    /**
+     * @return \Zend\Db\ResultSet\HydratingResultSet|ResultSet|\Zend\Paginator\Paginator
+     */
     public function getCurrentOrders()
     {
         $select = $this->getSql()->select($this->table);
@@ -30,6 +47,10 @@ class Order extends AbstractDbMapper
         return $resultSet;
     }
 
+    /**
+     * @param $id
+     * @return \Zend\Db\ResultSet\HydratingResultSet|ResultSet|\Zend\Paginator\Paginator
+     */
     public function getOrdersByCustomerId($id)
     {
         $select = $this->getSelect();
@@ -67,8 +88,6 @@ class Order extends AbstractDbMapper
         $select->columns([
             'numOrders'     => new Expression('COUNT(order.orderId)'),
             'total'         => new Expression('SUM(order.total)'),
-            //'monthLong'     => new Expression("DATE_FORMAT(order.orderDate, '%M')"),
-            //'monthShort'    => new Expression("DATE_FORMAT(order.orderDate, '%m')"),
             'month'         => new Expression("DATE_FORMAT(order.orderDate, '%m')"),
             'year'          => new Expression("DATE_FORMAT(order.orderDate, '%Y')"),
         ])->join(
@@ -103,7 +122,10 @@ class Order extends AbstractDbMapper
 
         return $resultSet->current();
     }
-    
+
+    /**
+     * @return array|\ArrayObject|null|object
+     */
     public function getMaxOrderNumber()
     {
         $select = $this->getSelect();
@@ -116,7 +138,12 @@ class Order extends AbstractDbMapper
         
         return $row;
     }
-    
+
+    /**
+     * @param $id
+     * @param $userId
+     * @return null|\Shop\Model\Order\Order
+     */
     public function getOrderByUserId($id, $userId)
     {
         $select = $this->getCustomerOrderSelect();
@@ -129,7 +156,11 @@ class Order extends AbstractDbMapper
         
         return $row;
     }
-    
+
+    /**
+     * @param $id
+     * @return \Zend\Db\ResultSet\HydratingResultSet|ResultSet|\Zend\Paginator\Paginator
+     */
     public function getOrdersByUserId($id)
     {
         $select = $this->getCustomerOrderSelect();
@@ -138,7 +169,10 @@ class Order extends AbstractDbMapper
         
         return $this->fetchResult($select);
     }
-    
+
+    /**
+     * @return Select
+     */
     public function getCustomerOrderSelect()
     {
         $select = $this->getSql()->select($this->table);

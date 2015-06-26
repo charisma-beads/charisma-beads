@@ -6,7 +6,7 @@ if (isset($this->productCategoryId)) $routeArray['id'] = $this->productCategoryI
 <div class="row">
 	<form class="form-horizontal col-md-12" method="post" action="<?=$this->url('admin/shop/category/edit', $routeArray) ?>">
 		<fieldset>
-			<legend><?=ucwords($this->formAction); ?> Product Category Form:</legend>
+			<legend><?=ucwords($this->formAction); ?> Product Category</legend>
 			
 			<div class="row">
 				<div class="col-md-6">
@@ -49,12 +49,24 @@ if (isset($this->productCategoryId)) $routeArray['id'] = $this->productCategoryI
                         </div>
                     </div>
                     
-                    <div class="form-group<?php if ($form->get('productImageId')->getMessages()) echo ' has-error'; ?>">
-                        <label class="col-md-4 control-label" for="productImageId"><?=$form->get('productImageId')->getLabel();?></label>
+                    <div class="form-group<?php if ($form->get('image')->getMessages()) echo ' has-error'; ?>">
+                        <label class="col-md-4 control-label" for="image"><?=$form->get('image')->getLabel();?></label>
                         <div class="col-md-8">
-                            <?=$this->formSelect($form->get('productImageId')->setAttribute('class', 'form-control')); ?>
+                            <div class="input-group">
+                                <?=$this->formText($form->get('image')->setAttribute('class', 'form-control')); ?>
+                                <span class="input-group-btn">
+                                    <a id="upload-category-image-button" class="btn btn-default" data-toggle="modal"
+                                       data-target="#upload-category-image-model">
+                                        <i class="fa fa-upload"></i>
+                                    </a>
+                                    <a id="list-category-image-button" class="btn btn-default" data-toggle="modal"
+                                       data-target="#list-category-image-model">
+                                        <i class="fa fa-list"></i>
+                                    </a>
+                                </span>
+                            </div>
                             <span class="help-block">
-                                <?=$this->formElementErrors($form->get('productImageId'), [
+                                <?=$this->formElementErrors($form->get('image'), [
                                     'class' => 'list-unstyled'
                                 ]); ?>
                             </span>
@@ -65,11 +77,6 @@ if (isset($this->productCategoryId)) $routeArray['id'] = $this->productCategoryI
                             </label>
                         </div>
                     </div>
-                    
-                    
-                         
-                    
-                   
                     
 				</div>
 				
@@ -111,3 +118,73 @@ if (isset($this->productCategoryId)) $routeArray['id'] = $this->productCategoryI
 		</fieldset>
 	</form>
 </div>
+
+<div id="upload-category-image-model" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Upload Image</h4>
+            </div>
+            <div class="modal-body">
+                <i class="fa fa-spinner fa-spin"></i>&nbsp;Loading
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="upload-category-image-save" type="button" class="btn btn-primary">Upload</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="list-category-image-model" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Category Image</h4>
+            </div>
+            <div class="modal-body">
+                <?=$this->formRow($this->formManager('ProductCategoryImageList', [
+                    'name' => 'product-category-image-list',
+                    'options' => [
+                        'label' => 'Select Image',
+                        'category_id' => $this->productCategoryId,
+                    ],
+                ]));?>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="list-category-image-save" type="button" class="btn btn-primary">Use Image</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $('#upload-category-image-model').on('show.bs.modal', function () {
+        $(this).find('.modal-body').load('<?=$this->url('admin/uploader', [
+            'action'    => 'upload-form',
+        ]);?>');
+    });
+
+    $('#upload-category-image-model').on('hide.bs.modal', function (e) {
+        $(this).find('.modal-body').html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Loading');
+
+        if (admin.upload && admin.upload.status) {
+            $('#product-category-image').val(admin.upload.image.name);
+        }
+    });
+
+    $('#list-category-image-save').on('click', function () {
+        $('#product-category-image').val(
+            $('select[name=product-category-image-list]').val()
+        );
+        $('#list-category-image-model').modal('hide');
+    });
+
+    $('#upload-category-image-save').on('click', function () {
+        $('#upload-form').submit();
+    });
+</script>

@@ -8,45 +8,36 @@
  * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
  * @license   see LICENSE.txt
  */
+
 namespace Shop\Service\Product;
 
-use UthandoCommon\Model\ModelInterface;
-use Shop\ShopException;
+use Shop\Mapper\Product\Category as CategoryMapper;
 use Shop\Model\Product\Category as CategoryModel;
-use UthandoCommon\Service\AbstractRelationalMapperService;
-use Zend\Form\Form;
+use Shop\ShopException;
+use UthandoCommon\Model\ModelInterface;
+use UthandoCommon\Service\AbstractMapperService;
 use Zend\EventManager\Event;
+use Zend\Form\Form;
 
 /**
  * Class Category
  * @package Shop\Service\Product
  * @method CategoryModel getById($id, $col = null)
+ * @method CategoryMapper getMapper($mapperClass = null, array $options = [])
  */
-class Category extends AbstractRelationalMapperService
+class Category extends AbstractMapperService
 {
     /**
      * @var string
      */
     protected $serviceAlias = 'ShopProductCategory';
-    
-    protected $tags = [
-        'product', 'image', 'option',
-    ];
 
     /**
      * @var array
      */
-    protected $referenceMap = [
-        'productImage'  => [
-            'refCol'    => 'productImageId',
-            'service'   => 'ShopProductImage',
-        ],
+    protected $tags = [
+        'product', 'option',
     ];
-	
-	/**
-	 * @var \Shop\Service\Product\Image
-	 */
-	protected $imageService;
 	
 	/**
 	 * Attach events
@@ -64,7 +55,6 @@ class Category extends AbstractRelationalMapperService
      */
 	public function fetchAll($topLevelOnly=false)
 	{
-        /* @var $mapper \Shop\Mapper\Product\Category */
         $mapper = $this->getMapper();
 
 	    if ($topLevelOnly) {
@@ -72,10 +62,6 @@ class Category extends AbstractRelationalMapperService
 	    } else {
 	    	$cats =  $mapper->getAllCategories();
 	    }
-
-        foreach($cats as $category) {
-            $this->populate($category, true);
-        }
 
         return $cats;
 	}
@@ -86,10 +72,8 @@ class Category extends AbstractRelationalMapperService
      */
 	public function getCategoriesByParentId($parentId)
 	{
-		$parentId = (int) $parentId;
-
-        /* @var $mapper \Shop\Mapper\Product\Category */
-        $mapper = $this->getMapper();
+		$parentId   = (int) $parentId;
+        $mapper     = $this->getMapper();
 	
 		return ($parentId != 0) ? $mapper->getSubCategoriesByParentId($parentId) : $this->fetchAll(true);
 	}
@@ -100,12 +84,9 @@ class Category extends AbstractRelationalMapperService
      */
 	public function getCategoryByIdent($ident)
 	{
-		$ident = (string) $ident;
-
-        /* @var $mapper \Shop\Mapper\Product\Category */
+		$ident  = (string) $ident;
         $mapper = $this->getMapper();
-
-		$cat = $mapper->getCategoryByIdent($ident);
+		$cat    = $mapper->getCategoryByIdent($ident);
 		
 		return $cat;
 	}
@@ -117,7 +98,6 @@ class Category extends AbstractRelationalMapperService
      */
 	public function getCategoryChildrenIds($categoryId, $recursive=false)
 	{
-        /* @var $mapper \Shop\Mapper\Product\Category */
         $mapper = $this->getMapper();
 
 		$categories = $mapper->getSubCategoriesByParentId($categoryId, $recursive);
@@ -133,32 +113,12 @@ class Category extends AbstractRelationalMapperService
 	}
 
     /**
-     * @param int $categoryId
-     * @param bool $recursive
-     * @return mixed
-     */
-	public function getCategoryImages($categoryId, $recursive=false)
-	{
-		$ids = $this->getCategoryChildrenIds($categoryId, $recursive);
-
-        /* @var $mapper \Shop\Mapper\Product\Image */
-        $mapper = $this->getMapper('ShopProductImage', [
-            'model'     => 'ShopProductImage',
-            'hydrator'  => 'ShopProductImage',
-        ]);
-
-		$images = $mapper->getImagesByCategoryIds($ids);
-
-		return $images;
-	}
-
-    /**
      * @param $categoryId
      * @return mixed
      */
 	public function getParentCategories($categoryId)
 	{
-        /* @var $mapper \Shop\Mapper\Product\Category */
+        /* @var $mapper CategoryMapper */
         $mapper = $this->getMapper();
 
 		return $mapper->getBreadCrumbs($categoryId);
@@ -192,7 +152,7 @@ class Category extends AbstractRelationalMapperService
 			$post['ident'] = $post['category'];
 		}
 
-        /* @var $mapper \Shop\Mapper\Product\Category */
+        /* @var $mapper CategoryMapper */
         $mapper = $this->getMapper();
 
         /* @var $model \Shop\Model\Product\Category */
@@ -333,7 +293,7 @@ class Category extends AbstractRelationalMapperService
 		
 		$category->setDateModified();
 
-        /* @var $mapper \Shop\Mapper\Product\Category */
+        /* @var $mapper CategoryMapper */
         $mapper = $this->getMapper();
 		
 		$result = $mapper->toggleEnabled($category);
@@ -341,12 +301,15 @@ class Category extends AbstractRelationalMapperService
 		if ($result) {
 		    $ids = $this->getCategoryChildrenIds($category->getProductCategoryId(), true);
 		    $ids[] = $category->getProductCategoryId();
-		    $mapper->cascadeEnabled($ids, $category->getEnabled());
+		    $mapper->cascadeEnabled($ids, $category->isEnabled());
 		}
 		
 		return $result;
 	}
-	
+
+    /**
+     * @param Event $e
+     */
 	public function preForm(Event $e)
 	{
 	    $model = $e->getParam('model');
