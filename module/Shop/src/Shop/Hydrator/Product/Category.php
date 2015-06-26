@@ -41,7 +41,7 @@ class Category extends AbstractHydrator
 			'productCategoryId'	=> $object->getProductCategoryId(),
 			'ident'				=> $object->getIdent(),
 			'category'			=> $object->getCategory(),
-            'image'             =>  $this->extractValue('enabled', $object->getImage()),
+            'image'             =>  $this->extractValue('image', $object->getImage()),
 			'lft'				=> $object->getLft(),
 			'rgt'				=> $object->getRgt(),
 			'enabled'			=> $this->extractValue('enabled', $object->isEnabled()),
