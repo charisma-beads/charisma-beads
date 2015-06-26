@@ -18,7 +18,7 @@ class Category extends AbstractHydrator
 		$dateTime = new DateTimeStrategy();
 		$trueFalse = new TrueFalse();
 		
-		$this->addStrategy('productImageId', new NullStrategy());
+		$this->addStrategy('image', new NullStrategy());
 		$this->addStrategy('enabled', $trueFalse);
 		$this->addStrategy('discontinued', $trueFalse);
 		$this->addStrategy('showImage', $trueFalse);
@@ -39,10 +39,9 @@ class Category extends AbstractHydrator
 	{
 		$data = array(
 			'productCategoryId'	=> $object->getProductCategoryId(),
-			'productImageId'	=> $this->extractValue('productImageId', $object->getProductImageId()),
-            'image'             => $object->getImage(),
 			'ident'				=> $object->getIdent(),
 			'category'			=> $object->getCategory(),
+            'image'             =>  $this->extractValue('enabled', $object->getImage()),
 			'lft'				=> $object->getLft(),
 			'rgt'				=> $object->getRgt(),
 			'enabled'			=> $this->extractValue('enabled', $object->isEnabled()),
