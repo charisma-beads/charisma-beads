@@ -13,40 +13,38 @@ namespace Shop\View;
 
 use UthandoCommon\View\AbstractViewHelper;
 use Shop\ShopException;
-use Shop\Options\CheckoutOptions;
+use Shop\Options\CartOptions;
 
 /**
- * Class CheckoutOption
+ * Class CartOption
  *
  * @package Shop\View
  */
-class CheckoutOption extends AbstractViewHelper
+class CartOption extends AbstractViewHelper
 {
     /**
-     * @var CheckoutOptions
+     * @var CartOptions
      */
-    protected $checkoutOptions;
+    protected $cartOptions;
 
     /**
      * @param null $key
-     * @return mixed|CheckoutOptions
+     * @return mixed|CartOptions
      * @throws ShopException
      */
     public function __invoke($key=null)
     {
-        if (!$this->checkoutOptions instanceof CheckoutOptions) {
+        if (!$this->cartOptions instanceof CartOptions) {
             $service = $this->getServiceLocator()
                 ->getServiceLocator()
-                ->get('Shop\Options\Checkout');
-            $this->checkoutOptions = $service;
+                ->get('Shop\Options\Cart');
+            $this->cartOptions = $service;
         }
         
-        if (is_string($key) && isset($this->checkoutOptions->$key)) {
-            return $this->checkoutOptions->$key;
+        if (is_string($key) && isset($this->cartOptions->$key)) {
+            return $this->cartOptions->$key;
         } else {
             throw new ShopException('option ' . $key . ' does not exist.');
         }
-
-        return $this->checkoutOptions;
     }
 }

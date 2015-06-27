@@ -131,6 +131,7 @@ class Category extends Form
     		'options'		=> [
     			'label'			=> 'Parent',
     			'required'		=> false,
+                'add_top'       => true,
             ],
         ]);
     	

@@ -19,13 +19,13 @@ class Settings extends Form
         ]);
         
         $this->add([
-            'type' => 'ShopCheckoutFieldSet',
-            'name' => 'checkout_options',
+            'type' => 'ShopCartFieldSet',
+            'name' => 'cart_options',
             'attributes' => [
                 'class' => 'col-md-6',
             ],
             'options' => [
-                'label' => 'Checkout Options',
+                'label' => 'Cart Options',
             ],
         ]);
         

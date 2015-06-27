@@ -4,7 +4,6 @@ namespace Shop\Hydrator\Product;
 
 use UthandoCommon\Hydrator\AbstractHydrator;
 use UthandoCommon\Hydrator\Strategy\DateTime as DateTimeStrategy;
-use UthandoCommon\Hydrator\Strategy\Null as NullStrategy;
 use UthandoCommon\Hydrator\Strategy\TrueFalse;
 
 class Category extends AbstractHydrator
@@ -17,7 +16,7 @@ class Category extends AbstractHydrator
 		
 		$dateTime = new DateTimeStrategy();
 		$trueFalse = new TrueFalse();
-        
+
 		$this->addStrategy('enabled', $trueFalse);
 		$this->addStrategy('discontinued', $trueFalse);
 		$this->addStrategy('showImage', $trueFalse);

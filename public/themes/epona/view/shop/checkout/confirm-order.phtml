@@ -34,7 +34,7 @@
                 </span>
             </section>
             
-            <?php if ($this->checkoutOption('collectInstore')):?>
+            <?php if ($this->cartOption('collectInstore')):?>
             <section>
                 <label class="checkbox">
 				    <?=$this->formCheckBox($this->form->get('collect_instore')->setOption('disable-twb', true));?><i></i>
@@ -77,7 +77,7 @@
             </section>
         </div>
         <footer>
-            <button type="submit" name="submit" class="button" value="placeOrder" data-loading-text="Please wait...">
+            <button id="place-order-button" type="submit" name="submit" class="button" value="placeOrder" data-loading-text="Please wait...">
             	Place Order
             </button>
             <a href="#cancelOrderModel" class="button button-secondary" data-toggle="modal" data-target="#cancelOrderModel">
@@ -119,3 +119,13 @@
         </div>
     </div>
 </div>
+
+<?php $this->inlineScript()->captureStart(); ?>
+    $(document).ready(function() {
+        $('#place-order-button').on('click', function(){
+            $('form.sky-form').loadingOverlay({
+                loadingText: 'Please wait while I prepare your order and redirect you to your chosen payment option'
+            });
+        });
+    });
+<?php $this->inlineScript()->captureEnd(); ?>

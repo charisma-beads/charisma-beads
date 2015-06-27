@@ -22,7 +22,7 @@ class PayOptionsList extends Radio implements ServiceLocatorAwareInterface
     {
         $options = $this->getServiceLocator()
             ->getServiceLocator()
-            ->get('Shop\Options\Checkout');
+            ->get('Shop\Options\Cart');
         
         $options = $options->toArray();
         $optionsArray = [];

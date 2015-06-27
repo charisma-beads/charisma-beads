@@ -172,7 +172,7 @@ return [
 
             'ShopSettings'              => 'Shop\Form\Settings\Settings',
             'ShopFieldSet'              => 'Shop\Form\Settings\ShopFieldSet',
-            'ShopCheckoutFieldSet'      => 'Shop\Form\Settings\CheckoutFieldSet',
+            'ShopCartFieldSet'          => 'Shop\Form\Settings\CartFieldSet',
             'ShopPaypalFieldSet'        => 'Shop\Form\Settings\PaypalFieldSet',
             'ShopReportsFieldSet'       => 'Shop\Form\Settings\ReportsFieldSet',
             'ShopCartCookieFieldSet'    => 'Shop\Form\Settings\CartCookieFieldSet',
@@ -268,7 +268,7 @@ return [
         ],
         'factories' => [
             'Shop\Options\CartCookie'   => 'Shop\Service\Factory\CartCookieOptions',
-            'Shop\Options\Checkout'     => 'Shop\Service\Factory\CheckoutOptions',
+            'Shop\Options\Cart'         => 'Shop\Service\Factory\CartOptions',
             'Shop\Options\Invoice'      => 'Shop\Service\Factory\InvoiceOptions',
             'Shop\Options\Paypal'       => 'Shop\Service\Factory\PaypalOptions',
             'Shop\Options\Reports'      => 'Shop\Service\Factory\ReportsOptions',
@@ -377,10 +377,10 @@ return [
         'invokables'    => [
             'ShopAlert'             => 'Shop\View\Alert',
             'BreadCrumbs'           => 'Shop\View\Breadcrumb',
-            'Category'              => 'Shop\View\Category',
-            'CheckoutOption'        => 'Shop\View\CheckoutOption',
-            'CountrySelect'         => 'Shop\View\CountrySelect',
+            'CartOption'            => 'Shop\View\CartOption',
             'Cart'                  => 'Shop\View\Cart',
+            'Category'              => 'Shop\View\Category',
+            'CountrySelect'         => 'Shop\View\CountrySelect',
             'CustomerAddress'       => 'Shop\View\CustomerAddress',
             'MonthYearSelect'       => 'Shop\View\FormMonthSelect',
             'InvoiceOption'         => 'Shop\View\InvoiceOption',

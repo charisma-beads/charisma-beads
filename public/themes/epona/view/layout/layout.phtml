@@ -47,6 +47,8 @@
             ->appendStylesheet($this->themePath('/assets/plugins/respond.js'), 'screen', 'lt IE 9')
             // SHOP
             ->appendStylesheet($this->themePath('/assets/css/layout-shop.css'))
+            // UTHANDO STYLES
+            ->appendStylesheet($this->basePath('/css/uthando-styles.css'))
         ;?>
         <style>
             /* Theme overrides */
@@ -301,6 +303,7 @@
         <!-- JAVASCRIPT FILES -->
         <?=$this->inlineScript()
             ->prependFile($this->themePath('/assets/js/scripts.js'))
+            ->prependFile($this->basePath('/js/loading-overlay.min.js'))
             ->prependFile($this->themePath('/assets/js/revolution_slider.js'))
             ->prependFile($this->themePath('/assets/plugins/revolution-slider/js/jquery.themepunch.revolution.min.js'))
             ->prependFile($this->themePath('/assets/plugins/revolution-slider/js/jquery.themepunch.tools.min.js'))

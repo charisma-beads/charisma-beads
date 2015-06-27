@@ -13,11 +13,11 @@ namespace Shop\Options;
 use Zend\Stdlib\AbstractOptions;
 
 /**
- * Class CheckoutOptions
+ * Class CartOptions
  *
  * @package Shop\Options
  */
-class CheckoutOptions extends AbstractOptions
+class CartOptions extends AbstractOptions
 {
     /**
      * @var boolean

@@ -4,16 +4,16 @@ namespace Shop\Form\Settings;
 use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\Form\Fieldset;
 use Zend\Stdlib\Hydrator\ClassMethods;
-use Shop\Options\CheckoutOptions;
+use Shop\Options\CartOptions;
 
-class CheckoutFieldSet extends Fieldset implements InputFilterProviderInterface
+class CartFieldSet extends Fieldset implements InputFilterProviderInterface
 {
     public function __construct($name = null, $options = [])
     {
         parent::__construct($name, $options);
     
         $this->setHydrator(new ClassMethods())
-            ->setObject(new CheckoutOptions());
+            ->setObject(new CartOptions());
     }
     
     public function init()

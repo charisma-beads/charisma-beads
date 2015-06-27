@@ -10,17 +10,47 @@
 
 namespace Shop\Form\Element;
 
+use UthandoCommon\Service\ServiceManager;
 use Zend\Form\Element\Select;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
 
+/**
+ * Class ProductCategoryList
+ *
+ * @package Shop\Form\Element
+ * @method ServiceManager getServiceLocator()
+ */
 class ProductCategoryList extends Select implements ServiceLocatorAwareInterface
 {
     use ServiceLocatorAwareTrait;
-    
+
+    /**
+     * @var string
+     */
     protected $emptyOption = '---Please select a category---';
+
+    /**
+     * @var bool
+     */
+    protected $addTop = false;
+
+    public function setOptions($options)
+    {
+        parent::setOptions($options);
+
+        if (isset($options['add_top'])) {
+            $this->addTop = $options['add_top'];
+        }
+    }
+
+    public function getValueOptions()
+    {
+        $options = ($this->valueOptions) ?: $this->getOptionList();
+        return $options;
+    }
     
-    public function init()
+    public function getOptionList()
     {
         /* @var $categoryService \Shop\Service\Product\Category */
         $categoryService = $this->getServiceLocator()
@@ -34,10 +64,13 @@ class ProductCategoryList extends Select implements ServiceLocatorAwareInterface
         $cats = $categoryService->fetchAll();
         
         $categoryOptions = [];
+
+        if ($this->isAddTop()) {
+            $categoryOptions[0] = 'Top';
+        }
          
         /* @var $cat \Shop\Model\Product\Category */
     	foreach($cats as $cat) {
-    		$indent = 'indent' . ($cat->getDepth() + 1);
     		$parent = ($cat->hasChildren() || $cat->getDepth() == 0) ? 'bold ' : '';
     		$categoryOptions[] = [
     			'label'	=> $cat->getCategory(),
@@ -49,7 +82,24 @@ class ProductCategoryList extends Select implements ServiceLocatorAwareInterface
     		];
     	}
         
-        $this->setValueOptions($categoryOptions);
+        return $categoryOptions;
     }
 
+    /**
+     * @return boolean
+     */
+    public function isAddTop()
+    {
+        return $this->addTop;
+    }
+
+    /**
+     * @param boolean $addTopOption
+     * @return $this
+     */
+    public function setAddTop($addTopOption)
+    {
+        $this->addTop = $addTopOption;
+        return $this;
+    }
 }
