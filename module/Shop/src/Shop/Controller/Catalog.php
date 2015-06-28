@@ -1,4 +1,13 @@
 <?php
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   Shop\Controller
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
+
 namespace Shop\Controller;
 
 use Shop\ShopException;
@@ -6,6 +15,11 @@ use UthandoCommon\Controller\ServiceTrait;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
+/**
+ * Class Catalog
+ *
+ * @package Shop\Controller
+ */
 class Catalog extends AbstractActionController
 {
     use ServiceTrait;

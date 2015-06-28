@@ -1,4 +1,13 @@
 <?php
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   Shop\Controller
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
+
 namespace Shop\Controller;
 
 use Shop\Service\Payment\Paypal as PaypalService;
@@ -8,6 +17,11 @@ use Zend\Mvc\Controller\AbstractActionController;
 use PayPal\Exception\PayPalConnectionException;
 use UthandoCommon\Controller\ServiceTrait;
 
+/**
+ * Class Paypal
+ *
+ * @package Shop\Controller
+ */
 class Paypal extends AbstractActionController
 {
     use SetExceptionMessages,

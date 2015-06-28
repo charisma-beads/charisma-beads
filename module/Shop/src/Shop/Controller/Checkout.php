@@ -1,4 +1,13 @@
 <?php
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   Shop\Controller
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
+
 namespace Shop\Controller;
 
 use UthandoCommon\Controller\ServiceTrait;
@@ -9,6 +18,11 @@ use Zend\Session\Container;
 use Zend\Http\PhpEnvironment\Response;
 use Zend\Form\Form;
 
+/**
+ * Class Checkout
+ *
+ * @package Shop\Controller
+ */
 class Checkout extends AbstractActionController
 {
     use ServiceTrait;

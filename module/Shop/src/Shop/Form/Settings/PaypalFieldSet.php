@@ -1,4 +1,13 @@
 <?php
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   Shop\Form\Settings
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
+
 namespace Shop\Form\Settings;
 
 use Zend\InputFilter\InputFilterProviderInterface;
@@ -6,6 +15,11 @@ use Zend\Form\Fieldset;
 use Zend\Stdlib\Hydrator\ClassMethods;
 use Shop\Options\PaypalOptions;
 
+/**
+ * Class PaypalFieldSet
+ *
+ * @package Shop\Form\Settings
+ */
 class PaypalFieldSet extends Fieldset implements InputFilterProviderInterface
 {
     public function __construct($name = null, $options = [])
