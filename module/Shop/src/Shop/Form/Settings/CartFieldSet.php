@@ -112,7 +112,7 @@ class CartFieldSet extends Fieldset implements InputFilterProviderInterface
         ]);
 
         $this->add([
-            'name'			=> 'shippingBYWeight',
+            'name'			=> 'shippingByWeight',
             'type'			=> 'radio',
             'options'		=> [
                 'label'			=> 'Shipping Cost',
