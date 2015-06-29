@@ -97,37 +97,6 @@ class ShopFieldSet extends Fieldset implements InputFilterProviderInterface
         ]);
         
         $this->add([
-            'name'			=> 'postState',
-            'type'			=> 'radio',
-            'options'		=> [
-                'label'			=> 'Post State',
-                'value_options' => [
-                    [
-                        'value' => '0',
-                        'label' => 'By Invoice Value',
-                        'label_attributes' => [
-                            'class' => 'col-md-12',
-                        ],
-
-                    ],
-                    [
-                        'value' => '1',
-                        'label' => 'By Invoice Weight',
-                        'label_attributes' => [
-                            'class' => 'col-md-12',
-                        ],
-
-                    ],
-                ],
-                'required' 		=> true,
-                'column-size' => 'md-8',
-                'label_attributes' => [
-                    'class' => 'col-md-4',
-                ],
-            ],
-        ]);
-        
-        $this->add([
             'name'			=> 'stockControl',
             'type'			=> 'checkbox',
             'options'		=> [
@@ -162,19 +131,6 @@ class ShopFieldSet extends Fieldset implements InputFilterProviderInterface
                 'label_attributes' => [
                     'class' => 'col-md-4',
                 ],
-            ],
-        ]);
-        
-        $this->add([
-            'name'			=> 'autoIncrementCart',
-            'type'			=> 'checkbox',
-            'options'		=> [
-                'label'			=> 'Auto Increment Cart',
-                'use_hidden_element' => true,
-                'checked_value' => '1',
-                'unchecked_value' => '0',
-                'required' 		=> false,
-                'column-size' => 'sm-8 col-sm-offset-4',
             ],
         ]);
     }

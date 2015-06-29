@@ -1,17 +1,33 @@
 <?php
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   Shop\Service
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
+
 namespace Shop\Service;
 
 use Shop\Service\Cart\Cart;
+use Shop\Service\Country\Country;
+use Shop\Service\Tax\Tax;
 
+/**
+ * Class Shipping
+ *
+ * @package Shop\Service
+ */
 class Shipping
 {
     /**
-     * @var \Shop\Service\Country\Country
+     * @var Country
      */
     protected $countryService;
 
     /**
-     * @var \Shop\Service\Tax
+     * @var Tax
      */
     protected $taxService;
 

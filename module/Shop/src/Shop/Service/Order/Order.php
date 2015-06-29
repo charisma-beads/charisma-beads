@@ -127,7 +127,7 @@ class Order extends AbstractRelationalMapperService
         $shopOptions = $this->getService('Shop\Options\Shop');
         
         $metadata->setPaymentMethod($paymentOption)
-            ->setTaxInvoice($shopOptions->getVatState())
+            ->setTaxInvoice($shopOptions->isVatState())
             ->setShippingTax($cart->getShippingTax())
             ->setRequirements($postData['requirements'])
             ->setCustomerName($customer->getFullName(), $customer->getPrefix()->getPrefix())
@@ -220,8 +220,8 @@ class Order extends AbstractRelationalMapperService
      */
     public function updateOrderStatus($orderNumber, $orderStatus)
     {
-        /* @var $options \Shop\Options\CartOptions */
-        $options = $this->getService('Shop\Options\Cart');
+        /* @var $options \Shop\Options\OrderOptions */
+        $options = $this->getService('Shop\Options\Order');
 
         $orderNumber = (int) $orderNumber;
         $orderStatus = (int) $orderStatus;
@@ -382,8 +382,8 @@ class Order extends AbstractRelationalMapperService
         $order = $this->populate($order, true);
         
         $email = $order->getCustomer()->getEmail();
-        /* @var $options \Shop\Options\CartOptions */
-        $options = $this->getService('Shop\Options\Cart');
+        /* @var $options \Shop\Options\OrderOptions */
+        $options = $this->getService('Shop\Options\Order');
         /* @var $shopOptions \Shop\Options\ShopOptions */
         $shopOptions = $this->getService('Shop\Options\Shop');
 

@@ -24,7 +24,7 @@ class ProductImage extends AbstractHelper
     /**
      * @var ImageModel
      */
-    protected $image;
+    protected $image = 'no_image_available.jpeg';
     
     /**
      * @var string
@@ -49,15 +49,16 @@ class ProductImage extends AbstractHelper
     public function getImage($withBasePath = true)
     {
         $basePath = $this->view->plugin('basepath');
-        $defaultImage = 'no_image_available.jpeg';
+        $defaultImage = '/img/no_image_available.jpeg';
         
         if ($this->image instanceof ImageModel) {
-            if ($this->image->getThumbnail()) {
-                $defaultImage = $this->image->getThumbnail();
+            if ($this->image->getThumbnail() && file_exists($this->publicDir.$this->imageDir.$this->image->getThumbnail())) {
+                $defaultImage = $this->imageDir . $this->image->getThumbnail();
             }
+
         }
-        
-        $image = $this->imageDir . $defaultImage;
+
+        $image = $defaultImage;
 
         if ($withBasePath) {
             $image = $basePath($image);

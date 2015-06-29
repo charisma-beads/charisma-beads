@@ -23,13 +23,16 @@ class ProductCategoryImage extends AbstractViewHelper
     /**
      * @var string
      */
-    protected $image;
+    protected $image = 'no_image_available.jpeg';
 
     /**
      * @var string
      */
     protected $categoryImageDirectory = '/userfiles/';
 
+    /**
+     * @var string
+     */
     protected $productImageDirectory = '/userfiles/shop/images/';
 
     /**
@@ -37,20 +40,23 @@ class ProductCategoryImage extends AbstractViewHelper
      */
     protected $publicDir = './public';
 
+    /**
+     * @param CategoryModel $model
+     * @return $this
+     */
     public function __invoke($model)
     {
-        $this->image = ($model instanceof CategoryModel) ? $model->getImage() : null;
+        if ($model instanceof CategoryModel) {
+            $this->image = $model->getImage();
+        }
+
         return $this;
     }
 
     public function getImage($withBasePath = true)
     {
         $basePath = $this->getView()->plugin('basepath');
-        $defaultImage = 'no_image_available.jpeg';
-
-        if ($this->image) {
-            $defaultImage = $this->image;
-        }
+        $defaultImage = $this->image;
 
         if ($this->isUploaded($this->categoryImageDirectory)) {
             $directory = $this->categoryImageDirectory;

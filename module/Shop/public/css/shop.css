@@ -1,7 +1,6 @@
 @CHARSET "UTF-8";
 
-#paypal-field-set,
-#invoice-field-set {
+#shop-settings fieldset:nth-child(odd)  {
     clear: both;
 }
 

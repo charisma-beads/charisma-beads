@@ -35,6 +35,7 @@
                         $this->statusFormElement->setValue($row->getOrderStatusId())
                             ->setAttribute('class', 'form-control input-sm')
                     );?>
+                    <input type="hidden" name="orderNumber" value="<?=$row->getOrderNumber(false);?>">
                 </td>
                 <td><?=$this->formatDate($row->getOrderDate())->setFormat('d/m/Y');?></td>
             </tr>

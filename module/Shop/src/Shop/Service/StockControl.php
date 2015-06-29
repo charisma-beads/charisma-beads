@@ -22,6 +22,7 @@ use Zend\EventManager\Event;
 
 /**
  * Class StockControl
+ *
  * @package Shop\Service
  */
 class StockControl

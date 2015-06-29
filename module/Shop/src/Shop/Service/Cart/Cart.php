@@ -244,7 +244,7 @@ class Cart extends AbstractMapperService implements InitializableInterface
         /** @var $item CartItem */
         $item = ($cart->offsetExists($productId)) ? $cart->offsetGet($productId) : new CartItem();
         
-        if ($this->getShopOptions()->getAutoIncrementCart()) {
+        if ($this->getCartOptions()->isAutoIncrementCart()) {
             $qty = $qty + $item->getQuantity();
         }
 
@@ -470,9 +470,9 @@ class Cart extends AbstractMapperService implements InitializableInterface
         $price = $item->getPrice();
         $tax = 0;
 
-        if (true == $this->getShopOptions()->getVatState()) {
+        if (true == $this->getShopOptions()->isVatState()) {
             $taxService = $this->getTaxService()
-                ->setTaxState($this->getShopOptions()->getVatState())
+                ->setTaxState($this->getShopOptions()->isVatState())
                 ->setTaxInc($item->getMetadata()->getVatInc());
             $taxService->addTax($price, $item->getTax(true));
             
@@ -639,6 +639,14 @@ class Cart extends AbstractMapperService implements InitializableInterface
     public function getShopOptions()
     {
         return $this->getServiceLocator()->get('Shop\Options\Shop');
+    }
+
+    /**
+     * @return \Shop\Options\CartOptions
+     */
+    public function getCartOptions()
+    {
+        return $this->getServiceLocator()->get('Shop\Options\Cart');
     }
 
     /**

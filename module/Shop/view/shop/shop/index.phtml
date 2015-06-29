@@ -145,7 +145,7 @@ $endYears = $this->formManager('MonthlyTotalYearList', [
     });
 
     $('#current-orders .panel-widget').on('change', 'select', function(){
-        var orderNumber = $(this).parent().prev().text();
+        var orderNumber = $('input[name=orderNumber]').val();
         var orderStatusId = this.value;
         $.ajax({
             url : '<?=$this->url('admin/shop/order/edit', [

@@ -33,11 +33,11 @@ class Tax
         	$taxRate = $taxRate + 1;
 
             if (!$this->taxInc) {
-                $pat = round($price*$taxRate, 2);
+                $pat = round($price * $taxRate, 2);
                 $tax = $pat - $price;
 
             } else {
-                $pbt = round($price/$taxRate, 2);
+                $pbt = round($price / $taxRate, 2);
                 $tax = $price - $pbt;
                 $price = $pbt;
             }
@@ -70,7 +70,7 @@ class Tax
     /**
      * @return bool
      */
-    public function getTaxState()
+    public function isTaxState()
     {
         return $this->taxState;
     }

@@ -20,7 +20,9 @@ use Zend\Form\Form;
 class Settings extends Form
 {
     public function init()
-    {   
+    {
+        $this->setAttribute('id','shop-settings');
+
         $this->add([
             'type' => 'ShopFieldSet',
             'name' => 'shop_options',
@@ -28,7 +30,18 @@ class Settings extends Form
                 'class' => 'col-md-6',
             ],
             'options' => [
-                'label' => 'Shop Options',
+                'label' => 'General Options',
+            ],
+        ]);
+
+        $this->add([
+            'type' => 'ShopOrderFieldSet',
+            'name' => 'order_options',
+            'attributes' => [
+                'class' => 'col-md-6',
+            ],
+            'options' => [
+                'label' => 'Order Options',
             ],
         ]);
         
@@ -44,18 +57,6 @@ class Settings extends Form
         ]);
         
         $this->add([
-            'type' => 'ShopPaypalFieldSet',
-            'name' => 'paypal_options',
-            'attributes' => [
-                'class' => 'col-md-6',
-                'id' => 'paypal-field-set',
-            ],
-            'options' => [
-                'label' => 'PayPal Options',
-            ],
-        ]);
-        
-        $this->add([
             'type' => 'ShopCartCookieFieldSet',
             'name' => 'cart_cookie',
             'attributes' => [
@@ -67,11 +68,21 @@ class Settings extends Form
         ]);
 
         $this->add([
+            'type' => 'ShopPaypalFieldSet',
+            'name' => 'paypal_options',
+            'attributes' => [
+                'class' => 'col-md-6',
+            ],
+            'options' => [
+                'label' => 'PayPal Options',
+            ],
+        ]);
+
+        $this->add([
             'type' => 'ShopInvoiceFieldSet',
             'name' => 'invoice_options',
             'attributes' => [
                 'class' => 'col-md-6',
-                'id' => 'invoice-field-set',
             ],
             'options' => [
                 'label' => 'Invoice Options',

@@ -10,23 +10,22 @@
 
 namespace Shop\Service\Factory;
 
-use Shop\Options\CartCookieOptions as Options;
+use Shop\Options\OrderOptions as Options;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
- * Class CartCookieOptions
+ * Class OrderOptions
  *
  * @package Shop\Service\Factory
  */
-class CartCookieOptions implements FactoryInterface
+class OrderOptions implements FactoryInterface
 {
-
 	public function createService(ServiceLocatorInterface $serviceLocator)
 	{
 	    $config = $serviceLocator->get('config');
-	    $options = isset($config['shop']['cart_cookie']) ? $config['shop']['cart_cookie'] : array();
-	     
+	    $options = isset($config['shop']['order_options']) ? $config['shop']['order_options'] : [];
+	    
 	    return new Options($options);
 	}
 }

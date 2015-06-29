@@ -6,7 +6,7 @@
         <?php if( ! $page->isVisible() || !$this->uthandoNavigation()->accept($page)) continue; ?>
         <?php $hasChildren = $page->hasChildren(); ?>
         <?php if(!$hasChildren): ?>
-            <li class="hidden-xs<?php if ($page->isActive(true)) echo ' active'; ?>">
+            <li class="<?=$page->get('class');?><?php if ($page->isActive(true)) echo ' active'; ?>">
                 <a href="<?=$page->getHref() ?>">
                     <i class="fa fa-angle-right"></i> <?=$page->getLabel() ?>
                 </a>

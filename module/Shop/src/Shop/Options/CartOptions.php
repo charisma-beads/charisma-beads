@@ -43,26 +43,16 @@ class CartOptions extends AbstractOptions
      * @var boolean
      */
     protected $payPaypal;
-    
-    /**
-     * @var string
-     */
-    protected $creditCardPaymentEmail;
-    
-    /**
-     * @var string
-     */
-    protected $orderEmail;
-    
-    /**
-     * @var bool
-     */
-    protected $sendOrderToAdmin;
 
     /**
      * @var bool
      */
-    protected $emailCustomerOnStatusChange;
+    protected $autoIncrementCart;
+
+    /**
+     * @var boolean
+     */
+    protected $shippingByWeight;
     
 	/**
 	 * @return boolean $PayCheck
@@ -153,76 +143,48 @@ class CartOptions extends AbstractOptions
 		$this->payPaypal = $payPaypal;
 		return $this;
 	}
-    
+
     /**
-     * @return string $creditCardPaymentEmail
+     * @return boolean
      */
-    public function getCreditCardPaymentEmail()
+    public function getShippingByWeight()
     {
-        return $this->creditCardPaymentEmail;
+        return $this->shippingByWeight;
     }
 
     /**
-     * @param string $creditCardPaymentEmail
+     * @return boolean
+     */
+    public function isShippingByWeight()
+    {
+        return $this->shippingByWeight;
+    }
+
+    /**
+     * @param boolean $shippingByWeight
      * @return $this
      */
-    public function setCreditCardPaymentEmail($creditCardPaymentEmail)
+    public function setShippingByWeight($shippingByWeight)
     {
-        $this->creditCardPaymentEmail = $creditCardPaymentEmail;
-        return $this;
-    }
-
-    /**
-     * @return string $orderEmail
-     */
-    public function getOrderEmail()
-    {
-        return $this->orderEmail;
-    }
-
-    /**
-     * @param string $orderEmail
-     * @return $this
-     */
-    public function setOrderEmail($orderEmail)
-    {
-        $this->orderEmail = $orderEmail;
-        return $this;
-    }
- 
-    /**
-     * @return boolean $sendOrderToAdmin
-     */
-    public function getSendOrderToAdmin()
-    {
-        return $this->sendOrderToAdmin;
-    }
-
-    /**
-     * @param boolean $sendOrderToAdmin
-     * @return $this
-     */
-    public function setSendOrderToAdmin($sendOrderToAdmin)
-    {
-        $this->sendOrderToAdmin = $sendOrderToAdmin;
+        $this->shippingByWeight = $shippingByWeight;
         return $this;
     }
 
     /**
      * @return boolean
      */
-    public function isEmailCustomerOnStatusChange()
+    public function isAutoIncrementCart()
     {
-        return $this->emailCustomerOnStatusChange;
+        return $this->autoIncrementCart;
     }
 
     /**
-     * @param boolean $emailCustomerOnStatusChange
+     * @param boolean $autoIncrementCart
      * @return $this
      */
-    public function setEmailCustomerOnStatusChange($emailCustomerOnStatusChange)
+    public function setAutoIncrementCart($autoIncrementCart)
     {
-        $this->emailCustomerOnStatusChange = (bool) $emailCustomerOnStatusChange;
+        $this->autoIncrementCart = $autoIncrementCart;
         return $this;
     }
 }

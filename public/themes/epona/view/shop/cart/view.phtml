@@ -192,7 +192,7 @@
 
                 <p class="fsize12">
                     Please note that shipping will be calculated on total order
-                    <?=($this->shopOption('postState')) ? 'weight' : 'value'; ?>
+                    <?=($this->cartOption('shippingByWeight')) ? 'weight' : 'value'; ?>
                     and destination, and will be applied when shipping information is finalised.
                 </p>
 

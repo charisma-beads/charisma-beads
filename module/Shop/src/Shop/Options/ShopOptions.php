@@ -35,11 +35,6 @@ class ShopOptions extends AbstractOptions
     protected $alertText;
     
     /**
-     * @var boolean
-     */
-    protected $postState;
-    
-    /**
      * @var integer
      */
     protected $productsPerPage;
@@ -63,11 +58,6 @@ class ShopOptions extends AbstractOptions
      * @var boolean
      */
     protected $vatState;
-    
-    /**
-     * @var bool
-     */
-    protected $autoIncrementCart;
 
     /**
      * @return string
@@ -120,24 +110,6 @@ class ShopOptions extends AbstractOptions
 	public function setAlertText($alertText)
 	{
 		$this->alertText = $alertText;
-		return $this;
-	}
-
-    /**
-     * @return bool
-     */
-	public function getPostState()
-	{
-		return $this->postState;
-	}
-
-    /**
-     * @param $postState
-     * @return $this
-     */
-	public function setPostState($postState)
-	{
-		$this->postState = $postState;
 		return $this;
 	}
 
@@ -216,7 +188,7 @@ class ShopOptions extends AbstractOptions
     /**
      * @return bool
      */
-	public function getVatState()
+	public function isVatState()
 	{
 		return $this->vatState;
 	}
@@ -230,22 +202,4 @@ class ShopOptions extends AbstractOptions
 		$this->vatState = $vatState;
 		return $this;
 	}
- 
-    /**
-     * @return boolean $autoIncrementCart
-     */
-    public function getAutoIncrementCart()
-    {
-        return $this->autoIncrementCart;
-    }
-
-    /**
-     * @param boolean $autoIncrementCart
-     * @return $this
-     */
-    public function setAutoIncrementCart($autoIncrementCart)
-    {
-        $this->autoIncrementCart = $autoIncrementCart;
-        return $this;
-    }
 }
