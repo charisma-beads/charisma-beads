@@ -111,184 +111,185 @@ $this->form->get('email')->setAttribute('readonly', '');
 
 <script>
 
+    $(document).ready(function() {
+        var addresses = function () {
 
-    var addresses = function(){
-
-        admin.ajaxWidgetPanel(
-            $('#customer-addresses .panel-body'),
-            '<?=$this->url('admin/shop/customer/address', [
-                'action' => 'list'
-            ]);?>',
-            {customerId : '<?=$this->model->getCustomerId();?>'}
-        );
-    };
-
-    var orders = function(){
-
-        admin.ajaxWidgetPanel(
-            $('#customer-orders .panel-table'),
-            '<?=$this->url('admin/shop/order/edit', [
-                'action' => 'order-list'
-]           );?>',
-            {customerId: '<?=$this->model->getCustomerId();?>'}
-        );
-    };
-
-    var updateAddressLists = function() {
-        $.ajax({
-            url : '<?=$this->url('admin/shop/customer/address', [
-                'action' => 'address-list'
-]           );?>',
-            data : {customerId : <?=$this->model->getCustomerId();?>},
-            type : 'POST'
-        }).done(function(data){
-            var billAd = $('select[name="billingAddressId"]');
-            var delAd = $('select[name="deliveryAddressId"]');
-
-            var billAdVal = billAd.val();
-            var delAdVal = delAd.val();
-
-            billAd.html(data);
-            delAd.html(data);
-
-            billAd.val(billAdVal);
-            delAd.val(delAdVal);
-        });
-    };
-
-    $('select').on('change', function(){
-        var formData = {
-            customerId : <?=$this->model->getCustomerId();?>
+            admin.ajaxWidgetPanel(
+                $('#customer-addresses .panel-body'),
+                '<?=$this->url('admin/shop/customer/address', [
+                    'action' => 'list'
+                ]);?>',
+                {customerId: '<?=$this->model->getCustomerId();?>'}
+            );
         };
-        var column = $(this).attr('name');
-        var value = $(this).val();
-        formData[column] = value;
 
-         $.ajax({
-            url : '<?=$this->url('admin/shop/customer/edit', [
-                'action' => 'update-address'
-            ]);?>',
-            data : formData,
-            type : 'POST',
-            complete : function(xhr) {
-                admin.addAlert(xhr.responseJSON.messages, xhr.responseJSON.status);
+        var orders = function () {
+
+            admin.ajaxWidgetPanel(
+                $('#customer-orders .panel-table'),
+                '<?=$this->url('admin/shop/order/edit', [
+                    'action' => 'order-list'
+    ]           );?>',
+                {customerId: '<?=$this->model->getCustomerId();?>'}
+            );
+        };
+
+        var updateAddressLists = function () {
+            $.ajax({
+                url: '<?=$this->url('admin/shop/customer/address', [
+                    'action' => 'address-list'
+    ]           );?>',
+                data: {customerId: <?=$this->model->getCustomerId();?>},
+                type: 'POST'
+            }).done(function (data) {
+                var billAd = $('select[name="billingAddressId"]');
+                var delAd = $('select[name="deliveryAddressId"]');
+
+                var billAdVal = billAd.val();
+                var delAdVal = delAd.val();
+
+                billAd.html(data);
+                delAd.html(data);
+
+                billAd.val(billAdVal);
+                delAd.val(delAdVal);
+            });
+        };
+
+        $('select').on('change', function () {
+            var formData = {
+                customerId: <?=$this->model->getCustomerId();?>
+            };
+            var column = $(this).attr('name');
+            var value = $(this).val();
+            formData[column] = value;
+
+            $.ajax({
+                url: '<?=$this->url('admin/shop/customer/edit', [
+                    'action' => 'update-address'
+                ]);?>',
+                data: formData,
+                type: 'POST',
+                complete: function (xhr) {
+                    admin.addAlert(xhr.responseJSON.messages, xhr.responseJSON.status);
+                }
+            });
+        });
+
+        $('#add-order-button').on('click', function () {
+            var billAddress = $('select[name=billingAddressId]').val();
+            var deliveryAddress = $('select[name=deliveryAddressId]').val();
+
+            if (billAddress == 0 || deliveryAddress == 0) {
+                bootbox.alert('You need to add a delivery & billing address before creating an order.');
+                return;
             }
-        });
-    });
 
-    $('#add-order-button').on('click', function(){
-        var billAddress = $('select[name=billingAddressId]').val();
-        var deliveryAddress = $('select[name=deliveryAddressId]').val();
-
-        if (billAddress == 0 || deliveryAddress == 0) {
-            bootbox.alert('You need to add a delivery & billing address before creating an order.');
-            return;
-        }
-
-        window.location = '<?=$this->url('admin/shop/order/edit', [
-            'action'    => 'create-order',
-            'id'        => $this->model->getCustomerId(),
-        ]);?>';
-    });
-
-    $('#customer-addresses').on('click', '.edit-address-button', function(event) {
-        event.preventDefault();
-
-        var el = $('#edit-address-model');
-        var url = $(this).attr('href').replace('-address', '');
-
-        el.on('show.bs.modal', function() {
-            $(this).find('.modal-body').load(url);
+            window.location = '<?=$this->url('admin/shop/order/edit', [
+                'action'    => 'create-order',
+                'id'        => $this->model->getCustomerId(),
+            ]);?>';
         });
 
-        el.on('hide.bs.modal', function(e){
+        $('#customer-addresses').on('click', '.edit-address-button', function (event) {
+            event.preventDefault();
+
+            var el = $('#edit-address-model');
+            var url = $(this).attr('href').replace('-address', '');
+
+            el.on('show.bs.modal', function () {
+                $(this).find('.modal-body').load(url);
+            });
+
+            el.on('hide.bs.modal', function (e) {
+                $(this).find('.modal-body').html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Loading');
+
+                el.off('show.bs.modal hide.bs.modal');
+                $('#edit-address-save').off('click');
+                addresses();
+            });
+
+            $('#edit-address-save').on('click', function () {
+                admin.ajaxModalForm(el, url);
+                updateAddressLists();
+            });
+
+            el.modal('show');
+
+        });
+
+        $('#customer-addresses').on('submit', 'form', function (event) {
+            event.preventDefault();
+            var url = '<?=$this->url('admin/shop/customer/address', [
+                'action'    => 'delete',
+            ]);?>';
+            var params = $(this).serialize() + '&submit=delete';
+            var el = $(this).parent().parent().parent();
+
+            $.ajax({
+                url: url,
+                data: params,
+                type: 'POST',
+                success: function (response) {
+                    admin.addAlert(response.messages, response.status);
+                    $(el).modal('hide');
+                    setTimeout('addresses()', 500);
+                    setTimeout('updateAddressLists()', 500);
+                },
+                error: function (response) {
+                    admin.addAlert(response.error, 'danger');
+                    $(el).modal('hide');
+                    setTimeout('addresses()', 500);
+                    setTimeout('updateAddressLists()', 500);
+                }
+            });
+        });
+
+        $('#customer-orders').on('submit', 'form', function (event) {
+            event.preventDefault();
+            var url = '<?=$this->url('admin/shop/order/edit', [
+                'action'    => 'delete',
+            ]);?>';
+            var params = $(this).serialize() + '&submit=delete';
+            var el = $(this).parent().parent().parent();
+
+            $.ajax({
+                url: url,
+                data: params,
+                type: 'POST',
+                success: function (response) {
+                    admin.addAlert(response.messages, response.status);
+                    $(el).modal('hide');
+                    setTimeout('orders()', 500);
+                },
+                error: function (response) {
+                    admin.addAlert(response.error, 'danger');
+                    $(el).modal('hide');
+                    setTimeout('orders()', 500);
+                }
+            });
+        });
+
+        $('#add-address-model').on('show.bs.modal', function () {
+            $(this).find('.modal-body').load('<?=$this->url('admin/shop/customer/address', [
+                'action'    => 'add',
+                'id'        => $this->model->getCustomerId(),
+            ]);?>');
+        });
+
+        $('#add-address-model').on('hide.bs.modal', function (e) {
             $(this).find('.modal-body').html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Loading');
-
-            el.off('show.bs.modal hide.bs.modal');
-            $('#edit-address-save').off('click');
             addresses();
-        });
-
-        $('#edit-address-save').on('click', function() {
-            admin.ajaxModalForm(el, url);
             updateAddressLists();
         });
 
-        el.modal('show');
-
-    });
-
-    $('#customer-addresses').on('submit', 'form', function(event) {
-        event.preventDefault();
-        var url = '<?=$this->url('admin/shop/customer/address', [
-            'action'    => 'delete',
-        ]);?>';
-        var params = $(this).serialize() + '&submit=delete';
-        var el = $(this).parent().parent().parent();
-
-        $.ajax({
-            url: url,
-            data:  params,
-            type: 'POST',
-            success: function (response) {
-                admin.addAlert(response.messages, response.status);
-                $(el).modal('hide');
-                setTimeout('addresses()',500);
-                setTimeout('updateAddressLists()',500);
-            },
-            error: function (response) {
-                admin.addAlert(response.error, 'danger');
-                $(el).modal('hide');
-                setTimeout('addresses()',500);
-                setTimeout('updateAddressLists()',500);
-            }
+        $('#add-address-save').on('click', function () {
+            admin.ajaxModalForm('#add-address-model', '<?=$this->url('admin/shop/customer/address', [
+                'action'    => 'add'
+            ]);?>');
         });
-    });
 
-    $('#customer-orders').on('submit', 'form', function(event) {
-        event.preventDefault();
-        var url = '<?=$this->url('admin/shop/order/edit', [
-            'action'    => 'delete',
-        ]);?>';
-        var params = $(this).serialize() + '&submit=delete';
-        var el = $(this).parent().parent().parent();
-
-        $.ajax({
-            url: url,
-            data:  params,
-            type: 'POST',
-            success: function (response) {
-                admin.addAlert(response.messages, response.status);
-                $(el).modal('hide');
-                setTimeout('orders()',500);
-            },
-            error: function (response) {
-                admin.addAlert(response.error, 'danger');
-                $(el).modal('hide');
-                setTimeout('orders()',500);
-            }
-        });
-    });
-
-    $('#add-address-model').on('show.bs.modal', function(){
-        $(this).find('.modal-body').load('<?=$this->url('admin/shop/customer/address', [
-            'action'    => 'add',
-            'id'        => $this->model->getCustomerId(),
-        ]);?>');
-    });
-
-    $('#add-address-model').on('hide.bs.modal', function(e){
-        $(this).find('.modal-body').html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Loading');
         addresses();
-        updateAddressLists();
+        orders();
     });
-
-    $('#add-address-save').on('click', function() {
-        admin.ajaxModalForm('#add-address-model', '<?=$this->url('admin/shop/customer/address', [
-            'action'    => 'add'
-        ]);?>');
-    });
-
-    addresses();
-    orders();
 </script>

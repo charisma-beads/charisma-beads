@@ -118,166 +118,167 @@
 </div>
 
 <script>
+    $(document).ready(function() {
+        var productOptions = function () {
+            admin.ajaxWidgetPanel(
+                $('#product-option .product-option-list'),
+                '<?=$this->url('admin/shop/product/option', [
+                    'action' => 'option-list'
+                ]);?>',
+                {productId: '<?=$this->model->getProductId();?>'}
+            );
+        };
 
-   var productOptions = function(){
-       admin.ajaxWidgetPanel(
-           $('#product-option .product-option-list'),
-           '<?=$this->url('admin/shop/product/option', [
-                'action' => 'option-list'
-            ]);?>',
-           {productId: '<?=$this->model->getProductId();?>'}
-       );
-   };
+        var productImages = function () {
+            admin.ajaxWidgetPanel(
+                $('#product-image .product-image-list'),
+                '<?=$this->url('admin/shop/product/image', [
+                    'action' => 'image-list'
+                ]);?>',
+                {productId: '<?=$this->model->getProductId();?>'}
+            );
+        };
 
-   var productImages = function(){
-       admin.ajaxWidgetPanel(
-           $('#product-image .product-image-list'),
-           '<?=$this->url('admin/shop/product/image', [
-                'action' => 'image-list'
-            ]);?>',
-           {productId: '<?=$this->model->getProductId();?>'}
-       );
-   };
+        $('#product-option').on('click', '.edit-button', function (event) {
+            event.preventDefault();
 
-   $('#product-option').on('click', '.edit-button', function(event) {
-       event.preventDefault();
+            var el = $('#edit-product-option-model');
+            var url = $(this).attr('href');
 
-       var el = $('#edit-product-option-model');
-       var url = $(this).attr('href');
+            el.on('show.bs.modal', function () {
+                $(this).find('.modal-body').load(url);
+            });
 
-       el.on('show.bs.modal', function() {
-           $(this).find('.modal-body').load(url);
-       });
+            el.on('hide.bs.modal', function (e) {
+                $(this).find('.modal-body').html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Loading');
+                productOptions();
+                el.off('show.bs.modal hide.bs.modal');
+                $('#edit-product-option-save').off('click');
+            });
 
-       el.on('hide.bs.modal', function(e){
-           $(this).find('.modal-body').html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Loading');
-           productOptions();
-           el.off('show.bs.modal hide.bs.modal');
-           $('#edit-product-option-save').off('click');
-       });
+            $('#edit-product-option-save').on('click', function () {
+                admin.ajaxModalForm(el, url);
+            });
 
-       $('#edit-product-option-save').on('click', function() {
-           admin.ajaxModalForm(el, url);
-       });
+            el.modal('show');
 
-       el.modal('show');
+        });
 
-   });
+        $('#product-option').on('submit', 'form', function (event) {
+            event.preventDefault();
+            var url = '<?=$this->url('admin/shop/product/option', [
+                'action'    => 'delete',
+            ]);?>';
+            var params = $(this).serialize() + '&submit=delete';
+            var el = $(this).parent().parent().parent();
 
-   $('#product-option').on('submit', 'form', function(event) {
-       event.preventDefault();
-       var url = '<?=$this->url('admin/shop/product/option', [
-            'action'    => 'delete',
-        ]);?>';
-       var params = $(this).serialize() + '&submit=delete';
-       var el = $(this).parent().parent().parent();
+            $.ajax({
+                url: url,
+                data: params,
+                type: 'POST',
+                success: function (response) {
+                    admin.addAlert(response.messages, response.status);
+                    $(el).modal('hide');
+                    setTimeout('productOptions()', 500);
+                },
+                error: function (response) {
+                    admin.addAlert(response.error, 'danger');
+                    $(el).modal('hide');
+                    setTimeout('productOptions()', 500);
+                }
+            });
+        });
 
-       $.ajax({
-           url: url,
-           data:  params,
-           type: 'POST',
-           success: function (response) {
-               admin.addAlert(response.messages, response.status);
-               $(el).modal('hide');
-               setTimeout('productOptions()',500);
-           },
-           error: function (response) {
-               admin.addAlert(response.error, 'danger');
-               $(el).modal('hide');
-               setTimeout('productOptions()',500);
-           }
-       });
-   });
+        $('#product-image').on('click', '.edit-button', function (event) {
+            event.preventDefault();
 
-   $('#product-image').on('click', '.edit-button', function(event) {
-       event.preventDefault();
+            var el = $('#edit-product-image-model');
+            var url = $(this).attr('href');
 
-       var el = $('#edit-product-image-model');
-       var url = $(this).attr('href');
+            el.on('show.bs.modal', function () {
+                $(this).find('.modal-body').load(url);
+            });
 
-       el.on('show.bs.modal', function() {
-           $(this).find('.modal-body').load(url);
-       });
+            el.on('hide.bs.modal', function (e) {
+                $(this).find('.modal-body').html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Loading');
+                productImages();
+                el.off('show.bs.modal hide.bs.modal');
+                $('#edit-product-image-save').off('click');
+            });
 
-       el.on('hide.bs.modal', function(e){
-           $(this).find('.modal-body').html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Loading');
-           productImages();
-           el.off('show.bs.modal hide.bs.modal');
-           $('#edit-product-image-save').off('click');
-       });
+            $('#edit-product-image-save').on('click', function () {
+                admin.ajaxModalForm(el, url);
+            });
 
-       $('#edit-product-image-save').on('click', function() {
-           admin.ajaxModalForm(el, url);
-       });
+            el.modal('show');
 
-       el.modal('show');
+        });
 
-   });
+        $('#product-image').on('submit', 'form', function (event) {
+            event.preventDefault();
+            var url = '<?=$this->url('admin/shop/product/image', [
+                'action'    => 'delete',
+            ]);?>';
+            var params = $(this).serialize() + '&submit=delete';
+            var el = $(this).parent().parent().parent();
 
-   $('#product-image').on('submit', 'form', function(event) {
-       event.preventDefault();
-       var url = '<?=$this->url('admin/shop/product/image', [
-            'action'    => 'delete',
-        ]);?>';
-       var params = $(this).serialize() + '&submit=delete';
-       var el = $(this).parent().parent().parent();
-
-       $.ajax({
-           url: url,
-           data:  params,
-           type: 'POST',
-           success: function (response) {
-               admin.addAlert(response.messages, response.status);
-               $(el).modal('hide');
-               setTimeout('productImages()',500);
-           },
-           error: function (response) {
-               admin.addAlert(response.error, 'danger');
-               $(el).modal('hide');
-               setTimeout('productImages()',500);
-           }
-       });
-   });
+            $.ajax({
+                url: url,
+                data: params,
+                type: 'POST',
+                success: function (response) {
+                    admin.addAlert(response.messages, response.status);
+                    $(el).modal('hide');
+                    setTimeout('productImages()', 500);
+                },
+                error: function (response) {
+                    admin.addAlert(response.error, 'danger');
+                    $(el).modal('hide');
+                    setTimeout('productImages()', 500);
+                }
+            });
+        });
 
 
-   $('#add-product-option-model').on('show.bs.modal', function () {
-        $(this).find('.modal-body').load('<?=$this->url('admin/shop/product/option', [
-            'action'    => 'add',
-            'id'        => $this->model->getProductId(),
-        ]);?>');
+        $('#add-product-option-model').on('show.bs.modal', function () {
+            $(this).find('.modal-body').load('<?=$this->url('admin/shop/product/option', [
+                'action'    => 'add',
+                'id'        => $this->model->getProductId(),
+            ]);?>');
+        });
+
+        $('#add-product-option-model').on('hide.bs.modal', function (e) {
+            $(this).find('.modal-body').html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Loading');
+            productOptions();
+        });
+
+        $('#add-product-option-save').on('click', function () {
+            admin.ajaxModalForm('#add-product-option-model', '<?=$this->url('admin/shop/product/option', [
+                'action'    => 'add',
+            ]);?>');
+        });
+
+        $('#add-product-image-model').on('show.bs.modal', function () {
+            $(this).find('.modal-body').load('<?=$this->url('admin/uploader', [
+                'action'    => 'upload-form',
+            ]);?>', function () {
+                $('#upload-form').append(
+                    '<input type="hidden" name="productId" value="<?=$this->model->getProductId();?>">'
+                );
+            });
+        });
+
+        $('#add-product-image-model').on('hide.bs.modal', function (e) {
+            $(this).find('.modal-body').html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Loading');
+            setTimeout('productImages()', 500);
+        });
+
+        $('#add-product-image-save').on('click', function () {
+            $('#upload-form').submit();
+        });
+
+        productOptions();
+        productImages();
     });
-
-    $('#add-product-option-model').on('hide.bs.modal', function (e) {
-        $(this).find('.modal-body').html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Loading');
-       productOptions();
-    });
-
-    $('#add-product-option-save').on('click', function () {
-        admin.ajaxModalForm('#add-product-option-model', '<?=$this->url('admin/shop/product/option', [
-            'action'    => 'add',
-        ]);?>');
-    });
-
-   $('#add-product-image-model').on('show.bs.modal', function () {
-       $(this).find('.modal-body').load('<?=$this->url('admin/uploader', [
-            'action'    => 'upload-form',
-        ]);?>', function(){
-           $('#upload-form').append(
-               '<input type="hidden" name="productId" value="<?=$this->model->getProductId();?>">'
-           );
-       });
-   });
-
-   $('#add-product-image-model').on('hide.bs.modal', function (e) {
-       $(this).find('.modal-body').html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Loading');
-       setTimeout('productImages()',500);
-   });
-
-   $('#add-product-image-save').on('click', function () {
-       $('#upload-form').submit();
-   });
-
-    productOptions();
-    productImages();
 
 </script>

@@ -79,85 +79,87 @@
 <div class="clearfix"></div>
 
 <script>
-    var provinces = function() {
+    $(document).ready(function() {
+        var provinces = function () {
 
-        admin.ajaxWidgetPanel(
-            $('#country-provinces .panel-table'),
-            '<?=$this->url('admin/shop/country/province', [
-                'action' => 'list'
-            ]);?>',
-            {countryId : '<?=$this->model->getCountryId();?>'}
-        );
-    }
+            admin.ajaxWidgetPanel(
+                $('#country-provinces .panel-table'),
+                '<?=$this->url('admin/shop/country/province', [
+                    'action' => 'list'
+                ]);?>',
+                {countryId: '<?=$this->model->getCountryId();?>'}
+            );
+        }
 
-    $('#country-provinces').on('click', '.edit-button', function(event) {
-        event.preventDefault();
+        $('#country-provinces').on('click', '.edit-button', function (event) {
+            event.preventDefault();
 
-        var el = $('#edit-province-model');
-        var url = $(this).attr('href').replace('-province', '');
+            var el = $('#edit-province-model');
+            var url = $(this).attr('href').replace('-province', '');
 
-        el.on('show.bs.modal', function() {
-            $(this).find('.modal-body').load(url);
+            el.on('show.bs.modal', function () {
+                $(this).find('.modal-body').load(url);
+            });
+
+            el.on('hide.bs.modal', function (e) {
+                $(this).find('.modal-body').html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Loading');
+                provinces();
+                el.off('show.bs.modal hide.bs.modal');
+                $('#edit-province-save').off('click');
+            });
+
+            $('#edit-province-save').on('click', function () {
+                admin.ajaxModalForm(el, url);
+            });
+
+            el.modal('show');
+
         });
 
-        el.on('hide.bs.modal', function(e){
+        $('#country-provinces').on('submit', 'form', function (event) {
+            event.preventDefault();
+            var url = '<?=$this->url('admin/shop/country/province', [
+                'action'    => 'delete',
+            ]);?>';
+            var params = $(this).serialize() + '&submit=delete';
+            var el = $(this).parent().parent().parent();
+
+            $.ajax({
+                url: url,
+                data: params,
+                type: 'POST',
+                success: function (response) {
+                    admin.addAlert(response.messages, response.status);
+                    $(el).modal('hide');
+                    setTimeout('provinces()', 500);
+                },
+                error: function (response) {
+                    admin.addAlert(response.error, 'danger');
+                    $(el).modal('hide');
+                    setTimeout('provinces()', 500);
+                }
+            });
+        });
+
+        $('#add-province-model').on('show.bs.modal', function () {
+            $(this).find('.modal-body').load('<?=$this->url('admin/shop/country/province', [
+                'action'    => 'add',
+                'id'        => $this->model->getCountryId(),
+            ]);?>');
+        });
+
+        $('#add-province-model').on('hide.bs.modal', function (e) {
             $(this).find('.modal-body').html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Loading');
             provinces();
-            el.off('show.bs.modal hide.bs.modal');
-            $('#edit-province-save').off('click');
         });
 
-        $('#edit-province-save').on('click', function() {
-            admin.ajaxModalForm(el, url);
+        $('#add-province-save').on('click', function () {
+            admin.ajaxModalForm('#add-province-model', '<?=$this->url('admin/shop/country/province', [
+                'action'    => 'add',
+            ]);?>');
         });
 
-        el.modal('show');
-
-    });
-
-    $('#country-provinces').on('submit', 'form', function(event) {
-        event.preventDefault();
-        var url = '<?=$this->url('admin/shop/country/province', [
-            'action'    => 'delete',
-        ]);?>';
-        var params = $(this).serialize() + '&submit=delete';
-        var el = $(this).parent().parent().parent();
-
-        $.ajax({
-            url: url,
-            data:  params,
-            type: 'POST',
-            success: function (response) {
-                admin.addAlert(response.messages, response.status);
-                $(el).modal('hide');
-                setTimeout('provinces()',500);
-            },
-            error: function (response) {
-                admin.addAlert(response.error, 'danger');
-                $(el).modal('hide');
-                setTimeout('provinces()',500);
-            }
-        });
-    });
-
-    $('#add-province-model').on('show.bs.modal', function(){
-        $(this).find('.modal-body').load('<?=$this->url('admin/shop/country/province', [
-            'action'    => 'add',
-            'id'        => $this->model->getCountryId(),
-        ]);?>');
-    });
-
-    $('#add-province-model').on('hide.bs.modal', function(e){
-        $(this).find('.modal-body').html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Loading');
         provinces();
     });
-
-    $('#add-province-save').on('click', function() {
-        admin.ajaxModalForm('#add-province-model', '<?=$this->url('admin/shop/country/province', [
-            'action'    => 'add',
-        ]);?>');
-    });
-
-    provinces();
 
 </script>
