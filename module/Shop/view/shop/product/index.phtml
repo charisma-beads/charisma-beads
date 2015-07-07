@@ -34,24 +34,25 @@ $discontinued = new Element\Checkbox('discontinued', [
 </div>
 
 <script>
+    $(document).ready(function() {
+        $('#table-product').dataGrid({
+            url: 'product/list',
+            query: {sort: '<?=(isset($this->params['sort'])) ? $this->params['sort'] : 'sku';?>'},
+            searchForm: $('#search-product'),
+            columnSort: true
+        });
 
-	$('#table-product').dataGrid({
-	    url : 'product/list',
-	    query: { sort : '<?=(isset($this->params['sort'])) ? $this->params['sort'] : 'sku';?>' },
-	    searchForm : $('#search-product'),
-	    columnSort: true
-	});
+        $('input[name=discontinued]').on('click', function () {
+            $('#table-product').dataGrid('doSearch');
+        });
 
-	$('input[name=discontinued]').on('click', function(){
-		   $('#table-product').dataGrid('doSearch');
-	});
+        $('input[name=disabled]').on('click', function () {
+            $('#table-product').dataGrid('doSearch');
+        });
 
-	$('input[name=disabled]').on('click', function(){
-		   $('#table-product').dataGrid('doSearch');
-	});
-
-	$('select[name=productCategoryId]').on('change', function(){
-		   $('#table-product').dataGrid('doSearch');
-	});
+        $('select[name=productCategoryId]').on('change', function () {
+            $('#table-product').dataGrid('doSearch');
+        });
+    });
 
 </script>

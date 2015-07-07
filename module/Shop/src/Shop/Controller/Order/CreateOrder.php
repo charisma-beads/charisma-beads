@@ -10,12 +10,17 @@
 
 namespace Shop\Controller\Order;
 
+use Zend\Mvc\Controller\AbstractActionController;
+
 /**
  * Class CreateOrder
  *
  * @package Shop\Controller\Order
  */
-class CreateOrder
+class CreateOrder extends AbstractActionController
 {
+    public function indexAction()
+    {
 
+    }
 }

@@ -15,12 +15,13 @@
 
 
 <script>
-
-	$('#table-advert').dataGrid({
-	    url : 'advert/list',
-	    query: { sort : 'advertId' },
-	    searchForm : $('#search-advert'),
-	    columnSort: true
-	});
+    $(document).ready(function() {
+        $('#table-advert').dataGrid({
+            url: 'advert/list',
+            query: {sort: 'advertId'},
+            searchForm: $('#search-advert'),
+            columnSort: true
+        });
+    });
 
 </script>

@@ -15,12 +15,13 @@
 </div>
 
 <script>
-
-	$('#table-customer').dataGrid({
-	    url : 'customer/list',
-	    query: { sort : 'name' },
-	    searchForm : $('#search-customer'),
-	    columnSort: true
-	});
+    $(document).ready(function() {
+        $('#table-customer').dataGrid({
+            url: 'customer/list',
+            query: {sort: 'name'},
+            searchForm: $('#search-customer'),
+            columnSort: true
+        });
+    });
 
 </script>
