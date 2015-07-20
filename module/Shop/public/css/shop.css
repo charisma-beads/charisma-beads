@@ -1,6 +1,6 @@
 @CHARSET "UTF-8";
 
-#shop-settings fieldset:nth-child(odd)  {
+fieldset:nth-child(odd)  {
     clear: both;
 }
 

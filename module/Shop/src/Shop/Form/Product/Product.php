@@ -61,11 +61,12 @@ class Product extends Form
         
         $this->add([
         	'name'			=> 'price',
-        	'type'			=> 'number',
+        	'type'			=> 'ShopPrice',
         	'attributes'	=> [
         		'placeholder'	=> 'Price:',
         		'autofocus'		=> true,
-        		'step'			=> '0.01'
+                'min'           => '0.00',
+        		'step'			=> '0.01',
         	],
         	'options'		=> [
         		'label'			=> 'Price:',

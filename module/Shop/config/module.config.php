@@ -4,7 +4,10 @@ return [
         'resolver_configs' => [
             'collections' => [
                 'css/uthando-admin.css' => [
-                    'css/shop.css'
+                    'css/shop.css',
+                ],
+                'js/uthando-admin.js' => [
+                    'js/shop.js',
                 ],
             ],
             'paths' => [
@@ -185,6 +188,7 @@ return [
             'CustomerAddressList'       => 'Shop\Form\Element\CustomerAddressList',
             'CustomerPrefixList'        => 'Shop\Form\Element\CustomerPrefixList',
             'MonthlyTotalYearList'      => 'Shop\Form\Element\MonthlyTotalYearList',
+            'ShopPrice'                 => 'Shop\Form\Element\Number',
             'OrderStatusList'           => 'Shop\Form\Element\OrderStatusList',
             'PayOptionsList'            => 'Shop\Form\Element\PayOptionsList',
             'PostLevelList'             => 'Shop\Form\Element\PostLevelList',

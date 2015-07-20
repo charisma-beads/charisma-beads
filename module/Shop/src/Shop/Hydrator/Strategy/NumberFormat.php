@@ -13,31 +13,28 @@ namespace Shop\Hydrator\Strategy;
 use Zend\Stdlib\Hydrator\Strategy\StrategyInterface;
 
 /**
- * Class Percent
+ * Class NumberFormat
  *
  * @package Shop\Hydrator\Strategy
  */
-class Percent implements StrategyInterface
+class NumberFormat implements StrategyInterface
 {
-    /**
-     * @param float $value
-     * @return float
-     */
-	public function extract($value)
-	{
-		$value = $value / 100;
-		
-		return $value;
-	}
 
     /**
      * @param float $value
      * @return float
      */
-	public function hydrate($value)
-	{
-		$wholePercent = $value * 100;
-		
-		return ($wholePercent < 100) ? $wholePercent : $value;
-	}
+    public function extract($value)
+    {
+        return number_format($value, 2);
+    }
+
+    /**
+     * @param float $value
+     * @return float
+     */
+    public function hydrate($value)
+    {
+        return number_format($value, 2);
+    }
 }

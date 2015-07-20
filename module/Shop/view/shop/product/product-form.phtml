@@ -4,23 +4,23 @@ $routeArray = ['action' => $this->formAction];
 if (isset($this->productId)) $routeArray['id'] = $this->productId;
 ?>
 <div class="row">
-	<form class="col-sm-12 form-horizontal" method="post" action="<?=$this->url('admin/shop/product/edit', $routeArray) ?>">
+	<form class="form-horizontal col-md-12" method="post" action="<?=$this->url('admin/shop/product/edit', $routeArray) ?>">
 
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-md-6">
                 <fieldset>
                     <legend>Details: 
                     <?php if ($this->formAction == 'edit'):?>
-                    <small>(<?=$this->model->getProductId();?>)</small>
+                    <mdall>(<?=$this->model->getProductId();?>)</mdall>
                     <?php endif;?>
                     </legend>
                     <div class="row">
-                        <div class="col-sm-6 text-right">
+                        <div class="col-md-6 text-right">
                             <label>
                                 <?=$this->formCheckbox($form->get('enabled'));?>
                             </label>
                         </div>
-                        <div class="col-sm-6 text-right">
+                        <div class="col-md-6 text-right">
                             <label>
                                 <?=$this->formCheckbox($form->get('discontinued'));?>
                             </label>
@@ -30,8 +30,8 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
                     <div class="clearfix">&nbsp;</div>
                     
                     <div class="form-group<?php if ($form->get('sku')->getMessages()) echo ' has-error'; ?>">
-                        <label class="col-sm-4 control-label" for="sku"><?=$form->get('sku')->getLabel();?></label>
-                        <div class="col-sm-8">
+                        <label class="col-md-4 control-label" for="sku"><?=$form->get('sku')->getLabel();?></label>
+                        <div class="col-md-8">
                             <?=$this->formText($form->get('sku')->setAttribute('class', 'form-control')); ?>
                             <span class="help-block">
                                 <?=$this->formElementErrors($form->get('sku'), [
@@ -42,8 +42,8 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
                     </div>
 
                     <div class="form-group<?php if ($form->get('name')->getMessages()) echo ' has-error'; ?>">
-                        <label class="col-sm-4 control-label" for="name"><?=$form->get('name')->getLabel();?></label>
-                        <div class="col-sm-8">
+                        <label class="col-md-4 control-label" for="name"><?=$form->get('name')->getLabel();?></label>
+                        <div class="col-md-8">
                             <?=$this->formText($form->get('name')->setAttribute('class', 'form-control')); ?>
                             <span class="help-block">
                                 <?=$this->formElementErrors($form->get('name'), [
@@ -54,8 +54,8 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
                     </div>
 
                     <div class="form-group<?php if ($form->get('productCategoryId')->getMessages()) echo ' has-error'; ?>">
-                        <label class="col-sm-4 control-label" for="productCategoryId"><?=$form->get('productCategoryId')->getLabel();?></label>
-                        <div class="col-sm-8">
+                        <label class="col-md-4 control-label" for="productCategoryId"><?=$form->get('productCategoryId')->getLabel();?></label>
+                        <div class="col-md-8">
                             <?=$this->formSelect($form->get('productCategoryId')->setAttribute('class', 'form-control')); ?>
                             <span class="help-block">
                                 <?=$this->formElementErrors($form->get('productCategoryId'), [
@@ -66,8 +66,8 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
                     </div>
 
                     <div class="form-group<?php if ($form->get('ident')->getMessages()) echo ' has-error'; ?>">
-                        <label class="col-sm-4 control-label" for="ident"><?=$form->get('ident')->getLabel();?></label>
-                        <div class="col-sm-8">
+                        <label class="col-md-4 control-label" for="ident"><?=$form->get('ident')->getLabel();?></label>
+                        <div class="col-md-8">
                             <?=$this->formText($form->get('ident')->setAttribute('class', 'form-control')); ?>
                             <span class="help-block">
                                 If you leave this blank the the product code and title will be used for the ident.
@@ -79,8 +79,8 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
                     </div>
 
                     <div class="form-group<?php if ($form->get('shortDescription')->getMessages()) echo ' has-error'; ?>">
-                        <label class="col-sm-4 control-label" for="shortDescription"><?=$form->get('shortDescription')->getLabel();?></label>
-                        <div class="col-sm-8">
+                        <label class="col-md-4 control-label" for="shortDescription"><?=$form->get('shortDescription')->getLabel();?></label>
+                        <div class="col-md-8">
                             <?=$this->formText($form->get('shortDescription')->setAttribute('class', 'form-control')); ?>
                             <span class="help-block">
                                 <?=$this->formElementErrors($form->get('shortDescription'), [
@@ -92,12 +92,12 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
                 </fieldset>
             </div>
 
-            <div class="col-sm-6">
+            <div class="col-md-6">
                 <fieldset>
                     <legend>Price:</legend>
                     <div class="form-group<?php if ($form->get('productGroupId')->getMessages()) echo ' has-error'; ?>">
-                        <label class="col-sm-4 control-label" for="productGroupId"><?=$form->get('productGroupId')->getLabel();?></label>
-                        <div class="col-sm-8">
+                        <label class="col-md-4 control-label" for="productGroupId"><?=$form->get('productGroupId')->getLabel();?></label>
+                        <div class="col-md-8">
                             <?=$this->formSelect($form->get('productGroupId')->setAttribute('class', 'form-control')); ?>
                             <span class="help-block">
                                 <?=$this->formElementErrors($form->get('productGroupId'), [
@@ -108,8 +108,8 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
                     </div>
 
                     <div class="form-group<?php if ($form->get('price')->getMessages()) echo ' has-error'; ?>">
-                        <label class="col-sm-4 control-label" for="price"><?=$form->get('price')->getLabel();?></label>
-                        <div class="col-sm-8">
+                        <label class="col-md-4 control-label" for="price"><?=$form->get('price')->getLabel();?></label>
+                        <div class="col-md-8">
                             <?=$this->formNumber($form->get('price')->setAttribute('class', 'form-control')); ?>
                             <span class="help-block">
                                 Do not include the currency sign or commas.
@@ -121,8 +121,8 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
                     </div>
 
                     <div class="form-group<?php if ($form->get('discountPercent')->getMessages()) echo ' has-error'; ?>">
-                        <label class="col-sm-4 control-label" for="discountPercent"><?=$form->get('discountPercent')->getLabel();?></label>
-                        <div class="col-sm-8">
+                        <label class="col-md-4 control-label" for="discountPercent"><?=$form->get('discountPercent')->getLabel();?></label>
+                        <div class="col-md-8">
                             <?=$this->formNumber($form->get('discountPercent')->setAttribute('class', 'form-control')); ?>
                             <span class="help-block">
                                 Do not include the % sign.
@@ -134,8 +134,8 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
                     </div>
 
                     <div class="form-group<?php if ($form->get('quantity')->getMessages()) echo ' has-error'; ?>">
-                        <label class="col-sm-4 control-label" for="quantity"><?=$form->get('quantity')->getLabel();?></label>
-                        <div class="col-sm-8">
+                        <label class="col-md-4 control-label" for="quantity"><?=$form->get('quantity')->getLabel();?></label>
+                        <div class="col-md-8">
                             <?=$this->formNumber($form->get('quantity')->setAttribute('class', 'form-control')); ?>
                             <span class="help-block">
                                 <?=$this->formElementErrors($form->get('quantity'), [
@@ -146,8 +146,8 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
                     </div>
 
                     <div class="form-group<?php if ($form->get('taxCodeId')->getMessages()) echo ' has-error'; ?>">
-                        <label class="col-sm-4 control-label" for="taxCodeId"><?=$form->get('taxCodeId')->getLabel();?></label>
-                        <div class="col-sm-8">
+                        <label class="col-md-4 control-label" for="taxCodeId"><?=$form->get('taxCodeId')->getLabel();?></label>
+                        <div class="col-md-8">
                             <?=$this->formSelect($form->get('taxCodeId')->setAttribute('class', 'form-control')); ?>
                             <span class="help-block">
                                 <?=$this->formElementErrors($form->get('taxCodeId'), [
@@ -158,12 +158,12 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
                     </div>
 
                     <div class="row">
-                        <div class="col-sm-4 text-right">
+                        <div class="col-md-4 text-right">
                             <label>
                                 <?=$this->formCheckbox($form->get('addPostage'));?>
                             </label>
                         </div>
-                        <div class="col-sm-4 text-right">
+                        <div class="col-md-4 text-right">
                             <label>
                                 <?=$this->formCheckbox($form->get('vatInc'));?>
                             </label>
@@ -172,7 +172,7 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
                 </fieldset>
             </div>
 
-            <div class="col-sm-6">
+            <div class="col-md-6">
                 <fieldset>
                     <legend>Attributes:</legend>
                     <div class="col-md-12 col-md-offset-4">
@@ -181,8 +181,8 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
                         </label>
                     </div>
                     <div class="form-group<?php if ($form->get('productSizeId')->getMessages()) echo ' has-error'; ?>">
-                        <label class="col-sm-4 control-label" for="productSizeId"><?=$form->get('productSizeId')->getLabel();?></label>
-                        <div class="col-sm-8">
+                        <label class="col-md-4 control-label" for="productSizeId"><?=$form->get('productSizeId')->getLabel();?></label>
+                        <div class="col-md-8">
                             <div class="input-group">
                                 <?=$this->formSelect($form->get('productSizeId')->setAttribute('class', 'form-control')); ?>
                                 <span class="input-group-btn">
@@ -198,8 +198,8 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
                     </div>
 
                     <div class="form-group<?php if ($form->get('postUnitId')->getMessages()) echo ' has-error'; ?>">
-                        <label class="col-sm-4 control-label" for="postUnitId"><?=$form->get('postUnitId')->getLabel();?></label>
-                        <div class="col-sm-8">
+                        <label class="col-md-4 control-label" for="postUnitId"><?=$form->get('postUnitId')->getLabel();?></label>
+                        <div class="col-md-8">
                             <div class="input-group">
                                 <?=$this->formSelect($form->get('postUnitId')->setAttribute('class', 'form-control')); ?>
                                 <span class="input-group-btn">
@@ -239,7 +239,7 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
         <input type="hidden" name="action" value="<?=$this->formAction;?>">
 
         <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
+            <div class="col-md-offset-2 col-md-10">
                 <button type="submit" class="btn btn-primary" data-loading-text="Please wait...">
                     Submit
                 </button>
@@ -256,14 +256,14 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button type="button" class="close" data-dimdiss="modal">&times;</button>
                 <h4 class="modal-title">Add Product Size</h4>
             </div>
             <div class="modal-body">
                 <i class="fa fa-spinner fa-spin"></i>&nbsp;Loading
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default" data-dimdiss="modal">Close</button>
                 <button id="edit-product-size-save" type="button" class="btn btn-primary">Save</button>
             </div>
         </div>
@@ -274,14 +274,14 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button type="button" class="close" data-dimdiss="modal">&times;</button>
                 <h4 class="modal-title">Add Product Weight</h4>
             </div>
             <div class="modal-body">
                 <i class="fa fa-spinner fa-spin"></i>&nbsp;Loading
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default" data-dimdiss="modal">Close</button>
                 <button id="edit-product-weight-save" type="button" class="btn btn-primary">Save</button>
             </div>
         </div>

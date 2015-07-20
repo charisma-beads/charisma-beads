@@ -14,8 +14,10 @@
             <a class="quick-cart-item" href="<?=$this->url('shop/cart', [
                 'action' => 'view'
             ]);?>"><!-- item -->
-                <img class="pull-left" src="<?=$this->basePath('/userfiles/shop/images/' . $item->getMetadata()->getImage()->getThumbnail());?>" width="40" alt="quick cart">
-                <div class="inline-block">
+                <?php if ($item->getMetadata()->getShowImage()):?>
+                <img class="pull-left" src="<?=$this->productImage($item->getMetadata()->getImage());?>" width="40" alt="quick cart">
+                <?php endif;?>
+                    <div class="inline-block">
                     <span class="title block"><?=$item->getMetadata()->getSku();?>/<?=$item->getMetadata()->getName();?></span>
                     <span class="price block"><?=$item->getQuantity();?> &times; <?=$this->cart()->getLineCost($item);?></span>
                 </div>
