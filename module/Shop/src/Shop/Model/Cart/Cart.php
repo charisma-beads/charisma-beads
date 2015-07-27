@@ -5,6 +5,8 @@ use UthandoCommon\Model\AbstractCollection;
 use UthandoCommon\Model\DateModifiedTrait;
 use UthandoCommon\Model\Model;
 use UthandoCommon\Model\ModelInterface;
+use RecursiveArrayIterator;
+use RecursiveIteratorIterator;
 
 class Cart extends AbstractCollection implements ModelInterface
 {
@@ -25,6 +27,11 @@ class Cart extends AbstractCollection implements ModelInterface
      * @var int
      */
     protected $expires;
+
+    /**
+     * @var bool
+     */
+    protected $sorted = false;
     
     public function __construct()
     {
@@ -109,6 +116,55 @@ class Cart extends AbstractCollection implements ModelInterface
     {
         $this->expires = $expires;
         return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isSorted()
+    {
+        return $this->sorted;
+    }
+
+    /**
+     * set the sorted value to true.
+     */
+    protected function setSorted()
+    {
+        $this->sorted = true;
+    }
+
+    /**
+     * reorder the cart by [category - sku]
+     */
+    public function rewind()
+    {
+        if (!$this->isSorted()) {
+            $entities = $this->getEntities();
+            $tempArray = [];
+
+            /* @var $item \Shop\Model\Cart\Item */
+            foreach ($entities as $key => $item) {
+                $sortKey = $item->getMetadata()->getCategory() . '-' . $item->getMetadata()->getSku();
+                $tempArray[$sortKey][$key] = $item;
+            }
+
+            ksort($tempArray);
+
+            $it = new RecursiveIteratorIterator(new RecursiveArrayIterator($tempArray), RecursiveIteratorIterator::SELF_FIRST);
+
+            $this->entities = [];
+
+            foreach ($it as $itemArray) {
+                foreach ($itemArray as $key => $item) {
+                    $this->entities[$key] = $item;
+                }
+            }
+            
+            $this->setSorted();
+        }
+
+        parent::rewind();
     }
 
     /**
