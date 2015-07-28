@@ -149,6 +149,7 @@ class Cart extends AbstractCollection implements ModelInterface
     }
 
     /**
+     * Make sure we have the cart items in the right order
      * reorder the cart by [category - sku]
      */
     public function rewind()
@@ -163,9 +164,8 @@ class Cart extends AbstractCollection implements ModelInterface
                 $tempArray[$sortKey][$key] = $item;
             }
 
+            // natural sort the multidimensional array
             array_multisort(array_keys($tempArray), SORT_NATURAL, $tempArray);
-
-            //ksort($tempArray);
 
             $it = new RecursiveIteratorIterator(
                 new RecursiveArrayIterator($tempArray),

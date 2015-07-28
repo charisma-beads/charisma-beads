@@ -22,7 +22,7 @@ class Line implements ModelInterface
     /**
      * @var int|null
      */
-    protected $productId;
+    protected $sortOrder;
     
     /**
      * @var int
@@ -83,18 +83,18 @@ class Line implements ModelInterface
     /**
      * @return int|null
      */
-    public function getProductId()
+    public function getSortOrder()
     {
-        return $this->productId;
+        return $this->sortOrder;
     }
 
     /**
-     * @param int|null $productId
+     * @param int|null $sortOrder
      * @return $this
      */
-    public function setProductId($productId)
+    public function setSortOrder($sortOrder)
     {
-        $this->productId = $productId;
+        $this->sortOrder = $sortOrder;
         return $this;
     }
 

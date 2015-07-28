@@ -162,12 +162,13 @@ class Order extends AbstractRelationalMapperService
         $orderId = $this->save($order);
         $this->generateOrderNumber($orderId);
 
-        
+        $c = 1;
+
         /* @var $item \Shop\Model\Cart\Item */
         foreach($cart->getCart() as $item) {
             $lineData = [
             	'orderId'   => $orderId,
-                'productId' => $item->getMetadata()->getProductId(),
+                'sortOrder' => $c,
                 'qty'       => $item->getQuantity(),
                 'price'     => $item->getPrice(),
                 'tax'       => $item->getTax(),
@@ -181,6 +182,7 @@ class Order extends AbstractRelationalMapperService
                 ->getModel($lineData);
             
             $orderLineService->save($orderLine);
+            $c++;
         }
         
         $this->sendEmail($orderId);

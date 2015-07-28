@@ -25,7 +25,7 @@ class Line extends AbstractHydrator
         return array(
             'orderLineId'   => $object->getOrderLineId(),
             'orderId'       => $object->getOrderId(),
-            'productId'     => $object->getProductId(),
+            'sortOrder'     => $object->getSortOrder(),
             'qty'           => $object->getQty(),
             'price'         => $object->getPrice(),
             'tax'           => $this->extractValue('tax', $object->getTax()),
