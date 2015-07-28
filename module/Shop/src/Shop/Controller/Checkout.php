@@ -172,7 +172,8 @@ class Checkout extends AbstractActionController
             
             if ($form->isValid()) {
                 $formValues = $form->getData();
-                $orderId = $this->getOrderService()->processOrderFromCart($customer, $formValues);
+                $orderId = $this->getOrderService()
+                    ->processOrderFromCart($customer, $formValues);
                 
                 if ($orderId) {
                     $this->getService('ShopCart')->clear(false);

@@ -1,4 +1,13 @@
 <?php
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   Shop\Model\Cart
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
+
 namespace Shop\Model\Cart;
 
 use UthandoCommon\Model\AbstractCollection;
@@ -8,6 +17,11 @@ use UthandoCommon\Model\ModelInterface;
 use RecursiveArrayIterator;
 use RecursiveIteratorIterator;
 
+/**
+ * Class Cart
+ *
+ * @package Shop\Model\Cart
+ */
 class Cart extends AbstractCollection implements ModelInterface
 {
     use Model,
@@ -149,9 +163,14 @@ class Cart extends AbstractCollection implements ModelInterface
                 $tempArray[$sortKey][$key] = $item;
             }
 
-            ksort($tempArray);
+            array_multisort(array_keys($tempArray), SORT_NATURAL, $tempArray);
 
-            $it = new RecursiveIteratorIterator(new RecursiveArrayIterator($tempArray), RecursiveIteratorIterator::SELF_FIRST);
+            //ksort($tempArray);
+
+            $it = new RecursiveIteratorIterator(
+                new RecursiveArrayIterator($tempArray),
+                RecursiveIteratorIterator::SELF_FIRST
+            );
 
             $this->entities = [];
 
@@ -160,7 +179,7 @@ class Cart extends AbstractCollection implements ModelInterface
                     $this->entities[$key] = $item;
                 }
             }
-            
+
             $this->setSorted();
         }
 

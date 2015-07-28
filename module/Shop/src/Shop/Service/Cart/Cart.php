@@ -506,12 +506,15 @@ class Cart extends AbstractMapperService implements InitializableInterface
     /**
      * Set the shipping cost
      *
-     * @param null $countryId
+     * @param null|int $countryId
+     * @param bool $shippingOff
      * @return $this
      */
-    public function setShippingCost($countryId = null)
+    public function setShippingCost($countryId = null, $shippingOff = false)
     {
-        $countryId = ($countryId) ?: $this->getContainer()->offsetGet('countryId');
+        if (!$shippingOff) {
+            $countryId = $this->getContainer()->offsetGet('countryId');
+        }
 
         if ($countryId) {
             $countryId = (int) $countryId;

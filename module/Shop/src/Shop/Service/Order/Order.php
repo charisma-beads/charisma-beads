@@ -22,7 +22,7 @@ use Zend\View\Model\ViewModel;
  * Class Order
  *
  * @package Shop\Service\Order
- * @method OrderModel populate()
+ * @method OrderModel populate($model, $children)
  * @method \Shop\Mapper\Order\Order getMapper($mapperClass = null, array $options = [])
  */
 class Order extends AbstractRelationalMapperService
@@ -99,11 +99,19 @@ class Order extends AbstractRelationalMapperService
      */
     public function processOrderFromCart(CustomerModel $customer, array $postData)
     {
+        $collectInStore = ($postData['collect_instore']) ? true : false;
+
         /* @var $cart \Shop\Service\Cart\Cart */
         $cart = $this->getService('ShopCart');
+        $countryId = $customer->getDeliveryAddress()->getCountryId();
+        $shippingOff = false;
 
-        $countryId = (0 == $postData['collect_instore']) ? $customer->getDeliveryAddress()->getCountryId() : null;
-        $cart->setShippingCost($countryId);
+        if ($collectInStore) {
+            $countryId = null;
+            $shippingOff = true;
+        }
+
+        $cart->setShippingCost($countryId, $shippingOff);
         
         $shipping = $cart->getShippingCost();
         $taxTotal = $cart->getTaxTotal();
@@ -135,7 +143,7 @@ class Order extends AbstractRelationalMapperService
             ->setDeliveryAddress($customer->getDeliveryAddress())
             ->setEmail($customer->getEmail());
         
-        if (1 == $postData['collect_instore']) {
+        if (true === $collectInStore) {
             $metadata->setShippingMethod('Collect At Store');
         }
         
