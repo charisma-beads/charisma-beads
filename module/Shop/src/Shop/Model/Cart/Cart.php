@@ -10,6 +10,7 @@
 
 namespace Shop\Model\Cart;
 
+use Shop\ShopException;
 use UthandoCommon\Model\AbstractCollection;
 use UthandoCommon\Model\DateModifiedTrait;
 use UthandoCommon\Model\Model;
@@ -46,6 +47,11 @@ class Cart extends AbstractCollection implements ModelInterface
      * @var bool
      */
     protected $sorted = false;
+
+    /**
+     * @var string
+     */
+    protected $sortOrder;
     
     public function __construct()
     {
@@ -149,18 +155,42 @@ class Cart extends AbstractCollection implements ModelInterface
     }
 
     /**
+     * @return string
+     * @throws ShopException
+     */
+    public function getSortOrder()
+    {
+        if (!$this->sortOrder) {
+            throw new ShopException('sort order cannot be empty');
+        }
+
+        return $this->sortOrder;
+    }
+
+    /**
+     * @param string $sortOrder
+     * @return $this
+     */
+    public function setSortOrder($sortOrder)
+    {
+        $this->sortOrder = $sortOrder;
+        return $this;
+    }
+
+    /**
      * Make sure we have the cart items in the right order
      * reorder the cart by [category - sku]
      */
     public function rewind()
     {
         if (!$this->isSorted()) {
+
             $entities = $this->getEntities();
             $tempArray = [];
 
             /* @var $item \Shop\Model\Cart\Item */
             foreach ($entities as $key => $item) {
-                $sortKey = $item->getMetadata()->getCategory() . '-' . $item->getMetadata()->getSku();
+                $sortKey = $item->getMetadata()->getCategory()->getLft() . '-' . $item->getMetadata()->getSku();
                 $tempArray[$sortKey][$key] = $item;
             }
 

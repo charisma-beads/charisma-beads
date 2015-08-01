@@ -148,6 +148,10 @@ class Cart extends AbstractMapperService implements InitializableInterface
         // load any cart items
         if ($cart) {
             $cart = $this->loadCartItems($cart);
+
+            $options = $this->getShopOptions();
+
+            $cart->setSortOrder($options->getProductsOrderCol());
         }
         
         $this->setCart($cart);
@@ -338,7 +342,7 @@ class Cart extends AbstractMapperService implements InitializableInterface
         $metadata->setProductId($product->getProductId())
             ->setSku($product->getSku())
             ->setName($product->getName())
-            ->setCategory($product->getProductCategory()->getCategory())
+            ->setCategory($product->getProductCategory())
             ->setDescription($product->getShortDescription())
             ->setTaxable($product->getTaxable())
             ->setVatInc($product->getVatInc())
@@ -455,7 +459,7 @@ class Cart extends AbstractMapperService implements InitializableInterface
 
             $this->getContainer()->offsetSet('cartId', $cartId);
         }
-        
+
         $this->cart = $cart;
     }
 

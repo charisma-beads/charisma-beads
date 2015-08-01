@@ -30,7 +30,7 @@ class MetaData
     protected $image;
     
     /**
-     * @var string
+     * @var Category
      */
     protected $category;
     
@@ -155,7 +155,7 @@ class MetaData
     }
 
     /**
-     * @return string
+     * @return Category
      */
     public function getCategory()
     {
@@ -163,10 +163,10 @@ class MetaData
     }
 
     /**
-     * @param $category
+     * @param Category $category
      * @return $this
      */
-    public function setCategory($category)
+    public function setCategory(Category $category)
     {
         $this->category = $category;
         return $this;

@@ -62,6 +62,16 @@ class Category extends NestedSet implements ModelInterface
 	protected $showImage;
 
     /**
+     * prints the category when object it converted to a string
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getCategory();
+    }
+
+    /**
      * @return int
      */
     public function getProductCategoryId()
