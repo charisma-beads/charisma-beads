@@ -186,28 +186,28 @@ class Cart extends AbstractCollection implements ModelInterface
         if (!$this->isSorted()) {
 
             $entities = $this->getEntities();
-            $tempArray = [];
+            $keyArray = [];
+            $itemArray = [];
+            $catArray = [];
+            $skuArray = [];
 
             /* @var $item \Shop\Model\Cart\Item */
             foreach ($entities as $key => $item) {
-                $sortKey = $item->getMetadata()->getCategory()->getLft() . '-' . $item->getMetadata()->getSku();
-                $tempArray[$sortKey][$key] = $item;
+                $keyArray[] = $key;
+                $itemArray[] = $item;
+                $catArray[] = $item->getMetadata()->getCategory()->getLft();
+                $skuArray[] = $item->getMetadata()->getSku();
             }
 
             // natural sort the multidimensional array
-            array_multisort(array_keys($tempArray), SORT_NATURAL, $tempArray);
+            //array_multisort(array_keys($tempArray), SORT_ASC, SORT_NATURAL, $tempArray);
 
-            $it = new RecursiveIteratorIterator(
-                new RecursiveArrayIterator($tempArray),
-                RecursiveIteratorIterator::SELF_FIRST
-            );
+            array_multisort($catArray, $skuArray, $keyArray, $itemArray);
 
             $this->entities = [];
 
-            foreach ($it as $itemArray) {
-                foreach ($itemArray as $key => $item) {
-                    $this->entities[$key] = $item;
-                }
+            foreach ($itemArray as $key => $item) {
+                $this->entities[$keyArray[$key]] = $item;
             }
 
             $this->setSorted();
