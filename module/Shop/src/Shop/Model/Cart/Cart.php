@@ -15,8 +15,6 @@ use UthandoCommon\Model\AbstractCollection;
 use UthandoCommon\Model\DateModifiedTrait;
 use UthandoCommon\Model\Model;
 use UthandoCommon\Model\ModelInterface;
-use RecursiveArrayIterator;
-use RecursiveIteratorIterator;
 
 /**
  * Class Cart

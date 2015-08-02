@@ -1,10 +1,24 @@
 <?php
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   Shop\Model\Cart
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
+
 namespace Shop\Model\Cart;
 
 use UthandoCommon\Model\ModelInterface;
 use UthandoCommon\Model\Model;
 use Shop\Model\Product\MetaData as ProductMetaData;
 
+/**
+ * Class Item
+ *
+ * @package Shop\Model\Cart
+ */
 class Item implements ModelInterface
 {   
     use Model;

@@ -1,9 +1,23 @@
 <?php
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   Shop\Model\Order
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
+
 namespace Shop\Model\Order;
 
 use UthandoCommon\Model\Model;
 use UthandoCommon\Model\ModelInterface;
 
+/**
+ * Class Status
+ *
+ * @package Shop\Model\Order
+ */
 class Status implements ModelInterface
 {
     use Model;
@@ -26,9 +40,10 @@ class Status implements ModelInterface
 		return $this->orderStatusId;
 	}
 
-	/**
-	 * @param number $orderStatusId
-	 */
+    /**
+     * @param $orderStatusId
+     * @return $this
+     */
 	public function setOrderStatusId($orderStatusId)
 	{
 		$this->orderStatusId = $orderStatusId;
@@ -43,9 +58,10 @@ class Status implements ModelInterface
 		return $this->orderStatus;
 	}
 
-	/**
-	 * @param string $orderStatus
-	 */
+    /**
+     * @param $orderStatus
+     * @return $this
+     */
 	public function setOrderStatus($orderStatus)
 	{
 		$this->orderStatus = $orderStatus;

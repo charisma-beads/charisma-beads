@@ -1,10 +1,24 @@
 <?php
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   Shop\Model\Order
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
+
 namespace Shop\Model\Order;
 
 use UthandoCommon\Model\Model;
 use UthandoCommon\Model\ModelInterface;
 use Shop\Model\Product\MetaData as ProductMetaData;
 
+/**
+ * Class Line
+ *
+ * @package Shop\Model\Order
+ */
 class Line implements ModelInterface
 {
     use Model;

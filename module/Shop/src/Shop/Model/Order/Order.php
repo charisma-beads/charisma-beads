@@ -1,4 +1,13 @@
 <?php
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   Shop\Model\Order
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
+
 namespace Shop\Model\Order;
 
 use UthandoCommon\Model\Model;
@@ -6,6 +15,11 @@ use UthandoCommon\Model\ModelInterface;
 use Shop\Model\Customer\Customer;
 use DateTime;
 
+/**
+ * Class Order
+ *
+ * @package Shop\Model\Order
+ */
 class Order implements ModelInterface
 {
     use Model;

@@ -1,10 +1,24 @@
 <?php
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   Shop\Model\Payment
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
+
 namespace Shop\Model\Payment;
 
 use UthandoCommon\Model\ModelInterface;
 use UthandoCommon\Model\Model;
 use Shop\Model\Customer\Address;
 
+/**
+ * Class CreditCard
+ *
+ * @package Shop\Model\Payment
+ */
 class CreditCard implements ModelInterface
 {
     const CREDIT_CARD_VISA          = 'Visa/Delta/Electron';
