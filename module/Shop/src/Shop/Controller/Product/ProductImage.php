@@ -1,10 +1,24 @@
 <?php
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   Shop\Controller\Product
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
+
 namespace Shop\Controller\Product;
 
 use UthandoCommon\Controller\AbstractCrudController;
 use Zend\View\Model\ViewModel;
 use Shop\ShopException;
 
+/**
+ * Class ProductImage
+ *
+ * @package Shop\Controller\Product
+ */
 class ProductImage extends AbstractCrudController
 {
 	protected $controllerSearchOverrides = array('sort' => 'productImageId');

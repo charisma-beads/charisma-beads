@@ -1,10 +1,24 @@
 <?php
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   Shop\Controller\Country
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
+
 namespace Shop\Controller\Country;
 
 use UthandoCommon\Controller\AbstractCrudController;
 use Shop\ShopException;
 use Zend\View\Model\ViewModel;
 
+/**
+ * Class CountryProvince
+ *
+ * @package Shop\Controller\Country
+ */
 class CountryProvince extends AbstractCrudController
 {
     protected $controllerSearchOverrides = array('sort' => 'countryCode');

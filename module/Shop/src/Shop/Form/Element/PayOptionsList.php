@@ -14,6 +14,11 @@ use Zend\Form\Element\Radio;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
 
+/**
+ * Class PayOptionsList
+ *
+ * @package Shop\Form\Element
+ */
 class PayOptionsList extends Radio implements ServiceLocatorAwareInterface
 {
     use ServiceLocatorAwareTrait;

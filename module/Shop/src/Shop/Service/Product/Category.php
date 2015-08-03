@@ -2,9 +2,8 @@
 /**
  * Uthando CMS (http://www.shaunfreeman.co.uk/)
  *
- * @package   UthandoCommon
+ * @package   Shop\Service\Product
  * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @link      https://github.com/uthando-cms for the canonical source repository
  * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
  * @license   see LICENSE.txt
  */
@@ -21,6 +20,7 @@ use Zend\Form\Form;
 
 /**
  * Class Category
+ *
  * @package Shop\Service\Product
  * @method CategoryModel getById($id, $col = null)
  * @method CategoryMapper getMapper($mapperClass = null, array $options = [])

@@ -1,4 +1,13 @@
 <?php
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   Shop\Controller\Customer
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
+
 namespace Shop\Controller\Customer;
 
 use Exception;
@@ -7,6 +16,11 @@ use UthandoCommon\Controller\AbstractCrudController;
 use Zend\Form\Form;
 use Zend\View\Model\ViewModel;
 
+/**
+ * Class CustomerAddress
+ *
+ * @package Shop\Controller\Customer
+ */
 class CustomerAddress extends AbstractCrudController
 {
     protected $controllerSearchOverrides = array('sort' => 'postcode');

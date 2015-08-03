@@ -1,4 +1,13 @@
 <?php
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   Shop\Hydrator\Order
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
+
 namespace Shop\Hydrator\Order;
 
 use UthandoCommon\Hydrator\AbstractHydrator;
@@ -6,6 +15,11 @@ use UthandoCommon\Hydrator\Strategy\DateTime as DateTimeStrategy;
 use UthandoCommon\Hydrator\Strategy\Null;
 use UthandoCommon\Hydrator\Strategy\Serialize;
 
+/**
+ * Class Order
+ *
+ * @package Shop\Hydrator\Order
+ */
 class Order extends AbstractHydrator
 {
     public function __construct()
@@ -24,7 +38,7 @@ class Order extends AbstractHydrator
      */
     public function extract($object)
     {
-        return array(
+        return [
             'orderId'       => $object->getOrderId(),
             'customerId'    => $object->getCustomerId(),
             'orderStatusId' => $object->getOrderStatusId(),
@@ -34,6 +48,6 @@ class Order extends AbstractHydrator
             'shipping'      => $object->getShipping(),
             'taxTotal'      => $object->getTaxTotal(),
             'metadata'      => $this->extractValue('metadata', $object->getMetadata()),
-        );
+        ];
     }
 }

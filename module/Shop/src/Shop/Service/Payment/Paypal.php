@@ -1,4 +1,13 @@
 <?php
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   Shop\Service\Payment
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
+
 namespace Shop\Service\Payment;
 
 use PayPal\Exception\PayPalConnectionException;
@@ -19,6 +28,11 @@ use PayPal\Rest\ApiContext;
 use Shop\Service\Tax\Tax;
 use UthandoCommon\Service\AbstractService;
 
+/**
+ * Class Paypal
+ *
+ * @package Shop\Service\Payment
+ */
 class Paypal extends AbstractService
 {
     /**

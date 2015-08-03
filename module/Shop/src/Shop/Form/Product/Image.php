@@ -1,9 +1,23 @@
 <?php
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   Shop\Form\Product
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
+
 namespace Shop\Form\Product;
 
 use TwbBundle\Form\View\Helper\TwbBundleForm;
 use Zend\Form\Form;
 
+/**
+ * Class Image
+ *
+ * @package Shop\Form\Product
+ */
 class Image extends Form
 {
     public function init()

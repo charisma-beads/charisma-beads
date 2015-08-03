@@ -1,10 +1,24 @@
 <?php
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   Shop\Hydrator\Cart
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
+
 namespace Shop\Hydrator\Cart;
 
 use UthandoCommon\Hydrator\AbstractHydrator;
 use UthandoCommon\Hydrator\Strategy\Serialize;
 use Shop\Hydrator\Strategy\Percent;
 
+/**
+ * Class Item
+ *
+ * @package Shop\Hydrator\Cart
+ */
 class Item extends AbstractHydrator
 {
     public Function __construct()
@@ -21,13 +35,13 @@ class Item extends AbstractHydrator
      */
     public function extract($object)
     {
-        return array(
+        return [
         	'cartItemId'    => $object->getCartItemId(),
             'cartId'        => $object->getCartId(),
             'quantity'      => $object->getQuantity(),
             'price'         => $object->getPrice(),
             'tax'           => $this->extractValue('tax', $object->getTax()),
             'metadata'      => $this->extractValue('metadata', $object->getMetadata()),
-        );
+        ];
     }
 }

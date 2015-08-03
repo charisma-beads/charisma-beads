@@ -1,4 +1,13 @@
 <?php
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   Shop\Controller\Customer
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
+
 namespace Shop\Controller\Customer;
 
 use Shop\ShopException;
@@ -8,6 +17,11 @@ use Zend\Http\PhpEnvironment\Response;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
 
+/**
+ * Class Customer
+ *
+ * @package Shop\Controller\Customer
+ */
 class Customer extends AbstractCrudController
 {
 	protected $controllerSearchOverrides = array('sort' => 'name');

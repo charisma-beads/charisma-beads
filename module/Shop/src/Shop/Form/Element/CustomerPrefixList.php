@@ -14,6 +14,11 @@ use Zend\Form\Element\Select;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
 
+/**
+ * Class CustomerPrefixList
+ *
+ * @package Shop\Form\Element
+ */
 class CustomerPrefixList extends Select implements ServiceLocatorAwareInterface
 {
     

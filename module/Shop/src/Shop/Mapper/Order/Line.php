@@ -1,8 +1,22 @@
 <?php
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   Shop\Mapper\Order
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
+
 namespace Shop\Mapper\Order;
 
 use UthandoCommon\Mapper\AbstractDbMapper;
 
+/**
+ * Class Line
+ *
+ * @package Shop\Mapper\Order
+ */
 class Line extends AbstractDbMapper
 {
     protected $table = 'orderLine';

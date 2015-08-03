@@ -1,10 +1,24 @@
 <?php
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   Shop\Service\Payment
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
+
 namespace Shop\Service\Payment;
 
 use UthandoCommon\Service\AbstractService;
 use Zend\View\Model\ViewModel;
 use Shop\Model\Payment\CreditCard as CreditCardModel;
 
+/**
+ * Class CreditCard
+ *
+ * @package Shop\Service\Payment
+ */
 class CreditCard extends AbstractService
 {
     protected $serviceAlias = "ShopPaymentCreditCard";

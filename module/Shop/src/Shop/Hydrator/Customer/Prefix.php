@@ -1,8 +1,22 @@
 <?php
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   Shop\Hydrator\Customer
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
+
 namespace Shop\Hydrator\Customer;
 
 use UthandoCommon\Hydrator\AbstractHydrator;
 
+/**
+ * Class Prefix
+ *
+ * @package Shop\Hydrator\Customer\
+ */
 class Prefix extends AbstractHydrator
 {
 	/**
@@ -11,9 +25,9 @@ class Prefix extends AbstractHydrator
 	 */
 	public function extract($object)
 	{
-		return array(
+		return [
 			'prefixId'   => $object->getPrefixId(),
 		    'prefix'     => $object->getPrefix()
-		);
+        ];
 	}
 }

@@ -1,4 +1,13 @@
 <?php
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   Shop\Controller\Cart
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
+
 namespace Shop\Controller\Cart;
 
 use Shop\Model\Cart\Item;
@@ -14,6 +23,7 @@ use Zend\View\Model\ViewModel;
 
 /**
  * Class Cart
+ *
  * @package Shop\Controller\Cart
  * @method \Zend\Http\Request getRequest()
  * @method \Zend\Session\Container sessionContainer()

@@ -1,4 +1,13 @@
 <?php
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   Shop\Mapper\Product
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
+
 namespace Shop\Mapper\Product;
 
 use UthandoCommon\Mapper\AbstractNestedSet;
@@ -6,7 +15,11 @@ use Shop\Model\Product\Category as CategoryModel;
 use Zend\Db\Sql\Where;
 use Zend\Db\Sql\Select;
 
-
+/**
+ * Class Category
+ *
+ * @package Shop\Mapper\Product
+ */
 class Category extends AbstractNestedSet
 {
 	protected $table = 'productCategory';

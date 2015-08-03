@@ -1,9 +1,23 @@
 <?php
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   Shop\Hydrator\Payment
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
+
 namespace Shop\Hydrator\Payment;
 
 use UthandoCommon\Hydrator\AbstractHydrator;
 use UthandoCommon\Hydrator\Strategy\DateTime as DateTimeStrategy;
 
+/**
+ * Class CreditCard
+ *
+ * @package Shop\Hydrator\Payment
+ */
 class CreditCard extends AbstractHydrator
 {
     public function __construct()
@@ -12,8 +26,10 @@ class CreditCard extends AbstractHydrator
         
         $this->addStrategy('date', new DateTimeStrategy());
     }
+
     /**
      * @param \Shop\Model\Payment\CreditCard $object
+     * @return array
      */
     public function extract($object)
     {

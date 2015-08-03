@@ -15,6 +15,7 @@ use UthandoCommon\View\AbstractViewHelper;
 
 /**
  * Class CountrySelect
+ *
  * @package Shop\View
  */
 class CountrySelect extends AbstractViewHelper

@@ -1,10 +1,23 @@
 <?php
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   Shop\Form\Customer
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
 
 namespace Shop\Form\Customer;
 
 use TwbBundle\Form\View\Helper\TwbBundleForm;
 use Zend\Form\Form;
 
+/**
+ * Class Customer
+ *
+ * @package Shop\Form\Customer
+ */
 class Customer extends Form
 {	
     use CustomerTrait;

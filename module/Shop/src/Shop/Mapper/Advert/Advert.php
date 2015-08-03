@@ -1,10 +1,24 @@
 <?php
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   Shop\Mapper\Advert
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
+
 namespace Shop\Mapper\Advert;
 
 use UthandoCommon\Mapper\AbstractDbMapper;
 use Zend\Db\Sql\Expression;
 use Zend\Db\ResultSet\ResultSet;
 
+/**
+ * Class Advert
+ *
+ * @package Shop\Mapper\Advert
+ */
 class Advert extends AbstractDbMapper
 {
     protected $table = 'advert';

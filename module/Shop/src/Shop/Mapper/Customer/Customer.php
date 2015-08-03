@@ -1,9 +1,23 @@
 <?php
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   Shop\Mapper\Customer
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
+
 namespace Shop\Mapper\Customer;
 
 use UthandoCommon\Mapper\AbstractDbMapper;
 use Zend\Db\Sql\Select;
 
+/**
+ * Class Customer
+ *
+ * @package Shop\Mapper\Customer
+ */
 class Customer extends AbstractDbMapper
 {
     /**

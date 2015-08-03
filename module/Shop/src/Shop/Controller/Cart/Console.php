@@ -16,6 +16,11 @@ use UthandoCommon\Controller\ServiceTrait;
 use Zend\Console\Request;
 use Zend\Mvc\Controller\AbstractActionController;
 
+/**
+ * Class Console
+ *
+ * @package Shop\Controller\Cart
+ */
 class Console extends AbstractActionController
 {
     use ServiceTrait;

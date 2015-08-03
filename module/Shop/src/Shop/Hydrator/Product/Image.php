@@ -1,10 +1,24 @@
 <?php
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   Shop\Hydrator\Product
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
+
 namespace Shop\Hydrator\Product;
 
 use UthandoCommon\Hydrator\AbstractHydrator;
 use UthandoCommon\Hydrator\Strategy\DateTime as DateTimeStrategy;
 use UthandoCommon\Hydrator\Strategy\TrueFalse;
 
+/**
+ * Class Image
+ *
+ * @package Shop\Hydrator\Product
+ */
 class Image extends AbstractHydrator
 {
 	public function __construct()
@@ -24,7 +38,7 @@ class Image extends AbstractHydrator
 	 */
 	public Function extract($object)
 	{
-		return array(
+		return [
 			'productImageId'	=> $object->getProductImageId(),
 			'productId'			=> $object->getProductId(),
 			'thumbnail'			=> $object->getThumbnail(),
@@ -32,6 +46,6 @@ class Image extends AbstractHydrator
 			'isDefault'			=> $this->extractValue('isDefault', $object->getIsDefault()),
 			'dateCreated'		=> $this->extractValue('dateCreated', $object->getDateCreated()),
 			'dateModified'		=> $this->extractValue('dateCreated', $object->getDateModified())
-		);
+        ];
 	}
 }

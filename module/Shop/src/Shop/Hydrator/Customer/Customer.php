@@ -1,10 +1,24 @@
 <?php
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   Shop\Hydrator\Customer
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
+
 namespace Shop\Hydrator\Customer;
 
 use UthandoCommon\Hydrator\AbstractHydrator;
 use UthandoCommon\Hydrator\Strategy\DateTime as DateTimeStrategy;
 use UthandoCommon\Hydrator\Strategy\Null as NullStrategy;
 
+/**
+ * Class Customer
+ *
+ * @package Shop\Hydrator\Customer
+ */
 class Customer extends AbstractHydrator
 {
     public Function __construct()
@@ -30,7 +44,7 @@ class Customer extends AbstractHydrator
      */
     public function extract($object)
     {
-    	return array(
+    	return [
     		'customerId'         => $object->getCustomerId(),
     		'userId'             => $this->extractValue('userId', $object->getUserId()),
     	    'prefixId'           => $object->getPrefixId(),
@@ -42,6 +56,6 @@ class Customer extends AbstractHydrator
     	    'email'              => $object->getEmail(),
     		'dateCreated'        => $this->extractValue('dateCreated', $object->getDateCreated()),
     		'dateModified'       => $this->extractValue('dateModified', $object->getDateModified())
-    	);
+        ];
     }
 }

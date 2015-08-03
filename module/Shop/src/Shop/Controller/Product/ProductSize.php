@@ -1,4 +1,12 @@
 <?php
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   Shop\Controller\Product
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
 
 namespace Shop\Controller\Product;
 
@@ -6,6 +14,11 @@ use Shop\ShopException;
 use UthandoCommon\Controller\AbstractCrudController;
 use Zend\View\Model\ViewModel;
 
+/**
+ * Class ProductSize
+ *
+ * @package Shop\Controller\Product
+ */
 class ProductSize extends AbstractCrudController
 {
     protected $serviceName = 'ShopProductSize';

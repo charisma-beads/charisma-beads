@@ -1,8 +1,22 @@
 <?php
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   Shop\Hydrator\Paypal
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
+
 namespace Shop\Hydrator\Paypal;
 
 use Zend\Stdlib\Hydrator\AbstractHydrator;
 
+/**
+ * Class PaypalHydrator
+ *
+ * @package Shop\Hydrator\Paypal
+ */
 class PaypalHydrator extends AbstractHydrator
 {
     const  PAYPAL_NAMESPACE = 'PayPal\\Api\\';

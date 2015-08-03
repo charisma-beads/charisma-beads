@@ -14,6 +14,11 @@ use Zend\Form\Element\Select;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
 
+/**
+ * Class ProductGroupList
+ *
+ * @package Shop\Form\Element
+ */
 class ProductGroupList extends Select implements ServiceLocatorAwareInterface
 { 
     use ServiceLocatorAwareTrait;

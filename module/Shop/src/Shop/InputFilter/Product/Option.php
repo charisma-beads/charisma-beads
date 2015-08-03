@@ -1,9 +1,22 @@
 <?php
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   Shop\InputFilter\Product
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
 
 namespace Shop\InputFilter\Product;
 
 use Zend\InputFilter\InputFilter;
 
+/**
+ * Class Option
+ *
+ * @package Shop\InputFilter\Product
+ */
 class Option extends InputFilter
 {
     public function init()
@@ -18,74 +31,74 @@ class Option extends InputFilter
             ],
         ]);
 
-        $this->add(array(
+        $this->add([
             'name'         => 'productId',
             'required'     => false,
-            'filters'      => array(
-                array('name' => 'StripTags'),
-                array('name' => 'StringTrim'),
-                array('name' => 'Digits'),
-            ),
-        ));
+            'filters'      => [
+                ['name' => 'StripTags'],
+                ['name' => 'StringTrim'],
+                ['name' => 'Digits'],
+            ],
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name'         => 'option',
             'required'     => true,
-            'filters'      => array(
-                array('name' => 'StripTags'),
-                array('name' => 'StringTrim'),
-            ),
-            'validators'   => array(
-                array('name' => 'StringLength', 'options' => array(
+            'filters'      => [
+                ['name' => 'StripTags'],
+                ['name' => 'StringTrim'],
+            ],
+            'validators'   => [
+                ['name' => 'StringLength', 'options' => [
                     'encoding' => 'UTF-8',
                     'min'      => 2,
                     'max'      => 100,
-                )),
-            ),
-        ));
+                ]],
+            ],
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name'			=> 'price',
             'required'		=> true,
-            'filters'		=> array(
-                array('name' => 'StripTags'),
-                array('name' => 'StringTrim')
-            ),
-            'validators'	=> array(
-                array('name' => 'Float')
-            ),
-        ));
+            'filters'		=> [
+                ['name' => 'StripTags'],
+                ['name' => 'StringTrim']
+            ],
+            'validators'	=> [
+                ['name' => 'Float']
+            ],
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name'			=> 'discountPercent',
             'required'		=> true,
-            'filters'		=> array(
-                array('name' => 'StripTags'),
-                array('name' => 'StringTrim'),
-            ),
-            'validators'	=> array(
-                array('name' => 'Float'),
-                array('name' => 'Between', 'options' => array(
+            'filters'		=> [
+                ['name' => 'StripTags'],
+                ['name' => 'StringTrim'],
+            ],
+            'validators'	=> [
+                ['name' => 'Float'],
+                ['name' => 'Between', 'options' => [
                     'min'		=> 0,
                     'max'		=> 100,
                     'inclusive'	=> true,
-                )),
-            ),
-        ));
+                ]],
+            ],
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name'			=> 'postUnitId',
             'required'		=> true,
-            'filters'		=> array(
-                array('name' => 'StripTags'),
-                array('name' => 'StringTrim'),
-            ),
-            'validators'	=> array(
-                array('name' => 'Int'),
-                array('name' => 'GreaterThan', 'options' => array(
+            'filters'		=> [
+                ['name' => 'StripTags'],
+                ['name' => 'StringTrim'],
+            ],
+            'validators'	=> [
+                ['name' => 'Int'],
+                ['name' => 'GreaterThan', 'options' => [
                     'min' => 0,
-                )),
-            ),
-        ));
+                ]],
+            ],
+        ]);
     }
 } 

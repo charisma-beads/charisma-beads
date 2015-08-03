@@ -1,4 +1,13 @@
 <?php
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   Shop\Hydrator\Product
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
+
 namespace Shop\Hydrator\Product;
 
 use Shop\Hydrator\Strategy\NumberFormat;
@@ -8,6 +17,11 @@ use UthandoCommon\Hydrator\Strategy\DateTime as DateTimeStrategy;
 use UthandoCommon\Hydrator\Strategy\TrueFalse;
 use UthandoCommon\Hydrator\Strategy\Null as NullStrategy;
 
+/**
+ * Class Product
+ *
+ * @package Shop\Hydrator\Product
+ */
 class Product extends AbstractHydrator
 {   
 	public Function __construct()
@@ -36,7 +50,7 @@ class Product extends AbstractHydrator
 	 */
 	public function extract($object)
 	{
-		return array(
+		return [
 			'productId'				=> $object->getProductId(),
 			'productCategoryId'		=> $object->getProductCategoryId(),
 			'productSizeId'			=> $object->getProductSizeId(),
@@ -60,6 +74,6 @@ class Product extends AbstractHydrator
 		    'showImage'             => $this->extractValue('showImage', $object->getShowImage()),
 			'dateCreated'			=> $this->extractValue('dateCreated', $object->getDateCreated()),
 			'dateModified'			=> $this->extractValue('dateModified', $object->getDateModified())
-		);
+		];
 	}
 }

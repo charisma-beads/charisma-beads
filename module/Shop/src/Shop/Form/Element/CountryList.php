@@ -14,6 +14,11 @@ use Zend\Form\Element\Select;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
 
+/**
+ * Class CountryList
+ *
+ * @package Shop\Form\Element
+ */
 class CountryList extends Select implements ServiceLocatorAwareInterface
 {
     

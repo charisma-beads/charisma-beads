@@ -1,9 +1,23 @@
 <?php
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   Shop\Service\Country
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
+
 namespace Shop\Service\Country;
 
 use Shop\ShopException;
 use UthandoCommon\Service\AbstractMapperService;
 
+/**
+ * Class Province
+ *
+ * @package Shop\Service\Country
+ */
 class Province extends AbstractMapperService
 {
     /**

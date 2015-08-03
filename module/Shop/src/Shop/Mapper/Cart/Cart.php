@@ -1,9 +1,23 @@
 <?php
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   Shop\Mapper\Cart
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
+
 namespace Shop\Mapper\Cart;
 
 use UthandoCommon\Mapper\AbstractDbMapper;
 use Zend\Db\Sql\Where;
 
+/**
+ * Class Cart
+ *
+ * @package Shop\Mapper\Cart
+ */
 class Cart extends AbstractDbMapper
 {
     protected $table = 'cart';

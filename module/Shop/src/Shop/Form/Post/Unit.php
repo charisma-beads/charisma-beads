@@ -1,9 +1,23 @@
 <?php
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   Shop\Form\Post
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
+
 namespace Shop\Form\Post;
 
 use TwbBundle\Form\View\Helper\TwbBundleForm;
 use Zend\Form\Form;
 
+/**
+ * Class Unit
+ *
+ * @package Shop\Form\Post
+ */
 class Unit extends Form
 {
     public function init()

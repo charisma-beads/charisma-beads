@@ -1,9 +1,22 @@
 <?php
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   Shop\InputFilter\Tax
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
 
 namespace Shop\InputFilter\Tax;
 
 use Zend\InputFilter\InputFilter;
 
+/**
+ * Class Code
+ *
+ * @package Shop\InputFilter\Tax
+ */
 class Code extends InputFilter
 {
 	public function init()

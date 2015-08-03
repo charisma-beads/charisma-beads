@@ -14,6 +14,11 @@ use Zend\Form\Element\Select;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
 
+/**
+ * Class TaxRateList
+ *
+ * @package Shop\Form\Element
+ */
 class TaxRateList extends Select implements ServiceLocatorAwareInterface
 {
     

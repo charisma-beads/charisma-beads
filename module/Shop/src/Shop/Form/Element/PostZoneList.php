@@ -14,6 +14,11 @@ use Zend\Form\Element\Select;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
 
+/**
+ * Class PostZoneList
+ *
+ * @package Shop\Form\Element
+ */
 class PostZoneList extends Select implements ServiceLocatorAwareInterface
 {
     

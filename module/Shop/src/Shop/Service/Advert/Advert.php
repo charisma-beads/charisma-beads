@@ -1,9 +1,23 @@
 <?php
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   Shop\Service\Advert
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
+
 namespace Shop\Service\Advert;
 
 use UthandoCommon\Service\AbstractMapperService;
 use Zend\Json\Json;
 
+/**
+ * Class Advert
+ *
+ * @package Shop\Service\Advert
+ */
 class Advert extends AbstractMapperService
 {
     /**
