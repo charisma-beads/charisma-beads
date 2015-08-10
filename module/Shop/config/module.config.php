@@ -39,7 +39,7 @@ return [
                                 'Shop\Controller\Country\Province' => ['action' => ['country-province-list']],
                                 'Shop\Controller\Customer' => ['action' => ['my-details']],
                                 'Shop\Controller\Customer\Address' => ['action' => ['my-addresses', 'edit-address', 'add-address', 'delete-address']],
-                                'Shop\Controller\Order' => ['action' => ['cancel', 'my-orders', 'view']],
+                                'Shop\Controller\Order' => ['action' => ['cancel', 'my-orders', 'print', 'view']],
                                 'Shop\Controller\Payment' => ['action' => 'all'],
                                 'Shop\Controller\Paypal' => ['action' => ['process', 'success', 'cancel']],
                             ],
