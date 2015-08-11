@@ -23,9 +23,9 @@
             <td><?=$this->priceFormat($this->escapeHtml($row->getTotal()));?></td>
             <td><?=$this->formatDate($row->getOrderDate());?>
             <td>
-                <?=$this->partial('uthando-admin/partial/edit-actions', [
+                <?=$this->partial('shop/order/partial/edit-actions', [
                     'pk'		=> 'orderId',
-                    'id'		=> $row->getOrderId(),
+                    'order'		=> $row,
                     'tableName'	=> 'order',
                     'route'		=> 'admin/shop/order/edit',
                     'buttonSize'=> 'btn-sm',
