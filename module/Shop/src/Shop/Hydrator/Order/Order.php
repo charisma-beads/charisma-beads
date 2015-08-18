@@ -12,7 +12,7 @@ namespace Shop\Hydrator\Order;
 
 use UthandoCommon\Hydrator\AbstractHydrator;
 use UthandoCommon\Hydrator\Strategy\DateTime as DateTimeStrategy;
-use UthandoCommon\Hydrator\Strategy\Null;
+use UthandoCommon\Hydrator\Strategy\NullStrategy;
 use UthandoCommon\Hydrator\Strategy\Serialize;
 
 /**
@@ -28,7 +28,7 @@ class Order extends AbstractHydrator
         
         $this->addStrategy('orderDate', new DateTimeStrategy());
         $this->addStrategy('metadata', new Serialize());
-        $this->addStrategy('orderNumber', new Null());
+        $this->addStrategy('orderNumber', new NullStrategy());
     }
     
     /**

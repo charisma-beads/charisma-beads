@@ -12,7 +12,7 @@ namespace Shop\Hydrator\Customer;
 
 use UthandoCommon\Hydrator\AbstractHydrator;
 use UthandoCommon\Hydrator\Strategy\DateTime as DateTimeStrategy;
-use UthandoCommon\Hydrator\Strategy\Null as NullStrategy;
+use UthandoCommon\Hydrator\Strategy\NullStrategy;
 
 /**
  * Class Customer

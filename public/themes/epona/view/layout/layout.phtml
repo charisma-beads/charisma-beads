@@ -85,6 +85,15 @@
             .box-content .item-image img {
             	width: 230px;
             }
+
+            #footer #newsletter_name {
+                -webkit-border-top-right-radius: 6px;
+                -webkit-border-bottom-right-radius: 6px;
+                -moz-border-radius-topright: 6px;
+                -moz-border-radius-bottomright: 6px;
+                border-top-right-radius: 6px;
+                border-bottom-right-radius: 6px;
+            }
             
         </style>
     </head>
@@ -265,11 +274,15 @@
                             </p>
 
                             <h4><small><strong>Subscribe to our Newsletter</strong></small></h4>
-                            <form id="newsletterSubscribe" method="post" action="php/newsletter.php" class="input-group">
-                                <input required type="email" class="form-control" name="newsletter_email" id="newsletter_email" value="" placeholder="E-mail Address">
-								<span class="input-group-btn">
-									<button class="btn btn-primary">SUBMIT</button>
-								</span>
+                            <form id="newsletterSubscribe" method="post" action="php/newsletter.php">
+                                <input required type="text" class="form-control" name="newsletter_name" id="newsletter_name" value="" placeholder="Name">
+                                <div class="input-group">
+                                    <input required type="email" class="form-control" name="newsletter_email" id="newsletter_email" value="" placeholder="E-mail Address">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-primary">SUBMIT</button>
+                                    </span>
+                                </div>
+
                             </form>
 
                         </div>
