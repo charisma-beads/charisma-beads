@@ -296,9 +296,17 @@
 
                 <div class="copyright">
                     <div class="container text-center fsize12">
+                        Registered at Companies House, register number <?=$this->contact('company.number');?>.<br>
+                        Registered office address:
+                        <?=$this->contact('company.address.line1');?>,
+                        <?php if($this->contact('company.address.line2') != ''):?>
+                            <?=$this->contact('company.address.line2');?>,
+                        <?php endif;?>
+                        <?=$this->contact('company.address.town');?>,
+                        <?=$this->contact('company.address.county');?>, <?=$this->contact('details.address.postcode');?><br>
                         Designed by <a href="http://www.shaunfreeman.co.uk" target="_blank" title="e-commerse websites" class="copyright">
                             Shaun Freeman
-                        </a> &bull; All Right Reserved &copy; <?=$this->themeOptions('site_name');?>. &nbsp;
+                        </a> &bull; All Right Reserved &copy; <?=date('Y');?> <?=$this->themeOptions('site_name');?>. &nbsp;
                         <a href="<?=$this->url('article', [
                             'slug' => 'cookie-policy',
                         ])?>" class="fsize11">Cookie Policy</a> &bull;

@@ -169,7 +169,7 @@ class Checkout extends AbstractActionController
         
         if ($this->request->isPost() && 'placeOrder' === $submit) {
             $params['collect_instore'] = $collect;
-            
+
             $form->setData($params);
             
             if ($form->isValid()) {
