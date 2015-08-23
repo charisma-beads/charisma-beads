@@ -31,6 +31,10 @@ class Shop extends AbstractActionController
 
     public function indexAction()
     {
+        $user_password = "password";
+        $hash = password_hash($user_password, PASSWORD_DEFAULT);
+
+        \FB::info(strlen($hash));
         return new ViewModel();
     }
 

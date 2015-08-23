@@ -128,7 +128,7 @@ class CreditCard implements ModelInterface
      */
     public function getCcType()
     {
-        return self::$creditCardName[$this->ccType];
+        return ($this->ccType) ? self::$creditCardName[$this->ccType] : null;
     }
 
     /**

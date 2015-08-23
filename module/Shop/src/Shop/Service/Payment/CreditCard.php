@@ -53,6 +53,9 @@ class CreditCard extends AbstractService
     {
         /* @var $orderService \Shop\Service\Order\Order */
         $orderService = $this->getService('ShopOrder');
+
+        /* @var $options \Shop\Options\OrderOptions */
+        $options = $this->getService('Shop\Options\Order');
         
         $order = $orderService->getById($model->getOrderId());
         $orderService->populate($order, true);
@@ -77,7 +80,7 @@ class CreditCard extends AbstractService
             ],
             'body'             => $emailView,
             'subject'          => 'Order No.:' . $order->getOrderNumber(),
-            'transport'        => 'default',
+            'transport'        => $options->getCreditCardPaymentEmail(),
         ]);
     }
 }

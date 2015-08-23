@@ -62,7 +62,7 @@ $card = $this->card;
 	        <th>Address Line 3</th>
 	        <td><?=$card->getAddress()->getAddress3()?></td>
 	    </tr>
-	    <? endif; ?>
+	    <?php endif; ?>
 	    <tr>
 	        <th>Town/City</th>
 	        <td><?=$card->getAddress()->getCity();?></td>
@@ -81,4 +81,3 @@ $card = $this->card;
 	    </tr>
 	</table>
 </div>
-
