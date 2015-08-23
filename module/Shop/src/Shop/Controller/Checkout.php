@@ -149,7 +149,7 @@ class Checkout extends AbstractActionController
         
         $params = $this->params()->fromPost();
         $submit = $this->params()->fromPost('submit', null);
-        $collect = $this->params()->fromPost('collect_instore', null);
+        $collect = $this->params()->fromPost('collect_instore', 0);
         
         $customer = $this->getCustomerService()
             ->setUser($this->identity())
@@ -168,6 +168,8 @@ class Checkout extends AbstractActionController
         
         
         if ($this->request->isPost() && 'placeOrder' === $submit) {
+            $params['collect_instore'] = $collect;
+            
             $form->setData($params);
             
             if ($form->isValid()) {

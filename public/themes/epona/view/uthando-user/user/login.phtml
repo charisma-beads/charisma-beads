@@ -64,7 +64,10 @@ $advertList = (false == $registerForm->has('advertId')) ? $this->formManager('Ad
 
                 <section>
                     <label class="checkbox">
-                        <?=$this->formCheckbox($loginForm->get('rememberme')->setOption('disable-twb', true));?>
+                        <?=$this->formCheckbox($loginForm->get('rememberme')->setOptions([
+                            'disable-twb' => true,
+                            'use_hidden_element' => false,
+                        ]));?>
                         <i></i>Keep me logged in
                     </label>
                 </section>
@@ -176,7 +179,8 @@ $advertList = (false == $registerForm->has('advertId')) ? $this->formManager('Ad
                 </section>
                 
                 <section>
-                    <label class="checkbox"><input type="checkbox" name="checkbox" checked="checked">
+                    <label class="checkbox">
+                        <input type="checkbox" name="checkbox" checked="checked">
                         <i></i>I want to receive news and  special offers
                     </label>
                 </section>

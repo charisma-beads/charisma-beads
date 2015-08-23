@@ -37,8 +37,11 @@
             <?php if ($this->cartOption('collectInstore')):?>
             <section>
                 <label class="checkbox">
-				    <?=$this->formCheckBox($this->form->get('collect_instore')->setOption('disable-twb', true));?><i></i>
-				    <?=$this->form->get('collect_instore')->getLabel();?>
+				    <?=$this->formCheckBox($this->form->get('collect_instore')->setOptions([
+                        'disable-twb' => true,
+                        'use_hidden_element' => false,
+                    ]));?>
+                    <i></i><?=$this->form->get('collect_instore')->getLabel();?>
 			    </label>
 			    <span class="help-block">
 			        <span class="text-info">When collecting, postage will be removed from total.</span>
