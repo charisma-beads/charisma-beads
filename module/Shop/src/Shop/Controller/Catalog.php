@@ -19,6 +19,7 @@ use Zend\View\Model\ViewModel;
  * Class Catalog
  *
  * @package Shop\Controller
+ * @method \Zend\Session\Container sessionContainer()
  */
 class Catalog extends AbstractActionController
 {
@@ -88,19 +89,26 @@ class Catalog extends AbstractActionController
 
     public function searchAction()
     {
+        $session = $this->sessionContainer('CatalogSearch');
+        $searchData = $session->offsetGet('searchData');
+
         $options = $this->getShopOptions();
-        $page = $this->params()->fromPost('page', 1);
+        $page = $this->params()->fromPost('page', $session->offsetGet('page'));
         $sort = $this->params()->fromPost('sort', $options->getProductsOrderCol());
         $sl = $this->getServiceLocator();
-
         
         $form = $sl->get('FormElementManager')->get('ShopCatalogSearch');
         $inputFilter = $sl->get('InputFilterManager')->get('ShopCatalogSearch');
         $form->setInputFilter($inputFilter);
-        $form->setData($this->params()->fromPost());
+        $form->setData(
+            ($searchData ==! $this->params()->fromPost()) ? $searchData : $this->params()->fromPost()
+        );
         $form->isValid();
 
-        $this->layout()->setVariable('searchData', $form->getData());
+        $session->offsetSet('searchData', $form->getData());
+        $session->offsetSet('page', $page);
+
+        $this->layout()->setVariable('searchData', $searchData);
         
         $products = $this->getProductService()->usePaginator([
             'limit' => $options->getProductsPerPage(),
