@@ -103,20 +103,20 @@
           &nbsp;(<?=$item->getMetadata()->getPostUnit();?> grams)
           <?php endif; ?>
 	    </td>
-		<td><?=$this->priceFormat($item->getPrice());?></td>
+		<td class="text-right"><?=$this->priceFormat($item->getPrice());?></td>
 		<td><?=$item->getQty();?></td>
-		<td><?=$this->priceFormat($item->getPrice() * $item->getQty());?></td>
+		<td class="text-right"><?=$this->priceFormat($item->getPrice() * $item->getQty());?></td>
 	</tr>
 	<?php endforeach; ?>
 	<tr>
         <td colspan="2">&nbsp;</td>
 	    <th colspan="2" class="text-right">Postage:</th>
-	    <td><?=$this->priceFormat($this->order->getShipping());?></td>
+	    <td class="text-right"><?=$this->priceFormat($this->order->getShipping());?></td>
 	</tr>
 	<tr>
         <td colspan="2">&nbsp;</td>
 	    <th colspan="2" class="text-right">Total:</th>
-	    <td><?=$this->priceFormat($this->order->getTotal());?></td>
+	    <td class="text-right"><?=$this->priceFormat($this->order->getTotal());?></td>
 	</tr>
 </table>
 
