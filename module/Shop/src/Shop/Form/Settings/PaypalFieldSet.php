@@ -89,30 +89,6 @@ class PaypalFieldSet extends Fieldset implements InputFilterProviderInterface
         ]);
         
         $this->add([
-            'name' => 'clientId',
-            'type' => 'text',
-            'options' => [
-                'label' => 'Client Id',
-                'column-size' => 'md-8',
-                'label_attributes' => [
-                    'class' => 'col-md-4',
-                ],
-            ],
-        ]);
-        
-        $this->add([
-            'name' => 'secret',
-            'type' => 'text',
-            'options' => [
-                'label' => 'Client Secret',
-                'column-size' => 'md-8',
-                'label_attributes' => [
-                    'class' => 'col-md-4',
-                ],
-            ],
-        ]);
-        
-        $this->add([
             'name'			=> 'paymentMethod',
             'type'			=> 'select',
             'options'		=> [
@@ -125,6 +101,17 @@ class PaypalFieldSet extends Fieldset implements InputFilterProviderInterface
                     'paypal' => 'Paypal',
                 ],
                 'column-size' => 'md-8',
+            ],
+        ]);
+
+        $this->add([
+            'type' => 'ShopPaypalCredentialPairsFieldSet',
+            'name' => 'credential_pairs',
+            'attributes' => [
+                'class' => 'col-md-12',
+            ],
+            'options' => [
+                'label' => 'API Credentials',
             ],
         ]);
     }
@@ -145,20 +132,6 @@ class PaypalFieldSet extends Fieldset implements InputFilterProviderInterface
                         'min' => 3,
                         'encoding' => 'UTF-8',
                     ]]
-                ],
-            ],
-            'clientId' => [
-                'required' => false,
-                'filters' => [
-                    ['name' => 'StripTags'],
-                    ['name' => 'StringTrim'],
-                ],
-            ],
-            'secret' => [
-                'required' => false,
-                'filters' => [
-                    ['name' => 'StripTags'],
-                    ['name' => 'StringTrim'],
                 ],
             ],
         ];

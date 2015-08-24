@@ -7,6 +7,7 @@
  * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
  * @license   see LICENSE.txt
  */
+
 namespace Shop\Options;
 
 use Zend\Stdlib\AbstractOptions;
@@ -46,16 +47,22 @@ class PaypalOptions extends AbstractOptions
      * @var string
      */
     protected  $logLevel = 'FINE';
-    
-    /**
-     * @var string
-     */
-    protected $clientId;
-    
-    /**
-     * @var string
-     */
-    protected $secret;
+
+	/**
+	 * api credentials
+	 *
+	 * @var array
+	 */
+	protected $credentialPairs = [
+		'sandbox'	=> [
+			'clientId'	=> '',
+			'secret' 	=> '',
+		],
+		'live'		=> [
+			'clientId' 	=> '',
+			'secret' 	=> '',
+		],
+	];
     
     /**
      * @var string
@@ -71,7 +78,8 @@ class PaypalOptions extends AbstractOptions
 	}
 
 	/**
-	 * @param string $currencyCode
+	 * @param $currencyCode
+	 * @return $this
 	 */
 	public function setCurrencyCode($currencyCode)
 	{
@@ -88,7 +96,8 @@ class PaypalOptions extends AbstractOptions
 	}
 
 	/**
-	 * @param string $mode
+	 * @param $mode
+	 * @return $this
 	 */
 	public function setMode($mode)
 	{
@@ -119,9 +128,10 @@ class PaypalOptions extends AbstractOptions
 	{
 		return $this->log;
 	}
-	
+
 	/**
-	 * @param boolean $log
+	 * @param $log
+	 * @return $this
 	 */
 	public function setLog($log)
 	{
@@ -160,36 +170,43 @@ class PaypalOptions extends AbstractOptions
 	{
 		$this->paymentMethod = $paymentMethod;
 	}
-	
-	/**
-	 * @return string
-	 */
-	public function getClientId()
+
+    /**
+     * @param null $mode
+     * @return array
+     */
+	public function getCredentialPairs($mode = null)
 	{
-		return $this->clientId;
+        if ($mode) {
+            return $this->credentialPairs[$mode];
+        }
+
+		return $this->credentialPairs;
 	}
 
 	/**
-	 * @param string $clientId
+	 * @param array $credentialPairs
+	 * @return $this
 	 */
-	public function setClientId($clientId)
+	public function setCredentialPairs(array $credentialPairs)
 	{
-		$this->clientId = $clientId;
+		$this->credentialPairs = $credentialPairs;
+		return $this;
 	}
+
+    /**
+     * @return string
+     */
+    public function getClientId()
+    {
+        return $this->credentialPairs[$this->mode]['clientId'];
+    }
 
 	/**
 	 * @return string
 	 */
 	public function getSecret()
 	{
-		return $this->secret;
-	}
-
-	/**
-	 * @param string $secret
-	 */
-	public function setSecret($secret)
-	{
-		$this->secret = $secret;
+		return $this->credentialPairs[$this->mode]['secret'];
 	}
 }
