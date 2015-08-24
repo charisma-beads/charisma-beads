@@ -139,7 +139,7 @@ class Cart extends AbstractViewHelper
 	    }
 
         if ($numItems) {
-            return '<i class="fa fa-shopping-cart"></i>&nbsp;(' . $numItems . ')';
+            return '&nbsp;(' . $numItems . ')';
         }
 	    
 	    return '';
