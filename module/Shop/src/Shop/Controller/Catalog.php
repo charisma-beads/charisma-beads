@@ -101,7 +101,7 @@ class Catalog extends AbstractActionController
         $inputFilter = $sl->get('InputFilterManager')->get('ShopCatalogSearch');
         $form->setInputFilter($inputFilter);
         $form->setData(
-            ($searchData ==! $this->params()->fromPost()) ? $searchData : $this->params()->fromPost()
+            ($searchData ==! $this->params()->fromPost() && null !== $searchData) ? $searchData : $this->params()->fromPost()
         );
         $form->isValid();
 
