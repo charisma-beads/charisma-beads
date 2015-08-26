@@ -10,20 +10,22 @@
         <!-- CART CONTENT -->
         <div class="quick-cart-content">
             <?php /* @var $item \Shop\Model\Cart\Item */ ?>
-            <?php foreach ($this->cart()->getCart() as $item): ?>
-            <a class="quick-cart-item" href="<?=$this->url('shop/cart', [
-                'action' => 'view'
-            ]);?>"><!-- item -->
-                <?php if ($item->getMetadata()->getShowImage()):?>
-                <img class="pull-left" src="<?=$this->productImage($item->getMetadata()->getImage());?>" width="40" alt="quick cart">
-                <?php endif;?>
-                    <div class="inline-block">
-                    <span class="title block"><?=$item->getMetadata()->getSku();?>/<?=$item->getMetadata()->getName();?></span>
-                    <span class="price block"><?=$item->getQuantity();?> &times; <?=$this->cart()->getLineCost($item);?></span>
-                </div>
-            </a><!-- /item -->
+            <div class="quick-cart-items">
+                <?php foreach ($this->cart()->getCart() as $item): ?>
+                    <a class="quick-cart-item" href="<?=$this->url('shop/cart', [
+                        'action' => 'view'
+                    ]);?>"><!-- item -->
+                        <?php if ($item->getMetadata()->getShowImage()):?>
+                            <img class="pull-left" src="<?=$this->productImage($item->getMetadata()->getImage());?>" width="40" alt="quick cart">
+                        <?php endif;?>
+                        <div class="inline-block">
+                            <span class="title block"><?=$item->getMetadata()->getSku();?>/<?=$item->getMetadata()->getName();?></span>
+                            <span class="price block"><?=$item->getQuantity();?> &times; <?=$this->cart()->getLineCost($item);?></span>
+                        </div>
+                    </a><!-- /item -->
 
-            <?php endforeach; ?>
+                <?php endforeach; ?>
+            </div>
 
             <div class="row cart-footer"><!-- cart footer -->
                 <div class="col-md-6 nopadding-right">

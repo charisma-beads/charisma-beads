@@ -147,7 +147,6 @@ class ServiceListener implements ListenerAggregateInterface
     public function addAdvertHit(Event $e)
     {
         $post = $e->getParam('post');
-        $userId = $e->getParam('saved');
         
         $sl = $e->getTarget()->getServiceLocator();
         /* @var $service \Shop\Service\Advert\Hit */
