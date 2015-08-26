@@ -31,11 +31,7 @@ class Hit extends AbstractRelationalMapperService
         'advert'  => [
             'refCol'    => 'advertId',
             'service'   => 'ShopAdvert',
-        ],
-        'user'  => [
-            'refCol'    => 'userId',
-            'service'   => 'UthandoUser',
-        ],
+        ]
     ];
     
     protected $tags = [

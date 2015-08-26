@@ -155,8 +155,7 @@ class ServiceListener implements ListenerAggregateInterface
         
         /* @var $model \Shop\Model\Advert\Hit */
         $model = $service->getModel();
-        $model->setAdvertId($post['advertId'])
-            ->setUserId($userId);
+        $model->setAdvertId($post['advertId']);
         
         $service->save($model);
         

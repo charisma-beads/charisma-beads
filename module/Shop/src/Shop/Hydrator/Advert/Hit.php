@@ -36,7 +36,6 @@ class Hit extends AbstractHydrator
         return [
             'advertHitId'   => $object->getAdvertHitId(),
             'advertId'      => $object->getAdvertId(),
-            'userId'        => $object->getUserId(),
             'dateCreated'   => $this->extractValue('dateCreated', $object->getDateCreated()),
         ];
     }
