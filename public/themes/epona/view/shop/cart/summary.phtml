@@ -27,15 +27,14 @@
                 <?php endforeach; ?>
             </div>
 
-            <div class="row cart-footer"><!-- cart footer -->
-                <div class="col-md-6 nopadding-right">
-                    <a href="<?=$this->url('shop/cart', [
-                        'action' => 'view'
-                    ]);?>" class="btn btn-primary fullwidth">VIEW CART</a>
-                </div>
-                <div class="col-md-6 nopadding-left">
-                    <a href="<?=$this->url('shop/checkout');?>" class="btn btn-info fullwidth">CHECKOUT</a>
-                </div>
+            <div class="cart-footer"><!-- cart footer -->
+
+                <a href="<?=$this->url('shop/cart', [
+                    'action' => 'view'
+                ]);?>" class="btn btn-primary col-sm-12 col-md-6">VIEW CART</a>
+
+                <a href="<?=$this->url('shop/checkout');?>" class="btn btn-info col-sm-12 col-md-6">CHECKOUT</a>
+
             </div><!-- /cart footer -->
 
         </div>
