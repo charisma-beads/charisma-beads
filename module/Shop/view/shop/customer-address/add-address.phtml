@@ -15,11 +15,11 @@
 	],
 ]); ?>
 
-<?php $this->inlineScript()->captureStart(); ?>
+<script>
 $(document).ready(function(){
     $('#countryId').change(function() {
     	$.ajax({
-    		url : '/shop/country/province',
+    		url : '<?=$this->basePath('/shop/country/province');?>',
     		data : {countryId : this.value},
     		type : 'POST'
     	}).done(function(data){
@@ -27,4 +27,4 @@ $(document).ready(function(){
     	});
 	});
 });
-<?php $this->inlineScript()->captureEnd(); ?>
+</script>

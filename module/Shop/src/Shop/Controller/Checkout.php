@@ -88,19 +88,19 @@ class Checkout extends AbstractActionController
         $countryService = $this->getService('ShopCountry');
 
         if (is_array($prg)) {
-            $billingCountry = $countryService->getById($prg['customer']['billingAddress']['countryId'])->getCode();
-            $deliveryCountry = $countryService->getById($prg['customer']['deliveryAddress']['countryId'])->getCode();
+            $billingCountry = $countryService->getById($prg['customer']['billingAddress']['countryId']);
+            $deliveryCountry = $countryService->getById($prg['customer']['deliveryAddress']['countryId']);
         } else {
-            $billingCountry = $customer->getBillingAddress()->getCountry()->getCode();
-            $deliveryCountry = $customer->getDeliveryAddress()->getCountry()->getCode();
+            $billingCountry = $customer->getBillingAddress()->getCountry();
+            $deliveryCountry = $customer->getDeliveryAddress()->getCountry();
         }
         
         $form = $this->getService('FormElementManager')
             ->get('ShopCustomerDetails', [
-                'billing_country' => ($billingCountry) ?: 'GB',
-                'delivery_country' => ($deliveryCountry) ?: 'GB',
+                'billing_country' => $billingCountry,
+                'delivery_country' => $deliveryCountry,
             ]);
-            
+
         $form->bind($customer);
         
         if ($prg instanceof Response) {

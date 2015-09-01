@@ -37,32 +37,35 @@ class CustomerFieldSet extends Fieldset implements InputFilterProviderInterface
             ->setObject(new CustomerModel());
     }
     
-    public function init()
+    public function initElements()
     {
         $this->addElements();
-        
+
         $this->add([
             'type' => 'ShopAddressFieldSet',
             'name' => 'billingAddress',
             'options' => [
                 'label' => 'Billing Address',
+                'country' => $this->getOption('billing_country'),
             ],
         ]);
+
+        $this->get('billingAddress')->initElements();
         
         $this->add([
             'type' => 'ShopAddressFieldSet',
             'name' => 'deliveryAddress',
             'options' => [
                 'label' => 'Delivery Address',
+                'country' => $this->getOption('delivery_country'),
             ],
         ]);
+
+        $this->get('deliveryAddress')->initElements();
     }
     
     public function getInputFilterSpecification()
     {
-        $this->get('billingAddress')->setOption('country', $this->getOption('billing_country'));
-        $this->get('deliveryAddress')->setOption('country', $this->getOption('delivery_country'));
-        
         return[
             'prefixId' => [
                 'required' => true,

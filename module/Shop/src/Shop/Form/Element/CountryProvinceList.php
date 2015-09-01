@@ -33,7 +33,7 @@ class CountryProvinceList extends Select implements ServiceLocatorAwareInterface
     public function setOptions($options)
     {
     	parent::setOptions($options);
-    
+
     	if (isset($this->options['country_id'])) {
     		$this->setCountryId($this->options['country_id']);
     	}

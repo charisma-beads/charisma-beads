@@ -32,6 +32,7 @@ class CustomerDetails extends Form
     
     public function init()
     {
+        // options are here
         $this->add([
             'type' => 'ShopCustomerFieldSet',
             'name' => 'customer',
@@ -42,7 +43,9 @@ class CustomerDetails extends Form
                 'delivery_country' => $this->options['delivery_country'],
             ],
         ]);
-        
+
+        $this->get('customer')->initElements();
+
         $this->add([
             'type' => 'checkbox',
             'name' => 'shipToBilling',

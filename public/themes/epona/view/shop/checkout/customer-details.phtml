@@ -269,7 +269,7 @@ $deliveryAddress = $customer->get('deliveryAddress');
 									<label class="select<?php if ($deliveryAddress->get('provinceId')->getMessages()) echo ' state-error'; ?>">
 										<?=$this->formSelect($deliveryAddress->get('provinceId')->setAttributes([
 										    'class' => 'pointer',
-										    'id' => 'billing-address-province-id'
+										    'id' => 'delivery-address-province-id'
 										]));?>
 										<i></i>
 									</label>
@@ -296,7 +296,7 @@ $deliveryAddress = $customer->get('deliveryAddress');
 									<label class="select<?php if ($deliveryAddress->get('countryId')->getMessages()) echo ' state-error'; ?>">
 										<?=$this->formSelect($deliveryAddress->get('countryId')->setAttributes([
 										    'class' => 'pointer',
-										    'id' => 'billing-address-country-id',
+										    'id' => 'delivery-address-country-id',
 										]));?>
 										<i></i>
 									</label>

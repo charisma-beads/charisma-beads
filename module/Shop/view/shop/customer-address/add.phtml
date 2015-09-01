@@ -21,7 +21,9 @@
 
     $('#countryId').change(function() {
         $.ajax({
-            url : '/shop/country/province',
+            url : '<?=$this->url('admin/shop/country/province', [
+                'action' => 'country-province-list'
+            ]);?>',
             data : {countryId : this.value},
             type : 'POST'
         }).done(function(data){

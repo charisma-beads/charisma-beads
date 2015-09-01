@@ -32,7 +32,7 @@ class AddressFieldSet extends Fieldset implements InputFilterProviderInterface
             ->setObject(new AddressModel());
     }
     
-    public function init()
+    public function initElements()
     {
         $this->addElements();
     }
@@ -114,7 +114,7 @@ class AddressFieldSet extends Fieldset implements InputFilterProviderInterface
                 ],
                 'validators' => [
                     ['name' => 'UthandoCommonPostCode', 'options' => [
-                        'country' => $this->getOption('country'),
+                        'country' => $this->getOption('country')->getCode(),
                     ]],
                 ],
             ],
@@ -140,12 +140,12 @@ class AddressFieldSet extends Fieldset implements InputFilterProviderInterface
                     ['name' => 'StringTrim'],
                     ['name' => 'Digits'],
                     ['name' => 'UthandoCommonPhoneNumber', 'options' => [
-                        'country' => $this->getOption('country'),
+                        'country' => $this->getOption('country')->getCode(),
                     ]],
                 ],
                 'validators' => [
                     ['name' => 'UthandoCommonPhoneNumber', 'options' => [
-                        'country' => $this->getOption('country'),
+                        'country' => $this->getOption('country')->getCode(),
                     ]],
                 ],
             ],

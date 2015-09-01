@@ -21,6 +21,9 @@ trait AddressTrait
 {
     public function addElements()
     {
+        $countyId = ($this->getOption('country')) ?: 1;
+        $countyId = (!is_object($countyId)) ? $countyId : $this->getOption('country')->getCountryId();
+
         $this->add([
             'name' => 'address1',
             'type'  => 'text',
@@ -101,7 +104,7 @@ trait AddressTrait
             ],
             'options' => [
                 'label' => 'County\Province:',
-                'country_id' => 1,
+                'country_id' => $countyId,
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
                 'column-size' => 'md-8',
                 'label_attributes' => [
@@ -136,7 +139,7 @@ trait AddressTrait
             ],
             'options' => [
                 'label' => 'Country',
-                'country_id' => 1,
+                'country_id' => $countyId,
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
                 'column-size' => 'md-8',
                 'label_attributes' => [
