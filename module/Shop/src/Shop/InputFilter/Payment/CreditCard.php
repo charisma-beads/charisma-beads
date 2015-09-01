@@ -69,6 +69,10 @@ class CreditCard extends InputFilter
             'filters' => [
                 ['name' => 'StripTags'],
                 ['name' => 'StringTrim'],
+                ['name' => 'PregReplace', 'options' => [
+                    'pattern'       => '/\s+/',
+                    'replacement'   => ''
+                ]],
                 ['name' => 'Digits'],
             ],
             'validators'	=> [

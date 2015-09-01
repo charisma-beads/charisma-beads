@@ -127,7 +127,7 @@ $this->inlineScript()
 
         $('#monthly-totals').on('change', 'select', function () {
             changeMonthlyStats();
-        })
+        });
 
         $('#current-orders .panel-widget').ajaxWidgetPanel({
             url: '<?=$this->url('admin/shop/order/edit', [

@@ -80,7 +80,7 @@ class CreditCard extends Form
         
         $this->add([
             'name' => 'ccNumber',
-            'type' => 'number',
+            'type' => 'text',
             'attributes'    => [
                 'placeholder'		=> 'Card Number',
                 'autofocus'			=> true,

@@ -39,7 +39,7 @@
     	<div class="row">
     		<section class="col col-md-10">
     			<label class="input<?php if ($this->form->get('ccNumber')->getMessages()) echo ' state-error'; ?>">
-    				<?=$this->formNumber($this->form->get('ccNumber'));?>
+    				<?=$this->formText($this->form->get('ccNumber'));?>
     			</label>
     			<span class="help-block">
     			   <?=$this->formElementErrors($this->form->get('ccNumber'), [
