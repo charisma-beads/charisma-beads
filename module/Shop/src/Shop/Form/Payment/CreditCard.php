@@ -126,7 +126,7 @@ class CreditCard extends Form
                 'autofocus'			=> true,
             ],
             'options'       => [
-                'label' => 'Expiry Date:',
+                'label' => 'Start Date:',
                 'min_year' => $this->getYears(-10),
                 'max_year' => $this->getYears(),
             ],
