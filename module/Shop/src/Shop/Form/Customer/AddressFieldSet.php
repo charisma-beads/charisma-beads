@@ -10,6 +10,7 @@
 
 namespace Shop\Form\Customer;
 
+use Shop\Model\Country\Country;
 use Shop\Model\Customer\Address as AddressModel;
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
@@ -39,6 +40,12 @@ class AddressFieldSet extends Fieldset implements InputFilterProviderInterface
     
     public function getInputFilterSpecification()
     {
+        $countryCode = $this->getOption('country');
+
+        if ($countryCode instanceof Country) {
+            $countryCode = $countryCode->getCode();
+        }
+
         return [
             'address1' => [
                 'required' => true,
@@ -114,7 +121,7 @@ class AddressFieldSet extends Fieldset implements InputFilterProviderInterface
                 ],
                 'validators' => [
                     ['name' => 'UthandoCommonPostCode', 'options' => [
-                        'country' => $this->getOption('country')->getCode(),
+                        'country' => $countryCode,
                     ]],
                 ],
             ],
@@ -140,12 +147,12 @@ class AddressFieldSet extends Fieldset implements InputFilterProviderInterface
                     ['name' => 'StringTrim'],
                     ['name' => 'Digits'],
                     ['name' => 'UthandoCommonPhoneNumber', 'options' => [
-                        'country' => $this->getOption('country')->getCode(),
+                        'country' => $countryCode,
                     ]],
                 ],
                 'validators' => [
                     ['name' => 'UthandoCommonPhoneNumber', 'options' => [
-                        'country' => $this->getOption('country')->getCode(),
+                        'country' => $countryCode,
                     ]],
                 ],
             ],
