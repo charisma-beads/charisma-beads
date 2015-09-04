@@ -130,7 +130,7 @@ if ($request->isPost() && $request->getPost('submit') != 'Register') {
 			header ("Location: " . $https . '/shop/users/thank-you.php');
 			
 		} else {
-			$registerForm->setMessages(array('security'=> array('Oops! Someting went wrong. Please try again.')));
+			$registerForm->setMessages(array('security'=> array('Oops! Something went wrong. Please try again.')));
 			$newsletterTable->delete(array(
 				'newsletter_id' => $newsletter_id
 			));
