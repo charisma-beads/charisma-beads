@@ -95,7 +95,7 @@
 	
 	<?php /* @var $item \Shop\Model\Order\Line */ ?>
 	<?php foreach ($this->order->getOrderlines() as $item): ?>
-	<tr>
+	<tr class="item-list">
 		<td><?=$item->getMetadata()->getSku();?></td>
 		<td>
 		  <?=$item->getMetadata()->getCategory();?> / <?=$item->getMetadata()->getName();?>
@@ -135,23 +135,25 @@
 </table>
 <?php endif; ?>
 
-<div class="footer">
-    <p>
-        Registered at Companies House, register number <?=$this->contact('company.number');?>.
-    </p>
-    <p>
-        Registered office address:
-        <?=$this->contact('company.address.line1');?>,
-        <?php if($this->contact('company.address.line2') != ''):?>
-        <?=$this->contact('company.address.line2');?>,
-        <?php endif;?>
-        <?=$this->contact('company.address.town');?>,
-        <?=$this->contact('company.address.county');?>, <?=$this->contact('details.address.postcode');?>
-    </p>
-</div>
-
 <div class="page-footer">
-    Page: <span class="pagenum"></span> - Order No: <?=$this->order->getOrderNumber();?>
-    <span>- <?=$this->shopOption('merchantName');?></span>
+    <div class="page-numbers">
+        Page: <span class="pagenum"></span> - Order No: <?=$this->order->getOrderNumber();?>
+        <span>- <?=$this->shopOption('merchantName');?></span>
+    </div>
+
+    <div class="company-details">
+        <p>
+            Registered at Companies House, register number <?=$this->contact('company.number');?>.
+        </p>
+        <p>
+            Registered office address:
+            <?=$this->contact('company.address.line1');?>,
+            <?php if($this->contact('company.address.line2') != ''):?>
+                <?=$this->contact('company.address.line2');?>,
+            <?php endif;?>
+            <?=$this->contact('company.address.town');?>,
+            <?=$this->contact('company.address.county');?>, <?=$this->contact('details.address.postcode');?>
+        </p>
+    </div>
 </div>
     

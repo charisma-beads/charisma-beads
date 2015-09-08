@@ -102,17 +102,21 @@
     	border-top: none;
     	text-align: left;
     }
+
+    .table .item-list td {
+        page-break-before: always;
+    }
     
     .text-right {
     	text-align: right;
     }
     
-    .footer {
+    .page-footer {
     	font-size: <?=$this->invoiceOption('footerFontSize');?>;
     	text-align: center;
     }
 
-    .footer p {
+    .page-footer .company-details p {
         margin: 2px;
     }
 
@@ -124,10 +128,10 @@
     }
 
     .pagenum:before {
-        content: counter(page);
+        content: counter(page) "/" counter(pages);;
     }
     <?php else: ?>
-    .page-footer {
+    .page-footer .page-numbers {
         display: none;
     }
     <?php endif; ?>

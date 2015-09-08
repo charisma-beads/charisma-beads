@@ -11,7 +11,7 @@
 namespace Shop\Controller\Order;
 
 use UthandoCommon\Controller\AbstractCrudController;
-use DOMPDFModule\View\Model\PdfModel;
+use UthandoDomPdf\View\Model\PdfModel;
 use Shop\ShopException;
 use Zend\View\Model\ViewModel;
 use Zend\View\Model\JsonModel;
@@ -152,8 +152,11 @@ class Order extends AbstractCrudController
         if (false === $order) {
             return $this->redirect()->toRoute('shop/order');
         }
-	    
-	    $pdf = new PdfModel(['order' => $order]);
+
+        /* @var PdfModel $pdf */
+	    $pdf = $this->getService('PdfModel');
+        $pdf->setVariable('order', $order);
+
 	    $pdf->setTerminal(true);
 	    
 	    return $pdf;
