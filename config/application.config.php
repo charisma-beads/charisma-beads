@@ -19,7 +19,7 @@ return [
         'UthandoTwitter',
         'UthandoNewsletter',
         'Shop',
-        'DOMPDFModule',
+        'UthandoDomPdf',
         'TwbBundle',
     ],
     'module_listener_options' => [

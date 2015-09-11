@@ -25,6 +25,8 @@ class Cart extends AbstractCollection implements ModelInterface
 {
     use Model,
         DateModifiedTrait;
+
+    protected $entityClass = 'Shop\Model\Cart\Item';
     
     /**
      * @var int
@@ -50,11 +52,6 @@ class Cart extends AbstractCollection implements ModelInterface
      * @var string
      */
     protected $sortOrder;
-    
-    public function __construct()
-    {
-        $this->setEntityClass('Shop\Model\Cart\Item');
-    }
 
     /**
      * @return int
