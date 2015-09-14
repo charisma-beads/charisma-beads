@@ -11,7 +11,7 @@
 
 namespace Shop\View;
 
-use Shop\Model\Product\Product;
+use Shop\Model\Product\Product as ProductModel;
 use UthandoCommon\View\AbstractViewHelper;
 
 /**
@@ -42,7 +42,7 @@ class ProductPrice extends AbstractViewHelper
      * @param Product $product
      * @return $this
      */
-    public function __invoke(Product $product)
+    public function __invoke(ProductModel $product)
     {
         $this->product = $product;
         

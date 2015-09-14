@@ -11,7 +11,7 @@
 
 namespace Shop\View;
 
-use Shop\Model\Product\Product;
+use Shop\Model\Product\Product as ProductModel;
 use UthandoCommon\View\AbstractViewHelper;
 
 /**
@@ -21,7 +21,7 @@ use UthandoCommon\View\AbstractViewHelper;
  */
 class ProductOptions extends AbstractViewHelper
 {
-    public function __invoke(Product $product)
+    public function __invoke(ProductModel $product)
     {
         $sl = $this->getServiceLocator()->getServiceLocator();
         $formManager = $sl->get('FormElementManager');
