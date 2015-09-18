@@ -11,6 +11,7 @@
 namespace Shop\Controller\Order;
 
 use UthandoCommon\Controller\AbstractCrudController;
+use UthandoDomPdf\Options\PdfOptions;
 use UthandoDomPdf\View\Model\PdfModel;
 use Shop\ShopException;
 use Zend\View\Model\ViewModel;
@@ -155,6 +156,7 @@ class Order extends AbstractCrudController
 
         /* @var PdfModel $pdf */
 	    $pdf = $this->getService('PdfModel');
+
         $pdf->setVariable('order', $order);
 
 	    $pdf->setTerminal(true);

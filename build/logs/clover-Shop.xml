@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1442218986">
-  <project timestamp="1442218986">
+<coverage generated="1442236739">
+  <project timestamp="1442236739">
     <package name="Shop\Controller">
       <file name="/Users/shaun/Web-Projects/charisma-beads/charisma-beads-v2/module/Shop/src/Shop/Controller/Advert.php">
         <class name="Advert" namespace="Shop\Controller" fullPackage="Shop" package="Shop">
@@ -1011,31 +1011,31 @@
     <package name="Shop\Event">
       <file name="/Users/shaun/Web-Projects/charisma-beads/charisma-beads-v2/module/Shop/src/Shop/Event/ServiceListener.php">
         <class name="ServiceListener" namespace="Shop\Event" fullPackage="Shop" package="Shop">
-          <metrics methods="7" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="93" coveredstatements="0" elements="100" coveredelements="0"/>
+          <metrics methods="7" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="93" coveredstatements="22" elements="100" coveredelements="23"/>
         </class>
-        <line num="27" type="method" name="attach" crap="2" count="0"/>
-        <line num="29" type="stmt" count="0"/>
-        <line num="31" type="stmt" count="0"/>
-        <line num="32" type="stmt" count="0"/>
-        <line num="33" type="stmt" count="0"/>
-        <line num="34" type="stmt" count="0"/>
-        <line num="35" type="stmt" count="0"/>
-        <line num="37" type="stmt" count="0"/>
-        <line num="38" type="stmt" count="0"/>
-        <line num="39" type="stmt" count="0"/>
-        <line num="41" type="stmt" count="0"/>
-        <line num="42" type="stmt" count="0"/>
-        <line num="43" type="stmt" count="0"/>
-        <line num="45" type="stmt" count="0"/>
-        <line num="46" type="stmt" count="0"/>
-        <line num="47" type="stmt" count="0"/>
-        <line num="49" type="stmt" count="0"/>
-        <line num="50" type="stmt" count="0"/>
-        <line num="51" type="stmt" count="0"/>
-        <line num="53" type="stmt" count="0"/>
-        <line num="54" type="stmt" count="0"/>
-        <line num="55" type="stmt" count="0"/>
-        <line num="56" type="stmt" count="0"/>
+        <line num="27" type="method" name="attach" crap="1" count="2"/>
+        <line num="29" type="stmt" count="2"/>
+        <line num="31" type="stmt" count="2"/>
+        <line num="32" type="stmt" count="2"/>
+        <line num="33" type="stmt" count="2"/>
+        <line num="34" type="stmt" count="2"/>
+        <line num="35" type="stmt" count="2"/>
+        <line num="37" type="stmt" count="2"/>
+        <line num="38" type="stmt" count="2"/>
+        <line num="39" type="stmt" count="2"/>
+        <line num="41" type="stmt" count="2"/>
+        <line num="42" type="stmt" count="2"/>
+        <line num="43" type="stmt" count="2"/>
+        <line num="45" type="stmt" count="2"/>
+        <line num="46" type="stmt" count="2"/>
+        <line num="47" type="stmt" count="2"/>
+        <line num="49" type="stmt" count="2"/>
+        <line num="50" type="stmt" count="2"/>
+        <line num="51" type="stmt" count="2"/>
+        <line num="53" type="stmt" count="2"/>
+        <line num="54" type="stmt" count="2"/>
+        <line num="55" type="stmt" count="2"/>
+        <line num="56" type="stmt" count="2"/>
         <line num="58" type="method" name="userEdit" crap="20" count="0"/>
         <line num="60" type="stmt" count="0"/>
         <line num="61" type="stmt" count="0"/>
@@ -1113,7 +1113,7 @@
         <line num="178" type="stmt" count="0"/>
         <line num="179" type="stmt" count="0"/>
         <line num="180" type="stmt" count="0"/>
-        <metrics loc="181" ncloc="160" classes="1" methods="7" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="93" coveredstatements="0" elements="100" coveredelements="0"/>
+        <metrics loc="181" ncloc="160" classes="1" methods="7" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="93" coveredstatements="22" elements="100" coveredelements="23"/>
       </file>
     </package>
     <package name="Shop\Form">
@@ -10296,6 +10296,6 @@
         <metrics loc="52" ncloc="30" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="0" elements="10" coveredelements="0"/>
       </file>
     </package>
-    <metrics files="265" loc="25213" ncloc="17564" classes="265" methods="1027" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="7526" coveredstatements="0" elements="8553" coveredelements="0"/>
+    <metrics files="265" loc="25213" ncloc="17564" classes="265" methods="1027" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="7526" coveredstatements="22" elements="8553" coveredelements="23"/>
   </project>
 </coverage>

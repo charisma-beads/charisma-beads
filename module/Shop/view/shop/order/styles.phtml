@@ -112,6 +112,7 @@
     }
     
     .page-footer {
+        width: 100%;
     	font-size: <?=$this->invoiceOption('footerFontSize');?>;
     	text-align: center;
     }
@@ -122,16 +123,6 @@
 
     <?php if ($this->print): ?>
     .page-footer {
-        position: fixed;
-        bottom: 0px;
-        width: 100%;
-    }
-
-    .pagenum:before {
-        content: counter(page) "/" counter(pages);;
-    }
-    <?php else: ?>
-    .page-footer .page-numbers {
         display: none;
     }
     <?php endif; ?>

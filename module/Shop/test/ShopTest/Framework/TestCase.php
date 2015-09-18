@@ -2,20 +2,82 @@
 
 namespace ShopTest\Framework;
 
-use PHPUnit_Framework_TestCase;
-use Zend\ServiceManager\ServiceManager;
+use UthandoUser\Model\User as TestUserModel;
+use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 
-class TestCase extends PHPUnit_Framework_TestCase
+class TestCase extends AbstractHttpControllerTestCase
 {
-    protected static $serviceManager = null;
-    
-    public static function setServiceManager(ServiceManager $sm)
+    /**
+     * @var TestUserModel
+     */
+    protected $adminUser;
+
+    /**
+     * @var TestUserModel
+     */
+    protected $registeredUser;
+
+    protected $traceError = true;
+
+    protected function setUp()
     {
-        self::$serviceManager = $sm;
+        $this->setApplicationConfig(
+            include __DIR__ . '/../../TestConfig.php.dist'
+        );
+
+        parent::setUp();
+
+        $albumTableMock = $this->getMockBuilder('UthandoSessionManager\SessionManager')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $albumTableMock->expects($this->once())
+            ->method('fetchAll')
+            ->will($this->returnValue(array()));
+
+        $serviceManager = $this->getApplicationServiceLocator();
+        $serviceManager->setAllowOverride(true);
+        $serviceManager->setService('Album\Model\AlbumTable', $albumTableMock);
     }
-    
-    public function getServiceManager()
+
+    protected function setAjaxRequest()
     {
-    	return self::$serviceManager;
+        $request = $this->getRequest();
+        $headers = $request->getHeaders();
+        $headers->addHeaders(array('X-Requested-With' =>'XMLHttpRequest'));
+    }
+
+    protected function getAdminUser()
+    {
+        /* @var $auth \UthandoUser\Service\Authentication */
+        $auth = $this->getApplicationServiceLocator()
+            ->get('Zend\Authentication\AuthenticationService');
+        $user = new TestUserModel();
+
+        $user->setFirstname('Joe')
+            ->setLastname('Bloggs')
+            ->setEmail('email@example.com')
+            ->setRole('admin')
+            ->setDateCreated(new \DateTime())
+            ->setDateModified(new \DateTime());
+        $auth->getStorage()->write($user);
+        $this->adminUser = $user;
+    }
+
+    protected function getRegisteredUser()
+    {
+        /* @var $auth \UthandoUser\Service\Authentication */
+        $auth = $this->getApplicationServiceLocator()
+            ->get('Zend\Authentication\AuthenticationService');
+        $user = new TestUserModel();
+
+        $user->setFirstname('Joe')
+            ->setLastname('Bloggs')
+            ->setEmail('email@example.com')
+            ->setRole('registered')
+            ->setDateCreated(new \DateTime())
+            ->setDateModified(new \DateTime());
+        $auth->getStorage()->write($user);
+        $this->registeredUser = $user;
     }
 }
