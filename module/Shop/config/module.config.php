@@ -1754,7 +1754,7 @@ return [
                 ],
                 'route' => 'admin/shop',
                 'resource' => 'menu:admin'
-            ]
-        ]
+            ],
+        ],
     ],
 ];
