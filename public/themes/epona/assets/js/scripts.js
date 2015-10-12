@@ -1008,7 +1008,7 @@ function _toggle() {
 
 
 
-/**	17. Contact Google Map
+/**	17. ContactService Google Map
 *************************************************** **/
 	function contactMap() {
 

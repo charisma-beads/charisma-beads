@@ -24,15 +24,9 @@
     <tr class="panel panel-default">
         <td class="panel-body address-body">
             <address>
-                <?=$this->contact('details.address.line1');?><br />
-                <?php if($this->contact('details.address.line2') != ''):?>
-                    <?=$this->contact('details.address.line2');?>,<br />
-                <?php endif;?>
-                <?=$this->contact('details.address.town');?><br />
-                <?=$this->contact('details.address.county');?><br />
-                <?=$this->contact('details.address.postcode');?>
-                <br /><br />
-                <?=$this->contact('details.phone');?><br />
+                <?=$this->contact()->formatAddress('details.address', true);?>
+                <br><br>
+                <?=$this->contact('details.phone');?><br>
                 <?=$this->contact('details.email');?>
             </address>
         </td>
@@ -142,12 +136,7 @@
         </p>
         <p>
             Registered office address:
-            <?=$this->contact('company.address.line1');?>,
-            <?php if($this->contact('company.address.line2') != ''):?>
-                <?=$this->contact('company.address.line2');?>,
-            <?php endif;?>
-            <?=$this->contact('company.address.town');?>,
-            <?=$this->contact('company.address.county');?>, <?=$this->contact('details.address.postcode');?>
+           <?=$this->contact()->formatAddress('company.address');?>
         </p>
     </div>
 </div>

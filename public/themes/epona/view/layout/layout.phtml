@@ -130,8 +130,8 @@
                                 ?>
                             </nav>
 
-                            Call Us Today: <strong><a href="tel:<?=$this->contact('details.phone');?>">
-                                <?=$this->contact('details.phone');?>
+                            Call Us Today: <strong><a href="tel:<?=$this->contact()->formatPhoneNumber();?>">
+                                <?=$this->contact()->formatPhoneNumber(true);?>
                             </a></strong>
 							<span class="hide_mobile">
 								&bull; <a href="<?=$this->url('contact');?>"><?=$this->contact('details.email');?></a>
@@ -229,14 +229,10 @@
                             <img alt="<?=$this->themeOptions('site_name');?>" src="<?=$this->basePath($this->themeOptions('logo2'));?>" height="50" class="logo" />
 
                             <p class="block">
-                                <?=$this->contact('details.address.line1');?>,&nbsp;
-                                <?=$this->contact('details.address.line2');?><br />
-                                <?=$this->contact('details.address.town');?>&nbsp;
-                                <?=$this->contact('details.address.county');?>&nbsp;
-                                <?=$this->contact('details.address.postcode');?><br />
+                                <?=$this->contact()->formatAddress('details.address');?><br />
                                 Email:&nbsp;<a href="<?=$this->url('contact');?>"><?=$this->contact('details.email');?></a><br />
-                                Phone:&nbsp;<a href="tel:<?=$this->contact('details.phone');?>">
-                                <?=$this->contact('details.phone');?>
+                                Phone:&nbsp;<a href="tel:<?=$this->contact()->formatPhoneNumber();?>">
+                                <?=$this->contact()->formatPhoneNumber(true);?>
                             </a><br />
                             </p>
 
@@ -303,12 +299,8 @@
                     <div class="container text-center fsize12">
                         Registered at Companies House, register number <?=$this->contact('company.number');?>.<br>
                         Registered office address:
-                        <?=$this->contact('company.address.line1');?>,
-                        <?php if($this->contact('company.address.line2') != ''):?>
-                            <?=$this->contact('company.address.line2');?>,
-                        <?php endif;?>
-                        <?=$this->contact('company.address.town');?>,
-                        <?=$this->contact('company.address.county');?>, <?=$this->contact('details.address.postcode');?><br>
+                        <?=$this->contact()->formatAddress('company.address');?>
+                       <br>
                         Designed by <a href="http://www.shaunfreeman.co.uk" target="_blank" title="e-commerse websites" class="copyright">
                             Shaun Freeman
                         </a> &bull; All Right Reserved &copy; <?=date('Y');?> <?=$this->themeOptions('site_name');?>. &nbsp;
