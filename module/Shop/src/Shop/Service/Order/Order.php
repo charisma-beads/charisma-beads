@@ -41,23 +41,6 @@ class Order extends AbstractRelationalMapperService
     ];
 
     /**
-     * @param $id
-     * @param null $col
-     * @return array|mixed|\Shop\Model\Order\Order
-     */
-    public function getById($id, $col = null)
-    {
-        $order = parent::getById($id, $col);
-
-        if ($order) {
-            $this->populate($order, true);
-        }
-
-        return $order;
-
-    }
-
-    /**
      * @var array
      */
     protected $referenceMap = [
@@ -76,6 +59,33 @@ class Order extends AbstractRelationalMapperService
             'getMethod'     => 'getOrderLinesByOrderId',
         ],
     ];
+
+    /**
+     * @var array
+     */
+    protected $orderStatusMap = [
+        'pay_check'         => 'Cheque Payment pending',
+        'pay_phone'         => 'Waiting for Payment',
+        'pay_credit_card'   => 'Card Payment Pending',
+        'pay_paypal'        => 'Paypal Payment Pending',
+    ];
+
+    /**
+     * @param $id
+     * @param null $col
+     * @return array|mixed|\Shop\Model\Order\Order
+     */
+    public function getById($id, $col = null)
+    {
+        $order = parent::getById($id, $col);
+
+        if ($order) {
+            $this->populate($order, true);
+        }
+
+        return $order;
+
+    }
 
     public function getCustomerOrdersByCustomerId($id)
     {
@@ -119,9 +129,9 @@ class Order extends AbstractRelationalMapperService
 
         /* @var $orderStatusService \Shop\Service\Order\Status */
         $orderStatusService = $this->getService('ShopOrderStatus');
-        
+
         /* @var $orderStatus \Shop\Model\Order\Status */
-        $orderStatus = $orderStatusService->getStatusByName('Pending');
+        $orderStatus = $orderStatusService->getStatusByName($this->orderStatusMap[$postData['payment_option']]);
         
         $metadata = new MetaData();
         
