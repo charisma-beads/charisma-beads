@@ -185,9 +185,8 @@ $this->form->get('email')->setAttribute('readonly', '');
                 return;
             }
 
-            window.location = '<?=$this->url('admin/shop/order/edit', [
-                'action'    => 'create-order',
-                'id'        => $this->model->getCustomerId(),
+            window.location = '<?=$this->url('admin/shop/order/create', [
+                'customerId'    => $this->model->getCustomerId(),
             ]);?>';
         });
 

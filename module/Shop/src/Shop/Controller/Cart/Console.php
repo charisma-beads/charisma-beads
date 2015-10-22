@@ -12,7 +12,7 @@
 namespace Shop\Controller\Cart;
 
 use Shop\Service\Cart\Cart as CartService;
-use UthandoCommon\Controller\ServiceTrait;
+use UthandoCommon\Service\ServiceTrait;
 use Zend\Console\Request;
 use Zend\Mvc\Controller\AbstractActionController;
 

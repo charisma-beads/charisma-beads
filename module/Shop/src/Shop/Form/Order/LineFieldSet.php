@@ -22,20 +22,34 @@ use Shop\Hydrator\Order\Line as LineHydrator;
  */
 class LineFieldSet extends Fieldset implements InputFilterProviderInterface
 {
-    public function __construct($name=null, $options=[])
+    /**
+     * Constructor
+     *
+     * @param null|string $name
+     * @param array $options
+     */
+    public function __construct($name = null, $options = [])
     {
         parent::__construct($name, $options);
         
         $this->setHydrator(new LineHydrator())
             ->setObject(new LineModel());
-        
-        
     }
+
+    /**
+     * set up elements
+     */
     public function init()
     {
-        
+        $this->add([
+            'name' => 'orderLineId',
+            'type' => 'Hidden',
+        ]);
     }
-    
+
+    /**
+     * @return array
+     */
     public function getInputFilterSpecification()
     {
         return [];

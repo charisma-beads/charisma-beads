@@ -48,7 +48,9 @@ $this->form->setAttribute('action', $this->url('contact/process'));
             </span>
             <span class="block">
                 <strong><i class="fa fa-phone"></i> Phone:</strong>&nbsp;
-                <a href="tel:1800-555-1234"><?=$this->contact('details.phone');?></a>
+                <a href="tel:<?=$this->contact()->formatPhoneNumber();?>">
+                    <?=$this->contact()->formatPhoneNumber(true);?>
+                </a>
             </span>
             <span class="block">
                 <strong><i class="fa fa-envelope"></i> Email:</strong>&nbsp;
@@ -65,3 +67,13 @@ $this->form->setAttribute('action', $this->url('contact/process'));
     </div>
     <!-- /INFO -->
 </div>
+
+<?php $this->inlineScript()->captureStart(); ?>
+$(document).ready(function() {
+    $('#contact-submit-button').on('click', function(){
+        $('form').loadingOverlay({
+            loadingText: 'Please wait while I try to send your message.'
+        });
+    });
+});
+<?php $this->inlineScript()->captureEnd(); ?>

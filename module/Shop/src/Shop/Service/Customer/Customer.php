@@ -23,7 +23,7 @@ use Shop\Form\Customer\CustomerDetails;
  * Class Customer
  *
  * @package Shop\Service\Customer
- * @method CustomerModel populate()
+ * @method CustomerModel populate($model, $children)
  */
 class Customer extends AbstractRelationalMapperService
 {
@@ -117,7 +117,7 @@ class Customer extends AbstractRelationalMapperService
 
     /**
      * @param $id
-     * @return array|mixed|\Shop\Model\Customer\Customer
+     * @return array|mixed|CustomerModel
      */
     public function getCustomerDetailsByCustomerId($id)
     {
@@ -130,7 +130,7 @@ class Customer extends AbstractRelationalMapperService
 
     /**
      * @param null $userId
-     * @return array|\ArrayObject|null|\Shop\Model\Customer\Customer
+     * @return array|\ArrayObject|null|CustomerModel
      */
     public function getCustomerDetailsFromUserId($userId = null)
     {

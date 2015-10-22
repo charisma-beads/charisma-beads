@@ -18,15 +18,17 @@ use Shop\Service\Customer\Address;
 use Shop\Service\Product\Product;
 use UthandoCommon\Controller\ServiceTrait;
 use UthandoSessionManager\SessionContainerTrait;
+use Zend\Http\Request;
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\Session\Container;
 use Zend\View\Model\ViewModel;
 
 /**
  * Class Cart
  *
  * @package Shop\Controller\Cart
- * @method \Zend\Http\Request getRequest()
- * @method \Zend\Session\Container sessionContainer()
+ * @method Request getRequest()
+ * @method Container sessionContainer()
  */
 class Cart extends AbstractActionController
 {

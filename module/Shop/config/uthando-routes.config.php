@@ -645,6 +645,21 @@ return [
                                 ],
                                 'may_terminate' => true,
                                 'child_routes' => [
+                                    'create' => [
+                                        'type' => 'Segment',
+                                        'options' => [
+                                            'route' => '/create/[/customerId/[:customerId]]',
+                                            'contraints' => [
+                                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                                'customerId' => '\d+'
+                                            ],
+                                            'defaults' => [
+                                                'controller' => 'Order\CreateOrder',
+                                                'action' => 'index',
+                                                'force-ssl' => 'ssl'
+                                            ]
+                                        ],
+                                    ],
                                     'edit' => [
                                         'type' => 'Segment',
                                         'options' => [

@@ -1,1 +1,17 @@
-<h2>Not yet implemented</h2>
+<?php $this->HeadTitle('Create Order'); ?>
+<?php $this->layout()->pageTitle = 'Create Order'; ?>
+
+<h2>Create order For:</h2>
+
+<a href="<?=$this->url('admin/shop/customer/edit', [
+    'action' => 'add',
+]);?>" class="btn btn-default">New Customer</a>
+
+<a href="<?=$this->url('admin/shop/customer');?>" class="btn btn-default">Existing Customer</a>
+
+
+<div class="clearfix"></div>
+
+
+
+

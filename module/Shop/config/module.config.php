@@ -7,7 +7,7 @@ return [
                     'css/shop.css',
                 ],
                 'js/uthando-admin.js' => [
-                    'js/shop.js',
+
                 ],
             ],
             'paths' => [
@@ -24,6 +24,7 @@ return [
             'Shop\Controller\Customer'              => 'Shop\Controller\Customer\Customer',
             'Shop\Controller\Customer\Address'      => 'Shop\Controller\Customer\CustomerAddress',
             'Shop\Controller\Order'                 => 'Shop\Controller\Order\Order',
+            'Shop\Controller\Order\CreateOrder'     => 'Shop\Controller\Order\CreateOrder',
             'Shop\Controller\Post\Cost'             => 'Shop\Controller\Post\PostCost',
             'Shop\Controller\Post\Level'            => 'Shop\Controller\Post\PostLevel',
             'Shop\Controller\Post\Unit'             => 'Shop\Controller\Post\PostUnit',

@@ -10,8 +10,8 @@
 
 namespace Shop\Controller\Order;
 
+use Shop\Service\Order\Order as OrderService;
 use UthandoCommon\Controller\AbstractCrudController;
-use UthandoDomPdf\Options\PdfOptions;
 use UthandoDomPdf\View\Model\PdfModel;
 use Shop\ShopException;
 use Zend\View\Model\ViewModel;
@@ -21,7 +21,7 @@ use Zend\View\Model\JsonModel;
  * Class Order
  *
  * @package Shop\Controller\Order
- * @method \Shop\Service\Order\Order getService()
+ * @method OrderService getService()
  */
 class Order extends AbstractCrudController
 {
@@ -71,7 +71,7 @@ class Order extends AbstractCrudController
 
         $customerId = $this->params()->fromPost('customerId');
 
-        /* @var $service \Shop\Service\Order\Order */
+        /* @var $service OrderService */
         $service = $this->getService();
         $models = $service->getCustomerOrdersByCustomerId($customerId);
 
@@ -89,7 +89,7 @@ class Order extends AbstractCrudController
         $request = $this->getRequest();
 
         if ($request->isXmlHttpRequest() && $request->isPost()) {
-            /* @var $service \Shop\Service\Order */
+            /* @var $service OrderService */
             $service = $this->getService();
             $result = $service->updateOrderStatus(
                 $this->params()->fromPost('orderNumber', null),
@@ -122,7 +122,7 @@ class Order extends AbstractCrudController
 	    $userId = $this->identity()->getUserId();
 	    $page = $this->params()->fromRoute('page', 1);
 	    
-	    /* @var $service \Shop\Service\Order */
+	    /* @var $service OrderService */
 	    $service = $this->getService()->usePaginator(array(
 			'limit'	=> 6,
 			'page'	=> $page
@@ -188,7 +188,7 @@ class Order extends AbstractCrudController
 	    $id = $this->params()->fromRoute('orderId', 0);
 	    $userId = $this->identity()->getUserId();
 	     
-	    /* @var $service \Shop\Service\Order\Order */
+	    /* @var $service OrderService */
 	    $service = $this->getService();
 
         if ($this->params()->fromRoute('is-admin', false)) {
