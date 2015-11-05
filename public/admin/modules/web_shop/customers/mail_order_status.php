@@ -25,11 +25,11 @@ if ($authorized) {
 	$from = $merchant_email;
 	$to = $row['email'];
 
-	$hdrs = array (
+	/*$hdrs = array (
 		'From'    => $from,
 		'Subject' => $merchant_name . " Order {$row['invoice']} Status" . date('F Y'),
 		'To' => $to
-	);
+	);*/
 
 	$message = "
 		Dear {$row['name']}, \r\n\r\n
@@ -39,13 +39,23 @@ if ($authorized) {
 		Charisma Beads Orders Department.
 	";
 
-	$mime = new Mail_mime();
-	$mime->setTXTBody($message);
-	$body = $mime->get();
-	$hdrs = $mime->headers($hdrs);
+	//$mime = new Mail_mime();
+	//$mime->setTXTBody($message);
+	//$body = $mime->get();
+	//$hdrs = $mime->headers($hdrs);
 
 	/* Put message to queue */
-	$done = $mail_queue->put($from, $to, $hdrs, $body);
+	//$done = $mail_queue->put($from, $to, $hdrs, $body);
+
+	$sendMail = new SendMail($sendMailconfig);
+
+	// mail invoice to customer.
+	$sendMail->sendEmail(array(
+        'from' => $sendMailconfig['address_list']['default'],
+        'to' => $to,
+        'subject' => $merchant_name . " Order {$row['invoice']} Status" . date('F Y'),
+        'body' => $message,
+	));
 
 } else {
 	header ("Location: http://www.charismabeads.co.uk");
