@@ -17,7 +17,7 @@ $this->form->setAttribute('action', $this->url('contact/process'));
 
     <!-- FORM -->
     <div class="col-md-9">
-        <?php if ($this->contact('google_map')): ?>
+        <?php if ($this->contact('google_map.show_map')): ?>
         <div id="gmap" class="<?=$this->contact('google_map.color');?> gmap-half margin-bottom60"><!-- google map --></div>
         <script type="text/javascript">
             var	$googlemap_latitude 	= <?=$this->contact('google_map.latitude');?>,
