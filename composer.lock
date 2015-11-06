@@ -113,16 +113,16 @@
         },
         {
             "name": "giggsey/libphonenumber-for-php",
-            "version": "7.1.0",
+            "version": "7.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/giggsey/libphonenumber-for-php.git",
-                "reference": "75277038380dbeba6c915749add6c0d38edd3719"
+                "reference": "8e2e8f97645b99cbb570494e4aa2aa7b321ee34b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/75277038380dbeba6c915749add6c0d38edd3719",
-                "reference": "75277038380dbeba6c915749add6c0d38edd3719",
+                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/8e2e8f97645b99cbb570494e4aa2aa7b321ee34b",
+                "reference": "8e2e8f97645b99cbb570494e4aa2aa7b321ee34b",
                 "shasum": ""
             },
             "require": {
@@ -172,7 +172,7 @@
                 "phonenumber",
                 "validation"
             ],
-            "time": "2015-10-08 14:46:18"
+            "time": "2015-10-30 09:46:36"
         },
         {
             "name": "kriswallsmith/assetic",
@@ -321,16 +321,16 @@
         },
         {
             "name": "paypal/rest-api-sdk-php",
-            "version": "v1.6.0",
+            "version": "v1.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paypal/PayPal-PHP-SDK.git",
-                "reference": "0592e16b267cb1f274ad11a9d36e21f922bb069f"
+                "reference": "89bc07aa1eae833b6d1f38188fe1787b8141685b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paypal/PayPal-PHP-SDK/zipball/0592e16b267cb1f274ad11a9d36e21f922bb069f",
-                "reference": "0592e16b267cb1f274ad11a9d36e21f922bb069f",
+                "url": "https://api.github.com/repos/paypal/PayPal-PHP-SDK/zipball/89bc07aa1eae833b6d1f38188fe1787b8141685b",
+                "reference": "89bc07aa1eae833b6d1f38188fe1787b8141685b",
                 "shasum": ""
             },
             "require": {
@@ -365,7 +365,7 @@
                 "rest",
                 "sdk"
             ],
-            "time": "2015-10-08 21:03:55"
+            "time": "2015-10-29 18:18:16"
         },
         {
             "name": "phenx/php-font-lib",
@@ -559,23 +559,20 @@
         },
         {
             "name": "symfony/process",
-            "version": "v2.7.5",
+            "version": "v2.7.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "b27c8e317922cd3cdd3600850273cf6b82b2e8e9"
+                "reference": "4a959dd4e19c2c5d7512689413921e0a74386ec7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/b27c8e317922cd3cdd3600850273cf6b82b2e8e9",
-                "reference": "b27c8e317922cd3cdd3600850273cf6b82b2e8e9",
+                "url": "https://api.github.com/repos/symfony/process/zipball/4a959dd4e19c2c5d7512689413921e0a74386ec7",
+                "reference": "4a959dd4e19c2c5d7512689413921e0a74386ec7",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.9"
-            },
-            "require-dev": {
-                "symfony/phpunit-bridge": "~2.7"
             },
             "type": "library",
             "extra": {
@@ -604,7 +601,7 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
-            "time": "2015-09-19 19:59:23"
+            "time": "2015-10-23 14:47:27"
         },
         {
             "name": "uthando-cms/uthando-admin",
@@ -664,16 +661,16 @@
         },
         {
             "name": "uthando-cms/uthando-article",
-            "version": "1.10.4",
+            "version": "1.10.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-article.git",
-                "reference": "205fb78d6731d9993b22ae84bdc286181e6392ad"
+                "reference": "b0b9dcda5334420e1250b60be4c0344a36269406"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-article/zipball/205fb78d6731d9993b22ae84bdc286181e6392ad",
-                "reference": "205fb78d6731d9993b22ae84bdc286181e6392ad",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-article/zipball/b0b9dcda5334420e1250b60be4c0344a36269406",
+                "reference": "b0b9dcda5334420e1250b60be4c0344a36269406",
                 "shasum": ""
             },
             "require": {
@@ -717,7 +714,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2015-07-07 05:33:55"
+            "time": "2015-11-06 05:56:08"
         },
         {
             "name": "uthando-cms/uthando-common",
@@ -789,16 +786,16 @@
         },
         {
             "name": "uthando-cms/uthando-contact",
-            "version": "1.7.0",
+            "version": "1.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-contact.git",
-                "reference": "9ca7fd7865171194a574104315b3dae10f4c9deb"
+                "reference": "c61fd57744cb05bec9bce3593cd89c7f005c9d44"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-contact/zipball/9ca7fd7865171194a574104315b3dae10f4c9deb",
-                "reference": "9ca7fd7865171194a574104315b3dae10f4c9deb",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-contact/zipball/c61fd57744cb05bec9bce3593cd89c7f005c9d44",
+                "reference": "c61fd57744cb05bec9bce3593cd89c7f005c9d44",
                 "shasum": ""
             },
             "require": {
@@ -844,7 +841,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2015-10-22 13:22:19"
+            "time": "2015-10-27 15:40:12"
         },
         {
             "name": "uthando-cms/uthando-dompdf",

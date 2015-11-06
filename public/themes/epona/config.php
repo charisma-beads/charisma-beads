@@ -3,6 +3,9 @@
 return [
     'template_map' => [
         'application/index/index'                               => __DIR__ . '/view/application/index/index.phtml',
+
+        'error/404'                                             => __DIR__ . '/view/error/404.phtml',
+
         'layout/layout'                                         => __DIR__ . '/view/layout/layout.phtml',
         'layout/page-title'                                     => __DIR__ . '/view/layout/page-title.phtml',
 
@@ -31,6 +34,7 @@ return [
         'shop/options'                                          => __DIR__ . '/view/shop/options.phtml',
         'shop/parallax'                                         => __DIR__ . '/view/shop/parallax.phtml',
 
+        'uthando-article/article/404'                           => __DIR__ . '/view/uthando-article/article/404.phtml',
         'uthando-article/article/view'                          => __DIR__ . '/view/uthando-article/article/view.phtml',
 
         'uthando-contact/contact/index'                         => __DIR__ . '/view/uthando-contact/contact/index.phtml',
