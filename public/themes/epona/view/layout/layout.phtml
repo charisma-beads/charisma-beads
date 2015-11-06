@@ -318,6 +318,17 @@
             <a href="#" id="toTop"></a>
         </div><!-- /#wrapper -->
 
+        <script>
+            window.cookieconsent_options = {
+                message: '<?=$this->themeOptions('site_name');?> uses cookies to ensure you get the best experience on our website.',
+                dismiss: 'OK',
+                learnMore: 'Learn more',
+                link : '<?=$this->url('article', [
+                    'slug' => 'cookie-policy'
+                ]);?>',
+                //theme: 'light-bottom',
+            };
+        </script>
         <!-- JAVASCRIPT FILES -->
         <?=$this->inlineScript()
             ->prependFile($this->themePath('/assets/js/scripts.js'))
@@ -333,6 +344,7 @@
             ->prependFile($this->themePath('/assets/plugins/masonry.js'))
             ->prependFile($this->themePath('/assets/plugins/jquery.isotope.js'))
             ->prependFile($this->themePath('/assets/plugins/jquery-2.1.1.min.js'))
+            ->prependFile('//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.9/cookieconsent.min.js')
         ;?>
     </body>
     <script type="text/javascript">
