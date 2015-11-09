@@ -68,7 +68,7 @@ class CreditCard extends AbstractService
             'card' => $model,
         ]);
     
-        $emailView->setTemplate('shop/payment/credit-card');
+        $emailView->setTemplate('shop/email/credit-card-email-body');
     
         $this->getEventManager()->trigger('mail.send', $this, [
             'sender'        => [

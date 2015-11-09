@@ -92,14 +92,13 @@ class Payment extends AbstractActionController
                 'order' => $order,
                 'form' => $service->getForm(null, $data, true, true),
             ]);
-            
+
             return $viewModel;
         }
         
         $result = $service->process($prg);
 
         if ($result instanceof Form) {
-
             $this->flashMessenger()->addErrorMessage('There were one or more issues with your submission. Please correct them as indicated below.');
             $viewModel->setVariables([
                 'form' => $result,
