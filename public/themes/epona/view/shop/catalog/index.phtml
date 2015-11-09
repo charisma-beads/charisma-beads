@@ -86,6 +86,12 @@
     	    <?php endif;?>
             <?php endforeach; ?>
         </div><!-- /PRODUCT LIST -->
+
+        <?php if (0 === $this->products->count()): ?>
+        <div class="comingsoon">
+            <h1><?=strtoupper($this->category);?> COMING SOON</h1>
+        </div>
+        <?php endif; ?>
     </div>
 </div>
 

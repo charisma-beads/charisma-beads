@@ -71,7 +71,7 @@ class Payment extends AbstractActionController
         
         $viewModel = new ViewModel();
         $viewModel->setTemplate('shop/payment/credit-card');
-        
+
         if ($prg instanceof Response) {
             return $prg;
         } elseif ($prg === false) {
@@ -97,8 +97,9 @@ class Payment extends AbstractActionController
         }
         
         $result = $service->process($prg);
-        
+
         if ($result instanceof Form) {
+
             $this->flashMessenger()->addErrorMessage('There were one or more issues with your submission. Please correct them as indicated below.');
             $viewModel->setVariables([
                 'form' => $result,
