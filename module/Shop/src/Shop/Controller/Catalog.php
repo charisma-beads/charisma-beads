@@ -11,7 +11,7 @@
 namespace Shop\Controller;
 
 use Shop\ShopException;
-use UthandoCommon\Controller\ServiceTrait;
+use UthandoCommon\Service\ServiceTrait;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 

@@ -3,6 +3,8 @@
 namespace ShopTest\Framework;
 
 use UthandoUser\Model\User as TestUserModel;
+use Zend\Session\Container;
+use Zend\Session\SessionManager;
 use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 
 class TestCase extends AbstractHttpControllerTestCase
@@ -27,17 +29,20 @@ class TestCase extends AbstractHttpControllerTestCase
 
         parent::setUp();
 
-        $albumTableMock = $this->getMockBuilder('UthandoSessionManager\SessionManager')
+        $sessionManager = new SessionManager();
+        Container::getDefaultManager($sessionManager);
+
+        $sessionMock = $this->getMockBuilder('UthandoSessionManager\Service\Factory\SessionManagerFactory')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $albumTableMock->expects($this->once())
-            ->method('fetchAll')
-            ->will($this->returnValue(array()));
+        $sessionMock->expects($this->once())
+            ->method('createService')
+            ->will($this->returnValue($sessionManager));
 
         $serviceManager = $this->getApplicationServiceLocator();
         $serviceManager->setAllowOverride(true);
-        $serviceManager->setService('Album\Model\AlbumTable', $albumTableMock);
+        $serviceManager->setService('UthandoSessionManager\SessionManager', $sessionMock);
     }
 
     protected function setAjaxRequest()

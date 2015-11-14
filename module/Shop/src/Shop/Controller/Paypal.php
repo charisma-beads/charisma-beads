@@ -13,9 +13,9 @@ namespace Shop\Controller;
 use Shop\Service\Payment\Paypal as PaypalService;
 use Shop\Service\Order\Order as OrderService;
 use UthandoCommon\Controller\SetExceptionMessages;
-use Zend\Mvc\Controller\AbstractActionController;
+use UthandoCommon\Service\ServiceTrait;
 use PayPal\Exception\PayPalConnectionException;
-use UthandoCommon\Controller\ServiceTrait;
+use Zend\Mvc\Controller\AbstractActionController;
 
 /**
  * Class Paypal

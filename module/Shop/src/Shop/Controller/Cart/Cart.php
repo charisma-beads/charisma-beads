@@ -16,7 +16,7 @@ use Shop\Model\Product\Product as ProductModel;
 use Shop\Service\Cart\Cart as CartService;
 use Shop\Service\Customer\Address;
 use Shop\Service\Product\Product;
-use UthandoCommon\Controller\ServiceTrait;
+use UthandoCommon\Service\ServiceTrait;
 use UthandoSessionManager\SessionContainerTrait;
 use Zend\Http\Request;
 use Zend\Mvc\Controller\AbstractActionController;

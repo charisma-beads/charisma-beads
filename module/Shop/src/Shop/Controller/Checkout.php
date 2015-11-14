@@ -10,7 +10,7 @@
 
 namespace Shop\Controller;
 
-use UthandoCommon\Controller\ServiceTrait;
+use UthandoCommon\Service\ServiceTrait;
 use Zend\Filter\Word\UnderscoreToDash;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;

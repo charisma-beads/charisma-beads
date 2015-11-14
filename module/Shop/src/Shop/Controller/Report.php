@@ -13,7 +13,7 @@ namespace Shop\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\View\Model\JsonModel;
-use UthandoCommon\Controller\ServiceTrait;
+use UthandoCommon\Service\ServiceTrait;
 
 /**
  * Class Report
