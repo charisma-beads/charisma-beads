@@ -5,4 +5,4 @@ cd $DIR
 cd ../
 
 php composer.phar self-update
-php composer.phar --no-dev install
+/usr/local/php7/bin/php composer.phar --no-dev install
