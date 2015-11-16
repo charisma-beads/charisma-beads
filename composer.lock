@@ -1016,16 +1016,16 @@
         },
         {
             "name": "uthando-cms/uthando-navigation",
-            "version": "2.0.1",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-navigation.git",
-                "reference": "129c8401d9443e5f7df40a4319a6c7f27e885aec"
+                "reference": "b02aa48bdf5bc2a57180159f923897e08c74dc64"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-navigation/zipball/129c8401d9443e5f7df40a4319a6c7f27e885aec",
-                "reference": "129c8401d9443e5f7df40a4319a6c7f27e885aec",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-navigation/zipball/b02aa48bdf5bc2a57180159f923897e08c74dc64",
+                "reference": "b02aa48bdf5bc2a57180159f923897e08c74dc64",
                 "shasum": ""
             },
             "require": {
@@ -1065,7 +1065,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2015-11-13 20:15:30"
+            "time": "2015-11-15 22:18:00"
         },
         {
             "name": "uthando-cms/uthando-news",
@@ -1382,21 +1382,22 @@
         },
         {
             "name": "uthando-cms/uthando-user",
-            "version": "2.0.0",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-user.git",
-                "reference": "ecac942498abae2ff9cdda5c6f92f62735044993"
+                "reference": "f04db6bbd055e06d0f531f856e2f4c14b8b4df55"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-user/zipball/ecac942498abae2ff9cdda5c6f92f62735044993",
-                "reference": "ecac942498abae2ff9cdda5c6f92f62735044993",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-user/zipball/f04db6bbd055e06d0f531f856e2f4c14b8b4df55",
+                "reference": "f04db6bbd055e06d0f531f856e2f4c14b8b4df55",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.0",
                 "uthando-cms/uthando-common": "2.*",
+                "uthando-cms/uthando-mail": "2.*",
                 "zendframework/zend-authentication": "2.*",
                 "zendframework/zend-crypt": "2.*",
                 "zendframework/zend-form": "2.*",
@@ -1432,7 +1433,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2015-11-13 15:38:45"
+            "time": "2015-11-14 14:01:37"
         },
         {
             "name": "zendframework/zend-authentication",
