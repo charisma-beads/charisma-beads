@@ -20,66 +20,119 @@ use Zend\Db\Sql\Select;
  * @package Shop\Mapper\Product
  */
 class Product extends AbstractDbMapper
-{       
-	protected $table = 'product';
-	protected $primary = 'productId';
-	protected $fetchEnabled = true;
-	protected $fetchDisabled = false;
+{
+    protected $table = 'product';
+    protected $primary = 'productId';
+    protected $fetchEnabled = true;
+    protected $fetchDisabled = false;
 
     /**
      * @param $ident
      * @return \Shop\Model\Product\Product|\UthandoCommon\Model\Model
      */
-	public function getProductByIdent($ident)
-	{
-		$ident = (string) $ident;
-		$select = $this->getSelect()->where(['ident' => $ident]);
-		$resultSet = $this->fetchResult($select);
-		$row = $resultSet->current();
-		return $row;
-	}
+    public function getProductByIdent($ident)
+    {
+        $ident = (string)$ident;
+        $select = $this->getSelect()->where(['ident' => $ident]);
+        $resultSet = $this->fetchResult($select);
+        $row = $resultSet->current();
+        return $row;
+    }
 
     /**
      * @param $id
      * @return null|\Shop\Model\Product\Product
      */
-	public function getFullProductById($id)
-	{
-	    $select = $this->getSelect();
-	    $select->where->equalTo('product.productId', $id);
+    public function getFullProductById($id)
+    {
+        $select = $this->getSelect();
+        $select->where->equalTo('product.productId', $id);
 
         $select = $this->setFilter($select);
-	    
-	    $resultSet = $this->fetchResult($select);
-	    $row = $resultSet->current();
-	    return $row;
-	}
+
+        $resultSet = $this->fetchResult($select);
+        $row = $resultSet->current();
+        return $row;
+    }
+
+    /**
+     * @param Select $select
+     * @return Select
+     */
+    public function setFilter(Select $select)
+    {
+        if ($this->getFetchEnabled()) {
+            $select->where->equalTo('product.enabled', 1);
+        }
+
+        if (!$this->getFetchDisabled()) {
+            $select->where->equalTo('product.discontinued', 0);
+        }
+
+        return $select;
+    }
+
+    /**
+     * @return bool
+     */
+	public function getFetchEnabled()
+    {
+        return $this->fetchEnabled;
+    }
+
+    /**
+     * @param $fetchEnabled
+     * @return $this
+     */
+	public function setFetchEnabled($fetchEnabled)
+    {
+        $this->fetchEnabled = $fetchEnabled;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+	public function getFetchDisabled()
+    {
+        return $this->fetchDisabled;
+    }
+
+    /**
+     * @param $fetchDisabled
+     * @return $this
+     */
+	public function setFetchDisabled($fetchDisabled)
+    {
+        $this->fetchDisabled = $fetchDisabled;
+        return $this;
+    }
 
     /**
      * @param array $categoryId
      * @param null $order
      * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
      */
-	public function getProductsByCategory(array $categoryId, $order=null)
-	{
-	    $select = $this->getSelect();
-	    $select->join(
-	        'productCategory',
-	        'product.productCategoryId=productCategory.productCategoryId',
-	        array(),
-	        Select::JOIN_LEFT
-	    );
-	    
-		$select->where->in('product.productCategoryId', $categoryId);
+    public function getProductsByCategory(array $categoryId, $order = null)
+    {
+        $select = $this->getSelect();
+        $select->join(
+            'productCategory',
+            'product.productCategoryId=productCategory.productCategoryId',
+            array(),
+            Select::JOIN_LEFT
+        );
+
+        $select->where->in('product.productCategoryId', $categoryId);
 
         $select = $this->setFilter($select);
-		
-		if ($order) {
-		    $select = $this->setSortOrder($select, $order);
-		}
-		
-		return $this->fetchResult($select);
-	}
+
+        if ($order) {
+            $select = $this->setSortOrder($select, $order);
+        }
+
+        return $this->fetchResult($select);
+    }
 
     /**
      * @param array $search
@@ -89,25 +142,25 @@ class Product extends AbstractDbMapper
      */
 	public function search(array $search, $sort, $select = null)
     {
-		$select = $this->getSelect();
-		$select->join(
+        $select = $this->getSelect();
+        $select->join(
             'productCategory',
             'product.productCategoryId=productCategory.productCategoryId',
             array(),
             Select::JOIN_LEFT
         )
-        ->join(
-            'productGroup',
-            'product.productGroupId=productGroup.productGroupId',
-            array(),
-            Select::JOIN_LEFT
-        )
-        ->join(
-            'productSize',
-            'product.productSizeId=productSize.productSizeId',
-            array(),
-            Select::JOIN_LEFT
-        );
+            ->join(
+                'productGroup',
+                'product.productGroupId=productGroup.productGroupId',
+                array(),
+                Select::JOIN_LEFT
+            )
+            ->join(
+                'productSize',
+                'product.productSizeId=productSize.productSizeId',
+                array(),
+                Select::JOIN_LEFT
+            );
 
         foreach ($search as $key => $value) {
 
@@ -131,9 +184,9 @@ class Product extends AbstractDbMapper
         }
 
         //\FB::info($this->getSqlString($select));
-		
-		return parent::search($search, $sort, $select);
-	}
+
+        return parent::search($search, $sort, $select);
+    }
 
     /**
      * @param array $search
@@ -141,82 +194,29 @@ class Product extends AbstractDbMapper
      * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
      */
 	public function searchProducts(array $search, $sort = null)
-	{
+    {
         $select = $this->getSelect();
         $select->join(
-                'productCategory',
-                'product.productCategoryId=productCategory.productCategoryId',
-                array(),
-                Select::JOIN_LEFT
-            )->join(
-                'postUnit',
-                'product.postUnitId=postUnit.postUnitId',
-                array(),
-                Select::JOIN_LEFT
-            )->join(
-                'productSize',
-                'product.productSizeId=productSize.productSizeId',
-                array(),
-                Select::JOIN_LEFT
-            );
+            'productCategory',
+            'product.productCategoryId=productCategory.productCategoryId',
+            array(),
+            Select::JOIN_LEFT
+        )->join(
+            'postUnit',
+            'product.postUnitId=postUnit.postUnitId',
+            array(),
+            Select::JOIN_LEFT
+        )->join(
+            'productSize',
+            'product.productSizeId=productSize.productSizeId',
+            array(),
+            Select::JOIN_LEFT
+        );
 
         $select = $this->setFilter($select);
 
         //\FB::info($this->getSqlString($select));
-	   
-	   return parent::search($search, $sort, $select);
-	}
 
-    /**
-     * @param Select $select
-     * @return Select
-     */
-    public function setFilter(Select $select)
-    {
-        if ($this->getFetchEnabled()) {
-            $select->where->equalTo('product.enabled', 1);
-        }
-
-        if (!$this->getFetchDisabled()) {
-            $select->where->equalTo('product.discontinued', 0);
-        }
-
-        return $select;
+        return parent::search($search, $sort, $select);
     }
-
-    /**
-     * @return bool
-     */
-	public function getFetchEnabled()
-	{
-		return $this->fetchEnabled;
-	}
-
-    /**
-     * @param $fetchEnabled
-     * @return $this
-     */
-	public function setFetchEnabled($fetchEnabled)
-	{
-		$this->fetchEnabled = $fetchEnabled;
-		return $this;
-	}
-
-    /**
-     * @return bool
-     */
-	public function getFetchDisabled()
-	{
-		return $this->fetchDisabled;
-	}
-
-    /**
-     * @param $fetchDisabled
-     * @return $this
-     */
-	public function setFetchDisabled($fetchDisabled)
-	{
-		$this->fetchDisabled = $fetchDisabled;
-		return $this;
-	}
 }

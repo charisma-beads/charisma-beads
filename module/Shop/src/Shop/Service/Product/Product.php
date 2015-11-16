@@ -61,6 +61,29 @@ class Product extends AbstractRelationalMapperService
     ];
 
     /**
+     * @var bool
+     */
+    protected $populate = true;
+
+    /**
+     * @param bool $bool $bool
+     * @return $this
+     */
+    public function setPopulate(bool $bool)
+    {
+        $this->populate = $bool;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPopulate() : bool
+    {
+        return $this->populate;
+    }
+
+    /**
      * Attach events
      */
     public function attachEvents()
@@ -103,7 +126,7 @@ class Product extends AbstractRelationalMapperService
             $cat = $categoryService->getCategoryByIdent($category);
             $categoryId = (null === $cat) ? 0 : $cat->getProductCategoryId();
         } else {
-            $categoryId = (int)$category;
+            $categoryId = (int) $category;
         }
 
         if (true === $deep) {
@@ -119,8 +142,10 @@ class Product extends AbstractRelationalMapperService
 
         $products = $mapper->getProductsByCategory($categoryId, $order);
 
-        foreach ($products as $product) {
-            $this->populate($product, true);
+        if ($this->isPopulate()) {
+            foreach ($products as $product) {
+                $this->populate($product, true);
+            }
         }
 
         return $products;

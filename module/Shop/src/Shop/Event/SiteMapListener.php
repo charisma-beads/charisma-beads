@@ -42,7 +42,7 @@ class SiteMapListener implements ListenerAggregateInterface
     public function addShopPages(Event $e)
     {
         /* @var \Zend\Navigation\Navigation $navigation */
-        $navigation = $e->getParam('siteMap');
+        $navigation = $e->getParam('navigation');
 
         /* @var \Shop\Service\Product\Product $productService */
         $productService = $e->getTarget()->getService('ShopProduct');
@@ -53,7 +53,6 @@ class SiteMapListener implements ListenerAggregateInterface
 
         $cats = $categoryService->fetchAll();
         $pages = [];
-        $c = 0;
         /* @var \Shop\Model\Product\Category $category */
         foreach ($cats as $category) {
             $pages[$category->getIdent()] = [
@@ -65,10 +64,12 @@ class SiteMapListener implements ListenerAggregateInterface
             ];
 
             // optimise this for only an array
-            //$products = $productService->getProductsByCategory((int)$category->getProductCategoryId(), null, false);
+            $products = $productService->setPopulate(false)
+                ->getProductsByCategory((int) $category->getProductCategoryId(), null, false);
 
             /* @var \Shop\Model\Product\Product $product */
-            /*foreach ($products as $product) {
+            foreach ($products as $product) {
+
                 $pages[$category->getIdent()]['pages'][$product->getIdent()] = [
                     'label'     => $category->getCategory(),
                     'route'     => 'shop/catalog/product',
@@ -77,7 +78,7 @@ class SiteMapListener implements ListenerAggregateInterface
                         'productIdent' => $product->getIdent(),
                     ],
                 ];
-            }*/
+            }
         }
 
         // find shop page
