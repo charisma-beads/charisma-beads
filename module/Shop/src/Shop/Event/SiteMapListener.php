@@ -69,7 +69,6 @@ class SiteMapListener implements ListenerAggregateInterface
 
             /* @var \Shop\Model\Product\Product $product */
             foreach ($products as $product) {
-
                 $pages[$category->getIdent()]['pages'][$product->getIdent()] = [
                     'label'     => $category->getCategory(),
                     'route'     => 'shop/catalog/product',
