@@ -46,7 +46,8 @@ class Customer extends AbstractDbMapper
     		}
     	}
     	
-    	$select = $this->getSelect();
+    	$select = $this->getSelect()
+            ->quantifier(Select::QUANTIFIER_DISTINCT);
     	
     	$select->join(
     	    'customerAddress',
