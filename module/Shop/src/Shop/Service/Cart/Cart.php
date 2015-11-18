@@ -5,7 +5,7 @@
  * @package   Shop\Service\Cart
  * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
  * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
+ * @license   see LICENSE
  */
 
 namespace Shop\Service\Cart;
@@ -525,7 +525,7 @@ class Cart extends AbstractMapperService implements InitializableInterface
      */
     public function setShippingCost($countryId = null, $shippingOff = false)
     {
-        if (!$shippingOff) {
+        if (!$shippingOff && null === $countryId) {
             $countryId = $this->getContainer()->offsetGet('countryId');
         }
 

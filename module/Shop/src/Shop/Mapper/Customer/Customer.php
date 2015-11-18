@@ -5,7 +5,7 @@
  * @package   Shop\Mapper\Customer
  * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
  * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
+ * @license   see LICENSE
  */
 
 namespace Shop\Mapper\Customer;
@@ -37,26 +37,26 @@ class Customer extends AbstractDbMapper
      * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
      */
     public function search(array $search, $sort, $select = null)
-    {	
-    	if (str_replace('-', '', $sort) == 'name') {
-    		if (strchr($sort,'-')) {
-    			$sort = array('-lastname', '-firstname');
-    		} else {
-    			$sort = array('lastname', 'firstname');
-    		}
-    	}
-    	
-    	$select = $this->getSelect()
+    {
+        if (str_replace('-', '', $sort) == 'name') {
+            if (strchr($sort, '-')) {
+                $sort = ['-lastname', '-firstname'];
+            } else {
+                $sort = ['lastname', 'firstname'];
+            }
+        }
+
+        $select = $this->getSelect()
             ->quantifier(Select::QUANTIFIER_DISTINCT);
-    	
-    	$select->join(
-    	    'customerAddress',
-    	    'customer.customerId=customerAddress.customerId',
-    	    array(),
-    	    Select::JOIN_LEFT
-    	);
-    	 
-    	return parent::search($search, $sort, $select);
+
+        $select->join(
+            'customerAddress',
+            'customer.customerId=customerAddress.customerId',
+            [],
+            Select::JOIN_LEFT
+        );
+
+        return parent::search($search, $sort, $select);
     }
 
     /**
