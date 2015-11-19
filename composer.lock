@@ -1069,16 +1069,16 @@
         },
         {
             "name": "uthando-cms/uthando-news",
-            "version": "2.0.0",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-news.git",
-                "reference": "b8b914ef4c521fdc9f8c06c2b2fa9e19244b4415"
+                "reference": "9d91b03cc5bce91b63fd8c968c52cd44a4c5b096"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-news/zipball/b8b914ef4c521fdc9f8c06c2b2fa9e19244b4415",
-                "reference": "b8b914ef4c521fdc9f8c06c2b2fa9e19244b4415",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-news/zipball/9d91b03cc5bce91b63fd8c968c52cd44a4c5b096",
+                "reference": "9d91b03cc5bce91b63fd8c968c52cd44a4c5b096",
                 "shasum": ""
             },
             "require": {
@@ -1117,7 +1117,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2015-11-13 19:32:50"
+            "time": "2015-11-18 23:52:41"
         },
         {
             "name": "uthando-cms/uthando-newsletter",
@@ -1279,16 +1279,16 @@
         },
         {
             "name": "uthando-cms/uthando-theme-manager",
-            "version": "2.0.0",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-theme-manager.git",
-                "reference": "58dea3795af1f803bf01cdfc9fff8428c1db3219"
+                "reference": "a19e04f06af352c9ec183382733262aaff53c907"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-theme-manager/zipball/58dea3795af1f803bf01cdfc9fff8428c1db3219",
-                "reference": "58dea3795af1f803bf01cdfc9fff8428c1db3219",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-theme-manager/zipball/a19e04f06af352c9ec183382733262aaff53c907",
+                "reference": "a19e04f06af352c9ec183382733262aaff53c907",
                 "shasum": ""
             },
             "require": {
@@ -1326,7 +1326,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2015-11-13 19:59:11"
+            "time": "2015-11-18 15:38:16"
         },
         {
             "name": "uthando-cms/uthando-twitter",
@@ -2368,39 +2368,40 @@
         },
         {
             "name": "zendframework/zend-json",
-            "version": "2.5.2",
+            "version": "2.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-json.git",
-                "reference": "4a3add6505fd8618728239d8ce35f182dfbdac02"
+                "reference": "e2945611a98e1fefcaaf69969350a0bfa6a8d574"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-json/zipball/4a3add6505fd8618728239d8ce35f182dfbdac02",
-                "reference": "4a3add6505fd8618728239d8ce35f182dfbdac02",
+                "url": "https://api.github.com/repos/zendframework/zend-json/zipball/e2945611a98e1fefcaaf69969350a0bfa6a8d574",
+                "reference": "e2945611a98e1fefcaaf69969350a0bfa6a8d574",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.5",
-                "zendframework/zend-stdlib": "~2.5"
+                "php": ">=5.5"
             },
             "require-dev": {
                 "fabpot/php-cs-fixer": "1.7.*",
                 "phpunit/phpunit": "~4.0",
                 "zendframework/zend-http": "~2.5",
                 "zendframework/zend-server": "~2.5",
+                "zendframework/zend-stdlib": "~2.5",
                 "zendframework/zendxml": "~1.0"
             },
             "suggest": {
                 "zendframework/zend-http": "Zend\\Http component",
                 "zendframework/zend-server": "Zend\\Server component",
+                "zendframework/zend-stdlib": "To use the cache for Zend\\Server",
                 "zendframework/zendxml": "To support Zend\\Json\\Json::fromXml() usage"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.5-dev",
-                    "dev-develop": "2.6-dev"
+                    "dev-master": "2.6-dev",
+                    "dev-develop": "2.7-dev"
                 }
             },
             "autoload": {
@@ -2418,7 +2419,7 @@
                 "json",
                 "zf2"
             ],
-            "time": "2015-08-05 14:45:17"
+            "time": "2015-11-18 13:59:33"
         },
         {
             "name": "zendframework/zend-loader",
