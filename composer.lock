@@ -906,16 +906,16 @@
         },
         {
             "name": "uthando-cms/uthando-file-manager",
-            "version": "2.0.0",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-file-manager.git",
-                "reference": "67e8b8f1556677118f461c21ba4459a0a3b9c1e6"
+                "reference": "99bb700b3ff4e13cd3f58432c76d1bfaf98b8dfb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-file-manager/zipball/67e8b8f1556677118f461c21ba4459a0a3b9c1e6",
-                "reference": "67e8b8f1556677118f461c21ba4459a0a3b9c1e6",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-file-manager/zipball/99bb700b3ff4e13cd3f58432c76d1bfaf98b8dfb",
+                "reference": "99bb700b3ff4e13cd3f58432c76d1bfaf98b8dfb",
                 "shasum": ""
             },
             "require": {
@@ -923,9 +923,6 @@
                 "rwoverdijk/assetmanager": "1.*",
                 "uthando-cms/uthando-common": "2.*",
                 "zendframework/zend-progressbar": "2.*"
-            },
-            "require-dev": {
-                "zendframework/zendframework": "2.*"
             },
             "type": "library",
             "autoload": {
@@ -958,7 +955,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2015-11-13 18:58:29"
+            "time": "2015-11-20 23:00:41"
         },
         {
             "name": "uthando-cms/uthando-mail",

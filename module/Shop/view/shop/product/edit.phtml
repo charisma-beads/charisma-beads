@@ -180,12 +180,12 @@
                 success: function (response) {
                     admin.addAlert(response.messages, response.status);
                     $(el).modal('hide');
-                    setTimeout('productOptions()', 500);
+                    setTimeout(productOptions, 500);
                 },
                 error: function (response) {
                     admin.addAlert(response.error, 'danger');
                     $(el).modal('hide');
-                    setTimeout('productOptions()', 500);
+                    setTimeout(productOptions, 500);
                 }
             });
         });
@@ -230,12 +230,12 @@
                 success: function (response) {
                     admin.addAlert(response.messages, response.status);
                     $(el).modal('hide');
-                    setTimeout('productImages()', 500);
+                    setTimeout(productImages, 500);
                 },
                 error: function (response) {
                     admin.addAlert(response.error, 'danger');
                     $(el).modal('hide');
-                    setTimeout('productImages()', 500);
+                    setTimeout(productImages, 500);
                 }
             });
         });
@@ -271,7 +271,7 @@
 
         $('#add-product-image-model').on('hide.bs.modal', function (e) {
             $(this).find('.modal-body').html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Loading');
-            setTimeout('productImages()', 500);
+           productImages();
         });
 
         $('#add-product-image-save').on('click', function () {
