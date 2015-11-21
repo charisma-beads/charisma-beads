@@ -906,16 +906,16 @@
         },
         {
             "name": "uthando-cms/uthando-file-manager",
-            "version": "2.1.0",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-file-manager.git",
-                "reference": "99bb700b3ff4e13cd3f58432c76d1bfaf98b8dfb"
+                "reference": "ddd94d5c313caf7776c5c96f96f4da552ba375fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-file-manager/zipball/99bb700b3ff4e13cd3f58432c76d1bfaf98b8dfb",
-                "reference": "99bb700b3ff4e13cd3f58432c76d1bfaf98b8dfb",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-file-manager/zipball/ddd94d5c313caf7776c5c96f96f4da552ba375fd",
+                "reference": "ddd94d5c313caf7776c5c96f96f4da552ba375fd",
                 "shasum": ""
             },
             "require": {
@@ -955,7 +955,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2015-11-20 23:00:41"
+            "time": "2015-11-21 23:53:36"
         },
         {
             "name": "uthando-cms/uthando-mail",
@@ -1066,16 +1066,16 @@
         },
         {
             "name": "uthando-cms/uthando-news",
-            "version": "2.1.0",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-news.git",
-                "reference": "9d91b03cc5bce91b63fd8c968c52cd44a4c5b096"
+                "reference": "b4f889c509866554716154f513cbd5262994627a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-news/zipball/9d91b03cc5bce91b63fd8c968c52cd44a4c5b096",
-                "reference": "9d91b03cc5bce91b63fd8c968c52cd44a4c5b096",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-news/zipball/b4f889c509866554716154f513cbd5262994627a",
+                "reference": "b4f889c509866554716154f513cbd5262994627a",
                 "shasum": ""
             },
             "require": {
@@ -1114,7 +1114,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2015-11-18 23:52:41"
+            "time": "2015-11-21 08:11:02"
         },
         {
             "name": "uthando-cms/uthando-newsletter",
@@ -1222,16 +1222,16 @@
         },
         {
             "name": "uthando-cms/uthando-testimonial",
-            "version": "2.0.0",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-testimonial.git",
-                "reference": "0fae8bfc00dc959db9b83893571f833ef3621017"
+                "reference": "f32e2e8a2ed9762e758bcf7fea864df20afbd537"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-testimonial/zipball/0fae8bfc00dc959db9b83893571f833ef3621017",
-                "reference": "0fae8bfc00dc959db9b83893571f833ef3621017",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-testimonial/zipball/f32e2e8a2ed9762e758bcf7fea864df20afbd537",
+                "reference": "f32e2e8a2ed9762e758bcf7fea864df20afbd537",
                 "shasum": ""
             },
             "require": {
@@ -1272,7 +1272,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2015-11-13 19:54:08"
+            "time": "2015-11-21 08:10:28"
         },
         {
             "name": "uthando-cms/uthando-theme-manager",

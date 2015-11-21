@@ -93,7 +93,6 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button id="add-product-image-save" type="button" class="btn btn-primary">Save</button>
             </div>
         </div>
     </div>
@@ -272,10 +271,6 @@
         $('#add-product-image-model').on('hide.bs.modal', function (e) {
             $(this).find('.modal-body').html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Loading');
            productImages();
-        });
-
-        $('#add-product-image-save').on('click', function () {
-            $('#upload-form').submit();
         });
 
         productOptions();
