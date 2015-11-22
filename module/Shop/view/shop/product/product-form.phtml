@@ -186,7 +186,9 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
                             <div class="input-group">
                                 <?=$this->formSelect($form->get('productSizeId')->setAttribute('class', 'form-control')); ?>
                                 <span class="input-group-btn">
-                                    <a href="#" id="add-size-button" class="btn btn-default" data-toggle="modal" data-target="#product-size-model">New Size</a>
+                                    <a id="add-size-button" class="btn btn-default" data-toggle="modal" data-target="#product-size-model">
+                                        New Size
+                                    </a>
                                 </span>
                             </div>
                             <span class="help-block">
@@ -203,7 +205,9 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
                             <div class="input-group">
                                 <?=$this->formSelect($form->get('postUnitId')->setAttribute('class', 'form-control')); ?>
                                 <span class="input-group-btn">
-                                    <a href="#" id="add-weight-button" class="btn btn-default" data-toggle="modal" data-target="#product-weight-model">New Weight</a>
+                                    <a id="add-weight-button" class="btn btn-default" data-toggle="modal" data-target="#product-weight-model">
+                                        New Weight
+                                    </a>
                                 </span>
                             </div>
                             <span class="help-block">
@@ -256,14 +260,14 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dimdiss="modal">&times;</button>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Add Product Size</h4>
             </div>
             <div class="modal-body">
                 <i class="fa fa-spinner fa-spin"></i>&nbsp;Loading
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dimdiss="modal">Close</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 <button id="edit-product-size-save" type="button" class="btn btn-primary">Save</button>
             </div>
         </div>
@@ -274,14 +278,14 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dimdiss="modal">&times;</button>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Add Product Weight</h4>
             </div>
             <div class="modal-body">
                 <i class="fa fa-spinner fa-spin"></i>&nbsp;Loading
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dimdiss="modal">Close</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 <button id="edit-product-weight-save" type="button" class="btn btn-primary">Save</button>
             </div>
         </div>
@@ -323,7 +327,8 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
             $(this).find('.modal-body').html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Loading');
         });
 
-        $('#edit-product-size-save').on('click', function() {
+        $('#edit-product-size-save').on('click', function(event) {
+            event.preventDefault();
             el = $('#product-size-model');
             el.find('.modal-content').loadingOverlay({
                 loadingText: 'Please wait while I update the database'
@@ -359,7 +364,8 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
             $(this).find('.modal-body').html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Loading');
         });
 
-        $('#edit-product-weight-save').on('click', function() {
+        $('#edit-product-weight-save').on('click', function(event) {
+            event.preventDefault();
             el = $('#product-weight-model');
             el.find('.modal-content').loadingOverlay({
                 loadingText: 'Please wait while I update the database'

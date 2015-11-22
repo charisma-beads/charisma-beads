@@ -69,3 +69,13 @@ a.current-order-link {
 .monthly-stats {
     margin-top: -5px;
 }
+
+/* start iPad viewport bug hack */
+body {
+    padding-right: 0px !important
+}
+
+.modal-open {
+    overflow-y: auto;
+}
+/* end iPad viewport bug hack */

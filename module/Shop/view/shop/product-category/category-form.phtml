@@ -131,7 +131,6 @@ if (isset($this->productCategoryId)) $routeArray['id'] = $this->productCategoryI
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button id="upload-category-image-save" type="button" class="btn btn-primary">Upload</button>
             </div>
         </div>
     </div>
@@ -182,9 +181,5 @@ if (isset($this->productCategoryId)) $routeArray['id'] = $this->productCategoryI
             $('select[name=product-category-image-list]').val()
         );
         $('#list-category-image-model').modal('hide');
-    });
-
-    $('#upload-category-image-save').on('click', function () {
-        $('#upload-form').submit();
     });
 </script>
