@@ -348,10 +348,8 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
                     });
 
                 }
+                el.find('.modal-content').loadingOverlay('remove');
             });
-
-            el.find('.modal-content').loadingOverlay('remove');
-
         });
 
         $('#product-weight-model').on('show.bs.modal', function(){
@@ -385,10 +383,9 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
                     });
 
                 }
+
+                el.find('.modal-content').loadingOverlay('remove');
             });
-
-            el.find('.modal-content').loadingOverlay('remove');
-
         });
     });
 </script>
