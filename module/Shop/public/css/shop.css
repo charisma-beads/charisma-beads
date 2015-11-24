@@ -70,6 +70,11 @@ a.current-order-link {
     margin-top: -5px;
 }
 
+/* use size of container for width of popover */
+.popover{
+    max-width: 100%; /* Max Width of the popover (depending on the container!) */
+}
+
 /* start iPad viewport bug hack */
 body {
     padding-right: 0px !important

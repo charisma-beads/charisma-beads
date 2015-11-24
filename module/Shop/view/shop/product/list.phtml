@@ -40,7 +40,7 @@
                         <i class="fa fa-check"></i>
                         <a tabindex="0" style="cursor: pointer;" role="button" data-toggle="popover" 
                             data-trigger="focus" title="<?=$this->escapeHtml($row->getDefaultImage()->getThumbnail())?>"
-                            data-content="<img src='<?=$this->productImage($row);?>' width='150'>">
+                            data-content="<img src='<?=$this->productImage($row, 'thumb');?>'>">
                             <i class="fa fa-eye fa-lg"></i>
                         </a>
                     <?php else: ?>

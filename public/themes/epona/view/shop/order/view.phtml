@@ -101,7 +101,7 @@
                 
                 <div class="cart_img">
                     <?php if ($item->getMetadata()->getShowImage()):?>
-                    <img src="<?=$this->productImage($item->getMetadata()->getImage());?>" alt="" width="60" />
+                    <img src="<?=$this->productImage($item->getMetadata()->getImage(), 'thumb');?>" alt="" width="60" />
                     <?php endif;?>
                 </div>
                 

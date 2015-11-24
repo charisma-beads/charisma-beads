@@ -24,7 +24,7 @@ class ProductImage extends AbstractHelper
     /**
      * @var ImageModel
      */
-    protected $image = 'no_image_available.jpeg';
+    protected $image;
     
     /**
      * @var string
@@ -37,45 +37,81 @@ class ProductImage extends AbstractHelper
     protected $publicDir = './public';
 
     /**
-     * @param \Shop\Model\Product\Product|\Shop\Model\Product\Category $model
-     * @return $this
+     * @var string
      */
-    public function __invoke($model)
+    protected $noImage = '/userfiles/shop/no_image_available.jpeg';
+
+    /**
+     * @param $model
+     * @param null $type
+     * @return $this|string
+     */
+    public function __invoke($model, $type = null)
     {
         $this->image = ($model instanceof ImageModel) ? $model : $model->getDefaultImage();
+
+        if (is_string($type)) {
+            switch ($type) {
+                case 'full':
+                    return $this->getFull();
+                case 'thumb':
+                    return $this->getThumbnail();
+            }
+        }
+
         return $this;
     }
 
-    public function getImage($withBasePath = true)
+    public function getFull($withBasePath = true)
     {
-        $basePath = $this->view->plugin('basepath');
-        $defaultImage = '/img/no_image_available.jpeg';
-        
-        if ($this->image instanceof ImageModel) {
-            if ($this->image->getThumbnail() && file_exists($this->publicDir.$this->imageDir.$this->image->getThumbnail())) {
-                $defaultImage = $this->imageDir . $this->image->getThumbnail();
-            }
+        $image = $this->noImage;
 
+        if ($this->image instanceof ImageModel) {
+            if ($this->fileExists($this->image->getFull())) {
+                $image = $this->imageDir . $this->image->getFull();
+            }
         }
 
-        $image = $defaultImage;
-
         if ($withBasePath) {
-            $image = $basePath($image);
+            $image = $this->getBasePath($image);
         }
 
         return $image;
     }
+
+    public function getThumbnail($withBasePath = true)
+    {
+        $image = $this->noImage;
+
+        if ($this->image instanceof ImageModel) {
+            if ($this->fileExists($this->image->getThumbnail())) {
+                $image = $this->imageDir . $this->image->getThumbnail();
+            }
+        }
+
+        if ($withBasePath) {
+            $image = $this->getBasePath($image);
+        }
+
+        return $image;
+    }
+
+    public function fileExists($file)
+    {
+        return file_exists($this->publicDir.$this->imageDir.$file);
+
+    }
     
     public function isUploaded()
     {
-        $image = ($this->image instanceof ImageModel) ? $this->getImage(false) : null;
+        $image = ($this->image instanceof ImageModel) ? $this->getFull(false) : null;
         $fileExists = is_file($this->publicDir.$image);
         return $fileExists;
     }
 
-    public function __toString()
+    public function getBasePath($image = null)
     {
-        return $this->getImage();
+        $basePath = $this->view->plugin('basepath');
+        return $basePath($image);
     }
 } 

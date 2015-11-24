@@ -250,16 +250,16 @@
         },
         {
             "name": "neilime/zf2-twb-bundle",
-            "version": "2.5.0",
+            "version": "2.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/neilime/zf2-twb-bundle.git",
-                "reference": "234cedecc2ab368ff4b0120f65b3c361d1fc7400"
+                "reference": "6e167627b5b0ff25828be11979c4031982c3884d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/neilime/zf2-twb-bundle/zipball/234cedecc2ab368ff4b0120f65b3c361d1fc7400",
-                "reference": "234cedecc2ab368ff4b0120f65b3c361d1fc7400",
+                "url": "https://api.github.com/repos/neilime/zf2-twb-bundle/zipball/6e167627b5b0ff25828be11979c4031982c3884d",
+                "reference": "6e167627b5b0ff25828be11979c4031982c3884d",
                 "shasum": ""
             },
             "require": {
@@ -317,7 +317,7 @@
                 "twitter bootstrap",
                 "zend framework 2"
             ],
-            "time": "2015-05-14 12:03:31"
+            "time": "2015-11-23 15:01:19"
         },
         {
             "name": "paypal/rest-api-sdk-php",
@@ -559,16 +559,16 @@
         },
         {
             "name": "symfony/process",
-            "version": "v2.7.6",
+            "version": "v2.7.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "4a959dd4e19c2c5d7512689413921e0a74386ec7"
+                "reference": "f6290983c8725d0afa29bdc3e5295879de3e58f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/4a959dd4e19c2c5d7512689413921e0a74386ec7",
-                "reference": "4a959dd4e19c2c5d7512689413921e0a74386ec7",
+                "url": "https://api.github.com/repos/symfony/process/zipball/f6290983c8725d0afa29bdc3e5295879de3e58f5",
+                "reference": "f6290983c8725d0afa29bdc3e5295879de3e58f5",
                 "shasum": ""
             },
             "require": {
@@ -583,7 +583,10 @@
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\Process\\": ""
-                }
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -601,7 +604,7 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
-            "time": "2015-10-23 14:47:27"
+            "time": "2015-11-19 16:11:24"
         },
         {
             "name": "uthando-cms/uthando-admin",
@@ -906,16 +909,16 @@
         },
         {
             "name": "uthando-cms/uthando-file-manager",
-            "version": "2.1.1",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-file-manager.git",
-                "reference": "ddd94d5c313caf7776c5c96f96f4da552ba375fd"
+                "reference": "e35be11b8d7ca5a5f04bd6155459d89b5a5fd97a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-file-manager/zipball/ddd94d5c313caf7776c5c96f96f4da552ba375fd",
-                "reference": "ddd94d5c313caf7776c5c96f96f4da552ba375fd",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-file-manager/zipball/e35be11b8d7ca5a5f04bd6155459d89b5a5fd97a",
+                "reference": "e35be11b8d7ca5a5f04bd6155459d89b5a5fd97a",
                 "shasum": ""
             },
             "require": {
@@ -955,7 +958,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2015-11-21 23:53:36"
+            "time": "2015-11-23 13:34:26"
         },
         {
             "name": "uthando-cms/uthando-mail",
@@ -1066,16 +1069,16 @@
         },
         {
             "name": "uthando-cms/uthando-news",
-            "version": "2.1.1",
+            "version": "2.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-news.git",
-                "reference": "b4f889c509866554716154f513cbd5262994627a"
+                "reference": "4461e6fd94e46405acad0e805727817602ffb969"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-news/zipball/b4f889c509866554716154f513cbd5262994627a",
-                "reference": "b4f889c509866554716154f513cbd5262994627a",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-news/zipball/4461e6fd94e46405acad0e805727817602ffb969",
+                "reference": "4461e6fd94e46405acad0e805727817602ffb969",
                 "shasum": ""
             },
             "require": {
@@ -1114,7 +1117,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2015-11-21 08:11:02"
+            "time": "2015-11-22 14:24:22"
         },
         {
             "name": "uthando-cms/uthando-newsletter",
@@ -1559,20 +1562,20 @@
         },
         {
             "name": "zendframework/zend-captcha",
-            "version": "2.5.1",
+            "version": "2.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-captcha.git",
-                "reference": "5f01e50b6f1f197245dd26e66e1b1e560a6ab15d"
+                "reference": "43c276df6e94e498bf530538aea53876a24fc47c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-captcha/zipball/5f01e50b6f1f197245dd26e66e1b1e560a6ab15d",
-                "reference": "5f01e50b6f1f197245dd26e66e1b1e560a6ab15d",
+                "url": "https://api.github.com/repos/zendframework/zend-captcha/zipball/43c276df6e94e498bf530538aea53876a24fc47c",
+                "reference": "43c276df6e94e498bf530538aea53876a24fc47c",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.23",
+                "php": ">=5.5",
                 "zendframework/zend-math": "~2.5",
                 "zendframework/zend-stdlib": "~2.5"
             },
@@ -1585,7 +1588,7 @@
                 "zendframework/zendservice-recaptcha": "*"
             },
             "suggest": {
-                "zendframework/zend-resources": "Translations of captcha messages",
+                "zendframework/zend-i18n-resources": "Translations of captcha messages",
                 "zendframework/zend-session": "Zend\\Session component",
                 "zendframework/zend-text": "Zend\\Text component",
                 "zendframework/zend-validator": "Zend\\Validator component",
@@ -1612,7 +1615,7 @@
                 "captcha",
                 "zf2"
             ],
-            "time": "2015-06-03 15:31:59"
+            "time": "2015-11-23 15:37:27"
         },
         {
             "name": "zendframework/zend-config",
@@ -1725,20 +1728,20 @@
         },
         {
             "name": "zendframework/zend-crypt",
-            "version": "2.5.1",
+            "version": "2.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-crypt.git",
-                "reference": "15537e8e438a98923f05c40c45c162342ea8235a"
+                "reference": "b7a5f99f530e7f77762e3eb4011ed1029ffc062f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-crypt/zipball/15537e8e438a98923f05c40c45c162342ea8235a",
-                "reference": "15537e8e438a98923f05c40c45c162342ea8235a",
+                "url": "https://api.github.com/repos/zendframework/zend-crypt/zipball/b7a5f99f530e7f77762e3eb4011ed1029ffc062f",
+                "reference": "b7a5f99f530e7f77762e3eb4011ed1029ffc062f",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.23",
+                "php": ">=5.5",
                 "zendframework/zend-math": "~2.5",
                 "zendframework/zend-servicemanager": "~2.5",
                 "zendframework/zend-stdlib": "~2.5"
@@ -1772,7 +1775,7 @@
                 "crypt",
                 "zf2"
             ],
-            "time": "2015-06-03 15:32:00"
+            "time": "2015-11-23 16:35:19"
         },
         {
             "name": "zendframework/zend-db",

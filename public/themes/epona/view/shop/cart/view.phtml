@@ -33,7 +33,7 @@
         <div class="item">
             <?php if ($item->getMetadata()->getShowImage()):?>
             <div class="cart_img">
-                <img src="<?=$this->productImage($item->getMetadata()->getImage());?>" alt="" width="60">
+                <img src="<?=$this->productImage($item->getMetadata()->getImage(), 'thumb');?>" alt="" width="60">
             </div>
             <?php endif;?>
             <?php /* @var $product \Shop\Model\Product\Product */ ?>

@@ -90,6 +90,7 @@ class ServiceListener implements ListenerAggregateInterface
         $options = $e->getParam('options');
         $path = $options->getDestination() . 'shop/images/';
         $options->setDestination($path);
+        $options->setCreateThumbnail(true);
     }
 
     public function postImageUpload(Event $e)
@@ -100,6 +101,8 @@ class ServiceListener implements ListenerAggregateInterface
             return;
         }
 
+        /* @var $options \UthandoFileManager\Options\FileManagerOptions */
+        $options = $e->getParam('options');
         /* @var $model \UthandoFileManager\Model\Image */
         $model = $e->getParam('model');
 
@@ -108,8 +111,8 @@ class ServiceListener implements ListenerAggregateInterface
 
         $post = [
             'productId' => $data['productId'],
-            'thumbnail' => $model->getFileName(),
-            'full'      => $model->getFileName(),
+            'full' => $model->getFileName(),
+            'thumbnail' => $options->getThumbnailDirectory() . $model->getThumbnail(),
         ];
 
         $service->add($post);

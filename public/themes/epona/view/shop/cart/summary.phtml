@@ -16,7 +16,7 @@
                         'action' => 'view'
                     ]);?>"><!-- item -->
                         <?php if ($item->getMetadata()->getShowImage()):?>
-                            <img class="pull-left" src="<?=$this->productImage($item->getMetadata()->getImage());?>" width="40" alt="quick cart">
+                            <img class="pull-left" src="<?=$this->productImage($item->getMetadata()->getImage(), 'thumb');?>" width="40" alt="quick cart">
                         <?php endif;?>
                         <div class="inline-block">
                             <span class="title block"><?=$item->getMetadata()->getSku();?>/<?=$item->getMetadata()->getName();?></span>
