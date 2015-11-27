@@ -32,6 +32,7 @@
     "uthando-cms/uthando-theme-manager": "2.*",
     "uthando-cms/uthando-twitter": "2.*",
     "uthando-cms/uthando-user": "2.*",
+    "uthando-cms/uthando-events": "1.*",
     "paypal/rest-api-sdk-php": "*",
     "phpoffice/phpexcel": "1.*",
     "firephp/firephp-core": "0.4.*"

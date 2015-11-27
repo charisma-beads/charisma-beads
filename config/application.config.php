@@ -2,25 +2,26 @@
 
 return [
     'modules' => [
-        'Application',
         'AssetManager',
+        'Application',
         'UthandoCommon',
         'UthandoAdmin',
         'UthandoSessionManager',
+        'UthandoUser',
         'UthandoThemeManager',
         'UthandoArticle',
         'UthandoNavigation',
-        'UthandoUser',
-        'UthandoContact',
         'UthandoMail',
+        'UthandoContact',
         'UthandoFileManager',
         'UthandoTestimonial',
         'UthandoNews',
         'UthandoTwitter',
         'UthandoNewsletter',
-        'Shop',
+        'UthandoEvents',
         'UthandoDomPdf',
         'TwbBundle',
+        'Shop',
     ],
     'module_listener_options' => [
         'module_paths' => [

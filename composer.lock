@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "57e0064c6dc011a2f3f92de68f572632",
-    "content-hash": "a78e21c50899f23b73a4fbed524b4507",
+    "hash": "414c62faadbfc3b3e948e7d8fdd8a86b",
+    "content-hash": "2f90ef604b9c198ab31e89cba683677f",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -608,16 +608,16 @@
         },
         {
             "name": "uthando-cms/uthando-admin",
-            "version": "2.0.0",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-admin.git",
-                "reference": "bf5077c8f2203777adf1de3e7ce770f74b8ce267"
+                "reference": "84da51f9c55a561869acdf9414a84b1963857ce1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-admin/zipball/bf5077c8f2203777adf1de3e7ce770f74b8ce267",
-                "reference": "bf5077c8f2203777adf1de3e7ce770f74b8ce267",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-admin/zipball/84da51f9c55a561869acdf9414a84b1963857ce1",
+                "reference": "84da51f9c55a561869acdf9414a84b1963857ce1",
                 "shasum": ""
             },
             "require": {
@@ -657,7 +657,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2015-11-13 19:15:39"
+            "time": "2015-11-27 13:50:19"
         },
         {
             "name": "uthando-cms/uthando-article",
@@ -717,16 +717,16 @@
         },
         {
             "name": "uthando-cms/uthando-common",
-            "version": "2.0.1",
+            "version": "2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-common.git",
-                "reference": "e25839e443f86db5b47c2c4fecb60bb757df95d6"
+                "reference": "77162d74c65210f14437c94c840d30de76446fe7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-common/zipball/e25839e443f86db5b47c2c4fecb60bb757df95d6",
-                "reference": "e25839e443f86db5b47c2c4fecb60bb757df95d6",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-common/zipball/77162d74c65210f14437c94c840d30de76446fe7",
+                "reference": "77162d74c65210f14437c94c840d30de76446fe7",
                 "shasum": ""
             },
             "require": {
@@ -777,7 +777,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2015-11-13 18:13:58"
+            "time": "2015-11-27 13:47:23"
         },
         {
             "name": "uthando-cms/uthando-contact",
@@ -906,6 +906,56 @@
                 "zf2"
             ],
             "time": "2015-11-10 13:53:32"
+        },
+        {
+            "name": "uthando-cms/uthando-events",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/uthando-cms/uthando-events.git",
+                "reference": "edfc6936a7ab3ae7c2d720284d33e55089953c23"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-events/zipball/edfc6936a7ab3ae7c2d720284d33e55089953c23",
+                "reference": "edfc6936a7ab3ae7c2d720284d33e55089953c23",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0",
+                "uthando-cms/uthando-common": "2.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "UthandoEvents": "src/"
+                },
+                "classmap": [
+                    "./Module.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Shaun Freeman",
+                    "email": "shaun@shaunfreeman.co.uk",
+                    "homepage": "https://github.com/shaunfreeman",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Events module for Uthando CMS",
+            "homepage": "http://shaunfreeman.name/",
+            "keywords": [
+                "cms",
+                "events",
+                "framework",
+                "uthando",
+                "zf2"
+            ],
+            "time": "2015-11-27 14:06:57"
         },
         {
             "name": "uthando-cms/uthando-file-manager",
@@ -1922,16 +1972,16 @@
         },
         {
             "name": "zendframework/zend-feed",
-            "version": "2.5.2",
+            "version": "2.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-feed.git",
-                "reference": "0661345b82b51428619e05d3aadd3de65b57fa54"
+                "reference": "f76da2bbba414ebf3bb00c81e9fdd65b04c66a7f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-feed/zipball/0661345b82b51428619e05d3aadd3de65b57fa54",
-                "reference": "0661345b82b51428619e05d3aadd3de65b57fa54",
+                "url": "https://api.github.com/repos/zendframework/zend-feed/zipball/f76da2bbba414ebf3bb00c81e9fdd65b04c66a7f",
+                "reference": "f76da2bbba414ebf3bb00c81e9fdd65b04c66a7f",
                 "shasum": ""
             },
             "require": {
@@ -1942,24 +1992,25 @@
             "require-dev": {
                 "fabpot/php-cs-fixer": "1.7.*",
                 "phpunit/phpunit": "~4.0",
+                "psr/http-message": "^1.0",
                 "zendframework/zend-cache": "~2.5",
                 "zendframework/zend-db": "~2.5",
                 "zendframework/zend-http": "~2.5",
-                "zendframework/zend-servicemanager": "~2.5",
                 "zendframework/zend-validator": "~2.5"
             },
             "suggest": {
-                "zendframework/zend-cache": "Zend\\Cache component",
-                "zendframework/zend-db": "Zend\\Db component",
+                "psr/http-message": "PSR-7 ^1.0, if you wish to use Zend\\Feed\\Reader\\Http\\Psr7ResponseDecorator",
+                "zendframework/zend-cache": "Zend\\Cache component, for optionally caching feeds between requests",
+                "zendframework/zend-db": "Zend\\Db component, for use with PubSubHubbub",
                 "zendframework/zend-http": "Zend\\Http for PubSubHubbub, and optionally for use with Zend\\Feed\\Reader",
-                "zendframework/zend-servicemanager": "Zend\\ServiceManager component, for default/recommended ExtensionManager implementations",
-                "zendframework/zend-validator": "Zend\\Validator component"
+                "zendframework/zend-servicemanager": "Zend\\ServiceManager component, for easily extending ExtensionManager implementations",
+                "zendframework/zend-validator": "Zend\\Validator component, for validating feeds and Atom entries in the Writer subcomponent"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.5-dev",
-                    "dev-develop": "2.6-dev"
+                    "dev-master": "2.6-dev",
+                    "dev-develop": "2.7-dev"
                 }
             },
             "autoload": {
@@ -1977,7 +2028,7 @@
                 "feed",
                 "zf2"
             ],
-            "time": "2015-08-04 21:39:18"
+            "time": "2015-11-24 15:38:00"
         },
         {
             "name": "zendframework/zend-filter",

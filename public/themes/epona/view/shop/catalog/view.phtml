@@ -23,7 +23,7 @@
                 <figure class="product-view-image"><!-- product image -->
                     <?php if ($product->getShowImage()):?>
                     <a href="<?=$this->productImage($product, 'full');?>" class="lightbox img-thumbnail" data-plugin-options='{"type":"image"}'>
-                        <img id="product-main-image" class="img-responsive" src="<?=$this->productImage($product, 'thumb');?>"  alt="">
+                        <img id="product-main-image" class="img-responsive" src="<?=$this->productImage($product, 'full');?>"  alt="<?=$product->getShortDescription();?>">
                     </a>
                     <?php endif;?>
                     <p class="fsize11 margin-top30">
