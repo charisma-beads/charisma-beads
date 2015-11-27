@@ -11,8 +11,10 @@
 
 namespace Shop;
 
-use Shop\Event\ServiceListener;
+use Shop\Event\ControllerListener;
+use Shop\Event\FileManagerListener;
 use Shop\Event\SiteMapListener;
+use Shop\Event\UserListener;
 use UthandoCommon\Config\ConfigInterface;
 use UthandoCommon\Config\ConfigTrait;
 use Zend\Console\Adapter\AdapterInterface as Console;
@@ -33,9 +35,11 @@ class Module implements ConsoleUsageProviderInterface, ConfigInterface
     {
         $app = $e->getApplication();
         $eventManager = $app->getEventManager();
-        
-        $eventManager->attachAggregate(new ServiceListener());
+
+        $eventManager->attachAggregate(new ControllerListener());
+        $eventManager->attachAggregate(new FileManagerListener());
         $eventManager->attachAggregate(new SiteMapListener());
+        $eventManager->attachAggregate(new UserListener());
     }
 
     public function getConsoleUsage(Console $console)

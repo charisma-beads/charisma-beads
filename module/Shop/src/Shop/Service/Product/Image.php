@@ -100,16 +100,17 @@ class Image extends AbstractRelationalMapperService
     public function deleteImage(Event $e)
     {
         /* @var $model \Shop\Model\Product\Image */
-        $model = $e->getParam('model');
-        $file = './public/userfiles/shop/images/' . $model->getFull();
-        //$thumb = './public/userfiles/shop/images/' . $model->getThumbnail();
-        
-        if (is_file($file) && file_exists($file)) {
-            unlink($file);
+        $model          = $e->getParam('model');
+        $imageDirectory = './public/userfiles/shop/images/';
+        $files          = [];
+        $files[]        = $imageDirectory . $model->getFull();
+        $files[]        = $imageDirectory . $model->getThumbnail();
+
+        foreach ($files as $file) {
+            if (is_file($file) && file_exists($file)) {
+                unlink($file);
+            }
         }
-        
-        // TODO: generate thumbnail to delete.
-        //unlink($thumb);
     }
 
     /**

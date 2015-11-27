@@ -43,6 +43,8 @@ return [
         'uthando-contact/email-template/default-layout'         => __DIR__ . '/view/uthando-contact/email-template/default-layout.phtml',
         'uthando-contact/email-template/default-sender-copy'    => __DIR__ . '/view/uthando-contact/email-template/default-sender-copy.phtml',
 
+        'uthando-events/time-line/index'                        => __DIR__ . '/view/uthando-events/time-line/index.phtml',
+
         'uthando-navigation/main-menu'                          => __DIR__ . '/view/uthando-navigation/main-menu.phtml',
         'uthando-navigation/top-menu'                           => __DIR__ . '/view/uthando-navigation/top-menu.phtml',
         'uthando-navigation/user-menu'                          => __DIR__ . '/view/uthando-navigation/user-menu.phtml',
