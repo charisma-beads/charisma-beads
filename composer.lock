@@ -717,16 +717,16 @@
         },
         {
             "name": "uthando-cms/uthando-common",
-            "version": "2.0.2",
+            "version": "2.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-common.git",
-                "reference": "77162d74c65210f14437c94c840d30de76446fe7"
+                "reference": "74fa162b317a5f653ffb5ee8514cf2a1fd0bc0fe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-common/zipball/77162d74c65210f14437c94c840d30de76446fe7",
-                "reference": "77162d74c65210f14437c94c840d30de76446fe7",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-common/zipball/74fa162b317a5f653ffb5ee8514cf2a1fd0bc0fe",
+                "reference": "74fa162b317a5f653ffb5ee8514cf2a1fd0bc0fe",
                 "shasum": ""
             },
             "require": {
@@ -777,7 +777,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2015-11-27 13:47:23"
+            "time": "2015-11-28 22:22:52"
         },
         {
             "name": "uthando-cms/uthando-contact",
@@ -909,16 +909,16 @@
         },
         {
             "name": "uthando-cms/uthando-events",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-events.git",
-                "reference": "edfc6936a7ab3ae7c2d720284d33e55089953c23"
+                "reference": "bfc76e479939edaf6c099d5298061d26bb3d418b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-events/zipball/edfc6936a7ab3ae7c2d720284d33e55089953c23",
-                "reference": "edfc6936a7ab3ae7c2d720284d33e55089953c23",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-events/zipball/bfc76e479939edaf6c099d5298061d26bb3d418b",
+                "reference": "bfc76e479939edaf6c099d5298061d26bb3d418b",
                 "shasum": ""
             },
             "require": {
@@ -955,7 +955,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2015-11-27 14:06:57"
+            "time": "2015-11-28 22:22:13"
         },
         {
             "name": "uthando-cms/uthando-file-manager",
