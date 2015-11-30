@@ -6,6 +6,11 @@
 
 <?php $this->placeholder('page-top')->captureEnd();?>
 
+<?php
+/* @var \UthandoEvents\Options\EventsOptions $options */
+$options = $this->options;
+?>
+
 <div class="row">
     <div class="col-md-3 col-sm-3">
         <?=$this->partial('shop/product-nav');?>
@@ -23,7 +28,7 @@
                     <?php $leftRight = (($c % 2) === 0) ? 'right' : 'left'; ?>
                 <div class="item pull-<?=$leftRight;?> col-md-6 col-sm-6"><!-- item -->
                     <h3 class="timeline-centered-title"><a href="#"><?=$this->escapeHtml($event->getTitle());?></a></h3>
-                    <h4><b><?=$this->formatDate($event->getDateTime(), 'd/m/Y H:i A');?></b></h4>
+                    <h4><b><?=$this->formatDate($event->getDateTime(), $options->getDateFormat());?></b></h4>
                     <p><?=nl2br($this->escapeHtml($event->getDescription()));?></p>
                     <?php if ($event->getHtml()): ?>
                     <div class="row">
