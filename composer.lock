@@ -608,16 +608,16 @@
         },
         {
             "name": "uthando-cms/uthando-admin",
-            "version": "2.2.0",
+            "version": "2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-admin.git",
-                "reference": "7a457fb95c54d7119809d25d66d96dad69736e8b"
+                "reference": "f5cda67ea3bfd27c35b828fda080fb276c8bdd14"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-admin/zipball/7a457fb95c54d7119809d25d66d96dad69736e8b",
-                "reference": "7a457fb95c54d7119809d25d66d96dad69736e8b",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-admin/zipball/f5cda67ea3bfd27c35b828fda080fb276c8bdd14",
+                "reference": "f5cda67ea3bfd27c35b828fda080fb276c8bdd14",
                 "shasum": ""
             },
             "require": {
@@ -658,7 +658,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2015-11-30 19:52:58"
+            "time": "2015-12-01 09:35:53"
         },
         {
             "name": "uthando-cms/uthando-article",
@@ -910,16 +910,16 @@
         },
         {
             "name": "uthando-cms/uthando-events",
-            "version": "1.1.0",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-events.git",
-                "reference": "508de29fe07e948f2a09daf4addd25ac68b50a8a"
+                "reference": "26c1c3920ed4aeb800468715f685737d0ceb5ced"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-events/zipball/508de29fe07e948f2a09daf4addd25ac68b50a8a",
-                "reference": "508de29fe07e948f2a09daf4addd25ac68b50a8a",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-events/zipball/26c1c3920ed4aeb800468715f685737d0ceb5ced",
+                "reference": "26c1c3920ed4aeb800468715f685737d0ceb5ced",
                 "shasum": ""
             },
             "require": {
@@ -956,7 +956,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2015-11-30 22:08:51"
+            "time": "2015-12-02 16:38:06"
         },
         {
             "name": "uthando-cms/uthando-file-manager",
