@@ -27,10 +27,9 @@ if (!$authorized) {
 	}
 	
 	$query = "
-			SELECT *
-			FROM mail_queue
-			WHERE sent_time IS NULL
-			";
+		SELECT *
+		FROM mail_queue
+	";
 	$result = mysql_query($query);
    
 	?>
