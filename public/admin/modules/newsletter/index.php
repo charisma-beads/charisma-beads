@@ -82,7 +82,7 @@ if (!$authorized) {
         		$bg = '#EEEEEE'; // Set the background colour.
         		while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
             		$bg = ($bg=='#EEEEEE' ? '#FFFFFF' : '#EEEEEE'); // Switch the background colour.
-					$user_email = unserialize($row['recipient']);
+					$user_email = $row['recipient'];
 				
 					$user = "
 						SELECT CONCAT(first_name, ' ', last_name) AS name
