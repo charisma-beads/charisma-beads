@@ -77,7 +77,7 @@ if (!$authorized) {
 				}
 
 				$to     = escape_data($row['email']);
-				$body   = serialize(escape_data($newsletter));
+				$body   = escape_data($newsletter);
 
 				/*
 				print "<pre>";
