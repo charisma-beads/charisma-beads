@@ -27,19 +27,8 @@ if (!$authorized) {
 
 		if ((isset($_POST['user']) || isset($_POST['select_all'])) && $_POST['submit'] == "Send Mail") {
 
-
-			require_once ($_SERVER['DOCUMENT_ROOT'].'/../data/mail_options.php');
-
-			/* we use the db_options and mail_options here */
-			$mail_queue = new Mail_Queue($db_options, $mail_options);
-
-			$from = $merchant_email;
-
-			$hdrs = array(
-				 'From'    => $from,
-				 'Subject' => $merchant_name . " Newsletter " . date('F Y'),
-				 'Date' => date("r")
-			 );
+			$from       = $merchant_email;
+			$subject    = $merchant_name . " Newsletter " . date('F Y');
 
 			/* we use Mail_mime() to construct a valid mail */
 			$template = "01"; // For testing.
@@ -51,18 +40,18 @@ if (!$authorized) {
 			$css_style = str_replace ('#### LINK ####', $newsletter_link, $css_style);
 
 			$template = array (
-							'LINK' => $newsletter_link,
-		 					'WEBSITE' => $merchant_website,
-	   						'STYLE' => $css_style,
-		  					'NAME' => $merchant_name,
-		 					'CONTENT' => $content
-						  );
+				'LINK' => $newsletter_link,
+				'WEBSITE' => $merchant_website,
+				'STYLE' => $css_style,
+				'NAME' => $merchant_name,
+				'CONTENT' => $content
+			);
 
 			$query = "
-					SELECT CONCAT(first_name, ' ', last_name) AS name, first_name, last_name, email
-					FROM newsletter AS n,customers AS c
-					WHERE n.newsletter_id=c.newsletter_id
-					";
+				SELECT CONCAT(first_name, ' ', last_name) AS name, first_name, last_name, email
+				FROM newsletter AS n,customers AS c
+				WHERE n.newsletter_id=c.newsletter_id
+			";
 			
 			if (!isset($_POST['select_all'])) {
 				$query .= "AND n.newsletter_id IN (";
@@ -87,14 +76,8 @@ if (!$authorized) {
 					$newsletter = str_replace ($template_name, $value, $newsletter);
 				}
 
-				$to = $row['email'];
-
-				$hdrs['To'] = $to;
-
-				$mime = new Mail_mime();
-				$mime->setHTMLBody($newsletter);
-				$body = $mime->get();
-				$hdrs = $mime->headers($hdrs);
+				$to     = $row['email'];
+				$body   = $newsletter;
 
 				/*
 				print "<pre>";
@@ -104,7 +87,12 @@ if (!$authorized) {
 				//unset($newsletter);
 
 				/* Put message to queue */
-				$done = $mail_queue->put($from, $to, $hdrs, $body);
+				$insertSql = "
+				    INSERT INTO mail_queue (sender, recipient, subject, body)
+				    VALUES ('$from', '$to', '$subject', '$body');
+				";
+				
+				mysql_query($insertSql);
 
 			}
 
