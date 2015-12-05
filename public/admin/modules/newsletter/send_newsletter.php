@@ -27,8 +27,8 @@ if (!$authorized) {
 
 		if ((isset($_POST['user']) || isset($_POST['select_all'])) && $_POST['submit'] == "Send Mail") {
 
-			$from       = $merchant_email;
-			$subject    = $merchant_name . " Newsletter " . date('F Y');
+			$from       = escape_data($merchant_email);
+			$subject    = escape_data($merchant_name . " Newsletter " . date('F Y'));
 
 			/* we use Mail_mime() to construct a valid mail */
 			$template = "01"; // For testing.
@@ -76,8 +76,8 @@ if (!$authorized) {
 					$newsletter = str_replace ($template_name, $value, $newsletter);
 				}
 
-				$to     = $row['email'];
-				$body   = serialize($newsletter);
+				$to     = escape_data($row['email']);
+				$body   = serialize(escape_data($newsletter));
 
 				/*
 				print "<pre>";
