@@ -321,16 +321,16 @@
         },
         {
             "name": "paypal/rest-api-sdk-php",
-            "version": "v1.6.2",
+            "version": "v1.6.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paypal/PayPal-PHP-SDK.git",
-                "reference": "7493e7aa5e384e897636d6073493ef0a865695ea"
+                "reference": "0993a6450e7ad7bd4bd7b4f7409784b6ff86873d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paypal/PayPal-PHP-SDK/zipball/7493e7aa5e384e897636d6073493ef0a865695ea",
-                "reference": "7493e7aa5e384e897636d6073493ef0a865695ea",
+                "url": "https://api.github.com/repos/paypal/PayPal-PHP-SDK/zipball/0993a6450e7ad7bd4bd7b4f7409784b6ff86873d",
+                "reference": "0993a6450e7ad7bd4bd7b4f7409784b6ff86873d",
                 "shasum": ""
             },
             "require": {
@@ -365,7 +365,7 @@
                 "rest",
                 "sdk"
             ],
-            "time": "2015-11-16 19:40:00"
+            "time": "2015-12-07 21:31:49"
         },
         {
             "name": "phenx/php-font-lib",
@@ -718,16 +718,16 @@
         },
         {
             "name": "uthando-cms/uthando-common",
-            "version": "2.1.1",
+            "version": "2.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-common.git",
-                "reference": "8c95cfd3f3225b721bd9c2f96d4a1d21d1645811"
+                "reference": "2ae4477714c96cfbc9f93a7bf6777c2580149bde"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-common/zipball/8c95cfd3f3225b721bd9c2f96d4a1d21d1645811",
-                "reference": "8c95cfd3f3225b721bd9c2f96d4a1d21d1645811",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-common/zipball/2ae4477714c96cfbc9f93a7bf6777c2580149bde",
+                "reference": "2ae4477714c96cfbc9f93a7bf6777c2580149bde",
                 "shasum": ""
             },
             "require": {
@@ -778,7 +778,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2015-11-30 22:07:48"
+            "time": "2015-12-11 17:24:44"
         },
         {
             "name": "uthando-cms/uthando-contact",
@@ -910,16 +910,16 @@
         },
         {
             "name": "uthando-cms/uthando-events",
-            "version": "1.2.0",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-events.git",
-                "reference": "26c1c3920ed4aeb800468715f685737d0ceb5ced"
+                "reference": "0cd34b27f510994ff235dbbfcbf5f65998d0910f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-events/zipball/26c1c3920ed4aeb800468715f685737d0ceb5ced",
-                "reference": "26c1c3920ed4aeb800468715f685737d0ceb5ced",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-events/zipball/0cd34b27f510994ff235dbbfcbf5f65998d0910f",
+                "reference": "0cd34b27f510994ff235dbbfcbf5f65998d0910f",
                 "shasum": ""
             },
             "require": {
@@ -956,7 +956,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2015-12-02 16:38:06"
+            "time": "2015-12-11 18:13:47"
         },
         {
             "name": "uthando-cms/uthando-file-manager",
@@ -1830,16 +1830,16 @@
         },
         {
             "name": "zendframework/zend-db",
-            "version": "2.6.1",
+            "version": "2.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-db.git",
-                "reference": "ecfd5cf4eb223f7374f7b05f40d0c97eed197de3"
+                "reference": "8bda58293d6baa3e1d8316300fce0fed55df8ea0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-db/zipball/ecfd5cf4eb223f7374f7b05f40d0c97eed197de3",
-                "reference": "ecfd5cf4eb223f7374f7b05f40d0c97eed197de3",
+                "url": "https://api.github.com/repos/zendframework/zend-db/zipball/8bda58293d6baa3e1d8316300fce0fed55df8ea0",
+                "reference": "8bda58293d6baa3e1d8316300fce0fed55df8ea0",
                 "shasum": ""
             },
             "require": {
@@ -1880,7 +1880,7 @@
                 "db",
                 "zf2"
             ],
-            "time": "2015-10-14 20:26:01"
+            "time": "2015-12-09 21:17:32"
         },
         {
             "name": "zendframework/zend-escaper",
@@ -1928,16 +1928,16 @@
         },
         {
             "name": "zendframework/zend-eventmanager",
-            "version": "2.5.2",
+            "version": "2.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-eventmanager.git",
-                "reference": "135af03d07fd048c322259aab6611d2be290475c"
+                "reference": "a03de810b99b0302059ab744c535d464b8dc4721"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-eventmanager/zipball/135af03d07fd048c322259aab6611d2be290475c",
-                "reference": "135af03d07fd048c322259aab6611d2be290475c",
+                "url": "https://api.github.com/repos/zendframework/zend-eventmanager/zipball/a03de810b99b0302059ab744c535d464b8dc4721",
+                "reference": "a03de810b99b0302059ab744c535d464b8dc4721",
                 "shasum": ""
             },
             "require": {
@@ -1945,14 +1945,15 @@
                 "zendframework/zend-stdlib": "~2.5"
             },
             "require-dev": {
+                "athletic/athletic": "dev-master",
                 "fabpot/php-cs-fixer": "1.7.*",
                 "phpunit/phpunit": "~4.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.5-dev",
-                    "dev-develop": "2.6-dev"
+                    "dev-master": "2.6-dev",
+                    "dev-develop": "3.0-dev"
                 }
             },
             "autoload": {
@@ -1969,7 +1970,7 @@
                 "eventmanager",
                 "zf2"
             ],
-            "time": "2015-07-16 19:00:49"
+            "time": "2015-10-06 11:53:40"
         },
         {
             "name": "zendframework/zend-feed",
