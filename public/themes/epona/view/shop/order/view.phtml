@@ -21,6 +21,7 @@
                     <h4>
                         <strong>Order</strong> Date
                         <span class="text-right">
+                            <?php if ($this->orderStatus($this->order)): ?>
                             <a href="<?=$this->url('shop/paypal', [
                                 'action' => 'process',
                                 'orderId' => $this->order->getOrderId(),
@@ -28,6 +29,9 @@
                             <a href="<?=$this->url('shop/payment/process-credit-card', [
                                 'orderId' => $this->order->getOrderId(),
                             ]);?>"><i class="fa fa-credit-card fa-3x"></i></a>
+                            <?php endif;?>
+                            <a href="tel:<?=$this->contact()->formatPhoneNumber();?>">
+                                <i class="fa fa-phone fa-3x"></i></a>
                             <a href="<?=$this->url('shop/order/print', [
                                 'orderId' => $this->order->getOrderId(),
                             ]);?>" target="_blank"><i class="fa fa-print fa-3x"></i></a>

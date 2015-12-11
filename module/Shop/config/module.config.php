@@ -303,6 +303,7 @@ return [
             'MonthYearSelect'       => 'Shop\View\FormMonthSelect',
             'InvoiceOption'         => 'Shop\View\InvoiceOption',
             'NormaliseOrderNumber'  => 'Shop\View\NormaliseOrderNumber',
+            'OrderStatus'           => 'Shop\View\OrderStatus',
             'PercentFormat'         => 'Shop\View\PercentFormat',
             'PriceFormat'           => 'Shop\View\PriceFormat',
             'ProductHelper'         => 'Shop\View\Product',

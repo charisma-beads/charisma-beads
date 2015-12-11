@@ -10,6 +10,7 @@
 
 namespace Shop\Form\Settings;
 
+use PayPal\Core\PayPalLoggingLevel;
 use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\Form\Fieldset;
 use Zend\Stdlib\Hydrator\ClassMethods;
@@ -82,7 +83,11 @@ class PaypalFieldSet extends Fieldset implements InputFilterProviderInterface
                     'class' => 'col-md-4',
                 ],
                 'value_options' => [
-                    'FINE', 'INFO', 'WARN', 'ERROR',
+                    'Error' => 'Error',
+                    'Warn'  => 'Warn',
+                    'Info'  => 'Info',
+                    'Fine'  => 'Fine',
+                    'Debug' => 'Debug',
                 ],
                 'column-size' => 'md-8',
             ],

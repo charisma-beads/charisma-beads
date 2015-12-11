@@ -5,11 +5,12 @@
  * @package   Shop\Model\Payment
  * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
  * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
+ * @license   see LICENSE
  */
 
 namespace Shop\Model\Payment;
 
+use DateTime;
 use UthandoCommon\Model\ModelInterface;
 use UthandoCommon\Model\Model;
 use Shop\Model\Customer\Address;
@@ -186,7 +187,7 @@ class CreditCard implements ModelInterface
     }
 
     /**
-     * @param number $ccv2
+     * @param number $cvv2
      * @return $this
      */
     public function setCvv2($cvv2)

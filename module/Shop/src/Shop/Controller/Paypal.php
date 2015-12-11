@@ -10,11 +10,11 @@
 
 namespace Shop\Controller;
 
+use Exception;
 use Shop\Service\Payment\Paypal as PaypalService;
 use Shop\Service\Order\Order as OrderService;
 use UthandoCommon\Controller\SetExceptionMessages;
 use UthandoCommon\Service\ServiceTrait;
-use PayPal\Exception\PayPalConnectionException;
 use Zend\Mvc\Controller\AbstractActionController;
 
 /**
@@ -26,82 +26,50 @@ class Paypal extends AbstractActionController
 {
     use SetExceptionMessages,
         ServiceTrait;
-    
+
     /**
      * @var PaypalService
      */
     protected $paypalService;
-    
+
     /**
      * @var OrderService
      */
-    protected  $orderService;
-    
+    protected $orderService;
+
     public function processAction()
     {
         $orderId = $this->params()->fromRoute('orderId');
         $userId = $this->identity()->getUserId();
-        
+
         $order = $this->getOrderService()
             ->getCustomerOrderByUserId($orderId, $userId);
-        
+
         try {
             $result = $this->getPaypalService()->createPayment($order);
-            
-            $update = $this->getOrderService()->save($result['order']);
-        } catch (PayPalConnectionException $e) {
-        	$this->setExceptionMessages($e);
-        	return ['order' => $order];
-        }
-        
-        return $this->redirect()->toUrl($result['redirectUrl']);
-    }
 
-    public function successAction()
-    {
-        $orderId = $this->params()->fromRoute('orderId', 0);
-        $userId = $this->identity()->getUserId();
-        $payerId = $this->params()->fromQuery('PayerID');
-        
-        $order = $this->getOrderService()
-            ->getCustomerOrderByUserId($orderId, $userId);
-        
-        try {
-            $result = $this->getPaypalService()->executePayment($order, $payerId);
-            
             $update = $this->getOrderService()->save($result['order']);
-            
-            $order = (!$update) ?: $this->getOrderService()
-                ->getCustomerOrderByUserId($orderId, $userId);
-            
-            return [
-                'order' => $order,
-                'payment' => $result['payment'],
-            ];
-        }
-        catch (PayPalConnectionException $e) {
+        } catch (Exception $e) {
             $this->setExceptionMessages($e);
             return ['order' => $order];
         }
+
+        return $this->redirect()->toUrl($result['redirectUrl']);
     }
 
-    public function cancelAction()
+    /**
+     * @return OrderService
+     */
+    public function getOrderService()
     {
-        $orderId = $this->params()->fromRoute('orderId', 0);
-        $userId = $this->identity()->getUserId();
-        
-        $result = $this->getOrderService()
-            ->cancelOrder($orderId, $userId);
+        if (!$this->orderService instanceof OrderService) {
+            $orderService = $this->getService('ShopOrder');
+            $this->orderService = $orderService;
+        }
 
-        $order = $this->getOrderService()
-            ->getCustomerOrderByUserId($orderId, $userId);
-        
-        return [
-            'order' => $order,
-            'result' => $result
-        ];
+        return $this->orderService;
     }
-    
+
     /**
      * @return PaypalService
      */
@@ -111,20 +79,50 @@ class Paypal extends AbstractActionController
             $paypalService = $this->getService('ShopPaymentPaypal');
             $this->paypalService = $paypalService;
         }
-        
+
         return $this->paypalService;
     }
-    
-    /**
-     * @return OrderService
-     */
-    public function getOrderService()
+
+    public function successAction()
     {
-    	if (!$this->orderService instanceof OrderService) {
-    		$orderService = $this->getService('ShopOrder');
-    		$this->orderService = $orderService;
-    	}
-    
-    	return $this->orderService;
+        $orderId = $this->params()->fromRoute('orderId', 0);
+        $userId = $this->identity()->getUserId();
+        $payerId = $this->params()->fromQuery('PayerID');
+
+        $order = $this->getOrderService()
+            ->getCustomerOrderByUserId($orderId, $userId);
+
+        try {
+            $result = $this->getPaypalService()->executePayment($order, $payerId);
+
+            $update = $this->getOrderService()->save($result);
+
+            $order = (!$update) ?: $this->getOrderService()
+                ->getCustomerOrderByUserId($orderId, $userId);
+
+        } catch (Exception $e) {
+            $this->setExceptionMessages($e);
+        }
+
+        return [
+            'order' => $order,
+        ];
+    }
+
+    public function cancelAction()
+    {
+        $orderId = $this->params()->fromRoute('orderId', 0);
+        $userId = $this->identity()->getUserId();
+
+        $result = $this->getOrderService()
+            ->cancelOrder($orderId, $userId);
+
+        $order = $this->getOrderService()
+            ->getCustomerOrderByUserId($orderId, $userId);
+
+        return [
+            'order' => $order,
+            'result' => $result
+        ];
     }
 }

@@ -10,7 +10,7 @@
 
 namespace Shop\Service\Payment;
 
-use PayPal\Exception\PayPalConnectionException;
+use PayPal\Api\RelatedResources;
 use Shop\Model\Order\Order as OrderModel;
 use Shop\Options\PaypalOptions;
 use PayPal\Api\Amount;
@@ -26,7 +26,9 @@ use PayPal\Api\Transaction;
 use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Rest\ApiContext;
 use Shop\Service\Tax\Tax;
+use Shop\ShopException;
 use UthandoCommon\Service\AbstractService;
+use UthandoCommon\Stdlib\StringUtils;
 
 /**
  * Class Paypal
@@ -54,60 +56,20 @@ class Paypal extends AbstractService
      * @var Tax
      */
     protected $taxService;
-    
+
     /**
      * Should this be done by hydrators?
-     * $payment = [
-            'intent' => 'sale',
-            'payer' => [
-                'paymentMethod' => 'paypal',
-            ],
-            'redirectUrls' => [
-                'cancelUrl' => 'http://localhost/payapl/cancel',
-                'returnUrl' => 'http://localhost/payapl/success',
-            ],
-            'transactions' => [
-                [
-                    'itemList' => [
-                        'items' => [
-                            [
-                                'name' => 'blue pants',
-                                'sku' => 'bp01',
-                                'price' => '10.00',
-                                'quantity' => '1',
-                                'currency' => 'GBP',
-                                'description' => 'some description'                            ],
-                        ],
-                        'shippingAddress' => [
-                            'line1' => '20 Bogus Lane',
-                            'line2' => '',
-                            'city' => 'Dubius Town',
-                            'state' => 'nowhere',
-                            'PostalCode' => 'AA11 1AA',
-                            'CountryCode' => 'GB',
-                            'ReciptentName' => 'Mr. E Coli',
-                            'phone' => '0123456789',
-                        ],
-                ],
-                'amount' => [
-                    'currency' => 'GBP',
-                    'total' => '12.00',
-                        'details' => [
-                            'shipping' => '2.00',
-                            'tax' => '0.00',
-                            'subtotal' => '10.00',
-                       ],
-                    ],
-                    'description' => 'Payment for order No: 1',
-                ],
-            ],
-        ];
      *
      * @param OrderModel $order
      * @return array
+     * @throws ShopException
      */
     public function createPayment(OrderModel $order)
-    {   
+    {
+        if ($order->getMetadata()->getPaymentId()) {
+            throw new ShopException('Payment already processed');
+        }
+
         $options = $this->getOptions();
         
         // set payment method
@@ -194,6 +156,7 @@ class Paypal extends AbstractService
         $transaction->setItemList($itemList);
         $transaction->setAmount($amount);
         $transaction->setDescription('Payment for order No:' . $order->getOrderNumber());
+        $transaction->setInvoiceNumber($order->getOrderNumber(false));
         
         // add redirect urls
         $redirectUrls = new RedirectUrls();
@@ -207,16 +170,8 @@ class Paypal extends AbstractService
         $payment->setRedirectUrls($redirectUrls);
         $payment->setTransactions([$transaction]);
 
-        try {
-            $payment->create($this->getApiContent());
+        $payment->create($this->getApiContent());
 
-        } catch (PayPalConnectionException $ex) {
-            // Don't spit out errors or use "exit" like this in production code
-            echo '<pre>';print_r(json_decode($payment->toJSON()));
-            echo '<pre>';print_r(json_decode($ex->getData()));exit;
-        }
-
-        
         $order->getMetadata()->setPaymentId($payment->getId());
         
         /* @var $orderStatus \Shop\Model\Order\Status */
@@ -242,24 +197,37 @@ class Paypal extends AbstractService
     public function executePayment(OrderModel $order, $payerId)
     {
         $paymentId = $order->getMetadata()->getPaymentId();
-        $payment = Payment::get($paymentId, $this->getApiContent());
+        $payment = $this->getPayment($paymentId);
         
         $execution = new PaymentExecution();
         $execution->setPayerId($payerId);
         
         $payment = $payment->execute($execution, $this->getApiContent());
+
+        $paymentState = $payment->getState();
+        /* @var Transaction $transaction */
+        $transaction = $payment->getTransactions()[0];
+        /* @var RelatedResources $relatedResource */
+        $relatedResource = $transaction->getRelatedResources()[0];
+        $saleState = $relatedResource->getSale()->getState();
             
-        if ($payment->getState() === 'approved') {
+        if ('approved' === $paymentState && 'completed' === $saleState) {
             /* @var $orderStatus \Shop\Model\Order\Status */
             $orderStatus = $this->getOrderStatusService()
                 ->getStatusByName('Paypal Payment Completed');
             $order->setOrderStatusId($orderStatus->getOrderStatusId());
         }
-        
-        return [
-            'payment'   => $payment,
-            'order'     => $order,
-        ];
+
+        return $order;
+    }
+
+    /**
+     * @param $paymentId
+     * @return Payment
+     */
+    public function getPayment($paymentId)
+    {
+        return Payment::get($paymentId, $this->getApiContent());
     }
     
     public function getApiContent()
@@ -271,7 +239,7 @@ class Paypal extends AbstractService
             		$options->getClientId(),
             		$options->getSecret()
             ));
-            
+
             $apiContext->setConfig([
                 'mode'              => $options->getMode(),
                 'log.LogEnabled'    => $options->getLogEnabled(),

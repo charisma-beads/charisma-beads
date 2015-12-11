@@ -32,7 +32,7 @@ class PaypalOptions extends AbstractOptions
     /**
      * @var bool
      */
-    protected $logEnabled = false;
+    protected $logEnabled = true;
     
     /**
      * @var bool
@@ -118,7 +118,7 @@ class PaypalOptions extends AbstractOptions
 	 */
 	public function setLogEnabled($logEnabled)
 	{
-		$this->logEnabled = $logEnabled;
+		$this->logEnabled = (bool) $logEnabled;
 	}
 
 	/**
