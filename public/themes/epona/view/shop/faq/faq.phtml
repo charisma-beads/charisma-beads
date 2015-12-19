@@ -1,0 +1,37 @@
+<?php $this->placeholder('page-top')->captureStart();?>
+
+<?=$this->partial('layout/page-title', [
+    'pageTitle' => 'F.A.Q'
+]);?>
+
+<?php $this->placeholder('page-top')->captureEnd();?>
+
+<div class="row">
+    <div class="col-md-3 col-sm-3">
+        <?=$this->partial('shop/product-nav');?>
+    </div>
+
+    <div class="col-md-9 col-sm-9">
+        <!-- ACCORDION -->
+        <div class="accordion panel-group" id="accordion">
+            <?php /* @var \Shop\Model\Faq $faq */ ?>
+            <?php foreach($this->faqs as $faq):?>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="" aria-expanded="true" data-toggle="collapse" data-parent="#accordion" href="#acordion<?=$faq->getFaqId();?>">
+                                <?=$this->escapeHtml($faq->getQuestion());?>
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="acordion<?=$faq->getFaqId();?>" class="collapse">
+                        <div class="panel-body">
+                            <?=$faq->getAnswer();?>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach;?>
+        </div>
+        <!-- /ACCORDION -->
+    </div>
+</div>

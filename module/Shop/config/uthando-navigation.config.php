@@ -339,6 +339,26 @@ return [
                             ]
                         ]
                     ],
+                    'faq' => [
+                        'label' => 'F.A.Q',
+                        'action' => 'index',
+                        'route' => 'admin/shop/faq',
+                        'resource' => 'menu:admin',
+                        'pages' => [
+                            'list' => [
+                                'label' => 'List All FAQs',
+                                'action' => 'index',
+                                'route' => 'admin/shop/faq',
+                                'resource' => 'menu:admin'
+                            ],
+                            'add' => [
+                                'label' => 'Add New FAQ',
+                                'action' => 'add',
+                                'route' => 'admin/shop/faq/edit',
+                                'resource' => 'menu:admin'
+                            ]
+                        ]
+                    ],
                     'shop-settings' => [
                         'label' => 'Settings',
                         'action' => 'index',

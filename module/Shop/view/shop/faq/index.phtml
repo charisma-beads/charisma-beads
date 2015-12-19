@@ -1,0 +1,27 @@
+
+<?=$this->partial('uthando-admin/partial/search', [
+    'name'			=> 'faq',
+    'searchInputs'	=> [
+        'Search' => 'question-answer',
+    ],
+]);?>
+
+    <div id="table-faq">
+        <?=$this->partial('shop/faq/list', [
+            'models' => $this->models
+        ]); ?>
+    </div>
+
+
+<?php $this->inlineScript()->captureStart(); ?>
+    $(document).ready(function(){
+        $('#table-productCategory').dataGrid({
+            url : 'faq/list',
+            query: { sort : 'lft' },
+            searchForm : $('#search-faq'),
+            paging : 'links',
+            columnSort: true,
+            //rowClick : admin.product.rowClick
+        });
+    });
+<?php $this->inlineScript()->captureEnd(); ?>

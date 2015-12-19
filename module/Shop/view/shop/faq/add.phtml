@@ -1,0 +1,7 @@
+<?php $this->headTitle('Add Category') ?>
+<?php $this->layout()->pageTitle = 'Add F.A.Q'; ?>
+
+<?=$this->partial('shop/faq/faq-form', [
+    'form' => $this->form,
+    'formAction' => 'add',
+]); ?>

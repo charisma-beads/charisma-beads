@@ -24,6 +24,7 @@ return [
         'shop/customer-address/add-address'                     => __DIR__ . '/view/shop/customer-address/add-address.phtml',
         'shop/customer-address/edit-address'                    => __DIR__ . '/view/shop/customer-address/edit-address.phtml',
         'shop/customer-address/my-addresses'                    => __DIR__ . '/view/shop/customer-address/my-addresses.phtml',
+        'shop/faq/faq'                                          => __DIR__ . '/view/shop/faq/faq.phtml',
         'shop/payment/credit-card'                              => __DIR__ . '/view/shop/payment/credit-card.phtml',
         'shop/payment/phone'                                    => __DIR__ . '/view/shop/payment/phone.phtml',
         'shop/order/my-orders'                                  => __DIR__ . '/view/shop/order/my-orders.phtml',
