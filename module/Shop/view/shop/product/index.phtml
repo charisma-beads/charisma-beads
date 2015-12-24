@@ -1,0 +1,58 @@
+<?php 
+use Zend\Form\Element; 
+
+$discontinued = new Element\Checkbox('discontinued', [
+    'checked_value' => '1',
+    'label' => 'discontinued',
+]);
+
+?>
+
+<?=$this->partial('uthando-admin/partial/search', [
+	'name'			=> 'product',
+	'searchInputs'	=> [
+		'Product'	=> 'sku-name-shortDescription',
+		//'Category'	=> 'category',
+	    'Category List' => $this->formManager('ProductCategoryList')->setName('productCategoryId'),
+	],
+    'secondRowInputs' => [
+        new Element\Checkbox('discontinued', [
+            'label' => 'discontinued',
+        ]),
+        new Element\Checkbox('disabled', [
+            'label' => 'disabled',
+        ]),
+    ],
+	'params'   => $this->params,
+    'menuPartial' => 'shop/product/partial/sub-menu',
+]);?>
+
+<div id="table-product">
+	<?=$this->partial('shop/product/list', [
+	    'models' => $this->models,
+	]); ?>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $('#table-product').dataGrid({
+            url: 'product/list',
+            query: {sort: '<?=(isset($this->params['sort'])) ? $this->params['sort'] : 'sku';?>'},
+            searchForm: $('#search-product'),
+            columnSort: true
+        });
+
+        $('input[name=discontinued]').on('click', function () {
+            $('#table-product').dataGrid('doSearch');
+        });
+
+        $('input[name=disabled]').on('click', function () {
+            $('#table-product').dataGrid('doSearch');
+        });
+
+        $('select[name=productCategoryId]').on('change', function () {
+            $('#table-product').dataGrid('doSearch');
+        });
+    });
+
+</script>

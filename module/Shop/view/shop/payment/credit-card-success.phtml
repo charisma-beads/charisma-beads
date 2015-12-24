@@ -1,0 +1,14 @@
+<?php $this->headTitle('Credit Card Payment') ?>
+
+<div class="row">
+    <h4 class="col-sm-12">
+        <a href="<?=$this->url('shop/order');?>">Back to orders</a>
+        <a href="<?=$this->url('shop/order/print', [
+            'orderId' => $this->order->getOrderId(),
+        ]);?>" class="siteTip pull-right new-window" target="_blank" title="click to print order">
+            <i class="glyphicon glyphicon-print">&nbsp;</i>
+        </a>
+    </h4>
+
+    <?=$this->partial('shop/order/details');?>
+</div>

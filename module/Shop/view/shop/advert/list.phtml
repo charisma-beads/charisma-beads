@@ -1,0 +1,50 @@
+<?php $this->headTitle('Adverts') ?>
+
+<?php if (count($this->models) > 0): ?>
+<div class="panel panel-default">
+    <table id="advert-list" class="table table-hover table-bordered table-condensed sortable-table">
+        <thead>
+            <tr>
+                <th>&nbsp;</th>
+                <th data-field="advertId">Advert Id</th>
+                <th data-field="advert">Advert</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <?php /* @var $row \Shop\Model\Advert\Advert */ ?>
+            <?php foreach($this->models as $row): ?>
+            <?php $class = ($row->isEnabled()) ? '' : 'danger';?>
+            <tr class="<?=$class;?>">
+                <td><?=$this->enabled($row, [
+                    'table' => 'advert',
+                    'route' => 'admin/shop/advert/edit',
+                ]); ?></td>
+                <td><?=$this->escapeHtml($row->getAdvertId()); ?></td>
+                <td><?=$this->escapeHtml($row->getAdvert()); ?></td>
+                <td>
+                    <?=$this->partial('uthando-admin/partial/edit-actions', [
+                        'pk'		=> 'advertId',
+                        'id'		=> $row->getAdvertId(),
+                        'tableName'	=> 'advert',
+                        'route'		=> 'admin/shop/advert/edit',
+                        'buttonSize'    => 'btn-sm',
+                    ]);?>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
+<?=$this->paginationControl(
+    $this->models,
+    'Elastic',
+    'application/partial/paginate',
+    ['route' => 'admin/shop/advert/page']
+); ?>
+
+<?php else: ?>
+<h4>No Adverts where returned by search.</h4>
+<?php endif; ?>
+

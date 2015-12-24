@@ -1,0 +1,14 @@
+<?php $this->headTitle('Add Country') ?>
+
+<?=$this->partial('uthando-admin/partial/add-edit-form', [
+	'form' 			=> $this->form,
+	'formAction' 	=> 'add',
+	'formName'		=> 'Country',
+    'postUrl'		=> $this->url('admin/shop/country/edit', [
+        'action' => 'add',
+    ]),
+    'cancelUrl'     => $this->url('admin/shop/country'),
+	'formElements'	=> [
+		'country', 'code', 'postZoneId', 'redirectToEdit',
+	],
+]); ?>

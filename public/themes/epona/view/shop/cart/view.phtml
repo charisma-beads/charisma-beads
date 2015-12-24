@@ -1,0 +1,208 @@
+
+<?php $this->placeholder('page-top')->captureStart();?>
+
+<?=$this->partial('shop/parallax', [
+    'title' => 'View Cart',
+]);?>
+
+<?php $this->placeholder('page-top')->captureEnd();?>
+
+<a href="<?=$this->url('shop');?>" class="btn btn-primary">Continue Shopping</a>
+
+<form class="cartContent margin-top20 clearfix" method="post" action="<?=$this->url('shop/cart', [
+    'action' => 'update'
+]);?>">
+
+    <!-- cart content -->
+    <div id="cartContent">
+        <!-- cart header -->
+        <div class="item head">
+            <span class="cart_img"></span>
+            <span class="product_name fsize13 bold">PRODUCT NAME</span>
+            <span class="remove_item fsize13 bold"></span>
+            <span class="total_price fsize13 bold">TOTAL</span>
+            <span class="qty fsize13 bold">QUANTITY</span>
+            <div class="clearfix"></div>
+        </div>
+        <!-- /cart header -->
+
+
+        <?php /* @var $item \Shop\Model\Cart\Item */ ?>
+        <?php foreach ($this->cart()->getCart() as $item): ?>
+        <!-- cart item -->
+        <div class="item">
+            <?php if ($item->getMetadata()->getShowImage()):?>
+            <div class="cart_img">
+                <img src="<?=$this->productImage($item->getMetadata()->getImage(), 'thumb');?>" alt="" width="60">
+            </div>
+            <?php endif;?>
+            <?php /* @var $product \Shop\Model\Product\Product */ ?>
+            <?php $product = $this->productHelper($item->getMetadata()->getProductId());?>
+            <a href="<?=$this->url('shop/catalog/product', [
+                'categoryIdent' => $product->getProductCategory()->getIdent(),
+                'productIdent' => $product->getIdent(),
+            ]);?>" class="product_name">
+                <span><?=$item->getMetadata()->getSku();?></span>
+                <small><?=$item->getMetadata()->getName();?>
+                <?php if ($item->getMetadata()->getOption()): ?>
+                &nbsp;(<?=$item->getMetadata()->getOption()->getOption();?>)
+                <?php endif; ?>
+                </small>
+            </a>
+            <a href="<?=$this->url('shop/cart', array(
+                'action'	=> 'remove',
+                'id'		=> $item->getCartItemId()
+            ));?>" class="remove_item"><i class="fa fa-times"></i></a>
+            <div class="total_price"><span><?=$this->cart()->getLineCost($item);?></span></div>
+            <div class="qty">
+                <input type="number" value="<?=$item->getQuantity();?>" name="quantity[<?=$item->getCartItemId();?>]" maxlength="3" />
+                &times; <?=$this->cart()->formatAmount($item->getPrice());?>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <!-- /cart item -->
+        <?php endforeach; ?>
+        <!-- cart total -->
+        <div class="total pull-right">
+            <small>
+                Shipping: <?=$this->cart()->getShippingTotal($this->countryId);?>
+            </small>
+
+            <span class="totalToPay">
+                TOTAL: <?=$this->cart()->getTotal();?>
+            </span>
+
+        </div>
+        <!-- /cart total -->
+
+
+        <!-- update cart -->
+        <button type="submit" name="update" class="btn_update btn btn-default btn-md pull-right" value="update">
+            Update Cart
+        </button>
+        <!-- /update cart -->
+        <a class="btn_update btn btn-danger btn-md pull-right" data-toggle="modal" data-target="#empty-cart">Empty Cart</a>
+        <div class="clearfix"></div>
+
+        <!-- empty cart modal -->
+
+        <div id="empty-cart" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+
+                    <div class="modal-header"><!-- modal header -->
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Empty Cart</h4>
+                    </div><!-- /modal header -->
+
+                    <!-- modal body -->
+                    <div class="modal-body">
+                        Do you really want to empty your shopping cart?
+                    </div>
+                    <!-- /modal body -->
+
+                    <div class="modal-footer"><!-- modal footer -->
+                        <a class="btn btn-danger" href="<?=$this->url('shop/cart', [
+                            'action' => 'empty'
+                        ]);?>">Yes</a> <a class="btn btn-primary" data-dismiss="modal">No</a>
+                    </div><!-- /modal footer -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /cart content -->
+</form>
+
+<div class="row margin-top60">
+
+    <div class="col-md-7 col-sm-7">
+
+        <!-- shipping -->
+        <form method="post" class="sky-form boxed cartContent">
+            <header class="styleColor">Calculate Shipping</header>
+
+            <fieldset>
+                <section>
+                    <label class="select">
+                        <?=$this->formSelect($this->countrySelect($this->countryId)->setAttribute('class', 'pointer'));?>
+                        <i></i>
+                    </label>
+                    <i></i>
+                </section>
+
+            </fieldset>
+            <footer>
+                <button type="submit" class="btn btn-default pull-right">UPDATE TOTALS</button>
+            </footer>
+        </form>
+        <!-- /shipping -->
+
+        <!-- promotional code -->
+        <form action="#" method="post" class="sky-form boxed cartContent">
+            <header class="styleColor">Have A Promotional Code?</header>
+
+            <fieldset>
+                <section>
+                    <label class="input">
+                        <input type="text" placeholder="Coupon Code" />
+                    </label>
+                </section>
+
+            </fieldset>
+            <footer>
+                <button type="submit" class="btn btn-default pull-right">APPLY</button>
+            </footer>
+        </form>
+        <!-- /promotional code -->
+    </div>
+
+    <div class="col-md-5 col-sm-5">
+
+        <!-- cart totals -->
+        <div class="sky-form boxed cartContent">
+            <header class="styleColor">Cart Totals</header>
+
+            <fieldset>
+
+                <section class="clearfix cart_totals">
+                    <span class="pull-right fsize16"><?=$this->cart()->getSubTotal();?></span>
+                    <span class="bold">Cart Subtotal</span>
+                </section>
+
+                <section class="clearfix cart_totals">
+                    <span class="pull-right fsize16"><?=$this->cart()->getShippingTotal($this->countryId);?></span>
+                    <span class="bold">Shipping</span>
+                </section>
+
+                <section class="clearfix cart_totals">
+                    <span class="pull-right fsize16">- £0.00</span>
+                    <span class="bold">
+                        Coupon Discount
+                        <small class="nobold font300 fsize11">
+                            (<?=$this->placeholder('discount-code')->set('£0.00');?>)
+                        </small>
+                    </span>
+                </section>
+
+                <section class="clearfix cart_totals noborder">
+                    <span class="pull-right fsize20 bold styleColor"><?=$this->cart()->getTotal();?></span>
+                    <span class="bold fsize18">ORDER TOTAL</span>
+                </section>
+
+                <p class="fsize12">
+                    Please note that shipping will be calculated on total order
+                    <?=($this->cartOption('shippingByWeight')) ? 'weight' : 'value'; ?>
+                    and destination, and will be applied when shipping information is finalised.
+                </p>
+
+            </fieldset>
+
+            <footer>
+                <a href="<?=$this->url('shop/checkout');?>" class="btn btn-primary pull-right">PROCEED TO CHECKOUT &rarr;</a>
+            </footer>
+        </div>
+        <!-- /cart totals -->
+
+    </div>
+</div>

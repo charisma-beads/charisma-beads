@@ -1,0 +1,13 @@
+<?php $this->headTitle('Edit Post Unit') ?>
+
+<?=$this->partial('uthando-admin/partial/add-edit-form', [
+	'form' 			=> $this->form,
+	'formName'		=> 'Post Unit',
+    'postUrl'		=> $this->url('admin/shop/post/unit/edit', [
+        'id'        => $this->model->getPostUnitId(),
+    ]),
+    'cancelUrl'     => $this->url('admin/shop/post/unit'),
+	'formElements'	=> [
+		'postUnit', 'postUnitId',
+	],
+]); ?>

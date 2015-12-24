@@ -1,0 +1,145 @@
+
+<?php $this->placeholder('page-top')->captureStart();?>
+
+<?=$this->partial('layout/page-title', [
+    'pageTitle' => 'Order Summary',
+    'bread' => [
+        'shop/order' => 'My Orders'
+    ],
+]);?>
+
+<?php $this->placeholder('page-top')->captureEnd();?>
+
+<div class="row">
+    <div><!-- note class 'printable' - this area is printable only! -->
+        <!-- CALLOUT -->
+        <div class="alert alert-default">
+
+            <div class="row">
+
+                <div class="col-md-6 col-sm-6"><!-- left text -->
+                    <h4>
+                        <strong>Order</strong> Date
+                        <span class="text-right">
+                            <?php if ($this->orderStatus($this->order)): ?>
+                            <a href="<?=$this->url('shop/paypal', [
+                                'action' => 'process',
+                                'orderId' => $this->order->getOrderId(),
+                            ]);?>"><i class="fa fa-paypal fa-3x"></i></a>
+                            <a href="<?=$this->url('shop/payment/process-credit-card', [
+                                'orderId' => $this->order->getOrderId(),
+                            ]);?>"><i class="fa fa-credit-card fa-3x"></i></a>
+                            <?php endif;?>
+                            <a href="tel:<?=$this->contact()->formatPhoneNumber();?>">
+                                <i class="fa fa-phone fa-3x"></i></a>
+                            <a href="<?=$this->url('shop/order/print', [
+                                'orderId' => $this->order->getOrderId(),
+                            ]);?>" target="_blank"><i class="fa fa-print fa-3x"></i></a>
+                        </span>
+                    </h4>
+                    <p>
+                        <?=$this->formatDate($this->order->getOrderDate())->setFormat('d/m/Y');?><br>
+                        <?=$this->order->getOrderStatus();?>
+                    </p>
+                </div><!-- /left text -->
+
+                <div class="col-md-6 col-sm-6 text-right"><!-- right btn -->
+                   
+                </div><!-- /right btn -->
+
+            </div>
+
+        </div>
+        <!-- /CALLOUT -->
+
+        <div class="divider half-margins"><!-- divider 30px --></div>
+
+        <!-- BILLING and SHIPPING ADDRESS -->
+        <div class="row">
+            <div class="col-md-6 col-sm-6">
+                <h5><strong>BILLING ADDRESS</strong></h5>
+                <p>
+                    <?=$this->customerAddress()
+                        ->setOrder($this->order)
+                        ->includeName()
+                        ->includeEmail()
+                        ->formatAddress(
+                            $this->order->getMetadata()
+                                ->getBillingAddress()
+                        );?>
+                </p>
+            </div>
+
+            <div class="col-md-6 col-sm-6">
+                <h5><strong>SHIPPING ADDRESS</strong></h5>
+                <p>
+                    <?=$this->customerAddress()
+                        ->setOrder($this->order)
+                        ->includeName()
+                        ->formatAddress(
+                            $this->order->getMetadata()
+                                ->getDeliveryAddress()
+                    );?>
+                </p>
+            </div>
+        </div>
+        <!-- /BILLING and SHIPPING ADDRESS -->
+
+
+        <!-- SUMMARY TABLE -->
+        <div class="cartContent margin-top30">
+            <!-- cart header -->
+            <div class="item head">
+                <span class="cart_img"></span>
+                <span class="product_name fsize13 bold">PRODUCT NAME</span>
+                <span class="total_price fsize13 bold">TOTAL</span>
+                <span class="qty fsize13 bold">QUANTITY</span>
+                <div class="clearfix"></div>
+            </div>
+            <!-- /cart header -->
+
+            <?php /* @var $item \Shop\Model\Order\Line */ ?>
+            <?php foreach ($this->order->getOrderlines() as $item): ?>
+            <!-- cart item -->
+            <div class="item">
+                
+                <div class="cart_img">
+                    <?php if ($item->getMetadata()->getShowImage()):?>
+                    <img src="<?=$this->productImage($item->getMetadata()->getImage(), 'thumb');?>" alt="" width="60" />
+                    <?php endif;?>
+                </div>
+                
+                <div class="product_name">
+                    <?=$item->getMetadata()->getSku();?> /
+                    <?=$item->getMetadata()->getCategory();?> /
+                    <?=$item->getMetadata()->getName();?>
+                    <?php if ($item->getMetadata()->getPostUnit() > 0): ?>
+                        &nbsp;(<?=$item->getMetadata()->getPostUnit();?> grams)
+                    <?php endif; ?>
+                </div>
+                <div class="total_price"><span><?=$this->priceFormat($item->getPrice() * $item->getQty());?></span></div>
+                <div class="qty"><?=$item->getQty();?> &times; <?=$this->priceFormat($item->getPrice());?></div>
+                <div class="clearfix"></div>
+            </div>
+            <!-- /cart item -->
+            <?php endforeach;?>
+
+            <!-- cart total -->
+            <div class="total pull-right">
+                <small>
+                    Shipping: <?=$this->priceFormat($this->order->getShipping());?>
+                </small>
+
+                <span class="totalToPay styleSecondColor">
+                    TOTAL: <?=$this->priceFormat($this->order->getTotal());?>
+                </span>
+
+            </div>
+            <!-- /cart total -->
+
+            <div class="clearfix"></div>
+        </div>
+        <!-- /SUMMARY TABLE -->
+
+    </div>
+</div>

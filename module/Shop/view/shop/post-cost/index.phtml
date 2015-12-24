@@ -1,0 +1,29 @@
+
+
+<?=$this->partial('uthando-admin/partial/search', [
+	'name'			=> 'postCost',
+	'searchInputs'	=> [
+		'Cost' => 'cost',
+	],
+]);?>
+	    	
+	    	
+<div id="table-postCost">
+	<?=$this->partial('shop/post-cost/list', [
+	    'models' => $this->models
+	]); ?>
+</div>
+
+
+<?php $this->inlineScript()->captureStart(); ?>
+$(document).ready(function(){
+	$('#table-postCost').dataGrid({
+	    url : 'cost/list',
+	    query: { sort : 'postZoneId' },
+	    searchForm : $('#search-postCost'),
+	    paging : 'links',
+	    columnSort: true,
+	    //rowClick : admin.product.rowClick
+	});
+});
+<?php $this->inlineScript()->captureEnd(); ?>

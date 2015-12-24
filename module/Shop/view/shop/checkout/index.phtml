@@ -1,0 +1,23 @@
+<?php $this->headTitle('Checkout - Login or Register') ?>
+
+<div>
+    <?=$this->partial('uthando-user/user/login-form', [
+        'form'          => $this->login,
+        'formAction'    => 'register',
+        'legend'        => 'Login To Checkout',
+        'returnTo'      => 'shop/checkout'
+    ]); ?>
+</div>
+
+<div id="checkout-or">
+    <span>OR</span>
+</div>
+
+<div class="">
+    <?=$this->partial('uthando-user/user/user-form', [
+        'form' => $this->register,
+    	'formAction' => 'register',
+        'legend' => 'Register As New Customer',
+        'returnTo'      => 'shop/checkout'
+    ]); ?>
+</div>

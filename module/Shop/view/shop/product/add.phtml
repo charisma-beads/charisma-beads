@@ -1,0 +1,6 @@
+<?php $this->headTitle('Add Product') ?>
+
+<?=$this->partial('shop/product/product-form', [
+	'form' => $this->form,
+	'formAction' => 'add',
+]); ?>

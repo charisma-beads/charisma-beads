@@ -1,0 +1,42 @@
+
+<?php
+$title = $this->title;
+$this->headTitle($title);
+$splitTitle = explode(' ', $title);
+$title1 = $splitTitle[0];
+unset($splitTitle[0]);
+$title2 = implode(' ', $splitTitle);
+?>
+<!-- options -->
+<div class="row shop-top-options">
+
+    <div class="col-sm-9 col-md-9">
+
+        <h2>
+            <strong><?=$title1;?></strong> <?=$title2;?>
+        </h2>
+
+        <?php if ($this->bread):?>
+        <!-- breadcrumb -->
+        <?=$this->breadCrumbs($this->product);?>
+        <!-- /breadcrumb -->
+        <?php endif;?>
+
+    </div>
+
+    <?php if ($this->enableOptions): ?>
+    <div class=" col-sm-3 col-md-3">
+
+        <select class="form-control pointer fsize13 pull-right" name="orderby">
+            <option value="menu_order" selected="selected">Default sorting</option>
+            <option value="popularity">Sort by popularity</option>
+            <option value="rating">Sort by average rating</option>
+            <option value="date">Sort by newness</option>
+            <option value="price">Sort by price: low to high</option>
+            <option value="price-desc">Sort by price: high to low</option>
+        </select>
+
+    </div>
+    <?php endif; ?>
+</div>
+<!-- /options -->

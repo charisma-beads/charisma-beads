@@ -1,0 +1,31 @@
+
+
+<?=$this->partial('uthando-admin/partial/search', [
+	'name'			=> 'taxRate',
+	'searchInputs'	=> [
+		'Tax Rate' => 'taxRate',
+	],
+]);?>
+
+
+<div id="table-taxRate">
+	<?=$this->partial('shop/tax-rate/list', [
+	    'models' => $this->models
+	]); ?>
+</div>
+
+<?php $this->inlineScript()->captureStart(); ?>
+$(document).ready(function(){
+	$('#table-taxRate').dataGrid({
+	    url : 'rate/list',
+	    query: { sort : 'taxRateId' },
+	    searchForm : $('#search-taxRate'),
+	    paging : 'links',
+	    columnSort: true,
+	    //rowClick : admin.dataTable.rowClick
+	});
+});
+<?php $this->inlineScript()->captureEnd(); ?>
+
+
+

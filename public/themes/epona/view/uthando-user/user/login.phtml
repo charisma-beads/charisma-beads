@@ -1,0 +1,199 @@
+
+<?php if ($this->renderPageTitle != false):?>
+    <?php $this->placeholder('page-top')->captureStart();?>
+
+    <?=$this->partial('layout/page-title', [
+        'pageTitle' => 'Login'
+    ]);?>
+    <?php $this->placeholder('page-top')->captureEnd();?>
+<?php endif;?>
+
+<?php
+$loginForm = (null == $this->loginForm) ? $this->formManager('UthandoUserLogin') : $this->loginForm;
+$registerForm = (null == $this->registerForm) ? $this->formManager('UthandoUserRegister') : $this->registerForm;
+$advertList = (false == $registerForm->has('advertId')) ? $this->formManager('AdvertList') : $registerForm->get('advertId');
+?>
+
+<div class="row">
+
+    <!-- LOGIN -->
+    <div class="col-md-6 col-sm-6">
+        <!-- form error -->
+        <?php if ($loginForm->getMessages()):?>
+            <div class="alert alert-danger"><!-- DANGER -->
+                <strong>Opps!</strong> There were some errors in the form, change a few things up and try submitting again.
+            </div>
+        <?php endif;?>
+        <!-- /form error -->
+        <!-- login form -->
+        <form action="<?=$this->url('user', [
+            'action' => 'authenticate',
+        ]) ?>" method="post" class="sky-form boxed">
+            <header>I'm a returning customer</header>
+
+            <fieldset>
+
+                <section>
+                    <label class="input<?php if ($loginForm->get('email')->getMessages()) echo ' state-error'; ?>">
+                        <i class="icon-append fa fa-envelope"></i>
+                        <?=$this->formEmail($loginForm->get('email')); ?>
+                        <b class="tooltip tooltip-bottom-right">Needed to verify your account</b>
+                        <span class="help-block">
+                            <?=$this->formElementErrors($loginForm->get('email'), [
+                                'class' => 'list-unstyled note note-error'
+                            ]); ?>
+                        </span>
+                    </label>
+                </section>
+
+                <section>
+                    <label class="input<?php if ($loginForm->get('passwd')->getMessages()) echo ' state-error'; ?>">
+                        <i class="icon-append fa fa-lock"></i>
+                        <?=$this->formPassword($loginForm->get('passwd')); ?>
+                        <b class="tooltip tooltip-bottom-right">Only latin characters and numbers</b>
+                        <span class="help-block">
+                            <?=$this->formElementErrors($loginForm->get('passwd'), [
+                                'class' => 'list-unstyled note note-error'
+                            ]); ?>
+                        </span>
+                    </label>
+                    <div class="note"><a href="<?=$this->url('user', [
+                        'action'    => 'forgot-password',
+                    ]);?>">Forgot Password?</a></div>
+                </section>
+
+                <section>
+                    <label class="checkbox">
+                        <?=$this->formCheckbox($loginForm->get('rememberme')->setOptions([
+                            'disable-twb' => true,
+                            'use_hidden_element' => false,
+                        ]));?>
+                        <i></i>Keep me logged in
+                    </label>
+                </section>
+
+            </fieldset>
+            <footer>
+                <button type="submit" class="button" data-loading-text="Please wait...">Log in</button>
+            </footer>
+            <?=$this->formElement($loginForm->get('security')); ?>
+            <?=$this->formElement($loginForm->get('returnTo')); ?>
+        </form>
+        <!-- /login form -->
+
+    </div>
+    <!-- /LOGIN -->
+
+    <!-- REGISTER -->
+    <div class="col-md-6 col-sm-6">
+        <!-- form error -->
+        <?php if ($registerForm->getMessages()):?>
+            <div class="alert alert-danger"><!-- DANGER -->
+                <strong>Opps!</strong> There were some errors in the form, change a few things up and try submitting again.
+            </div>
+        <?php endif;?>
+        <!-- /form error -->
+        <!-- registration form -->
+        <form action="<?=$this->url('user', [
+            'action' => 'register',
+        ]) ?>" method="post" class="sky-form boxed">
+            <header>New Customer</header>
+
+            <fieldset>
+                <section>
+                    <label class="input<?php if ($registerForm->get('email')->getMessages()) echo ' state-error'; ?>">
+                        <i class="icon-append fa fa-envelope"></i>
+                        <?=$this->formEmail($registerForm->get('email'));?>
+                        <b class="tooltip tooltip-bottom-right">Needed to verify your account</b>
+                        <span class="help-block">
+                            <?=$this->formElementErrors($registerForm->get('email'), [
+                                'class' => 'list-unstyled note note-error'
+                            ]); ?>
+                        </span>
+                    </label>
+                </section>
+
+                <section>
+                    <label class="input<?php if ($registerForm->get('passwd')->getMessages()) echo ' state-error'; ?>">
+                        <i class="icon-append fa fa-lock"></i>
+                        <?=$this->formPassword($registerForm->get('passwd'));?>
+                        <b class="tooltip tooltip-bottom-right">Only latin characters and numbers</b>
+                        <span class="help-block">
+                            <?=$this->formElementErrors($registerForm->get('passwd'), [
+                                'class' => 'list-unstyled note note-error'
+                            ]); ?>
+                        </span>
+                    </label>
+                </section>
+
+                <section>
+                    <label class="input<?php if ($registerForm->get('passwd-confirm')->getMessages()) echo ' state-error'; ?>">
+                        <i class="icon-append fa fa-lock"></i>
+                        <?=$this->formPassword($registerForm->get('passwd-confirm'));?>
+                        <b class="tooltip tooltip-bottom-right">Only latin characters and numbers</b>
+                        <span class="help-block">
+                            <?=$this->formElementErrors($registerForm->get('passwd-confirm'), [
+                                'class' => 'list-unstyled note note-error'
+                            ]); ?>
+                        </span>
+                    </label>
+                </section>
+            </fieldset>
+
+            <fieldset>
+                <div class="row">
+                    <section class="col col-md-6">
+                        <label class="input<?php if ($registerForm->get('firstname')->getMessages()) echo ' state-error'; ?>">
+                            <?=$this->formInput($registerForm->get('firstname'));?>
+                            <span class="help-block">
+                            <?=$this->formElementErrors($registerForm->get('firstname'), [
+                                'class' => 'list-unstyled note note-error'
+                            ]); ?>
+                        </span>
+                        </label>
+                    </section>
+                    <section class="col col-md-6">
+                        <label class="input<?php if ($registerForm->get('lastname')->getMessages()) echo ' state-error'; ?>">
+                            <?=$this->formInput($registerForm->get('lastname'));?>
+                            <span class="help-block">
+                                <?=$this->formElementErrors($registerForm->get('lastname'), array(
+                                    'class' => 'list-unstyled note note-error'
+                                )); ?>
+                            </span>
+                        </label>
+                    </section>
+                </div>
+                
+                <section class="<?php if ($advertList->getMessages()) echo ' state-error'; ?>">
+                    <label class="select">
+                        <?=$this->formSelect(
+                            $advertList->setAttribute('class', 'pointer')
+                        );?>
+                        <i></i>
+                    </label>
+                    <span class="help-block">
+                        <?=$this->formElementErrors($advertList, [
+                            'class' => 'list-unstyled note note-error'
+                        ]); ?>
+                    </span>
+                </section>
+                
+                <section>
+                    <label class="checkbox">
+                        <input type="checkbox" name="checkbox" checked="checked">
+                        <i></i>I want to receive news and  special offers
+                    </label>
+                </section>
+            </fieldset>
+            <footer>
+                <button type="submit" class="button">Submit</button>
+            </footer>
+            <?=$this->formElement($registerForm->get('security')); ?>
+            <?=$this->formElement($registerForm->get('returnTo')); ?>
+        </form>
+        <!-- /registration form -->
+
+    </div>
+    <!-- /REGISTER -->
+
+</div>

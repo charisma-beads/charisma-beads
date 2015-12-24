@@ -1,0 +1,41 @@
+
+<div class="plot-container">
+	<div id="advert-placeholder" class="plot-placeholder"></div>
+	<div id="advert-hover" class="text-right"></div>
+</div>
+
+<script type="text/javascript">
+
+	$(function() {
+
+		var aData = <?=$this->stats;?>;
+
+		function suffixFormatter(val, axis) {
+		    return val.toFixed(axis.tickDecimals) + "%";
+		}
+
+		var advertPlaceholder = $("#advert-placeholder");
+
+		$.plot(advertPlaceholder, aData, {
+			series: {
+		        pie: {
+		            innerRadius: 0.5,
+		            show: true
+		        }
+		    },
+		    grid: {
+		        hoverable: true,
+		        clickable: true
+		    }
+		});
+
+        advertPlaceholder.bind("plothover plotclick", function(event, pos, obj) {
+
+			if (!obj) return;
+			
+			var percent = parseFloat(obj.series.percent).toFixed(2);
+			$("#advert-hover").html("<span style='font-weight:bold; color:" + obj.series.color + "'>" + obj.series.label + " (" + percent + "%)</span>");
+		});
+	});
+
+</script>

@@ -1,0 +1,43 @@
+<?php $this->headTitle('Post Zones') ?>
+
+<?php if (count($this->models) > 0): ?>
+<div class="panel panel-default">
+    <table id="postZone-list" class="table table-hover table-bordered table-condensed sortable-table">
+    	<thead>
+    		<tr>
+    			<th data-field="postZoneId">Post Zone Id</th>
+    			<th data-field="zone">Zone</th>
+    			<th>Actions</th>
+    		</tr>
+    	</thead>
+    	
+    	<tbody>
+    		<?php /* @var $row \Shop\Model\Post\Zone */ ?>
+    		<?php foreach($this->models as $row): ?>
+    		<tr>
+    			<td><?=$this->escapeHtml($row->getPostZoneId()); ?></td>
+    			<td><?=$this->escapeHtml($row->getZone()); ?></td>
+    			<td>
+                    <?=$this->partial('uthando-admin/partial/edit-actions', [
+                    	'pk'		=> 'postZoneId',
+                    	'id'		=> $row->getPostZoneId(),
+    		    		'tableName'	=> 'postZone',
+                    	'route'		=> 'admin/shop/post/zone/edit',
+    		    	]);?>
+    			</td>
+    		</tr>
+    		<?php endforeach; ?>
+    	</tbody>
+    </table>
+</div>
+
+<?=$this->paginationControl(
+    $this->models,
+    'Elastic',
+    'application/partial/paginate',
+	['route' => 'admin/cshop/post/zone/page']
+); ?>
+
+<?php else: ?>
+<h4>No Post Zones where returned by search.</h4>
+<?php endif; ?>

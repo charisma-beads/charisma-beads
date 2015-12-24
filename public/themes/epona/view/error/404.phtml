@@ -1,0 +1,29 @@
+<?php $this->headTitle('404 Page Not Found'); ?>
+
+<?php $this->placeholder('page-top')->captureStart();?>
+
+<?=$this->partial('layout/page-title', [
+    'pageTitle' => '404 Page Not Found',
+]);?>
+
+<?php $this->placeholder('page-top')->captureEnd();?>
+
+<div class="row default-e404">
+
+    <div class="col-md-9">
+
+        <span class="default-404"><i class="fa fa-file"></i> 404</span>
+        <p class="text-center lead">We're sorry, but the page you were looking for doesn't exist.</p>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <h4>Useful Links</h4>
+
+        <!-- SIDE NAV -->
+        <?=$this->partial('shop/product-nav');?>
+        <!-- /SIDE NAV -->
+
+    </div>
+</div>

@@ -1,0 +1,31 @@
+
+<?php $this->headTitle('Edit My Address') ?>
+
+<?=$this->partial('uthando-admin/partial/add-edit-form', [
+	'form'         => $this->form,
+	'formName'     => 'Edit Address',
+	'postUrl'      => $this->url('shop/customer/address', [
+	    'action'   => 'edit-address',
+	    'id'       => $this->model->getCustomerAddressId(),
+    ]),
+	'cancelUrl'    => $this->url('shop/customer/address'),
+	'formElements' => [
+		'customerAddressId', 'address1', 'address2', 'address3',
+        'city', 'provinceId', 'postcode', 'countryId',
+        'phone', 'returnTo'
+	],
+]); ?>
+
+<script>
+$(document).ready(function(){
+    $('#countryId').change(function() {
+    	$.ajax({
+    		url : '<?=$this->basePath('/shop/country/province');?>',
+    		data : {countryId : this.value},
+    		type : 'POST'
+    	}).done(function(data){
+          	$('#provinceId').html( data );
+    	});
+	});
+});
+</script>

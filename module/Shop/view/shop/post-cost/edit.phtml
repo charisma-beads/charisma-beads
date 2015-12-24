@@ -1,0 +1,13 @@
+<?php $this->headTitle('Edit Post Cost') ?>
+
+<?=$this->partial('uthando-admin/partial/add-edit-form', [
+	'form' 			=> $this->form,
+	'formName'		=> 'Post Level',
+    'postUrl'		=> $this->url('admin/shop/post/cost/edit', [
+        'id'    => $this->model->getPostCostId(),
+    ]),
+    'cancelUrl'     => $this->url('admin/shop/post/cost'),
+	'formElements'	=> [
+		'cost', 'vatInc', 'postLevelId', 'postZoneId', 'postCostId',
+	],
+]); ?>

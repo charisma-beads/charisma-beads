@@ -1,0 +1,39 @@
+
+<?php if (count($this->models) > 0): ?>
+    <table id="customer-list" class="table table-hover table-bordered table-condensed sortable-table">
+        <thead>
+        <tr>
+            <th>Customer Id</th>
+            <th>Name</th>
+            <th>Date Created</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <?php /* @var $row \Shop\Model\Customer\Customer */ ?>
+        <?php foreach($this->models as $row): ?>
+            <?php $class = ($row->getUser()->getActive()) ? '' : 'danger';?>
+            <tr class="<?=$class;?>">
+                <td>
+                    <a href="<?=$this->url('admin/shop/customer/edit', [
+                        'id' => $row->getCustomerId(),
+                    ]);?>">
+                        <?=$this->escapeHtml($row->getNumber());?>
+                    </a>
+                </td>
+                <td><?=$this->escapeHtml($row->getLastNameFirst());?></td>
+                <td><?=$this->escapeHtml($this->formatDate($row->getDateCreated())); ?></td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+
+<?php else: ?>
+    <div class="panel-body">
+        <h4>No new Customers this month.</h4>
+    </div>
+<?php endif; ?>
+
+<script>
+    $('#new-customer-count').html('(<?=count($this->models);?>)');
+</script>

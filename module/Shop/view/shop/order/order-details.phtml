@@ -1,0 +1,122 @@
+
+<div class="col-md-12">
+    <div class="panel panel-default order-details">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                Order Details
+            </h4>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel-body">
+                    Order No:&nbsp;<span><?=$this->escapeHtml($this->order->getOrderNumber());?></span><br>
+                    Customer No:&nbsp;<span><?=$this->escapeHtml($this->order->getCustomer()->getNumber());?></span><br>
+                    Date Ordered:&nbsp;<span><?=$this->formatDate($this->order->getOrderDate())->setFormat('d/m/Y');
+                        ?></span>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="panel-body">
+                    Status: <span><?=$this->escapeHtml($this->order->getOrderStatus()->getOrderStatus());?></span><br>
+                    Payment Method: <span><?=$this->escapeHtml($this->order->getMetaData()->getPaymentMethod());?></span><br>
+                    Shipping Method: <span><?=$this->escapeHtml($this->order->getMetaData()->getShippingMethod());?></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-6">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                Billing Address
+            </h4>
+        </div>
+        <div class="panel-body">
+            <address>
+                <?=$this->customerAddress()
+                    ->setOrder($this->order)
+                    ->includeName()
+                    ->includeEmail()
+                    ->formatAddress(
+                        $this->order->getMetadata()
+                            ->getBillingAddress()
+                );?>
+            </address>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-6">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                Delivery Address
+            </h4>
+        </div>
+        <div class="panel-body">
+            <address>
+                <?=$this->customerAddress()
+                    ->setOrder($this->order)
+                    ->includeName()
+                    ->formatAddress(
+                        $this->order->getMetadata()
+                            ->getDeliveryAddress()
+                );?><br>
+            </address>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <div class="panel panel-default">
+        <table class="table table-bordered table-striped">
+            <tr class="first-row">
+        		<th>Product</th>
+        		<th>Description</th>
+        		<th>Price</th>
+        		<th>Quantity</th>
+        		<th>Total</th>
+        	</tr>
+        	
+        	<?php /* @var $item \Shop\Model\Order\Line */ ?>
+        	<?php foreach ($this->order->getOrderlines() as $item): ?>
+        	<tr>
+        		<td><?=$item->getMetadata()->getSku();?></td>
+        		<td>
+        		  <?=$item->getMetadata()->getCategory();?> / <?=$item->getMetadata()->getName();?>
+        		  <?php if ($item->getMetadata()->getPostUnit() > 0): ?>
+                  &nbsp;(<?=$item->getMetadata()->getPostUnit();?> grams)
+                  <?php endif; ?>
+        		</td>
+        		<td><?=$this->priceFormat($item->getPrice());?></td>
+        		<td><?=$item->getQty();?></td>
+        		<td><?=$this->priceFormat($item->getPrice() * $item->getQty());?></td>
+        	</tr>
+        	<?php endforeach; ?>
+        	<tr>
+                <td colspan="2">&nbsp;</td>
+        	    <th colspan="2"><p class="text-right">Postage:</p></th>
+        	    <td><?=$this->priceFormat($this->order->getShipping());?></td>
+        	</tr>
+        	<tr>
+                <td colspan="2">&nbsp;</td>
+        	    <th colspan="2"><p class="text-right">Total:</p></th>
+        	    <td><?=$this->priceFormat($this->order->getTotal());?></td>
+        	</tr>
+        </table>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">Requirements</h4>
+        </div>
+        <div class="panel-body">
+            <p><?=$this->escapeHtml($this->order->getMetaData()->getRequirements());?></p>
+        </div>
+    </div>
+</div>

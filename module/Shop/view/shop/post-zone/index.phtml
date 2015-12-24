@@ -1,0 +1,29 @@
+
+
+<?=$this->partial('uthando-admin/partial/search', [
+	'name'			=> 'postZone',
+	'searchInputs'	=> [
+		'Zone' => 'zone',
+	],
+]);?>
+	    	
+<div id="table-postZone">
+	<?=$this->partial('shop/post-zone/list', [
+	    'models' => $this->models
+	]); ?>
+</div>
+
+
+<?php $this->inlineScript()->captureStart(); ?>
+$(document).ready(function(){
+	$('#table-postZone').dataGrid({
+	    url : 'zone/list',
+	    query: { sort : 'zone' },
+	    searchForm : $('#search-postZone'),
+	    paging : 'links',
+	    columnSort: true,
+	    //rowClick : admin.product.rowClick
+	});
+});
+<?php $this->inlineScript()->captureEnd(); ?>
+

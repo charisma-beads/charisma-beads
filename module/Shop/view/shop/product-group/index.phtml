@@ -1,0 +1,26 @@
+
+<?=$this->partial('uthando-admin/partial/search', [
+	'name'			=> 'productGroup',
+	'searchInputs'	=> [
+		'Group'		=> 'group',
+	],
+]);?>
+
+	    	
+<div id="table-productGroup">
+	<?=$this->partial('shop/product-group/list', [
+	    'models' => $this->models
+	]); ?>
+</div>
+
+<?php $this->inlineScript()->captureStart(); ?>
+$(document).ready(function(){
+	$('#table-productGroupPrice').dataGrid({
+	    url : 'group/list',
+	    query: { sort : 'productGroupId' },
+	    searchForm : $('#search-productGroup'),
+	    paging : 'links',
+	    columnSort: true
+	});
+});
+<?php $this->inlineScript()->captureEnd(); ?>

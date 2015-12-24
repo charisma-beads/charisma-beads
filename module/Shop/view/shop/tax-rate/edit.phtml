@@ -1,0 +1,13 @@
+<?php $this->headTitle('Edit Tax Rate') ?>
+
+<?=$this->partial('uthando-admin/partial/add-edit-form', [
+	'form' 			=> $this->form,
+	'formName'		=> 'Tax Rate',
+    'postUrl'		=> $this->url('admin/shop/tax/rate/edit', [
+        'id'    => $this->model->getTaxRateId(),
+    ]),
+    'cancelUrl'     => $this->url('admin/shop/tax/rate'),
+	'formElements'	=> [
+		'taxRate', 'taxRateId',
+	],
+]); ?>

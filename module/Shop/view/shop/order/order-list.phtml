@@ -1,0 +1,44 @@
+
+<?php if (count($this->models)): ?>
+
+<table id="order-list" class="table table-hover table-bordered table-condensed sortable-table">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Order Number</th>
+        <th>Status</th>
+        <th>Total</th>
+        <th>Order Date</th>
+        <th style="width:125px;">Actions</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <?php /* @var $row \Shop\Model\Order\Order */ ?>
+    <?php foreach($this->models as $row): ?>
+        <tr>
+            <td><?=$this->escapeHtml($row->getOrderId());?></td>
+            <td><?=$this->escapeHtml($row->getOrderNumber());?></td>
+            <td><?=$this->escapehtml($row->getOrderStatus()->getOrderStatus());?></td>
+            <td><?=$this->priceFormat($this->escapeHtml($row->getTotal()));?></td>
+            <td><?=$this->formatDate($row->getOrderDate());?>
+            <td>
+                <?=$this->partial('shop/order/partial/edit-actions', [
+                    'pk'		=> 'orderId',
+                    'order'		=> $row,
+                    'tableName'	=> 'order',
+                    'route'		=> 'admin/shop/order/edit',
+                    'buttonSize'=> 'btn-sm',
+                ]);?>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+    </tbody>
+</table>
+
+
+<?php else: ?>
+<div class="panel-body">
+    <h4>No Orders where returned.</h4>
+</div>
+<?php endif; ?>

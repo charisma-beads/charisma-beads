@@ -1,0 +1,27 @@
+
+<?=$this->partial('uthando-admin/partial/search', [
+	'name'			=> 'advert',
+	'searchInputs'	=> [
+		'Advert'	=> 'advert',
+	],
+	'params' 		=> $this->params,
+]);?>
+
+<div id="table-advert">
+	<?=$this->partial('shop/advert/list', [
+	    'models' => $this->models,
+	]); ?>
+</div>
+
+
+<script>
+    $(document).ready(function() {
+        $('#table-advert').dataGrid({
+            url: 'advert/list',
+            query: {sort: 'advertId'},
+            searchForm: $('#search-advert'),
+            columnSort: true
+        });
+    });
+
+</script>

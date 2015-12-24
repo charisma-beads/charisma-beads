@@ -1,0 +1,41 @@
+
+<?php $this->placeholder('header')->captureStart();?>
+<?=$this->partial('shop/options', [
+    'title' => 'Shop Front',
+    'bread' => [],
+]);?>
+
+<?php $this->placeholder('header')->captureEnd();?>
+
+<div class="row">
+    <div class="col-md-3 hidden-sm">
+        <?=$this->partial('shop/product-nav');?>
+    </div>
+    <div class="col-md-9">
+        <!-- PRODUCT CATEGORIES -->
+        <div class="row">
+            <?php /* @var $row \Shop\Model\Product\Category */ ?>
+             <?php $c=0;?>
+            <?php foreach ($this->cats as $row): ?>
+            <?php $c++;?>
+                <div class="col-sm-4 col-md-4"><!-- category -->
+                    <div class="box-content thumbnail text-center">
+                        <a href="<?php echo $this->url('shop/catalog', [
+                            'categoryIdent' => $row->getIdent()
+                        ]); ?>" class="item-image"><!-- image -->
+                            <?php if ($row->getShowImage()):?>
+                            <img class="img-responsive" src="<?=$this->productCategoryImage($row);?>" alt="<?=$this->escapehtml($row->getCategory());?>">
+                            <?php endif;?>
+                        </a>
+                        <div class="caption text-left"><!-- name -->
+                            <h5 class="nomargin elipsis"><?=$this->escapehtml($row->getCategory());?></h5>
+                        </div>
+                    </div>
+                </div><!-- /category -->
+                <?php if (($c % 3) === 0):?>
+            	<div class="clearfix"></div>
+            	<?php endif; ?>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</div>

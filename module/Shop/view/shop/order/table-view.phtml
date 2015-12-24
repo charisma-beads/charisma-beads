@@ -1,0 +1,145 @@
+<table class="col-12">
+    <tr>
+        <td>
+            <img src="<?=APPLICATION_PATH . '/public' . $this->themeOptions('logo');?>" height="50" alt="logo">
+            <img src="<?=APPLICATION_PATH . '/public' . $this->themeOptions('logo2');?>" height="50" alt="logo" >
+        </td>
+    </tr>
+</table>
+
+<table class="col-12 panel address">
+    <tr class="panel panel-default">
+        <td class="col-4 panel-heading address-heading">
+            <h4 class="panel-title"> <?=$this->shopOption('merchantName');?></h4>
+        </td>
+        <td>&nbsp;</td>
+        <td class="col-4 panel-heading address-heading">
+            <h4 class="panel-title"> Billing Address</h4>
+        </td>                 
+        <td>&nbsp;</td>  
+        <td class="col-4 panel-heading address-heading">
+            <h4 class="panel-title"> Delivery Address</h4>
+        </td>                     
+    </tr>
+    <tr class="panel panel-default">
+        <td class="panel-body address-body">
+            <address>
+                <?=$this->contact()->formatAddress('details.address', true);?>
+                <br><br>
+                <?=$this->contact('details.phone');?><br>
+                <?=$this->contact('details.email');?>
+            </address>
+        </td>
+        <td class="spacer-row">&nbsp;</td>
+        <td class="panel-body address-body">
+           <address>
+                <?=$this->customerAddress()
+                    ->setOrder($this->order)
+                    ->includeName()
+                    ->includeEmail()
+                    ->formatAddress(
+                        $this->order->getMetadata()
+                            ->getBillingAddress()
+                );?>
+            </address>
+        </td>
+        <td>&nbsp;</td>
+        <td class="panel-body address-body">
+           <address>
+                <?=$this->customerAddress()
+                    ->setOrder($this->order)
+                    ->includeName()
+                    ->formatAddress(
+                        $this->order->getMetadata()
+                            ->getBillingAddress()
+                );?>
+            </address>
+        </td>
+    </tr>
+</table>
+
+<table class="col-12 panel panel-default">
+    <tr>
+        <td class="panel-heading" colspan="3">
+            <h4 class="panel-title"> Order Details</h4>
+        </td>
+    </tr>
+    <tr>
+        <td class="col-6 panel-body">
+            Order No:&nbsp;<span><?=$this->escapeHtml($this->order->getOrderNumber());?></span><br>
+            Date Ordered:&nbsp;<span><?=$this->formatDate($this->order->getOrderDate())->setFormat('d/m/Y');?></span>
+        </td>
+        <td>&nbsp;</td>
+        <td class="col-6 panel-body">
+            Payment Method: <span><?=$this->escapeHtml($this->order->getMetaData()->getPaymentMethod());?></span><br>
+            Shipping Method: <span><?=$this->escapeHtml($this->order->getMetaData()->getShippingMethod());?></span>
+        </td>
+    </tr>
+</table>
+
+
+<table class="col-12 panel table">
+    <tr class="first-row">
+		<th>Product</th>
+		<th>Description</th>
+		<th>Price</th>
+		<th>Quantity</th>
+		<th>Total</th>
+	</tr>
+	
+	<?php /* @var $item \Shop\Model\Order\Line */ ?>
+	<?php foreach ($this->order->getOrderlines() as $item): ?>
+	<tr class="item-list">
+		<td><?=$item->getMetadata()->getSku();?></td>
+		<td>
+		  <?=$item->getMetadata()->getCategory();?> / <?=$item->getMetadata()->getName();?>
+		  <?php if ($item->getMetadata()->getPostUnit() > 0): ?>
+          &nbsp;(<?=$item->getMetadata()->getPostUnit();?> grams)
+          <?php endif; ?>
+	    </td>
+		<td class="text-right"><?=$this->priceFormat($item->getPrice());?></td>
+		<td><?=$item->getQty();?></td>
+		<td class="text-right"><?=$this->priceFormat($item->getPrice() * $item->getQty());?></td>
+	</tr>
+	<?php endforeach; ?>
+	<tr>
+        <td colspan="2">&nbsp;</td>
+	    <th colspan="2" class="text-right">Postage:</th>
+	    <td class="text-right"><?=$this->priceFormat($this->order->getShipping());?></td>
+	</tr>
+	<tr>
+        <td colspan="2">&nbsp;</td>
+	    <th colspan="2" class="text-right">Total:</th>
+	    <td class="text-right"><?=$this->priceFormat($this->order->getTotal());?></td>
+	</tr>
+</table>
+
+<?php if ($this->order->getMetaData()->getRequirements()): ?>
+<table class="col-12 panel panel-default">
+    <tr>
+        <td class="panel-heading">
+            <h4 class="panel-title"> Requirements</h4>
+        </td>                   
+    </tr>
+    <tr>
+        <td class="panel-body">
+            <p><?=$this->escapeHtml($this->order->getMetaData()->getRequirements());?></p>
+        </td>
+    </tr>
+</table>
+<?php endif; ?>
+
+<div class="page-footer">
+    <div class="company-details">
+        <p>
+            Registered at Companies House, register number <?=$this->contact('company.number');?>.
+        </p>
+        <p>
+            Registered office address:
+           <?=$this->contact()->formatAddress('company.address');?>
+        </p>
+    </div>
+</div>
+
+
+    

@@ -1,0 +1,26 @@
+
+<?=$this->partial('uthando-admin/partial/search', [
+	'name'			=> 'order',
+	'searchInputs'	=> [
+		'Order' => 'orderNumber',
+	],
+]);?>
+
+	    	
+<div id="table-order">
+	<?=$this->partial('shop/order/list', [
+	    'models' => $this->models
+	]); ?>
+</div>
+
+<?php $this->inlineScript()->captureStart(); ?>
+$(document).ready(function(){
+	$('#table-order').dataGrid({
+	    url : 'order/list',
+	    query: { sort : '-orderDate' },
+	    searchForm : $('#search-order'),
+	    paging : 'links',
+	    columnSort: true,
+	});
+});
+<?php $this->inlineScript()->captureEnd(); ?>

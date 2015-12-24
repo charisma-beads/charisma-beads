@@ -1,0 +1,44 @@
+
+<a class="dropdown-toggle">
+    <i class="fa fa-shopping-cart"></i>&nbsp;
+    <?=$this->cart()->countItems(); ?>&nbsp;ITEMS&nbsp;-&nbsp;<?=$this->cart()->getTotal(); ?>&nbsp;<i class="fa fa-angle-down"></i>
+</a>
+<ul class="dropdown-menu pull-right">
+    <li>
+        <p><i class="fa fa-warning"></i> You have <?=$this->cart()->countItems(); ?> item(s) in your cart</p>
+
+        <!-- CART CONTENT -->
+        <div class="quick-cart-content">
+            <?php /* @var $item \Shop\Model\Cart\Item */ ?>
+            <div class="quick-cart-items">
+                <?php foreach ($this->cart()->getCart() as $item): ?>
+                    <a class="quick-cart-item" href="<?=$this->url('shop/cart', [
+                        'action' => 'view'
+                    ]);?>"><!-- item -->
+                        <?php if ($item->getMetadata()->getShowImage()):?>
+                            <img class="pull-left" src="<?=$this->productImage($item->getMetadata()->getImage(), 'thumb');?>" width="40" alt="quick cart">
+                        <?php endif;?>
+                        <div class="inline-block">
+                            <span class="title block"><?=$item->getMetadata()->getSku();?>/<?=$item->getMetadata()->getName();?></span>
+                            <span class="price block"><?=$item->getQuantity();?> &times; <?=$this->cart()->getLineCost($item);?></span>
+                        </div>
+                    </a><!-- /item -->
+
+                <?php endforeach; ?>
+            </div>
+
+            <div class="cart-footer"><!-- cart footer -->
+
+                <a href="<?=$this->url('shop/cart', [
+                    'action' => 'view'
+                ]);?>" class="btn btn-primary col-sm-12 col-md-6">VIEW CART</a>
+
+                <a href="<?=$this->url('shop/checkout');?>" class="btn btn-info col-sm-12 col-md-6">CHECKOUT</a>
+
+            </div><!-- /cart footer -->
+
+        </div>
+        <!-- /CART CONTENT -->
+
+    </li>
+</ul>

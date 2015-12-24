@@ -1,0 +1,43 @@
+<?php
+$articleTitle = $this->escapehtml($this->page->getTitle());
+$this->headTitle($articleTitle);
+
+// setting page keywords and description
+if ($this->page->getDescription() || $this->page->getDescription() != '') {
+    $this->headMeta()->appendName('description', $this->escapehtml($this->page->getDescription()));
+}
+?>
+
+<?php $this->placeholder('page-top')->captureStart();?>
+
+<?=$this->partial('layout/page-title', [
+    'pageTitle' => $articleTitle
+]);?>
+
+<?php $this->placeholder('page-top')->captureEnd();?>
+
+<div id="blog" class="row">
+
+    <!-- BLOG SIDEBAR -->
+	<div class="col-md-3 col-sm-3">
+        <?=$this->partial('shop/product-nav');?>
+	</div>
+	<!-- /BLOG SIDEBAR -->
+
+	<!-- BLOG ARTICLE -->
+	<div class="col-md-9 col-sm-9">
+
+		<div class="row">
+
+			<!-- article content -->
+			<article>
+				<?=$this->page->getContent();?>
+			</article>
+
+			<hr class="half-margins invisible" />
+		</div>
+
+	</div>
+	<!-- /BLOG ARTICLE -->
+
+</div>

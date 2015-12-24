@@ -1,0 +1,13 @@
+<?php $this->headTitle('Add Post Zone') ?>
+
+<?=$this->partial('uthando-admin/partial/add-edit-form', [
+	'form' 			=> $this->form,
+	'formName'		=> 'Post Zone',
+    'postUrl'		=> $this->url('admin/shop/post/zone/edit', [
+        'action' => 'add',
+    ]),
+    'cancelUrl'     => $this->url('admin/shop/post/zone'),
+	'formElements'	=> [
+		'zone', 'taxCodeId',
+	],
+]); ?>

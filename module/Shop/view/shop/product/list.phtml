@@ -1,0 +1,83 @@
+<?php $this->headTitle('Products') ?>
+
+<?php if (count($this->models) > 0): ?>
+<div class="panel panel-default">
+    <table id="product-list" class="table table-hover table-bordered table-condensed sortable-table">
+        <thead>
+            <tr>
+                <th data-field="enabled">&nbsp;</th>
+                <th data-field="productId">Product Id</th>
+                <th data-field="sku">SKU</th>
+                <th data-field="name">Name/Title</th>
+                <th data-field="description">Description</th>
+                <th data-field="price">Price</th>
+                <th data-field="productSizeId">Size</th>
+                <th data-field="quantity">Stock</th>
+                <th data-field="category">Category</th>
+                <th>Image</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <?php /* @var $row \Shop\Model\Product\Product */ ?>
+            <?php foreach($this->models as $row): ?>
+            <tr class="<?=$this->ProductTableRowState($row);?>">
+                <td><?=$this->enabled($row, [
+                    'table' => 'product',
+                    'route' => 'admin/shop/product/edit',
+                ]); ?></td>
+                <td><?=$this->escapeHtml($row->getProductId()); ?></td>
+                <td><?=$this->escapeHtml($row->getSku()); ?></td>
+                <td><?=$this->escapeHtml($row->getName()); ?></td>
+                <td><?=$this->escapeHtml($row->getShortDescription()); ?></td>
+                <td><?=$this->priceFormat($row->getPrice(false)); ?>
+                <td><?=$this->escapeHtml($row->getProductSize()->getSize()); ?>
+                <td><?=$this->escapeHtml($row->getQuantity());?></td>
+                <td><?=$this->escapeHtml($row->getProductCategory()->getCategory()); ?></td>
+                <td>
+                    <?php if($this->productImage($row)->isUploaded()):?>
+                        <i class="fa fa-check"></i>
+                        <a tabindex="0" style="cursor: pointer;" role="button" data-toggle="popover" 
+                            data-trigger="focus" title="<?=$this->escapeHtml($row->getDefaultImage()->getThumbnail())?>"
+                            data-content="<img src='<?=$this->productImage($row, 'thumb');?>'>">
+                            <i class="fa fa-eye fa-lg"></i>
+                        </a>
+                    <?php else: ?>
+                        <i class="fa fa-times"></i>
+                    <?php endif; ?>
+                </td>
+                <td>
+                    <?=$this->partial('uthando-admin/partial/edit-actions', [
+                        'pk'		=> 'productId',
+                        'id'		=> $row->getProductId(),
+                        'tableName'	=> 'product',
+                        'route'		=> 'admin/shop/product/edit',
+                        'buttonSize'    => 'btn-sm',
+                    ]);?>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
+<?=$this->paginationControl(
+    $this->models,
+    'Elastic',
+    'application/partial/paginate',
+    ['route' => 'admin/shop/product/page']
+); ?>
+
+<?php else: ?>
+<h4>No Products where returned by search.</h4>
+<?php endif; ?>
+
+<script>
+$(function () {
+	  $('[data-toggle="popover"]').popover({
+		  html: true,
+          placement: 'left'
+	  })
+	})
+</script>
+

@@ -1,0 +1,49 @@
+
+<?php if (count($this->models) > 0): ?>
+<table class="table table-hover table-bordered table-condensed">
+    <thead>
+        <tr>
+            <th>Customer</th>
+            <th>Order Number</th>
+            <th>Order Status</th>
+            <th>Order Date</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <?php /* @var $row \Shop\Model\Order\Order */ ?>
+        <?php foreach($this->models as $row): ?>
+            <tr>
+                <td>
+                    <a href="<?=$this->url('admin/shop/customer/edit', [
+                        'id' => $row->getCustomerId(),
+                    ]);?>">
+                        <?=$this->escapeHtml($row->getCustomer()->getFullName());?>
+                    </a>
+                </td>
+                <td title="order-number">
+                    <a href="<?=$this->url('admin/shop/order/edit', [
+                        'id' => $row->getOrderId(),
+                        'action' => 'print'
+                    ]);?>" target="_blank" class="current-order-link">
+                        <span><?=$this->escapeHtml($row->getOrderNumber());?></span>
+                        <i class="fa fa-print fa-2x"></i>
+                    </a>
+                </td>
+                <td>
+                    <?=$this->formSelect(
+                        $this->statusFormElement->setValue($row->getOrderStatusId())
+                            ->setAttribute('class', 'form-control input-sm')
+                    );?>
+                    <input type="hidden" name="orderNumber" value="<?=$row->getOrderNumber(false);?>">
+                </td>
+                <td><?=$this->formatDate($row->getOrderDate())->setFormat('d/m/Y');?></td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+<?php else: ?>
+<div class="panel-body">
+    <h4 class="text-center">No New Orders Currently</h4>
+</div>
+<?php endif; ?>

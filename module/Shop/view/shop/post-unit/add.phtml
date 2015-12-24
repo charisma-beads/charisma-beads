@@ -1,0 +1,40 @@
+
+<?php
+$postUrl = null;
+$cancelUrl = null;
+$helperOptions = null;
+$formName = null;
+
+if ($this->request()->isXmlHttpRequest()) {
+    $helperOptions = [
+        'labelWidth'    => '2',
+        'elementWidth'  => '10',
+    ];
+} else {
+    $this->headTitle('Add Post Unit');
+    $postUrl = $this->url('admin/shop/post/unit/edit', [
+        'action'    => 'add',
+    ]);
+    $cancelUrl = $this->url('admin/shop/post/unit');
+    $formName = 'Post Unit';
+}
+?>
+
+<?php if ($this->request()->isXmlHttpRequest()):?>
+    <div id="alerts" class="col-md-12">
+        <?=$this->tbFlashMessenger()->render(); ?>
+    </div>
+<?php endif; ?>
+
+<div class="col-md-12">
+    <?=$this->partial('uthando-admin/partial/add-edit-form', [
+        'form' 			=> $this->form,
+        'formName'		=> $formName,
+        'postUrl'		=> $postUrl,
+        'cancelUrl'     => $cancelUrl,
+        'helperOptions' => $helperOptions,
+        'formElements'	=> [
+            'postUnit',
+        ],
+    ]); ?>
+</div>

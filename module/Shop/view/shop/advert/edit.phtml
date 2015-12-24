@@ -1,0 +1,13 @@
+<?php $this->headTitle('Edit Advert') ?>
+
+<?=$this->partial('uthando-admin/partial/add-edit-form', [
+    'form' 			=> $this->form,
+    'formName'		=> 'Advert',
+    'formElements'	=> [
+        'enabled', 'advert', 'advertId',
+    ],
+    'postUrl'		=> $this->url('admin/shop/advert/edit', [
+        'id'        => $this->model->getAdvertId(),
+    ]),
+    'cancelUrl'     => $this->url('admin/shop/advert'),
+]); ?>

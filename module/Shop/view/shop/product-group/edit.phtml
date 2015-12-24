@@ -1,0 +1,13 @@
+<?php $this->headTitle('Edit Group Price') ?>
+
+<?=$this->partial('uthando-admin/partial/add-edit-form', [
+	'form' 			=> $this->form,
+	'formName'		=> 'Group Price',
+    'postUrl'		=> $this->url('admin/shop/group/edit', [
+        'id' => $this->model->getProductGroupId(),
+    ]),
+    'cancelUrl'     => $this->url('admin/shop/group'),
+	'formElements'	=> [
+		'productGroupId', 'group', 'price',
+	],
+]); ?>

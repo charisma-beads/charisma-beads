@@ -1,0 +1,98 @@
+<?php $this->headTitle('Checkout - Comfirm Order') ?>
+
+<div class="row">
+    <h2 class="col-md-12">Comfirm Order</h2>
+    
+    <div class="col-md-12">
+        <?=$this->partial('shop/cart', [
+        	'checkout' => true,
+            'countryId' => $this->countryId
+        ]); ?>
+    </div>
+    
+    <form method="post" action="<?=$this->url('shop/checkout', [
+    	'action' => 'confirm-order',
+    ]); ?>">
+        
+        <div class="col-md-6">
+        <?php $this->formRadio()->setSeparator('</div><div class="radio">');?>
+            <div class="form-group<?php if ($this->form->get('payment_option')->getMessages()) echo ' has-error'; ?>">
+                <div class="radio">
+				    <?=$this->formRadio($this->form->get('payment_option'));?>
+                </div>
+                <span class="help-block">
+                    <?=$this->formElementErrors($this->form->get('payment_option'), [
+                        'class' => 'list-unstyled'
+                    ]); ?>
+                </span>
+            </div>
+            
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+    				    <?=$this->formElement($this->form->get('collect_instore'));?>
+    				    <?=$this->form->get('collect_instore')->getLabel();?>
+				    </label>
+				    <span class="help-block">
+				        <span class="text-info">When collecting, postage will be removed from total.</span>
+			        </span>
+				    
+			    </div>
+		    </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="form-group<?php if ($this->form->get('requirements')->getMessages()) echo ' has-error'; ?>">
+                <label class="control-label" for="requirements"><?=$this->form->get('requirements')->getLabel();?></label>
+                <?=$this->formElement($this->form->get('requirements')->setAttribute('class', 'form-control'));?>
+            </div>
+            <div class="form-group<?php if ($this->form->get('terms')->getMessages()) echo ' has-error'; ?>">
+                <label class="control-label" for="terms"><?=$this->form->get('terms')->getLabel();?></label>
+                <?=$this->formElement($this->form->get('terms')->setAttribute('class', 'form-control'));?>
+                <span class="help-block">
+                    <?=$this->formElementErrors($this->form->get('terms'), [
+                        'class' => 'list-unstyled'
+                    ]); ?>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="control-group">
+                <div class="controls">
+                    <a href="#cancelOrderModel" class="btn btn-danger" data-toggle="modal" data-target="#cancelOrderModel">
+                        Cancel Order
+                    </a>
+                    <button type="submit" name="submit" class="btn btn-primary" value="placeOrder" data-loading-text="Please wait...">
+                    	Place Order
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="cancelOrderModel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 id="cancelOrderModelLabel">Cancel Order</h3>
+            </div>
+            
+            <form class="form-horizontal"  method="post" action="<?=$this->url('shop/checkout', [
+                'action' => 'cancelOrder',
+            ]) ?>">
+                <div class="modal-body">
+                    <p>Are you sure you want to cancel your order.</p>
+                    <p class="label label-important">This action cannot be undone</p>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">No Don't Do It</button>
+                    <button type="submit" name="submit" class="btn btn-danger" value="cancelOrder">Yes I want to cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

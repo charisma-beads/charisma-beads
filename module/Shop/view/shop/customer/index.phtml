@@ -1,0 +1,27 @@
+
+
+<?=$this->partial('uthando-admin/partial/search', [
+	'name'			=> 'customer',
+	'searchInputs'	=> [
+		'Customer'	=> 'firstname-lastname',
+		'Address'	=> 'address1'
+	],
+]);?>
+	    	
+<div id="table-customer">
+	<?=$this->partial('shop/customer/list', [
+	    'models' => $this->models
+	]); ?>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $('#table-customer').dataGrid({
+            url: 'customer/list',
+            query: {sort: 'name'},
+            searchForm: $('#search-customer'),
+            columnSort: true
+        });
+    });
+
+</script>

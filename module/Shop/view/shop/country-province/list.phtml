@@ -1,0 +1,43 @@
+<?php $this->headTitle('Country Province') ?>
+
+<?php if (count($this->models) > 0): ?>
+
+<table id="countryProvince-list" class="table table-hover table-bordered table-condensed sortable-table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Code</th>
+            <th>Name</th>
+            <th style="min-width: 125px;">Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <?php /* @var $row \Shop\Model\Country\Province */ ?>
+        <?php foreach($this->models as $row): ?>
+        <tr>
+            <td><?=$this->escapeHtml($row->getProvinceId()); ?></td>
+            <td><?=$this->escapeHtml($row->getProvinceCode()); ?></td>
+            <td><?=$this->escapeHtml($row->getProvinceName()); ?></td>
+            <td>
+                <?=$this->partial('uthando-admin/partial/edit-actions', [
+                    'pk'		=> 'countryProvinceId',
+                    'id'		=> $row->getProvinceId(),
+                    'tableName'	=> 'countryProvince',
+                    'route'		=> 'admin/shop/country/province',
+                    'routeParams'   => [
+                        'action'    => 'edit'
+                    ],
+                    'buttonSize'=> 'btn-sm',
+                ]);?>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+
+<?php else: ?>
+<div class="panel-body">
+    <h4>No provinces yet.</h4>
+</div>
+<?php endif; ?>

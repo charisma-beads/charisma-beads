@@ -1,0 +1,49 @@
+
+<?php $formWidth = ($this->formWidth) ?: '12'; ?>
+<?php $options = ($this->helperOptions) ?: []; ?>
+
+<form class="sky-form boxed" method="post" action="<?=$this->postUrl;?>">
+    <?php if($this->formName): ?>
+        <header><?=$this->formName;?></header>
+    <?php endif; ?>
+
+    <?php foreach($this->formElements as $fieldSet): ?>
+    <fieldset>
+        <?php foreach ($fieldSet as $element): ?>
+            <?php $inputType = $this->form->get($element)->getAttribute('type'); ?>
+            <?php $inputType = ($inputType == 'text') ? 'input' : $inputType; ?>
+            <div class="row">
+                <section class="col col-md-12">
+                    <label class="<?=$inputType;?><?php if ($this->form->get($element)->getMessages()) echo ' state-error'; ?>">
+                        <?=$this->formElement($this->form->get($element)); ?>
+                        <?php if ('select' == $inputType):?>
+                        <i></i>
+                        <?php endif;?>
+                    </label>
+                    <span class="help-block">
+					   <?=$this->formElementErrors($this->form->get($element), [
+                            'class' => 'list-unstyled note note-error'
+                        ]); ?>
+					</span>
+                </section>
+            </div>
+        <?php endforeach; ?>
+    </fieldset>
+    <?php endforeach; ?>
+
+    <?php if ($this->postUrl):?>
+        <footer>
+
+            <button type="submit" class="btn btn-primary" data-loading-text="Please wait...">
+                Submit
+            </button>
+
+            <?php if ($this->cancelUrl):?>
+            <a href="<?=$this->cancelUrl;?>" class="btn btn-warning"  data-loading-text="Please wait...">
+                Cancel
+            </a>
+            <?php endif;?>
+        </footer>
+    <?php endif;?>
+
+</form>

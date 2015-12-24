@@ -1,0 +1,41 @@
+<?php $this->headTitle('Product Sizes') ?>
+
+<?php if (count($this->models) > 0): ?>
+    <div class="panel panel-default">
+        <table id="productSize-list" class="table table-hover table-bordered table-condensed sortable-table">
+            <thead>
+            <tr>
+                <th data-field="productSizeId">Id</th>
+                <th data-field="size">Size</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <?php /* @var $row \Shop\Model\Product\Size */ ?>
+            <?php foreach($this->models as $row): ?>
+                <tr>
+                    <td><?=$this->escapeHtml($row->getProductSizeId()); ?></td>
+                    <td><?=$this->escapeHtml($row->getSize()); ?></td>
+                    <td>
+                        <?=$this->partial('uthando-admin/partial/edit-actions', [
+                            'pk'		=> 'productSizeId',
+                            'id'		=> $row->getProductSizeId(),
+                            'tableName'	=> 'productSize',
+                            'route'		=> 'admin/shop/product/size/edit',
+                        ]);?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+    <?=$this->paginationControl(
+        $this->models,
+        'Elastic',
+        'application/partial/paginate',
+        ['route' => 'admin/shop/product/size/page']
+    ); ?>
+<?php else: ?>
+    <h4>Sizes have not been created yet.</h4>
+<?php endif; ?>

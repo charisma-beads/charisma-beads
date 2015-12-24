@@ -1,0 +1,43 @@
+
+<?php if (count($this->models) > 0): ?>
+    <div class="panel panel-default">
+        <table id="productOption-list" class="table table-hover table-bordered table-condensed sortable-table">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Option</th>
+                <th>Price</th>
+                <th>Discount</th>
+                <th>Weight (gms)</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <?php /* @var $row \Shop\Model\Product\Option */ ?>
+            <?php foreach($this->models as $row): ?>
+                <tr>
+                    <td><?=$this->escapeHtml($row->getProductOptionId()); ?></td>
+                    <td><?=$this->escapeHtml($row->getOption()); ?></td>
+                    <td><?=$this->escapeHtml($this->priceFormat($row->getPrice(false))); ?></td>
+                    <td><?=$this->escapeHtml($this->percentFormat($row->getDiscountPercent(true))); ?></td>
+                    <td><?=$this->escapeHtml($row->getPostUnit()->getPostUnit());?></td>
+                    <td>
+                        <?=$this->partial('uthando-admin/partial/edit-actions', [
+                            'pk'		=> 'productOptionId',
+                            'id'		=> $row->getProductOptionId(),
+                            'tableName'	=> 'productOption',
+                            'route'		=> 'admin/shop/product/option',
+                            'routeParams'   => [
+                                'action'    => 'edit'
+                            ]
+                        ]);?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+<?php else: ?>
+    <h4>Options for this product have not been created yet.</h4>
+<?php endif; ?>

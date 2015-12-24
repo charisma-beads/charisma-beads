@@ -1,0 +1,60 @@
+<?php $this->headTitle('Product Categories') ?>
+
+<?php if (count($this->models) > 0): ?>
+<div class="panel panel-default">
+    <table id="productCategory-list" class="table table-hover table-bordered table-condensed sortable-table">
+    	<thead>
+    		<tr>
+    		    <th data-field="enabled">&nbsp;</th>
+    			<th data-field="productCategoryId">Product Category Id</th>
+    			<th data-field="category">Category</th>
+    			<th data-field="lft">Lft</th>
+    			<th data-field="rgt">Rgt</th>
+    			<th data-field="dateCreated">Date Created</th>
+    			<th data-field="dateModified">Date Modified</th>
+    			<th>Actions</th>
+    		</tr>
+    	</thead>
+    	
+    	<tbody>
+    		<?php /* @var $row \Shop\Model\Product\Category */ ?>
+    		<?php foreach($this->models as $row): ?>
+    		<?php
+        		$parent = ($row->hasChildren() || $row->getDepth() == 0) ? 'bold ' : '';
+    		?>
+    		<tr class="<?=$this->ProductTableRowState($row);?>">
+    		    <td><?=$this->enabled($row, [
+    		    	'table' => 'productCategory',
+    		        'route' => 'admin/shop/category/edit',
+    		    ]); ?></td>
+    			<td><?=$this->escapeHtml($row->getProductCategoryId()); ?></td>
+    			<td class="<?=$parent;?>" style="text-indent: <?=$row->getDepth();?>em;">
+					<?=$this->escapeHtml($row->getCategory()); ?>
+				</td>
+    			<td><?=$this->escapeHtml($row->getLft()); ?></td>
+    			<td><?=$this->escapeHtml($row->getRgt()); ?></td>
+    			<td><?=$this->escapeHtml($this->formatDate($row->getDateCreated())); ?></td>
+    			<td><?=$this->escapeHtml($this->formatDate($row->getDateModified())); ?></td>
+    			<td>
+                    <?=$this->partial('uthando-admin/partial/edit-actions', [
+                    	'pk'		=> 'productCategoryId',
+                    	'id'		=> $row->getProductCategoryId(),
+    		    		'tableName'	=> 'productCategory',
+                    	'route'		=> 'admin/shop/category/edit',
+    		    	]);?>
+    			</td>
+    		</tr>
+    		<?php endforeach; ?>
+    	</tbody>
+    </table>
+</div>
+<?=$this->paginationControl(
+    $this->models,
+    'Elastic',
+    'application/partial/paginate',
+	['route' => 'admin/shop/category/page']
+); ?>
+
+<?php else: ?>
+<h4>No Categories where returned by search.</h4>
+<?php endif; ?>

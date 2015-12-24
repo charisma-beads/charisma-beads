@@ -1,0 +1,280 @@
+<?php $this->headTitle('Edit Product') ?>
+
+<!-- Nav tabs -->
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#product" data-toggle="tab">Product</a></li>
+    <li><a href="#product-option" data-toggle="tab">Options</a></li>
+    <li><a href="#product-image" data-toggle="tab">Images</a></li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+    <div class="tab-pane active" id="product">
+        <div class="clearfix">&nbsp;</div>
+        <?=$this->partial('shop/product/product-form', [
+            'form' => $this->form,
+            'formAction' => 'edit',
+            'productId' => $this->model->getProductId(),
+            'model' => $this->model,
+        ]); ?>
+    </div>
+
+    <div class="tab-pane" id="product-option">
+        <div class="clearfix">&nbsp;</div>
+        <button id="add-product-option-button" class="btn btn-default" data-toggle="modal"
+                data-target="#add-product-option-model">
+            Add Product Option
+        </button>
+        <div class="clearfix">&nbsp;</div>
+        <div class="product-option-list">
+            <i class="fa fa-spinner fa-spin"></i>&nbsp;Loading
+        </div>
+
+    </div>
+
+    <div class="tab-pane" id="product-image">
+        <div class="clearfix">&nbsp;</div>
+        <button id="add-product-image-button" class="btn btn-default" data-toggle="modal"
+                data-target="#add-product-image-model">
+            Add Product Image
+        </button>
+        <div class="clearfix">&nbsp;</div>
+        <div class="product-image-list">
+            <i class="fa fa-spinner fa-spin"></i>&nbsp;Loading
+        </div>
+    </div>
+</div>
+
+<div id="add-product-option-model" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add Product Option</h4>
+            </div>
+            <div class="modal-body">
+                <i class="fa fa-spinner fa-spin"></i>&nbsp;Loading
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="add-product-option-save" type="button" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="edit-product-option-model" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Edit Product Option</h4>
+            </div>
+            <div class="modal-body">
+                <i class="fa fa-spinner fa-spin"></i>&nbsp;Loading
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="edit-product-option-save" type="button" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="add-product-image-model" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add Product Image</h4>
+            </div>
+            <div class="modal-body">
+                <i class="fa fa-spinner fa-spin"></i>&nbsp;Loading
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="edit-product-image-model" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Edit Product Image</h4>
+            </div>
+            <div class="modal-body">
+                <i class="fa fa-spinner fa-spin"></i>&nbsp;Loading
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="edit-product-image-save" type="button" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+
+        var productOptions = function () {
+            admin.ajaxWidgetPanel(
+                $('#product-option .product-option-list'),
+                '<?=$this->url('admin/shop/product/option', [
+                    'action' => 'option-list'
+                ]);?>',
+                {productId: '<?=$this->model->getProductId();?>'}
+            );
+        };
+
+        var productImages = function () {
+            admin.ajaxWidgetPanel(
+                $('#product-image .product-image-list'),
+                '<?=$this->url('admin/shop/product/image', [
+                    'action' => 'image-list'
+                ]);?>',
+                {productId: '<?=$this->model->getProductId();?>'}
+            );
+        };
+
+        $('#product-option').on('click', '.edit-button', function (event) {
+            event.preventDefault();
+
+            var el = $('#edit-product-option-model');
+            var url = $(this).attr('href');
+
+            el.on('show.bs.modal', function () {
+                $(this).find('.modal-body').load(url);
+            });
+
+            el.on('hide.bs.modal', function (e) {
+                $(this).find('.modal-body').html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Loading');
+                productOptions();
+                el.off('show.bs.modal hide.bs.modal');
+                $('#edit-product-option-save').off('click');
+            });
+
+            $('#edit-product-option-save').on('click', function () {
+                admin.ajaxModalForm(el, url);
+            });
+
+            el.modal('show');
+
+        });
+
+        $('#product-option').on('submit', 'form', function (event) {
+            event.preventDefault();
+            var url = '<?=$this->url('admin/shop/product/option', [
+                'action'    => 'delete',
+            ]);?>';
+            var params = $(this).serialize() + '&submit=delete';
+            var el = $(this).parent().parent().parent();
+
+            $.ajax({
+                url: url,
+                data: params,
+                type: 'POST',
+                success: function (response) {
+                    admin.addAlert(response.messages, response.status);
+                    $(el).modal('hide');
+                    setTimeout(productOptions, 500);
+                },
+                error: function (response) {
+                    admin.addAlert(response.error, 'danger');
+                    $(el).modal('hide');
+                    setTimeout(productOptions, 500);
+                }
+            });
+        });
+
+        $('#product-image').on('click', '.edit-button', function (event) {
+            event.preventDefault();
+
+            var el = $('#edit-product-image-model');
+            var url = $(this).attr('href');
+
+            el.on('show.bs.modal', function () {
+                $(this).find('.modal-body').load(url);
+            });
+
+            el.on('hide.bs.modal', function (e) {
+                $(this).find('.modal-body').html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Loading');
+                productImages();
+                el.off('show.bs.modal hide.bs.modal');
+                $('#edit-product-image-save').off('click');
+            });
+
+            $('#edit-product-image-save').on('click', function () {
+                admin.ajaxModalForm(el, url);
+            });
+
+            el.modal('show');
+
+        });
+
+        $('#product-image').on('submit', 'form', function (event) {
+            event.preventDefault();
+            var url = '<?=$this->url('admin/shop/product/image', [
+                'action'    => 'delete',
+            ]);?>';
+            var params = $(this).serialize() + '&submit=delete';
+            var el = $(this).parent().parent().parent();
+
+            $.ajax({
+                url: url,
+                data: params,
+                type: 'POST',
+                success: function (response) {
+                    admin.addAlert(response.messages, response.status);
+                    $(el).modal('hide');
+                    setTimeout(productImages, 500);
+                },
+                error: function (response) {
+                    admin.addAlert(response.error, 'danger');
+                    $(el).modal('hide');
+                    setTimeout(productImages, 500);
+                }
+            });
+        });
+
+
+        $('#add-product-option-model').on('show.bs.modal', function () {
+            $(this).find('.modal-body').load('<?=$this->url('admin/shop/product/option', [
+                'action'    => 'add',
+                'id'        => $this->model->getProductId(),
+            ]);?>');
+        });
+
+        $('#add-product-option-model').on('hide.bs.modal', function (e) {
+            $(this).find('.modal-body').html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Loading');
+            productOptions();
+        });
+
+        $('#add-product-option-save').on('click', function () {
+            admin.ajaxModalForm('#add-product-option-model', '<?=$this->url('admin/shop/product/option', [
+                'action'    => 'add',
+            ]);?>');
+        });
+
+        $('#add-product-image-model').on('show.bs.modal', function () {
+            $(this).find('.modal-body').load('<?=$this->url('admin/uploader', [
+                'action'    => 'upload-form',
+            ]);?>', function () {
+                $('#upload-form').append(
+                    '<input type="hidden" name="productId" value="<?=$this->model->getProductId();?>">'
+                );
+            });
+        });
+
+        $('#add-product-image-model').on('hide.bs.modal', function (e) {
+            $(this).find('.modal-body').html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Loading');
+           productImages();
+        });
+
+        productOptions();
+        productImages();
+    });
+
+</script>

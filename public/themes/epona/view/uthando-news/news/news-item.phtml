@@ -1,0 +1,73 @@
+<?php $this->headlink()->appendStylesheet($this->themePath('assets/css/layout-blog.css'))?>
+<?php
+$articleTitle = $this->escapehtml($this->model->getArticle()->getTitle());
+$this->headTitle($articleTitle);
+
+// setting page keywords and description
+if ($this->model->getArticle()->getDescription() || $this->model->getArticle()->getDescription() != '') {
+    $this->headMeta()->appendName('description', $this->escapehtml($this->model->getArticle()->getDescription()));
+}
+?>
+
+<?php $this->placeholder('page-top')->captureStart();?>
+
+<?=$this->partial('layout/page-title', [
+    'pageTitle' => $articleTitle,
+    'bread' => [
+        'news-list' => 'News' 
+    ],
+]);?>
+
+<?php $this->placeholder('page-top')->captureEnd();?>
+
+<div id="blog" class="row">
+
+    <!-- BLOG SIDEBAR -->
+	<div class="col-md-3 col-sm-3">
+        <?=$this->partial('shop/product-nav');?>
+	</div>
+	<!-- /BLOG SIDEBAR -->
+
+	<!-- BLOG ARTICLE -->
+	<div class="col-md-9 col-sm-9">
+
+		<div class="prev-article row">
+
+			<div class="col-md-9 col-sm-9">
+
+				<h1><?=$articleTitle?></h1>
+
+				<?php if($this->model->getImage()):?>
+				<!-- image -->
+				<img src="<?=$this->basePath('/userfiles/' . $this->escapeHtml($this->model->getImage()));?>" class="img-responsive" alt="img" />
+				<!-- /image -->
+				<?php endif; ?>
+
+				<!-- article content -->
+				<article>
+					<?=$this->model->getArticle()->getContent();?>
+				</article>
+
+				<hr class="half-margins invisible" />
+
+			</div>
+			
+			<div class="blog-prev-date text-left col-md-3 col-sm-3">
+				<span class="date">
+					<?=$this->formatDate($this->model->getArticle()->getDateCreated(), 'j');?> 
+					<small><?=$this->formatDate($this->model->getArticle()->getDateCreated(), 'M Y');?></small>
+				</span>
+				<span class="info hidden-xs">
+					<span class="block"><i class="fa fa-user"></i> BY <?=$this->model->getArticle()->getUser()->getFullName();?></span>
+					<span class="block"><i class="fa fa-link"></i> <a href="<?=$this->url('news',[
+                        'news-item' => $this->model->getArticle()->getSlug(),
+                    ]);?>">PERMALINK</a></span>
+				</span>
+			</div>
+
+		</div>
+
+	</div>
+	<!-- /BLOG ARTICLE -->
+
+</div>

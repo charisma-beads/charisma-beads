@@ -1,0 +1,65 @@
+
+<?php $this->placeholder('page-top')->captureStart();?>
+
+<?=$this->partial('layout/page-title', [
+    'pageTitle' => 'My Orders'
+]);?>
+
+<?php $this->placeholder('page-top')->captureEnd();?>
+
+<div class="row">
+
+    <div class="col-md-4">
+        <?=$this->uthandoNavigation()
+            ->uthandoTbDbMenu('user-menu')
+            ->setUlClass('side-nav list-group')
+            ->setAddClassToListItem();?>
+    </div>
+
+    <div class="col-md-8">
+        <?php if (count($this->orders) > 0):?>
+        <!-- HISTORY TABLE -->
+        <table class="table table-striped">
+            <!-- table head -->
+            <thead>
+            <tr>
+                <th>Order Id</th>
+                <th>Order Date</th>
+                <th>Amount</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+
+            <!-- table items -->
+            <tbody>
+            <?php /* @var $order \Shop\Model\Order\Order */ ?>
+            <?php foreach($this->orders as $order):?>
+            <tr><!-- item -->
+                <td>
+                    <a href="<?=$this->url('shop/order/view', [
+                        'orderId' => $order->getOrderId(),
+                    ]);?>"><?=$this->escapeHtml($order->getOrderNumber());?></a>
+                </td>
+                <td><?=$this->formatDate($order->getOrderDate())->setFormat('d/m/Y');?></td>
+                <td><?=$this->priceFormat($order->getTotal());?> <small>(<?=count($order->getOrderLines());?> items)</small></td>
+                <td><?=$this->escapeHtml($order->getOrderStatus()->getOrderStatus());?></td>
+            </tr><!-- /item -->
+            <?php endforeach;?>
+            </tbody>
+        </table>
+        <!-- /HISTORY TABLE -->
+
+        <div class="divider half-margins"><!-- divider 30px --></div>
+
+        <?=$this->paginationControl(
+            $this->orders,
+            'Elastic',
+            'shop/order/pagination',
+            ['route' => 'shop/order/page']
+        ); ?>
+
+        <?php else:?>
+            <h2>We have no orders from you at present.</h2>
+        <?php endif;?>
+    </div>
+</div>

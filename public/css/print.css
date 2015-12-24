@@ -1,23 +1,9 @@
-#LeftColumn {
-	display:none;
+
+#main-content {
+	background-color: #fff;
+	border-top: 0px;
+	padding: 5px;
+	padding-top: 50px;
+    padding-bottom: 40px;
+	margin-bottom: 10px;
 }
-
-#RightColumn {
-	display:none;
-}
-
-#Heading {
-	display:none;
-} 
-
-#Middle {
-	margin:0px;	
-} 
-
-#Row1 {
-	margin:0px;
-}
-
-#Row2 {
-	display:none;
-} 

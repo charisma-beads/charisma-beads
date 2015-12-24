@@ -1,91 +1,57 @@
 <?php
-/*
- * index.php
- *
- * Copyright (c) 2010 Shaun Freeman <shaun@shaunfreeman.co.uk>.
- *
- * This file is part of Charisma Beads.
- *
- * Charisma Beads is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Charisma Beads is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Charisma Beads.  If not, see <http ://www.gnu.org/licenses/>.
+ob_start();
+ini_set('display_errors', true);
+// If we're running under `php -S` with PHP 5.4.0+
+// Thanks to Stephan Sokolow
+if (php_sapi_name() == 'cli-server') {
+
+    // Replicate the effects of basic "index.php"-hiding mod_rewrite rules
+    // Tested working under FatFreeFramework 2.0.6 through 2.0.12.
+    $_SERVER['SCRIPT_NAME'] = str_replace(__DIR__, '', __FILE__);
+    $_SERVER['SCRIPT_FILENAME'] = __FILE__;
+
+    // Replicate the FatFree/WordPress/etc. .htaccess "serve existing files" bit
+    $url_parts = parse_url($_SERVER["REQUEST_URI"]);
+
+    $_req = rtrim($_SERVER['DOCUMENT_ROOT'] . $url_parts['path'], '/' . DIRECTORY_SEPARATOR);
+
+    if (__FILE__ !== $_req && __DIR__ !== $_req && file_exists($_req)) {
+        return false; // serve the requested resource as-is.
+    }
+}
+
+/**
+ * This makes our life easier when dealing with paths. Everything is relative
+ * to the application root now.
  */
+chdir(dirname(__DIR__));
 
-// Set the page title.
+define('APPLICATION_PATH', dirname(__DIR__));
 
-// Include configuration file for error management and such.
-include_once ($_SERVER['DOCUMENT_ROOT'] . '/includes/inc_files.php');
-
-// route to page.
-//define ('PARENT_FILE', 1);
-define ('REQUEST_URI', $_SERVER['REQUEST_URI']);
-
-$path = Utility::getPath();
-
-switch($path[0]):
-	case 'pages':
-		$page = $path[1];
-		break;
-	case 'shop':
-		$ident = $path[1];
-		include_once ($_SERVER['DOCUMENT_ROOT'] . '/shop/index.php');
-		exit();
-		break;
-	default: $page = 1;
-endswitch;
-
-// update page stats.
-$where = (is_int($page)) ? 'page_id=' . $page : "ident='$page'"; 
-$query = "
-	SELECT page_id, page, content
-	FROM pages
-	WHERE $where
-	";
-$result = mysql_fetch_array (mysql_query ($query), MYSQL_NUM);
-
-if (!$result) {
-    $page_title = "404 ERROR";
-    $content = "<p>Sorry We cannot find the page you are looking for.</p><p>404 error: The page: $page doesn't exist</p>";
-    require_once ($_SERVER['DOCUMENT_ROOT'] . '/includes/inc_bottom.php');
-    exit();
+// Setup autoloading
+if (file_exists('vendor/autoload.php')) {
+    $loader = include 'vendor/autoload.php';
 }
 
-$content = '';
-
-if ('contacts' === $page) {
-	include_once ($_SERVER['DOCUMENT_ROOT'] . '/php/contacts.php');
+if (!class_exists('Zend\Loader\AutoloaderFactory')) {
+    throw new RuntimeException('Unable to load ZF2. Run `php composer.phar install` or define a ZF2_PATH environment variable.');
 }
 
-$content .= $result[2];
-$page_title = $result[1];
+$config = require 'config/application.config.php';
 
-$query = "
-	SELECT hits
-	FROM menu_links
-	WHERE page_id={$result[0]}
-	";
-$result = mysql_query ($query);
-
-if (is_resource($result)) {
-	$hits = mysql_fetch_array ($result, MYSQL_NUM);
-
-	$hits = $result[0] + 1; 
-	$query = "
-		UPDATE menu_links
-		SET hits={$result[0]}
-		WHERE page_id=1
-	";
-	$result1 = mysql_query ($query);
+// Use local config if availible
+if (file_exists('config/application.config.local.php')) {
+    $config = require 'config/application.config.local.php';
 }
 
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/includes/inc_bottom.php');
-?>
+// Run the application!
+Zend\Mvc\Application::init($config)->run();
+
+if (class_exists('FB')) {
+    $time = microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"];
+
+    \FB::info($time, 'Process Time');
+    \FB::info((memory_get_usage(true) / 1024 / 1024) . " MB", 'Memory');
+    \FB::info((memory_get_peak_usage(true) / 1024 / 1024) . " MB", 'Peak');
+}
+ob_end_flush();

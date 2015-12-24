@@ -1,0 +1,84 @@
+
+<?php $this->placeholder('page-top')->captureStart();?>
+
+<?=$this->partial('layout/page-title', [
+    'pageTitle' => 'My Addresses'
+]);?>
+
+<?php $this->placeholder('page-top')->captureEnd();?>
+
+<div class="row">
+
+    <div class="col-md-4">
+        <?=$this->uthandoNavigation()
+            ->uthandoTbDbMenu('user-menu')
+            ->setUlClass('side-nav list-group')
+            ->setAddClassToListItem();?>
+    </div>
+
+    <div class="col-md-8">
+
+        <h3 class="col-md-12">Address Book For <?=$this->identity()->getFullName();?></h3>
+
+        <div class="col-md-12">
+            <a href="<?=$this->url('shop/customer/address', [
+                'action'    => 'add-address',
+            ]);?>" class="btn btn-primary">Add Address</a>
+        </div>
+
+        <div class="clearfix">&nbsp;</div>
+
+        <?php /* @var $address \Shop\Model\Customer\Address */ ?>
+        <?php foreach ($this->addresses as $address):?>
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <i class="fa fa-money"></i>
+                        <i class="fa fa-truck"></i>
+                    </div>
+                    <div class="panel-body">
+                        <address>
+                            <?=$this->customerAddress()->formatAddress($address)?>
+                        </address>
+                    </div>
+                    <div class="panel-footer">
+                        <a href="<?=$this->url('shop/customer/address', [
+                            'action'    => 'edit-address',
+                            'id' => $address->getCustomerAddressId(),
+                        ]);?>" class="btn btn-primary">Edit</a>
+                        <a href="#deleteAddressModel<?=$address->getCustomerAddressId();?>" class="btn btn-danger" data-toggle="modal" data-target="#deleteAddressModel<?=$address->getCustomerAddressId();?>">Delete</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="deleteAddressModel<?=$address->getCustomerAddressId();?>">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h3 id="deleteAddressModelLabel<?=$address->getCustomerAddressId();?>">Delete Address</h3>
+                        </div>
+
+                        <form class="form-horizontal"  method="post" action="<?=$this->url('shop/customer/address', [
+                            'action' => 'delete-address'
+                        ]) ?>">
+                            <div class="modal-body">
+                                <p>Are you sure you want to delete this address?</p>
+                                <p class="label label-important">This action cannot be undone</p>
+                            </div>
+
+                            <input type="hidden" name="customerAddressId" value="<?=$address->getCustomerAddressId();?>">
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">No Don't Do It!</button>
+                                <button type="submit" name="submit" class="btn btn-danger" value="deleteAddress">Yes I want to delete this address</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach;?>
+
+    </div>
+</div>

@@ -1,0 +1,21 @@
+<?php $this->headTitle('Shop') ?>
+
+<h2>Shop Front</h2>
+
+<div class="row">
+<?php foreach ($this->cats as $row): ?>
+    <div class="col-xs-4">
+    	<div class="thumbnail text-center category-item-box">
+    		<img data-src="holder.js/200x100/auto" alt="">
+    		<div class="caption">
+        		<h5>
+                    <a href="<?php echo $this->url('shop/catalog', [
+            			'categoryIdent' => $row->getIdent()
+            		]); ?>" class="btn btn-default"><?=$this->escapehtml($row->getCategory());?></a>
+        		</h5>
+    		</div>
+    	</div>
+    </div>
+<?php endforeach; ?>
+</div>
+

@@ -1,0 +1,27 @@
+
+<?=$this->partial('uthando-admin/partial/search', [
+	'name'			=> 'postUnit',
+	'searchInputs'	=> [
+		'Post Unit' => 'postUnit',
+	],
+]);?>
+
+	    	
+<div id="table-postUnit">
+	<?=$this->partial('shop/post-unit/list', [
+	    'models' => $this->models
+	]); ?>
+</div>
+
+
+<?php $this->inlineScript()->captureStart(); ?>
+$(document).ready(function(){
+	$('#table-postUnit').dataGrid({
+	    url : 'unit/list',
+	    query: { sort : 'postUnit' },
+	    searchForm : $('#search-postUnit'),
+	    paging : 'links',
+	    columnSort: true,
+	});
+});
+<?php $this->inlineScript()->captureEnd(); ?>

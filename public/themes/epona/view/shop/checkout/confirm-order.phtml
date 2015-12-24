@@ -1,0 +1,134 @@
+<?php $this->headTitle('Checkout - Comfirm Order') ?>
+
+<?php $this->placeholder('page-top')->captureStart();?>
+
+<?=$this->partial('shop/parallax', [
+    'title' => 'Confirm Order',
+]);?>
+
+<?php $this->placeholder('page-top')->captureEnd();?>
+
+<div class="row">
+    
+    <div class="col-md-12">
+        <?=$this->partial('shop/cart', [
+        	'checkout' => true,
+            'countryId' => $this->countryId
+        ]); ?>
+    </div>
+    
+    <form method="post" action="<?=$this->url('shop/checkout', [
+    	'action' => 'confirm-order',
+    ]); ?>" class="sky-form">
+        
+        <div class="col-md-6">
+        <?php $this->formRadio()->setSeparator('');?>
+            <section class="<?php if ($this->form->get('payment_option')->getMessages()) echo 'has-error'; ?>">
+                
+			    <?=$this->formRadio($this->form->get('payment_option'));?>
+                
+                <span class="help-block">
+                    <?=$this->formElementErrors($this->form->get('payment_option'), [
+                        'class' => 'list-unstyled'
+                    ]); ?>
+                </span>
+            </section>
+            
+            <?php if ($this->cartOption('collectInstore')):?>
+            <section>
+                <label class="checkbox">
+				    <?=$this->formCheckBox($this->form->get('collect_instore')->setOptions([
+                        'disable-twb' => true,
+                        'use_hidden_element' => false,
+                    ]));?>
+                    <i></i><?=$this->form->get('collect_instore')->getLabel();?>
+			    </label>
+			    <span class="help-block">
+			        <span class="text-info">When collecting, postage will be removed from total.</span>
+		        </span>
+		    </section>
+		    <?php endif;?>
+        </div>
+        
+        <div class="col-md-6">
+            <section class="<?php if ($this->form->get('requirements')->getMessages()) echo ' has-error'; ?>">
+                <label class="control-label" for="requirements"><?=$this->form->get('requirements')->getLabel();?></label>
+                <label class="textarea textarea-resizable">
+                    <?=$this->formTextarea($this->form->get('requirements'));?>
+                </label>
+            </section>
+            <section class="<?php if ($this->form->get('terms')->getMessages()) echo ' has-error'; ?>">
+                <label class="label">
+                    <?=$this->form->get('terms')->getLabel();?>
+                    <a class="note note-error" href="<?=$this->url('article', [
+                        'slug' => 'terms',
+                        'model' => true,
+                    ]);?>" data-toggle="modal" data-target=".ajax_modal_container">
+                        click here to read terms
+                    </a>
+                </label>
+                <label class="select">
+                    <?=$this->formSelect($this->form->get('terms')->setAttribute('class', 'pointer'));?>
+                    <i></i>
+                </label>
+                
+                <span class="help-block">
+                    <?=$this->formElementErrors($this->form->get('terms'), [
+                        'class' => 'list-unstyled'
+                    ]); ?>
+                </span>
+            </section>
+        </div>
+        <footer>
+            <button id="place-order-button" type="submit" name="submit" class="button" value="placeOrder" data-loading-text="Please wait...">
+            	Place Order
+            </button>
+            <a href="#cancelOrderModel" class="button button-secondary" data-toggle="modal" data-target="#cancelOrderModel">
+                Cancel Order
+            </a>
+        </footer>
+    </form>
+</div>
+
+<!-- Term Ajax -->
+<div class="modal fade ajax_modal_container" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content"></div>
+	</div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="cancelOrderModel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 id="cancelOrderModelLabel">Cancel Order</h3>
+            </div>
+            
+            <form class="form-horizontal"  method="post" action="<?=$this->url('shop/checkout', [
+                'action' => 'cancelOrder',
+            ]) ?>">
+                <div class="modal-body">
+                    <p>Are you sure you want to cancel your order.</p>
+                    <p class="label label-important">This action cannot be undone</p>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">No Don't Do It</button>
+                    <button type="submit" name="submit" class="btn btn-danger" value="cancelOrder">Yes I want to cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<?php $this->inlineScript()->captureStart(); ?>
+    $(document).ready(function() {
+        $('#place-order-button').on('click', function(){
+            $('form.sky-form').loadingOverlay({
+                loadingText: 'Please wait while I prepare your order and redirect you to your chosen payment option'
+            });
+        });
+    });
+<?php $this->inlineScript()->captureEnd(); ?>

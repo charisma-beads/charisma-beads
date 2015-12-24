@@ -1,0 +1,237 @@
+<?php
+$startYears = $this->formManager('MonthlyTotalYearList', [
+    'name' => 'start',
+    'label' => 'Start',
+    'minOrMax' => 'min',
+])->setAttributes([
+    'class' => 'input-sm',
+    'id' => 'startYears',
+]);
+
+$endYears = $this->formManager('MonthlyTotalYearList', [
+    'name' => 'end',
+    'label' => 'End',
+    'minOrMax' => 'max',
+])->setAttributes([
+    'class' => 'input-sm',
+    'id' => 'endYears',
+]);
+
+$this->inlineScript()
+    ->appendFile($this->basePath('js/flot/jquery.flot.js'))
+    ->appendFile($this->basePath('js/flot/jquery.flot.pie.js'))
+    ->appendFile($this->basePath('js/flot/jquery.flot.categories.js'))
+    ->appendFile($this->basePath('js/flot/jquery.flot.resize.js'));
+
+?>
+
+<div class="row">
+    <!-- new orders -->
+    <div class="col-md-12 col-lg-6">
+        <div id="current-orders" class="panel panel-info">
+            <!-- Default panel contents -->
+            <div class="panel-heading">
+                <h4 class="panel-title">Current Orders</h4>
+            </div>
+            <div class="panel-table panel-widget">
+                <div class="text-center">
+                    <i class="fa fa-spinner fa-spin"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- new customer -->
+    <div class="col-md-12 col-lg-6">
+        <div id="new-customers" class="panel panel-info">
+            <!-- Default panel contents -->
+            <div class="panel-heading">
+                <h4 class="panel-title">New Customers This Month&nbsp;<span id="new-customer-count"></span></h4>
+            </div>
+            <div class="panel-table panel-widget">
+                <div class="text-center">
+                    <i class="fa fa-spinner fa-spin"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Ad Stats -->
+    <div class="col-md-12 col-lg-6">
+        <div id="ad-stats" class="panel panel-info">
+            <!-- Default panel contents -->
+            <div class="panel-heading">
+                <h4 class="panel-title">Advert Statistics</h4>
+            </div>
+            <div class="panel-table panel-widget">
+                <div class="text-center">
+                    <i class="fa fa-spinner fa-spin"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- monthly total -->
+    <div class="col-md-12 col-lg-6">
+        <div id="monthly-totals" class="panel panel-info">
+            <!-- Default panel contents -->
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    Monthly Totals
+                    <button id="monthly-totals-report-button" class="btn btn-default btn-xs">
+                        Download Report
+                    </button>
+                    <div class="form-inline pull-right">
+                        <div class="monthly-stats start-year form-group form-group-sm">
+                            <span class="control-label"><?=$startYears->getLabel();?></span>
+                            <?=$this->formElement($startYears);?>
+                        </div>
+                        <div class="monthly-stats end-year form-group form-group-sm">
+                            <span class="control-label"><?=$endYears->getLabel();?></span>
+                            <?=$this->formElement($endYears);?>
+                        </div>
+                    </div>
+                </h4>
+
+
+            </div>
+            <div class="panel-table panel-widget">
+                <div class="text-center">
+                    <i class="fa fa-spinner fa-spin"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="clearfix"></div>
+
+<script>
+    $(document).ready(function() {
+        function changeMonthlyStats() {
+            admin.ajaxWidgetPanel(
+                $('#monthly-totals .panel-widget'),
+                '<?=$this->url('admin/shop/order/edit', [
+                    'action' => 'monthly-totals',
+                ]);?>',
+                {
+                    start: $('#startYears').val(),
+                    end: $('#endYears').val()
+                }
+            );
+        }
+
+        changeMonthlyStats();
+
+        $('#monthly-totals').on('change', 'select', function () {
+            changeMonthlyStats();
+        });
+
+        $('#current-orders .panel-widget').ajaxWidgetPanel({
+            url: '<?=$this->url('admin/shop/order/edit', [
+                'action' => 'current-orders',
+            ]);?>'
+        });
+
+        $('#new-customers .panel-widget').ajaxWidgetPanel({
+            url: '<?=$this->url('admin/shop/customer/edit', [
+                'action' => 'list-new',
+            ]);?>'
+        });
+
+        $('#ad-stats .panel-widget').ajaxWidgetPanel({
+            url: '<?=$this->url('admin/shop/advert/edit', [
+                'action' => 'stats',
+            ]);?>'
+        });
+
+        $('#current-orders .panel-widget').on('change', 'select', function () {
+            var orderNumber = $('input[name=orderNumber]').val();
+            var orderStatusId = this.value;
+            $.ajax({
+                url: '<?=$this->url('admin/shop/order/edit', [
+                    'action' => 'update-status',
+                ]);?>',
+                data: {
+                    'orderStatusId': orderStatusId,
+                    'orderNumber': orderNumber
+                },
+                type: 'POST',
+                success: function (json) {
+                    if (json.html) {
+                        $('#current-orders .panel-widget').html(json.html);
+                    } else {
+                        admin.addAlert('Failed to update order status due to database error', 'danger');
+                    }
+                },
+                error: function (response) {
+                    admin.addAlert(response.responseText, 'danger');
+                }
+            });
+        });
+
+        $('#monthly-totals-report-button').on('click', function () {
+            var url = '<?=$this->url('admin/shop/report', [
+                'action'    => 'monthly-totals',
+            ]);?>';
+
+            var el = bootbox.dialog({
+                title: "Monthly Report Download",
+                message: 'Preparing report',
+                buttons: {
+                    main: {
+                        label: "Close",
+                        className: "btn-default"
+                    }
+                }
+            });
+
+            el.find('.modal-content').loadingOverlay({
+                loadingText: 'Please wait while I prepare your report'
+            });
+
+            $.ajax({
+                url: url,
+                type: 'POST',
+                beforeSend: function () {
+                    el.find('.modal-content').loadingOverlay({
+                        loadingText: 'Please wait while I prepare your report'
+                    });
+                },
+                success: function (response) {
+                    el.modal('hide');
+                    if (response.status == 'success') {
+                        message = '<h5>Please click on link below to download your report</h5>'
+                        + '<a href="' + response.url + '" target="_blank">' + response.report + '</a>';
+                    } else {
+                        message = '<h5 class="text-danger">Error!</h5><span class="text-danger">' + response.message + '</span>';
+                    }
+
+                    bootbox.dialog({
+                        title: "Monthly Report Download",
+                        message: message,
+                        buttons: {
+                            main: {
+                                label: "Close",
+                                className: "btn-default"
+                            }
+                        }
+                    });
+                },
+                error: function (response) {
+                    if (errorCount < 3) {
+                        admin.addAlert('An error occured, trying again', 'info');
+                        $('#get-product-list').trigger('click');
+                        errorCount++;
+                    } else {
+                        admin.addAlert(response.error, 'danger');
+                        el.modal('hide');
+                        errorCount = 0;
+                    }
+                }
+            });
+        });
+    });
+</script>
