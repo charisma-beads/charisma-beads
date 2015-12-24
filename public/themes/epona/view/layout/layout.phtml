@@ -99,6 +99,15 @@
                 border-top-right-radius: 6px;
                 border-bottom-right-radius: 6px;
             }
+
+            #footer .checkbox {
+                color: #777;
+            }
+
+            .vertical-align {
+                display: flex;
+                align-items: center;
+            }
             
         </style>
     </head>
@@ -229,15 +238,38 @@
 
                             <p class="block">
                                 <?=$this->contact()->formatAddress('details.address');?><br />
-                                Email:&nbsp;<a href="<?=$this->url('contact');?>"><?=$this->contact('details.email');?></a><br />
+                                Email:&nbsp;<a href="<?=$this->url('contact');?>">
+                                    <?=$this->contact('details.email');?>
+                                </a><br />
                                 Phone:&nbsp;<a href="tel:<?=$this->contact()->formatPhoneNumber();?>">
-                                <?=$this->contact()->formatPhoneNumber(true);?>
-                            </a><br />
+                                    <?=$this->contact()->formatPhoneNumber(true);?>
+                                </a><br />
                             </p>
 
                             <p class="block"><!-- social -->
                                 <?=$this->socialLinks();?>
                             </p><!-- /social -->
+
+                            <div class="row vertical-align">
+                                <div class="col-md-6">
+                                    <a href="https://www.positivessl.com" style="font-family: arial; font-size: 10px; color: #212121; text-decoration: none;">
+                                        <img src="https://www.positivessl.com/images-new/PositiveSSL_tl_trans.png" alt="SSL Certificate" title="SSL Certificate" border="0" />
+                                    </a>
+                                    <div style="font-family: arial;font-weight:bold;font-size:15px;color:#86BEE0;">
+                                        <a href="https://www.positivessl.com" style="color:#86BEE0; text-decoration: none;">
+                                            SSL Certificate
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href='http://www.siteuptime.com/' onMouseOver='this.href="http://www.siteuptime.com/statistics.php?Id=16033&UserId=195343";'>
+                                        <img width=85 height=16 border=0 alt='website uptime' src="https://siteuptime.com/button/genbutton.php?u=195343&m=16033&c=green&p=total">
+                                    </a>
+                                    <noscript>
+                                        <a href='http://www.siteuptime.com/'>website monitoring</a>
+                                    </noscript>
+                                </div>
+                            </div>
                         </div>
                         <!-- /col #1 -->
 
@@ -272,17 +304,30 @@
                             <p>
                                 <?=$this->contact('details.about_us_text');?>
                             </p>
-
+                            <?php $newsletter = $this->formManager('UthandoNewsletterSubscriber'); ?>
                             <h4><small><strong>Subscribe to our Newsletter</strong></small></h4>
-                            <form id="newsletterSubscribe" method="post" action="php/newsletter.php">
-                                <input required type="text" class="form-control" name="newsletter_name" id="newsletter_name" value="" placeholder="Name">
+                            <form class="sky-form" id="newsletterSubscribe" method="post" action="<?=$this->url('newsletter/subscribe');?>">
+                                <?=$this->formText($newsletter->get('name')->setAttributes([
+                                    'class' => 'form-control',
+                                    'id' => 'newsletter_name',
+                                    'placeholder' => 'Name',
+                                ]));?>
                                 <div class="input-group">
-                                    <input required type="email" class="form-control" name="newsletter_email" id="newsletter_email" value="" placeholder="E-mail Address">
+                                    <?=$this->formEmail($newsletter->get('email')->setAttributes([
+                                        'class' => 'form-control',
+                                        'id' => 'newsletter_email',
+                                        'placeholder' => 'E-mail Address',
+                                    ]));?>
                                     <span class="input-group-btn">
                                         <button class="btn btn-primary">SUBMIT</button>
                                     </span>
                                 </div>
-
+                                <?=$this->formMultiCheckbox(
+                                    $newsletter->get('subscribe')
+                                        ->setLabelOption('disable_html_escape', true)
+                                        ->setLabelPrepend(true)
+                                        ->setPreSelect(true)
+                                );?>
                             </form>
 
                         </div>
