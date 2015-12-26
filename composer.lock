@@ -1176,12 +1176,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-newsletter.git",
-                "reference": "9615405f9d0adcba2e4ef4429e36a5439626302c"
+                "reference": "2b6ac2ce15b30a11971cb240c60884c2ac0233ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-newsletter/zipball/9615405f9d0adcba2e4ef4429e36a5439626302c",
-                "reference": "9615405f9d0adcba2e4ef4429e36a5439626302c",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-newsletter/zipball/2b6ac2ce15b30a11971cb240c60884c2ac0233ea",
+                "reference": "2b6ac2ce15b30a11971cb240c60884c2ac0233ea",
                 "shasum": ""
             },
             "require": {
@@ -1221,7 +1221,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2015-12-24 15:30:12"
+            "time": "2015-12-26 14:14:37"
         },
         {
             "name": "uthando-cms/uthando-session-manager",
@@ -1434,16 +1434,16 @@
         },
         {
             "name": "uthando-cms/uthando-user",
-            "version": "2.0.3",
+            "version": "2.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-user.git",
-                "reference": "167f25399d9e6d950020ede1e5635614a1a66935"
+                "reference": "554ce3c658783073a4319b9dee626974389da3e3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-user/zipball/167f25399d9e6d950020ede1e5635614a1a66935",
-                "reference": "167f25399d9e6d950020ede1e5635614a1a66935",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-user/zipball/554ce3c658783073a4319b9dee626974389da3e3",
+                "reference": "554ce3c658783073a4319b9dee626974389da3e3",
                 "shasum": ""
             },
             "require": {
@@ -1485,7 +1485,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2015-11-17 15:42:56"
+            "time": "2015-12-24 16:43:36"
         },
         {
             "name": "zendframework/zend-authentication",
