@@ -52,8 +52,8 @@ class Catalog extends AbstractActionController
         $category = $this->getProductCategoryService()->getCategoryByIdent($ident);
         
         // make more gracefull with setExceptionMessages trait.
-        if (! $category) {
-            throw new ShopException('Unknown category ' . $ident);
+        if (!$category) {
+            return $this->redirect()->toRoute('shop');
         }
         
         $products = $this->getProductService()
@@ -75,10 +75,6 @@ class Catalog extends AbstractActionController
 
         if (!$product) {
             return $this->redirect()->toRoute('shop');
-        }
-
-        if (null === $product) {
-            throw new ShopException('Unknown product' . $this->params('productIdent'));
         }
         
         return new ViewModel([

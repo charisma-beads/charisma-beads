@@ -102,7 +102,11 @@ class Product extends AbstractRelationalMapperService
         /* @var $mapper \Shop\Mapper\Product\Product */
         $mapper = $this->getMapper();
         $product = $mapper->getProductByIdent($ident);
-        $this->populate($product, true);
+
+        if ($product instanceof ProductModel) {
+            $this->populate($product, true);
+        }
+
         return $product;
     }
 
