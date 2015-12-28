@@ -559,16 +559,16 @@
         },
         {
             "name": "symfony/process",
-            "version": "v2.8.0",
+            "version": "v2.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "1b988a88e3551102f3c2d9e1d47a18c3a78d6312"
+                "reference": "62c254438b5040bc2217156e1570cf2206e8540c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/1b988a88e3551102f3c2d9e1d47a18c3a78d6312",
-                "reference": "1b988a88e3551102f3c2d9e1d47a18c3a78d6312",
+                "url": "https://api.github.com/repos/symfony/process/zipball/62c254438b5040bc2217156e1570cf2206e8540c",
+                "reference": "62c254438b5040bc2217156e1570cf2206e8540c",
                 "shasum": ""
             },
             "require": {
@@ -604,7 +604,7 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
-            "time": "2015-11-30 12:35:10"
+            "time": "2015-12-23 11:03:46"
         },
         {
             "name": "uthando-cms/uthando-admin",
@@ -1176,12 +1176,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-newsletter.git",
-                "reference": "2b6ac2ce15b30a11971cb240c60884c2ac0233ea"
+                "reference": "654ce868c0a12503965fb0023de42e2d34cb4387"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-newsletter/zipball/2b6ac2ce15b30a11971cb240c60884c2ac0233ea",
-                "reference": "2b6ac2ce15b30a11971cb240c60884c2ac0233ea",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-newsletter/zipball/654ce868c0a12503965fb0023de42e2d34cb4387",
+                "reference": "654ce868c0a12503965fb0023de42e2d34cb4387",
                 "shasum": ""
             },
             "require": {
@@ -1221,7 +1221,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2015-12-26 14:14:37"
+            "time": "2015-12-27 14:11:41"
         },
         {
             "name": "uthando-cms/uthando-session-manager",
