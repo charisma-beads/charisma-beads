@@ -5,7 +5,7 @@
  * @package   Shop\Controller\Product
  * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
  * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
+ * @license   see LICENSE
  */
 
 namespace Shop\Controller\Product;
@@ -23,61 +23,66 @@ use Zend\View\Model\ViewModel;
  */
 class Product extends AbstractCrudController
 {
-	protected $controllerSearchOverrides = ['sort' => 'productId'];
-	protected $serviceName = 'ShopProduct';
-	protected $route = 'admin/shop/product';
-	
-	public function viewAction()
-	{
-		return new ViewModel();
-	}
+    protected $controllerSearchOverrides = [
+        'sort'          => 'productId',
+        'disabled'      => 0,
+        'discontinued'  => 0,
+    ];
 
-	public function duplicateAction()
-	{
-		$id = $this->params('id', 0);
+    protected $serviceName = 'ShopProduct';
+    protected $route = 'admin/shop/product';
 
-		/* @var $product ProductModel */
-		$product = $this->getService()->makeDuplicate($id);
+    public function viewAction()
+    {
+        return new ViewModel();
+    }
 
-		if (!$product instanceof ProductModel) {
-			throw new ShopException('No product was found with id: ' . $id);
-		}
+    public function duplicateAction()
+    {
+        $id = $this->params('id', 0);
 
-		$form = $this->getService()->getForm($product);
+        /* @var $product ProductModel */
+        $product = $this->getService()->makeDuplicate($id);
 
-		$viewModel = new ViewModel([
-			'form' => $form,
-			'routeParams' => $this->params()->fromRoute(),
-		]);
+        if (!$product instanceof ProductModel) {
+            throw new ShopException('No product was found with id: ' . $id);
+        }
 
-		$viewModel->setTemplate('shop/product/add');
+        $form = $this->getService()->getForm($product);
 
-		return $viewModel;
-	}
-	
-	public function setEnabledAction()
-	{
-	   $id = (int) $this->params('id', 0);
-	   
-		if (!$id) {
-			return $this->redirect()->toRoute($this->getRoute(), [
-				'action' => 'list'
-			]);
-		}
-		
-		try {
-		    /* @var $product ProductModel */
-			$product = $this->getService()->getById($id);
-			$result = $this->getService()->toggleEnabled($product);
-		} catch (Exception $e) {
-		    $this->setExceptionMessages($e);
-			return $this->redirect()->toRoute($this->getRoute(), [
-				'action' => 'list'
-			]);
-		}
-		
-		return $this->redirect()->toRoute($this->getRoute(), [
-			'action' => 'list'
-		]);
-	}
+        $viewModel = new ViewModel([
+            'form' => $form,
+            'routeParams' => $this->params()->fromRoute(),
+        ]);
+
+        $viewModel->setTemplate('shop/product/add');
+
+        return $viewModel;
+    }
+
+    public function setEnabledAction()
+    {
+        $id = (int)$this->params('id', 0);
+
+        if (!$id) {
+            return $this->redirect()->toRoute($this->getRoute(), [
+                'action' => 'list'
+            ]);
+        }
+
+        try {
+            /* @var $product ProductModel */
+            $product = $this->getService()->getById($id);
+            $result = $this->getService()->toggleEnabled($product);
+        } catch (Exception $e) {
+            $this->setExceptionMessages($e);
+            return $this->redirect()->toRoute($this->getRoute(), [
+                'action' => 'list'
+            ]);
+        }
+
+        return $this->redirect()->toRoute($this->getRoute(), [
+            'action' => 'list'
+        ]);
+    }
 }
