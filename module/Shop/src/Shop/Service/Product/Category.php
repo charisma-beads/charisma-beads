@@ -158,11 +158,7 @@ class Category extends AbstractMapperService
         /* @var $model \Shop\Model\Product\Category */
 		$model = $mapper->getModel();
 
-        $options = [
-            'categoryId' => $model->getProductCategoryId(),
-        ];
-
-		$form  = $this->getForm($model, $post, $options, true, true);
+		$form  = $this->getForm($model, $post, true, true);
 	
 		if (!$form->isValid()) {
 			return $form;
@@ -200,11 +196,8 @@ class Category extends AbstractMapperService
 		}
 
 		$model->setDateModified();
-        $options = [
-            'categoryId' => $model->getProductCategoryId(),
-        ];
 		
-		$form = $this->getForm($model, $post, $options, true, true);
+		$form = $this->getForm($model, $post, true, true);
 	
 		if (!$form->isValid()) {
 			return $form;

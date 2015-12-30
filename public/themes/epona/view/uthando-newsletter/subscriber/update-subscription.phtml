@@ -1,0 +1,46 @@
+
+<?php $this->placeholder('page-top')->captureStart();?>
+
+<?=$this->partial('layout/page-title', [
+    'pageTitle' => 'Newsletter preferences'
+]);?>
+
+<?php $this->placeholder('page-top')->captureEnd();?>
+
+<div class="row">
+
+    <div class="col-md-4">
+        <?=$this->uthandoNavigation()
+            ->uthandoTbDbMenu('user-menu')
+            ->setUlClass('side-nav list-group')
+            ->setAddClassToListItem();?>
+    </div>
+
+    <div class="col-md-8">
+        <!-- newsletter -->
+        <form action="<?php echo $this->url('newsletter/update'); ?>" method="post" class="sky-form boxed">
+            <header>Newsletter Preferences</header>
+
+            <fieldset>
+
+                <section>
+                    <?=$this->formRow(
+                        $this->form->get('subscribe')
+                            ->setLabelOption('disable_html_escape', true)
+                            ->setLabelPrepend(true)
+                    );?>
+                </section>
+
+            </fieldset>
+
+            <footer>
+                <button type="submit" class="button"><i class="fa fa-check"></i> Update Preferences</button>
+            </footer>
+
+            <?=$this->formHidden($this->form->get('name'));?>
+            <?=$this->formHidden($this->form->get('email'));?>
+            <?=$this->formHidden($this->form->get('subscriberId'));?>
+        </form>
+        <!-- /newsletter -->
+    </div>
+</div>

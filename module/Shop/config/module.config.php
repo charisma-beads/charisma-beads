@@ -41,6 +41,7 @@ return [
             'Shop\Controller\Advert'                => 'Shop\Controller\Advert',
             'Shop\Controller\Catalog'               => 'Shop\Controller\Catalog',
             'Shop\Controller\Checkout'              => 'Shop\Controller\Checkout',
+            'Shop\Controller\Faq'                   => 'Shop\Controller\Faq',
             'Shop\Controller\Payment'               => 'Shop\Controller\Payment',
             'Shop\Controller\Paypal'                => 'Shop\Controller\Paypal',
             'Shop\Controller\Report'                => 'Shop\Controller\Report',
@@ -82,6 +83,7 @@ return [
             'ShopProductSize'       => 'Shop\Form\Product\Size',
             'ShopTaxCode'           => 'Shop\Form\Tax\Code',
             'ShopTaxRate'           => 'Shop\Form\Tax\Rate',
+            'ShopFaq'               => 'Shop\Form\Faq',
 
             'ShopPaypalCredentialPairsFieldSet' => 'Shop\Form\Settings\Paypal\CredentialPairsFieldSet',
             'ShopPaypalCredentialSetFieldSet'   => 'Shop\Form\Settings\Paypal\CredentialSetFieldSet',
@@ -113,6 +115,7 @@ return [
             'ProductSizeList'           => 'Shop\Form\Element\ProductSizeList',
             'TaxCodeList'               => 'Shop\Form\Element\TaxCodeList',
             'TaxRateList'               => 'Shop\Form\Element\TaxRateList',
+            'FaqList'                   => 'Shop\Form\Element\FaqList',
         ],
     ],
     'hydrators' => [
@@ -145,6 +148,7 @@ return [
             'ShopProductSize'       => 'Shop\Hydrator\Product\Size',
             'ShopTaxCode'           => 'Shop\Hydrator\Tax\Code',
             'ShopTaxRate'           => 'Shop\Hydrator\Tax\Rate',
+            'ShopFaq'               => 'Shop\Hydrator\Faq',
         ],
     ],
     'input_filters' => [
@@ -176,6 +180,7 @@ return [
             'ShopProductSize'       => 'Shop\InputFilter\Product\Size',
             'ShopTaxCode'           => 'Shop\InputFilter\Tax\Code',
             'ShopTaxRate'           => 'Shop\InputFilter\Tax\Rate',
+            'ShopFaq'               => 'Shop\InputFilter\Faq',
         ],
     ],
     'service_manager' => [
@@ -223,6 +228,7 @@ return [
             'ShopProductSize'       => 'Shop\Mapper\Product\Size',
             'ShopTaxCode'           => 'Shop\Mapper\Tax\Code',
             'ShopTaxRate'           => 'Shop\Mapper\Tax\Rate',
+            'ShopFaq'               => 'Shop\Mapper\Faq',
         ],
     ],
     'uthando_models' => [
@@ -254,6 +260,7 @@ return [
             'ShopProductSize'       => 'Shop\Model\Product\Size',
             'ShopTaxCode'           => 'Shop\Model\Tax\Code',
             'ShopTaxRate'           => 'Shop\Model\Tax\Rate',
+            'ShopFaq'               => 'Shop\Model\Faq',
         ],
     ],
     'uthando_services' => [
@@ -284,6 +291,7 @@ return [
             'ShopProductSize'       => 'Shop\Service\Product\Size',
             'ShopTaxCode'           => 'Shop\Service\Tax\Code',
             'ShopTaxRate'           => 'Shop\Service\Tax\Rate',
+            'ShopFaq'               => 'Shop\Service\Faq',
         ],
     ],
     'validators' => [

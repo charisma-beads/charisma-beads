@@ -1,0 +1,47 @@
+<?php $this->headTitle('F.A.Qs') ?>
+<?php $this->layout()->pageTitle = 'List F.A.Q\'s'; ?>
+
+<?php if (count($this->models) > 0): ?>
+    <div class="panel panel-default">
+        <table id="faq-list" class="table table-hover table-bordered table-condensed sortable-table">
+            <thead>
+            <tr>
+                <th data-field="faqId">Id</th>
+                <th data-field="question">Question</th>
+                <th data-field="lft">Lft</th>
+                <th data-field="rgt">Rgt</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <?php /* @var $row \Shop\Model\Faq */ ?>
+            <?php foreach($this->models as $row): ?>
+                <tr>
+                    <td><?=$this->escapeHtml($row->getFaqId()); ?></td>
+                    <td><?=$this->escapeHtml($row->getQuestion()); ?></td>
+                    <td><?=$this->escapeHtml($row->getLft()); ?></td>
+                    <td><?=$this->escapeHtml($row->getRgt()); ?></td>
+                    <td>
+                        <?=$this->partial('uthando-admin/partial/edit-actions', [
+                            'pk'		=> 'faqId',
+                            'id'		=> $row->getFaqId(),
+                            'tableName'	=> 'faq',
+                            'route'		=> 'admin/shop/faq/edit',
+                        ]);?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+    <?=$this->paginationControl(
+        $this->models,
+        'Elastic',
+        'application/partial/paginate',
+        ['route' => 'admin/shop/faq/page']
+    ); ?>
+
+<?php else: ?>
+    <h4>No F.A.Q's where returned by search.</h4>
+<?php endif; ?>

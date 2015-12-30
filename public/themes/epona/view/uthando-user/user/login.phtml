@@ -12,6 +12,7 @@
 $loginForm = (null == $this->loginForm) ? $this->formManager('UthandoUserLogin') : $this->loginForm;
 $registerForm = (null == $this->registerForm) ? $this->formManager('UthandoUserRegister') : $this->registerForm;
 $advertList = (false == $registerForm->has('advertId')) ? $this->formManager('AdvertList') : $registerForm->get('advertId');
+$newsletter = (false == $registerForm->has('subscribe')) ? $this->formManager('UthandoNewsletterSubscriptionList') : $registerForm->get('subscribe');
 ?>
 
 <div class="row">
@@ -163,28 +164,41 @@ $advertList = (false == $registerForm->has('advertId')) ? $this->formManager('Ad
                         </label>
                     </section>
                 </div>
-                
-                <section class="<?php if ($advertList->getMessages()) echo ' state-error'; ?>">
-                    <label class="select">
-                        <?=$this->formSelect(
-                            $advertList->setAttribute('class', 'pointer')
-                        );?>
-                        <i></i>
-                    </label>
-                    <span class="help-block">
-                        <?=$this->formElementErrors($advertList, [
-                            'class' => 'list-unstyled note note-error'
-                        ]); ?>
-                    </span>
-                </section>
-                
-                <section>
-                    <label class="checkbox">
-                        <input type="checkbox" name="checkbox" checked="checked">
-                        <i></i>I want to receive news and  special offers
-                    </label>
-                </section>
             </fieldset>
+
+            <fieldset>
+                <div class="row">
+                    <section class="<?php if ($advertList->getMessages()) echo ' state-error'; ?> col col-md-12">
+                        <label class="select">
+                            <?=$this->formSelect(
+                                $advertList->setAttribute('class', 'pointer')
+                            );?>
+                            <i></i>
+                        </label>
+                        <span class="help-block">
+                            <?=$this->formElementErrors($advertList, [
+                                'class' => 'list-unstyled note note-error'
+                            ]); ?>
+                        </span>
+                    </section>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <div class="row">
+                    <div class="col col-md-12">
+                        <label class="label">I would also like the subscribe to these newsletters:</label>
+                        <section class="<?php if ($newsletter->getMessages()) echo ' state-error'; ?>">
+                            <?=$this->formRow(
+                                $newsletter->setLabelOption('disable_html_escape', true)
+                                    ->setLabelPrepend(true)
+                                    ->setPreSelect(true)
+                            );?>
+                        </section>
+                    </div>
+                </div>
+            </fieldset>
+
             <footer>
                 <button type="submit" class="button">Submit</button>
             </footer>

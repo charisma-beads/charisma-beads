@@ -1,0 +1,8 @@
+<?php $this->headTitle('Edit Category') ?>
+<?php $this->layout()->pageTitle = 'Edit F.A.Q'; ?>
+
+<?=$this->partial('shop/faq/faq-form', [
+    'form' => $this->form,
+    'formAction' => 'edit',
+    'faqId' => $this->model->getFaqId()
+]); ?>

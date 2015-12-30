@@ -259,6 +259,17 @@ return [
                                 'controller' => 'Paypal',
                                 'force-ssl' => 'ssl',
                                 'orderId' => 0,
+                            ],
+                        ],
+                    ],
+                    'faq' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/faq',
+                            'defaults' => [
+                                'controller' => 'Faq',
+                                'action' => 'faq',
+                                'force-ssl' => 'ssl',
                             ]
                         ]
                     ]
@@ -316,10 +327,52 @@ return [
                                                 'action' => 'list',
                                                 'page' => 1,
                                                 'force-ssl' => 'ssl'
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                            ],
+                            'faq' => [
+                                'type' => 'Segment',
+                                'options' => [
+                                    'route' => '/faq',
+                                    'defaults' => [
+                                        'controller' => 'Faq',
+                                        'action' => 'index',
+                                        'force-ssl' => 'ssl'
+                                    ],
+                                ],
+                                'may_terminate' => true,
+                                'child_routes' => [
+                                    'edit' => [
+                                        'type' => 'Segment',
+                                        'options' => [
+                                            'route' => '/[:action[/id/[:id]]]',
+                                            'constraints' => [
+                                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                                'id' => '\d+'
+                                            ],
+                                            'defaults' => [
+                                                'action' => 'edit',
+                                                'force-ssl' => 'ssl'
                                             ]
                                         ]
-                                    ]
-                                ]
+                                    ],
+                                    'page' => [
+                                        'type' => 'Segment',
+                                        'options' => [
+                                            'route' => '/page/[:page]',
+                                            'constraints' => [
+                                                'page' => '\d+'
+                                            ],
+                                            'defaults' => [
+                                                'action' => 'list',
+                                                'page' => 1,
+                                                'force-ssl' => 'ssl'
+                                            ],
+                                        ],
+                                    ],
+                                ],
                             ],
                             'product' => [
                                 'type' => 'Segment',
