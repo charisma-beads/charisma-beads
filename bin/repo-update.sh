@@ -7,5 +7,3 @@ cd ../
 git stash
 git stash drop
 git pull
-
-php5 -d memory_limit=512M ./data/upgrade/upgrade-all.php
