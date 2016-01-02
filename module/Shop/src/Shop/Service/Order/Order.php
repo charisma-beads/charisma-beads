@@ -248,7 +248,7 @@ class Order extends AbstractRelationalMapperService
         /* @var $mapper \Shop\Mapper\Order\Order */
         $mapper = $this->getMapper();
         $order = $mapper->getOrderByOrderNumber($orderNumber);
-        \FB::info($order);
+        
         $order->setOrderStatusId($orderStatus);
         $result = $this->save($order);
 
