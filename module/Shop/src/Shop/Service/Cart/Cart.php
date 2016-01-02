@@ -134,6 +134,8 @@ class Cart extends AbstractMapperService implements InitializableInterface
         if ($this->isInitialized) {
             return;
         }
+
+        $cart = null;
         
         // check first if there is a cartId in the session data,
         // else try to retrieve the cartId from cookie verifier.
@@ -153,6 +155,7 @@ class Cart extends AbstractMapperService implements InitializableInterface
         }
 
         // load any cart items
+        // if no cart then retrieve empty cart object
         if ($cart instanceof CartModel) {
             $cart = $this->loadCartItems($cart);
 
@@ -471,16 +474,15 @@ class Cart extends AbstractMapperService implements InitializableInterface
      */
     public function setCart($cart = null)
     {
-        if (!$cart instanceof CartModel) {
-            /* @var $cart CartModel */
-            //$cart = $this->getModel();
-            //$cart->setExpires($this->getCartCookieService()->getCookieConfig()->getExpiry())
-                //->setVerifyId($this->getCartCookieService()->setCartVerifierCookie());
-            //$cartId = $this->save($cart);
-            //$cart->setCartId($cartId);
+        /*if (!$cart instanceof CartModel) {
+            $cart = $this->getModel();
+            $cart->setExpires($this->getCartCookieService()->getCookieConfig()->getExpiry())
+                ->setVerifyId($this->getCartCookieService()->setCartVerifierCookie());
+            $cartId = $this->save($cart);
+            $cart->setCartId($cartId);
 
-            //$this->getContainer()->offsetSet('cartId', $cartId);
-        }
+            $this->getContainer()->offsetSet('cartId', $cartId);
+        }*/
 
         $this->cart = $cart;
     }
@@ -522,7 +524,7 @@ class Cart extends AbstractMapperService implements InitializableInterface
         $this->taxTotal = 0;
 
         $cart = ($this->getCart()) ?? [];
-        
+
         foreach($cart as $cartItem) {
             $sub = $sub + $this->getLineCost($cartItem);
         }
