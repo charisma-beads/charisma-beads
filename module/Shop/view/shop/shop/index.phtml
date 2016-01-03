@@ -148,8 +148,8 @@ $this->inlineScript()
         });
 
         $('#current-orders .panel-widget').on('change', 'select', function () {
-            var orderNumber = $('input[name=orderNumber]').val();
-            var orderStatusId = this.value;
+            var orderNumber = $(this).next().val();
+            var orderStatusId = $(this).val();
             $.ajax({
                 url: '<?=$this->url('admin/shop/order/edit', [
                     'action' => 'update-status',

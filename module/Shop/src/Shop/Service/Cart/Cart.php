@@ -155,12 +155,15 @@ class Cart extends AbstractMapperService implements InitializableInterface
         }
 
         // load any cart items
-        if ($cart) {
+        // if no cart then retrieve empty cart object
+        if ($cart instanceof CartModel) {
             $cart = $this->loadCartItems($cart);
 
             $options = $this->getShopOptions();
 
             $cart->setSortOrder($options->getProductsOrderCol());
+        } else {
+            $cart = $this->getModel();
         }
         
         $this->setCart($cart);
@@ -433,11 +436,24 @@ class Cart extends AbstractMapperService implements InitializableInterface
     {
         $cart = $this->getCart();
         $cart->setDateModified();
+
+        if (null === $cart->getVerifyId()) {
+            $cart->setExpires($this->getCartCookieService()->getCookieConfig()->getExpiry())
+                ->setVerifyId($this->getCartCookieService()->setCartVerifierCookie());
+        }
         
-        $this->save($cart);
+        $cartId = $this->save($cart);
+
+        if (null === $cart->getCartId()) {
+            $cart->setCartId($cartId);
+        }
         
         /* @var $cartItem CartItem */
         foreach ($cart as $cartItem) {
+            if (null === $cartItem->getCartId()) {
+                $cartItem->setCartId($cart->getCartId());
+            }
+
             $this->getCartItemService()->save($cartItem);
         }
 
@@ -454,12 +470,11 @@ class Cart extends AbstractMapperService implements InitializableInterface
 
     /**
      *
-     * @param CartModel $cart            
+     * @param CartModel|null $cart
      */
     public function setCart($cart = null)
     {
-        if (!$cart instanceof CartModel) {
-            /* @var $cart CartModel */
+        /*if (!$cart instanceof CartModel) {
             $cart = $this->getModel();
             $cart->setExpires($this->getCartCookieService()->getCookieConfig()->getExpiry())
                 ->setVerifyId($this->getCartCookieService()->setCartVerifierCookie());
@@ -467,7 +482,7 @@ class Cart extends AbstractMapperService implements InitializableInterface
             $cart->setCartId($cartId);
 
             $this->getContainer()->offsetSet('cartId', $cartId);
-        }
+        }*/
 
         $this->cart = $cart;
     }
@@ -507,8 +522,10 @@ class Cart extends AbstractMapperService implements InitializableInterface
     {
         $sub = 0;
         $this->taxTotal = 0;
-        
-        foreach($this->getCart() as $cartItem) {
+
+        $cart = ($this->getCart()) ?? [];
+
+        foreach($cart as $cartItem) {
             $sub = $sub + $this->getLineCost($cartItem);
         }
         

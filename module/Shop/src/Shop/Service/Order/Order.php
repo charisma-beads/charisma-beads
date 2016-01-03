@@ -243,12 +243,12 @@ class Order extends AbstractRelationalMapperService
         /* @var $options \Shop\Options\OrderOptions */
         $options = $this->getService('Shop\Options\Order');
 
-        $orderNumber = (int) $orderNumber;
+        $orderNumber = (string) $orderNumber;
         $orderStatus = (int) $orderStatus;
         /* @var $mapper \Shop\Mapper\Order\Order */
         $mapper = $this->getMapper();
         $order = $mapper->getOrderByOrderNumber($orderNumber);
-
+        
         $order->setOrderStatusId($orderStatus);
         $result = $this->save($order);
 
