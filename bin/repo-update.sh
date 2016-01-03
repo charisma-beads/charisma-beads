@@ -9,5 +9,5 @@ git fetch --tags
 CB_VERSION="tags/"$(git describe --tags $(git rev-list --tags --max-count=1))
 echo ${CB_VERSION}
 
-git checkout tags/"${CB_VERSION}"
+git checkout "${CB_VERSION}"
 git pull
