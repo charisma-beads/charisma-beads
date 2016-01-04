@@ -1225,16 +1225,16 @@
         },
         {
             "name": "uthando-cms/uthando-session-manager",
-            "version": "2.0.0",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-session-manager.git",
-                "reference": "0e986c69c51f01279e551cdab56eed7c01ea658a"
+                "reference": "48b696c388fbe6b21c6ee14d4925366ed9af5721"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-session-manager/zipball/0e986c69c51f01279e551cdab56eed7c01ea658a",
-                "reference": "0e986c69c51f01279e551cdab56eed7c01ea658a",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-session-manager/zipball/48b696c388fbe6b21c6ee14d4925366ed9af5721",
+                "reference": "48b696c388fbe6b21c6ee14d4925366ed9af5721",
                 "shasum": ""
             },
             "require": {
@@ -1273,7 +1273,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2015-11-13 19:45:56"
+            "time": "2016-01-04 15:48:59"
         },
         {
             "name": "uthando-cms/uthando-testimonial",
@@ -1434,16 +1434,16 @@
         },
         {
             "name": "uthando-cms/uthando-user",
-            "version": "2.0.4",
+            "version": "2.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-user.git",
-                "reference": "554ce3c658783073a4319b9dee626974389da3e3"
+                "reference": "a0b7bf9daa7cc8d9925f7630a08c3b68553e6aa9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-user/zipball/554ce3c658783073a4319b9dee626974389da3e3",
-                "reference": "554ce3c658783073a4319b9dee626974389da3e3",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-user/zipball/a0b7bf9daa7cc8d9925f7630a08c3b68553e6aa9",
+                "reference": "a0b7bf9daa7cc8d9925f7630a08c3b68553e6aa9",
                 "shasum": ""
             },
             "require": {
@@ -1485,7 +1485,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2015-12-24 16:43:36"
+            "time": "2016-01-04 15:50:00"
         },
         {
             "name": "zendframework/zend-authentication",
