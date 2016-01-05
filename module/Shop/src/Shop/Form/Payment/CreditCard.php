@@ -93,13 +93,13 @@ class CreditCard extends Form
         
         $this->add([
             'name' => 'cvv2',
-            'type' => 'number',
+            'type' => 'text',
             'attributes'    => [
                 'placeholder'		=> 'CVV2',
                 'autofocus'			=> true,
                 'maxlength' => 3,
-                'min'  => '100',
-                'max'  => '999',
+                //'min'  => '000',
+                //'max'  => '999',
             ],
             'options'       => [
                 'label' => 'CVV2:',
