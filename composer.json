@@ -27,7 +27,7 @@
     "uthando-cms/uthando-navigation": "2.*",
     "uthando-cms/uthando-news": "2.*",
     "uthando-cms/uthando-newsletter": "dev-master",
-    "uthando-cms/uthando-session-manager": "2.0.4",
+    "uthando-cms/uthando-session-manager": "2.*",
     "uthando-cms/uthando-testimonial": "2.*",
     "uthando-cms/uthando-theme-manager": "2.*",
     "uthando-cms/uthando-twitter": "2.*",
