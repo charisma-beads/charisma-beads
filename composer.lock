@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "414c62faadbfc3b3e948e7d8fdd8a86b",
-    "content-hash": "2f90ef604b9c198ab31e89cba683677f",
+    "hash": "9e23906ef46ea4578f6c6207eee660e2",
+    "content-hash": "b2a449d8010767f39e3f31afb938cd4f",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -1225,16 +1225,16 @@
         },
         {
             "name": "uthando-cms/uthando-session-manager",
-            "version": "2.1.0",
+            "version": "2.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-session-manager.git",
-                "reference": "ef2023504a20bf5a4f4bb08bb836907b7161ef09"
+                "reference": "81f428a1fdc83e870e6e2329857d5533b193d30a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-session-manager/zipball/ef2023504a20bf5a4f4bb08bb836907b7161ef09",
-                "reference": "ef2023504a20bf5a4f4bb08bb836907b7161ef09",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-session-manager/zipball/81f428a1fdc83e870e6e2329857d5533b193d30a",
+                "reference": "81f428a1fdc83e870e6e2329857d5533b193d30a",
                 "shasum": ""
             },
             "require": {
@@ -1274,7 +1274,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2016-01-06 09:18:57"
+            "time": "2016-01-05 17:49:00"
         },
         {
             "name": "uthando-cms/uthando-testimonial",
