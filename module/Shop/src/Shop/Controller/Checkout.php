@@ -10,6 +10,7 @@
 
 namespace Shop\Controller;
 
+use Shop\Model\Country\Country;
 use UthandoCommon\Service\ServiceTrait;
 use Zend\Filter\Word\UnderscoreToDash;
 use Zend\Mvc\Controller\AbstractActionController;
@@ -110,7 +111,7 @@ class Checkout extends AbstractActionController
                 $form->get('shipToBilling')->setValue('1');
             }
             return [
-                'countryId' => $deliveryCountry,
+                'countryId' => ($billingCountry instanceof Country) ? $billingCountry->getCountryId() : $billingCountry,
                 'form' => $form,
             ];
         }
@@ -135,7 +136,7 @@ class Checkout extends AbstractActionController
         }
         
         return [
-            'countryId' => $deliveryCountry,
+            'countryId' => ($billingCountry instanceof Country) ? $billingCountry->getCountryId() : $billingCountry,
             'form' => $form,
         ];
         
