@@ -1225,16 +1225,16 @@
         },
         {
             "name": "uthando-cms/uthando-session-manager",
-            "version": "2.1.1",
+            "version": "2.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-session-manager.git",
-                "reference": "bf9cde2ff895bf70c94d59e937b1c8f1adde8b53"
+                "reference": "1fd945a1401c4a941920b8f728844c1ea5ba4a9e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-session-manager/zipball/bf9cde2ff895bf70c94d59e937b1c8f1adde8b53",
-                "reference": "bf9cde2ff895bf70c94d59e937b1c8f1adde8b53",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-session-manager/zipball/1fd945a1401c4a941920b8f728844c1ea5ba4a9e",
+                "reference": "1fd945a1401c4a941920b8f728844c1ea5ba4a9e",
                 "shasum": ""
             },
             "require": {
@@ -1274,7 +1274,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2016-01-06 12:49:11"
+            "time": "2016-01-07 14:58:23"
         },
         {
             "name": "uthando-cms/uthando-testimonial",
