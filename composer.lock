@@ -113,16 +113,16 @@
         },
         {
             "name": "giggsey/libphonenumber-for-php",
-            "version": "7.2.2",
+            "version": "7.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/giggsey/libphonenumber-for-php.git",
-                "reference": "8b64ea2ecd4080f9ce75cf688dda0c4afedb6b64"
+                "reference": "43a2132bd4fbd5453d412d15df1504824e5a058f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/8b64ea2ecd4080f9ce75cf688dda0c4afedb6b64",
-                "reference": "8b64ea2ecd4080f9ce75cf688dda0c4afedb6b64",
+                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/43a2132bd4fbd5453d412d15df1504824e5a058f",
+                "reference": "43a2132bd4fbd5453d412d15df1504824e5a058f",
                 "shasum": ""
             },
             "require": {
@@ -172,7 +172,7 @@
                 "phonenumber",
                 "validation"
             ],
-            "time": "2015-12-15 17:24:20"
+            "time": "2016-01-08 14:15:34"
         },
         {
             "name": "kriswallsmith/assetic",
@@ -718,16 +718,16 @@
         },
         {
             "name": "uthando-cms/uthando-common",
-            "version": "2.1.4",
+            "version": "2.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-common.git",
-                "reference": "ebe8ee0d664c7060fdb75bd9624967dc19fa9f3f"
+                "reference": "d0f5cfdb87f4a4697e2551d396de5a64a2158a7c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-common/zipball/ebe8ee0d664c7060fdb75bd9624967dc19fa9f3f",
-                "reference": "ebe8ee0d664c7060fdb75bd9624967dc19fa9f3f",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-common/zipball/d0f5cfdb87f4a4697e2551d396de5a64a2158a7c",
+                "reference": "d0f5cfdb87f4a4697e2551d396de5a64a2158a7c",
                 "shasum": ""
             },
             "require": {
@@ -778,7 +778,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2016-01-02 14:56:37"
+            "time": "2016-01-09 14:36:17"
         },
         {
             "name": "uthando-cms/uthando-contact",
