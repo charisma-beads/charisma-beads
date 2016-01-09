@@ -11,7 +11,9 @@
 
 namespace Shop\Mapper\Product;
 
+use Shop\Model\Product\Product as ProductModel;
 use UthandoCommon\Mapper\AbstractDbMapper;
+use Zend\Db\Sql\Expression;
 use Zend\Db\Sql\Select;
 
 /**
@@ -28,7 +30,7 @@ class Product extends AbstractDbMapper
 
     /**
      * @param $ident
-     * @return \Shop\Model\Product\Product|\UthandoCommon\Model\Model
+     * @return ProductModel|\UthandoCommon\Model\Model
      */
     public function getProductByIdent($ident)
     {
@@ -41,7 +43,7 @@ class Product extends AbstractDbMapper
 
     /**
      * @param $id
-     * @return null|\Shop\Model\Product\Product
+     * @return null|ProductModel
      */
     public function getFullProductById($id)
     {
@@ -218,5 +220,47 @@ class Product extends AbstractDbMapper
         //\FB::info($this->getSqlString($select));
 
         return parent::search($search, $sort, $select);
+    }
+
+    /**
+     * @param $id
+     * @return array|\ArrayObject|null|ProductModel
+     */
+    public function getPreviousProduct($id)
+    {
+        $whereSelect = $this->getSql()->select();
+        $whereSelect->from($this->getTable())
+            ->columns([
+                'productId' => new Expression('MAX(productId)')
+            ])->where->lessThan('productId' , $id);
+
+        $select = $this->getSelect();
+        $select->where(['productId' => $whereSelect]);
+
+        $result = $this->fetchResult($select);
+        $row = $result->current();
+
+        return $row;
+    }
+
+    /**
+     * @param $id
+     * @return array|\ArrayObject|null|ProductModel
+     */
+    public function getNextProduct($id)
+    {
+        $whereSelect = $this->getSql()->select();
+        $whereSelect->from($this->getTable())
+            ->columns([
+                'productId' => new Expression('MIN(productId)')
+            ])->where->greaterThan('productId' , $id);
+
+        $select = $this->getSelect();
+        $select->where(['productId' => $whereSelect]);
+
+        $result = $this->fetchResult($select);
+        $row = $result->current();
+
+        return $row;
     }
 }

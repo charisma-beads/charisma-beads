@@ -1,12 +1,12 @@
 <?php
 /**
  * Uthando CMS (http://www.shaunfreeman.co.uk/)
- * 
+ *
  * @package   Shop\View
  * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
  * @link      https://github.com/uthando-cms for the canonical source repository
  * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
+ * @license   see LICENSE
  */
 
 namespace Shop\View;
@@ -26,7 +26,11 @@ class Product extends AbstractViewHelper
      */
     protected $service;
 
-    public function __invoke($productId)
+    /**
+     * @param null $productId
+     * @return $this|array|mixed|\Shop\Model\Product\Product|\UthandoCommon\Model\ModelInterface
+     */
+    public function __invoke($productId = null)
     {
         if (!$this->service instanceof ProductService) {
             $this->service = $this->getServiceLocator()
@@ -35,8 +39,26 @@ class Product extends AbstractViewHelper
                 ->get('ShopProduct');
         }
 
-        return $this->service->getFullProductById($productId);
+        if ($productId) {
+            return $this->service->getFullProductById($productId);
+        }
+
+        return $this;
     }
 
+    public function getPrevious($id)
+    {
+        $prev = $this->service->getMapper()
+            ->getPreviousProduct($id);
 
-} 
+        return $prev;
+    }
+
+    public function getNext($id)
+    {
+        $next = $this->service->getMapper()
+            ->getNextProduct($id);
+
+        return $next;
+    }
+}

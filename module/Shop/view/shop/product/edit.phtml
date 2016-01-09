@@ -1,5 +1,23 @@
 <?php $this->headTitle('Edit Product') ?>
 
+<?php
+$previous = $this->productHelper()->getPrevious($this->model->getProductId());
+$next = $this->productHelper()->getNext($this->model->getProductId());
+?>
+
+<ul class="pager">
+    <li class="previous<?php if (!$previous) echo " disabled"; ?>">
+        <a href="<?=$this->url('admin/shop/product/edit', [
+            'id' => (!$previous) ? '' : $previous->getProductId()
+        ]);?>">&larr; Previous</a>
+    </li>
+    <li class="next<?php if (!$next) echo " disabled"; ?>">
+        <a href="<?=$this->url('admin/shop/product/edit', [
+            'id' => (!$next) ? '' : $next->getProductId()
+        ]);?>">Next &rarr;</a>
+    </li>
+</ul>
+
 <!-- Nav tabs -->
 <ul class="nav nav-tabs">
     <li class="active"><a href="#product" data-toggle="tab">Product</a></li>

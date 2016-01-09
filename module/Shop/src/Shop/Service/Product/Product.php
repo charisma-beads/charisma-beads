@@ -18,6 +18,7 @@ use Zend\EventManager\Event;
  * Class Product
  *
  * @package Shop\Service\Product
+ * @method \Shop\Mapper\Product\Product getMapper($mapperClass = null, array $options = [])
  */
 class Product extends AbstractRelationalMapperService
 {
@@ -66,7 +67,7 @@ class Product extends AbstractRelationalMapperService
     protected $populate = true;
 
     /**
-     * @param bool $bool $bool
+     * @param bool $bool
      * @return $this
      */
     public function setPopulate(bool $bool)
