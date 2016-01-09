@@ -10,7 +10,7 @@
 
 namespace Shop\Hydrator\Strategy;
 
-use Zend\Stdlib\Hydrator\Strategy\StrategyInterface;
+use Zend\Hydrator\Strategy\StrategyInterface;
 
 /**
  * Class NumberFormat

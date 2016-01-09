@@ -347,7 +347,7 @@ class Product implements ModelInterface
      */
     public function setPrice($price)
 	{
-		$this->price = (float) $price;
+		$this->price = $price;
 		return $this;
 	}
 

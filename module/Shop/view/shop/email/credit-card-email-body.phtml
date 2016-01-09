@@ -31,7 +31,7 @@ $card = $this->card;
 	    </tr>
 	    <tr>
 	        <th>Expiry Date</th>
-	        <td><?=$card->getCcExpiryDate();?></td>
+	        <td><?=$this->formatDate($card->getCcExpiryDate(), 'm/Y');?></td>
 	    </tr>
 	    <tr>
 	        <th>Card Verification Number</th>
@@ -44,7 +44,7 @@ $card = $this->card;
 	    </tr>
 	    <tr>
 	        <th>Start Date</th>
-	        <td><?=$card->getCcStartDate();?></td>
+	        <td><?=$this->formatDate($card->getCcStartDate(), 'm/Y');?></td>
 	    </tr>
 	    <?php endif; ?>
 	    <tr>
@@ -54,7 +54,7 @@ $card = $this->card;
 	    <?php if ($card->getAddress()->getAddress2()): ?>
 	    <tr>
 	        <th>Address Line 2</th>
-	        <td><?=$card->getAddress()->getAddress2();?>?></td>
+	        <td><?=$card->getAddress()->getAddress2();?></td>
 	    </tr>
 	    <?php endif; ?>
 	    <?php if ($card->getAddress()->getAddress3()): ?>

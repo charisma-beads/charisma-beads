@@ -87,7 +87,7 @@ class Group implements ModelInterface
      */
     public function setPrice($price)
 	{
-		$this->price = $price;
+		$this->price = (float) $price;
 		return $this;
 	}
 }

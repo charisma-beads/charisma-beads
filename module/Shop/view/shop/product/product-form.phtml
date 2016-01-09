@@ -110,7 +110,7 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
                     <div class="form-group<?php if ($form->get('price')->getMessages()) echo ' has-error'; ?>">
                         <label class="col-md-4 control-label" for="price"><?=$form->get('price')->getLabel();?></label>
                         <div class="col-md-8">
-                            <?=$this->formNumber($form->get('price')->setAttribute('class', 'form-control')); ?>
+                            <?=$this->formText($form->get('price')->setAttribute('class', 'form-control')); ?>
                             <span class="help-block">
                                 Do not include the currency sign or commas.
                                 <?=$this->formElementErrors($form->get('price'), [

@@ -197,7 +197,8 @@ class Product extends AbstractRelationalMapperService
         /* @var $mapper \Shop\Mapper\Product\Product */
         $mapper = $this->getMapper();
 
-        $products = $mapper->searchProducts($search, $sort);
+        $products = $mapper->setFetchEnabled(false)
+            ->searchProducts($search, $sort);
 
         foreach ($products as $product) {
             $this->populate($product, true);

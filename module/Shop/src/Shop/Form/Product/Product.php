@@ -75,7 +75,7 @@ class Product extends Form
         
         $this->add([
         	'name'			=> 'price',
-        	'type'			=> 'ShopPrice',
+        	'type'			=> 'number',
         	'attributes'	=> [
         		'placeholder'	=> 'Price:',
         		'autofocus'		=> true,
