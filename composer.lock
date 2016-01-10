@@ -839,16 +839,16 @@
         },
         {
             "name": "uthando-cms/uthando-dompdf",
-            "version": "3.0.0",
+            "version": "3.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-dompdf.git",
-                "reference": "a204ecd447c7d2a938224c763ecfeeb0ff4ec31e"
+                "reference": "95f02110292ac32eaa1282231f8452a35aebb037"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-dompdf/zipball/a204ecd447c7d2a938224c763ecfeeb0ff4ec31e",
-                "reference": "a204ecd447c7d2a938224c763ecfeeb0ff4ec31e",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-dompdf/zipball/95f02110292ac32eaa1282231f8452a35aebb037",
+                "reference": "95f02110292ac32eaa1282231f8452a35aebb037",
                 "shasum": ""
             },
             "require": {
@@ -906,7 +906,7 @@
                 "pdf",
                 "zf2"
             ],
-            "time": "2015-11-10 13:53:32"
+            "time": "2016-01-10 22:29:01"
         },
         {
             "name": "uthando-cms/uthando-events",
