@@ -145,7 +145,8 @@ class Product extends AbstractRelationalMapperService
             $categoryId = (array) $categoryId;
         }
 
-        $products = $mapper->getProductsByCategory($categoryId, $order);
+        $products = $mapper->setFetchEnabled(false)
+            ->getProductsByCategory($categoryId, $order);
 
         if ($this->isPopulate()) {
             foreach ($products as $product) {
