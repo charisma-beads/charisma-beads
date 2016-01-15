@@ -98,7 +98,9 @@ class ProductImage extends AbstractHelper
 
     public function fileExists($file)
     {
-        return file_exists($this->publicDir.$this->imageDir.$file);
+        $file = $this->publicDir.$this->imageDir.$file;
+        $fileExists = (file_exists($file) && is_file($file)) ? true : false;
+        return $fileExists;
 
     }
     
