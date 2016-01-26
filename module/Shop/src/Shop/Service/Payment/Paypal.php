@@ -10,9 +10,6 @@
 
 namespace Shop\Service\Payment;
 
-use PayPal\Api\RelatedResources;
-use Shop\Model\Order\Order as OrderModel;
-use Shop\Options\PaypalOptions;
 use PayPal\Api\Amount;
 use PayPal\Api\Details;
 use PayPal\Api\Item;
@@ -21,14 +18,17 @@ use PayPal\Api\Payment;
 use PayPal\Api\PaymentExecution;
 use PayPal\Api\Payer;
 use PayPal\Api\RedirectUrls;
+use PayPal\Api\RelatedResources;
+use PayPal\Api\Search;
 use PayPal\Api\ShippingAddress;
 use PayPal\Api\Transaction;
 use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Rest\ApiContext;
+use Shop\Model\Order\Order as OrderModel;
+use Shop\Options\PaypalOptions;
 use Shop\Service\Tax\Tax;
 use Shop\ShopException;
 use UthandoCommon\Service\AbstractService;
-use UthandoCommon\Stdlib\StringUtils;
 
 /**
  * Class Paypal
@@ -193,7 +193,14 @@ class Paypal extends AbstractService
             'redirectUrl'   => $redirectUrl
         ];
     }
-    
+
+    /**
+     * Execute payment and get it's status
+     *
+     * @param OrderModel $order
+     * @param $payerId
+     * @return OrderModel
+     */
     public function executePayment(OrderModel $order, $payerId)
     {
         $paymentId = $order->getMetadata()->getPaymentId();
@@ -229,7 +236,10 @@ class Paypal extends AbstractService
     {
         return Payment::get($paymentId, $this->getApiContent());
     }
-    
+
+    /**
+     * @return ApiContext
+     */
     public function getApiContent()
     {
         if (!$this->apiContext instanceof ApiContext) {
@@ -252,7 +262,12 @@ class Paypal extends AbstractService
         
         return $this->apiContext;
     }
-    
+
+    /**
+     * @param $action
+     * @param $orderId
+     * @return mixed
+     */
     public function buildUrl($action, $orderId)
     {
         $viewManager = $this->getServiceLocator()
@@ -268,7 +283,10 @@ class Paypal extends AbstractService
         
         return $scheme($url);
     }
-    
+
+    /**
+     * @return array|object|\Shop\Service\Order\Status
+     */
     public function getOrderStatusService()
     {
         if (!$this->orderStatusService) {

@@ -6,6 +6,7 @@
             <th>Customer</th>
             <th>Order Number</th>
             <th>Order Status</th>
+            <th>Payment Id</th>
             <th>Order Date</th>
         </tr>
     </thead>
@@ -37,6 +38,7 @@
                     );?>
                     <input type="hidden" name="orderNumber" value="<?=$row->getOrderNumber(false);?>">
                 </td>
+                <td><?=$this->escapeHtml($row->getMetadata()->getPaymentId());?></td>
                 <td><?=$this->formatDate($row->getOrderDate())->setFormat('d/m/Y');?></td>
             </tr>
         <?php endforeach; ?>
