@@ -29,6 +29,7 @@ use Shop\Options\PaypalOptions;
 use Shop\Service\Tax\Tax;
 use Shop\ShopException;
 use UthandoCommon\Service\AbstractService;
+use UthandoCommon\Stdlib\StringUtils;
 
 /**
  * Class Paypal
@@ -66,7 +67,9 @@ class Paypal extends AbstractService
      */
     public function createPayment(OrderModel $order)
     {
-        if ($order->getMetadata()->getPaymentId()) {
+        $pending = StringUtils::endsWith($order->getOrderStatus()->getOrderStatus(), 'Pending');
+
+        if ($order->getMetadata()->getPaymentId() && false === $pending) {
             throw new ShopException('Payment already processed');
         }
 
