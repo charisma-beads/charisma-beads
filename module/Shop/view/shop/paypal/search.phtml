@@ -1,0 +1,8 @@
+
+<?php if (null === $this->error):?>
+<pre>
+    <?php print_r($this->payment->toArray()); ?>
+</pre>
+<?php else: ?>
+<?=$this->escapeHtml($this->error);?>
+<?php endif;?>

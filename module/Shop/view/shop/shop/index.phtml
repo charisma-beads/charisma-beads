@@ -147,6 +147,31 @@ $this->inlineScript()
             ]);?>'
         });
 
+        $('#current-orders .panel-widget').on('click', 'a.paypal-payment-lookup', function (e) {
+            e.preventDefault();
+
+            var url = $(this).attr('href');
+
+            var dialog = bootbox.dialog({
+                title: "PayPal Payment Lookup",
+                show: false,
+                size: 'large',
+                message: '<i class="fa fa-spinner fa-spin"></i>&nbsp;Loading',
+                buttons: {
+                    primary: {
+                        label: "Close",
+                        className: "btn-primary"
+                    }
+                }
+            });
+
+            dialog.on('show.bs.modal', function () {
+                console.log(url);
+                $(this).find('.modal-body').load(url);
+            });
+            dialog.modal('show');
+        });
+
         $('#current-orders .panel-widget').on('change', 'select', function () {
             var orderNumber = $(this).next().val();
             var orderStatusId = $(this).val();

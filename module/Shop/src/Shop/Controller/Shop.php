@@ -31,12 +31,6 @@ class Shop extends AbstractActionController
 
     public function indexAction()
     {
-        /* @var \Shop\Service\Payment\payPal $paypal */
-        //$paypal = $this->getService('ShopPaymentPaypal');
-
-        //$payment = $paypal->getPayment('PAY-60Y70944VF406181DK2V5KLA');
-
-        //\FB::info($payment);
         return new ViewModel();
     }
 

@@ -38,7 +38,14 @@
                     );?>
                     <input type="hidden" name="orderNumber" value="<?=$row->getOrderNumber(false);?>">
                 </td>
-                <td><?=$this->escapeHtml($row->getMetadata()->getPaymentId());?></td>
+                <td>
+                    <a class="paypal-payment-lookup" href="<?=$this->url('admin/shop/paypal', [
+                        'action' => 'search',
+                        'paymentId' => $this->escapeHtml($row->getMetadata()->getPaymentId()),
+                    ]);?>">
+                        <?=$this->escapeHtml($row->getMetadata()->getPaymentId());?>
+                    </a>
+                </td>
                 <td><?=$this->formatDate($row->getOrderDate())->setFormat('d/m/Y');?></td>
             </tr>
         <?php endforeach; ?>

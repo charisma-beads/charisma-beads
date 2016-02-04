@@ -1023,6 +1023,21 @@ return [
                                     ],
                                 ],
                             ],
+                            'paypal' => [
+                                'type' => 'Segment',
+                                'options' => [
+                                    'route' => '/paypal[/:action[/:paymentId]]',
+                                    'constraints' => [
+                                        'action' => '[a-zA-Z0-9][a-zA-Z0-9_-]*',
+                                        'paymentId' => '[a-zA-Z0-9][a-zA-Z0-9-]*',
+                                    ],
+                                    'defaults' => [
+                                        'controller' => 'Paypal',
+                                        'force-ssl' => 'ssl',
+                                        'paymentId' => '',
+                                    ],
+                                ],
+                            ],
                             'report' => [
                                 'type' => 'Segment',
                                 'options' => [

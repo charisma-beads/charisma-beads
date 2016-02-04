@@ -16,6 +16,7 @@ use Shop\Service\Order\Order as OrderService;
 use UthandoCommon\Controller\SetExceptionMessages;
 use UthandoCommon\Service\ServiceTrait;
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
 
 /**
  * Class Paypal
@@ -36,6 +37,32 @@ class Paypal extends AbstractActionController
      * @var OrderService
      */
     protected $orderService;
+
+    public function searchAction()
+    {
+        $orderId    = $this->params()->fromRoute('paymentId');
+        $error      = null;
+        $payment    = null;
+
+        try {
+            $payment = $this->getPaypalService()
+                ->getPayment($orderId);
+        } catch (Exception $e) {
+
+            $error = $e->getMessage();
+        }
+
+        $viewModel = new ViewModel([
+            'payment' => $payment,
+            'error' => $error,
+        ]);
+
+        if ($this->getRequest()->isXmlHttpRequest()) {
+            $viewModel->setTerminal(true);
+        }
+
+        return $viewModel;
+    }
 
     public function processAction()
     {
