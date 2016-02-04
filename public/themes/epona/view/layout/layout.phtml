@@ -143,8 +143,8 @@
                                 ?>
                             </nav>
 
-                            Call Us Today: <strong><a href="tel:<?=$this->contact()->formatPhoneNumber();?>">
-                                <?=$this->contact()->formatPhoneNumber(true);?>
+                            Call Us Today: <strong><a href="tel:<?=$this->contact()->formatPhoneNumber('phone');?>">
+                                <?=$this->contact()->formatPhoneNumber('phone', true);?>
                             </a></strong>
 							<span class="hide_mobile">
 								&bull; <a href="<?=$this->url('contact');?>"><?=$this->contact('details.email');?></a>
@@ -245,8 +245,8 @@
                                 Email:&nbsp;<a href="<?=$this->url('contact');?>">
                                     <?=$this->contact('details.email');?>
                                 </a><br />
-                                Phone:&nbsp;<a href="tel:<?=$this->contact()->formatPhoneNumber();?>">
-                                    <?=$this->contact()->formatPhoneNumber(true);?>
+                                Phone:&nbsp;<a href="tel:<?=$this->contact()->formatPhoneNumber('phone');?>">
+                                    <?=$this->contact()->formatPhoneNumber('phone', true);?>
                                 </a><br />
                             </p>
 
