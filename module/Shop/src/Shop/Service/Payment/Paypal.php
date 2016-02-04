@@ -67,7 +67,8 @@ class Paypal extends AbstractService
      */
     public function createPayment(OrderModel $order)
     {
-        $pending = StringUtils::endsWith($order->getOrderStatus()->getOrderStatus(), 'Pending');
+        $orderStatus = $order->getOrderStatus()->getOrderStatus();
+        $pending = (StringUtils::endsWith($orderStatus, 'Pending') || 'Waiting for Payment' === $orderStatus) ?  true : false;
 
         if ($order->getMetadata()->getPaymentId() && false === $pending) {
             throw new ShopException('Payment already processed');
