@@ -166,7 +166,6 @@ $this->inlineScript()
             });
 
             dialog.on('show.bs.modal', function () {
-                console.log(url);
                 $(this).find('.modal-body').load(url);
             });
             dialog.modal('show');

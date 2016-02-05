@@ -1,8 +1,19 @@
 
 <?php if (null === $this->error):?>
-<pre>
-    <?php print_r($this->payment->toArray()); ?>
-</pre>
+    <pre><?=$this->escapeHtml(Zend\Json\Json::prettyPrint($this->payment->toJson(), array("indent" => "    ")));?></pre>
 <?php else: ?>
-<?=$this->escapeHtml($this->error);?>
+<table class="table table-bordered">
+    <tr>
+        <th>Code</th>
+        <td><?=$this->escapeHtml($this->code);?></td>
+    </tr>
+    <tr>
+        <th>Data</th>
+        <td><pre><?=$this->escapeHtml(Zend\Json\Json::prettyPrint($this->data, array("indent" => "    ")));?></pre></td>
+    </tr>
+    <tr>
+        <th>Message</th>
+        <td><?=$this->escapeHtml($this->error);?></td>
+    </tr>
+</table>
 <?php endif;?>

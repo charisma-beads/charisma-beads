@@ -11,6 +11,7 @@
 namespace Shop\Controller;
 
 use Exception;
+use PayPal\Exception\PayPalConnectionException;
 use Shop\Service\Payment\Paypal as PaypalService;
 use Shop\Service\Order\Order as OrderService;
 use UthandoCommon\Controller\SetExceptionMessages;
@@ -43,18 +44,23 @@ class Paypal extends AbstractActionController
         $orderId    = $this->params()->fromRoute('paymentId');
         $error      = null;
         $payment    = null;
+        $data       = null;
+        $code       = null;
 
         try {
             $payment = $this->getPaypalService()
                 ->getPayment($orderId);
-        } catch (Exception $e) {
-
+        } catch (PayPalConnectionException $e) {
+            $code = $e->getCode(); // Prints the Error Code
+            $data = $e->getData(); // Prints the detailed error message
             $error = $e->getMessage();
         }
 
         $viewModel = new ViewModel([
-            'payment' => $payment,
-            'error' => $error,
+            'payment'   => $payment,
+            'error'     => $error,
+            'data'      => $data,
+            'code'      => $code,
         ]);
 
         if ($this->getRequest()->isXmlHttpRequest()) {
