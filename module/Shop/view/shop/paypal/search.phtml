@@ -1,6 +1,6 @@
 
 <?php if (null === $this->error):?>
-    <pre><?=$this->escapeHtml(Zend\Json\Json::prettyPrint($this->payment->toJson(), array("indent" => "    ")));?></pre>
+    <pre><?=$this->escapeHtml(Zend\Json\Json::prettyPrint($this->payment->toJson(), array("indent" => "  ")));?></pre>
 <?php else: ?>
 <table class="table table-bordered">
     <tr>
@@ -9,7 +9,7 @@
     </tr>
     <tr>
         <th>Data</th>
-        <td><pre><?=$this->escapeHtml(Zend\Json\Json::prettyPrint($this->data, array("indent" => "    ")));?></pre></td>
+        <td><pre><?=$this->escapeHtml(Zend\Json\Json::prettyPrint($this->data, array("indent" => "  ")));?></pre></td>
     </tr>
     <tr>
         <th>Message</th>
