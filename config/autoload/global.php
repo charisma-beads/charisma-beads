@@ -8,5 +8,8 @@ return [
         'error_reporting' => E_ALL,
         'max_execution_time' => 60,
         'date.timezone' => 'Europe/London'
-    ]
+    ],
+    'uthando_user' => [
+        'default_admin_route' => 'admin/shop',
+    ],
 ];

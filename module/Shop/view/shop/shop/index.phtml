@@ -1,4 +1,7 @@
 <?php
+$this->headTitle('Shop Overview');
+$this->layout()->pageTitle = $this->translate('Shop Overview');
+
 $startYears = $this->formManager('MonthlyTotalYearList', [
     'name' => 'start',
     'label' => 'Start',
@@ -25,13 +28,13 @@ $this->inlineScript()
 
 ?>
 
-<div class="row">
+<div id="shop-overview" class="row">
     <!-- new orders -->
     <div class="col-md-12 col-lg-6">
-        <div id="current-orders" class="panel panel-info">
+        <div id="current-orders" class="panel panel-default">
             <!-- Default panel contents -->
             <div class="panel-heading">
-                <h4 class="panel-title">Current Orders</h4>
+                <h4 class="panel-title"><i class="fa fa-shopping-cart"></i> Current Orders</h4>
             </div>
             <div class="panel-table panel-widget">
                 <div class="text-center">
@@ -43,10 +46,10 @@ $this->inlineScript()
 
     <!-- new customer -->
     <div class="col-md-12 col-lg-6">
-        <div id="new-customers" class="panel panel-info">
+        <div id="new-customers" class="panel panel-default">
             <!-- Default panel contents -->
             <div class="panel-heading">
-                <h4 class="panel-title">New Customers This Month&nbsp;<span id="new-customer-count"></span></h4>
+                <h4 class="panel-title"><i class="fa fa-users"></i> New Customers This Month&nbsp;<span id="new-customer-count"></span></h4>
             </div>
             <div class="panel-table panel-widget">
                 <div class="text-center">
@@ -60,10 +63,10 @@ $this->inlineScript()
 <div class="row">
     <!-- Ad Stats -->
     <div class="col-md-12 col-lg-6">
-        <div id="ad-stats" class="panel panel-info">
+        <div id="ad-stats" class="panel panel-default">
             <!-- Default panel contents -->
             <div class="panel-heading">
-                <h4 class="panel-title">Advert Statistics</h4>
+                <h4 class="panel-title"><i class="fa fa-pie-chart"></i>  Advert Statistics</h4>
             </div>
             <div class="panel-table panel-widget">
                 <div class="text-center">
@@ -75,11 +78,11 @@ $this->inlineScript()
 
     <!-- monthly total -->
     <div class="col-md-12 col-lg-6">
-        <div id="monthly-totals" class="panel panel-info">
+        <div id="monthly-totals" class="panel panel-default">
             <!-- Default panel contents -->
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    Monthly Totals
+                    <i class="fa fa-line-chart"></i> Monthly Totals
                     <button id="monthly-totals-report-button" class="btn btn-default btn-xs">
                         Download Report
                     </button>

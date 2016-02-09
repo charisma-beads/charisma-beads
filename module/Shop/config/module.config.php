@@ -185,21 +185,23 @@ return [
     ],
     'service_manager' => [
         'invokables' => [
-            'Shop\Service\Report'       => 'Shop\Service\Report',
-            'Shop\Service\StockControl' => 'Shop\Service\StockControl',
+            'Shop\Service\Report'           => 'Shop\Service\Report',
+            'Shop\Service\StockControl'     => 'Shop\Service\StockControl',
         ],
         'factories' => [
-            'Shop\Options\CartCookie'   => 'Shop\Service\Factory\CartCookieOptions',
-            'Shop\Options\Cart'         => 'Shop\Service\Factory\CartOptions',
-            'Shop\Options\Invoice'      => 'Shop\Service\Factory\InvoiceOptions',
-            'Shop\Options\Order'        => 'Shop\Service\Factory\OrderOptions',
-            'Shop\Options\Paypal'       => 'Shop\Service\Factory\PaypalOptions',
-            'Shop\Options\Reports'      => 'Shop\Service\Factory\ReportsOptions',
-            'Shop\Options\Shop'         => 'Shop\Service\Factory\ShopOptions',
+            'Shop\Options\CartCookie'       => 'Shop\Service\Factory\CartCookieOptions',
+            'Shop\Options\Cart'             => 'Shop\Service\Factory\CartOptions',
+            'Shop\Options\Invoice'          => 'Shop\Service\Factory\InvoiceOptions',
+            'Shop\Options\Order'            => 'Shop\Service\Factory\OrderOptions',
+            'Shop\Options\Paypal'           => 'Shop\Service\Factory\PaypalOptions',
+            'Shop\Options\Reports'          => 'Shop\Service\Factory\ReportsOptions',
+            'Shop\Options\Shop'             => 'Shop\Service\Factory\ShopOptions',
 
-            'Shop\Service\Cart\Cookie'  => 'Shop\Service\Factory\CartCookie',
-            'Shop\Service\Shipping'     => 'Shop\Service\Factory\Shipping',
-            'Shop\Service\Tax'          => 'Shop\Service\Factory\Tax',
+            'Shop\Service\Cart\Cookie'      => 'Shop\Service\Factory\CartCookie',
+            'Shop\Service\Shipping'         => 'Shop\Service\Factory\Shipping',
+            'Shop\Service\Tax'              => 'Shop\Service\Factory\Tax',
+
+            'ExceptionMailer\ErrorHandling' => Shop\Exception\MailerFactory::class
         ],
     ],
     'uthando_mappers' => [
@@ -328,7 +330,8 @@ return [
         'template_map' => [
             'cart/summary'         => __DIR__ . '/../view/shop/cart/cart-summary.phtml',
             'shop/cart'            => __DIR__ . '/../view/shop/cart/cart.phtml',
-            'shop/order/details'   => __DIR__ . '/../view/shop/order/order-details.phtml'
+            'shop/order/details'   => __DIR__ . '/../view/shop/order/order-details.phtml',
+            'error/mail'           => __DIR__ . '/../view/error/mail.phtml', // Exception_Mailer
         ],
         'template_path_stack' => [
             'shop' => __DIR__ . '/../view'

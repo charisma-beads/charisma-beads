@@ -36,6 +36,9 @@ return [
             ],
             'shop' => [
                 'label' => 'Shop',
+                'params' => [
+                    'icon' => 'fa-shopping-cart',
+                ],
                 'pages' => [
                     'overview' => [
                         'label' => 'Overview',

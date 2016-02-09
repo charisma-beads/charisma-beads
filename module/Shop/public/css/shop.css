@@ -5,6 +5,21 @@ fieldset:nth-child(odd)  {
 }
 
 /* Panel Styles */
+#shop-overview .panel-body,
+.panel-table {
+    max-height: 300px;
+    overflow: auto;
+}
+
+#monthly-totals select {
+    height: 26px;
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+
 .panel-title {
     position: relative;
     vertical-align: middle;

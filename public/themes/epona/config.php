@@ -27,6 +27,7 @@ return [
         'shop/faq/faq'                                          => __DIR__ . '/view/shop/faq/faq.phtml',
         'shop/payment/credit-card'                              => __DIR__ . '/view/shop/payment/credit-card.phtml',
         'shop/payment/phone'                                    => __DIR__ . '/view/shop/payment/phone.phtml',
+        'shop/paypal/success'                                   => __DIR__ . '/view/shop/order/view.phtml',
         'shop/order/my-orders'                                  => __DIR__ . '/view/shop/order/my-orders.phtml',
         'shop/order/pagination'                                 => __DIR__ . '/view/shop/order/pagination.phtml',
         'shop/order/view'                                       => __DIR__ . '/view/shop/order/view.phtml',

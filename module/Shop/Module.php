@@ -35,11 +35,27 @@ class Module implements ConsoleUsageProviderInterface, ConfigInterface
     {
         $app = $e->getApplication();
         $eventManager = $app->getEventManager();
+        $services = $app->getServiceManager();
 
         $eventManager->attachAggregate(new ControllerListener());
         $eventManager->attachAggregate(new FileManagerListener());
         $eventManager->attachAggregate(new SiteMapListener());
         $eventManager->attachAggregate(new UserListener());
+        $eventManager->attach(MvcEvent::EVENT_DISPATCH_ERROR, function($event) use ($services) {
+            /** @var $event MvcEvent */
+            if (!$event->isError()) {
+                return;
+            }
+
+            $exception = $event->getResult()->exception;
+
+            if (!$exception) {
+                return;
+            }
+
+            $service = $services->get('ExceptionMailer\ErrorHandling');
+            $service->mailException($exception, $event->getResult());
+        });
     }
 
     public function getConsoleUsage(Console $console)
