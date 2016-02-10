@@ -328,6 +328,7 @@ return [
     ],
     'view_manager' => [
         'template_map' => [
+            'mail/error'           => __DIR__ . '/../view/error/mail.phtml',
             'cart/summary'         => __DIR__ . '/../view/shop/cart/cart-summary.phtml',
             'shop/cart'            => __DIR__ . '/../view/shop/cart/cart.phtml',
             'shop/order/details'   => __DIR__ . '/../view/shop/order/order-details.phtml',

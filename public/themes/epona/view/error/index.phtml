@@ -1,0 +1,34 @@
+
+<?php $this->placeholder('page-top')->captureStart();?>
+
+<?=$this->partial('layout/page-title', [
+    'pageTitle' => '500 Server Error',
+]);?>
+
+<?php $this->placeholder('page-top')->captureEnd();?>
+
+<div class="row default-e404">
+
+    <div class="col-md-9">
+
+        <span class="default-404"><i class="fa fa-file"></i> 500</span>
+        <p class="text-center lead">
+            We're sorry, but something seems to have gone wrong. We have been notified and will look into it.
+        </p>
+        <p class="text-center">
+            If the error happened while attempting to pay for items in your shopping cart,
+            please check your order history to see if your order in payment pending.
+            <a href="<?=$this->url('shop/order');?>">Order History</a>
+        </p>
+    </div>
+
+    <div class="col-md-3">
+
+        <h4>Useful Links</h4>
+
+        <!-- SIDE NAV -->
+        <?=$this->partial('shop/product-nav');?>
+        <!-- /SIDE NAV -->
+
+    </div>
+</div>
