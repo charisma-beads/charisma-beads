@@ -43,7 +43,7 @@ class AddressFieldSet extends Fieldset implements InputFilterProviderInterface
         $countryCode = $this->getOption('country');
 
         if ($countryCode instanceof Country) {
-            $countryCode = $countryCode->getCode();
+            $countryCode = ($countryCode->getCode()) ? $countryCode->getCode() : 'GB';
         }
 
         return [
@@ -110,7 +110,7 @@ class AddressFieldSet extends Fieldset implements InputFilterProviderInterface
             ],
             
             'postcode' => [
-                'required' => ($this->getOption('country') == 'IE') ? false : true,
+                'required' => ($countryCode == 'IE') ? false : true,
                 'filters' => [
                     ['name' => 'StripTags'],
                     ['name' => 'StringTrim'],

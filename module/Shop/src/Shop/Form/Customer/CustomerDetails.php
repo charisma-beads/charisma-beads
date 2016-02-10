@@ -39,8 +39,8 @@ class CustomerDetails extends Form
             'options' => [
                 'label' => 'Customer',
                 'use_as_base_fieldset' => true,
-                'billing_country' => $this->options['billing_country'],
-                'delivery_country' => $this->options['delivery_country'],
+                'billing_country' => $this->getOption('billing_country'),
+                'delivery_country' => $this->getOption('delivery_country'),
             ],
         ]);
 
