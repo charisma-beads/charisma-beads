@@ -19,7 +19,7 @@ use PayPal\Api\PaymentExecution;
 use PayPal\Api\Payer;
 use PayPal\Api\RedirectUrls;
 use PayPal\Api\RelatedResources;
-use PayPal\Api\Search;
+use PayPal\Api\Sale;
 use PayPal\Api\ShippingAddress;
 use PayPal\Api\Transaction;
 use PayPal\Auth\OAuthTokenCredential;
@@ -204,11 +204,16 @@ class Paypal extends AbstractService
      * @param OrderModel $order
      * @param $payerId
      * @return OrderModel
+     * @throws ShopException
      */
     public function executePayment(OrderModel $order, $payerId)
     {
         $paymentId = $order->getMetadata()->getPaymentId();
         $payment = $this->getPayment($paymentId);
+
+        if ($this->getRelatedResource($payment)->getSale() instanceof Sale) {
+            throw new ShopException('Payment already processed');
+        }
         
         $execution = new PaymentExecution();
         $execution->setPayerId($payerId);
@@ -217,10 +222,9 @@ class Paypal extends AbstractService
 
         $paymentState = $payment->getState();
         /* @var Transaction $transaction */
-        $transaction = $payment->getTransactions()[0];
-        /* @var RelatedResources $relatedResource */
-        $relatedResource = $transaction->getRelatedResources()[0];
-        $saleState = $relatedResource->getSale()->getState();
+        $saleState = $this->getRelatedResource($payment)
+            ->getSale()
+            ->getState();
             
         if ('approved' === $paymentState && 'completed' === $saleState) {
             /* @var $orderStatus \Shop\Model\Order\Status */
@@ -230,6 +234,23 @@ class Paypal extends AbstractService
         }
 
         return $order;
+    }
+
+    /**
+     * @param Payment $payment
+     * @return RelatedResources
+     */
+    public function getRelatedResource(Payment $payment)
+    {
+        /* @var Transaction $transaction */
+        $transaction = $payment->getTransactions()[0];
+        /* @var RelatedResources $relatedResource */
+
+        if (1 === count($transaction->getRelatedResources())) {
+            return $transaction->getRelatedResources()[0];
+        }
+
+        return new RelatedResources();
     }
 
     /**

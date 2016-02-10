@@ -59,19 +59,35 @@ class Checkout extends AbstractActionController
         if (!$this->getService('ShopCart')->hasItems()) {
             return $this->redirect()->toRoute('shop');
         }
+
+        $prg = $this->prg();
         
         $userId = $this->identity()->getUserId();
         $customer = $this->getCustomerService()->getCustomerByUserId($userId);
-        
-        if ($customer->getBillingAddressId() && $customer->getDeliveryAddressId()) {
-            return [
-                'customer' => $customer,
-            ];
+
+        if ($prg instanceof Response) {
+            return $prg;
+        } elseif ($prg === false) {
+            if ($customer->getBillingAddressId() && $customer->getDeliveryAddressId()) {
+                return [
+                    'customer' => $customer,
+                ];
+            }
+
+            return $this->redirect()->toRoute('shop/checkout', [
+                'action' => 'customer-details',
+            ]);
         }
-        
-        return $this->redirect()->toRoute('shop/checkout', [
-            'action' => 'customer-details',
-        ]);
+
+        if (isset($prg['submit']) && $prg['submit'] == 'confirmAddress') {
+            return $this->redirect()->toRoute('shop/checkout', [
+                'action' => 'confirm-order',
+            ]);
+        } else {
+            return $this->redirect()->toRoute('shop/checkout', [
+                'action' => 'customer-details',
+            ]);
+        }
     }
     
     public function customerDetailsAction()
@@ -147,10 +163,8 @@ class Checkout extends AbstractActionController
         if (!$this->getService('ShopCart')->hasItems()) {
             return $this->redirect()->toRoute('shop');
         }
-        
-        $params = $this->params()->fromPost();
-        $submit = $this->params()->fromPost('submit', null);
-        $collect = $this->params()->fromPost('collect_instore', 0);
+
+        $prg = $this->prg();
         
         $customer = $this->getCustomerService()
             ->setUser($this->identity())
@@ -166,21 +180,34 @@ class Checkout extends AbstractActionController
         $form->setInputFilter($this->getServiceLocator()
             ->get('InputFilterManager')
             ->get('Shop\InputFilter\Order\Confirm'));
-        
-        
-        if ($this->request->isPost() && 'placeOrder' === $submit) {
-            $params['collect_instore'] = $collect;
 
-            $form->setData($params);
-            
+        if ($prg instanceof Response) {
+            return $prg;
+        } elseif ($prg === false) {
+            return new ViewModel(array(
+                'countryId' => $customer->getDeliveryAddress()->getCountryId(),
+                'form' => $form
+            ));
+        }
+
+        $submit = (isset($prg['submit'])) ? $prg['submit'] : null ;
+        $collect = (isset($prg['collect_instore'])) ? 1 : 0;
+
+        if ('placeOrder' == $submit) {
+            $prg['collect_instore'] = $collect;
+
+            $form->setData($prg);
+
             if ($form->isValid()) {
                 $formValues = $form->getData();
                 $orderId = $this->getOrderService()
                     ->processOrderFromCart($customer, $formValues);
-                
+
+                \FB::info($orderId, __METHOD__);
+
                 if ($orderId) {
                     $this->getService('ShopCart')->clear(false);
-                    
+
                     // need to email order,
                     // add params to session and redirect to payment page.
                     $orderParams = [
@@ -188,26 +215,21 @@ class Checkout extends AbstractActionController
                         'collect' => $collect,
                         'requirements' => $formValues['requirements']
                     ];
-                    
+
                     $filter = new UnderscoreToDash();
                     $action = $filter->filter($formValues['payment_option']);
-                    
+
                     /* @var $container \Zend\Session\AbstractContainer */
                     $container = new Container('order');
                     $container->setExpirationHops(1, null);
                     $container->order = $orderParams;
-                    
-                    $this->redirect()->toRoute('shop/payment/default', [
+
+                    return $this->redirect()->toRoute('shop/payment/default', [
                         'paymentOption' => lcfirst($action)
                     ]);
                 }
             }
         }
-        
-        return new ViewModel(array(
-            'countryId' => $customer->getDeliveryAddress()->getCountryId(),
-            'form' => $form
-        ));
     }
 
     public function cancelOrderAction()
