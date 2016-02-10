@@ -203,8 +203,6 @@ class Checkout extends AbstractActionController
                 $orderId = $this->getOrderService()
                     ->processOrderFromCart($customer, $formValues);
 
-                \FB::info($orderId, __METHOD__);
-
                 if ($orderId) {
                     $this->getService('ShopCart')->clear(false);
 

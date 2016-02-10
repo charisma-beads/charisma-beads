@@ -41,7 +41,7 @@ class Module implements ConsoleUsageProviderInterface, ConfigInterface
         $eventManager->attachAggregate(new FileManagerListener());
         $eventManager->attachAggregate(new SiteMapListener());
         $eventManager->attachAggregate(new UserListener());
-        $eventManager->attach(MvcEvent::EVENT_DISPATCH_ERROR, function($event) use ($services) {
+        $eventManager->attach([MvcEvent::EVENT_RENDER_ERROR, MvcEvent::EVENT_DISPATCH_ERROR], function($event) use ($services) {
             /** @var $event MvcEvent */
             if (!$event->isError()) {
                 return;
