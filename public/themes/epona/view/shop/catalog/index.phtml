@@ -14,6 +14,19 @@
     <div class="col-md-9">
         <!-- PRODUCT LIST -->
         <div class="row">
+            <!-- cart links -->
+            <?php if ($this->cart()->countItems() > 0):?>
+
+                <div class="col-md-12 text-center cart-links">
+                    <a href="<?=$this->url('shop/cart', [
+                        'action' => 'view'
+                    ]);?>" class="btn btn-primary">VIEW CART</a>
+
+                    <a href="<?=$this->url('shop/checkout');?>" class="btn btn-info">CHECKOUT</a>
+                </div>
+
+            <?php endif;?>
+            <!-- /cart links -->
             <?php /* @var $row \Shop\Model\Product\Product */ ?>
             <?php $c=0;?>
             <?php foreach ($this->products as $row): ?>
@@ -92,18 +105,18 @@
             <h1><?=strtoupper($this->category);?> COMING SOON</h1>
         </div>
         <?php endif; ?>
+
+        <!-- PAGINATION -->
+        <?=$this->paginationControl(
+            $this->products,
+            'Jumping',
+            'application/partial/paginate',
+            [
+                'route'		=> 'shop/catalog/page',
+                'routeParams' 	=> [
+                    'categoryIdent' => $this->category->getIdent()
+                ]
+            ]
+        ); ?><!-- /PAGINATION -->
     </div>
 </div>
-
-<!-- PAGINATION -->
-<?=$this->paginationControl(
-    $this->products,
-    'Elastic',
-    'application/partial/paginate',
-    [
-        'route'		=> 'shop/catalog/page',
-        'routeParams' 	=> [
-            'categoryIdent' => $this->category->getIdent()
-        ]
-    ]
-); ?><!-- /PAGINATION -->

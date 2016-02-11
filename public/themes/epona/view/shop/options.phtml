@@ -40,17 +40,3 @@ $title2 = implode(' ', $splitTitle);
     <?php endif; ?>
 </div>
 <!-- /options -->
-
-<!-- cart links -->
-<?php if ($this->cart()->countItems() > 0):?>
-    <div class="row">
-        <div class="col-md-9 col-md-offset-3 text-center cart-links">
-            <a href="<?=$this->url('shop/cart', [
-                'action' => 'view'
-            ]);?>" class="btn btn-primary">VIEW CART</a>
-
-            <a href="<?=$this->url('shop/checkout');?>" class="btn btn-info">CHECKOUT</a>
-        </div>
-    </div>
-<?php endif;?>
-<!-- /cart links -->
