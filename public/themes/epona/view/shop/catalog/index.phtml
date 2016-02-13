@@ -12,7 +12,6 @@
         <?=$this->partial('shop/product-nav');?>
     </div>
     <div class="col-md-9">
-        <!-- PRODUCT LIST -->
         <div class="row">
             <!-- cart links -->
             <?php if ($this->cart()->countItems() > 0):?>
@@ -27,6 +26,7 @@
 
             <?php endif;?>
             <!-- /cart links -->
+            <!-- PRODUCT LIST -->
             <?php /* @var $row \Shop\Model\Product\Product */ ?>
             <?php $c=0;?>
             <?php foreach ($this->products as $row): ?>
@@ -98,25 +98,21 @@
     	    <div class="clearfix"></div>
     	    <?php endif;?>
             <?php endforeach; ?>
-        </div><!-- /PRODUCT LIST -->
+            <?php if (0 === $this->products->count()): ?>
+                <div class="comingsoon">
+                    <h1><?=strtoupper($this->category);?> COMING SOON</h1>
+                </div>
+            <?php endif; ?>
+            <!-- /PRODUCT LIST -->
 
-        <?php if (0 === $this->products->count()): ?>
-        <div class="comingsoon">
-            <h1><?=strtoupper($this->category);?> COMING SOON</h1>
+            <!-- PAGINATION -->
+            <?=$this->paginationControl(
+                $this->products,
+                'Jumping',
+                'application/partial/paginate',
+                ['route' => 'shop/search/page']
+            ); ?><!-- /PAGINATION -->
         </div>
-        <?php endif; ?>
 
-        <!-- PAGINATION -->
-        <?=$this->paginationControl(
-            $this->products,
-            'Jumping',
-            'application/partial/paginate',
-            [
-                'route'		=> 'shop/catalog/page',
-                'routeParams' 	=> [
-                    'categoryIdent' => $this->category->getIdent()
-                ]
-            ]
-        ); ?><!-- /PAGINATION -->
     </div>
 </div>

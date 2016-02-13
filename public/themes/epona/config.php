@@ -3,6 +3,7 @@
 return [
     'template_map' => [
         'application/index/index'                               => __DIR__ . '/view/application/index/index.phtml',
+        'application/partial/paginate'                          => __DIR__ . '/view/partial/paginate.phtml',
 
         'error/404'                                             => __DIR__ . '/view/error/404.phtml',
         'error/index'                                           => __DIR__ . '/view/error/index.phtml',

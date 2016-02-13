@@ -54,7 +54,7 @@ class Module implements ConsoleUsageProviderInterface, ConfigInterface
             }
 
             $service = $services->get('ExceptionMailer\ErrorHandling');
-            $service->mailException($exception, $event->getResult());
+            $service->mailException($exception);
         });
     }
 

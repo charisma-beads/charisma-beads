@@ -61,16 +61,26 @@ class Mailer
     }
 
     /**
-     * @param ViewModel $model
-     *
+     * @param \Exception $e
      * @return \Zend\Mime\Message
      */
-    public function getHtmlBody(ViewModel $model)
+    public function getHtmlBody(\Exception $e)
     {
         /** @var PhpRenderer $view */
         $view = $this->getServiceManager()->get('ViewRenderer');
-        $model = clone($model);
+        /* @var \Zend\Http\PhpEnvironment\Request $request */
+        $request = $this->getServiceManager()->get('Request');
+
+        $model = new ViewModel([
+            'exception'     => $e,
+            'getVars'       => $request->getQuery()->toArray(),
+            'postVars'      => $request->getPost()->toArray(),
+            'requestString' => $request->toString(),
+            'sessionVars'   => $_SESSION,
+        ]);
+
         $model->setTemplate($this->config['exception_mailer']['template']);
+
         $content = $view->render($model);
         $text = new Part('');
         $text->type = "text/plain";
@@ -83,9 +93,8 @@ class Mailer
 
     /**
      * @param \Exception $e
-     * @param null       $viewModel
      */
-    public function mailException(\Exception $e, $viewModel = null)
+    public function mailException(\Exception $e)
     {
         // Mail
         if (!$this->config['exception_mailer']['send']) {
@@ -119,9 +128,8 @@ class Mailer
         // check if we should use the template
         if ($this->getServiceManager() !== null
             && $this->config['exception_mailer']['useTemplate'] == true
-            && $viewModel instanceof ViewModel
         ) {
-            $message->setBody($this->getHtmlBody($viewModel));
+            $message->setBody($this->getHtmlBody($e));
         } else {
             $message->setBody($e->getTraceAsString());
         }
