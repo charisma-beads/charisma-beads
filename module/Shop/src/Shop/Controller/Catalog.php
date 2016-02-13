@@ -86,7 +86,7 @@ class Catalog extends AbstractActionController
 
     public function searchAction()
     {
-        $searchData = null;
+        $searchData = [];
         $session = $this->sessionContainer('CatalogSearch');
         $prg = null;
 
@@ -105,8 +105,8 @@ class Catalog extends AbstractActionController
         }
 
         $options = $this->getShopOptions();
-        $page = ($searchData['page']) ?? $session->offsetGet('page');
-        $sort = ($searchData['sort']) ?? $options->getProductsOrderCol();
+        $page = (isset($searchData['page'])) ? $searchData['page'] : $session->offsetGet('page');
+        $sort = (isset($searchData['sort'])) ? $searchData['sort'] : $options->getProductsOrderCol();
         $sl = $this->getServiceLocator();
         
         $form = $sl->get('FormElementManager')->get('ShopCatalogSearch');
