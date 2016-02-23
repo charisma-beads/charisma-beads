@@ -23,6 +23,25 @@ class MonthlyTotalYearList extends Select implements ServiceLocatorAwareInterfac
 {
     use ServiceLocatorAwareTrait;
 
+    /**
+     * MonthlyTotalYearList constructor.
+     * @param null $name
+     * @param array $options
+     */
+    public function __construct($name = null, $options = [])
+    {
+        if (is_array($name)) {
+            $options = $name;
+        }
+
+        if (isset($options['name'])) {
+            $name = $options['name'];
+            unset($options['name']);
+        }
+
+        parent::__construct($name, $options);
+    }
+
     public function init()
     {
         /* @var $mapper \Shop\Mapper\Order\Order */
