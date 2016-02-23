@@ -1176,12 +1176,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-newsletter.git",
-                "reference": "b143e7c223a6a6ce4f7ea54b30e45205ccc05837"
+                "reference": "a4e205915357d1c39743b644239a3fd9a7581ab3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-newsletter/zipball/b143e7c223a6a6ce4f7ea54b30e45205ccc05837",
-                "reference": "b143e7c223a6a6ce4f7ea54b30e45205ccc05837",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-newsletter/zipball/a4e205915357d1c39743b644239a3fd9a7581ab3",
+                "reference": "a4e205915357d1c39743b644239a3fd9a7581ab3",
                 "shasum": ""
             },
             "require": {
@@ -1221,20 +1221,20 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2016-02-19 18:43:25"
+            "time": "2016-02-23 15:08:55"
         },
         {
             "name": "uthando-cms/uthando-session-manager",
-            "version": "2.2.0",
+            "version": "2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-session-manager.git",
-                "reference": "6a16ecfafa42afefca8ab28dde8fccfc05c4e31d"
+                "reference": "42ce64b7c2d8b18f9a0f8c9c6d8030bac3fd98ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-session-manager/zipball/6a16ecfafa42afefca8ab28dde8fccfc05c4e31d",
-                "reference": "6a16ecfafa42afefca8ab28dde8fccfc05c4e31d",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-session-manager/zipball/42ce64b7c2d8b18f9a0f8c9c6d8030bac3fd98ba",
+                "reference": "42ce64b7c2d8b18f9a0f8c9c6d8030bac3fd98ba",
                 "shasum": ""
             },
             "require": {
@@ -1274,7 +1274,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2016-02-18 12:11:33"
+            "time": "2016-02-23 15:34:17"
         },
         {
             "name": "uthando-cms/uthando-testimonial",
@@ -2840,16 +2840,16 @@
         },
         {
             "name": "zendframework/zend-mvc",
-            "version": "2.6.2",
+            "version": "2.6.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-mvc.git",
-                "reference": "9babf3f501f7db532f3293ec39593237f297a7d0"
+                "reference": "a0f21c0261adab4a27bd10964995625b7d4c7f64"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-mvc/zipball/9babf3f501f7db532f3293ec39593237f297a7d0",
-                "reference": "9babf3f501f7db532f3293ec39593237f297a7d0",
+                "url": "https://api.github.com/repos/zendframework/zend-mvc/zipball/a0f21c0261adab4a27bd10964995625b7d4c7f64",
+                "reference": "a0f21c0261adab4a27bd10964995625b7d4c7f64",
                 "shasum": ""
             },
             "require": {
@@ -2923,7 +2923,7 @@
                 "mvc",
                 "zf2"
             ],
-            "time": "2016-02-22 18:29:58"
+            "time": "2016-02-23 15:24:59"
         },
         {
             "name": "zendframework/zend-navigation",
