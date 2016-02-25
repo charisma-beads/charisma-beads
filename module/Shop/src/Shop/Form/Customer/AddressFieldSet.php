@@ -5,7 +5,7 @@
  * @package   Shop\Form\Customer
  * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
  * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
+ * @license   see LICENSE
  */
 
 namespace Shop\Form\Customer;
@@ -14,7 +14,7 @@ use Shop\Model\Country\Country;
 use Shop\Model\Customer\Address as AddressModel;
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
-use Zend\Stdlib\Hydrator\ClassMethods;
+use Zend\Hydrator\ClassMethods;
 
 /**
  * Class AddressFieldSet

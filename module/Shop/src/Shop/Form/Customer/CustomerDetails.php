@@ -5,13 +5,13 @@
  * @package   Shop\Form\Customer
  * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
  * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
+ * @license   see LICENSE
  */
 
 namespace Shop\Form\Customer;
 
 use Zend\Form\Form;
-use Zend\Stdlib\Hydrator\ClassMethods;
+use Zend\Hydrator\ClassMethods;
 use Zend\InputFilter\InputFilter;
 
 /**
@@ -23,6 +23,10 @@ class CustomerDetails extends Form
 {   
     public function __construct($name = null, $options = [])
     {
+        if (is_array($name)) {
+            $options = $name;
+        }
+
         parent::__construct($name, $options);
     
         $this->setHydrator(new ClassMethods(false))

@@ -5,7 +5,7 @@
  * @package   Shop\Form\Customer
  * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
  * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
+ * @license   see LICENSE
  */
 
 namespace Shop\Form\Customer;
@@ -13,7 +13,7 @@ namespace Shop\Form\Customer;
 use Zend\Form\Fieldset;
 use Shop\Model\Customer\Customer as CustomerModel;
 use Zend\InputFilter\InputFilterProviderInterface;
-use Zend\Stdlib\Hydrator\ClassMethods;
+use Zend\Hydrator\ClassMethods;
 
 /**
  * Class CustomerFieldSet
