@@ -718,16 +718,16 @@
         },
         {
             "name": "uthando-cms/uthando-common",
-            "version": "2.2.2",
+            "version": "2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-common.git",
-                "reference": "451f04b5e1eec5cfb65440b96e548179596bb1bf"
+                "reference": "ad06b044bfe1465008271754ecf5ec67218ccf38"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-common/zipball/451f04b5e1eec5cfb65440b96e548179596bb1bf",
-                "reference": "451f04b5e1eec5cfb65440b96e548179596bb1bf",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-common/zipball/ad06b044bfe1465008271754ecf5ec67218ccf38",
+                "reference": "ad06b044bfe1465008271754ecf5ec67218ccf38",
                 "shasum": ""
             },
             "require": {
@@ -778,7 +778,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2016-02-13 15:19:00"
+            "time": "2016-02-25 12:53:26"
         },
         {
             "name": "uthando-cms/uthando-contact",
@@ -960,20 +960,20 @@
         },
         {
             "name": "uthando-cms/uthando-file-manager",
-            "version": "2.2.1",
+            "version": "2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-file-manager.git",
-                "reference": "992d06b1e13c136f9fb794a49c1bb8693cd6d227"
+                "reference": "95d268925f19f74b92d04928ffa08f49108a706e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-file-manager/zipball/992d06b1e13c136f9fb794a49c1bb8693cd6d227",
-                "reference": "992d06b1e13c136f9fb794a49c1bb8693cd6d227",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-file-manager/zipball/95d268925f19f74b92d04928ffa08f49108a706e",
+                "reference": "95d268925f19f74b92d04928ffa08f49108a706e",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.0",
+                "php": ">=5.5",
                 "rwoverdijk/assetmanager": "1.*",
                 "uthando-cms/uthando-common": "2.*",
                 "zendframework/zend-progressbar": "2.*"
@@ -1009,7 +1009,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2016-02-08 07:17:22"
+            "time": "2016-02-25 12:58:37"
         },
         {
             "name": "uthando-cms/uthando-mail",
@@ -1067,16 +1067,16 @@
         },
         {
             "name": "uthando-cms/uthando-navigation",
-            "version": "2.2.3",
+            "version": "2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-navigation.git",
-                "reference": "fc38d232b8bab4d3f3210262b0ec549a391ac2a1"
+                "reference": "1db03e91f11ee46ee00e3398820674a6477998dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-navigation/zipball/fc38d232b8bab4d3f3210262b0ec549a391ac2a1",
-                "reference": "fc38d232b8bab4d3f3210262b0ec549a391ac2a1",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-navigation/zipball/1db03e91f11ee46ee00e3398820674a6477998dd",
+                "reference": "1db03e91f11ee46ee00e3398820674a6477998dd",
                 "shasum": ""
             },
             "require": {
@@ -1116,7 +1116,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2016-02-19 13:47:15"
+            "time": "2016-02-25 12:59:34"
         },
         {
             "name": "uthando-cms/uthando-news",
@@ -1435,16 +1435,16 @@
         },
         {
             "name": "uthando-cms/uthando-user",
-            "version": "2.2.2",
+            "version": "2.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-user.git",
-                "reference": "2970df07528fbe7f72af5dbaf29596bd17e2160c"
+                "reference": "b3342b7b7d5265456a32a453d106caff7c98d18d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-user/zipball/2970df07528fbe7f72af5dbaf29596bd17e2160c",
-                "reference": "2970df07528fbe7f72af5dbaf29596bd17e2160c",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-user/zipball/b3342b7b7d5265456a32a453d106caff7c98d18d",
+                "reference": "b3342b7b7d5265456a32a453d106caff7c98d18d",
                 "shasum": ""
             },
             "require": {
@@ -1486,7 +1486,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2016-02-10 13:20:10"
+            "time": "2016-02-25 13:48:00"
         },
         {
             "name": "zendframework/zend-authentication",
@@ -1615,29 +1615,29 @@
         },
         {
             "name": "zendframework/zend-captcha",
-            "version": "2.5.3",
+            "version": "2.5.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-captcha.git",
-                "reference": "3d4e9913244e7efd1f9816decf4b0506d7c0be00"
+                "reference": "53ddb0e9d0a6d15b7405e2090419f4e11c1174d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-captcha/zipball/3d4e9913244e7efd1f9816decf4b0506d7c0be00",
-                "reference": "3d4e9913244e7efd1f9816decf4b0506d7c0be00",
+                "url": "https://api.github.com/repos/zendframework/zend-captcha/zipball/53ddb0e9d0a6d15b7405e2090419f4e11c1174d2",
+                "reference": "53ddb0e9d0a6d15b7405e2090419f4e11c1174d2",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.5",
-                "zendframework/zend-math": "~2.5",
-                "zendframework/zend-stdlib": "~2.5"
+                "php": "^5.5 || ^7.0",
+                "zendframework/zend-math": "^2.6",
+                "zendframework/zend-stdlib": "^2.7 || ^3.0"
             },
             "require-dev": {
                 "fabpot/php-cs-fixer": "1.7.*",
                 "phpunit/phpunit": "~4.0",
-                "zendframework/zend-session": "~2.5",
-                "zendframework/zend-text": "~2.5",
-                "zendframework/zend-validator": "~2.5",
+                "zendframework/zend-session": "^2.6",
+                "zendframework/zend-text": "^2.6",
+                "zendframework/zend-validator": "^2.6",
                 "zendframework/zendservice-recaptcha": "*"
             },
             "suggest": {
@@ -1668,7 +1668,7 @@
                 "captcha",
                 "zf2"
             ],
-            "time": "2016-02-22 21:56:40"
+            "time": "2016-02-23 16:14:30"
         },
         {
             "name": "zendframework/zend-config",
@@ -2631,16 +2631,16 @@
         },
         {
             "name": "zendframework/zend-mail",
-            "version": "2.6.0",
+            "version": "2.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-mail.git",
-                "reference": "6dc8a3a262c9d70889ec846124482db3edab9b39"
+                "reference": "3311e163de28dc3b41dfba642939132a16336143"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-mail/zipball/6dc8a3a262c9d70889ec846124482db3edab9b39",
-                "reference": "6dc8a3a262c9d70889ec846124482db3edab9b39",
+                "url": "https://api.github.com/repos/zendframework/zend-mail/zipball/3311e163de28dc3b41dfba642939132a16336143",
+                "reference": "3311e163de28dc3b41dfba642939132a16336143",
                 "shasum": ""
             },
             "require": {
@@ -2654,7 +2654,11 @@
             "require-dev": {
                 "fabpot/php-cs-fixer": "1.7.*",
                 "phpunit/phpunit": "~4.0",
-                "zendframework/zend-config": "^2.6"
+                "zendframework/zend-config": "^2.6",
+                "zendframework/zend-servicemanager": "^2.7.5 || ^3.0.3"
+            },
+            "suggest": {
+                "zendframework/zend-servicemanager": "^2.7.5 || ^3.0.3 when using SMTP to deliver messages"
             },
             "type": "library",
             "extra": {
@@ -2678,7 +2682,7 @@
                 "mail",
                 "zf2"
             ],
-            "time": "2016-02-18 14:26:31"
+            "time": "2016-02-24 22:32:05"
         },
         {
             "name": "zendframework/zend-math",
@@ -2927,37 +2931,35 @@
         },
         {
             "name": "zendframework/zend-navigation",
-            "version": "2.5.1",
+            "version": "2.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-navigation.git",
-                "reference": "1afcd2ea2342ee5cc68e11e28b09d9b6365cac0f"
+                "reference": "864f04447be937d3d0eb22a52fe492cdd27f18aa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-navigation/zipball/1afcd2ea2342ee5cc68e11e28b09d9b6365cac0f",
-                "reference": "1afcd2ea2342ee5cc68e11e28b09d9b6365cac0f",
+                "url": "https://api.github.com/repos/zendframework/zend-navigation/zipball/864f04447be937d3d0eb22a52fe492cdd27f18aa",
+                "reference": "864f04447be937d3d0eb22a52fe492cdd27f18aa",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.23",
-                "zendframework/zend-stdlib": "~2.5"
+                "php": "^5.5 || ^7.0",
+                "zendframework/zend-stdlib": "^2.7 || ^3.0"
             },
             "require-dev": {
                 "fabpot/php-cs-fixer": "1.7.*",
                 "phpunit/phpunit": "~4.0",
-                "zendframework/zend-config": "~2.5",
-                "zendframework/zend-console": "~2.5",
-                "zendframework/zend-http": "~2.5",
-                "zendframework/zend-i18n": "~2.5",
-                "zendframework/zend-log": "~2.5",
-                "zendframework/zend-modulemanager": "~2.5",
-                "zendframework/zend-mvc": "~2.5",
-                "zendframework/zend-permissions-acl": "~2.5",
-                "zendframework/zend-serializer": "~2.5",
-                "zendframework/zend-servicemanager": "~2.5",
-                "zendframework/zend-uri": "~2.5",
-                "zendframework/zend-view": "~2.5"
+                "zendframework/zend-config": "^2.6",
+                "zendframework/zend-console": "^2.6",
+                "zendframework/zend-http": "^2.5.4",
+                "zendframework/zend-i18n": "^2.6",
+                "zendframework/zend-log": "^2.7.1",
+                "zendframework/zend-mvc": "^2.6.3",
+                "zendframework/zend-permissions-acl": "^2.6",
+                "zendframework/zend-servicemanager": "^2.7.5 || ^3.0.3",
+                "zendframework/zend-uri": "^2.5",
+                "zendframework/zend-view": "^2.6.3"
             },
             "suggest": {
                 "zendframework/zend-config": "Zend\\Config component",
@@ -2969,8 +2971,8 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.5-dev",
-                    "dev-develop": "2.6-dev"
+                    "dev-master": "2.6-dev",
+                    "dev-develop": "2.7-dev"
                 }
             },
             "autoload": {
@@ -2988,37 +2990,36 @@
                 "navigation",
                 "zf2"
             ],
-            "time": "2015-06-03 15:32:02"
+            "time": "2016-02-24 21:33:58"
         },
         {
             "name": "zendframework/zend-paginator",
-            "version": "2.5.1",
+            "version": "2.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-paginator.git",
-                "reference": "79b946198737253c597ff2ac3fbe91a479bb8a7d"
+                "reference": "15c82665abc668e6ddf955afc4b86cd3385efbad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-paginator/zipball/79b946198737253c597ff2ac3fbe91a479bb8a7d",
-                "reference": "79b946198737253c597ff2ac3fbe91a479bb8a7d",
+                "url": "https://api.github.com/repos/zendframework/zend-paginator/zipball/15c82665abc668e6ddf955afc4b86cd3385efbad",
+                "reference": "15c82665abc668e6ddf955afc4b86cd3385efbad",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.23",
-                "zendframework/zend-stdlib": "~2.5"
+                "php": "^5.5 || ^7.0",
+                "zendframework/zend-stdlib": "^2.7 || ^3.0"
             },
             "require-dev": {
                 "fabpot/php-cs-fixer": "1.7.*",
                 "phpunit/phpunit": "~4.0",
-                "zendframework/zend-cache": "~2.5",
-                "zendframework/zend-config": "~2.5",
-                "zendframework/zend-db": "~2.5",
-                "zendframework/zend-filter": "~2.5",
-                "zendframework/zend-json": "~2.5",
-                "zendframework/zend-mvc": "~2.5",
-                "zendframework/zend-servicemanager": "~2.5",
-                "zendframework/zend-view": "~2.5"
+                "zendframework/zend-cache": "^2.6.1",
+                "zendframework/zend-config": "^2.6.0",
+                "zendframework/zend-db": "^2.7",
+                "zendframework/zend-filter": "^2.6.1",
+                "zendframework/zend-json": "^2.6.1",
+                "zendframework/zend-servicemanager": "^2.7.5 || ^3.0.3",
+                "zendframework/zend-view": "^2.6.3"
             },
             "suggest": {
                 "zendframework/zend-cache": "Zend\\Cache component to support cache features",
@@ -3031,8 +3032,8 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.5-dev",
-                    "dev-develop": "2.6-dev"
+                    "dev-master": "2.6-dev",
+                    "dev-develop": "2.7-dev"
                 }
             },
             "autoload": {
@@ -3049,7 +3050,7 @@
                 "paginator",
                 "zf2"
             ],
-            "time": "2015-06-03 15:32:02"
+            "time": "2016-02-23 17:41:20"
         },
         {
             "name": "zendframework/zend-permissions-acl",
@@ -3258,16 +3259,16 @@
         },
         {
             "name": "zendframework/zend-session",
-            "version": "2.6.0",
+            "version": "2.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-session.git",
-                "reference": "7feebb6a49d57362eb8b7e7e554297bf716c70ee"
+                "reference": "da969762f16dc1e874eef79172284a9cd9e906ca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-session/zipball/7feebb6a49d57362eb8b7e7e554297bf716c70ee",
-                "reference": "7feebb6a49d57362eb8b7e7e554297bf716c70ee",
+                "url": "https://api.github.com/repos/zendframework/zend-session/zipball/da969762f16dc1e874eef79172284a9cd9e906ca",
+                "reference": "da969762f16dc1e874eef79172284a9cd9e906ca",
                 "shasum": ""
             },
             "require": {
@@ -3314,7 +3315,7 @@
                 "session",
                 "zf2"
             ],
-            "time": "2016-02-23 14:19:37"
+            "time": "2016-02-23 20:46:27"
         },
         {
             "name": "zendframework/zend-stdlib",
