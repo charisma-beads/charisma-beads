@@ -26,7 +26,7 @@
     "uthando-cms/uthando-mail": "2.*",
     "uthando-cms/uthando-navigation": "2.*",
     "uthando-cms/uthando-news": "2.*",
-    "uthando-cms/uthando-newsletter": "dev-master",
+    "uthando-cms/uthando-newsletter": "1.*",
     "uthando-cms/uthando-session-manager": "2.*",
     "uthando-cms/uthando-testimonial": "2.*",
     "uthando-cms/uthando-theme-manager": "2.*",
