@@ -26,6 +26,10 @@ class CreditCard extends Form
     
     public function __construct($name = null, $options = [])
     {
+        if (is_array($name)) {
+            $options = $name;
+            $name = (isset($name['name'])) ? $name['name'] : null;
+        }
         parent::__construct($name, $options);
         
         $this->date = new \DateTime();

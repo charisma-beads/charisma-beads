@@ -32,7 +32,7 @@ class CreditCard extends AbstractService
         ]);
 
         $model = $this->getModel();
-        $form = $this->getForm($model, $data, true, true);
+        $form = $this->prepareForm($model, $data, true, true);
         
         if (!$form->isValid()) {
             return $form;

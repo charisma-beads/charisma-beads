@@ -1,16 +1,31 @@
+<?php $this->headTitle('Orders') ?>
+<?php $this->layout()->pageTitle = $this->translate('Orders');?>
 
-<?=$this->partial('uthando-admin/partial/search', [
-	'name'			=> 'order',
-	'searchInputs'	=> [
-		'Order' => 'orderNumber',
-	],
-]);?>
+<?php $this->placeholder('header-buttons')->captureStart();?>
+<a href="<?=$this->url('admin/shop/order/edit', [
+	'action' => 'add'
+]);?>" type="submit" form="form-order" data-toggle="tooltip" title="<?=$this->translate('Add Order');?>" class="btn btn-primary">
+	<i class="fa fa-plus"></i>
+</a>
+<?php $this->placeholder('header-buttons')->captureEnd();?>
 
-	    	
-<div id="table-order">
-	<?=$this->partial('shop/order/list', [
-	    'models' => $this->models
-	]); ?>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-list"></i> <?=$this->translate('Orders List');?></h3>
+    </div>
+    <div class="panel-body">
+        <?=$this->partial('uthando-admin/partial/search', [
+            'name'			=> 'order',
+            'searchInputs'	=> [
+                $this->translate('Order') => 'orderNumber',
+            ],
+        ]);?>
+    </div>
+    <div id="table-order" class="admin-table">
+        <?=$this->partial('shop/order/list', [
+            'models' => $this->models
+        ]); ?>
+    </div>
 </div>
 
 <?php $this->inlineScript()->captureStart(); ?>
