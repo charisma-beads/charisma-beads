@@ -767,16 +767,16 @@
         },
         {
             "name": "uthando-cms/uthando-common",
-            "version": "2.4.0",
+            "version": "2.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-common.git",
-                "reference": "796e770da718d0c066b1524b9368da94b4dd4cad"
+                "reference": "e3f3bee3263057170bbec332765ecf6c905699ca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-common/zipball/796e770da718d0c066b1524b9368da94b4dd4cad",
-                "reference": "796e770da718d0c066b1524b9368da94b4dd4cad",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-common/zipball/e3f3bee3263057170bbec332765ecf6c905699ca",
+                "reference": "e3f3bee3263057170bbec332765ecf6c905699ca",
                 "shasum": ""
             },
             "require": {
@@ -827,7 +827,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2016-03-11 15:22:06"
+            "time": "2016-03-18 11:36:23"
         },
         {
             "name": "uthando-cms/uthando-contact",
@@ -1221,16 +1221,16 @@
         },
         {
             "name": "uthando-cms/uthando-newsletter",
-            "version": "1.0.1",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-newsletter.git",
-                "reference": "6c13b80f110efc614743f95e6bc771474a45aae1"
+                "reference": "a5efa08f2d1913a8f512d0ad1afe589dad19b380"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-newsletter/zipball/6c13b80f110efc614743f95e6bc771474a45aae1",
-                "reference": "6c13b80f110efc614743f95e6bc771474a45aae1",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-newsletter/zipball/a5efa08f2d1913a8f512d0ad1afe589dad19b380",
+                "reference": "a5efa08f2d1913a8f512d0ad1afe589dad19b380",
                 "shasum": ""
             },
             "require": {
@@ -1270,7 +1270,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2016-03-11 17:22:59"
+            "time": "2016-03-19 15:27:08"
         },
         {
             "name": "uthando-cms/uthando-session-manager",
@@ -1981,20 +1981,20 @@
         },
         {
             "name": "zendframework/zend-diactoros",
-            "version": "1.3.3",
+            "version": "1.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-diactoros.git",
-                "reference": "4d54fde709664562eb63356f0250d527824d05de"
+                "reference": "b1d59735b672865dbeb930805029c24f226e3e77"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-diactoros/zipball/4d54fde709664562eb63356f0250d527824d05de",
-                "reference": "4d54fde709664562eb63356f0250d527824d05de",
+                "url": "https://api.github.com/repos/zendframework/zend-diactoros/zipball/b1d59735b672865dbeb930805029c24f226e3e77",
+                "reference": "b1d59735b672865dbeb930805029c24f226e3e77",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.4",
+                "php": "^5.4 || ^7.0",
                 "psr/http-message": "~1.0"
             },
             "provide": {
@@ -2027,7 +2027,7 @@
                 "psr",
                 "psr-7"
             ],
-            "time": "2016-01-04 21:37:32"
+            "time": "2016-03-17 18:02:05"
         },
         {
             "name": "zendframework/zend-escaper",
