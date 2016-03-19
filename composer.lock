@@ -657,16 +657,16 @@
         },
         {
             "name": "uthando-cms/uthando-admin",
-            "version": "2.4.0",
+            "version": "2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-admin.git",
-                "reference": "1139c23b86b26c2bf1902acbdf68be8c821c78e7"
+                "reference": "f62c8c2bf292fabf050df3d5a16021da9f37a2bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-admin/zipball/1139c23b86b26c2bf1902acbdf68be8c821c78e7",
-                "reference": "1139c23b86b26c2bf1902acbdf68be8c821c78e7",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-admin/zipball/f62c8c2bf292fabf050df3d5a16021da9f37a2bc",
+                "reference": "f62c8c2bf292fabf050df3d5a16021da9f37a2bc",
                 "shasum": ""
             },
             "require": {
@@ -707,7 +707,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2016-02-18 14:56:22"
+            "time": "2016-03-19 22:09:24"
         },
         {
             "name": "uthando-cms/uthando-article",
