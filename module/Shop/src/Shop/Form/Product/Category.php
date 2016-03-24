@@ -22,10 +22,19 @@ use Zend\Form\FormElementManager;
  */
 class Category extends Form
 {
-	/**
-	 * @var int
-	 */
-	protected $categoryId;
+    /**
+     * @var int
+     */
+    protected $categoryId;
+
+    public function __construct($name = null, array $options = [])
+    {
+        if (is_array($name)) {
+            $options = $name;
+            $name = (isset($options['name'])) ? $options['name'] : null;
+        }
+        parent::__construct($name, $options);
+    }
 
     /**
      * @param array|\Traversable $options
@@ -42,119 +51,119 @@ class Category extends Form
 
     public function init()
     {
-    	$this->add([
-    		'name'	=> 'productCategoryId',
-    		'type'	=> 'hidden',
+        $this->add([
+            'name' => 'productCategoryId',
+            'type' => 'hidden',
         ]);
-    	
-    	$this->add([
-    		'name'			=> 'category',
-    		'type'			=> 'text',
-    		'attributes'	=> [
-    			'placeholder'		=> 'Category',
-    			'autofocus'			=> true,
-    			'autocapitalize'	=> 'on',
+
+        $this->add([
+            'name' => 'category',
+            'type' => 'text',
+            'attributes' => [
+                'placeholder' => 'Category',
+                'autofocus' => true,
+                'autocapitalize' => 'on',
             ],
-    		'options'		=> [
-    			'label'	=> 'Category',
+            'options' => [
+                'label' => 'Category',
             ]
         ]);
-    	
-    	$this->add([
-    		'name'			=> 'ident',
-    		'type'			=> 'text',
-    		'attributes'	=> [
-    			'placeholder'		=> 'Ident',
-    			'autofocus'			=> true,
-    			'autocapitalize'	=> 'off'
+
+        $this->add([
+            'name' => 'ident',
+            'type' => 'text',
+            'attributes' => [
+                'placeholder' => 'Ident',
+                'autofocus' => true,
+                'autocapitalize' => 'off'
             ],
-    		'options'		=> [
-    			'label'			=> 'Ident',
-    			'help-inline'	=> 'If you leave this blank the the category name will be used for the ident.'
-            ],
-        ]);
-    	
-    	$this->add([
-    		'name'			=> 'enabled',
-    		'type'			=> 'checkbox',
-    		'options'		=> [
-    			'label'			=> 'Enabled',
-    			'use_hidden_element' => true,
-    			'checked_value' => '1',
-    			'unchecked_value' => '0',
-    			'required' 		=> true,
+            'options' => [
+                'label' => 'Ident',
+                'help-inline' => 'If you leave this blank the the category name will be used for the ident.'
             ],
         ]);
-    	
-    	$this->add([
-    		'name'			=> 'discontinued',
-    		'type'			=> 'checkbox',
-    		'options'		=> [
-    			'label'			=> 'Discontinued',
-    			'required' 		=> true,
-    			'use_hidden_element' => true,
-    			'checked_value' => '1',
-    			'unchecked_value' => '0',
+
+        $this->add([
+            'name' => 'enabled',
+            'type' => 'checkbox',
+            'options' => [
+                'label' => 'Enabled',
+                'use_hidden_element' => true,
+                'checked_value' => '1',
+                'unchecked_value' => '0',
+                'required' => true,
             ],
         ]);
-    	
-    	$this->add([
-    	    'name'			=> 'showImage',
-    	    'type'			=> 'checkbox',
-    	    'options'		=> [
-    	        'label'			=> 'Show Image',
-    	        'required' 		=> true,
-    	        'use_hidden_element' => true,
-    	        'checked_value' => '1',
-    	        'unchecked_value' => '0',
+
+        $this->add([
+            'name' => 'discontinued',
+            'type' => 'checkbox',
+            'options' => [
+                'label' => 'Discontinued',
+                'required' => true,
+                'use_hidden_element' => true,
+                'checked_value' => '1',
+                'unchecked_value' => '0',
             ],
         ]);
-    	
-    	$this->add([
-    		'name'		=> 'image',
-    		'type'		=> 'text',
-    		'options'	=> [
-    			'label'			=> 'Image',
-    			'required'		=> false,
+
+        $this->add([
+            'name' => 'showImage',
+            'type' => 'checkbox',
+            'options' => [
+                'label' => 'Show Image',
+                'required' => true,
+                'use_hidden_element' => true,
+                'checked_value' => '1',
+                'unchecked_value' => '0',
+            ],
+        ]);
+
+        $this->add([
+            'name' => 'image',
+            'type' => 'text',
+            'options' => [
+                'label' => 'Image',
+                'required' => false,
             ],
             'attributes' => [
                 'id' => 'product-category-image',
             ]
         ]);
-    	
-    	$this->add([
-    		'name'			=> 'parent',
-    		'type'			=> 'ProductCategoryList',
-    		'attributes'	=> [
-    			'class' => 'input-xlarge',
+
+        $this->add([
+            'name' => 'parent',
+            'type' => 'ProductCategoryList',
+            'attributes' => [
+                'class' => 'input-xlarge',
             ],
-    		'options'		=> [
-    			'label'			=> 'Parent',
-    			'required'		=> false,
-                'add_top'       => true,
+            'options' => [
+                'label' => 'Parent',
+                'required' => false,
+                'add_top' => true,
             ],
         ]);
-    	
-    	$categoryInsertOptions = [
-    		NestedSet::INSERT_NODE	=> 'insert after this category.',
-    		NestedSet::INSERT_CHILD	=> 'insert as a new sub-category at the top.',
+
+        $categoryInsertOptions = [
+            NestedSet::INSERT_NODE => 'insert after this category.',
+            NestedSet::INSERT_CHILD => 'insert as a new sub-category at the top.',
 
         ];
-    	
-    	if ($this->getCategoryId()) {
-    		$categoryInsertOptions['noInsert'] = [
+
+        if ($this->getCategoryId()) {
+            $categoryInsertOptions['noInsert'] = [
                 'value' => 'noInsert',
                 'selected' => true,
                 'label' => 'no change',
-    		];
-    	}
-    	
-    	$this->add([
-    		'name'			=> 'categoryInsertType',
-    		'type'			=> 'radio',
-    		'options'		=> [
-    			'required'		=> true,
-    			'value_options' => array_reverse($categoryInsertOptions, true),
+            ];
+        }
+
+        $this->add([
+            'name' => 'categoryInsertType',
+            'type' => 'radio',
+            'options' => [
+                'required' => true,
+                'value_options' => array_reverse($categoryInsertOptions, true),
             ],
         ]);
     }
@@ -162,19 +171,19 @@ class Category extends Form
     /**
      * @return number
      */
-	public function getCategoryId()
-	{
-		return $this->categoryId;
-	}
+    public function getCategoryId()
+    {
+        return $this->categoryId;
+    }
 
-	/**
-	 * @param int $categoryId
-	 * @return \Shop\Form\Product\Category
-	 */
-	public function setCategoryId($categoryId)
-	{
-		$categoryId = (int) $categoryId;
-		$this->categoryId = $categoryId;
-		return $this;
-	}
+    /**
+     * @param int $categoryId
+     * @return \Shop\Form\Product\Category
+     */
+    public function setCategoryId($categoryId)
+    {
+        $categoryId = (int)$categoryId;
+        $this->categoryId = $categoryId;
+        return $this;
+    }
 }

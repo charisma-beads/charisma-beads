@@ -89,13 +89,3 @@ a.current-order-link {
 .popover{
     max-width: 100%; /* Max Width of the popover (depending on the container!) */
 }
-
-/* start iPad viewport bug hack */
-body {
-    padding-right: 0px !important
-}
-
-.modal-open {
-    overflow-y: auto;
-}
-/* end iPad viewport bug hack */

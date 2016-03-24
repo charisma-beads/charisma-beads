@@ -31,17 +31,17 @@ class Unit extends Form
             'name'			=> 'postUnit',
             'type'			=> 'number',
             'attributes'	=> [
-                'placeholder'	=> 'Unit:',
+                'placeholder'	=> 'Unit',
                 'autofocus'		=> true,
                 'step'			=> '0.01'
             ],
             'options'		=> [
-                'label'			=> 'Unit:',
-                'help-inline'	=> 'This should be weight in grams.',
+                'label'			=> 'Unit',
+                'help-block'	=> 'This should be weight in grams.',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-4',
+                'column-size' => 'sm-10',
                 'label_attributes' => [
-                    'class' => 'col-md-2',
+                    'class' => 'col-sm-2',
                 ],
             ],
         ]);

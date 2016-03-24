@@ -31,14 +31,14 @@ class Size extends Form
             'name' => 'size',
             'type' => 'text',
             'attributes' => [
-                'placeholder' => 'Size:'
+                'placeholder' => 'Size'
             ],
             'options' => [
-                'label' => 'Size:',
+                'label' => 'Size',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-4',
+                'column-size' => 'sm-10',
                 'label_attributes' => [
-                    'class' => 'col-md-2',
+                    'class' => 'col-sm-2',
                 ],
             ]
         ]);

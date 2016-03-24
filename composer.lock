@@ -113,16 +113,16 @@
         },
         {
             "name": "giggsey/libphonenumber-for-php",
-            "version": "7.2.7",
+            "version": "7.2.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/giggsey/libphonenumber-for-php.git",
-                "reference": "26680b8a22728181ea8e77f4627a323aba480b99"
+                "reference": "3214f7d8da6270707d8489c9fe7e691a96fb1c20"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/26680b8a22728181ea8e77f4627a323aba480b99",
-                "reference": "26680b8a22728181ea8e77f4627a323aba480b99",
+                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/3214f7d8da6270707d8489c9fe7e691a96fb1c20",
+                "reference": "3214f7d8da6270707d8489c9fe7e691a96fb1c20",
                 "shasum": ""
             },
             "require": {
@@ -172,7 +172,7 @@
                 "phonenumber",
                 "validation"
             ],
-            "time": "2016-03-09 15:03:21"
+            "time": "2016-03-21 15:20:21"
         },
         {
             "name": "kriswallsmith/assetic",
@@ -657,16 +657,16 @@
         },
         {
             "name": "uthando-cms/uthando-admin",
-            "version": "2.5.0",
+            "version": "2.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-admin.git",
-                "reference": "f62c8c2bf292fabf050df3d5a16021da9f37a2bc"
+                "reference": "0f4ec6028c71c406aafe7081e0ed5912694b3c60"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-admin/zipball/f62c8c2bf292fabf050df3d5a16021da9f37a2bc",
-                "reference": "f62c8c2bf292fabf050df3d5a16021da9f37a2bc",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-admin/zipball/0f4ec6028c71c406aafe7081e0ed5912694b3c60",
+                "reference": "0f4ec6028c71c406aafe7081e0ed5912694b3c60",
                 "shasum": ""
             },
             "require": {
@@ -707,7 +707,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2016-03-19 22:09:24"
+            "time": "2016-03-24 08:09:33"
         },
         {
             "name": "uthando-cms/uthando-article",
@@ -767,16 +767,16 @@
         },
         {
             "name": "uthando-cms/uthando-common",
-            "version": "2.5.1",
+            "version": "2.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-common.git",
-                "reference": "e3f3bee3263057170bbec332765ecf6c905699ca"
+                "reference": "37da45a711ce0d69e98188fa26e9c7ef144d5681"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-common/zipball/e3f3bee3263057170bbec332765ecf6c905699ca",
-                "reference": "e3f3bee3263057170bbec332765ecf6c905699ca",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-common/zipball/37da45a711ce0d69e98188fa26e9c7ef144d5681",
+                "reference": "37da45a711ce0d69e98188fa26e9c7ef144d5681",
                 "shasum": ""
             },
             "require": {
@@ -827,7 +827,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2016-03-18 11:36:23"
+            "time": "2016-03-22 22:58:52"
         },
         {
             "name": "uthando-cms/uthando-contact",
@@ -3032,16 +3032,16 @@
         },
         {
             "name": "zendframework/zend-navigation",
-            "version": "2.6.0",
+            "version": "2.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-navigation.git",
-                "reference": "864f04447be937d3d0eb22a52fe492cdd27f18aa"
+                "reference": "8048625bd5cac2d427ce16094d3ee7f95bb1e313"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-navigation/zipball/864f04447be937d3d0eb22a52fe492cdd27f18aa",
-                "reference": "864f04447be937d3d0eb22a52fe492cdd27f18aa",
+                "url": "https://api.github.com/repos/zendframework/zend-navigation/zipball/8048625bd5cac2d427ce16094d3ee7f95bb1e313",
+                "reference": "8048625bd5cac2d427ce16094d3ee7f95bb1e313",
                 "shasum": ""
             },
             "require": {
@@ -3050,17 +3050,17 @@
             },
             "require-dev": {
                 "fabpot/php-cs-fixer": "1.7.*",
-                "phpunit/phpunit": "~4.0",
+                "phpunit/phpunit": "^4.5",
                 "zendframework/zend-config": "^2.6",
                 "zendframework/zend-console": "^2.6",
                 "zendframework/zend-http": "^2.5.4",
                 "zendframework/zend-i18n": "^2.6",
                 "zendframework/zend-log": "^2.7.1",
-                "zendframework/zend-mvc": "^2.6.3",
+                "zendframework/zend-mvc": "^2.7",
                 "zendframework/zend-permissions-acl": "^2.6",
                 "zendframework/zend-servicemanager": "^2.7.5 || ^3.0.3",
                 "zendframework/zend-uri": "^2.5",
-                "zendframework/zend-view": "^2.6.3"
+                "zendframework/zend-view": "^2.6.5"
             },
             "suggest": {
                 "zendframework/zend-config": "Zend\\Config component",
@@ -3091,7 +3091,7 @@
                 "navigation",
                 "zf2"
             ],
-            "time": "2016-02-24 21:33:58"
+            "time": "2016-03-21 18:29:58"
         },
         {
             "name": "zendframework/zend-paginator",
@@ -3739,16 +3739,16 @@
         },
         {
             "name": "zendframework/zend-view",
-            "version": "2.6.4",
+            "version": "2.6.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-view.git",
-                "reference": "5347f90525d9804de74766b29e2e723b5dd7a4c6"
+                "reference": "b6cbad62a95ba9bf1ce8814bbd4a1d2316041cb9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-view/zipball/5347f90525d9804de74766b29e2e723b5dd7a4c6",
-                "reference": "5347f90525d9804de74766b29e2e723b5dd7a4c6",
+                "url": "https://api.github.com/repos/zendframework/zend-view/zipball/b6cbad62a95ba9bf1ce8814bbd4a1d2316041cb9",
+                "reference": "b6cbad62a95ba9bf1ce8814bbd4a1d2316041cb9",
                 "shasum": ""
             },
             "require": {
@@ -3759,7 +3759,7 @@
             },
             "require-dev": {
                 "fabpot/php-cs-fixer": "1.7.*",
-                "phpunit/phpunit": "~4.0",
+                "phpunit/phpunit": "^4.5",
                 "zendframework/zend-authentication": "^2.5",
                 "zendframework/zend-cache": "^2.6.1",
                 "zendframework/zend-config": "^2.6",
@@ -3818,7 +3818,7 @@
                 "view",
                 "zf2"
             ],
-            "time": "2016-03-02 18:43:40"
+            "time": "2016-03-21 18:04:51"
         },
         {
             "name": "zendframework/zendoauth",

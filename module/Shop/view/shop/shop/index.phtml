@@ -21,10 +21,10 @@ $endYears = $this->formManager('MonthlyTotalYearList', [
 ]);
 
 $this->inlineScript()
-    ->appendFile($this->basePath('js/flot/jquery.flot.js'))
-    ->appendFile($this->basePath('js/flot/jquery.flot.pie.js'))
-    ->appendFile($this->basePath('js/flot/jquery.flot.categories.js'))
-    ->appendFile($this->basePath('js/flot/jquery.flot.resize.js'));
+    ->appendFile('//cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.js')
+    ->appendFile('//cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.pie.js')
+    ->appendFile('//cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.categories.js')
+    ->appendFile('//cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.resize.js');
 
 ?>
 

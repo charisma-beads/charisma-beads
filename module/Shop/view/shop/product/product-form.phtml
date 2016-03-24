@@ -11,7 +11,7 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
                 <fieldset>
                     <legend>Details: 
                     <?php if ($this->formAction == 'edit'):?>
-                    <mdall>(<?=$this->model->getProductId();?>)</mdall>
+                    <small>(<?=$this->model->getProductId();?>)</small>
                     <?php endif;?>
                     </legend>
                     <div class="row">
@@ -186,7 +186,7 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
                             <div class="input-group">
                                 <?=$this->formSelect($form->get('productSizeId')->setAttribute('class', 'form-control')); ?>
                                 <span class="input-group-btn">
-                                    <a id="add-size-button" class="btn btn-default" data-toggle="modal" data-target="#product-size-model">
+                                    <a href="#" id="add-size-button" class="btn btn-default">
                                         New Size
                                     </a>
                                 </span>
@@ -256,24 +256,6 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
 	</form>
 </div>
 
-<div id="product-size-model" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Add Product Size</h4>
-            </div>
-            <div class="modal-body">
-                <i class="fa fa-spinner fa-spin"></i>&nbsp;Loading
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button id="edit-product-size-save" type="button" class="btn btn-primary">Save</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div id="product-weight-model" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -299,58 +281,58 @@ if (isset($this->productId)) $routeArray['id'] = $this->productId;
 <script type="text/javascript">
     $(document).ready(function(){
         var loadSizes;
-        $('#product-textarea').liveEdit({
-            height : 500,
-            css: [
-                '//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css',
-                '//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css',
-                '//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css'
-            ] /* Apply bootstrap css into the editing area */ ,
-            groups: [
-                ["group1", "", ["Bold", "Italic", "Underline", "ForeColor", "RemoveFormat"]],
-                ["group2", "", ["Bullets", "Numbering", "Indent", "Outdent"]],
-                ["group3", "", ["Paragraph", "FontSize", "FontDialog", "TextDialog"]],
-                ["group4", "", ["LinkDialog", "TableDialog", "Snippets"]],
-                ["group5", "", ["Undo", "Redo", "FullScreen"]]
-            ] /* Toolbar configuration */ ,
-            fileBrowser: '<?=$this->basePath('/admin/asset-manager')?>'
-        });
-        $('#product-textarea').data('liveEdit').startedit(); /* Run the Editor */
 
-        $('#product-size-model').on('show.bs.modal', function(){
-            $(this).find('.modal-body').load('<?=$this->url('admin/shop/product/size/edit', [
-                'action'    => 'add',
-            ]);?>');
-        });
+        var sizeDialog = function(e) {
+            e.preventDefault();
+            sizeModal = bootbox.dialog({
+                title: "Add Product Size",
+                show: false,
+                message: '<i class="fa fa-spinner fa-spin"></i>&nbsp;Loading',
+                buttons: {
+                    main: {
+                        label: "Close",
+                        className: "btn-default"
+                    },
+                    save: {
+                        label: "Save",
+                        className: "btn-primary",
+                        callback: function () {
+                            sizeModal.find('.modal-content').loadingOverlay({
+                                loadingText: 'Please wait while I update the database'
+                            });
 
-        $('#product-size-model').on('hide.bs.modal', function (e) {
-            $(this).find('.modal-body').html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Loading');
-        });
+                            response = admin.ajaxModalForm(sizeModal, '<?=$this->url('admin/shop/product/size/edit', [
+                                'action' => 'add',
+                            ]);?>');
 
-        $('#edit-product-size-save').on('click', function(event) {
-            event.preventDefault();
-            el = $('#product-size-model');
-            el.find('.modal-content').loadingOverlay({
-                loadingText: 'Please wait while I update the database'
-            });
+                            response.done(function (data) {
+                                if ($.isPlainObject(data)) {
+                                    var selectElement = $('select[name=productSizeId]');
+                                    selectElement.load('<?=$this->url('admin/shop/product/size/edit', [
+                                        'action' => 'size-list',
+                                    ]);?>', null, function () {
+                                        selectElement.val(data.rowId);
+                                    });
+                                    
+                                }
+                                sizeModal.find('.modal-content').loadingOverlay('remove');
+                            });
 
-            response = admin.ajaxModalForm(el, '<?=$this->url('admin/shop/product/size/edit', [
-                'action' => 'add',
-            ]);?>');
-
-            response.done(function(data){
-                if ($.isPlainObject(data)) {
-                    var selectElement = $('select[name=productSizeId]');
-                    selectElement.load('<?=$this->url('admin/shop/product/size/edit', [
-                        'action' => 'size-list',
-                    ]);?>', null, function(){
-                        selectElement.val(data.rowId);
-                    });
-
+                            return false;
+                        }
+                    }
                 }
-                el.find('.modal-content').loadingOverlay('remove');
             });
-        });
+
+            sizeModal.on('show.bs.modal', function(){
+                $(this).find('.bootbox-body').load('<?=$this->url('admin/shop/product/size/edit', [
+                    'action'    => 'add',
+                ]);?>');
+            });
+            sizeModal.modal('show');
+        };
+
+        $('#add-size-button').on('click', sizeDialog);
 
         $('#product-weight-model').on('show.bs.modal', function(){
             $(this).find('.modal-body').load('<?=$this->url('admin/shop/post/unit/edit', [

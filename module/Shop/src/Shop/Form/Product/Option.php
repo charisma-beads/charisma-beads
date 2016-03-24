@@ -38,9 +38,9 @@ class Option extends Form
             'options'	=> [
                 'label'			=> 'Weight:',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-8',
+                'column-size' => 'sm-10',
                 'label_attributes' => [
-                    'class' => 'col-md-4',
+                    'class' => 'col-sm-2',
                 ],
             ],
         ]);
@@ -55,9 +55,9 @@ class Option extends Form
             'options'		=> [
                 'label'		=> 'Option:',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-8',
+                'column-size' => 'sm-10',
                 'label_attributes' => [
-                    'class' => 'col-md-4',
+                    'class' => 'col-sm-2',
                 ],
             ],
         ]);
@@ -73,9 +73,9 @@ class Option extends Form
             'options'		=> [
                 'label'			=> 'Price:',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-8',
+                'column-size' => 'sm-10',
                 'label_attributes' => [
-                    'class' => 'col-md-4',
+                    'class' => 'col-sm-2',
                 ],
             ],
         ]);
@@ -93,9 +93,9 @@ class Option extends Form
             'options'		=> [
                 'label'			=> 'Product Discount:',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-8',
+                'column-size' => 'sm-10',
                 'label_attributes' => [
-                    'class' => 'col-md-4',
+                    'class' => 'col-sm-2',
                 ],
             ]
         ]);

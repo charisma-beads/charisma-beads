@@ -8,29 +8,46 @@ $discontinued = new Element\Checkbox('discontinued', [
 
 ?>
 
-<?=$this->partial('uthando-admin/partial/search', [
-	'name'			=> 'product',
-	'searchInputs'	=> [
-		'Product'	=> 'sku-name-shortDescription',
-		//'Category'	=> 'category',
-	    'Category List' => $this->formManager('ProductCategoryList')->setName('productCategoryId'),
-	],
-    'secondRowInputs' => [
-        new Element\Checkbox('discontinued', [
-            'label' => 'discontinued',
-        ]),
-        new Element\Checkbox('disabled', [
-            'label' => 'disabled',
-        ]),
-    ],
-	'params'   => $this->params,
-    'menuPartial' => 'shop/product/partial/sub-menu',
-]);?>
+<?php $this->headTitle('Products') ?>
+<?php $this->layout()->pageTitle = $this->translate('Products');?>
 
-<div id="table-product">
-	<?=$this->partial('shop/product/list', [
-	    'models' => $this->models,
-	]); ?>
+<?php $this->placeholder('header-buttons')->captureStart();?>
+<a href="<?=$this->url('admin/shop/product/edit', [
+    'action' => 'add'
+]);?>" type="submit" form="form-porduct" data-toggle="tooltip" title="<?=$this->translate('Add Product');?>" class="btn btn-primary">
+    <i class="fa fa-plus"></i>
+</a>
+<?php $this->placeholder('header-buttons')->captureEnd();?>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-list"></i> <?=$this->translate('Product List');?></h3>
+    </div>
+    <div class="panel-body">
+        <?=$this->partial('uthando-admin/partial/search', [
+            'name'			=> 'product',
+            'searchInputs'	=> [
+                'Product'	=> 'sku-name-shortDescription',
+                //'Category'	=> 'category',
+                'Category List' => $this->formManager('ProductCategoryList')->setName('productCategoryId'),
+            ],
+            'secondRowInputs' => [
+                new Element\Checkbox('discontinued', [
+                    'label' => 'discontinued',
+                ]),
+                new Element\Checkbox('disabled', [
+                    'label' => 'disabled',
+                ]),
+            ],
+            'params'   => $this->params,
+            'menuPartial' => 'shop/product/partial/sub-menu',
+        ]);?>
+    </div>
+    <div id="table-product" class="admin-table">
+        <?=$this->partial('shop/product/list', [
+            'models' => $this->models,
+        ]); ?>
+    </div>
 </div>
 
 <script>

@@ -6,9 +6,6 @@ return [
                 'css/uthando-admin.css' => [
                     'css/shop.css',
                 ],
-                'js/uthando-admin.js' => [
-
-                ],
             ],
             'paths' => [
                 'Shop' => __DIR__ . '/../public',

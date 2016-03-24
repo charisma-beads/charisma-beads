@@ -20,21 +20,6 @@ if ($this->request()->isXmlHttpRequest()) {
 }
 ?>
 
-<?php if ($this->request()->isXmlHttpRequest()):?>
-    <div id="alerts" class="col-md-12">
-        <?=$this->tbFlashMessenger()->render(); ?>
-    </div>
-<?php endif; ?>
+<?=$this->tbFlashMessenger()->render(); ?>
 
-<div class="col-md-12">
-    <?=$this->partial('uthando-admin/partial/add-edit-form', [
-        'form' 			=> $this->form,
-        'formName'		=> $formName,
-        'postUrl'		=> $postUrl,
-        'cancelUrl'     => $cancelUrl,
-        'helperOptions' => $helperOptions,
-        'formElements'	=> [
-            'postUnit',
-        ],
-    ]); ?>
-</div>
+<?=$this->form($form);?>

@@ -38,9 +38,9 @@ class Image extends Form
             'options' => [
                 'label' => 'Thumbnail:',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-8',
+                'column-size' => 'sm-10',
                 'label_attributes' => [
-                    'class' => 'col-md-4',
+                    'class' => 'col-sm-2',
                 ],
             ],
             'attributes' => [
@@ -54,9 +54,9 @@ class Image extends Form
             'options' => [
                 'label' => 'Full Image:',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-8',
+                'column-size' => 'sm-10',
                 'label_attributes' => [
-                    'class' => 'col-md-4',
+                    'class' => 'col-sm-2',
                 ],
             ],
             'attributes' => [
@@ -74,9 +74,9 @@ class Image extends Form
                     '1'	=> 'Yes',
                 ],
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-8',
+                'column-size' => 'sm-10',
                 'label_attributes' => [
-                    'class' => 'col-md-4',
+                    'class' => 'col-sm-2',
                 ],
             ],
         ]);

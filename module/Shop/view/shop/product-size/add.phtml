@@ -19,19 +19,7 @@ if ($this->request()->isXmlHttpRequest()) {
 }
 ?>
 
-<div id="alerts" class="col-md-12">
-    <?=$this->tbFlashMessenger()->render(); ?>
-</div>
 
-<div class="col-md-12">
-    <?=$this->partial('uthando-admin/partial/add-edit-form', [
-        'form' 			=> $this->form,
-        'formName'		=> $formName,
-        'formElements'	=> [
-            'productSizeId', 'size',
-        ],
-        'postUrl'		=> $postUrl,
-        'cancelUrl'     => $cancelUrl,
-        'helperOptions' => $helperOptions,
-    ]); ?>
-</div>
+<?=$this->tbFlashMessenger()->render(); ?>
+
+<?=$this->form($form);?>

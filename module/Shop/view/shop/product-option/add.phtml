@@ -1,18 +1,4 @@
 
-<div id="alerts" class="col-md-12">
-    <?=$this->tbFlashMessenger()->render(); ?>
-</div>
+<?=$this->tbFlashMessenger()->render(); ?>
 
-<div class="col-md-12">
-    <?=$this->partial('uthando-admin/partial/add-edit-form', array(
-        'form' 			=> $this->form,
-        'formElements'	=> array(
-            'productOptionId', 'productId',
-            'option', 'price', 'discountPercent', 'postUnitId'
-        ),
-        'helperOptions' => [
-            'labelWidth'    => '4',
-            'elementWidth'  => '8',
-        ],
-    )); ?>
-</div>
+<?=$this->form($form);?>
