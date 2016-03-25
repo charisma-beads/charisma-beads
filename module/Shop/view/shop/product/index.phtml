@@ -12,6 +12,9 @@ $discontinued = new Element\Checkbox('discontinued', [
 <?php $this->layout()->pageTitle = $this->translate('Products');?>
 
 <?php $this->placeholder('header-buttons')->captureStart();?>
+<a href="#" id="product-list-link" data-toggle="tooltip" title="<?=$this->translate('Export Product List');?>" class="btn btn-primary">
+    <i class="fa fa-file-excel-o"></i> Export Products
+</a>
 <a href="<?=$this->url('admin/shop/product/edit', [
     'action' => 'add'
 ]);?>" type="submit" form="form-porduct" data-toggle="tooltip" title="<?=$this->translate('Add Product');?>" class="btn btn-primary">
@@ -50,6 +53,9 @@ $discontinued = new Element\Checkbox('discontinued', [
     </div>
 </div>
 
+<?php $this->inlineScript()
+    ->appendFile($this->basePath('js/admin/shop/products-list.js'));?>
+
 <script>
     $(document).ready(function() {
         $('#table-product').dataGrid({
@@ -58,18 +64,5 @@ $discontinued = new Element\Checkbox('discontinued', [
             searchForm: $('#search-product'),
             columnSort: true
         });
-
-        $('input[name=discontinued]').on('click', function () {
-            $('#table-product').dataGrid('doSearch');
-        });
-
-        $('input[name=disabled]').on('click', function () {
-            $('#table-product').dataGrid('doSearch');
-        });
-
-        $('select[name=productCategoryId]').on('change', function () {
-            $('#table-product').dataGrid('doSearch');
-        });
     });
-
 </script>

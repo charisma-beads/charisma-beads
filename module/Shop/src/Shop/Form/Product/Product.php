@@ -311,7 +311,7 @@ class Product extends Form
                 'label_attributes' => [
                     'class' => 'col-sm-2',
                 ],
-                'add-on-append' => new Button('add-size-button', [
+                'add-on-append' => new Button('list-category-image-button', [
                     'label' => 'New Size',
                 ]),
             ],

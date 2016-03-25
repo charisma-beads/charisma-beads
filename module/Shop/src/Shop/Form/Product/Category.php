@@ -10,7 +10,10 @@
 
 namespace Shop\Form\Product;
 
+use TwbBundle\Form\View\Helper\TwbBundleForm;
+use TwbBundle\View\Helper\TwbBundleButtonGroup;
 use UthandoCommon\Mapper\AbstractNestedSet as NestedSet;
+use Zend\Form\Element\Button;
 use Zend\Form\Form;
 use Zend\Form\FormElementManager;
 
@@ -57,6 +60,34 @@ class Category extends Form
         ]);
 
         $this->add([
+            'name' => 'enabled',
+            'type' => 'checkbox',
+            'options' => [
+                'label' => 'Enabled',
+                'use_hidden_element' => true,
+                'checked_value' => '1',
+                'unchecked_value' => '0',
+                'required' => true,
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'sm-10 col-sm-offset-2',
+            ],
+        ]);
+
+        $this->add([
+            'name' => 'discontinued',
+            'type' => 'checkbox',
+            'options' => [
+                'label' => 'Discontinued',
+                'required' => true,
+                'use_hidden_element' => true,
+                'checked_value' => '1',
+                'unchecked_value' => '0',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'sm-10 col-sm-offset-2',
+            ],
+        ]);
+
+        $this->add([
             'name' => 'category',
             'type' => 'text',
             'attributes' => [
@@ -66,6 +97,11 @@ class Category extends Form
             ],
             'options' => [
                 'label' => 'Category',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'sm-10',
+                'label_attributes' => [
+                    'class' => 'col-sm-2',
+                ],
             ]
         ]);
 
@@ -79,31 +115,12 @@ class Category extends Form
             ],
             'options' => [
                 'label' => 'Ident',
-                'help-inline' => 'If you leave this blank the the category name will be used for the ident.'
-            ],
-        ]);
-
-        $this->add([
-            'name' => 'enabled',
-            'type' => 'checkbox',
-            'options' => [
-                'label' => 'Enabled',
-                'use_hidden_element' => true,
-                'checked_value' => '1',
-                'unchecked_value' => '0',
-                'required' => true,
-            ],
-        ]);
-
-        $this->add([
-            'name' => 'discontinued',
-            'type' => 'checkbox',
-            'options' => [
-                'label' => 'Discontinued',
-                'required' => true,
-                'use_hidden_element' => true,
-                'checked_value' => '1',
-                'unchecked_value' => '0',
+                'help-block' => 'If you leave this blank the the category name will be used for the ident.',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'sm-10',
+                'label_attributes' => [
+                    'class' => 'col-sm-2',
+                ],
             ],
         ]);
 
@@ -116,8 +133,18 @@ class Category extends Form
                 'use_hidden_element' => true,
                 'checked_value' => '1',
                 'unchecked_value' => '0',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'sm-10 col-sm-offset-2',
             ],
         ]);
+
+        $aButtonOptions = array('label' => 'Select File','dropdown' => [
+            'label' => 'Dropdown',
+            'name' => 'dropdownMenu1',
+            'list_attributes' => ['aria-labelledby' => 'dropdownMenu1', 'class'=>'dropdown-menu-right'],
+            'items' => ['Upload File','Use Existing',]
+        ]);
+
 
         $this->add([
             'name' => 'image',
@@ -125,6 +152,23 @@ class Category extends Form
             'options' => [
                 'label' => 'Image',
                 'required' => false,
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'sm-10',
+                'label_attributes' => [
+                    'class' => 'col-sm-2',
+                ],
+                /*'add-on-append' => new Button('select-button', [
+                    'fontAwesome' => 'upload',
+                    'attributes' => [
+                        'id' => 'upload-category-image-button',
+                    ],
+                ]),
+                'add-on-append' => new Button('list-image-button', [
+                    'fontAwesome' => 'list',
+                    'class' => 'clearfix',
+                    'id' => 'list-category-image-button',
+                ]),*/
+                'add-on-append' => new Button('file-select', $aButtonOptions),
             ],
             'attributes' => [
                 'id' => 'product-category-image',
@@ -141,6 +185,11 @@ class Category extends Form
                 'label' => 'Parent',
                 'required' => false,
                 'add_top' => true,
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'sm-10',
+                'label_attributes' => [
+                    'class' => 'col-sm-2',
+                ],
             ],
         ]);
 
@@ -164,6 +213,8 @@ class Category extends Form
             'options' => [
                 'required' => true,
                 'value_options' => array_reverse($categoryInsertOptions, true),
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'sm-10 col-sm-offset-2',
             ],
         ]);
     }

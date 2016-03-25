@@ -135,6 +135,7 @@ var product = {
 };
 
 $(document).ready(function () {
+
     $('textarea.editable-textarea').summernote({
         toolbar: [
             ['style', ['style', 'bold', 'underline', 'clear']],

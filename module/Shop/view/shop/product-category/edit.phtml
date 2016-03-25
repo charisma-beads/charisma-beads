@@ -1,7 +1,31 @@
 <?php $this->headTitle('Edit Category') ?>
 
-<?=$this->partial('shop/product-category/category-form', [
-	'form' => $this->form,
-	'formAction' => 'edit',
-	'productCategoryId' => $this->model->getProductCategoryId()
+<?php $this->headTitle('Edit Category') ?>
+<?php $this->layout()->pageTitle = $this->translate('Edit Product');?>
+
+<?php $this->placeholder('header-buttons')->captureStart();?>
+<button type="submit" form="form-product-category" data-toggle="tooltip" title="<?=$this->translate('Save');?>" class="btn btn-primary">
+	<i class="fa fa-save"></i>
+</button>
+<a href="<?=$this->url('admin/shop/category');?>" data-toggle="tooltip" title="<?=$this->translate('Cancel');?>" class="btn btn-default">
+	<i class="fa fa-reply"></i>
+</a>
+<?php $this->placeholder('header-buttons')->captureEnd();?>
+
+<?php $this->form->setAttributes([
+	'method' => 'post',
+	'id' => 'form-product-category',
+	'action' => $this->url('admin/shop/product/edit', [
+		'id' => $this->model->getProductCategoryId(),
+	]),
 ]); ?>
+
+<div id="product-category-edit" class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title"><i class="fa fa-pencil"></i> <?=$this->translate('Edit Category');?></h3>
+	</div>
+	<div class="panel-body">
+		<?=$this->form($this->form);?>
+	</div>
+
+</div>
