@@ -138,12 +138,23 @@ class Category extends Form
             ],
         ]);
 
-        $aButtonOptions = array('label' => 'Select File','dropdown' => [
+        $aButtonOptions = ['label' => 'Select File','dropdown' => [
             'label' => 'Dropdown',
             'name' => 'dropdownMenu1',
             'list_attributes' => ['aria-labelledby' => 'dropdownMenu1', 'class'=>'dropdown-menu-right'],
-            'items' => ['Upload File','Use Existing',]
-        ]);
+            'items' => [
+                'Upload Image' => [
+                    'item_attributes' => [
+                        'id' => 'upload-category-image',
+                    ],
+                ],
+                'Use Existing' => [
+                    'item_attributes' => [
+                        'id' => 'list-category-image',
+                    ],
+                ],
+            ],
+        ]];
 
 
         $this->add([
@@ -157,18 +168,23 @@ class Category extends Form
                 'label_attributes' => [
                     'class' => 'col-sm-2',
                 ],
-                /*'add-on-append' => new Button('select-button', [
-                    'fontAwesome' => 'upload',
-                    'attributes' => [
-                        'id' => 'upload-category-image-button',
+                'add-on-append' => new Button('file-select', ['label' => 'Select File','dropdown' => [
+                    'label' => 'Dropdown',
+                    'name' => 'dropdownMenu1',
+                    'list_attributes' => ['aria-labelledby' => 'dropdownMenu1', 'class'=>'dropdown-menu-right'],
+                    'items' => [
+                        'Upload Image' => [
+                            'item_attributes' => [
+                                'id' => 'upload-category-image',
+                            ],
+                        ],
+                        'Use Existing' => [
+                            'item_attributes' => [
+                                'id' => 'list-category-image',
+                            ],
+                        ],
                     ],
-                ]),
-                'add-on-append' => new Button('list-image-button', [
-                    'fontAwesome' => 'list',
-                    'class' => 'clearfix',
-                    'id' => 'list-category-image-button',
-                ]),*/
-                'add-on-append' => new Button('file-select', $aButtonOptions),
+                ]]),
             ],
             'attributes' => [
                 'id' => 'product-category-image',
@@ -192,6 +208,10 @@ class Category extends Form
                 ],
             ],
         ]);
+
+        if ($this->getCategoryId()) {
+            $this->get('parent')->setValue($this->getCategoryId());
+        }
 
         $categoryInsertOptions = [
             NestedSet::INSERT_NODE => 'insert after this category.',

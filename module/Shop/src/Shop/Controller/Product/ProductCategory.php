@@ -10,7 +10,9 @@
 
 namespace Shop\Controller\Product;
 
+use Shop\ShopException;
 use UthandoCommon\Controller\AbstractCrudController;
+use Zend\View\Model\ViewModel;
 
 /**
  * Class ProductCategory
@@ -22,18 +24,19 @@ class ProductCategory extends AbstractCrudController
     protected $controllerSearchOverrides = array('sort' => 'lft');
     protected $serviceName = 'ShopProductCategory';
     protected $route = 'admin/shop/category';
-    protected $routes = [
-        //'edit' => 'admin/shop/category/edit',
-    ];
-    
+
+    /*protected $routes = [
+        'edit' => 'admin/shop/category/edit',
+    ];*/
+
     public function indexAction()
     {
-	    $this->getService()->getMapper()
-	       ->setFetchEnabled(false)
-	       ->setFetchDisabled(true);
-	    return parent::indexAction();
+        $this->getService()->getMapper()
+            ->setFetchEnabled(false)
+            ->setFetchDisabled(true);
+        return parent::indexAction();
     }
-    
+
     public function listAction()
     {
         $this->getService()->getMapper()
@@ -41,26 +44,45 @@ class ProductCategory extends AbstractCrudController
             ->setFetchDisabled(true);
         return parent::listAction();
     }
-    
+
+    public function categoryImageSelectAction()
+    {
+        if (!$this->getRequest()->isXmlHttpRequest()) {
+            throw new ShopException('Access denied');
+        }
+
+        $id = $this->params()->fromRoute('id', null);
+        $selectElement = $this->getServiceLocator()
+            ->get('FormElementManager')
+            ->get('ProductCategoryImageList');
+
+        $selectElement->setCategoryId($id);
+
+        $viewModel = new ViewModel(['form' => $selectElement]);
+        $viewModel->setTerminal(true);
+
+        return $viewModel;
+    }
+
     public function setEnabledAction()
     {
-    	$id = (int) $this->params('id', 0);
-    
-    	if (!$id) {
-    		return $this->redirect()->toRoute($this->getRoute(), array(
-    			'action' => 'list'
-    		));
-    	}
-  		
-    	try {
-    		$category = $this->getService()->getById($id);
-    		$result = $this->getService()->toggleEnabled($category);
-    	} catch (\Exception $e) {
-    		$this->setExceptionMessages($e);
-    	}
-    
-    	return $this->redirect()->toRoute($this->getRoute(), array(
-    		'action' => 'list'
-    	));
+        $id = (int)$this->params('id', 0);
+
+        if (!$id) {
+            return $this->redirect()->toRoute($this->getRoute(), array(
+                'action' => 'list'
+            ));
+        }
+
+        try {
+            $category = $this->getService()->getById($id);
+            $result = $this->getService()->toggleEnabled($category);
+        } catch (\Exception $e) {
+            $this->setExceptionMessages($e);
+        }
+
+        return $this->redirect()->toRoute($this->getRoute(), array(
+            'action' => 'list'
+        ));
     }
 }
