@@ -53,15 +53,9 @@ return [
                         'resource' => 'menu:admin',
                         'pages' => [
                             'list' => [
-                                'label' => 'List All Products',
+                                'label' => 'List Products',
                                 'action' => 'index',
                                 'route' => 'admin/shop/product',
-                                'resource' => 'menu:admin'
-                            ],
-                            'add' => [
-                                'label' => 'Add New Product',
-                                'action' => 'add',
-                                'route' => 'admin/shop/product/edit',
                                 'resource' => 'menu:admin'
                             ],
                             'categories' => [
@@ -69,60 +63,18 @@ return [
                                 'action' => 'index',
                                 'route' => 'admin/shop/category',
                                 'resource' => 'menu:admin',
-                                'pages' => [
-                                    'list' => [
-                                        'label' => 'List All Categories',
-                                        'action' => 'index',
-                                        'route' => 'admin/shop/category',
-                                        'resource' => 'menu:admin'
-                                    ],
-                                    'add' => [
-                                        'label' => 'Add New Category',
-                                        'action' => 'add',
-                                        'route' => 'admin/shop/category/edit',
-                                        'resource' => 'menu:admin'
-                                    ]
-                                ]
                             ],
                             'sizes' => [
                                 'label' => 'Product Sizes',
                                 'action' => 'index',
                                 'route' => 'admin/shop/product/size',
                                 'resource' => 'menu:admin',
-                                'pages' => [
-                                    'list' => [
-                                        'label' => 'List All Sizes',
-                                        'action' => 'index',
-                                        'route' => 'admin/shop/product/size',
-                                        'resource' => 'menu:admin'
-                                    ],
-                                    'add' => [
-                                        'label' => 'Add New Size',
-                                        'action' => 'add',
-                                        'route' => 'admin/shop/product/size/edit',
-                                        'resource' => 'menu:admin'
-                                    ]
-                                ]
                             ],
                             'groups' => [
                                 'label' => 'Groups',
                                 'action' => 'index',
                                 'route' => 'admin/shop/group',
                                 'resource' => 'menu:admin',
-                                'pages' => [
-                                    'list' => [
-                                        'label' => 'List All Group Prices',
-                                        'action' => 'index',
-                                        'route' => 'admin/shop/group',
-                                        'resource' => 'menu:admin'
-                                    ],
-                                    'add' => [
-                                        'label' => 'Add New Group Price',
-                                        'action' => 'add',
-                                        'route' => 'admin/shop/group/edit',
-                                        'resource' => 'menu:admin'
-                                    ]
-                                ]
                             ],
                         ]
                     ],

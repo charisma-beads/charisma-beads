@@ -1,26 +1,43 @@
 
-<?=$this->partial('uthando-admin/partial/search', [
-	'name'			=> 'productGroup',
-	'searchInputs'	=> [
-		'Group'		=> 'group',
-	],
-]);?>
+<?php $this->headTitle('Product Groups') ?>
+<?php $this->layout()->pageTitle = $this->translate('Product Groups'); ?>
 
-	    	
-<div id="table-productGroup">
-	<?=$this->partial('shop/product-group/list', [
-	    'models' => $this->models
-	]); ?>
+<?php $this->placeholder('header-buttons')->captureStart(); ?>
+<a href="<?= $this->url('admin/shop/group/edit', [
+    'action' => 'add'
+]); ?>" type="submit" form="form-product-group" data-toggle="tooltip"
+   title="<?= $this->translate('Add Group'); ?>" class="btn btn-primary">
+    <i class="fa fa-plus"></i>
+</a>
+<?php $this->placeholder('header-buttons')->captureEnd(); ?>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-list"></i> <?= $this->translate('Product Group List'); ?></h3>
+    </div>
+    <div class="panel-body">
+        <?= $this->partial('uthando-admin/partial/search', [
+            'name' => 'productGroup',
+            'searchInputs' => [
+                'Group' => 'group',
+            ],
+        ]); ?>
+    </div>
+    <div id="table-productGroup" class="admin-table">
+        <?= $this->partial('shop/product-group/list', [
+            'models' => $this->models
+        ]); ?>
+    </div>
 </div>
 
-<?php $this->inlineScript()->captureStart(); ?>
-$(document).ready(function(){
-	$('#table-productGroupPrice').dataGrid({
-	    url : 'group/list',
-	    query: { sort : 'productGroupId' },
-	    searchForm : $('#search-productGroup'),
-	    paging : 'links',
-	    columnSort: true
-	});
-});
-<?php $this->inlineScript()->captureEnd(); ?>
+<script>
+    $(document).ready(function(){
+        $('#table-productGroupPrice').dataGrid({
+            url : 'group/list',
+            query: { sort : 'productGroupId' },
+            searchForm : $('#search-productGroup'),
+            paging : 'links',
+            columnSort: true
+        });
+    });
+</script>
