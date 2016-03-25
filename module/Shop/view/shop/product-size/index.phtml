@@ -1,26 +1,43 @@
 
-<?=$this->partial('uthando-admin/partial/search', [
-	'name'			=> 'productSize',
-	'searchInputs'	=> [
-		'Size' => 'size',
-	],
-]);?>
+<?php $this->headTitle('Product Sizes') ?>
+<?php $this->layout()->pageTitle = $this->translate('Product Sizes'); ?>
 
-<div id="table-productSize">
-	<?=$this->partial('shop/product-size/list', [
-	    'models' => $this->models
-	]); ?>
+<?php $this->placeholder('header-buttons')->captureStart(); ?>
+<a href="<?= $this->url('admin/shop/product/size/edit', [
+    'action' => 'add'
+]); ?>" type="submit" form="form-product-size" data-toggle="tooltip"
+   title="<?= $this->translate('Add Size'); ?>" class="btn btn-primary">
+    <i class="fa fa-plus"></i>
+</a>
+<?php $this->placeholder('header-buttons')->captureEnd(); ?>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-list"></i> <?= $this->translate('Product Size List'); ?></h3>
+    </div>
+    <div class="panel-body">
+        <?= $this->partial('uthando-admin/partial/search', [
+            'name' => 'productSize',
+            'searchInputs' => [
+                'Size' => 'size',
+            ],
+        ]); ?>
+    </div>
+    <div id="table-productSize" class="admin-table">
+        <?= $this->partial('shop/product-size/list', [
+            'models' => $this->models
+        ]); ?>
+    </div>
 </div>
 
-
 <script>
-$(document).ready(function(){
-	$('#table-productSize').dataGrid({
-	    url : '<?=$this->url('admin/shop/product/size/edit', ['action' => 'list']);?>',
-	    query: { sort : 'productSizeId' },
-	    searchForm : $('#search-productSize'),
-	    paging : 'links',
-	    columnSort: true
-	});
-});
+    $(document).ready(function () {
+        $('#table-productSize').dataGrid({
+            url: '<?=$this->url('admin/shop/product/size/edit', ['action' => 'list']);?>',
+            query: {sort: 'productSizeId'},
+            searchForm: $('#search-productSize'),
+            paging: 'links',
+            columnSort: true
+        });
+    });
 </script>
