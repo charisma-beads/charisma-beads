@@ -1,17 +1,34 @@
 
+<?php $this->headTitle('Customers') ?>
+<?php $this->layout()->pageTitle = $this->translate('Customers'); ?>
 
-<?=$this->partial('uthando-admin/partial/search', [
-	'name'			=> 'customer',
-	'searchInputs'	=> [
-		'Customer'	=> 'firstname-lastname',
-		'Address'	=> 'address1'
-	],
-]);?>
-	    	
-<div id="table-customer">
-	<?=$this->partial('shop/customer/list', [
-	    'models' => $this->models
-	]); ?>
+<?php $this->placeholder('header-buttons')->captureStart(); ?>
+<a href="<?= $this->url('admin/shop/customer/edit', [
+    'action' => 'add'
+]); ?>" type="submit" form="form-customers" data-toggle="tooltip"
+   title="<?= $this->translate('Add Customer'); ?>" class="btn btn-primary">
+    <i class="fa fa-plus"></i>
+</a>
+<?php $this->placeholder('header-buttons')->captureEnd(); ?>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-list"></i> <?= $this->translate('Customer List'); ?></h3>
+    </div>
+    <div class="panel-body">
+        <?=$this->partial('uthando-admin/partial/search', [
+            'name'			=> 'customer',
+            'searchInputs'	=> [
+                'Customer'	=> 'firstname-lastname',
+                'Address'	=> 'address1'
+            ],
+        ]);?>
+    </div>
+    <div id="table-customer" class="admin-table">
+        <?=$this->partial('shop/customer/list', [
+            'models' => $this->models
+        ]); ?>
+    </div>
 </div>
 
 <script>

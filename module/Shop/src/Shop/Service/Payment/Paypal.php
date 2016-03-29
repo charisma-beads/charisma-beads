@@ -174,7 +174,21 @@ class Paypal extends AbstractService
         $payment->setRedirectUrls($redirectUrls);
         $payment->setTransactions([$transaction]);
 
-        $payment->create($this->getApiContent());
+        try {
+            $payment->create($this->getApiContent());
+        } catch (\Exception $e) {
+            $paypalException = new PaymentException(
+                'An error occurred when trying to execute your PayPal payment, please contact the shop to process your payment',
+                $e->getCode(),
+                $e
+            );
+
+            $paypalException->setOrder($order)
+                ->setPayment($payment);
+
+            throw $paypalException;
+        }
+        
 
         $order->getMetadata()->setPaymentId($payment->getId());
         
@@ -217,8 +231,21 @@ class Paypal extends AbstractService
         
         $execution = new PaymentExecution();
         $execution->setPayerId($payerId);
-        
-        $payment = $payment->execute($execution, $this->getApiContent());
+
+        try {
+            $payment = $payment->execute($execution, $this->getApiContent());
+        } catch (\Exception $e) {
+            $paypalException = new PaymentException(
+                'An error occurred when trying to execute your PayPal payment, please contact the shop to process your payment',
+                $e->getCode(),
+                $e
+            );
+
+            $paypalException->setOrder($order)
+                ->setPayment($payment);
+
+            throw $paypalException;
+        }
 
         $paymentState = $payment->getState();
         /* @var Transaction $transaction */

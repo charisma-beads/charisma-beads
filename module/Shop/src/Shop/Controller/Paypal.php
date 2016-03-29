@@ -12,6 +12,7 @@ namespace Shop\Controller;
 
 use Exception;
 use PayPal\Exception\PayPalConnectionException;
+use Shop\Service\Payment\PaymentException;
 use Shop\Service\Payment\Paypal as PaypalService;
 use Shop\Service\Order\Order as OrderService;
 use UthandoCommon\Controller\SetExceptionMessages;
@@ -83,7 +84,15 @@ class Paypal extends AbstractActionController
 
             $update = $this->getOrderService()->save($result['order']);
         } catch (Exception $e) {
+
+            $mailer = $this->getService('ExceptionMailer\ErrorHandling');
+            $config = $mailer->getConfig();
+            $config['exception_mailer']['template'] = 'error/paypal';
+            $mailer->setConfig($config);
+
+            $mailer->mailException($e);
             $this->setExceptionMessages($e);
+            
             return ['order' => $order];
         }
 
@@ -134,6 +143,12 @@ class Paypal extends AbstractActionController
                 ->getCustomerOrderByUserId($orderId, $userId);
 
         } catch (Exception $e) {
+            $mailer = $this->getService('ExceptionMailer\ErrorHandling');
+            $config = $mailer->getConfig();
+            $config['exception_mailer']['template'] = 'error/paypal';
+            $mailer->setConfig($config);
+
+            $mailer->mailException($e);
             $this->setExceptionMessages($e);
         }
 

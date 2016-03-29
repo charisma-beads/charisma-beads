@@ -330,6 +330,7 @@ return [
             'shop/cart'            => __DIR__ . '/../view/shop/cart/cart.phtml',
             'shop/order/details'   => __DIR__ . '/../view/shop/order/order-details.phtml',
             'error/mail'           => __DIR__ . '/../view/error/mail.phtml', // Exception_Mailer
+            'error/paypal'         => __DIR__ . '/../view/error/paypal-error.phtml', // Exception_Mailer
         ],
         'template_path_stack' => [
             'shop' => __DIR__ . '/../view'

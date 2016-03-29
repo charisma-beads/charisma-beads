@@ -30,9 +30,9 @@ trait CustomerTrait
             'options'		=> [
                 'label'		=> 'Prefix:',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-8',
+                'column-size' => 'sm-10',
                 'label_attributes' => [
-                    'class' => 'col-md-4',
+                    'class' => 'col-sm-2',
                 ],
             ],
         ]);
@@ -43,9 +43,9 @@ trait CustomerTrait
             'options'		=> [
                 'label' => 'Firstname:',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-8',
+                'column-size' => 'sm-10',
                 'label_attributes' => [
-                    'class' => 'col-md-4',
+                    'class' => 'col-sm-2',
                 ],
             ],
         ]);
@@ -56,9 +56,9 @@ trait CustomerTrait
             'options'		=> [
                 'label' => 'Lastname:',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-8',
+                'column-size' => 'sm-10',
                 'label_attributes' => [
-                    'class' => 'col-md-4',
+                    'class' => 'col-sm-2',
                 ],
             ],
         ]);
@@ -69,9 +69,9 @@ trait CustomerTrait
             'options' => [
                 'label' => 'Email:',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-8',
+                'column-size' => 'sm-10',
                 'label_attributes' => [
-                    'class' => 'col-md-4',
+                    'class' => 'col-sm-2',
                 ],
             ],
         ]);

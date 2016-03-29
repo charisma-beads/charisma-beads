@@ -608,16 +608,16 @@
         },
         {
             "name": "symfony/process",
-            "version": "v2.8.3",
+            "version": "v2.8.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "7dedd5b60550f33dca16dd7e94ef8aca8b67bbfe"
+                "reference": "fb467471952ef5cf8497c029980e556b47545333"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/7dedd5b60550f33dca16dd7e94ef8aca8b67bbfe",
-                "reference": "7dedd5b60550f33dca16dd7e94ef8aca8b67bbfe",
+                "url": "https://api.github.com/repos/symfony/process/zipball/fb467471952ef5cf8497c029980e556b47545333",
+                "reference": "fb467471952ef5cf8497c029980e556b47545333",
                 "shasum": ""
             },
             "require": {
@@ -653,20 +653,20 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
-            "time": "2016-02-02 13:33:15"
+            "time": "2016-03-23 13:11:46"
         },
         {
             "name": "uthando-cms/uthando-admin",
-            "version": "2.5.3",
+            "version": "2.5.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-admin.git",
-                "reference": "0f4ec6028c71c406aafe7081e0ed5912694b3c60"
+                "reference": "751ad6ba9f7049e4f188b7e257fdfbd64db050ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-admin/zipball/0f4ec6028c71c406aafe7081e0ed5912694b3c60",
-                "reference": "0f4ec6028c71c406aafe7081e0ed5912694b3c60",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-admin/zipball/751ad6ba9f7049e4f188b7e257fdfbd64db050ef",
+                "reference": "751ad6ba9f7049e4f188b7e257fdfbd64db050ef",
                 "shasum": ""
             },
             "require": {
@@ -707,7 +707,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2016-03-24 08:09:33"
+            "time": "2016-03-28 12:44:22"
         },
         {
             "name": "uthando-cms/uthando-article",
@@ -767,16 +767,16 @@
         },
         {
             "name": "uthando-cms/uthando-common",
-            "version": "2.5.2",
+            "version": "2.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-common.git",
-                "reference": "37da45a711ce0d69e98188fa26e9c7ef144d5681"
+                "reference": "d0d6a159a17864cc651b3f3e8300d3bc82705e6e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-common/zipball/37da45a711ce0d69e98188fa26e9c7ef144d5681",
-                "reference": "37da45a711ce0d69e98188fa26e9c7ef144d5681",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-common/zipball/d0d6a159a17864cc651b3f3e8300d3bc82705e6e",
+                "reference": "d0d6a159a17864cc651b3f3e8300d3bc82705e6e",
                 "shasum": ""
             },
             "require": {
@@ -827,7 +827,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2016-03-22 22:58:52"
+            "time": "2016-03-24 11:49:33"
         },
         {
             "name": "uthando-cms/uthando-contact",
@@ -1484,16 +1484,16 @@
         },
         {
             "name": "uthando-cms/uthando-user",
-            "version": "2.2.5",
+            "version": "2.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-user.git",
-                "reference": "c753fc099c6732d835e7294f4c2ae9c5c6a6ea09"
+                "reference": "1a9a064a3ece50fbd26107d12689572de98e99a1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-user/zipball/c753fc099c6732d835e7294f4c2ae9c5c6a6ea09",
-                "reference": "c753fc099c6732d835e7294f4c2ae9c5c6a6ea09",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-user/zipball/1a9a064a3ece50fbd26107d12689572de98e99a1",
+                "reference": "1a9a064a3ece50fbd26107d12689572de98e99a1",
                 "shasum": ""
             },
             "require": {
@@ -1535,7 +1535,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2016-02-29 11:50:15"
+            "time": "2016-03-28 14:16:35"
         },
         {
             "name": "zendframework/zend-authentication",

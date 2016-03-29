@@ -1,31 +1,49 @@
 
 <?php
-$this->headTitle('Edit Customer');
 $this->form->get('firstname')->setAttribute('readonly', '');
 $this->form->get('lastname')->setAttribute('readonly', '');
 $this->form->get('email')->setAttribute('readonly', '');
 ?>
-<div class="col-md-12">
-    <?=$this->partial('uthando-admin/partial/add-edit-form', [
-        'form' 			=> $this->form,
-        'formName'		=> 'Customer ' . $this->model->getNumber(),
-        'postUrl'		=> $this->url('admin/shop/customer/edit', [
-            'id'        => $this->model->getCustomerId(),
-        ]),
-        'cancelUrl'     => $this->url('admin/shop/customer'),
-        'formElements'  => [
-            'customerId', 'userId', 'prefixId', 'firstname', 'lastname',
-            'billingAddressId', 'deliveryAddressId',
-             'email',
-        ],
-        'formWidth'     => '6',
-        'helperOptions' => [
-            'labelWidth'    => '4',
-            'elementWidth'  => '8',
-        ],
-    ]); ?>
 
-    <div class="col-md-6">
+<?php $this->headTitle('Edit Customer') ?>
+<?php $this->layout()->pageTitle = $this->translate('Edit Customer'); ?>
+
+<?php $this->placeholder('header-buttons')->captureStart(); ?>
+<button type="submit" form="form-customer" data-toggle="tooltip" title="<?= $this->translate('Save'); ?>"
+        class="btn btn-primary">
+    <i class="fa fa-save"></i>
+</button>
+<a href="<?= $this->url('admin/shop/customer'); ?>" data-toggle="tooltip" title="<?= $this->translate('Cancel'); ?>"
+   class="btn btn-default">
+    <i class="fa fa-reply"></i>
+</a>
+<?php $this->placeholder('header-buttons')->captureEnd(); ?>
+
+<?php $this->form->setAttributes([
+    'method' => 'post',
+    'id' => 'form-customer',
+    'action' => $this->url('admin/shop/customer/edit', [
+        'id' => $this->model->getCustomerId(),
+    ]),
+]); ?>
+
+<div class="row">
+
+    <div class="col-sm-6">
+        <div id="customer" class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <i class="fa fa-pencil"></i> <?= $this->translate('Edit Customer'); ?>
+                    <small>(<?=$this->escapeHtml($this->model->getNumber());?>)</small>
+                </h3>
+            </div>
+            <div class="panel-body">
+                <?= $this->form($this->form); ?>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6">
         <div class="panel-group" id="accordion">
             <div id="customer-addresses" class="panel panel-info">
                 <!-- Default panel contents -->
@@ -112,6 +130,8 @@ $this->form->get('email')->setAttribute('readonly', '');
 <script>
 
     $(document).ready(function() {
+
+        customer.customerId = '<?=$this->escapeHtml($this->model->getCustomerId());?>';
         var addresses = function () {
 
             admin.ajaxWidgetPanel(

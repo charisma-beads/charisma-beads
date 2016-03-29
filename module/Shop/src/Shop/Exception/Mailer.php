@@ -36,9 +36,32 @@ class Mailer
      */
     protected $sm;
 
-    function __construct(array $config)
+    /**
+     * Mailer constructor.
+     *
+     * @param array $config
+     */
+    public function __construct(array $config)
     {
         $this->config = $config;
+    }
+
+    /**
+     * @return array
+     */
+    public function getConfig()
+    {
+        return $this->config;
+    }
+
+    /**
+     * @param $config
+     * @return $this
+     */
+    public function setConfig($config)
+    {
+        $this->config = $config;
+        return $this;
     }
 
     /**
@@ -62,22 +85,24 @@ class Mailer
 
     /**
      * @param \Exception $e
+     * @param array $extraVars
      * @return \Zend\Mime\Message
+     * @throws \Exception
      */
-    public function getHtmlBody(\Exception $e)
+    public function getHtmlBody(\Exception $e, $extraVars = [])
     {
         /** @var PhpRenderer $view */
         $view = $this->getServiceManager()->get('ViewRenderer');
         /* @var \Zend\Http\PhpEnvironment\Request $request */
         $request = $this->getServiceManager()->get('Request');
 
-        $model = new ViewModel([
+        $model = new ViewModel(array_merge($extraVars, [
             'exception'     => $e,
             'getVars'       => $request->getQuery()->toArray(),
             'postVars'      => $request->getPost()->toArray(),
             'requestString' => $request->toString(),
             'sessionVars'   => $_SESSION,
-        ]);
+        ]));
 
         $model->setTemplate($this->config['exception_mailer']['template']);
 
@@ -93,8 +118,9 @@ class Mailer
 
     /**
      * @param \Exception $e
+     * @param array $extraVars
      */
-    public function mailException(\Exception $e)
+    public function mailException(\Exception $e, $extraVars = [])
     {
         // Mail
         if (!$this->config['exception_mailer']['send']) {
@@ -129,7 +155,7 @@ class Mailer
         if ($this->getServiceManager() !== null
             && $this->config['exception_mailer']['useTemplate'] == true
         ) {
-            $message->setBody($this->getHtmlBody($e));
+            $message->setBody($this->getHtmlBody($e, $extraVars));
         } else {
             $message->setBody($e->getTraceAsString());
         }

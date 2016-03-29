@@ -32,12 +32,12 @@ return [
         'config_glob_paths' => [
             'config/autoload/{,*.}{global,local}.php'
         ],
-        'config_cache_enabled' => true,
+        'config_cache_enabled' => false,
         'config_cache_key' => 'config-cache',
-        'module_map_cache_enabled' => true,
+        'module_map_cache_enabled' => false,
         'module_map_cache_key' => 'module-map-cache',
         'cache_dir' => './data/cache',
-        'check_dependencies' => true
+        'check_dependencies' => true,
     ],
     'service_manager' => [
         'invokables' => [

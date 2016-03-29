@@ -56,27 +56,91 @@ return [
                                 'label' => 'List Products',
                                 'action' => 'index',
                                 'route' => 'admin/shop/product',
-                                'resource' => 'menu:admin'
+                                'resource' => 'menu:admin',
+                                'pages' => [
+                                    'edit' => [
+                                        'label' => 'Edit Product',
+                                        'action' => 'edit',
+                                        'route' => 'admin/shop/product/edit',
+                                        'resource' => 'menu:admin',
+                                        'visible' => false,
+                                    ],
+                                    'add' => [
+                                        'label' => 'Add Product',
+                                        'action' => 'add',
+                                        'route' => 'admin/shop/product/edit',
+                                        'resource' => 'menu:admin',
+                                        'visible' => false,
+                                    ],
+                                ],
                             ],
                             'categories' => [
                                 'label' => 'Categories',
                                 'action' => 'index',
                                 'route' => 'admin/shop/category',
                                 'resource' => 'menu:admin',
+                                'pages' => [
+                                    'edit' => [
+                                        'label' => 'Edit Category',
+                                        'action' => 'edit',
+                                        'route' => 'admin/shop/category/edit',
+                                        'resource' => 'menu:admin',
+                                        'visible' => false,
+                                    ],
+                                    'add' => [
+                                        'label' => 'Add Category',
+                                        'action' => 'add',
+                                        'route' => 'admin/shop/category/edit',
+                                        'resource' => 'menu:admin',
+                                        'visible' => false,
+                                    ],
+                                ],
                             ],
                             'sizes' => [
                                 'label' => 'Product Sizes',
                                 'action' => 'index',
                                 'route' => 'admin/shop/product/size',
                                 'resource' => 'menu:admin',
+                                'pages' => [
+                                    'edit' => [
+                                        'label' => 'Edit Product Size',
+                                        'action' => 'edit',
+                                        'route' => 'admin/shop/product/size/edit',
+                                        'resource' => 'menu:admin',
+                                        'visible' => false,
+                                    ],
+                                    'add' => [
+                                        'label' => 'Add Product Size',
+                                        'action' => 'add',
+                                        'route' => 'admin/shop/product/size/edit',
+                                        'resource' => 'menu:admin',
+                                        'visible' => false,
+                                    ],
+                                ],
                             ],
                             'groups' => [
                                 'label' => 'Groups',
                                 'action' => 'index',
                                 'route' => 'admin/shop/group',
                                 'resource' => 'menu:admin',
+                                'pages' => [
+                                    'edit' => [
+                                        'label' => 'Edit Group',
+                                        'action' => 'edit',
+                                        'route' => 'admin/shop/group/edit',
+                                        'resource' => 'menu:admin',
+                                        'visible' => false,
+                                    ],
+                                    'add' => [
+                                        'label' => 'Add Group',
+                                        'action' => 'add',
+                                        'route' => 'admin/shop/group/edit',
+                                        'resource' => 'menu:admin',
+                                        'visible' => false,
+                                    ],
+                                ],
                             ],
-                        ]
+                        ],
                     ],
                     'customers' => [
                         'label' => 'Customers',
@@ -84,17 +148,19 @@ return [
                         'route' => 'admin/shop/customer',
                         'resource' => 'menu:admin',
                         'pages' => [
-                            'list' => [
-                                'label' => 'List All Customers',
-                                'action' => 'index',
-                                'route' => 'admin/shop/customer',
-                                'resource' => 'menu:admin'
+                            'edit' => [
+                                'label' => 'Edit Customer',
+                                'action' => 'edit',
+                                'route' => 'admin/shop/customer/edit',
+                                'resource' => 'menu:admin',
+                                'visible' => false,
                             ],
                             'add' => [
-                                'label' => 'Add New Customer',
+                                'label' => 'Add Customer',
                                 'action' => 'add',
                                 'route' => 'admin/shop/customer/edit',
-                                'resource' => 'menu:admin'
+                                'resource' => 'menu:admin',
+                                'visible' => false,
                             ]
                         ]
                     ],
