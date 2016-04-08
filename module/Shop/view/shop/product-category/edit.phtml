@@ -1,38 +1,40 @@
-
 <?php $this->headTitle('Edit Category') ?>
-<?php $this->layout()->pageTitle = $this->translate('Edit Category');?>
+<?php $this->layout()->pageTitle = $this->translate('Edit Category'); ?>
 
-<?php $this->placeholder('header-buttons')->captureStart();?>
-<button type="submit" form="form-product-category" data-toggle="tooltip" title="<?=$this->translate('Save');?>" class="btn btn-primary">
-	<i class="fa fa-save"></i>
+<?php $this->placeholder('header-buttons')->captureStart(); ?>
+<button type="submit" form="form-product-category" data-toggle="tooltip" title="<?= $this->translate('Save'); ?>"
+        class="btn btn-primary">
+    <i class="fa fa-save"></i>
 </button>
-<a href="<?=$this->url('admin/shop/category');?>" data-toggle="tooltip" title="<?=$this->translate('Cancel');?>" class="btn btn-default">
-	<i class="fa fa-reply"></i>
+<a href="<?= $this->url('admin/shop/category'); ?>" data-toggle="tooltip" title="<?= $this->translate('Cancel'); ?>"
+   class="btn btn-default">
+    <i class="fa fa-reply"></i>
 </a>
-<?php $this->placeholder('header-buttons')->captureEnd();?>
+<?php $this->placeholder('header-buttons')->captureEnd(); ?>
 
 <?php $this->form->setAttributes([
-	'method' => 'post',
-	'id' => 'form-product-category',
-	'action' => $this->url('admin/shop/category/edit', [
-		'id' => $this->model->getProductCategoryId(),
-	]),
+    'method' => 'post',
+    'id' => 'form-product-category',
+    'action' => $this->url('admin/shop/category/edit', [
+        'id' => $this->model->getProductCategoryId(),
+    ]),
 ]); ?>
 
 <div id="product-category-edit" class="panel panel-default">
-	<div class="panel-heading">
-		<h3 class="panel-title"><i class="fa fa-pencil"></i> <?=$this->translate('Edit Category');?></h3>
-	</div>
-	<div class="panel-body">
-		<?=$this->form($this->form);?>
-	</div>
+    <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-pencil"></i> <?= $this->translate('Edit Category'); ?></h3>
+    </div>
+    <div class="panel-body">
+        <?= $this->form($this->form); ?>
+    </div>
 </div>
 
 <?php $this->inlineScript()
-	->appendFile($this->basePath('/js/admin/shop/category-edit.js'));?>
+    ->appendFile($this->basePath('js/admin/shop/shop.js'))
+    ->appendFile($this->basePath('/js/admin/shop/category-edit.js')); ?>
 
 <script>
-	$(document).ready(function() {
-		category.productCategoryId = <?=$this->model->getProductCategoryId();?>;
-	});
+    $(document).ready(function () {
+        category.productCategoryId = <?=$this->model->getProductCategoryId();?>;
+    });
 </script>

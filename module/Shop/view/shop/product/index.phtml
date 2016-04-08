@@ -54,6 +54,7 @@ $discontinued = new Element\Checkbox('discontinued', [
 </div>
 
 <?php $this->inlineScript()
+    ->appendFile($this->basePath('js/admin/shop/shop.js'))
     ->appendFile($this->basePath('js/admin/shop/products-list.js'));?>
 
 <script>
