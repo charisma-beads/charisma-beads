@@ -1,3 +1,6 @@
+String.prototype.contains = function(str) {
+    return this.indexOf(str) != -1;
+};
 
 var Shop = {
     bootboxDialog : function(options) {

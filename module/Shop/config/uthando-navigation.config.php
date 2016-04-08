@@ -161,8 +161,8 @@ return [
                                 'route' => 'admin/shop/customer/edit',
                                 'resource' => 'menu:admin',
                                 'visible' => false,
-                            ]
-                        ]
+                            ],
+                        ],
                     ],
                     'orders' => [
                         'label' => 'Orders',
@@ -170,19 +170,21 @@ return [
                         'route' => 'admin/shop/order',
                         'resource' => 'menu:admin',
                         'pages' => [
-                            'list' => [
-                                'label' => 'List All Orders',
+                            'edit' => [
+                                'label' => 'Edit Orders',
                                 'action' => 'index',
-                                'route' => 'admin/shop/order',
-                                'resource' => 'menu:admin'
+                                'route' => 'admin/shop/order/edit',
+                                'resource' => 'menu:admin',
+                                'visible' => false,
                             ],
                             'add' => [
                                 'label' => 'Add New Order',
                                 'action' => 'add',
                                 'route' => 'admin/shop/order/edit',
-                                'resource' => 'menu:admin'
-                            ]
-                        ]
+                                'resource' => 'menu:admin',
+                                'visible' => false,
+                            ],
+                        ],
                     ],
                     'postage' => [
                         'label' => 'Postage',
