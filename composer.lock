@@ -1484,16 +1484,16 @@
         },
         {
             "name": "uthando-cms/uthando-user",
-            "version": "2.2.6",
+            "version": "2.2.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-user.git",
-                "reference": "1a9a064a3ece50fbd26107d12689572de98e99a1"
+                "reference": "f1721657d44b73ff6a5fa438f2e15df673de5154"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-user/zipball/1a9a064a3ece50fbd26107d12689572de98e99a1",
-                "reference": "1a9a064a3ece50fbd26107d12689572de98e99a1",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-user/zipball/f1721657d44b73ff6a5fa438f2e15df673de5154",
+                "reference": "f1721657d44b73ff6a5fa438f2e15df673de5154",
                 "shasum": ""
             },
             "require": {
@@ -1535,7 +1535,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2016-03-28 14:16:35"
+            "time": "2016-04-11 07:20:13"
         },
         {
             "name": "zendframework/zend-authentication",
