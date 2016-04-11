@@ -831,16 +831,16 @@
         },
         {
             "name": "uthando-cms/uthando-contact",
-            "version": "2.1.0",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-contact.git",
-                "reference": "c01e48f9a3359598a4e16bd2d3dc1aab714da045"
+                "reference": "7c888e94dfbbdf78aff5b4576d8f4062b5ed465a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-contact/zipball/c01e48f9a3359598a4e16bd2d3dc1aab714da045",
-                "reference": "c01e48f9a3359598a4e16bd2d3dc1aab714da045",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-contact/zipball/7c888e94dfbbdf78aff5b4576d8f4062b5ed465a",
+                "reference": "7c888e94dfbbdf78aff5b4576d8f4062b5ed465a",
                 "shasum": ""
             },
             "require": {
@@ -884,20 +884,20 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2016-02-29 14:49:13"
+            "time": "2016-04-11 22:17:47"
         },
         {
             "name": "uthando-cms/uthando-dompdf",
-            "version": "3.3.0",
+            "version": "3.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-dompdf.git",
-                "reference": "7bef07c17d4649c53cf94a6f3ea4b703b69cd298"
+                "reference": "83526cd645c8bde38cf141fc94e4c2228f852423"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-dompdf/zipball/7bef07c17d4649c53cf94a6f3ea4b703b69cd298",
-                "reference": "7bef07c17d4649c53cf94a6f3ea4b703b69cd298",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-dompdf/zipball/83526cd645c8bde38cf141fc94e4c2228f852423",
+                "reference": "83526cd645c8bde38cf141fc94e4c2228f852423",
                 "shasum": ""
             },
             "require": {
@@ -955,7 +955,7 @@
                 "pdf",
                 "zf2"
             ],
-            "time": "2016-03-11 15:23:28"
+            "time": "2016-04-11 22:18:22"
         },
         {
             "name": "uthando-cms/uthando-events",
@@ -2750,21 +2750,20 @@
         },
         {
             "name": "zendframework/zend-mail",
-            "version": "2.6.1",
+            "version": "2.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-mail.git",
-                "reference": "3311e163de28dc3b41dfba642939132a16336143"
+                "reference": "fcec5a6f32a5646ce81783f319836996bdd03110"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-mail/zipball/3311e163de28dc3b41dfba642939132a16336143",
-                "reference": "3311e163de28dc3b41dfba642939132a16336143",
+                "url": "https://api.github.com/repos/zendframework/zend-mail/zipball/fcec5a6f32a5646ce81783f319836996bdd03110",
+                "reference": "fcec5a6f32a5646ce81783f319836996bdd03110",
                 "shasum": ""
             },
             "require": {
                 "php": "^5.5 || ^7.0",
-                "zendframework/zend-crypt": "^2.6",
                 "zendframework/zend-loader": "^2.5",
                 "zendframework/zend-mime": "^2.5",
                 "zendframework/zend-stdlib": "^2.7 || ^3.0",
@@ -2774,16 +2773,22 @@
                 "fabpot/php-cs-fixer": "1.7.*",
                 "phpunit/phpunit": "~4.0",
                 "zendframework/zend-config": "^2.6",
+                "zendframework/zend-crypt": "^2.6",
                 "zendframework/zend-servicemanager": "^2.7.5 || ^3.0.3"
             },
             "suggest": {
+                "zendframework/zend-crypt": "Crammd5 support in SMTP Auth",
                 "zendframework/zend-servicemanager": "^2.7.5 || ^3.0.3 when using SMTP to deliver messages"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.6-dev",
-                    "dev-develop": "2.7-dev"
+                    "dev-master": "2.7-dev",
+                    "dev-develop": "2.8-dev"
+                },
+                "zf": {
+                    "component": "Zend\\Mail",
+                    "config-provider": "Zend\\Mail\\ConfigProvider"
                 }
             },
             "autoload": {
@@ -2801,7 +2806,7 @@
                 "mail",
                 "zf2"
             ],
-            "time": "2016-02-24 22:32:05"
+            "time": "2016-04-11 20:32:54"
         },
         {
             "name": "zendframework/zend-math",
@@ -3119,16 +3124,16 @@
         },
         {
             "name": "zendframework/zend-paginator",
-            "version": "2.6.0",
+            "version": "2.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-paginator.git",
-                "reference": "15c82665abc668e6ddf955afc4b86cd3385efbad"
+                "reference": "42211f3e1e8230953c641e91fec5aa9fe964eb95"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-paginator/zipball/15c82665abc668e6ddf955afc4b86cd3385efbad",
-                "reference": "15c82665abc668e6ddf955afc4b86cd3385efbad",
+                "url": "https://api.github.com/repos/zendframework/zend-paginator/zipball/42211f3e1e8230953c641e91fec5aa9fe964eb95",
+                "reference": "42211f3e1e8230953c641e91fec5aa9fe964eb95",
                 "shasum": ""
             },
             "require": {
@@ -3157,8 +3162,12 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.6-dev",
-                    "dev-develop": "2.7-dev"
+                    "dev-master": "2.7-dev",
+                    "dev-develop": "2.8-dev"
+                },
+                "zf": {
+                    "component": "Zend\\Paginator",
+                    "config-provider": "Zend\\Paginator\\ConfigProvider"
                 }
             },
             "autoload": {
@@ -3175,7 +3184,7 @@
                 "paginator",
                 "zf2"
             ],
-            "time": "2016-02-23 17:41:20"
+            "time": "2016-04-11 21:18:13"
         },
         {
             "name": "zendframework/zend-permissions-acl",
