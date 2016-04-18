@@ -26,6 +26,50 @@
 
         <?php endif;?>
         <!-- /cart links -->
+
+        <!-- PRODUCT CATEGORIES -->
+        <?php if ($this->subCategories->count() > 0): ?>
+            <!-- CALLOUT -->
+            <div class="alert alert-default fade in">
+
+                <div class="row">
+
+                    <div class="col-md-12 col-sm-12"><!-- left text -->
+                        <h4>Also <strong>In This Category</strong></h4>
+                    </div><!-- /left text -->
+
+                </div>
+
+            </div>
+            <!-- /CALLOUT -->
+            <div class="row">
+
+                <?php /* @var $row \Shop\Model\Product\Category */ ?>
+                <?php $c=0;?>
+                <?php foreach ($this->subCategories as $row): ?>
+                    <?php $c++;?>
+                    <div class="col-sm-4 col-md-4"><!-- category -->
+                        <div class="box-content thumbnail text-center">
+                            <a href="<?php echo $this->url('shop/catalog', [
+                                'categoryIdent' => $row->getIdent()
+                            ]); ?>" class="item-image"><!-- image -->
+                                <?php if ($row->getShowImage()):?>
+                                    <img class="img-responsive" src="<?=$this->productCategoryImage($row);?>" alt="<?=$this->escapehtml($row->getCategory());?>">
+                                <?php endif;?>
+                            </a>
+                            <div class="caption text-left"><!-- name -->
+                                <h5 class="nomargin elipsis"><?=$this->escapehtml($row->getCategory());?></h5>
+                            </div>
+                        </div>
+                    </div><!-- /category -->
+                    <?php if (($c % 3) === 0):?>
+                        <div class="clearfix"></div>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
+        <!-- /PRODUCT CATEGORIES -->
+
         <!-- PRODUCT LIST -->
         <?php /* @var $row \Shop\Model\Product\Product */ ?>
         <?php $c=0;?>

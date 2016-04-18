@@ -84,7 +84,7 @@ class Category extends AbstractMapperService
      */
     public function getCategoryByIdent($ident)
     {
-        $ident = (string)$ident;
+        $ident = (string) $ident;
         $mapper = $this->getMapper();
         $cat = $mapper->getCategoryByIdent($ident);
 

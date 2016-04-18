@@ -62,10 +62,13 @@ class Catalog extends AbstractActionController
                 'limit' => $options->getProductsPerPage(),
                 'page' => $page
         ])->getProductsByCategory($category->getIdent(), $options->getProductsOrderCol());
+
+        $subCategories = $this->getProductCategoryService()->getCategoriesByParentId($category->getProductCategoryId());
         
         return new ViewModel([
             'bread' => $this->getBreadcrumb($category->getProductCategoryId()),
             'category' => $category,
+            'subCategories' => $subCategories,
             'products' => $products
         ]);
     }
