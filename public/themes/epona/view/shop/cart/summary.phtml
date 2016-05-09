@@ -19,7 +19,12 @@
                             <img class="pull-left" src="<?=$this->productImage($item->getMetadata()->getImage(), 'thumb');?>" width="40" alt="quick cart">
                         <?php endif;?>
                         <div class="inline-block">
-                            <span class="title block"><?=$item->getMetadata()->getSku();?>/<?=$item->getMetadata()->getName();?></span>
+                            <span class="title block">
+                                <?=$item->getMetadata()->getSku();?>/<?=$item->getMetadata()->getName();?>
+                                <?php if ($item->getMetadata()->getOption()): ?>
+                                    &nbsp;(<?=$item->getMetadata()->getOption()->getOption();?>)
+                                <?php endif; ?>
+                            </span>
                             <span class="price block"><?=$item->getQuantity();?> &times; <?=$this->cart()->getLineCost($item);?></span>
                         </div>
                     </a><!-- /item -->
