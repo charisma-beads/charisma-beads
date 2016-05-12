@@ -1222,16 +1222,16 @@
         },
         {
             "name": "uthando-cms/uthando-newsletter",
-            "version": "1.1.2",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-newsletter.git",
-                "reference": "fd24ef666177ffbe3deaeb22f2d51538a7385b8d"
+                "reference": "2b6d7be52c7660cffa30d6347093ce08c6922f51"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-newsletter/zipball/fd24ef666177ffbe3deaeb22f2d51538a7385b8d",
-                "reference": "fd24ef666177ffbe3deaeb22f2d51538a7385b8d",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-newsletter/zipball/2b6d7be52c7660cffa30d6347093ce08c6922f51",
+                "reference": "2b6d7be52c7660cffa30d6347093ce08c6922f51",
                 "shasum": ""
             },
             "require": {
@@ -1271,7 +1271,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2016-05-11 21:26:46"
+            "time": "2016-05-12 13:02:12"
         },
         {
             "name": "uthando-cms/uthando-session-manager",

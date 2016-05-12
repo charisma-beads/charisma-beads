@@ -4,6 +4,11 @@ fieldset:nth-child(odd)  {
     clear: both;
 }
 
+.form-group.has-error ul {
+    padding: 0;
+    list-style: none;
+}
+
 /* Panel Styles */
 #shop-overview .panel-body,
 .panel-table {
