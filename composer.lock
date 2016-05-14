@@ -321,16 +321,16 @@
         },
         {
             "name": "paypal/rest-api-sdk-php",
-            "version": "v1.7.1",
+            "version": "1.7.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paypal/PayPal-PHP-SDK.git",
-                "reference": "d2fac37f2cba3ccf2a23ce30d3d23f34d17d099b"
+                "reference": "d3031fc35f4f4b0034a22a6e7174ae063f3a4b22"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paypal/PayPal-PHP-SDK/zipball/d2fac37f2cba3ccf2a23ce30d3d23f34d17d099b",
-                "reference": "d2fac37f2cba3ccf2a23ce30d3d23f34d17d099b",
+                "url": "https://api.github.com/repos/paypal/PayPal-PHP-SDK/zipball/d3031fc35f4f4b0034a22a6e7174ae063f3a4b22",
+                "reference": "d3031fc35f4f4b0034a22a6e7174ae063f3a4b22",
                 "shasum": ""
             },
             "require": {
@@ -366,7 +366,7 @@
                 "rest",
                 "sdk"
             ],
-            "time": "2016-04-22 03:29:29"
+            "time": "2016-05-13 18:25:38"
         },
         {
             "name": "phenx/php-font-lib",
@@ -1222,16 +1222,16 @@
         },
         {
             "name": "uthando-cms/uthando-newsletter",
-            "version": "1.2.1",
+            "version": "1.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-newsletter.git",
-                "reference": "fab0975c23dd2627f8d960592535138784f3a7f4"
+                "reference": "52696c7e619384f6f955df5f2a2c27ea5bd100fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-newsletter/zipball/fab0975c23dd2627f8d960592535138784f3a7f4",
-                "reference": "fab0975c23dd2627f8d960592535138784f3a7f4",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-newsletter/zipball/52696c7e619384f6f955df5f2a2c27ea5bd100fc",
+                "reference": "52696c7e619384f6f955df5f2a2c27ea5bd100fc",
                 "shasum": ""
             },
             "require": {
@@ -1271,7 +1271,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2016-05-13 17:32:15"
+            "time": "2016-05-14 07:48:23"
         },
         {
             "name": "uthando-cms/uthando-session-manager",
