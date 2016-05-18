@@ -99,7 +99,7 @@ class Faq extends AbstractMapperService
         /* @var $model \Shop\Model\Faq */
         $model = $mapper->getModel();
 
-        $form  = $this->getForm($model, $post, true, true);
+        $form  = $this->prepareForm($model, $post, true, true);
 
         if (!$form->isValid()) {
             return $form;
@@ -136,7 +136,6 @@ class Faq extends AbstractMapperService
         $form = $this->prepareForm($model, $post, true, true);
 
         if (!$form->isValid()) {
-            \FB::info($form->getMessages());
             return $form;
         }
 
