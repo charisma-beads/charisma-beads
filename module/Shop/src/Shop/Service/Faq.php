@@ -128,11 +128,12 @@ class Faq extends AbstractMapperService
      */
     public function edit(ModelInterface $model, array $post, Form $form = null)
     {
+
         if (!$model instanceof FaqModel) {
             throw new ShopException('$model must be an instance of Shop\Model\Faq, ' . get_class($model) . ' given.');
         }
 
-        $form = $this->getForm($model, $post, true, true);
+        $form = $this->prepareForm($model, $post, true, true);
 
         if (!$form->isValid()) {
             \FB::info($form->getMessages());
