@@ -56,7 +56,7 @@ class Product extends InputFilter
     	    'filters'      => [
     	        ['name' => 'StripTags'],
     	        ['name' => 'StringTrim'],
-    	        ['name' => 'StringToUpper'],
+    	        //['name' => 'StringToUpper'],
 			],
     	    'validators' => [
     			['name' => 'StringLength', 'options' => [
