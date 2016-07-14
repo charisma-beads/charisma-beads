@@ -17,13 +17,13 @@
         <?=$this->partial('shop/product-nav');?>
     </div>
     <div class="col-md-9">
-        <div class="row">
+        <div itemscope itemtype="http://schema.org/Product" class="row">
             <div class="col-md-4 col-sm-4">
 
                 <figure class="product-view-image"><!-- product image -->
                     <?php if ($product->getShowImage()):?>
                     <a href="<?=$this->productImage($product, 'full');?>" class="lightbox img-thumbnail" data-plugin-options='{"type":"image"}'>
-                        <img id="product-main-image" class="img-responsive" src="<?=$this->productImage($product, 'full');?>"  alt="<?=$product->getShortDescription();?>">
+                        <img itemprop="image" id="product-main-image" class="img-responsive" src="<?=$this->productImage($product, 'full');?>"  alt="<?=$product->getShortDescription();?>">
                     </a>
                     <?php endif;?>
                     <p class="fsize11 margin-top30">
@@ -34,10 +34,10 @@
             </div>
             <div class="col-md-8 col-sm-8">
 
-                <h1 class="product-view-title"><?=$product->getSku();?> <?=$product->getName();?></h1>
+                <h1 itemprop="name" class="product-view-title"><?=$product->getSku();?> <?=$product->getName();?></h1>
 
                 <h3 class="product-view-price"><em><?=$this->productPrice($product);?></em></h3>
-                <p><?=$product->getDescription();?></p>
+                <p itemprop="description"><?=$product->getDescription();?></p>
 
                 <hr class="half-margins" />
 

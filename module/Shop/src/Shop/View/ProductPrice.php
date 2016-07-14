@@ -24,7 +24,7 @@ class ProductPrice extends AbstractViewHelper
     /**
      * @var string
      */
-    protected $format = '<p><b>%s</b>%s %s</p>';
+    protected $format = '<p itemprop="offers" itemscope itemtype="https://schema.org/Offer"><b itemprop="price">%s</b>%s %s</p>';
 
     protected $discountFormat = ' was <del>%s</del>';
 
