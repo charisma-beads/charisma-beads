@@ -46,6 +46,11 @@ class Product extends AbstractViewHelper
         return $this;
     }
 
+    public function getLatestProducts($num = 10)
+    {
+        return $this->service->getLatestProducts($num);
+    }
+
     public function getPrevious($id)
     {
         $prev = $this->service->getMapper()

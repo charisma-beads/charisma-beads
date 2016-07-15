@@ -223,6 +223,21 @@ class Product extends AbstractDbMapper
     }
 
     /**
+     * @param int $limit
+     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     */
+    public function getLatestProducts($limit = 10)
+    {
+        $select = $this->getSelect();
+        $select = $this->setLimit($select, $limit, 0);
+        $select = $this->setSortOrder($select, '-dateCreated');
+
+        $select = $this->setFilter($select);
+
+        return $this->fetchResult($select);
+    }
+
+    /**
      * @param $id
      * @return array|\ArrayObject|null|ProductModel
      */

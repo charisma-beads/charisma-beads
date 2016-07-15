@@ -46,7 +46,18 @@ class Category extends AbstractViewHelper
 	{
 		return $this->service->getById($id);
 	}
-	
+
+    /**
+     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     */
+	public function getTopCategories()
+    {
+        return $this->service->fetchAll(true);
+    }
+
+    /**
+     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     */
 	public function getChildCategories()
 	{
 		return $this->service->fetchAll();

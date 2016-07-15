@@ -16,6 +16,7 @@ return [
         'shop/cart/summary'                                     => __DIR__ . '/view/shop/cart/summary.phtml',
         'shop/cart/view'                                        => __DIR__ . '/view/shop/cart/view.phtml',
         'shop/catalog/index'                                    => __DIR__ . '/view/shop/catalog/index.phtml',
+        'shop/catalog/new-products-carousel'                    => __DIR__ . '/view/shop/catalog/new-products-carousel.phtml',
         'shop/catalog/search'                                   => __DIR__ . '/view/shop/catalog/search.phtml',
         'shop/catalog/view'                                     => __DIR__ . '/view/shop/catalog/view.phtml',
         'shop/checkout/confirm-address'                         => __DIR__ . '/view/shop/checkout/confirm-address.phtml',

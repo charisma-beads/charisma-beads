@@ -1,0 +1,57 @@
+
+<!-- NEW PRODUCTS -->
+
+<h2 class="owl-featured"><strong>Lastest</strong> Arrivals</h2>
+
+<div class="owl-carousel featured" data-plugin-options='{"singleItem": false, "stopOnHover":false, "autoPlay":true, "autoHeight": false, "navigation": true, "pagination": false}'>
+    <?php foreach ($this->productHelper()->getLatestProducts() as $item):?>
+        <div>
+            <div class="owl-featured-item">
+                <a class="figure" href="<?=$this->url('shop/catalog/product', [
+                    'categoryIdent' => $item->getProductCategory()->getIdent(),
+                    'productIdent' => $item->getIdent(),
+                ]);?>">
+                    <span><i class="fa fa-plus"></i></span>
+                    <img alt="" src="<?=$this->productImage($item, 'thumb');?>" width="230" />
+                </a>
+                <div class="owl-featured-detail">
+                    <a class="featured-title" href="<?=$this->url('shop/catalog/product', [
+                        'categoryIdent' => $item->getProductCategory()->getIdent(),
+                        'productIdent' => $item->getIdent(),
+                    ]);?>"><?=$item->getSku();?><br><?=$item->getName();?></a>
+                    <span class="price">
+                    <?=$this->productPrice($item)
+                        ->setFormat('<span class="bold">%s</span> %s %s ')
+                        ->setDiscountFormat('<span class="line-through">%s</span>'); ?>
+                </span>
+
+                    <?php $form = $this->cart()->addForm($item)->setAttribute('class', 'margin-top10 nopadding clearfix'); ?>
+
+                    <?php if ($item->inStock() && $item->isEnabled()):?>
+                        <?=$this->form()->openTag($form); ?>
+                        <?=$this->formHidden($form->get('productId')); ?>
+                        <?=$this->formHidden($form->get('returnTo')); ?>
+
+                        <?php if ($item->getProductOption()): ?>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <?=$this->productOptions($item);?>
+                                </div><!-- /btn-group -->
+                            </div>
+                        <?php endif; ?>
+
+                        <?=$this->formInput($form->get('qty')->setAttribute('class', 'form-control')); ?>
+
+                        <button type="submit" name="buy-item" class="btn btn-warning btn-sm">
+                            ADD TO CART <i class="fa fa-shopping-cart"></i>
+                            <?=$this->cart()->hasProductInCart($item);?>
+                        </button>
+
+                        <?=$this->form()->closeTag(); ?>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    <?php endforeach; ?>
+</div>
+<!-- /NEW PRODUCTS -->

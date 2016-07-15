@@ -209,6 +209,17 @@ class Product extends AbstractRelationalMapperService
         return $products;
     }
 
+    public function getLatestProducts($num)
+    {
+        $products = $this->getMapper()->getLatestProducts($num);
+
+        foreach ($products as $product) {
+            $this->populate($product, true);
+        }
+
+        return $products;
+    }
+
     /**
      * Make a new product based on a product.
      *
