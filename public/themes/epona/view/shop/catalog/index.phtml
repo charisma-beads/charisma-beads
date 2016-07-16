@@ -1,12 +1,16 @@
 
 <?php $this->placeholder('header')->captureStart();?>
 <?=$this->partial('shop/options', [
-    'title' => $this->escapehtml($this->category->getCategory() . ' Page ' . $this->products->getCurrentPageNumber()),
+    'title' => $this->escapehtml(join(' ', [
+        $this->category->getCategory(),
+        'Page',
+        $this->products->getCurrentPageNumber() . '/' . $this->products->count(),
+    ])),
     'bread' => $this->bread,
     'category' => $this->category,
 ]);?>
 <?php $this->placeholder('header')->captureEnd();?>
-<?php \FB::info($this->products);?>
+
 <div class="row">
     <div class="col-md-3">
         <?=$this->partial('shop/product-nav');?>
@@ -175,3 +179,28 @@
 
     </div>
 </div>
+
+<?php
+if ($this->products->getCurrentPageNumber() < $this->products->count()) {
+    $next = $this->headLink()
+        ->createDataNext([
+            $this->url('shop/catalog/page', [
+                'categoryIdent' => $this->category->getIdent(),
+                'page' => ((int) $this->products->getCurrentPageNumber() + 1),
+            ])
+        ]);
+    $this->headLink()->prepend($next);
+}
+
+if ($this->products->getCurrentPageNumber() > 1) {
+
+    $prev = $this->headLink()
+        ->createDataPrev([
+            $this->url('shop/catalog/page', [
+                'categoryIdent' => $this->category->getIdent(),
+                'page' => ((int) $this->products->getCurrentPageNumber() - 1),
+            ])
+        ]);
+    $this->headLink()->prepend($prev);
+}
+?>
