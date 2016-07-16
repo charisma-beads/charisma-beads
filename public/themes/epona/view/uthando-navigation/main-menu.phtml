@@ -33,17 +33,18 @@
 
                         <?php if ($cat->hasChildren()): ?>
                             <li><!-- NOTE: "active" to be open on page load -->
-                                <a class="dropdown-toggle:disabled" href="<?=$this->url('shop/catalog', [
+                                <a class="dropdown-toggle:disable" href="<?=$this->url('shop/catalog', [
                                     'categoryIdent' => $cat->getIdent()
                                 ]); ?>">
-                                    <?=$this->escapehtml($cat->getCategory()); ?>
+                                    <?=$this->escapehtml($cat->getCategory()); ?>&nbsp;
+                                    <i class="fa fa-angle-right"></i>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <?php elseif ($cat->getDepth() > 0): ?>
                                     <li>
                                         <a href="<?=$this->url('shop/catalog', [
                                             'categoryIdent' => $cat->getIdent()
-                                        ]); ?>"><?=$this->escapehtml($cat->getCategory()); ?></a>
+                                        ]); ?>"><i class="fa fa-angle-right"></i>&nbsp;<?=$this->escapehtml($cat->getCategory()); ?></a>
                                         <?php else: ?>
                                     <li>
                                         <a href="<?=$this->url('shop/catalog', [
