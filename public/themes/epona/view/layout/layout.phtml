@@ -424,6 +424,12 @@
                     }
                 });
             });
+
+            $('#topNav .dropdown-toggle').on('click', function(e){
+
+                var el = $(e.target);
+                window.location.href = el.attr('href');
+            })
         });
     </script>
 </html>
