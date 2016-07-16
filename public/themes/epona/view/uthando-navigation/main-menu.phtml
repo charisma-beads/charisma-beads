@@ -16,7 +16,7 @@
             <?php $cats = $this->category()->getChildCategories();?>
             <?php $c=0;?>
             <li class="dropdown<?php if ($page->isActive(true)) echo ' active'; ?>">
-                <a class="dropdown-toggle" href="<?=$page->getHref() ?>">
+                <a class="dropdown-toggle:disabled" href="<?=$page->getHref() ?>">
                     <?=$page->getLabel() ?> <span><?=$page->get('labelText');?></span>
                 </a>
                 <?php $cats = $this->category()->getChildCategories();?>
@@ -33,7 +33,7 @@
 
                         <?php if ($cat->hasChildren()): ?>
                             <li><!-- NOTE: "active" to be open on page load -->
-                                <a class="dropdown-toggle" href="<?=$this->url('shop/catalog', [
+                                <a class="dropdown-toggle:disabled" href="<?=$this->url('shop/catalog', [
                                     'categoryIdent' => $cat->getIdent()
                                 ]); ?>">
                                     <?=$this->escapehtml($cat->getCategory()); ?>
