@@ -5,7 +5,11 @@
 
 <?php $this->placeholder('header')->captureStart();?>
 <?=$this->partial('shop/options', [
-    'title' => $this->escapehtml($product->getName()),
+    'title' => $this->escapehtml(join(' - ', [
+        $product->getProductCategory()->getCategory(),
+        $product->getSku(),
+        $product->getName()
+    ])),
     'bread' => $this->bread,
     'product' => $product,
     'category' => $product->getProductCategory(),
@@ -34,7 +38,11 @@
             </div>
             <div class="col-md-8 col-sm-8">
 
-                <h1 itemprop="name" class="product-view-title"><?=$product->getSku();?> <?=$product->getName();?></h1>
+                <h1 itemprop="name" class="product-view-title">
+                    <?=$product->getProductCategory()->getCategory();?>&nbsp;
+                    <?=$product->getSku();?>&nbsp;
+                    <?=$product->getName();?>
+                </h1>
 
                 <h3 class="product-view-price"><em><?=$this->productPrice($product);?></em></h3>
                 <p itemprop="description"><?=$product->getDescription();?></p>
