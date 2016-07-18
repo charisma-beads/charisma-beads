@@ -1,10 +1,10 @@
 
 <!-- NEW PRODUCTS -->
 
-<h2 class="owl-featured"><strong>Lastest</strong> Arrivals</h2>
+<h2 class="owl-featured"><?=$this->newProductsCarouselOption()->formatTitle();?></h2>
 
-<div class="owl-carousel featured" data-plugin-options='{"items" : 5, "singleItem": false, "stopOnHover":true, "autoPlay":true, "autoHeight": false, "navigation": true, "pagination": false}'>
-    <?php foreach ($this->productHelper()->getLatestProducts() as $item):?>
+<div class="owl-carousel featured" data-plugin-options='{"items" : <?=$this->newProductsCarouselOption('numberItemsToDisplay');?>, "singleItem": false, "stopOnHover":true, "autoPlay":<?=($this->newProductsCarouselOption('autoPlay')) ? 'true' : 'false';?>, "autoHeight": false, "navigation": true, "pagination": false}'>
+    <?php foreach ($this->productHelper()->getLatestProducts($this->newProductsCarouselOption('totalItems')) as $item):?>
         <div>
             <div class="owl-featured-item">
                 <a class="figure" href="<?=$this->url('shop/catalog/product', [

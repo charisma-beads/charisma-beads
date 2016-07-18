@@ -20,6 +20,11 @@ use Zend\Stdlib\AbstractOptions;
 class ShopOptions extends AbstractOptions
 {
     /**
+     * @var bool
+     */
+	protected $developmentMode;
+
+    /**
      * @var string
      */
     protected $merchantName;
@@ -58,6 +63,24 @@ class ShopOptions extends AbstractOptions
      * @var boolean
      */
     protected $vatState;
+
+    /**
+     * @return boolean
+     */
+    public function isDevelopmentMode()
+    {
+        return $this->developmentMode;
+    }
+
+    /**
+     * @param boolean $developmentMode
+     * @return $this
+     */
+    public function setDevelopmentMode($developmentMode)
+    {
+        $this->developmentMode = $developmentMode;
+        return $this;
+    }
 
     /**
      * @return string

@@ -99,6 +99,17 @@ class Settings extends Form
                 'label' => 'Reports Options',
             ],
         ]);
+
+        $this->add([
+            'type' => 'NewProductsCarouselFieldSet',
+            'name' => 'new_products_carousel',
+            'attributes' => [
+                'class' => 'col-md-6',
+            ],
+            'options' => [
+                'label' => 'New Products Carousel Options',
+            ],
+        ]);
         
         $this->add([
             'name' => 'button-submit',
