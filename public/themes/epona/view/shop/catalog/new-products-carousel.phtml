@@ -3,7 +3,7 @@
 
 <h2 class="owl-featured"><strong>Lastest</strong> Arrivals</h2>
 
-<div class="owl-carousel featured" data-plugin-options='{"singleItem": false, "stopOnHover":false, "autoPlay":true, "autoHeight": false, "navigation": true, "pagination": false}'>
+<div class="owl-carousel featured" data-plugin-options='{"items" : 5, "singleItem": false, "stopOnHover":true, "autoPlay":true, "autoHeight": false, "navigation": true, "pagination": false}'>
     <?php foreach ($this->productHelper()->getLatestProducts() as $item):?>
         <div>
             <div class="owl-featured-item">
@@ -12,13 +12,17 @@
                     'productIdent' => $item->getIdent(),
                 ]);?>">
                     <span><i class="fa fa-plus"></i></span>
-                    <img alt="" src="<?=$this->productImage($item, 'thumb');?>" width="230" />
+                    <img alt="" src="<?=$this->productImage($item, 'thumb');?>" width="250" />
                 </a>
                 <div class="owl-featured-detail">
                     <a class="featured-title" href="<?=$this->url('shop/catalog/product', [
                         'categoryIdent' => $item->getProductCategory()->getIdent(),
                         'productIdent' => $item->getIdent(),
-                    ]);?>"><?=$item->getSku();?><br><?=$item->getName();?></a>
+                    ]);?>">
+                        <?=$this->escapeHtml($item->getProductCategory()->getCategory());?><br>
+                        <?=$this->escapeHtml($item->getSku());?><br>
+                        <?=$this->escapeHtml($item->getName());?>
+                    </a>
                     <span class="price">
                     <?=$this->productPrice($item)
                         ->setFormat('<span class="bold">%s</span> %s %s ')

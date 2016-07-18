@@ -24,8 +24,11 @@ class ProductPrice extends AbstractViewHelper
     /**
      * @var string
      */
-    protected $format = '<p itemprop="offers" itemscope itemtype="https://schema.org/Offer"><b itemprop="price">%s</b>%s %s</p>';
+    protected $format = '<p><b>%s</b>%s %s</p>';
 
+    /**
+     * @var string
+     */
     protected $discountFormat = ' was <del>%s</del>';
 
     /**
@@ -39,7 +42,7 @@ class ProductPrice extends AbstractViewHelper
     protected $product;
 
     /**
-     * @param Product $product
+     * @param ProductModel $product
      * @return $this
      */
     public function __invoke(ProductModel $product)

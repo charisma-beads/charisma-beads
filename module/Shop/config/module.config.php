@@ -321,6 +321,7 @@ return [
             'ProductSearch'         => 'Shop\View\ProductSearch',
             'ProductTableRowState'  => 'Shop\View\ProductTableRowState',
             'ShopOption'            => 'Shop\View\ShopOption',
+            'StructuredData'        => 'Shop\View\StructuredData',
         ],
     ],
     'view_manager' => [

@@ -241,10 +241,6 @@ body.boxed #topBar {
 	z-index:1;
 }
 
-
-
-
-
 /* mobile */
 #topNav button.btn-mobile {
 	display:none;

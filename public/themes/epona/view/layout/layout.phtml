@@ -51,6 +51,9 @@
             // UTHANDO STYLES
             ->appendStylesheet($this->basePath('/css/uthando-styles.css'))
         ;?>
+
+        <?=$this->placeholder('structured-data');?>
+
         <style>
             /* Theme overrides */
             #header.sticky.affix #topBar {
@@ -426,7 +429,6 @@
             });
 
             $('#topNav .dropdown-toggle').on('click', function(e){
-
                 var el = $(e.target);
                 window.location.href = el.attr('href');
             })
