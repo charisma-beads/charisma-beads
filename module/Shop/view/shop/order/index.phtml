@@ -4,7 +4,7 @@
 <?php $this->placeholder('header-buttons')->captureStart();?>
 <a href="<?=$this->url('admin/shop/order/edit', [
 	'action' => 'add'
-]);?>" type="submit" form="form-order" data-toggle="tooltip" title="<?=$this->translate('Add Order');?>" class="btn btn-primary">
+]);?>" type="submit" form="form-order" data-toggle="tooltip" title="<?=$this->translate('Add Order');?>" class="btn btn-primary" id="order-add">
 	<i class="fa fa-plus"></i>
 </a>
 <?php $this->placeholder('header-buttons')->captureEnd();?>
@@ -28,14 +28,19 @@
     </div>
 </div>
 
-<?php $this->inlineScript()->captureStart(); ?>
-$(document).ready(function(){
-	$('#table-order').dataGrid({
-	    url : 'order/list',
-	    query: { sort : '-orderDate' },
-	    searchForm : $('#search-order'),
-	    paging : 'links',
-	    columnSort: true,
-	});
-});
-<?php $this->inlineScript()->captureEnd(); ?>
+<?php $this->inlineScript()
+    ->appendFile($this->basePath('js/admin/shop/typeahead.bundle.min.js'))
+    ->appendFile($this->basePath('js/admin/shop/shop.js'))
+    ->appendFile($this->basePath('js/admin/shop/orders.js'));?>
+
+<script>
+    $(document).ready(function(){
+        $('#table-order').dataGrid({
+            url : 'order/list',
+            query: { sort : '-orderDate' },
+            searchForm : $('#search-order'),
+            paging : 'links',
+            columnSort: true,
+        });
+    });
+</script>

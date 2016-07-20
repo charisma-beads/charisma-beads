@@ -12,6 +12,7 @@
 namespace Shop;
 
 use Shop\Event\ControllerListener;
+use Shop\Event\ErrorListener;
 use Shop\Event\FileManagerListener;
 use Shop\Event\SiteMapListener;
 use Shop\Event\UserListener;
@@ -35,27 +36,12 @@ class Module implements ConsoleUsageProviderInterface, ConfigInterface
     {
         $app = $e->getApplication();
         $eventManager = $app->getEventManager();
-        $services = $app->getServiceManager();
 
         $eventManager->attach(new ControllerListener());
         $eventManager->attach(new FileManagerListener());
         $eventManager->attach(new SiteMapListener());
         $eventManager->attach(new UserListener());
-        $eventManager->attach([MvcEvent::EVENT_RENDER_ERROR, MvcEvent::EVENT_DISPATCH_ERROR], function($event) use ($services) {
-            /** @var $event MvcEvent */
-            if (!$event->isError()) {
-                return;
-            }
-
-            $exception = $event->getResult()->exception;
-
-            if (!$exception) {
-                return;
-            }
-
-            $service = $services->get('ExceptionMailer\ErrorHandling');
-            $service->mailException($exception);
-        });
+        $eventManager->attach(new ErrorListener());
     }
 
     public function getConsoleUsage(Console $console)

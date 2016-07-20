@@ -74,9 +74,12 @@ $this->form->get('email')->setAttribute('readonly', '');
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
                             Customer Orders
                         </a>
-                        <button id="add-order-button" class="btn btn-default btn-xs">
+                        <a id="add-order-button" href="<?=$this->url('admin/shop/order/create', [
+                            'action' => 'create',
+                            'customerId' => $this->model->getCustomerId(),
+                        ]);?>" class="btn btn-default btn-xs">
                             Create Order
-                        </button>
+                        </a>
                     </h4>
                 </div>
                 <div id="collapseTwo" class="panel-collapse collapse in">

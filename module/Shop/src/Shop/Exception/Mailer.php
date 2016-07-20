@@ -13,6 +13,7 @@ namespace Shop\Exception;
 use Zend\Mail\Message;
 use Zend\Mail\Transport\Smtp;
 use Zend\Mail\Transport\SmtpOptions;
+use Zend\Mime\Message as MimeMessage;
 use Zend\Mime\Mime;
 use Zend\Mime\Part;
 use Zend\ServiceManager\ServiceManager;
@@ -86,7 +87,7 @@ class Mailer
     /**
      * @param \Exception $e
      * @param array $extraVars
-     * @return \Zend\Mime\Message
+     * @return MimeMessage
      * @throws \Exception
      */
     public function getHtmlBody(\Exception $e, $extraVars = [])
@@ -111,9 +112,10 @@ class Mailer
         $text->type = "text/plain";
         $html = new Part($content);
         $html->type = Mime::TYPE_HTML;
-        $msg = new \Zend\Mime\Message();
-        $msg->setParts(Array($text, $html));
-        return $msg;
+        $mime = new MimeMessage();
+        $mime->setParts([$text, $html]);
+
+        return $mime;
     }
 
     /**

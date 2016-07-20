@@ -5,6 +5,7 @@ return [
             'collections' => [
                 'css/uthando-admin.css' => [
                     'css/shop.css',
+                    'css/typeaheadjs.css',
                 ],
             ],
             'paths' => [
@@ -91,7 +92,8 @@ return [
             'ShopReportsFieldSet'               => 'Shop\Form\Settings\ReportsFieldSet',
             'ShopCartCookieFieldSet'            => 'Shop\Form\Settings\CartCookieFieldSet',
             'ShopInvoiceFieldSet'               => 'Shop\Form\Settings\InvoiceFieldSet',
-            'ShopOrderFieldSet'                 => 'Shop\Form\Settings\OrderFieldSet',
+            'ShopOrderFieldSet'                 => Shop\Form\Settings\OrderFieldSet::class,
+            'ShopOrderMetadataFieldSet'         => Shop\Form\Order\MetadataFieldSet::class,
             'NewProductsCarouselFieldSet'       => 'Shop\Form\Settings\NewProductsCarouselFieldSet',
 
             'AdvertList'                => 'Shop\Form\Element\AdvertList',

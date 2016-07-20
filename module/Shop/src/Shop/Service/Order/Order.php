@@ -194,8 +194,10 @@ class Order extends AbstractRelationalMapperService
             $orderLineService->save($orderLine);
             $c++;
         }
-        
-        $this->sendEmail($orderId);
+
+        if ($customer->getEmail()) {
+            $this->sendEmail($orderId);
+        }
         
         return $orderId;
     }

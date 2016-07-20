@@ -647,7 +647,7 @@ return [
                                             'route' => '/[:action[/id/[:id]]]',
                                             'constraints' => [
                                                 'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                                'id' => '\d+'
+                                                'id' => '\d+',
                                             ],
                                             'defaults' => [
                                                 'action' => 'edit',
@@ -701,14 +701,13 @@ return [
                                     'create' => [
                                         'type' => 'Segment',
                                         'options' => [
-                                            'route' => '/create/[/customerId/[:customerId]]',
+                                            'route' => '/[:action]/customerId/[:customerId]',
                                             'contraints' => [
                                                 'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                                 'customerId' => '\d+'
                                             ],
                                             'defaults' => [
                                                 'controller' => 'Order\CreateOrder',
-                                                'action' => 'index',
                                                 'force-ssl' => 'ssl'
                                             ]
                                         ],

@@ -94,3 +94,14 @@ a.current-order-link {
 .popover{
     max-width: 100%; /* Max Width of the popover (depending on the container!) */
 }
+
+#add-order-button {
+    color: #000000;
+}
+
+.table-pre-wrap pre {
+    white-space: pre-wrap;       /* Since CSS 2.1 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}

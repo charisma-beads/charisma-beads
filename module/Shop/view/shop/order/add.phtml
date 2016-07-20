@@ -1,16 +1,28 @@
-<?php $this->HeadTitle('Create Order'); ?>
-<?php $this->layout()->pageTitle = 'Create Order'; ?>
 
-<h2>Create order For:</h2>
+<style>
+    #scrollable-typeahead-menu .tt-menu {
+        max-height: 150px;
+        overflow-y: auto;
+    }
+</style>
 
-<a href="<?=$this->url('admin/shop/customer/edit', [
-    'action' => 'add',
-]);?>" class="btn btn-default">New Customer</a>
+<div id="scrollable-typeahead-menu">
+    <div class="input-group">
+        <input type="text" class="form-control typeahead" placeholder="Type Search here...">
+        <span class="input-group-btn">
+            <a id="order-create-button" class="btn btn-default" type="button" data-toggle="tooltip" title="<?=$this->translate('New order for this customer');?>">
+                <span class="fa fa-shopping-bag"></span>
+            </a>
+            <a href="<?=$this->url('admin/shop/customer/edit', [
+                'action' => 'add',
+            ]);?>" class="btn btn-default" type="button" data-toggle="tooltip" title="<?=$this->translate('New Customer');?>">
+                <span class="fa fa-user-plus"></span>
+            </a>
+        </span>
+    </div>
 
-<a href="<?=$this->url('admin/shop/customer');?>" class="btn btn-default">Existing Customer</a>
+</div>
 
-
-<div class="clearfix"></div>
 
 
 

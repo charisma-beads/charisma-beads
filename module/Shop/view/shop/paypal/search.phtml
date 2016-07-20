@@ -2,7 +2,7 @@
 <?php if (null === $this->error):?>
     <pre><?=$this->escapeHtml(Zend\Json\Json::prettyPrint($this->payment->toJson(), array("indent" => "  ")));?></pre>
 <?php else: ?>
-<table class="table table-bordered">
+<table class="table table-bordered table-pre-wrap">
     <tr>
         <th>Code</th>
         <td><?=$this->escapeHtml($this->code);?></td>

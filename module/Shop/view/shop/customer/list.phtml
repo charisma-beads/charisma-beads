@@ -23,6 +23,13 @@
     			<td><?=$this->escapeHtml($this->formatDate($row->getDateCreated())); ?></td>
     			<td><?=$this->escapeHtml($this->formatDate($row->getDateModified())); ?></td>
     			<td>
+                    <a href="<?=$this->url('admin/shop/order/create', [
+                        'action' => 'create',
+                        'customerId' => $row->getCustomerId(),
+                    ]); ?>" class="btn btn-default">
+                        <i class="fa fa-shopping-bag" data-toggle="tooltip" title="<?=$this->translate('Create Order');?>"></i>
+                        </a>
+
                     <?=$this->partial('uthando-admin/partial/edit-actions', [
                     	'pk'		=> 'customerId',
                     	'id'		=> $row->getCustomerId(),

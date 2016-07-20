@@ -5,7 +5,7 @@
  * @package   Shop\Controller\Order
  * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
  * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
+ * @license   see LICENSE
  */
 
 namespace Shop\Controller\Order;
@@ -30,7 +30,7 @@ class CreateOrder extends AbstractActionController
         $this->serviceName = 'ShopOrder';
     }
 
-    public function indexAction()
+    public function createAction()
     {
         $customerId = $this->params()->fromRoute('customerId', null);
 
@@ -48,5 +48,14 @@ class CreateOrder extends AbstractActionController
                 'action' => 'add',
             ]);
         }
+
+        return [
+            'model' => $customer,
+        ];
+    }
+
+    public function saveAction()
+    {
+
     }
 }

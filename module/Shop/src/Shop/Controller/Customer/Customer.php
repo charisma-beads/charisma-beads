@@ -32,6 +32,19 @@ class Customer extends AbstractCrudController
         'edit' => 'admin/shop/customer/edit',
     ];
 
+    public function autoCompleteAction()
+    {
+        if (!$this->getRequest()->isXmlHttpRequest()) {
+            throw new ShopException('Action not allowed');
+        }
+
+        $data = $this->getService()->fetchAll();
+
+        return new JsonModel([
+            'results' => $data->toArray(),
+        ]);
+    }
+
     public function listNewAction()
     {
         if (!$this->getRequest()->isXmlHttpRequest()) {
