@@ -139,7 +139,7 @@ class Address extends InputFilter
         		]],
     		],
 		]);
-        
+
         $this->add([
     		'name' => 'phone',
     		'required' => true,
