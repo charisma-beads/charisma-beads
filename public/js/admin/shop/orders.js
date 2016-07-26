@@ -65,7 +65,7 @@ $(document).ready(function () {
                 },{
                     displayKey: 'name',
                     source: cdata,
-                    limit: -1,
+                    limit: 20,
                     templates: {
                         pending: function (data) {
                             return '<strong>Searching ...</strong>';
