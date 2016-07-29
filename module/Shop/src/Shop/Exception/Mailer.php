@@ -90,7 +90,7 @@ class Mailer
      * @return MimeMessage
      * @throws \Exception
      */
-    public function getHtmlBody(\Exception $e, $extraVars = [])
+    public function getHtmlBody($e, $extraVars = [])
     {
         /** @var PhpRenderer $view */
         $view = $this->getServiceManager()->get('ViewRenderer');
@@ -122,7 +122,7 @@ class Mailer
      * @param \Exception $e
      * @param array $extraVars
      */
-    public function mailException(\Exception $e, $extraVars = [])
+    public function mailException($e, $extraVars = [])
     {
         // Mail
         if (!$this->config['exception_mailer']['send']) {
