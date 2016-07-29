@@ -184,50 +184,52 @@ class Checkout extends AbstractActionController
         if ($prg instanceof Response) {
             return $prg;
         } elseif ($prg === false) {
-            return new ViewModel(array(
+            return new ViewModel([
                 'countryId' => $customer->getDeliveryAddress()->getCountryId(),
                 'form' => $form
-            ));
+            ]);
         }
 
-        $submit = (isset($prg['submit'])) ? $prg['submit'] : null ;
         $collect = (isset($prg['collect_instore'])) ? 1 : 0;
 
-        if ('placeOrder' == $submit) {
-            $prg['collect_instore'] = $collect;
+        $prg['collect_instore'] = $collect;
 
-            $form->setData($prg);
+        $form->setData($prg);
 
-            if ($form->isValid()) {
-                $formValues = $form->getData();
-                $orderId = $this->getOrderService()
-                    ->processOrderFromCart($customer, $formValues);
+        if ($form->isValid()) {
+            $formValues = $form->getData();
+            $orderId = $this->getOrderService()
+                ->processOrderFromCart($customer, $formValues);
 
-                if ($orderId) {
-                    $this->getService('ShopCart')->clear(false);
+            if ($orderId) {
+                $this->getService('ShopCart')->clear(false);
 
-                    // need to email order,
-                    // add params to session and redirect to payment page.
-                    $orderParams = [
-                        'orderId' => $orderId,
-                        'collect' => $collect,
-                        'requirements' => $formValues['requirements']
-                    ];
+                // need to email order,
+                // add params to session and redirect to payment page.
+                $orderParams = [
+                    'orderId' => $orderId,
+                    'collect' => $collect,
+                    'requirements' => $formValues['requirements']
+                ];
 
-                    $filter = new UnderscoreToDash();
-                    $action = $filter->filter($formValues['payment_option']);
+                $filter = new UnderscoreToDash();
+                $action = $filter->filter($formValues['payment_option']);
 
-                    /* @var $container \Zend\Session\AbstractContainer */
-                    $container = new Container('order');
-                    $container->setExpirationHops(1, null);
-                    $container->order = $orderParams;
+                /* @var $container \Zend\Session\AbstractContainer */
+                $container = new Container('order');
+                $container->setExpirationHops(1, null);
+                $container->order = $orderParams;
 
-                    return $this->redirect()->toRoute('shop/payment/default', [
-                        'paymentOption' => lcfirst($action)
-                    ]);
-                }
+                return $this->redirect()->toRoute('shop/payment/default', [
+                    'paymentOption' => lcfirst($action)
+                ]);
             }
         }
+
+        return new ViewModel([
+            'countryId' => $customer->getDeliveryAddress()->getCountryId(),
+            'form' => $form
+        ]);
     }
 
     public function cancelOrderAction()
