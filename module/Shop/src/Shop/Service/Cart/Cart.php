@@ -230,7 +230,7 @@ class Cart extends AbstractMapperService implements InitializableInterface
      *
      * @param ProductModel $product            
      * @param array $post           
-     * @return CartItem
+     * @return CartItem|bool
      */
     public function addItem(ProductModel $product, $post)
     {
@@ -471,20 +471,12 @@ class Cart extends AbstractMapperService implements InitializableInterface
     /**
      *
      * @param CartModel|null $cart
+     * @return $this
      */
     public function setCart($cart = null)
     {
-        /*if (!$cart instanceof CartModel) {
-            $cart = $this->getModel();
-            $cart->setExpires($this->getCartCookieService()->getCookieConfig()->getExpiry())
-                ->setVerifyId($this->getCartCookieService()->setCartVerifierCookie());
-            $cartId = $this->save($cart);
-            $cart->setCartId($cartId);
-
-            $this->getContainer()->offsetSet('cartId', $cartId);
-        }*/
-
         $this->cart = $cart;
+        return $this;
     }
 
     /**

@@ -1,0 +1,22 @@
+<?php /** @var  $product \Shop\Model\Product\Product */ $product = $this->product; ?>
+
+<tr class="order-line">
+    <input type="hidden" name="orderLineId" value="">
+    <input type="hidden" name="productId" value="<?=$this->escapeHtml($product->getProductId());?>">
+
+    <td><?=$this->escapeHtml($product->getSku());?></td>
+    <td>
+        <?=$this->escapeHtml($product->getProductCategory()->getCategory());?> /
+        <?=$this->escapeHtml($product->getName());?>
+        <?php if ($product->getPostUnit()->getPostUnit() > 0): ?>
+            (<?=$this->escapeHtml($product->getPostUnit()->getPostUnit());?> grams)
+        <?php endif; ?>
+    </td>
+    <td><?=$this->priceFormat($product->getPrice());?></td>
+    <td><input class="form-control" name="qty" type="text" value="<?=$this->escapeHtml($this->quantity);?>"></td>
+    <td><?=$this->priceFormat($product->getPrice() * $this->quantity);?></td>
+    <td>
+        <a class="btn btn-primary"><i class="fa fa-refresh"></i></a>
+        <a class="btn btn-danger"><i class="fa fa-trash"></i></a>
+    </td>
+</tr>

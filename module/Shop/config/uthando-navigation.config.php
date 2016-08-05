@@ -177,6 +177,13 @@ return [
                                 'resource' => 'menu:admin',
                                 'visible' => false,
                             ],
+                            'create' => [
+                                'label' => 'Create Order',
+                                'action' => 'create',
+                                'route' => 'admin/shop/order/create',
+                                'resource' => 'menu:admin',
+                                'visible' => false,
+                            ],
                             'add' => [
                                 'label' => 'Add New Order',
                                 'action' => 'add',

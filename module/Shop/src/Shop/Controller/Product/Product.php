@@ -14,6 +14,7 @@ use Exception;
 use Shop\Model\Product\Product as ProductModel;
 use Shop\ShopException;
 use UthandoCommon\Controller\AbstractCrudController;
+use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
 
 /**
@@ -42,6 +43,48 @@ class Product extends AbstractCrudController
     public function viewAction()
     {
         return new ViewModel();
+    }
+
+    public function getAction()
+    {
+        if (!$this->getRequest()->isXmlHttpRequest()) {
+            throw new ShopException('Access denied.');
+        }
+
+        $id = $this->params()->fromRoute('id');
+        $product = $this->getService()->getFullProductById($id);
+
+        $viewModel = new ViewModel([
+            'product' => $product,
+        ]);
+        $viewModel->setTerminal(true);
+
+        return $viewModel;
+    }
+
+    public function searchAction()
+    {
+        $viewModel = new ViewModel();
+
+        $query = htmlspecialchars_decode($this->params()->fromRoute('search'));
+
+        if ($this->getRequest()->isXmlHttpRequest()) {
+            $viewModel->setTerminal(true);
+        }
+
+        if ($query) {
+            $this->getService()->setPopulate(false);
+
+            $results = $this->getService()->search([
+                'sku-shortDescription' => $query,
+            ]);
+
+            $viewModel = new JsonModel([
+                'results' => $results->toArray()
+            ]);
+        }
+
+        return $viewModel;
     }
 
     public function duplicateAction()

@@ -105,3 +105,18 @@ a.current-order-link {
     white-space: -o-pre-wrap;    /* Opera 7 */
     word-wrap: break-word;       /* Internet Explorer 5.5+ */
 }
+
+/* equal height panel */
+.row-eq-height, .row-eq-height > div[class='panel']{
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex:1 1 auto;
+}
+
+#scrollable-typeahead-menu .tt-menu {
+    max-height: 150px;
+    overflow-y: auto;
+}

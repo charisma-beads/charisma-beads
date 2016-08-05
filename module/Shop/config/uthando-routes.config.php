@@ -400,6 +400,19 @@ return [
                                             ]
                                         ]
                                     ],
+                                    'search' => [
+                                        'type' => 'Segment',
+                                        'options' => [
+                                            'route' => '/search[/][:search]',
+                                            'constraints' => [
+                                                'search' => '[a-zA-Z0-9][a-zA-Z0-9.%_-]*',
+                                            ],
+                                            'defaults' => [
+                                                'action' => 'search',
+                                                'force-ssl' => 'ssl'
+                                            ]
+                                        ]
+                                    ],
                                     'image' => [
                                         'type' => 'Segment',
                                         'options' => [
@@ -701,14 +714,15 @@ return [
                                     'create' => [
                                         'type' => 'Segment',
                                         'options' => [
-                                            'route' => '/[:action]/customerId/[:customerId]',
+                                            'route' => '/create/[:action][/customerId/[:customerId]]',
                                             'contraints' => [
                                                 'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                                 'customerId' => '\d+'
                                             ],
                                             'defaults' => [
                                                 'controller' => 'Order\CreateOrder',
-                                                'force-ssl' => 'ssl'
+                                                'force-ssl' => 'ssl',
+                                                'action' => 'create',
                                             ]
                                         ],
                                     ],
@@ -740,7 +754,7 @@ return [
                                             ]
                                         ]
                                     ]
-                                ]
+                                ],
                             ],
                             'post' => [
                                 'type' => 'Segment',

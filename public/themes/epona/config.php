@@ -5,8 +5,8 @@ return [
         'application/index/index'                               => __DIR__ . '/view/application/index/index.phtml',
         'application/partial/paginate'                          => __DIR__ . '/view/partial/paginate.phtml',
 
-        'error/404'                                             => __DIR__ . '/view/error/404.phtml',
-        'error/index'                                           => __DIR__ . '/view/error/index.phtml',
+        //'error/404'                                             => __DIR__ . '/view/error/404.phtml',
+        //'error/index'                                           => __DIR__ . '/view/error/index.phtml',
 
         'layout/layout'                                         => __DIR__ . '/view/layout/layout.phtml',
         'layout/page-title'                                     => __DIR__ . '/view/layout/page-title.phtml',

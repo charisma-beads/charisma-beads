@@ -62,29 +62,6 @@ class Product extends AbstractRelationalMapperService
     ];
 
     /**
-     * @var bool
-     */
-    protected $populate = true;
-
-    /**
-     * @param bool $bool
-     * @return $this
-     */
-    public function setPopulate(bool $bool)
-    {
-        $this->populate = $bool;
-        return $this;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isPopulate() : bool
-    {
-        return $this->populate;
-    }
-
-    /**
      * Attach events
      */
     public function attachEvents()
@@ -250,7 +227,6 @@ class Product extends AbstractRelationalMapperService
         $this->populate($product, true);
 
         return $product;
-
     }
 
     /**

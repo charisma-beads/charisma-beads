@@ -287,10 +287,12 @@ class Order implements ModelInterface
 
     /**
      * @param Status $orderStatus
+     * @return $this
      */
     public function setOrderStatus(Status $orderStatus)
     {
         $this->orderStatus = $orderStatus;
+        return $this;
     }
 
     /**
@@ -303,17 +305,21 @@ class Order implements ModelInterface
 
     /**
      * @param $orderLines
+     * @return $this
      */
     public function setOrderLines($orderLines)
     {
         $this->orderLines = $orderLines;
+        return $this;
     }
 
     /**
      * @param Line $orderLine
+     * @return $this
      */
     public function setOrderLine(Line $orderLine)
     {
         $this->orderLines[] = $orderLine;
+        return $this;
     }
 }

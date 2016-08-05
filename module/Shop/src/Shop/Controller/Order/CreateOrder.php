@@ -11,10 +11,10 @@
 namespace Shop\Controller\Order;
 
 use Shop\Service\Customer\Customer;
-use Shop\Service\Order\Order;
 use Shop\ShopException;
 use UthandoCommon\Service\ServiceTrait;
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
 
 /**
  * Class CreateOrder
@@ -30,7 +30,7 @@ class CreateOrder extends AbstractActionController
         $this->serviceName = 'ShopOrder';
     }
 
-    public function createAction()
+    public function addAction()
     {
         $customerId = $this->params()->fromRoute('customerId', null);
 
@@ -49,9 +49,39 @@ class CreateOrder extends AbstractActionController
             ]);
         }
 
+        $order = $this->getService()->create($customer, [
+            'collect_instore'   => false,
+            'payment_option'    => 'pay_pending',
+            'requirements'      => '',
+        ]);
+
+        $form = $this->getService()->prepareForm($order);
+
         return [
             'model' => $customer,
+            'order' => $order,
+            'form'  => $form,
         ];
+    }
+
+    public function addLineAction()
+    {
+        if (!$this->getRequest()->isXmlHttpRequest()) {
+            //throw new ShopException('Access denied.');
+        }
+
+        $id = $this->params()->fromPost('productId', 0);
+        $qty = $this->params()->fromPost('qty', 0);
+        $product = $this->getService('ShopProduct')->getFullProductById($id);
+
+        $viewModel = new ViewModel([
+            'product' => $product,
+            'quantity' => $qty,
+        ]);
+
+        $viewModel->setTerminal(true);
+
+        return $viewModel;
     }
 
     public function saveAction()

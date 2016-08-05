@@ -37,17 +37,70 @@ class Order extends Form
         ]);
 
         $this->add([
-            'name'  => 'orderStatusId',
-            'type'  => 'OrderStatusList',
-        ]);
-
-        $this->add([
             'name'  => 'orderNumber',
             'type'  => StaticElement::class,
             'options' => [
                 'label' => 'Order Number',
+                'column-size' => 'md-10',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'label_attributes' => [
+                    'class' => 'col-md-2',
+                ],
+            ],
+        ]);
+
+        $this->add([
+            'name'  => 'orderStatusId',
+            'type'  => 'OrderStatusList',
+            'options' => [
+                'label' => 'Order Status',
+                'column-size' => 'md-10',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'label_attributes' => [
+                    'class' => 'col-md-2',
+                ],
+            ],
+        ]);
+
+        $this->add([
+            'name'		=> 'payment_option',
+            'type'		=> 'PayOptionsList',
+            'options'	=> [
+                'required'		=> true,
+                'disable_inarray_validator' => true,
+                'column-size' => 'md-10 col-md-offset-2',
+                'inline' => true,
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
             ],
+        ]);
+
+        $this->add([
+            'name'			=> 'collect_instore',
+            'type'			=> 'checkbox',
+            'options'		=> [
+                'label'			=> 'Collect Instore',
+                'required' 		=> false,
+                'use_hidden_element' => true,
+                'checked_value' => '1',
+                'unchecked_value' => '0',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'md-10 col-md-offset-2',
+            ],
+        ]);
+
+        $this->add([
+            'name'			=> 'requirements',
+            'type'			=> 'Textarea',
+            'options'		=> [
+                'label'		=> 'Additional Requirements',
+                'required'	=> false,
+            ],
+            'attributes' => [
+                'placeholder'	=> 'Additional Requirements',
+                'autofocus'		=> true,
+                'class' => 'form-control',
+                'rows' => 10,
+            ]
         ]);
 
         $this->add([
@@ -83,7 +136,7 @@ class Order extends Form
             'options' => [
                 'label' => 'Date/Time',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-4 date-time-pick',
+                'column-size' => 'md-10 date-time-pick',
                 'add-on-append' => '<i class="fa fa-calendar"></i>',
                 'label_attributes' => [
                     'class' => 'col-md-2',
@@ -92,22 +145,33 @@ class Order extends Form
             ],
             'attributes' => [
                 'class' => 'date-time-pick',
+                'step' => 'any',
             ],
         ]);
 
+        $orderDate = $this->get('orderDate')->getValue();
+
+        if (!$orderDate) {
+            $dateTime = new \DateTime();
+            $this->get('orderDate')->setValue($dateTime->format('d/m/Y H:i:s'));
+        }
+
         $this->add([
-            'type' => 'ShopOrderLineFieldSet',
+            'type' => 'Zend\Form\Element\Collection',
             'name' => 'orderLines',
             'options' => [
                 'label' => 'Order Lines',
-                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-            ],
-            'attributes' => [
-                'class' => 'col-md-6',
+                'count' => 0,
+                'should_create_template' => true,
+                'template_placeholder' => '__placeholder__',
+                'allow_add' => true,
+                'target_element' => [
+                    'type' => 'ShopOrderLineFieldSet',
+                ],
             ],
         ]);
 
-        $this->add([
+        /*$this->add([
             'type' => 'ShopOrderMetadataFieldSet',
             'name' => 'metadata',
             'options' => [
@@ -117,6 +181,6 @@ class Order extends Form
             'attributes' => [
                 'class' => 'col-md-6',
             ],
-        ]);
+        ]);*/
     }
 }

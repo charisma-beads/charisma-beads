@@ -185,8 +185,6 @@ class Product extends AbstractDbMapper
             }
         }
 
-        //\FB::info($this->getSqlString($select));
-
         return parent::search($search, $sort, $select);
     }
 

@@ -41,4 +41,30 @@ class Line extends AbstractMapperService
         
         return $orderLines;
     }
+
+    /**
+     * @param \Shop\Model\Cart\Cart $lines
+     * @param $orderId
+     */
+    public function processOrderLines($lines, $orderId)
+    {
+        $c = 1;
+
+        foreach($lines as $item) {
+            $lineData = [
+                'orderId'   => $orderId,
+                'sortOrder' => $c,
+                'qty'       => $item->getQuantity(),
+                'price'     => $item->getPrice(),
+                'tax'       => $item->getTax(),
+                'metadata'  => $item->getMetadata(),
+            ];
+
+            $orderLine = $this->getMapper()
+                ->getModel($lineData);
+
+            $this->save($orderLine);
+            $c++;
+        }
+    }
 }

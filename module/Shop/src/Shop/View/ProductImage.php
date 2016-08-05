@@ -67,6 +67,12 @@ class ProductImage extends AbstractHelper
         $image = $this->noImage;
 
         if ($this->image instanceof ImageModel) {
+            $strToLower = strtolower($this->image->getFull());
+
+            if ($this->fileExists($strToLower)) {
+                $image = $this->imageDir . $strToLower;
+            }
+
             if ($this->fileExists($this->image->getFull())) {
                 $image = $this->imageDir . $this->image->getFull();
             }
@@ -84,6 +90,12 @@ class ProductImage extends AbstractHelper
         $image = $this->noImage;
 
         if ($this->image instanceof ImageModel) {
+            $strToLower = strtolower($this->image->getThumbnail());
+
+            if ($this->fileExists($strToLower)) {
+                $image = $this->imageDir . $strToLower;
+            }
+
             if ($this->fileExists($this->image->getThumbnail())) {
                 $image = $this->imageDir . $this->image->getThumbnail();
             }
