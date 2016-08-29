@@ -22,8 +22,35 @@ use Zend\ServiceManager\ServiceLocatorAwareTrait;
 class PayOptionsList extends Radio implements ServiceLocatorAwareInterface
 {
     use ServiceLocatorAwareTrait;
-    
-    public function init()
+
+    /**
+     * @var bool
+     */
+    protected $addPrefix = false;
+
+    public function setOptions($options)
+    {
+        parent::setOptions($options);
+
+        if (isset($options['add_prefix'])) {
+            $this->setAddPrefix($options['add_prefix']);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getValueOptions()
+    {
+        return ($this->valueOptions) ?: $this->getPaymentOptions();
+    }
+
+    /**
+     * @return array
+     */
+    public function getPaymentOptions()
     {
         $options = $this->getServiceLocator()
             ->getServiceLocator()
@@ -37,11 +64,30 @@ class PayOptionsList extends Radio implements ServiceLocatorAwareInterface
             
             if ('pay' === $ex_key[0]  && true == $value) {
                 $ex_key[0] = $ex_key[0] . ' by';
-                $optionsArray[$key] = '<i></i>' . ucwords(implode(' ', $ex_key));
+                $prefix = ($this->isAddPrefix()) ? '<i></i>' : '';
+                $optionsArray[$key] =  $prefix . ucwords(implode(' ', $ex_key));
             }
         }
         
-        $this->setValueOptions($optionsArray);
+        return $optionsArray;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isAddPrefix(): bool
+    {
+        return $this->addPrefix;
+    }
+
+    /**
+     * @param boolean $addPrefix
+     * @return $this
+     */
+    public function setAddPrefix($addPrefix)
+    {
+        $this->addPrefix = $addPrefix;
+        return $this;
     }
 
 }

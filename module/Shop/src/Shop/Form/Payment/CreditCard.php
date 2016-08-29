@@ -26,6 +26,10 @@ class CreditCard extends Form
     
     public function __construct($name = null, $options = [])
     {
+        if (is_array($name)) {
+            $options = $name;
+            $name = (isset($name['name'])) ? $name['name'] : null;
+        }
         parent::__construct($name, $options);
         
         $this->date = new \DateTime();
@@ -93,13 +97,13 @@ class CreditCard extends Form
         
         $this->add([
             'name' => 'cvv2',
-            'type' => 'number',
+            'type' => 'text',
             'attributes'    => [
                 'placeholder'		=> 'CVV2',
                 'autofocus'			=> true,
                 'maxlength' => 3,
-                'min'  => '100',
-                'max'  => '999',
+                //'min'  => '000',
+                //'max'  => '999',
             ],
             'options'       => [
                 'label' => 'CVV2:',

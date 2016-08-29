@@ -24,6 +24,7 @@ class OrderStatus extends AbstractHelper
      * @var array
      */
     protected $allowedStatuses = [
+        'Pending',
         'Waiting for Payment',
         'Paypal Payment Pending',
         'Cheque Payment Pending',

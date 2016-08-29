@@ -10,8 +10,9 @@
 
 namespace Shop\Hydrator\Payment;
 
+use Shop\Hydrator\Strategy\CreditCardNumberStrategy;
 use UthandoCommon\Hydrator\AbstractHydrator;
-use UthandoCommon\Hydrator\Strategy\DateTime as DateTimeStrategy;
+use UthandoCommon\Hydrator\Strategy\DateTime;
 
 /**
  * Class CreditCard
@@ -23,8 +24,14 @@ class CreditCard extends AbstractHydrator
     public function __construct()
     {
         parent::__construct();
-        
-        $this->addStrategy('date', new DateTimeStrategy());
+
+        $dateTimeStrategy = new DateTime([
+            'hydrateFormat' => 'Y/m',
+        ]);
+
+        $this->addStrategy('ccNumber', new CreditCardNumberStrategy());
+        $this->addStrategy('ccEpiryDate', $dateTimeStrategy);
+        $this->addStrategy('ccStratDate', $dateTimeStrategy);
     }
 
     /**
@@ -38,10 +45,10 @@ class CreditCard extends AbstractHydrator
             'total'         => $object->getTotal(),
             'ccType'        => $object->getCcType(),
             'ccName'        => $object->getCcName(),
-            'ccNumber'      => $object->getCcNumber(),
+            'ccNumber'      => $this->extractValue('ccNumber', $object->getCcNumber()),
             'cvv2'          => $object->getCvv2(),
-            'ccEpiryDate'   => $object->getCcExpiryDate(),
-            'ccStratDate'   => $object->getCcStartDate(),
+            'ccEpiryDate'   => $this->extractValue('ccEpiryDate', $object->getCcExpiryDate()),
+            'ccStratDate'   => $this->extractValue('ccStratDate', $object->getCcStartDate()),
             'address'       => $object->getAddress(),
         ];
     }

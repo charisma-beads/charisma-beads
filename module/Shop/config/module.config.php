@@ -5,9 +5,7 @@ return [
             'collections' => [
                 'css/uthando-admin.css' => [
                     'css/shop.css',
-                ],
-                'js/uthando-admin.js' => [
-
+                    'css/typeaheadjs.css',
                 ],
             ],
             'paths' => [
@@ -94,7 +92,9 @@ return [
             'ShopReportsFieldSet'               => 'Shop\Form\Settings\ReportsFieldSet',
             'ShopCartCookieFieldSet'            => 'Shop\Form\Settings\CartCookieFieldSet',
             'ShopInvoiceFieldSet'               => 'Shop\Form\Settings\InvoiceFieldSet',
-            'ShopOrderFieldSet'                 => 'Shop\Form\Settings\OrderFieldSet',
+            'ShopOrderFieldSet'                 => Shop\Form\Settings\OrderFieldSet::class,
+            'ShopOrderMetadataFieldSet'         => Shop\Form\Order\MetadataFieldSet::class,
+            'NewProductsCarouselFieldSet'       => 'Shop\Form\Settings\NewProductsCarouselFieldSet',
 
             'AdvertList'                => 'Shop\Form\Element\AdvertList',
             'CountryList'               => 'Shop\Form\Element\CountryList',
@@ -185,21 +185,24 @@ return [
     ],
     'service_manager' => [
         'invokables' => [
-            'Shop\Service\Report'       => 'Shop\Service\Report',
-            'Shop\Service\StockControl' => 'Shop\Service\StockControl',
+            'Shop\Service\Report'                       => 'Shop\Service\Report',
+            'Shop\Service\StockControl'                 => 'Shop\Service\StockControl',
         ],
         'factories' => [
-            'Shop\Options\CartCookie'   => 'Shop\Service\Factory\CartCookieOptions',
-            'Shop\Options\Cart'         => 'Shop\Service\Factory\CartOptions',
-            'Shop\Options\Invoice'      => 'Shop\Service\Factory\InvoiceOptions',
-            'Shop\Options\Order'        => 'Shop\Service\Factory\OrderOptions',
-            'Shop\Options\Paypal'       => 'Shop\Service\Factory\PaypalOptions',
-            'Shop\Options\Reports'      => 'Shop\Service\Factory\ReportsOptions',
-            'Shop\Options\Shop'         => 'Shop\Service\Factory\ShopOptions',
+            'Shop\Options\CartCookie'                   => 'Shop\Service\Factory\CartCookieOptions',
+            'Shop\Options\Cart'                         => 'Shop\Service\Factory\CartOptions',
+            'Shop\Options\Invoice'                      => 'Shop\Service\Factory\InvoiceOptions',
+            'Shop\Options\Order'                        => 'Shop\Service\Factory\OrderOptions',
+            'Shop\Options\Paypal'                       => 'Shop\Service\Factory\PaypalOptions',
+            'Shop\Options\Reports'                      => 'Shop\Service\Factory\ReportsOptions',
+            'Shop\Options\Shop'                         => 'Shop\Service\Factory\ShopOptions',
+            'Shop\Options\NewProductsCarouselOptions'   => 'Shop\Service\Factory\NewProductsCarouselOptions',
 
-            'Shop\Service\Cart\Cookie'  => 'Shop\Service\Factory\CartCookie',
-            'Shop\Service\Shipping'     => 'Shop\Service\Factory\Shipping',
-            'Shop\Service\Tax'          => 'Shop\Service\Factory\Tax',
+            'Shop\Service\Cart\Cookie'                  => 'Shop\Service\Factory\CartCookie',
+            'Shop\Service\Shipping'                     => Shop\Service\Factory\Shipping::class,
+            'Shop\Service\Tax'                          => Shop\Service\Factory\Tax::class,
+
+            'ExceptionMailer\ErrorHandling'             => Shop\Exception\MailerFactory::class
         ],
     ],
     'uthando_mappers' => [
@@ -235,14 +238,14 @@ return [
         'invokables' => [
             'ShopAdvert'            => 'Shop\Model\Advert\Advert',
             'ShopAdvertHit'         => 'Shop\Model\Advert\Hit',
-            'ShopCart'              => 'Shop\Model\Cart\Cart',
+            'ShopCart'              => Shop\Model\Cart\Cart::class,
             'ShopCartItem'          => 'Shop\Model\Cart\Item',
             'ShopCountry'           => 'Shop\Model\Country\Country',
             'ShopCountryProvince'   => 'Shop\Model\Country\Province',
             'ShopCustomer'          => 'Shop\Model\Customer\Customer',
             'ShopCustomerAddress'   => 'Shop\Model\Customer\Address',
             'ShopCustomerPrefix'    => 'Shop\Model\Customer\Prefix',
-            'ShopOrder'             => 'Shop\Model\Order\Order',
+            'ShopOrder'             => Shop\Model\Order\Order::class,
             'ShopOrderLine'         => 'Shop\Model\Order\Line',
             'ShopOrderMetaData'     => 'Shop\Model\Order\MetaData',
             'ShopOrderStatus'       => 'Shop\Model\Order\Status',
@@ -301,34 +304,39 @@ return [
     ],
     'view_helpers' => [
         'invokables'    => [
-            'ShopAlert'             => 'Shop\View\Alert',
-            'BreadCrumbs'           => 'Shop\View\Breadcrumb',
-            'CartOption'            => 'Shop\View\CartOption',
-            'Cart'                  => 'Shop\View\Cart',
-            'Category'              => 'Shop\View\Category',
-            'CountrySelect'         => 'Shop\View\CountrySelect',
-            'CustomerAddress'       => 'Shop\View\CustomerAddress',
-            'MonthYearSelect'       => 'Shop\View\FormMonthSelect',
-            'InvoiceOption'         => 'Shop\View\InvoiceOption',
-            'NormaliseOrderNumber'  => 'Shop\View\NormaliseOrderNumber',
-            'OrderStatus'           => 'Shop\View\OrderStatus',
-            'PercentFormat'         => 'Shop\View\PercentFormat',
-            'PriceFormat'           => 'Shop\View\PriceFormat',
-            'ProductHelper'         => 'Shop\View\Product',
-            'ProductCategoryImage'  => 'Shop\View\ProductCategoryImage',
-            'ProductImage'          => 'Shop\View\ProductImage',
-            'ProductOptions'        => 'Shop\View\ProductOptions',
-            'ProductPrice'          => 'Shop\View\ProductPrice',
-            'ProductSearch'         => 'Shop\View\ProductSearch',
-            'ProductTableRowState'  => 'Shop\View\ProductTableRowState',
-            'ShopOption'            => 'Shop\View\ShopOption',
+            'ShopAlert'                 => 'Shop\View\Alert',
+            'BreadCrumbs'               => 'Shop\View\Breadcrumb',
+            'CartOption'                => 'Shop\View\CartOption',
+            'Cart'                      => 'Shop\View\Cart',
+            'Category'                  => 'Shop\View\Category',
+            'CountrySelect'             => 'Shop\View\CountrySelect',
+            'CustomerAddress'           => 'Shop\View\CustomerAddress',
+            'MonthYearSelect'           => 'Shop\View\FormMonthSelect',
+            'InvoiceOption'             => 'Shop\View\InvoiceOption',
+            'NormaliseOrderNumber'      => 'Shop\View\NormaliseOrderNumber',
+            'NewProductsCarouselOption' => 'Shop\View\NewProductsCarouselOption',
+            'OrderStatus'               => 'Shop\View\OrderStatus',
+            'PercentFormat'             => 'Shop\View\PercentFormat',
+            'PriceFormat'               => 'Shop\View\PriceFormat',
+            'ProductHelper'             => 'Shop\View\Product',
+            'ProductCategoryImage'      => 'Shop\View\ProductCategoryImage',
+            'ProductImage'              => 'Shop\View\ProductImage',
+            'ProductOptions'            => 'Shop\View\ProductOptions',
+            'ProductPrice'              => 'Shop\View\ProductPrice',
+            'ProductSearch'             => 'Shop\View\ProductSearch',
+            'ProductTableRowState'      => 'Shop\View\ProductTableRowState',
+            'ShopOption'                => 'Shop\View\ShopOption',
+            'StructuredData'            => 'Shop\View\StructuredData',
         ],
     ],
     'view_manager' => [
         'template_map' => [
+            'mail/error'           => __DIR__ . '/../view/error/mail.phtml',
             'cart/summary'         => __DIR__ . '/../view/shop/cart/cart-summary.phtml',
             'shop/cart'            => __DIR__ . '/../view/shop/cart/cart.phtml',
-            'shop/order/details'   => __DIR__ . '/../view/shop/order/order-details.phtml'
+            'shop/order/details'   => __DIR__ . '/../view/shop/order/order-details.phtml',
+            'error/mail'           => __DIR__ . '/../view/error/mail.phtml', // Exception_Mailer
+            'error/paypal'         => __DIR__ . '/../view/error/paypal-error.phtml', // Exception_Mailer
         ],
         'template_path_stack' => [
             'shop' => __DIR__ . '/../view'

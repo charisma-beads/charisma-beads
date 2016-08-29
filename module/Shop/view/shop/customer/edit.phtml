@@ -1,31 +1,49 @@
 
 <?php
-$this->headTitle('Edit Customer');
 $this->form->get('firstname')->setAttribute('readonly', '');
 $this->form->get('lastname')->setAttribute('readonly', '');
 $this->form->get('email')->setAttribute('readonly', '');
 ?>
-<div class="col-md-12">
-    <?=$this->partial('uthando-admin/partial/add-edit-form', [
-        'form' 			=> $this->form,
-        'formName'		=> 'Customer ' . $this->model->getNumber(),
-        'postUrl'		=> $this->url('admin/shop/customer/edit', [
-            'id'        => $this->model->getCustomerId(),
-        ]),
-        'cancelUrl'     => $this->url('admin/shop/customer'),
-        'formElements'  => [
-            'customerId', 'userId', 'prefixId', 'firstname', 'lastname',
-            'billingAddressId', 'deliveryAddressId',
-             'email',
-        ],
-        'formWidth'     => '6',
-        'helperOptions' => [
-            'labelWidth'    => '4',
-            'elementWidth'  => '8',
-        ],
-    ]); ?>
 
-    <div class="col-md-6">
+<?php $this->headTitle('Edit Customer') ?>
+<?php $this->layout()->pageTitle = $this->translate('Edit Customer'); ?>
+
+<?php $this->placeholder('header-buttons')->captureStart(); ?>
+<button type="submit" form="form-customer" data-toggle="tooltip" title="<?= $this->translate('Save'); ?>"
+        class="btn btn-primary">
+    <i class="fa fa-save"></i>
+</button>
+<a href="<?= $this->url('admin/shop/customer'); ?>" data-toggle="tooltip" title="<?= $this->translate('Cancel'); ?>"
+   class="btn btn-default">
+    <i class="fa fa-reply"></i>
+</a>
+<?php $this->placeholder('header-buttons')->captureEnd(); ?>
+
+<?php $this->form->setAttributes([
+    'method' => 'post',
+    'id' => 'form-customer',
+    'action' => $this->url('admin/shop/customer/edit', [
+        'id' => $this->model->getCustomerId(),
+    ]),
+]); ?>
+
+<div class="row">
+
+    <div class="col-sm-6">
+        <div id="customer" class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <i class="fa fa-pencil"></i> <?= $this->translate('Edit Customer'); ?>
+                    <small>(<?=$this->escapeHtml($this->model->getNumber());?>)</small>
+                </h3>
+            </div>
+            <div class="panel-body">
+                <?= $this->form($this->form); ?>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6">
         <div class="panel-group" id="accordion">
             <div id="customer-addresses" class="panel panel-info">
                 <!-- Default panel contents -->
@@ -34,9 +52,10 @@ $this->form->get('email')->setAttribute('readonly', '');
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
                             Customer Addresses
                         </a>
-                        <button id="add-address-button" class="btn btn-default btn-xs" data-toggle="modal"
-                                data-target="#add-address-model">
-                            Add Address
+                        <button id="add-address-button" class="btn btn-default btn-xs" href="<?=$this->url('admin/shop/customer/address', [
+                            'action'    => 'add',
+                            'id'        => $this->model->getCustomerId(),
+                        ]);?>">Add Address
                         </button>
                     </h4>
                 </div>
@@ -55,9 +74,12 @@ $this->form->get('email')->setAttribute('readonly', '');
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
                             Customer Orders
                         </a>
-                        <button id="add-order-button" class="btn btn-default btn-xs">
+                        <a id="add-order-button" href="<?=$this->url('admin/shop/order/create', [
+                            'action' => 'create',
+                            'customerId' => $this->model->getCustomerId(),
+                        ]);?>" class="btn btn-default btn-xs">
                             Create Order
-                        </button>
+                        </a>
                     </h4>
                 </div>
                 <div id="collapseTwo" class="panel-collapse collapse in">
@@ -72,223 +94,14 @@ $this->form->get('email')->setAttribute('readonly', '');
     </div>
 </div>
 
-<div id="add-address-model" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Add Address</h4>
-            </div>
-            <div class="modal-body">
-                <i class="fa fa-spinner fa-spin"></i>&nbsp;Loading
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button id="add-address-save" type="button" class="btn btn-primary">Save</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div id="edit-address-model" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Edit Address</h4>
-            </div>
-            <div class="modal-body">
-                <i class="fa fa-spinner fa-spin"></i>&nbsp;Loading
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button id="edit-address-save" type="button" class="btn btn-primary">Save</button>
-            </div>
-        </div>
-    </div>
-</div>
 <div class="clearfix"></div>
 
+<?php $this->inlineScript()
+    ->appendFile($this->basePath('js/admin/shop/shop.js'))
+    ->appendFile($this->basePath('js/admin/shop/customer-edit.js'));?>
+
 <script>
-
     $(document).ready(function() {
-        var addresses = function () {
-
-            admin.ajaxWidgetPanel(
-                $('#customer-addresses .panel-body'),
-                '<?=$this->url('admin/shop/customer/address', [
-                    'action' => 'list'
-                ]);?>',
-                {customerId: '<?=$this->model->getCustomerId();?>'}
-            );
-        };
-
-        var orders = function () {
-
-            admin.ajaxWidgetPanel(
-                $('#customer-orders .panel-table'),
-                '<?=$this->url('admin/shop/order/edit', [
-                    'action' => 'order-list'
-    ]           );?>',
-                {customerId: '<?=$this->model->getCustomerId();?>'}
-            );
-        };
-
-        var updateAddressLists = function () {
-            $.ajax({
-                url: '<?=$this->url('admin/shop/customer/address', [
-                    'action' => 'address-list'
-    ]           );?>',
-                data: {customerId: <?=$this->model->getCustomerId();?>},
-                type: 'POST'
-            }).done(function (data) {
-                var billAd = $('select[name="billingAddressId"]');
-                var delAd = $('select[name="deliveryAddressId"]');
-
-                var billAdVal = billAd.val();
-                var delAdVal = delAd.val();
-
-                billAd.html(data);
-                delAd.html(data);
-
-                billAd.val(billAdVal);
-                delAd.val(delAdVal);
-            });
-        };
-
-        $('select').on('change', function () {
-            var formData = {
-                customerId: <?=$this->model->getCustomerId();?>
-            };
-            var column = $(this).attr('name');
-            var value = $(this).val();
-            formData[column] = value;
-
-            $.ajax({
-                url: '<?=$this->url('admin/shop/customer/edit', [
-                    'action' => 'update-address'
-                ]);?>',
-                data: formData,
-                type: 'POST',
-                complete: function (xhr) {
-                    admin.addAlert(xhr.responseJSON.messages, xhr.responseJSON.status);
-                }
-            });
-        });
-
-        $('#add-order-button').on('click', function () {
-            var billAddress = $('select[name=billingAddressId]').val();
-            var deliveryAddress = $('select[name=deliveryAddressId]').val();
-
-            if (billAddress == 0 || deliveryAddress == 0) {
-                bootbox.alert('You need to add a delivery & billing address before creating an order.');
-                return;
-            }
-
-            window.location = '<?=$this->url('admin/shop/order/create', [
-                'customerId'    => $this->model->getCustomerId(),
-            ]);?>';
-        });
-
-        $('#customer-addresses').on('click', '.edit-address-button', function (event) {
-            event.preventDefault();
-
-            var el = $('#edit-address-model');
-            var url = $(this).attr('href').replace('-address', '');
-
-            el.on('show.bs.modal', function () {
-                $(this).find('.modal-body').load(url);
-            });
-
-            el.on('hide.bs.modal', function (e) {
-                $(this).find('.modal-body').html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Loading');
-
-                el.off('show.bs.modal hide.bs.modal');
-                $('#edit-address-save').off('click');
-                addresses();
-            });
-
-            $('#edit-address-save').on('click', function () {
-                admin.ajaxModalForm(el, url);
-                updateAddressLists();
-            });
-
-            el.modal('show');
-
-        });
-
-        $('#customer-addresses').on('submit', 'form', function (event) {
-            event.preventDefault();
-            var url = '<?=$this->url('admin/shop/customer/address', [
-                'action'    => 'delete',
-            ]);?>';
-            var params = $(this).serialize() + '&submit=delete';
-            var el = $(this).parent().parent().parent();
-
-            $.ajax({
-                url: url,
-                data: params,
-                type: 'POST',
-                success: function (response) {
-                    admin.addAlert(response.messages, response.status);
-                    $(el).modal('hide');
-                    setTimeout('addresses()', 500);
-                    setTimeout('updateAddressLists()', 500);
-                },
-                error: function (response) {
-                    admin.addAlert(response.error, 'danger');
-                    $(el).modal('hide');
-                    setTimeout('addresses()', 500);
-                    setTimeout('updateAddressLists()', 500);
-                }
-            });
-        });
-
-        $('#customer-orders').on('submit', 'form', function (event) {
-            event.preventDefault();
-            var url = '<?=$this->url('admin/shop/order/edit', [
-                'action'    => 'delete',
-            ]);?>';
-            var params = $(this).serialize() + '&submit=delete';
-            var el = $(this).parent().parent().parent();
-
-            $.ajax({
-                url: url,
-                data: params,
-                type: 'POST',
-                success: function (response) {
-                    admin.addAlert(response.messages, response.status);
-                    $(el).modal('hide');
-                    setTimeout('orders()', 500);
-                },
-                error: function (response) {
-                    admin.addAlert(response.error, 'danger');
-                    $(el).modal('hide');
-                    setTimeout('orders()', 500);
-                }
-            });
-        });
-
-        $('#add-address-model').on('show.bs.modal', function () {
-            $(this).find('.modal-body').load('<?=$this->url('admin/shop/customer/address', [
-                'action'    => 'add',
-                'id'        => $this->model->getCustomerId(),
-            ]);?>');
-        });
-
-        $('#add-address-model').on('hide.bs.modal', function (e) {
-            $(this).find('.modal-body').html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Loading');
-            addresses();
-            updateAddressLists();
-        });
-
-        $('#add-address-save').on('click', function () {
-            admin.ajaxModalForm('#add-address-model', '<?=$this->url('admin/shop/customer/address', [
-                'action'    => 'add'
-            ]);?>');
-        });
-
-        addresses();
-        orders();
+        customer.customerId = '<?=$this->escapeHtml($this->model->getCustomerId());?>';
     });
 </script>

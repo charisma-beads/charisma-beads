@@ -18,6 +18,7 @@ use Zend\EventManager\Event;
  * Class Product
  *
  * @package Shop\Service\Product
+ * @method \Shop\Mapper\Product\Product getMapper($mapperClass = null, array $options = [])
  */
 class Product extends AbstractRelationalMapperService
 {
@@ -59,29 +60,6 @@ class Product extends AbstractRelationalMapperService
             'getMethod' => 'getOptionsByProductId',
         ],
     ];
-
-    /**
-     * @var bool
-     */
-    protected $populate = true;
-
-    /**
-     * @param bool $bool $bool
-     * @return $this
-     */
-    public function setPopulate(bool $bool)
-    {
-        $this->populate = $bool;
-        return $this;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isPopulate() : bool
-    {
-        return $this->populate;
-    }
 
     /**
      * Attach events
@@ -144,7 +122,8 @@ class Product extends AbstractRelationalMapperService
             $categoryId = (array) $categoryId;
         }
 
-        $products = $mapper->getProductsByCategory($categoryId, $order);
+        $products = $mapper->setFetchEnabled(false)
+            ->getProductsByCategory($categoryId, $order);
 
         if ($this->isPopulate()) {
             foreach ($products as $product) {
@@ -197,7 +176,19 @@ class Product extends AbstractRelationalMapperService
         /* @var $mapper \Shop\Mapper\Product\Product */
         $mapper = $this->getMapper();
 
-        $products = $mapper->searchProducts($search, $sort);
+        $products = $mapper->setFetchEnabled(false)
+            ->searchProducts($search, $sort);
+
+        foreach ($products as $product) {
+            $this->populate($product, true);
+        }
+
+        return $products;
+    }
+
+    public function getLatestProducts($num)
+    {
+        $products = $this->getMapper()->getLatestProducts($num);
 
         foreach ($products as $product) {
             $this->populate($product, true);
@@ -236,7 +227,6 @@ class Product extends AbstractRelationalMapperService
         $this->populate($product, true);
 
         return $product;
-
     }
 
     /**

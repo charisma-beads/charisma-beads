@@ -28,7 +28,7 @@ class CountryProvinceList extends Select implements ServiceLocatorAwareInterface
     /**
      * @var int
      */
-    protected $countryId;
+    protected $countryId = 1;
     
     public function setOptions($options)
     {
@@ -50,7 +50,7 @@ class CountryProvinceList extends Select implements ServiceLocatorAwareInterface
             ->getServiceLocator()
             ->get('UthandoServiceManager')
             ->get('ShopCountryProvince');
-        
+
         if ($this->getCountryId()) {
             $provinces = $service->getProvincesByCountryId($this->getCountryId());
         } else {

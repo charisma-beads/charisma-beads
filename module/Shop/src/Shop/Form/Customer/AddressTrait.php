@@ -35,9 +35,9 @@ trait AddressTrait
             'options' => [
                 'label' => 'Address Line 1:',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-8',
+                'column-size' => 'sm-8',
                 'label_attributes' => [
-                    'class' => 'col-md-4',
+                    'class' => 'col-sm-4',
                 ],
             ],
         ]);
@@ -53,9 +53,9 @@ trait AddressTrait
             'options' => [
                 'label' => 'Address Line 2:',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-8',
+                'column-size' => 'sm-8',
                 'label_attributes' => [
-                    'class' => 'col-md-4',
+                    'class' => 'col-sm-4',
                 ],
             ],
         ]);
@@ -71,9 +71,9 @@ trait AddressTrait
             'options' => [
                 'label' => 'Address Line 3:',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-8',
+                'column-size' => 'sm-8',
                 'label_attributes' => [
-                    'class' => 'col-md-4',
+                    'class' => 'col-sm-4',
                 ],
             ],
         ]);
@@ -89,9 +89,9 @@ trait AddressTrait
             'options' => [
                 'label' => 'City\Town:',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-8',
+                'column-size' => 'sm-8',
                 'label_attributes' => [
-                    'class' => 'col-md-4',
+                    'class' => 'col-sm-4',
                 ],
             ],
         ]);
@@ -106,9 +106,9 @@ trait AddressTrait
                 'label' => 'County\Province:',
                 'country_id' => $countyId,
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-8',
+                'column-size' => 'sm-8',
                 'label_attributes' => [
-                    'class' => 'col-md-4',
+                    'class' => 'col-sm-4',
                 ],
             ],
         ]);
@@ -124,9 +124,9 @@ trait AddressTrait
             'options' => [
                 'label' => 'Postcode:',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-8',
+                'column-size' => 'sm-8',
                 'label_attributes' => [
-                    'class' => 'col-md-4',
+                    'class' => 'col-sm-4',
                 ],
             ],
         ]);
@@ -141,9 +141,9 @@ trait AddressTrait
                 'label' => 'Country',
                 'country_id' => $countyId,
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-8',
+                'column-size' => 'sm-8',
                 'label_attributes' => [
-                    'class' => 'col-md-4',
+                    'class' => 'col-sm-4',
                 ],
             ],
         ]);
@@ -158,9 +158,9 @@ trait AddressTrait
             'options'		=> [
                 'label' => 'Phone No.:',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-8',
+                'column-size' => 'sm-8',
                 'label_attributes' => [
-                    'class' => 'col-md-4',
+                    'class' => 'col-sm-4',
                 ],
             ],
         ]);

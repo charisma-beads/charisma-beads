@@ -51,7 +51,7 @@
                     ->includeName()
                     ->formatAddress(
                         $this->order->getMetadata()
-                            ->getBillingAddress()
+                            ->getDeliveryAddress()
                 );?>
             </address>
         </td>
@@ -98,8 +98,8 @@
           <?php endif; ?>
 	    </td>
 		<td class="text-right"><?=$this->priceFormat($item->getPrice());?></td>
-		<td><?=$item->getQty();?></td>
-		<td class="text-right"><?=$this->priceFormat($item->getPrice() * $item->getQty());?></td>
+		<td><?=$item->getQuantity();?></td>
+		<td class="text-right"><?=$this->priceFormat($item->getPrice() * $item->getQuantity());?></td>
 	</tr>
 	<?php endforeach; ?>
 	<tr>
@@ -140,6 +140,3 @@
         </p>
     </div>
 </div>
-
-
-    

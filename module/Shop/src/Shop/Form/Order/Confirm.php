@@ -34,6 +34,7 @@ class Confirm extends Form
                 'label_attributes' => [
                     'class' => 'radio',
                 ],
+                'add_prefix' => true,
             ],
             
         ]);

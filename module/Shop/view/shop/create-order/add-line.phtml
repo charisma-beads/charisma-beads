@@ -1,0 +1,40 @@
+<?php /** @var  $product \Shop\Model\Order\Order */ $order = $this->order; ?>
+
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>Product</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Total</th>
+        <th>&nbsp;</th>
+    </tr>
+
+    <?php foreach($this->form->get('orderLines') as $fieldset):?>
+        <tr class="order-line">
+            <?=$this->formHidden($fieldset->get('orderLineId'));?>
+            <?=$this->formHidden($fieldset->get('productId'));?>
+
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><?=$this->formElement($fieldset->get('qty'));?></td>
+            <td></td>
+            <td>
+                <a class="btn btn-primary"><i class="fa fa-refresh"></i></a>
+                <a class="btn btn-danger"><i class="fa fa-trash"></i></a>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+
+    <tr id="table-postage">
+        <td colspan="2">&nbsp&nbsp;</td>
+        <th colspan="2"><p class="text-right">Postage:</p></th>
+        <td><?=$this->priceFormat($this->order->getShipping());?></td>
+    </tr>
+    <tr id="table-total">
+        <td colspan="2">&nbsp&nbsp;</td>
+        <th colspan="2"><p class="text-right">Total:</p></th>
+        <td><?=$this->priceFormat($this->order->getTotal());?></td>
+    </tr>
+</table>

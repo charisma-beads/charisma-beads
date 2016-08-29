@@ -1,0 +1,190 @@
+
+<?php $this->headTitle('Create Order') ?>
+<?php $this->layout()->pageTitle = $this->translate('Create Order'); ?>
+<?php $this->form->prepare();?>
+
+
+<?php $this->placeholder('header-buttons')->captureStart(); ?>
+<button type="submit" form="form-order" data-toggle="tooltip" title="<?= $this->translate('Save'); ?>"
+        class="btn btn-primary">
+    <i class="fa fa-save"></i>
+</button>
+<a href="<?= $this->url('admin/shop/order'); ?>" data-toggle="tooltip" title="<?= $this->translate('Cancel'); ?>"
+   class="btn btn-default">
+    <i class="fa fa-reply"></i>
+</a>
+<?php $this->placeholder('header-buttons')->captureEnd(); ?>
+
+<?php $this->form->setAttributes([
+    'method' => 'post',
+    'id' => 'form-order',
+    'action' => $this->url('admin/shop/order/create', [
+        'action' => 'save',
+        'customerId' => $this->model->getCustomerId(),
+    ]),
+]); ?>
+
+<?=$this->form(null,\TwbBundle\Form\View\Helper\TwbBundleForm::LAYOUT_HORIZONTAL)->openTag($this->form);?>
+<div class="col-sm-12">
+    <div id="order-create" class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                <i class="fa fa-pencil"></i>
+                &nbsp;<?= $this->translate('Create Order'); ?>
+                <small>(<?=$this->escapeHtml($this->model->getFullName());?>)</small>
+            </h3>
+        </div>
+
+        <div class="panel-body">
+
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="panel panel-default equal">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <i class="fa fa-map-marker"></i>
+                                &nbsp;<?= $this->translate('Billing Address'); ?>
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            <address>
+                                <?=$this->customerAddress()
+                                    ->setCustomer($this->model)
+                                    ->includeName()
+                                    ->includeEmail()
+                                    ->formatAddress($this->model->getBillingAddress());?>
+                            </address>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-3">
+                    <div class="panel panel-default equal">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <i class="fa fa-truck"></i>
+                                &nbsp;<?= $this->translate('Delivery Address'); ?>
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            <address>
+                                <?=$this->customerAddress()
+                                    ->setCustomer($this->model)
+                                    ->includeName()
+                                    ->formatAddress($this->model->getDeliveryAddress());?>
+                                <br>
+                            </address>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="panel panel-default equal">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <i class="fa fa-info"></i>
+                                &nbsp;<?= $this->translate('Order Details'); ?>
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            <?=$this->formRow($this->form->get('orderNumber'));?>
+                            <?=$this->formRow($this->form->get('orderStatusId'));?>
+                            <?=$this->formRow($this->form->get('orderDate'));?>
+                            <?=$this->formRow($this->form->get('payment_option'));?>
+                            <?=$this->formRow($this->form->get('collect_instore'));?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <i class="fa fa-shopping-basket"></i>
+                                &nbsp;<?= $this->translate($this->form->get('orderLines')->getLabel()); ?>
+                                <button id="add-order-line" class="btn btn-default btn-xs pull-right">
+                                    <i class="fa fa-cart-plus"></i> add product
+                                </button>
+                            </h3>
+                        </div>
+                        <div id="order-lines">
+                            <table class="table table-bordered table-striped">
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Description</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                    <th>&nbsp;</th>
+                                </tr>
+
+                                <?php foreach($this->form->get('orderLines') as $fieldset):?>
+                                    <tr class="order-line">
+                                        <?=$this->formHidden($fieldset->get('orderLineId'));?>
+                                        <?=$this->formHidden($fieldset->get('productId'));?>
+
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td><?=$this->formElement($fieldset->get('qty'));?></td>
+                                        <td></td>
+                                        <td>
+                                            <a class="btn btn-primary"><i class="fa fa-refresh"></i></a>
+                                            <a class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+
+                                <tr id="table-postage">
+                                    <td colspan="2">&nbsp&nbsp;</td>
+                                    <th colspan="2"><p class="text-right">Postage:</p></th>
+                                    <td><?=$this->priceFormat($this->order->getShipping());?></td>
+                                </tr>
+                                <tr id="table-total">
+                                    <td colspan="2">&nbsp&nbsp;</td>
+                                    <th colspan="2"><p class="text-right">Total:</p></th>
+                                    <td><?=$this->priceFormat($this->order->getTotal());?></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <i class="fa fa-info"></i>
+                                &nbsp;<?=$this->form->get('requirements')->getLabel();?>
+                            </h3>
+                        </div>
+                        <div id="order-lines" class="panel-body">
+                            <?=$this->formTextarea($this->form->get('requirements'));?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<?=$this->formHidden($this->form->get('customerId'));?>
+<?=$this->form()->closeTag();?>
+
+<?php $this->inlineScript()
+    ->appendFile($this->basePath('js/admin/shop/typeahead.bundle.min.js'))
+    ->appendFile('//cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.7.0/jquery.matchHeight-min.js')
+    ->appendFile($this->basePath('js/admin/shop/shop.js'))
+    ->appendFile($this->basePath('js/admin/shop/orders.js'));?>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.date-time-pick .input-group').datetimepicker({
+            format: '<?=$this->convertToJsDateFormat('d/m/Y H:i:s')->renderJsFormat();?>'
+        });
+    });
+</script>
+

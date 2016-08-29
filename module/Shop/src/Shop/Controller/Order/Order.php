@@ -5,7 +5,7 @@
  * @package   Shop\Controller\Order
  * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
  * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
+ * @license   see LICENSE
  */
 
 namespace Shop\Controller\Order;
@@ -29,14 +29,21 @@ class Order extends AbstractCrudController
 	protected $serviceName = 'ShopOrder';
 	protected $route = 'admin/shop/order';
 
+    public function addAction()
+    {
+        if (!$this->getRequest()->isXmlHttpRequest()) {
+            throw new ShopException('Action not allowed');
+        }
+
+        return parent::addAction();
+    }
+
     public function currentOrdersAction()
     {
         $request = $this->getRequest();
 
         if ($request->isXmlHttpRequest()) {
-
             $viewModel = $this->getCurrentOrders();
-
             return $viewModel;
         }
 
@@ -197,7 +204,6 @@ class Order extends AbstractCrudController
         } else {
             $order = $service->getCustomerOrderByUserId($id, $userId);
         }
-
 	    
 	    return $order;
 	}

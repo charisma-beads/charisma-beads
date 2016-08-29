@@ -10,6 +10,8 @@
 
 namespace Shop\Form\Order;
 
+use TwbBundle\Form\Element\StaticElement;
+use TwbBundle\Form\View\Helper\TwbBundleForm;
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
 use Shop\Model\Order\Line as LineModel;
@@ -44,6 +46,25 @@ class LineFieldSet extends Fieldset implements InputFilterProviderInterface
         $this->add([
             'name' => 'orderLineId',
             'type' => 'Hidden',
+        ]);
+
+        $this->add([
+            'name' => 'productId',
+            'type' => 'hidden',
+        ]);
+
+        $this->add([
+            'name' => 'qty',
+            'type' => 'Number',
+            'options' => [
+                'label' => 'Quantity:',
+                'required' => true,
+            ],
+            'attributes' => [
+                'min'  => '0',
+                'step' => '1',
+                'value' => 1,
+            ],
         ]);
     }
 

@@ -165,7 +165,7 @@ class Customer extends AbstractRelationalMapperService
             ->setCountryId($data['customer']['billingAddress']['countryId']);
         
         $form->setData($data);
-        
+
         if (!$form->isValid()) {
             return $form;
         }

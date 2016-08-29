@@ -400,6 +400,19 @@ return [
                                             ]
                                         ]
                                     ],
+                                    'search' => [
+                                        'type' => 'Segment',
+                                        'options' => [
+                                            'route' => '/search[/][:search]',
+                                            'constraints' => [
+                                                'search' => '[a-zA-Z0-9][a-zA-Z0-9.%_-]*',
+                                            ],
+                                            'defaults' => [
+                                                'action' => 'search',
+                                                'force-ssl' => 'ssl'
+                                            ]
+                                        ]
+                                    ],
                                     'image' => [
                                         'type' => 'Segment',
                                         'options' => [
@@ -647,7 +660,7 @@ return [
                                             'route' => '/[:action[/id/[:id]]]',
                                             'constraints' => [
                                                 'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                                'id' => '\d+'
+                                                'id' => '\d+',
                                             ],
                                             'defaults' => [
                                                 'action' => 'edit',
@@ -701,15 +714,15 @@ return [
                                     'create' => [
                                         'type' => 'Segment',
                                         'options' => [
-                                            'route' => '/create/[/customerId/[:customerId]]',
+                                            'route' => '/create/[:action][/customerId/[:customerId]]',
                                             'contraints' => [
                                                 'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                                 'customerId' => '\d+'
                                             ],
                                             'defaults' => [
                                                 'controller' => 'Order\CreateOrder',
-                                                'action' => 'index',
-                                                'force-ssl' => 'ssl'
+                                                'force-ssl' => 'ssl',
+                                                'action' => 'create',
                                             ]
                                         ],
                                     ],
@@ -741,7 +754,7 @@ return [
                                             ]
                                         ]
                                     ]
-                                ]
+                                ],
                             ],
                             'post' => [
                                 'type' => 'Segment',
@@ -1020,6 +1033,21 @@ return [
                                                 ],
                                             ],
                                         ],
+                                    ],
+                                ],
+                            ],
+                            'paypal' => [
+                                'type' => 'Segment',
+                                'options' => [
+                                    'route' => '/paypal[/:action[/:paymentId]]',
+                                    'constraints' => [
+                                        'action' => '[a-zA-Z0-9][a-zA-Z0-9_-]*',
+                                        'paymentId' => '[a-zA-Z0-9][a-zA-Z0-9-]*',
+                                    ],
+                                    'defaults' => [
+                                        'controller' => 'Paypal',
+                                        'force-ssl' => 'ssl',
+                                        'paymentId' => '',
                                     ],
                                 ],
                             ],

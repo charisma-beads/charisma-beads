@@ -1,27 +1,42 @@
 
-<?=$this->partial('uthando-admin/partial/search', [
-	'name'			=> 'productCategory',
-	'searchInputs'	=> [
-		'Category' => 'category',
-	],
-]);?>
+<?php $this->headTitle('Product Categories') ?>
+<?php $this->layout()->pageTitle = $this->translate('Product Categories');?>
 
-<div id="table-productCategory">
-	<?=$this->partial('shop/product-category/list', [
-	    'models' => $this->models
-	]); ?>
+<?php $this->placeholder('header-buttons')->captureStart();?>
+<a href="<?=$this->url('admin/shop/category/edit', [
+    'action' => 'add'
+]);?>" type="submit" form="form-porduct-category" data-toggle="tooltip" title="<?=$this->translate('Add Category');?>" class="btn btn-primary">
+    <i class="fa fa-plus"></i>
+</a>
+<?php $this->placeholder('header-buttons')->captureEnd();?>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-list"></i> <?=$this->translate('Category List');?></h3>
+    </div>
+    <div class="panel-body">
+        <?=$this->partial('uthando-admin/partial/search', [
+            'name'			=> 'productCategory',
+            'searchInputs'	=> [
+                'Category' => 'category',
+            ],
+        ]);?>
+    </div>
+    <div id="table-productCategory" class="admin-table">
+        <?=$this->partial('shop/product-category/list', [
+            'models' => $this->models
+        ]); ?>
+    </div>
 </div>
 
-
-<?php $this->inlineScript()->captureStart(); ?>
-$(document).ready(function(){
-	$('#table-productCategory').dataGrid({
-	    url : 'category/list',
-	    query: { sort : 'lft' },
-	    searchForm : $('#search-productCategory'),
-	    paging : 'links',
-	    columnSort: true,
-	    //rowClick : admin.product.rowClick
-	});
-});
-<?php $this->inlineScript()->captureEnd(); ?>
+<script>
+    $(document).ready(function() {
+        $('#table-productCategory').dataGrid({
+            url : 'category/list',
+            query: {sort: '<?=(isset($this->params['sort'])) ? $this->params['sort'] : 'lft';?>'},
+            searchForm : $('#search-productCategory'),
+            paging : 'links',
+            columnSort: true,
+        });
+    });
+</script>

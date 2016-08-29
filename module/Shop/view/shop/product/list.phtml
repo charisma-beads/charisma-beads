@@ -1,7 +1,6 @@
-<?php $this->headTitle('Products') ?>
 
 <?php if (count($this->models) > 0): ?>
-<div class="panel panel-default">
+<div class="table-responsive">
     <table id="product-list" class="table table-hover table-bordered table-condensed sortable-table">
         <thead>
             <tr>
@@ -71,13 +70,3 @@
 <?php else: ?>
 <h4>No Products where returned by search.</h4>
 <?php endif; ?>
-
-<script>
-$(function () {
-	  $('[data-toggle="popover"]').popover({
-		  html: true,
-          placement: 'left'
-	  })
-	})
-</script>
-

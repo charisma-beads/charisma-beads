@@ -45,6 +45,7 @@ return [
                                 'Shop\Controller\Faq' => ['action' => 'all'],
                                 'Shop\Controller\Order' => ['action' => 'all'],
                                 'Shop\Controller\Order\CreateOrder' => ['action' => 'all'],
+                                'Shop\Controller\Paypal' => ['action' => ['search']],
                                 'Shop\Controller\Post\Cost' => ['action' => 'all'],
                                 'Shop\Controller\Post\Level' => ['action' => 'all'],
                                 'Shop\Controller\Post\Unit' => ['action' => 'all'],

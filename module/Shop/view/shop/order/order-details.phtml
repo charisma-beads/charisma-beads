@@ -92,8 +92,8 @@
                   <?php endif; ?>
         		</td>
         		<td><?=$this->priceFormat($item->getPrice());?></td>
-        		<td><?=$item->getQty();?></td>
-        		<td><?=$this->priceFormat($item->getPrice() * $item->getQty());?></td>
+        		<td><?=$item->getQuantity();?></td>
+        		<td><?=$this->priceFormat($item->getPrice() * $item->getQuantity());?></td>
         	</tr>
         	<?php endforeach; ?>
         	<tr>

@@ -1,19 +1,29 @@
+
 <?php $this->headTitle('Edit Product Size') ?>
+<?php $this->layout()->pageTitle = $this->translate('Edit Product Size');?>
 
-<div id="alerts" class="col-md-12">
-    <?=$this->tbFlashMessenger()->render(); ?>
-</div>
+<?php $this->placeholder('header-buttons')->captureStart();?>
+<button type="submit" form="form-product-size" data-toggle="tooltip" title="<?=$this->translate('Save');?>" class="btn btn-primary">
+    <i class="fa fa-save"></i>
+</button>
+<a href="<?=$this->url('admin/shop/category');?>" data-toggle="tooltip" title="<?=$this->translate('Cancel');?>" class="btn btn-default">
+    <i class="fa fa-reply"></i>
+</a>
+<?php $this->placeholder('header-buttons')->captureEnd();?>
 
-<div class="col-md-12">
-    <?=$this->partial('uthando-admin/partial/add-edit-form', [
-        'form' 			=> $this->form,
-        'formName'		=> 'Product Size',
-        'formElements'	=> [
-            'productSizeId', 'size',
-        ],
-        'postUrl'		=> $this->url('admin/shop/product/size/edit', [
-            'id'        => $this->model->getProductSizeId(),
-        ]),
-        'cancelUrl'     => $this->url('admin/shop/product/size'),
-    ]); ?>
+<?php $this->form->setAttributes([
+    'method' => 'post',
+    'id' => 'form-product-size',
+    'action' => $this->url('admin/shop/product/size/edit', [
+        'id' => $this->model->getProductSizeId(),
+    ]),
+]); ?>
+
+<div id="product-size-edit" class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-pencil"></i> <?=$this->translate('Edit Size');?></h3>
+    </div>
+    <div class="panel-body">
+        <?=$this->form($this->form);?>
+    </div>
 </div>

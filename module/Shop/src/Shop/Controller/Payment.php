@@ -80,23 +80,24 @@ class Payment extends AbstractActionController
                 'orderId' => $order->getOrderId(),
                 'address' => $order->getCustomer()->getBillingAddress()->getArrayCopy(),
             ];
-            
-            $service->setFormOptions([
+
+            $options = [
                 'billing_country' => $order->getCustomer()
                     ->getBillingAddress()
                     ->getCountry()
                     ->getCode(),
-            ]);
+            ];
             
             $viewModel->setVariables([
                 'order' => $order,
-                'form' => $service->getForm(null, $data, true, true),
+                'form' => $service->getForm(null, $options)->setData($data),
             ]);
 
             return $viewModel;
         }
-        
+
         $result = $service->process($prg);
+
 
         if ($result instanceof Form) {
             $this->flashMessenger()->addErrorMessage('There were one or more issues with your submission. Please correct them as indicated below.');

@@ -12,6 +12,7 @@ namespace Shop\Controller;
 
 use Shop\ShopException;
 use UthandoCommon\Service\ServiceTrait;
+use Zend\Http\PhpEnvironment\Response;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
@@ -61,10 +62,13 @@ class Catalog extends AbstractActionController
                 'limit' => $options->getProductsPerPage(),
                 'page' => $page
         ])->getProductsByCategory($category->getIdent(), $options->getProductsOrderCol());
+
+        $subCategories = $this->getProductCategoryService()->getCategoriesByParentId($category->getProductCategoryId());
         
         return new ViewModel([
             'bread' => $this->getBreadcrumb($category->getProductCategoryId()),
             'category' => $category,
+            'subCategories' => $subCategories,
             'products' => $products
         ]);
     }
@@ -85,23 +89,37 @@ class Catalog extends AbstractActionController
 
     public function searchAction()
     {
+        $searchData = [];
         $session = $this->sessionContainer('CatalogSearch');
-        $searchData = $session->offsetGet('searchData');
+        $prg = null;
+
+        if ($this->getRequest()->isXmlHttpRequest()) {
+            $searchData = $this->params()->fromPost();
+        } else {
+            $prg = $this->prg();
+        }
+
+        if ($prg instanceof Response) {
+            return $prg;
+        } elseif (false === $prg) {
+            $searchData = $session->offsetGet('searchData');
+        } elseif (is_array($prg)) {
+            $searchData = $prg;
+        }
 
         $options = $this->getShopOptions();
-        $page = $this->params()->fromPost('page', $session->offsetGet('page'));
-        $sort = $this->params()->fromPost('sort', $options->getProductsOrderCol());
+        $page = (isset($searchData['page'])) ? $searchData['page'] : $session->offsetGet('page');
+        $sort = (isset($searchData['sort'])) ? $searchData['sort'] : $options->getProductsOrderCol();
         $sl = $this->getServiceLocator();
         
         $form = $sl->get('FormElementManager')->get('ShopCatalogSearch');
         $inputFilter = $sl->get('InputFilterManager')->get('ShopCatalogSearch');
         $form->setInputFilter($inputFilter);
-        $form->setData(
-            ($searchData ==! $this->params()->fromPost() && null !== $searchData) ? $searchData : $this->params()->fromPost()
-        );
-        $form->isValid();
+        $form->setData($searchData);
 
-        $session->offsetSet('searchData', $form->getData());
+        $formData = ($form->isValid()) ? $form->getData() : [];
+
+        $session->offsetSet('searchData', $formData);
         $session->offsetSet('page', $page);
 
         $this->layout()->setVariable('searchData', $searchData);
@@ -109,7 +127,7 @@ class Catalog extends AbstractActionController
         $products = $this->getProductService()->usePaginator([
             'limit' => $options->getProductsPerPage(),
             'page' => $page,
-        ])->searchProducts($form->getData(), $sort);
+        ])->searchProducts($formData, $sort);
         
         $viewModel = new ViewModel([
             'products' => $products,

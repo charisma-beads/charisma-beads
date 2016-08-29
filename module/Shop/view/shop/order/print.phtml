@@ -1,3 +1,4 @@
+<?=$this->doctype(); ?>
 <html>
     <head>
         <?=$this->headTitle($this->shopOption('merchantName') . ' - Order No. ' .$this->order->getOrderNumber()); ?>
@@ -10,6 +11,5 @@
         <?=$this->partial('shop/order/table-view', [
             'order' => $this->order,
         ])?>
-
     </body>
 </html>

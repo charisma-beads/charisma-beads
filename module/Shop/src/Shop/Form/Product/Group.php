@@ -5,7 +5,7 @@
  * @package   Shop\Form\Product
  * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
  * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
+ * @license   see LICENSE
  */
 
 namespace Shop\Form\Product;
@@ -38,9 +38,9 @@ class Group extends Form
     		'options'		=> [
     			'label'      => 'Group:',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-4',
+                'column-size' => 'sm-10',
                 'label_attributes' => [
-                    'class' => 'col-md-2',
+                    'class' => 'col-sm-2',
                 ],
     		],
     	]);
@@ -56,11 +56,11 @@ class Group extends Form
     		],
     		'options'		=> [
     			'label'			=> 'Price:',
-        		'help-inline'	=> 'Do not include the currency sign or commas.',
+        		'help-block'	=> 'Do not include the currency sign or commas.',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-4',
+                'column-size' => 'sm-10',
                 'label_attributes' => [
-                    'class' => 'col-md-2',
+                    'class' => 'col-sm-2',
                 ],
     		],
     	]);

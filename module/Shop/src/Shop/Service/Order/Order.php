@@ -13,6 +13,8 @@ namespace Shop\Service\Order;
 use Shop\Model\Customer\Customer as CustomerModel;
 use Shop\Model\Order\MetaData;
 use Shop\Model\Order\Order as OrderModel;
+use Shop\Service\Cart\Cart;
+use Shop\Service\StockControl;
 use UthandoCommon\Service\AbstractRelationalMapperService;
 use Zend\Json\Json;
 use Zend\Math\BigInteger\BigInteger;
@@ -57,6 +59,7 @@ class Order extends AbstractRelationalMapperService
             'refCol'        => 'orderId',
             'service'       => 'ShopOrderLine',
             'getMethod'     => 'getOrderLinesByOrderId',
+            'setMethod'     => 'setOrderLine',
         ],
     ];
 
@@ -68,12 +71,30 @@ class Order extends AbstractRelationalMapperService
         'pay_phone'         => 'Waiting for Payment',
         'pay_credit_card'   => 'Card Payment Pending',
         'pay_paypal'        => 'Paypal Payment Pending',
+        'pay_pending'       => 'Pending',
     ];
+
+    /**
+    * Attach events
+    */
+    public function attachEvents()
+    {
+        /* @var $stockControl StockControl */
+        $stockControl = $this->getService('Shop\Service\StockControl');
+
+        $this->getEventManager()->attach([
+            'stock.check',
+            'stock.save',
+            'stock.restore',
+            'stock.restore.one',
+            'stock.restore.many'
+        ], [$stockControl, 'init']);
+    }
 
     /**
      * @param $id
      * @param null $col
-     * @return array|mixed|\Shop\Model\Order\Order
+     * @return OrderModel
      */
     public function getById($id, $col = null)
     {
@@ -84,9 +105,12 @@ class Order extends AbstractRelationalMapperService
         }
 
         return $order;
-
     }
 
+    /**
+     * @param $id
+     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     */
     public function getCustomerOrdersByCustomerId($id)
     {
         $id = (int) $id;
@@ -102,21 +126,18 @@ class Order extends AbstractRelationalMapperService
     }
 
     /**
-     * @param CustomerModel $customer
-     * @param array $postData
+     * @param int $orderId
      * @return int
-     * @throws \UthandoCommon\Service\ServiceException
      */
-    public function processOrderFromCart(CustomerModel $customer, array $postData)
+    public function processOrderFromCart($orderId)
     {
-        $collectInStore = ($postData['collect_instore']) ? true : false;
-
-        /* @var $cart \Shop\Service\Cart\Cart */
+        $order = $this->getById($orderId);
+        /* @var $cart Cart */
         $cart = $this->getService('ShopCart');
-        $countryId = $customer->getDeliveryAddress()->getCountryId();
+        $countryId = $order->getCustomer()->getDeliveryAddress()->getCountryId();
         $shippingOff = false;
 
-        if ($collectInStore) {
+        if ('Collect At Store' == $order->getShipping()) {
             $countryId = null;
             $shippingOff = true;
         }
@@ -127,14 +148,43 @@ class Order extends AbstractRelationalMapperService
         $taxTotal = $cart->getTaxTotal();
         $cartTotal = $cart->getTotal();
 
+        $order->getMetadata()
+            ->setShippingTax($cart->getShippingTax());
+
+        $order->setTotal($cartTotal)
+            ->setShipping($shipping)
+            ->setTaxTotal($taxTotal);
+
+        $result = $this->save($order);
+
+        /* @var $orderLineService \Shop\Service\Order\Line */
+        $orderLineService = $this->getService('ShopOrderLine');
+        $orderLineService->processLines($cart->getCart(), $orderId);
+
+        if ($order->getCustomer()->getEmail()) {
+            $this->sendEmail($orderId);
+        }
+        
+        return $orderId;
+    }
+
+    /**
+     * @param CustomerModel $customer
+     * @param $postData
+     * @return OrderModel
+     */
+    public function create(CustomerModel $customer, $postData)
+    {
+        $collectInStore = ($postData['collect_instore']) ? true : false;
+
         /* @var $orderStatusService \Shop\Service\Order\Status */
         $orderStatusService = $this->getService('ShopOrderStatus');
 
         /* @var $orderStatus \Shop\Model\Order\Status */
         $orderStatus = $orderStatusService->getStatusByName($this->orderStatusMap[$postData['payment_option']]);
-        
+
         $metadata = new MetaData();
-        
+
         $paymentOption = ucwords(str_replace(
             '_',
             ' ',
@@ -143,60 +193,35 @@ class Order extends AbstractRelationalMapperService
 
         /* @var $shopOptions \Shop\Options\ShopOptions */
         $shopOptions = $this->getService('Shop\Options\Shop');
-        
+
         $metadata->setPaymentMethod($paymentOption)
             ->setTaxInvoice($shopOptions->isVatState())
-            ->setShippingTax($cart->getShippingTax())
             ->setRequirements($postData['requirements'])
             ->setCustomerName($customer->getFullName(), $customer->getPrefix()->getPrefix())
             ->setBillingAddress($customer->getBillingAddress())
             ->setDeliveryAddress($customer->getDeliveryAddress())
             ->setEmail($customer->getEmail());
-        
+
         if (true === $collectInStore) {
             $metadata->setShippingMethod('Collect At Store');
         }
-        
+
         $data = [
-        	'customerId'    => $customer->getCustomerId(),
+            'customerId'    => $customer->getCustomerId(),
             'orderStatusId' => $orderStatus->getOrderStatusId(),
-            //'orderNumber'   => $orderNumber,
-            'total'         => $cartTotal,
-            'shipping'      => $shipping,
-            'taxTotal'      => $taxTotal,
+            'total'         => 0,
+            'shipping'      => 0,
+            'taxTotal'      => 0,
+            'orderDate'     => New \DateTime(),
             'metadata'      => $metadata,
+            'customer'      => $customer,
+            'orderStatus'   => $orderStatus,
         ];
-        
+
         $order = $this->getMapper()->getModel($data);
-        
         $orderId = $this->save($order);
         $this->generateOrderNumber($orderId);
 
-        $c = 1;
-
-        /* @var $item \Shop\Model\Cart\Item */
-        foreach($cart->getCart() as $item) {
-            $lineData = [
-            	'orderId'   => $orderId,
-                'sortOrder' => $c,
-                'qty'       => $item->getQuantity(),
-                'price'     => $item->getPrice(),
-                'tax'       => $item->getTax(),
-                'metadata'  => $item->getMetadata(),
-            ];
-
-            /* @var $orderLineService \Shop\Service\Order\Line */
-            $orderLineService = $this->getService('ShopOrderLine');
-            $orderLine = $orderLineService
-                ->getMapper()
-                ->getModel($lineData);
-            
-            $orderLineService->save($orderLine);
-            $c++;
-        }
-        
-        $this->sendEmail($orderId);
-        
         return $orderId;
     }
 

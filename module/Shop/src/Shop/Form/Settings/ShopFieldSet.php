@@ -33,6 +33,19 @@ class ShopFieldSet extends Fieldset implements InputFilterProviderInterface
     public function init()
     {
         $this->add([
+            'name' => 'developmentMode',
+            'type' => 'checkbox',
+            'options' => [
+                'label' => 'Development Mode',
+                'use_hidden_element' => true,
+                'checked_value' => '1',
+                'unchecked_value' => '0',
+                'required' 		=> false,
+                'column-size' => 'sm-8 col-sm-offset-4',
+            ],
+        ]);
+
+        $this->add([
             'name' => 'merchantName',
             'type' => 'text',
             'options' => [

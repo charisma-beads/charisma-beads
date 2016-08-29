@@ -10,9 +10,6 @@
 
 namespace Shop\Service\Payment;
 
-use PayPal\Api\RelatedResources;
-use Shop\Model\Order\Order as OrderModel;
-use Shop\Options\PaypalOptions;
 use PayPal\Api\Amount;
 use PayPal\Api\Details;
 use PayPal\Api\Item;
@@ -21,10 +18,14 @@ use PayPal\Api\Payment;
 use PayPal\Api\PaymentExecution;
 use PayPal\Api\Payer;
 use PayPal\Api\RedirectUrls;
+use PayPal\Api\RelatedResources;
+use PayPal\Api\Sale;
 use PayPal\Api\ShippingAddress;
 use PayPal\Api\Transaction;
 use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Rest\ApiContext;
+use Shop\Model\Order\Order as OrderModel;
+use Shop\Options\PaypalOptions;
 use Shop\Service\Tax\Tax;
 use Shop\ShopException;
 use UthandoCommon\Service\AbstractService;
@@ -66,7 +67,10 @@ class Paypal extends AbstractService
      */
     public function createPayment(OrderModel $order)
     {
-        if ($order->getMetadata()->getPaymentId()) {
+        $orderStatus = $order->getOrderStatus()->getOrderStatus();
+        $pending = (StringUtils::endsWith($orderStatus, 'Pending') || 'Waiting for Payment' === $orderStatus) ?  true : false;
+
+        if ($order->getMetadata()->getPaymentId() && false === $pending) {
             throw new ShopException('Payment already processed');
         }
 
@@ -141,7 +145,7 @@ class Paypal extends AbstractService
             $item->setDescription($orderItem->getMetadata()->getDescription());
             $item->setPrice($price);
             $item->setTax($tax);
-            $item->setQuantity($orderItem->getQty());
+            $item->setQuantity($orderItem->getQuantity());
             $item->setCurrency($options->getCurrencyCode());
             
             $items[] = $item;
@@ -170,7 +174,21 @@ class Paypal extends AbstractService
         $payment->setRedirectUrls($redirectUrls);
         $payment->setTransactions([$transaction]);
 
-        $payment->create($this->getApiContent());
+        try {
+            $payment->create($this->getApiContent());
+        } catch (\Exception $e) {
+            $paypalException = new PaymentException(
+                'An error occurred when trying to execute your PayPal payment, please contact the shop to process your payment',
+                $e->getCode(),
+                $e
+            );
+
+            $paypalException->setOrder($order)
+                ->setPayment($payment);
+
+            throw $paypalException;
+        }
+        
 
         $order->getMetadata()->setPaymentId($payment->getId());
         
@@ -193,23 +211,47 @@ class Paypal extends AbstractService
             'redirectUrl'   => $redirectUrl
         ];
     }
-    
+
+    /**
+     * Execute payment and get it's status
+     *
+     * @param OrderModel $order
+     * @param $payerId
+     * @return OrderModel
+     * @throws ShopException
+     */
     public function executePayment(OrderModel $order, $payerId)
     {
         $paymentId = $order->getMetadata()->getPaymentId();
         $payment = $this->getPayment($paymentId);
+
+        if ($this->getRelatedResource($payment)->getSale() instanceof Sale) {
+            throw new ShopException('Payment already processed');
+        }
         
         $execution = new PaymentExecution();
         $execution->setPayerId($payerId);
-        
-        $payment = $payment->execute($execution, $this->getApiContent());
+
+        try {
+            $payment = $payment->execute($execution, $this->getApiContent());
+        } catch (\Exception $e) {
+            $paypalException = new PaymentException(
+                'An error occurred when trying to execute your PayPal payment, please contact the shop to process your payment',
+                $e->getCode(),
+                $e
+            );
+
+            $paypalException->setOrder($order)
+                ->setPayment($payment);
+
+            throw $paypalException;
+        }
 
         $paymentState = $payment->getState();
         /* @var Transaction $transaction */
-        $transaction = $payment->getTransactions()[0];
-        /* @var RelatedResources $relatedResource */
-        $relatedResource = $transaction->getRelatedResources()[0];
-        $saleState = $relatedResource->getSale()->getState();
+        $saleState = $this->getRelatedResource($payment)
+            ->getSale()
+            ->getState();
             
         if ('approved' === $paymentState && 'completed' === $saleState) {
             /* @var $orderStatus \Shop\Model\Order\Status */
@@ -222,6 +264,23 @@ class Paypal extends AbstractService
     }
 
     /**
+     * @param Payment $payment
+     * @return RelatedResources
+     */
+    public function getRelatedResource(Payment $payment)
+    {
+        /* @var Transaction $transaction */
+        $transaction = $payment->getTransactions()[0];
+        /* @var RelatedResources $relatedResource */
+
+        if (1 === count($transaction->getRelatedResources())) {
+            return $transaction->getRelatedResources()[0];
+        }
+
+        return new RelatedResources();
+    }
+
+    /**
      * @param $paymentId
      * @return Payment
      */
@@ -229,7 +288,10 @@ class Paypal extends AbstractService
     {
         return Payment::get($paymentId, $this->getApiContent());
     }
-    
+
+    /**
+     * @return ApiContext
+     */
     public function getApiContent()
     {
         if (!$this->apiContext instanceof ApiContext) {
@@ -252,7 +314,12 @@ class Paypal extends AbstractService
         
         return $this->apiContext;
     }
-    
+
+    /**
+     * @param $action
+     * @param $orderId
+     * @return mixed
+     */
     public function buildUrl($action, $orderId)
     {
         $viewManager = $this->getServiceLocator()
@@ -268,7 +335,10 @@ class Paypal extends AbstractService
         
         return $scheme($url);
     }
-    
+
+    /**
+     * @return array|object|\Shop\Service\Order\Status
+     */
     public function getOrderStatusService()
     {
         if (!$this->orderStatusService) {

@@ -27,6 +27,7 @@ class ProductOptions extends AbstractViewHelper
         $formManager = $sl->get('FormElementManager');
 
         $options = $formManager->get('ProductOptionList', [
+            'name' => 'ProductOptionList',
             'product' => $product,
         ]);
 

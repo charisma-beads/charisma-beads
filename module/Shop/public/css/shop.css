@@ -4,7 +4,27 @@ fieldset:nth-child(odd)  {
     clear: both;
 }
 
+.form-group.has-error ul {
+    padding: 0;
+    list-style: none;
+}
+
 /* Panel Styles */
+#shop-overview .panel-body,
+.panel-table {
+    max-height: 300px;
+    overflow: auto;
+}
+
+#monthly-totals select {
+    height: 26px;
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+
 .panel-title {
     position: relative;
     vertical-align: middle;
@@ -75,12 +95,28 @@ a.current-order-link {
     max-width: 100%; /* Max Width of the popover (depending on the container!) */
 }
 
-/* start iPad viewport bug hack */
-body {
-    padding-right: 0px !important
+#add-order-button {
+    color: #000000;
 }
 
-.modal-open {
+.table-pre-wrap pre {
+    white-space: pre-wrap;       /* Since CSS 2.1 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
+/* equal height panel */
+.row-eq-height, .row-eq-height > div[class='panel']{
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex:1 1 auto;
+}
+
+#scrollable-typeahead-menu .tt-menu {
+    max-height: 150px;
     overflow-y: auto;
 }
-/* end iPad viewport bug hack */

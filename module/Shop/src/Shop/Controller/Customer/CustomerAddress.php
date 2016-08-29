@@ -5,7 +5,7 @@
  * @package   Shop\Controller\Customer
  * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
  * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
+ * @license   see LICENSE
  */
 
 namespace Shop\Controller\Customer;
@@ -162,7 +162,7 @@ class CustomerAddress extends AbstractCrudController
 	    		}
 	    	}
 	    	
-	    	$form = $this->getService()->getForm($model);
+	    	$form = $this->getService()->prepareForm($model);
             $form->get('returnTo')->setValue(html_entity_decode($this->params('return', null)));
 	    	
     	} catch (Exception $e) {

@@ -10,8 +10,6 @@
 
 namespace Shop\Model\Order;
 
-use UthandoCommon\Model\Model;
-use UthandoCommon\Model\ModelInterface;
 use Shop\Model\Customer\Customer;
 use DateTime;
 
@@ -20,9 +18,10 @@ use DateTime;
  *
  * @package Shop\Model\Order
  */
-class Order implements ModelInterface
+class Order extends AbstractOrderCollection
 {
-    use Model;
+
+    protected $entityClass = 'Shop\Model\Order\Line';
     
     /**
      * @var int
@@ -78,11 +77,6 @@ class Order implements ModelInterface
      * @var Status
      */
     protected $orderStatus;
-    
-    /**
-     * @var array
-     */
-    protected $orderLines = array();
 
     /**
      * @return int
@@ -287,10 +281,12 @@ class Order implements ModelInterface
 
     /**
      * @param Status $orderStatus
+     * @return $this
      */
     public function setOrderStatus(Status $orderStatus)
     {
         $this->orderStatus = $orderStatus;
+        return $this;
     }
 
     /**
@@ -298,22 +294,26 @@ class Order implements ModelInterface
      */
     public function getOrderLines()
     {
-        return $this->orderLines;
+        return $this->getEntities();
     }
 
     /**
      * @param $orderLines
+     * @return $this
      */
     public function setOrderLines($orderLines)
     {
-        $this->orderLines = $orderLines;
+        $this->setEntities($orderLines);
+        return $this;
     }
 
     /**
      * @param Line $orderLine
+     * @return $this
      */
     public function setOrderLine(Line $orderLine)
     {
-        $this->orderLines[] = $orderLine;
+        $this->add($orderLine);
+        return $this;
     }
 }

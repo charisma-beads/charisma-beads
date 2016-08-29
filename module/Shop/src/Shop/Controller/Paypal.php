@@ -11,11 +11,14 @@
 namespace Shop\Controller;
 
 use Exception;
+use PayPal\Exception\PayPalConnectionException;
+use Shop\Service\Payment\PaymentException;
 use Shop\Service\Payment\Paypal as PaypalService;
 use Shop\Service\Order\Order as OrderService;
 use UthandoCommon\Controller\SetExceptionMessages;
 use UthandoCommon\Service\ServiceTrait;
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
 
 /**
  * Class Paypal
@@ -37,6 +40,37 @@ class Paypal extends AbstractActionController
      */
     protected $orderService;
 
+    public function searchAction()
+    {
+        $orderId    = $this->params()->fromRoute('paymentId');
+        $error      = null;
+        $payment    = null;
+        $data       = null;
+        $code       = null;
+
+        try {
+            $payment = $this->getPaypalService()
+                ->getPayment($orderId);
+        } catch (PayPalConnectionException $e) {
+            $code = $e->getCode(); // Prints the Error Code
+            $data = $e->getData(); // Prints the detailed error message
+            $error = $e->getMessage();
+        }
+
+        $viewModel = new ViewModel([
+            'payment'   => $payment,
+            'error'     => $error,
+            'data'      => $data,
+            'code'      => $code,
+        ]);
+
+        if ($this->getRequest()->isXmlHttpRequest()) {
+            $viewModel->setTerminal(true);
+        }
+
+        return $viewModel;
+    }
+
     public function processAction()
     {
         $orderId = $this->params()->fromRoute('orderId');
@@ -50,7 +84,15 @@ class Paypal extends AbstractActionController
 
             $update = $this->getOrderService()->save($result['order']);
         } catch (Exception $e) {
+
+            $mailer = $this->getService('ExceptionMailer\ErrorHandling');
+            $config = $mailer->getConfig();
+            $config['exception_mailer']['template'] = 'error/paypal';
+            $mailer->setConfig($config);
+
+            $mailer->mailException($e);
             $this->setExceptionMessages($e);
+            
             return ['order' => $order];
         }
 
@@ -101,6 +143,12 @@ class Paypal extends AbstractActionController
                 ->getCustomerOrderByUserId($orderId, $userId);
 
         } catch (Exception $e) {
+            $mailer = $this->getService('ExceptionMailer\ErrorHandling');
+            $config = $mailer->getConfig();
+            $config['exception_mailer']['template'] = 'error/paypal';
+            $mailer->setConfig($config);
+
+            $mailer->mailException($e);
             $this->setExceptionMessages($e);
         }
 

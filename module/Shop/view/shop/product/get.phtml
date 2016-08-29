@@ -1,0 +1,41 @@
+<?php /** @var  \Shop\Model\Product\Product $product */ $product = $this->product;?>
+
+<div class="media">
+    <div class="media-left">
+        <img class="media-object" src="<?=$this->productImage($product, 'thumb');?>">
+    </div>
+    <div class="media-body">
+        <h4 class="media-heading">
+            <?=$this->escapeHtml($product->getProductCategory()->getCategory());?><br>
+            <?=$this->escapeHtml($product->getSku());?> - <?=$this->escapeHtml($product->getName());?>
+        </h4>
+        <?php if ($product->inStock() && $product->isEnabled()) : ?>
+        <span class="text-success"><!-- stock -->
+            <i class="fa fa-check"></i>
+            <span class="text-muted">
+                <?=($product->getQuantity() > 0) ? $this->escapeHtml($product->getQuantity()) :'';?>
+            </span> in stock
+        </span><!-- /stock -->
+        <?php else: ?>
+        <span class="text-danger"><!-- stock -->
+            <i class="fa fa-times"></i> out of stock
+        </span><!-- /stock -->
+        <?php endif; ?>
+        <?php if ($product->inStock() && $product->isEnabled()):?>
+        <form id="product-form" method="post">
+            <?php if ($product->getProductOption()): ?>
+            <div class="form-group">
+                <?=$this->productOptions($product);?>
+            </div>
+            <?php endif; ?>
+            <div class="form-group">
+                <input class="form-control" name="qty" value="" placeholder="Qty">
+            </div>
+            <button type="submit" name="buy-item" class="btn btn-primary">
+                ADD TO ORDER <i class="fa fa-shopping-cart"></i>
+            </button>
+            <input type="hidden" name="productId" value="<?=$this->escapeHtml($product->getProductId());?>">
+        </form>
+        <?php endif; ?>
+    </div>
+</div>

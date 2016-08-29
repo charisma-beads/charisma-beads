@@ -5,7 +5,7 @@
  * @package   Shop\Form\Customer
  * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
  * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
+ * @license   see LICENSE
  */
 
 namespace Shop\Form\Customer;
@@ -19,56 +19,56 @@ use Zend\Form\Form;
  * @package Shop\Form\Customer
  */
 class Customer extends Form
-{	
+{
     use CustomerTrait;
-    
-	public function init()
-	{
-	    $this->add([
-	        'name' => 'customerId',
-	        'type' => 'hidden',
-	    ]);
-	    
-	    $this->add([
-            'name' => 'userId',
-	        'type' => 'hidden',
-	    ]);
+
+    public function init()
+    {
+        $this->add([
+            'name' => 'customerId',
+            'type' => 'hidden',
+        ]);
 
         $this->add([
-            'name'      => 'redirectToEdit',
-            'type'      => 'hidden',
-            'attributes'   => [
+            'name' => 'userId',
+            'type' => 'hidden',
+        ]);
+
+        $this->add([
+            'name' => 'redirectToEdit',
+            'type' => 'hidden',
+            'attributes' => [
                 'value' => true,
             ],
         ]);
-	    
-	    $this->add([
-	        'name' => 'billingAddressId',
-	        'type' => 'CustomerAddressList',
-	        'options' => [
+
+        $this->addElements();
+
+        $this->add([
+            'name' => 'billingAddressId',
+            'type' => 'CustomerAddressList',
+            'options' => [
                 'label' => 'Billing Address:',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-8',
+                'column-size' => 'sm-10',
                 'label_attributes' => [
-                    'class' => 'col-md-4',
+                    'class' => 'col-sm-2',
                 ],
-	       ],
-	    ]);
-	    
-	    $this->add([
+            ],
+        ]);
+
+        $this->add([
             'name' => 'deliveryAddressId',
             'type' => 'CustomerAddressList',
             'options' => [
                 'label' => 'Delivery Address:',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-8',
+                'column-size' => 'sm-10',
                 'label_attributes' => [
-                    'class' => 'col-md-4',
+                    'class' => 'col-sm-2',
                 ],
 
             ],
         ]);
-	    
-	    $this->addElements();
-	}
+    }
 }

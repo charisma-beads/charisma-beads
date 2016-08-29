@@ -29,6 +29,11 @@ class ProductCategoryImageList extends Select implements ServiceLocatorAwareInte
      */
     protected $categoryId;
 
+    public function init()
+    {
+        $this->setName('image-select');
+    }
+
     public function setOptions($options)
     {
         parent::setOptions($options);

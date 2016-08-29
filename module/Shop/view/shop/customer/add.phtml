@@ -1,26 +1,39 @@
 
 <?php
-$this->headTitle('Add Customer');
 $this->form->get('firstname')->setAttribute('readonly', '');
 $this->form->get('lastname')->setAttribute('readonly', '');
 $this->form->get('email')->setAttribute('readonly', '');
+$this->form->remove('billingAddressId')
+    ->remove('deliveryAddressId');
 ?>
 
-<?=$this->partial('uthando-admin/partial/add-edit-form', [
-    'form' 			=> $this->form,
-    'formName'		=> 'New Customer',
-    'postUrl'		=> $this->url('admin/shop/customer/edit', [
+<?php $this->headTitle('Add Customer') ?>
+<?php $this->layout()->pageTitle = $this->translate('Add Customer'); ?>
+
+<?php $this->placeholder('header-buttons')->captureStart(); ?>
+<button type="submit" form="form-customer" data-toggle="tooltip" title="<?= $this->translate('Save'); ?>"
+        class="btn btn-primary">
+    <i class="fa fa-save"></i>
+</button>
+<a href="<?= $this->url('admin/shop/customer'); ?>" data-toggle="tooltip" title="<?= $this->translate('Cancel'); ?>"
+   class="btn btn-default">
+    <i class="fa fa-reply"></i>
+</a>
+<?php $this->placeholder('header-buttons')->captureEnd(); ?>
+
+<?php $this->form->setAttributes([
+    'method' => 'post',
+    'id' => 'form-customer',
+    'action' => $this->url('admin/shop/customer/edit', [
         'action' => 'add',
     ]),
-    'cancelUrl'     => $this->url('admin/shop/customer'),
-    'formElements' => [
-        'prefixId', 'redirectToEdit', 'firstname', 'lastname', 'email',
-    ],
-    'formWidth'     => '6',
-    'helperOptions' => [
-        'labelWidth'    => '4',
-        'elementWidth'  => '8',
-    ],
 ]); ?>
 
-<div class="clearfix"></div>
+<div id="customer" class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-pencil"></i> <?= $this->translate('Add Customer'); ?></h3>
+    </div>
+    <div class="panel-body">
+        <?= $this->form($this->form); ?>
+    </div>
+</div>
