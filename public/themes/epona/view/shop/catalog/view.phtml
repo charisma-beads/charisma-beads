@@ -5,12 +5,18 @@
 
 <?php $this->placeholder('header')->captureStart();?>
 <?=$this->partial('shop/options', [
-    'title' => $this->escapehtml($product->getName()),
+    'title' => $this->escapehtml(join(' - ', [
+        $product->getProductCategory()->getCategory(),
+        $product->getSku(),
+        $product->getName()
+    ])),
     'bread' => $this->bread,
     'product' => $product,
     'category' => $product->getProductCategory(),
 ]);?>
 <?php $this->placeholder('header')->captureEnd();?>
+
+<?php $this->placeholder('structured-data')->set($this->structuredData($this->product));?>
 
 <div class="row">
     <div class="col-md-3 hidden-sm">
@@ -19,7 +25,6 @@
     <div class="col-md-9">
         <div class="row">
             <div class="col-md-4 col-sm-4">
-
                 <figure class="product-view-image"><!-- product image -->
                     <?php if ($product->getShowImage()):?>
                     <a href="<?=$this->productImage($product, 'full');?>" class="lightbox img-thumbnail" data-plugin-options='{"type":"image"}'>
@@ -27,21 +32,25 @@
                     </a>
                     <?php endif;?>
                     <p class="fsize11 margin-top30">
-                        <?=$product->getSku();?>&nbsp;
-                        <?=$product->getShortDescription();?>
+                        <span><?=$this->escapeHtml($product->getSku());?></span>&nbsp;
+                        <?=$this->escapeHtml($product->getShortDescription());?>
                     </p>
                 </figure>
             </div>
             <div class="col-md-8 col-sm-8">
 
-                <h1 class="product-view-title"><?=$product->getSku();?> <?=$product->getName();?></h1>
+                <h1 class="product-view-title">
+                    <?=$this->escapeHtml($product->getProductCategory()->getCategory());?>&nbsp;
+                    <?=$this->escapeHtml($product->getSku());?>&nbsp;
+                    <?=$this->escapeHtml($product->getName());?>
+                </h1>
 
                 <h3 class="product-view-price"><em><?=$this->productPrice($product);?></em></h3>
                 <p><?=$product->getDescription();?></p>
 
                 <hr class="half-margins" />
 
-                <?php if ($product->inStock()) : ?>
+                <?php if ($product->inStock() && $product->isEnabled()):?>
                     <span class="shop-stock-info stock-yes"><!-- stock -->
                         <i class="fa fa-check"></i> <span class="text-muted">
                             <?=($product->getQuantity() > 0) ? $product->getQuantity() : '';?>
@@ -66,7 +75,7 @@
 
                 <?php $form = $this->cart()->addForm($product)->setAttribute('class', 'form-inline margin-top30 nopadding clearfix'); ?>
                 
-                <?php if ($product->inStock()):?>
+                <?php if ($product->inStock() && $product->isEnabled()):?>
                 <?=$this->form()->openTag($form); ?>
                     <?=$this->formHidden($form->get('productId')); ?>
                     <?=$this->formHidden($form->get('returnTo')); ?>

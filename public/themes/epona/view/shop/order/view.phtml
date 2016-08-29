@@ -30,7 +30,7 @@
                                 'orderId' => $this->order->getOrderId(),
                             ]);?>"><i class="fa fa-credit-card fa-3x"></i></a>
                             <?php endif;?>
-                            <a href="tel:<?=$this->contact()->formatPhoneNumber();?>">
+                            <a href="tel:<?=$this->contact()->formatPhoneNumber('phone');?>">
                                 <i class="fa fa-phone fa-3x"></i></a>
                             <a href="<?=$this->url('shop/order/print', [
                                 'orderId' => $this->order->getOrderId(),
@@ -117,8 +117,8 @@
                         &nbsp;(<?=$item->getMetadata()->getPostUnit();?> grams)
                     <?php endif; ?>
                 </div>
-                <div class="total_price"><span><?=$this->priceFormat($item->getPrice() * $item->getQty());?></span></div>
-                <div class="qty"><?=$item->getQty();?> &times; <?=$this->priceFormat($item->getPrice());?></div>
+                <div class="total_price"><span><?=$this->priceFormat($item->getPrice() * $item->getQuantity());?></span></div>
+                <div class="qty"><?=$item->getQuantity();?> &times; <?=$this->priceFormat($item->getPrice());?></div>
                 <div class="clearfix"></div>
             </div>
             <!-- /cart item -->

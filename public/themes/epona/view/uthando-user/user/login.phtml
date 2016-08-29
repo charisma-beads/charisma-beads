@@ -1,9 +1,9 @@
 
-<?php if ($this->renderPageTitle != false):?>
+<?php if (!$this->disablePageTitle):?>
     <?php $this->placeholder('page-top')->captureStart();?>
 
     <?=$this->partial('layout/page-title', [
-        'pageTitle' => 'Login'
+        'pageTitle' => 'Login - Register'
     ]);?>
     <?php $this->placeholder('page-top')->captureEnd();?>
 <?php endif;?>

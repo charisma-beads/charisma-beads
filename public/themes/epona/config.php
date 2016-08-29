@@ -3,8 +3,10 @@
 return [
     'template_map' => [
         'application/index/index'                               => __DIR__ . '/view/application/index/index.phtml',
+        'application/partial/paginate'                          => __DIR__ . '/view/partial/paginate.phtml',
 
-        'error/404'                                             => __DIR__ . '/view/error/404.phtml',
+        //'error/404'                                             => __DIR__ . '/view/error/404.phtml',
+        //'error/index'                                           => __DIR__ . '/view/error/index.phtml',
 
         'layout/layout'                                         => __DIR__ . '/view/layout/layout.phtml',
         'layout/page-title'                                     => __DIR__ . '/view/layout/page-title.phtml',
@@ -14,6 +16,7 @@ return [
         'shop/cart/summary'                                     => __DIR__ . '/view/shop/cart/summary.phtml',
         'shop/cart/view'                                        => __DIR__ . '/view/shop/cart/view.phtml',
         'shop/catalog/index'                                    => __DIR__ . '/view/shop/catalog/index.phtml',
+        'shop/catalog/new-products-carousel'                    => __DIR__ . '/view/shop/catalog/new-products-carousel.phtml',
         'shop/catalog/search'                                   => __DIR__ . '/view/shop/catalog/search.phtml',
         'shop/catalog/view'                                     => __DIR__ . '/view/shop/catalog/view.phtml',
         'shop/checkout/confirm-address'                         => __DIR__ . '/view/shop/checkout/confirm-address.phtml',
@@ -27,6 +30,7 @@ return [
         'shop/faq/faq'                                          => __DIR__ . '/view/shop/faq/faq.phtml',
         'shop/payment/credit-card'                              => __DIR__ . '/view/shop/payment/credit-card.phtml',
         'shop/payment/phone'                                    => __DIR__ . '/view/shop/payment/phone.phtml',
+        'shop/paypal/success'                                   => __DIR__ . '/view/shop/order/view.phtml',
         'shop/order/my-orders'                                  => __DIR__ . '/view/shop/order/my-orders.phtml',
         'shop/order/pagination'                                 => __DIR__ . '/view/shop/order/pagination.phtml',
         'shop/order/view'                                       => __DIR__ . '/view/shop/order/view.phtml',

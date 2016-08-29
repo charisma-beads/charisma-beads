@@ -12,10 +12,11 @@
         <?=$this->partial('shop/product-nav');?>
     </div>
     <div class="col-md-9">
+        <?=$this->partial('shop/catalog/new-products-carousel');?>
         <!-- PRODUCT CATEGORIES -->
         <div class="row">
             <?php /* @var $row \Shop\Model\Product\Category */ ?>
-             <?php $c=0;?>
+            <?php $c=0;?>
             <?php foreach ($this->cats as $row): ?>
             <?php $c++;?>
                 <div class="col-sm-4 col-md-4"><!-- category -->

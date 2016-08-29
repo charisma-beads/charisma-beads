@@ -5,96 +5,107 @@
 ]);?>
 <?php $this->placeholder('header')->captureEnd();?>
 <div id="search-content">
-    <div class="row">
-        <div class="col-md-3 hidden-sm">
-            <?=$this->partial('shop/product-nav');?>
-        </div>
-        <div class="col-md-9">
-            <!-- PRODUCT LIST -->
-            <div class="row">
-                <?php /* @var $row \Shop\Model\Product\Product */ ?>
-                <?php foreach ($this->products as $row): ?>
-                    <div class="col-md-3 col-sm-3 shop-item-list"><!-- item -->
-                        <a href="<?=$this->url('shop/catalog/product', [
-                            'categoryIdent' => $row->getProductCategory()->getIdent(),
-                            'productIdent' => $row->getIdent(),
-                        ]);?>">
-
-                            <?php if ($row->getShowImage()):?>
-                            <figure><!-- image -->
-                                <img class="" src="<?=$this->productImage($row, 'thumb');?>" alt="" />
-                            </figure><!-- /image -->
-                            <?php endif;?>
-                            <?php if ($row->inStock()) : ?>
-                            <span class="shop-stock-info stock-yes"><!-- stock -->
-                                <span class="text-muted"><?=$this->escapehtml($row->getSku());?></span>
-                                <i class="fa fa-check"></i>
-                                <span class="text-muted">
-                                    <?=($row->getQuantity() > 0) ? $row->getQuantity() :'';?>
-                                </span> in stock
-                            </span><!-- /stock -->
-                            <?php else: ?>
-                            <span class="shop-stock-info stock-no"><!-- stock -->
-                                <span class="text-muted"><?=$this->escapehtml($row->getSku());?></span>
-                                <i class="fa fa-times"></i> out of stock
-                            </span><!-- /stock -->
-                            <?php endif; ?>
-                            <div class="product-info"><!-- title and price -->
-                                <h2>
-                                    <span class="product-name">
-                                        <?=$this->escapeHtml($row->getProductCategory()->getCategory());?> -
-                                        <?=$this->escapeHtml($row->getName());?><br>
-                                        Size:<?=$row->getProductSize()->getSize();?>
-                                    </span>
-                                    <?=$this->productPrice($row)
-                                        ->setFormat('<span class="bold">%s</span> %s %s')
-                                        ->setDiscountFormat('<span class="line-through">%s</span>'); ?>
-        
-                                </h2>
-                            </div><!-- /title and price -->
-                        </a>
-                        
-                        <?php $form = $this->cart()->addForm($row)->setAttribute('class', 'margin-top10 nopadding clearfix'); ?>
-                        
-                         <?php if ($row->getQuantity() != 0):?>
-                        <?=$this->form()->openTag($form); ?>
-                            <?=$this->formHidden($form->get('productId')); ?>
-                            <?=$this->formHidden($form->get('returnTo')); ?>
-                            
-                            <?php if ($row->getProductOption()): ?>
-                            <div class="row">
-                                <div class="col col-md-12">
-                                    <?=$this->productOptions($row);?>
-                                </div><!-- /btn-group -->
-                            </div>
-                            <?php endif; ?>
-                            
-                            <?=$this->formInput($form->get('qty')->setAttribute('class', 'form-control')); ?>
-                    
-                            <button type="submit" name="buy-item" class="btn btn-primary col-md-12">
-                                ADD TO CART <i class="fa fa-shopping-cart"></i>
-                                <?=$this->cart()->hasProductInCart($row);?>
-                            </button>
-                            
-                        <?=$this->form()->closeTag(); ?>
-                        <?php endif; ?>
-                    </div><!-- /item -->
-                <?php endforeach; ?>
-                
-                <?php if ($this->products->count() == 0):?>
-                    <h3>No products match your search.</h3>
-                <?php endif;?>
-            </div><!-- /PRODUCT LIST -->
-        </div>
+    <div class="col-md-3 hidden-sm">
+        <?=$this->partial('shop/product-nav');?>
     </div>
+    <div class="col-md-9">
+        <!-- PRODUCT LIST -->
+        <div class="row">
+            <?php if ($this->cart()->countItems() > 0):?>
 
-    <!-- PAGINATION -->
-    <?=$this->paginationControl(
-        $this->products,
-        'Elastic',
-        'application/partial/paginate',
-        ['route' => 'shop/search/page']
-    ); ?><!-- /PAGINATION -->
+                <div class="col-md-12 text-center cart-links">
+                    <a href="<?=$this->url('shop/cart', [
+                        'action' => 'view'
+                    ]);?>" class="btn btn-primary">VIEW CART</a>
+
+                    <a href="<?=$this->url('shop/checkout');?>" class="btn btn-info">CHECKOUT</a>
+                </div>
+
+            <?php endif;?>
+            <?php /* @var $row \Shop\Model\Product\Product */ ?>
+            <?php foreach ($this->products as $row): ?>
+                <div class="col-md-3 col-sm-3 shop-item-list"><!-- item -->
+                    <a href="<?=$this->url('shop/catalog/product', [
+                        'categoryIdent' => $row->getProductCategory()->getIdent(),
+                        'productIdent' => $row->getIdent(),
+                    ]);?>">
+
+                        <?php if ($row->getShowImage()):?>
+                        <figure><!-- image -->
+                            <img class="" src="<?=$this->productImage($row, 'thumb');?>" alt="" />
+                        </figure><!-- /image -->
+                        <?php endif;?>
+                        <?php if ($row->inStock() && $row->isEnabled()):?>
+                        <span class="shop-stock-info stock-yes"><!-- stock -->
+                            <span class="text-muted"><?=$this->escapehtml($row->getSku());?></span>
+                            <i class="fa fa-check"></i>
+                            <span class="text-muted">
+                                <?=($row->getQuantity() > 0) ? $row->getQuantity() :'';?>
+                            </span> in stock
+                        </span><!-- /stock -->
+                        <?php else: ?>
+                        <span class="shop-stock-info stock-no"><!-- stock -->
+                            <span class="text-muted"><?=$this->escapehtml($row->getSku());?></span>
+                            <i class="fa fa-times"></i> out of stock
+                        </span><!-- /stock -->
+                        <?php endif; ?>
+                        <div class="product-info"><!-- title and price -->
+                            <h2>
+                                <span class="product-name">
+                                    <?=$this->escapeHtml($row->getProductCategory()->getCategory());?> -
+                                    <?=$this->escapeHtml($row->getName());?><br>
+                                    Size:<?=$row->getProductSize()->getSize();?>
+                                </span>
+                                <?=$this->productPrice($row)
+                                    ->setFormat('<span class="bold">%s</span> %s %s')
+                                    ->setDiscountFormat('<span class="line-through">%s</span>'); ?>
+
+                            </h2>
+                        </div><!-- /title and price -->
+                    </a>
+
+                    <?php $form = $this->cart()->addForm($row)->setAttribute('class', 'margin-top10 nopadding clearfix'); ?>
+
+                    <?php if ($row->inStock() && $row->isEnabled()):?>
+                    <?=$this->form()->openTag($form); ?>
+                        <?=$this->formHidden($form->get('productId')); ?>
+                        <?=$this->formHidden($form->get('returnTo')); ?>
+
+                        <?php if ($row->getProductOption()): ?>
+                        <div class="row">
+                            <div class="col col-md-12">
+                                <?=$this->productOptions($row);?>
+                            </div><!-- /btn-group -->
+                        </div>
+                        <?php endif; ?>
+
+                        <?=$this->formInput($form->get('qty')->setAttribute('class', 'form-control')); ?>
+
+                        <button type="submit" name="buy-item" class="btn btn-primary col-md-12">
+                            ADD TO CART <i class="fa fa-shopping-cart"></i>
+                            <?=$this->cart()->hasProductInCart($row);?>
+                        </button>
+
+                    <?=$this->form()->closeTag(); ?>
+                    <?php endif; ?>
+                </div><!-- /item -->
+            <?php endforeach; ?>
+
+            <?php if ($this->products->count() == 0):?>
+                <h3>No products match your search.</h3>
+            <?php endif;?>
+        </div><!-- /PRODUCT LIST -->
+
+        <div class="clearfix"></div>
+        
+        <!-- PAGINATION -->
+        <?=$this->paginationControl(
+            $this->products,
+            'Jumping',
+            'application/partial/paginate',
+            ['route' => 'shop/search/page']
+        ); ?><!-- /PAGINATION -->
+    </div>
 </div>
 
 <?php $this->inlineScript()->appendFile($this->basePath('/js/jquery.searchForm.js')) ?>

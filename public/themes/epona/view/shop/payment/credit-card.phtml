@@ -49,7 +49,7 @@
     		</section>
     		<section class="col col-md-2">
     			<label class="input<?php if ($this->form->get('cvv2')->getMessages()) echo ' state-error'; ?>">
-    				<?=$this->formNumber($this->form->get('cvv2'));?>
+    				<?=$this->formText($this->form->get('cvv2'));?>
     			</label>
     			<span class="help-block">
     			   <?=$this->formElementErrors($this->form->get('cvv2'), [

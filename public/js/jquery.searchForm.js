@@ -115,7 +115,29 @@
         
         ajaxCall : function(data)
         {
-        	this.$element.load(this.options.url, this.options.query,
+			$.ajax({
+				url : this.options.url,
+				data : this.options.query,
+				type : 'POST',
+				beforeSend : function() {
+					this.$element.loadingOverlay();
+				}.bind(this),
+				success : function(responseText) {
+					this.$element.html(responseText);
+				}.bind(this),
+				error : function(response) {
+                    this.$element.html(responseText);
+				}.bind(this),
+				complete : function() {
+					this.init();
+					$('html, body').animate({
+						scrollTop: $("body").offset().top
+					}, 1000);
+					this.$element.loadingOverlay('remove');
+				}.bind(this)
+			});
+
+        	/*this.$element.load(this.options.url, this.options.query,
         		function (responseText, textStatus, req) {
         			//if (this.options.searchForm) this.options.searchForm.unbind('submit');
                     if (textStatus == "error") {
@@ -126,7 +148,7 @@
                             scrollTop: $("body").offset().top
                         }, 1000);
                     }
-            }.bind(this));
+            }.bind(this));*/
         }
     };
     

@@ -9,6 +9,7 @@
             ->appendName('viewport', 'width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0')
             ->appendName('rating', 'general')
             ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+            ->appendName('robots', 'Index, Follow')
         ;?>
 
         <?=$this->headTitle($this->themeOptions('site_name'))
@@ -50,14 +51,22 @@
             // UTHANDO STYLES
             ->appendStylesheet($this->basePath('/css/uthando-styles.css'))
         ;?>
+
+        <?=$this->placeholder('structured-data');?>
+
         <style>
             /* Theme overrides */
             #header.sticky.affix #topBar {
                 display:block;
             }
 
+            #topNav ul.dropdown-menu > li a {
+                padding: 10px 20px;
+            }
+
             .shop-item-list {
-                height:405px;
+                height: auto;
+                min-height: 425px;
             }
             
             .shop-item-list a {
@@ -113,6 +122,10 @@
                 margin-bottom: 10px;
             }
 
+            .owl-carousel .owl-item div {
+                text-align: left;
+            }
+
         </style>
     </head>
 
@@ -139,12 +152,13 @@
                             <nav class="nav-second">
                                 <?=$this->uthandoNavigation()
                                     ->uthandoTbDbMenu('top-menu')
-                                    ->setPartial('uthando-navigation/top-menu');
+                                    ->setPartial('uthando-navigation/top-menu')
+                                ;
                                 ?>
                             </nav>
 
-                            Call Us Today: <strong><a href="tel:<?=$this->contact()->formatPhoneNumber();?>">
-                                <?=$this->contact()->formatPhoneNumber(true);?>
+                            Call Us Today: <strong><a href="tel:<?=$this->contact()->formatPhoneNumber('phone');?>">
+                                <?=$this->contact()->formatPhoneNumber('phone', true);?>
                             </a></strong>
 							<span class="hide_mobile">
 								&bull; <a href="<?=$this->url('contact');?>"><?=$this->contact('details.email');?></a>
@@ -211,6 +225,7 @@
             <!-- CONTENT -->
             <section>
                 <div class="container">
+
                     <!-- header -->
                     <?=$this->placeholder('header');?>
                     <!-- /header -->
@@ -245,8 +260,8 @@
                                 Email:&nbsp;<a href="<?=$this->url('contact');?>">
                                     <?=$this->contact('details.email');?>
                                 </a><br />
-                                Phone:&nbsp;<a href="tel:<?=$this->contact()->formatPhoneNumber();?>">
-                                    <?=$this->contact()->formatPhoneNumber(true);?>
+                                Phone:&nbsp;<a href="tel:<?=$this->contact()->formatPhoneNumber('phone');?>">
+                                    <?=$this->contact()->formatPhoneNumber('phone', true);?>
                                 </a><br />
                             </p>
 
@@ -327,6 +342,7 @@
                                             ->setLabelOption('disable_html_escape', true)
                                             ->setLabelPrepend(true)
                                             ->setPreSelect(true)
+                                            ->setIncludeHidden(false)
                                     );?>
                                 </form>
                             </div>
@@ -416,6 +432,11 @@
                     }
                 });
             });
+
+            $('#topNav .dropdown-toggle').on('click', function(e){
+                var el = $(e.target);
+                window.location.href = el.attr('href');
+            })
         });
     </script>
 </html>
