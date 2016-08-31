@@ -910,16 +910,16 @@
         },
         {
             "name": "uthando-cms/uthando-common",
-            "version": "2.7.3",
+            "version": "2.7.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-common.git",
-                "reference": "524633861ab64577601288b12ae7159def2fe7db"
+                "reference": "6e043ce95b97025853695ff295d89d1697de3ea9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-common/zipball/524633861ab64577601288b12ae7159def2fe7db",
-                "reference": "524633861ab64577601288b12ae7159def2fe7db",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-common/zipball/6e043ce95b97025853695ff295d89d1697de3ea9",
+                "reference": "6e043ce95b97025853695ff295d89d1697de3ea9",
                 "shasum": ""
             },
             "require": {
@@ -970,7 +970,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2016-08-19 19:17:50"
+            "time": "2016-08-31 12:51:53"
         },
         {
             "name": "uthando-cms/uthando-contact",
