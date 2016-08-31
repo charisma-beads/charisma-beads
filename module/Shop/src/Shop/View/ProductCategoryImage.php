@@ -23,7 +23,12 @@ class ProductCategoryImage extends AbstractViewHelper
     /**
      * @var string
      */
-    protected $image = 'no_image_available.jpeg';
+    protected $noImage = 'no_image_available.jpeg';
+
+    /**
+     * @var string
+     */
+    protected $image = '';
 
     /**
      * @var string
@@ -60,8 +65,12 @@ class ProductCategoryImage extends AbstractViewHelper
 
         if ($this->isUploaded($this->categoryImageDirectory)) {
             $directory = $this->categoryImageDirectory;
-        } else if ($this->isUploaded($this->productImageDirectory)) {
+        } else {
             $directory = $this->productImageDirectory;
+        }
+
+        if (!$this->isUploaded($directory)) {
+            $defaultImage = $this->noImage;
         }
 
         $image = $directory . $defaultImage;
