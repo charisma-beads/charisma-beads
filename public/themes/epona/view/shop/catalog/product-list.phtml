@@ -6,10 +6,6 @@
     <?php foreach ($this->products as $row): ?>
         <?php $c++;?>
 
-        <?php if ($c === 1 || (($c % 4) + 1) === 1):?>
-            <div class="row">
-        <?php endif;?>
-
         <div class="col-md-3 col-sm-3 shop-item-list"><!-- item -->
             <a href="<?=$this->url('shop/catalog/product', [
                 'categoryIdent' => $row->getProductCategory()->getIdent(),
@@ -78,7 +74,7 @@
         </div><!-- /item -->
 
         <?php if (($c % 4) === 0):?>
-            </div>
+           <div class="clearfix"></div>
         <?php endif;?>
 
     <?php endforeach; ?>

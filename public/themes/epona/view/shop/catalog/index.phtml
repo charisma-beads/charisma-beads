@@ -21,37 +21,36 @@
 
         <!-- cart links -->
         <?php if ($this->cart()->countItems() > 0):?>
-        <div class="row">
-            <div class="col-md-12 text-center cart-links">
-                <a href="<?=$this->url('shop/cart', [
-                    'action' => 'view'
-                ]);?>" class="btn btn-primary">VIEW CART</a>
 
-                <a href="<?=$this->url('shop/checkout');?>" class="btn btn-info">CHECKOUT</a>
-            </div>
+        <div class="col-md-12 text-center cart-links">
+            <a href="<?=$this->url('shop/cart', [
+                'action' => 'view'
+            ]);?>" class="btn btn-primary">VIEW CART</a>
+
+            <a href="<?=$this->url('shop/checkout');?>" class="btn btn-info">CHECKOUT</a>
         </div>
+
+        <div class="clearfix"></div>
 
         <?php endif;?>
         <!-- /cart links -->
 
         <!-- PRODUCT CATEGORIES -->
         <?php if ($this->subCategories->count() > 0): ?>
-        <div class="row">
-            <!-- CALLOUT -->
-            <div class="alert alert-default fade in">
 
-                <div class="row">
+        <!-- CALLOUT -->
+        <div class="alert alert-default fade in">
 
-                    <div class="col-md-12 col-sm-12"><!-- left text -->
-                        <h4>Also <strong>In This Category</strong></h4>
-                    </div><!-- /left text -->
+            <div class="row">
 
-                </div>
+                <div class="col-md-12 col-sm-12"><!-- left text -->
+                    <h4>Also <strong>In This Category</strong></h4>
+                </div><!-- /left text -->
 
             </div>
-            <!-- /CALLOUT -->
+
         </div>
-        <div class="row">
+        <!-- /CALLOUT -->
 
             <?php /* @var $row \Shop\Model\Product\Category */ ?>
             <?php $c=0;?>
@@ -78,7 +77,6 @@
             <div class="divider"><!-- divider -->
                 <i class="fa fa-angle-double-down"></i>
             </div>
-        </div>
         <?php endif; ?>
         <!-- /PRODUCT CATEGORIES -->
 
@@ -103,6 +101,7 @@
         ); ?><!-- /PAGINATION -->
 
     </div>
+
 </div>
 
 <?php
