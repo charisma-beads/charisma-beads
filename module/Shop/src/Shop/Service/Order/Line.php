@@ -60,7 +60,9 @@ class Line extends AbstractMapperService
             'metadata'  => $lineModel->getMetadata(),
         ];
 
-        return $this->save($lineData);
+        $lineModel = $this->getMapper()->getModel($lineData);
+
+        return $this->save($lineModel);
     }
 
     /**
