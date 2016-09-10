@@ -14,8 +14,6 @@ use Shop\Model\Customer\Customer as CustomerModel;
 use Shop\Model\Order\MetaData;
 use Shop\Model\Order\Order as OrderModel;
 use Shop\Service\Cart\Cart;
-use Shop\Service\StockControl;
-use UthandoCommon\Service\AbstractRelationalMapperService;
 use Zend\Json\Json;
 use Zend\Math\BigInteger\BigInteger;
 use Zend\View\Model\ViewModel;
@@ -27,7 +25,7 @@ use Zend\View\Model\ViewModel;
  * @method OrderModel populate($model, $children)
  * @method \Shop\Mapper\Order\Order getMapper($mapperClass = null, array $options = [])
  */
-class Order extends AbstractRelationalMapperService
+class Order extends AbstractOrder
 {
     /**
      * @var string
@@ -59,7 +57,7 @@ class Order extends AbstractRelationalMapperService
             'refCol'        => 'orderId',
             'service'       => 'ShopOrderLine',
             'getMethod'     => 'getOrderLinesByOrderId',
-            'setMethod'     => 'setOrderLine',
+            'setMethod'     => 'setEntities',
         ],
     ];
 
@@ -73,23 +71,6 @@ class Order extends AbstractRelationalMapperService
         'pay_paypal'        => 'Paypal Payment Pending',
         'pay_pending'       => 'Pending',
     ];
-
-    /**
-    * Attach events
-    */
-    public function attachEvents()
-    {
-        /* @var $stockControl StockControl */
-        $stockControl = $this->getService('Shop\Service\StockControl');
-
-        $this->getEventManager()->attach([
-            'stock.check',
-            'stock.save',
-            'stock.restore',
-            'stock.restore.one',
-            'stock.restore.many'
-        ], [$stockControl, 'init']);
-    }
 
     /**
      * @param $id
@@ -191,8 +172,7 @@ class Order extends AbstractRelationalMapperService
             str_replace('pay_', '', $postData['payment_option'])
         ));
 
-        /* @var $shopOptions \Shop\Options\ShopOptions */
-        $shopOptions = $this->getService('Shop\Options\Shop');
+        $shopOptions = $this->getShopOptions();
 
         $metadata->setPaymentMethod($paymentOption)
             ->setTaxInvoice($shopOptions->isVatState())
@@ -279,8 +259,8 @@ class Order extends AbstractRelationalMapperService
 
         if ($result && $options->isEmailCustomerOnStatusChange()) {
             $this->populate($order, true);
-            /* @var $shopOptions \Shop\Options\ShopOptions */
-            $shopOptions = $this->getService('Shop\Options\Shop');
+
+            $shopOptions = $this->getShopOptions();
 
             $subject = 'Order Status From %s Order No. %s';
 
@@ -429,8 +409,7 @@ class Order extends AbstractRelationalMapperService
         $email = $order->getCustomer()->getEmail();
         /* @var $options \Shop\Options\OrderOptions */
         $options = $this->getService('Shop\Options\Order');
-        /* @var $shopOptions \Shop\Options\ShopOptions */
-        $shopOptions = $this->getService('Shop\Options\Shop');
+        $shopOptions = $this->getShopOptions();
 
         $emailView = new ViewModel([
             'order' => $order,

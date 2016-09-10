@@ -186,7 +186,6 @@ return [
     'service_manager' => [
         'invokables' => [
             'Shop\Service\Report'                       => 'Shop\Service\Report',
-            'Shop\Service\StockControl'                 => 'Shop\Service\StockControl',
         ],
         'factories' => [
             'Shop\Options\CartCookie'                   => 'Shop\Service\Factory\CartCookieOptions',

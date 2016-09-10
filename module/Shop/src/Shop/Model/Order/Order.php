@@ -44,21 +44,6 @@ class Order extends AbstractOrderCollection
     protected $orderNumber = 0;
     
     /**
-     * @var float
-     */
-    protected $total = 0.00;
-    
-    /**
-     * @var float
-     */
-    protected $shipping = 0.00;
-    
-    /**
-     * @var float
-     */
-    protected $taxTotal = 0.00;
-    
-    /**
      * @var DateTime
      */
     protected $orderDate;
@@ -162,60 +147,6 @@ class Order extends AbstractOrderCollection
     {
         $this->orderNumber = $orderNumber;
     }
-
-    /**
-     * @return float
-     */
-	public function getTotal()
-	{
-		return $this->total;
-	}
-
-    /**
-     * @param $total
-     * @return $this
-     */
-	public function setTotal($total)
-	{
-		$this->total = $total;
-		return $this;
-	}
-
-    /**
-     * @return float
-     */
-	public function getShipping()
-	{
-		return $this->shipping;
-	}
-
-    /**
-     * @param $shipping
-     * @return $this
-     */
-	public function setShipping($shipping)
-	{
-		$this->shipping = $shipping;
-		return $this;
-	}
-
-    /**
-     * @return float
-     */
-	public function getTaxTotal()
-	{
-		return $this->taxTotal;
-	}
-
-    /**
-     * @param $taxTotal
-     * @return $this
-     */
-	public function setTaxTotal($taxTotal)
-	{
-		$this->taxTotal = $taxTotal;
-		return $this;
-	}
 	
 	/**
 	 * @return DateTime $orderDate

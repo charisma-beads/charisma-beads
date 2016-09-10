@@ -17,11 +17,8 @@ use Shop\Model\Product\Product as ProductModel;
 use Shop\Model\Product\MetaData as ProductMetaData;
 use Shop\Options\CartCookieOptions;
 use Shop\Service\Cart\Cookie as CartCookie;
-use Shop\Service\Shipping;
-use Shop\Service\StockControl;
-use Shop\Service\Tax\Tax;
+use Shop\Service\Order\AbstractOrder;
 use UthandoCommon\Model\CollectionException;
-use UthandoCommon\Service\AbstractMapperService;
 use Zend\Session\Container;
 use Zend\Stdlib\InitializableInterface;
 use Shop\Model\Product\Option as ProductOption;
@@ -31,8 +28,10 @@ use Shop\Model\Product\Option as ProductOption;
  *
  * @package Shop\Service\Cart
  */
-class Cart extends AbstractMapperService implements InitializableInterface
+class Cart extends AbstractOrder implements InitializableInterface
 {
+    protected $cart;
+
     /**
      * @var string
      */
@@ -42,16 +41,6 @@ class Cart extends AbstractMapperService implements InitializableInterface
      * @var Container
      */
     protected $container;
-    
-    /**
-     * @var Shipping
-     */
-    protected $shippingService;
-
-    /**
-     * @var Tax
-     */
-    protected $taxService;
 
     /**
      *
@@ -63,11 +52,6 @@ class Cart extends AbstractMapperService implements InitializableInterface
      * @var CartCookie
      */
     protected $cartCookieService;
-
-    /**
-     * @var CartModel
-     */
-    protected $cart;
 
     /**
      * @var boolean
@@ -110,21 +94,16 @@ class Cart extends AbstractMapperService implements InitializableInterface
     protected $taxTotal = 0;
 
     /**
-     * Attach events
+     * @var array
      */
-    public function attachEvents()
-    {
-        /* @var $stockControl StockControl */
-        $stockControl = $this->getService('Shop\Service\StockControl');
-
-        $this->getEventManager()->attach([
-            'stock.check',
-            'stock.save',
-            'stock.restore',
-            'stock.restore.one',
-            'stock.restore.many'
-        ], [$stockControl, 'init']);
-    }
+    protected $referenceMap = [
+        'CartItem'    => [
+            'refCol'        => 'cartId',
+            'service'       => 'ShopCartItem',
+            'getMethod'     => 'getCartItemsByCartId',
+            'setMethod'     => 'setEntities',
+        ],
+    ];
 
     /**
      * @throws CollectionException
@@ -465,7 +444,7 @@ class Cart extends AbstractMapperService implements InitializableInterface
      */
     public function getCart()
     {
-        return $this->cart;
+        return $this->getOrderModel();
     }
 
     /**
@@ -475,8 +454,7 @@ class Cart extends AbstractMapperService implements InitializableInterface
      */
     public function setCart($cart = null)
     {
-        $this->cart = $cart;
-        return $this;
+        return $this->setOrderModel($cart);
     }
 
     /**
@@ -659,45 +637,11 @@ class Cart extends AbstractMapperService implements InitializableInterface
     }
 
     /**
-     * @return \Shop\Options\ShopOptions
-     */
-    public function getShopOptions()
-    {
-        return $this->getServiceLocator()->get('Shop\Options\Shop');
-    }
-
-    /**
      * @return \Shop\Options\CartOptions
      */
     public function getCartOptions()
     {
         return $this->getServiceLocator()->get('Shop\Options\Cart');
-    }
-
-    /**
-     * @return Shipping
-     */
-    protected function getShippingService()
-    {
-        if (!$this->shippingService instanceof Shipping) {
-            $this->shippingService = $this->getServiceLocator()
-                ->get('Shop\Service\Shipping');
-        }
-
-        return $this->shippingService;
-    }
-
-    /**
-     * @return Tax
-     */
-    public function getTaxService()
-    {
-        if (! $this->taxService instanceof Tax) {
-            $sl = $this->getServiceLocator();
-            $this->taxService = $sl->get('Shop\Service\Tax');
-        }
-
-        return $this->taxService;
     }
 
     /**

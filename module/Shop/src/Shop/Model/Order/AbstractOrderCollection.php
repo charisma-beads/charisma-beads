@@ -17,9 +17,44 @@ use UthandoCommon\Model\AbstractCollection;
 use UthandoCommon\Model\Model;
 use UthandoCommon\Model\ModelInterface;
 
-class AbstractOrderCollection extends AbstractCollection implements ModelInterface
+abstract class AbstractOrderCollection extends AbstractCollection implements ModelInterface
 {
     use Model;
+
+    /**
+     * Total before shipping
+     *
+     * @var float
+     */
+    protected $subTotal = 0;
+
+    /**
+     * Total with shipping
+     *
+     * @var float
+     */
+    protected $total = 0;
+
+    /**
+     * The shipping cost
+     *
+     * @var float
+     */
+    protected $shipping = 0;
+
+    /**
+     * Total shipping tax
+     *
+     * @var float
+     */
+    protected $shippingTax = 0;
+
+    /**
+     * Total of tax
+     *
+     * @var float
+     */
+    protected $taxTotal = 0;
 
     /**
      * @var bool
@@ -32,9 +67,104 @@ class AbstractOrderCollection extends AbstractCollection implements ModelInterfa
     protected $sortOrder;
 
     /**
+     * @return int
+     */
+    abstract public function getId();
+
+    /**
+     * @return float
+     */
+    public function getSubTotal(): float
+    {
+        return $this->subTotal;
+    }
+
+    /**
+     * @param float $subTotal
+     * @return $this
+     */
+    public function setSubTotal($subTotal)
+    {
+        $this->subTotal = $subTotal;
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getTotal(): float
+    {
+        return $this->total;
+    }
+
+    /**
+     * @param float $total
+     * @return $this
+     */
+    public function setTotal($total)
+    {
+        $this->total = $total;
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getShipping(): float
+    {
+        return $this->shipping;
+    }
+
+    /**
+     * @param float $shipping
+     * @return $this
+     */
+    public function setShipping($shipping)
+    {
+        $this->shipping = $shipping;
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getShippingTax(): float
+    {
+        return $this->shippingTax;
+    }
+
+    /**
+     * @param float $shippingTax
+     * @return $this
+     */
+    public function setShippingTax($shippingTax)
+    {
+        $this->shippingTax = $shippingTax;
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getTaxTotal(): float
+    {
+        return $this->taxTotal;
+    }
+
+    /**
+     * @param float $taxTotal
+     * @return $this
+     */
+    public function setTaxTotal($taxTotal)
+    {
+        $this->taxTotal = $taxTotal;
+        return $this;
+    }
+
+    /**
      * @return boolean
      */
-    public function isSorted()
+    public function isSorted(): bool
     {
         return $this->sorted;
     }
@@ -51,7 +181,7 @@ class AbstractOrderCollection extends AbstractCollection implements ModelInterfa
      * @return string
      * @throws ShopException
      */
-    public function getSortOrder()
+    public function getSortOrder(): string
     {
         if (!$this->sortOrder) {
             throw new ShopException('sort order cannot be empty');
