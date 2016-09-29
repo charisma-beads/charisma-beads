@@ -144,6 +144,7 @@ return [
             'ShopProductCategory'   => 'Shop\Hydrator\Product\Category',
             'ShopProductGroup'      => 'Shop\Hydrator\Product\Group',
             'ShopProductImage'      => 'Shop\Hydrator\Product\Image',
+            'ShopProductMetaData'   => \Shop\Hydrator\Product\MetaData::class,
             'ShopProductOption'     => 'Shop\Hydrator\Product\Option',
             'ShopProductSize'       => 'Shop\Hydrator\Product\Size',
             'ShopTaxCode'           => 'Shop\Hydrator\Tax\Code',

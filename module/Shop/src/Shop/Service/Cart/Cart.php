@@ -14,7 +14,6 @@ use Shop\Mapper\Cart\Cart as CartMapper;
 use Shop\Model\Cart\Cart as CartModel;
 use Shop\Model\Cart\Item as CartItem;
 use Shop\Model\Product\Product as ProductModel;
-use Shop\Model\Product\MetaData as ProductMetaData;
 use Shop\Options\CartCookieOptions;
 use Shop\Service\Cart\Cookie as CartCookie;
 use Shop\Service\Order\AbstractOrder;
@@ -57,41 +56,6 @@ class Cart extends AbstractOrder implements InitializableInterface
      * @var boolean
      */
     protected $isInitialized = false;
-    
-    /**
-     * Total before shipping
-     *
-     * @var float
-     */
-    protected $subTotal = 0;
-    
-    /**
-     * Total with shipping
-     *
-     * @var float
-     */
-    protected $total = 0;
-    
-    /**
-     * The shipping cost
-     *
-     * @var float
-     */
-    protected $shipping = 0;
-    
-    /**
-     * Total shipping tax
-     * 
-     * @var float
-     */
-    protected $shippingTax = 0;
-    
-    /**
-     * Total of tax
-     *
-     * @var float
-     */
-    protected $taxTotal = 0;
 
     /**
      * @var array
@@ -187,22 +151,6 @@ class Cart extends AbstractOrder implements InitializableInterface
         
         return $cart;
     }
-    
-    /**
-     * Checks if cart has any items.
-     * 
-     * @return boolean
-     */
-    public function hasItems()
-    {
-        $cart = $this->getCart();
-        
-        if ($cart->count() > 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     /**
      * Adds items contained with the shopping cart
@@ -214,18 +162,18 @@ class Cart extends AbstractOrder implements InitializableInterface
     public function addItem(ProductModel $product, $post)
     {
         $qty = $post['qty'];
-        
+
         if ($qty <= 0 || $product->inStock() === false || $product->isDiscontinued() === true || $product->isEnabled() === false) {
             return false;
         }
-        
+
         $productClone = clone $product;
-        
+
         $productId = $productClone->getProductId();
         $optionId = (isset($post['ProductOptionList'])) ? (int) substr(strrchr($post['ProductOptionList'], "-"), 1) : null;
-        
+
         $productOption = ($optionId) ? $product->getProductOption($optionId) : null;
-        
+
         if ($productOption instanceof ProductOption) {
             $productClone->setPostUnitId($productOption->getPostUnitId())
                 ->setPostUnit($productOption->getPostUnit())
@@ -238,7 +186,7 @@ class Cart extends AbstractOrder implements InitializableInterface
 
         /** @var $item CartItem */
         $item = ($cart->offsetExists($productId)) ? $cart->offsetGet($productId) : new CartItem();
-        
+
         if ($this->getCartOptions()->isAutoIncrementCart()) {
             $qty = $qty + $item->getQuantity();
         }
@@ -319,34 +267,6 @@ class Cart extends AbstractOrder implements InitializableInterface
         }
 
         $this->persist();
-    }
-
-    /**
-     * @param ProductModel $product
-     * @param int $optionId
-     * @return \Shop\Model\Product\MetaData
-     */
-    public function getProductMetaData(ProductModel $product, $optionId)
-    {
-        $metadata = new ProductMetaData();
-        
-        $metadata->setProductId($product->getProductId())
-            ->setSku($product->getSku())
-            ->setName($product->getName())
-            ->setCategory($product->getProductCategory())
-            ->setDescription($product->getShortDescription())
-            ->setTaxable($product->getTaxable())
-            ->setVatInc($product->getVatInc())
-            ->setAddPostage($product->getAddPostage())
-            ->setPostUnit($product->getPostUnit()->getPostUnit())
-            ->setShowImage($product->getShowImage())
-            ->setImage($product->getDefaultImage());
-        
-        if ($optionId) {
-            $metadata->setOption($product->getProductOption($optionId));
-        }
-        
-        return $metadata;
     }
 
     /**
@@ -491,7 +411,7 @@ class Cart extends AbstractOrder implements InitializableInterface
     public function calculateTotals()
     {
         $sub = 0;
-        $this->taxTotal = 0;
+        $this->getCart()->setTaxTotal(0);
 
         $cart = ($this->getCart()) ?? [];
 
@@ -499,8 +419,8 @@ class Cart extends AbstractOrder implements InitializableInterface
             $sub = $sub + $this->getLineCost($cartItem);
         }
         
-        $this->subTotal = $sub;
-        $this->total = $this->subTotal + $this->shipping;
+        $cart->setSubTotal($sub);
+        $cart->setTotal($cart->getSubTotal() + $cart->getShipping());
     }
 
     /**
@@ -529,7 +449,7 @@ class Cart extends AbstractOrder implements InitializableInterface
             $this->setShippingTax(0);
         }
         
-        $this->shipping = $cost;
+        $this->getCart()->setShipping($cost);
         
         return $this;
     }
@@ -539,7 +459,7 @@ class Cart extends AbstractOrder implements InitializableInterface
      */
     public function getShippingTax()
     {
-        return $this->shippingTax;
+        return $this->getCart()->getShippingTax();
     }
 
     /**
@@ -548,7 +468,7 @@ class Cart extends AbstractOrder implements InitializableInterface
      */
     public function setShippingTax($shippingTax)
     {
-        $this->shippingTax = $shippingTax;
+        $this->getCart()->setShippingTax($shippingTax);
         return $this;
     }
 
@@ -560,7 +480,7 @@ class Cart extends AbstractOrder implements InitializableInterface
     public function getShippingCost()
     {
         $this->calculateTotals();
-        return $this->shipping;
+        return $this->getCart()->getShipping();
     }
 
     /**
@@ -571,7 +491,7 @@ class Cart extends AbstractOrder implements InitializableInterface
     public function getSubTotal()
     {
         $this->calculateTotals();
-        return $this->subTotal;
+        return $this->getCart()->getSubTotal();
     }
 
     /**
@@ -582,7 +502,7 @@ class Cart extends AbstractOrder implements InitializableInterface
     public function getTotal()
     {
         $this->calculateTotals();
-        return $this->total;
+        return $this->getCart()->getTotal();
     }
     
     /**
@@ -593,7 +513,7 @@ class Cart extends AbstractOrder implements InitializableInterface
     public function getTaxTotal()
     {
         $this->calculateTotals();
-        return $this->taxTotal + $this->shippingTax;
+        return $this->getCart()->getTaxTotal() + $this->getCart()->getShippingTax();
     }
 
     /**

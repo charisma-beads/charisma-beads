@@ -10,7 +10,10 @@
 
 namespace Shop\Service\Order;
 
+use Shop\Hydrator\Product\MetaData;
 use Shop\Model\Order\AbstractOrderCollection;
+use Shop\Model\Product\MetaData as ProductMetaData;
+use Shop\Model\Product\Product;
 use Shop\Options\ShopOptions;
 use Shop\Service\Shipping;
 use Shop\Service\Tax\Tax;
@@ -42,6 +45,37 @@ class AbstractOrder extends  AbstractRelationalMapperService
      * @var Tax
      */
     protected $taxService;
+
+    /**
+     * Checks if order model has any items.
+     *
+     * @return boolean
+     */
+    public function hasItems()
+    {
+        $orderModel = $this->getOrderModel();
+
+        if ($orderModel->count() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * @param Product $product
+     * @param int $optionId
+     * @return ProductMetaData
+     */
+    public function getProductMetaData(Product $product, $optionId)
+    {
+        $hydrator = new MetaData($optionId);
+        $model    = $this->getModel('ShopProductMetaData');
+        /*  @var ProductMetaData $metadata */
+        $metadata = $hydrator->hydrate($product->getArrayCopy(), $model);
+
+        return $metadata;
+    }
 
     /**
      * @return AbstractOrderCollection
