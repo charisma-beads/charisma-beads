@@ -33,6 +33,11 @@ class Order extends AbstractOrder
     protected $serviceAlias = 'ShopOrder';
 
     /**
+     * @var string
+     */
+    protected $lineService = 'ShopOrderLine';
+
+    /**
      * @var array
      */
     protected $tags = [
@@ -116,25 +121,21 @@ class Order extends AbstractOrder
         /* @var $cart Cart */
         $cart = $this->getService('ShopCart');
         $countryId = $order->getCustomer()->getDeliveryAddress()->getCountryId();
-        $shippingOff = false;
 
         if ('Collect At Store' == $order->getShipping()) {
             $countryId = null;
-            $shippingOff = true;
         }
 
-        $cart->setShippingCost($countryId, $shippingOff);
+        $cart->setShippingCost($countryId);
         
-        $shipping = $cart->getShippingCost();
-        $taxTotal = $cart->getTaxTotal();
-        $cartTotal = $cart->getTotal();
-
-        $order->getMetadata()
-            ->setShippingTax($cart->getShippingTax());
+        $shipping   = $cart->getShippingCost();
+        $taxTotal   = $cart->getTaxTotal();
+        $cartTotal  = $cart->getTotal();
 
         $order->setTotal($cartTotal)
+            ->setTaxTotal($taxTotal)
             ->setShipping($shipping)
-            ->setTaxTotal($taxTotal);
+            ->setShippingTax($cart->getShippingTax());
 
         $result = $this->save($order);
 
@@ -192,6 +193,7 @@ class Order extends AbstractOrder
             'total'         => 0,
             'shipping'      => 0,
             'taxTotal'      => 0,
+            'shippingTax'   => 0,
             'orderDate'     => New \DateTime(),
             'metadata'      => $metadata,
             'customer'      => $customer,
@@ -203,6 +205,16 @@ class Order extends AbstractOrder
         $this->generateOrderNumber($orderId);
 
         return $orderId;
+    }
+
+    public function persist()
+    {
+        // TODO: Implement persist() method.
+    }
+
+    public function removeItem($id)
+    {
+        // TODO: Implement removeItem() method.
     }
 
     /**

@@ -47,6 +47,7 @@ class Order extends AbstractHydrator
             'orderDate'     => $this->extractValue('orderDate', $object->getOrderDate()),
             'shipping'      => $object->getShipping(),
             'taxTotal'      => $object->getTaxTotal(),
+            'shippingTax'   => $object->getShippingTax(),
             'metadata'      => $this->extractValue('metadata', $object->getMetadata()),
         ];
     }

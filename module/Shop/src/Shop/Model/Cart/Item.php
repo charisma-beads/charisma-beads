@@ -24,23 +24,13 @@ class Item implements ModelInterface, LineInterface
 {   
     use Model,
         LineTrait;
-    
-    /**
-     * @var int
-     */
-    protected $cartItemId;
-    
-    /**
-     * @var int
-     */
-    protected $cartId;
 	
 	/**
 	 * @return number
 	 */
     public function getCartItemId()
     {
-        return $this->cartItemId;
+        return $this->getId();
     }
 
     /**
@@ -49,7 +39,7 @@ class Item implements ModelInterface, LineInterface
      */
     public function setCartItemId($cartItemId)
     {
-        $this->cartItemId = $cartItemId;
+        $this->setId($cartItemId);
         return $this;
     }
 
@@ -58,7 +48,7 @@ class Item implements ModelInterface, LineInterface
      */
     public function getCartId()
     {
-        return $this->cartId;
+        return $this->getParentId();
     }
 
     /**
@@ -67,7 +57,7 @@ class Item implements ModelInterface, LineInterface
      */
     public function setCartId($cartId)
     {
-        $this->cartId = $cartId;
+        $this->setParentId($cartId);
         return $this;
     }
 }

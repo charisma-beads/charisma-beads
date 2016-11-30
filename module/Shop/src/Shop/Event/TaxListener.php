@@ -10,7 +10,11 @@
 
 namespace Shop\Event;
 
-
+/**
+ * Class TaxListener
+ *
+ * @package Shop\Event
+ */
 class TaxListener
 {
 

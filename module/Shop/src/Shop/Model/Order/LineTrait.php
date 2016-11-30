@@ -22,6 +22,16 @@ trait LineTrait
     /**
      * @var int
      */
+    protected $id;
+
+    /**
+     * @var int
+     */
+    protected $parentId;
+
+    /**
+     * @var int
+     */
     protected $quantity = 0;
 
     /**
@@ -38,6 +48,42 @@ trait LineTrait
      * @var ProductMetaData
      */
     protected $metadata;
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     * @return $this
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getParentId()
+    {
+        return $this->parentId;
+    }
+
+    /**
+     * @param int $parentId
+     * @return $this
+     */
+    public function setParentId($parentId)
+    {
+        $this->parentId = $parentId;
+        return $this;
+    }
 
     /**
      * @return int
@@ -76,12 +122,11 @@ trait LineTrait
     }
 
     /**
-     * @param bool $formatPercent
      * @return float
      */
-    public function getTax($formatPercent=false)
+    public function getTax()
     {
-        return (true === $formatPercent) ? $this->tax / 100 : $this->tax;
+        return $this->tax;
     }
 
     /**

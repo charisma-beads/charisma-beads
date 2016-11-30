@@ -21,6 +21,28 @@ interface LineInterface
     /**
      * @return int
      */
+    public function getId();
+
+    /**
+     * @param int $id
+     * @return this
+     */
+    public function setId($id);
+
+    /**
+     * @return int
+     */
+    public function getParentId();
+
+    /**
+     * @param int $parentId
+     * @return this
+     */
+    public function setParentId($parentId);
+
+    /**
+     * @return int
+     */
     public function getQuantity();
 
     /**
@@ -41,13 +63,12 @@ interface LineInterface
     public function setPrice($price);
 
     /**
-     * @param bool $formatPercent
      * @return float
      */
-    public function getTax($formatPercent=false);
+    public function getTax();
 
     /**
-     * @param $tax
+     * @param float $tax
      * @return $this
      */
     public function setTax($tax);

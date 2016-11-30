@@ -11,9 +11,8 @@
 
 namespace Shop\Event;
 
-use Shop\Model\Cart\Item as CartItem;
 use Shop\Model\Order\AbstractOrderCollection;
-use Shop\Model\Order\Line;
+use Shop\Model\Order\LineInterface;
 use Shop\Model\Product\Product as ProductModel;
 use Shop\Service\Cart\Cart;
 use Shop\Service\Order\Order;
@@ -76,13 +75,14 @@ class StockControlListener implements ListenerAggregateInterface
      */
     public function check(Event $e)
     {
-        /* @var $item CartItem|Line */
-        $item       = $e->getParam('item');
+        /* @var $line LineInterface */
+        $line       = $e->getParam('line');
         /* @var $product ProductModel */
         $product    = $e->getParam('product');
         $qty        = $e->getParam('qty');
 
-        $currentCartQuantity = $item->getQuantity();
+        $currentCartQuantity = $line->getQuantity();
+
         // calculate the difference that's in the cart and what is asked for.
         $diff = ($currentCartQuantity < $qty) ? ($qty - $currentCartQuantity) : ($currentCartQuantity - $qty);
 

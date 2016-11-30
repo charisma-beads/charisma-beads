@@ -26,9 +26,10 @@
         </div>
         <!-- /cart header -->
 
-
+        <?php \FB::info($this->cart()->getCart(), __FILE__);?>
         <?php /* @var $item \Shop\Model\Cart\Item */ ?>
         <?php foreach ($this->cart()->getCart() as $item): ?>
+            <?php \FB::info($item, __FILE__);?>
         <!-- cart item -->
         <div class="item">
             <?php if ($item->getMetadata()->getShowImage()):?>
@@ -113,7 +114,7 @@
     </div>
     <!-- /cart content -->
 </form>
-
+<?php \FB::info($this->cart()->getCart(), __FILE__);?>
 <div class="row margin-top60">
 
     <div class="col-md-7 col-sm-7">

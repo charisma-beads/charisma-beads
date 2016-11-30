@@ -22,23 +22,13 @@ class Line implements ModelInterface, LineInterface
 {
     use Model,
         LineTrait;
-    
-    /**
-     * @var int
-     */
-    protected $orderLineId;
-    
-    /**
-     * @var int
-     */
-    protected $orderId;
 
     /**
      * @return int
      */
 	public function getOrderLineId()
 	{
-		return $this->orderLineId;
+		return $this->getId();
 	}
 
     /**
@@ -47,7 +37,7 @@ class Line implements ModelInterface, LineInterface
      */
 	public function setOrderLineId($orderLineId)
 	{
-		$this->orderLineId = $orderLineId;
+		$this->setId($orderLineId);
 		return $this;
 	}
 
@@ -56,7 +46,7 @@ class Line implements ModelInterface, LineInterface
      */
 	public function getOrderId()
 	{
-		return $this->orderId;
+		return $this->getParentId();
 	}
 
     /**
@@ -65,7 +55,7 @@ class Line implements ModelInterface, LineInterface
      */
 	public function setOrderId($orderId)
 	{
-		$this->orderId = $orderId;
+		$this->setParentId($orderId);
 		return $this;
 	}
 }

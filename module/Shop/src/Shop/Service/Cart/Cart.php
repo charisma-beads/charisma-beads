@@ -13,7 +13,6 @@ namespace Shop\Service\Cart;
 use Shop\Mapper\Cart\Cart as CartMapper;
 use Shop\Model\Cart\Cart as CartModel;
 use Shop\Model\Cart\Item as CartItem;
-use Shop\Model\Product\Product as ProductModel;
 use Shop\Options\CartCookieOptions;
 use Shop\Service\Cart\Cookie as CartCookie;
 use Shop\Service\Order\AbstractOrder;
@@ -26,6 +25,7 @@ use Shop\Model\Product\Option as ProductOption;
  * Class Cart
  *
  * @package Shop\Service\Cart
+ * @method CartModel getOrderModel()
  */
 class Cart extends AbstractOrder implements InitializableInterface
 {
@@ -35,6 +35,11 @@ class Cart extends AbstractOrder implements InitializableInterface
      * @var string
      */
     protected $serviceAlias = 'ShopCart';
+
+    /**
+     * @var string
+     */
+    protected $lineService = 'ShopCartItem';
 
     /**
      * @var Container
@@ -108,8 +113,13 @@ class Cart extends AbstractOrder implements InitializableInterface
         } else {
             $cart = $this->getModel();
         }
+
+        $cart->setAutoIncrementQuantity(
+            $this->getCartOptions()->isAutoIncrementCart()
+        );
         
         $this->setCart($cart);
+        $this->calculateTotals();
         $this->isInitialized = true;
     }
 
@@ -120,7 +130,8 @@ class Cart extends AbstractOrder implements InitializableInterface
      */
     public function loadCartItems(CartModel $cart)
     {
-        $itemsService = $this->getCartItemService();
+        /* @var $itemsService \Shop\Service\Cart\Item */
+        $itemsService = $this->getService($this->lineService);
         $items = $itemsService->getCartItemsByCartId($cart->getCartId());
 
         /* @var $item CartItem */
@@ -150,139 +161,6 @@ class Cart extends AbstractOrder implements InitializableInterface
         $cart = $cartMapper->getCartByVerifier($verifier);
         
         return $cart;
-    }
-
-    /**
-     * Adds items contained with the shopping cart
-     *
-     * @param ProductModel $product            
-     * @param array $post           
-     * @return CartItem|bool
-     */
-    public function addItem(ProductModel $product, $post)
-    {
-        $qty = $post['qty'];
-
-        if ($qty <= 0 || $product->inStock() === false || $product->isDiscontinued() === true || $product->isEnabled() === false) {
-            return false;
-        }
-
-        $productClone = clone $product;
-
-        $productId = $productClone->getProductId();
-        $optionId = (isset($post['ProductOptionList'])) ? (int) substr(strrchr($post['ProductOptionList'], "-"), 1) : null;
-
-        $productOption = ($optionId) ? $product->getProductOption($optionId) : null;
-
-        if ($productOption instanceof ProductOption) {
-            $productClone->setPostUnitId($productOption->getPostUnitId())
-                ->setPostUnit($productOption->getPostUnit())
-                ->setPrice($productOption->getPrice(false))
-                ->setDiscountPercent($productOption->getDiscountPercent());
-            $productId = $productId . '-' . $optionId;
-        }
-        
-        $cart = $this->getCart();
-
-        /** @var $item CartItem */
-        $item = ($cart->offsetExists($productId)) ? $cart->offsetGet($productId) : new CartItem();
-
-        if ($this->getCartOptions()->isAutoIncrementCart()) {
-            $qty = $qty + $item->getQuantity();
-        }
-
-        $argv = compact('product', 'qty', 'item');
-        $argv = $this->prepareEventArguments($argv);
-
-        $this->getEventManager()->trigger('stock.check', $this, $argv);
-
-        $qty = $argv['qty'];
-        
-        if (0 == $qty) {
-            $this->removeItem($item->getCartItemId());
-            return false;
-        }
-
-        $item->setPrice($productClone->getPrice())
-            ->setQuantity($qty)
-            ->setTax($productClone->getTaxCode()->getTaxRate()->getTaxRate())
-            ->setMetadata($this->getProductMetaData($productClone, $optionId))
-            ->setCartId($this->getCart()->getCartId());
-        
-        $cart->offsetSet($productId, $item);
-        
-        $this->persist();
-
-        $this->getEventManager()->trigger('stock.save', $this, $argv);
-        
-        return $item;
-    }
-
-    /**
-     * Updates cart items.
-     *
-     * @param array $items
-     */
-    public function updateItem(array $items)
-    {
-        $cart = $this->getCart();
-
-        foreach ($items as $cartItemId => $qty) {
-
-            $item = $cart->getCartItemById($cartItemId);
-
-            if (!$item || $qty < 0) continue;
-
-            if ($qty == 0) {
-                $this->removeItem($cartItemId);
-            } else {
-
-                /* @var $productService \Shop\Service\Product\Product */
-                $productService = $this->getService('ShopProduct');
-                $product = $productService->getById($item->getMetadata()->getProductId());
-
-                $argv = compact('product', 'qty', 'item');
-                $argv = $this->prepareEventArguments($argv);
-
-                $this->getEventManager()->trigger('stock.check', $this, $argv);
-
-                $qty = $argv['qty'];
-
-                $item->setQuantity($qty);
-
-                $offsetKey = $item->getMetadata()->getProductId();
-
-                // check for option
-                if ($item->getMetadata()->getOption() instanceof ProductOption) {
-                    $offsetKey = join('-', [
-                        $offsetKey,
-                        $item->getMetadata()->getOption()->getProductOptionId()
-                    ]);
-                }
-
-                $cart->offsetSet($offsetKey, $item);
-
-                $this->getEventManager()->trigger('stock.save', $this, $argv);
-            }
-        }
-
-        $this->persist();
-    }
-
-    /**
-     * Remove an item for the shopping cart
-     *
-     * @param $id
-     */
-    public function removeItem($id)
-    {
-        $item = $this->getCartItemService()->getById($id);
-
-        $argv = compact('item');
-        $argv = $this->prepareEventArguments($argv);
-
-        $this->getEventManager()->trigger('stock.restore', $this, $argv);
-        $this->getCartItemService()->delete($id);
     }
 
     /**
@@ -353,7 +231,7 @@ class Cart extends AbstractOrder implements InitializableInterface
                 $cartItem->setCartId($cart->getCartId());
             }
 
-            $this->getCartItemService()->save($cartItem);
+            $this->getService($this->lineService)->save($cartItem);
         }
 
         $this->getContainer()->offsetSet('cartId', $cart->getCartId());
@@ -378,55 +256,9 @@ class Cart extends AbstractOrder implements InitializableInterface
     }
 
     /**
-     * calculates the item line price
-     *
-     * @param CartItem $item            
-     * @return number
-     */
-    public function getLineCost(CartItem $item)
-    {
-        $price = $item->getPrice();
-        $tax = 0;
-
-        if (true == $this->getShopOptions()->isVatState()) {
-            $taxService = $this->getTaxService()
-                ->setTaxState($this->getShopOptions()->isVatState())
-                ->setTaxInc($item->getMetadata()->getVatInc());
-            $taxService->addTax($price, $item->getTax(true));
-            
-            $price = $taxService->getPrice();
-            $tax = $taxService->getTax();
-            
-            $this->taxTotal += $tax * $item->getQuantity();
-        }
-        
-        $price = ($item->getMetadata()->getVatInc()) ? $price + $tax : $price;
-        
-        return $price * $item->getQuantity();
-    }
-
-    /**
-     * Calculate the totals
-     */
-    public function calculateTotals()
-    {
-        $sub = 0;
-        $this->getCart()->setTaxTotal(0);
-
-        $cart = ($this->getCart()) ?? [];
-
-        foreach($cart as $cartItem) {
-            $sub = $sub + $this->getLineCost($cartItem);
-        }
-        
-        $cart->setSubTotal($sub);
-        $cart->setTotal($cart->getSubTotal() + $cart->getShipping());
-    }
-
-    /**
      * Set the shipping cost
      *
-     * @param null|int $countryId
+     * @param null $countryId
      * @param bool $shippingOff
      * @return $this
      */
@@ -436,84 +268,8 @@ class Cart extends AbstractOrder implements InitializableInterface
             $countryId = $this->getContainer()->offsetGet('countryId');
         }
 
-        if ($countryId) {
-            $countryId = (int) $countryId;
-            $shipping = $this->getShippingService();
-            $shipping->setCountryId($countryId);
-        
-            $cost = $shipping->calculateShipping($this);
-        
-            $this->setShippingTax($shipping->getShippingTax());
-        } else {
-            $cost = 0;
-            $this->setShippingTax(0);
-        }
-        
-        $this->getCart()->setShipping($cost);
-        
+        parent::setShippingCost($countryId);
         return $this;
-    }
-
-    /**
-     * @return float
-     */
-    public function getShippingTax()
-    {
-        return $this->getCart()->getShippingTax();
-    }
-
-    /**
-     * @param float $shippingTax
-     * @return $this
-     */
-    public function setShippingTax($shippingTax)
-    {
-        $this->getCart()->setShippingTax($shippingTax);
-        return $this;
-    }
-
-    /**
-     * Get the shipping cost
-     *
-     * @return float
-     */
-    public function getShippingCost()
-    {
-        $this->calculateTotals();
-        return $this->getCart()->getShipping();
-    }
-
-    /**
-     * Get the sub total
-     *
-     * @return float
-     */
-    public function getSubTotal()
-    {
-        $this->calculateTotals();
-        return $this->getCart()->getSubTotal();
-    }
-
-    /**
-     * Get the basket total
-     *
-     * @return float
-     */
-    public function getTotal()
-    {
-        $this->calculateTotals();
-        return $this->getCart()->getTotal();
-    }
-    
-    /**
-     * Get the tax total
-     * 
-     * @return float
-     */
-    public function getTaxTotal()
-    {
-        $this->calculateTotals();
-        return $this->getCart()->getTaxTotal() + $this->getCart()->getShippingTax();
     }
 
     /**
@@ -573,7 +329,7 @@ class Cart extends AbstractOrder implements InitializableInterface
             $sl = $this->getServiceLocator();
             $this->cartItemService = $sl->get('ShopCartItem');
         }
-        
+
         return $this->cartItemService;
     }
 

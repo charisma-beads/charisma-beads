@@ -10,12 +10,16 @@
 
 namespace Shop\Model\Order;
 
-use Shop\Model\Product\Product;
 use Shop\ShopException;
 use UthandoCommon\Model\AbstractCollection;
 use UthandoCommon\Model\Model;
 use UthandoCommon\Model\ModelInterface;
 
+/**
+ * Class AbstractOrderCollection
+ *
+ * @package Shop\Model\Order
+ */
 abstract class AbstractOrderCollection extends AbstractCollection implements ModelInterface
 {
     use Model;
@@ -68,40 +72,29 @@ abstract class AbstractOrderCollection extends AbstractCollection implements Mod
     /**
      * @var bool
      */
-    protected $autoIncrement = false;
+    protected $autoIncrementQuantity = false;
 
     /**
      * @return int
      */
     abstract public function getId();
 
-    public function addItem(Product $product, $qty)
+    /**
+     * Return line item by its id
+     *
+     * @param $id
+     * @return bool|LineInterface
+     */
+    public function getLineById($id)
     {
-        if ($qty <= 0 || $product->inStock() === false || $product->isDiscontinued() === true || $product->isEnabled() === false) {
-            return false;
+        /* @var $orderLine LineInterface */
+        foreach ($this->getEntities() as $orderLine) {
+            if ($orderLine->getId() == $id) {
+                return $orderLine;
+            }
         }
 
-        $productClone = clone $product;
-
-        $productId = $productClone->getProductId();
-        $optionId = (isset($post['ProductOptionList'])) ? (int) substr(strrchr($post['ProductOptionList'], "-"), 1) : null;
-
-        $productOption = ($optionId) ? $product->getProductOption($optionId) : null;
-
-        if ($productOption instanceof ProductOption) {
-            $productClone->setPostUnitId($productOption->getPostUnitId())
-                ->setPostUnit($productOption->getPostUnit())
-                ->setPrice($productOption->getPrice(false))
-                ->setDiscountPercent($productOption->getDiscountPercent());
-            $productId = $productId . '-' . $optionId;
-        }
-
-        /** @var $item CartItem */
-        $item = ($this->offsetExists($productId)) ? $this->offsetGet($productId) : new $this->entityClass();
-
-        if ($this->isAutoIncrementCart()) {
-            $qty = $qty + $item->getQuantity();
-        }
+        return false;
     }
 
     /**
@@ -197,18 +190,18 @@ abstract class AbstractOrderCollection extends AbstractCollection implements Mod
     /**
      * @return boolean
      */
-    public function isAutoIncrement(): bool
+    public function isAutoIncrementQuantity(): bool
     {
-        return $this->autoIncrement;
+        return $this->autoIncrementQuantity;
     }
 
     /**
-     * @param boolean $autoIncrement
+     * @param boolean $autoIncrementQuantity
      * @return $this
      */
-    public function setAutoIncrement($autoIncrement)
+    public function setAutoIncrementQuantity($autoIncrementQuantity)
     {
-        $this->autoIncrement = $autoIncrement;
+        $this->autoIncrementQuantity = $autoIncrementQuantity;
         return $this;
     }
 

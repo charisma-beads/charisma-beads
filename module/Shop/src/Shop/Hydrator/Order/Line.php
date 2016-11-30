@@ -26,7 +26,6 @@ class Line extends AbstractHydrator
         parent::__construct();
         
         $this->addStrategy('metadata', new Serialize());
-        $this->addStrategy('tax', new Percent());
     }
     
     /**
@@ -41,7 +40,7 @@ class Line extends AbstractHydrator
             'orderId'       => $object->getOrderId(),
             'quantity'      => $object->getQuantity(),
             'price'         => $object->getPrice(),
-            'tax'           => $this->extractValue('tax', $object->getTax()),
+            'tax'           => $object->getTax(),
             'metadata'      => $this->extractValue('metadata', $object->getMetadata()),
         ];
     }
