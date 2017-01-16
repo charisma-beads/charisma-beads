@@ -117,8 +117,10 @@
                         &nbsp;(<?=$item->getMetadata()->getPostUnit();?> grams)
                     <?php endif; ?>
                 </div>
-                <div class="total_price"><span><?=$this->priceFormat($item->getPrice() * $item->getQuantity());?></span></div>
-                <div class="qty"><?=$item->getQuantity();?> &times; <?=$this->priceFormat($item->getPrice());?></div>
+                <div class="total_price"><span><?=$this->priceFormat(
+                    ($item->getPrice() + $item->getTax()) * $item->getQuantity()
+                );?></span></div>
+                <div class="qty"><?=$item->getQuantity();?> &times; <?=$this->priceFormat(($item->getPrice() + $item->getTax()));?></div>
                 <div class="clearfix"></div>
             </div>
             <!-- /cart item -->

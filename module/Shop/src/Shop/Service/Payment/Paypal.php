@@ -82,7 +82,7 @@ class Paypal extends AbstractService
         
         // set payment amount of order
         $details = new Details();
-        $details->setShipping(number_format($order->getShipping() - $order->getShippingTax(), 2));
+        $details->setShipping(number_format($order->getShipping(), 2));
         $details->setTax(number_format($order->getTaxTotal(), 2));
         
         $subtotal = $order->getTotal() - ($order->getShipping() + ($order->getTaxTotal()));

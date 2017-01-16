@@ -91,8 +91,15 @@ class Cart extends AbstractViewHelper
      */
     public function getLineCost($item)
     {
-        $amount = $this->cartService->getLineCost($item);
+        $priceTax = $this->cartService->calculateTax($item);
+        $amount = $priceTax['price'] + $priceTax['tax'];
         return $this->formatAmount($amount);
+    }
+
+    public function getLineTax($item)
+    {
+        $amount = $this->cartService->calculateTax($item);
+        return $this->formatAmount($amount['tax']);
     }
 
     /**
@@ -134,6 +141,15 @@ class Cart extends AbstractViewHelper
     {
         $amount = $this->cartService->getTotal();
         return $this->formatAmount($amount);
+    }
+
+    /**
+     * @return string
+     */
+    public function getTaxTotal()
+    {
+        $tax = $this->cartService->getTaxTotal();
+        return $this->formatAmount($tax);
     }
 
     /**

@@ -217,6 +217,14 @@ class ShopOptions extends AbstractOptions
 	}
 
     /**
+     * @return bool
+     */
+	public function getVatState()
+    {
+        return $this->isVatState();
+    }
+
+    /**
      * @param $vatState
      * @return $this
      */

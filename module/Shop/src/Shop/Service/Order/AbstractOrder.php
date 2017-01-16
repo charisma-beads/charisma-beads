@@ -201,20 +201,35 @@ abstract class AbstractOrder extends AbstractRelationalMapperService
         $taxTotal = $this->getOrderModel()->getTaxTotal();
 
         if (true == $this->getShopOptions()->isVatState()) {
-            $taxService = $this->getTaxService()
-                ->setTaxState($this->getShopOptions()->isVatState())
-                ->setTaxInc($item->getMetadata()->getVatInc());
-            $taxService->addTax($price, $item->getTax());
 
-            $price = $taxService->getPrice();
-            $tax = $taxService->getTax();
-            $taxTotal += $tax * $item->getQuantity();
-            $this->getOrderModel()->setTaxTotal($taxTotal);
+            $priceTax = $this->calculateTax($item);
+            $price = $priceTax['price'];
+            $tax = $priceTax['tax'];
+
+            $this->getOrderModel()->setTaxTotal($tax);
         }
 
         //$price = ($item->getMetadata()->getVatInc()) ? $price + $tax : $price;
 
         return $price * $item->getQuantity();
+    }
+
+    /**
+     * @param LineInterface $item
+     * @return array
+     */
+    public function calculateTax(LineInterface $item)
+    {
+        $taxService = $this->getTaxService()
+            ->setTaxState($this->getShopOptions()->isVatState())
+            ->setTaxInc($item->getMetadata()->getVatInc());
+        $taxService->addTax($item->getPrice(), $item->getTax());
+
+        $price  = $taxService->getPrice() * $item->getQuantity();
+        $tax    = $taxService->getTax() * $item->getQuantity() ;
+
+        return ['price' => $price, 'tax' => $tax];
+
     }
 
     /**
@@ -354,12 +369,6 @@ abstract class AbstractOrder extends AbstractRelationalMapperService
     }
 
     abstract public function persist();
-
-
-    public function getTax($line, $taxrate)
-    {
-
-    }
 
     /**
      * @return AbstractOrderCollection
