@@ -138,7 +138,7 @@ class Order extends AbstractOrder
         $cart = $this->getService('ShopCart');
         $countryId = $order->getCustomer()->getDeliveryAddress()->getCountryId();
 
-        if ('Collect At Store' == $order->getShipping()) {
+        if ('Collect At Store' == $order->getMetadata()->getShippingMethod()) {
             $countryId = null;
         }
 
@@ -242,7 +242,12 @@ class Order extends AbstractOrder
         $order->setSubTotal($sub);
 
         $shipping = $this->getShippingService();
-        $shipping->setCountryId($order->getMetadata()->getDeliveryAddress()->getCountryId());
+
+        if ($order->getMetadata()->getShippingMethod() == 'Collect At Store') {
+            $shipping->setCountryId(0);
+        } else {
+            $shipping->setCountryId($order->getMetadata()->getDeliveryAddress()->getCountryId());
+        }
 
         $cost = $shipping->calculateShipping($order);
 

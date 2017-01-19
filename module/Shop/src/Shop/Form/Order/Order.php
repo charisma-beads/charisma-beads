@@ -10,6 +10,7 @@
 
 namespace Shop\Form\Order;
 
+use Shop\Model\Order\Order as OrderModel;
 use TwbBundle\Form\Element\StaticElement;
 use TwbBundle\Form\View\Helper\TwbBundleForm;
 use Zend\Form\Element\DateTime;
@@ -154,6 +155,13 @@ class Order extends Form
         if (!$orderDate) {
             $dateTime = new \DateTime();
             $this->get('orderDate')->setValue($dateTime->format('d/m/Y H:i:s'));
+        }
+    }
+
+    public function configureFormValues(OrderModel $order)
+    {
+        if ($order->getMetadata()->getShippingMethod() == 'Collect At Store') {
+            $this->get('collect_instore')->setValue(1);
         }
     }
 }

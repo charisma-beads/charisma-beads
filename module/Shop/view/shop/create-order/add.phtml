@@ -4,24 +4,12 @@
 
 
 <?php $this->placeholder('header-buttons')->captureStart(); ?>
-<button type="submit" form="form-order" data-toggle="tooltip" title="<?= $this->translate('Save'); ?>"
-        class="btn btn-primary">
+
+<a href="<?= $this->url('admin/shop/order'); ?>" data-toggle="tooltip" title="<?= $this->translate('Save'); ?>"
+   class="btn btn-primary">
     <i class="fa fa-save"></i>
-</button>
-<a href="<?= $this->url('admin/shop/order'); ?>" data-toggle="tooltip" title="<?= $this->translate('Cancel'); ?>"
-   class="btn btn-default">
-    <i class="fa fa-reply"></i>
 </a>
 <?php $this->placeholder('header-buttons')->captureEnd(); ?>
-
-<?php $this->form->setAttributes([
-    'method' => 'post',
-    'id' => 'form-order',
-    'action' => $this->url('admin/shop/order/create', [
-        'action' => 'save',
-        'customerId' => $this->model->getCustomerId(),
-    ]),
-]); ?>
 
 <?=$this->form(null,\TwbBundle\Form\View\Helper\TwbBundleForm::LAYOUT_HORIZONTAL)->openTag($this->form);?>
 <div class="col-sm-12">
@@ -136,6 +124,7 @@
     </div>
 </div>
 <?=$this->formHidden($this->form->get('customerId'));?>
+<?=$this->formHidden($this->form->get('orderId'));?>
 <?=$this->form()->closeTag();?>
 
 <?php $this->inlineScript()

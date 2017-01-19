@@ -11,19 +11,22 @@ $order = $this->order;
 <a href="<?=$this->url($this->route, array_merge($routeParams, [
     'id' => $order->getOrderId(),
     'action' => 'print'
-])); ?>" target="_blank" class="edit-button"><i class="fa fa-eye fa-2x"></i></a>
+])); ?>" target="_blank" class="btn btn-default"><i class="fa fa-eye"></i></a>
 
-<?php if (!$order->getCustomer()->getUserId()):?>
+<?php if ($order->getOrderStatus()->getOrderStatus() == 'Pending'):?>
 <?php if ($edit):?>
-    <a href="<?=$this->url($this->route, array_merge($routeParams, [
-    	'id' => $order->getOrderId()
-    ])); ?>" class="edit-button"><i class="fa fa-edit fa-2x"></i></a>
+
+<a href="<?=$this->url('admin/shop/order/create', [
+    'id' => $order->getOrderId(),
+    'action' => 'edit'
+]); ?>" class="btn btn-primary" data-toggle="tooltip" title="<?= $this->translate('Edit'); ?>"><i class="fa fa-edit"></i></a>
+
 <?php endif; ?>
 &nbsp;
 <?php if($delete):?>
 <!-- Button to trigger modal -->
-<a href="#<?=$this->tableName;?>Model<?=$order->getOrderId();?>" class="text-danger" data-toggle="modal" data-target="#<?=$this->tableName;?>Model<?=$order->getOrderId();?>">
-    <i class="fa fa-trash fa-2x"></i></a>
+<a href="#<?=$this->tableName;?>Model<?=$order->getOrderId();?>" class="btn btn-danger btn-tooltip delete-button" data-toggle="modal" data-target="#<?=$this->tableName;?>Model<?=$order->getOrderId();?>">
+    <i class="fa fa-trash"></i></a>
 <!-- Modal -->
 <div class="modal fade" id="<?=$this->tableName;?>Model<?=$order->getOrderId();?>">
 

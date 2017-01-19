@@ -25,7 +25,10 @@
             <td><?=$this->priceFormat(($item->getPrice() + $item->getTax()) * $item->getQuantity());?></td>
             <td>
                 <!--<a class="btn btn-primary"><i class="fa fa-refresh"></i></a>-->
-                <a id="delete-line-<?=$item->getId();?>" class="btn btn-danger delete-line"><i class="fa fa-trash"></i></a>
+                <a data-href="<?=$this->url('admin/shop/order/create', [
+                    'action'    => 'remove-line',
+                    'id'        => $order->getId(),
+                ]);?>" id="delete-line-<?=$item->getId();?>" class="btn btn-danger delete-line"><i class="fa fa-trash"></i></a>
             </td>
         </tr>
     <?php endforeach; ?>
