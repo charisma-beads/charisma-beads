@@ -109,46 +109,9 @@
                             </h3>
                         </div>
                         <div id="order-lines">
-                            <table class="table table-bordered table-striped">
-                                <tr>
-                                    <th>Product</th>
-                                    <th>Description</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                    <th>Total</th>
-                                    <th>&nbsp;</th>
-                                </tr>
-                                <?php /* @var $item \Shop\Model\Order\Line */ ?>
-                                <?php foreach($this->order as $item):?>
-                                    <tr class="order-line">
-                                        <td><?=$item->getMetadata()->getSku();?></td>
-                                        <td>
-                                            <?=$item->getMetadata()->getCategory();?> / <?=$item->getMetadata()->getName();?>
-                                            <?php if ($item->getMetadata()->getPostUnit() > 0): ?>
-                                                &nbsp;(<?=$item->getMetadata()->getPostUnit();?> grams)
-                                            <?php endif; ?>
-                                        </td>
-                                        <td><?=$this->priceFormat($item->getPrice() + $item->getTax());?></td>
-                                        <td><?=$item->getQuantity();?></td>
-                                        <td><?=$this->priceFormat(($item->getPrice() + $item->getTax()) * $item->getQuantity());?></td>
-                                        <td>
-                                            <a class="btn btn-primary"><i class="fa fa-refresh"></i></a>
-                                            <a class="btn btn-danger"><i class="fa fa-trash"></i></a>
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?>
-
-                                <tr id="table-postage">
-                                    <td colspan="2">&nbsp&nbsp;</td>
-                                    <th colspan="2"><p class="text-right">Postage:</p></th>
-                                    <td><?=$this->priceFormat($this->order->getShipping());?></td>
-                                </tr>
-                                <tr id="table-total">
-                                    <td colspan="2">&nbsp&nbsp;</td>
-                                    <th colspan="2"><p class="text-right">Total:</p></th>
-                                    <td><?=$this->priceFormat($this->order->getTotal());?></td>
-                                </tr>
-                            </table>
+                            <?=$this->partial('shop/create-order/add-line', [
+                                    'order' => $this->order,
+                            ]);?>
                         </div>
                     </div>
                 </div>

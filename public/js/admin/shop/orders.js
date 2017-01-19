@@ -5,8 +5,6 @@ var Orders = {
     productId : null,
 
     addProduct : function(data) {
-        console.log(data);
-
         $.ajax({
             url: admin.basePath + '/admin/shop/order/create/add-line',
             data:  data,
@@ -233,5 +231,25 @@ $(document).ready(function () {
         });
 
         dialog.modal('show');
+    });
+
+    $('#order-lines').on('click', 'a.delete-line', function (e) {
+        e.preventDefault();
+        var lineId = $(this).attr('id').replace('delete-line-', '');
+        console.log(lineId);
+        $.ajax({
+            url: admin.basePath + '/admin/shop/order/create/remove-line',
+            data:  {
+                lineId : lineId
+            },
+            type: 'POST',
+            success: function (response) {
+                console.log(response);
+                $('#order-lines table').replaceWith(response);
+            },
+            error: function (response) {
+                admin.addAlert(response.error, 'danger');
+            }
+        });
     });
 });

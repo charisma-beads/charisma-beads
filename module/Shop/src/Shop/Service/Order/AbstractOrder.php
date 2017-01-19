@@ -206,7 +206,6 @@ abstract class AbstractOrder extends AbstractRelationalMapperService
     public function removeItem($id)
     {
         $item = $this->getRelatedService($this->lineService)->getById($id);
-
         $argv = compact('item');
         $argv = $this->prepareEventArguments($argv);
 

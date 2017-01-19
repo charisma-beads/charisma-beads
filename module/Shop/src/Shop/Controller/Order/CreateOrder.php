@@ -90,11 +90,8 @@ class CreateOrder extends AbstractActionController
         }
 
         $session    = $this->sessionContainer('createAdminOrder');
-        $customerId = $session->offsetGet('customerId');
-
         $orderId    = $session->offsetGet('orderId');
         $order      = $this->getService()->getOrder($orderId);
-
         $productId  = $this->params()->fromPost('productId', 0);
         $product    = $this->getService('ShopProduct')->getFullProductById($productId);
 
@@ -112,8 +109,30 @@ class CreateOrder extends AbstractActionController
         return $viewModel;
     }
 
-    public function saveAction()
+    public function removeLineAction()
     {
+        if (!$this->getRequest()->isXmlHttpRequest()) {
+            throw new ShopException('Access denied.');
+        }
 
+        $session    = $this->sessionContainer('createAdminOrder');
+        $orderId    = $session->offsetGet('orderId');
+        $lineId     = $this->params()->fromPost('lineId', 0);
+
+        $this->getService()->removeItem($lineId);
+
+        $order  = $this->getService()->getOrder($orderId);
+        $order  = $this->getService()->loadItems($order);
+        $this->getService()->recalculateTotals();
+
+        $viewModel = new ViewModel([
+            'order' => $order,
+        ]);
+
+        $viewModel->setTemplate('shop/create-order/add-line');
+
+        $viewModel->setTerminal(true);
+
+        return $viewModel;
     }
 }

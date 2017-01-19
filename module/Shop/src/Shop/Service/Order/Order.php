@@ -272,10 +272,10 @@ class Order extends AbstractOrder
         $this->getRelatedService($this->lineService)->save($line);
     }
 
-    public function removeItem($id)
+    /*public function removeItem($id)
     {
-        // TODO: Implement removeItem() method.
-    }
+        parent::removeItem($id);
+    }*/
 
     /**
      * Generate simple order number with check digit.
