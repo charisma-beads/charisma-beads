@@ -57,6 +57,32 @@ abstract class AbstractOrder extends AbstractRelationalMapperService
     protected $taxService;
 
     /**
+     * @param AbstractOrderCollection $orderModel
+     * @return AbstractOrderCollection
+     */
+    public function loadItems(AbstractOrderCollection $orderModel)
+    {
+        $itemsService = $this->getRelatedService($this->lineService);
+
+        $method = $this->getReferenceMap()[$this->lineService]['getMethod'];
+        $items = $itemsService->$method($orderModel->getId());
+
+        /* @var $item LineInterface */
+        foreach ($items as $item) {
+            $productId = $item->getMetadata()->getProductId();
+            $productOption = ($item->getMetadata()->getOption()) ?: null;
+
+            if ($productOption instanceof ProductOption) {
+                $productId = $productId . '-' . $productOption->getProductOptionId();
+            }
+
+            $orderModel->offsetSet($productId, $item);
+        }
+
+        return $orderModel;
+    }
+
+    /**
      * Adds items contained with the order collection
      *
      * @param ProductModel $product
@@ -114,7 +140,7 @@ abstract class AbstractOrder extends AbstractRelationalMapperService
 
         $model->offsetSet($productId, $line);
 
-        $this->persist();
+        $this->persist($line);
 
         $this->getEventManager()->trigger('stock.save', $this, $argv);
 
@@ -179,13 +205,13 @@ abstract class AbstractOrder extends AbstractRelationalMapperService
      */
     public function removeItem($id)
     {
-        $item = $this->getService($this->lineService)->getById($id);
+        $item = $this->getRelatedService($this->lineService)->getById($id);
 
         $argv = compact('item');
         $argv = $this->prepareEventArguments($argv);
 
         $this->getEventManager()->trigger('stock.restore', $this, $argv);
-        $this->getService($this->lineService)->delete($id);
+        $this->getRelatedService($this->lineService)->delete($id);
     }
 
     /**
@@ -196,18 +222,11 @@ abstract class AbstractOrder extends AbstractRelationalMapperService
      */
     public function getLineCost(LineInterface $item)
     {
-        $price = $item->getPrice();
-        $tax = 0;
-        $taxTotal = $this->getOrderModel()->getTaxTotal();
+        $priceTax = $this->calculateTax($item);
+        $price = $priceTax['price'];
+        $tax = $priceTax['tax'];
 
-        if (true == $this->getShopOptions()->isVatState()) {
-
-            $priceTax = $this->calculateTax($item);
-            $price = $priceTax['price'];
-            $tax = $priceTax['tax'];
-
-            $this->getOrderModel()->setTaxTotal($tax);
-        }
+        $this->getOrderModel()->setTaxTotal($tax);
 
         //$price = ($item->getMetadata()->getVatInc()) ? $price + $tax : $price;
 
@@ -220,13 +239,18 @@ abstract class AbstractOrder extends AbstractRelationalMapperService
      */
     public function calculateTax(LineInterface $item)
     {
-        $taxService = $this->getTaxService()
-            ->setTaxState($this->getShopOptions()->isVatState())
-            ->setTaxInc($item->getMetadata()->getVatInc());
-        $taxService->addTax($item->getPrice(), $item->getTax());
+        if (true == $this->getShopOptions()->isVatState()) {
+            $taxService = $this->getTaxService()
+                ->setTaxState($this->getShopOptions()->isVatState())
+                ->setTaxInc($item->getMetadata()->getVatInc());
+            $taxService->addTax($item->getPrice(), $item->getTax());
 
-        $price  = $taxService->getPrice() * $item->getQuantity();
-        $tax    = $taxService->getTax() * $item->getQuantity() ;
+            $price  = $taxService->getPrice() * $item->getQuantity();
+            $tax    = $taxService->getTax() * $item->getQuantity();
+        } else {
+            $price  = $item->getPrice() * $item->getQuantity();
+            $tax    = 0;
+        }
 
         return ['price' => $price, 'tax' => $tax];
 
@@ -243,6 +267,7 @@ abstract class AbstractOrder extends AbstractRelationalMapperService
         $orderModel = ($this->getOrderModel()) ?? [];
 
         foreach($orderModel as $lineItem) {
+
             $sub = $sub + $this->getLineCost($lineItem);
         }
 
@@ -368,7 +393,11 @@ abstract class AbstractOrder extends AbstractRelationalMapperService
         return $metadata;
     }
 
-    abstract public function persist();
+    /**
+     * @param LineInterface $item
+     * @return mixed
+     */
+    abstract public function persist(LineInterface $item);
 
     /**
      * @return AbstractOrderCollection

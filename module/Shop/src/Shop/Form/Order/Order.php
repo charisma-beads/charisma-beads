@@ -155,32 +155,5 @@ class Order extends Form
             $dateTime = new \DateTime();
             $this->get('orderDate')->setValue($dateTime->format('d/m/Y H:i:s'));
         }
-
-        $this->add([
-            'type' => 'Zend\Form\Element\Collection',
-            'name' => 'orderLines',
-            'options' => [
-                'label' => 'Order Lines',
-                'count' => 0,
-                'should_create_template' => true,
-                'template_placeholder' => '__placeholder__',
-                'allow_add' => true,
-                'target_element' => [
-                    'type' => 'ShopOrderLineFieldSet',
-                ],
-            ],
-        ]);
-
-        /*$this->add([
-            'type' => 'ShopOrderMetadataFieldSet',
-            'name' => 'metadata',
-            'options' => [
-                'label' => 'Metadata',
-                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-            ],
-            'attributes' => [
-                'class' => 'col-md-6',
-            ],
-        ]);*/
     }
 }

@@ -11,6 +11,8 @@
 namespace Shop\Service\Order;
 
 use Shop\Model\Customer\Customer as CustomerModel;
+use Shop\Model\Order\Line;
+use Shop\Model\Order\LineInterface;
 use Shop\Model\Order\MetaData;
 use Shop\Model\Order\Order as OrderModel;
 use Shop\Service\Cart\Cart;
@@ -24,6 +26,7 @@ use Zend\View\Model\ViewModel;
  * @package Shop\Service\Order
  * @method OrderModel populate($model, $children)
  * @method \Shop\Mapper\Order\Order getMapper($mapperClass = null, array $options = [])
+ * @method OrderModel getOrderModel()
  */
 class Order extends AbstractOrder
 {
@@ -35,7 +38,7 @@ class Order extends AbstractOrder
     /**
      * @var string
      */
-    protected $lineService = 'ShopOrderLine';
+    protected $lineService = 'orderLines';
 
     /**
      * @var array
@@ -91,6 +94,19 @@ class Order extends AbstractOrder
         }
 
         return $order;
+    }
+
+    /**
+     * @param $id
+     * @return OrderModel
+     */
+    public function getOrder($id)
+    {
+        $order = parent::getById($id);
+
+        $this->setOrderModel($order);
+
+        return $this->getOrderModel();
     }
 
     /**
@@ -207,9 +223,53 @@ class Order extends AbstractOrder
         return $orderId;
     }
 
-    public function persist()
+    /**
+     * Recalculate totals of order
+     */
+    public function recalculateTotals()
     {
-        // TODO: Implement persist() method.
+        $order = $this->getOrderModel();
+        $sub = 0;
+        $tax = 0;
+        $order->setTaxTotal(0);
+
+        /* @var $lineItem \Shop\Model\Order\Line */
+        foreach($order as $lineItem) {
+            $sub = $sub + (($lineItem->getPrice()) * $lineItem->getQuantity());
+            $order->setTaxTotal($order->getTaxTotal() + ($lineItem->getTax() * $lineItem->getQuantity()));
+        }
+
+        $order->setSubTotal($sub);
+
+        $shipping = $this->getShippingService();
+        $shipping->setCountryId($order->getMetadata()->getDeliveryAddress()->getCountryId());
+
+        $cost = $shipping->calculateShipping($order);
+
+        $order->setShipping($cost);
+        $this->setShippingTax($shipping->getShippingTax());
+
+        $order->setTotal($order->getSubTotal() + $order->getShipping());
+        $order->setTaxTotal($order->getTaxTotal() + $order->getShippingTax());
+
+        $this->save($order);
+        $this->getOrder($order->getId());
+    }
+
+    public function persist(LineInterface $line)
+    {
+        $order = $this->getOrderModel();
+        $order->setOrderDate();
+
+        if (null === $line->getOrderId()) {
+            $line->setCartId($order->getOrderId());
+        }
+
+        $priceTax = $this->calculateTax($line);
+        $line->setPrice($priceTax['price'] / $line->getQuantity());
+        $line->setTax($priceTax['tax'] / $line->getQuantity());
+
+        $this->getRelatedService($this->lineService)->save($line);
     }
 
     public function removeItem($id)

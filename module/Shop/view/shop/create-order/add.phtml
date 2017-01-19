@@ -1,7 +1,6 @@
 
 <?php $this->headTitle('Create Order') ?>
 <?php $this->layout()->pageTitle = $this->translate('Create Order'); ?>
-<?php $this->form->prepare();?>
 
 
 <?php $this->placeholder('header-buttons')->captureStart(); ?>
@@ -103,7 +102,7 @@
                         <div class="panel-heading">
                             <h3 class="panel-title">
                                 <i class="fa fa-shopping-basket"></i>
-                                &nbsp;<?= $this->translate($this->form->get('orderLines')->getLabel()); ?>
+                                &nbsp;<?= $this->translate('Order Lines'); ?>
                                 <button id="add-order-line" class="btn btn-default btn-xs pull-right">
                                     <i class="fa fa-cart-plus"></i> add product
                                 </button>
@@ -119,17 +118,19 @@
                                     <th>Total</th>
                                     <th>&nbsp;</th>
                                 </tr>
-
-                                <?php foreach($this->form->get('orderLines') as $fieldset):?>
+                                <?php /* @var $item \Shop\Model\Order\Line */ ?>
+                                <?php foreach($this->order as $item):?>
                                     <tr class="order-line">
-                                        <?=$this->formHidden($fieldset->get('orderLineId'));?>
-                                        <?=$this->formHidden($fieldset->get('productId'));?>
-
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td><?=$this->formElement($fieldset->get('qty'));?></td>
-                                        <td></td>
+                                        <td><?=$item->getMetadata()->getSku();?></td>
+                                        <td>
+                                            <?=$item->getMetadata()->getCategory();?> / <?=$item->getMetadata()->getName();?>
+                                            <?php if ($item->getMetadata()->getPostUnit() > 0): ?>
+                                                &nbsp;(<?=$item->getMetadata()->getPostUnit();?> grams)
+                                            <?php endif; ?>
+                                        </td>
+                                        <td><?=$this->priceFormat($item->getPrice() + $item->getTax());?></td>
+                                        <td><?=$item->getQuantity();?></td>
+                                        <td><?=$this->priceFormat(($item->getPrice() + $item->getTax()) * $item->getQuantity());?></td>
                                         <td>
                                             <a class="btn btn-primary"><i class="fa fa-refresh"></i></a>
                                             <a class="btn btn-danger"><i class="fa fa-trash"></i></a>

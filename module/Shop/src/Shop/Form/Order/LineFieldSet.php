@@ -44,7 +44,7 @@ class LineFieldSet extends Fieldset implements InputFilterProviderInterface
     public function init()
     {
         $this->add([
-            'name' => 'orderLineId',
+            'name' => 'id',
             'type' => 'Hidden',
         ]);
 
@@ -54,7 +54,7 @@ class LineFieldSet extends Fieldset implements InputFilterProviderInterface
         ]);
 
         $this->add([
-            'name' => 'qty',
+            'name' => 'quantity',
             'type' => 'Number',
             'options' => [
                 'label' => 'Quantity:',

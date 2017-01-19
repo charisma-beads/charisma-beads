@@ -78,16 +78,16 @@ class Shipping
             if ($item->getMetadata()->getAddPostage() === true) {
             	$this->postWeight += $item->getMetadata()->getPostUnit() * $item->getQuantity();
             } else {
-            	$this->noShipping += $orderModel->getLineCost($item);
+            	$this->noShipping += $item->getPrice();
             }
         }
-        
+
         if ($this->getShippingByWeight() === true) {
             $itemLevel = $this->getPostWeight();
         } else {
             $itemLevel = $orderModel->getSubTotal() - $this->getNoShipping();
         }
-        
+
         if ($itemLevel == $this->getNoShipping()) {
             return 0;
         }
@@ -97,7 +97,7 @@ class Shipping
 
         $taxInc = 0;
         $taxRate = 0;
-        
+
         foreach ($shippingLevels as $row) {
         	if ($itemLevel > $row->postLevel) {
         	   $this->shippingTotal = $row->cost;

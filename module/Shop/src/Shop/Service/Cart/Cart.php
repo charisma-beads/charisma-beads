@@ -13,13 +13,13 @@ namespace Shop\Service\Cart;
 use Shop\Mapper\Cart\Cart as CartMapper;
 use Shop\Model\Cart\Cart as CartModel;
 use Shop\Model\Cart\Item as CartItem;
+use Shop\Model\Order\LineInterface;
 use Shop\Options\CartCookieOptions;
 use Shop\Service\Cart\Cookie as CartCookie;
 use Shop\Service\Order\AbstractOrder;
 use UthandoCommon\Model\CollectionException;
 use Zend\Session\Container;
 use Zend\Stdlib\InitializableInterface;
-use Shop\Model\Product\Option as ProductOption;
 
 /**
  * Class Cart
@@ -39,7 +39,7 @@ class Cart extends AbstractOrder implements InitializableInterface
     /**
      * @var string
      */
-    protected $lineService = 'ShopCartItem';
+    protected $lineService = 'CartItem';
 
     /**
      * @var Container
@@ -105,7 +105,7 @@ class Cart extends AbstractOrder implements InitializableInterface
         // load any cart items
         // if no cart then retrieve empty cart object
         if ($cart instanceof CartModel) {
-            $cart = $this->loadCartItems($cart);
+            $cart = $this->loadItems($cart);
 
             $options = $this->getShopOptions();
 
@@ -121,32 +121,6 @@ class Cart extends AbstractOrder implements InitializableInterface
         $this->setCart($cart);
         $this->calculateTotals();
         $this->isInitialized = true;
-    }
-
-    /**
-     * @param CartModel $cart
-     * @return CartModel
-     * @throws CollectionException
-     */
-    public function loadCartItems(CartModel $cart)
-    {
-        /* @var $itemsService \Shop\Service\Cart\Item */
-        $itemsService = $this->getService($this->lineService);
-        $items = $itemsService->getCartItemsByCartId($cart->getCartId());
-
-        /* @var $item CartItem */
-        foreach ($items as $item) {
-            $productId = $item->getMetadata()->getProductId();
-            $productOption = ($item->getMetadata()->getOption()) ?: null;
-            
-            if ($productOption instanceof ProductOption) {
-                $productId = $productId . '-' . $productOption->getProductOptionId();
-            }
-            
-            $cart->offsetSet($productId, $item);
-        }
-
-        return $cart;
     }
 
     /**
@@ -208,8 +182,10 @@ class Cart extends AbstractOrder implements InitializableInterface
      * Persist the cart data in the session and in
      * the database, then set a cookie for persistence after
      * session has been expired.
+     * @param CartItem $item
+     * @return mixed|void
      */
-    public function persist()
+    public function persist(LineInterface $item)
     {
         $cart = $this->getCart();
         $cart->setDateModified();
@@ -231,7 +207,7 @@ class Cart extends AbstractOrder implements InitializableInterface
                 $cartItem->setCartId($cart->getCartId());
             }
 
-            $this->getService($this->lineService)->save($cartItem);
+            $this->getRelatedService($this->lineService)->save($cartItem);
         }
 
         $this->getContainer()->offsetSet('cartId', $cart->getCartId());
