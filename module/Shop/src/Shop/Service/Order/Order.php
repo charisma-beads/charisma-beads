@@ -262,7 +262,7 @@ class Order extends AbstractOrder
         $this->getOrder($order->getId());
     }
 
-    public function persist(LineInterface $line)
+    public function persist(LineInterface $line = null)
     {
         $order = $this->getOrderModel();
         $order->setOrderDate();
@@ -272,8 +272,8 @@ class Order extends AbstractOrder
         }
 
         $priceTax = $this->calculateTax($line);
-        $line->setPrice($priceTax['price'] / $line->getQuantity());
-        $line->setTax($priceTax['tax'] / $line->getQuantity());
+        $line->setPrice($priceTax['price']);
+        $line->setTax($priceTax['tax']);
 
         $this->getRelatedService($this->lineService)->save($line);
     }

@@ -244,10 +244,10 @@ abstract class AbstractOrder extends AbstractRelationalMapperService
                 ->setTaxInc($item->getMetadata()->getVatInc());
             $taxService->addTax($item->getPrice(), $item->getTax());
 
-            $price  = $taxService->getPrice() * $item->getQuantity();
-            $tax    = $taxService->getTax() * $item->getQuantity();
+            $price  = $taxService->getPrice();
+            $tax    = $taxService->getTax();
         } else {
-            $price  = $item->getPrice() * $item->getQuantity();
+            $price  = $item->getPrice();
             $tax    = 0;
         }
 
@@ -396,7 +396,7 @@ abstract class AbstractOrder extends AbstractRelationalMapperService
      * @param LineInterface $item
      * @return mixed
      */
-    abstract public function persist(LineInterface $item);
+    abstract public function persist(LineInterface $item = null);
 
     /**
      * @return AbstractOrderCollection

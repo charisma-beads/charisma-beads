@@ -13,6 +13,7 @@ namespace Shop\Service\Order;
 use Shop\Model\Cart\Cart;
 use Shop\Model\Order\Line as LineModel;
 use Shop\Model\Order\LineInterface;
+use Shop\Service\Cart\Cart as CartService;
 use UthandoCommon\Service\AbstractMapperService;
 
 /**
@@ -52,11 +53,15 @@ class Line extends AbstractMapperService
      */
     public function addLine(LineInterface $lineModel, $orderId)
     {
+        /* @var $cart CartService */
+        $cart = $this->getService('ShopCart');
+        $priceTax = $cart->calculateTax($lineModel);
+
         $lineData = [
             'orderId'   => $orderId,
             'quantity'  => $lineModel->getQuantity(),
-            'price'     => $lineModel->getPrice(),
-            'tax'       => $lineModel->getTax(),
+            'price'     => $priceTax['price'],
+            'tax'       => $priceTax['tax'],
             'metadata'  => $lineModel->getMetadata(),
         ];
 

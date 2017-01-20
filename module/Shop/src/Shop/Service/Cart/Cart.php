@@ -182,10 +182,10 @@ class Cart extends AbstractOrder implements InitializableInterface
      * Persist the cart data in the session and in
      * the database, then set a cookie for persistence after
      * session has been expired.
-     * @param CartItem $item
+     * @param LineInterface $item
      * @return mixed|void
      */
-    public function persist(LineInterface $item)
+    public function persist(LineInterface $item = null)
     {
         $cart = $this->getCart();
         $cart->setDateModified();

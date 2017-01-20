@@ -91,8 +91,8 @@ class Cart extends AbstractViewHelper
      */
     public function getLineCost($item)
     {
-        $priceTax = $this->cartService->calculateTax($item);
-        $amount = $priceTax['price'] + $priceTax['tax'];
+        $amount = $this->cartService->getLineCost($item);
+        //$amount = $priceTax['price'] + $priceTax['tax'];
         return $this->formatAmount($amount);
     }
 
