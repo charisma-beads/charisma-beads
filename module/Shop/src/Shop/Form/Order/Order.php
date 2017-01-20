@@ -63,7 +63,7 @@ class Order extends Form
             ],
         ]);
 
-        $this->add([
+        /*$this->add([
             'name'		=> 'payment_option',
             'type'		=> 'PayOptionsList',
             'options'	=> [
@@ -73,7 +73,7 @@ class Order extends Form
                 'inline' => true,
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
             ],
-        ]);
+        ]);*/
 
         $this->add([
             'name'			=> 'collect_instore',

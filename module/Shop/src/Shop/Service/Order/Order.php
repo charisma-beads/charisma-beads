@@ -16,6 +16,7 @@ use Shop\Model\Order\LineInterface;
 use Shop\Model\Order\MetaData;
 use Shop\Model\Order\Order as OrderModel;
 use Shop\Service\Cart\Cart;
+use Zend\EventManager\Event;
 use Zend\Json\Json;
 use Zend\Math\BigInteger\BigInteger;
 use Zend\View\Model\ViewModel;

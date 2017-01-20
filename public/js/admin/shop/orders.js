@@ -13,7 +13,6 @@ var Orders = {
             data:  data,
             type: 'POST',
             success: function (response) {
-                console.log(response);
                 $('#order-lines table').replaceWith(response);
             },
             error: function (response) {
@@ -158,7 +157,6 @@ $(document).ready(function () {
             },
             type: 'POST',
             success: function (response) {
-                console.log(response);
                 $('#order-lines table').replaceWith(response);
             },
             error: function (response) {
@@ -257,7 +255,7 @@ $(document).ready(function () {
         dialog.modal('show');
     });
 
-    $('#order input[name=collect_instore]').on('click', function(e){
+    $('#form-order input[name=collect_instore]').on('click', function(e){
         var orderId = $('input[name=orderId]').val();
 
         $.ajax({
@@ -267,7 +265,6 @@ $(document).ready(function () {
             },
             type: 'POST',
             success: function (response) {
-                console.log(response);
                 $('#order-lines table').replaceWith(response);
             },
             error: function (response) {
@@ -289,7 +286,6 @@ $(document).ready(function () {
             },
             type: 'POST',
             success: function (response) {
-                console.log(response);
                 $('#order-lines table').replaceWith(response);
             },
             error: function (response) {

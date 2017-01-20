@@ -104,6 +104,54 @@ class CreateOrder extends AbstractActionController
         return $viewModel;
     }
 
+    public function saveAction()
+    {
+        $post = $this->params()->fromPost();
+        $id = $this->params()->fromPost('orderId', null);
+
+        if (!$id) {
+            throw new ShopException('No order id was supplied');
+        }
+
+        $order = $this->getService()->getOrder($id);
+
+        if ($id !== $order->getId()) {
+            throw new ShopException('No order ids do not match');
+        }
+
+        $form = $this->getService()->prepareForm($order, $post, true, true);
+        $hydrator = $form->getHydrator();
+        $dateTimeStrategy = $hydrator->getStrategy('orderDate');
+        $dateTimeStrategy->setHydrateFormat('d/m/Y H:i:s');
+
+        if ($form->isValid()) {
+            $data = $form->getData();
+            $result = $this->getService()->save($data);
+
+            if ($result) {
+                $this->flashMessenger()->addSuccessMessage('row ' . $order->getId() . ' has been saved to database table orders');
+            } else {
+                $this->flashMessenger()->addErrorMessage('record could not be saved to table orders due to a database error.');
+            }
+
+            return $this->redirect()->toRoute('admin/shop/order');
+        }
+
+        /* @var Customer $service */
+        $service    = $this->getService('ShopCustomer');
+        $customer   = $service->getCustomerDetailsByCustomerId($order->getMetadata()->getDeliveryAddress()->getCustomerId());
+
+        $viewModel = new ViewModel([
+            'model' => $customer,
+            'order' => $order,
+            'form'  => $form,
+        ]);
+
+        $viewModel->setTemplate('shop/create-order/add');
+
+        return $viewModel;
+    }
+
     /**
      * @return ViewModel
      * @throws ShopException

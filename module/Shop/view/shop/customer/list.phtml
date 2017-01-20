@@ -24,8 +24,8 @@
     			<td><?=$this->escapeHtml($this->formatDate($row->getDateModified())); ?></td>
     			<td>
                     <a href="<?=$this->url('admin/shop/order/create', [
-                        'action' => 'create',
-                        'customerId' => $row->getCustomerId(),
+                        'action' => 'add',
+                        'id' => $row->getCustomerId(),
                     ]); ?>" class="btn btn-default">
                         <i class="fa fa-shopping-bag" data-toggle="tooltip" title="<?=$this->translate('Create Order');?>"></i>
                         </a>
