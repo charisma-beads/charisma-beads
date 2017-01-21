@@ -126,6 +126,7 @@ class CreateOrder extends AbstractActionController
 
         if ($form->isValid()) {
             $data = $form->getData();
+            $data->getMetadata()->setRequirements($post['requirements']);
             $result = $this->getService()->save($data);
 
             if ($result) {

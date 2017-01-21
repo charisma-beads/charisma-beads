@@ -163,5 +163,7 @@ class Order extends Form
         if ($order->getMetadata()->getShippingMethod() == 'Collect At Store') {
             $this->get('collect_instore')->setValue(1);
         }
+
+        $this->get('requirements')->setValue($order->getMetadata()->getRequirements());
     }
 }

@@ -11,12 +11,10 @@
 namespace Shop\Service\Order;
 
 use Shop\Model\Customer\Customer as CustomerModel;
-use Shop\Model\Order\Line;
 use Shop\Model\Order\LineInterface;
 use Shop\Model\Order\MetaData;
 use Shop\Model\Order\Order as OrderModel;
 use Shop\Service\Cart\Cart;
-use Zend\EventManager\Event;
 use Zend\Json\Json;
 use Zend\Math\BigInteger\BigInteger;
 use Zend\View\Model\ViewModel;
@@ -277,11 +275,6 @@ class Order extends AbstractOrder
 
         $this->getRelatedService($this->lineService)->save($line);
     }
-
-    /*public function removeItem($id)
-    {
-        parent::removeItem($id);
-    }*/
 
     /**
      * Generate simple order number with check digit.

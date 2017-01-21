@@ -1,23 +1,61 @@
 <?php $this->headTitle('Edit Country') ?>
+<?php $this->layout()->pageTitle = $this->translate('Edit Country');?>
+
+<?php $this->placeholder('header-buttons')->captureStart();?>
+<button type="submit" form="form-country" data-toggle="tooltip" title="<?=$this->translate('Save');?>" class="btn btn-primary">
+    <i class="fa fa-save"></i>
+</button>
+<a href="<?=$this->url('admin/shop/country');?>" data-toggle="tooltip" title="<?=$this->translate('Cancel');?>" class="btn btn-default">
+    <i class="fa fa-reply"></i>
+</a>
+<?php $this->placeholder('header-buttons')->captureEnd();?>
+
+<?php $this->form->setAttributes([
+    'method' => 'post',
+    'id' => 'form-country',
+    'action' => $this->url('admin/shop/country/edit', [
+        'id' => $this->model->getCountryId(),
+    ]),
+]); ?>
+
+<div id="country-edit" class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-pencil"></i> <?=$this->translate('Edit Country');?></h3>
+    </div>
+    <div class="panel-body">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#country" data-toggle="tab">Country</a></li>
+            <li><a href="#country-province" data-toggle="tab">Provinces</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div class="tab-pane active" id="country">
+                <div class="clearfix">&nbsp;</div>
+                <?=$this->form($this->form);?>
+            </div>
+
+            <div class="tab-pane" id="country-province">
+                <div class="clearfix">&nbsp;</div>
+                <a href="<?=$this->url('admin/shop/country/province', [
+                    'action'    => 'add',
+                    'id'        => $this->model->getCountryId(),
+                ]);?>" id="add-country-province-button" class="btn btn-default">
+                    Add Province
+                </a>
+                <div class="clearfix">&nbsp;</div>
+                <div class="country-province-list">
+                    <i class="fa fa-spinner fa-spin"></i>&nbsp;Loading
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
 
 <div class="col-md-12">
-    <?=$this->partial('uthando-admin/partial/add-edit-form', [
-        'form' 			=> $this->form,
-        'formAction' 	=> 'edit',
-        'formName'		=> 'Country',
-        'postUrl'		=> $this->url('admin/shop/country/edit', [
-            'id'        => $this->model->getCountryId(),
-        ]),
-        'cancelUrl'     => $this->url('admin/shop/country'),
-        'formElements'	=> [
-            'country', 'code', 'postZoneId', 'countryId',
-        ],
-        'formWidth'     => '6',
-        'helperOptions' => [
-            'labelWidth'    => '4',
-            'elementWidth'  => '8',
-        ],
-    ]); ?>
 
     <div class="col-md-6">
         <div id="country-provinces" class="panel panel-info">

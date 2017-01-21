@@ -204,40 +204,12 @@ return [
                                 'action' => 'index',
                                 'route' => 'admin/shop/post/zone',
                                 'resource' => 'menu:admin',
-                                'pages' => [
-                                    'edit' => [
-                                        'label' => 'List All Zones',
-                                        'action' => 'index',
-                                        'route' => 'admin/shop/post/zone',
-                                        'resource' => 'menu:admin'
-                                    ],
-                                    'add' => [
-                                        'label' => 'Add New Zone',
-                                        'action' => 'add',
-                                        'route' => 'admin/shop/post/zone/edit',
-                                        'resource' => 'menu:admin'
-                                    ]
-                                ]
                             ],
                             'countries' => [
                                 'label' => 'Countries',
                                 'action' => 'index',
                                 'route' => 'admin/shop/country',
                                 'resource' => 'menu:admin',
-                                'pages' => [
-                                    'edit' => [
-                                        'label' => 'List All Countries',
-                                        'action' => 'index',
-                                        'route' => 'admin/shop/country',
-                                        'resource' => 'menu:admin'
-                                    ],
-                                    'add' => [
-                                        'label' => 'Add New Country',
-                                        'action' => 'add',
-                                        'route' => 'admin/shop/country/edit',
-                                        'resource' => 'menu:admin'
-                                    ]
-                                ]
                             ],
                             'levels' => [
                                 'label' => 'Postage Levels',
