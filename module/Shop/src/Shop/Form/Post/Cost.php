@@ -39,9 +39,9 @@ class Cost extends Form
 				'label'			=> 'Cost:',
 				'help-inline'	=> 'Do not include the currency sign or commas.',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-4',
+                'column-size' => 'sm-10',
                 'label_attributes' => [
-                    'class' => 'col-md-2',
+                    'class' => 'col-sm-2',
                 ],
 			],
 		]);
@@ -50,13 +50,13 @@ class Cost extends Form
 			'name'			=> 'vatInc',
 			'type'			=> 'checkbox',
 			'options'		=> [
-				'label'			=> 'Vat Included:',
+				'label'			=> 'Vat Included',
 				'required' 		=> true,
 				'use_hidden_element' => true,
 				'checked_value' => '1',
 				'unchecked_value' => '0',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-4 col-md-offset-2',
+                'column-size' => 'sm-10 col-sm-offset-2',
 			],
 		]);
 		
@@ -66,9 +66,9 @@ class Cost extends Form
 			'options'	=> [
 				'label'			=> 'Post Level:',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-4',
+                'column-size' => 'sm-10',
                 'label_attributes' => [
-                    'class' => 'col-md-2',
+                    'class' => 'col-sm-2',
                 ],
 			],
 		]);
@@ -79,9 +79,9 @@ class Cost extends Form
 			'options'	=> [
 				'label'			=> 'Post Zone:',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-4',
+                'column-size' => 'sm-10',
                 'label_attributes' => [
-                    'class' => 'col-md-2',
+                    'class' => 'col-sm-2',
                 ],
 			],
 		]);

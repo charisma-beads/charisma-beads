@@ -272,18 +272,20 @@ return [
                                 'resource' => 'menu:admin',
                                 'pages' => [
                                     'edit' => [
-                                        'label' => 'List All Postage Costs',
-                                        'action' => 'index',
-                                        'route' => 'admin/shop/post/cost',
-                                        'resource' => 'menu:admin'
+                                        'label' => 'Edit Postage Cost',
+                                        'action' => 'edit',
+                                        'route' => 'admin/shop/post/cost/edit',
+                                        'resource' => 'menu:admin',
+                                        'visible' => false,
                                     ],
                                     'add' => [
                                         'label' => 'Add New Postage Cost',
                                         'action' => 'add',
                                         'route' => 'admin/shop/post/cost/edit',
-                                        'resource' => 'menu:admin'
-                                    ]
-                                ]
+                                        'resource' => 'menu:admin',
+                                        'visible' => false,
+                                    ],
+                                ],
                             ],
                             'units' => [
                                 'label' => 'Postage Units',
@@ -292,20 +294,22 @@ return [
                                 'resource' => 'menu:admin',
                                 'pages' => [
                                     'edit' => [
-                                        'label' => 'List All Postage Units',
-                                        'action' => 'index',
-                                        'route' => 'admin/shop/post/unit',
-                                        'resource' => 'menu:admin'
+                                        'label' => 'Edit Postage Unit',
+                                        'action' => 'edit',
+                                        'route' => 'admin/shop/post/unit/edit',
+                                        'resource' => 'menu:admin',
+                                        'visible' => false,
                                     ],
                                     'add' => [
                                         'label' => 'Add New Postage Unit',
                                         'action' => 'add',
                                         'route' => 'admin/shop/post/unit/edit',
-                                        'resource' => 'menu:admin'
-                                    ]
-                                ]
-                            ]
-                        ]
+                                        'resource' => 'menu:admin',
+                                        'visible' => false,
+                                    ],
+                                ],
+                            ],
+                        ],
                     ],
                     'tax' => [
                         'label' => 'Tax',

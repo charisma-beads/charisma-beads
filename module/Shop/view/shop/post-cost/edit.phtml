@@ -1,13 +1,31 @@
 <?php $this->headTitle('Edit Post Cost') ?>
+<?php $this->layout()->pageTitle = $this->translate('Edit Post Cost'); ?>
 
-<?=$this->partial('uthando-admin/partial/add-edit-form', [
-	'form' 			=> $this->form,
-	'formName'		=> 'Post Level',
-    'postUrl'		=> $this->url('admin/shop/post/cost/edit', [
-        'id'    => $this->model->getPostCostId(),
+<?php $this->placeholder('header-buttons')->captureStart(); ?>
+<button type="submit" form="form-post-cost" data-toggle="tooltip" title="<?= $this->translate('Save'); ?>"
+		class="btn btn-primary">
+	<i class="fa fa-save"></i>
+</button>
+<a href="<?= $this->url('admin/shop/post/cost'); ?>" data-toggle="tooltip" title="<?= $this->translate('Cancel'); ?>"
+   class="btn btn-default">
+	<i class="fa fa-reply"></i>
+</a>
+<?php $this->placeholder('header-buttons')->captureEnd(); ?>
+
+<?php $this->form->setAttributes([
+    'method' => 'post',
+    'id' => 'form-post-cost',
+    'action' => $this->url('admin/shop/post/cost/edit', [
+        'action'    => 'edit',
+		'id'        => $this->model->getPostCostId(),
     ]),
-    'cancelUrl'     => $this->url('admin/shop/post/cost'),
-	'formElements'	=> [
-		'cost', 'vatInc', 'postLevelId', 'postZoneId', 'postCostId',
-	],
 ]); ?>
+
+<div id="post-cost-edit" class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title"><i class="fa fa-pencil"></i> <?= $this->translate('Edit Post Cost'); ?></h3>
+	</div>
+	<div class="panel-body">
+        <?= $this->form($this->form); ?>
+	</div>
+</div>
