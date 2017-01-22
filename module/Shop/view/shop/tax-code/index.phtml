@@ -1,30 +1,42 @@
-  	
-<?=$this->partial('uthando-admin/partial/search', [
-	'name'			=> 'taxCode',
-	'searchInputs'	=> [
-		'Tax Code' => 'taxCode-description',
-	],
-]);?>
+<?php $this->headTitle('Tax Codes') ?>
+<?php $this->layout()->pageTitle = $this->translate('Tax Codes');?>
 
-	    	
-<div id="table-taxCode">
-	<?=$this->partial('shop/tax-code/list', [
-	    'models' => $this->models
-	]); ?>
+<?php $this->placeholder('header-buttons')->captureStart();?>
+<a href="<?=$this->url('admin/shop/tax/code/edit', [
+    'action' => 'add'
+]);?>" data-toggle="tooltip" title="<?=$this->translate('Add Tax Code');?>" class="btn btn-primary" id="tax-code-add">
+    <i class="fa fa-plus"></i>
+</a>
+<?php $this->placeholder('header-buttons')->captureEnd();?>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-list"></i> <?=$this->translate('List Tax Codes');?></h3>
+    </div>
+    <div class="panel-body">
+        <?=$this->partial('uthando-admin/partial/search', [
+            'name'			=> 'taxCode',
+            'searchInputs'	=> [
+                'Tax Code' => 'taxCode-description',
+            ],
+        ]);?>
+    </div>
+    <div id="table-taxCode" class="admin-table">
+        <?=$this->partial('shop/tax-code/list', [
+            'models' => $this->models
+        ]); ?>
+    </div>
 </div>
 
-
-<?php $this->inlineScript()->captureStart(); ?>
-$(document).ready(function(){
-	$('#table-taxCode').dataGrid({
-	    url : 'code/list',
-	    query: { sort : 'taxCodeId' },
-	    searchForm : $('#search-taxCode'),
-	    paging : 'links',
-	    columnSort: true,
-	    //rowClick : admin.dataTable.rowClick
-	});
-});
-<?php $this->inlineScript()->captureEnd(); ?>
-
-
+<script>
+    $(document).ready(function(){
+        $('#table-taxCode').dataGrid({
+            url : 'code/list',
+            query: { sort : 'taxCodeId' },
+            searchForm : $('#search-taxCode'),
+            paging : 'links',
+            columnSort: true,
+            //rowClick : admin.dataTable.rowClick
+        });
+    });
+</script>

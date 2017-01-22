@@ -4,14 +4,14 @@
 <?php $this->placeholder('header-buttons')->captureStart();?>
 <a href="<?=$this->url('admin/shop/tax/rate/edit', [
     'action' => 'add'
-]);?>" data-toggle="tooltip" title="<?=$this->translate('Add Tax rate');?>" class="btn btn-primary" id="tax-rate-add">
+]);?>" data-toggle="tooltip" title="<?=$this->translate('Add Tax Rate');?>" class="btn btn-primary" id="tax-rate-add">
     <i class="fa fa-plus"></i>
 </a>
 <?php $this->placeholder('header-buttons')->captureEnd();?>
 
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h3 class="panel-title"><i class="fa fa-list"></i> <?=$this->translate('List Tax rates');?></h3>
+        <h3 class="panel-title"><i class="fa fa-list"></i> <?=$this->translate('List Tax Rates');?></h3>
     </div>
     <div class="panel-body">
         <?=$this->partial('uthando-admin/partial/search', [

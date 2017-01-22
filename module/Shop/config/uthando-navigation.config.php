@@ -318,7 +318,7 @@ return [
                         'resource' => 'menu:admin',
                         'pages' => [
                             'rates' => [
-                                'label' => 'Tax Rates',
+                                'label' => 'Rates',
                                 'action' => 'index',
                                 'route' => 'admin/shop/tax/rate',
                                 'resource' => 'menu:admin',
@@ -346,16 +346,18 @@ return [
                                 'resource' => 'menu:admin',
                                 'pages' => [
                                     'edit' => [
-                                        'label' => 'List All Tax Codes',
-                                        'action' => 'index',
-                                        'route' => 'admin/shop/tax/code',
-                                        'resource' => 'menu:admin'
+                                        'label' => 'Edit Tax Code',
+                                        'action' => 'edit',
+                                        'route' => 'admin/shop/tax/code/edit',
+                                        'resource' => 'menu:admin',
+                                        'visible' => false,
                                     ],
                                     'add' => [
                                         'label' => 'Add New Tax Code',
                                         'action' => 'add',
                                         'route' => 'admin/shop/tax/code/edit',
-                                        'resource' => 'menu:admin'
+                                        'resource' => 'menu:admin',
+                                        'visible' => false,
                                     ],
                                 ],
                             ],
