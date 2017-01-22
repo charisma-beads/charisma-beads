@@ -1,13 +1,31 @@
 <?php $this->headTitle('Edit Post Unit') ?>
+<?php $this->layout()->pageTitle = $this->translate('Edit Post Unit'); ?>
 
-<?=$this->partial('uthando-admin/partial/add-edit-form', [
-	'form' 			=> $this->form,
-	'formName'		=> 'Post Unit',
-    'postUrl'		=> $this->url('admin/shop/post/unit/edit', [
-        'id'        => $this->model->getPostUnitId(),
+<?php $this->placeholder('header-buttons')->captureStart(); ?>
+<button type="submit" form="form-post-unit" data-toggle="tooltip" title="<?= $this->translate('Save'); ?>"
+		class="btn btn-primary">
+	<i class="fa fa-save"></i>
+</button>
+<a href="<?= $this->url('admin/shop/post/unit'); ?>" data-toggle="tooltip" title="<?= $this->translate('Cancel'); ?>"
+   class="btn btn-default">
+	<i class="fa fa-reply"></i>
+</a>
+<?php $this->placeholder('header-buttons')->captureEnd(); ?>
+
+<?php $this->form->setAttributes([
+    'method' => 'post',
+    'id' => 'form-post-unit',
+    'action' => $this->url('admin/shop/post/level/edit', [
+        'action'    => 'edit',
+		'id'        => $this->model->getPostUnitId(),
     ]),
-    'cancelUrl'     => $this->url('admin/shop/post/unit'),
-	'formElements'	=> [
-		'postUnit', 'postUnitId',
-	],
 ]); ?>
+
+<div id="post-unit-edit" class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title"><i class="fa fa-pencil"></i> <?= $this->translate('Edit Post Unit'); ?></h3>
+	</div>
+	<div class="panel-body">
+        <?= $this->form($this->form); ?>
+	</div>
+</div>
