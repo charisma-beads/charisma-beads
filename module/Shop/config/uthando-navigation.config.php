@@ -392,18 +392,20 @@ return [
                         'resource' => 'menu:admin',
                         'pages' => [
                             'list' => [
-                                'label' => 'List All FAQs',
-                                'action' => 'index',
-                                'route' => 'admin/shop/faq',
-                                'resource' => 'menu:admin'
+                                'label' => 'Edit FAQ',
+                                'action' => 'edit',
+                                'route' => 'admin/shop/faq/edit',
+                                'resource' => 'menu:admin',
+                                'visible' => false,
                             ],
                             'add' => [
                                 'label' => 'Add New FAQ',
                                 'action' => 'add',
                                 'route' => 'admin/shop/faq/edit',
-                                'resource' => 'menu:admin'
-                            ]
-                        ]
+                                'resource' => 'menu:admin',
+                                'visible' => false,
+                            ],
+                        ],
                     ],
                     'shop-settings' => [
                         'label' => 'Settings',
