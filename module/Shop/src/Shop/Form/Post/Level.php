@@ -39,9 +39,9 @@ class Level extends Form
         		'label'			=> 'Post Level Price:',
         		'help-inline'	=> 'Do not include the currency sign or commas.',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-4',
+                'column-size' => 'sm-10',
                 'label_attributes' => [
-                    'class' => 'col-md-2',
+                    'class' => 'col-sm-2',
                 ],
         	],
 		]);

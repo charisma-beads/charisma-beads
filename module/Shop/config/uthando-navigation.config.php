@@ -250,16 +250,18 @@ return [
                                 'resource' => 'menu:admin',
                                 'pages' => [
                                     'edit' => [
-                                        'label' => 'List All Postage Levels',
-                                        'action' => 'index',
-                                        'route' => 'admin/shop/post/level',
-                                        'resource' => 'menu:admin'
+                                        'label' => 'Edit Postage Level',
+                                        'action' => 'edit',
+                                        'route' => 'admin/shop/post/level/edit',
+                                        'resource' => 'menu:admin',
+                                        'visible' => false,
                                     ],
                                     'add' => [
                                         'label' => 'Add New Postage Level',
                                         'action' => 'add',
                                         'route' => 'admin/shop/post/level/edit',
-                                        'resource' => 'menu:admin'
+                                        'resource' => 'menu:admin',
+                                        'visible' => false,
                                     ]
                                 ]
                             ],
