@@ -1,13 +1,31 @@
 <?php $this->headTitle('Edit Tax Rate') ?>
+<?php $this->layout()->pageTitle = $this->translate('Edit Tax Rate'); ?>
 
-<?=$this->partial('uthando-admin/partial/add-edit-form', [
-	'form' 			=> $this->form,
-	'formName'		=> 'Tax Rate',
-    'postUrl'		=> $this->url('admin/shop/tax/rate/edit', [
-        'id'    => $this->model->getTaxRateId(),
+<?php $this->placeholder('header-buttons')->captureStart(); ?>
+<button type="submit" form="form-tax-rate" data-toggle="tooltip" title="<?= $this->translate('Save'); ?>"
+        class="btn btn-primary">
+    <i class="fa fa-save"></i>
+</button>
+<a href="<?= $this->url('admin/shop/tax/rate'); ?>" data-toggle="tooltip" title="<?= $this->translate('Cancel'); ?>"
+   class="btn btn-default">
+    <i class="fa fa-reply"></i>
+</a>
+<?php $this->placeholder('header-buttons')->captureEnd(); ?>
+
+<?php $this->form->setAttributes([
+    'method' => 'post',
+    'id' => 'form-tax-rate',
+    'action' => $this->url('admin/shop/tax/rate/edit', [
+        'action'    => 'edit',
+        'id'        => $this->model->getTaxRateId(),
     ]),
-    'cancelUrl'     => $this->url('admin/shop/tax/rate'),
-	'formElements'	=> [
-		'taxRate', 'taxRateId',
-	],
 ]); ?>
+
+<div id="tax-rate-edit" class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-pencil"></i> <?= $this->translate('Edit Tax Rate'); ?></h3>
+    </div>
+    <div class="panel-body">
+        <?= $this->form($this->form); ?>
+    </div>
+</div>

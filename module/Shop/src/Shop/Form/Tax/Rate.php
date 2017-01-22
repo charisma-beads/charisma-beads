@@ -41,9 +41,9 @@ class Rate extends Form
 				'label' => 'Tax Rate:',
 				'help-inline'	=> 'Do not include the % sign.',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-4',
+                'column-size' => 'sm-10',
                 'label_attributes' => [
-                    'class' => 'col-md-2',
+                    'class' => 'col-sm-2',
                 ],
 			],
 		]);

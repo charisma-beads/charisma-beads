@@ -318,22 +318,24 @@ return [
                         'resource' => 'menu:admin',
                         'pages' => [
                             'rates' => [
-                                'label' => 'Rates',
+                                'label' => 'Tax Rates',
                                 'action' => 'index',
                                 'route' => 'admin/shop/tax/rate',
                                 'resource' => 'menu:admin',
                                 'pages' => [
                                     'edit' => [
-                                        'label' => 'List All Tax Rates',
-                                        'action' => 'index',
-                                        'route' => 'admin/shop/tax/rate',
-                                        'resource' => 'menu:admin'
+                                        'label' => 'Edit Tax Rate',
+                                        'action' => 'edit',
+                                        'route' => 'admin/shop/tax/rate/edit',
+                                        'resource' => 'menu:admin',
+                                        'visible' => false,
                                     ],
                                     'add' => [
                                         'label' => 'Add New Tax Rate',
                                         'action' => 'add',
                                         'route' => 'admin/shop/tax/rate/edit',
-                                        'resource' => 'menu:admin'
+                                        'resource' => 'menu:admin',
+                                        'visible' => false,
                                     ]
                                 ]
                             ],
