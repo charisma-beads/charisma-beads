@@ -415,7 +415,7 @@ return [
                     ],
                 ],
                 'route' => 'admin/shop',
-                'resource' => 'menu:admin'
+                'resource' => 'menu:admin',
             ],
         ],
     ],
