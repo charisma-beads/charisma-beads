@@ -370,18 +370,20 @@ return [
                         'resource' => 'menu:admin',
                         'pages' => [
                             'list' => [
-                                'label' => 'List All Adverts',
-                                'action' => 'index',
-                                'route' => 'admin/shop/advert',
-                                'resource' => 'menu:admin'
+                                'label' => 'Edit Advert',
+                                'action' => 'edit',
+                                'route' => 'admin/shop/advert/edit',
+                                'resource' => 'menu:admin',
+                                'visible' => false,
                             ],
                             'add' => [
                                 'label' => 'Add New Advert',
                                 'action' => 'add',
                                 'route' => 'admin/shop/advert/edit',
-                                'resource' => 'menu:admin'
-                            ]
-                        ]
+                                'resource' => 'menu:admin',
+                                'visible' => false,
+                            ],
+                        ],
                     ],
                     'faq' => [
                         'label' => 'F.A.Q',

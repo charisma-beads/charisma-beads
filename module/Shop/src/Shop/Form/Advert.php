@@ -33,9 +33,9 @@ class Advert extends Form
             'options' => [
                 'label' => 'Advert Name',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-4',
+                'column-size' => 'sm-10',
                 'label_attributes' => [
-                    'class' => 'col-md-2',
+                    'class' => 'col-sm-2',
                 ],
             ],
         ]);
@@ -49,7 +49,7 @@ class Advert extends Form
                 'checked_value' => '1',
                 'unchecked_value' => '0',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-4 col-md-offset-2',
+                'column-size' => 'sm-10 col-sm-offset-2',
             ],
         ]);
     }
