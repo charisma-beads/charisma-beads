@@ -31,8 +31,6 @@ class Province extends AbstractHydrator
             'provinceCode'              => $object->getProvinceCode(),
             'provinceName'              => $object->getProvinceName(),
             'provinceAlternateNames'    => $object->getProvinceAlternateNames(),
-            'lft'                       => $object->getLft(),
-            'rgt'                       => $object->getRgt(),
         ];
     }
 }

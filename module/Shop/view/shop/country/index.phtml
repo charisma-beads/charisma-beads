@@ -1,3 +1,6 @@
+<?php $this->headTitle('Countries') ?>
+<?php $this->layout()->pageTitle = $this->translate('Countries');?>
+
 <?php $this->placeholder('header-buttons')->captureStart();?>
 <a href="<?=$this->url('admin/shop/country/edit', [
     'action' => 'add'
@@ -8,7 +11,7 @@
 
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h3 class="panel-title"><i class="fa fa-list"></i> <?=$this->translate('Country');?></h3>
+        <h3 class="panel-title"><i class="fa fa-list"></i> <?=$this->translate('List Countries');?></h3>
     </div>
     <div class="panel-body">
         <?=$this->partial('uthando-admin/partial/search', [

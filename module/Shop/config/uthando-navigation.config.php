@@ -204,12 +204,44 @@ return [
                                 'action' => 'index',
                                 'route' => 'admin/shop/post/zone',
                                 'resource' => 'menu:admin',
+                                'pages' => [
+                                    'edit' => [
+                                        'label' => 'Edit Zone',
+                                        'action' => 'edit',
+                                        'route' => 'admin/shop/post/zone/edit',
+                                        'resource' => 'menu:admin',
+                                        'visible' => false,
+                                    ],
+                                    'add' => [
+                                        'label' => 'Add New Zone',
+                                        'action' => 'add',
+                                        'route' => 'admin/shop/post/zone/edit',
+                                        'resource' => 'menu:admin',
+                                        'visible' => false,
+                                    ]
+                                ]
                             ],
                             'countries' => [
                                 'label' => 'Countries',
                                 'action' => 'index',
                                 'route' => 'admin/shop/country',
                                 'resource' => 'menu:admin',
+                                'pages' => [
+                                    'edit' => [
+                                        'label' => 'Edit Country',
+                                        'action' => 'edit',
+                                        'route' => 'admin/shop/country/edit',
+                                        'resource' => 'menu:admin',
+                                        'visible' => false,
+                                    ],
+                                    'add' => [
+                                        'label' => 'Add New Country',
+                                        'action' => 'add',
+                                        'route' => 'admin/shop/country/edit',
+                                        'resource' => 'menu:admin',
+                                        'visible' => false,
+                                    ]
+                                ]
                             ],
                             'levels' => [
                                 'label' => 'Postage Levels',

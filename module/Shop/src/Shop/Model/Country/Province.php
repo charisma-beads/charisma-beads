@@ -49,16 +49,6 @@ class Province implements ModelInterface
     protected $provinceAlternateNames;
     
     /**
-     * @var int
-     */
-    protected $lft;
-    
-    /**
-     * @var int
-     */
-    protected $rgt;
-    
-    /**
      * @var Country
      */
     protected $country;
@@ -150,42 +140,6 @@ class Province implements ModelInterface
 	public function setProvinceAlternateNames($provinceAlternateNames)
 	{
 		$this->provinceAlternateNames = $provinceAlternateNames;
-		return $this;
-	}
-
-	/**
-	 * @return number
-	 */
-	public function getLft()
-	{
-		return $this->lft;
-	}
-
-	/**
-	 * @param int $lft
-	 * @return \Shop\Model\Country\Province
-	 */
-	public function setLft($lft)
-	{
-		$this->lft = $lft;
-		return $this;
-	}
-
-	/**
-	 * @return number
-	 */
-	public function getRgt()
-	{
-		return $this->rgt;
-	}
-
-	/**
-	 * @param int $rgt
-	 * @return \Shop\Model\Country\Province
-	 */
-	public function setRgt($rgt)
-	{
-		$this->rgt = $rgt;
 		return $this;
 	}
 

@@ -614,7 +614,7 @@ return [
                                     'province' => [
                                         'type' => 'Segment',
                                         'options' => [
-                                            'route' => '/province[/][:action[/[:id]]]',
+                                            'route' => '/province[/][:action][/[:id]]',
                                             'constraints' => [
                                                 'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                                 'id' => '\d+',
