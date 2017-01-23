@@ -16,6 +16,9 @@
             <td><?=$item->getMetadata()->getSku();?></td>
             <td>
                 <?=$item->getMetadata()->getCategory();?> / <?=$item->getMetadata()->getName();?>
+                <?php if ($item->getMetadata()->getOption()): ?>
+                    &nbsp;(<?=$item->getMetadata()->getOption()->getOption();?>)
+                <?php endif; ?>
                 <?php if ($item->getMetadata()->getPostUnit() > 0): ?>
                     &nbsp;(<?=$item->getMetadata()->getPostUnit();?> grams)
                 <?php endif; ?>

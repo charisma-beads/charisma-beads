@@ -10,7 +10,7 @@
 
 namespace Shop\Service\Order;
 
-use Shop\Form\Product\Option as ProductOption;
+use Shop\Model\Product\Option as ProductOption;
 use Shop\Hydrator\Product\MetaData;
 use Shop\Model\Order\AbstractOrderCollection;
 use Shop\Model\Order\LineInterface;
@@ -386,9 +386,9 @@ abstract class AbstractOrder extends AbstractRelationalMapperService
     {
         $hydrator = new MetaData($optionId);
         $model    = $this->getModel('ShopProductMetaData');
+
         /*  @var ProductMetaData $metadata */
         $metadata = $hydrator->hydrate($product->getArrayCopy(), $model);
-
         return $metadata;
     }
 

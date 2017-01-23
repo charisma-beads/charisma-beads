@@ -34,8 +34,10 @@ class ProductImageStrategy implements StrategyInterface
     {
         if (!is_array($value)) return $value;
 
+        if (empty($value)) return new Image();
+
         foreach ($value as $row) {
-            if ($row->getIsDefault()) {
+            if ($row->getIsDefault() || !$row->getProductImageId()) {
                 return $row;
             }
         }
