@@ -4,16 +4,16 @@ var Orders = {
 
     productId : null,
 
-    addProduct : function(data) {
+    addProduct : function(data, dialog) {
         var orderId = $('input[name=orderId]').val();
         data = data + '&id=' + orderId;
-        console.log(data);
         $.ajax({
             url: admin.basePath + '/admin/shop/order/create/add-line',
             data:  data,
             type: 'POST',
             success: function (response) {
                 $('#order-lines table').replaceWith(response);
+                dialog.modal('hide');
             },
             error: function (response) {
                 admin.addAlert(response.error, 'danger');
@@ -40,6 +40,12 @@ var Orders = {
                         }).done(function(data){
                             dialog.find('.modal-body').html(data);
                             dialog.find('.modal-content').loadingOverlay('remove');
+
+                            $('#product-form').on('submit', function(e) {
+                                e.preventDefault();
+                                var data = $(this).serialize();
+                                Orders.addProduct(data, dialog);
+                            });
                         });
 
                         return false;
@@ -51,7 +57,7 @@ var Orders = {
         $('#product-form').on('submit', function(e) {
             e.preventDefault();
             var data = $(this).serialize();
-            Orders.addProduct(data);
+            Orders.addProduct(data, dialog);
         });
 
         dialog.modal('show');
