@@ -23,10 +23,12 @@
     			<td><?=$this->escapeHtml($this->formatDate($row->getDateCreated())); ?></td>
     			<td><?=$this->escapeHtml($this->formatDate($row->getDateModified())); ?></td>
     			<td>
-                    <button type="submit" form="form-create-order-<?=$row->getCustomerId();?>" data-toggle="tooltip" title="<?= $this->translate('Create Order'); ?>"
-                            class="btn btn-default">
+                    <a href="<?=$this->url('admin/shop/order/create', [
+                        'action' => 'add',
+                    ]); ?>" id="order-<?=$row->getCustomerId();?>" data-toggle="tooltip" title="<?= $this->translate('Create Order'); ?>"
+                            class="btn btn-default create-order-button">
                         <i class="fa fa-shopping-bag"></i>
-                    </button>
+                    </a>
 
                     <?=$this->partial('uthando-admin/partial/edit-actions', [
                     	'pk'		=> 'customerId',
@@ -34,11 +36,6 @@
     		    		'tableName'	=> 'customer',
                     	'route'		=> 'admin/shop/customer/edit',
     		    	]);?>
-                    <form id="form-create-order-<?=$row->getCustomerId();?>" action="<?=$this->url('admin/shop/order/create', [
-                        'action' => 'add',
-                    ]); ?>" method="post">
-                        <input type="hidden" name="customerId" value="<?=$row->getCustomerId();?>">
-                    </form>
     			</td>
     		</tr>
     		<?php endforeach; ?>
