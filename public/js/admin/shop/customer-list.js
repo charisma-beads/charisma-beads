@@ -20,6 +20,7 @@ var customer = {
 
 $(document).ready(function() {
     customer.createOrder();
+
     $( document ).ajaxComplete(function() {
         customer.createOrder();
     });

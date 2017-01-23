@@ -136,6 +136,32 @@ var Orders = {
         });
 
         dialog.modal('show');
+    },
+
+    statusSelect : function () {
+
+        $('#order-list').on('change', '.order-status-select', function () {
+            var orderNumber = $(this).next().val();
+            var orderStatusId = $(this).val();
+            $.ajax({
+                    url: admin.basePath + '/admin/shop/order/update-status',
+            data: {
+                'orderStatusId': orderStatusId,
+                    'orderNumber': orderNumber
+            },
+            type: 'POST',
+                success: function (json) {
+                if (json.html) {
+                    $('#current-orders .panel-widget').html(json.html);
+                } else {
+                    admin.addAlert('Failed to update order status due to database error', 'danger');
+                }
+            },
+            error: function (response) {
+                admin.addAlert(response.responseText, 'danger');
+            }
+        });
+    });
     }
 };
 
@@ -144,6 +170,12 @@ $(document).ready(function () {
     if ($('.equal').length > 0) {
         $('.equal').matchHeight();
     }
+
+    Orders.statusSelect();
+
+    $( document ).ajaxComplete(function() {
+        Orders.statusSelect();
+    });
 
     /*$('#order-list').on('click', 'a.edit-order', function (e) {
         e.preventDefault();
