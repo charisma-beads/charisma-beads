@@ -276,7 +276,7 @@ class Cart extends AbstractOrder implements InitializableInterface
 
         /* @var $cart CartModel */
         foreach ($models as $cart) {
-            $this->loadCartItems($cart);
+            $this->loadItems($cart);
         }
 
         $argv = compact('models');
