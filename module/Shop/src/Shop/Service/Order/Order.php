@@ -158,9 +158,7 @@ class Order extends AbstractOrder
         $orderLineService = $this->getService('ShopOrderLine');
         $orderLineService->processLines($cart->getCart(), $orderId);
 
-        if ($order->getCustomer()->getEmail()) {
-            $this->sendEmail($orderId);
-        }
+        $this->sendEmail($orderId);
         
         return $orderId;
     }
@@ -328,7 +326,7 @@ class Order extends AbstractOrder
         $order->setOrderStatusId($orderStatus);
         $result = $this->save($order);
 
-        if ($result && $options->isEmailCustomerOnStatusChange()) {
+        if ($result && $options->isEmailCustomerOnStatusChange() && $order->getCustomer()->getEmail()) {
             $this->populate($order, true);
 
             $shopOptions = $this->getShopOptions();
@@ -489,18 +487,20 @@ class Order extends AbstractOrder
         $emailView->setTemplate('shop/order/table-view');
 
         $subject = 'Order Confirmation From %s Order No. %s';
-        
-        $this->getEventManager()->trigger('mail.send', $this, [
-            'recipient'        => [
-                'name'      => $order->getCustomer()->getFullName(),
-                'address'   => $email,
-            ],
-            'layout'           => 'shop/email/order',
-            'layout_params'    => ['order' => $order],
-            'body'             => $emailView,
-            'subject'          => sprintf($subject, $shopOptions->getMerchantName(), $order->getOrderNumber()),
-            'transport'        => $options->getOrderEmail(),
-        ]);
+
+        if ($email) {
+            $this->getEventManager()->trigger('mail.send', $this, [
+                'recipient' => [
+                    'name' => $order->getCustomer()->getFullName(),
+                    'address' => $email,
+                ],
+                'layout' => 'shop/email/order',
+                'layout_params' => ['order' => $order],
+                'body' => $emailView,
+                'subject' => sprintf($subject, $shopOptions->getMerchantName(), $order->getOrderNumber()),
+                'transport' => $options->getOrderEmail(),
+            ]);
+        }
         
         if ($options->getSendOrderToAdmin()) {
             $this->getEventManager()->trigger('mail.send', $this, [

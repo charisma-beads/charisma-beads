@@ -91,11 +91,11 @@ var Orders = {
                 var productSearch = $('.typeahead').typeahead({
                     hint: true,
                     highlight: true,
-                    minLength: 3
+                    minLength: 2
                 },{
                     displayKey: 'sku',
                     source: pdata,
-                    limit: 20,
+                    limit: 9999,
                     templates: {
                         pending: function (data) {
                             return '<strong>Searching ...</strong>';
@@ -105,6 +105,9 @@ var Orders = {
                         },
                         empty: function(data) {
                             return '<strong>Unable to find product using search query "' + data.query + '"</strong>';
+                        },
+                        header: function (data) {
+                            return '<h4 class="text-center"><strong>' + data.suggestions.length + '</strong> Results</h4>';
                         }
                     }
                 });

@@ -41,7 +41,7 @@ class Order extends AbstractDbMapper
             ->notEqualTo('orderStatus', 'Acknowledged')
             ->notEqualTo('orderStatus', 'Ready For Collection');
 
-        $select     = $this->setSortOrder($select, ['-orderDate']);
+        $select     = $this->setSortOrder($select, ['-orderNumber']);
         $resultSet  = $this->fetchResult($select);
 
         return $resultSet;
