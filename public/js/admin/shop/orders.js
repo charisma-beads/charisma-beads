@@ -149,7 +149,8 @@ var Orders = {
 
     statusSelect : function () {
 
-        $('#order-list').on('change', '.order-status-select', function () {
+        $('#order-list').on('change', '.order-status-select', function (e) {
+            e.preventDefault();
             var orderNumber = $(this).next().val();
             var orderStatusId = $(this).val();
             $.ajax({
@@ -160,8 +161,8 @@ var Orders = {
             },
             type: 'POST',
                 success: function (json) {
-                if (json.html) {
-                    $('#current-orders .panel-widget').html(json.html);
+                if (json.success) {
+                    admin.addAlert('Updated order status to order no: ' + orderNumber, 'success');
                 } else {
                     admin.addAlert('Failed to update order status due to database error', 'danger');
                 }
@@ -181,10 +182,6 @@ $(document).ready(function () {
     }
 
     Orders.statusSelect();
-
-    $( document ).ajaxComplete(function() {
-        Orders.statusSelect();
-    });
 
     /*$('#order-list').on('click', 'a.edit-order', function (e) {
         e.preventDefault();

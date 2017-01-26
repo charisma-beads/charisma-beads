@@ -326,8 +326,12 @@ class Order extends AbstractOrder
         $order->setOrderStatusId($orderStatus);
         $result = $this->save($order);
 
-        if ($result && $options->isEmailCustomerOnStatusChange() && $order->getCustomer()->getEmail()) {
+        if ($result && $options->isEmailCustomerOnStatusChange()) {
             $this->populate($order, true);
+
+            if (!$order->getCustomer()->getEmail()) {
+                return $result;
+            }
 
             $shopOptions = $this->getShopOptions();
 
