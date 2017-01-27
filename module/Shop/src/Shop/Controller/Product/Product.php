@@ -76,6 +76,7 @@ class Product extends AbstractCrudController
             $this->getService()->setPopulate(false);
 
             $results = $this->getService()->search([
+                'sort' => 'sku',
                 'sku-shortDescription' => $query,
             ]);
 
