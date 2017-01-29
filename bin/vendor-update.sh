@@ -6,5 +6,5 @@ cd ../
 
 rm ./data/cache/*.php
 
-/usr/local/php7/bin/php composer.phar self-update
-/usr/local/php7/bin/php composer.phar --no-dev install
+php7.1 composer.phar self-update
+php7.1 composer.phar --no-dev install

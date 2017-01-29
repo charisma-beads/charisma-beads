@@ -132,7 +132,7 @@ class CreateOrder extends AbstractActionController
             if ($result) {
                 $this->flashMessenger()->addSuccessMessage('row ' . $order->getId() . ' has been saved to database table orders');
             } else {
-                $this->flashMessenger()->addErrorMessage('record could not be saved to table orders due to a database error.');
+                $this->flashMessenger()->addInfoMessage('No changes were saved to row ' . $order->getId() . '.');
             }
 
             return $this->redirect()->toRoute('admin/shop/order');
