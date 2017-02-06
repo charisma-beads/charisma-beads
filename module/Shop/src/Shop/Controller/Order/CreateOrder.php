@@ -127,10 +127,20 @@ class CreateOrder extends AbstractActionController
         if ($form->isValid()) {
             $data = $form->getData();
             $data->getMetadata()->setRequirements($post['requirements']);
+            $paymentOption = ucwords(str_replace(
+                '_',
+                ' ',
+                str_replace('pay_', '', $post['payment_option'])
+            ));
+            $data->getMetaData()->setPaymentMethod($paymentOption);
             $result = $this->getService()->save($data);
 
             if ($result) {
                 $this->flashMessenger()->addSuccessMessage('row ' . $order->getId() . ' has been saved to database table orders');
+
+                if ($post['email_order']) {
+                    $this->getService()->sendEmail($order->getOrderId());
+                }
             } else {
                 $this->flashMessenger()->addInfoMessage('No changes were saved to row ' . $order->getId() . '.');
             }

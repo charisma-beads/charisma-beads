@@ -89,8 +89,9 @@
                             <?=$this->formRow($this->form->get('orderNumber'));?>
                             <?=$this->formRow($this->form->get('orderStatusId'));?>
                             <?=$this->formRow($this->form->get('orderDate'));?>
-                            <?php /*$this->formRow($this->form->get('payment_option'));*/ ?>
+                            <?=$this->formRow($this->form->get('payment_option')); ?>
                             <?=$this->formRow($this->form->get('collect_instore'));?>
+                            <?=$this->formRow($this->form->get('email_order'));?>
                         </div>
                     </div>
                 </div>

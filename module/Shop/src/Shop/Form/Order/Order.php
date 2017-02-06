@@ -63,7 +63,7 @@ class Order extends Form
             ],
         ]);
 
-        /*$this->add([
+        $this->add([
             'name'		=> 'payment_option',
             'type'		=> 'PayOptionsList',
             'options'	=> [
@@ -73,13 +73,27 @@ class Order extends Form
                 'inline' => true,
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
             ],
-        ]);*/
+        ]);
 
         $this->add([
             'name'			=> 'collect_instore',
             'type'			=> 'checkbox',
             'options'		=> [
                 'label'			=> 'Collect Instore',
+                'required' 		=> false,
+                'use_hidden_element' => true,
+                'checked_value' => '1',
+                'unchecked_value' => '0',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'md-10 col-md-offset-2',
+            ],
+        ]);
+
+        $this->add([
+            'name'			=> 'email_order',
+            'type'			=> 'checkbox',
+            'options'		=> [
+                'label'			=> 'Email Order',
                 'required' 		=> false,
                 'use_hidden_element' => true,
                 'checked_value' => '1',
@@ -165,5 +179,9 @@ class Order extends Form
         }
 
         $this->get('requirements')->setValue($order->getMetadata()->getRequirements());
+
+        $this->get('payment_option')->setValue(strtolower(
+            str_replace(' ', '_', 'pay ' . $order->getMetadata()->getPaymentMethod())
+        ));
     }
 }
