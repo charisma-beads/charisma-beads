@@ -1,27 +1,42 @@
+<?php $this->headTitle('Countries') ?>
+<?php $this->layout()->pageTitle = $this->translate('Countries');?>
 
-<?=$this->partial('uthando-admin/partial/search', [
-	'name'			=> 'country',
-	'searchInputs'	=> [
-		'Country' => 'country-code',
-	],
-]);?>
+<?php $this->placeholder('header-buttons')->captureStart();?>
+<a href="<?=$this->url('admin/shop/country/edit', [
+    'action' => 'add'
+]);?>" data-toggle="tooltip" title="<?=$this->translate('Add Country');?>" class="btn btn-primary" id="country-add">
+    <i class="fa fa-plus"></i>
+</a>
+<?php $this->placeholder('header-buttons')->captureEnd();?>
 
-	    	
-<div id="table-country">
-	<?=$this->partial('shop/country/list', [
-	    'models' => $this->models
-	]); ?>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-list"></i> <?=$this->translate('List Countries');?></h3>
+    </div>
+    <div class="panel-body">
+        <?=$this->partial('uthando-admin/partial/search', [
+            'name'			=> 'country',
+            'searchInputs'	=> [
+                'Country' => 'country-code',
+            ],
+        ]);?>
+    </div>
+    <div id="table-country" class="admin-table">
+        <?=$this->partial('shop/country/list', [
+            'models' => $this->models
+        ]); ?>
+    </div>
 </div>
 
-<?php $this->inlineScript()->captureStart(); ?>
-$(document).ready(function(){
-	$('#table-country').dataGrid({
-	    url : 'country/list',
-	    query: { sort : 'country' },
-	    searchForm : $('#search-country'),
-	    paging : 'links',
-	    columnSort: true,
-	    //rowClick : admin.product.rowClick
-	});
-});
-<?php $this->inlineScript()->captureEnd(); ?>
+<script>
+    $(document).ready(function(){
+        $('#table-country').dataGrid({
+            url : 'country/list',
+            query: { sort : 'country' },
+            searchForm : $('#search-country'),
+            paging : 'links',
+            columnSort: true,
+            //rowClick : admin.product.rowClick
+        });
+    });
+</script>

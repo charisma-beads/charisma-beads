@@ -1,27 +1,41 @@
+<?php $this->headTitle('Post Units') ?>
+<?php $this->layout()->pageTitle = $this->translate('Post Units');?>
 
-<?=$this->partial('uthando-admin/partial/search', [
-	'name'			=> 'postUnit',
-	'searchInputs'	=> [
-		'Post Unit' => 'postUnit',
-	],
-]);?>
+<?php $this->placeholder('header-buttons')->captureStart();?>
+<a href="<?=$this->url('admin/shop/post/unit/edit', [
+    'action' => 'add'
+]);?>" data-toggle="tooltip" title="<?=$this->translate('Add Post Unit');?>" class="btn btn-primary" id="post-unit-add">
+    <i class="fa fa-plus"></i>
+</a>
+<?php $this->placeholder('header-buttons')->captureEnd();?>
 
-	    	
-<div id="table-postUnit">
-	<?=$this->partial('shop/post-unit/list', [
-	    'models' => $this->models
-	]); ?>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-list"></i> <?=$this->translate('List Post Units');?></h3>
+    </div>
+    <div class="panel-body">
+        <?=$this->partial('uthando-admin/partial/search', [
+            'name'			=> 'postUnit',
+            'searchInputs'	=> [
+                'Post Unit' => 'postUnit',
+            ],
+        ]);?>
+    </div>
+    <div id="table-postUnit" class="admin-table">
+        <?=$this->partial('shop/post-unit/list', [
+            'models' => $this->models
+        ]); ?>
+    </div>
 </div>
 
-
-<?php $this->inlineScript()->captureStart(); ?>
-$(document).ready(function(){
-	$('#table-postUnit').dataGrid({
-	    url : 'unit/list',
-	    query: { sort : 'postUnit' },
-	    searchForm : $('#search-postUnit'),
-	    paging : 'links',
-	    columnSort: true,
-	});
-});
-<?php $this->inlineScript()->captureEnd(); ?>
+<script>
+    $(document).ready(function(){
+        $('#table-postUnit').dataGrid({
+            url : 'unit/list',
+            query: { sort : 'postUnit' },
+            searchForm : $('#search-postUnit'),
+            paging : 'links',
+            columnSort: true,
+        });
+    });
+</script>

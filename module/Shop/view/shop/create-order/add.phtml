@@ -1,7 +1,6 @@
 
 <?php $this->headTitle('Create Order') ?>
 <?php $this->layout()->pageTitle = $this->translate('Create Order'); ?>
-<?php $this->form->prepare();?>
 
 
 <?php $this->placeholder('header-buttons')->captureStart(); ?>
@@ -20,7 +19,7 @@
     'id' => 'form-order',
     'action' => $this->url('admin/shop/order/create', [
         'action' => 'save',
-        'customerId' => $this->model->getCustomerId(),
+        'id' => $this->order->getId()
     ]),
 ]); ?>
 
@@ -90,8 +89,9 @@
                             <?=$this->formRow($this->form->get('orderNumber'));?>
                             <?=$this->formRow($this->form->get('orderStatusId'));?>
                             <?=$this->formRow($this->form->get('orderDate'));?>
-                            <?=$this->formRow($this->form->get('payment_option'));?>
+                            <?=$this->formRow($this->form->get('payment_option')); ?>
                             <?=$this->formRow($this->form->get('collect_instore'));?>
+                            <?=$this->formRow($this->form->get('email_order'));?>
                         </div>
                     </div>
                 </div>
@@ -103,51 +103,16 @@
                         <div class="panel-heading">
                             <h3 class="panel-title">
                                 <i class="fa fa-shopping-basket"></i>
-                                &nbsp;<?= $this->translate($this->form->get('orderLines')->getLabel()); ?>
+                                &nbsp;<?= $this->translate('Order Lines'); ?>
                                 <button id="add-order-line" class="btn btn-default btn-xs pull-right">
                                     <i class="fa fa-cart-plus"></i> add product
                                 </button>
                             </h3>
                         </div>
                         <div id="order-lines">
-                            <table class="table table-bordered table-striped">
-                                <tr>
-                                    <th>Product</th>
-                                    <th>Description</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                    <th>Total</th>
-                                    <th>&nbsp;</th>
-                                </tr>
-
-                                <?php foreach($this->form->get('orderLines') as $fieldset):?>
-                                    <tr class="order-line">
-                                        <?=$this->formHidden($fieldset->get('orderLineId'));?>
-                                        <?=$this->formHidden($fieldset->get('productId'));?>
-
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td><?=$this->formElement($fieldset->get('qty'));?></td>
-                                        <td></td>
-                                        <td>
-                                            <a class="btn btn-primary"><i class="fa fa-refresh"></i></a>
-                                            <a class="btn btn-danger"><i class="fa fa-trash"></i></a>
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?>
-
-                                <tr id="table-postage">
-                                    <td colspan="2">&nbsp&nbsp;</td>
-                                    <th colspan="2"><p class="text-right">Postage:</p></th>
-                                    <td><?=$this->priceFormat($this->order->getShipping());?></td>
-                                </tr>
-                                <tr id="table-total">
-                                    <td colspan="2">&nbsp&nbsp;</td>
-                                    <th colspan="2"><p class="text-right">Total:</p></th>
-                                    <td><?=$this->priceFormat($this->order->getTotal());?></td>
-                                </tr>
-                            </table>
+                            <?=$this->partial('shop/create-order/add-line', [
+                                    'order' => $this->order,
+                            ]);?>
                         </div>
                     </div>
                 </div>
@@ -172,6 +137,7 @@
     </div>
 </div>
 <?=$this->formHidden($this->form->get('customerId'));?>
+<?=$this->formHidden($this->form->get('orderId'));?>
 <?=$this->form()->closeTag();?>
 
 <?php $this->inlineScript()

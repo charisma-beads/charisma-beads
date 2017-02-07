@@ -110,18 +110,5 @@ class Settings extends Form
                 'label' => 'New Products Carousel Options',
             ],
         ]);
-        
-        $this->add([
-            'name' => 'button-submit',
-            'type' => 'button',
-            'attributes' => [
-                'type' => 'submit',
-                'class' => 'btn-primary'
-            ],
-            'options' => [
-                'label' => 'Save',
-                'column-size' => 'md-10 col-md-offset-2'
-            ],
-        ]);
     }
 }

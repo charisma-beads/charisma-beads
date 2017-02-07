@@ -1,29 +1,42 @@
+<?php $this->headTitle('Post Costs') ?>
+<?php $this->layout()->pageTitle = $this->translate('Post Costs');?>
 
+<?php $this->placeholder('header-buttons')->captureStart();?>
+<a href="<?=$this->url('admin/shop/post/cost/edit', [
+    'action' => 'add'
+]);?>" data-toggle="tooltip" title="<?=$this->translate('Add Post Cost');?>" class="btn btn-primary" id="post-cost-add">
+    <i class="fa fa-plus"></i>
+</a>
+<?php $this->placeholder('header-buttons')->captureEnd();?>
 
-<?=$this->partial('uthando-admin/partial/search', [
-	'name'			=> 'postCost',
-	'searchInputs'	=> [
-		'Cost' => 'cost',
-	],
-]);?>
-	    	
-	    	
-<div id="table-postCost">
-	<?=$this->partial('shop/post-cost/list', [
-	    'models' => $this->models
-	]); ?>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-list"></i> <?=$this->translate('List Post Costs');?></h3>
+    </div>
+    <div class="panel-body">
+        <?=$this->partial('uthando-admin/partial/search', [
+            'name'			=> 'postCost',
+            'searchInputs'	=> [
+                'Cost' => 'cost',
+            ],
+        ]);?>
+    </div>
+    <div id="table-postCost" class="admin-table">
+        <?=$this->partial('shop/post-cost/list', [
+            'models' => $this->models
+        ]); ?>
+    </div>
 </div>
 
-
-<?php $this->inlineScript()->captureStart(); ?>
-$(document).ready(function(){
-	$('#table-postCost').dataGrid({
-	    url : 'cost/list',
-	    query: { sort : 'postZoneId' },
-	    searchForm : $('#search-postCost'),
-	    paging : 'links',
-	    columnSort: true,
-	    //rowClick : admin.product.rowClick
-	});
-});
-<?php $this->inlineScript()->captureEnd(); ?>
+<script>
+    $(document).ready(function(){
+        $('#table-postCost').dataGrid({
+            url : 'cost/list',
+            query: { sort : 'postZoneId' },
+            searchForm : $('#search-postCost'),
+            paging : 'links',
+            columnSort: true,
+            //rowClick : admin.product.rowClick
+        });
+    });
+</script>

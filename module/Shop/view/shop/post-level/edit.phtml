@@ -1,13 +1,31 @@
 <?php $this->headTitle('Edit Post Level') ?>
+<?php $this->layout()->pageTitle = $this->translate('Edit Post Level'); ?>
 
-<?=$this->partial('uthando-admin/partial/add-edit-form', [
-	'form' 			=> $this->form,
-	'formName'		=> 'Post Level',
-    'postUrl'		=> $this->url('admin/shop/post/level/edit', [
-        'id'    => $this->model->getPostLevelId(),
+<?php $this->placeholder('header-buttons')->captureStart(); ?>
+<button type="submit" form="form-post-level" data-toggle="tooltip" title="<?= $this->translate('Save'); ?>"
+		class="btn btn-primary">
+	<i class="fa fa-save"></i>
+</button>
+<a href="<?= $this->url('admin/shop/post/level'); ?>" data-toggle="tooltip" title="<?= $this->translate('Cancel'); ?>"
+   class="btn btn-default">
+	<i class="fa fa-reply"></i>
+</a>
+<?php $this->placeholder('header-buttons')->captureEnd(); ?>
+
+<?php $this->form->setAttributes([
+    'method' => 'post',
+    'id' => 'form-post-level',
+    'action' => $this->url('admin/shop/post/level/edit', [
+        'action' => 'edit',
+		'id'	 => $this->model->getPostLevelId(),
     ]),
-    'cancelUrl'     => $this->url('admin/shop/post/level'),
-	'formElements'	=> [
-		'postLevel', 'postLevelId',
-	],
 ]); ?>
+
+<div id="post-level-edit" class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title"><i class="fa fa-pencil"></i> <?= $this->translate('Edit Post Level'); ?></h3>
+	</div>
+	<div class="panel-body">
+        <?= $this->form($this->form); ?>
+	</div>
+</div>

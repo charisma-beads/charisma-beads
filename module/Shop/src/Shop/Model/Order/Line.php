@@ -12,58 +12,23 @@ namespace Shop\Model\Order;
 
 use UthandoCommon\Model\Model;
 use UthandoCommon\Model\ModelInterface;
-use Shop\Model\Product\MetaData as ProductMetaData;
 
 /**
  * Class Line
  *
  * @package Shop\Model\Order
  */
-class Line implements ModelInterface
+class Line implements ModelInterface, LineInterface
 {
-    use Model;
-    
-    /**
-     * @var int
-     */
-    protected $orderLineId;
-    
-    /**
-     * @var int
-     */
-    protected $orderId;
-
-    /**
-     * @var int|null
-     */
-    protected $sortOrder;
-    
-    /**
-     * @var int
-     */
-    protected $qty = 0;
-    
-    /**
-     * @var float
-     */
-    protected $price = 0.00;
-    
-    /**
-     * @var float
-     */
-    protected $tax = 0.00;
-    
-    /**
-     * @var ProductMetaData
-     */
-    protected $metadata;
+    use Model,
+        LineTrait;
 
     /**
      * @return int
      */
 	public function getOrderLineId()
 	{
-		return $this->orderLineId;
+		return $this->getId();
 	}
 
     /**
@@ -72,7 +37,7 @@ class Line implements ModelInterface
      */
 	public function setOrderLineId($orderLineId)
 	{
-		$this->orderLineId = $orderLineId;
+		$this->setId($orderLineId);
 		return $this;
 	}
 
@@ -81,7 +46,7 @@ class Line implements ModelInterface
      */
 	public function getOrderId()
 	{
-		return $this->orderId;
+		return $this->getParentId();
 	}
 
     /**
@@ -90,98 +55,7 @@ class Line implements ModelInterface
      */
 	public function setOrderId($orderId)
 	{
-		$this->orderId = $orderId;
+		$this->setParentId($orderId);
 		return $this;
-	}
-
-    /**
-     * @return int|null
-     */
-    public function getSortOrder()
-    {
-        return $this->sortOrder;
-    }
-
-    /**
-     * @param int|null $sortOrder
-     * @return $this
-     */
-    public function setSortOrder($sortOrder)
-    {
-        $this->sortOrder = $sortOrder;
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-	public function getQty()
-	{
-		return $this->qty;
-	}
-
-    /**
-     * @param $qty
-     * @return $this
-     */
-	public function setQty($qty)
-	{
-		$this->qty = $qty;
-		return $this;
-	}
-
-    /**
-     * @return float
-     */
-	public function getPrice()
-	{
-		return $this->price;
-	}
-
-    /**
-     * @param $price
-     * @return $this
-     */
-	public function setPrice($price)
-	{
-		$this->price = $price;
-		return $this;
-	}
-
-	/**
-	 * @param bool $formatPercent
-	 * @return float
-	 */
-	public function getTax($formatPercent=false)
-	{
-		return (true === $formatPercent) ? $this->tax / 100 : $this->tax;
-	}
-
-    /**
-     * @param $tax
-     * @return $this
-     */
-	public function setTax($tax)
-	{
-		$this->tax = $tax;
-		return $this;
-	}
-
-    /**
-     * @return ProductMetaData
-     */
-	public function getMetadata()
-	{
-	    return $this->metadata;
-	}
-
-    /**
-     * @param ProductMetaData $metadata
-     * @return $this
-     */
-	public function setMetadata(ProductMetaData $metadata)
-	{
-	    $this->metadata = $metadata;
-	    return $this;
 	}
 }

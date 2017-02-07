@@ -1,18 +1,33 @@
+<?php $this->headTitle('Adverts') ?>
+<?php $this->layout()->pageTitle = $this->translate('Adverts');?>
 
-<?=$this->partial('uthando-admin/partial/search', [
-	'name'			=> 'advert',
-	'searchInputs'	=> [
-		'Advert'	=> 'advert',
-	],
-	'params' 		=> $this->params,
-]);?>
+<?php $this->placeholder('header-buttons')->captureStart();?>
+<a href="<?=$this->url('admin/shop/advert/edit', [
+    'action' => 'add'
+]);?>" data-toggle="tooltip" title="<?=$this->translate('Add Tax Code');?>" class="btn btn-primary" id="advert-add">
+    <i class="fa fa-plus"></i>
+</a>
+<?php $this->placeholder('header-buttons')->captureEnd();?>
 
-<div id="table-advert">
-	<?=$this->partial('shop/advert/list', [
-	    'models' => $this->models,
-	]); ?>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-list"></i> <?=$this->translate('List Adverts');?></h3>
+    </div>
+    <div class="panel-body">
+        <?=$this->partial('uthando-admin/partial/search', [
+            'name'			=> 'advert',
+            'searchInputs'	=> [
+                'Advert'	=> 'advert',
+            ],
+            'params' 		=> $this->params,
+        ]);?>
+    </div>
+    <div id="table-advert" class="admin-table">
+        <?=$this->partial('shop/advert/list', [
+            'models' => $this->models,
+        ]); ?>
+    </div>
 </div>
-
 
 <script>
     $(document).ready(function() {
@@ -23,5 +38,4 @@
             columnSort: true
         });
     });
-
 </script>

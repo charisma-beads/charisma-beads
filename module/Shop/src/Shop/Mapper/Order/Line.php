@@ -26,7 +26,7 @@ class Line extends AbstractDbMapper
     {
         $select = $this->getSelect();
         $select->where->equalTo('orderId', $id);
-        $select = $this->setSortOrder($select, 'sortOrder');
+        //$select = $this->setSortOrder($select, 'sortOrder');
         return $this->fetchResult($select);
     }
 }

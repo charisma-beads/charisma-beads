@@ -10,6 +10,7 @@
 
 namespace Shop\Form\Order;
 
+use Shop\Model\Order\Order as OrderModel;
 use TwbBundle\Form\Element\StaticElement;
 use TwbBundle\Form\View\Helper\TwbBundleForm;
 use Zend\Form\Element\DateTime;
@@ -74,11 +75,27 @@ class Order extends Form
             ],
         ]);
 
+        $this->get('payment_option')->setValue('pay_phone');
+
         $this->add([
             'name'			=> 'collect_instore',
             'type'			=> 'checkbox',
             'options'		=> [
                 'label'			=> 'Collect Instore',
+                'required' 		=> false,
+                'use_hidden_element' => true,
+                'checked_value' => '1',
+                'unchecked_value' => '0',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'md-10 col-md-offset-2',
+            ],
+        ]);
+
+        $this->add([
+            'name'			=> 'email_order',
+            'type'			=> 'checkbox',
+            'options'		=> [
+                'label'			=> 'Email Order',
                 'required' 		=> false,
                 'use_hidden_element' => true,
                 'checked_value' => '1',
@@ -155,32 +172,21 @@ class Order extends Form
             $dateTime = new \DateTime();
             $this->get('orderDate')->setValue($dateTime->format('d/m/Y H:i:s'));
         }
+    }
 
-        $this->add([
-            'type' => 'Zend\Form\Element\Collection',
-            'name' => 'orderLines',
-            'options' => [
-                'label' => 'Order Lines',
-                'count' => 0,
-                'should_create_template' => true,
-                'template_placeholder' => '__placeholder__',
-                'allow_add' => true,
-                'target_element' => [
-                    'type' => 'ShopOrderLineFieldSet',
-                ],
-            ],
-        ]);
+    public function configureFormValues(OrderModel $order)
+    {
+        if ($order->getMetadata()->getShippingMethod() == 'Collect At Store') {
+            $this->get('collect_instore')->setValue(1);
+        }
 
-        /*$this->add([
-            'type' => 'ShopOrderMetadataFieldSet',
-            'name' => 'metadata',
-            'options' => [
-                'label' => 'Metadata',
-                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-            ],
-            'attributes' => [
-                'class' => 'col-md-6',
-            ],
-        ]);*/
+        $this->get('requirements')->setValue($order->getMetadata()->getRequirements());
+
+        if ($order->getMetadata()->getPaymentMethod() != 'Pending') {
+            $this->get('payment_option')->setValue(strtolower(
+                str_replace(' ', '_', 'pay ' . $order->getMetadata()->getPaymentMethod())
+            ));
+        }
+
     }
 }

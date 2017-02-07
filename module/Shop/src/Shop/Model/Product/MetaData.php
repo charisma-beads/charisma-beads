@@ -9,14 +9,18 @@
  */
 
 namespace Shop\Model\Product;
+use UthandoCommon\Model\Model;
+use UthandoCommon\Model\ModelInterface;
 
 /**
  * Class MetaData
  *
  * @package Shop\Model\Product
  */
-class MetaData
-{   
+class MetaData implements ModelInterface
+{
+    use Model;
+
     /**
      * @var int
      */
@@ -283,10 +287,10 @@ class MetaData
     }
 
     /**
-     * @param Option $option
+     * @param Option|null $option
      * @return $this
      */
-    public function setOption(Option $option)
+    public function setOption(Option $option = null)
     {
         $this->option = $option;
         return $this;

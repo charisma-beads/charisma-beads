@@ -29,6 +29,9 @@ class PercentFormat extends AbstractViewHelper
 	
 	public function __invoke($percentage)
 	{
+	    if ($percentage > 0) {
+	        $percentage--;
+        }
 		$numberFormatHelper = $this->getNumberFormat()
 			->setFormatStyle(NumberFormatter::PERCENT)
 			->setFormatType(NumberFormatter::TYPE_DEFAULT)

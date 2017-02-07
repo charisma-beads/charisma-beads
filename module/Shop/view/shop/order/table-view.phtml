@@ -97,9 +97,9 @@
           &nbsp;(<?=$item->getMetadata()->getPostUnit();?> grams)
           <?php endif; ?>
 	    </td>
-		<td class="text-right"><?=$this->priceFormat($item->getPrice());?></td>
-		<td><?=$item->getQty();?></td>
-		<td class="text-right"><?=$this->priceFormat($item->getPrice() * $item->getQty());?></td>
+		<td class="text-right"><?=$this->priceFormat($item->getPrice() + $item->getTax());?></td>
+		<td><?=$item->getQuantity();?></td>
+		<td class="text-right"><?=$this->priceFormat(($item->getPrice() + $item->getTax()) * $item->getQuantity());?></td>
 	</tr>
 	<?php endforeach; ?>
 	<tr>

@@ -361,6 +361,13 @@ $deliveryAddress = $customer->get('deliveryAddress');
                     <span class="bold">Shipping</span>
                 </section>
 
+                <?php if ($this->shopOption('vatState')): ?>
+                    <section class="clearfix cart_totals">
+                        <span class="pull-right fsize16"><?=$this->cart()->getTaxTotal();?></span>
+                        <span class="bold">VAT</span>
+                    </section>
+                <?php endif;?>
+
                 <section class="clearfix cart_totals">
                     <span class="pull-right fsize16">- <?=$this->placeholder('discount-code')->set('£0.00');?></span>
                     <span class="bold">Coupon Discount</span>

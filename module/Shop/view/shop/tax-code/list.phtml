@@ -1,7 +1,7 @@
 <?php $this->headTitle('Tax Codes') ?>
 
 <?php if (count($this->models) > 0): ?>
-<div class="panel panel-default">
+<div class="table-responsive">
     <table id="taxCode-list" class="table table-hover table-bordered table-condensed sortable-table">
     	<thead>
     		<tr>
@@ -18,7 +18,7 @@
     		<?php foreach($this->models as $row): ?>
     		<tr>
     			<td><?=$this->escapeHtml($row->getTaxCodeId()); ?></td>
-    			<td><?=$this->escapeHtml($this->percentFormat($row->getTaxRate()->getTaxRate(true))); ?></td>
+    			<td><?=$this->escapeHtml($this->percentFormat($row->getTaxRate()->getTaxRate())); ?></td>
     			<td><?=$this->escapeHtml($row->getTaxCode()); ?></td>
     			<td><?=$this->escapeHtml($row->getDescription()); ?></td>
     			<td>

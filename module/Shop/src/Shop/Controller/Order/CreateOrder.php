@@ -10,6 +10,7 @@
 
 namespace Shop\Controller\Order;
 
+use Shop\Service\Order\Order;
 use Shop\Service\Customer\Customer;
 use Shop\ShopException;
 use UthandoCommon\Service\ServiceTrait;
@@ -20,6 +21,7 @@ use Zend\View\Model\ViewModel;
  * Class CreateOrder
  *
  * @package Shop\Controller\Order
+ * @method Order getService($service = null, $options = [])
  */
 class CreateOrder extends AbstractActionController
 {
@@ -32,16 +34,17 @@ class CreateOrder extends AbstractActionController
 
     public function addAction()
     {
-        $customerId = $this->params()->fromRoute('customerId', null);
+        //$prg        = $this->prg();
+        //$session    = $this->sessionContainer('createAdminOrder');
+        $customerId = $this->params()->fromPost('customerId', null);
 
-        if (null === $customerId) {
+        if (!$customerId) {
             throw new ShopException('No customer id was supplied');
         }
 
         /* @var Customer $service */
-        $service = $this->getService('ShopCustomer');
-
-        $customer = $service->getCustomerDetailsByCustomerId($customerId);
+        $service    = $this->getService('ShopCustomer');
+        $customer   = ($customerId) ? $service->getCustomerDetailsByCustomerId($customerId) : null;
 
         if (null === $customer->getCustomerId()) {
             $this->redirect()->toRoute('admin/shop/customer/edit', [
@@ -49,13 +52,24 @@ class CreateOrder extends AbstractActionController
             ]);
         }
 
-        $order = $this->getService()->create($customer, [
+        $orderId = $this->getService()->create($customer, [
             'collect_instore'   => false,
             'payment_option'    => 'pay_pending',
             'requirements'      => '',
         ]);
 
-        $form = $this->getService()->prepareForm($order);
+        if (!$orderId) {
+            throw new ShopException('Something went wrong, order was not created.');
+        }
+
+        //$session->offsetSet('orderId', $orderId);
+        //$session->offsetSet('customerId', $customerId);
+
+        $order  = $this->getService()->getOrder($orderId);
+
+        $this->getService()->loadItems($order);
+
+        $form   = $this->getService()->prepareForm($order);
 
         return [
             'model' => $customer,
@@ -64,19 +78,116 @@ class CreateOrder extends AbstractActionController
         ];
     }
 
+    public function editAction()
+    {
+        $orderId    = $this->params()->fromRoute('id', 0);
+
+        $order      = $this->getService()->getOrder($orderId);
+
+        /* @var Customer $service */
+        $service    = $this->getService('ShopCustomer');
+        $customer   = $service->getCustomerDetailsByCustomerId($order->getMetadata()->getDeliveryAddress()->getCustomerId());
+
+        $this->getService()->loadItems($order);
+
+        $form   = $this->getService()->prepareForm($order);
+        $form->configureFormValues($order);
+
+        $viewModel = new ViewModel([
+            'model' => $customer,
+            'order' => $order,
+            'form'  => $form,
+        ]);
+
+        $viewModel->setTemplate('shop/create-order/add');
+
+        return $viewModel;
+    }
+
+    public function saveAction()
+    {
+        $post = $this->params()->fromPost();
+        $id = $this->params()->fromPost('orderId', null);
+
+        if (!$id) {
+            throw new ShopException('No order id was supplied');
+        }
+
+        $order = $this->getService()->getOrder($id);
+
+        if ($id !== $order->getId()) {
+            throw new ShopException('No order ids do not match');
+        }
+
+        $form = $this->getService()->prepareForm($order, $post, true, true);
+        $hydrator = $form->getHydrator();
+        $dateTimeStrategy = $hydrator->getStrategy('orderDate');
+        $dateTimeStrategy->setHydrateFormat('d/m/Y H:i:s');
+
+        if ($form->isValid()) {
+            $data = $form->getData();
+            $data->getMetadata()->setRequirements($post['requirements']);
+            $paymentOption = ucwords(str_replace(
+                '_',
+                ' ',
+                str_replace('pay_', '', $post['payment_option'])
+            ));
+            $data->getMetaData()->setPaymentMethod($paymentOption);
+            $result = $this->getService()->save($data);
+
+            if ($result) {
+                $this->flashMessenger()->addSuccessMessage('row ' . $order->getId() . ' has been saved to database table orders');
+
+                if ($post['email_order']) {
+                    $this->getService()->sendEmail($order->getOrderId());
+                }
+            } else {
+                $this->flashMessenger()->addInfoMessage('No changes were saved to row ' . $order->getId() . '.');
+            }
+
+            return $this->redirect()->toRoute('admin/shop/order');
+        }
+
+        /* @var Customer $service */
+        $service    = $this->getService('ShopCustomer');
+        $customer   = $service->getCustomerDetailsByCustomerId($order->getMetadata()->getDeliveryAddress()->getCustomerId());
+
+        $viewModel = new ViewModel([
+            'model' => $customer,
+            'order' => $order,
+            'form'  => $form,
+        ]);
+
+        $viewModel->setTemplate('shop/create-order/add');
+
+        return $viewModel;
+    }
+
+    /**
+     * @return ViewModel
+     * @throws ShopException
+     */
     public function addLineAction()
     {
         if (!$this->getRequest()->isXmlHttpRequest()) {
-            //throw new ShopException('Access denied.');
+            throw new ShopException('Access denied.');
         }
 
-        $id = $this->params()->fromPost('productId', 0);
-        $qty = $this->params()->fromPost('qty', 0);
-        $product = $this->getService('ShopProduct')->getFullProductById($id);
+        //$session    = $this->sessionContainer('createAdminOrder');
+        //$orderId    = $session->offsetGet('orderId');
+
+        $orderId    = $this->params()->fromPost('id', 0);
+        $productId  = $this->params()->fromPost('productId', 0);
+        $order      = $this->getService()->getOrder($orderId);
+        $product    = $this->getService('ShopProduct')->getFullProductById($productId);
+
+        $this->getService()->loadItems($order);
+        $this->getService()->addItem($product, $this->params()->fromPost());
+        $this->getService()->recalculateTotals();
+        $this->getService()->loadItems($this->getService()->getOrderModel());
 
         $viewModel = new ViewModel([
-            'product' => $product,
-            'quantity' => $qty,
+            'order' => $this->getService()->getOrderModel(),
         ]);
 
         $viewModel->setTerminal(true);
@@ -84,8 +195,61 @@ class CreateOrder extends AbstractActionController
         return $viewModel;
     }
 
-    public function saveAction()
+    public function removeLineAction()
     {
+        if (!$this->getRequest()->isXmlHttpRequest()) {
+            throw new ShopException('Access denied.');
+        }
 
+        //$session    = $this->sessionContainer('createAdminOrder');
+        $orderId    = $this->params()->fromRoute('id', 0);
+        $lineId     = $this->params()->fromPost('lineId', 0);
+
+        $this->getService()->removeItem($lineId);
+
+        $order  = $this->getService()->getOrder($orderId);
+        $order  = $this->getService()->loadItems($order);
+        $this->getService()->recalculateTotals();
+
+        $viewModel = new ViewModel([
+            'order' => $order,
+        ]);
+
+        $viewModel->setTemplate('shop/create-order/add-line');
+
+        $viewModel->setTerminal(true);
+
+        return $viewModel;
+    }
+
+    public function instoreAction()
+    {
+        if (!$this->getRequest()->isXmlHttpRequest()) {
+            throw new ShopException('Access denied.');
+        }
+
+        $orderId    = $this->params()->fromRoute('id', 0);
+        $order      = $this->getService()->getOrder($orderId);
+
+        if ($order->getMetadata()->getShippingMethod() == 'Collect At Store') {
+            $order->getMetadata()->setShippingMethod('Royal Mail');
+        } else {
+            $order->getMetadata()->setShippingMethod('Collect At Store');
+        }
+
+        $this->getService()->save($order);
+
+        $order  = $this->getService()->loadItems($order);
+        $this->getService()->recalculateTotals();
+
+        $viewModel = new ViewModel([
+            'order' => $order,
+        ]);
+
+        $viewModel->setTemplate('shop/create-order/add-line');
+
+        $viewModel->setTerminal(true);
+
+        return $viewModel;
     }
 }

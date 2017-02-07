@@ -37,9 +37,9 @@ class Zone extends Form
 			'options'		=> [
 				'label'		=> 'Post Zone:',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-4',
+                'column-size' => 'sm-10',
                 'label_attributes' => [
-                    'class' => 'col-md-2',
+                    'class' => 'col-sm-2',
                 ],
 			],
 		]);
@@ -50,9 +50,9 @@ class Zone extends Form
 			'options'	=> [
 				'label'			=> 'Tax Code:',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-4',
+                'column-size' => 'sm-10',
                 'label_attributes' => [
-                    'class' => 'col-md-2',
+                    'class' => 'col-sm-2',
                 ],
 			],
 		]);

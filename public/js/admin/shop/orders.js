@@ -4,16 +4,16 @@ var Orders = {
 
     productId : null,
 
-    addProduct : function(data) {
-        console.log(data);
-
+    addProduct : function(data, dialog) {
+        var orderId = $('input[name=orderId]').val();
+        data = data + '&id=' + orderId;
         $.ajax({
             url: admin.basePath + '/admin/shop/order/create/add-line',
             data:  data,
             type: 'POST',
             success: function (response) {
-                console.log(response);
-                $('#table-postage').before(response);
+                $('#order-lines table').replaceWith(response);
+                dialog.modal('hide');
             },
             error: function (response) {
                 admin.addAlert(response.error, 'danger');
@@ -40,6 +40,12 @@ var Orders = {
                         }).done(function(data){
                             dialog.find('.modal-body').html(data);
                             dialog.find('.modal-content').loadingOverlay('remove');
+
+                            $('#product-form').on('submit', function(e) {
+                                e.preventDefault();
+                                var data = $(this).serialize();
+                                Orders.addProduct(data, dialog);
+                            });
                         });
 
                         return false;
@@ -51,7 +57,7 @@ var Orders = {
         $('#product-form').on('submit', function(e) {
             e.preventDefault();
             var data = $(this).serialize();
-            Orders.addProduct(data);
+            Orders.addProduct(data, dialog);
         });
 
         dialog.modal('show');
@@ -85,11 +91,11 @@ var Orders = {
                 var productSearch = $('.typeahead').typeahead({
                     hint: true,
                     highlight: true,
-                    minLength: 3
+                    minLength: 2
                 },{
                     displayKey: 'sku',
                     source: pdata,
-                    limit: 20,
+                    limit: 9999,
                     templates: {
                         pending: function (data) {
                             return '<strong>Searching ...</strong>';
@@ -99,6 +105,9 @@ var Orders = {
                         },
                         empty: function(data) {
                             return '<strong>Unable to find product using search query "' + data.query + '"</strong>';
+                        },
+                        header: function (data) {
+                            return '<h4 class="text-center"><strong>' + data.suggestions.length + '</strong> Results</h4>';
                         }
                     }
                 });
@@ -136,6 +145,33 @@ var Orders = {
         });
 
         dialog.modal('show');
+    },
+
+    statusSelect : function () {
+
+        $('#order-list').on('change', '.order-status-select', function (e) {
+            e.preventDefault();
+            var orderNumber = $(this).next().val();
+            var orderStatusId = $(this).val();
+            $.ajax({
+                    url: admin.basePath + '/admin/shop/order/update-status',
+            data: {
+                'orderStatusId': orderStatusId,
+                    'orderNumber': orderNumber
+            },
+            type: 'POST',
+                success: function (json) {
+                if (json.success) {
+                    admin.addAlert('Updated order status to order no: ' + orderNumber, 'success');
+                } else {
+                    admin.addAlert('Failed to update order status due to database error', 'danger');
+                }
+            },
+            error: function (response) {
+                admin.addAlert(response.responseText, 'danger');
+            }
+        });
+    });
     }
 };
 
@@ -144,6 +180,28 @@ $(document).ready(function () {
     if ($('.equal').length > 0) {
         $('.equal').matchHeight();
     }
+
+    Orders.statusSelect();
+
+    /*$('#order-list').on('click', 'a.edit-order', function (e) {
+        e.preventDefault();
+        var lineId = $(this).attr('id').replace('delete-line-', '');
+        console.log(lineId);
+
+        $.ajax({
+            url: admin.basePath + '/admin/shop/order/create/remove-line',
+            data:  {
+                lineId : lineId
+            },
+            type: 'POST',
+            success: function (response) {
+                $('#order-lines table').replaceWith(response);
+            },
+            error: function (response) {
+                admin.addAlert(response.error, 'danger');
+            }
+        });
+    });*/
 
     $('#add-order-line').on('click', function (e) {
         e.preventDefault();
@@ -222,11 +280,55 @@ $(document).ready(function () {
                 });
 
                 $('.typeahead').bind('typeahead:select', function(ev, suggestion) {
-                    $('#order-create-button').attr('href', admin.basePath + '/admin/shop/order/create/add/customerId/' + suggestion.customerId);
+                    $('#customerId').val(suggestion.customerId);
+
+                    $('#order-create-button').on('click', function (event) {
+                        event.preventDefault();
+                        $('#order-create-form').submit();
+                    });
                 });
             });
         });
 
         dialog.modal('show');
+    });
+
+    $('#form-order input[name=collect_instore]').on('click', function(e){
+        var orderId = $('input[name=orderId]').val();
+
+        $.ajax({
+            url: admin.basePath + '/admin/shop/order/create/instore/id/' + orderId,
+            data:  {
+
+            },
+            type: 'POST',
+            success: function (response) {
+                $('#order-lines table').replaceWith(response);
+            },
+            error: function (response) {
+                admin.addAlert(response.error, 'danger');
+            }
+        });
+
+    });
+
+    $('#order-lines').on('click', 'a.delete-line', function (e) {
+        e.preventDefault();
+        var lineId = $(this).attr('id').replace('delete-line-', '');
+        var aLink = $(this).attr('data-href');
+
+        $.ajax({
+            url: aLink,
+            data:  {
+                lineId : lineId
+            },
+            type: 'POST',
+            success: function (response) {
+                $('#order-lines table').replaceWith(response);
+            },
+            error: function (response) {
+                admin.addAlert(response.error, 'danger');
+            }
+        });
     });
 });

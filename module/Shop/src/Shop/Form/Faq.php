@@ -56,6 +56,11 @@ class Faq extends Form
             ],
             'options'		=> [
                 'label'	=> 'Question',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'sm-10',
+                'label_attributes' => [
+                    'class' => 'col-sm-2',
+                ],
             ]
         ]);
 
@@ -66,10 +71,15 @@ class Faq extends Form
                 'placeholder'		=> 'Answer',
                 'autofocus'			=> true,
                 'autocapitalize'	=> 'off',
-                'class'             => 'form-control tiny-mce-textarea',
+                'class'             => 'editable-textarea',
             ],
             'options'		=> [
                 'label'			=> 'Answer',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'sm-10',
+                'label_attributes' => [
+                    'class' => 'col-sm-2',
+                ],
             ],
         ]);
 
@@ -83,6 +93,11 @@ class Faq extends Form
                 'label'			=> 'Parent',
                 'required'		=> false,
                 'add_top'       => true,
+                'twb-layout'    => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size'   => 'sm-10',
+                'label_attributes' => [
+                    'class' => 'col-sm-2',
+                ],
             ],
         ]);
 
@@ -104,15 +119,11 @@ class Faq extends Form
             'name'			=> 'faqInsertType',
             'type'			=> 'radio',
             'options'		=> [
-                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
                 'required'		=> true,
                 'value_options' => array_reverse($faqInsertOptions, true),
-                'column-size' => 'md-8 col-md-offset-4',
-                'label_attributes' => [
-                    'class' => 'col-md-8',
-                ],
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'sm-10 col-sm-offset-2',
             ],
-
         ]);
     }
 

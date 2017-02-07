@@ -614,7 +614,7 @@ return [
                                     'province' => [
                                         'type' => 'Segment',
                                         'options' => [
-                                            'route' => '/province[/][:action[/[:id]]]',
+                                            'route' => '/province[/][:action][/[:id]]',
                                             'constraints' => [
                                                 'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                                 'id' => '\d+',
@@ -714,10 +714,10 @@ return [
                                     'create' => [
                                         'type' => 'Segment',
                                         'options' => [
-                                            'route' => '/create/[:action][/customerId/[:customerId]]',
+                                            'route' => '/create/[:action][/id/[:id]]',
                                             'contraints' => [
                                                 'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                                'customerId' => '\d+'
+                                                'id' => '\d+'
                                             ],
                                             'defaults' => [
                                                 'controller' => 'Order\CreateOrder',

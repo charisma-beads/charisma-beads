@@ -112,6 +112,12 @@ $(document).ready(function () {
         customerId: customer.customerId
     });
 
+    $('#form-customer-submit').on('click', function(e){
+        e.preventDefault();
+        var cusForm = $(this).attr('form');
+        $('#'+cusForm).submit();
+    });
+
     $('#customer-addresses').on('click', '.edit-address-button', function (event) {
         event.preventDefault();
         customer.addressModel($(this), {

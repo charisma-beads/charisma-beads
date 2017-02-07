@@ -144,6 +144,7 @@ return [
             'ShopProductCategory'   => 'Shop\Hydrator\Product\Category',
             'ShopProductGroup'      => 'Shop\Hydrator\Product\Group',
             'ShopProductImage'      => 'Shop\Hydrator\Product\Image',
+            'ShopProductMetaData'   => \Shop\Hydrator\Product\MetaData::class,
             'ShopProductOption'     => 'Shop\Hydrator\Product\Option',
             'ShopProductSize'       => 'Shop\Hydrator\Product\Size',
             'ShopTaxCode'           => 'Shop\Hydrator\Tax\Code',
@@ -186,7 +187,6 @@ return [
     'service_manager' => [
         'invokables' => [
             'Shop\Service\Report'                       => 'Shop\Service\Report',
-            'Shop\Service\StockControl'                 => 'Shop\Service\StockControl',
         ],
         'factories' => [
             'Shop\Options\CartCookie'                   => 'Shop\Service\Factory\CartCookieOptions',
@@ -199,8 +199,8 @@ return [
             'Shop\Options\NewProductsCarouselOptions'   => 'Shop\Service\Factory\NewProductsCarouselOptions',
 
             'Shop\Service\Cart\Cookie'                  => 'Shop\Service\Factory\CartCookie',
-            'Shop\Service\Shipping'                     => 'Shop\Service\Factory\Shipping',
-            'Shop\Service\Tax'                          => 'Shop\Service\Factory\Tax',
+            'Shop\Service\Shipping'                     => Shop\Service\Factory\Shipping::class,
+            'Shop\Service\Tax'                          => Shop\Service\Factory\Tax::class,
 
             'ExceptionMailer\ErrorHandling'             => Shop\Exception\MailerFactory::class
         ],
@@ -238,14 +238,14 @@ return [
         'invokables' => [
             'ShopAdvert'            => 'Shop\Model\Advert\Advert',
             'ShopAdvertHit'         => 'Shop\Model\Advert\Hit',
-            'ShopCart'              => 'Shop\Model\Cart\Cart',
+            'ShopCart'              => Shop\Model\Cart\Cart::class,
             'ShopCartItem'          => 'Shop\Model\Cart\Item',
             'ShopCountry'           => 'Shop\Model\Country\Country',
             'ShopCountryProvince'   => 'Shop\Model\Country\Province',
             'ShopCustomer'          => 'Shop\Model\Customer\Customer',
             'ShopCustomerAddress'   => 'Shop\Model\Customer\Address',
             'ShopCustomerPrefix'    => 'Shop\Model\Customer\Prefix',
-            'ShopOrder'             => 'Shop\Model\Order\Order',
+            'ShopOrder'             => Shop\Model\Order\Order::class,
             'ShopOrderLine'         => 'Shop\Model\Order\Line',
             'ShopOrderMetaData'     => 'Shop\Model\Order\MetaData',
             'ShopOrderStatus'       => 'Shop\Model\Order\Status',

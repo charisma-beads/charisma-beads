@@ -38,7 +38,8 @@ class TaxRateList extends Select implements ServiceLocatorAwareInterface
 		
 		/* @var $taxRate \Shop\Model\Tax\Rate */
 		foreach ($taxRates as $taxRate) {
-			$taxRateOptions[$taxRate->getTaxRateId()] = $taxRate->getTaxRate();
+		    $rate = ($taxRate->getTaxRate() > 0) ? ($taxRate->getTaxRate() - 1) : $taxRate->getTaxRate();
+			$taxRateOptions[$taxRate->getTaxRateId()] = $rate * 100 . '%';
 		}
         
         $this->setValueOptions($taxRateOptions);

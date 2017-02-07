@@ -16,12 +16,12 @@ use Shop\Event\ErrorListener;
 use Shop\Event\FileManagerListener;
 use Shop\Event\SiteMapListener;
 use Shop\Event\UserListener;
+use Shop\Event\StockControlListener;
 use UthandoCommon\Config\ConfigInterface;
 use UthandoCommon\Config\ConfigTrait;
 use Zend\Console\Adapter\AdapterInterface as Console;
 use Zend\ModuleManager\Feature\ConsoleUsageProviderInterface;
 use Zend\Mvc\MvcEvent;
-use Zend\Stdlib\ArrayUtils;
 
 /**
  * Class Module
@@ -42,6 +42,7 @@ class Module implements ConsoleUsageProviderInterface, ConfigInterface
         $eventManager->attach(new SiteMapListener());
         $eventManager->attach(new UserListener());
         $eventManager->attach(new ErrorListener());
+        $eventManager->attach(new StockControlListener());
     }
 
     public function getConsoleUsage(Console $console)

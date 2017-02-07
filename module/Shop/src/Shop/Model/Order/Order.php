@@ -10,8 +10,6 @@
 
 namespace Shop\Model\Order;
 
-use UthandoCommon\Model\Model;
-use UthandoCommon\Model\ModelInterface;
 use Shop\Model\Customer\Customer;
 use DateTime;
 
@@ -20,9 +18,10 @@ use DateTime;
  *
  * @package Shop\Model\Order
  */
-class Order implements ModelInterface
+class Order extends AbstractOrderCollection
 {
-    use Model;
+
+    protected $entityClass = 'Shop\Model\Order\Line';
     
     /**
      * @var int
@@ -45,21 +44,6 @@ class Order implements ModelInterface
     protected $orderNumber = 0;
     
     /**
-     * @var float
-     */
-    protected $total = 0.00;
-    
-    /**
-     * @var float
-     */
-    protected $shipping = 0.00;
-    
-    /**
-     * @var float
-     */
-    protected $taxTotal = 0.00;
-    
-    /**
      * @var DateTime
      */
     protected $orderDate;
@@ -78,11 +62,6 @@ class Order implements ModelInterface
      * @var Status
      */
     protected $orderStatus;
-    
-    /**
-     * @var array
-     */
-    protected $orderLines = array();
 
     /**
      * @return int
@@ -168,60 +147,6 @@ class Order implements ModelInterface
     {
         $this->orderNumber = $orderNumber;
     }
-
-    /**
-     * @return float
-     */
-	public function getTotal()
-	{
-		return $this->total;
-	}
-
-    /**
-     * @param $total
-     * @return $this
-     */
-	public function setTotal($total)
-	{
-		$this->total = $total;
-		return $this;
-	}
-
-    /**
-     * @return float
-     */
-	public function getShipping()
-	{
-		return $this->shipping;
-	}
-
-    /**
-     * @param $shipping
-     * @return $this
-     */
-	public function setShipping($shipping)
-	{
-		$this->shipping = $shipping;
-		return $this;
-	}
-
-    /**
-     * @return float
-     */
-	public function getTaxTotal()
-	{
-		return $this->taxTotal;
-	}
-
-    /**
-     * @param $taxTotal
-     * @return $this
-     */
-	public function setTaxTotal($taxTotal)
-	{
-		$this->taxTotal = $taxTotal;
-		return $this;
-	}
 	
 	/**
 	 * @return DateTime $orderDate
@@ -300,7 +225,7 @@ class Order implements ModelInterface
      */
     public function getOrderLines()
     {
-        return $this->orderLines;
+        return $this->getEntities();
     }
 
     /**
@@ -309,7 +234,7 @@ class Order implements ModelInterface
      */
     public function setOrderLines($orderLines)
     {
-        $this->orderLines = $orderLines;
+        $this->setEntities($orderLines);
         return $this;
     }
 
@@ -319,7 +244,7 @@ class Order implements ModelInterface
      */
     public function setOrderLine(Line $orderLine)
     {
-        $this->orderLines[] = $orderLine;
+        $this->add($orderLine);
         return $this;
     }
 }

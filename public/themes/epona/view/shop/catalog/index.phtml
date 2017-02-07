@@ -21,37 +21,36 @@
 
         <!-- cart links -->
         <?php if ($this->cart()->countItems() > 0):?>
-        <div class="row">
-            <div class="col-md-12 text-center cart-links">
-                <a href="<?=$this->url('shop/cart', [
-                    'action' => 'view'
-                ]);?>" class="btn btn-primary">VIEW CART</a>
 
-                <a href="<?=$this->url('shop/checkout');?>" class="btn btn-info">CHECKOUT</a>
-            </div>
+        <div class="col-md-12 text-center cart-links">
+            <a href="<?=$this->url('shop/cart', [
+                'action' => 'view'
+            ]);?>" class="btn btn-primary">VIEW CART</a>
+
+            <a href="<?=$this->url('shop/checkout');?>" class="btn btn-info">CHECKOUT</a>
         </div>
+
+        <div class="clearfix"></div>
 
         <?php endif;?>
         <!-- /cart links -->
 
         <!-- PRODUCT CATEGORIES -->
         <?php if ($this->subCategories->count() > 0): ?>
-        <div class="row">
-            <!-- CALLOUT -->
-            <div class="alert alert-default fade in">
 
-                <div class="row">
+        <!-- CALLOUT -->
+        <div class="alert alert-default fade in">
 
-                    <div class="col-md-12 col-sm-12"><!-- left text -->
-                        <h4>Also <strong>In This Category</strong></h4>
-                    </div><!-- /left text -->
+            <div class="row">
 
-                </div>
+                <div class="col-md-12 col-sm-12"><!-- left text -->
+                    <h4>Also <strong>In This Category</strong></h4>
+                </div><!-- /left text -->
 
             </div>
-            <!-- /CALLOUT -->
+
         </div>
-        <div class="row">
+        <!-- /CALLOUT -->
 
             <?php /* @var $row \Shop\Model\Product\Category */ ?>
             <?php $c=0;?>
@@ -78,91 +77,13 @@
             <div class="divider"><!-- divider -->
                 <i class="fa fa-angle-double-down"></i>
             </div>
-        </div>
         <?php endif; ?>
         <!-- /PRODUCT CATEGORIES -->
 
-        <!-- PRODUCT LIST -->
-        <?php /* @var $row \Shop\Model\Product\Product */ ?>
-        <?php $c=0;?>
-        <?php foreach ($this->products as $row): ?>
-        <?php $c++;?>
-        <div class="col-md-3 col-sm-3 shop-item-list"><!-- item -->
-            <a href="<?=$this->url('shop/catalog/product', [
-                'categoryIdent' => $row->getProductCategory()->getIdent(),
-                'productIdent' => $row->getIdent(),
-            ]);?>">
-                <?php if ($row->getShowImage()):?>
-                <figure><!-- image -->
-                    <img class="img-responsive" src="<?=$this->productImage($row, 'thumb');?>" alt="" />
-                </figure><!-- /image -->
-                <?php endif;?>
-                <?php if ($row->inStock() && $row->isEnabled()) : ?>
-                <span class="shop-stock-info stock-yes"><!-- stock -->
-                    <span class="text-muted"><?=$this->escapehtml($row->getSku());?></span>
-                    <i class="fa fa-check"></i>
-                    <span class="text-muted">
-                        <?=($row->getQuantity() > 0) ? $this->escapeHtml($row->getQuantity()) :'';?>
-                    </span> in stock
-                </span><!-- /stock -->
-                <?php else: ?>
-                <span class="shop-stock-info stock-no"><!-- stock -->
-                    <span class="text-muted"><?=$this->escapehtml($row->getSku());?></span>
-                    <i class="fa fa-times"></i> out of stock
-                </span><!-- /stock -->
-                <?php endif; ?>
-                <div class="product-info"><!-- title and price -->
-                    <h2>
-                        <span class="product-name">
-                            <span><?=$this->escapeHtml($row->getProductCategory()->getCategory());?>&nbsp;
-                            <?=$this->escapeHtml($row->getSku());?>&nbsp;
-                            <?=$this->escapeHtml($row->getName());?></span><br>
-                            Size:<?=$this->escapeHtml($row->getProductSize()->getSize());?>
-                        </span>
-                        <span>
-                            <?=$this->productPrice($row)
-                                ->setFormat('<span class="bold">%s</span> %s %s ')
-                                ->setDiscountFormat('<span class="line-through">%s</span>'); ?>
-                        </span>
-                    </h2>
-                </div><!-- /title and price -->
-            </a>
-
-            <?php $form = $this->cart()->addForm($row)->setAttribute('class', 'margin-top10 nopadding clearfix'); ?>
-
-            <?php if ($row->inStock() && $row->isEnabled()):?>
-            <?=$this->form()->openTag($form); ?>
-                <?=$this->formHidden($form->get('productId')); ?>
-                <?=$this->formHidden($form->get('returnTo')); ?>
-
-                <?php if ($row->getProductOption()): ?>
-                <div class="row">
-                    <div class="col-md-12">
-                        <?=$this->productOptions($row);?>
-                    </div><!-- /btn-group -->
-                </div>
-                <?php endif; ?>
-
-                <?=$this->formInput($form->get('qty')->setAttribute('class', 'form-control')); ?>
-
-                <button type="submit" name="buy-item" class="btn btn-primary col-sm-12 col-md-12">
-                    ADD TO CART <i class="fa fa-shopping-cart"></i>
-                    <?=$this->cart()->hasProductInCart($row);?>
-                </button>
-
-            <?=$this->form()->closeTag(); ?>
-            <?php endif; ?>
-        </div><!-- /item -->
-        <?php if (($c % 4) === 0):?>
-        <div class="clearfix"></div>
-        <?php endif;?>
-        <?php endforeach; ?>
-        <?php if (0 === $this->products->count()): ?>
-            <div class="comingsoon">
-                <h1><?=strtoupper($this->category);?> COMING SOON</h1>
-            </div>
-        <?php endif; ?>
-        <!-- /PRODUCT LIST -->
+        <?=$this->partial('shop/catalog/product-list', [
+            'products'  => $this->products,
+            'search'    => false,
+        ]);?>
 
         <div class="clearfix"></div>
 
@@ -180,6 +101,7 @@
         ); ?><!-- /PAGINATION -->
 
     </div>
+
 </div>
 
 <?php

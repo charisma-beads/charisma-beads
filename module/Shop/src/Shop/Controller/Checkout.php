@@ -198,10 +198,10 @@ class Checkout extends AbstractActionController
 
         if ($form->isValid()) {
             $formValues = $form->getData();
-            $order      = $this->getOrderService()->create($customer, $formValues);
-            $orderId    = $this->getOrderService()->processOrderFromCart($order);
+            $orderId    = $this->getOrderService()->create($customer, $formValues);
 
             if ($orderId) {
+                $this->getOrderService()->processOrderFromCart($orderId);
                 $this->getService('ShopCart')->clear(false);
 
                 // need to email order,

@@ -45,9 +45,9 @@ class Country extends Form
         	'options'		=> [
         		'label'		=> 'Country:',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-8',
+                'column-size' => 'sm-10',
                 'label_attributes' => [
-                    'class' => 'col-md-4',
+                    'class' => 'col-sm-2',
                 ],
         	],
 
@@ -65,9 +65,9 @@ class Country extends Form
 		        'required'	=> true,
 		        'help-block' => 'Please use the ISO-3166 alpha 2 country code (two-letters)',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-8',
+                'column-size' => 'sm-10',
                 'label_attributes' => [
-                    'class' => 'col-md-4',
+                    'class' => 'col-sm-2',
                 ],
 		    ],
 		]);
@@ -79,9 +79,9 @@ class Country extends Form
 				'label'     => 'Post Zone:',
 				'required'  => true,
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-8',
+                'column-size' => 'sm-10',
                 'label_attributes' => [
-                    'class' => 'col-md-4',
+                    'class' => 'col-sm-2',
                 ],
 			],
 		]);

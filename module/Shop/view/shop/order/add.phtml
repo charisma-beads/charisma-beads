@@ -10,9 +10,16 @@
     <div class="input-group">
         <input type="text" class="form-control typeahead" placeholder="Type Search here...">
         <span class="input-group-btn">
+            <form id="order-create-form" action="<?=$this->url('admin/shop/order/create', [
+                'action' => 'add',
+            ]);?>" method="post">
+                <input id="customerId" type="hidden" name="customerId" value="">
+            </form>
+
             <a id="order-create-button" class="btn btn-default" type="button" data-toggle="tooltip" title="<?=$this->translate('New order for this customer');?>">
                 <span class="fa fa-shopping-bag"></span>
             </a>
+
             <a href="<?=$this->url('admin/shop/customer/edit', [
                 'action' => 'add',
             ]);?>" class="btn btn-default" type="button" data-toggle="tooltip" title="<?=$this->translate('New Customer');?>">

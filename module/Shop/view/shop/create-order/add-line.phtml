@@ -1,22 +1,50 @@
-<?php /** @var  $product \Shop\Model\Product\Product */ $product = $this->product; ?>
+<?php /** @var  $order \Shop\Model\Order\Order */ $order = $this->order; ?>
 
-<tr class="order-line">
-    <input type="hidden" name="orderLineId" value="">
-    <input type="hidden" name="productId" value="<?=$this->escapeHtml($product->getProductId());?>">
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>Product</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Total</th>
+        <th>&nbsp;</th>
+    </tr>
 
-    <td><?=$this->escapeHtml($product->getSku());?></td>
-    <td>
-        <?=$this->escapeHtml($product->getProductCategory()->getCategory());?> /
-        <?=$this->escapeHtml($product->getName());?>
-        <?php if ($product->getPostUnit()->getPostUnit() > 0): ?>
-            (<?=$this->escapeHtml($product->getPostUnit()->getPostUnit());?> grams)
-        <?php endif; ?>
-    </td>
-    <td><?=$this->priceFormat($product->getPrice());?></td>
-    <td><input class="form-control" name="qty" type="text" value="<?=$this->escapeHtml($this->quantity);?>"></td>
-    <td><?=$this->priceFormat($product->getPrice() * $this->quantity);?></td>
-    <td>
-        <a class="btn btn-primary"><i class="fa fa-refresh"></i></a>
-        <a class="btn btn-danger"><i class="fa fa-trash"></i></a>
-    </td>
-</tr>
+    <?php /* @var $item \Shop\Model\Order\Line */ ?>
+    <?php foreach($order as $item):?>
+        <tr class="order-line">
+            <td><?=$item->getMetadata()->getSku();?></td>
+            <td>
+                <?=$item->getMetadata()->getCategory();?> / <?=$item->getMetadata()->getName();?>
+                <?php if ($item->getMetadata()->getOption()): ?>
+                    &nbsp;(<?=$item->getMetadata()->getOption()->getOption();?>)
+                <?php endif; ?>
+                <?php if ($item->getMetadata()->getPostUnit() > 0): ?>
+                    &nbsp;(<?=$item->getMetadata()->getPostUnit();?> grams)
+                <?php endif; ?>
+            </td>
+            <td><?=$this->priceFormat($item->getPrice() + $item->getTax());?></td>
+            <td><?=$item->getQuantity();?></td>
+            <td><?=$this->priceFormat(($item->getPrice() + $item->getTax()) * $item->getQuantity());?></td>
+            <td>
+                <!--<a class="btn btn-primary"><i class="fa fa-refresh"></i></a>-->
+                <a data-href="<?=$this->url('admin/shop/order/create', [
+                    'action'    => 'remove-line',
+                    'id'        => $order->getId(),
+                ]);?>" id="delete-line-<?=$item->getId();?>" class="btn btn-danger delete-line"><i class="fa fa-trash"></i></a>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+
+
+    <tr id="table-postage">
+        <td colspan="2">&nbsp&nbsp;</td>
+        <th colspan="2"><p class="text-right">Postage:</p></th>
+        <td><?=$this->priceFormat($order->getShipping());?></td>
+    </tr>
+    <tr id="table-total">
+        <td colspan="2">&nbsp&nbsp;</td>
+        <th colspan="2"><p class="text-right">Total:</p></th>
+        <td><?=$this->priceFormat($order->getTotal());?></td>
+    </tr>
+</table>

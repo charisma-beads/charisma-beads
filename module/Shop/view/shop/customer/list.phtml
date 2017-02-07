@@ -24,11 +24,11 @@
     			<td><?=$this->escapeHtml($this->formatDate($row->getDateModified())); ?></td>
     			<td>
                     <a href="<?=$this->url('admin/shop/order/create', [
-                        'action' => 'create',
-                        'customerId' => $row->getCustomerId(),
-                    ]); ?>" class="btn btn-default">
-                        <i class="fa fa-shopping-bag" data-toggle="tooltip" title="<?=$this->translate('Create Order');?>"></i>
-                        </a>
+                        'action' => 'add',
+                    ]); ?>" id="order-<?=$row->getCustomerId();?>" data-toggle="tooltip" title="<?= $this->translate('Create Order'); ?>"
+                            class="btn btn-default create-order-button">
+                        <i class="fa fa-shopping-bag"></i>
+                    </a>
 
                     <?=$this->partial('uthando-admin/partial/edit-actions', [
                     	'pk'		=> 'customerId',

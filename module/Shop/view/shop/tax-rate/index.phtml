@@ -1,31 +1,42 @@
+<?php $this->headTitle('Tax Rates') ?>
+<?php $this->layout()->pageTitle = $this->translate('Tax Rates');?>
 
+<?php $this->placeholder('header-buttons')->captureStart();?>
+<a href="<?=$this->url('admin/shop/tax/rate/edit', [
+    'action' => 'add'
+]);?>" data-toggle="tooltip" title="<?=$this->translate('Add Tax Rate');?>" class="btn btn-primary" id="tax-rate-add">
+    <i class="fa fa-plus"></i>
+</a>
+<?php $this->placeholder('header-buttons')->captureEnd();?>
 
-<?=$this->partial('uthando-admin/partial/search', [
-	'name'			=> 'taxRate',
-	'searchInputs'	=> [
-		'Tax Rate' => 'taxRate',
-	],
-]);?>
-
-
-<div id="table-taxRate">
-	<?=$this->partial('shop/tax-rate/list', [
-	    'models' => $this->models
-	]); ?>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-list"></i> <?=$this->translate('List Tax Rates');?></h3>
+    </div>
+    <div class="panel-body">
+        <?=$this->partial('uthando-admin/partial/search', [
+            'name'			=> 'taxRate',
+            'searchInputs'	=> [
+                'Tax Rate' => 'taxRate',
+            ],
+        ]);?>
+    </div>
+    <div id="table-taxRate" class="admin-table">
+        <?=$this->partial('shop/tax-rate/list', [
+            'models' => $this->models
+        ]); ?>
+    </div>
 </div>
 
-<?php $this->inlineScript()->captureStart(); ?>
-$(document).ready(function(){
-	$('#table-taxRate').dataGrid({
-	    url : 'rate/list',
-	    query: { sort : 'taxRateId' },
-	    searchForm : $('#search-taxRate'),
-	    paging : 'links',
-	    columnSort: true,
-	    //rowClick : admin.dataTable.rowClick
-	});
-});
-<?php $this->inlineScript()->captureEnd(); ?>
-
-
-
+<script>
+    $(document).ready(function(){
+        $('#table-taxRate').dataGrid({
+            url : 'rate/list',
+            query: { sort : 'taxRateId' },
+            searchForm : $('#search-taxRate'),
+            paging : 'links',
+            columnSort: true,
+            //rowClick : admin.dataTable.rowClick
+        });
+    });
+</script>

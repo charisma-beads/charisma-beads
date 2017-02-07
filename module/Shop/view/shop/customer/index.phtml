@@ -31,6 +31,10 @@
     </div>
 </div>
 
+<?php $this->inlineScript()
+    ->appendFile($this->basePath('js/admin/shop/shop.js'))
+    ->appendFile($this->basePath('js/admin/shop/customer-list.js'));?>
+
 <script>
     $(document).ready(function() {
         $('#table-customer').dataGrid({
@@ -40,5 +44,4 @@
             columnSort: true
         });
     });
-
 </script>

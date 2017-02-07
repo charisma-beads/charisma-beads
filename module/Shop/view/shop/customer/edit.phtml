@@ -9,7 +9,7 @@ $this->form->get('email')->setAttribute('readonly', '');
 <?php $this->layout()->pageTitle = $this->translate('Edit Customer'); ?>
 
 <?php $this->placeholder('header-buttons')->captureStart(); ?>
-<button type="submit" form="form-customer" data-toggle="tooltip" title="<?= $this->translate('Save'); ?>"
+<button id="form-customer-submit" form="form-customer" data-toggle="tooltip" title="<?= $this->translate('Save'); ?>"
         class="btn btn-primary">
     <i class="fa fa-save"></i>
 </button>
@@ -57,7 +57,7 @@ $this->form->get('email')->setAttribute('readonly', '');
                             'id'        => $this->model->getCustomerId(),
                         ]);?>">Add Address
                         </button>
-                    </h4>
+                        <h4>
                 </div>
                 <div id="collapseOne" class="panel-collapse collapse">
                     <div class="panel-body">
@@ -74,12 +74,16 @@ $this->form->get('email')->setAttribute('readonly', '');
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
                             Customer Orders
                         </a>
-                        <a id="add-order-button" href="<?=$this->url('admin/shop/order/create', [
-                            'action' => 'create',
-                            'customerId' => $this->model->getCustomerId(),
-                        ]);?>" class="btn btn-default btn-xs">
+
+                        <button type="submit" id="add-order-button" form="form-create-order" class="btn btn-default btn-xs">
                             Create Order
-                        </a>
+                        </button>
+                        <form id="form-create-order" action="<?=$this->url('admin/shop/order/create', [
+                            'action' => 'add',
+                        ]); ?>" method="post">
+                            <input type="hidden" name="customerId" value="<?=$this->model->getCustomerId();?>">
+                        </form>
+                    </
                     </h4>
                 </div>
                 <div id="collapseTwo" class="panel-collapse collapse in">

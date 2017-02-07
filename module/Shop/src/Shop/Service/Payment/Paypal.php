@@ -83,9 +83,9 @@ class Paypal extends AbstractService
         // set payment amount of order
         $details = new Details();
         $details->setShipping(number_format($order->getShipping(), 2));
-        $details->setTax(number_format($order->getTaxTotal() - $order->getMetadata()->getShippingTax(), 2));
+        $details->setTax(number_format($order->getTaxTotal(), 2));
         
-        $subtotal = $order->getTotal() - ($order->getShipping() + ($order->getTaxTotal() - $order->getMetadata()->getShippingTax()));
+        $subtotal = $order->getTotal() - ($order->getShipping() + ($order->getTaxTotal()));
         $details->setSubtotal(number_format($subtotal, 2));
         
         $amount = new Amount();
@@ -131,7 +131,7 @@ class Paypal extends AbstractService
                 $taxService->setTaxState($order->getMetadata()->getTaxInvoice())
                     ->setTaxInc($orderItem->getMetadata()->getVatInc());
 
-                $taxService->addTax($orderItem->getPrice(), $orderItem->getTax(true));
+                $taxService->addTax($orderItem->getPrice(), $orderItem->getTax());
                 $price = $taxService->getPrice();
                 $tax = $taxService->getTax();
 
@@ -145,7 +145,7 @@ class Paypal extends AbstractService
             $item->setDescription($orderItem->getMetadata()->getDescription());
             $item->setPrice($price);
             $item->setTax($tax);
-            $item->setQuantity($orderItem->getQty());
+            $item->setQuantity($orderItem->getQuantity());
             $item->setCurrency($options->getCurrencyCode());
             
             $items[] = $item;

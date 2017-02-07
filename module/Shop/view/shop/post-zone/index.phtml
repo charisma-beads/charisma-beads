@@ -1,29 +1,43 @@
+<?php $this->headTitle('Zones') ?>
+<?php $this->layout()->pageTitle = $this->translate('Zones');?>
 
+<?php $this->placeholder('header-buttons')->captureStart();?>
+<a href="<?=$this->url('admin/shop/post/zone/edit', [
+    'action' => 'add'
+]);?>" data-toggle="tooltip" title="<?=$this->translate('Add Zone');?>" class="btn btn-primary" id="post-zone-add">
+    <i class="fa fa-plus"></i>
+</a>
+<?php $this->placeholder('header-buttons')->captureEnd();?>
 
-<?=$this->partial('uthando-admin/partial/search', [
-	'name'			=> 'postZone',
-	'searchInputs'	=> [
-		'Zone' => 'zone',
-	],
-]);?>
-	    	
-<div id="table-postZone">
-	<?=$this->partial('shop/post-zone/list', [
-	    'models' => $this->models
-	]); ?>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-list"></i> <?=$this->translate('Zone List');?></h3>
+    </div>
+    <div class="panel-body">
+        <?=$this->partial('uthando-admin/partial/search', [
+            'name'			=> 'postZone',
+            'searchInputs'	=> [
+                'Zone' => 'zone',
+            ],
+        ]);?>
+    </div>
+    <div id="table-postZone" class="admin-table">
+        <?=$this->partial('shop/post-zone/list', [
+            'models' => $this->models
+        ]); ?>
+    </div>
 </div>
 
-
-<?php $this->inlineScript()->captureStart(); ?>
-$(document).ready(function(){
-	$('#table-postZone').dataGrid({
-	    url : 'zone/list',
-	    query: { sort : 'zone' },
-	    searchForm : $('#search-postZone'),
-	    paging : 'links',
-	    columnSort: true,
-	    //rowClick : admin.product.rowClick
-	});
-});
-<?php $this->inlineScript()->captureEnd(); ?>
+<script>
+    $(document).ready(function(){
+        $('#table-postZone').dataGrid({
+            url : 'zone/list',
+            query: { sort : 'zone' },
+            searchForm : $('#search-postZone'),
+            paging : 'links',
+            columnSort: true,
+            //rowClick : admin.product.rowClick
+        });
+    });
+</script>
 

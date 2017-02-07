@@ -10,21 +10,17 @@
 
 namespace Shop\Model\Cart;
 
-use Shop\ShopException;
-use UthandoCommon\Model\AbstractCollection;
+use Shop\Model\Order\AbstractOrderCollection;
 use UthandoCommon\Model\DateModifiedTrait;
-use UthandoCommon\Model\Model;
-use UthandoCommon\Model\ModelInterface;
 
 /**
  * Class Cart
  *
  * @package Shop\Model\Cart
  */
-class Cart extends AbstractCollection implements ModelInterface
+class Cart extends AbstractOrderCollection
 {
-    use Model,
-        DateModifiedTrait;
+    use DateModifiedTrait;
 
     protected $entityClass = 'Shop\Model\Cart\Item';
     
@@ -42,16 +38,6 @@ class Cart extends AbstractCollection implements ModelInterface
      * @var int
      */
     protected $expires;
-
-    /**
-     * @var bool
-     */
-    protected $sorted = false;
-
-    /**
-     * @var string
-     */
-    protected $sortOrder;
 
     /**
      * @return int
@@ -131,98 +117,5 @@ class Cart extends AbstractCollection implements ModelInterface
     {
         $this->expires = $expires;
         return $this;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function isSorted()
-    {
-        return $this->sorted;
-    }
-
-    /**
-     * set the sorted value to true.
-     */
-    protected function setSorted()
-    {
-        $this->sorted = true;
-    }
-
-    /**
-     * @return string
-     * @throws ShopException
-     */
-    public function getSortOrder()
-    {
-        if (!$this->sortOrder) {
-            throw new ShopException('sort order cannot be empty');
-        }
-
-        return $this->sortOrder;
-    }
-
-    /**
-     * @param string $sortOrder
-     * @return $this
-     */
-    public function setSortOrder($sortOrder)
-    {
-        $this->sortOrder = $sortOrder;
-        return $this;
-    }
-
-    /**
-     * Make sure we have the cart items in the right order
-     * reorder the cart by [category - sku]
-     */
-    public function rewind()
-    {
-        if (!$this->isSorted()) {
-
-            $entities = $this->getEntities();
-            $keyArray = [];
-            $itemArray = [];
-            $catArray = [];
-            $skuArray = [];
-
-            /* @var $item \Shop\Model\Cart\Item */
-            foreach ($entities as $key => $item) {
-                $keyArray[] = $key;
-                $itemArray[] = $item;
-                $catArray[] = $item->getMetadata()->getCategory()->getLft();
-                $skuArray[] = $item->getMetadata()->getSku();
-            }
-
-            // natural sort the multidimensional array
-            //array_multisort(array_keys($tempArray), SORT_ASC, SORT_NATURAL, $tempArray);
-
-            array_multisort($catArray, $skuArray, $keyArray, $itemArray);
-
-            $this->entities = [];
-
-            foreach ($itemArray as $key => $item) {
-                $this->entities[$keyArray[$key]] = $item;
-            }
-
-            $this->setSorted();
-        }
-
-        parent::rewind();
-    }
-
-    /**
-     * @return int
-     */
-    public function count()
-    {
-        $numItems = null;
-
-        /* @var $item Item */
-        foreach ($this->entities as $item) {
-            $numItems += $item->getQuantity();
-        }
-
-        return $numItems;
     }
 }

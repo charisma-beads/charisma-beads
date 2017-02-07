@@ -11,9 +11,10 @@
 namespace Shop\Service\Order;
 
 use Shop\Model\Customer\Customer as CustomerModel;
+use Shop\Model\Order\LineInterface;
 use Shop\Model\Order\MetaData;
 use Shop\Model\Order\Order as OrderModel;
-use UthandoCommon\Service\AbstractRelationalMapperService;
+use Shop\Service\Cart\Cart;
 use Zend\Json\Json;
 use Zend\Math\BigInteger\BigInteger;
 use Zend\View\Model\ViewModel;
@@ -24,13 +25,19 @@ use Zend\View\Model\ViewModel;
  * @package Shop\Service\Order
  * @method OrderModel populate($model, $children)
  * @method \Shop\Mapper\Order\Order getMapper($mapperClass = null, array $options = [])
+ * @method OrderModel getOrderModel()
  */
-class Order extends AbstractRelationalMapperService
+class Order extends AbstractOrder
 {
     /**
      * @var string
      */
     protected $serviceAlias = 'ShopOrder';
+
+    /**
+     * @var string
+     */
+    protected $lineService = 'orderLines';
 
     /**
      * @var array
@@ -57,6 +64,7 @@ class Order extends AbstractRelationalMapperService
             'refCol'        => 'orderId',
             'service'       => 'ShopOrderLine',
             'getMethod'     => 'getOrderLinesByOrderId',
+            'setMethod'     => 'setEntities',
         ],
     ];
 
@@ -74,7 +82,7 @@ class Order extends AbstractRelationalMapperService
     /**
      * @param $id
      * @param null $col
-     * @return array|mixed|\Shop\Model\Order\Order
+     * @return OrderModel
      */
     public function getById($id, $col = null)
     {
@@ -85,6 +93,19 @@ class Order extends AbstractRelationalMapperService
         }
 
         return $order;
+    }
+
+    /**
+     * @param $id
+     * @return OrderModel
+     */
+    public function getOrder($id)
+    {
+        $order = parent::getById($id);
+
+        $this->setOrderModel($order);
+
+        return $this->getOrderModel();
     }
 
     /**
@@ -106,44 +127,38 @@ class Order extends AbstractRelationalMapperService
     }
 
     /**
-     * @param OrderModel $order
+     * @param int $orderId
      * @return int
      */
-    public function processOrderFromCart(OrderModel $order)
+    public function processOrderFromCart($orderId)
     {
-        /* @var $cart \Shop\Service\Cart\Cart */
+        $order = $this->getById($orderId);
+        /* @var $cart Cart */
         $cart = $this->getService('ShopCart');
         $countryId = $order->getCustomer()->getDeliveryAddress()->getCountryId();
-        $shippingOff = false;
 
-        if ('Collect At Store' == $order->getShipping()) {
+        if ('Collect At Store' == $order->getMetadata()->getShippingMethod()) {
             $countryId = null;
-            $shippingOff = true;
         }
 
-        $cart->setShippingCost($countryId, $shippingOff);
+        $cart->setShippingCost($countryId);
         
-        $shipping = $cart->getShippingCost();
-        $taxTotal = $cart->getTaxTotal();
-        $cartTotal = $cart->getTotal();
-        
-        $order->getMetadata()
-            ->setShippingTax($cart->getShippingTax());
+        $shipping   = $cart->getShippingCost();
+        $taxTotal   = $cart->getTaxTotal();
+        $cartTotal  = $cart->getTotal();
 
         $order->setTotal($cartTotal)
+            ->setTaxTotal($taxTotal)
             ->setShipping($shipping)
-            ->setTaxTotal($taxTotal);
+            ->setShippingTax($cart->getShippingTax());
 
-        $orderId = $this->save($order);
-        $this->generateOrderNumber($orderId);
+        $result = $this->save($order);
 
         /* @var $orderLineService \Shop\Service\Order\Line */
         $orderLineService = $this->getService('ShopOrderLine');
-        $orderLineService->processOrderLines($cart->getCart(), $orderId);
+        $orderLineService->processLines($cart->getCart(), $orderId);
 
-        if ($order->getCustomer()->getEmail()) {
-            $this->sendEmail($orderId);
-        }
+        $this->sendEmail($orderId);
         
         return $orderId;
     }
@@ -171,8 +186,7 @@ class Order extends AbstractRelationalMapperService
             str_replace('pay_', '', $postData['payment_option'])
         ));
 
-        /* @var $shopOptions \Shop\Options\ShopOptions */
-        $shopOptions = $this->getService('Shop\Options\Shop');
+        $shopOptions = $this->getShopOptions();
 
         $metadata->setPaymentMethod($paymentOption)
             ->setTaxInvoice($shopOptions->isVatState())
@@ -192,6 +206,7 @@ class Order extends AbstractRelationalMapperService
             'total'         => 0,
             'shipping'      => 0,
             'taxTotal'      => 0,
+            'shippingTax'   => 0,
             'orderDate'     => New \DateTime(),
             'metadata'      => $metadata,
             'customer'      => $customer,
@@ -199,8 +214,64 @@ class Order extends AbstractRelationalMapperService
         ];
 
         $order = $this->getMapper()->getModel($data);
+        $orderId = $this->save($order);
+        $this->generateOrderNumber($orderId);
 
-        return $order;
+        return $orderId;
+    }
+
+    /**
+     * Recalculate totals of order
+     */
+    public function recalculateTotals()
+    {
+        $order = $this->getOrderModel();
+        $sub = 0;
+        $tax = 0;
+        $order->setTaxTotal(0);
+
+        /* @var $lineItem \Shop\Model\Order\Line */
+        foreach($order as $lineItem) {
+            $sub = $sub + (($lineItem->getPrice()) * $lineItem->getQuantity());
+            $order->setTaxTotal($order->getTaxTotal() + ($lineItem->getTax() * $lineItem->getQuantity()));
+        }
+
+        $order->setSubTotal($sub);
+
+        $shipping = $this->getShippingService();
+
+        if ($order->getMetadata()->getShippingMethod() == 'Collect At Store') {
+            $shipping->setCountryId(0);
+        } else {
+            $shipping->setCountryId($order->getMetadata()->getDeliveryAddress()->getCountryId());
+        }
+
+        $cost = $shipping->calculateShipping($order);
+
+        $order->setShipping($cost);
+        $this->setShippingTax($shipping->getShippingTax());
+
+        $order->setTotal($order->getSubTotal() + $order->getShipping());
+        $order->setTaxTotal($order->getTaxTotal() + $order->getShippingTax());
+
+        $this->save($order);
+        $this->getOrder($order->getId());
+    }
+
+    public function persist(LineInterface $line = null)
+    {
+        $order = $this->getOrderModel();
+        $order->setOrderDate();
+
+        if (null === $line->getOrderId()) {
+            $line->setCartId($order->getOrderId());
+        }
+
+        $priceTax = $this->calculateTax($line);
+        $line->setPrice($priceTax['price']);
+        $line->setTax($priceTax['tax']);
+
+        $this->getRelatedService($this->lineService)->save($line);
     }
 
     /**
@@ -257,8 +328,12 @@ class Order extends AbstractRelationalMapperService
 
         if ($result && $options->isEmailCustomerOnStatusChange()) {
             $this->populate($order, true);
-            /* @var $shopOptions \Shop\Options\ShopOptions */
-            $shopOptions = $this->getService('Shop\Options\Shop');
+
+            if (!$order->getCustomer()->getEmail()) {
+                return $result;
+            }
+
+            $shopOptions = $this->getShopOptions();
 
             $subject = 'Order Status From %s Order No. %s';
 
@@ -407,8 +482,7 @@ class Order extends AbstractRelationalMapperService
         $email = $order->getCustomer()->getEmail();
         /* @var $options \Shop\Options\OrderOptions */
         $options = $this->getService('Shop\Options\Order');
-        /* @var $shopOptions \Shop\Options\ShopOptions */
-        $shopOptions = $this->getService('Shop\Options\Shop');
+        $shopOptions = $this->getShopOptions();
 
         $emailView = new ViewModel([
             'order' => $order,
@@ -417,18 +491,20 @@ class Order extends AbstractRelationalMapperService
         $emailView->setTemplate('shop/order/table-view');
 
         $subject = 'Order Confirmation From %s Order No. %s';
-        
-        $this->getEventManager()->trigger('mail.send', $this, [
-            'recipient'        => [
-                'name'      => $order->getCustomer()->getFullName(),
-                'address'   => $email,
-            ],
-            'layout'           => 'shop/email/order',
-            'layout_params'    => ['order' => $order],
-            'body'             => $emailView,
-            'subject'          => sprintf($subject, $shopOptions->getMerchantName(), $order->getOrderNumber()),
-            'transport'        => $options->getOrderEmail(),
-        ]);
+
+        if ($email) {
+            $this->getEventManager()->trigger('mail.send', $this, [
+                'recipient' => [
+                    'name' => $order->getCustomer()->getFullName(),
+                    'address' => $email,
+                ],
+                'layout' => 'shop/email/order',
+                'layout_params' => ['order' => $order],
+                'body' => $emailView,
+                'subject' => sprintf($subject, $shopOptions->getMerchantName(), $order->getOrderNumber()),
+                'transport' => $options->getOrderEmail(),
+            ]);
+        }
         
         if ($options->getSendOrderToAdmin()) {
             $this->getEventManager()->trigger('mail.send', $this, [

@@ -206,16 +206,18 @@ return [
                                 'resource' => 'menu:admin',
                                 'pages' => [
                                     'edit' => [
-                                        'label' => 'List All Zones',
-                                        'action' => 'index',
-                                        'route' => 'admin/shop/post/zone',
-                                        'resource' => 'menu:admin'
+                                        'label' => 'Edit Zone',
+                                        'action' => 'edit',
+                                        'route' => 'admin/shop/post/zone/edit',
+                                        'resource' => 'menu:admin',
+                                        'visible' => false,
                                     ],
                                     'add' => [
                                         'label' => 'Add New Zone',
                                         'action' => 'add',
                                         'route' => 'admin/shop/post/zone/edit',
-                                        'resource' => 'menu:admin'
+                                        'resource' => 'menu:admin',
+                                        'visible' => false,
                                     ]
                                 ]
                             ],
@@ -226,16 +228,18 @@ return [
                                 'resource' => 'menu:admin',
                                 'pages' => [
                                     'edit' => [
-                                        'label' => 'List All Countries',
-                                        'action' => 'index',
-                                        'route' => 'admin/shop/country',
-                                        'resource' => 'menu:admin'
+                                        'label' => 'Edit Country',
+                                        'action' => 'edit',
+                                        'route' => 'admin/shop/country/edit',
+                                        'resource' => 'menu:admin',
+                                        'visible' => false,
                                     ],
                                     'add' => [
                                         'label' => 'Add New Country',
                                         'action' => 'add',
                                         'route' => 'admin/shop/country/edit',
-                                        'resource' => 'menu:admin'
+                                        'resource' => 'menu:admin',
+                                        'visible' => false,
                                     ]
                                 ]
                             ],
@@ -246,16 +250,18 @@ return [
                                 'resource' => 'menu:admin',
                                 'pages' => [
                                     'edit' => [
-                                        'label' => 'List All Postage Levels',
-                                        'action' => 'index',
-                                        'route' => 'admin/shop/post/level',
-                                        'resource' => 'menu:admin'
+                                        'label' => 'Edit Postage Level',
+                                        'action' => 'edit',
+                                        'route' => 'admin/shop/post/level/edit',
+                                        'resource' => 'menu:admin',
+                                        'visible' => false,
                                     ],
                                     'add' => [
                                         'label' => 'Add New Postage Level',
                                         'action' => 'add',
                                         'route' => 'admin/shop/post/level/edit',
-                                        'resource' => 'menu:admin'
+                                        'resource' => 'menu:admin',
+                                        'visible' => false,
                                     ]
                                 ]
                             ],
@@ -266,18 +272,20 @@ return [
                                 'resource' => 'menu:admin',
                                 'pages' => [
                                     'edit' => [
-                                        'label' => 'List All Postage Costs',
-                                        'action' => 'index',
-                                        'route' => 'admin/shop/post/cost',
-                                        'resource' => 'menu:admin'
+                                        'label' => 'Edit Postage Cost',
+                                        'action' => 'edit',
+                                        'route' => 'admin/shop/post/cost/edit',
+                                        'resource' => 'menu:admin',
+                                        'visible' => false,
                                     ],
                                     'add' => [
                                         'label' => 'Add New Postage Cost',
                                         'action' => 'add',
                                         'route' => 'admin/shop/post/cost/edit',
-                                        'resource' => 'menu:admin'
-                                    ]
-                                ]
+                                        'resource' => 'menu:admin',
+                                        'visible' => false,
+                                    ],
+                                ],
                             ],
                             'units' => [
                                 'label' => 'Postage Units',
@@ -286,20 +294,22 @@ return [
                                 'resource' => 'menu:admin',
                                 'pages' => [
                                     'edit' => [
-                                        'label' => 'List All Postage Units',
-                                        'action' => 'index',
-                                        'route' => 'admin/shop/post/unit',
-                                        'resource' => 'menu:admin'
+                                        'label' => 'Edit Postage Unit',
+                                        'action' => 'edit',
+                                        'route' => 'admin/shop/post/unit/edit',
+                                        'resource' => 'menu:admin',
+                                        'visible' => false,
                                     ],
                                     'add' => [
                                         'label' => 'Add New Postage Unit',
                                         'action' => 'add',
                                         'route' => 'admin/shop/post/unit/edit',
-                                        'resource' => 'menu:admin'
-                                    ]
-                                ]
-                            ]
-                        ]
+                                        'resource' => 'menu:admin',
+                                        'visible' => false,
+                                    ],
+                                ],
+                            ],
+                        ],
                     ],
                     'tax' => [
                         'label' => 'Tax',
@@ -314,16 +324,18 @@ return [
                                 'resource' => 'menu:admin',
                                 'pages' => [
                                     'edit' => [
-                                        'label' => 'List All Tax Rates',
-                                        'action' => 'index',
-                                        'route' => 'admin/shop/tax/rate',
-                                        'resource' => 'menu:admin'
+                                        'label' => 'Edit Tax Rate',
+                                        'action' => 'edit',
+                                        'route' => 'admin/shop/tax/rate/edit',
+                                        'resource' => 'menu:admin',
+                                        'visible' => false,
                                     ],
                                     'add' => [
                                         'label' => 'Add New Tax Rate',
                                         'action' => 'add',
                                         'route' => 'admin/shop/tax/rate/edit',
-                                        'resource' => 'menu:admin'
+                                        'resource' => 'menu:admin',
+                                        'visible' => false,
                                     ]
                                 ]
                             ],
@@ -334,16 +346,18 @@ return [
                                 'resource' => 'menu:admin',
                                 'pages' => [
                                     'edit' => [
-                                        'label' => 'List All Tax Codes',
-                                        'action' => 'index',
-                                        'route' => 'admin/shop/tax/code',
-                                        'resource' => 'menu:admin'
+                                        'label' => 'Edit Tax Code',
+                                        'action' => 'edit',
+                                        'route' => 'admin/shop/tax/code/edit',
+                                        'resource' => 'menu:admin',
+                                        'visible' => false,
                                     ],
                                     'add' => [
                                         'label' => 'Add New Tax Code',
                                         'action' => 'add',
                                         'route' => 'admin/shop/tax/code/edit',
-                                        'resource' => 'menu:admin'
+                                        'resource' => 'menu:admin',
+                                        'visible' => false,
                                     ],
                                 ],
                             ],
@@ -356,18 +370,20 @@ return [
                         'resource' => 'menu:admin',
                         'pages' => [
                             'list' => [
-                                'label' => 'List All Adverts',
-                                'action' => 'index',
-                                'route' => 'admin/shop/advert',
-                                'resource' => 'menu:admin'
+                                'label' => 'Edit Advert',
+                                'action' => 'edit',
+                                'route' => 'admin/shop/advert/edit',
+                                'resource' => 'menu:admin',
+                                'visible' => false,
                             ],
                             'add' => [
                                 'label' => 'Add New Advert',
                                 'action' => 'add',
                                 'route' => 'admin/shop/advert/edit',
-                                'resource' => 'menu:admin'
-                            ]
-                        ]
+                                'resource' => 'menu:admin',
+                                'visible' => false,
+                            ],
+                        ],
                     ],
                     'faq' => [
                         'label' => 'F.A.Q',
@@ -376,18 +392,20 @@ return [
                         'resource' => 'menu:admin',
                         'pages' => [
                             'list' => [
-                                'label' => 'List All FAQs',
-                                'action' => 'index',
-                                'route' => 'admin/shop/faq',
-                                'resource' => 'menu:admin'
+                                'label' => 'Edit FAQ',
+                                'action' => 'edit',
+                                'route' => 'admin/shop/faq/edit',
+                                'resource' => 'menu:admin',
+                                'visible' => false,
                             ],
                             'add' => [
                                 'label' => 'Add New FAQ',
                                 'action' => 'add',
                                 'route' => 'admin/shop/faq/edit',
-                                'resource' => 'menu:admin'
-                            ]
-                        ]
+                                'resource' => 'menu:admin',
+                                'visible' => false,
+                            ],
+                        ],
                     ],
                     'shop-settings' => [
                         'label' => 'Settings',
@@ -397,7 +415,7 @@ return [
                     ],
                 ],
                 'route' => 'admin/shop',
-                'resource' => 'menu:admin'
+                'resource' => 'menu:admin',
             ],
         ],
     ],

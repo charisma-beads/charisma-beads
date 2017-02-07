@@ -10,6 +10,10 @@
 
 namespace Shop\Service\Order;
 
+use Shop\Model\Cart\Cart;
+use Shop\Model\Order\Line as LineModel;
+use Shop\Model\Order\LineInterface;
+use Shop\Service\Cart\Cart as CartService;
 use UthandoCommon\Service\AbstractMapperService;
 
 /**
@@ -35,7 +39,7 @@ class Line extends AbstractMapperService
     public function getOrderLinesByOrderId($orderId)
     {
         $orderId = (int) $orderId;
-        /* @var $mapper \Shop\Mapper\Order\Line */
+        /* @var $mapper LineModel */
         $mapper = $this->getMapper();
         $orderLines = $mapper->getOrderLinesByOrderId($orderId);
         
@@ -43,28 +47,37 @@ class Line extends AbstractMapperService
     }
 
     /**
-     * @param \Shop\Model\Cart\Cart $lines
+     * @param LineInterface $lineModel
+     * @param $orderId
+     * @return int
+     */
+    public function addLine(LineInterface $lineModel, $orderId)
+    {
+        /* @var $cart CartService */
+        $cart = $this->getService('ShopCart');
+        $priceTax = $cart->calculateTax($lineModel);
+
+        $lineData = [
+            'orderId'   => $orderId,
+            'quantity'  => $lineModel->getQuantity(),
+            'price'     => $priceTax['price'],
+            'tax'       => $priceTax['tax'],
+            'metadata'  => $lineModel->getMetadata(),
+        ];
+
+        $lineModel = $this->getMapper()->getModel($lineData);
+
+        return $this->save($lineModel);
+    }
+
+    /**
+     * @param Cart|LineModel $lines
      * @param $orderId
      */
-    public function processOrderLines($lines, $orderId)
+    public function processLines($lines, $orderId)
     {
-        $c = 1;
-
         foreach($lines as $item) {
-            $lineData = [
-                'orderId'   => $orderId,
-                'sortOrder' => $c,
-                'qty'       => $item->getQuantity(),
-                'price'     => $item->getPrice(),
-                'tax'       => $item->getTax(),
-                'metadata'  => $item->getMetadata(),
-            ];
-
-            $orderLine = $this->getMapper()
-                ->getModel($lineData);
-
-            $this->save($orderLine);
-            $c++;
+            $this->addLine($item, $orderId);
         }
     }
 }

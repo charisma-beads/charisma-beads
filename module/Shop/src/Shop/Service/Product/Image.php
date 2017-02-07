@@ -86,14 +86,14 @@ class Image extends AbstractRelationalMapperService
             $images = $mapper->getImagesByProductId($id);
             
             $ProductImages = [];
-            
+
             foreach ($images as $image) {
                 $ProductImages[] = $image;
             }
             
             $this->setCacheItem($id.'-productImages', $ProductImages);
         }
-        
+
         return $ProductImages;
     }
     

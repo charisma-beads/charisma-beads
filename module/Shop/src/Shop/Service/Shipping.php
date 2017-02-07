@@ -10,6 +10,8 @@
 
 namespace Shop\Service;
 
+use Shop\Model\Order\AbstractOrderCollection;
+use Shop\Model\Order\LineInterface;
 use Shop\Service\Cart\Cart;
 use Shop\Service\Country\Country;
 use Shop\Service\Tax\Tax;
@@ -62,30 +64,30 @@ class Shipping
     protected $shippingByWeight = false;
 
     /**
-     * @param Cart $cart
+     * @param AbstractOrderCollection $orderModel
      * @return number
      */
-    public function calculateShipping(Cart $cart)
+    public function calculateShipping(AbstractOrderCollection $orderModel)
     {
         $this->noShipping = 0;
         $this->postWeight = 0;
         $this->shippingTax = 0;
         
-        /* @var $item \Shop\Model\Cart\Item */
-        foreach ($cart->getCart() as $item) {
+        /* @var $item LineInterface */
+        foreach ($orderModel as $item) {
             if ($item->getMetadata()->getAddPostage() === true) {
             	$this->postWeight += $item->getMetadata()->getPostUnit() * $item->getQuantity();
             } else {
-            	$this->noShipping += $cart->getLineCost($item);
+            	$this->noShipping += $item->getPrice();
             }
         }
-        
+
         if ($this->getShippingByWeight() === true) {
             $itemLevel = $this->getPostWeight();
         } else {
-            $itemLevel = $cart->getSubTotal() - $this->getNoShipping();
+            $itemLevel = $orderModel->getSubTotal() - $this->getNoShipping();
         }
-        
+
         if ($itemLevel == $this->getNoShipping()) {
             return 0;
         }
@@ -95,7 +97,7 @@ class Shipping
 
         $taxInc = 0;
         $taxRate = 0;
-        
+
         foreach ($shippingLevels as $row) {
         	if ($itemLevel > $row->postLevel) {
         	   $this->shippingTotal = $row->cost;
@@ -114,7 +116,7 @@ class Shipping
         $price = $taxService->getPrice();
         $tax = $taxService->getTax();
         
-        return ($taxInc) ? $price + $tax : $price;
+        return $price;
     }
 
     /**
