@@ -75,6 +75,8 @@ class Order extends Form
             ],
         ]);
 
+        $this->get('payment_option')->setValue('pay_phone');
+
         $this->add([
             'name'			=> 'collect_instore',
             'type'			=> 'checkbox',
@@ -180,8 +182,11 @@ class Order extends Form
 
         $this->get('requirements')->setValue($order->getMetadata()->getRequirements());
 
-        $this->get('payment_option')->setValue(strtolower(
-            str_replace(' ', '_', 'pay ' . $order->getMetadata()->getPaymentMethod())
-        ));
+        if ($order->getMetadata()->getPaymentMethod() != 'Pending') {
+            $this->get('payment_option')->setValue(strtolower(
+                str_replace(' ', '_', 'pay ' . $order->getMetadata()->getPaymentMethod())
+            ));
+        }
+
     }
 }
