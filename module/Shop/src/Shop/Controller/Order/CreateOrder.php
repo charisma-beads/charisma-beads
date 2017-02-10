@@ -139,7 +139,11 @@ class CreateOrder extends AbstractActionController
                 $this->flashMessenger()->addSuccessMessage('row ' . $order->getId() . ' has been saved to database table orders');
 
                 if ($post['email_order']) {
-                    $this->getService()->sendEmail($order->getOrderId());
+                    $email = $this->getService()->sendEmail($order->getOrderId());
+
+                    if ($email instanceof \Exception) {
+                        $this->flashMessenger()->addErrorMessage($email->getMessage());
+                    }
                 }
             } else {
                 $this->flashMessenger()->addInfoMessage('No changes were saved to row ' . $order->getId() . '.');
