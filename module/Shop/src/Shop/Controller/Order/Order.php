@@ -204,7 +204,9 @@ class Order extends AbstractCrudController
         } else {
             $order = $service->getCustomerOrderByUserId($id, $userId);
         }
-	    
+
+        $order->rewind();
+
 	    return $order;
 	}
 }
