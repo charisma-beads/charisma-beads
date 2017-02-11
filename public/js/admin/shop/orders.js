@@ -72,6 +72,8 @@ var Orders = {
             var el = $(this);
             el.find('.modal-body').load(admin.basePath + '/admin/shop/product/search',null, function (){
 
+                $('#add-product-button').prop('disabled', true);
+
                 var pdata = new Bloodhound({
                     datumTokenizer: function (d) {
                         return Bloodhound.tokenizers.whitespace(d.name);
@@ -114,29 +116,28 @@ var Orders = {
 
                 productSearch.bind('typeahead:select', function(ev, suggestion) {
                     Orders.productId = suggestion.productId;
+                    $('#add-product-button').prop('disabled', false);
+                    $('#add-product-button').on('click', function (e) {
+                        e.preventDefault();
+                        el.find('.modal-content').loadingOverlay({
+                            loadingText: 'Please wait while I load your product'
+                        });
+
+                        $.ajax({
+                            url : admin.basePath + '/admin/shop/product/get/id/' + Orders.productId,
+                            type : 'GET'
+                        }).done(function(data){
+                            Orders.productDialog(data, Orders.productId);
+                            el.find('.modal-content').loadingOverlay('remove');
+                            dialog.modal('hide');
+                        });
+                    });
                 });
 
                 setTimeout(function(){
                     productSearch.focus();
                 },500);
 
-
-
-                $('#add-product-button').on('click', function (e) {
-                    e.preventDefault();
-                    el.find('.modal-content').loadingOverlay({
-                        loadingText: 'Please wait while I load your product'
-                    });
-
-                    $.ajax({
-                        url : admin.basePath + '/admin/shop/product/get/id/' + Orders.productId,
-                        type : 'GET'
-                    }).done(function(data){
-                        Orders.productDialog(data, Orders.productId);
-                        el.find('.modal-content').loadingOverlay('remove');
-                        dialog.modal('hide');
-                    });
-                });
             });
         });
 
