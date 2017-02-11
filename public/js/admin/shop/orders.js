@@ -84,6 +84,9 @@ var Orders = {
                         wildcard: '%QUERY',
                         filter: function (data) {
                             return $.map(data.results, function (item) {
+                                if (item.quantity != '0') {
+                                    //return item;
+                                }
                                 return item;
                             });
                         }
@@ -103,7 +106,17 @@ var Orders = {
                             return '<strong>Searching ...</strong>';
                         },
                         suggestion: function (data) {
-                            return '<p><strong>' + data.sku +  '</strong> - ' + data.shortDescription + '</p>';
+                            var outOfStock = false;
+                            console.log(data);
+                            if (data.quantity == '0') {
+                                var outOfStock = true;
+                            }
+                            var htmlString = '<p><strong>' + data.sku +  '</strong> - ' + data.shortDescription;
+                            if (outOfStock == true) {
+                                htmlString += ' <strong>(Out of Stock)</strong>';
+                            }
+                            htmlString += '</p>';
+                            return htmlString;
                         },
                         empty: function(data) {
                             return '<strong>Unable to find product using search query "' + data.query + '"</strong>';
