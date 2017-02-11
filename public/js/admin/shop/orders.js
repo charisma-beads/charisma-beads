@@ -84,9 +84,6 @@ var Orders = {
                         wildcard: '%QUERY',
                         filter: function (data) {
                             return $.map(data.results, function (item) {
-                                if (item.quantity != '0') {
-                                    //return item;
-                                }
                                 return item;
                             });
                         }
