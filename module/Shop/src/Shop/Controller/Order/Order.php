@@ -98,6 +98,7 @@ class Order extends AbstractCrudController
         if ($request->isXmlHttpRequest() && $request->isPost()) {
             /* @var $service OrderService */
             $service = $this->getService();
+
             $result = $service->updateOrderStatus(
                 $this->params()->fromPost('orderNumber', null),
                 $this->params()->fromPost('orderStatusId', null)

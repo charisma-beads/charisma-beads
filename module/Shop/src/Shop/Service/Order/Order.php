@@ -16,6 +16,7 @@ use Shop\Model\Order\MetaData;
 use Shop\Model\Order\Order as OrderModel;
 use Shop\Service\Cart\Cart;
 use Zend\Json\Json;
+use Zend\Mail\Protocol\Exception\RuntimeException;
 use Zend\Math\BigInteger\BigInteger;
 use Zend\View\Model\ViewModel;
 
@@ -343,17 +344,21 @@ class Order extends AbstractOrder
 
             $emailView->setTemplate('shop/email/status-change');
 
-            $this->getEventManager()->trigger('mail.send', $this, [
-                'recipient'        => [
-                    'name'      => $order->getCustomer()->getFullName(),
-                    'address'   => $order->getCustomer()->getEmail(),
-                ],
-                'layout'           => 'shop/email/order',
-                'layout_params'    => ['order' => $order],
-                'body'             => $emailView,
-                'subject'          => sprintf($subject, $shopOptions->getMerchantName(), $order->getOrderNumber()),
-                'transport'        => $options->getOrderEmail(),
-            ]);
+            try {
+                $this->getEventManager()->trigger('mail.send', $this, [
+                    'recipient'        => [
+                        'name'      => $order->getCustomer()->getFullName(),
+                        'address'   => $order->getCustomer()->getEmail(),
+                    ],
+                    'layout'           => 'shop/email/order',
+                    'layout_params'    => ['order' => $order],
+                    'body'             => $emailView,
+                    'subject'          => sprintf($subject, $shopOptions->getMerchantName(), $order->getOrderNumber()),
+                    'transport'        => $options->getOrderEmail(),
+                ]);
+            } catch (RuntimeException $e) {
+                return $result;
+            }
         }
 
         return $result;
@@ -468,16 +473,18 @@ class Order extends AbstractOrder
 
         return Json::encode($totalsArray);
     }
-    
+
     /**
      * send order via email
-     * 
-     * @param int $orderId
+     *
+     * @param $orderId
+     * @return \Exception|null|RuntimeException
      */
     public function sendEmail($orderId)
     {
         $order = $this->getById($orderId);
         $order = $this->populate($order, true);
+        $emailResult = null;
         
         $email = $order->getCustomer()->getEmail();
         /* @var $options \Shop\Options\OrderOptions */
@@ -493,17 +500,21 @@ class Order extends AbstractOrder
         $subject = 'Order Confirmation From %s Order No. %s';
 
         if ($email) {
-            $this->getEventManager()->trigger('mail.send', $this, [
-                'recipient' => [
-                    'name' => $order->getCustomer()->getFullName(),
-                    'address' => $email,
-                ],
-                'layout' => 'shop/email/order',
-                'layout_params' => ['order' => $order],
-                'body' => $emailView,
-                'subject' => sprintf($subject, $shopOptions->getMerchantName(), $order->getOrderNumber()),
-                'transport' => $options->getOrderEmail(),
-            ]);
+            try {
+                $this->getEventManager()->trigger('mail.send', $this, [
+                    'recipient' => [
+                        'name' => $order->getCustomer()->getFullName(),
+                        'address' => $email,
+                    ],
+                    'layout' => 'shop/email/order',
+                    'layout_params' => ['order' => $order],
+                    'body' => $emailView,
+                    'subject' => sprintf($subject, $shopOptions->getMerchantName(), $order->getOrderNumber()),
+                    'transport' => $options->getOrderEmail(),
+                ]);
+            } catch (RuntimeException $e) {
+                $emailResult = $e;
+            }
         }
         
         if ($options->getSendOrderToAdmin()) {
@@ -519,6 +530,8 @@ class Order extends AbstractOrder
                 'transport'        => $options->getOrderEmail(),
             ]);
         }
+
+        return $emailResult;
     }
 
     /**

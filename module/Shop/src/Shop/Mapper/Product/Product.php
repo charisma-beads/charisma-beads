@@ -164,6 +164,9 @@ class Product extends AbstractDbMapper
                 Select::JOIN_LEFT
             );
 
+        $disabled = 0;
+        $discontinued = 0;
+
         foreach ($search as $key => $value) {
 
             switch ($value['columns'][0]) {
@@ -174,15 +177,27 @@ class Product extends AbstractDbMapper
                     unset($search[$key]);
                     break;
                 case 'discontinued':
-                    $select->where->equalTo('product.discontinued', (int)$value['searchString']);;
+                    $discontinued = (int) $value['searchString'];
                     unset($search[$key]);
                     break;
                 case 'disabled':
-                    $enabled = ($value['searchString']) ? 0 : 1;
-                    $select->where->equalTo('product.enabled', $enabled);
+                    $disabled = (int) $value['searchString'];
                     unset($search[$key]);
                     break;
             }
+        }
+
+        if ($discontinued == 1 && $disabled == 1) {
+            $select->where->equalTo('product.enabled', 0);
+            $select->where->or->equalTo('product.discontinued', 1);
+        } elseif ($discontinued == 1 && $disabled == 0) {
+            $select->where->equalTo('product.discontinued', 1);
+        } elseif ($discontinued == 0 && $disabled == 1) {
+            $select->where->equalTo('product.enabled', 0);
+            $select->where->equalTo('product.discontinued', 0);
+        } else {
+            $select->where->equalTo('product.enabled', 1);
+            $select->where->equalTo('product.discontinued', 0);
         }
 
         return parent::search($search, $sort, $select);
