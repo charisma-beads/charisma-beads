@@ -131,9 +131,10 @@ class CustomerAddress extends AbstractViewHelper
         $html .= $address->getPostcode() . '<br>';
         $html .= $address->getCountry()->getCountry() .'<br><br>';
         $html .= $address->getPhone() . '<br>';
-        
+
         if ($this->includeEmail) {
-            $html .= ($this->order instanceof Order) ? $this->order->getMetadata()->getEmail() : $identity->getEmail();
+            $html .= ($this->order instanceof Order) ?
+                $this->order->getMetadata()->getEmail() : $identity->getEmail();
         }
         
         return $html;

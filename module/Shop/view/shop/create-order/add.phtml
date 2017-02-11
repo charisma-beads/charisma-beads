@@ -48,9 +48,10 @@
                         <div class="panel-body">
                             <address>
                                 <?=$this->customerAddress()
-                                    ->setCustomer($this->model)
+                                    //->setCustomer($this->model)
                                     ->includeName()
                                     ->includeEmail()
+                                    ->setOrder($this->order)
                                     ->formatAddress($this->model->getBillingAddress());?>
                             </address>
                         </div>
@@ -68,7 +69,7 @@
                         <div class="panel-body">
                             <address>
                                 <?=$this->customerAddress()
-                                    ->setCustomer($this->model)
+                                    //->setCustomer($this->model)
                                     ->includeName()
                                     ->formatAddress($this->model->getDeliveryAddress());?>
                                 <br>
