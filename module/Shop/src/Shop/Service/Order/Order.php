@@ -518,17 +518,23 @@ class Order extends AbstractOrder
         }
         
         if ($options->getSendOrderToAdmin()) {
-            $this->getEventManager()->trigger('mail.send', $this, [
-                'sender'        => [
-                    'name'      => $order->getCustomer()->getFullName(),
-                    'address'   => $email,
-                ],
+            $sender = [];
+
+            if ($email) {
+                $sender = [
+                    'sender'        => [
+                        'name'      => $order->getCustomer()->getFullName(),
+                        'address'   => $email,
+                    ],
+                ];
+            }
+            $this->getEventManager()->trigger('mail.send', $this, array_merge([
                 'layout'           => 'shop/email/order',
                 'layout_params'    => ['order' => $order],
                 'body'             => $emailView,
                 'subject'          => sprintf($subject, $order->getCustomer()->getFullName(), $order->getOrderNumber()),
                 'transport'        => $options->getOrderEmail(),
-            ]);
+            ], $sender));
         }
 
         return $emailResult;
