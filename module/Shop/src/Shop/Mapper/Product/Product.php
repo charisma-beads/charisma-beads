@@ -188,8 +188,10 @@ class Product extends AbstractDbMapper
         }
 
         if ($discontinued == 1 && $disabled == 1) {
-            $select->where->equalTo('product.enabled', 0);
-            $select->where->or->equalTo('product.discontinued', 1);
+            $where = $select->where->nest();
+            $where->equalTo('product.enabled', 0);
+            $where->or->equalTo('product.discontinued', 1);
+            $where->unnest();
         } elseif ($discontinued == 1 && $disabled == 0) {
             $select->where->equalTo('product.discontinued', 1);
         } elseif ($discontinued == 0 && $disabled == 1) {
@@ -199,6 +201,8 @@ class Product extends AbstractDbMapper
             $select->where->equalTo('product.enabled', 1);
             $select->where->equalTo('product.discontinued', 0);
         }
+
+        //\FB::info($this->getSqlString($select));
 
         return parent::search($search, $sort, $select);
     }
