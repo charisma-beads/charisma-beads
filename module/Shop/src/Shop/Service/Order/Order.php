@@ -10,6 +10,7 @@
 
 namespace Shop\Service\Order;
 
+use Dompdf\Exception;
 use Shop\Model\Customer\Customer as CustomerModel;
 use Shop\Model\Order\LineInterface;
 use Shop\Model\Order\MetaData;
@@ -102,7 +103,7 @@ class Order extends AbstractOrder
      */
     public function getOrder($id)
     {
-        $order = parent::getById($id);
+        $order = $this->getById($id);
 
         $this->setOrderModel($order);
 
@@ -133,31 +134,42 @@ class Order extends AbstractOrder
      */
     public function processOrderFromCart($orderId)
     {
-        $order = $this->getById($orderId);
+        $this->getOrder($orderId);
+
         /* @var $cart Cart */
         $cart = $this->getService('ShopCart');
-        $countryId = $order->getCustomer()->getDeliveryAddress()->getCountryId();
 
-        if ('Collect At Store' == $order->getMetadata()->getShippingMethod()) {
-            $countryId = null;
+        if ('Collect At Store' == $this->getOrderModel()->getMetadata()->getShippingMethod()) {
+            $cart->setShippingCost(null, true);
+        } else {
+            $cart->setShippingCost(
+                $this->getOrderModel()
+                    ->getCustomer()
+                    ->getDeliveryAddress()
+                    ->getCountryId()
+            );
         }
 
-        $cart->setShippingCost($countryId);
-        
+
+
         $shipping   = $cart->getShippingCost();
         $taxTotal   = $cart->getTaxTotal();
         $cartTotal  = $cart->getTotal();
 
-        $order->setTotal($cartTotal)
+        $this->getOrderModel()->setTotal($cartTotal)
             ->setTaxTotal($taxTotal)
             ->setShipping($shipping)
             ->setShippingTax($cart->getShippingTax());
 
-        $result = $this->save($order);
-
         /* @var $orderLineService \Shop\Service\Order\Line */
         $orderLineService = $this->getService('ShopOrderLine');
         $orderLineService->processLines($cart->getCart(), $orderId);
+
+        $this->loadItems($this->getOrderModel());
+
+        $this->recalculateTotals();
+        
+        $result = $this->save($this->getOrderModel());
 
         $this->sendEmail($orderId);
         

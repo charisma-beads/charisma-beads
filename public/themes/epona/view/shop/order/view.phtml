@@ -129,7 +129,7 @@
             <!-- cart total -->
             <div class="total pull-right">
                 <small>
-                    Shipping: <?=$this->priceFormat($this->order->getShipping());?>
+                    Shipping: <?=$this->priceFormat($this->order->getShipping() + $this->order->getShippingTax());?>
                 </small>
 
                 <span class="totalToPay styleSecondColor">
