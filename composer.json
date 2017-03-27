@@ -35,7 +35,6 @@
     "uthando-cms/uthando-events": "1.*",
     "paypal/rest-api-sdk-php": "*",
     "phpoffice/phpexcel": "1.*",
-    "firephp/firephp-core": "0.4.*",
     "twitter/typeahead.js": "*"
   },
   "require-dev": {
@@ -83,7 +82,8 @@
     "twitter/typeahead.js": "*",
     "twbs/bootstrap": "*",
     "giggsey/libphonenumber-for-php": "7.*",
-    "codeclimate/php-test-reporter": "dev-master"
+    "codeclimate/php-test-reporter": "dev-master",
+    "ccampbell/chromephp": "4.*"
   },
   "authors": [
     {

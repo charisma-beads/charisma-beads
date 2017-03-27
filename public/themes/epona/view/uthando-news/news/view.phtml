@@ -23,8 +23,8 @@
 			<div class="col-md-9 col-sm-9">
 
 				<h2 class="article-title"><a href="<?=$this->url('news',[
-                        'news-item' => $row->getArticle()->getSlug(),
-                    ]);?>"><?=$this->escapeHtml($row->getArticle()->getTitle());?></a>
+                        'news-item' => $row->getSlug(),
+                    ]);?>"><?=$this->escapeHtml($row->getTitle());?></a>
                 </h2>
 				
                 <?php if($row->getImage()):?>
@@ -37,13 +37,13 @@
                 <?php endif; ?>
 				<!-- blog short preview -->
 				<p>
-                    <?=strip_tags(substr($row->getArticle()->getContent(),0, strpos($row->getArticle()->getContent(), "</p>")+4));?> ...
+                    <?=strip_tags(substr($row->getContent(),0, strpos($row->getContent(), "</p>")+4));?> ...
                 </p>
 
 				<!-- read more button -->
 				<div class="text-right">
 					<a href="<?=$this->url('news',[
-                        'news-item' => $row->getArticle()->getSlug(),
+                        'news-item' => $row->getSlug(),
                     ]);?>" class="read-more btn btn-xs"><i class="fa fa-sign-out"></i> READ MORE</a>
 				</div>
 
@@ -51,13 +51,13 @@
 
 			<div class="blog-prev-date text-left col-md-3 col-sm-3">
 				<span class="date">
-					<?=$this->formatDate($row->getArticle()->getDateCreated(), 'j');?> 
-					<small><?=$this->formatDate($row->getArticle()->getDateCreated(), 'M Y');?></small>
+					<?=$this->formatDate($row->getDateCreated(), 'j');?>
+					<small><?=$this->formatDate($row->getDateCreated(), 'M Y');?></small>
 				</span>
 				<span class="info hidden-xs">
-					<span class="block"><i class="fa fa-user"></i> BY <?=$row->getArticle()->getUser()->getFullName();?></span>
+					<span class="block"><i class="fa fa-user"></i> BY <?=$row->getUser()->getFullName();?></span>
 					<span class="block"><i class="fa fa-link"></i> <a href="<?=$this->url('news',[
-                        'news-item' => $row->getArticle()->getSlug(),
+                        'news-item' => $row->getSlug(),
                     ]);?>">PERMALINK</a></span>
 				</span>
 			</div>

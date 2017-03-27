@@ -42,10 +42,6 @@
             ->appendStylesheet($this->themePath('/assets/css/header-5.css'))
             ->appendStylesheet($this->themePath('/assets/css/footer-default.css'))
             ->appendStylesheet($this->themePath('/assets/css/color_scheme/yellow.css'), 'screen', false, ['id' => 'color_scheme'])
-            // Morenizr
-            ->appendStylesheet($this->themePath('/assets/plugins/modernizr.min.js'))
-            // IE 8
-            ->appendStylesheet($this->themePath('/assets/plugins/respond.js'), 'screen', 'lt IE 9')
             // SHOP
             ->appendStylesheet($this->themePath('/assets/css/layout-shop.css'))
             // UTHANDO STYLES
@@ -414,6 +410,8 @@
             ->prependFile($this->themePath('/assets/plugins/jquery.isotope.js'))
             ->prependFile($this->themePath('/assets/plugins/jquery-2.1.1.min.js'))
             ->prependFile('//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.9/cookieconsent.min.js')
+            ->prependFile($this->themePath('/assets/plugins/respond.js'), 'screen', 'lt IE 9')
+            ->prependFile($this->themePath('/assets/plugins/modernizr.min.js'))
         ;?>
     </body>
     <script type="text/javascript">
