@@ -43,7 +43,7 @@ class ProductCategoryImage extends AbstractViewHelper
     /**
      * @var string
      */
-    protected $publicDir = './public';
+    protected $publicDir = './public_html';
 
     /**
      * @param CategoryModel $model

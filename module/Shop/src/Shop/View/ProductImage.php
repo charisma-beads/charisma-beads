@@ -34,7 +34,7 @@ class ProductImage extends AbstractHelper
     /**
      * @var string
      */
-    protected $publicDir = './public';
+    protected $publicDir = './public_html';
 
     /**
      * @var string
