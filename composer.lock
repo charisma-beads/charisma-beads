@@ -938,16 +938,16 @@
         },
         {
             "name": "uthando-cms/uthando-common",
-            "version": "2.10.0",
+            "version": "2.11.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-common.git",
-                "reference": "865cadd57352c610f2aaf9972c1921e773c98c4b"
+                "reference": "a2396d3c641e4c522fb6be55ab261c52b26ecc72"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-common/zipball/865cadd57352c610f2aaf9972c1921e773c98c4b",
-                "reference": "865cadd57352c610f2aaf9972c1921e773c98c4b",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-common/zipball/a2396d3c641e4c522fb6be55ab261c52b26ecc72",
+                "reference": "a2396d3c641e4c522fb6be55ab261c52b26ecc72",
                 "shasum": ""
             },
             "require": {
@@ -998,7 +998,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2017-03-26T22:12:42+00:00"
+            "time": "2017-03-29T17:12:30+00:00"
         },
         {
             "name": "uthando-cms/uthando-contact",
@@ -1340,20 +1340,20 @@
         },
         {
             "name": "uthando-cms/uthando-news",
-            "version": "2.2.4",
+            "version": "2.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-news.git",
-                "reference": "905a9aef8e2aa1c1291a6186dddc972ccea3a475"
+                "reference": "65daa50e447cae0d1b3c118cf23f9ede8f29311d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-news/zipball/905a9aef8e2aa1c1291a6186dddc972ccea3a475",
-                "reference": "905a9aef8e2aa1c1291a6186dddc972ccea3a475",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-news/zipball/65daa50e447cae0d1b3c118cf23f9ede8f29311d",
+                "reference": "65daa50e447cae0d1b3c118cf23f9ede8f29311d",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.5",
+                "php": ">=7.0",
                 "uthando-cms/uthando-article": "2.*",
                 "uthando-cms/uthando-common": "2.*",
                 "zendframework/zend-inputfilter": "2.*"
@@ -1388,7 +1388,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2017-03-24T19:50:51+00:00"
+            "time": "2017-03-29T17:11:48+00:00"
         },
         {
             "name": "uthando-cms/uthando-newsletter",
@@ -4252,12 +4252,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/codeclimate/php-test-reporter.git",
-                "reference": "e86f3e6105796dfc7a43b1eb7da5d1039388052c"
+                "reference": "8d60fccff8475b1f95e80c6d49166ac038366675"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/codeclimate/php-test-reporter/zipball/e86f3e6105796dfc7a43b1eb7da5d1039388052c",
-                "reference": "e86f3e6105796dfc7a43b1eb7da5d1039388052c",
+                "url": "https://api.github.com/repos/codeclimate/php-test-reporter/zipball/8d60fccff8475b1f95e80c6d49166ac038366675",
+                "reference": "8d60fccff8475b1f95e80c6d49166ac038366675",
                 "shasum": ""
             },
             "require": {
@@ -4303,7 +4303,7 @@
                 "codeclimate",
                 "coverage"
             ],
-            "time": "2017-02-16T22:00:42+00:00"
+            "time": "2017-03-28T15:33:00+00:00"
         },
         {
             "name": "doctrine/instantiator",

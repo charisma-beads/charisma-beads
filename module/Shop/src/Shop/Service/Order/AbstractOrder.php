@@ -123,6 +123,7 @@ abstract class AbstractOrder extends AbstractRelationalMapperService
         }
 
         $argv = compact('product', 'qty', 'line');
+        $argv = $this->prepareEventArguments($argv);
         $this->getEventManager()->trigger('stock.check', $this, $argv);
 
         $qty = $argv['qty'];
