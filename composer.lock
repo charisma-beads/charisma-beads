@@ -4,8 +4,51 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "0d314113f8dc2006241330706cadee33",
+    "content-hash": "d00a1993df6d140fb198763bf44755c3",
     "packages": [
+        {
+            "name": "ccampbell/chromephp",
+            "version": "4.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ccampbell/chromephp.git",
+                "reference": "c3c297615d48ae5b2a86a82311152d1ed095fcef"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ccampbell/chromephp/zipball/c3c297615d48ae5b2a86a82311152d1ed095fcef",
+                "reference": "c3c297615d48ae5b2a86a82311152d1ed095fcef",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "ChromePhp": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Craig Campbell",
+                    "email": "iamcraigcampbell@gmail.com",
+                    "homepage": "http://craig.is",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Log variables to the Chrome console (via Chrome Logger Google Chrome extension).",
+            "homepage": "http://github.com/ccampbell/chromephp",
+            "keywords": [
+                "log",
+                "logging"
+            ],
+            "time": "2013-06-26T03:44:33+00:00"
+        },
         {
             "name": "container-interop/container-interop",
             "version": "1.2.0",
@@ -882,16 +925,16 @@
         },
         {
             "name": "uthando-cms/uthando-article",
-            "version": "2.2.2",
+            "version": "2.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-article.git",
-                "reference": "11563627d57135970344dafe0ed0810951a8d9b3"
+                "reference": "2c036fe74f54c6eee27f04e128dbd53d87840b6d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-article/zipball/11563627d57135970344dafe0ed0810951a8d9b3",
-                "reference": "11563627d57135970344dafe0ed0810951a8d9b3",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-article/zipball/2c036fe74f54c6eee27f04e128dbd53d87840b6d",
+                "reference": "2c036fe74f54c6eee27f04e128dbd53d87840b6d",
                 "shasum": ""
             },
             "require": {
@@ -934,20 +977,20 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2017-03-22T17:57:36+00:00"
+            "time": "2017-04-03T06:15:58+00:00"
         },
         {
             "name": "uthando-cms/uthando-common",
-            "version": "2.11.1",
+            "version": "2.11.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-common.git",
-                "reference": "a2396d3c641e4c522fb6be55ab261c52b26ecc72"
+                "reference": "ee54d1198492b6bdc56ca6fd7456f813caea4c02"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-common/zipball/a2396d3c641e4c522fb6be55ab261c52b26ecc72",
-                "reference": "a2396d3c641e4c522fb6be55ab261c52b26ecc72",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-common/zipball/ee54d1198492b6bdc56ca6fd7456f813caea4c02",
+                "reference": "ee54d1198492b6bdc56ca6fd7456f813caea4c02",
                 "shasum": ""
             },
             "require": {
@@ -998,7 +1041,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2017-03-29T17:12:30+00:00"
+            "time": "2017-04-02T21:36:42+00:00"
         },
         {
             "name": "uthando-cms/uthando-contact",
@@ -1059,16 +1102,16 @@
         },
         {
             "name": "uthando-cms/uthando-dompdf",
-            "version": "3.4.0",
+            "version": "3.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-dompdf.git",
-                "reference": "d804f9125502c479252c4eaf33f12e618cf96892"
+                "reference": "8ad326239d45c4d3ad86533a7c4d864febe11c26"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-dompdf/zipball/d804f9125502c479252c4eaf33f12e618cf96892",
-                "reference": "d804f9125502c479252c4eaf33f12e618cf96892",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-dompdf/zipball/8ad326239d45c4d3ad86533a7c4d864febe11c26",
+                "reference": "8ad326239d45c4d3ad86533a7c4d864febe11c26",
                 "shasum": ""
             },
             "require": {
@@ -1126,20 +1169,20 @@
                 "pdf",
                 "zf2"
             ],
-            "time": "2016-05-23T22:46:42+00:00"
+            "time": "2017-04-03T06:16:23+00:00"
         },
         {
             "name": "uthando-cms/uthando-events",
-            "version": "1.4.0",
+            "version": "1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-events.git",
-                "reference": "14285dd79ab1e8badf0e072efb7b62b3dde4744f"
+                "reference": "51e7d1fdde3ca49e9da34901ded3715908253193"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-events/zipball/14285dd79ab1e8badf0e072efb7b62b3dde4744f",
-                "reference": "14285dd79ab1e8badf0e072efb7b62b3dde4744f",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-events/zipball/51e7d1fdde3ca49e9da34901ded3715908253193",
+                "reference": "51e7d1fdde3ca49e9da34901ded3715908253193",
                 "shasum": ""
             },
             "require": {
@@ -1176,7 +1219,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2017-03-22T22:18:16+00:00"
+            "time": "2017-04-03T06:16:32+00:00"
         },
         {
             "name": "uthando-cms/uthando-file-manager",
@@ -1233,16 +1276,16 @@
         },
         {
             "name": "uthando-cms/uthando-mail",
-            "version": "2.1.4",
+            "version": "2.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-mail.git",
-                "reference": "1ed3abb99ace6a920c3bf996544e96c8f10252cc"
+                "reference": "715ec1d12da81b4523e17c98dd47e37d604ee650"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-mail/zipball/1ed3abb99ace6a920c3bf996544e96c8f10252cc",
-                "reference": "1ed3abb99ace6a920c3bf996544e96c8f10252cc",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-mail/zipball/715ec1d12da81b4523e17c98dd47e37d604ee650",
+                "reference": "715ec1d12da81b4523e17c98dd47e37d604ee650",
                 "shasum": ""
             },
             "require": {
@@ -1283,20 +1326,20 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2017-03-21T20:43:50+00:00"
+            "time": "2017-04-03T06:16:40+00:00"
         },
         {
             "name": "uthando-cms/uthando-navigation",
-            "version": "2.5.1",
+            "version": "2.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-navigation.git",
-                "reference": "cb670f5dc32c2a891b823e8f41b7364d71195daf"
+                "reference": "6f15848a3367b6f2a993cdc78cbaff5464089c15"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-navigation/zipball/cb670f5dc32c2a891b823e8f41b7364d71195daf",
-                "reference": "cb670f5dc32c2a891b823e8f41b7364d71195daf",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-navigation/zipball/6f15848a3367b6f2a993cdc78cbaff5464089c15",
+                "reference": "6f15848a3367b6f2a993cdc78cbaff5464089c15",
                 "shasum": ""
             },
             "require": {
@@ -1336,20 +1379,20 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2017-03-24T14:51:25+00:00"
+            "time": "2017-04-03T06:16:50+00:00"
         },
         {
             "name": "uthando-cms/uthando-news",
-            "version": "2.7.0",
+            "version": "2.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-news.git",
-                "reference": "ce2d70259cfeeff1acb361758da201360dc0f05b"
+                "reference": "87c4100d0d1c8e3a0dd549f8b00ffeb877819d9c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-news/zipball/ce2d70259cfeeff1acb361758da201360dc0f05b",
-                "reference": "ce2d70259cfeeff1acb361758da201360dc0f05b",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-news/zipball/87c4100d0d1c8e3a0dd549f8b00ffeb877819d9c",
+                "reference": "87c4100d0d1c8e3a0dd549f8b00ffeb877819d9c",
                 "shasum": ""
             },
             "require": {
@@ -1388,20 +1431,20 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2017-04-01T15:16:50+00:00"
+            "time": "2017-04-03T14:35:49+00:00"
         },
         {
             "name": "uthando-cms/uthando-newsletter",
-            "version": "1.2.4",
+            "version": "1.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-newsletter.git",
-                "reference": "3f8d48830660a83ef431711a67a1d6d7455774e0"
+                "reference": "4ce5b0b8be26c41008f470657eabdf5754fe7812"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-newsletter/zipball/3f8d48830660a83ef431711a67a1d6d7455774e0",
-                "reference": "3f8d48830660a83ef431711a67a1d6d7455774e0",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-newsletter/zipball/4ce5b0b8be26c41008f470657eabdf5754fe7812",
+                "reference": "4ce5b0b8be26c41008f470657eabdf5754fe7812",
                 "shasum": ""
             },
             "require": {
@@ -1441,20 +1484,20 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2017-03-21T20:52:35+00:00"
+            "time": "2017-04-03T06:16:58+00:00"
         },
         {
             "name": "uthando-cms/uthando-session-manager",
-            "version": "2.3.0",
+            "version": "2.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-session-manager.git",
-                "reference": "25da9873032e13e3d18bbc16fc625e897db93909"
+                "reference": "d5009250802e0d6159b1e8dc3842cf5a17ef1ae5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-session-manager/zipball/25da9873032e13e3d18bbc16fc625e897db93909",
-                "reference": "25da9873032e13e3d18bbc16fc625e897db93909",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-session-manager/zipball/d5009250802e0d6159b1e8dc3842cf5a17ef1ae5",
+                "reference": "d5009250802e0d6159b1e8dc3842cf5a17ef1ae5",
                 "shasum": ""
             },
             "require": {
@@ -1494,20 +1537,20 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2016-08-09T14:20:59+00:00"
+            "time": "2017-04-03T06:17:19+00:00"
         },
         {
             "name": "uthando-cms/uthando-testimonial",
-            "version": "2.1.0",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-testimonial.git",
-                "reference": "01874f16dbd666d96ef7bfdad3477a3e40117ae2"
+                "reference": "376c1d96b7cf39f9e1686b411e5e35e2cb526650"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-testimonial/zipball/01874f16dbd666d96ef7bfdad3477a3e40117ae2",
-                "reference": "01874f16dbd666d96ef7bfdad3477a3e40117ae2",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-testimonial/zipball/376c1d96b7cf39f9e1686b411e5e35e2cb526650",
+                "reference": "376c1d96b7cf39f9e1686b411e5e35e2cb526650",
                 "shasum": ""
             },
             "require": {
@@ -1548,7 +1591,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2017-03-22T21:42:05+00:00"
+            "time": "2017-04-03T06:17:25+00:00"
         },
         {
             "name": "uthando-cms/uthando-theme-manager",
@@ -1603,16 +1646,16 @@
         },
         {
             "name": "uthando-cms/uthando-twitter",
-            "version": "2.0.1",
+            "version": "2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-twitter.git",
-                "reference": "433a4e17ec9c31a1d2a6ff1ab3cdcdbfcb722b9a"
+                "reference": "20bc4b2e9ffb12d75d7c521c6ab9b709e342a9fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-twitter/zipball/433a4e17ec9c31a1d2a6ff1ab3cdcdbfcb722b9a",
-                "reference": "433a4e17ec9c31a1d2a6ff1ab3cdcdbfcb722b9a",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-twitter/zipball/20bc4b2e9ffb12d75d7c521c6ab9b709e342a9fc",
+                "reference": "20bc4b2e9ffb12d75d7c521c6ab9b709e342a9fc",
                 "shasum": ""
             },
             "require": {
@@ -1651,20 +1694,20 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2017-03-22T09:43:12+00:00"
+            "time": "2017-04-03T06:17:35+00:00"
         },
         {
             "name": "uthando-cms/uthando-user",
-            "version": "2.2.7",
+            "version": "2.2.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-user.git",
-                "reference": "f1721657d44b73ff6a5fa438f2e15df673de5154"
+                "reference": "d6ffb44823bf8d297c4874f4c94aeb530ab7bbce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-user/zipball/f1721657d44b73ff6a5fa438f2e15df673de5154",
-                "reference": "f1721657d44b73ff6a5fa438f2e15df673de5154",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-user/zipball/d6ffb44823bf8d297c4874f4c94aeb530ab7bbce",
+                "reference": "d6ffb44823bf8d297c4874f4c94aeb530ab7bbce",
                 "shasum": ""
             },
             "require": {
@@ -1706,7 +1749,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2016-04-11T07:20:13+00:00"
+            "time": "2017-04-03T06:18:36+00:00"
         },
         {
             "name": "zendframework/zend-authentication",
@@ -4204,49 +4247,6 @@
     ],
     "packages-dev": [
         {
-            "name": "ccampbell/chromephp",
-            "version": "4.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ccampbell/chromephp.git",
-                "reference": "c3c297615d48ae5b2a86a82311152d1ed095fcef"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ccampbell/chromephp/zipball/c3c297615d48ae5b2a86a82311152d1ed095fcef",
-                "reference": "c3c297615d48ae5b2a86a82311152d1ed095fcef",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.0.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "ChromePhp": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "Craig Campbell",
-                    "email": "iamcraigcampbell@gmail.com",
-                    "homepage": "http://craig.is",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Log variables to the Chrome console (via Chrome Logger Google Chrome extension).",
-            "homepage": "http://github.com/ccampbell/chromephp",
-            "keywords": [
-                "log",
-                "logging"
-            ],
-            "time": "2013-06-26T03:44:33+00:00"
-        },
-        {
             "name": "codeclimate/php-test-reporter",
             "version": "dev-master",
             "source": {
@@ -5066,16 +5066,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "5.7.17",
+            "version": "5.7.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "68752b665d3875f9a38a357e3ecb35c79f8673bf"
+                "reference": "69c4f49ff376af2692bad9cebd883d17ebaa98a1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/68752b665d3875f9a38a357e3ecb35c79f8673bf",
-                "reference": "68752b665d3875f9a38a357e3ecb35c79f8673bf",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/69c4f49ff376af2692bad9cebd883d17ebaa98a1",
+                "reference": "69c4f49ff376af2692bad9cebd883d17ebaa98a1",
                 "shasum": ""
             },
             "require": {
@@ -5144,7 +5144,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2017-03-19T16:52:12+00:00"
+            "time": "2017-04-03T02:22:27+00:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",

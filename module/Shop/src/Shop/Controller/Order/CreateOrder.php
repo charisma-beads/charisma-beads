@@ -67,7 +67,7 @@ class CreateOrder extends AbstractActionController
 
         $order  = $this->getService()->getOrder($orderId);
 
-        $this->getService()->loadItems($order);
+        //$this->getService()->loadItems($order);
 
         $form   = $this->getService()->prepareForm($order);
 
@@ -88,10 +88,10 @@ class CreateOrder extends AbstractActionController
         $service    = $this->getService('ShopCustomer');
         $customer   = $service->getCustomerDetailsByCustomerId($order->getMetadata()->getDeliveryAddress()->getCustomerId());
 
-        $this->getService()->loadItems($order);
-
         $form   = $this->getService()->prepareForm($order);
         $form->configureFormValues($order);
+
+        \ChromePhp::info($order);
 
         $viewModel = new ViewModel([
             'model' => $customer,
@@ -188,7 +188,7 @@ class CreateOrder extends AbstractActionController
         $this->getService()->loadItems($order);
         $this->getService()->addItem($product, $this->params()->fromPost());
         $this->getService()->recalculateTotals();
-        $this->getService()->loadItems($this->getService()->getOrderModel());
+        //$this->getService()->loadItems($this->getService()->getOrderModel());
 
         $viewModel = new ViewModel([
             'order' => $this->getService()->getOrderModel(),
@@ -212,7 +212,7 @@ class CreateOrder extends AbstractActionController
         $this->getService()->removeItem($lineId);
 
         $order  = $this->getService()->getOrder($orderId);
-        $order  = $this->getService()->loadItems($order);
+        //$order  = $this->getService()->loadItems($order);
         $this->getService()->recalculateTotals();
 
         $viewModel = new ViewModel([

@@ -150,8 +150,6 @@ class Order extends AbstractOrder
             );
         }
 
-
-
         $shipping   = $cart->getShippingCost();
         $taxTotal   = $cart->getTaxTotal();
         $cartTotal  = $cart->getTotal();

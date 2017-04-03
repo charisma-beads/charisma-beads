@@ -35,7 +35,8 @@
     "uthando-cms/uthando-events": "1.*",
     "paypal/rest-api-sdk-php": "*",
     "phpoffice/phpexcel": "1.*",
-    "twitter/typeahead.js": "*"
+    "twitter/typeahead.js": "*",
+    "ccampbell/chromephp": "4.*"
   },
   "require-dev": {
     "zendframework/zend-authentication": "2.*",
