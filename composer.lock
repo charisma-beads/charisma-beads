@@ -981,16 +981,16 @@
         },
         {
             "name": "uthando-cms/uthando-common",
-            "version": "2.11.2",
+            "version": "2.11.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-common.git",
-                "reference": "ee54d1198492b6bdc56ca6fd7456f813caea4c02"
+                "reference": "3b103299cf6e692580ea97ec6c8bb4a25df43fd4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-common/zipball/ee54d1198492b6bdc56ca6fd7456f813caea4c02",
-                "reference": "ee54d1198492b6bdc56ca6fd7456f813caea4c02",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-common/zipball/3b103299cf6e692580ea97ec6c8bb4a25df43fd4",
+                "reference": "3b103299cf6e692580ea97ec6c8bb4a25df43fd4",
                 "shasum": ""
             },
             "require": {
@@ -1041,7 +1041,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2017-04-02T21:36:42+00:00"
+            "time": "2017-04-04T14:50:59+00:00"
         },
         {
             "name": "uthando-cms/uthando-contact",
@@ -1383,16 +1383,16 @@
         },
         {
             "name": "uthando-cms/uthando-news",
-            "version": "2.7.1",
+            "version": "2.7.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-news.git",
-                "reference": "87c4100d0d1c8e3a0dd549f8b00ffeb877819d9c"
+                "reference": "bc93b8c647ec897db1f725a80790e3494f8d5124"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-news/zipball/87c4100d0d1c8e3a0dd549f8b00ffeb877819d9c",
-                "reference": "87c4100d0d1c8e3a0dd549f8b00ffeb877819d9c",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-news/zipball/bc93b8c647ec897db1f725a80790e3494f8d5124",
+                "reference": "bc93b8c647ec897db1f725a80790e3494f8d5124",
                 "shasum": ""
             },
             "require": {
@@ -1431,7 +1431,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2017-04-03T14:35:49+00:00"
+            "time": "2017-04-03T21:00:37+00:00"
         },
         {
             "name": "uthando-cms/uthando-newsletter",

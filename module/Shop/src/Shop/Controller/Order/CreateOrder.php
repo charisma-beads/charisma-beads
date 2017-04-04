@@ -91,8 +91,6 @@ class CreateOrder extends AbstractActionController
         $form   = $this->getService()->prepareForm($order);
         $form->configureFormValues($order);
 
-        \ChromePhp::info($order);
-
         $viewModel = new ViewModel([
             'model' => $customer,
             'order' => $order,
