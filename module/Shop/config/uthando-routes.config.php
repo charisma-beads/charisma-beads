@@ -11,7 +11,6 @@ return [
                         '__NAMESPACE__' => 'Shop\Controller',
                         'controller' => 'Shop',
                         'action' => 'shop-front',
-                        'force-ssl' => 'http'
                     ]
                 ],
                 'may_terminate' => true,
@@ -27,7 +26,6 @@ return [
                                 'controller' => 'Catalog',
                                 'action' => 'index',
                                 'categoryIdent' => '',
-                                'force-ssl' => 'http'
                             ]
                         ],
                         'may_terminate' => true,
@@ -42,7 +40,6 @@ return [
                                     'defaults' => [
                                         'action' => 'view',
                                         'productIdent' => '',
-                                        'force-ssl' => 'http'
                                     ]
                                 ]
                             ],
@@ -55,7 +52,6 @@ return [
                                     ],
                                     'defaults' => [
                                         'page' => 1,
-                                        'force-ssl' => 'http'
                                     ]
                                 ]
                             ]
@@ -68,7 +64,6 @@ return [
                             'defaults' => [
                                 'controller' => 'Catalog',
                                 'action' => 'search',
-                                'force-ssl' => 'http'
                             ]
                         ],
                         'may_terminate' => true,
@@ -82,7 +77,6 @@ return [
                                     ],
                                     'defaults' => [
                                         'page' => 1,
-                                        'force-ssl' => 'http'
                                     ]
                                 ]
                             ]
@@ -99,7 +93,6 @@ return [
                             'defaults' => [
                                 'controller' => 'Cart',
                                 'action' => 'view',
-                                'force-ssl' => 'http'
                             ]
                         ]
                     ],
@@ -153,7 +146,6 @@ return [
                             'defaults' => [
                                 'controller' => 'Country\Province',
                                 'action' => 'country-province-list',
-                                'force-ssl' => 'http',
                             ],
                         ],
                     ],
