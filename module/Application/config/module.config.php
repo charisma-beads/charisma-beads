@@ -38,7 +38,6 @@ return [
                         '__NAMESPACE__' => 'Application\Controller',
                         'controller'    => 'Index',
                         'action'        => 'index',
-                        'force-ssl'     => 'http'
                     ],
                 ],
             ],
