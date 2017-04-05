@@ -40,11 +40,11 @@
     <tr id="table-postage">
         <td colspan="2">&nbsp&nbsp;</td>
         <th colspan="2"><p class="text-right">Postage:</p></th>
-        <td><?=$this->priceFormat($order->getShipping());?></td>
+        <td><?=$this->priceFormat($order->getShipping() + $order->getShippingTax());?></td>
     </tr>
     <tr id="table-total">
         <td colspan="2">&nbsp&nbsp;</td>
         <th colspan="2"><p class="text-right">Total:</p></th>
-        <td><?=$this->priceFormat($order->getTotal());?></td>
+        <td><?=$this->priceFormat($order->getTotal() + $order->getTaxTotal());?></td>
     </tr>
 </table>
