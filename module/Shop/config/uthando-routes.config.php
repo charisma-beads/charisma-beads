@@ -11,6 +11,7 @@ return [
                         '__NAMESPACE__' => 'Shop\Controller',
                         'controller' => 'Shop',
                         'action' => 'shop-front',
+                        'force-ssl' => 'ssl'
                     ]
                 ],
                 'may_terminate' => true,

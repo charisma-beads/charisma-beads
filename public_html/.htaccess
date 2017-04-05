@@ -1,5 +1,8 @@
 
 RewriteEngine On
+RewriteCond %{HTTPS} !=on [OR]
+RewriteCond %{HTTP_HOST} !^www\.charismabeads\.co\.uk$ [NC]
+RewriteRule ^/?(.*) https://www.charismabeads.co.uk/$1 [R,L]
 
 # The following rule tells Apache that if the requested filename
 # exists, simply serve it.
@@ -18,13 +21,8 @@ RewriteCond %{REQUEST_URI}::$1 ^(/.+)(.+)::\2$
 RewriteRule ^(.*) - [E=BASE:%1]
 RewriteRule ^(.*)$ %{ENV:BASE}index.php [NC,L]
 
-
 RewriteCond %{QUERY_STRING} base64_encode.*\(.*\) [OR]
 RewriteCond %{QUERY_STRING} (\&lt;|%3C).*script.*(\&gt;|%3E) [NC,OR]
 RewriteCond %{QUERY_STRING} GLOBALS(=|\[|\%[0-9A-Z]{0,2}) [OR]
 RewriteCond %{QUERY_STRING} _REQUEST(=|\[|\%[0-9A-Z]{0,2})
 RewriteRule ^(.*)$ index.php [F,L]
-
-RewriteCond %{HTTPS} off [OR]
-RewriteCond %{HTTP_HOST} !^www\.charismabeads\.co\.uk$ [NC]
-RewriteRule (.*) https://www.charismabeads.co.uk%{REQUEST_URI}
