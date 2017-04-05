@@ -183,7 +183,7 @@ class CreateOrder extends AbstractActionController
         $order      = $this->getService()->getOrder($orderId);
         $product    = $this->getService('ShopProduct')->getFullProductById($productId);
 
-        $this->getService()->loadItems($order);
+        //$this->getService()->loadItems($order);
         $this->getService()->addItem($product, $this->params()->fromPost());
         $this->getService()->recalculateTotals();
         //$this->getService()->loadItems($this->getService()->getOrderModel());
