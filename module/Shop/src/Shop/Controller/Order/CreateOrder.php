@@ -241,7 +241,7 @@ class CreateOrder extends AbstractActionController
 
         $this->getService()->save($order);
 
-        $order  = $this->getService()->loadItems($order);
+        //$order  = $this->getService()->loadItems($order);
         $this->getService()->recalculateTotals();
 
         $viewModel = new ViewModel([

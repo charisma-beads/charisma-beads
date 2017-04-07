@@ -40,7 +40,7 @@ $statusFormElement->setName('orderStatusId');
                     );?>
                     <input type="hidden" name="orderNumber" value="<?=$row->getOrderNumber(false);?>">
                 </td>
-    			<td><?=$this->priceFormat($this->escapeHtml($row->getTotal()));?></td>
+    			<td><?=$this->priceFormat($this->escapeHtml($row->getTotal() + $row->getTaxTotal()));?></td>
     			<td><?=$this->formatDate($row->getOrderDate());?>
     			<td>
                     <?=$this->partial('shop/order/partial/edit-actions', [
