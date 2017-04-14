@@ -142,6 +142,28 @@ return [
                             ],
                         ],
                     ],
+                    'vouchers' => [
+                        'label' => 'Vouchers',
+                        'action' => 'index',
+                        'route' => 'admin/shop/voucher',
+                        'resource' => 'menu:admin',
+                        'pages' => [
+                            'edit' => [
+                                'label' => 'Edit Voucher',
+                                'action' => 'edit',
+                                'route' => 'admin/shop/voucher/edit',
+                                'resource' => 'menu:admin',
+                                'visible' => false,
+                            ],
+                            'add' => [
+                                'label' => 'Add Voucher',
+                                'action' => 'add',
+                                'route' => 'admin/shop/voucher/edit',
+                                'resource' => 'menu:admin',
+                                'visible' => false,
+                            ],
+                        ],
+                    ],
                     'customers' => [
                         'label' => 'Customers',
                         'action' => 'index',

@@ -1,0 +1,42 @@
+<?php $this->headTitle('Vouchers ') ?>
+<?php $this->layout()->pageTitle = $this->translate('Vouchers');?>
+
+<?php $this->placeholder('header-buttons')->captureStart();?>
+<a href="<?=$this->url('admin/shop/voucher/edit', [
+    'action' => 'add'
+]);?>" data-toggle="tooltip" title="<?=$this->translate('Add Tax Rate');?>" class="btn btn-primary" id="voucher-add">
+    <i class="fa fa-plus"></i>
+</a>
+<?php $this->placeholder('header-buttons')->captureEnd();?>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-list"></i> <?=$this->translate('List Vouchers');?></h3>
+    </div>
+    <div class="panel-body">
+        <?=$this->partial('uthando-admin/partial/search', [
+            'name'			=> 'voucher',
+            'searchInputs'	=> [
+                'Voucher' => 'voucherId-code',
+            ],
+        ]);?>
+    </div>
+    <div id="table-voucher" class="admin-table">
+        <?=$this->partial('shop/voucher-codes/list', [
+            'models' => $this->models
+        ]); ?>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function(){
+        $('#table-voucher').dataGrid({
+            url : 'voucher/list',
+            query: { sort : 'voucherId' },
+            searchForm : $('#search-voucher'),
+            paging : 'links',
+            columnSort: true,
+            //rowClick : admin.dataTable.rowClick
+        });
+    });
+</script>

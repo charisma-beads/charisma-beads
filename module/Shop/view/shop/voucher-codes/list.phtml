@@ -1,0 +1,53 @@
+
+<?php if (count($this->models) > 0): ?>
+<div class="table-responsive">
+    <table id="voucher-list" class="table table-hover table-bordered table-condensed sortable-table">
+    	<thead>
+    		<tr>
+                <th data-field="active">&nbsp;</th>
+    			<th data-field="voucherId">Voucher Id</th>
+    			<th data-field="code">Code</th>
+                <th data-field="startDate">Start Date</th>
+                <th data-field="endDate">End Date</th>
+    			<th>Actions</th>
+    		</tr>
+    	</thead>
+    	
+    	<tbody>
+    		<?php /* @var $row \Shop\Model\Voucher\Code */ ?>
+    		<?php foreach($this->models as $row): ?>
+                <?php $class = ($row->isActive()) ? '' : 'danger'; ?>
+    		<tr class="<?=$class;?>">
+                <td>
+                    <?=$this->enabled($row, [
+                        'table' => 'product',
+                        'route' => 'admin/shop/voucher/edit',
+                    ]); ?>
+                </td>
+    			<td><?=$this->escapeHtml($row->getVoucherId()); ?></td>
+    			<td><?=$this->escapeHtml($row->getCode()); ?></td>
+                <td><?=$this->formatDate($row->getStartDate(), 'd/m/Y'); ?></td>
+                <td><?=$this->formatDate($row->getEndDate(), 'd/m/Y'); ?></td>
+    			<td>
+                    <?=$this->partial('uthando-admin/partial/edit-actions', [
+                    	'pk'		=> 'voucherId',
+                    	'id'		=> $row->getvoucherId(),
+    		    		'tableName'	=> 'voucher',
+                    	'route'		=> 'admin/shop/voucher/edit',
+    		    	]);?>
+    			</td>
+    		</tr>
+    		<?php endforeach; ?>
+    	</tbody>
+    </table>
+</div>
+<?=$this->paginationControl(
+    $this->models,
+    'Elastic',
+    'application/partial/paginate',
+	['route' => 'admin/shop/voucher/page']
+); ?>
+
+<?php else: ?>
+<h4>No Vouchers where returned by search.</h4>
+<?php endif; ?>

@@ -366,6 +366,19 @@ CREATE TABLE IF NOT EXISTS `taxRate` (
   PRIMARY KEY (`taxRateId`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
 
+DROP TABLE IF EXISTS `voucherCodes`;
+CREATE TABLE `voucherCodes` (
+  `voucherId` int(10) UNSIGNED NOT NULL,
+  `code` varchar(255) NOT NULL,
+  `quantity` int(5) UNSIGNED NOT NULL,
+  `minCartCost` float(6,2) NOT NULL DEFAULT '0.00',
+  `discountOperation` enum('-','%','s') NOT NULL DEFAULT '%',
+  `startDate` date NOT NULL,
+  `endDate` date NOT NULL,
+  `active` char(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`voucherId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 --
 -- Constraints for dumped tables
 --
@@ -400,5 +413,21 @@ ALTER TABLE `postZone`
 --
 ALTER TABLE `productCategory`
   ADD CONSTRAINT `productCategory_ibfk_4` FOREIGN KEY (`productImageId`) REFERENCES `productImage` (`productImageId`) ON DELETE SET NULL;
+
+--
+-- Indexes for table `voucherCodes`
+--
+ALTER TABLE `voucherCodes`
+  ADD PRIMARY KEY (`voucherId`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `voucherCodes`
+--
+ALTER TABLE `voucherCodes`
+  MODIFY `voucherId` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 SET FOREIGN_KEY_CHECKS=1;

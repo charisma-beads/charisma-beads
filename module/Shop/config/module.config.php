@@ -45,6 +45,7 @@ return [
             'Shop\Controller\Report'                => 'Shop\Controller\Report',
             'Shop\Controller\Settings'              => 'Shop\Controller\Settings',
             'Shop\Controller\Shop'                  => 'Shop\Controller\Shop',
+            \Shop\Controller\Voucher\VoucherCodes::class    => \Shop\Controller\Voucher\VoucherCodes::class,
         ],
     ],
     'controller_plugins' => [
@@ -82,6 +83,7 @@ return [
             'ShopTaxCode'           => 'Shop\Form\Tax\Code',
             'ShopTaxRate'           => 'Shop\Form\Tax\Rate',
             'ShopFaq'               => 'Shop\Form\Faq',
+            'ShopVoucherCode'       => \Shop\Form\Voucher\Code::class,
 
             'ShopPaypalCredentialPairsFieldSet' => 'Shop\Form\Settings\Paypal\CredentialPairsFieldSet',
             'ShopPaypalCredentialSetFieldSet'   => 'Shop\Form\Settings\Paypal\CredentialSetFieldSet',
@@ -150,6 +152,9 @@ return [
             'ShopTaxCode'           => 'Shop\Hydrator\Tax\Code',
             'ShopTaxRate'           => 'Shop\Hydrator\Tax\Rate',
             'ShopFaq'               => 'Shop\Hydrator\Faq',
+            'ShopVoucherCode'       => Shop\Hydrator\Voucher\Codes::class,
+            \Shop\Hydrator\Voucher\CategoryMap::class => \Shop\Model\Voucher\CategoryMap::class,
+            \Shop\Hydrator\Voucher\ZoneMap::class => \Shop\Hydrator\Voucher\ZoneMap::class,
         ],
     ],
     'input_filters' => [
@@ -182,6 +187,7 @@ return [
             'ShopTaxCode'           => 'Shop\InputFilter\Tax\Code',
             'ShopTaxRate'           => 'Shop\InputFilter\Tax\Rate',
             'ShopFaq'               => 'Shop\InputFilter\Faq',
+            'ShopVoucherCode'       => \Shop\InputFilter\Voucher\Code::class,
         ],
     ],
     'service_manager' => [
@@ -232,6 +238,9 @@ return [
             'ShopTaxCode'           => 'Shop\Mapper\Tax\Code',
             'ShopTaxRate'           => 'Shop\Mapper\Tax\Rate',
             'ShopFaq'               => 'Shop\Mapper\Faq',
+            'ShopVoucherCode'       => \Shop\Mapper\Voucher\Code::class,
+            \Shop\Mapper\Voucher\CategoryMap::class => \Shop\Mapper\Voucher\CategoryMap::class,
+            \Shop\Mapper\Voucher\ZoneMap::class => \Shop\Mapper\Voucher\ZoneMap::class,
         ],
     ],
     'uthando_models' => [
@@ -264,6 +273,9 @@ return [
             'ShopTaxCode'           => 'Shop\Model\Tax\Code',
             'ShopTaxRate'           => 'Shop\Model\Tax\Rate',
             'ShopFaq'               => 'Shop\Model\Faq',
+            'ShopVoucherCode'       => \Shop\Model\Voucher\Code::class,
+            \Shop\Model\Voucher\ZoneMap::class => \Shop\Model\Voucher\ZoneMap::class,
+            \Shop\Model\Voucher\CategoryMap::class => \Shop\Model\Voucher\CategoryMap::class,
         ],
     ],
     'uthando_services' => [
@@ -295,6 +307,7 @@ return [
             'ShopTaxCode'           => 'Shop\Service\Tax\Code',
             'ShopTaxRate'           => 'Shop\Service\Tax\Rate',
             'ShopFaq'               => 'Shop\Service\Faq',
+            'ShopVoucherCode'       => \Shop\Service\Voucher\Code::class,
         ],
     ],
     'validators' => [

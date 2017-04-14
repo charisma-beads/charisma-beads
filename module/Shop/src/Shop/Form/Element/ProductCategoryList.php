@@ -71,14 +71,11 @@ class ProductCategoryList extends Select implements ServiceLocatorAwareInterface
          
         /* @var $cat \Shop\Model\Product\Category */
     	foreach($cats as $cat) {
-    		$parent = ($cat->hasChildren() || $cat->getDepth() == 0) ? 'bold ' : '';
+            $ident = ($cat->getDepth() > 0) ? str_repeat('&nbsp;&nbsp;',($cat->getDepth())) . '&bull;&nbsp;' : '';
     		$categoryOptions[] = [
-    			'label'	=> $cat->getCategory(),
-    			'value'	=> $cat->getProductCategoryId(),
-    			'attributes'	=> [
-    				'class'	=> $parent,
-					'style' => 'text-indent:' . $cat->getDepth() . 'em;',
-    			],
+    			'label'	                => $ident . $cat->getCategory(),
+    			'value'	                => $cat->getProductCategoryId(),
+                'disable_html_escape'   => true,
     		];
     	}
         
