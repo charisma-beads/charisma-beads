@@ -11,6 +11,7 @@
 namespace Shop\Service\Voucher;
 
 use Shop\Model\Voucher\Code as CodeModel;
+use UthandoCommon\Hydrator\Strategy\DateTime;
 use UthandoCommon\Service\AbstractMapperService;
 use Zend\EventManager\Event;
 
@@ -40,22 +41,29 @@ class Code extends AbstractMapperService
     {
         $this->getEventManager()->attach([
             'pre.add', 'pre.edit'
-        ], [$this, 'setupFilter']);
+        ], [$this, 'setupForm']);
     }
 
     /**
      * @param Event $e
      */
-    public function setupFilter(Event $e)
+    public function setupForm(Event $e)
     {
         $form = $e->getParam('form');
         $model = $e->getParam('model');
         $post = $e->getParam('post');
 
-        $code = ($model instanceof CodeModel && $model->getCode() === $post['code']) ? $model->getEmail() : null;
+        $code = ($model instanceof CodeModel && $model->getCode() === $post['code']) ? $model->getCode() : null;
 
         /* @var $inputFilter \Shop\InputFilter\Voucher\Code */
         $inputFilter = $form->getInputFilter();
         $inputFilter->addNoRecordExists($code);
+
+        $hydrator = $form->getHydrator();
+        /* @var DateTime $dateTimeStrategy */
+        $dateTimeStrategy = $hydrator->getStrategy('startDate');
+        $dateTimeStrategy->setHydrateFormat('d/m/Y');
+        $dateTimeStrategy = $hydrator->getStrategy('endDate');
+        $dateTimeStrategy->setHydrateFormat('d/m/Y');
     }
 }

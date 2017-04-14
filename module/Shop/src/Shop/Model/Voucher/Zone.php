@@ -14,18 +14,13 @@ use UthandoCommon\Model\Model;
 use UthandoCommon\Model\ModelInterface;
 
 /**
- * Class ZoneMap
+ * Class Zone
  *
  * @package Shop\Model\Voucher
  */
-class ZoneMap implements ModelInterface
+class Zone implements ModelInterface
 {
     use Model;
-
-    /**
-     * @var int
-     */
-    protected $voucherId;
 
     /**
      * @var int
@@ -35,34 +30,16 @@ class ZoneMap implements ModelInterface
     /**
      * @return int
      */
-    public function getVoucherId(): int
-    {
-        return $this->voucherId;
-    }
-
-    /**
-     * @param int $voucherId
-     * @return ZoneMap
-     */
-    public function setVoucherId(int $voucherId): ZoneMap
-    {
-        $this->voucherId = $voucherId;
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getZoneId(): int
+    public function getZoneId()
     {
         return $this->zoneId;
     }
 
     /**
      * @param int $zoneId
-     * @return ZoneMap
+     * @return Zone
      */
-    public function setZoneId(int $zoneId): ZoneMap
+    public function setZoneId($zoneId)
     {
         $this->zoneId = $zoneId;
         return $this;

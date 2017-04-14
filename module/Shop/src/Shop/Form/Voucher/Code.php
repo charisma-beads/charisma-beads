@@ -162,7 +162,7 @@ class Code extends Form
             'options' => [
                 'label' => 'Categories',
                 'required' => true,
-                'empty_option' => 'All Categories',
+                'empty_option' => null,
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
                 'column-size' => 'sm-8',
                 'label_attributes' => [
@@ -182,7 +182,7 @@ class Code extends Form
             'options' => [
                 'label' => 'Zones',
                 'required' => true,
-                'empty_option' => 'All Zones',
+                'empty_option' => null,
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
                 'column-size' => 'sm-8',
                 'label_attributes' => [

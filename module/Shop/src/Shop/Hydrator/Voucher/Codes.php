@@ -10,10 +10,12 @@
 
 namespace Shop\Hydrator\Voucher;
 
+use Shop\Hydrator\Strategy\VoucherCategoriesStrategy;
+use Shop\Hydrator\Strategy\VoucherZonesStrategy;
 use Shop\Model\Voucher\Code;
 use UthandoCommon\Hydrator\AbstractHydrator;
 use UthandoCommon\Hydrator\Strategy\DateTime;
-use Zend\Hydrator\Strategy\BooleanStrategy;
+use UthandoCommon\Hydrator\Strategy\TrueFalse;
 
 /**
  * Class Codes
@@ -25,10 +27,15 @@ class Codes extends AbstractHydrator
 
     public function __construct()
     {
-        $dateStrategy = new DateTime();
-        $this->addStrategy('active', new BooleanStrategy(1, 0));
+        $dateStrategy = new DateTime([
+            'extractFormat' => 'Y-m-d',
+            'hydrateFormat' => 'Y-m-d',
+        ]);
+        $this->addStrategy('active', new TrueFalse());
         $this->addStrategy('startDate', $dateStrategy);
         $this->addStrategy('endDate', $dateStrategy);
+        $this->addStrategy('productCategories', new VoucherCategoriesStrategy());
+        $this->addStrategy('zones', new VoucherZonesStrategy());
     }
 
     /**
@@ -46,6 +53,8 @@ class Codes extends AbstractHydrator
             'discountOperation' => $object->getDiscountOperation(),
             'startDate'         => $this->extractValue('startDate', $object->getStartDate()),
             'endDate'           => $this->extractValue('endDate', $object->getEndDate()),
+            'productCategories' => $this->extractValue('productCategories', $object->getProductCategories()),
+            'zones'             => $this->extractValue('zones', $object->getZones()),
         ];
     }
 }

@@ -15,7 +15,7 @@
 <?php $this->form->setAttributes([
     'method' => 'post',
     'id' => 'form-voucher',
-    'action' => $this->url('admin/shop/voucher', [
+    'action' => $this->url('admin/shop/voucher/edit', [
         'action'    => 'edit',
         'id'        => $this->model->getVoucherId(),
     ]),

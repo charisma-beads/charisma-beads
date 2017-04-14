@@ -25,6 +25,15 @@ class PostZoneList extends Select implements ServiceLocatorAwareInterface
     use ServiceLocatorAwareTrait;
     
     protected $emptyOption = '---Please select a post zone---';
+
+    public function setOptions($options)
+    {
+        parent::setOptions($options);
+
+        if (array_key_exists('empty_option', $options)) {
+            $this->setEmptyOption($options['empty_option']);
+        }
+    }
     
     public function init()
     {

@@ -42,6 +42,10 @@ class ProductCategoryList extends Select implements ServiceLocatorAwareInterface
         if (isset($options['add_top'])) {
             $this->addTop = $options['add_top'];
         }
+
+        if (array_key_exists('empty_option', $options)) {
+            $this->setEmptyOption($options['empty_option']);
+        }
     }
 
     public function getValueOptions()

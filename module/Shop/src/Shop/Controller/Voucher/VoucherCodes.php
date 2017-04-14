@@ -21,5 +21,5 @@ class VoucherCodes extends AbstractCrudController
 {
     protected $controllerSearchOverrides = array('sort' => 'voucherId');
     protected $serviceName = 'ShopVoucherCode';
-    protected $route = 'admin/shop/voucher/code';
+    protected $route = 'admin/shop/voucher';
 }

@@ -13,13 +13,13 @@ namespace Shop\Model\Voucher;
 use UthandoCommon\Model\AbstractCollection;
 
 /**
- * Class ZoneCollection
+ * Class CategoryCollection
  *
  * @package Shop\Model\Voucher
  */
-class ZoneCollection extends AbstractCollection
+class ProductCategoryCollection extends AbstractCollection
 {
-    protected $entityClass = Zone::class;
+    protected $entityClass = ProductCategory::class;
 
     /**
      * @param $array
@@ -27,10 +27,12 @@ class ZoneCollection extends AbstractCollection
     public function fromArray($array)
     {
         foreach ($array as $value) {
-            /* @var $entity Zone */
+            /* @var $entity ProductCategory */
             $entity = new $this->entityClass();
-            $entity->setZoneId($value);
+
+            $entity->setCategoryId($value);
             $this->add($entity);
+
         }
     }
 
@@ -38,9 +40,9 @@ class ZoneCollection extends AbstractCollection
     {
         $returnArray = [];
 
-        /* @var $value Zone */
+        /* @var $value ProductCategory */
         foreach ($this->getEntities() as $value) {
-            $returnArray[] = $value->getZoneId();
+            $returnArray[] = $value->getCategoryId();
         }
 
         return $returnArray;

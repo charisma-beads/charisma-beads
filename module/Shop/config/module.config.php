@@ -153,8 +153,6 @@ return [
             'ShopTaxRate'           => 'Shop\Hydrator\Tax\Rate',
             'ShopFaq'               => 'Shop\Hydrator\Faq',
             'ShopVoucherCode'       => Shop\Hydrator\Voucher\Codes::class,
-            \Shop\Hydrator\Voucher\CategoryMap::class => \Shop\Model\Voucher\CategoryMap::class,
-            \Shop\Hydrator\Voucher\ZoneMap::class => \Shop\Hydrator\Voucher\ZoneMap::class,
         ],
     ],
     'input_filters' => [
@@ -239,8 +237,6 @@ return [
             'ShopTaxRate'           => 'Shop\Mapper\Tax\Rate',
             'ShopFaq'               => 'Shop\Mapper\Faq',
             'ShopVoucherCode'       => \Shop\Mapper\Voucher\Code::class,
-            \Shop\Mapper\Voucher\CategoryMap::class => \Shop\Mapper\Voucher\CategoryMap::class,
-            \Shop\Mapper\Voucher\ZoneMap::class => \Shop\Mapper\Voucher\ZoneMap::class,
         ],
     ],
     'uthando_models' => [
@@ -274,8 +270,6 @@ return [
             'ShopTaxRate'           => 'Shop\Model\Tax\Rate',
             'ShopFaq'               => 'Shop\Model\Faq',
             'ShopVoucherCode'       => \Shop\Model\Voucher\Code::class,
-            \Shop\Model\Voucher\ZoneMap::class => \Shop\Model\Voucher\ZoneMap::class,
-            \Shop\Model\Voucher\CategoryMap::class => \Shop\Model\Voucher\CategoryMap::class,
         ],
     ],
     'uthando_services' => [

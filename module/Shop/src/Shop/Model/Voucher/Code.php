@@ -69,7 +69,7 @@ class Code implements ModelInterface
     protected $zones;
 
     /**
-     * @var CategoryMapCollection
+     * @var ProductCategoryCollection
      */
     protected $productCategories;
 
@@ -246,7 +246,7 @@ class Code implements ModelInterface
     }
 
     /**
-     * @return CategoryMapCollection
+     * @return ProductCategoryCollection
      */
     public function getProductCategories()
     {
@@ -254,12 +254,28 @@ class Code implements ModelInterface
     }
 
     /**
-     * @param CategoryMapCollection $productCategories
+     * @param ProductCategoryCollection $productCategories
      * @return Code
      */
-    public function setProductCategories(CategoryMapCollection $productCategories)
+    public function setProductCategories(ProductCategoryCollection $productCategories)
     {
         $this->productCategories = $productCategories;
         return $this;
+    }
+
+    public function getArrayCopy()
+    {
+        return [
+            'voucherId'         => $this->getVoucherId(),
+            'code'              => $this->getCode(),
+            'active'            => $this->isActive(),
+            'quantity'          => $this->getQuantity(),
+            'minCartCost'       => $this->getMinCartCost(),
+            'discountOperation' => $this->getDiscountOperation(),
+            'startDate'         => $this->getStartDate(),
+            'endDate'           => $this->getEndDate(),
+            'productCategories' => $this->getProductCategories()->toArray(),
+            'zones'             => $this->getZones()->toArray(),
+        ];
     }
 }

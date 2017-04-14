@@ -134,7 +134,7 @@ class Code extends InputFilter implements ServiceLocatorAwareInterface
         $this->get('code')
             ->getValidatorChain()
             ->attachByName(NoRecordExists::class, [
-                'table' => 'voucherCode',
+                'table' => 'voucherCodes',
                 'field' => 'code',
                 'adapter' => $this->getServiceLocator()->getServiceLocator()->get('Zend\Db\Adapter\Adapter'),
                 'exclude' => $exclude,

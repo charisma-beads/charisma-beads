@@ -14,18 +14,13 @@ use UthandoCommon\Model\Model;
 use UthandoCommon\Model\ModelInterface;
 
 /**
- * Class CategoryMap
+ * Class ProductCategory
  *
  * @package Shop\Model\Voucher
  */
-class CategoryMap implements ModelInterface
+class ProductCategory implements ModelInterface
 {
     use Model;
-
-    /**
-     * @var int
-     */
-    protected $voucherId;
 
     /**
      * @var int
@@ -35,34 +30,16 @@ class CategoryMap implements ModelInterface
     /**
      * @return int
      */
-    public function getVoucherId(): int
-    {
-        return $this->voucherId;
-    }
-
-    /**
-     * @param int $voucherId
-     * @return CategoryMap
-     */
-    public function setVoucherId(int $voucherId): CategoryMap
-    {
-        $this->voucherId = $voucherId;
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getCategoryId(): int
+    public function getCategoryId()
     {
         return $this->categoryId;
     }
 
     /**
      * @param int $categoryId
-     * @return CategoryMap
+     * @return ProductCategory
      */
-    public function setCategoryId(int $categoryId): CategoryMap
+    public function setCategoryId($categoryId)
     {
         $this->categoryId = $categoryId;
         return $this;
