@@ -15,7 +15,9 @@ use Zend\Filter\StringToUpper;
 use Zend\Filter\StringTrim;
 use Zend\Filter\StripTags;
 use Zend\Filter\ToInt;
+use Zend\I18n\Filter\Alnum;
 use Zend\I18n\Filter\NumberFormat;
+use Zend\I18n\Validator\Alnum as AlnumValidator;
 use Zend\I18n\Validator\IsFloat;
 use Zend\I18n\Validator\IsInt;
 use Zend\InputFilter\InputFilter;
@@ -53,8 +55,10 @@ class Code extends InputFilter implements ServiceLocatorAwareInterface
                 ['name' => StripTags::class],
                 ['name' => StringTrim::class],
                 ['name' => StringToUpper::class],
+                ['name' => Alnum::class]
             ],
             'validators' => [
+                ['name' => AlnumValidator::class],
                 ['name' => StringLength::class, 'options' => [
                     'encoding' => 'UTF-8',
                     'min' => 2,
@@ -92,6 +96,34 @@ class Code extends InputFilter implements ServiceLocatorAwareInterface
         ]);
 
         $this->add([
+            'name' => 'limitCustomer',
+            'required' => false,
+            'allow_empty' => true,
+            'filters' => [
+                ['name' => StripTags::class],
+                ['name' => StringTrim::class],
+                ['name' => Boolean::class],
+            ],
+        ]);
+
+        $this->add([
+            'name' => 'noPerCustomer',
+            'required' => false,
+            'filters' => [
+                ['name' => StripTags::class],
+                ['name' => StringTrim::class],
+            ],
+            'validators'	=> [
+                ['name' => NotEmpty::class],
+                ['name' => IsInt::class],
+                ['name' => GreaterThan::class, 'options'	=> [
+                    'min'		=> -1,
+                    'inclusive'	=> true,
+                ]],
+            ],
+        ]);
+
+        $this->add([
             'name' => 'minCartCost',
             'required' => true,
             'filters' => [
@@ -114,8 +146,8 @@ class Code extends InputFilter implements ServiceLocatorAwareInterface
         ]);
 
         $this->add([
-            'name' => 'endDate',
-            'required' => true,
+            'name' => 'expiry',
+            'required' => false,
             'filters' => [
                 ['name' => StripTags::class],
                 ['name' => StringTrim::class],

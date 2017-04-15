@@ -63,7 +63,7 @@ class Code extends AbstractMapperService
         /* @var DateTime $dateTimeStrategy */
         $dateTimeStrategy = $hydrator->getStrategy('startDate');
         $dateTimeStrategy->setHydrateFormat('d/m/Y');
-        $dateTimeStrategy = $hydrator->getStrategy('endDate');
+        $dateTimeStrategy = $hydrator->getStrategy('expiry');
         $dateTimeStrategy->setHydrateFormat('d/m/Y');
     }
 }

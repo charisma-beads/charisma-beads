@@ -370,12 +370,15 @@ DROP TABLE IF EXISTS `voucherCodes`;
 CREATE TABLE `voucherCodes` (
   `voucherId` int(10) UNSIGNED NOT NULL,
   `code` varchar(255) NOT NULL,
-  `quantity` int(5) NOT NULL,
+  `quantity` int(5) NOT NULL DEFAULT '-1',
+  `limitCustomer` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `noPerCustomer` int(11) DEFAULT NULL,
   `minCartCost` float(6,2) NOT NULL DEFAULT '0.00',
   `discountOperation` enum('-','%','s') NOT NULL DEFAULT '%',
   `startDate` date NOT NULL,
-  `endDate` date NOT NULL,
-  `active` char(1) NOT NULL DEFAULT '0',
+  `expiry` date DEFAULT NULL,
+  `active` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `redeemable` enum('web','fairs','both') NOT NULL,
   `productCategories` text NOT NULL,
   `zones` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

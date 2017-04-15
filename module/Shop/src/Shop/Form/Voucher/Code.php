@@ -11,6 +11,7 @@
 namespace Shop\Form\Voucher;
 
 use TwbBundle\Form\View\Helper\TwbBundleForm;
+use Zend\Form\Element\Checkbox;
 use Zend\Form\Element\Csrf;
 use Zend\Form\Element\Date;
 use Zend\Form\Element\Hidden;
@@ -30,7 +31,7 @@ class Code extends Form
     {
         $this->add([
             'name' => 'active',
-            'type' => 'checkbox',
+            'type' => Checkbox::class,
             'options' => [
                 'label' => 'Active',
                 'use_hidden_element' => true,
@@ -39,6 +40,25 @@ class Code extends Form
                 'required' => true,
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
                 'column-size' => 'sm-10 col-sm-offset-2',
+            ],
+        ]);
+
+        $this->add([
+            'name' => 'redeemable',
+            'type' => Select::class,
+            'options' => [
+                'label' => 'Redeemable',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'sm-10',
+                'label_attributes' => [
+                    'class' => 'col-sm-2',
+                ],
+                'empty_option' => '---Please select option---',
+                'value_options' => [
+                    'web'	=> 'Allow only on website.',
+                    'fairs'	=> 'Allow only at fairs.',
+                    'both'  => 'Allow on website and at fairs.'
+                ],
             ],
         ]);
 
@@ -62,13 +82,51 @@ class Code extends Form
 
         $this->add([
             'name' => 'quantity',
-            'type' => Text::class,
+            'type' => Number::class,
             'attributes' => [
                 'placeholder' => 'Quantity',
                 'autofocus' => true,
+                'min' => '-1',
+                'step' => '1',
+                'value' => '-1',
             ],
             'options' => [
                 'label' => 'Quantity',
+                'required' => true,
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'sm-10',
+                'label_attributes' => [
+                    'class' => 'col-sm-2',
+                ],
+                'help-block' => '-1 = infinite number available',
+            ],
+        ]);
+
+        $this->add([
+            'name' => 'limitCustomer',
+            'type' => Checkbox::class,
+            'options' => [
+                'label' => 'Limit No Per Customer',
+                'use_hidden_element' => true,
+                'checked_value' => '1',
+                'unchecked_value' => '0',
+                'required' => true,
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'sm-10 col-sm-offset-2',
+            ],
+        ]);
+
+        $this->add([
+            'name' => 'noPerCustomer',
+            'type' => Number::class,
+            'attributes' => [
+                'placeholder' => 'No. Per Customer',
+                'min' => '-1',
+                'step' => '1',
+                'autofocus' => true,
+            ],
+            'options' => [
+                'label' => 'No. Per Customer',
                 'required' => true,
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
                 'column-size' => 'sm-10',
@@ -138,10 +196,10 @@ class Code extends Form
         ]);
 
         $this->add([
-            'name' => 'endDate',
+            'name' => 'expiry',
             'type' => Date::class,
             'options' => [
-                'label' => 'End date',
+                'label' => 'Expiry',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
                 'column-size' => 'sm-10 date-time-pick',
                 'add-on-append' => '<i class="fa fa-calendar"></i>',
@@ -152,7 +210,7 @@ class Code extends Form
             ],
             'attributes' => [
                 'class' => 'date-time-pick',
-                'placeholder' => 'End Date',
+                'placeholder' => 'Expiry',
             ],
         ]);
 
@@ -169,6 +227,13 @@ class Code extends Form
                     'class' => 'col-sm-4',
                 ],
                 'twb-form-group-size' => 'col-sm-6',
+                'help-block' => '<ul class="text-info">
+                  <li>For Windows & Linux: Hold down the control (ctrl) button to select multiple options</li>
+                  <li>For Mac: Hold down the command button to select multiple options</li>
+                  <li>NB. If a parent category is selected then the voucher will apply to all it\'s 
+                  sub-categories 
+                  too.</li>
+                </ul>',
             ],
             'attributes' => [
                 'multiple' => true,
@@ -189,6 +254,10 @@ class Code extends Form
                     'class' => 'col-sm-4',
                 ],
                 'twb-form-group-size' => 'col-sm-6',
+                'help-block' => '<ul class="text-info">
+                  <li>For Windows & Linux: Hold down the control (ctrl) button to select multiple options</li>
+                  <li>For Mac: Hold down the command button to select multiple options</li>
+                </ul>'
             ],
             'attributes' => [
                 'multiple' => true,

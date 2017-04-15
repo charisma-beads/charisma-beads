@@ -39,9 +39,24 @@ class Code implements ModelInterface
     protected $active = false;
 
     /**
+     * @var string
+     */
+    protected $redeemable;
+
+    /**
      * @var int
      */
     protected $quantity;
+
+    /**
+     * @var bool
+     */
+    protected $limitCustomer = false;
+
+    /**
+     * @var int
+     */
+    protected $noPerCustomer;
 
     /**
      * @var float
@@ -61,7 +76,7 @@ class Code implements ModelInterface
     /**
      * @var DateTime|null
      */
-    protected $endDate;
+    protected $expiry;
 
     /**
      * @var ZoneCollection
@@ -138,6 +153,22 @@ class Code implements ModelInterface
     }
 
     /**
+     * @return string
+     */
+    public function getRedeemable()
+    {
+        return $this->redeemable;
+    }
+
+    /**
+     * @param string $redeemable
+     */
+    public function setRedeemable($redeemable)
+    {
+        $this->redeemable = $redeemable;
+    }
+
+    /**
      * @return int
      */
     public function getQuantity()
@@ -153,6 +184,38 @@ class Code implements ModelInterface
     {
         $this->quantity = $quantity;
         return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isLimitCustomer(): bool
+    {
+        return $this->limitCustomer;
+    }
+
+    /**
+     * @param bool $limitCustomer
+     */
+    public function setLimitCustomer(bool $limitCustomer)
+    {
+        $this->limitCustomer = $limitCustomer;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNoPerCustomer(): int
+    {
+        return $this->noPerCustomer;
+    }
+
+    /**
+     * @param int $noPerCustomer
+     */
+    public function setNoPerCustomer(int $noPerCustomer)
+    {
+        $this->noPerCustomer = $noPerCustomer;
     }
 
     /**
@@ -212,18 +275,18 @@ class Code implements ModelInterface
     /**
      * @return DateTime|null
      */
-    public function getEndDate()
+    public function getExpiry()
     {
-        return $this->endDate;
+        return $this->expiry;
     }
 
     /**
-     * @param DateTime|null $endDate
+     * @param DateTime|null $expiry
      * @return Code
      */
-    public function setEndDate(DateTime $endDate = null)
+    public function setExpiry(DateTime $expiry = null)
     {
-        $this->endDate = $endDate;
+        $this->expiry = $expiry;
         return $this;
     }
 
@@ -263,17 +326,23 @@ class Code implements ModelInterface
         return $this;
     }
 
+    /**
+     * @return array
+     */
     public function getArrayCopy()
     {
         return [
             'voucherId'         => $this->getVoucherId(),
             'code'              => $this->getCode(),
             'active'            => $this->isActive(),
+            'redeemable'        => $this->getRedeemable(),
             'quantity'          => $this->getQuantity(),
+            'limitCustomer'     => $this->isLimitCustomer(),
+            'noPerCustomer'     => $this->getNoPerCustomer(),
             'minCartCost'       => $this->getMinCartCost(),
             'discountOperation' => $this->getDiscountOperation(),
             'startDate'         => $this->getStartDate(),
-            'endDate'           => $this->getEndDate(),
+            'expiry'            => $this->getExpiry(),
             'productCategories' => $this->getProductCategories()->toArray(),
             'zones'             => $this->getZones()->toArray(),
         ];
