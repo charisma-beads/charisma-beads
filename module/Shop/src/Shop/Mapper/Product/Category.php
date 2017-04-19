@@ -54,7 +54,12 @@ class Category extends AbstractNestedSet
 	    
 	    return $this->fetchResult($select);
 	}
-	
+
+    /**
+     * @param $parentId
+     * @param bool $immediate
+     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     */
 	public function getSubCategoriesByParentId($parentId, $immediate=true)
 	{
 	    $select = $this->getDecendentsByParentId($parentId, $immediate);

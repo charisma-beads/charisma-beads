@@ -17,6 +17,7 @@ use Shop\Event\FileManagerListener;
 use Shop\Event\SiteMapListener;
 use Shop\Event\UserListener;
 use Shop\Event\StockControlListener;
+use Shop\Event\VoucherListener;
 use UthandoCommon\Config\ConfigInterface;
 use UthandoCommon\Config\ConfigTrait;
 use Zend\Console\Adapter\AdapterInterface as Console;
@@ -43,6 +44,7 @@ class Module implements ConsoleUsageProviderInterface, ConfigInterface
         $eventManager->attach(new UserListener());
         $eventManager->attach(new ErrorListener());
         $eventManager->attach(new StockControlListener());
+        $eventManager->attach(new VoucherListener());
     }
 
     public function getConsoleUsage(Console $console)

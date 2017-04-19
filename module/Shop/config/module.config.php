@@ -237,6 +237,7 @@ return [
             'ShopTaxRate'           => 'Shop\Mapper\Tax\Rate',
             'ShopFaq'               => 'Shop\Mapper\Faq',
             'ShopVoucherCode'       => \Shop\Mapper\Voucher\Code::class,
+            \Shop\Mapper\Voucher\CustomerMap::class => \Shop\Mapper\Voucher\CustomerMap::class,
         ],
     ],
     'uthando_models' => [
@@ -270,6 +271,7 @@ return [
             'ShopTaxRate'           => 'Shop\Model\Tax\Rate',
             'ShopFaq'               => 'Shop\Model\Faq',
             'ShopVoucherCode'       => \Shop\Model\Voucher\Code::class,
+            \Shop\Model\Voucher\CustomerMap::class  => \Shop\Model\Voucher\CustomerMap::class,
         ],
     ],
     'uthando_services' => [
@@ -307,6 +309,7 @@ return [
     'validators' => [
         'invokables' => [
             'ShopPostCode'  => 'Shop\I18n\Validator\PostCode',
+            \Shop\Validator\Voucher::class => \Shop\Validator\Voucher::class,
         ],
     ],
     'view_helpers' => [

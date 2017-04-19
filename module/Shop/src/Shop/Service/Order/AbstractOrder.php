@@ -267,12 +267,13 @@ abstract class AbstractOrder extends AbstractRelationalMapperService
         $orderModel = ($this->getOrderModel()) ?? [];
 
         foreach($orderModel as $lineItem) {
-
             $sub = $sub + $this->getLineCost($lineItem);
         }
 
         $orderModel->setSubTotal($sub);
         $orderModel->setTotal($orderModel->getSubTotal() + $orderModel->getShipping());
+
+        $this->getEventManager()->trigger('voucher.check', $this);
     }
 
     /**

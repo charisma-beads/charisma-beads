@@ -59,7 +59,7 @@ class Codes extends AbstractHydrator
             'minCartCost'       => $object->getMinCartCost(),
             'discountOperation' => $object->getDiscountOperation(),
             'startDate'         => $this->extractValue('startDate', $object->getStartDate()),
-            'expiry'           => $this->extractValue('expiry', $object->getExpiry()),
+            'expiry'            => $this->extractValue('expiry', $object->getExpiry()),
             'productCategories' => $this->extractValue('productCategories', $object->getProductCategories()),
             'zones'             => $this->extractValue('zones', $object->getZones()),
         ];

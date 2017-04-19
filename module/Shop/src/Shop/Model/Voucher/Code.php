@@ -23,6 +23,14 @@ class Code implements ModelInterface
 {
     use Model;
 
+    const DISCOUNT_SUBTRACT_TOTAL       = '-';
+    const DISCOUNT_SUBTRACT_PERCENTAGE  = '%';
+    const DISCOUNT_SUBTRACT_SHIPPING    = 's';
+
+    const REDEEM_WEB    = 'web';
+    const REDEEM_FAIR   = 'fairs';
+    const REDEEM_BOTH   = 'both';
+
     /**
      * @var int
      */

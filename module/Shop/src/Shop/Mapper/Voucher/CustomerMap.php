@@ -10,19 +10,20 @@
 
 namespace Shop\Mapper\Voucher;
 
+use Shop\Model\Voucher\CustomerMap as CustomerMapModel;
 use UthandoCommon\Mapper\AbstractDbMapper;
 
 /**
- * Class Code
+ * Class CustomerMap
  *
  * @package Shop\Mapper\Voucher
  */
-class Code extends AbstractDbMapper
+class CustomerMap extends AbstractDbMapper
 {
     /**
      * @var string
      */
-    protected $table = 'voucherCodes';
+    protected $table = 'customerMap';
 
     /**
      * @var string
@@ -30,19 +31,20 @@ class Code extends AbstractDbMapper
     protected $primary = 'voucherId';
 
     /**
-     * @param $code
-     * @return \Shop\Model\Voucher\Code|null
+     * @param $voucherId
+     * @param $customerId
+     * @return CustomerMapModel|null
      */
-    public function getVoucherByCode($code)
+    public function getByVoucherAndCustomerId($voucherId, $customerId)
     {
-        $code = strtoupper($code);
-
         $select = $this->getSelect();
         $select->where
-            ->equalTo('code', $code);
+            ->equalTo('voucherId', $voucherId)
+            ->and
+            ->equalTo('customerId', $customerId);
 
-        $result = $this->fetchResult($select);
-        $row    = $result->current();
+        $rowSet = $this->fetchResult($select);
+        $row = $rowSet->current();
 
         return $row;
     }

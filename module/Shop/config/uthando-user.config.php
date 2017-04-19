@@ -14,6 +14,7 @@ return [
                                 'Shop\Controller\Faq' => ['action' => ['faq']],
                                 'Shop\Controller\Product' => ['action' => [ 'view']],
                                 'Shop\Controller\Shop' => ['action' => ['shop-front']],
+                                \Shop\Controller\Voucher\VoucherCodes::class => ['action' => ['add-voucher']],
                             ],
                         ],
                     ],

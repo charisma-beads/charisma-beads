@@ -10,6 +10,7 @@
 
 namespace Shop\Service\Voucher;
 
+use Shop\Form\Voucher\VoucherFieldSet;
 use Shop\Model\Voucher\Code as CodeModel;
 use UthandoCommon\Hydrator\Strategy\DateTime;
 use UthandoCommon\Service\AbstractMapperService;
@@ -19,6 +20,7 @@ use Zend\EventManager\Event;
  * Class Code
  *
  * @package Shop\Service\Voucher
+ * @method \Shop\Mapper\Voucher\Code getMapper($mapperClass = null, array $options = [])
  */
 class Code extends AbstractMapperService
 {
@@ -65,5 +67,17 @@ class Code extends AbstractMapperService
         $dateTimeStrategy->setHydrateFormat('d/m/Y');
         $dateTimeStrategy = $hydrator->getStrategy('expiry');
         $dateTimeStrategy->setHydrateFormat('d/m/Y');
+    }
+
+    public function storeVoucher(VoucherFieldSet $form)
+    {
+        $data = $form->getData();
+        $validVoucher = $this->checkVoucher($data['code']);
+
+    }
+
+    public function checkVoucher($code)
+    {
+        $voucher = $this->getMapper()->getVoucherByCode($code);
     }
 }

@@ -10,6 +10,7 @@
 
 namespace Shop\Form\Voucher;
 
+use Shop\Model\Voucher\Code as CodeModel;
 use TwbBundle\Form\View\Helper\TwbBundleForm;
 use Zend\Form\Element\Checkbox;
 use Zend\Form\Element\Csrf;
@@ -55,9 +56,9 @@ class Code extends Form
                 ],
                 'empty_option' => '---Please select option---',
                 'value_options' => [
-                    'web'	=> 'Allow only on website.',
-                    'fairs'	=> 'Allow only at fairs.',
-                    'both'  => 'Allow on website and at fairs.'
+                    CodeModel::REDEEM_WEB	=> 'Allow only on website.',
+                    CodeModel::REDEEM_FAIR	=> 'Allow only at fairs.',
+                    CodeModel::REDEEM_BOTH  => 'Allow on website and at fairs.'
                 ],
             ],
         ]);
@@ -169,9 +170,9 @@ class Code extends Form
                 ],
                 'empty_option' => '---Please select option---',
                 'value_options' => [
-                    '-'	=> 'Subtract fix amount from subtotal',
-                    '%'	=> 'Subtract percentage form subtotal',
-                    's' => 'Subtract fix amount form shipping'
+                    CodeModel::DISCOUNT_SUBTRACT_TOTAL	    => 'Subtract fix amount from subtotal',
+                    CodeModel::DISCOUNT_SUBTRACT_PERCENTAGE	=> 'Subtract percentage form subtotal',
+                    CodeModel::DISCOUNT_SUBTRACT_SHIPPING   => 'Subtract fix amount form shipping'
                 ],
             ],
         ]);
