@@ -10,9 +10,13 @@
 
 namespace Shop\Controller\Voucher;
 
-use Shop\Form\Voucher\VoucherFieldSet;
+use Shop\Form\Voucher\Voucher;
+use Shop\Model\Customer\Customer;
+use Shop\Service\Cart\Cart;
+use Shop\Service\Customer\Customer as CustomerService;
 use Shop\ShopException;
-use UthandoCommon\Controller\AbstractCrudController;
+use UthandoCommon\Service\ServiceTrait;
+use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
 /**
@@ -20,16 +24,18 @@ use Zend\View\Model\ViewModel;
  *
  * @package Shop\Controller\Voucher
  */
-class VoucherCodes extends AbstractCrudController
+class VoucherCodes extends AbstractActionController
 {
-    protected $controllerSearchOverrides = array('sort' => 'voucherId');
-    protected $serviceName = 'ShopVoucherCode';
-    protected $route = 'admin/shop/voucher';
+    use ServiceTrait;
+
+    public function __construct()
+    {
+        $this->setServiceName('ShopVoucherCode');
+    }
 
     public function addVoucherAction()
     {
         $request = $this->getRequest();
-        $session = $this->sessionContainer(VoucherCodes::class);
 
         if (!$request->isXmlHttpRequest()) {
             throw new ShopException('Access denied.');
@@ -38,16 +44,38 @@ class VoucherCodes extends AbstractCrudController
         $viewModel = new ViewModel();
         $viewModel->setTerminal(true);
 
-        $form = $this->getService()->getForm(VoucherFieldSet::class);
+        $form = $this->getService()->getForm(Voucher::class, [
+            'cart'      => $this->getCart()->getCart(),
+            'customer'  => $this->getCustomer(),
+        ]);
         $post = $this->params()->fromPost();
 
         $form->setData($post);
 
         if ($form->isValid()) {
-            $this->getService()->storeVoucher($form);
+            $this->getService()->storeVoucher($form->getData());
             $this->redirect()->toRoute('shop/cart/view');
         }
 
         return $viewModel->setVariable('form', $form);
+    }
+
+    private function getCart() : ?Cart
+    {
+        return $this->getService('ShopCart');
+    }
+
+    private function getCustomer() : ?Customer
+    {
+        if ($this->identity()) {
+            $user = $this->identity();
+            /* @var CustomerService $customerService */
+            $customerService = $this->getService('ShopCustomer');
+            $customer = $customerService->getCustomerByUserId($user->getUserId());
+
+            return $customer;
+        }
+
+        return null;
     }
 }

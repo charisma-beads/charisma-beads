@@ -45,6 +45,7 @@ return [
             'Shop\Controller\Report'                => 'Shop\Controller\Report',
             'Shop\Controller\Settings'              => 'Shop\Controller\Settings',
             'Shop\Controller\Shop'                  => 'Shop\Controller\Shop',
+            \Shop\Controller\Voucher\VoucherAdmin::class    => \Shop\Controller\Voucher\VoucherAdmin::class,
             \Shop\Controller\Voucher\VoucherCodes::class    => \Shop\Controller\Voucher\VoucherCodes::class,
         ],
     ],
@@ -84,6 +85,7 @@ return [
             'ShopTaxRate'           => 'Shop\Form\Tax\Rate',
             'ShopFaq'               => 'Shop\Form\Faq',
             'ShopVoucherCode'       => \Shop\Form\Voucher\Code::class,
+            \Shop\Form\Voucher\Voucher::class => \Shop\Form\Voucher\Voucher::class,
 
             'ShopPaypalCredentialPairsFieldSet' => 'Shop\Form\Settings\Paypal\CredentialPairsFieldSet',
             'ShopPaypalCredentialSetFieldSet'   => 'Shop\Form\Settings\Paypal\CredentialSetFieldSet',

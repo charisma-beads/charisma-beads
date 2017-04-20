@@ -1,0 +1,25 @@
+
+<?php $form = $this->form;?>
+
+<!-- promotional code -->
+<form action="<?=$this->url('shop\voucher\add-voucher');?>" method="post" class="sky-form boxed cartContent">
+    <header class="styleColor">Have A Promotional Code?</header>
+
+    <fieldset>
+        <section>
+            <label class="input">
+                <input type="text" placeholder="Coupon Code" name="code" />
+                <span class="help-block">
+                    <?=$this->formElementErrors($form->get('code'), [
+                        'class' => 'list-unstyled text-danger'
+                    ]); ?>
+                </span>
+            </label>
+        </section>
+
+    </fieldset>
+    <footer>
+        <button type="submit" class="btn btn-default pull-right">APPLY</button>
+    </footer>
+</form>
+<!-- /promotional code -->

@@ -14,7 +14,7 @@ use TwbBundle\Form\View\Helper\TwbBundleForm;
 use Zend\Filter\StringToUpper;
 use Zend\Filter\StringTrim;
 use Zend\Filter\StripTags;
-use Zend\Form\Fieldset;
+use Zend\Form\Form;
 use Zend\I18n\Filter\Alnum;
 use Zend\I18n\Validator\Alnum as AlnumValidator;
 use Zend\InputFilter\InputFilterProviderInterface;
@@ -25,7 +25,7 @@ use Zend\Validator\StringLength;
  *
  * @package Shop\Form\Voucher
  */
-class VoucherFieldSet extends Fieldset implements InputFilterProviderInterface
+class Voucher extends Form implements InputFilterProviderInterface
 {
     public function init()
     {
@@ -33,7 +33,7 @@ class VoucherFieldSet extends Fieldset implements InputFilterProviderInterface
             'name' => 'code',
             'type' => Text::class,
             'attributes' => [
-                'placeholder' => 'Code',
+                'placeholder' => 'Voucher Code',
                 'autofocus' => true,
             ],
             'options' => [
@@ -71,6 +71,10 @@ class VoucherFieldSet extends Fieldset implements InputFilterProviderInterface
                         'encoding' => 'UTF-8',
                         'min' => 2,
                         'max' => 255,
+                    ]],
+                    ['name' => \Shop\Validator\Voucher::class, 'options' => [
+                        'customer'  => $this->getOption('customer'),
+                        'cart'      => $this->getOption('cart'),
                     ]],
                 ],
             ],

@@ -10,8 +10,11 @@
 
 namespace Shop\Service\Voucher;
 
-use Shop\Form\Voucher\VoucherFieldSet;
+use Shop\Form\Voucher\Voucher;
+use Shop\Mapper\Product\Category;
+use Shop\Model\Product\Category as CategoryModel;
 use Shop\Model\Voucher\Code as CodeModel;
+use Shop\Model\Voucher\ProductCategory;
 use UthandoCommon\Hydrator\Strategy\DateTime;
 use UthandoCommon\Service\AbstractMapperService;
 use Zend\EventManager\Event;
@@ -44,6 +47,37 @@ class Code extends AbstractMapperService
         $this->getEventManager()->attach([
             'pre.add', 'pre.edit'
         ], [$this, 'setupForm']);
+
+        $this->getEventManager()->attach([
+            'pre.save',
+        ], [$this, 'checkChildCategories']);
+    }
+
+    /**
+     * @param Event $e
+     */
+    public function checkChildCategories(Event $e)
+    {
+        /* @var CodeModel $data */
+        $data = $e->getParam('data');
+
+        /* @var $mapper Category */
+        $mapper = $this->getMapper('ShopProductCategory');
+
+        $categories = [];
+
+        /* @var ProductCategory $productCategory */
+        foreach ($data->getProductCategories() as $productCategory) {
+            $childCategories = $mapper->getSubCategoriesByParentId($productCategory->getCategoryId());
+
+            /* @var CategoryModel $category */
+            foreach ($childCategories as $category) {
+                $categories[] = $category->getProductCategoryId();
+            }
+        }
+
+        $data->getProductCategories()->fromArray($categories);
+        $e->setParam('data', $data);
     }
 
     /**
@@ -69,15 +103,10 @@ class Code extends AbstractMapperService
         $dateTimeStrategy->setHydrateFormat('d/m/Y');
     }
 
-    public function storeVoucher(VoucherFieldSet $form)
+    public function storeVoucher(array $data)
     {
-        $data = $form->getData();
-        $validVoucher = $this->checkVoucher($data['code']);
+        $code = $data['code'] ?? null;
+        
 
-    }
-
-    public function checkVoucher($code)
-    {
-        $voucher = $this->getMapper()->getVoucherByCode($code);
     }
 }

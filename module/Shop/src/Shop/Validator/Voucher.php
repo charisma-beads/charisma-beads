@@ -10,13 +10,11 @@
 
 namespace Shop\Validator;
 
-use Shop\Mapper\Product\Category;
 use Shop\Mapper\Voucher\Code as CodeMapper;
 use Shop\Mapper\Voucher\CustomerMap as CustomerMapMapper;
 use Shop\Model\Customer\Customer;
 use Shop\Model\Order\AbstractOrderCollection;
 use Shop\Model\Order\LineInterface;
-use Shop\Model\Product\Category as CategoryModel;
 use Shop\Model\Voucher\Code;
 use Shop\Model\Voucher\CustomerMap;
 use Zend\Hydrator\ClassMethods;
@@ -84,9 +82,10 @@ class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
     }
 
     /**
+     * @param $voucherId
      * @return null|CustomerMap
      */
-    public function getCustomerMap(): ?CustomerMap
+    public function getCustomerMap($voucherId): ?CustomerMap
     {
         /* @var $mapper CustomerMapMapper */
         $mapper = $this->getServiceLocator()
@@ -96,7 +95,7 @@ class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
                 'hydrator'  => ClassMethods::class,
             ]);
         $customerMap = $mapper->getByVoucherAndCustomerId(
-            $this->getVoucher()->getVoucherId(),
+            $voucherId,
             $this->getCustomer()->getCustomerId()
         );
 
@@ -137,32 +136,6 @@ class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
     {
         $this->cart = $cart;
         return $this;
-    }
-
-    /**
-     * @param $parentId
-     * @return array
-     */
-    public function getChildCategories($parentId): array
-    {
-        /* @var $mapper Category */
-        $mapper = $this->getServiceLocator()
-            ->get('UthandoMapperManager')
-            ->get('ShopProductCategory', [
-                'model'     => 'ShopProductCategory',
-                'hydrator'  => 'ShopProductCategory',
-            ]);
-
-        $childCategories = $mapper->getSubCategoriesByParentId($parentId);
-
-        $categories = [];
-
-        /* @var CategoryModel $category */
-        foreach ($childCategories as $category) {
-            $categories[] = $category->getProductCategoryId();
-        }
-
-        return $categories;
     }
 
     /**
@@ -234,17 +207,6 @@ class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
             /* @var LineInterface $item */
             foreach ($this->getCart() as $item) {
                 $catArray[] = $item->getMetadata()->getCategory()->getProductCategoryId();
-
-                if ($item->getMetadata()->getCategory()->hasChildren()) {
-                    array_merge(
-                        $catArray,
-                        $this->getChildCategories(
-                            $item->getMetadata()
-                                ->getCategory()
-                                ->getProductCategoryId()
-                        )
-                    );
-                }
             }
 
             if (!in_array($voucher->getProductCategories()->toArray(), $catArray)) {
@@ -255,7 +217,7 @@ class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
         }
 
         if ($this->getCustomer() instanceof Customer) {
-            $customerMap = $this->getCustomerMap();
+            $customerMap = $this->getCustomerMap($voucher->getVoucherId());
 
             // check customer zone
             if (in_array($this->getCustomer()->getDeliveryAddress()->getCountryId(), $voucher->getZones()->toArray())) {

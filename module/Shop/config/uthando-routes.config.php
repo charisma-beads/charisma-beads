@@ -265,8 +265,19 @@ return [
                                 'force-ssl' => 'ssl',
                             ]
                         ]
-                    ]
-                ]
+                    ],
+                    'voucher' => [
+                        'type' => 'Literal',
+                        'options' => [
+                            'route' => '/add-voucher',
+                            'defaults' => [
+                                'controller' => \Shop\Controller\Voucher\VoucherCodes::class,
+                                'action' => 'add-voucher',
+                                'force-ssl' => 'ssl',
+                            ],
+                        ],
+                    ],
+                ],
             ],
             'admin' => [
                 'child_routes' => [
@@ -1079,7 +1090,7 @@ return [
                                 'options' => [
                                     'route' => '/voucher',
                                     'defaults' => [
-                                        'controller' => \Shop\Controller\Voucher\VoucherCodes::class,
+                                        'controller' => \Shop\Controller\Voucher\VoucherAdmin::class,
                                         'action' => 'index',
                                         'force-ssl' => 'ssl'
                                     ],
