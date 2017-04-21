@@ -17,6 +17,7 @@ use Shop\Service\Customer\Customer as CustomerService;
 use Shop\ShopException;
 use UthandoCommon\Service\ServiceTrait;
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
 
 /**
@@ -54,7 +55,9 @@ class VoucherCodes extends AbstractActionController
 
         if ($form->isValid()) {
             $this->getService()->storeVoucher($form->getData());
-            $this->redirect()->toRoute('shop/cart/view');
+            return new JsonModel([
+                'href' => $this->url()->fromRoute('shop/cart'),
+            ]);
         }
 
         return $viewModel->setVariable('form', $form);

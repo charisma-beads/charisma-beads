@@ -106,7 +106,7 @@ class Code extends AbstractMapperService
     public function storeVoucher(array $data)
     {
         $code = $data['code'] ?? null;
-        
+
 
     }
 }

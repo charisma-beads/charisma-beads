@@ -151,21 +151,24 @@
         <!-- /shipping -->
 
         <!-- promotional code -->
-        <form action="#" method="post" class="sky-form boxed cartContent">
-            <header class="styleColor">Have A Promotional Code?</header>
+        <div id="voucher-code">
+            <form action="<?=$this->url('shop/voucher');?>" id="voucher-code-form" method="post" class="sky-form boxed
+            cartContent">
+                <header class="styleColor">Have A Promotional Code?</header>
 
-            <fieldset>
-                <section>
-                    <label class="input">
-                        <input type="text" placeholder="Coupon Code" />
-                    </label>
-                </section>
+                <fieldset>
+                    <section>
+                        <label class="input">
+                            <input type="text" placeholder="Coupon Code" name="code"/>
+                        </label>
+                    </section>
 
-            </fieldset>
-            <footer>
-                <button type="submit" class="btn btn-default pull-right">APPLY</button>
-            </footer>
-        </form>
+                </fieldset>
+                <footer>
+                    <button type="submit" class="btn btn-default pull-right">APPLY</button>
+                </footer>
+            </form>
+        </div>
         <!-- /promotional code -->
     </div>
 
@@ -225,3 +228,34 @@
 
     </div>
 </div>
+
+<?php $this->inlineScript()->captureStart(); ?>
+    $(document).ready(function() {
+
+        $('#voucher-code').on('submit', 'form', function (event) {
+            event.preventDefault();
+
+            var params = $(this).serialize();
+            var el = $(this).parent();
+            var url = $(this).attr('action');
+
+            $.ajax({
+                url : url,
+                data: params,
+                type: 'POST',
+                beforeSend : function() {
+                    $(el).html('<div class="text-center"><i class="fa fa-refresh fa-spin fa-3x"></i></div>');
+                },
+                success: function (response) {
+                    if ($.isPlainObject(response)) {
+                        console.log(response);
+                        window.location.replace(response.href);
+                        return response;
+                    } else {
+                        $(el).html(response);
+                    }
+                }
+            });
+        });
+    });
+<?php $this->inlineScript()->captureEnd(); ?>

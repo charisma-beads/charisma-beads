@@ -23,7 +23,7 @@ class CustomerMap extends AbstractDbMapper
     /**
      * @var string
      */
-    protected $table = 'customerMap';
+    protected $table = 'voucherCustomerMap';
 
     /**
      * @var string

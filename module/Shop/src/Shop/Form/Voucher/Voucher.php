@@ -14,6 +14,7 @@ use TwbBundle\Form\View\Helper\TwbBundleForm;
 use Zend\Filter\StringToUpper;
 use Zend\Filter\StringTrim;
 use Zend\Filter\StripTags;
+use Zend\Form\Element\Text;
 use Zend\Form\Form;
 use Zend\I18n\Filter\Alnum;
 use Zend\I18n\Validator\Alnum as AlnumValidator;
@@ -52,7 +53,7 @@ class Voucher extends Form implements InputFilterProviderInterface
     {
         return [
             'code' => [
-                'required' => false,
+                'required' => true,
                 'filters' => [
                     ['name' => StripTags::class],
                     ['name' => StringTrim::class],

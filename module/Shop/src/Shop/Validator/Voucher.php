@@ -43,7 +43,7 @@ class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
     protected $messageTemplates = [
         self::EXPIRED               => 'This voucher has expired',
         self::INVALID_CATEGORY      => 'There are no qualifying products in your order.',
-        self::INVALID_MINIMUM       => 'Your order total is not enough for your order to qualify for this voucher code',
+        self::INVALID_MINIMUM       => 'Your order total is not enough for you to qualify for this voucher code',
         self::INVALID_REDEEM        => 'This Voucher can be only redeemed at one of our fairs.',
         self::INVALID_VOUCHER       => 'This Voucher is not valid.',
         self::INVALID_ZONE          => 'This voucher is not for use in your country.',
@@ -67,10 +67,11 @@ class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
      * @param string $code
      * @return null|Code
      */
-    public function getVoucher($code): ?Code
+    public function getVoucher($code)
     {
         /* @var $mapper CodeMapper */
         $mapper = $this->getServiceLocator()
+            ->getServiceLocator()
             ->get('UthandoMapperManager')
             ->get('ShopVoucherCode', [
                 'model'     => 'ShopVoucherCode',
@@ -85,10 +86,11 @@ class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
      * @param $voucherId
      * @return null|CustomerMap
      */
-    public function getCustomerMap($voucherId): ?CustomerMap
+    public function getCustomerMap($voucherId)
     {
         /* @var $mapper CustomerMapMapper */
         $mapper = $this->getServiceLocator()
+            ->getServiceLocator()
             ->get('UthandoMapperManager')
             ->get(CustomerMapMapper::class, [
                 'model'     => CustomerMap::class,
@@ -105,7 +107,7 @@ class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
     /**
      * @return Customer
      */
-    public function getCustomer(): Customer
+    public function getCustomer()
     {
         return $this->customer;
     }
@@ -114,7 +116,7 @@ class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
      * @param Customer $customer
      * @return Voucher
      */
-    public function setCustomer(Customer $customer): Voucher
+    public function setCustomer(Customer $customer)
     {
         $this->customer = $customer;
         return $this;
@@ -123,7 +125,7 @@ class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
     /**
      * @return AbstractOrderCollection
      */
-    public function getCart(): AbstractOrderCollection
+    public function getCart()
     {
         return $this->cart;
     }
@@ -132,7 +134,7 @@ class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
      * @param AbstractOrderCollection $cart
      * @return Voucher
      */
-    public function setCart(AbstractOrderCollection $cart): Voucher
+    public function setCart(AbstractOrderCollection $cart)
     {
         $this->cart = $cart;
         return $this;
@@ -143,8 +145,9 @@ class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
      * @param null $context
      * @return bool
      */
-    public function isValid($value, $context = null): bool
+    public function isValid($value, $context = null)
     {
+
         $voucher = $this->getVoucher($value);
 
         if (!$voucher instanceof Code) {
@@ -193,10 +196,10 @@ class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
             return false;
         }
 
-        if ($this->getCart() instanceof AbstractOrderCollection && $voucher->getMinCartCost() > 0) {
+        if ($this->getCart() instanceof AbstractOrderCollection) {
 
             // minimum total
-            if ($this->getCart()->getSubTotal() < $voucher->getMinCartCost()) {
+            if ($voucher->getMinCartCost() > 0 && $this->getCart()->getSubTotal() < $voucher->getMinCartCost()) {
                 $this->error(self::INVALID_MINIMUM);
                 return false;
             }
@@ -209,7 +212,7 @@ class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
                 $catArray[] = $item->getMetadata()->getCategory()->getProductCategoryId();
             }
 
-            if (!in_array($voucher->getProductCategories()->toArray(), $catArray)) {
+            if (empty(array_intersect($catArray, $voucher->getProductCategories()->toArray()))) {
                 $this->error(self::INVALID_CATEGORY);
                 return false;
             }
@@ -217,10 +220,12 @@ class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
         }
 
         if ($this->getCustomer() instanceof Customer) {
-            $customerMap = $this->getCustomerMap($voucher->getVoucherId());
+
+            $customerMap    = $this->getCustomerMap($voucher->getVoucherId());
+            $zone           = $this->getCustomer()->getDeliveryAddress()->getCountry()->getPostZoneId();
 
             // check customer zone
-            if (in_array($this->getCustomer()->getDeliveryAddress()->getCountryId(), $voucher->getZones()->toArray())) {
+            if (!in_array($zone, $voucher->getZones()->toArray())) {
                 $this->error(self::INVALID_ZONE);
                 return false;
             }
