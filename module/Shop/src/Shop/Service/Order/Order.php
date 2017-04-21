@@ -139,7 +139,7 @@ class Order extends AbstractOrder
         /* @var $cart Cart */
         $cart = $this->getService('ShopCart');
 
-        if ('Collect At Store' == $this->getOrderModel()->getMetadata()->getShippingMethod()) {
+        if ('Collect at Open Day' == $this->getOrderModel()->getMetadata()->getShippingMethod()) {
             $cart->setShippingCost(null, true);
         } else {
             $cart->setShippingCost(
@@ -208,7 +208,7 @@ class Order extends AbstractOrder
             ->setEmail($customer->getEmail());
 
         if (true === $collectInStore) {
-            $metadata->setShippingMethod('Collect At Store');
+            $metadata->setShippingMethod('Collect at Open Day');
         }
 
         $data = [

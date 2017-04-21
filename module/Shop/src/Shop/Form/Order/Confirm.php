@@ -43,7 +43,7 @@ class Confirm extends Form
             'name'			=> 'collect_instore',
             'type'			=> 'checkbox',
             'options'		=> [
-                'label'			=> 'Collect Instore',
+                'label'			=> 'Collect at Open Day',
                 'required' 		=> false,
                 'use_hidden_element' => true,
                 'checked_value' => '1',
