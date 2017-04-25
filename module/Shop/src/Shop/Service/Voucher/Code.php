@@ -1,4 +1,6 @@
 <?php
+use Shop\Service\Cart\Cart;
+
 /**
  * charisma-beads (http://www.shaunfreeman.co.uk/)
  *
@@ -10,7 +12,6 @@
 
 namespace Shop\Service\Voucher;
 
-use Shop\Form\Voucher\Voucher;
 use Shop\Mapper\Product\Category;
 use Shop\Model\Product\Category as CategoryModel;
 use Shop\Model\Voucher\Code as CodeModel;
@@ -101,12 +102,5 @@ class Code extends AbstractMapperService
         $dateTimeStrategy->setHydrateFormat('d/m/Y');
         $dateTimeStrategy = $hydrator->getStrategy('expiry');
         $dateTimeStrategy->setHydrateFormat('d/m/Y');
-    }
-
-    public function storeVoucher(array $data)
-    {
-        $code = $data['code'] ?? null;
-
-
     }
 }

@@ -68,6 +68,12 @@ class Cart extends AbstractActionController
 
     public function viewAction()
     {
+        $viewModel = new ViewModel();
+
+        if ($this->getRequest()->isXmlHttpRequest()) {
+            $viewModel->setTerminal(true);
+        }
+
         $session = $this->sessionContainer('ShopCart');
         $countryId = $this->params()->fromPost('countryId', $session->offsetGet('countryId'));
 
@@ -93,9 +99,7 @@ class Cart extends AbstractActionController
 
         $session->offsetSet('countryId', $countryId);
 
-        return new ViewModel(array(
-            'countryId' => $countryId
-        ));
+        return $viewModel->setVariable('countryId', $countryId);
     }
 
     public function removeAction()

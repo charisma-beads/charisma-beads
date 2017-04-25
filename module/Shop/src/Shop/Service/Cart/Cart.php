@@ -124,6 +124,16 @@ class Cart extends AbstractOrder implements InitializableInterface
     }
 
     /**
+     * Calculate totals and check voucher
+     */
+    public function calculateTotals()
+    {
+        parent::calculateTotals();
+
+        $this->getEventManager()->trigger('cart.voucher', $this);
+    }
+
+    /**
      * @param $verifier
      * @return CartModel
      */

@@ -51,6 +51,7 @@ class Codes extends AbstractHydrator
         return [
             'voucherId'         => $object->getVoucherId(),
             'code'              => $object->getCode(),
+            'description'       => $object->getDescription(),
             'active'            => $this->extractValue('active', $object->isActive()),
             'redeemable'        => $object->getRedeemable(),
             'quantity'          => $object->getQuantity(),
@@ -58,6 +59,7 @@ class Codes extends AbstractHydrator
             'noPerCustomer'     => $object->getNoPerCustomer(),
             'minCartCost'       => $object->getMinCartCost(),
             'discountOperation' => $object->getDiscountOperation(),
+            'discountAmount'    => $object->getDiscountAmount(),
             'startDate'         => $this->extractValue('startDate', $object->getStartDate()),
             'expiry'            => $this->extractValue('expiry', $object->getExpiry()),
             'productCategories' => $this->extractValue('productCategories', $object->getProductCategories()),

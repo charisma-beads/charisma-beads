@@ -82,6 +82,24 @@ class Code extends Form
         ]);
 
         $this->add([
+            'name' => 'description',
+            'type' => Text::class,
+            'attributes' => [
+                'placeholder' => 'Description',
+                'autofocus' => true,
+            ],
+            'options' => [
+                'label' => 'Description',
+                'required' => false,
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'sm-10',
+                'label_attributes' => [
+                    'class' => 'col-sm-2',
+                ],
+            ],
+        ]);
+
+        $this->add([
             'name' => 'quantity',
             'type' => Number::class,
             'attributes' => [
@@ -125,6 +143,7 @@ class Code extends Form
                 'min' => '-1',
                 'step' => '1',
                 'autofocus' => true,
+                'value' => '-1',
             ],
             'options' => [
                 'label' => 'No. Per Customer',
@@ -154,7 +173,7 @@ class Code extends Form
                 'label_attributes' => [
                     'class' => 'col-sm-2',
                 ],
-                'help-block' => 'Enter the minimum cost or percentage this voucher will be valid for. Do not include the currency sign or commas or % sign.',
+                'help-block' => 'Enter the minimum cost this voucher will be valid for. Do not include the currency sign or commas.',
             ],
         ]);
 
@@ -170,10 +189,33 @@ class Code extends Form
                 ],
                 'empty_option' => '---Please select option---',
                 'value_options' => [
-                    CodeModel::DISCOUNT_SUBTRACT_TOTAL	    => 'Subtract fix amount from subtotal',
-                    CodeModel::DISCOUNT_SUBTRACT_PERCENTAGE	=> 'Subtract percentage form subtotal',
-                    CodeModel::DISCOUNT_SUBTRACT_SHIPPING   => 'Subtract fix amount form shipping'
+                    CodeModel::DISCOUNT_CATEGORY            => 'Subtract fixed amount from qualifying products only',
+                    CodeModel::DISCOUNT_CATEGORY_PERCENTAGE => 'Subtract percentage from qualifying products only',
+                    CodeModel::DISCOUNT_SUBTOTAL	        => 'Subtract fixed amount from subtotal',
+                    CodeModel::DISCOUNT_SUBTOTAL_PERCENTAGE	=> 'Subtract percentage form subtotal',
+                    CodeModel::DISCOUNT_SHIPPING            => 'Subtract fixed amount form shipping',
+                    CodeModel::DISCOUNT_SHIPPING_PERCENTAGE => 'Subtract percentage from shipping',
                 ],
+            ],
+        ]);
+
+        $this->add([
+            'name' => 'discountAmount',
+            'type' => Number::class,
+            'attributes' => [
+                'autofocus' => true,
+                'min' => '0.00',
+                'step' => '0.01',
+                'value' => '0.00',
+            ],
+            'options' => [
+                'label' => 'Discount Amount',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'sm-10',
+                'label_attributes' => [
+                    'class' => 'col-sm-2',
+                ],
+                'help-block' => 'Enter the cost or percentage this voucher will be apply. Do not include the currency sign or commas or % sign.',
             ],
         ]);
 

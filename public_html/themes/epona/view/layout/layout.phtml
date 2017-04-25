@@ -393,9 +393,11 @@
                 ]);?>',
                 //theme: 'light-bottom',
             };
+            shopBasePath = '<?=$this->basePath();?>';
         </script>
         <!-- JAVASCRIPT FILES -->
         <?=$this->inlineScript()
+            ->prependFile($this->basePath('/js/shop.js'))
             ->prependFile($this->themePath('/assets/js/scripts.js'))
             ->prependFile($this->basePath('/js/loading-overlay.min.js'))
             ->prependFile($this->themePath('/assets/js/revolution_slider.js'))

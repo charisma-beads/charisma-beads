@@ -68,6 +68,22 @@ class Code extends InputFilter implements ServiceLocatorAwareInterface
         ]);
 
         $this->add([
+            'name' => 'description',
+            'required' => true,
+            'filters' => [
+                ['name' => StripTags::class],
+                ['name' => StringTrim::class],
+            ],
+            'validators' => [
+                ['name' => StringLength::class, 'options' => [
+                    'encoding' => 'UTF-8',
+                    'min' => 10,
+                    'max' => 255,
+                ]],
+            ],
+        ]);
+
+        $this->add([
             'name' => 'active',
             'required' => false,
             'allow_empty' => true,
@@ -125,6 +141,19 @@ class Code extends InputFilter implements ServiceLocatorAwareInterface
 
         $this->add([
             'name' => 'minCartCost',
+            'required' => true,
+            'filters' => [
+                ['name' => StripTags::class],
+                ['name' => StringTrim::class],
+                ['name' => NumberFormat::class],
+            ],
+            'validators' => [
+                ['name' => IsFloat::class],
+            ],
+        ]);
+
+        $this->add([
+            'name' => 'discountAmount',
             'required' => true,
             'filters' => [
                 ['name' => StripTags::class],

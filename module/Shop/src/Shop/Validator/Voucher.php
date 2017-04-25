@@ -162,7 +162,7 @@ class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
 
         // not active
         if (!$voucher->isActive()) {
-            $this->$this->error(self::NOT_ACTIVE);
+            $this->error(self::NOT_ACTIVE);
             return false;
         }
 
@@ -177,14 +177,14 @@ class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
         $todayEnd   = new \DateTime('midnight tomorrow');
 
         // out of date
-        if ($todayStart->getTimestamp() < $voucher->getStartDate()->getTimestamp()) {
+        if ($todayStart->getTimestamp() > $voucher->getStartDate()->getTimestamp()) {
             $this->error(self::OUT_OF_DATE_VOUCHER);
             return false;
         }
 
         if (
             $voucher->getExpiry() instanceof \DateTime &&
-            $todayEnd->getTimestamp() > $voucher->getExpiry()->getTimestamp()
+            $todayEnd->getTimestamp() < $voucher->getExpiry()->getTimestamp()
         ) {
             $this->error(self::EXPIRED);
             return false;

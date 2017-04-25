@@ -23,9 +23,12 @@ class Code implements ModelInterface
 {
     use Model;
 
-    const DISCOUNT_SUBTRACT_TOTAL       = '-';
-    const DISCOUNT_SUBTRACT_PERCENTAGE  = '%';
-    const DISCOUNT_SUBTRACT_SHIPPING    = 's';
+    const DISCOUNT_SUBTOTAL             = '-';
+    const DISCOUNT_SUBTOTAL_PERCENTAGE  = '%';
+    const DISCOUNT_CATEGORY             = '-c';
+    const DISCOUNT_CATEGORY_PERCENTAGE  = '%c';
+    const DISCOUNT_SHIPPING             = '-s';
+    const DISCOUNT_SHIPPING_PERCENTAGE  = '%s';
 
     const REDEEM_WEB    = 'web';
     const REDEEM_FAIR   = 'fairs';
@@ -40,6 +43,11 @@ class Code implements ModelInterface
      * @var string
      */
     protected $code;
+
+    /**
+     * @var string
+     */
+    protected $description;
 
     /**
      * @var bool
@@ -77,6 +85,11 @@ class Code implements ModelInterface
     protected $discountOperation;
 
     /**
+     * @var float
+     */
+    protected $discountAmount;
+
+    /**
      * @var DateTime
      */
     protected $startDate;
@@ -108,7 +121,7 @@ class Code implements ModelInterface
      * @param int $voucherId
      * @return Code
      */
-    public function setVoucherId(int $voucherId)
+    public function setVoucherId($voucherId)
     {
         $this->voucherId = $voucherId;
         return $this;
@@ -129,6 +142,24 @@ class Code implements ModelInterface
     public function setCode(string $code)
     {
         $this->code = $code;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     * @return Code
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
         return $this;
     }
 
@@ -154,7 +185,7 @@ class Code implements ModelInterface
      * @param bool $active
      * @return Code
      */
-    public function setActive(bool $active)
+    public function setActive($active)
     {
         $this->active = $active;
         return $this;
@@ -188,7 +219,7 @@ class Code implements ModelInterface
      * @param int $quantity
      * @return Code
      */
-    public function setQuantity(int $quantity)
+    public function setQuantity($quantity)
     {
         $this->quantity = $quantity;
         return $this;
@@ -197,7 +228,7 @@ class Code implements ModelInterface
     /**
      * @return bool
      */
-    public function isLimitCustomer(): bool
+    public function isLimitCustomer()
     {
         return $this->limitCustomer;
     }
@@ -205,7 +236,7 @@ class Code implements ModelInterface
     /**
      * @param bool $limitCustomer
      */
-    public function setLimitCustomer(bool $limitCustomer)
+    public function setLimitCustomer($limitCustomer)
     {
         $this->limitCustomer = $limitCustomer;
     }
@@ -213,7 +244,7 @@ class Code implements ModelInterface
     /**
      * @return int
      */
-    public function getNoPerCustomer(): int
+    public function getNoPerCustomer()
     {
         return $this->noPerCustomer;
     }
@@ -221,7 +252,7 @@ class Code implements ModelInterface
     /**
      * @param int $noPerCustomer
      */
-    public function setNoPerCustomer(int $noPerCustomer)
+    public function setNoPerCustomer($noPerCustomer)
     {
         $this->noPerCustomer = $noPerCustomer;
     }
@@ -238,7 +269,7 @@ class Code implements ModelInterface
      * @param float $minCartCost
      * @return Code
      */
-    public function setMinCartCost(float $minCartCost)
+    public function setMinCartCost($minCartCost)
     {
         $this->minCartCost = $minCartCost;
         return $this;
@@ -253,10 +284,28 @@ class Code implements ModelInterface
     }
 
     /**
+     * @return float
+     */
+    public function getDiscountAmount()
+    {
+        return $this->discountAmount;
+    }
+
+    /**
+     * @param float $discountAmount
+     * @return Code
+     */
+    public function setDiscountAmount($discountAmount)
+    {
+        $this->discountAmount = $discountAmount;
+        return $this;
+    }
+
+    /**
      * @param string $discountOperation
      * @return Code
      */
-    public function setDiscountOperation(string $discountOperation)
+    public function setDiscountOperation($discountOperation)
     {
         $this->discountOperation = $discountOperation;
         return $this;
@@ -342,6 +391,7 @@ class Code implements ModelInterface
         return [
             'voucherId'         => $this->getVoucherId(),
             'code'              => $this->getCode(),
+            'description'       => $this->getDescription(),
             'active'            => $this->isActive(),
             'redeemable'        => $this->getRedeemable(),
             'quantity'          => $this->getQuantity(),
@@ -349,6 +399,7 @@ class Code implements ModelInterface
             'noPerCustomer'     => $this->getNoPerCustomer(),
             'minCartCost'       => $this->getMinCartCost(),
             'discountOperation' => $this->getDiscountOperation(),
+            'discountAmount'    => $this->getDiscountAmount(),
             'startDate'         => $this->getStartDate(),
             'expiry'            => $this->getExpiry(),
             'productCategories' => $this->getProductCategories()->toArray(),

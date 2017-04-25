@@ -65,14 +65,14 @@ abstract class AbstractOrderCollection extends AbstractCollection implements Mod
     protected $sorted = false;
 
     /**
-     * @var string
-     */
-    protected $sortOrder;
-
-    /**
      * @var bool
      */
     protected $autoIncrementQuantity = false;
+
+    /**
+     * @var float
+     */
+    protected $discount = 0;
 
     /**
      * @return int
@@ -120,7 +120,7 @@ abstract class AbstractOrderCollection extends AbstractCollection implements Mod
      */
     public function getTotal(): float
     {
-        return $this->total;
+        return $this->total - $this->discount;
     }
 
     /**
@@ -184,6 +184,24 @@ abstract class AbstractOrderCollection extends AbstractCollection implements Mod
     public function setTaxTotal($taxTotal)
     {
         $this->taxTotal = $taxTotal;
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getDiscount()
+    {
+        return $this->discount;
+    }
+
+    /**
+     * @param float $discount
+     * @return $this
+     */
+    public function setDiscount($discount)
+    {
+        $this->discount = $discount;
         return $this;
     }
 

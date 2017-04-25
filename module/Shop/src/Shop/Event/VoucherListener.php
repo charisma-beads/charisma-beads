@@ -10,13 +10,14 @@
 
 namespace Shop\Event;
 
+use Shop\Model\Voucher\Code;
 use Shop\Service\Cart\Cart;
-use Shop\Service\Order\AbstractOrder;
-use Shop\Service\Order\Order;
+use Shop\Validator\Voucher;
 use Zend\EventManager\Event;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\EventManager\ListenerAggregateTrait;
+use Zend\Mvc\Controller\Plugin\FlashMessenger;
 
 /**
  * Class VoucherListener
@@ -35,18 +36,108 @@ class VoucherListener implements ListenerAggregateInterface
         $events = $events->getSharedManager();
 
         $this->listeners[] = $events->attach(
-            [Cart::class, Order::class],
-            ['voucher.check'],
-            [$this, 'check']
+            [Cart::class],
+            ['cart.voucher'],
+            [$this, 'cartVoucher']
         );
     }
 
     /**
      * @param Event $e
      */
-    public function check(Event $e)
+    public function cartVoucher(Event $e)
     {
-        \ChromePhp::info(__METHOD__);
+        /* @var Cart $service */
+        $service = $e->getTarget();
+        $voucher = $service->getContainer()->offsetGet('voucher');
+
+        if (!$voucher) {
+            return;
+        }
+
+        /* @var Voucher $voucherValidator */
+        $voucherValidator = $service->getServiceLocator()
+            ->get('ValidatorManager')
+            ->get(Voucher::class);
+
+        $voucherValidator->setCart($service->getCart());
+
+        if (!$voucherValidator->isValid($voucher)) {
+            $flashMessenger = new FlashMessenger();
+
+            foreach ($voucherValidator->getMessages() as $message) {
+                $flashMessenger->addErrorMessage($message);
+            }
+
+            $service->getContainer()->offsetSet('voucher', null);
+
+            return;
+        }
+
+        $voucher = $voucherValidator->getVoucher($voucher);
+
+        // qualified items
+        $items = [];
+        $voucherCategories = $voucher->getProductCategories()->toArray();
+
+        /* @var \Shop\Model\Cart\Item $item */
+        foreach ($service->getCart() as $key => $item) {
+            if (in_array($item->getMetadata()->getCategory()->getProductCategoryId(), $voucherCategories)) {
+                $items[] = $item;
+            }
+        }
+
+        $discount = 0;
+
+        if (Code::DISCOUNT_SUBTOTAL === $voucher->getDiscountOperation()) {
+            $subTotal = $service->getSubTotal();
+
+            if ($voucher->getDiscountAmount() > $subTotal) {
+                $discount = $subTotal;
+            } else {
+                $discount = $voucher->getDiscountAmount();
+            }
+
+        } elseif (Code::DISCOUNT_SUBTOTAL_PERCENTAGE === $voucher->getDiscountOperation()) {
+            $subTotal = $service->getSubTotal();
+            $discount = (($subTotal) / 100) * $voucher->getDiscountAmount();
+
+        } elseif (Code::DISCOUNT_CATEGORY === $voucher->getDiscountOperation()) {
+            $catSubTotal = 0;
+
+            foreach ($items as $item) {
+                $catSubTotal += $item->getPrice() * $item->getQuantity();
+                $discount += $voucher->getDiscountAmount() * $item->getQuantity();
+            }
+
+            if ($discount > $catSubTotal) {
+                $discount = $catSubTotal;
+            }
+
+        } elseif (Code::DISCOUNT_CATEGORY_PERCENTAGE === $voucher->getDiscountOperation()) {
+            $catSubTotal = 0;
+
+            foreach ($items as $item) {
+                $catSubTotal += $item->getPrice() * $item->getQuantity();
+            }
+
+            $discount = (($catSubTotal) / 100) * $voucher->getDiscountAmount();
+
+        } elseif (Code::DISCOUNT_SHIPPING === $voucher->getDiscountOperation()) {
+            $shipping = $service->getShippingCost() + $service->getShippingTax();
+
+            if ($voucher->getDiscountAmount() > $shipping) {
+                $discount = $shipping;
+            } else {
+                $discount = $voucher->getDiscountAmount();
+            }
+
+        } elseif (Code::DISCOUNT_SHIPPING_PERCENTAGE === $voucher->getDiscountOperation()) {
+            $shipping = $service->getShippingCost() + $service->getShippingTax();
+            $discount = (($shipping) / 100) * $voucher->getDiscountAmount();
+        }
+
+        $service->getCart()->setDiscount($discount);
 
     }
 }

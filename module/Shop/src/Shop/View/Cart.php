@@ -128,6 +128,15 @@ class Cart extends AbstractViewHelper
     /**
      * @return string
      */
+    public function getDiscount()
+    {
+        $amount = $this->getCart()->getDiscount();
+        return $this->formatAmount(-$amount);
+    }
+
+    /**
+     * @return string
+     */
     public function getSubTotal()
     {
         $amount = $this->cartService->getSubTotal();

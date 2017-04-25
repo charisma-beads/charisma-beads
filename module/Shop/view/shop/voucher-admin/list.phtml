@@ -7,6 +7,7 @@
                 <th data-field="active">&nbsp;</th>
     			<th data-field="voucherId">Voucher Id</th>
     			<th data-field="code">Code</th>
+                <th data-field="description">Description</th>
                 <th data-field="startDate">Start Date</th>
                 <th data-field="endDate">End Date</th>
     			<th>Actions</th>
@@ -26,6 +27,7 @@
                 </td>
     			<td><?=$this->escapeHtml($row->getVoucherId()); ?></td>
     			<td><?=$this->escapeHtml($row->getCode()); ?></td>
+                <td><?=$this->escapeHtml($row->getDescription()); ?></td>
                 <td><?=$this->formatDate($row->getStartDate(), 'd/m/Y'); ?></td>
                 <td><?=$this->formatDate($row->getExpiry(), 'd/m/Y'); ?></td>
     			<td>

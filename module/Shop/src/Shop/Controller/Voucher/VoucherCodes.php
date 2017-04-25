@@ -17,6 +17,7 @@ use Shop\Service\Customer\Customer as CustomerService;
 use Shop\ShopException;
 use UthandoCommon\Service\ServiceTrait;
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\Session\Container;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
 
@@ -24,6 +25,7 @@ use Zend\View\Model\ViewModel;
  * Class Code
  *
  * @package Shop\Controller\Voucher
+ * @method Container sessionContainer($sessionName = null)
  */
 class VoucherCodes extends AbstractActionController
 {
@@ -54,9 +56,13 @@ class VoucherCodes extends AbstractActionController
         $form->setData($post);
 
         if ($form->isValid()) {
-            $this->getService()->storeVoucher($form->getData());
+            $data = $form->getData();
+
+            $session = $this->sessionContainer('ShopCart');
+            $session->offsetSet('voucher', $data['code']);
+
             return new JsonModel([
-                'href' => $this->url()->fromRoute('shop/cart'),
+                'success' => true,
             ]);
         }
 
