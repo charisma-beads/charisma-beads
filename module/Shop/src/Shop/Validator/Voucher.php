@@ -172,19 +172,22 @@ class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
             return false;
         }
 
-        // get the start and end of day today.
-        $todayStart = new \DateTime('midnight today');
-        $todayEnd   = new \DateTime('midnight tomorrow');
+        // get the the time
+        $now = new \DateTime();
+
+        // set start and end time of voucher
+        $voucher->getStartDate()->setTime(00,00,00);
+        $voucher->getExpiry()->setTime(23,59,59);
 
         // out of date
-        if ($todayStart->getTimestamp() > $voucher->getStartDate()->getTimestamp()) {
+        if ($now->getTimestamp() < $voucher->getStartDate()->getTimestamp()) {
             $this->error(self::OUT_OF_DATE_VOUCHER);
             return false;
         }
 
         if (
             $voucher->getExpiry() instanceof \DateTime &&
-            $todayEnd->getTimestamp() < $voucher->getExpiry()->getTimestamp()
+            $now->getTimestamp() > $voucher->getExpiry()->getTimestamp()
         ) {
             $this->error(self::EXPIRED);
             return false;

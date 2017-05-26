@@ -104,12 +104,17 @@
 	<?php endforeach; ?>
 	<tr>
         <td colspan="2">&nbsp;</td>
-	    <th colspan="2" class="text-right">Postage:</th>
+	    <th colspan="2" class="text-right">Postage</th>
 	    <td class="text-right"><?=$this->priceFormat($this->order->getShipping() + $this->order->getShippingTax());?></td>
 	</tr>
-	<tr>
+    <tr>
+        <td colspan="2"> </td>
+        <th colspan="2" class="text-right">Coupon Discount</th>
+        <td class="text-right"><?=$this->priceFormat(-$this->order->getDiscount());?></td>
+    </tr>
+    <tr>
         <td colspan="2">&nbsp;</td>
-	    <th colspan="2" class="text-right">Total:</th>
+	    <th colspan="2" class="text-right">Total</th>
 	    <td class="text-right"><?=$this->priceFormat($this->order->getTotal() + $this->order->getTaxTotal());?></td>
 	</tr>
 </table>

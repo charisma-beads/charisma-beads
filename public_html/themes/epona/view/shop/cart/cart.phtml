@@ -1,0 +1,124 @@
+<?php $checkout = ($this->checkout === true) ?: false; ?>
+<!-- cart content -->
+<div id="cartContent">
+    <!-- cart header -->
+    <div class="item head">
+        <span class="cart_img"></span>
+        <span class="product_name fsize13 bold">PRODUCT NAME</span>
+        <span class="remove_item fsize13 bold"></span>
+        <span class="total_price fsize13 bold">TOTAL</span>
+        <?php if ($this->shopOption('vatState')): ?>
+            <span class="tax fsize13 bold">VAT</span>
+        <?php endif;?>
+        <span class="qty fsize13 bold">QUANTITY</span>
+
+        <div class="clearfix"></div>
+    </div>
+    <!-- /cart header -->
+
+    <?php /* @var $item \Shop\Model\Cart\Item */ ?>
+    <?php foreach ($this->cart()->getCart() as $item): ?>
+        <!-- cart item -->
+        <div class="item">
+            <?php if ($item->getMetadata()->getShowImage()):?>
+                <div class="cart_img">
+                    <img src="<?=$this->productImage($item->getMetadata()->getImage(), 'thumb');?>" alt="" width="60">
+                </div>
+            <?php endif;?>
+            <?php /* @var $product \Shop\Model\Product\Product */ ?>
+            <?php $product = $this->productHelper($item->getMetadata()->getProductId());?>
+            <a href="<?=$this->url('shop/catalog/product', [
+                'categoryIdent' => $product->getProductCategory()->getIdent(),
+                'productIdent' => $product->getIdent(),
+            ]);?>" class="product_name">
+                <span><?=$item->getMetadata()->getSku();?></span>
+                <small><?=$item->getMetadata()->getName();?>
+                    <?php if ($item->getMetadata()->getOption()): ?>
+                        &nbsp;(<?=$item->getMetadata()->getOption()->getOption();?>)
+                    <?php endif; ?>
+                </small>
+            </a>
+            <?php if (!$checkout): ?>
+            <a href="<?=$this->url('shop/cart', array(
+                'action'	=> 'remove',
+                'id'		=> $item->getCartItemId()
+            ));?>" class="remove_item"><i class="fa fa-times"></i></a>
+            <?php else:?>
+                <span class="remove_item">&nbsp;</span>
+            <?php endif;?>
+            <div class="total_price"><span><?=$this->cart()->getLineCost($item);?></span></div>
+
+            <?php if ($this->shopOption('vatState')): ?>
+                <div class="tax"><span><?=$this->cart()->getLineTax($item);?></span></div>
+            <?php endif;?>
+
+            <div class="qty">
+                <?php if (!$checkout): ?>
+                <input type="number" value="<?=$item->getQuantity();?>" name="quantity[<?=$item->getCartItemId();?>]" maxlength="3" />
+                <?php else:?>
+                    <?=$item->getQuantity();?>&nbsp;
+                <?php endif;?>
+                &times; <?=$this->cart()->formatAmount($item->getPrice());?>
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+        <!-- /cart item -->
+    <?php endforeach; ?>
+    <!-- cart total -->
+    <div class="total pull-right">
+        <small>
+            Shipping: <?=$this->cart()->getShippingTotal($this->countryId);?>
+        </small>
+        <small>
+            Coupon Discount: <?=$this->cart()->getDiscount();?>
+        </small>
+        <?php if ($this->shopOption('vatState')): ?>
+            <small>
+                VAT Total: <?=$this->cart()->getTaxTotal();?>
+            </small>
+        <?php endif;?>
+        <span class="totalToPay">
+            TOTAL: <?=$this->cart()->getTotal();?>
+        </span>
+
+    </div>
+    <!-- /cart total -->
+    <?php if (!$checkout): ?>
+    <!-- update cart -->
+    <button type="submit" name="update" class="btn_update btn btn-default btn-md pull-right" value="update">
+        Update Cart
+    </button>
+    <!-- /update cart -->
+    <a class="btn_update btn btn-danger btn-md pull-right" data-toggle="modal" data-target="#empty-cart">Empty Cart</a>
+    <div class="clearfix"></div>
+
+    <!-- empty cart modal -->
+
+    <div id="empty-cart" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+
+                <div class="modal-header"><!-- modal header -->
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Empty Cart</h4>
+                </div><!-- /modal header -->
+
+                <!-- modal body -->
+                <div class="modal-body">
+                    Do you really want to empty your shopping cart?
+                </div>
+                <!-- /modal body -->
+
+                <div class="modal-footer"><!-- modal footer -->
+                    <a class="btn btn-danger" href="<?=$this->url('shop/cart', [
+                        'action' => 'empty'
+                    ]);?>">Yes</a> <a class="btn btn-primary" data-dismiss="modal">No</a>
+                </div><!-- /modal footer -->
+
+            </div>
+        </div>
+    </div>
+    <?php endif; ?>
+</div>
+<!-- /cart content -->

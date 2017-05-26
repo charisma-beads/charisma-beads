@@ -12,6 +12,7 @@ namespace Shop\Event;
 
 use Shop\Model\Voucher\Code;
 use Shop\Service\Cart\Cart;
+use Shop\Service\Order\Order;
 use Shop\Validator\Voucher;
 use Zend\EventManager\Event;
 use Zend\EventManager\EventManagerInterface;
@@ -37,9 +38,20 @@ class VoucherListener implements ListenerAggregateInterface
 
         $this->listeners[] = $events->attach(
             [Cart::class],
-            ['cart.voucher'],
+            ['voucher.add'],
             [$this, 'cartVoucher']
         );
+
+        $this->listeners[] = $events->attach(
+            [Order::class],
+            ['voucher.use'],
+            [$this, 'useVoucher']
+        );
+    }
+
+    public function useVoucher(Event $e)
+    {
+
     }
 
     /**
@@ -76,68 +88,10 @@ class VoucherListener implements ListenerAggregateInterface
 
         $voucher = $voucherValidator->getVoucher($voucher);
 
-        // qualified items
-        $items = [];
-        $voucherCategories = $voucher->getProductCategories()->toArray();
-
-        /* @var \Shop\Model\Cart\Item $item */
-        foreach ($service->getCart() as $key => $item) {
-            if (in_array($item->getMetadata()->getCategory()->getProductCategoryId(), $voucherCategories)) {
-                $items[] = $item;
-            }
-        }
-
-        $discount = 0;
-
-        if (Code::DISCOUNT_SUBTOTAL === $voucher->getDiscountOperation()) {
-            $subTotal = $service->getSubTotal();
-
-            if ($voucher->getDiscountAmount() > $subTotal) {
-                $discount = $subTotal;
-            } else {
-                $discount = $voucher->getDiscountAmount();
-            }
-
-        } elseif (Code::DISCOUNT_SUBTOTAL_PERCENTAGE === $voucher->getDiscountOperation()) {
-            $subTotal = $service->getSubTotal();
-            $discount = (($subTotal) / 100) * $voucher->getDiscountAmount();
-
-        } elseif (Code::DISCOUNT_CATEGORY === $voucher->getDiscountOperation()) {
-            $catSubTotal = 0;
-
-            foreach ($items as $item) {
-                $catSubTotal += $item->getPrice() * $item->getQuantity();
-                $discount += $voucher->getDiscountAmount() * $item->getQuantity();
-            }
-
-            if ($discount > $catSubTotal) {
-                $discount = $catSubTotal;
-            }
-
-        } elseif (Code::DISCOUNT_CATEGORY_PERCENTAGE === $voucher->getDiscountOperation()) {
-            $catSubTotal = 0;
-
-            foreach ($items as $item) {
-                $catSubTotal += $item->getPrice() * $item->getQuantity();
-            }
-
-            $discount = (($catSubTotal) / 100) * $voucher->getDiscountAmount();
-
-        } elseif (Code::DISCOUNT_SHIPPING === $voucher->getDiscountOperation()) {
-            $shipping = $service->getShippingCost() + $service->getShippingTax();
-
-            if ($voucher->getDiscountAmount() > $shipping) {
-                $discount = $shipping;
-            } else {
-                $discount = $voucher->getDiscountAmount();
-            }
-
-        } elseif (Code::DISCOUNT_SHIPPING_PERCENTAGE === $voucher->getDiscountOperation()) {
-            $shipping = $service->getShippingCost() + $service->getShippingTax();
-            $discount = (($shipping) / 100) * $voucher->getDiscountAmount();
-        }
+        $discount = $e->getTarget()
+            ->getService('ShopVoucherCode')
+            ->doDiscount($voucher, $service);
 
         $service->getCart()->setDiscount($discount);
-
     }
 }

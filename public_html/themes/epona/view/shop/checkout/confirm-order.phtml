@@ -7,50 +7,59 @@
 ]);?>
 
 <?php $this->placeholder('page-top')->captureEnd();?>
-
-<div class="row">
+<div id="cart-content">
     
-    <div class="col-md-12">
+    <div class="cartContent">
         <?=$this->partial('shop/cart', [
         	'checkout' => true,
             'countryId' => $this->countryId
         ]); ?>
     </div>
-    
-    <form method="post" action="<?=$this->url('shop/checkout', [
-    	'action' => 'confirm-order',
-    ]); ?>" class="sky-form">
-        
-        <div class="col-md-6">
-        <?php $this->formRadio()->setSeparator('');?>
+
+    <div class="clearfix"></div>
+
+    <!-- promotional code -->
+    <div id="voucher-code" class="col-md-6">
+        <?=$this->partial('shop/voucher-codes/add-voucher', [
+            'url' => $this->url('shop/checkout', [
+                'action' => 'confirm-order'
+            ]),
+        ]);?>
+    </div>
+    <!-- /promotional code -->
+
+    <div class="col-md-6">
+        <form method="post" action="<?=$this->url('shop/checkout', [
+            'action' => 'confirm-order',
+        ]); ?>" class="sky-form">
+
+            <?php $this->formRadio()->setSeparator('');?>
             <section class="<?php if ($this->form->get('payment_option')->getMessages()) echo 'has-error'; ?>">
-                
-			    <?=$this->formRadio($this->form->get('payment_option'));?>
-                
+
+                <?=$this->formRadio($this->form->get('payment_option'));?>
+
                 <span class="help-block">
                     <?=$this->formElementErrors($this->form->get('payment_option'), [
                         'class' => 'list-unstyled'
                     ]); ?>
                 </span>
             </section>
-            
+
             <?php if ($this->cartOption('collectInstore')):?>
             <section>
                 <label class="checkbox">
-				    <?=$this->formCheckBox($this->form->get('collect_instore')->setOptions([
+                    <?=$this->formCheckBox($this->form->get('collect_instore')->setOptions([
                         'disable-twb' => true,
                         'use_hidden_element' => false,
                     ]));?>
                     <i></i><?=$this->form->get('collect_instore')->getLabel();?>
-			    </label>
-			    <span class="help-block">
-			        <span class="text-info">When collecting, postage will be removed from total.</span>
-		        </span>
-		    </section>
-		    <?php endif;?>
-        </div>
-        
-        <div class="col-md-6">
+                </label>
+                <span class="help-block">
+                    <span class="text-info">When collecting, postage will be removed from total.</span>
+                </span>
+            </section>
+            <?php endif;?>
+
             <section class="<?php if ($this->form->get('requirements')->getMessages()) echo ' has-error'; ?>">
                 <label class="control-label" for="requirements"><?=$this->form->get('requirements')->getLabel();?></label>
                 <label class="textarea textarea-resizable">
@@ -71,23 +80,24 @@
                     <?=$this->formSelect($this->form->get('terms')->setAttribute('class', 'pointer'));?>
                     <i></i>
                 </label>
-                
+
                 <span class="help-block">
                     <?=$this->formElementErrors($this->form->get('terms'), [
                         'class' => 'list-unstyled'
                     ]); ?>
                 </span>
             </section>
-        </div>
-        <footer>
-            <button id="place-order-button" type="submit" name="submit" class="button" value="placeOrder" data-loading-text="Please wait...">
-            	Place Order
-            </button>
-            <a href="#cancelOrderModel" class="button button-secondary" data-toggle="modal" data-target="#cancelOrderModel">
-                Cancel Order
-            </a>
-        </footer>
-    </form>
+
+            <footer>
+                <button id="place-order-button" type="submit" name="submit" class="button" value="placeOrder" data-loading-text="Please wait...">
+                    Place Order
+                </button>
+                <a href="#cancelOrderModel" class="button button-secondary" data-toggle="modal" data-target="#cancelOrderModel">
+                    Cancel Order
+                </a>
+            </footer>
+        </form>
+    </div>
 </div>
 
 <!-- Term Ajax -->
@@ -126,7 +136,7 @@
 <?php $this->inlineScript()->captureStart(); ?>
     $(document).ready(function() {
         $('#place-order-button').on('click', function(){
-            $('form.sky-form').loadingOverlay({
+            $('#cart-content').loadingOverlay({
                 loadingText: 'Please wait while I prepare your order and redirect you to your chosen payment option'
             });
         });

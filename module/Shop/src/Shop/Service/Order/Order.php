@@ -16,6 +16,7 @@ use Shop\Model\Order\LineInterface;
 use Shop\Model\Order\MetaData;
 use Shop\Model\Order\Order as OrderModel;
 use Shop\Service\Cart\Cart;
+use Shop\Service\Voucher\Code;
 use Zend\Json\Json;
 use Zend\Mail\Protocol\Exception\RuntimeException;
 use Zend\Math\BigInteger\BigInteger;
@@ -138,6 +139,9 @@ class Order extends AbstractOrder
 
         /* @var $cart Cart */
         $cart = $this->getService('ShopCart');
+        $voucher = $cart->getContainer()->offsetGet('voucher');
+        $voucher = $this->getService('ShopVoucherCode')
+            ->getVocherByCode($voucher);
 
         if ('Collect at Open Day' == $this->getOrderModel()->getMetadata()->getShippingMethod()) {
             $cart->setShippingCost(null, true);
@@ -153,11 +157,14 @@ class Order extends AbstractOrder
         $shipping   = $cart->getShippingCost();
         $taxTotal   = $cart->getTaxTotal();
         $cartTotal  = $cart->getTotal();
+        $discount   = $cart->getCart()->getDiscount();
 
         $this->getOrderModel()->setTotal($cartTotal)
             ->setTaxTotal($taxTotal)
             ->setShipping($shipping)
-            ->setShippingTax($cart->getShippingTax());
+            ->setShippingTax($cart->getShippingTax())
+            ->setDiscount($discount)
+            ->getMetadata()->setVoucher($voucher);
 
         /* @var $orderLineService \Shop\Service\Order\Line */
         $orderLineService = $this->getService('ShopOrderLine');
@@ -251,7 +258,7 @@ class Order extends AbstractOrder
 
         $shipping = $this->getShippingService();
 
-        if ($order->getMetadata()->getShippingMethod() == 'Collect At Store') {
+        if ($order->getMetadata()->getShippingMethod() == 'Collect at Open Day') {
             $shipping->setCountryId(0);
         } else {
             $shipping->setCountryId($order->getMetadata()->getDeliveryAddress()->getCountryId());

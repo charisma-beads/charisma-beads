@@ -15,7 +15,9 @@ namespace Shop\Service\Voucher;
 use Shop\Mapper\Product\Category;
 use Shop\Model\Product\Category as CategoryModel;
 use Shop\Model\Voucher\Code as CodeModel;
+use Shop\Model\Voucher\Code as VoucherCode;
 use Shop\Model\Voucher\ProductCategory;
+use Shop\Service\Order\AbstractOrder;
 use UthandoCommon\Hydrator\Strategy\DateTime;
 use UthandoCommon\Service\AbstractMapperService;
 use Zend\EventManager\Event;
@@ -55,6 +57,15 @@ class Code extends AbstractMapperService
     }
 
     /**
+     * @param $code
+     * @return null|CodeModel
+     */
+    public function getVoucherByCode($code)
+    {
+        return $this->getMapper()->getVoucherByCode($code);
+    }
+
+    /**
      * @param Event $e
      */
     public function checkChildCategories(Event $e)
@@ -79,6 +90,79 @@ class Code extends AbstractMapperService
 
         $data->getProductCategories()->fromArray($categories);
         $e->setParam('data', $data);
+    }
+
+    /**
+     * @param VoucherCode $voucher
+     * @param AbstractOrder $service
+     * @return float|int
+     */
+    public function doDiscount(VoucherCode $voucher, AbstractOrder $service)
+    {
+        // qualified items
+        $items = [];
+        $voucherCategories = $voucher->getProductCategories()->toArray();
+
+        /* @var \Shop\Model\Cart\Item $item */
+        foreach ($service->getOrderModel() as $key => $item) {
+            if (in_array($item->getMetadata()->getCategory()->getProductCategoryId(), $voucherCategories)) {
+                $items[] = $item;
+            }
+        }
+
+        $discount = 0;
+
+        switch($voucher->getDiscountOperation()) {
+            case VoucherCode::DISCOUNT_SUBTOTAL:
+                $subTotal = $service->getSubTotal();
+
+                if ($voucher->getDiscountAmount() > $subTotal) {
+                    $discount = $subTotal;
+                } else {
+                    $discount = $voucher->getDiscountAmount();
+                }
+                break;
+            case VoucherCode::DISCOUNT_SUBTOTAL_PERCENTAGE:
+                $subTotal = $service->getSubTotal();
+                $discount = (($subTotal) / 100) * $voucher->getDiscountAmount();
+                break;
+            case VoucherCode::DISCOUNT_CATEGORY:
+                $catSubTotal = 0;
+
+                foreach ($items as $item) {
+                    $catSubTotal += $item->getPrice() * $item->getQuantity();
+                    $discount += $voucher->getDiscountAmount() * $item->getQuantity();
+                }
+
+                if ($discount > $catSubTotal) {
+                    $discount = $catSubTotal;
+                }
+                break;
+            case VoucherCode::DISCOUNT_CATEGORY_PERCENTAGE:
+                $catSubTotal = 0;
+
+                foreach ($items as $item) {
+                    $catSubTotal += $item->getPrice() * $item->getQuantity();
+                }
+
+                $discount = (($catSubTotal) / 100) * $voucher->getDiscountAmount();
+                break;
+            case VoucherCode::DISCOUNT_SHIPPING:
+                $shipping = $service->getShippingCost() + $service->getShippingTax();
+
+                if ($voucher->getDiscountAmount() > $shipping) {
+                    $discount = $shipping;
+                } else {
+                    $discount = $voucher->getDiscountAmount();
+                }
+                break;
+            case VoucherCode::DISCOUNT_SHIPPING_PERCENTAGE:
+                $shipping = $service->getShippingCost() + $service->getShippingTax();
+                $discount = (($shipping) / 100) * $voucher->getDiscountAmount();
+                break;
+        }
+
+        return $discount;
     }
 
     /**

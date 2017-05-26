@@ -1,5 +1,9 @@
 
-<?php $form = $this->voucherForm;?>
+<?php
+$form = $this->formManager(\Shop\Form\Voucher\Voucher::class);
+$defaultValue = $this->cart()->getVoucherCode();
+$form->get('code')->setValue($defaultValue);
+?>
 
 <!-- promotional code -->
 <form action="<?=$this->url;?>" method="post" id="voucher-code-form" class="sky-form boxed
@@ -9,7 +13,7 @@ cartContent">
     <fieldset>
         <section>
             <label class="input">
-                <input type="text" placeholder="Coupon Code" name="code" />
+                <input type="text" placeholder="Coupon Code" name="code" value="<?=$form->get('code')->getValue();?>" />
                 <span class="help-block">
                     <?=$this->formElementErrors($form->get('code'), [
                         'class' => 'list-unstyled text-danger'

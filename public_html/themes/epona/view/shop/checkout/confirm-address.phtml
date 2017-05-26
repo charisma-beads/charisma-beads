@@ -92,7 +92,7 @@
             <?php endif;?>
 
             <section class="clearfix cart_totals">
-                <span class="pull-right fsize16">- <?=$this->placeholder('discount-code')->set('£0.00');?></span>
+                <span class="pull-right fsize16"><?=$this->cart()->getDiscount();?></span>
                 <span class="bold">Coupon Discount</span>
             </section>
 

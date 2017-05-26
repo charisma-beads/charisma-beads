@@ -1,0 +1,1 @@
+ALTER TABLE `order` CHANGE `discount` `discount` FLOAT(6,2) NOT NULL DEFAULT '0.00';

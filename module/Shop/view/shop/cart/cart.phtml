@@ -53,6 +53,14 @@
     	    <?php endif; ?>
     	</tr>
     	<?php endif; ?>
+        <tr>
+            <td colspan="2">&nbsp;</td>
+            <th colspan="2"><p class="text-right">Coupon Discount:</p></th>
+            <td class="text-right"><?=$this->cart()->getDiscount();?></td>
+            <?php if (!$checkout): ?>
+                <td>&nbsp;</td>
+            <?php endif; ?>
+        </tr>
         <?php if ($this->shopOption('vatState')): ?>
             <tr>
                 <td colspan="2">&nbsp;</td>

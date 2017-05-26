@@ -11,6 +11,7 @@
 namespace Shop\Model\Order;
 
 use Shop\Model\Customer\Address;
+use Shop\Model\Voucher\Code;
 
 /**
  * Class MetaData
@@ -68,6 +69,11 @@ class MetaData
      * @var string
      */
     protected $email;
+
+    /**
+     * @var Code
+     */
+    protected $voucher;
 
     /**
      * @return bool
@@ -252,5 +258,21 @@ class MetaData
     {
         $this->email = $email;
         return $this;
+    }
+
+    /**
+     * @return Code
+     */
+    public function getVoucher(): ?Code
+    {
+        return $this->voucher;
+    }
+
+    /**
+     * @param Code $voucher
+     */
+    public function setVoucher(Code $voucher)
+    {
+        $this->voucher = $voucher;
     }
 }

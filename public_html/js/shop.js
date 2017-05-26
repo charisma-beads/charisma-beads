@@ -13,7 +13,7 @@ var Cart = {
 
     voucherCheck : function (el, url, params) {
         $.ajax({
-            url : url,
+            url : shopBasePath + '/shop/add-voucher',
             data: params,
             type: 'POST',
             beforeSend : function() {
@@ -23,8 +23,8 @@ var Cart = {
                 if ($.isPlainObject(response)) {
                     if (response.success == true) {
                         $.ajax({
-                            url : shopBasePath + '/shop/cart/',
-                            type: 'POST',
+                            url : url,
+                            type: 'GET',
                             success: function (response) {
                                 $('#cart-content').html(response);
                                 Cart.setupVoucherForm();

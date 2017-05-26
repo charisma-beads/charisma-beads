@@ -46,27 +46,30 @@ class VoucherCodes extends AbstractActionController
 
         $viewModel = new ViewModel();
         $viewModel->setTerminal(true);
+        $session = $this->sessionContainer('ShopCart');
 
         $form = $this->getService()->getForm(Voucher::class, [
             'cart'      => $this->getCart()->getCart(),
             'customer'  => $this->getCustomer(),
         ]);
-        $post = $this->params()->fromPost();
 
-        $form->setData($post);
+        if ($request->isPost()) {
+            $post = $this->params()->fromPost();
 
-        if ($form->isValid()) {
-            $data = $form->getData();
+            $form->setData($post);
 
-            $session = $this->sessionContainer('ShopCart');
-            $session->offsetSet('voucher', $data['code']);
+            if ($form->isValid()) {
+                $data = $form->getData();
 
-            return new JsonModel([
-                'success' => true,
-            ]);
+                $session->offsetSet('voucher', $data['code']);
+
+                return new JsonModel([
+                    'success' => true,
+                ]);
+            }
         }
 
-        return $viewModel->setVariable('form', $form);
+        return $viewModel->setVariable('voucherForm', $form);
     }
 
     private function getCart() : ?Cart

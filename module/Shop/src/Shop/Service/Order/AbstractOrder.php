@@ -272,6 +272,8 @@ abstract class AbstractOrder extends AbstractRelationalMapperService
 
         $orderModel->setSubTotal($sub);
         $orderModel->setTotal($orderModel->getSubTotal() + $orderModel->getShipping());
+
+        $this->getEventManager()->trigger('voucher.add', $this);
     }
 
     /**

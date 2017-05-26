@@ -10,6 +10,8 @@
 
 namespace Shop\Form\Order;
 
+use TwbBundle\Form\View\Helper\TwbBundleForm;
+use Zend\Form\Element\Text;
 use Zend\Form\Form;
 
 /**
@@ -25,7 +27,7 @@ class Confirm extends Form
             'name'		=> 'payment_option',
             'type'		=> 'PayOptionsList',
             'options'	=> [
-                'label'			=> 'Choose Payment Options:',
+                'label'			=> 'Choose Payment Options',
                 'required'		=> true,
                 'disable_inarray_validator' => true,
                 'label_options' => [
@@ -55,11 +57,11 @@ class Confirm extends Form
             'name'			=> 'requirements',
             'type'			=> 'textarea',
             'attributes'	=> [
-                'placeholder'	=> 'Additional Requirements:',
+                'placeholder'	=> 'Additional Requirements',
                 'autofocus'		=> true,
             ],
             'options'		=> [
-                'label'		=> 'Additional Requirements:',
+                'label'		=> 'Additional Requirements',
                 'required'	=> false,
             ],
         ]);

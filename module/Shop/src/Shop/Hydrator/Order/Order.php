@@ -48,6 +48,7 @@ class Order extends AbstractHydrator
             'shipping'      => $object->getShipping(),
             'taxTotal'      => $object->getTaxTotal(),
             'shippingTax'   => $object->getShippingTax(),
+            'discount'      => $object->getDiscount(),
             'metadata'      => $this->extractValue('metadata', $object->getMetadata()),
         ];
     }

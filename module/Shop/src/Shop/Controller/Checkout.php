@@ -169,25 +169,36 @@ class Checkout extends AbstractActionController
         $customer = $this->getCustomerService()
             ->setUser($this->identity())
             ->getCustomerDetailsFromUserId();
+
+        // Get Voucher from session
         
         /* @var $form \Zend\Form\Form */
         $form = $this->getServiceLocator()
             ->get('FormElementManager')
             ->get('ShopOrderConfirm');
-        
+
         $form->init();
 
-        $form->setInputFilter($this->getServiceLocator()
+        $inputFilter = $this->getServiceLocator()
             ->get('InputFilterManager')
-            ->get('Shop\InputFilter\Order\Confirm'));
+            ->get('Shop\InputFilter\Order\Confirm');
+
+        $form->setInputFilter($inputFilter);
+
+        $viewModel = new ViewModel([
+            'countryId' => $customer->getDeliveryAddress()->getCountryId(),
+            'form' => $form
+        ]);
+
+        if ($this->getRequest()->isXmlHttpRequest()) {
+            $viewModel->setTerminal(true);
+        }
 
         if ($prg instanceof Response) {
             return $prg;
         } elseif ($prg === false) {
-            return new ViewModel([
-                'countryId' => $customer->getDeliveryAddress()->getCountryId(),
-                'form' => $form
-            ]);
+
+            return $viewModel;
         }
 
         $collect = (isset($prg['collect_instore'])) ? 1 : 0;
@@ -226,10 +237,7 @@ class Checkout extends AbstractActionController
             }
         }
 
-        return new ViewModel([
-            'countryId' => $customer->getDeliveryAddress()->getCountryId(),
-            'form' => $form
-        ]);
+        return $viewModel;
     }
 
     public function cancelOrderAction()

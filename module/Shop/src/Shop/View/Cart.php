@@ -216,4 +216,13 @@ class Cart extends AbstractViewHelper
 
         return $form;
     }
+
+    /**
+     * @return string|null
+     */
+    public function getVoucherCode()
+    {
+        $container = $this->cartService->getContainer();
+        return $container->offsetGet('voucher');
+    }
 }

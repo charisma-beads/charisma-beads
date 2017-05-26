@@ -13,6 +13,7 @@ return [
 
         'partial/sky-form'                                      => __DIR__ . '/view/partial/sky-form.phtml',
 
+        'shop/cart'                                             => __DIR__ . '/view/shop/cart/cart.phtml',
         'shop/cart/summary'                                     => __DIR__ . '/view/shop/cart/summary.phtml',
         'shop/cart/view'                                        => __DIR__ . '/view/shop/cart/view.phtml',
         'shop/catalog/index'                                    => __DIR__ . '/view/shop/catalog/index.phtml',
@@ -39,6 +40,7 @@ return [
         'shop/product-nav'                                      => __DIR__ . '/view/shop/product-nav.phtml',
         'shop/options'                                          => __DIR__ . '/view/shop/options.phtml',
         'shop/parallax'                                         => __DIR__ . '/view/shop/parallax.phtml',
+        'shop/voucher-codes/add-voucher'                        => __DIR__ . '/view/shop/voucher-codes/add-voucher.phtml',
 
         'uthando-article/article/404'                           => __DIR__ . '/view/uthando-article/article/404.phtml',
         'uthando-article/article/view'                          => __DIR__ . '/view/uthando-article/article/view.phtml',

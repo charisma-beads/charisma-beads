@@ -10,6 +10,7 @@
 
 namespace Shop\Form\Voucher;
 
+use Shop\Validator\Voucher as VoucherValidator;
 use TwbBundle\Form\View\Helper\TwbBundleForm;
 use Zend\Filter\StringToUpper;
 use Zend\Filter\StringTrim;
@@ -73,7 +74,7 @@ class Voucher extends Form implements InputFilterProviderInterface
                         'min' => 2,
                         'max' => 255,
                     ]],
-                    ['name' => \Shop\Validator\Voucher::class, 'options' => [
+                    ['name' => VoucherValidator::class, 'options' => [
                         'customer'  => $this->getOption('customer'),
                         'cart'      => $this->getOption('cart'),
                     ]],
