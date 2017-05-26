@@ -233,10 +233,10 @@ class CreateOrder extends AbstractActionController
         $orderId    = $this->params()->fromRoute('id', 0);
         $order      = $this->getService()->getOrder($orderId);
 
-        if ($order->getMetadata()->getShippingMethod() == 'Collect At Store') {
+        if ($order->getMetadata()->getShippingMethod() == 'Collect at Open Day') {
             $order->getMetadata()->setShippingMethod('Royal Mail');
         } else {
-            $order->getMetadata()->setShippingMethod('Collect At Store');
+            $order->getMetadata()->setShippingMethod('Collect at Open Day');
         }
 
         $this->getService()->save($order);

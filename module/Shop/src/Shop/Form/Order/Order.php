@@ -176,7 +176,7 @@ class Order extends Form
 
     public function configureFormValues(OrderModel $order)
     {
-        if ($order->getMetadata()->getShippingMethod() == 'Collect At Store') {
+        if ($order->getMetadata()->getShippingMethod() == 'Collect at Open Day') {
             $this->get('collect_instore')->setValue(1);
         }
 

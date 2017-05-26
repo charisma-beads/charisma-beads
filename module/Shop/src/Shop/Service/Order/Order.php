@@ -251,7 +251,7 @@ class Order extends AbstractOrder
 
         $shipping = $this->getShippingService();
 
-        if ($order->getMetadata()->getShippingMethod() == 'Collect At Store') {
+        if ($order->getMetadata()->getShippingMethod() == 'Collect at Open Day') {
             $shipping->setCountryId(0);
         } else {
             $shipping->setCountryId($order->getMetadata()->getDeliveryAddress()->getCountryId());
