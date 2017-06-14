@@ -62,6 +62,7 @@ class Code extends AbstractMapperService
      */
     public function getVoucherByCode($code)
     {
+        \ChromePhp::info($code);
         return $this->getMapper()->getVoucherByCode($code);
     }
 

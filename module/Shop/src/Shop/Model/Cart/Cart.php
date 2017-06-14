@@ -48,6 +48,14 @@ class Cart extends AbstractOrderCollection
     }
 
     /**
+     * @return float
+     */
+    public function getTotal(): float
+    {
+        return $this->total - $this->discount;
+    }
+
+    /**
      * Return cart item by its id
      *
      * @param $id

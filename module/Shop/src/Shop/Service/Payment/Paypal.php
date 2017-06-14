@@ -150,6 +150,18 @@ class Paypal extends AbstractService
             
             $items[] = $item;
         }
+
+        // add discount here as extra line item
+        if ($order->getDiscount() > 0) {
+            $item = new Item();
+            $voucher = $order->getMetadata()->getVoucher();
+            $item->setPrice(-$order->getDiscount())
+                ->setSku($voucher->getCode())
+                ->setName($voucher->getCode())
+                ->setDescription($voucher->getDescription())
+                ->setQuantity(1)
+                ->setCurrency($options->getCurrencyCode());
+        }
         
         $itemList = new ItemList();
         $itemList->setItems($items);

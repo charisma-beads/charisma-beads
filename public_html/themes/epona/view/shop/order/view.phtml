@@ -132,6 +132,10 @@
                     Shipping: <?=$this->priceFormat($this->order->getShipping() + $this->order->getShippingTax());?>
                 </small>
 
+                <small>
+                    Coupon Discount: -<?=$this->priceFormat($this->order->getDiscount());?>
+                </small>
+
                 <span class="totalToPay styleSecondColor">
                     TOTAL: <?=$this->priceFormat($this->order->getTotal());?>
                 </span>

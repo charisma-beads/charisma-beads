@@ -10,11 +10,11 @@
 
 namespace Shop\Service\Order;
 
-use Dompdf\Exception;
 use Shop\Model\Customer\Customer as CustomerModel;
 use Shop\Model\Order\LineInterface;
 use Shop\Model\Order\MetaData;
 use Shop\Model\Order\Order as OrderModel;
+use Shop\Model\Voucher\Code as VoucherCode;
 use Shop\Service\Cart\Cart;
 use Shop\Service\Voucher\Code;
 use Zend\Json\Json;
@@ -139,9 +139,16 @@ class Order extends AbstractOrder
 
         /* @var $cart Cart */
         $cart = $this->getService('ShopCart');
-        $voucher = $cart->getContainer()->offsetGet('voucher');
-        $voucher = $this->getService('ShopVoucherCode')
-            ->getVocherByCode($voucher);
+        $code = $cart->getContainer()->offsetGet('voucher');
+
+        if ($code) {
+            /* @var $voucherService Code */
+            $voucherService = $this->getService('ShopVoucherCode');
+
+            $voucher = $voucherService->getVoucherByCode($code);
+        } else {
+            $voucher = new VoucherCode();
+        }
 
         if ('Collect at Open Day' == $this->getOrderModel()->getMetadata()->getShippingMethod()) {
             $cart->setShippingCost(null, true);
@@ -156,8 +163,8 @@ class Order extends AbstractOrder
 
         $shipping   = $cart->getShippingCost();
         $taxTotal   = $cart->getTaxTotal();
-        $cartTotal  = $cart->getTotal();
         $discount   = $cart->getCart()->getDiscount();
+        $cartTotal  = $cart->getTotal();
 
         $this->getOrderModel()->setTotal($cartTotal)
             ->setTaxTotal($taxTotal)
@@ -172,7 +179,7 @@ class Order extends AbstractOrder
 
         $this->loadItems($this->getOrderModel());
 
-        $this->recalculateTotals();
+        //$this->recalculateTotals();
         
         $result = $this->save($this->getOrderModel());
 

@@ -120,7 +120,7 @@ abstract class AbstractOrderCollection extends AbstractCollection implements Mod
      */
     public function getTotal(): float
     {
-        return $this->total - $this->discount;
+        return $this->total;
     }
 
     /**

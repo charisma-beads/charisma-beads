@@ -270,9 +270,11 @@ class MetaData
 
     /**
      * @param Code $voucher
+     * @return $this
      */
     public function setVoucher(Code $voucher)
     {
         $this->voucher = $voucher;
+        return $this;
     }
 }
