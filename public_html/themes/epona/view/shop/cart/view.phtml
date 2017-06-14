@@ -47,6 +47,7 @@
             <div id="voucher-code">
                 <?=$this->partial('shop/voucher-codes/add-voucher', [
                     'url' => $this->url('shop/cart'),
+                    'voucherForm' => $this->formManager(\Shop\Form\Voucher\Voucher::class),
                 ]);?>
             </div>
             <!-- /promotional code -->

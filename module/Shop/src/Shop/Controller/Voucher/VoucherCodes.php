@@ -63,8 +63,24 @@ class VoucherCodes extends AbstractActionController
 
                 $session->offsetSet('voucher', $data['code']);
 
+                $this->flashMessenger()
+                    ->addMessage(
+                        'Your voucher code has been applied to your order.',
+                        'voucher-success'
+                    );
+
                 return new JsonModel([
                     'success' => true,
+                ]);
+            } else {
+                $this->flashMessenger()
+                    ->addMessage(
+                        'Your voucher code could not be applied to your order.',
+                        'voucher-error'
+                    );
+
+                return new JsonModel([
+                    'success' => false,
                 ]);
             }
         }

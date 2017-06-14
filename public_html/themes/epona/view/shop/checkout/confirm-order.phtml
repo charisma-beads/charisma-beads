@@ -24,6 +24,7 @@
             'url' => $this->url('shop/checkout', [
                 'action' => 'confirm-order'
             ]),
+            'voucherForm' => $this->formManager(\Shop\Form\Voucher\Voucher::class),
         ]);?>
     </div>
     <!-- /promotional code -->

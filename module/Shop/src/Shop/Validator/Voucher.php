@@ -147,7 +147,6 @@ class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
      */
     public function isValid($value, $context = null)
     {
-
         $voucher = $this->getVoucher($value);
 
         if (!$voucher instanceof Code) {
@@ -219,7 +218,6 @@ class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
                 $this->error(self::INVALID_CATEGORY);
                 return false;
             }
-
         }
 
         if ($this->getCustomer() instanceof Customer) {

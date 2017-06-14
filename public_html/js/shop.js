@@ -21,7 +21,7 @@ var Cart = {
             },
             success: function (response) {
                 if ($.isPlainObject(response)) {
-                    if (response.success == true) {
+                    //if (response.success == true) {
                         $.ajax({
                             url : url,
                             type: 'GET',
@@ -30,7 +30,7 @@ var Cart = {
                                 Cart.setupVoucherForm();
                             }
                         });
-                    }
+                    //}
 
                 } else {
                     $(el).html(response);

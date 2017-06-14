@@ -267,7 +267,7 @@ return [
                         ]
                     ],
                     'voucher' => [
-                        'type' => 'Literal',
+                        'type' => 'Segment',
                         'options' => [
                             'route' => '/add-voucher',
                             'defaults' => [

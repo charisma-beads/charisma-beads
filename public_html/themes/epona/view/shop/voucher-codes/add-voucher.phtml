@@ -1,8 +1,19 @@
 
 <?php
-$form = $this->formManager(\Shop\Form\Voucher\Voucher::class);
+$form = $this->voucherForm;
 $defaultValue = $this->cart()->getVoucherCode();
 $form->get('code')->setValue($defaultValue);
+
+$errorMessage = ($this->flashMessenger()->hasMessages('voucher-error')) ? $this->flashMessenger('voucher-error')[0] : null;
+$successMessage = ($this->flashMessenger()->hasMessages('voucher-success')) ? $this->flashMessenger('voucher-success')[0] : null;
+
+if ($errorMessage) {
+    echo $this->tbalert()->danger($errorMessage);
+}
+
+if ($successMessage) {
+    echo $this->tbalert()->success($successMessage);
+}
 ?>
 
 <!-- promotional code -->
