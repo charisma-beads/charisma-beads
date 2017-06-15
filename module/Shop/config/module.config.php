@@ -154,7 +154,8 @@ return [
             'ShopTaxCode'           => 'Shop\Hydrator\Tax\Code',
             'ShopTaxRate'           => 'Shop\Hydrator\Tax\Rate',
             'ShopFaq'               => 'Shop\Hydrator\Faq',
-            'ShopVoucherCode'       => Shop\Hydrator\Voucher\Codes::class,
+            'ShopVoucherCode'       => \Shop\Hydrator\Voucher\Codes::class,
+            'ShopVoucherCustomerMap' => \Zend\Hydrator\ClassMethods::class,
         ],
     ],
     'input_filters' => [
@@ -239,7 +240,7 @@ return [
             'ShopTaxRate'           => 'Shop\Mapper\Tax\Rate',
             'ShopFaq'               => 'Shop\Mapper\Faq',
             'ShopVoucherCode'       => \Shop\Mapper\Voucher\Code::class,
-            \Shop\Mapper\Voucher\CustomerMap::class => \Shop\Mapper\Voucher\CustomerMap::class,
+            'ShopVoucherCustomerMap' => \Shop\Mapper\Voucher\CustomerMap::class,
         ],
     ],
     'uthando_models' => [
@@ -273,7 +274,7 @@ return [
             'ShopTaxRate'           => 'Shop\Model\Tax\Rate',
             'ShopFaq'               => 'Shop\Model\Faq',
             'ShopVoucherCode'       => \Shop\Model\Voucher\Code::class,
-            \Shop\Model\Voucher\CustomerMap::class  => \Shop\Model\Voucher\CustomerMap::class,
+            'ShopVoucherCustomerMap'  => \Shop\Model\Voucher\CustomerMap::class,
         ],
     ],
     'uthando_services' => [
@@ -306,6 +307,7 @@ return [
             'ShopTaxRate'           => 'Shop\Service\Tax\Rate',
             'ShopFaq'               => 'Shop\Service\Faq',
             'ShopVoucherCode'       => \Shop\Service\Voucher\Code::class,
+            'ShopVoucherCustomerMap'    => \Shop\Service\Voucher\CustomerMap::class,
         ],
     ],
     'validators' => [

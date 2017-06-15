@@ -13,6 +13,7 @@ namespace Shop\Event;
 use Shop\Model\Voucher\Code;
 use Shop\Service\Cart\Cart;
 use Shop\Service\Order\Order;
+use Shop\Service\Voucher\CustomerMap;
 use Shop\Validator\Voucher;
 use Zend\EventManager\Event;
 use Zend\EventManager\EventManagerInterface;
@@ -49,9 +50,26 @@ class VoucherListener implements ListenerAggregateInterface
         );
     }
 
+    /**
+     * @param Event $e
+     */
     public function useVoucher(Event $e)
     {
+        /* @var $voucher Code */
+        $voucher = $e->getParam('voucher');
+        /* @var $order \Shop\Model\Order\Order */
+        $order = $e->getParam('order');
 
+        /* @var $voucherService \Shop\Service\Voucher\Code */
+        $voucherService = $e->getTarget()->getService('ShopVoucherCode');
+
+        $voucherService->updateVoucherCount($voucher->getCode());
+
+        if ($voucher->getNoPerCustomer() > 0) {
+            /* @var $voucherMapService CustomerMap */
+            $voucherMapService = $e->getTarget()->getService('ShopVoucherCustomerMap');
+            $voucherMapService->updateCustomerCount($voucher, $order->getCustomer());
+        }
     }
 
     /**

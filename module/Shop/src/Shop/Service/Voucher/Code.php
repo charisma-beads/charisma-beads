@@ -1,6 +1,4 @@
 <?php
-use Shop\Service\Cart\Cart;
-
 /**
  * charisma-beads (http://www.shaunfreeman.co.uk/)
  *
@@ -62,7 +60,6 @@ class Code extends AbstractMapperService
      */
     public function getVoucherByCode($code)
     {
-        \ChromePhp::info($code);
         return $this->getMapper()->getVoucherByCode($code);
     }
 
@@ -91,6 +88,24 @@ class Code extends AbstractMapperService
 
         $data->getProductCategories()->fromArray($categories);
         $e->setParam('data', $data);
+    }
+
+    /**
+     * @param $voucherCode
+     * @return bool|int
+     */
+    public function updateVoucherCount($voucherCode)
+    {
+        $voucher = $this->getMapper()->getVoucherByCode($voucherCode);
+        $qty     = $voucher->getQuantity();
+
+        if ($qty > 0) {
+            $qty = $qty - 1;
+            $voucher->setQuantity($qty);
+            return $this->save($voucher);
+        }
+
+        return false;
     }
 
     /**

@@ -184,6 +184,11 @@ class Order extends AbstractOrder
         $result = $this->save($this->getOrderModel());
 
         $this->sendEmail($orderId);
+
+        $order = $this->getOrderModel();
+        $argv = compact('voucher', 'order');
+        $argv = $this->prepareEventArguments($argv);
+        $this->getEventManager()->trigger('voucher.use', $this, $argv);
         
         return $orderId;
     }

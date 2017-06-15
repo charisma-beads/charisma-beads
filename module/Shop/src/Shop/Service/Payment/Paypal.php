@@ -161,6 +161,7 @@ class Paypal extends AbstractService
                 ->setDescription($voucher->getDescription())
                 ->setQuantity(1)
                 ->setCurrency($options->getCurrencyCode());
+            $items[] = $item;
         }
         
         $itemList = new ItemList();
