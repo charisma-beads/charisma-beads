@@ -9,7 +9,7 @@ cartContent">
     <fieldset>
         <section>
             <label class="input">
-                <input type="text" placeholder="Coupon Code" name="code" />
+                <input type="text" placeholder="Coupon Code" name="code" value="<?=$form->get('code')->getValue();?>" />
                 <span class="help-block">
                     <?=$this->formElementErrors($form->get('code'), [
                         'class' => 'list-unstyled text-danger'

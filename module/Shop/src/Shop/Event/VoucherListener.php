@@ -90,13 +90,13 @@ class VoucherListener implements ListenerAggregateInterface
             ->get('ValidatorManager')
             ->get(Voucher::class);
 
-        $voucherValidator->setCart($service->getCart());
+        $voucherValidator->setOrderModel($service->getOrderModel());
 
         if (!$voucherValidator->isValid($voucher)) {
             $flashMessenger = new FlashMessenger();
 
             foreach ($voucherValidator->getMessages() as $message) {
-                $flashMessenger->addErrorMessage($message);
+                $flashMessenger->addMessage($message, 'voucher-error');
             }
 
             $service->getContainer()->offsetSet('voucher', null);

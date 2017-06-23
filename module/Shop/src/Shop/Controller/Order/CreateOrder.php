@@ -86,7 +86,9 @@ class CreateOrder extends AbstractActionController
 
         /* @var Customer $service */
         $service    = $this->getService('ShopCustomer');
-        $customer   = $service->getCustomerDetailsByCustomerId($order->getMetadata()->getDeliveryAddress()->getCustomerId());
+        $customer   = $service->getCustomerDetailsByCustomerId(
+            $order->getMetadata()->getDeliveryAddress()->getCustomerId()
+        );
 
         $form   = $this->getService()->prepareForm($order);
         $form->configureFormValues($order);
@@ -152,7 +154,9 @@ class CreateOrder extends AbstractActionController
 
         /* @var Customer $service */
         $service    = $this->getService('ShopCustomer');
-        $customer   = $service->getCustomerDetailsByCustomerId($order->getMetadata()->getDeliveryAddress()->getCustomerId());
+        $customer   = $service->getCustomerDetailsByCustomerId(
+            $order->getMetadata()->getDeliveryAddress()->getCustomerId()
+        );
 
         $viewModel = new ViewModel([
             'model' => $customer,

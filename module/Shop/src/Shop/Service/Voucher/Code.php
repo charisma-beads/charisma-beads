@@ -10,7 +10,7 @@
 
 namespace Shop\Service\Voucher;
 
-use Shop\Mapper\Product\Category;
+use Shop\Service\Product\Category;
 use Shop\Model\Product\Category as CategoryModel;
 use Shop\Model\Voucher\Code as CodeModel;
 use Shop\Model\Voucher\Code as VoucherCode;
@@ -68,21 +68,24 @@ class Code extends AbstractMapperService
      */
     public function checkChildCategories(Event $e)
     {
+
+
         /* @var CodeModel $data */
         $data = $e->getParam('data');
 
-        /* @var $mapper Category */
-        $mapper = $this->getMapper('ShopProductCategory');
+        /* @var $service Category */
+        $service = $this->getService('ShopProductCategory');
 
         $categories = [];
 
         /* @var ProductCategory $productCategory */
         foreach ($data->getProductCategories() as $productCategory) {
-            $childCategories = $mapper->getSubCategoriesByParentId($productCategory->getCategoryId());
+
+            $childCategories = $service->getCategoryChildrenIds($productCategory->getCategoryId());
 
             /* @var CategoryModel $category */
-            foreach ($childCategories as $category) {
-                $categories[] = $category->getProductCategoryId();
+            foreach ($childCategories as $categoryId) {
+                $categories[] = $categoryId;
             }
         }
 
@@ -147,11 +150,12 @@ class Code extends AbstractMapperService
 
                 foreach ($items as $item) {
                     $catSubTotal += $item->getPrice() * $item->getQuantity();
-                    $discount += $voucher->getDiscountAmount() * $item->getQuantity();
                 }
 
-                if ($discount > $catSubTotal) {
+                if ($voucher->getDiscountAmount() > $catSubTotal) {
                     $discount = $catSubTotal;
+                } else {
+                    $discount = $voucher->getDiscountAmount();
                 }
                 break;
             case VoucherCode::DISCOUNT_CATEGORY_PERCENTAGE:
@@ -202,5 +206,20 @@ class Code extends AbstractMapperService
         $dateTimeStrategy->setHydrateFormat('d/m/Y');
         $dateTimeStrategy = $hydrator->getStrategy('expiry');
         $dateTimeStrategy->setHydrateFormat('d/m/Y');
+    }
+
+    /**
+     * @param CodeModel $code
+     * @return int
+     */
+    public function toggleEnabled(CodeModel $code)
+    {
+        $this->removeCacheItem($code->getVoucherId());
+
+        $enabled = (true === $code->isActive()) ? false : true;
+
+        $code->setActive($enabled);
+
+        return $this->save($code);
     }
 }

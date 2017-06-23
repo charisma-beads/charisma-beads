@@ -10,6 +10,7 @@
 
 namespace Shop\Controller\Voucher;
 
+use Shop\Model\Voucher\Code;
 use UthandoCommon\Controller\AbstractCrudController;
 
 /**
@@ -22,4 +23,30 @@ class VoucherAdmin extends AbstractCrudController
     protected $controllerSearchOverrides = array('sort' => 'voucherId');
     protected $serviceName = 'ShopVoucherCode';
     protected $route = 'admin/shop/voucher';
+
+    public function setEnabledAction()
+    {
+        $id = (int)$this->params('id', 0);
+
+        if (!$id) {
+            return $this->redirect()->toRoute($this->getRoute(), [
+                'action' => 'list'
+            ]);
+        }
+
+        try {
+            /* @var $model Code */
+            $model = $this->getService()->getById($id);
+            $result = $this->getService()->toggleEnabled($model);
+        } catch (Exception $e) {
+            $this->setExceptionMessages($e);
+            return $this->redirect()->toRoute($this->getRoute(), [
+                'action' => 'list'
+            ]);
+        }
+
+        return $this->redirect()->toRoute($this->getRoute(), [
+            'action' => 'list'
+        ]);
+    }
 }

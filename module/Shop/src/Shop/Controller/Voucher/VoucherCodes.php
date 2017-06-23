@@ -49,8 +49,8 @@ class VoucherCodes extends AbstractActionController
         $session = $this->sessionContainer('ShopCart');
 
         $form = $this->getService()->getForm(Voucher::class, [
-            'cart'      => $this->getCart()->getCart(),
-            'customer'  => $this->getCustomer(),
+            'order_model'   => $this->getCart()->getCart(),
+            'customer'      => $this->getCustomer(),
         ]);
 
         if ($request->isPost()) {

@@ -60,7 +60,7 @@ class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
     /**
      * @var AbstractOrderCollection
      */
-    protected $cart;
+    protected $orderModel;
 
     /**
      * @param string $code
@@ -124,18 +124,18 @@ class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
     /**
      * @return AbstractOrderCollection
      */
-    public function getCart()
+    public function getOrderModel()
     {
-        return $this->cart;
+        return $this->orderModel;
     }
 
     /**
-     * @param AbstractOrderCollection $cart
+     * @param AbstractOrderCollection $orderModel
      * @return Voucher
      */
-    public function setCart(AbstractOrderCollection $cart)
+    public function setOrderModel(AbstractOrderCollection $orderModel)
     {
-        $this->cart = $cart;
+        $this->orderModel = $orderModel;
         return $this;
     }
 
@@ -173,9 +173,8 @@ class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
         // get the the time
         $now = new \DateTime();
 
-        // set start and end time of voucher
+        // set start time of voucher
         $voucher->getStartDate()->setTime(00,00,00);
-        $voucher->getExpiry()->setTime(23,59,59);
 
         // out of date
         if ($now->getTimestamp() < $voucher->getStartDate()->getTimestamp()) {
@@ -183,12 +182,14 @@ class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
             return false;
         }
 
-        if (
-            $voucher->getExpiry() instanceof \DateTime &&
-            $now->getTimestamp() > $voucher->getExpiry()->getTimestamp()
-        ) {
-            $this->error(self::EXPIRED);
-            return false;
+        if ($voucher->getExpiry() instanceof \DateTime) {
+            // set end time of voucher
+            $voucher->getExpiry()->setTime(23,59,59);
+
+            if ($now->getTimestamp() > $voucher->getExpiry()->getTimestamp()) {
+                $this->error(self::EXPIRED);
+                return false;
+            }
         }
 
         // limited voucher
@@ -197,10 +198,10 @@ class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
             return false;
         }
 
-        if ($this->getCart() instanceof AbstractOrderCollection) {
+        if ($this->getOrderModel() instanceof AbstractOrderCollection) {
 
             // minimum total
-            if ($voucher->getMinCartCost() > 0 && $this->getCart()->getSubTotal() < $voucher->getMinCartCost()) {
+            if ($voucher->getMinCartCost() > 0 && $this->getOrderModel()->getSubTotal() < $voucher->getMinCartCost()) {
                 $this->error(self::INVALID_MINIMUM);
                 return false;
             }
@@ -209,7 +210,7 @@ class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
             $catArray = [];
 
             /* @var LineInterface $item */
-            foreach ($this->getCart() as $item) {
+            foreach ($this->getOrderModel() as $item) {
                 $catArray[] = $item->getMetadata()->getCategory()->getProductCategoryId();
             }
 
