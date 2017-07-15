@@ -99,7 +99,6 @@ class CreateOrder extends AbstractActionController
             'form'  => $form,
         ]);
 
-        \ChromePhp::info($order);
         $viewModel->setTemplate('shop/create-order/add');
 
         return $viewModel;
