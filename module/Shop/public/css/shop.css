@@ -25,15 +25,16 @@ fieldset:nth-child(odd)  {
     overflow: hidden;
 }
 
-.panel-title {
+/*.panel-title {
     position: relative;
     vertical-align: middle;
-}
-.panel-title button {
+}*/
+
+/*.panel-title button {
     position: absolute;
     margin-left: 5px;
     margin-top: -2px;
-}
+}*/
 
 .panel-title select.input-sm {
     height: 25px;

@@ -68,8 +68,6 @@ class Code extends AbstractMapperService
      */
     public function checkChildCategories(Event $e)
     {
-
-
         /* @var CodeModel $data */
         $data = $e->getParam('data');
 

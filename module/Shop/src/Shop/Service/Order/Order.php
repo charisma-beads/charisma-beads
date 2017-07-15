@@ -253,41 +253,51 @@ class Order extends AbstractOrder
     /**
      * Recalculate totals of order
      */
-    public function recalculateTotals()
+    public function calculateTotals()
     {
-        $order = $this->getOrderModel();
         $sub = 0;
         $tax = 0;
-        $order->setTaxTotal(0);
+        $this->getOrderModel()->setTaxTotal(0);
 
         /* @var $lineItem \Shop\Model\Order\Line */
-        foreach($order as $lineItem) {
+        foreach($this->getOrderModel() as $lineItem) {
             $sub = $sub + (($lineItem->getPrice()) * $lineItem->getQuantity());
-            $order->setTaxTotal($order->getTaxTotal() + ($lineItem->getTax() * $lineItem->getQuantity()));
+            $this->getOrderModel()->setTaxTotal(
+                $this->getOrderModel()->getTaxTotal() + ($lineItem->getTax() * $lineItem->getQuantity())
+            );
         }
 
-        $order->setSubTotal($sub);
+        $this->getOrderModel()->setSubTotal($sub);
 
         $shipping = $this->getShippingService();
 
-        if ($order->getMetadata()->getShippingMethod() == 'Collect at Open Day') {
+        if ($this->getOrderModel()->getMetadata()->getShippingMethod() == 'Collect at Open Day') {
             $shipping->setCountryId(0);
         } else {
-            $shipping->setCountryId($order->getMetadata()->getDeliveryAddress()->getCountryId());
+            $shipping->setCountryId($this->getOrderModel()->getMetadata()->getDeliveryAddress()->getCountryId());
         }
 
-        $cost = $shipping->calculateShipping($order);
+        $cost = $shipping->calculateShipping($this->getOrderModel());
 
-        $order->setShipping($cost);
+        $this->getOrderModel()->setShipping($cost);
         $this->setShippingTax($shipping->getShippingTax());
 
-        $order->setTotal($order->getSubTotal() + $order->getShipping());
-        $order->setTaxTotal($order->getTaxTotal() + $order->getShippingTax());
+        $this->getOrderModel()->setTotal(
+            $this->getOrderModel()->getSubTotal() + $this->getOrderModel()->getShipping()
+        );
+        $this->getOrderModel()->setTaxTotal(
+            $this->getOrderModel()->getTaxTotal() + $this->getOrderModel()->getShippingTax()
+        );
 
-        $this->save($order);
-        $this->getOrder($order->getId());
+        $this->getEventManager()->trigger('order.voucher.check', $this);
+
+        $this->save($this->getOrderModel());
     }
 
+    /**
+     * @param LineInterface|null $line
+     * @return void
+     */
     public function persist(LineInterface $line = null)
     {
         $order = $this->getOrderModel();

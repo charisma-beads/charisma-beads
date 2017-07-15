@@ -99,6 +99,7 @@ class CreateOrder extends AbstractActionController
             'form'  => $form,
         ]);
 
+        \ChromePhp::info($order);
         $viewModel->setTemplate('shop/create-order/add');
 
         return $viewModel;
@@ -189,12 +190,37 @@ class CreateOrder extends AbstractActionController
 
         //$this->getService()->loadItems($order);
         $this->getService()->addItem($product, $this->params()->fromPost());
-        $this->getService()->recalculateTotals();
+        $this->getService()->calculateTotals();
         //$this->getService()->loadItems($this->getService()->getOrderModel());
 
         $viewModel = new ViewModel([
             'order' => $this->getService()->getOrderModel(),
         ]);
+
+        $viewModel->setTerminal(true);
+
+        return $viewModel;
+    }
+
+    public function reloadAction()
+    {
+        if (!$this->getRequest()->isXmlHttpRequest()) {
+            throw new ShopException('Access denied.');
+        }
+
+        //$session    = $this->sessionContainer('createAdminOrder');
+        $orderId    = $this->params()->fromRoute('id', 0);
+
+
+        $order  = $this->getService()->getOrder($orderId);
+        //$order  = $this->getService()->loadItems($order);
+        $this->getService()->calculateTotals();
+
+        $viewModel = new ViewModel([
+            'order' => $order,
+        ]);
+
+        $viewModel->setTemplate('shop/create-order/add-line');
 
         $viewModel->setTerminal(true);
 
@@ -215,7 +241,7 @@ class CreateOrder extends AbstractActionController
 
         $order  = $this->getService()->getOrder($orderId);
         //$order  = $this->getService()->loadItems($order);
-        $this->getService()->recalculateTotals();
+        $this->getService()->calculateTotals();
 
         $viewModel = new ViewModel([
             'order' => $order,
@@ -246,7 +272,7 @@ class CreateOrder extends AbstractActionController
         $this->getService()->save($order);
 
         //$order  = $this->getService()->loadItems($order);
-        $this->getService()->recalculateTotals();
+        $this->getService()->calculateTotals();
 
         $viewModel = new ViewModel([
             'order' => $order,

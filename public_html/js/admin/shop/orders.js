@@ -21,6 +21,55 @@ var Orders = {
         });
     },
 
+    addVoucherDialog : function() {
+        var orderId = $('input[name=orderId]').val();
+
+        var dialog = Shop.bootboxDialog({
+            title: 'Voucher Code',
+            buttons: {
+                submit: {
+                    label : 'Check Voucher',
+                    callback : function() {
+                        $.ajax({
+                            url: admin.basePath + '/admin/shop/voucher/add-voucher/id/' + orderId,
+                            data: {'code': $('input[name=code]').val()},
+                            type: 'POST',
+                            success: function (response) {
+                                if ($.isPlainObject(response)) {
+                                    if (response.success) {
+                                        $('#order-lines table').load(
+                                            admin.basePath + '/admin/shop/order/create/reload/id/' + orderId
+                                        );
+                                        dialog.modal('hide');
+                                    }
+                                } else{
+                                    dialog.find('.modal-body').html(response);
+                                }
+
+                            }
+                        });
+
+                        return false;
+                    }
+                }
+            }
+
+        });
+
+        dialog.on('show.bs.modal', function () {
+            var el = $(this);
+            /*el.find('.modal-content').loadingOverlay({
+                loadingText: 'Please wait while I load the form.'
+            });*/
+
+            el.find('.modal-body').load(
+                admin.basePath + '/admin/shop/voucher/add-voucher/id/' + orderId
+            )
+        });
+
+        dialog.modal('show');
+    },
+
     productDialog : function(html, productId) {
         var dialog = Shop.bootboxDialog({
             title: 'Product Information',
@@ -104,7 +153,7 @@ var Orders = {
                         },
                         suggestion: function (data) {
                             var outOfStock = false;
-                            console.log(data);
+
                             if (data.quantity == '0') {
                                 var outOfStock = true;
                             }
@@ -217,6 +266,11 @@ $(document).ready(function () {
     $('#add-order-line').on('click', function (e) {
         e.preventDefault();
         Orders.addOrderDigalog();
+    });
+
+    $('#add-voucher').on('click', function (e) {
+        e.preventDefault();
+        Orders.addVoucherDialog();
     });
 
     $('#order-list').on('click', 'a.paypal-payment-lookup', function (e) {

@@ -42,6 +42,11 @@
         <th colspan="2"><p class="text-right">Postage:</p></th>
         <td><?=$this->priceFormat($order->getShipping() + $order->getShippingTax());?></td>
     </tr>
+    <tr id="table-discount">
+        <td colspan="2">&nbsp </td>
+        <th colspan="2" class="text-right">Coupon Discount</th>
+        <td><?=$this->priceFormat(-$this->order->getDiscount());?></td>
+    </tr>
     <tr id="table-total">
         <td colspan="2">&nbsp&nbsp;</td>
         <th colspan="2"><p class="text-right">Total:</p></th>

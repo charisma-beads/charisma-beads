@@ -105,39 +105,17 @@
                             <h3 class="panel-title">
                                 <i class="fa fa-shopping-basket"></i>
                                 &nbsp;<?= $this->translate('Order Lines'); ?>
-                                <button id="add-order-line" class="btn btn-default btn-xs pull-right">
+                                <button id="add-order-line" class="btn btn-default btn-xs">
                                     <i class="fa fa-cart-plus"></i> add product
+                                </button>
+                                <button id="add-voucher" class="btn btn-default btn-xs">
+                                    <i class="fa fa-barcode"></i> add voucher
                                 </button>
                             </h3>
                         </div>
                         <div id="order-lines">
                             <?=$this->partial('shop/create-order/add-line', [
                                     'order' => $this->order,
-                            ]);?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">
-                                <i class="fa fa-shopping-basket"></i>
-                                &nbsp;<?= $this->translate('Order Lines'); ?>
-                                <button id="add-order-line" class="btn btn-default btn-xs pull-right">
-                                    <i class="fa fa-cart-plus"></i> add product
-                                </button>
-                            </h3>
-                        </div>
-                        <div id="order-lines">
-                            <?=$this->partial('shop/voucher-codes/add-voucher', [
-                                'url' => $this->url('admin/shop/order/create', [
-                                    'action' => 'save',
-                                    'id' => $this->order->getId()
-                                ]),
-                                'voucherForm' => $this->formManager(\Shop\Form\Voucher\Voucher::class),
                             ]);?>
                         </div>
                     </div>
