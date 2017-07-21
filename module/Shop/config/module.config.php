@@ -155,7 +155,7 @@ return [
             'ShopTaxRate'           => 'Shop\Hydrator\Tax\Rate',
             'ShopFaq'               => 'Shop\Hydrator\Faq',
             'ShopVoucherCode'       => \Shop\Hydrator\Voucher\Codes::class,
-            'ShopVoucherCustomerMap' => \Zend\Hydrator\ClassMethods::class,
+            'ShopVoucherCustomerMap' => \Shop\Hydrator\Voucher\CustomerMap::class,
         ],
     ],
     'input_filters' => [

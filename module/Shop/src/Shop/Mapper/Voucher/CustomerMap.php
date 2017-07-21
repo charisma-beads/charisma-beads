@@ -46,6 +46,10 @@ class CustomerMap extends AbstractDbMapper
         $rowSet = $this->fetchResult($select);
         $row = $rowSet->current();
 
+        if (!$row) {
+            $row = new CustomerMapModel();
+        }
+
         return $row;
     }
 }

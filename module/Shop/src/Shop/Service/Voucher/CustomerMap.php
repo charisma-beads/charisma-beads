@@ -40,6 +40,7 @@ class CustomerMap extends AbstractMapperService
      */
     public function updateCustomerCount(Code $voucher, Customer $customer)
     {
+
         /* @var CustomerMapModel $map */
         $map = $this->getMapper()
             ->getByVoucherAndCustomerId(
@@ -47,14 +48,14 @@ class CustomerMap extends AbstractMapperService
                 $customer->getCustomerId()
             );
 
-        if (!$map instanceof CustomerMapModel) {
-            $map = new CustomerMapModel();
+        if (!$map->getCustomerId()) {
             $map->setCustomerId($customer->getCustomerId());
+
         }
 
         $count = $map->getCount() + 1;
         $map->setCount($count);
-
+        ;
         return $this->save($map);
     }
 

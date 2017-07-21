@@ -59,6 +59,7 @@ class VoucherCodes extends AbstractActionController
             $form->setData($post);
 
             if ($form->isValid()) {
+
                 $data = $form->getData();
 
                 $session->offsetSet('voucher', $data['code']);

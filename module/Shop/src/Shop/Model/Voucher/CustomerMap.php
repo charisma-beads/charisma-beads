@@ -35,12 +35,12 @@ class CustomerMap implements ModelInterface
     /**
      * @var int
      */
-    protected $count;
+    protected $count = 0;
 
     /**
      * @return int
      */
-    public function getVoucherId(): int
+    public function getVoucherId(): ?int
     {
         return $this->voucherId;
     }
@@ -58,7 +58,7 @@ class CustomerMap implements ModelInterface
     /**
      * @return int
      */
-    public function getCustomerId(): int
+    public function getCustomerId(): ?int
     {
         return $this->customerId;
     }
