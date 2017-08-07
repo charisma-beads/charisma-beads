@@ -71,6 +71,7 @@ class VoucherAdmin extends AbstractCrudController
 
                 return new JsonModel([
                     'success' => true,
+                    'discount' => $order->getDiscount(),
                 ]);
             }
         }

@@ -30,6 +30,7 @@ var Orders = {
                 submit: {
                     label : 'Check Voucher',
                     callback : function() {
+
                         $.ajax({
                             url: admin.basePath + '/admin/shop/voucher/add-voucher/id/' + orderId,
                             data: {'code': $('input[name=code]').val()},
@@ -37,15 +38,25 @@ var Orders = {
                             success: function (response) {
                                 if ($.isPlainObject(response)) {
                                     if (response.success) {
-                                        $('#order-lines table').load(
-                                            admin.basePath + '/admin/shop/order/create/reload/id/' + orderId
-                                        );
                                         dialog.modal('hide');
+                                        $('#order-lines table').load(
+                                            admin.basePath + '/admin/shop/order/create/reload/id/' + orderId,
+                                            function() {
+                                                if (response.discount == 0) {
+                                                    el = $('#table-discount td:last-child')
+                                                    discount = el.html().replace ( /[^\d.]/g, '' );
+
+                                                    if (discount == '0.00') {
+                                                        setTimeout(Orders.addVoucherDialog,500)
+                                                    }
+
+                                                }
+                                            }
+                                        );
                                     }
                                 } else{
                                     dialog.find('.modal-body').html(response);
                                 }
-
                             }
                         });
 
