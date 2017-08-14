@@ -56,6 +56,8 @@ class VoucherCodes extends AbstractActionController
         if ($request->isPost()) {
             $post = $this->params()->fromPost();
 
+            $form->setOption('country', $this->getService('ShopCountry')->getById($post['countryId']));
+
             $form->setData($post);
 
             if ($form->isValid()) {

@@ -4,7 +4,8 @@ var Cart = {
         $('#voucher-code').on('submit', 'form', function (event) {
             event.preventDefault();
 
-            var params = $(this).serialize();
+            var countryId = $('select[name=countryId]').find(":selected").val();
+            var params = $(this).serialize() + '&countryId=' + countryId;
             var el = $(this).parent();
             var url = $(this).attr('action');
             Cart.voucherCheck(el, url, params);

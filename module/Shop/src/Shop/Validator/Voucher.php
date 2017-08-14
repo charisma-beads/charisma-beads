@@ -12,6 +12,7 @@ namespace Shop\Validator;
 
 use Shop\Mapper\Voucher\Code as CodeMapper;
 use Shop\Mapper\Voucher\CustomerMap as CustomerMapMapper;
+use Shop\Model\Country\Country;
 use Shop\Model\Customer\Customer;
 use Shop\Model\Order\AbstractOrderCollection;
 use Shop\Model\Order\LineInterface;
@@ -61,6 +62,11 @@ class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
      * @var AbstractOrderCollection
      */
     protected $orderModel;
+
+    /**
+     * @var Country
+     */
+    protected $country;
 
     /**
      * @param string $code
@@ -117,9 +123,31 @@ class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
      * @param Customer $customer
      * @return Voucher
      */
-    public function setCustomer(Customer $customer)
+    public function setCustomer($customer)
     {
-        $this->customer = $customer;
+        if ($customer instanceof Customer) {
+            $this->customer = $customer;
+            $this->setCountry($customer->getDeliveryAddress()->getCountry());
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Country
+     */
+    public function getCountry()
+    {
+        return $this->country;
+    }
+
+    /**
+     * @param Country $country
+     * @return $this
+     */
+    public function setCountry($country)
+    {
+        $this->country = $country;
         return $this;
     }
 
@@ -200,6 +228,16 @@ class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
             return false;
         }
 
+        if ($this->getCountry() instanceof Country) {
+            $zone = $this->getCountry()->getPostZoneId();
+
+            // check valid zone
+            if (!in_array($zone, $voucher->getZones()->toArray())) {
+                $this->error(self::INVALID_ZONE);
+                return false;
+            }
+        }
+
         if ($this->getOrderModel() instanceof AbstractOrderCollection) {
 
             // minimum total
@@ -225,21 +263,12 @@ class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
         if ($this->getCustomer() instanceof Customer) {
 
             $customerMap    = $this->getCustomerMap($voucher->getVoucherId());
-            $zone           = $this->getCustomer()->getDeliveryAddress()->getCountry()->getPostZoneId();
-
-            // check customer zone
-            if (!in_array($zone, $voucher->getZones()->toArray())) {
-                $this->error(self::INVALID_ZONE);
-                return false;
-            }
 
             // check customer hasn't used all vouchers
             if ($voucher->isLimitCustomer() && $customerMap->getCount() >= $voucher->getNoPerCustomer()) {
                 $this->error(self::USER_LIMIT_REACHED);
                 return false;
             }
-
-
         }
 
         return true;

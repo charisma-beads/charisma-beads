@@ -77,6 +77,7 @@ class Voucher extends Form implements InputFilterProviderInterface
                     ['name' => VoucherValidator::class, 'options' => [
                         'customer'      => $this->getOption('customer'),
                         'order_model'   => $this->getOption('order_model'),
+                        'country'       => $this->getOption('country'),
                     ]],
                 ],
             ],

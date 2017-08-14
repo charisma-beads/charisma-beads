@@ -131,7 +131,13 @@ class VoucherListener implements ListenerAggregateInterface
             return;
         }
 
-        $voucherValidator = $this->getVoucherValidator($e);
+        $voucherValidator   = $this->getVoucherValidator($e);
+        $countryId          = $e->getTarget()->getContainer()->offsetGet('countryId');
+        $country            = $service->getService('ShopCountry')->getById($countryId);
+
+        if ($countryId) {
+            $voucherValidator->setCountry($country);
+        }
 
         if (!$voucherValidator->isValid($voucher)) {
 
