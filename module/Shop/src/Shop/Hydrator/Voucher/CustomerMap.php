@@ -26,6 +26,7 @@ class CustomerMap extends AbstractHydrator
     public function extract($object): array
     {
         return [
+            'id'                => $object->getId(),
             'voucherId'         => $object->getVoucherId(),
             'customerId'        => $object->getCustomerId(),
             'count'             => $object->getCount(),

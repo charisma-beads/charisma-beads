@@ -25,6 +25,11 @@ class CustomerMap implements ModelInterface
     /**
      * @var int
      */
+    protected $id;
+
+    /**
+     * @var int
+     */
     protected $voucherId;
 
     /**
@@ -36,6 +41,24 @@ class CustomerMap implements ModelInterface
      * @var int
      */
     protected $count = 0;
+
+    /**
+     * @return int
+     */
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     * @return $this
+     */
+    public function setId(int $id)
+    {
+        $this->id = $id;
+        return $this;
+    }
 
     /**
      * @return int

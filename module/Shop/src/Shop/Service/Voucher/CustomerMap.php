@@ -48,14 +48,17 @@ class CustomerMap extends AbstractMapperService
                 $customer->getCustomerId()
             );
 
+        if (!$map->getVoucherId()) {
+            $map->setVoucherId($voucher->getVoucherId());
+        }
+
         if (!$map->getCustomerId()) {
             $map->setCustomerId($customer->getCustomerId());
-
         }
 
         $count = $map->getCount() + 1;
         $map->setCount($count);
-        ;
+
         return $this->save($map);
     }
 

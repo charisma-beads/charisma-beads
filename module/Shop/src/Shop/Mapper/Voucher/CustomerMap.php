@@ -28,7 +28,7 @@ class CustomerMap extends AbstractDbMapper
     /**
      * @var string
      */
-    protected $primary = 'voucherId';
+    protected $primary = 'id';
 
     /**
      * @param $voucherId

@@ -68,6 +68,10 @@ class VoucherListener implements ListenerAggregateInterface
         /* @var $order \Shop\Model\Order\Order */
         $order = $e->getParam('order');
 
+        if (!$voucher || !$voucher->getVoucherId()) {
+            return;
+        }
+
         /* @var $voucherService CodeService */
         $voucherService = $e->getTarget()->getService('ShopVoucherCode');
 
@@ -96,7 +100,6 @@ class VoucherListener implements ListenerAggregateInterface
         }
 
         $voucherValidator = $this->getVoucherValidator($e);
-
 
         if (!$voucherValidator->isValid($voucher->getCode())) {
             $this->setErrorMessages($voucherValidator);

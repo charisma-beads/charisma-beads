@@ -234,10 +234,11 @@ class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
             }
 
             // check customer hasn't used all vouchers
-            if ($voucher->isLimitCustomer() && !$customerMap->getCount() < $voucher->getNoPerCustomer()) {
+            if ($voucher->isLimitCustomer() && $customerMap->getCount() >= $voucher->getNoPerCustomer()) {
                 $this->error(self::USER_LIMIT_REACHED);
                 return false;
             }
+
 
         }
 

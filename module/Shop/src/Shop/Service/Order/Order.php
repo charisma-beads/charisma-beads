@@ -17,6 +17,7 @@ use Shop\Model\Order\Order as OrderModel;
 use Shop\Model\Voucher\Code as VoucherCode;
 use Shop\Service\Cart\Cart;
 use Shop\Service\Voucher\Code;
+use Shop\Validator\Voucher;
 use Zend\Json\Json;
 use Zend\Mail\Protocol\Exception\RuntimeException;
 use Zend\Math\BigInteger\BigInteger;
@@ -139,14 +140,27 @@ class Order extends AbstractOrder
 
         /* @var $cart Cart */
         $cart = $this->getService('ShopCart');
+
         $code = $cart->getContainer()->offsetGet('voucher');
 
-        if ($code) {
+        /* @var Voucher $voucherValidator */
+        $voucherValidator = $this->getServiceLocator()
+            ->get('ValidatorManager')
+            ->get(Voucher::class);
+
+        $voucherValidator->setOrderModel($cart->getOrderModel())
+            ->setCustomer($this->getOrderModel()->getCustomer());
+
+        if ($code && $voucherValidator->isValid($code)) {
             /* @var $voucherService Code */
             $voucherService = $this->getService('ShopVoucherCode');
 
             $voucher = $voucherService->getVoucherByCode($code);
+
         } else {
+            $cart->getContainer()->offsetSet('voucher', null);
+            $cart->getOrderModel()
+                ->setDiscount(0);
             $voucher = new VoucherCode();
         }
 
