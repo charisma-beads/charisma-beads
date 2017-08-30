@@ -101,7 +101,7 @@ class Image extends AbstractRelationalMapperService
     {
         /* @var $model \Shop\Model\Product\Image */
         $model          = $e->getParam('model');
-        $imageDirectory = './public/userfiles/shop/images/';
+        $imageDirectory = './public_html/userfiles/shop/images/';
         $files          = [];
         $files[]        = $imageDirectory . $model->getFull();
         $files[]        = $imageDirectory . $model->getThumbnail();
