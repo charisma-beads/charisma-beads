@@ -138,7 +138,13 @@ class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
      */
     public function getCountry()
     {
-        return $this->country;
+        if ($this->getCustomer() instanceof Customer) {
+            $country = $this->getCustomer()->getDeliveryAddress()->getCountry();
+        } else {
+            $country = $this->country;
+        }
+
+        return $country;
     }
 
     /**
@@ -177,6 +183,7 @@ class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
     public function isValid($value, $context = null)
     {
         $voucher = $this->getVoucher($value);
+
 
         if (!$voucher instanceof Code) {
             $this->error(self::INVALID_VOUCHER);
@@ -259,6 +266,8 @@ class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
                 return false;
             }
         }
+
+
 
         if ($this->getCustomer() instanceof Customer) {
 

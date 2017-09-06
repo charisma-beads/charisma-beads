@@ -1,0 +1,18 @@
+
+<h2>Email Address Verification From <?=$this->contact('details.name');?></h2>
+<br/>
+Please click on the following link to verify your email address
+<br/>
+<?php $link = $this->serverUrl() . $this->url('registration', [
+    'action' => 'verify-email',
+    'email' => $this->registrationRecord->getUser()->getEmail() ,
+    'token' => $this->registrationRecord->getToken(),
+]); ?>
+<a href="<?=$link;?>"><?=$link;?></a>
+<br/>
+
+<p>
+    If the link above does not work please cut and paste the link below in your browser
+    <br/>
+    <pre><?=$link;?></pre>
+</p>
