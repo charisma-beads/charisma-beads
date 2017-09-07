@@ -5,8 +5,8 @@ return [
         'application/index/index'                               => __DIR__ . '/view/application/index/index.phtml',
         'application/partial/paginate'                          => __DIR__ . '/view/partial/paginate.phtml',
 
-        //'error/404'                                             => __DIR__ . '/view/error/404.phtml',
-        //'error/index'                                           => __DIR__ . '/view/error/index.phtml',
+        'error/404'                                             => __DIR__ . '/view/error/404.phtml',
+        'error/index'                                           => __DIR__ . '/view/error/index.phtml',
 
         'layout/layout'                                         => __DIR__ . '/view/layout/layout.phtml',
         'layout/page-title'                                     => __DIR__ . '/view/layout/page-title.phtml',
@@ -57,6 +57,7 @@ return [
         'uthando-navigation/top-menu'                           => __DIR__ . '/view/uthando-navigation/top-menu.phtml',
         'uthando-navigation/user-menu'                          => __DIR__ . '/view/uthando-navigation/user-menu.phtml',
 
+        'uthando-news/news/404'                                 => __DIR__ . '/view/error/404.phtml',
         'uthando-news/news/news-item'                           => __DIR__ . '/view/uthando-news/news/news-item.phtml',
         'uthando-news/news/paginate'                            => __DIR__ . '/view/uthando-news/news/paginate.phtml',
         'uthando-news/news/view'                                => __DIR__ . '/view/uthando-news/news/view.phtml',
