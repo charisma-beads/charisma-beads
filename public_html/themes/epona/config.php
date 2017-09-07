@@ -67,6 +67,7 @@ return [
 
         'uthando-twitter/twitter/twitter-feed'                  => __DIR__ . '/view/uthando-twitter/twitter/twitter-feed.phtml',
 
+        'uthando-user/email/verify'                             => __DIR__ . '/view/uthando-user/email/verify.phtml',
         'uthando-user/user/forgot-password'                     => __DIR__ . '/view/uthando-user/user/forgot-password.phtml',
         'uthando-user/user/login'                               => __DIR__ . '/view/uthando-user/user/login.phtml',
         'uthando-user/user/password'                            => __DIR__ . '/view/uthando-user/user/password.phtml',
