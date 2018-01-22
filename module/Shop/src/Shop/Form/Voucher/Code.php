@@ -226,11 +226,11 @@ class Code extends Form
                 'label' => 'Start Date',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
                 'column-size' => 'sm-10 date-time-pick',
-                'add-on-append' => '<i class="fa fa-calendar"></i>',
+                //'add-on-append' => '<i class="fa fa-calendar"></i>',
                 'label_attributes' => [
                     'class' => 'col-sm-2',
                 ],
-                'format' => 'd/m/Y'
+                'format' => 'Y-m-d'
             ],
             'attributes' => [
                 'class' => 'date-time-pick',
@@ -245,11 +245,11 @@ class Code extends Form
                 'label' => 'Expiry',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
                 'column-size' => 'sm-10 date-time-pick',
-                'add-on-append' => '<i class="fa fa-calendar"></i>',
+                //'add-on-append' => '<i class="fa fa-calendar"></i>',
                 'label_attributes' => [
                     'class' => 'col-sm-2',
                 ],
-                'format' => 'd/m/Y'
+                'format' => 'Y-m-d'
             ],
             'attributes' => [
                 'class' => 'date-time-pick',

@@ -201,9 +201,9 @@ class Code extends AbstractMapperService
         $hydrator = $form->getHydrator();
         /* @var DateTime $dateTimeStrategy */
         $dateTimeStrategy = $hydrator->getStrategy('startDate');
-        $dateTimeStrategy->setHydrateFormat('d/m/Y');
+        $dateTimeStrategy->setHydrateFormat('Y-m-d');
         $dateTimeStrategy = $hydrator->getStrategy('expiry');
-        $dateTimeStrategy->setHydrateFormat('d/m/Y');
+        $dateTimeStrategy->setHydrateFormat('Y-m-d');
     }
 
     /**
