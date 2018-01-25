@@ -10,15 +10,8 @@
 
 namespace Shop\InputFilter\Order;
 
-use Shop\Validator\Voucher;
-use Zend\Filter\StringToUpper;
-use Zend\Filter\StringTrim;
-use Zend\Filter\StripTags;
-use Zend\I18n\Filter\Alnum;
-use Zend\I18n\Validator\Alnum as AlnumValidator;
 use Zend\InputFilter\InputFilter;
 use Zend\Validator\NotEmpty;
-use Zend\Validator\StringLength;
 
 /**
  * Class Confirm
@@ -62,8 +55,8 @@ class Confirm extends InputFilter
                 ['name' => 'StringTrim'],
             ],
             'validators' => [
-            	['name' => 'NotEmpty', 'options' => [
-                    'message' => [
+                ['name' => 'NotEmpty', 'options' => [
+                    'messages' => [
                         NotEmpty::IS_EMPTY => 'You must agree to the terms to proceed with order.',
                     ]
                 ]],
