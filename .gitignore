@@ -2,8 +2,8 @@
 /data/*
 !data/fonts/*
 /vendor/*
-/public/shop/images/*
-/public/userfiles/*
+/public_html/shop/images/*
+/public_html/userfiles/*
 .DS_Store
 .idea
 .settings
