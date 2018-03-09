@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "9f98acb47dd20cc9645666534dcb428e",
+    "content-hash": "1b3e698c213e7675ea5515245894a9bc",
     "packages": [
         {
             "name": "ccampbell/chromephp",
@@ -1489,16 +1489,16 @@
         },
         {
             "name": "uthando-cms/uthando-session-manager",
-            "version": "2.4.2",
+            "version": "2.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-session-manager.git",
-                "reference": "9f06484016adbbc57bf8a27e160ccfb0f2505836"
+                "reference": "cfa2fc923fe300b830225b1bf62b946532af875f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-session-manager/zipball/9f06484016adbbc57bf8a27e160ccfb0f2505836",
-                "reference": "9f06484016adbbc57bf8a27e160ccfb0f2505836",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-session-manager/zipball/cfa2fc923fe300b830225b1bf62b946532af875f",
+                "reference": "cfa2fc923fe300b830225b1bf62b946532af875f",
                 "shasum": ""
             },
             "require": {
@@ -1538,7 +1538,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2018-03-09T10:27:01+00:00"
+            "time": "2018-03-09T11:31:25+00:00"
         },
         {
             "name": "uthando-cms/uthando-testimonial",
