@@ -30,7 +30,7 @@
     "uthando-cms/uthando-session-manager": "2.4.3",
     "uthando-cms/uthando-testimonial": "2.1.1",
     "uthando-cms/uthando-theme-manager": "2.3.1",
-    "uthando-cms/uthando-twitter": "2.0.2",
+    "uthando-cms/uthando-twitter": "2.3.0",
     "uthando-cms/uthando-user": "2.2.8",
     "uthando-cms/uthando-events": "1.4.1",
     "paypal/rest-api-sdk-php": "1.12.0",
