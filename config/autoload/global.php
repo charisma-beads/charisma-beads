@@ -6,7 +6,7 @@ return [
         'display_startup_errors'        => false,
         'display_errors'                => true,
         'error_reporting'               => E_ALL ^ E_USER_DEPRECATED,
-        'max_execution_time'            => 60,
+        'max_execution_time'            => 300,
         'date.timezone'                 => 'Europe/London',
         'zlib.output_compression'       => true,
         'zlib.output_compression_level' => -1,

@@ -34,7 +34,7 @@ class ReportsFieldSet extends Fieldset implements InputFilterProviderInterface
     public function init()
     {
         $this->add([
-            'name' => 'memoryLimit',
+            'name' => 'memory_limit',
             'type' => 'text',
             'options' => [
                 'label' => 'Reports Memory Limit',
@@ -47,7 +47,7 @@ class ReportsFieldSet extends Fieldset implements InputFilterProviderInterface
         ]);
 
         $this->add([
-            'name' => 'monthFormat',
+            'name' => 'month_format',
             'type' => 'select',
             'options' => [
                 'label' => 'Month Format',
@@ -64,7 +64,7 @@ class ReportsFieldSet extends Fieldset implements InputFilterProviderInterface
         ]);
 
         $this->add([
-            'name' => 'writerType',
+            'name' => 'writer_type',
             'type' => 'select',
             'options' => [
                 'label' => 'Writer Type',
@@ -80,14 +80,14 @@ class ReportsFieldSet extends Fieldset implements InputFilterProviderInterface
     public function getInputFilterSpecification()
     {
         return [
-            'memoryLimit' => [
+            'memory_limit' => [
                 'required' => false,
                 'filters' => [
                     ['name' => 'StripTags'],
                     ['name' => 'StringTrim'],
                 ],
             ],
-            'monthFormat' => [
+            'month_format' => [
                 'required' => false,
                 'filters' => [
                     ['name' => 'StripTags'],

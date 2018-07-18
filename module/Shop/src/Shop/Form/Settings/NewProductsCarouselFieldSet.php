@@ -45,7 +45,7 @@ class NewProductsCarouselFieldSet extends Fieldset implements InputFilterProvide
         ]);
         
         $this->add([
-            'name' => 'totalItems',
+            'name' => 'total_items',
             'type' => 'text',
             'options' => [
                 'label' => 'Total Items',
@@ -57,10 +57,10 @@ class NewProductsCarouselFieldSet extends Fieldset implements InputFilterProvide
         ]);
 
         $this->add([
-            'name' => 'numberItemsToDisplay',
+            'name' => 'number_items_to_display',
             'type' => 'text',
             'options' => [
-                'label' => 'Number To Tisplay',
+                'label' => 'Number To Display',
                 'column-size' => 'md-8',
                 'label_attributes' => [
                     'class' => 'col-md-4',
@@ -69,7 +69,7 @@ class NewProductsCarouselFieldSet extends Fieldset implements InputFilterProvide
         ]);
 
         $this->add([
-            'name'			=> 'autoPlay',
+            'name'			=> 'auto_play',
             'type'			=> 'checkbox',
             'options'		=> [
                 'label'			=> 'Auto Play',
@@ -93,7 +93,7 @@ class NewProductsCarouselFieldSet extends Fieldset implements InputFilterProvide
                     ['name' => 'UpperCaseWords']
                 ],
             ],
-            'totalItems' => [
+            'total_items' => [
                 'required' => true,
                 'filters' => [
                     ['name' => 'StripTags'],
@@ -103,7 +103,7 @@ class NewProductsCarouselFieldSet extends Fieldset implements InputFilterProvide
                     ['name' => 'Int'],
                 ],
             ],
-            'numberItemsToDisplay' => [
+            'number_items_to_display' => [
                 'required' => true,
                 'filters' => [
                     ['name' => 'StripTags'],
@@ -113,7 +113,7 @@ class NewProductsCarouselFieldSet extends Fieldset implements InputFilterProvide
                     ['name' => 'Int'],
                 ],
             ],
-            'autoPlay' => [
+            'auto_play' => [
                 'required' => false,
                 'filters' => [
                     ['name' => 'StripTags'],

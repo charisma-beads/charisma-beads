@@ -8,12 +8,12 @@ use Zend\ModuleManager\ModuleManager;
 
 class Module
 {
-    public function init(ModuleManager $moduleManager)
+    /*public function init(ModuleManager $moduleManager)
     {
         $eventManager = $moduleManager->getEventManager();
 
-        $eventManager->attach(ModuleEvent::EVENT_LOAD_MODULES_POST, [$this, 'setPhpSettings']);
-    }
+        //$eventManager->attach(ModuleEvent::EVENT_LOAD_MODULES_POST, [$this, 'setPhpSettings']);
+    }*/
     
     public function onBootstrap(MvcEvent $event)
     {
@@ -23,17 +23,19 @@ class Module
             ->get('ModuleRouteListener');
         
         $moduleRouteListener->attach($eventManager);
-        //$eventManager->attach(MvcEvent::EVENT_ROUTE, [$this, 'setPhpSettings']);
+        $eventManager->attach(MvcEvent::EVENT_ROUTE, [$this, 'setPhpSettings']);
     }
 
-    public function setPhpSettings(ModuleEvent $event)
+    public function setPhpSettings(MvcEvent $event)
     {
         // we could have different setting for different route.
         // in this case we would set it up in 'onBootstrap' method
         // and attach it to the MvcEvent::EVENT_ROUTE
-        $phpSettings = $event->getConfigListener()
+        /*$phpSettings = $event->getConfigListener()
             ->getMergedConfig(true)
-            ->get('php_settings');
+            ->get('php_settings');*/
+        $config = $event->getApplication()->getServiceManager()->get('Config');
+        $phpSettings = (isset($config['php_settings'])) ? $config['php_settings'] : null;
 
         if ($phpSettings) {
             foreach ($phpSettings as $key => $value) {

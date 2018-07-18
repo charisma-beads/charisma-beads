@@ -110,6 +110,7 @@ $this->inlineScript()
 
 <div class="clearfix"></div>
 
+<?php $this->placeholder('js-scripts')->captureStart();?>
 <script>
     $(document).ready(function() {
         function changeMonthlyStats() {
@@ -261,3 +262,4 @@ $this->inlineScript()
         });
     });
 </script>
+<?php $this->placeholder('js-scripts')->captureEnd();?>

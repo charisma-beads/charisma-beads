@@ -131,7 +131,7 @@
                                 &nbsp;<?=$this->form->get('requirements')->getLabel();?>
                             </h3>
                         </div>
-                        <div id="order-lines" class="panel-body">
+                        <div id="requirements" class="panel-body">
                             <?=$this->formTextarea($this->form->get('requirements'));?>
                         </div>
                     </div>
@@ -145,16 +145,16 @@
 <?=$this->form()->closeTag();?>
 
 <?php $this->inlineScript()
-    ->appendFile($this->basePath('js/admin/shop/typeahead.bundle.min.js'))
+    ->appendFile($this->basePath('js/bootstrap-datetimepicker.js'))
+    ->appendFile($this->basePath('js/admin/typeahead.bundle.min.js'))
     ->appendFile('//cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.7.0/jquery.matchHeight-min.js')
-    ->appendFile($this->basePath('js/admin/shop/shop.js'))
-    ->appendFile($this->basePath('js/admin/shop/orders.js'));?>
+    ->appendFile($this->basePath('js/admin/shop.js'))
+    ->appendFile($this->basePath('js/admin/orders.js'));?>
 
+<?php $this->placeholder('js-scripts')->captureStart();?>
 <script type="text/javascript">
-    $(document).ready(function() {
-        $('.date-time-pick .input-group').datetimepicker({
-            format: '<?=$this->convertToJsDateFormat('d/m/Y H:i:s')->renderJsFormat();?>'
-        });
+    $('.date-time-pick .input-group').datetimepicker({
+        format: '<?=$this->convertToJsDateFormat('d/m/Y H:i:s')->renderJsFormat();?>'
     });
 </script>
-
+<?php $this->placeholder('js-scripts')->captureEnd();?>

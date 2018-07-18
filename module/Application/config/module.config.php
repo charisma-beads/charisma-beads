@@ -1,6 +1,28 @@
 <?php
 
 return [
+    'asset_manager' => [
+        'resolver_configs' => [
+            'collections' => [
+                'js/uthando.js' => [
+                    'js/prettify.js',
+                    'js/site.js',
+                ],
+                'css/uthando.css' => [
+                    'css/prettify.css',
+                    'css/uthando-styles.css',
+                    'css/print.css',
+                ],
+            ],
+            'map' => [
+                'css/prettify.css' => 'https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.css',
+                'js/prettify.js' => 'https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.js',
+            ],
+            'paths' => [
+                'Application' => __DIR__ . '/../public',
+            ],
+        ],
+    ],
     'uthando_user' => [
         'acl' => [
             'roles' => [
@@ -38,6 +60,7 @@ return [
                         '__NAMESPACE__' => 'Application\Controller',
                         'controller'    => 'Index',
                         'action'        => 'index',
+                        'force-ssl'     => 'http'
                     ],
                 ],
             ],

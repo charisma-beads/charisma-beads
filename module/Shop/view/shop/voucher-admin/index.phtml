@@ -28,15 +28,15 @@
     </div>
 </div>
 
+<?php $this->placeholder('js-scripts')->captureStart();?>
 <script>
-    $(document).ready(function(){
-        $('#table-voucher').dataGrid({
-            url : 'voucher/list',
-            query: { sort : 'voucherId' },
-            searchForm : $('#search-voucher'),
-            paging : 'links',
-            columnSort: true,
-            //rowClick : admin.dataTable.rowClick
-        });
+    $('#table-voucher').dataGrid({
+        url : 'voucher/list',
+        query: { sort : 'voucherId' },
+        searchForm : $('#search-voucher'),
+        paging : 'links',
+        columnSort: true,
+        //rowClick : admin.dataTable.rowClick
     });
 </script>
+<?php $this->placeholder('js-scripts')->captureEnd();?>

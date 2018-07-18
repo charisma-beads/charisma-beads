@@ -83,7 +83,6 @@ $this->form->get('email')->setAttribute('readonly', '');
                         ]); ?>" method="post">
                             <input type="hidden" name="customerId" value="<?=$this->model->getCustomerId();?>">
                         </form>
-                    </
                     </h4>
                 </div>
                 <div id="collapseTwo" class="panel-collapse collapse in">
@@ -101,11 +100,11 @@ $this->form->get('email')->setAttribute('readonly', '');
 <div class="clearfix"></div>
 
 <?php $this->inlineScript()
-    ->appendFile($this->basePath('js/admin/shop/shop.js'))
-    ->appendFile($this->basePath('js/admin/shop/customer-edit.js'));?>
+    ->appendFile($this->basePath('js/admin/shop.js'))
+    ->appendFile($this->basePath('js/admin/customer-edit.js'));?>
 
+<?php $this->placeholder('js-scripts')->captureStart();?>
 <script>
-    $(document).ready(function() {
-        customer.customerId = '<?=$this->escapeHtml($this->model->getCustomerId());?>';
-    });
+    customer.customerId = '<?=$this->escapeHtml($this->model->getCustomerId());?>';
 </script>
+<?php $this->placeholder('js-scripts')->captureEnd();?>

@@ -34,7 +34,7 @@ class CartFieldSet extends Fieldset implements InputFilterProviderInterface
     {
         
         $this->add([
-            'name'			=> 'payCheck',
+            'name'			=> 'pay_check',
             'type'			=> 'checkbox',
             'options'		=> [
                 'label'			=> 'Cheque Payments',
@@ -47,7 +47,7 @@ class CartFieldSet extends Fieldset implements InputFilterProviderInterface
         ]);
         
         $this->add([
-            'name'			=> 'payPhone',
+            'name'			=> 'pay_phone',
             'type'			=> 'checkbox',
             'options'		=> [
                 'label'			=> 'Phone Payments',
@@ -60,7 +60,7 @@ class CartFieldSet extends Fieldset implements InputFilterProviderInterface
         ]);
         
         $this->add([
-            'name'			=> 'payCreditCard',
+            'name'			=> 'pay_credit_card',
             'type'			=> 'checkbox',
             'options'		=> [
                 'label'			=> 'Credit Card Payments',
@@ -73,7 +73,7 @@ class CartFieldSet extends Fieldset implements InputFilterProviderInterface
         ]);
         
         $this->add([
-            'name'			=> 'payPaypal',
+            'name'			=> 'pay_paypal',
             'type'			=> 'checkbox',
             'options'		=> [
                 'label'			=> 'Paypal Payments',
@@ -86,7 +86,7 @@ class CartFieldSet extends Fieldset implements InputFilterProviderInterface
         ]);
         
         $this->add([
-            'name'			=> 'collectInstore',
+            'name'			=> 'collect_instore',
             'type'			=> 'checkbox',
             'options'		=> [
                 'label'			=> 'Collect Instore',
@@ -99,7 +99,7 @@ class CartFieldSet extends Fieldset implements InputFilterProviderInterface
         ]);
 
         $this->add([
-            'name'			=> 'autoIncrementCart',
+            'name'			=> 'auto_increment_cart',
             'type'			=> 'checkbox',
             'options'		=> [
                 'label'			=> 'Auto Increment Cart',
@@ -112,7 +112,7 @@ class CartFieldSet extends Fieldset implements InputFilterProviderInterface
         ]);
 
         $this->add([
-            'name'			=> 'shippingByWeight',
+            'name'			=> 'shipping_by_weight',
             'type'			=> 'radio',
             'options'		=> [
                 'label'			=> 'Shipping Cost',

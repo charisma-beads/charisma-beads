@@ -87,11 +87,13 @@ $next = $this->productHelper()->getNext($this->model->getProductId());
 </div>
 
 <?php $this->inlineScript()
-    ->appendFile($this->basePath('js/admin/shop/shop.js'))
-    ->appendFile($this->basePath('js/admin/shop/products-edit.js'));?>
+    ->appendFile($this->basePath('js/admin/shop.js'))
+    ->appendFile($this->basePath('js/admin/products-edit.js'));?>
 
+<?php $this->textEditor()->summernote();?>
+
+<?php $this->placeholder('js-scripts')->captureStart();?>
 <script>
-    $(document).ready(function() {
-        product.productId = <?=$this->model->getProductId();?>;
-    });
+    product.productId = <?=$this->model->getProductId();?>;
 </script>
+<?php $this->placeholder('js-scripts')->captureEnd();?>

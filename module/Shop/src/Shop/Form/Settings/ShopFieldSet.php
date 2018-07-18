@@ -10,10 +10,19 @@
 
 namespace Shop\Form\Settings;
 
+use Zend\Filter\Boolean;
+use Zend\Filter\StringTrim;
+use Zend\Filter\StripTags;
+use Zend\Filter\ToInt;
+use Zend\Form\Element\Checkbox;
+use Zend\Form\Element\Number;
+use Zend\Form\Element\Text;
+use Zend\Form\Element\Textarea;
+use Zend\Hydrator\ClassMethods;
 use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\Form\Fieldset;
 use Shop\Options\ShopOptions;
-use Zend\Stdlib\Hydrator\ClassMethods;
+
 
 /**
  * Class ShopFieldSet
@@ -33,8 +42,8 @@ class ShopFieldSet extends Fieldset implements InputFilterProviderInterface
     public function init()
     {
         $this->add([
-            'name' => 'developmentMode',
-            'type' => 'checkbox',
+            'name' => 'development_mode',
+            'type' => Checkbox::class,
             'options' => [
                 'label' => 'Development Mode',
                 'use_hidden_element' => true,
@@ -46,8 +55,8 @@ class ShopFieldSet extends Fieldset implements InputFilterProviderInterface
         ]);
 
         $this->add([
-            'name' => 'merchantName',
-            'type' => 'text',
+            'name' => 'merchant_name',
+            'type' => Text::class,
             'options' => [
                 'label' => 'Merchant Name',
                 'column-size' => 'md-8',
@@ -59,7 +68,7 @@ class ShopFieldSet extends Fieldset implements InputFilterProviderInterface
 
         $this->add([
             'name'			=> 'alert',
-            'type'			=> 'checkbox',
+            'type'			=> Checkbox::class,
             'options'		=> [
                 'label'			=> 'Enable Alert',
                 'use_hidden_element' => true,
@@ -71,8 +80,8 @@ class ShopFieldSet extends Fieldset implements InputFilterProviderInterface
         ]);
         
         $this->add([
-            'name' => 'alertText',
-            'type' => 'textarea',
+            'name' => 'alert_text',
+            'type' => Textarea::class,
             'options' => [
                 'label' => 'Alert Text',
                 'column-size' => 'md-8',
@@ -86,8 +95,8 @@ class ShopFieldSet extends Fieldset implements InputFilterProviderInterface
         ]);
         
         $this->add([
-            'name' => 'productsPerPage',
-            'type' => 'number',
+            'name' => 'products_per_page',
+            'type' => Number::class,
             'options' => [
                 'label' => 'Products Per Page',
                 'column-size' => 'md-8',
@@ -98,8 +107,8 @@ class ShopFieldSet extends Fieldset implements InputFilterProviderInterface
         ]);
         
         $this->add([
-            'name' => 'productsOrderCol',
-            'type' => 'text',
+            'name' => 'products_order_col',
+            'type' => Text::class,
             'options' => [
                 'label' => 'Product Sort Order',
                 'column-size' => 'md-8',
@@ -110,8 +119,8 @@ class ShopFieldSet extends Fieldset implements InputFilterProviderInterface
         ]);
         
         $this->add([
-            'name'			=> 'stockControl',
-            'type'			=> 'checkbox',
+            'name'			=> 'stock_control',
+            'type'			=> Checkbox::class,
             'options'		=> [
                 'label'			=> 'Enable Stock Control',
                 'use_hidden_element' => true,
@@ -123,8 +132,8 @@ class ShopFieldSet extends Fieldset implements InputFilterProviderInterface
         ]);
         
         $this->add([
-            'name'			=> 'vatState',
-            'type'			=> 'checkbox',
+            'name'			=> 'vat_state',
+            'type'			=> Checkbox::class,
             'options'		=> [
                 'label'			=> 'Enable VAT',
                 'use_hidden_element' => true,
@@ -136,8 +145,8 @@ class ShopFieldSet extends Fieldset implements InputFilterProviderInterface
         ]);
         
         $this->add([
-            'name' => 'vatNumber',
-            'type' => 'text',
+            'name' => 'vat_number',
+            'type' => Text::class,
             'options' => [
                 'label' => 'VAT Number',
                 'column-size' => 'md-8',
@@ -151,40 +160,82 @@ class ShopFieldSet extends Fieldset implements InputFilterProviderInterface
     public function getInputFilterSpecification()
     {
         return [
-            'merchantName' => [
+            'development_mode' => [
+                'required' => true,
+                'allow_empty' => true,
+                'filters' => [
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
+                    ['name' => Boolean::class, 'options' => [
+                        'type' => Boolean::TYPE_ZERO_STRING,
+                    ]],
+                ],
+            ],
+            'merchant_name' => [
                 'required' => true,
                 'filters' => [
-                    ['name' => 'StripTags'],
-                    ['name' => 'StringTrim'],
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
                 ],
             ],
-            'alertText' => [
+            'alert' => [
+                'required' => true,
+                'allow_empty' => true,
+                'filters' => [
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
+                    ['name' => Boolean::class, 'options' => [
+                        'type' => Boolean::TYPE_ZERO_STRING,
+                    ]],
+                ],
+            ],
+            'alert_text' => [
                 'required' => false,
                 'filters' => [
-                    ['name' => 'StripTags'],
-                    ['name' => 'StringTrim'],
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
                 ],
             ],
-            'productsPerPage' => [
+            'products_per_page' => [
                 'filters' => [
-                    ['name' => 'StripTags'],
-                    ['name' => 'StringTrim'],
-                ],
-                'validators' => [
-                    ['name' => 'Int'],
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
+                    ['name' => ToInt::class],
                 ],
             ],
-            'productsOrderCol' => [
+            'products_order_col' => [
                 'filters' => [
-                    ['name' => 'StripTags'],
-                    ['name' => 'StringTrim'],
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
                 ],
             ],
-            'vatNumber' => [
+            'stock_control' => [
+                'required' => true,
+                'allow_empty' => true,
+                'filters' => [
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
+                    ['name' => Boolean::class, 'options' => [
+                        'type' => Boolean::TYPE_ZERO_STRING,
+                    ]],
+                ],
+            ],
+            'vat_state' => [
+                'required' => true,
+                'allow_empty' => true,
+                'filters' => [
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
+                    ['name' => Boolean::class, 'options' => [
+                        'type' => Boolean::TYPE_ZERO_STRING,
+                    ]],
+                ],
+            ],
+            'vat_number' => [
                 'required' => false,
                 'filters' => [
-                    ['name' => 'StripTags'],
-                    ['name' => 'StringTrim'],
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
                 ],
             ],
         ];

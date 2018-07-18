@@ -10,9 +10,9 @@
 
 namespace Shop\Form\Settings;
 
+use Zend\Hydrator\ClassMethods;
 use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\Form\Fieldset;
-use Zend\Stdlib\Hydrator\ClassMethods;
 use Shop\Options\CartCookieOptions;
 
 /**
@@ -95,7 +95,7 @@ class CartCookieFieldSet extends Fieldset implements InputFilterProviderInterfac
         ]);
         
         $this->add([
-            'name' => 'cookieName',
+            'name' => 'cookie_name',
             'type' => 'text',
             'options' => [
                 'label' => 'Cookie Name',
@@ -134,7 +134,7 @@ class CartCookieFieldSet extends Fieldset implements InputFilterProviderInterfac
                     ['name' => 'StringTrim'],
                 ],
             ],
-            'cookieName' => [
+            'cookie_name' => [
                 'required' => false,
                 'filters' => [
                     ['name' => 'StripTags'],

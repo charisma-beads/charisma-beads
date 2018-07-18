@@ -184,7 +184,7 @@ class CartOptions extends AbstractOptions
      */
     public function setAutoIncrementCart($autoIncrementCart)
     {
-        $this->autoIncrementCart = $autoIncrementCart;
+        $this->autoIncrementCart = (bool) $autoIncrementCart;
         return $this;
     }
 }

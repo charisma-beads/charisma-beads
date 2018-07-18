@@ -29,18 +29,18 @@
 </div>
 
 <?php $this->inlineScript()
-    ->appendFile($this->basePath('js/admin/shop/typeahead.bundle.min.js'))
-    ->appendFile($this->basePath('js/admin/shop/shop.js'))
-    ->appendFile($this->basePath('js/admin/shop/orders.js'));?>
+    ->appendFile($this->basePath('js/admin/typeahead.bundle.min.js'))
+    ->appendFile($this->basePath('js/admin/shop.js'))
+    ->appendFile($this->basePath('js/admin/orders.js'));?>
 
+<?php $this->placeholder('js-scripts')->captureStart();?>
 <script>
-    $(document).ready(function(){
-        $('#table-order').dataGrid({
-            url : 'order/list',
-            query: { sort : '-orderDate' },
-            searchForm : $('#search-order'),
-            paging : 'links',
-            columnSort: true,
-        });
+    $('#table-order').dataGrid({
+        url : 'order/list',
+        query: { sort : '-orderDate' },
+        searchForm : $('#search-order'),
+        paging : 'links',
+        columnSort: true,
     });
 </script>
+<?php $this->placeholder('js-scripts')->captureEnd();?>

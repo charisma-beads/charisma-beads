@@ -32,16 +32,16 @@
 </div>
 
 <?php $this->inlineScript()
-    ->appendFile($this->basePath('js/admin/shop/shop.js'))
-    ->appendFile($this->basePath('js/admin/shop/customer-list.js'));?>
+    ->appendFile($this->basePath('js/admin/shop.js'))
+    ->appendFile($this->basePath('js/admin/customer-list.js'));?>
 
+<?php $this->placeholder('js-scripts')->captureStart();?>
 <script>
-    $(document).ready(function() {
-        $('#table-customer').dataGrid({
-            url: 'customer/list',
-            query: {sort: 'name'},
-            searchForm: $('#search-customer'),
-            columnSort: true
-        });
+    $('#table-customer').dataGrid({
+        url: 'customer/list',
+        query: {sort: 'name'},
+        searchForm: $('#search-customer'),
+        columnSort: true
     });
 </script>
+<?php $this->placeholder('js-scripts')->captureEnd();?>

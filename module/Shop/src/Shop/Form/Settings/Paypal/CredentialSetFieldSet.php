@@ -23,7 +23,7 @@ class CredentialSetFieldSet extends Fieldset implements InputFilterProviderInter
     public function init()
     {
         $this->add([
-            'name' => 'clientId',
+            'name' => 'client_id',
             'type' => 'text',
             'options' => [
                 'label' => 'Client Id',
@@ -50,7 +50,7 @@ class CredentialSetFieldSet extends Fieldset implements InputFilterProviderInter
     public function getInputFilterSpecification()
     {
         return [
-            'clientId' => [
+            'client_id' => [
                 'required' => false,
                 'filters' => [
                     ['name' => 'StripTags'],

@@ -19,7 +19,7 @@
 	]),
 ]); ?>
 
-<div id="product-category-edit" class="panel panel-default">
+<div id="product-category-add" class="panel panel-default">
 	<div class="panel-heading">
 		<h3 class="panel-title"><i class="fa fa-pencil"></i> <?=$this->translate('Add Category');?></h3>
 	</div>
@@ -29,11 +29,12 @@
 </div>
 
 <?php $this->inlineScript()
-	->appendFile($this->basePath('js/admin/shop/shop.js'))
-	->appendFile($this->basePath('/js/admin/shop/category-edit.js'));?>
+	->appendFile($this->basePath('js/admin/shop.js'))
+	->appendFile($this->basePath('/js/admin/category-edit.js'));?>
 
+<?php $this->placeholder('js-scripts')->captureStart();?>
 <script>
-	$(document).ready(function() {
-		$('#list-category-image').remove();
-	});
+    $('#list-category-image').remove();
 </script>
+<?php $this->placeholder('js-scripts')->captureEnd();?>
+

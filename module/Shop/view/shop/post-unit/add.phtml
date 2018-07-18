@@ -20,7 +20,8 @@
     ]),
 ]); ?>
 
-<div id="post-unit-edit" class="panel panel-default">
+<?php if (!$this->request()->isXmlHttpRequest()):?>
+<div id="post-unit-add" class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title"><i class="fa fa-pencil"></i> <?= $this->translate('Add Post Unit'); ?></h3>
     </div>
@@ -28,3 +29,6 @@
         <?= $this->form($this->form); ?>
     </div>
 </div>
+<?php else: ?>
+<?= $this->form($this->form); ?>
+<?php endif; ?>

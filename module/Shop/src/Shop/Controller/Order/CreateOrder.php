@@ -195,7 +195,7 @@ class CreateOrder extends AbstractActionController
         //$this->getService()->loadItems($this->getService()->getOrderModel());
 
         $viewModel = new ViewModel([
-            'order' => $this->getService()->getOrderModel(),
+            'order' => $this->getService()->getOrder($orderId),
         ]);
 
         $viewModel->setTerminal(true);

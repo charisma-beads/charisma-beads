@@ -33,7 +33,7 @@ class InvoiceFieldSet extends Fieldset implements InputFilterProviderInterface
     public function init()
     {
         $this->add([
-            'name' => 'fontSize',
+            'name' => 'font_size',
             'type' => 'text',
             'options' => [
                 'label' => 'Font Size',
@@ -46,7 +46,7 @@ class InvoiceFieldSet extends Fieldset implements InputFilterProviderInterface
         ]);
 
         $this->add([
-            'name' => 'panelTitleFontSize',
+            'name' => 'panel_title_font_size',
             'type' => 'text',
             'options' => [
                 'label' => 'Panel Title Font Size',
@@ -59,7 +59,7 @@ class InvoiceFieldSet extends Fieldset implements InputFilterProviderInterface
         ]);
 
         $this->add([
-            'name' => 'footerFontSize',
+            'name' => 'footer_font_size',
             'type' => 'text',
             'options' => [
                 'label' => 'Footer Font Size',
@@ -75,21 +75,21 @@ class InvoiceFieldSet extends Fieldset implements InputFilterProviderInterface
     public function getInputFilterSpecification()
     {
         return [
-            'fontSize' => [
+            'font_size' => [
                 'required' => true,
                 'filters' => [
                     ['name' => 'StripTags'],
                     ['name' => 'StringTrim'],
                 ],
             ],
-            'panelTitleFontSize' => [
+            'panel_title_font_size' => [
                 'required' => true,
                 'filters' => [
                     ['name' => 'StripTags'],
                     ['name' => 'StringTrim'],
                 ],
             ],
-            'footerFontSize' => [
+            'footer_font_size' => [
                 'required' => true,
                 'filters' => [
                     ['name' => 'StripTags'],

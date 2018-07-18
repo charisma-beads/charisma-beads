@@ -21,6 +21,7 @@ use Shop\Validator\Voucher;
 use Zend\Json\Json;
 use Zend\Mail\Protocol\Exception\RuntimeException;
 use Zend\Math\BigInteger\BigInteger;
+use Zend\Stdlib\InitializableInterface;
 use Zend\View\Model\ViewModel;
 
 /**
@@ -84,6 +85,14 @@ class Order extends AbstractOrder
     ];
 
     /**
+     * @return \Shop\Options\CartOptions
+     */
+    public function getCartOptions()
+    {
+        return $this->getServiceLocator()->get('Shop\Options\Cart');
+    }
+
+    /**
      * @param $id
      * @param null $col
      * @return OrderModel
@@ -106,6 +115,16 @@ class Order extends AbstractOrder
     public function getOrder($id)
     {
         $order = $this->getById($id);
+
+        $order->setSortOrder($this->getShopOptions()->getProductsOrderCol());
+
+        $order->setAutoIncrementQuantity(
+            $this->getCartOptions()->isAutoIncrementCart()
+        );
+
+        $order->setEntities([]);
+
+        $this->loadItems($order);
 
         $this->setOrderModel($order);
 

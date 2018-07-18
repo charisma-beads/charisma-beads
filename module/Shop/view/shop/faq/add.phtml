@@ -20,7 +20,7 @@
     ]),
 ]); ?>
 
-<div id="faq-edit" class="panel panel-default">
+<div id="faq-add" class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title"><i class="fa fa-pencil"></i> <?= $this->translate('Add FAQ'); ?></h3>
     </div>
@@ -29,6 +29,4 @@
     </div>
 </div>
 
-<?php $this->inlineScript()
-    ->appendFile($this->basePath('js/admin/shop/shop.js'))
-    ->appendFile($this->basePath('js/admin/shop/faq-edit.js'));?>
+<?php $this->textEditor()->summernote();?>

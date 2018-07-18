@@ -28,14 +28,14 @@
     </div>
 </div>
 
+<?php $this->placeholder('js-scripts')->captureStart();?>
 <script>
-    $(document).ready(function(){
-        $('#table-postUnit').dataGrid({
-            url : 'unit/list',
-            query: { sort : 'postUnit' },
-            searchForm : $('#search-postUnit'),
-            paging : 'links',
-            columnSort: true,
-        });
+    $('#table-postUnit').dataGrid({
+        url : 'unit/list',
+        query: { sort : 'postUnit' },
+        searchForm : $('#search-postUnit'),
+        paging : 'links',
+        columnSort: true,
     });
 </script>
+<?php $this->placeholder('js-scripts')->captureEnd();?>

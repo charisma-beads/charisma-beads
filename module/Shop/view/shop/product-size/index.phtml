@@ -30,14 +30,14 @@
     </div>
 </div>
 
+<?php $this->placeholder('js-scripts')->captureStart();?>
 <script>
-    $(document).ready(function () {
-        $('#table-productSize').dataGrid({
-            url: '<?=$this->url('admin/shop/product/size/edit', ['action' => 'list']);?>',
-            query: {sort: 'productSizeId'},
-            searchForm: $('#search-productSize'),
-            paging: 'links',
-            columnSort: true
-        });
+    $('#table-productSize').dataGrid({
+        url: '<?=$this->url('admin/shop/product/size/edit', ['action' => 'list']);?>',
+        query: {sort: 'productSizeId'},
+        searchForm: $('#search-productSize'),
+        paging: 'links',
+        columnSort: true
     });
 </script>
+<?php $this->placeholder('js-scripts')->captureEnd();?>

@@ -34,7 +34,7 @@ class PaypalFieldSet extends Fieldset implements InputFilterProviderInterface
     public function init()
     {
         $this->add([
-            'name' => 'currencyCode',
+            'name' => 'currency_code',
             'type' => 'text',
             'options' => [
                 'label' => 'Currency Code',
@@ -62,7 +62,7 @@ class PaypalFieldSet extends Fieldset implements InputFilterProviderInterface
         ]);
         
         $this->add([
-            'name'			=> 'logEnabled',
+            'name'			=> 'log_enabled',
             'type'			=> 'checkbox',
             'options'		=> [
                 'label'			=> 'Enable Log',
@@ -75,7 +75,7 @@ class PaypalFieldSet extends Fieldset implements InputFilterProviderInterface
         ]);
         
         $this->add([
-            'name'			=> 'logLevel',
+            'name'			=> 'log_level',
             'type'			=> 'select',
             'options'		=> [
                 'label'			=> 'Log Level',
@@ -94,7 +94,7 @@ class PaypalFieldSet extends Fieldset implements InputFilterProviderInterface
         ]);
         
         $this->add([
-            'name'			=> 'paymentMethod',
+            'name'			=> 'payment_method',
             'type'			=> 'select',
             'options'		=> [
                 'label'			=> 'Payment Method',
@@ -124,7 +124,7 @@ class PaypalFieldSet extends Fieldset implements InputFilterProviderInterface
     public function getInputFilterSpecification()
     {
         return [
-            'currencyCode' => [
+            'currency_code' => [
                 'required' => false,
                 'filters' => [
                     ['name' => 'StripTags'],

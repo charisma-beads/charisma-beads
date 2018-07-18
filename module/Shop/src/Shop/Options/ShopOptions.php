@@ -67,7 +67,15 @@ class ShopOptions extends AbstractOptions
     /**
      * @return boolean
      */
-    public function isDevelopmentMode()
+    public function isDevelopmentMode(): bool
+    {
+        return $this->developmentMode;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getDevelopmentMode(): bool
     {
         return $this->developmentMode;
     }
@@ -76,7 +84,7 @@ class ShopOptions extends AbstractOptions
      * @param boolean $developmentMode
      * @return $this
      */
-    public function setDevelopmentMode($developmentMode)
+    public function setDevelopmentMode(bool $developmentMode)
     {
         $this->developmentMode = $developmentMode;
         return $this;
@@ -85,7 +93,7 @@ class ShopOptions extends AbstractOptions
     /**
      * @return string
      */
-    public function getMerchantName()
+    public function getMerchantName(): string
     {
         return $this->merchantName;
     }
@@ -103,7 +111,7 @@ class ShopOptions extends AbstractOptions
     /**
      * @return bool
      */
-	public function getAlert()
+	public function getAlert(): bool
 	{
 		return $this->alert;
 	}
@@ -112,7 +120,7 @@ class ShopOptions extends AbstractOptions
      * @param $alert
      * @return $this
      */
-	public function setAlert($alert)
+	public function setAlert(bool $alert)
 	{
 		$this->alert = $alert;
 		return $this;
@@ -121,7 +129,7 @@ class ShopOptions extends AbstractOptions
     /**
      * @return string
      */
-	public function getAlertText()
+	public function getAlertText(): string
 	{
 		return $this->alertText;
 	}
@@ -139,7 +147,7 @@ class ShopOptions extends AbstractOptions
     /**
      * @return int
      */
-	public function getProductsPerPage()
+	public function getProductsPerPage(): int
 	{
 		return $this->productsPerPage;
 	}
@@ -184,7 +192,7 @@ class ShopOptions extends AbstractOptions
      * @param $stockControl
      * @return $this
      */
-	public function setStockControl($stockControl)
+	public function setStockControl(bool $stockControl)
 	{
 		$this->stockControl = $stockControl;
 		return $this;
@@ -193,7 +201,7 @@ class ShopOptions extends AbstractOptions
     /**
      * @return string
      */
-	public function getVatNumber()
+	public function getVatNumber(): string
 	{
 		return $this->vatNumber;
 	}
@@ -211,7 +219,7 @@ class ShopOptions extends AbstractOptions
     /**
      * @return bool
      */
-	public function isVatState()
+	public function isVatState(): bool
 	{
 		return $this->vatState;
 	}
@@ -219,7 +227,7 @@ class ShopOptions extends AbstractOptions
     /**
      * @return bool
      */
-	public function getVatState()
+	public function getVatState(): bool
     {
         return $this->isVatState();
     }
@@ -228,7 +236,7 @@ class ShopOptions extends AbstractOptions
      * @param $vatState
      * @return $this
      */
-	public function setVatState($vatState)
+	public function setVatState(bool $vatState)
 	{
 		$this->vatState = $vatState;
 		return $this;

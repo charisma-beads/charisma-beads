@@ -21,7 +21,7 @@
 	]),
 ]); ?>
 
-<div id="product-edit" class="panel panel-default">
+<div id="product-add" class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title"><i class="fa fa-pencil"></i> <?= $this->translate('Add Product'); ?></h3>
     </div>
@@ -31,5 +31,7 @@
 </div>
 
 <?php $this->inlineScript()
-    ->appendFile($this->basePath('js/admin/shop/shop.js'))
-    ->appendFile($this->basePath('js/admin/shop/products-edit.js'));?>
+    ->appendFile($this->basePath('js/admin/shop.js'))
+    ->appendFile($this->basePath('js/admin/products-edit.js'));?>
+
+<?php $this->textEditor()->summernote();?>

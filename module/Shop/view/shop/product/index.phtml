@@ -54,16 +54,17 @@ $discontinued = new Element\Checkbox('discontinued', [
 </div>
 
 <?php $this->inlineScript()
-    ->appendFile($this->basePath('js/admin/shop/shop.js'))
-    ->appendFile($this->basePath('js/admin/shop/products-list.js'));?>
+    ->appendFile($this->basePath('/js/admin/shop.js'))
+    ->appendFile($this->basePath('/js/admin/products-list.js'));?>
 
+<?php $this->placeholder('js-scripts')->captureStart();?>
 <script>
-    $(document).ready(function() {
-        $('#table-product').dataGrid({
-            url: 'product/list',
-            query: {sort: '<?=(isset($this->params['sort'])) ? $this->params['sort'] : 'sku';?>'},
-            searchForm: $('#search-product'),
-            columnSort: true
-        });
+    $('#table-product').dataGrid({
+        url: 'product/list',
+        query: {sort: '<?=(isset($this->params['sort'])) ? $this->params['sort'] : 'sku';?>'},
+        searchForm: $('#search-product'),
+        columnSort: true
     });
 </script>
+<?php $this->placeholder('js-scripts')->captureEnd();?>
+

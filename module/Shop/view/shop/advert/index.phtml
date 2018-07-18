@@ -29,13 +29,13 @@
     </div>
 </div>
 
+<?php $this->placeholder('js-scripts')->captureStart();?>
 <script>
-    $(document).ready(function() {
-        $('#table-advert').dataGrid({
-            url: 'advert/list',
-            query: {sort: 'advertId'},
-            searchForm: $('#search-advert'),
-            columnSort: true
-        });
+    $('#table-advert').dataGrid({
+        url: 'advert/list',
+        query: {sort: 'advertId'},
+        searchForm: $('#search-advert'),
+        columnSort: true
     });
 </script>
+<?php $this->placeholder('js-scripts')->captureEnd();?>

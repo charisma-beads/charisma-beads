@@ -13,7 +13,7 @@ namespace Shop\Form\Settings;
 use Shop\Options\OrderOptions;
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
-use Zend\Stdlib\Hydrator\ClassMethods;
+use Zend\Hydrator\ClassMethods;
 
 /**
  * Class OrderFieldSet
@@ -33,7 +33,7 @@ class OrderFieldSet extends Fieldset implements InputFilterProviderInterface
     public function init()
     {
         $this->add([
-            'name'			=> 'creditCardPaymentEmail',
+            'name'			=> 'credit_card_payment_email',
             'type'			=> 'UthandoMailTransportList',
             'options'       => [
                 'label' => 'Payment Email',
@@ -45,7 +45,7 @@ class OrderFieldSet extends Fieldset implements InputFilterProviderInterface
         ]);
 
         $this->add([
-            'name'			=> 'orderEmail',
+            'name'			=> 'order_email',
             'type'			=> 'UthandoMailTransportList',
             'options'       => [
                 'label' => 'Order Email',
@@ -57,7 +57,7 @@ class OrderFieldSet extends Fieldset implements InputFilterProviderInterface
         ]);
 
         $this->add([
-            'name'			=> 'sendOrderToAdmin',
+            'name'			=> 'send_order_to_admin',
             'type'			=> 'checkbox',
             'options'		=> [
                 'label'			=> 'Send Order To Admin',
@@ -70,7 +70,7 @@ class OrderFieldSet extends Fieldset implements InputFilterProviderInterface
         ]);
 
         $this->add([
-            'name'			=> 'emailCustomerOnStatusChange',
+            'name'			=> 'email_customer_on_status_change',
             'type'			=> 'checkbox',
             'options'		=> [
                 'label'			=> 'Email Customer On Order Status Change',

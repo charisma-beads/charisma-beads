@@ -55,11 +55,11 @@ class PaypalOptions extends AbstractOptions
 	 */
 	protected $credentialPairs = [
 		'sandbox'	=> [
-			'clientId'	=> '',
+			'client_id'	=> '',
 			'secret' 	=> '',
 		],
 		'live'		=> [
-			'clientId' 	=> '',
+			'client_id' 	=> '',
 			'secret' 	=> '',
 		],
 	];
@@ -199,7 +199,7 @@ class PaypalOptions extends AbstractOptions
      */
     public function getClientId()
     {
-        return $this->credentialPairs[$this->mode]['clientId'];
+        return $this->credentialPairs[$this->mode]['client_id'];
     }
 
 	/**

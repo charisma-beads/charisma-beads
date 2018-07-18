@@ -28,15 +28,15 @@
     </div>
 </div>
 
+<?php $this->placeholder('js-scripts')->captureStart();?>
 <script>
-    $(document).ready(function(){
-        $('#table-taxRate').dataGrid({
-            url : 'rate/list',
-            query: { sort : 'taxRateId' },
-            searchForm : $('#search-taxRate'),
-            paging : 'links',
-            columnSort: true,
-            //rowClick : admin.dataTable.rowClick
-        });
+    $('#table-taxRate').dataGrid({
+        url : 'rate/list',
+        query: { sort : 'taxRateId' },
+        searchForm : $('#search-taxRate'),
+        paging : 'links',
+        columnSort: true,
+        //rowClick : admin.dataTable.rowClick
     });
 </script>
+<?php $this->placeholder('js-scripts')->captureEnd();?>
