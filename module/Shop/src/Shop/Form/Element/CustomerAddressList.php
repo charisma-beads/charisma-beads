@@ -51,7 +51,7 @@ class CustomerAddressList extends Select implements ServiceLocatorAwareInterface
         $addressOptions = [
             0 => '---Please select an address---',
         ];
-        
+
         /* @var $address \Shop\Model\Customer\Address */
         foreach($addresses as $address) {
             $addressLabel = join(', ', [

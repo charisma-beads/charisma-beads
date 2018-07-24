@@ -12,6 +12,7 @@ namespace Shop\Service\Customer;
 
 use \Shop\Model\Customer\Customer as CustomerModel;
 use UthandoCommon\Service\AbstractRelationalMapperService;
+use UthandoCommon\Service\AbstractService;
 use UthandoCommon\Service\ServiceException;
 use UthandoUser\Model\User;
 use Zend\EventManager\Event;
@@ -84,7 +85,7 @@ class Customer extends AbstractRelationalMapperService
         ], [$this, 'setCustomerValidation']);
         
         $this->getEventManager()->attach([
-            'form.init'
+            AbstractService::EVENT_POST_PREPARE_FORM
         ], [$this, 'formInit']);
     }
 
