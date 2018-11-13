@@ -34,7 +34,8 @@
     "paypal/rest-api-sdk-php": "1.*",
     "phpoffice/phpexcel": "1.*",
     "twitter/typeahead.js": "*",
-    "ccampbell/chromephp": "4.*"
+    "ccampbell/chromephp": "4.*",
+    "studio-42/elfinder": "2.1.41"
   },
   "require-dev": {
     "zendframework/zend-authentication": "2.*",

@@ -14,6 +14,7 @@ use Shop\Service\Order\Order;
 use Shop\Service\Customer\Customer;
 use Shop\ShopException;
 use UthandoCommon\Service\ServiceTrait;
+use Zend\Json\Json;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
