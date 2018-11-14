@@ -39,6 +39,12 @@ class StockControlListener implements ListenerAggregateInterface
 
         $this->listeners[] = $events->attach(
             [Cart::class, Order::class],
+            ['cart.stock.check'],
+            [$this, 'cartCheck']
+        );
+
+        $this->listeners[] = $events->attach(
+            [Cart::class, Order::class],
             ['stock.check'],
             [$this, 'check']
         );
@@ -69,11 +75,11 @@ class StockControlListener implements ListenerAggregateInterface
     }
 
     /**
-     * Check if product is out of stock
+     * Check if cart has more than whats in stock
      *
      * @param Event $e
      */
-    public function check(Event $e)
+    public function cartCheck(Event $e)
     {
         /* @var $line LineInterface */
         $line       = $e->getParam('line');
@@ -86,6 +92,57 @@ class StockControlListener implements ListenerAggregateInterface
         // calculate the difference that's in the cart and what is asked for.
         $diff = ($currentCartQuantity < $qty) ? ($qty - $currentCartQuantity) : ($currentCartQuantity - $qty);
 
+
+
+        // if product is non stock item return
+        if ($product->getQuantity() < 0) {
+            return;
+        }
+
+        // if quantity is greater than zero then
+        // set quantity according to stock availability
+        if ($currentCartQuantity <= $qty) {
+
+            // if request is more than we have in stock, only allow what is in stock
+            if ($product->getQuantity() < $qty) {
+                $qty = $product->getQuantity();
+                $e->setParam('message', sprintf(
+                    'You asked for %s x %s, only %s are available. Your request has been reduced by %s',
+                    $qty + $diff,
+                    $product->getSku(),
+                    $product->getQuantity(),
+                    $diff
+                ));
+            }
+        }
+
+        // reduce the cart quantity
+        if ($currentCartQuantity > $qty) {
+            $qty = $currentCartQuantity - $diff;
+        }
+
+        // set the adjusted params
+        $e->setParam('qty', $qty);
+    }
+
+    /**
+     * Check if product is out of stock
+     *
+     * @param Event $e
+     */
+    public function check(Event $e)
+    {
+        /* @var $line LineInterface */
+        $line       = $e->getParam('line');
+        /* @var $product ProductModel */
+        $product    = $e->getParam('product');
+        $qty        = $e->getParam('qty');
+
+        $currentQuantity = $line->getQuantity();
+
+        // calculate the difference that's in the order and what is asked for.
+        $diff = ($currentQuantity < $qty) ? ($qty - $currentQuantity) : ($currentQuantity - $qty);
+
         // if product is non stock item return
         if ($product->getQuantity() < 0) {
             return;
@@ -94,19 +151,19 @@ class StockControlListener implements ListenerAggregateInterface
         // if quantity is greater than zero then
         // set quantity according to stock availability
         // and update product quantity
-        if ($currentCartQuantity < $qty) {
+        if ($currentQuantity < $qty) {
             // if request is more than we have in stock, only allow what is in stock
             if ($product->getQuantity() < $diff) {
                 $diff = $product->getQuantity();
-                $qty = $currentCartQuantity + $diff;
+                $qty = $currentQuantity + $diff;
             }
 
             $product->setQuantity($product->getQuantity() - $diff);
         }
 
-        // if we reduce the cart quantity, then put excess back into stock
-        if ($currentCartQuantity > $qty) {
-            $qty = $currentCartQuantity - $diff;
+        // if we reduce the order quantity, then put excess back into stock
+        if ($currentQuantity > $qty) {
+            $qty = $currentQuantity - $diff;
             $product->setQuantity($product->getQuantity() + $diff);
         }
 

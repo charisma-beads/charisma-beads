@@ -185,6 +185,16 @@ class Checkout extends AbstractActionController
 
         $form->setInputFilter($inputFilter);
 
+        $this->getService('ShopCart')->checkStock();
+
+        $messages = $this->getService('ShopCart')->getMessages();
+
+        if (!empty($messages)) {
+            $this->flashMessenger()->addInfoMessage(
+                join('<br>', $messages)
+            );
+        }
+
         $viewModel = new ViewModel([
             'countryId' => $customer->getDeliveryAddress()->getCountryId(),
             'form' => $form

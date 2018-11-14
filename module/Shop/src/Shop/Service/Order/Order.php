@@ -14,8 +14,11 @@ use Shop\Model\Customer\Customer as CustomerModel;
 use Shop\Model\Order\LineInterface;
 use Shop\Model\Order\MetaData;
 use Shop\Model\Order\Order as OrderModel;
+use Shop\Model\Product\Product as ProductModel;
+use Shop\Model\Product\Option as ProductOption;
 use Shop\Model\Voucher\Code as VoucherCode;
 use Shop\Service\Cart\Cart;
+use Shop\Service\Product\Product as ProductService;
 use Shop\Service\Voucher\Code;
 use Shop\Validator\Voucher;
 use Zend\Json\Json;
@@ -152,6 +155,8 @@ class Order extends AbstractOrder
     /**
      * @param int $orderId
      * @return int
+     * @throws \UthandoCommon\Model\CollectionException
+     * @throws \UthandoCommon\Service\ServiceException
      */
     public function processOrderFromCart($orderId)
     {
@@ -159,6 +164,7 @@ class Order extends AbstractOrder
 
         /* @var $cart Cart */
         $cart = $this->getService('ShopCart');
+        $cart->checkStock();
 
         $code = $cart->getContainer()->offsetGet('voucher');
 
@@ -229,7 +235,8 @@ class Order extends AbstractOrder
     /**
      * @param CustomerModel $customer
      * @param $postData
-     * @return OrderModel
+     * @return int
+     * @throws \UthandoCommon\Service\ServiceException
      */
     public function create(CustomerModel $customer, $postData)
     {
@@ -281,6 +288,138 @@ class Order extends AbstractOrder
         $this->generateOrderNumber($orderId);
 
         return $orderId;
+    }
+
+    /**
+     * Adds items contained with the order collection
+     *
+     * @param ProductModel $product
+     * @param array $post
+     * @return LineInterface|bool
+     * @throws \UthandoCommon\Model\CollectionException
+     * @throws \UthandoCommon\Service\ServiceException
+     */
+    public function addItem(ProductModel $product, $post)
+    {
+        $qty = $post['qty'];
+
+        if ($qty <= 0 || $product->inStock() === false || $product->isDiscontinued() === true || $product->isEnabled() === false) {
+            return false;
+        }
+
+        $productClone = clone $product;
+
+        $productId = $productClone->getProductId();
+        $optionId = (isset($post['ProductOptionList'])) ? (int) substr(strrchr($post['ProductOptionList'], "-"), 1) : null;
+
+        $productOption = ($optionId) ? $product->getProductOption($optionId) : null;
+
+        if ($productOption instanceof ProductOption) {
+            $productClone->setPostUnitId($productOption->getPostUnitId())
+                ->setPostUnit($productOption->getPostUnit())
+                ->setPrice($productOption->getPrice(false))
+                ->setDiscountPercent($productOption->getDiscountPercent());
+            $productId = $productId . '-' . $optionId;
+        }
+
+        $model = $this->getOrderModel();
+        $lineModel = $model->getEntityClass();
+
+        /** @var $line LineInterface */
+        $line = ($model->offsetExists($productId)) ? $model->offsetGet($productId) : new $lineModel();
+
+        if ($model->isAutoIncrementQuantity()) {
+            $qty = $qty + $line->getQuantity();
+        }
+
+        $argv = compact('product', 'qty', 'line');
+        $argv = $this->prepareEventArguments($argv);
+        $this->getEventManager()->trigger('stock.check', $this, $argv);
+
+        $qty = $argv['qty'];
+
+        if (0 == $qty) {
+            $this->removeItem($line->getId());
+            return false;
+        }
+
+        $line->setPrice($productClone->getPrice())
+            ->setQuantity($qty)
+            ->setTax($productClone->getTaxCode()->getTaxRate()->getTaxRate())
+            ->setMetadata($this->getProductMetaData($productClone, $optionId))
+            ->setParentId($model->getId());
+
+        $model->offsetSet($productId, $line);
+
+        $this->persist($line);
+
+        $this->getEventManager()->trigger('stock.save', $this, $argv);
+
+        return $line;
+    }
+
+    /**
+     * Updates order items.
+     *
+     * @param array $items
+     * @throws \UthandoCommon\Model\CollectionException
+     * @throws \UthandoCommon\Service\ServiceException
+     */
+    public function updateItem(array $items)
+    {
+        $orderModel = $this->getOrderModel();
+
+        foreach ($items as $lineItemId => $qty) {
+
+            $line = $orderModel->getLineById($lineItemId);
+
+            if (!$line || $qty < 0) continue;
+
+            if ($qty == 0) {
+                $this->removeItem($lineItemId);
+            } else {
+
+                /* @var $productService ProductService */
+                $productService = $this->getService('ShopProduct');
+                $product = $productService->getById($line->getMetadata()->getProductId());
+
+                $argv = compact('product', 'qty', 'line');
+                $argv = $this->prepareEventArguments($argv);
+
+                $this->getEventManager()->trigger('stock.check', $this, $argv);
+
+                $qty = $argv['qty'];
+
+                $line->setQuantity($qty);
+
+                $offsetKey = $line->getMetadata()->getProductId();
+
+                // check for option
+                if ($line->getMetadata()->getOption() instanceof ProductOption) {
+                    $offsetKey = join('-', [
+                        $offsetKey,
+                        $line->getMetadata()->getOption()->getProductOptionId()
+                    ]);
+                }
+
+                $orderModel->offsetSet($offsetKey, $line);
+
+                $this->getEventManager()->trigger('stock.save', $this, $argv);
+            }
+        }
+
+        $this->persist();
+    }
+
+    public function removeItem($id)
+    {
+        $item = $this->getRelatedService($this->lineService)->getById($id);
+        $argv = compact('item');
+        $argv = $this->prepareEventArguments($argv);
+
+        $this->getEventManager()->trigger('stock.restore', $this, $argv);
+
+        parent::removeItem($id);
     }
 
     /**

@@ -20,6 +20,7 @@ use UthandoCommon\Service\ServiceTrait;
 use UthandoSessionManager\SessionContainerTrait;
 use Zend\Http\Request;
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\Mvc\Controller\Plugin\FlashMessenger;
 use Zend\Session\Container;
 use Zend\View\Model\ViewModel;
 
@@ -56,6 +57,13 @@ class Cart extends AbstractActionController
             );
     
             if ($result instanceof Item) {
+                $messages = $cart->getMessages();
+                if ($messages) {
+                    $this->flashMessenger()->addInfoMessage(
+                        join('<br>', $messages)
+                    );
+                }
+
                 $this->flashMessenger()->addInfoMessage(
                     'You have added ' . $result->getQuantity() . ' X ' . $result->getMetadata()->getName() . ' to your cart'
                 );
@@ -98,6 +106,16 @@ class Cart extends AbstractActionController
         }
 
         $session->offsetSet('countryId', $countryId);
+
+        /* @var $cart CartService */
+        $cart = $this->getService('ShopCart');
+
+        $messages = $cart->getMessages();
+        if (!empty($messages)) {
+            $this->flashMessenger()->addInfoMessage(
+                join('<br>', $messages)
+            );
+        }
 
         return $viewModel->setVariable('countryId', $countryId);
     }

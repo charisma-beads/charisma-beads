@@ -9,6 +9,7 @@
  */
 
 namespace Shop\Model\Product;
+
 use UthandoCommon\Model\Model;
 use UthandoCommon\Model\ModelInterface;
 
