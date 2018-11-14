@@ -78,7 +78,7 @@ class Shipping
             if ($item->getMetadata()->getAddPostage() === true) {
             	$this->postWeight += $item->getMetadata()->getPostUnit() * $item->getQuantity();
             } else {
-            	$this->noShipping += $item->getPrice();
+            	$this->noShipping += $item->getPrice() * $item->getQuantity();
             }
         }
 
