@@ -270,7 +270,7 @@ class Cart extends AbstractOrder implements InitializableInterface
         $this->persist();
     }
 
-    public function checkStock()
+    public function checkStock($updateProduct = false)
     {
         $cart = $this->getOrderModel();
 
@@ -294,6 +294,15 @@ class Cart extends AbstractOrder implements InitializableInterface
                     )
                 );
                 $line->setQuantity($product->getQuantity());
+            }
+
+            if (true === $updateProduct) {
+                $product->setQuantity(
+                    ($product->getQuantity() - $line->getQuantity())
+                );
+                
+                $this->getService('ShopProduct')
+                    ->save($product);
             }
 
             $offsetKey = $line->getMetadata()->getProductId();

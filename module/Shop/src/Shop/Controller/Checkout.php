@@ -185,16 +185,6 @@ class Checkout extends AbstractActionController
 
         $form->setInputFilter($inputFilter);
 
-        $this->getService('ShopCart')->checkStock();
-
-        $messages = $this->getService('ShopCart')->getMessages();
-
-        if (!empty($messages)) {
-            $this->flashMessenger()->addInfoMessage(
-                join('<br>', $messages)
-            );
-        }
-
         $viewModel = new ViewModel([
             'countryId' => $customer->getDeliveryAddress()->getCountryId(),
             'form' => $form
@@ -207,6 +197,15 @@ class Checkout extends AbstractActionController
         if ($prg instanceof Response) {
             return $prg;
         } elseif ($prg === false) {
+            $this->getService('ShopCart')->checkStock();
+
+            $messages = $this->getService('ShopCart')->getMessages();
+
+            if (!empty($messages)) {
+                $this->flashMessenger()->addInfoMessage(
+                    join('<br>', $messages)
+                );
+            }
 
             return $viewModel;
         }
@@ -222,6 +221,16 @@ class Checkout extends AbstractActionController
             $orderId    = $this->getOrderService()->create($customer, $formValues);
 
             if ($orderId) {
+                $this->getService('ShopCart')->checkStock(true);
+
+                $messages = $this->getService('ShopCart')->getMessages();
+
+                if (!empty($messages)) {
+                    $this->flashMessenger()->addInfoMessage(
+                        join('<br>', $messages)
+                    );
+                }
+
                 $this->getOrderService()->processOrderFromCart($orderId);
                 $this->getService('ShopCart')->clear(false);
 
@@ -245,6 +254,16 @@ class Checkout extends AbstractActionController
                     'paymentOption' => lcfirst($action)
                 ]);
             }
+        }
+
+        $this->getService('ShopCart')->checkStock();
+
+        $messages = $this->getService('ShopCart')->getMessages();
+
+        if (!empty($messages)) {
+            $this->flashMessenger()->addInfoMessage(
+                join('<br>', $messages)
+            );
         }
 
         return $viewModel;

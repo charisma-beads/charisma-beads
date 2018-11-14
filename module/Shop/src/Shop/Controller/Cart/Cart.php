@@ -113,7 +113,7 @@ class Cart extends AbstractActionController
         $messages = $cart->getMessages();
         if (!empty($messages)) {
             $this->flashMessenger()->addInfoMessage(
-                join('<br>', $messages)
+                join('<br\>', $messages)
             );
         }
 

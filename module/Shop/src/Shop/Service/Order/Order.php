@@ -164,7 +164,6 @@ class Order extends AbstractOrder
 
         /* @var $cart Cart */
         $cart = $this->getService('ShopCart');
-        $cart->checkStock();
 
         $code = $cart->getContainer()->offsetGet('voucher');
 
