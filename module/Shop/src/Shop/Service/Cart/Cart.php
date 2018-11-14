@@ -300,7 +300,7 @@ class Cart extends AbstractOrder implements InitializableInterface
                 $product->setQuantity(
                     ($product->getQuantity() - $line->getQuantity())
                 );
-                
+
                 $this->getService('ShopProduct')
                     ->save($product);
             }

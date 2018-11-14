@@ -59,9 +59,9 @@ class Cart extends AbstractActionController
             if ($result instanceof Item) {
                 $messages = $cart->getMessages();
                 if ($messages) {
-                    $this->flashMessenger()->addInfoMessage(
-                        join('<br>', $messages)
-                    );
+                    foreach ($messages as $message) {
+                        $this->flashMessenger()->addInfoMessage($message);
+                    }
                 }
 
                 $this->flashMessenger()->addInfoMessage(
@@ -112,9 +112,9 @@ class Cart extends AbstractActionController
 
         $messages = $cart->getMessages();
         if (!empty($messages)) {
-            $this->flashMessenger()->addInfoMessage(
-                join('<br\>', $messages)
-            );
+            foreach ($messages as $message) {
+                $this->flashMessenger()->addInfoMessage($message);
+            }
         }
 
         return $viewModel->setVariable('countryId', $countryId);

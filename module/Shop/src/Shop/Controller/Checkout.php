@@ -202,9 +202,9 @@ class Checkout extends AbstractActionController
             $messages = $this->getService('ShopCart')->getMessages();
 
             if (!empty($messages)) {
-                $this->flashMessenger()->addInfoMessage(
-                    join('<br>', $messages)
-                );
+                foreach ($messages as $message) {
+                    $this->flashMessenger()->addInfoMessage($message);
+                }
             }
 
             return $viewModel;
@@ -226,9 +226,9 @@ class Checkout extends AbstractActionController
                 $messages = $this->getService('ShopCart')->getMessages();
 
                 if (!empty($messages)) {
-                    $this->flashMessenger()->addInfoMessage(
-                        join('<br>', $messages)
-                    );
+                    foreach ($messages as $message) {
+                        $this->flashMessenger()->addInfoMessage($message);
+                    }
                 }
 
                 $this->getOrderService()->processOrderFromCart($orderId);
@@ -261,9 +261,9 @@ class Checkout extends AbstractActionController
         $messages = $this->getService('ShopCart')->getMessages();
 
         if (!empty($messages)) {
-            $this->flashMessenger()->addInfoMessage(
-                join('<br>', $messages)
-            );
+            foreach ($messages as $message) {
+                $this->flashMessenger()->addInfoMessage($message);
+            }
         }
 
         return $viewModel;
