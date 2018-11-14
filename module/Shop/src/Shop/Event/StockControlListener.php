@@ -105,14 +105,16 @@ class StockControlListener implements ListenerAggregateInterface
 
             // if request is more than we have in stock, only allow what is in stock
             if ($product->getQuantity() < $qty) {
-                $qty = $product->getQuantity();
+
                 $e->setParam('message', sprintf(
                     'You asked for %s x %s, only %s are available. Your request has been reduced by %s',
-                    $qty + $diff,
+                    $qty,
                     $product->getSku(),
                     $product->getQuantity(),
-                    $diff
+                    (0 === $currentCartQuantity) ? $qty - $product->getQuantity() : $diff
                 ));
+
+                $qty = $product->getQuantity();
             }
         }
 
