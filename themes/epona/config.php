@@ -21,6 +21,7 @@ return [
         'shop/catalog/product-list'                             => __DIR__ . '/view/shop/catalog/product-list.phtml',
         'shop/catalog/search'                                   => __DIR__ . '/view/shop/catalog/search.phtml',
         'shop/catalog/view'                                     => __DIR__ . '/view/shop/catalog/view.phtml',
+        'shop/checkout/cancel-checkout'                         => __DIR__ . '/view/shop/checkout/cancel-checkout.phtml',
         'shop/checkout/confirm-address'                         => __DIR__ . '/view/shop/checkout/confirm-address.phtml',
         'shop/checkout/confirm-order'                           => __DIR__ . '/view/shop/checkout/confirm-order.phtml',
         'shop/checkout/customer-details'                        => __DIR__ . '/view/shop/checkout/customer-details.phtml',

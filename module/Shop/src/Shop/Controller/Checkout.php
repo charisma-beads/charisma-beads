@@ -207,6 +207,11 @@ class Checkout extends AbstractActionController
                 }
             }
 
+            if (!$this->getService('ShopCart')->hasItems()) {
+                $this->getService('ShopCart')->clear(false);
+                $viewModel->setTemplate('shop/checkout/cancel-checkout');
+            }
+
             return $viewModel;
         }
 
@@ -229,6 +234,12 @@ class Checkout extends AbstractActionController
                     foreach ($messages as $message) {
                         $this->flashMessenger()->addInfoMessage($message);
                     }
+                }
+
+                if (!$this->getService('ShopCart')->hasItems()) {
+                    $this->getService('ShopCart')->clear(false);
+                    $viewModel->setTemplate('shop/checkout/cancel-checkout');
+                    return $viewModel;
                 }
 
                 $this->getOrderService()->processOrderFromCart($orderId);
@@ -264,6 +275,11 @@ class Checkout extends AbstractActionController
             foreach ($messages as $message) {
                 $this->flashMessenger()->addInfoMessage($message);
             }
+        }
+
+        if (!$this->getService('ShopCart')->hasItems()) {
+            $this->getService('ShopCart')->clear(false);
+            $viewModel->setTemplate('shop/checkout/cancel-checkout');
         }
 
         return $viewModel;

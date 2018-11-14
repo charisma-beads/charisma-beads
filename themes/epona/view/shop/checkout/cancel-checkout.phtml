@@ -1,0 +1,19 @@
+
+<?php $this->placeholder('page-top')->captureStart();?>
+
+<?=$this->partial('layout/page-title', [
+    'pageTitle' => 'Checkout Canceled',
+]);?>
+<?php $this->placeholder('page-top')->captureEnd();?>
+
+<div class="col-md-12">
+    <h2>Unfortunately we are unable to process your order.</h2>
+
+    <p>
+        This can be due to limited availability of certain products like workshops, which are allocated on a first come basis and
+        the amount order was £0.00 after removing the unavailable items from your order.
+    </p>
+    <p>We are sorry for any inconvenience this may have caused you.</p>
+    <p>You have not been charged.</p>
+
+</div>
