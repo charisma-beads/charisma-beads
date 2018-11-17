@@ -102,6 +102,14 @@ class OrderOptions extends AbstractOptions
     }
 
     /**
+     * @return boolean
+     */
+    public function getEmailCustomerOnStatusChange()
+    {
+        return $this->emailCustomerOnStatusChange;
+    }
+
+    /**
      * @param boolean $emailCustomerOnStatusChange
      * @return $this
      */

@@ -10,9 +10,11 @@
 
 namespace Shop\Form\Settings;
 
+
+use Zend\Form\Element\Checkbox;
+use Zend\Hydrator\ClassMethods;
 use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\Form\Fieldset;
-use Zend\Stdlib\Hydrator\ClassMethods;
 use Shop\Options\CartOptions;
 
 /**
@@ -100,7 +102,7 @@ class CartFieldSet extends Fieldset implements InputFilterProviderInterface
 
         $this->add([
             'name'			=> 'auto_increment_cart',
-            'type'			=> 'checkbox',
+            'type'			=> Checkbox::class,
             'options'		=> [
                 'label'			=> 'Auto Increment Cart',
                 'use_hidden_element' => true,
@@ -145,6 +147,8 @@ class CartFieldSet extends Fieldset implements InputFilterProviderInterface
     
     public function getInputFilterSpecification()
     {
-        return [];
+        return [
+
+        ];
     }
 }
