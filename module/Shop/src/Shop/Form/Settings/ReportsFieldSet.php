@@ -12,9 +12,13 @@ namespace Shop\Form\Settings;
 
 use Shop\Options\ReportsOptions;
 use Shop\Service\Report;
+use Zend\Filter\StringTrim;
+use Zend\Filter\StripTags;
+use Zend\Form\Element\Select;
+use Zend\Form\Element\Text;
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
-use Zend\Stdlib\Hydrator\ClassMethods;
+use Zend\Hydrator\ClassMethods;
 
 /**
  * Class ReportsFieldSet
@@ -35,7 +39,7 @@ class ReportsFieldSet extends Fieldset implements InputFilterProviderInterface
     {
         $this->add([
             'name' => 'memory_limit',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => 'Reports Memory Limit',
                 'column-size' => 'md-8',
@@ -48,7 +52,7 @@ class ReportsFieldSet extends Fieldset implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'month_format',
-            'type' => 'select',
+            'type' => Select::class,
             'options' => [
                 'label' => 'Month Format',
                 'label_attributes' => [
@@ -65,7 +69,7 @@ class ReportsFieldSet extends Fieldset implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'writer_type',
-            'type' => 'select',
+            'type' => Select::class,
             'options' => [
                 'label' => 'Writer Type',
                 'label_attributes' => [
@@ -83,15 +87,22 @@ class ReportsFieldSet extends Fieldset implements InputFilterProviderInterface
             'memory_limit' => [
                 'required' => false,
                 'filters' => [
-                    ['name' => 'StripTags'],
-                    ['name' => 'StringTrim'],
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
                 ],
             ],
             'month_format' => [
                 'required' => false,
                 'filters' => [
-                    ['name' => 'StripTags'],
-                    ['name' => 'StringTrim'],
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
+                ],
+            ],
+            'writer_type' => [
+                'required' => false,
+                'filters' => [
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
                 ],
             ],
         ];

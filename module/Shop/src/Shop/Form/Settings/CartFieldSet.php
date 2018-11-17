@@ -11,7 +11,11 @@
 namespace Shop\Form\Settings;
 
 
+use Zend\Filter\Boolean;
+use Zend\Filter\StringTrim;
+use Zend\Filter\StripTags;
 use Zend\Form\Element\Checkbox;
+use Zend\Form\Element\Radio;
 use Zend\Hydrator\ClassMethods;
 use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\Form\Fieldset;
@@ -37,7 +41,7 @@ class CartFieldSet extends Fieldset implements InputFilterProviderInterface
         
         $this->add([
             'name'			=> 'pay_check',
-            'type'			=> 'checkbox',
+            'type'			=> Checkbox::class,
             'options'		=> [
                 'label'			=> 'Cheque Payments',
                 'use_hidden_element' => true,
@@ -50,7 +54,7 @@ class CartFieldSet extends Fieldset implements InputFilterProviderInterface
         
         $this->add([
             'name'			=> 'pay_phone',
-            'type'			=> 'checkbox',
+            'type'			=> Checkbox::class,
             'options'		=> [
                 'label'			=> 'Phone Payments',
                 'use_hidden_element' => true,
@@ -63,7 +67,7 @@ class CartFieldSet extends Fieldset implements InputFilterProviderInterface
         
         $this->add([
             'name'			=> 'pay_credit_card',
-            'type'			=> 'checkbox',
+            'type'			=> Checkbox::class,
             'options'		=> [
                 'label'			=> 'Credit Card Payments',
                 'use_hidden_element' => true,
@@ -76,7 +80,7 @@ class CartFieldSet extends Fieldset implements InputFilterProviderInterface
         
         $this->add([
             'name'			=> 'pay_paypal',
-            'type'			=> 'checkbox',
+            'type'			=> Checkbox::class,
             'options'		=> [
                 'label'			=> 'Paypal Payments',
                 'use_hidden_element' => true,
@@ -89,7 +93,7 @@ class CartFieldSet extends Fieldset implements InputFilterProviderInterface
         
         $this->add([
             'name'			=> 'collect_instore',
-            'type'			=> 'checkbox',
+            'type'			=> Checkbox::class,
             'options'		=> [
                 'label'			=> 'Collect Instore',
                 'use_hidden_element' => true,
@@ -115,7 +119,7 @@ class CartFieldSet extends Fieldset implements InputFilterProviderInterface
 
         $this->add([
             'name'			=> 'shipping_by_weight',
-            'type'			=> 'radio',
+            'type'			=> Radio::class,
             'options'		=> [
                 'label'			=> 'Shipping Cost',
                 'value_options' => [
@@ -148,7 +152,83 @@ class CartFieldSet extends Fieldset implements InputFilterProviderInterface
     public function getInputFilterSpecification()
     {
         return [
-
+            'pay_check' => [
+                'required' => false,
+                'allow_empty' => true,
+                'filters' => [
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
+                    ['name' => Boolean::class, 'options' => [
+                        'type' => Boolean::TYPE_ZERO_STRING,
+                    ]],
+                ],
+            ],
+            'pay_phone' => [
+                'required' => false,
+                'allow_empty' => true,
+                'filters' => [
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
+                    ['name' => Boolean::class, 'options' => [
+                        'type' => Boolean::TYPE_ZERO_STRING,
+                    ]],
+                ],
+            ],
+            'pay_credit_card' => [
+                'required' => false,
+                'allow_empty' => true,
+                'filters' => [
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
+                    ['name' => Boolean::class, 'options' => [
+                        'type' => Boolean::TYPE_ZERO_STRING,
+                    ]],
+                ],
+            ],
+            'pay_paypal' => [
+                'required' => false,
+                'allow_empty' => true,
+                'filters' => [
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
+                    ['name' => Boolean::class, 'options' => [
+                        'type' => Boolean::TYPE_ZERO_STRING,
+                    ]],
+                ],
+            ],
+            'collect_instore' => [
+                'required' => false,
+                'allow_empty' => true,
+                'filters' => [
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
+                    ['name' => Boolean::class, 'options' => [
+                        'type' => Boolean::TYPE_ZERO_STRING,
+                    ]],
+                ],
+            ],
+            'auto_increment_cart' => [
+                'required' => false,
+                'allow_empty' => true,
+                'filters' => [
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
+                    ['name' => Boolean::class, 'options' => [
+                        'type' => Boolean::TYPE_ZERO_STRING,
+                    ]],
+                ],
+            ],
+            'shipping_by_weight' => [
+                'required' => false,
+                'allow_empty' => true,
+                'filters' => [
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
+                    ['name' => Boolean::class, 'options' => [
+                        'type' => Boolean::TYPE_ZERO_STRING,
+                    ]],
+                ],
+            ],
         ];
     }
 }

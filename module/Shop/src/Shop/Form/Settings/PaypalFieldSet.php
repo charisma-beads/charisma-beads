@@ -10,11 +10,19 @@
 
 namespace Shop\Form\Settings;
 
-use PayPal\Core\PayPalLoggingLevel;
+use Shop\Form\Settings\Paypal\CredentialPairsFieldSet;
+use Zend\Filter\Boolean;
+use Zend\Filter\StringToUpper;
+use Zend\Filter\StringTrim;
+use Zend\Filter\StripTags;
+use Zend\Form\Element\Checkbox;
+use Zend\Form\Element\Select;
+use Zend\Form\Element\Text;
 use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\Form\Fieldset;
-use Zend\Stdlib\Hydrator\ClassMethods;
+use Zend\Hydrator\ClassMethods;
 use Shop\Options\PaypalOptions;
+use Zend\Validator\StringLength;
 
 /**
  * Class PaypalFieldSet
@@ -35,7 +43,7 @@ class PaypalFieldSet extends Fieldset implements InputFilterProviderInterface
     {
         $this->add([
             'name' => 'currency_code',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => 'Currency Code',
                 'column-size' => 'md-8',
@@ -47,7 +55,7 @@ class PaypalFieldSet extends Fieldset implements InputFilterProviderInterface
         
         $this->add([
             'name'			=> 'mode',
-            'type'			=> 'select',
+            'type'			=> Select::class,
             'options'		=> [
                 'label'			=> 'Mode',
                 'label_attributes' => [
@@ -63,7 +71,7 @@ class PaypalFieldSet extends Fieldset implements InputFilterProviderInterface
         
         $this->add([
             'name'			=> 'log_enabled',
-            'type'			=> 'checkbox',
+            'type'			=> Checkbox::class,
             'options'		=> [
                 'label'			=> 'Enable Log',
                 'use_hidden_element' => true,
@@ -76,7 +84,7 @@ class PaypalFieldSet extends Fieldset implements InputFilterProviderInterface
         
         $this->add([
             'name'			=> 'log_level',
-            'type'			=> 'select',
+            'type'			=> Select::class,
             'options'		=> [
                 'label'			=> 'Log Level',
                 'label_attributes' => [
@@ -95,7 +103,7 @@ class PaypalFieldSet extends Fieldset implements InputFilterProviderInterface
         
         $this->add([
             'name'			=> 'payment_method',
-            'type'			=> 'select',
+            'type'			=> Select::class,
             'options'		=> [
                 'label'			=> 'Payment Method',
                 'label_attributes' => [
@@ -110,7 +118,7 @@ class PaypalFieldSet extends Fieldset implements InputFilterProviderInterface
         ]);
 
         $this->add([
-            'type' => 'ShopPaypalCredentialPairsFieldSet',
+            'type' => CredentialPairsFieldSet::class,
             'name' => 'credential_pairs',
             'attributes' => [
                 'class' => 'col-md-12',
@@ -127,16 +135,48 @@ class PaypalFieldSet extends Fieldset implements InputFilterProviderInterface
             'currency_code' => [
                 'required' => false,
                 'filters' => [
-                    ['name' => 'StripTags'],
-                    ['name' => 'StringTrim'],
-                    ['name' => 'StringToUpper']
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
+                    ['name' => StringToUpper::class]
                 ],
                 'validators' => [
-                    ['name' => 'StringLength', 'options' => [
+                    ['name' => StringLength::class, 'options' => [
                         'max' => 3,
                         'min' => 3,
                         'encoding' => 'UTF-8',
                     ]]
+                ],
+            ],
+            'mode' => [
+                'required' => false,
+                'filters' => [
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
+                ],
+            ],
+            'log_enabled' => [
+                'required' => false,
+                'allow_empty' => true,
+                'filters' => [
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
+                    ['name' => Boolean::class, 'options' => [
+                        'type' => Boolean::TYPE_ZERO_STRING,
+                    ]],
+                ],
+            ],
+            'log_level' => [
+                'required' => false,
+                'filters' => [
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
+                ],
+            ],
+            'payment_method' => [
+                'required' => false,
+                'filters' => [
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
                 ],
             ],
         ];

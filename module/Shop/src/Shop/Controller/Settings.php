@@ -24,7 +24,7 @@ class Settings extends AbstractActionController
 
     public function __construct()
     {
-        $this->setFormName('ShopSettings')
+        $this->setFormName(\Shop\Form\Settings\Settings::class)
             ->setConfigKey('shop');
     }
 }

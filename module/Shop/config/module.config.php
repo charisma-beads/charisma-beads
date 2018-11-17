@@ -87,18 +87,7 @@ return [
             'ShopVoucherCode'       => \Shop\Form\Voucher\Code::class,
             \Shop\Form\Voucher\Voucher::class => \Shop\Form\Voucher\Voucher::class,
 
-            'ShopPaypalCredentialPairsFieldSet' => 'Shop\Form\Settings\Paypal\CredentialPairsFieldSet',
-            'ShopPaypalCredentialSetFieldSet'   => 'Shop\Form\Settings\Paypal\CredentialSetFieldSet',
-            'ShopSettings'                      => 'Shop\Form\Settings\Settings',
-            'ShopFieldSet'                      => 'Shop\Form\Settings\ShopFieldSet',
-            'ShopCartFieldSet'                  => 'Shop\Form\Settings\CartFieldSet',
-            'ShopPaypalFieldSet'                => 'Shop\Form\Settings\PaypalFieldSet',
-            'ShopReportsFieldSet'               => 'Shop\Form\Settings\ReportsFieldSet',
-            'ShopCartCookieFieldSet'            => 'Shop\Form\Settings\CartCookieFieldSet',
-            'ShopInvoiceFieldSet'               => 'Shop\Form\Settings\InvoiceFieldSet',
-            'ShopOrderFieldSet'                 => Shop\Form\Settings\OrderFieldSet::class,
             'ShopOrderMetadataFieldSet'         => Shop\Form\Order\MetadataFieldSet::class,
-            'NewProductsCarouselFieldSet'       => 'Shop\Form\Settings\NewProductsCarouselFieldSet',
 
             'AdvertList'                => 'Shop\Form\Element\AdvertList',
             'CountryList'               => 'Shop\Form\Element\CountryList',

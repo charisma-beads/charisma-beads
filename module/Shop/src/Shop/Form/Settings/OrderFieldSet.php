@@ -11,6 +11,11 @@
 namespace Shop\Form\Settings;
 
 use Shop\Options\OrderOptions;
+use UthandoMail\Form\Element\MailTransportList;
+use Zend\Filter\Boolean;
+use Zend\Filter\StringTrim;
+use Zend\Filter\StripTags;
+use Zend\Form\Element\Checkbox;
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\Hydrator\ClassMethods;
@@ -34,7 +39,7 @@ class OrderFieldSet extends Fieldset implements InputFilterProviderInterface
     {
         $this->add([
             'name'			=> 'credit_card_payment_email',
-            'type'			=> 'UthandoMailTransportList',
+            'type'			=> MailTransportList::class,
             'options'       => [
                 'label' => 'Payment Email',
                 'column-size' => 'md-8',
@@ -46,7 +51,7 @@ class OrderFieldSet extends Fieldset implements InputFilterProviderInterface
 
         $this->add([
             'name'			=> 'order_email',
-            'type'			=> 'UthandoMailTransportList',
+            'type'			=> MailTransportList::class,
             'options'       => [
                 'label' => 'Order Email',
                 'column-size' => 'md-8',
@@ -58,7 +63,7 @@ class OrderFieldSet extends Fieldset implements InputFilterProviderInterface
 
         $this->add([
             'name'			=> 'send_order_to_admin',
-            'type'			=> 'checkbox',
+            'type'			=> Checkbox::class,
             'options'		=> [
                 'label'			=> 'Send Order To Admin',
                 'use_hidden_element' => true,
@@ -71,7 +76,7 @@ class OrderFieldSet extends Fieldset implements InputFilterProviderInterface
 
         $this->add([
             'name'			=> 'email_customer_on_status_change',
-            'type'			=> 'checkbox',
+            'type'			=> Checkbox::class,
             'options'		=> [
                 'label'			=> 'Email Customer On Order Status Change',
                 'use_hidden_element' => true,
@@ -92,7 +97,42 @@ class OrderFieldSet extends Fieldset implements InputFilterProviderInterface
     public function getInputFilterSpecification()
     {
         return [
-
+            'credit_card_payment_email' => [
+                'required' => false,
+                'filters' => [
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
+                ],
+            ],
+            'order_email' => [
+                'required' => false,
+                'filters' => [
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
+                ],
+            ],
+            'send_order_to_admin' => [
+                'required' => false,
+                'allow_empty' => true,
+                'filters' => [
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
+                    ['name' => Boolean::class, 'options' => [
+                        'type' => Boolean::TYPE_ZERO_STRING,
+                    ]],
+                ],
+            ],
+            'email_customer_on_status_change' => [
+                'required' => false,
+                'allow_empty' => true,
+                'filters' => [
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
+                    ['name' => Boolean::class, 'options' => [
+                        'type' => Boolean::TYPE_ZERO_STRING,
+                    ]],
+                ],
+            ],
         ];
     }
 }

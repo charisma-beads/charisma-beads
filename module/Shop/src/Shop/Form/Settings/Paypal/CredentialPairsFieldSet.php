@@ -22,7 +22,7 @@ class CredentialPairsFieldSet extends Fieldset
     public function init()
     {
         $this->add([
-            'type' => 'ShopPaypalCredentialSetFieldSet',
+            'type' => CredentialSetFieldSet::class,
             'name' => 'sandbox',
             'attributes' => [
                 'class' => 'col-md-12',
@@ -33,7 +33,7 @@ class CredentialPairsFieldSet extends Fieldset
         ]);
 
         $this->add([
-            'type' => 'ShopPaypalCredentialSetFieldSet',
+            'type' => CredentialSetFieldSet::class,
             'name' => 'live',
             'attributes' => [
                 'class' => 'col-md-12',

@@ -11,6 +11,9 @@
 namespace Shop\Form\Settings;
 
 use Shop\Options\InvoiceOptions;
+use Zend\Filter\StringTrim;
+use Zend\Filter\StripTags;
+use Zend\Form\Element\Text;
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\Stdlib\Hydrator\ClassMethods;
@@ -34,7 +37,7 @@ class InvoiceFieldSet extends Fieldset implements InputFilterProviderInterface
     {
         $this->add([
             'name' => 'font_size',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => 'Font Size',
                 'column-size' => 'md-8',
@@ -47,7 +50,7 @@ class InvoiceFieldSet extends Fieldset implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'panel_title_font_size',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => 'Panel Title Font Size',
                 'column-size' => 'md-8',
@@ -60,7 +63,7 @@ class InvoiceFieldSet extends Fieldset implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'footer_font_size',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => 'Footer Font Size',
                 'column-size' => 'md-8',
@@ -78,22 +81,22 @@ class InvoiceFieldSet extends Fieldset implements InputFilterProviderInterface
             'font_size' => [
                 'required' => true,
                 'filters' => [
-                    ['name' => 'StripTags'],
-                    ['name' => 'StringTrim'],
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
                 ],
             ],
             'panel_title_font_size' => [
                 'required' => true,
                 'filters' => [
-                    ['name' => 'StripTags'],
-                    ['name' => 'StringTrim'],
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
                 ],
             ],
             'footer_font_size' => [
                 'required' => true,
                 'filters' => [
-                    ['name' => 'StripTags'],
-                    ['name' => 'StringTrim'],
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
                 ],
             ],
         ];

@@ -24,7 +24,7 @@ class Settings extends Form
         $this->setAttribute('id','shop-settings');
 
         $this->add([
-            'type' => 'ShopFieldSet',
+            'type' => ShopFieldSet::class,
             'name' => 'shop_options',
             'attributes' => [
                 'class' => 'col-md-6',
@@ -35,7 +35,7 @@ class Settings extends Form
         ]);
 
         $this->add([
-            'type' => 'ShopOrderFieldSet',
+            'type' => OrderFieldSet::class,
             'name' => 'order_options',
             'attributes' => [
                 'class' => 'col-md-6',
@@ -46,7 +46,7 @@ class Settings extends Form
         ]);
         
         $this->add([
-            'type' => 'ShopCartFieldSet',
+            'type' => CartFieldSet::class,
             'name' => 'cart_options',
             'attributes' => [
                 'class' => 'col-md-6',
@@ -57,7 +57,7 @@ class Settings extends Form
         ]);
         
         $this->add([
-            'type' => 'ShopCartCookieFieldSet',
+            'type' => CartCookieFieldSet::class,
             'name' => 'cart_cookie',
             'attributes' => [
                 'class' => 'col-md-6',
@@ -68,7 +68,7 @@ class Settings extends Form
         ]);
 
         $this->add([
-            'type' => 'ShopPaypalFieldSet',
+            'type' => PaypalFieldSet::class,
             'name' => 'paypal_options',
             'attributes' => [
                 'class' => 'col-md-6',
@@ -79,7 +79,7 @@ class Settings extends Form
         ]);
 
         $this->add([
-            'type' => 'ShopInvoiceFieldSet',
+            'type' => InvoiceFieldSet::class,
             'name' => 'invoice_options',
             'attributes' => [
                 'class' => 'col-md-6',
@@ -90,7 +90,7 @@ class Settings extends Form
         ]);
 
         $this->add([
-            'type' => 'ShopReportsFieldSet',
+            'type' => ReportsFieldSet::class,
             'name' => 'report_options',
             'attributes' => [
                 'class' => 'col-md-6',
@@ -101,7 +101,7 @@ class Settings extends Form
         ]);
 
         $this->add([
-            'type' => 'NewProductsCarouselFieldSet',
+            'type' => NewProductsCarouselFieldSet::class,
             'name' => 'new_products_carousel',
             'attributes' => [
                 'class' => 'col-md-6',

@@ -10,6 +10,9 @@
 
 namespace Shop\Form\Settings\Paypal;
 
+use Zend\Filter\StringTrim;
+use Zend\Filter\StripTags;
+use Zend\Form\Element\Text;
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
 
@@ -24,7 +27,7 @@ class CredentialSetFieldSet extends Fieldset implements InputFilterProviderInter
     {
         $this->add([
             'name' => 'client_id',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => 'Client Id',
                 'column-size' => 'md-8',
@@ -36,7 +39,7 @@ class CredentialSetFieldSet extends Fieldset implements InputFilterProviderInter
 
         $this->add([
             'name' => 'secret',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => 'Client Secret',
                 'column-size' => 'md-8',
@@ -53,15 +56,15 @@ class CredentialSetFieldSet extends Fieldset implements InputFilterProviderInter
             'client_id' => [
                 'required' => false,
                 'filters' => [
-                    ['name' => 'StripTags'],
-                    ['name' => 'StringTrim'],
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
                 ],
             ],
             'secret' => [
                 'required' => false,
                 'filters' => [
-                    ['name' => 'StripTags'],
-                    ['name' => 'StringTrim'],
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
                 ],
             ],
         ];
