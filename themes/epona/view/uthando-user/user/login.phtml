@@ -9,10 +9,10 @@
 <?php endif;?>
 
 <?php
-$loginForm = (null == $this->loginForm) ? $this->formManager('UthandoUserLogin') : $this->loginForm;
-$registerForm = (null == $this->registerForm) ? $this->formManager('UthandoUserRegister') : $this->registerForm;
+$loginForm = (null == $this->loginForm) ? $this->formManager(\UthandoUser\Form\LoginForm::class) : $this->loginForm;
+$registerForm = (null == $this->registerForm) ? $this->formManager(\UthandoUser\Form\RegisterForm::class) : $this->registerForm;
 $advertList = (false == $registerForm->has('advertId')) ? $this->formManager('AdvertList') : $registerForm->get('advertId');
-$newsletter = (false == $registerForm->has('subscribe')) ? $this->formManager('UthandoNewsletterSubscriptionList') : $registerForm->get('subscribe');
+$newsletter = (false == $registerForm->has('subscribe')) ? $this->formManager(\UthandoNewsletter\Form\Element\SubscriptionList::class) : $registerForm->get('subscribe');
 ?>
 
 <div class="row">

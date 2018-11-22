@@ -18,6 +18,7 @@ use Shop\Model\Order\AbstractOrderCollection;
 use Shop\Model\Order\LineInterface;
 use Shop\Model\Voucher\Code;
 use Shop\Model\Voucher\CustomerMap;
+use UthandoCommon\Mapper\MapperManager;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Zend\Validator\AbstractValidator;
@@ -77,7 +78,7 @@ class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
         /* @var $mapper CodeMapper */
         $mapper = $this->getServiceLocator()
             ->getServiceLocator()
-            ->get('UthandoMapperManager')
+            ->get(MapperManager::class)
             ->get('ShopVoucherCode', [
                 'model'     => 'ShopVoucherCode',
                 'hydrator'  => 'ShopVoucherCode',
@@ -96,7 +97,7 @@ class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
         /* @var $mapper CustomerMapMapper */
         $mapper = $this->getServiceLocator()
             ->getServiceLocator()
-            ->get('UthandoMapperManager')
+            ->get(MapperManager::class)
             ->get('ShopVoucherCustomerMap', [
                 'model'     => 'ShopVoucherCustomerMap',
                 'hydrator'  => 'ShopVoucherCustomerMap',

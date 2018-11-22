@@ -12,6 +12,7 @@ namespace Shop\View;
 
 use Shop\Model\Product\Category as CategoryModel;
 use UthandoCommon\View\AbstractViewHelper;
+use Zend\View\Helper\BasePath;
 
 /**
  * Class ProductCategoryImage
@@ -60,6 +61,8 @@ class ProductCategoryImage extends AbstractViewHelper
 
     public function getImage($withBasePath = true)
     {
+
+        /** @var BasePath $basePath */
         $basePath = $this->getView()->plugin('basepath');
         $defaultImage = $this->image;
 
