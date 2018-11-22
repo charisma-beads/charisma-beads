@@ -10,6 +10,7 @@
 
 namespace Shop\Form\Element;
 
+use UthandoCommon\Service\ServiceManager;
 use Zend\Form\Element\Select;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
@@ -59,7 +60,7 @@ class ProductCategoryImageList extends Select implements ServiceLocatorAwareInte
             /* @var $sm \UthandoCommon\Service\ServiceManager */
             $sm = $this->getServiceLocator()
                 ->getServiceLocator()
-                ->get('UthandoServiceManager');
+                ->get(ServiceManager::class);
 
             /* @var $imageService \Shop\Service\Product\Image */
             $imageService = $sm->get('ShopProductImage');

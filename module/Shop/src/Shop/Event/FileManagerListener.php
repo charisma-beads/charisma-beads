@@ -10,6 +10,7 @@
 
 namespace Shop\Event;
 
+use UthandoFileManager\Service\ImageUploader;
 use Zend\EventManager\Event;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
@@ -29,11 +30,11 @@ class FileManagerListener implements ListenerAggregateInterface
         $events = $events->getSharedManager();
 
         $this->listeners[] = $events->attach([
-            'UthandoFileManager\Service\ImageUploader',
+            ImageUploader::class,
         ], ['pre.upload'], [$this, 'preImageUpload']);
 
         $this->listeners[] = $events->attach([
-            'UthandoFileManager\Service\ImageUploader',
+            ImageUploader::class,
         ], ['post.upload'], [$this, 'postImageUpload']);
     }
 

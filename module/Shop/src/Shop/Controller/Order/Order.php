@@ -163,7 +163,7 @@ class Order extends AbstractCrudController
         }
 
         /* @var PdfModel $pdf */
-	    $pdf = $this->getService('PdfModel');
+	    $pdf = $this->getService(PdfModel::class);
 
         $pdf->setVariable('order', $order);
 

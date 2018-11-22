@@ -11,6 +11,7 @@
 namespace Shop\Service\Factory;
 
 use Shop\Service\Shipping as ShippingService;
+use UthandoCommon\Service\ServiceManager;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
@@ -24,7 +25,7 @@ class Shipping implements FactoryInterface
 	public function createService(ServiceLocatorInterface $serviceLocator)
 	{
 	    /* @var $serviceManager \UthandoCommon\Service\ServiceManager */
-	    $serviceManager = $serviceLocator->get('UthandoServiceManager');
+	    $serviceManager = $serviceLocator->get(ServiceManager::class);
 	    
 	    /* @var $cartOptions \Shop\Options\CartOptions */
 	    $cartOptions = $serviceLocator->get('Shop\Options\Cart');

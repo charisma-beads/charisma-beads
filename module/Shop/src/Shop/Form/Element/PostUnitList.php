@@ -10,6 +10,7 @@
 
 namespace Shop\Form\Element;
 
+use UthandoCommon\Service\ServiceManager;
 use Zend\Form\Element\Select;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
@@ -29,7 +30,7 @@ class PostUnitList extends Select implements ServiceLocatorAwareInterface
     {
         $postUnits = $this->getServiceLocator()
             ->getServiceLocator()
-            ->get('UthandoServiceManager')
+            ->get(ServiceManager::class)
             ->get('ShopPostUnit')
             ->fetchAll('postUnit');
         

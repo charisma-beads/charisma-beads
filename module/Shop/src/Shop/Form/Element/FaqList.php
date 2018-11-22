@@ -11,6 +11,7 @@
 namespace Shop\Form\Element;
 
 
+use UthandoCommon\Service\ServiceManager;
 use Zend\Form\Element\Select;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
@@ -49,7 +50,7 @@ class FaqList extends Select implements ServiceLocatorAwareInterface
         /* @var $faqService \Shop\Service\Faq */
         $faqService = $this->getServiceLocator()
             ->getServiceLocator()
-            ->get('UthandoServiceManager')
+            ->get(ServiceManager::class)
             ->get('ShopFaq');
 
         $faqService->getMapper();

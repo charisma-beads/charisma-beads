@@ -10,6 +10,7 @@
 
 namespace Shop\Event;
 
+use UthandoUser\Service\UserService;
 use Zend\EventManager\Event;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
@@ -24,15 +25,15 @@ class UserListener implements ListenerAggregateInterface
         $events = $events->getSharedManager();
 
         $this->listeners[] = $events->attach([
-            'UthandoUser\Service\User',
+            UserService::class,
         ], ['pre.add'], [$this, 'addAdvertList']);
 
         $this->listeners[] = $events->attach([
-            'UthandoUser\Service\User',
+            UserService::class,
         ], ['post.add'], [$this, 'addAdvertHit']);
 
         $this->listeners[] = $events->attach([
-            'UthandoUser\Service\User',
+            UserService::class,
         ], ['post.edit'], [$this, 'userEdit']);
     }
 

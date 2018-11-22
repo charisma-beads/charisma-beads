@@ -14,7 +14,8 @@ use \Shop\Model\Customer\Customer as CustomerModel;
 use UthandoCommon\Service\AbstractRelationalMapperService;
 use UthandoCommon\Service\AbstractService;
 use UthandoCommon\Service\ServiceException;
-use UthandoUser\Model\User;
+use UthandoUser\Model\UserModel;
+use UthandoUser\Service\UserService;
 use Zend\EventManager\Event;
 use Zend\Math\BigInteger\BigInteger;
 use Zend\Math\Rand;
@@ -43,7 +44,7 @@ class Customer extends AbstractRelationalMapperService
     protected $referenceMap = [
         'user'              => [
             'refCol'    => 'userId',
-            'service'   => 'UthandoUser',
+            'service'   => UserService::class,
         ],
         'prefix'            => [
             'refCol'    => 'prefixId',
@@ -104,7 +105,7 @@ class Customer extends AbstractRelationalMapperService
         // no customer is return create one base on the userId.
         if(!$customer instanceof CustomerModel) {
             /* @var \UthandoUser\Service\User $userService */
-            $userService = $this->getService('UthandoUser');
+            $userService = $this->getService(UserService::class);
             $user = $userService->getById($userId);
             $user = $userService->getMapper()->extract($user);
             $customer = $this->getMapper()->getModel($user);
@@ -319,7 +320,7 @@ class Customer extends AbstractRelationalMapperService
             $user->getEmail() != $model->getEmail()) {
 
             /* @var \UthandoUser\Service\User $userService */
-            $userService = $this->getService('UthandoUser');
+            $userService = $this->getService(UserService::class);
             $post = $user->getArrayCopy();
 
             $post['firstname'] = $model->getFirstname();
@@ -371,7 +372,7 @@ class Customer extends AbstractRelationalMapperService
     }
 
     /**
-     * @return \UthandoUser\Model\User
+     * @return \UthandoUser\Model\UserModel
      */
     public function getUser()
     {
@@ -382,7 +383,7 @@ class Customer extends AbstractRelationalMapperService
      * @param User $user
      * @return $this
      */
-    public function setUser(User $user)
+    public function setUser(UserModel $user)
     {
         $this->user = $user;
         return $this;

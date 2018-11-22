@@ -10,6 +10,7 @@
 
 namespace Shop\Form\Element;
 
+use UthandoCommon\Service\ServiceManager;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\Form\Element\Select;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
@@ -31,7 +32,7 @@ class AdvertList extends Select implements ServiceLocatorAwareInterface
         
         $adverts = $this->getServiceLocator()
             ->getServiceLocator()
-            ->get('UthandoServiceManager')
+            ->get(ServiceManager::class)
             ->get('ShopAdvert')
             ->fetchAll();
         

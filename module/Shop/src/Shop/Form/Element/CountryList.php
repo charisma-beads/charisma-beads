@@ -10,6 +10,7 @@
 
 namespace Shop\Form\Element;
 
+use UthandoCommon\Service\ServiceManager;
 use Zend\Form\Element\Select;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
@@ -47,7 +48,7 @@ class CountryList extends Select implements ServiceLocatorAwareInterface
         /* @var \Shop\Service\Country\Country $countryService */
         $countryService = $this->getServiceLocator()
             ->getServiceLocator()
-            ->get('UthandoServiceManager')
+            ->get(ServiceManager::class)
             ->get('ShopCountry');
 
         $countries = $countryService->fetchAll();

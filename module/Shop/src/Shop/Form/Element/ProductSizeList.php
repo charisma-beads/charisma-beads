@@ -10,6 +10,7 @@
 
 namespace Shop\Form\Element;
 
+use UthandoCommon\Service\ServiceManager;
 use Zend\Form\Element\Select;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
@@ -29,7 +30,7 @@ class ProductSizeList extends Select implements ServiceLocatorAwareInterface
     {
         $sizes = $this->getServiceLocator()
             ->getServiceLocator()
-            ->get('UthandoServiceManager')
+            ->get(ServiceManager::class)
             ->get('ShopProductSize')
             ->fetchAll('size');
         

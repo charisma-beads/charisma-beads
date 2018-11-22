@@ -13,6 +13,7 @@ namespace Shop\View;
 
 use Shop\Form\Cart\Add;
 use Shop\Model\Cart\Cart as CartModel;
+use UthandoCommon\Service\ServiceManager;
 use UthandoCommon\View\AbstractViewHelper;
 use Zend\I18n\View\Helper\CurrencyFormat;
 use Shop\Service\Cart\Cart as CartService;
@@ -43,7 +44,7 @@ class Cart extends AbstractViewHelper
         if (!$this->cartService instanceof CartService) {
             $this->cartService = $this->getServiceLocator()
                 ->getServiceLocator()
-                ->get('UthandoServiceManager')
+                ->get(ServiceManager::class)
                 ->get('ShopCart');
         }
 

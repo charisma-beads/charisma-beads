@@ -59,7 +59,7 @@ class ProductCategoryList extends Select implements ServiceLocatorAwareInterface
         /* @var $categoryService \Shop\Service\Product\Category */
         $categoryService = $this->getServiceLocator()
             ->getServiceLocator()
-            ->get('UthandoServiceManager')
+            ->get(ServiceManager::class)
             ->get('ShopProductCategory');
         
         $categoryService->getMapper()

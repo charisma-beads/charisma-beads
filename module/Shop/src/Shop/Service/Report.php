@@ -10,6 +10,7 @@
 
 namespace Shop\Service;
 
+use UthandoCommon\Service\ServiceManager;
 use Zend\Json\Json;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
@@ -334,7 +335,7 @@ class Report implements ServiceLocatorAwareInterface
     public function getProductService()
     {
         $sl = $this->getServiceLocator()
-            ->get('UthandoServiceManager');
+            ->get(ServiceManager::class);
         $service = $sl->get('ShopProduct');
         
         return $service;
@@ -346,7 +347,7 @@ class Report implements ServiceLocatorAwareInterface
     public function getProductCategoryService()
     {
         $sl = $this->getServiceLocator()
-        ->get('UthandoServiceManager');
+        ->get(ServiceManager::class);
         $service = $sl->get('ShopProductCategory');
     
         return $service;
@@ -358,7 +359,7 @@ class Report implements ServiceLocatorAwareInterface
     public function getOrderService()
     {
         $sl = $this->getServiceLocator()
-            ->get('UthandoServiceManager');
+            ->get(ServiceManager::class);
         $service = $sl->get('ShopOrder');
 
         return $service;

@@ -14,7 +14,7 @@ use UthandoCommon\Model\DateCreatedTrait;
 use UthandoCommon\Model\DateModifiedTrait;
 use UthandoCommon\Model\Model;
 use UthandoCommon\Model\ModelInterface;
-use UthandoUser\Model\User;
+use UthandoUser\Model\UserModel;
 
 /**
  * Class Customer
@@ -230,7 +230,7 @@ class Customer implements ModelInterface
      * @param User $user
      * @return $this
      */
-    public function setUser(User $user)
+    public function setUser(UserModel $user)
     {
         $this->user = $user;
         return $this;

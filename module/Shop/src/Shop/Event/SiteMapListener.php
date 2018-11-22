@@ -10,6 +10,8 @@
 
 namespace Shop\Event;
 
+use UthandoNavigation\Service\MenuService;
+use UthandoNavigation\Service\SiteMapService;
 use Zend\EventManager\Event;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
@@ -32,7 +34,7 @@ class SiteMapListener implements ListenerAggregateInterface
         $events = $events->getSharedManager();
 
         $this->listeners[] = $events->attach([
-            'UthandoNavigation\Service\SiteMap',
+            SiteMapService::class,
         ], ['uthando.site-map'], [$this, 'addShopPages']);
     }
 
@@ -49,7 +51,7 @@ class SiteMapListener implements ListenerAggregateInterface
         /* @var \Shop\Service\Product\Category $categoryService */
         $categoryService = $e->getTarget()->getService('ShopProductCategory');
         /* @var \UthandoNavigation\Service\Menu $service */
-        $menuService = $e->getTarget()->getService('UthandoNavigationMenu');
+        $menuService = $e->getTarget()->getService(MenuService::class);
 
         $cats = $categoryService->fetchAll();
         $pages = [];

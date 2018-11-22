@@ -327,7 +327,7 @@
                             <p>
                                 <?=$this->contact('details.about_us_text');?>
                             </p>
-                            <?php $newsletter = $this->formManager('UthandoNewsletterSubscriber'); ?>
+                            <?php $newsletter = $this->formManager(\UthandoNewsletter\Form\SubscriberForm::class); ?>
                             <div id="newsletter_form">
                                 <h4><small><strong>Subscribe to our Newsletter</strong></small></h4>
                                 <form class="sky-form" id="newsletterSubscribe" method="post" action="<?=$this->url('newsletter/subscribe');?>">

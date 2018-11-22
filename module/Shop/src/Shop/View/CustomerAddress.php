@@ -13,6 +13,7 @@ namespace Shop\View;
 
 use Shop\Model\Customer\Address;
 use Shop\Model\Order\Order;
+use UthandoCommon\Service\ServiceManager;
 use UthandoCommon\View\AbstractViewHelper;
 use Zend\Stdlib\Exception\InvalidArgumentException;
 use Zend\View\Helper\Identity;
@@ -271,7 +272,7 @@ class CustomerAddress extends AbstractViewHelper
     	if (!$this->customerAddressService) {
     		$sl = $this->getServiceLocator()
                 ->getServiceLocator()
-                ->get('UthandoServiceManager');
+                ->get(ServiceManager::class);
     		$this->customerAddressService = $sl->get('ShopCustomerAddress');
     	}
     	 

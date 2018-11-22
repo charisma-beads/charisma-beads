@@ -10,6 +10,7 @@
 
 namespace Shop\Form\Element;
 
+use UthandoCommon\Mapper\MapperManager;
 use Zend\Form\Element\Select;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
@@ -47,7 +48,7 @@ class MonthlyTotalYearList extends Select implements ServiceLocatorAwareInterfac
         /* @var $mapper \Shop\Mapper\Order\Order */
         $mapper = $this->getServiceLocator()
             ->getServiceLocator()
-            ->get('UthandoMapperManager')
+            ->get(MapperManager::class)
             ->get('ShopOrder');
 
         $minMaxYear = $mapper->getMinMaxYear();

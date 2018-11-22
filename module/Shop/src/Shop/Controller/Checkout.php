@@ -12,6 +12,8 @@ namespace Shop\Controller;
 
 use Shop\Model\Country\Country;
 use UthandoCommon\Service\ServiceTrait;
+use UthandoUser\Form\LoginForm;
+use UthandoUser\Form\RegisterForm;
 use Zend\Filter\Word\UnderscoreToDash;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
@@ -325,7 +327,7 @@ class Checkout extends AbstractActionController
     public function getLoginForm()
     {
         $form = $this->getService('FormElementManager')
-            ->get('UthandoUserLogin');
+            ->get(LoginForm::class);
         $form->setData(array(
             'returnTo' => 'shop/checkout'
         ));
@@ -335,7 +337,7 @@ class Checkout extends AbstractActionController
     public function getRegisterForm()
     {
         $form = $this->getService('FormElementManager')
-            ->get('UthandoUserRegister', [
+            ->get(RegisterForm::class, [
                 'returnTo' => 'shop/checkout'
             ]);
         return $form;
