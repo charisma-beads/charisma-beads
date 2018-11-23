@@ -11,7 +11,7 @@
 namespace Shop\Hydrator\Cart;
 
 use UthandoCommon\Hydrator\AbstractHydrator;
-use UthandoCommon\Hydrator\Strategy\Serialize;
+use Shop\Hydrator\Strategy\Serialize;
 use Shop\Hydrator\Strategy\Percent;
 
 /**

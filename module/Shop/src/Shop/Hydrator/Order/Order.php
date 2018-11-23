@@ -13,7 +13,7 @@ namespace Shop\Hydrator\Order;
 use UthandoCommon\Hydrator\AbstractHydrator;
 use UthandoCommon\Hydrator\Strategy\DateTime as DateTimeStrategy;
 use UthandoCommon\Hydrator\Strategy\NullStrategy;
-use UthandoCommon\Hydrator\Strategy\Serialize;
+use Shop\Hydrator\Strategy\Serialize;
 
 /**
  * Class Order

@@ -11,8 +11,7 @@
 namespace Shop\Hydrator\Order;
 
 use UthandoCommon\Hydrator\AbstractHydrator;
-use UthandoCommon\Hydrator\Strategy\Serialize;
-use Shop\Hydrator\Strategy\Percent;
+use Shop\Hydrator\Strategy\Serialize;
 
 /**
  * Class Line
