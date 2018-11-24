@@ -24,11 +24,11 @@ class Serialize implements StrategyInterface
     /**
      * @var JsonSerializer
      */
-    protected $serialier;
+    protected $serializer;
 
     public function __construct()
     {
-        $this->serialier = new JsonSerializer();
+        $this->serializer = new JsonSerializer();
     }
 
     /**
@@ -39,7 +39,7 @@ class Serialize implements StrategyInterface
      */
     public function extract($value)
     {
-        return $this->serialier->serialize($value);
+        return $this->serializer->serialize($value);
     }
 
     /**
@@ -55,7 +55,7 @@ class Serialize implements StrategyInterface
         }
 
         try {
-            $value = $this->serialier->unserialize($value);
+            $value = $this->serializer->unserialize($value);
         } catch (JsonSerializerException $e) {
             $value = Serializer::unserialize($value);
         }
