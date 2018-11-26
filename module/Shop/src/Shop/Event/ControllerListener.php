@@ -10,6 +10,9 @@
 
 namespace Shop\Event;
 
+use Shop\Controller\CountryProvinceController;
+use Shop\Controller\CustomerAddressController;
+use Shop\Controller\ProductOptionController;
 use Zend\EventManager\Event;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
@@ -24,9 +27,9 @@ class ControllerListener implements ListenerAggregateInterface
         $events = $events->getSharedManager();
 
         $this->listeners[] = $events->attach([
-            'Shop\Controller\Customer\CustomerAddress',
-            'Shop\Controller\Country\CountryProvince',
-            'Shop\Controller\Product\ProductOption',
+            CustomerAddressController::class,
+            CountryProvinceController::class,
+            ProductOptionController::class,
         ], ['add.action'], [$this, 'addAction']);
     }
 
@@ -37,13 +40,13 @@ class ControllerListener implements ListenerAggregateInterface
         $form = $e->getParam('form');
 
         switch (get_class($controller)) {
-            case 'Shop\Controller\Customer\CustomerAddress':
+            case CustomerAddressController::class:
                 $form->get('customerId')->setValue($params);
                 break;
-            case 'Shop\Controller\Country\CountryProvince':
+            case CountryProvinceController::class:
                 $form->get('countryId')->setValue($params);
                 break;
-            case 'Shop\Controller\Product\ProductOption':
+            case ProductOptionController::class:
                 $form->get('productId')->setValue($params);
                 break;
         }

@@ -10,6 +10,9 @@
 
 namespace Shop\Event;
 
+use Shop\Form\Element\AdvertList;
+use Shop\Service\AdvertHitService;
+use Shop\Service\CustomerService;
 use UthandoUser\Service\UserService;
 use Zend\EventManager\Event;
 use Zend\EventManager\EventManagerInterface;
@@ -42,8 +45,8 @@ class UserListener implements ListenerAggregateInterface
         $sl = $e->getTarget()->getServiceLocator();
         $data = $e->getParam('post');
 
-        /* @var $customerService \Shop\Service\Customer\Customer */
-        $customerService = $sl->get('ShopCustomer');
+        /* @var $customerService \Shop\Service\CustomerService */
+        $customerService = $sl->get(CustomerService::class);
 
         $customer = $customerService->getCustomerDetailsFromUserId($data['userId']);
 
@@ -66,11 +69,11 @@ class UserListener implements ListenerAggregateInterface
         $advertList = $e->getTarget()
             ->getServiceLocator()
             ->get('FormElementManager')
-            ->get('AdvertList');
+            ->get(AdvertList::class);
 
         $post = $e->getParam('post');
 
-        /* @var $form \UthandoUser\Form\Register */
+        /* @var $form \UthandoUser\Form\RegisterForm */
         $form = $e->getParam('form');
 
         if (isset($post['advertId'])) {
@@ -94,10 +97,10 @@ class UserListener implements ListenerAggregateInterface
         $post = $e->getParam('post');
 
         $sl = $e->getTarget()->getServiceLocator();
-        /* @var $service \Shop\Service\Advert\Hit */
-        $service = $sl->get('ShopAdvertHit');
+        /* @var $service \Shop\Service\AdvertHitService */
+        $service = $sl->get(AdvertHitService::class);
 
-        /* @var $model \Shop\Model\Advert\Hit */
+        /* @var $model \Shop\Model\AdvertHitModel */
         $model = $service->getModel();
         $model->setAdvertId($post['advertId']);
 

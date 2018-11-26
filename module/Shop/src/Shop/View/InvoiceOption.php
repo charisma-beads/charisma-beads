@@ -36,7 +36,7 @@ class InvoiceOption extends AbstractViewHelper
         if (!$this->invoiceOptions instanceof InvoiceOptions) {
             $service = $this->getServiceLocator()
                 ->getServiceLocator()
-                ->get('Shop\Options\Invoice');
+                ->get(InvoiceOptions::class);
             $this->invoiceOptions = $service;
         }
 

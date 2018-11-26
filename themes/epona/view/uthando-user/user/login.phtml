@@ -11,7 +11,7 @@
 <?php
 $loginForm = (null == $this->loginForm) ? $this->formManager(\UthandoUser\Form\LoginForm::class) : $this->loginForm;
 $registerForm = (null == $this->registerForm) ? $this->formManager(\UthandoUser\Form\RegisterForm::class) : $this->registerForm;
-$advertList = (false == $registerForm->has('advertId')) ? $this->formManager('AdvertList') : $registerForm->get('advertId');
+$advertList = (false == $registerForm->has('advertId')) ? $this->formManager(\Shop\Form\Element\AdvertList::class) : $registerForm->get('advertId');
 $newsletter = (false == $registerForm->has('subscribe')) ? $this->formManager(\UthandoNewsletter\Form\Element\SubscriptionList::class) : $registerForm->get('subscribe');
 ?>
 

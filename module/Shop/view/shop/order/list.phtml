@@ -1,6 +1,6 @@
 
 <?php
-$statusFormElement = $this->formManager('OrderStatusList');
+$statusFormElement = $this->formManager(\Shop\Form\Element\OrderStatusList::class);
 $statusFormElement->setName('orderStatusId');
 ?>
 
@@ -20,7 +20,7 @@ $statusFormElement->setName('orderStatusId');
     	</thead>
     	
     	<tbody>
-    		<?php /* @var $row \Shop\Model\Order\Order */ ?>
+    		<?php /* @var $row \Shop\Model\Order\OrderModel */ ?>
     		<?php foreach($this->models as $row): ?>
     		<tr>
     			<td><?=$this->escapeHtml($row->getOrderId());?></td>

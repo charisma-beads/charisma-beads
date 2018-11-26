@@ -37,7 +37,7 @@ class CartOption extends AbstractViewHelper
         if (!$this->cartOptions instanceof CartOptions) {
             $service = $this->getServiceLocator()
                 ->getServiceLocator()
-                ->get('Shop\Options\Cart');
+                ->get(CartOptions::class);
             $this->cartOptions = $service;
         }
         

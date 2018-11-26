@@ -11,7 +11,7 @@
 namespace Shop\Form\Settings;
 
 use Shop\Options\ReportsOptions;
-use Shop\Service\Report;
+use Shop\Service\ReportService;
 use Zend\Filter\StringTrim;
 use Zend\Filter\StripTags;
 use Zend\Form\Element\Select;
@@ -75,7 +75,7 @@ class ReportsFieldSet extends Fieldset implements InputFilterProviderInterface
                 'label_attributes' => [
                     'class' => 'col-md-4',
                 ],
-                'value_options' => Report::$writerTypeMap,
+                'value_options' => ReportService::$writerTypeMap,
                 'column-size' => 'md-8',
             ],
         ]);

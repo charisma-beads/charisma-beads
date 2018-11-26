@@ -11,6 +11,7 @@
 
 namespace Shop\View;
 
+use Shop\Form\Element\CountryList;
 use UthandoCommon\View\AbstractViewHelper;
 
 /**
@@ -26,7 +27,7 @@ class CountrySelect extends AbstractViewHelper
         $select = $this->getServiceLocator()
             ->getServiceLocator()
             ->get('FormElementManager')
-            ->get('CountryList');
+            ->get(CountryList::class);
 
         $select->setName('countryId');
 

@@ -37,7 +37,7 @@ class NewProductsCarouselOption extends AbstractViewHelper
         if (!$this->newProductsCarouselOptions instanceof NewProductsCarouselOptions) {
             $service = $this->getServiceLocator()
                 ->getServiceLocator()
-                ->get('Shop\Options\NewProductsCarouselOptions');
+                ->get(NewProductsCarouselOptions::class);
             $this->newProductsCarouselOptions = $service;
         }
         

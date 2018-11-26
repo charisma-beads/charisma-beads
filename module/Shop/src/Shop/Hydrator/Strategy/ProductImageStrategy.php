@@ -10,8 +10,7 @@
 
 namespace Shop\Hydrator\Strategy;
 
-use Shop\Model\Product\Image;
-use Shop\Model\Product\Product;
+use Shop\Model\ProductImageModel;
 use Zend\Hydrator\Strategy\StrategyInterface;
 
 class ProductImageStrategy implements StrategyInterface
@@ -34,7 +33,7 @@ class ProductImageStrategy implements StrategyInterface
     {
         if (!is_array($value)) return $value;
 
-        if (empty($value)) return new Image();
+        if (empty($value)) return new ProductImageModel();
 
         foreach ($value as $row) {
             if ($row->getIsDefault() || !$row->getProductImageId()) {

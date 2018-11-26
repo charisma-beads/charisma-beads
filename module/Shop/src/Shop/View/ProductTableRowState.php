@@ -11,6 +11,7 @@
 
 namespace Shop\View;
 
+use Shop\Model\ProductModel;
 use Zend\View\Helper\AbstractHelper;
 
 /**
@@ -21,7 +22,7 @@ use Zend\View\Helper\AbstractHelper;
 class ProductTableRowState extends AbstractHelper
 {
     /**
-     * @param \Shop\Model\Product\Product||shop\Model\Product\Category $model
+     * @param ProductModel|\Shop\Model\ProductCategoryModel $model
      * @return string
      */
     public function __invoke($model)

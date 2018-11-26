@@ -10,7 +10,7 @@
 
 namespace Shop\View;
 
-use Shop\Model\Order\Order;
+use Shop\Model\OrderModel;
 use Zend\Form\View\Helper\AbstractHelper;
 
 /**
@@ -32,10 +32,10 @@ class OrderStatus extends AbstractHelper
     ];
 
     /**
-     * @param Order $order
+     * @param OrderModel $order
      * @return bool
      */
-    public function __invoke(Order $order)
+    public function __invoke(OrderModel $order)
     {
         return $this->isAllowedStatus(
             $order->getOrderStatus()->getOrderStatus()

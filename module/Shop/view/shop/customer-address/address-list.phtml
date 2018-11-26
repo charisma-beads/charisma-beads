@@ -1,6 +1,6 @@
 
 <option value="0">---Please select an address---</option>
-<?php /* @var $address \Shop\Model\Customer\Address */ ?>
+<?php /* @var $address \Shop\Model\Customer\CustomerAddressModel */ ?>
 <?php foreach ($this->models as $address):?>
     <option value="<?=$address->getCustomerAddressId()?>">
         <?=$address->getAddress1() . ', ' . $address->getPostcode();?>

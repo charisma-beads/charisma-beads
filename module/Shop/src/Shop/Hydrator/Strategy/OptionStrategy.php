@@ -10,7 +10,7 @@
 
 namespace Shop\Hydrator\Strategy;
 
-use Shop\Model\Product\Option;
+use Shop\Model\ProductOptionModel;
 use Zend\Hydrator\Strategy\StrategyInterface;
 
 /**
@@ -26,8 +26,8 @@ class OptionStrategy implements StrategyInterface
     protected $optionId;
 
     /**
-     * @param Option $value
-     * @return Option
+     * @param ProductOptionModel $value
+     * @return ProductOptionModel
      */
     public function extract($value)
     {
@@ -35,13 +35,13 @@ class OptionStrategy implements StrategyInterface
     }
 
     /**
-     * @param Option $value
-     * @return Option
+     * @param ProductOptionModel $value
+     * @return ProductOptionModel
      */
     public function hydrate($value)
     {
         if (is_array($value) && !empty($value)) {
-            /* @var $option Option */
+            /* @var $option ProductOptionModel */
             foreach ($value as $option) {
                 if ($this->getOptionId() == $option->getProductOptionId()) {
                     return $option;

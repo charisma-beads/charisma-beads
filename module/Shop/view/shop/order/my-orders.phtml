@@ -3,7 +3,7 @@
 <div class="row">
     <h3 class="col-md-12">Order History For <?=$this->identity()->getFullName();?></h3>
     <?php if (count($this->orders) > 0):?>
-    <?php /* @var $order \Shop\Model\Order\Order */ ?>
+    <?php /* @var $order \Shop\Model\Order\OrderModel */ ?>
 
     <div class="col-md-12">
         <?=$this->paginationControl(

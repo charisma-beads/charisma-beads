@@ -1,6 +1,6 @@
 
 <option value="0">---Please select a province---</option>
-<?php /* @var $province \Shop\Model\Country\Province */ ?>
+<?php /* @var $province \Shop\Model\Country\CountryProvinceModel */ ?>
 <?php foreach ($this->models as $province):?>
     <option value="<?=$province->getProvinceId()?>"><?=$province->getProvinceName();?></option>
 <?php endforeach;?>

@@ -37,7 +37,7 @@ class ShopOption extends AbstractViewHelper
         if (!$this->shopOptions instanceof ShopOptions) {
             $service = $this->getServiceLocator()
                 ->getServiceLocator()
-                ->get('Shop\Options\Shop');
+                ->get(ShopOptions::class);
             $this->shopOptions = $service;
         }
         

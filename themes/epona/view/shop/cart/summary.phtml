@@ -9,7 +9,7 @@
 
         <!-- CART CONTENT -->
         <div class="quick-cart-content">
-            <?php /* @var $item \Shop\Model\Cart\Item */ ?>
+            <?php /* @var $item \Shop\Model\Cart\CarItemModel */ ?>
             <div class="quick-cart-items">
                 <?php foreach ($this->cart()->getCart() as $item): ?>
                     <a class="quick-cart-item" href="<?=$this->url('shop/cart', [

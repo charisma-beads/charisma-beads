@@ -11,13 +11,14 @@
 
 namespace Shop\View;
 
-use Shop\Model\Customer\Address;
-use Shop\Model\Order\Order;
+use Shop\Model\CustomerAddressModel;
+use Shop\Model\OrderModel;
+use Shop\Service\CustomerAddressService;
 use UthandoCommon\Service\ServiceManager;
 use UthandoCommon\View\AbstractViewHelper;
 use Zend\Stdlib\Exception\InvalidArgumentException;
 use Zend\View\Helper\Identity;
-use Shop\Model\Customer\Customer;
+use Shop\Model\CustomerModel;
 
 /**
  * Class CustomerAddress
@@ -27,22 +28,22 @@ use Shop\Model\Customer\Customer;
 class CustomerAddress extends AbstractViewHelper
 {
     /**
-     * @var \Shop\Service\Customer\Address
+     * @var \Shop\Service\CustomerAddressService
      */
     protected $customerAddressService;
     
     /**
-     * @var Customer
+     * @var CustomerModel
      */
     protected $customer;
     
     /**
-     * @var Order
+     * @var OrderModel
      */
     protected $order;
     
     /**
-     * @var Address
+     * @var CustomerAddressModel
      */
     protected $address;
     
@@ -81,17 +82,17 @@ class CustomerAddress extends AbstractViewHelper
     }
     
     /**
-     * @param Address $address
+     * @param CustomerAddressModel $address
      * @throws InvalidArgumentException
      * @return string
      */
-    public function formatAddress(Address $address=null)
+    public function formatAddress(CustomerAddressModel $address=null)
     {
         if (null === $address) {
             $address = $this->getAddress();
         }
         
-        if (!$address instanceof Address) {
+        if (!$address instanceof CustomerAddressModel) {
             throw new InvalidArgumentException('Address must in an instance of \Shop\Model\Customer\Address');
         }
         
@@ -100,9 +101,9 @@ class CustomerAddress extends AbstractViewHelper
         
         if ($this->includeName) {
             
-            if ($this->order instanceof Order) {
+            if ($this->order instanceof OrderModel) {
                 $html .= $this->order->getMetadata()->getCustomerName() . '<br>';
-            } elseif ($this->customer instanceof Customer) {
+            } elseif ($this->customer instanceof CustomerModel) {
                 
                 $prefix = $this->customer->getPrefix()->getPrefix();
                 $name = $this->customer->getFullName();
@@ -134,7 +135,7 @@ class CustomerAddress extends AbstractViewHelper
         $html .= $address->getPhone() . '<br>';
 
         if ($this->includeEmail) {
-            $html .= ($this->order instanceof Order) ?
+            $html .= ($this->order instanceof OrderModel) ?
                 $this->order->getMetadata()->getEmail() : $identity->getEmail();
         }
         
@@ -142,7 +143,7 @@ class CustomerAddress extends AbstractViewHelper
     }
     
     /**
-     * @return \Shop\Model\Order\Order
+     * @return \Shop\Model\OrderModel
      */
     public function getOrder()
     {
@@ -150,10 +151,10 @@ class CustomerAddress extends AbstractViewHelper
     }
     
     /**
-     * @param Order $order
+     * @param OrderModel $order
      * @return \Shop\View\CustomerAddress
      */
-    public function setOrder(Order $order)
+    public function setOrder(OrderModel $order)
     {
     	$this->order = $order;
     
@@ -161,7 +162,7 @@ class CustomerAddress extends AbstractViewHelper
     }
     
     /**
-     * @return Customer $customer
+     * @return CustomerModel $customer
      */
     public function getCustomer()
     {
@@ -169,17 +170,17 @@ class CustomerAddress extends AbstractViewHelper
     }
 
     /**
-     * @param Customer $customer
+     * @param CustomerModel $customer
      * @return $this
      */
-    public function setCustomer(Customer $customer)
+    public function setCustomer(CustomerModel $customer)
     {
         $this->customer = $customer;
         return $this;
     }
 
  /**
-     * @return \Shop\Model\Customer\Address
+     * @return \Shop\Model\CustomerAddressModel
      */
     public function getAddress()
     {
@@ -265,7 +266,7 @@ class CustomerAddress extends AbstractViewHelper
     }
     
     /**
-     * @return \Shop\Service\Customer\Address
+     * @return \Shop\Service\CustomerAddressService
      */
     public function getCustomerAddressService()
     {
@@ -273,7 +274,7 @@ class CustomerAddress extends AbstractViewHelper
     		$sl = $this->getServiceLocator()
                 ->getServiceLocator()
                 ->get(ServiceManager::class);
-    		$this->customerAddressService = $sl->get('ShopCustomerAddress');
+    		$this->customerAddressService = $sl->get(CustomerAddressService::class);
     	}
     	 
     	return $this->customerAddressService;

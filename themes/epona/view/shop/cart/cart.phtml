@@ -16,7 +16,7 @@
     </div>
     <!-- /cart header -->
 
-    <?php /* @var $item \Shop\Model\Cart\Item */ ?>
+    <?php /* @var $item \Shop\Model\Cart\CarItemModel */ ?>
     <?php foreach ($this->cart()->getCart() as $item): ?>
         <!-- cart item -->
         <div class="item">
@@ -25,7 +25,7 @@
                     <img src="<?=$this->productImage($item->getMetadata()->getImage(), 'thumb');?>" alt="" width="60">
                 </div>
             <?php endif;?>
-            <?php /* @var $product \Shop\Model\Product\Product */ ?>
+            <?php /* @var $product \Shop\Model\Product\ProductModel */ ?>
             <?php $product = $this->productHelper($item->getMetadata()->getProductId());?>
             <a href="<?=$this->url('shop/catalog/product', [
                 'categoryIdent' => $product->getProductCategory()->getIdent(),

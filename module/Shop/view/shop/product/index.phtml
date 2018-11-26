@@ -32,7 +32,7 @@ $discontinued = new Element\Checkbox('discontinued', [
             'searchInputs'	=> [
                 'Product'	=> 'sku-name-shortDescription',
                 //'Category'	=> 'category',
-                'Category List' => $this->formManager('ProductCategoryList')->setName('productCategoryId'),
+                'Category List' => $this->formManager(\Shop\Form\Element\ProductCategoryList::class)->setName('productCategoryId'),
             ],
             'secondRowInputs' => [
                 new Element\Checkbox('discontinued', [

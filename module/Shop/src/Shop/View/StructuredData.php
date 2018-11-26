@@ -10,7 +10,7 @@
 
 namespace Shop\View;
 
-use Shop\Model\Product\Product;
+use Shop\Model\ProductModel;
 use UthandoCommon\View\AbstractViewHelper;
 use Zend\Json\Json;
 use Zend\Paginator\Paginator;
@@ -33,7 +33,7 @@ class StructuredData extends AbstractViewHelper
     protected $schema = 'http://schema.org';
 
     /**
-     * @var Product|Paginator
+     * @var ProductModel|Paginator
      */
     protected $productOrList;
 
@@ -43,7 +43,7 @@ class StructuredData extends AbstractViewHelper
      */
     public function __invoke($productOrList = null)
     {
-        if ($productOrList instanceof Product || $productOrList instanceof Paginator) {
+        if ($productOrList instanceof ProductModel || $productOrList instanceof Paginator) {
             $this->productOrList = $productOrList;
             return $this->render();
         }
@@ -59,7 +59,7 @@ class StructuredData extends AbstractViewHelper
         $html = null;
         $json = null;
 
-        if ($this->productOrList instanceof Product) {
+        if ($this->productOrList instanceof ProductModel) {
             $json = Json::encode($this->item($this->productOrList));
         }
 
@@ -75,11 +75,11 @@ class StructuredData extends AbstractViewHelper
     }
 
     /**
-     * @param Product $product
+     * @param ProductModel $product
      * @param bool $addSchema
      * @return array
      */
-    public function item(Product $product, $addSchema = true)
+    public function item(ProductModel $product, $addSchema = true)
     {
         $array = [
             '@type'         => 'Product',

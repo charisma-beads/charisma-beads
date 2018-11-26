@@ -10,7 +10,7 @@
 
 namespace Shop\Hydrator\Strategy;
 
-use Shop\Model\Post\Unit;
+use Shop\Model\PostUnitModel;
 use Zend\Hydrator\Strategy\StrategyInterface;
 
 /**
@@ -30,11 +30,11 @@ class PostUnitStrategy implements StrategyInterface
     }
 
     /**
-     * @param float|Unit $value
+     * @param float|PostUnitModel $value
      * @return float
      */
     public function hydrate($value)
     {
-        return ($value instanceof Unit) ? $value->getPostUnit() : $value;
+        return ($value instanceof PostUnitModel) ? $value->getPostUnit() : $value;
     }
 }

@@ -2,7 +2,7 @@
 $this->headTitle('Shop Overview');
 $this->layout()->pageTitle = $this->translate('Shop Overview');
 
-$startYears = $this->formManager('MonthlyTotalYearList', [
+$startYears = $this->formManager(\Shop\Form\Element\MonthlyTotalYearList::class, [
     'name' => 'start',
     'label' => 'Start',
     'minOrMax' => 'min',
@@ -11,7 +11,7 @@ $startYears = $this->formManager('MonthlyTotalYearList', [
     'id' => 'startYears',
 ]);
 
-$endYears = $this->formManager('MonthlyTotalYearList', [
+$endYears = $this->formManager(\Shop\Form\Element\MonthlyTotalYearList::class, [
     'name' => 'end',
     'label' => 'End',
     'minOrMax' => 'max',

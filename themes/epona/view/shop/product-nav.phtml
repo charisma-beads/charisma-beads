@@ -7,7 +7,7 @@
 <!-- SIDE NAV -->
 <ul class="side-nav list-group" id="sidebar-nav">
 
-    <?php /* @var $cat \Shop\Model\Product\Category */ ?>
+    <?php /* @var $cat \Shop\Model\Product\ProductCategoryModel */ ?>
     <?php foreach ($cats as $cat): ?>
         <?php $count++; ?>
         <?php $liClass = ($cat->hasChildren()) ? ' list-toggle' : ''; ?>

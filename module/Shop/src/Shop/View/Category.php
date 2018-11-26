@@ -11,9 +11,9 @@
 
 namespace Shop\View;
 
+use Shop\Service\ProductCategoryService;
 use UthandoCommon\Service\ServiceManager;
 use UthandoCommon\View\AbstractViewHelper;
-use Shop\Service\Product\Category as ProductCategory;
 
 /**
  * Class Category
@@ -23,17 +23,17 @@ use Shop\Service\Product\Category as ProductCategory;
 class Category extends AbstractViewHelper
 {
 	/**
-	 * @var ProductCategory
+	 * @var ProductCategoryService
 	 */
 	protected $service;
 	
 	public function __invoke()
 	{
-		if (!$this->service instanceof ProductCategory) {
+		if (!$this->service instanceof ProductCategoryService) {
 			$this->service = $this->getServiceLocator()
 				->getServiceLocator()
 				->get(ServiceManager::class)
-				->get('ShopProductCategory');
+				->get(ProductCategoryService::class);
 		}
 		
 		return $this;
@@ -41,7 +41,7 @@ class Category extends AbstractViewHelper
 	
 	/**
 	 * @param int $id
-	 * @return \Shop\Model\Product\Category
+	 * @return \Shop\Model\ProductCategoryModel
 	 */
 	public function getCategory($id)
 	{

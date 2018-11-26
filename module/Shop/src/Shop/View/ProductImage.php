@@ -11,7 +11,7 @@
 
 namespace Shop\View;
 
-use Shop\Model\Product\Image as ImageModel;
+use Shop\Model\ProductImageModel as ImageModel;
 use Zend\View\Helper\AbstractHelper;
 
 /**

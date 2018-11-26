@@ -87,7 +87,7 @@
 		<th>Total</th>
 	</tr>
 	
-	<?php /* @var $item \Shop\Model\Order\Line */ ?>
+	<?php /* @var $item \Shop\Model\OrderLineModel */ ?>
 	<?php foreach ($this->order->getOrderlines() as $item): ?>
 	<tr class="item-list">
 		<td><?=$item->getMetadata()->getSku();?></td>

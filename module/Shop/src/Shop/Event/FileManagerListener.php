@@ -63,10 +63,10 @@ class FileManagerListener implements ListenerAggregateInterface
 
         /* @var $options \UthandoFileManager\Options\FileManagerOptions */
         $options = $e->getParam('options');
-        /* @var $model \UthandoFileManager\Model\Image */
+        /* @var $model \UthandoFileManager\Model\ImageModel */
         $model = $e->getParam('model');
 
-        /* @var $service \Shop\Service\Product\Image */
+        /* @var $service \Shop\Service\ProductImageService */
         $service = $e->getTarget()->getService('ShopProductImage');
 
         $post = [

@@ -11,6 +11,8 @@
 
 namespace Shop\View;
 
+use Shop\Form\CatalogSearchForm;
+use Shop\InputFilter\CatalogSearchInputFilter;
 use UthandoCommon\View\AbstractViewHelper;
 
 /**
@@ -26,8 +28,8 @@ class ProductSearch extends AbstractViewHelper
     	$formManager = $sl->get('FormElementManager');
         $inputFilterManager = $sl->get('InputFilterManager');
 
-        $searchBox = $formManager->get('ShopCatalogSearch',['name' => 'search-catalog']);
-    	$inputFilter = $inputFilterManager->get('ShopCatalogSearch');
+        $searchBox = $formManager->get(CatalogSearchForm::class,['name' => 'search-catalog']);
+    	$inputFilter = $inputFilterManager->get(CatalogSearchInputFilter::class);
 
     	$searchBox->setInputFilter($inputFilter);
 

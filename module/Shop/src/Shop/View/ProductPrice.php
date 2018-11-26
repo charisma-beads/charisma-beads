@@ -11,7 +11,7 @@
 
 namespace Shop\View;
 
-use Shop\Model\Product\Product as ProductModel;
+use Shop\Model\ProductModel;
 use UthandoCommon\View\AbstractViewHelper;
 
 /**
@@ -37,7 +37,7 @@ class ProductPrice extends AbstractViewHelper
     protected $priceFormatHelper;
 
     /**
-     * @var Product
+     * @var ProductModel
      */
     protected $product;
 

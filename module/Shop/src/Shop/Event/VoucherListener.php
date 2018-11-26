@@ -10,12 +10,13 @@
 
 namespace Shop\Event;
 
-use Shop\Model\Voucher\Code;
-use Shop\Service\Cart\Cart;
-use Shop\Service\Order\AbstractOrder;
-use Shop\Service\Order\Order;
-use Shop\Service\Voucher\Code as CodeService;
-use Shop\Service\Voucher\CustomerMap;
+use Shop\Model\VoucherCodeModel;
+use Shop\Service\CartService;
+use Shop\Service\AbstractOrderService;
+use Shop\Service\CountryService;
+use Shop\Service\OrderService;
+use Shop\Service\VoucherCodeService;
+use Shop\Service\VoucherCustomerMapService;
 use Shop\Validator\Voucher;
 use Zend\EventManager\Event;
 use Zend\EventManager\EventManagerInterface;
@@ -40,19 +41,19 @@ class VoucherListener implements ListenerAggregateInterface
         $events = $events->getSharedManager();
 
         $this->listeners[] = $events->attach(
-            [Cart::class],
+            [CartService::class],
             ['cart.voucher.check'],
             [$this, 'cartVoucher']
         );
 
         $this->listeners[] = $events->attach(
-            [Order::class],
+            [OrderService::class],
             ['voucher.use'],
             [$this, 'useVoucher']
         );
 
         $this->listeners[] = $events->attach(
-            [Order::class],
+            [OrderService::class],
             ['order.voucher.check'],
             [$this, 'orderVoucher']
         );
@@ -63,23 +64,23 @@ class VoucherListener implements ListenerAggregateInterface
      */
     public function useVoucher(Event $e)
     {
-        /* @var $voucher Code */
+        /* @var $voucher VoucherCodeModel */
         $voucher = $e->getParam('voucher');
-        /* @var $order \Shop\Model\Order\Order */
+        /* @var $order \Shop\Model\OrderModel */
         $order = $e->getParam('order');
 
         if (!$voucher || !$voucher->getVoucherId()) {
             return;
         }
 
-        /* @var $voucherService CodeService */
-        $voucherService = $e->getTarget()->getService('ShopVoucherCode');
+        /* @var $voucherService VoucherCodeService */
+        $voucherService = $e->getTarget()->getService(VoucherCodeService::class);
 
         $voucherService->updateVoucherCount($voucher->getCode());
 
         if ($voucher->getNoPerCustomer() > 0) {
-            /* @var $voucherMapService CustomerMap */
-            $voucherMapService = $e->getTarget()->getService('ShopVoucherCustomerMap');
+            /* @var $voucherMapService VoucherCustomerMapService */
+            $voucherMapService = $e->getTarget()->getService(VoucherCustomerMapService::class);
             $voucherMapService->updateCustomerCount($voucher, $order->getCustomer());
         }
     }
@@ -89,7 +90,7 @@ class VoucherListener implements ListenerAggregateInterface
      */
     public function orderVoucher(Event $e)
     {
-        /* @var Order $service */
+        /* @var OrderService $service */
         $service = $e->getTarget();
         $voucher = $service->getOrderModel()
             ->getMetadata()
@@ -105,7 +106,7 @@ class VoucherListener implements ListenerAggregateInterface
             $this->setErrorMessages($voucherValidator);
             $service->getOrderModel()
                 ->getMetadata()
-                ->setVoucher(new Code());
+                ->setVoucher(new VoucherCodeModel());
             $service->getOrderModel()
                 ->setDiscount(0);
             return;
@@ -123,7 +124,7 @@ class VoucherListener implements ListenerAggregateInterface
      */
     public function cartVoucher(Event $e)
     {
-        /* @var Cart $service */
+        /* @var CartService $service */
         $service = $e->getTarget();
         $voucher = $service->getContainer()->offsetGet('voucher');
 
@@ -133,7 +134,7 @@ class VoucherListener implements ListenerAggregateInterface
 
         $voucherValidator   = $this->getVoucherValidator($e);
         $countryId          = $e->getTarget()->getContainer()->offsetGet('countryId');
-        $country            = $service->getService('ShopCountry')->getById($countryId);
+        $country            = $service->getService(CountryService::class)->getById($countryId);
 
         if ($countryId) {
             $voucherValidator->setCountry($country);
@@ -189,10 +190,10 @@ class VoucherListener implements ListenerAggregateInterface
     private function doDiscount(Event $e, Voucher $voucherValidator, $voucherCode)
     {
         $voucher = $voucherValidator->getVoucher($voucherCode);
-        /* @var AbstractOrder $service */
+        /* @var AbstractOrderService $service */
         $service = $e->getTarget();
-        /* @var CodeService $codeService */
-        $codeService = $service->getService('ShopVoucherCode');
+        /* @var VoucherCodeService $codeService */
+        $codeService = $service->getService(VoucherCodeService::class);
 
         $discount = $codeService->doDiscount($voucher, $service);
 

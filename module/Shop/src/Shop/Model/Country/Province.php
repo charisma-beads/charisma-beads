@@ -10,8 +10,7 @@
 
 namespace Shop\Model\Country;
 
-use UthandoCommon\Model\Model;
-use UthandoCommon\Model\ModelInterface;
+use Shop\Model\CountryProvinceModel;
 
 
 /**
@@ -19,145 +18,45 @@ use UthandoCommon\Model\ModelInterface;
  *
  * @package Shop\Model\Country
  */
-class Province implements ModelInterface
+class Province extends CountryProvinceModel
 {
-    use Model;
-    
+    protected $lft;
+
+    protected $rgt;
+
     /**
-     * @var int
+     * @return mixed
      */
-    protected $provinceId;
-    
+    public function getLft()
+    {
+        return $this->lft;
+    }
+
     /**
-     * @var int
+     * @param mixed $lft
+     * @return Province
      */
-    protected $countryId;
-    
+    public function setLft($lft)
+    {
+        $this->lft = $lft;
+        return $this;
+    }
+
     /**
-     * @var string
+     * @return mixed
      */
-    protected $provinceCode;
-    
+    public function getRgt()
+    {
+        return $this->rgt;
+    }
+
     /**
-     * @var string
+     * @param mixed $rgt
+     * @return Province
      */
-    protected $provinceName;
-    
-    /**
-     * @var string
-     */
-    protected $provinceAlternateNames;
-    
-    /**
-     * @var Country
-     */
-    protected $country;
-    
-    /**
-     * @return number
-     */
-	public function getProvinceId()
-	{
-		return $this->provinceId;
-	}
-
-	/**
-	 * @param int $provinceId
-	 * @return \Shop\Model\Country\Province
-	 */
-	public function setProvinceId($provinceId)
-	{
-		$this->provinceId = $provinceId;
-		return $this;
-	}
-
-	/**
-	 * @return number
-	 */
-	public function getCountryId()
-	{
-		return $this->countryId;
-	}
-
-	/**
-	 * @param int $countryId
-	 * @return \Shop\Model\Country\Province
-	 */
-	public function setCountryId($countryId)
-	{
-		$this->countryId = $countryId;
-		return $this;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getProvinceCode()
-	{
-		return $this->provinceCode;
-	}
-
-	/**
-	 * @param string $countryProvinceCode
-	 * @return \Shop\Model\Country\Province
-	 */
-	public function setProvinceCode($countryProvinceCode)
-	{
-		$this->provinceCode = $countryProvinceCode;
-		return $this;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getProvinceName()
-	{
-		return $this->provinceName;
-	}
-
-	/**
-	 * @param string $provinceName
-	 * @return \Shop\Model\Country\Province
-	 */
-	public function setProvinceName($provinceName)
-	{
-		$this->provinceName = $provinceName;
-		return $this;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getProvinceAlternateNames()
-	{
-		return $this->provinceAlternateNames;
-	}
-
-	/**
-	 * @param string $provinceAlternateNames
-	 * @return \Shop\Model\Country\Province
-	 */
-	public function setProvinceAlternateNames($provinceAlternateNames)
-	{
-		$this->provinceAlternateNames = $provinceAlternateNames;
-		return $this;
-	}
-
-	/**
-	 * @return Country
-	 */
-	public function getCountry()
-	{
-		return $this->country;
-	}
-
-	/**
-	 * @param Country $country
-	 * @return \Shop\Model\Country\Province
-	 */
-	public function setCountry(Country $country)
-	{
-		$this->country = $country;
-		return $this;
-	}
+    public function setRgt($rgt)
+    {
+        $this->rgt = $rgt;
+        return $this;
+    }
 }

@@ -49,7 +49,7 @@
             endwhile;
             ?>
         </ul>
-        <?php if ($this->exception->getOrder() instanceof \Shop\Model\Order\Order): ?>
+        <?php if ($this->exception->getOrder() instanceof \Shop\Model\Order\OrderModel): ?>
             <hr/>
             <h2><?=$this->translate('Order Information') ?>:</h2>
             <pre><?=Zend\Debug\Debug::dump($this->exception->getOrder(), null, false);?> ?></pre>

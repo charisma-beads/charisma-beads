@@ -1,6 +1,6 @@
 
 <option value="0">---Please select a weight---</option>
-<?php /* @var $unit \Shop\Model\Post\Unit */ ?>
+<?php /* @var $unit \Shop\Model\Post\PostUnitModel */ ?>
 <?php foreach ($this->models as $unit):?>
     <option value="<?=$unit->getPostUnitId()?>"><?=$unit->getPostUnit()?></option>
 <?php endforeach;?>

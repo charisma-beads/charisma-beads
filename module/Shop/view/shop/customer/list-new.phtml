@@ -10,7 +10,7 @@
         </thead>
 
         <tbody>
-        <?php /* @var $row \Shop\Model\Customer\Customer */ ?>
+        <?php /* @var $row \Shop\Model\Customer\CustomerModel */ ?>
         <?php foreach($this->models as $row): ?>
             <?php $class = ($row->getUser()->getActive()) ? '' : 'danger';?>
             <tr class="<?=$class;?>">

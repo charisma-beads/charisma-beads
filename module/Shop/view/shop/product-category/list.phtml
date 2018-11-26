@@ -16,7 +16,7 @@
     	</thead>
     	
     	<tbody>
-    		<?php /* @var $row \Shop\Model\Product\Category */ ?>
+    		<?php /* @var $row \Shop\Model\Product\ProductCategoryModel */ ?>
     		<?php foreach($this->models as $row): ?>
     		<?php
         		$parent = ($row->hasChildren() || $row->getDepth() == 0) ? 'bold ' : '';

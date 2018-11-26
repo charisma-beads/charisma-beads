@@ -10,14 +10,14 @@
 
 namespace Shop\Validator;
 
-use Shop\Mapper\Voucher\Code as CodeMapper;
-use Shop\Mapper\Voucher\CustomerMap as CustomerMapMapper;
-use Shop\Model\Country\Country;
-use Shop\Model\Customer\Customer;
-use Shop\Model\Order\AbstractOrderCollection;
-use Shop\Model\Order\LineInterface;
-use Shop\Model\Voucher\Code;
-use Shop\Model\Voucher\CustomerMap;
+use Shop\Mapper\VoucherCodeMapper as CodeMapper;
+use Shop\Mapper\VoucherCustomerMapMapper as CustomerMapMapper;
+use Shop\Model\CountryModel;
+use Shop\Model\CustomerModel;
+use Shop\Model\AbstractOrderCollection;
+use Shop\Model\OrderLineInterface;
+use Shop\Model\VoucherCodeModel;
+use Shop\Model\VoucherCustomerMapModel;
 use UthandoCommon\Mapper\MapperManager;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
@@ -55,7 +55,7 @@ class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
     ];
 
     /**
-     * @var Customer
+     * @var CustomerModel
      */
     protected $customer;
 
@@ -65,13 +65,13 @@ class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
     protected $orderModel;
 
     /**
-     * @var Country
+     * @var CountryModel
      */
     protected $country;
 
     /**
      * @param string $code
-     * @return null|Code
+     * @return null|VoucherCodeModel
      */
     public function getVoucher($code)
     {
@@ -90,7 +90,7 @@ class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
 
     /**
      * @param $voucherId
-     * @return null|CustomerMap
+     * @return null|VoucherCustomerMapModel
      */
     public function getCustomerMap($voucherId)
     {
@@ -113,7 +113,7 @@ class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
     }
 
     /**
-     * @return Customer
+     * @return CustomerModel
      */
     public function getCustomer()
     {
@@ -121,12 +121,12 @@ class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
     }
 
     /**
-     * @param Customer $customer
+     * @param CustomerModel $customer
      * @return Voucher
      */
     public function setCustomer($customer)
     {
-        if ($customer instanceof Customer) {
+        if ($customer instanceof CustomerModel) {
             $this->customer = $customer;
             $this->setCountry($customer->getDeliveryAddress()->getCountry());
         }
@@ -135,11 +135,11 @@ class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
     }
 
     /**
-     * @return Country
+     * @return CountryModel
      */
     public function getCountry()
     {
-        if ($this->getCustomer() instanceof Customer) {
+        if ($this->getCustomer() instanceof CustomerModel) {
             $country = $this->getCustomer()->getDeliveryAddress()->getCountry();
         } else {
             $country = $this->country;
@@ -149,7 +149,7 @@ class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
     }
 
     /**
-     * @param Country $country
+     * @param CountryModel $country
      * @return $this
      */
     public function setCountry($country)
@@ -186,7 +186,7 @@ class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
         $voucher = $this->getVoucher($value);
 
 
-        if (!$voucher instanceof Code) {
+        if (!$voucher instanceof VoucherCodeModel) {
             $this->error(self::INVALID_VOUCHER);
             return false;
         }
@@ -203,7 +203,7 @@ class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
         }
 
         // not allowed on website
-        if ($voucher->getRedeemable() === Code::REDEEM_FAIR) {
+        if ($voucher->getRedeemable() === VoucherCodeModel::REDEEM_FAIR) {
             $this->error(self::INVALID_REDEEM);
             return false;
         }
@@ -236,7 +236,7 @@ class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
             return false;
         }
 
-        if ($this->getCountry() instanceof Country) {
+        if ($this->getCountry() instanceof CountryModel) {
             $zone = $this->getCountry()->getPostZoneId();
 
             // check valid zone
@@ -257,7 +257,7 @@ class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
             // check for qualifying categories
             $catArray = [];
 
-            /* @var LineInterface $item */
+            /* @var OrderLineInterface $item */
             foreach ($this->getOrderModel() as $item) {
                 $catArray[] = $item->getMetadata()->getCategory()->getProductCategoryId();
             }
@@ -270,7 +270,7 @@ class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
 
 
 
-        if ($this->getCustomer() instanceof Customer) {
+        if ($this->getCustomer() instanceof CustomerModel) {
 
             $customerMap    = $this->getCustomerMap($voucher->getVoucherId());
 

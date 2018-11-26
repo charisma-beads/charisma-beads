@@ -11,6 +11,7 @@
 
 namespace Shop\View;
 
+use Shop\Options\ShopOptions;
 use UthandoCommon\View\AbstractViewHelper;
 
 /**
@@ -29,7 +30,7 @@ class Alert extends AbstractViewHelper
     {
         $this->shopOptions = $this->getServiceLocator()
             ->getServiceLocator()
-            ->get('Shop\Options\Shop');
+            ->get(ShopOptions::class);
         
         return $this->renderAlert();
     }

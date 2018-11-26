@@ -11,7 +11,7 @@
 
 namespace Shop\View;
 
-use Shop\Service\Product\Product as ProductService;
+use Shop\Service\ProductService;
 use UthandoCommon\Service\ServiceManager;
 use UthandoCommon\View\AbstractViewHelper;
 
@@ -29,7 +29,7 @@ class Product extends AbstractViewHelper
 
     /**
      * @param null $productId
-     * @return $this|array|mixed|\Shop\Model\Product\Product|\UthandoCommon\Model\ModelInterface
+     * @return $this|array|mixed|\Shop\Model\ProductModel|\UthandoCommon\Model\ModelInterface
      */
     public function __invoke($productId = null)
     {
@@ -37,7 +37,7 @@ class Product extends AbstractViewHelper
             $this->service = $this->getServiceLocator()
                 ->getServiceLocator()
                 ->get(ServiceManager::class)
-                ->get('ShopProduct');
+                ->get(ProductService::class);
         }
 
         if ($productId) {

@@ -10,6 +10,7 @@
 
 namespace Shop\Event;
 
+use Shop\Options\ShopOptions;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\EventManager\ListenerAggregateTrait;
@@ -44,7 +45,7 @@ class ErrorListener implements ListenerAggregateInterface
         $exception = $e->getResult()->exception;
 
         /** @var \Shop\Options\ShopOptions $shopOptions */
-        $shopOptions = $services->get('Shop\Options\Shop');
+        $shopOptions = $services->get(ShopOptions::class);
 
         if (!$e->isError() || !$exception || $shopOptions->isDevelopmentMode()) {
             return;

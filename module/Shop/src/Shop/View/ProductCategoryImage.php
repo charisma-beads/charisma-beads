@@ -10,7 +10,7 @@
 
 namespace Shop\View;
 
-use Shop\Model\Product\Category as CategoryModel;
+use Shop\Model\ProductCategoryModel;
 use UthandoCommon\View\AbstractViewHelper;
 use Zend\View\Helper\BasePath;
 
@@ -47,12 +47,12 @@ class ProductCategoryImage extends AbstractViewHelper
     protected $publicDir = './public_html';
 
     /**
-     * @param CategoryModel $model
+     * @param ProductCategoryModel $model
      * @return $this
      */
     public function __invoke($model)
     {
-        if ($model instanceof CategoryModel) {
+        if ($model instanceof ProductCategoryModel) {
             $this->image = $model->getImage();
         }
 

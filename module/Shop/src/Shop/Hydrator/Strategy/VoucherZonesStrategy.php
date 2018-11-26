@@ -10,7 +10,7 @@
 
 namespace Shop\Hydrator\Strategy;
 
-use Shop\Model\Voucher\ZoneCollection;
+use Shop\Model\VoucherZoneCollection;
 use Zend\Serializer\Serializer;
 use Zend\Hydrator\Strategy\StrategyInterface;
 
@@ -18,7 +18,7 @@ class VoucherZonesStrategy implements StrategyInterface
 {
     public function extract($value)
     {
-        if ($value instanceof ZoneCollection)  {
+        if ($value instanceof VoucherZoneCollection)  {
             $value = $value->toArray();
             $value = Serializer::serialize($value);
         }
@@ -32,7 +32,7 @@ class VoucherZonesStrategy implements StrategyInterface
             $value = Serializer::unserialize($value);
         }
 
-        $collection = new ZoneCollection();
+        $collection = new VoucherZoneCollection();
         $collection->fromArray($value);
         return $collection;
     }

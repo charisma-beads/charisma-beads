@@ -1,4 +1,4 @@
-<?php /** @var  $order \Shop\Model\Order\Order */ $order = $this->order; ?>
+<?php /** @var  $order \Shop\Model\Order\OrderModel */ $order = $this->order; ?>
 <table class="table table-bordered table-striped">
     <tr>
         <th>Product</th>
@@ -9,7 +9,7 @@
         <th>&nbsp;</th>
     </tr>
 
-    <?php /* @var $item \Shop\Model\Order\Line */ ?>
+    <?php /* @var $item \Shop\Model\Order\OrderOrderLineModel */ ?>
     <?php foreach($order as $item):?>
         <tr class="order-line">
             <td><?=$item->getMetadata()->getSku();?></td>

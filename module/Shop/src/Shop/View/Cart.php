@@ -11,12 +11,12 @@
 
 namespace Shop\View;
 
-use Shop\Form\Cart\Add;
-use Shop\Model\Cart\Cart as CartModel;
+use Shop\Form\CartAddFrom;
+use Shop\Model\CartModel as CartModel;
 use UthandoCommon\Service\ServiceManager;
 use UthandoCommon\View\AbstractViewHelper;
 use Zend\I18n\View\Helper\CurrencyFormat;
-use Shop\Service\Cart\Cart as CartService;
+use Shop\Service\CartService;
 use Zend\View\Model\ViewModel;
 
 /**
@@ -27,7 +27,7 @@ use Zend\View\Model\ViewModel;
 class Cart extends AbstractViewHelper
 {
     /**
-     * @var \Shop\Service\Cart\Cart
+     * @var \Shop\Service\CartService
      */
     protected $cartService;
 
@@ -45,7 +45,7 @@ class Cart extends AbstractViewHelper
             $this->cartService = $this->getServiceLocator()
                 ->getServiceLocator()
                 ->get(ServiceManager::class)
-                ->get('ShopCart');
+                ->get(CartService::class);
         }
 
         return $this;
@@ -196,11 +196,11 @@ class Cart extends AbstractViewHelper
 
     /**
      * @param $product
-     * @return Add
+     * @return CartAddFrom
      */
     public function addForm($product)
     {
-        $form = new Add();
+        $form = new CartAddFrom();
         $form->init();
 
         $form->setData(array(

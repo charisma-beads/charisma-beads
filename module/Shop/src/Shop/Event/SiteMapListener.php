@@ -10,6 +10,8 @@
 
 namespace Shop\Event;
 
+use Shop\Service\ProductCategoryService;
+use Shop\Service\ProductService;
 use UthandoNavigation\Service\MenuService;
 use UthandoNavigation\Service\SiteMapService;
 use Zend\EventManager\Event;
@@ -46,16 +48,16 @@ class SiteMapListener implements ListenerAggregateInterface
         /* @var \Zend\Navigation\Navigation $navigation */
         $navigation = $e->getParam('navigation');
 
-        /* @var \Shop\Service\Product\Product $productService */
-        $productService = $e->getTarget()->getService('ShopProduct');
-        /* @var \Shop\Service\Product\Category $categoryService */
-        $categoryService = $e->getTarget()->getService('ShopProductCategory');
-        /* @var \UthandoNavigation\Service\Menu $service */
+        /* @var \Shop\Service\ProductService $productService */
+        $productService = $e->getTarget()->getService(ProductService::class);
+        /* @var \Shop\Service\ProductCategoryService $categoryService */
+        $categoryService = $e->getTarget()->getService(ProductCategoryService::class);
+        /* @var \UthandoNavigation\Service\MenuService $service */
         $menuService = $e->getTarget()->getService(MenuService::class);
 
         $cats = $categoryService->fetchAll();
         $pages = [];
-        /* @var \Shop\Model\Product\Category $category */
+        /* @var \Shop\Model\ProductCategoryModel $category */
         foreach ($cats as $category) {
             $pages[$category->getIdent()] = [
                 'label'     => $category->getCategory(),
@@ -69,7 +71,7 @@ class SiteMapListener implements ListenerAggregateInterface
             $products = $productService->setPopulate(false)
                 ->getProductsByCategory((int) $category->getProductCategoryId(), null, false);
 
-            /* @var \Shop\Model\Product\Product $product */
+            /* @var \Shop\Model\Product\ProductModel $product */
             foreach ($products as $product) {
                 $pages[$category->getIdent()]['pages'][$product->getIdent()] = [
                     'label'     => $category->getCategory(),

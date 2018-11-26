@@ -10,7 +10,7 @@
 
 namespace Shop\Hydrator\Strategy;
 
-use Shop\Model\Voucher\ProductCategoryCollection;
+use Shop\Model\ProductCategoryCollection;
 use Zend\Serializer\Serializer;
 use Zend\Hydrator\Strategy\StrategyInterface;
 

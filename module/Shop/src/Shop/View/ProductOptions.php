@@ -11,7 +11,8 @@
 
 namespace Shop\View;
 
-use Shop\Model\Product\Product as ProductModel;
+use Shop\Form\Element\ProductOptionsList;
+use Shop\Model\ProductModel;
 use UthandoCommon\View\AbstractViewHelper;
 
 /**
@@ -26,7 +27,7 @@ class ProductOptions extends AbstractViewHelper
         $sl = $this->getServiceLocator()->getServiceLocator();
         $formManager = $sl->get('FormElementManager');
 
-        $options = $formManager->get('ProductOptionList', [
+        $options = $formManager->get(ProductOptionsList::class, [
             'name' => 'ProductOptionList',
             'product' => $product,
         ]);

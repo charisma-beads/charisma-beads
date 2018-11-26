@@ -11,11 +11,11 @@
 
 namespace Shop\Event;
 
-use Shop\Model\Order\AbstractOrderCollection;
-use Shop\Model\Order\LineInterface;
-use Shop\Model\Product\Product as ProductModel;
-use Shop\Service\Cart\Cart;
-use Shop\Service\Order\Order;
+use Shop\Model\AbstractOrderCollection;
+use Shop\Model\OrderLineInterface;
+use Shop\Model\ProductModel as ProductModel;
+use Shop\Service\CartService;
+use Shop\Service\OrderService;
 use Zend\EventManager\Event;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
@@ -38,37 +38,37 @@ class StockControlListener implements ListenerAggregateInterface
         $events = $events->getSharedManager();
 
         $this->listeners[] = $events->attach(
-            [Cart::class, Order::class],
+            [CartService::class, OrderService::class],
             ['cart.stock.check'],
             [$this, 'cartCheck']
         );
 
         $this->listeners[] = $events->attach(
-            [Cart::class, Order::class],
+            [CartService::class, OrderService::class],
             ['stock.check'],
             [$this, 'check']
         );
 
         $this->listeners[] = $events->attach(
-            [Cart::class, Order::class],
+            [CartService::class, OrderService::class],
             ['stock.save'],
             [$this, 'save']
         );
 
         $this->listeners[] = $events->attach(
-            [Cart::class, Order::class],
+            [CartService::class, OrderService::class],
             ['stock.restore'],
             [$this, 'restore']
         );
 
         $this->listeners[] = $events->attach(
-            [Cart::class, Order::class],
+            [CartService::class, OrderService::class],
             ['stock.restore.one'],
             [$this, 'restoreStockFromOne']
         );
 
         $this->listeners[] = $events->attach(
-            [Cart::class, Order::class],
+            [CartService::class, OrderService::class],
             ['stock.restore.many'],
             [$this, 'restoreStockFromMany']
         );
@@ -81,7 +81,7 @@ class StockControlListener implements ListenerAggregateInterface
      */
     public function cartCheck(Event $e)
     {
-        /* @var $line LineInterface */
+        /* @var $line OrderLineInterface */
         $line       = $e->getParam('line');
         /* @var $product ProductModel */
         $product    = $e->getParam('product');
@@ -134,7 +134,7 @@ class StockControlListener implements ListenerAggregateInterface
      */
     public function check(Event $e)
     {
-        /* @var $line LineInterface */
+        /* @var $line OrderLineInterface */
         $line       = $e->getParam('line');
         /* @var $product ProductModel */
         $product    = $e->getParam('product');
