@@ -5,8 +5,8 @@ return [
         'application/index/index'                               => __DIR__ . '/view/application/index/index.phtml',
         'application/partial/paginate'                          => __DIR__ . '/view/partial/paginate.phtml',
 
-        //'error/404'                                             => __DIR__ . '/view/error/404.phtml',
-        //'error/index'                                           => __DIR__ . '/view/error/index.phtml',
+        'error/404'                                             => __DIR__ . '/view/error/404.phtml',
+        'error/index'                                           => __DIR__ . '/view/error/index.phtml',
 
         'layout/layout'                                         => __DIR__ . '/view/layout/layout.phtml',
         'layout/maintenance'                                    => __DIR__ . '/view/layout/maintenance.phtml',
@@ -47,8 +47,8 @@ return [
         'uthando-article/article/404'                           => __DIR__ . '/view/uthando-article/article/404.phtml',
         'uthando-article/article/view'                          => __DIR__ . '/view/uthando-article/article/view.phtml',
 
-        'uthando-contact/controller/contact/index'              => __DIR__ . '/view/uthando-contact/contact/index.phtml',
-        'uthando-contact/controller/contact/thank-you'          => __DIR__ . '/view/uthando-contact/contact/thank-you.phtml',
+        'uthando-contact/contact/index'                         => __DIR__ . '/view/uthando-contact/contact/index.phtml',
+        'uthando-contact/contact/thank-you'                     => __DIR__ . '/view/uthando-contact/contact/thank-you.phtml',
         'uthando-contact/email-template/default-content'        => __DIR__ . '/view/uthando-contact/email-template/default-content.phtml',
         'uthando-contact/email-template/default-layout'         => __DIR__ . '/view/uthando-contact/email-template/default-layout.phtml',
         'uthando-contact/email-template/default-sender-copy'    => __DIR__ . '/view/uthando-contact/email-template/default-sender-copy.phtml',
