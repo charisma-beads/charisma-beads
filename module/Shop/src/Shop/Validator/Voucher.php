@@ -10,8 +10,10 @@
 
 namespace Shop\Validator;
 
-use Shop\Mapper\VoucherCodeMapper as CodeMapper;
-use Shop\Mapper\VoucherCustomerMapMapper as CustomerMapMapper;
+use Shop\Hydrator\VoucherCodeHydrator;
+use Shop\Hydrator\VoucherCustomerMapHydrator;
+use Shop\Mapper\VoucherCodeMapper;
+use Shop\Mapper\VoucherCustomerMapMapper;
 use Shop\Model\CountryModel;
 use Shop\Model\CustomerModel;
 use Shop\Model\AbstractOrderCollection;
@@ -75,13 +77,13 @@ class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
      */
     public function getVoucher($code)
     {
-        /* @var $mapper CodeMapper */
+        /* @var $mapper VoucherCodeMapper */
         $mapper = $this->getServiceLocator()
             ->getServiceLocator()
             ->get(MapperManager::class)
-            ->get('ShopVoucherCode', [
-                'model'     => 'ShopVoucherCode',
-                'hydrator'  => 'ShopVoucherCode',
+            ->get(VoucherCodeMapper::class, [
+                'model'     => VoucherCodeModel::class,
+                'hydrator'  => VoucherCodeHydrator::class,
             ]);
         $voucher = $mapper->getVoucherByCode($code);
 
@@ -94,13 +96,13 @@ class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
      */
     public function getCustomerMap($voucherId)
     {
-        /* @var $mapper CustomerMapMapper */
+        /* @var $mapper VoucherCustomerMapMapper */
         $mapper = $this->getServiceLocator()
             ->getServiceLocator()
             ->get(MapperManager::class)
-            ->get('ShopVoucherCustomerMap', [
-                'model'     => 'ShopVoucherCustomerMap',
-                'hydrator'  => 'ShopVoucherCustomerMap',
+            ->get(VoucherCustomerMapMapper::class, [
+                'model'     => VoucherCustomerMapModel::class,
+                'hydrator'  => VoucherCustomerMapHydrator::class,
             ]);
 
 

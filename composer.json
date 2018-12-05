@@ -35,7 +35,6 @@
     "phpoffice/phpexcel": "1.*",
     "twitter/typeahead.js": "*",
     "ccampbell/chromephp": "4.*",
-    "studio-42/elfinder": "2.1.41",
     "zumba/json-serializer": "^2.2"
   },
   "require-dev": {

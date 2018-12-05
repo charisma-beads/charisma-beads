@@ -10,6 +10,7 @@
 
 namespace Shop\Controller;
 
+use Shop\Service\CreditCardService;
 use Shop\Service\OrderService;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
@@ -68,7 +69,7 @@ class PaymentController extends AbstractActionController
         }
         
         $prg = $this->prg();
-        $service = $this->getService('ShopPaymentCreditCard');
+        $service = $this->getService(CreditCardService::class);
         
         $viewModel = new ViewModel();
         $viewModel->setTemplate('shop/payment/credit-card');

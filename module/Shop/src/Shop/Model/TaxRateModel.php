@@ -56,7 +56,7 @@ class TaxRateModel implements ModelInterface
      */
     public function getTaxRate($formatPercent=false)
 	{
-		return (true === $formatPercent) ? $this->taxRate / 100 : $this->taxRate;
+		return (true === $formatPercent) ? 1 + ($this->taxRate / 100) : $this->taxRate;
 	}
 
     /**

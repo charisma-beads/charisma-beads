@@ -12,9 +12,9 @@ namespace Shop\Service;
 
 use Shop\Form\CustomerAddressForm;
 use Shop\Hydrator\CustomerAddressHydrator;
+use Shop\InputFilter\CustomerAddressInputFilter;
 use Shop\Mapper\CustomerAddressMapper;
 use Shop\Model\Customer\Address;
-use Shop\Model\CustomerAddressModel;
 use Shop\ShopException;
 use UthandoCommon\Service\AbstractRelationalMapperService;
 use Zend\EventManager\Event;
@@ -28,7 +28,7 @@ class CustomerAddressService extends AbstractRelationalMapperService
 {
     protected $form         = CustomerAddressForm::class;
     protected $hydrator     = CustomerAddressHydrator::class;
-    protected $inputFilter  = CustomerAddressHydrator::class;
+    protected $inputFilter  = CustomerAddressInputFilter::class;
     protected $mapper       = CustomerAddressMapper::class;
     protected $model        = Address::class;
     

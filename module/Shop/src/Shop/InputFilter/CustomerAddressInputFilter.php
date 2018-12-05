@@ -8,7 +8,7 @@
  * @license   see LICENSE.txt
  */
 
-namespace Shop\InputFilter\Customer;
+namespace Shop\InputFilter;
 
 use UthandoCommon\Filter\Ucwords;
 use UthandoCommon\I18n\Filter\PhoneNumber;

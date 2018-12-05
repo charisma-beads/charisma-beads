@@ -95,7 +95,7 @@ class CatalogController extends AbstractActionController
     public function searchAction()
     {
         $searchData = [];
-        $session = $this->sessionContainer('CatalogSearch');
+        $session = $this->sessionContainer(CatalogSearchForm::class);
         $prg = null;
 
         if ($this->getRequest()->isXmlHttpRequest()) {

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c6fb60552c05ca5c40fe85eabc81a0e7",
+    "content-hash": "08b8fe644cf0313b25e695107a2d80f5",
     "packages": [
         {
             "name": "ccampbell/chromephp",
@@ -990,16 +990,16 @@
         },
         {
             "name": "studio-42/elfinder",
-            "version": "2.1.41",
+            "version": "2.1.43",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Studio-42/elFinder.git",
-                "reference": "8a4000573d1bba41001b996b891d43de3768d610"
+                "reference": "878daf75321c5c81d1ae308298241d94b383ea62"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Studio-42/elFinder/zipball/8a4000573d1bba41001b996b891d43de3768d610",
-                "reference": "8a4000573d1bba41001b996b891d43de3768d610",
+                "url": "https://api.github.com/repos/Studio-42/elFinder/zipball/878daf75321c5c81d1ae308298241d94b383ea62",
+                "reference": "878daf75321c5c81d1ae308298241d94b383ea62",
                 "shasum": ""
             },
             "require": {
@@ -1044,7 +1044,7 @@
             ],
             "description": "File manager for web",
             "homepage": "http://elfinder.org",
-            "time": "2018-08-19T07:28:57+00:00"
+            "time": "2018-11-24T01:37:42+00:00"
         },
         {
             "name": "summernote/summernote",
@@ -1140,16 +1140,16 @@
         },
         {
             "name": "symfony/process",
-            "version": "v3.4.18",
+            "version": "v3.4.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "35c2914a9f50519bd207164c353ae4d59182c2cb"
+                "reference": "abb46b909dd6ba0b50e10d4c10ffe6ee96dd70f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/35c2914a9f50519bd207164c353ae4d59182c2cb",
-                "reference": "35c2914a9f50519bd207164c353ae4d59182c2cb",
+                "url": "https://api.github.com/repos/symfony/process/zipball/abb46b909dd6ba0b50e10d4c10ffe6ee96dd70f2",
+                "reference": "abb46b909dd6ba0b50e10d4c10ffe6ee96dd70f2",
                 "shasum": ""
             },
             "require": {
@@ -1185,7 +1185,7 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
-            "time": "2018-10-14T17:33:21+00:00"
+            "time": "2018-11-20T16:10:26+00:00"
         },
         {
             "name": "true/punycode",
@@ -1323,16 +1323,16 @@
         },
         {
             "name": "uthando-cms/uthando-article",
-            "version": "2.6.0",
+            "version": "2.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-article.git",
-                "reference": "01b00c471f3f4dd339b52d1e25adee9c4d2c6741"
+                "reference": "5fac9967761ccb12fd8e12e0063758d0b54de108"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-article/zipball/01b00c471f3f4dd339b52d1e25adee9c4d2c6741",
-                "reference": "01b00c471f3f4dd339b52d1e25adee9c4d2c6741",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-article/zipball/5fac9967761ccb12fd8e12e0063758d0b54de108",
+                "reference": "5fac9967761ccb12fd8e12e0063758d0b54de108",
                 "shasum": ""
             },
             "require": {
@@ -1375,20 +1375,20 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2018-11-19T21:47:55+00:00"
+            "time": "2018-12-04T09:04:29+00:00"
         },
         {
             "name": "uthando-cms/uthando-common",
-            "version": "2.17.1",
+            "version": "2.17.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-common.git",
-                "reference": "12db9b0782f0bb644b2e15fc1c87eec889f06d71"
+                "reference": "82810d145e1eaf220b0ec5b4ad3e27b5a9ae902b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-common/zipball/12db9b0782f0bb644b2e15fc1c87eec889f06d71",
-                "reference": "12db9b0782f0bb644b2e15fc1c87eec889f06d71",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-common/zipball/82810d145e1eaf220b0ec5b4ad3e27b5a9ae902b",
+                "reference": "82810d145e1eaf220b0ec5b4ad3e27b5a9ae902b",
                 "shasum": ""
             },
             "require": {
@@ -1440,7 +1440,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2018-11-20T19:54:41+00:00"
+            "time": "2018-12-05T15:52:30+00:00"
         },
         {
             "name": "uthando-cms/uthando-contact",
@@ -1622,16 +1622,16 @@
         },
         {
             "name": "uthando-cms/uthando-file-manager",
-            "version": "2.6.2",
+            "version": "2.6.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-file-manager.git",
-                "reference": "cb8c3225f920d9db4761df198a0195333e406237"
+                "reference": "e0b562e9b79f93ffef33a1e4d5a8f400895e7588"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-file-manager/zipball/cb8c3225f920d9db4761df198a0195333e406237",
-                "reference": "cb8c3225f920d9db4761df198a0195333e406237",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-file-manager/zipball/e0b562e9b79f93ffef33a1e4d5a8f400895e7588",
+                "reference": "e0b562e9b79f93ffef33a1e4d5a8f400895e7588",
                 "shasum": ""
             },
             "require": {
@@ -1672,7 +1672,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2018-11-21T09:51:10+00:00"
+            "time": "2018-11-29T15:04:36+00:00"
         },
         {
             "name": "uthando-cms/uthando-mail",
@@ -1783,16 +1783,16 @@
         },
         {
             "name": "uthando-cms/uthando-news",
-            "version": "2.12.0",
+            "version": "2.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-news.git",
-                "reference": "6d4dc198647b0cb6ba6146f88c1d0c067b24cde5"
+                "reference": "86a83da53764d01f72ec2c032ac374a8a2302cd3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-news/zipball/6d4dc198647b0cb6ba6146f88c1d0c067b24cde5",
-                "reference": "6d4dc198647b0cb6ba6146f88c1d0c067b24cde5",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-news/zipball/86a83da53764d01f72ec2c032ac374a8a2302cd3",
+                "reference": "86a83da53764d01f72ec2c032ac374a8a2302cd3",
                 "shasum": ""
             },
             "require": {
@@ -1832,7 +1832,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2018-11-19T21:56:29+00:00"
+            "time": "2018-11-29T12:24:57+00:00"
         },
         {
             "name": "uthando-cms/uthando-newsletter",
@@ -1996,16 +1996,16 @@
         },
         {
             "name": "uthando-cms/uthando-theme-manager",
-            "version": "2.10.0",
+            "version": "2.10.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-theme-manager.git",
-                "reference": "e95f15d7ec5d597d4eb3c39a9d2082db7e28937c"
+                "reference": "c9d5665234d9c265406962e71e6692001257a76b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-theme-manager/zipball/e95f15d7ec5d597d4eb3c39a9d2082db7e28937c",
-                "reference": "e95f15d7ec5d597d4eb3c39a9d2082db7e28937c",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-theme-manager/zipball/c9d5665234d9c265406962e71e6692001257a76b",
+                "reference": "c9d5665234d9c265406962e71e6692001257a76b",
                 "shasum": ""
             },
             "require": {
@@ -2043,7 +2043,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2018-11-19T21:55:30+00:00"
+            "time": "2018-11-29T14:10:50+00:00"
         },
         {
             "name": "uthando-cms/uthando-twitter",
@@ -2099,16 +2099,16 @@
         },
         {
             "name": "uthando-cms/uthando-user",
-            "version": "2.4.0",
+            "version": "2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uthando-cms/uthando-user.git",
-                "reference": "2e1b5781214e9a8e0f27eb2cc7f4fc8a9bf195d6"
+                "reference": "bdbe7ee2efa3a01ee445dcf5bfdc328ba8cd7c15"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-user/zipball/2e1b5781214e9a8e0f27eb2cc7f4fc8a9bf195d6",
-                "reference": "2e1b5781214e9a8e0f27eb2cc7f4fc8a9bf195d6",
+                "url": "https://api.github.com/repos/uthando-cms/uthando-user/zipball/bdbe7ee2efa3a01ee445dcf5bfdc328ba8cd7c15",
+                "reference": "bdbe7ee2efa3a01ee445dcf5bfdc328ba8cd7c15",
                 "shasum": ""
             },
             "require": {
@@ -2150,7 +2150,7 @@
                 "uthando",
                 "zf2"
             ],
-            "time": "2018-11-19T20:28:50+00:00"
+            "time": "2018-12-05T12:41:29+00:00"
         },
         {
             "name": "zendframework/zend-authentication",
@@ -3475,16 +3475,16 @@
         },
         {
             "name": "zendframework/zend-math",
-            "version": "2.7.0",
+            "version": "2.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-math.git",
-                "reference": "f4358090d5d23973121f1ed0b376184b66d9edec"
+                "reference": "1abce074004dacac1a32cd54de94ad47ef960d38"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-math/zipball/f4358090d5d23973121f1ed0b376184b66d9edec",
-                "reference": "f4358090d5d23973121f1ed0b376184b66d9edec",
+                "url": "https://api.github.com/repos/zendframework/zend-math/zipball/1abce074004dacac1a32cd54de94ad47ef960d38",
+                "reference": "1abce074004dacac1a32cd54de94ad47ef960d38",
                 "shasum": ""
             },
             "require": {
@@ -3521,7 +3521,7 @@
                 "math",
                 "zf2"
             ],
-            "time": "2016-04-07T16:29:53+00:00"
+            "time": "2018-12-04T15:34:17+00:00"
         },
         {
             "name": "zendframework/zend-mime",
@@ -6349,16 +6349,16 @@
         },
         {
             "name": "symfony/config",
-            "version": "v4.1.7",
+            "version": "v4.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/config.git",
-                "reference": "991fec8bbe77367fc8b48ecbaa8a4bd6e905a238"
+                "reference": "10ba96d42cc9a482bce05c8179f06e24e665c920"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/config/zipball/991fec8bbe77367fc8b48ecbaa8a4bd6e905a238",
-                "reference": "991fec8bbe77367fc8b48ecbaa8a4bd6e905a238",
+                "url": "https://api.github.com/repos/symfony/config/zipball/10ba96d42cc9a482bce05c8179f06e24e665c920",
+                "reference": "10ba96d42cc9a482bce05c8179f06e24e665c920",
                 "shasum": ""
             },
             "require": {
@@ -6381,7 +6381,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.1-dev"
+                    "dev-master": "4.2-dev"
                 }
             },
             "autoload": {
@@ -6408,24 +6408,25 @@
             ],
             "description": "Symfony Config Component",
             "homepage": "https://symfony.com",
-            "time": "2018-10-31T09:09:42+00:00"
+            "time": "2018-11-26T10:55:26+00:00"
         },
         {
             "name": "symfony/console",
-            "version": "v4.1.7",
+            "version": "v4.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "432122af37d8cd52fba1b294b11976e0d20df595"
+                "reference": "4dff24e5d01e713818805c1862d2e3f901ee7dd0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/432122af37d8cd52fba1b294b11976e0d20df595",
-                "reference": "432122af37d8cd52fba1b294b11976e0d20df595",
+                "url": "https://api.github.com/repos/symfony/console/zipball/4dff24e5d01e713818805c1862d2e3f901ee7dd0",
+                "reference": "4dff24e5d01e713818805c1862d2e3f901ee7dd0",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.1.3",
+                "symfony/contracts": "^1.0",
                 "symfony/polyfill-mbstring": "~1.0"
             },
             "conflict": {
@@ -6449,7 +6450,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.1-dev"
+                    "dev-master": "4.2-dev"
                 }
             },
             "autoload": {
@@ -6476,20 +6477,88 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2018-10-31T09:30:44+00:00"
+            "time": "2018-11-27T07:40:44+00:00"
         },
         {
-            "name": "symfony/event-dispatcher",
-            "version": "v2.8.47",
+            "name": "symfony/contracts",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "76494bc38ff38d90d01913d23b5271acd4d78dd3"
+                "url": "https://github.com/symfony/contracts.git",
+                "reference": "3edf0ab943d1985a356721952cba36ff31bd6e5f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/76494bc38ff38d90d01913d23b5271acd4d78dd3",
-                "reference": "76494bc38ff38d90d01913d23b5271acd4d78dd3",
+                "url": "https://api.github.com/repos/symfony/contracts/zipball/3edf0ab943d1985a356721952cba36ff31bd6e5f",
+                "reference": "3edf0ab943d1985a356721952cba36ff31bd6e5f",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1.3"
+            },
+            "require-dev": {
+                "psr/cache": "^1.0",
+                "psr/container": "^1.0"
+            },
+            "suggest": {
+                "psr/cache": "When using the Cache contracts",
+                "psr/container": "When using the Service contracts",
+                "symfony/cache-contracts-implementation": "",
+                "symfony/service-contracts-implementation": "",
+                "symfony/translation-contracts-implementation": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Contracts\\": ""
+                },
+                "exclude-from-classmap": [
+                    "**/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "A set of abstractions extracted out of the Symfony components",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "abstractions",
+                "contracts",
+                "decoupling",
+                "interfaces",
+                "interoperability",
+                "standards"
+            ],
+            "time": "2018-11-24T09:35:08+00:00"
+        },
+        {
+            "name": "symfony/event-dispatcher",
+            "version": "v2.8.48",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/event-dispatcher.git",
+                "reference": "a77e974a5fecb4398833b0709210e3d5e334ffb0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/a77e974a5fecb4398833b0709210e3d5e334ffb0",
+                "reference": "a77e974a5fecb4398833b0709210e3d5e334ffb0",
                 "shasum": ""
             },
             "require": {
@@ -6536,20 +6605,20 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2018-10-20T23:16:31+00:00"
+            "time": "2018-11-21T14:20:20+00:00"
         },
         {
             "name": "symfony/filesystem",
-            "version": "v4.1.7",
+            "version": "v4.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "fd7bd6535beb1f0a0a9e3ee960666d0598546981"
+                "reference": "2f4c8b999b3b7cadb2a69390b01af70886753710"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/fd7bd6535beb1f0a0a9e3ee960666d0598546981",
-                "reference": "fd7bd6535beb1f0a0a9e3ee960666d0598546981",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/2f4c8b999b3b7cadb2a69390b01af70886753710",
+                "reference": "2f4c8b999b3b7cadb2a69390b01af70886753710",
                 "shasum": ""
             },
             "require": {
@@ -6559,7 +6628,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.1-dev"
+                    "dev-master": "4.2-dev"
                 }
             },
             "autoload": {
@@ -6586,7 +6655,7 @@
             ],
             "description": "Symfony Filesystem Component",
             "homepage": "https://symfony.com",
-            "time": "2018-10-30T13:18:25+00:00"
+            "time": "2018-11-11T19:52:12+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -6648,25 +6717,26 @@
         },
         {
             "name": "symfony/stopwatch",
-            "version": "v4.1.7",
+            "version": "v4.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/stopwatch.git",
-                "reference": "5bfc064125b73ff81229e19381ce1c34d3416f4b"
+                "reference": "ec076716412274e51f8a7ea675d9515e5c311123"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/stopwatch/zipball/5bfc064125b73ff81229e19381ce1c34d3416f4b",
-                "reference": "5bfc064125b73ff81229e19381ce1c34d3416f4b",
+                "url": "https://api.github.com/repos/symfony/stopwatch/zipball/ec076716412274e51f8a7ea675d9515e5c311123",
+                "reference": "ec076716412274e51f8a7ea675d9515e5c311123",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.1.3"
+                "php": "^7.1.3",
+                "symfony/contracts": "^1.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.1-dev"
+                    "dev-master": "4.2-dev"
                 }
             },
             "autoload": {
@@ -6693,20 +6763,20 @@
             ],
             "description": "Symfony Stopwatch Component",
             "homepage": "https://symfony.com",
-            "time": "2018-10-02T12:40:59+00:00"
+            "time": "2018-11-11T19:52:12+00:00"
         },
         {
             "name": "symfony/yaml",
-            "version": "v4.1.7",
+            "version": "v4.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "367e689b2fdc19965be435337b50bc8adf2746c9"
+                "reference": "c41175c801e3edfda90f32e292619d10c27103d7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/367e689b2fdc19965be435337b50bc8adf2746c9",
-                "reference": "367e689b2fdc19965be435337b50bc8adf2746c9",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/c41175c801e3edfda90f32e292619d10c27103d7",
+                "reference": "c41175c801e3edfda90f32e292619d10c27103d7",
                 "shasum": ""
             },
             "require": {
@@ -6725,7 +6795,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.1-dev"
+                    "dev-master": "4.2-dev"
                 }
             },
             "autoload": {
@@ -6752,7 +6822,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2018-10-02T16:36:10+00:00"
+            "time": "2018-11-11T19:52:12+00:00"
         },
         {
             "name": "twbs/bootstrap",

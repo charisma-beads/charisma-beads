@@ -355,6 +355,26 @@ class CartService extends AbstractOrderService implements InitializableInterface
     }
 
     /**
+     * Calculate the totals
+     */
+    public function calculateTotals()
+    {
+        $sub = 0;
+        $this->getOrderModel()->setTaxTotal(0);
+
+        $orderModel = ($this->getOrderModel()) ?? [];
+
+        foreach($orderModel as $lineItem) {
+            $sub = $sub + $this->getLineCost($lineItem);
+        }
+
+        $orderModel->setSubTotal($sub);
+        $orderModel->setTotal($orderModel->getSubTotal() + $orderModel->getShipping());
+
+        $this->getEventManager()->trigger('cart.voucher.check', $this);
+    }
+
+    /**
      * @param Container $ns
      */
     public function setContainer(Container $ns)
@@ -368,7 +388,7 @@ class CartService extends AbstractOrderService implements InitializableInterface
     public function getContainer()
     {
         if (! $this->container instanceof Container) {
-            $this->setContainer(new Container('ShopCart'));
+            $this->setContainer(new Container(CartService::class));
         }
         
         return $this->container;

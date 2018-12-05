@@ -441,7 +441,7 @@ return [
                                                 'id' => '\d+',
                                             ],
                                             'defaults' => [
-                                                'controller' => \Shop\Controller\ProductSizeController::class,
+                                                'controller' => \Shop\Controller\ProductOptionController::class,
                                                 'action' => 'list',
                                                 'force-ssl' => 'ssl'
                                             ],

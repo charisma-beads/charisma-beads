@@ -27,7 +27,7 @@ use Zend\Form\Form;
  *
  * @package Shop\Form
  */
-class Order extends Form
+class OrderForm extends Form
 {
     public function init()
     {

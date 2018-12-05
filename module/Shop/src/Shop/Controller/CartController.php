@@ -82,7 +82,7 @@ class CartController extends AbstractActionController
             $viewModel->setTerminal(true);
         }
 
-        $session = $this->sessionContainer('ShopCart');
+        $session = $this->sessionContainer(CartService::class);
         $countryId = $this->params()->fromPost('countryId', $session->offsetGet('countryId'));
 
         if ($this->identity()) {

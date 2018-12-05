@@ -10,6 +10,7 @@
 
 namespace Shop\Service;
 
+use Shop\Form\OrderForm;
 use Shop\Hydrator\OrderHydrator;
 use Shop\InputFilter\OrderInputFilter;
 use Shop\Mapper\OrderMapper;
@@ -39,6 +40,7 @@ use Zend\View\Model\ViewModel;
  */
 class OrderService extends AbstractOrderService
 {
+    protected $form         = OrderForm::class;
     protected $hydrator     = OrderHydrator::class;
     protected $inputFilter  = OrderInputFilter::class;
     protected $mapper       = OrderMapper::class;
@@ -70,7 +72,7 @@ class OrderService extends AbstractOrderService
             'refCol'        => 'orderStatusId',
             'service'       => OrderStatusService::class,
         ],
-        'orderLines'    => [
+        OrderLineService::class    => [
             'refCol'        => 'orderId',
             'service'       => OrderLineService::class,
             'getMethod'     => 'getOrderLinesByOrderId',

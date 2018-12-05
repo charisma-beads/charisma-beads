@@ -16,6 +16,7 @@ use Shop\Model\OrderLineInterface;
 use Shop\Model\ProductModel as ProductModel;
 use Shop\Service\CartService;
 use Shop\Service\OrderService;
+use Shop\Service\ProductService;
 use Zend\EventManager\Event;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
@@ -185,7 +186,7 @@ class StockControlListener implements ListenerAggregateInterface
         $item = ($item) ?: $e->getParam('item');
         /* @var $product ProductModel */
         $product = $e->getTarget()
-            ->getService('ShopProduct')
+            ->getService(ProductService::class)
             ->getById(
                 $item->getMetadata()->getProductId()
             );
@@ -196,7 +197,7 @@ class StockControlListener implements ListenerAggregateInterface
                 $product->getQuantity() + $item->getQuantity()
             );
             $e->getTarget()
-                ->getService('ShopProduct')
+                ->getService(ProductService::class)
                 ->save($product);
         }
     }
@@ -219,7 +220,7 @@ class StockControlListener implements ListenerAggregateInterface
     {
         $product = $e->getParam('product');
         $e->getTarget()
-            ->getService('ShopProduct')
+            ->getService(ProductService::class)
             ->save($product);
     }
 

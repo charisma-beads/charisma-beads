@@ -134,25 +134,7 @@ abstract class AbstractOrderService extends AbstractRelationalMapperService
 
     }
 
-    /**
-     * Calculate the totals
-     */
-    public function calculateTotals()
-    {
-        $sub = 0;
-        $this->getOrderModel()->setTaxTotal(0);
-
-        $orderModel = ($this->getOrderModel()) ?? [];
-
-        foreach($orderModel as $lineItem) {
-            $sub = $sub + $this->getLineCost($lineItem);
-        }
-
-        $orderModel->setSubTotal($sub);
-        $orderModel->setTotal($orderModel->getSubTotal() + $orderModel->getShipping());
-
-        $this->getEventManager()->trigger('cart.voucher.check', $this);
-    }
+    abstract public function calculateTotals();
 
     /**
      * Set the shipping cost

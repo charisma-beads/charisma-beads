@@ -33,7 +33,7 @@ $this->headTitle($this->escapehtml($post->getTitle()));
 
         <!-- PRODUCT CATEGORIES -->
         <div class="row">
-            <?php /* @var $row \Shop\Model\Product\ProductCategoryModel */ ?>
+            <?php /* @var $row \Shop\Model\ProductCategoryModel */ ?>
             <?php $c=0;?>
             <?php foreach ($this->Category()->getTopCategories() as $row): ?>
                 <?php $c++;?>

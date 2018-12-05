@@ -160,7 +160,7 @@ class ProductOptionModel implements ModelInterface
      */
     public function getDiscountPercent($formatPercent=false)
     {
-        return (true === $formatPercent) ? $this->discountPercent / 100 : $this->discountPercent;
+        return (true === $formatPercent) ? 1 + ($this->discountPercent / 100) : $this->discountPercent;
     }
 
     /**

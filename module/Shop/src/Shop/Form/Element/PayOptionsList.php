@@ -66,6 +66,10 @@ class PayOptionsList extends Radio implements ServiceLocatorAwareInterface
             if ('credit' === $ex_key[1]) {
                 $ex_key[1] = 'debit / ' . $ex_key[1];
             }
+
+            if ('check' === $ex_key[1]) {
+                $ex_key[1] = 'cheque';
+            }
             
             if ('pay' === $ex_key[0]  && true == $value) {
                 $ex_key[0] = $ex_key[0] . ' by';

@@ -10,9 +10,9 @@
 
 namespace Shop\Service;
 
-use Shop\Form\Element\ProductCategoryImageList;
 use Shop\Form\ProductCategoryForm;
 use Shop\Hydrator\ProductCategoryHydrator;
+use Shop\InputFilter\ProductCategoryInputFilter;
 use Shop\Mapper\ProductCategoryMapper;
 use Shop\Model\ProductCategoryModel;
 use Shop\ShopException;
@@ -32,7 +32,7 @@ class ProductCategoryService extends AbstractMapperService
 {
     protected $form         = ProductCategoryForm::class;
     protected $hydrator     = ProductCategoryHydrator::class;
-    protected $inputFilter  = ProductCategoryImageList::class;
+    protected $inputFilter  = ProductCategoryInputFilter::class;
     protected $mapper       = ProductCategoryMapper::class;
     protected $model        = ProductCategoryModel::class;
 

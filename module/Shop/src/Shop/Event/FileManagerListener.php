@@ -10,6 +10,7 @@
 
 namespace Shop\Event;
 
+use Shop\Service\ProductImageService;
 use UthandoFileManager\Service\ImageUploader;
 use Zend\EventManager\Event;
 use Zend\EventManager\EventManagerInterface;
@@ -67,7 +68,7 @@ class FileManagerListener implements ListenerAggregateInterface
         $model = $e->getParam('model');
 
         /* @var $service \Shop\Service\ProductImageService */
-        $service = $e->getTarget()->getService('ShopProductImage');
+        $service = $e->getTarget()->getService(ProductImageService::class);
 
         $post = [
             'productId' => $data['productId'],

@@ -33,7 +33,7 @@ class ProductService extends AbstractRelationalMapperService
     protected $model        = ProductModel::class;
 
     protected $tags = [
-        'image', 'option',
+        'image', 'option', 'product',
     ];
 
     protected $referenceMap = [

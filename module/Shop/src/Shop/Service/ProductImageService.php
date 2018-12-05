@@ -12,6 +12,7 @@ namespace Shop\Service;
 
 use Shop\Form\ProductImageForm;
 use Shop\Hydrator\ProductImageHydrator;
+use Shop\InputFilter\ProductImageInputFilter;
 use Shop\Mapper\ProductImageMapper;
 use Shop\Model\ProductImageModel;
 use UthandoCommon\Service\AbstractRelationalMapperService;
@@ -26,6 +27,7 @@ use Zend\EventManager\Event;
 class ProductImageService extends AbstractRelationalMapperService
 {
     protected $form         = ProductImageForm::class;
+    protected $inputFilter  = ProductImageInputFilter::class;
     protected $hydrator     = ProductImageHydrator::class;
     protected $mapper       = ProductImageMapper::class;
     protected $model        = ProductImageModel::class;
