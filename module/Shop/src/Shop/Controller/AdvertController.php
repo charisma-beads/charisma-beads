@@ -36,4 +36,26 @@ class AdvertController extends AbstractCrudController
 
         return $viewModel;
     }
+
+    public function setEnabledAction()
+    {
+        $id = (int)$this->params('id', 0);
+
+        if (!$id) {
+            return $this->redirect()->toRoute($this->getRoute(), array(
+                'action' => 'list'
+            ));
+        }
+
+        try {
+            $advert = $this->getService()->getById($id);
+            $result = $this->getService()->toggleEnabled($advert);
+        } catch (\Exception $e) {
+            $this->setExceptionMessages($e);
+        }
+
+        return $this->redirect()->toRoute($this->getRoute(), array(
+            'action' => 'list'
+        ));
+    }
 }

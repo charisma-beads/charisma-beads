@@ -48,4 +48,15 @@ class AdvertService extends AbstractMapperService
         
         return Json::encode($statsArray);
     }
+
+    public function toggleEnabled(AdvertModel $advert)
+    {
+        $this->removeCacheItem($advert->getAdvertId());
+
+        $enabled = (true === $advert->isEnabled()) ? false : true;
+
+        $advert->setEnabled($enabled);
+
+        return parent::save($advert);
+    }
 }
