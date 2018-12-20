@@ -54,7 +54,7 @@
 
             <div class="qty">
                 <?php if (!$checkout): ?>
-                <input type="number" value="<?=$item->getQuantity();?>" name="quantity[<?=$item->getCartItemId();?>]" maxlength="3" />
+                <input type="number" value="<?=$item->getQuantity();?>" name="quantity[<?=$item->getCartItemId();?>]" maxlength="3" min="0" step="1" />
                 <?php else:?>
                     <?=$item->getQuantity();?>&nbsp;
                 <?php endif;?>

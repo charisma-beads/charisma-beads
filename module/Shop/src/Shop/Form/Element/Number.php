@@ -22,6 +22,7 @@ class Number extends ZendFormNumber
     public function getValue()
     {
         $value = parent::getValue();
-        return number_format($value, 2);
+        $decimals = $this->getOption('decimals');
+        return number_format($value, $decimals);
     }
 }

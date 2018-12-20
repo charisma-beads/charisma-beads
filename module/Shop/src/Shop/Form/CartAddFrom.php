@@ -31,11 +31,12 @@ class CartAddFrom extends Form
 			'options' => [
 				'label' => 'Quantity:',
 				'required' => true,
+                'decimals' => 0,
 			],
 			'attributes' => [
 				'min'  => '0',
 				'step' => '1',
-				'value' => 1,		
+				'value' => '1',
 			],
 		]);
 

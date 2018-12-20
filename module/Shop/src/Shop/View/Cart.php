@@ -200,8 +200,10 @@ class Cart extends AbstractViewHelper
      */
     public function addForm($product)
     {
-        $form = new CartAddFrom();
-        $form->init();
+        $fm = $this->getServiceLocator()
+            ->getServiceLocator()
+            ->get('FormElementManager');
+        $form = $fm->get(CartAddFrom::class);
 
         $form->setData(array(
             'productId' => $product->getProductId(),
