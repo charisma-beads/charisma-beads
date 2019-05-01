@@ -22,7 +22,7 @@
               &nbsp;(<?=$item->getMetadata()->getPostUnit();?> grams)
               <?php endif; ?>
 		    </td>
-    		<td class="text-right"><?=$this->cart()->formatAmount($item->getPrice());?></td>
+    		<td class="text-right"><?=$this->cart()->getLineCost($item);?></td>
     		<td>
     		    <?php if (!$checkout): ?>
     		    <div class="col-sm-5">
@@ -32,7 +32,7 @@
     			<?=$item->getQuantity();?>
     			<?php endif; ?>
     		</td>
-    		<td class="text-right"><?=$this->cart()->getLineCost($item);?></td>
+    		<td class="text-right"><?=$this->cart()->getLineTotal($item);?></td>
     		<?php if (!$checkout): ?>
     		<td>
                 <a href="<?=$this->url('shop/cart', array(

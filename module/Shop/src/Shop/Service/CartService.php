@@ -470,6 +470,7 @@ class CartService extends AbstractOrderService implements InitializableInterface
      * Clear old, forgotten and abandoned shopping carts.
      *
      * @return int
+     * @throws \Exception
      */
     public function clearExpired()
     {

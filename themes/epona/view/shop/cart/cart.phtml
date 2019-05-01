@@ -46,7 +46,7 @@
             <?php else:?>
                 <span class="remove_item">&nbsp;</span>
             <?php endif;?>
-            <div class="total_price"><span><?=$this->cart()->getLineCost($item);?></span></div>
+            <div class="total_price"><span><?=$this->cart()->getLineTotal($item);?></span></div>
 
             <?php if ($this->shopOption('vatState')): ?>
                 <div class="tax"><span><?=$this->cart()->getLineTax($item);?></span></div>
@@ -58,7 +58,7 @@
                 <?php else:?>
                     <?=$item->getQuantity();?>&nbsp;
                 <?php endif;?>
-                &times; <?=$this->cart()->formatAmount($item->getPrice());?>
+                &times; <?=$this->cart()->getLineCost($item);?>
             </div>
 
             <div class="clearfix"></div>

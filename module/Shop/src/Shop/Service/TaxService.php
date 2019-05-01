@@ -43,7 +43,12 @@ class TaxService
      */
     public function addTax($price, $taxRate=0)
     {
+
+        if ($taxRate > 1) $taxRate = $taxRate / 100;
+
+
         if ($this->taxState && $taxRate != 0) {
+
         	$taxRate = $taxRate + 1;
 
             if (!$this->taxInc) {

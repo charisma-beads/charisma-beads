@@ -641,6 +641,7 @@ class OrderService extends AbstractOrderService
      * @param null|string $end
      * @param string $monthFormat
      * @return string
+     * @throws \Exception
      */
     public function getMonthlyTotals($start = null, $end = null, $monthFormat = 'm')
     {

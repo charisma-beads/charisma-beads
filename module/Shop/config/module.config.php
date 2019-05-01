@@ -79,6 +79,9 @@ return [
             \Shop\Service\ShippingService::class            => Shop\Service\Factory\ShippingServiceFactory::class,
             \Shop\Service\TaxService::class                 => Shop\Service\Factory\TaxServiceFactory::class,
         ],
+        'shared' => [
+            \Shop\Service\TaxService::class => false // will not be shared
+        ],
     ],
     'uthando_services' => [
         'invokables' => [
