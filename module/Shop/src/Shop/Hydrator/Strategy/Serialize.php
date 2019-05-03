@@ -57,7 +57,6 @@ class Serialize implements StrategyInterface
         try {
             $value = $this->serializer->unserialize($value);
         } catch (JsonSerializerException $e) {
-            \ChromePhp::info($e->getMessage());
             $value = Serializer::unserialize($value);
         }
 
