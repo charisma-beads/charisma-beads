@@ -1,8 +1,8 @@
 
 RewriteEngine On
-RewriteCond %{HTTPS} !=on [OR]
-RewriteCond %{HTTP_HOST} !^www\.charismabeads\.co\.uk$ [NC]
-RewriteRule ^/?(.*) https://www.charismabeads.co.uk/$1 [R,L]
+#RewriteCond %{HTTPS} !=on [OR]
+#RewriteCond %{HTTP_HOST} !^www\.charismabeads\.co\.uk$ [NC]
+#RewriteRule ^/?(.*) https://www.charismabeads.co.uk/$1 [R,L]
 
 # The following rule tells Apache that if the requested filename
 # exists, simply serve it.
