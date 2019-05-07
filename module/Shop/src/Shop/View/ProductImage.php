@@ -12,14 +12,16 @@
 namespace Shop\View;
 
 use Shop\Model\ProductImageModel as ImageModel;
-use Zend\View\Helper\AbstractHelper;
+use UthandoCommon\View\AbstractViewHelper;
+use UthandoFileManager\Service\ImageUploader;
+
 
 /**
  * Class ProductImage
  *
  * @package Shop\View
  */
-class ProductImage extends AbstractHelper
+class ProductImage extends AbstractViewHelper
 {
     /**
      * @var ImageModel
@@ -96,9 +98,14 @@ class ProductImage extends AbstractHelper
                 $image = $this->imageDir . $strToLower;
             }
 
+
             if ($this->fileExists($this->image->getThumbnail())) {
                 $image = $this->imageDir . $this->image->getThumbnail();
             }
+        }
+
+        if ($image === $this->noImage && $this->isUploaded()) {
+            $image = $this->getFull($withBasePath);
         }
 
         if ($withBasePath) {
@@ -111,6 +118,7 @@ class ProductImage extends AbstractHelper
     public function fileExists($file)
     {
         $file = $this->publicDir.$this->imageDir.$file;
+
         $fileExists = (file_exists($file) && is_file($file)) ? true : false;
         return $fileExists;
 
