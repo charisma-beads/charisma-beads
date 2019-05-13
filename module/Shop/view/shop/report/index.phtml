@@ -16,7 +16,7 @@ $disabled = new Element\Checkbox('disabled', [
 ?>
 
 <form id="product-report">
-    <?=$this->formRow($this->formManager('ProductCategoryList')
+    <?=$this->formRow($this->formManager(\Shop\Form\Element\ProductCategoryList::class)
         ->setName('productCategoryId')
         ->setEmptyOption('All Categories')
     );?>
