@@ -17,7 +17,6 @@ use Zend\Filter\Digits;
 use Zend\Filter\StringToUpper;
 use Zend\Filter\StringTrim;
 use Zend\Filter\StripTags;
-use Zend\I18n\Filter\Alnum;
 use Zend\I18n\Validator\IsInt;
 use Zend\InputFilter\InputFilter;
 use Zend\Validator\GreaterThan;
