@@ -10,9 +10,9 @@
 
 namespace Shop\InputFilter;
 
+use Shop\I18n\Validator\PostCode;
 use UthandoCommon\Filter\Ucwords;
 use UthandoCommon\I18n\Filter\PhoneNumber;
-use UthandoCommon\I18n\Validator\PostCode;
 use Zend\Filter\Digits;
 use Zend\Filter\StringToUpper;
 use Zend\Filter\StringTrim;
@@ -125,9 +125,6 @@ class CustomerAddressInputFilter extends InputFilter
                 ['name' => StripTags::class],
                 ['name' => StringTrim::class],
                 ['name' => StringToUpper::class],
-                ['name' => Alnum::class, 'options' => [
-                    'allowWhiteSpace' => true,
-                ]],
     		],
     		'validators' => [
         		['name' => PostCode::class, 'options' => [
