@@ -187,7 +187,7 @@ class CartService extends AbstractOrderService implements InitializableInterface
 
         $qty = $argv['qty'];
 
-        if ($argv['message']) {
+        if (isset($argv['message'])) {
             $this->setMessages($argv['message']);
         }
 

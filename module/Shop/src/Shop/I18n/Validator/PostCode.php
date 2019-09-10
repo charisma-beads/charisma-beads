@@ -159,7 +159,7 @@ class PostCode extends AbstractValidator
         'PK' => '\d{5}',
         'PY' => '\d{4}',
         'PH' => '\d{4}',
-        'PL' => '\d{2}-\d{3}',
+        'PL' => '\d{2}(-| )?\d{3}',
         'PR' => '00[679]\d{2}([ \-]\d{4})?',
         'RO' => '\d{6}',
         'RU' => '\d{6}',
