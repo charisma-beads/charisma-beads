@@ -3,6 +3,11 @@
 !data/fonts/*
 /vendor/*
 /public_html/userfiles/*
+/public_html/css/*
+/public_html/epona/*
+/public_html/img/*
+/public_html/el-finder/*
+/public_html/js/*
 .DS_Store
 .idea
 .settings
@@ -12,3 +17,4 @@ deployment.properties
 deployment.xml
 *.local.php
 !do_not_remove
+.env

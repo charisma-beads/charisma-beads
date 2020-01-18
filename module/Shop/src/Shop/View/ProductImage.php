@@ -13,7 +13,6 @@ namespace Shop\View;
 
 use Shop\Model\ProductImageModel as ImageModel;
 use UthandoCommon\View\AbstractViewHelper;
-use UthandoFileManager\Service\ImageUploader;
 
 
 /**
@@ -119,16 +118,14 @@ class ProductImage extends AbstractViewHelper
     {
         $file = $this->publicDir.$this->imageDir.$file;
 
-        $fileExists = (file_exists($file) && is_file($file)) ? true : false;
-        return $fileExists;
+        return (file_exists($file) && is_file($file)) ? true : false;
 
     }
     
     public function isUploaded()
     {
         $image = ($this->image instanceof ImageModel) ? $this->getFull(false) : null;
-        $fileExists = is_file($this->publicDir.$image);
-        return $fileExists;
+        return is_file($this->publicDir.$image);
     }
 
     public function getBasePath($image = null)

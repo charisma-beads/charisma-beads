@@ -120,6 +120,7 @@ $newsletter = (false == $registerForm->has('subscribe')) ? $this->formManager(\U
                         <?=$this->formPassword($registerForm->get('passwd'));?>
                         <b class="tooltip tooltip-bottom-right">Only latin characters and numbers</b>
                         <span class="help-block">
+                            <span class="text text-info">Password must be at least 8 characters long.</span>
                             <?=$this->formElementErrors($registerForm->get('passwd'), [
                                 'class' => 'list-unstyled note note-error'
                             ]); ?>
