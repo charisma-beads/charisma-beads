@@ -1,0 +1,23 @@
+<?php $this->headTitle('News');?>
+<?php $newsHelper = $this->newsHelper();?>
+
+<?php if ($this->models->count() > 0):?>
+    <?php foreach($this->models as $newsItem):?>
+        <h3><?=$this->escapeHtml($newsItem->getTitle());?></h3>
+        <p><?=$this->escapeHtml($newsItem->getLead());?></p>
+        <a href="<?=$this->url('news', [
+            'news-item' => $this->escapeHtml($newsItem->getSlug()),
+        ]);?>" class="btn btn-primary">Read More</a><br>
+        <span><b>Author:</b> <?=$this->escapeHtml($newsItem->getUser()->getFullName());?></span>
+        <span><b>Date:</b> <?=$this->formatDate($newsItem->getDateCreated());?></span>
+        <hr>
+    <?php endforeach;?>
+<?php elseif ($this->view == 'news-list/search'):?>
+    <h1>No news found in search.</h1>
+<?php elseif ($this->view == 'news-list/tags'):?>
+    <h1>No news found under this tag.</h1>
+<?php else:?>
+    <h1>No news has been posted yet. Please stay tuned.</h1>
+<?php endif;?>
+
+

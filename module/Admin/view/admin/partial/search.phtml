@@ -1,0 +1,59 @@
+<?php
+use Zend\Form\Element;
+
+$params = ($this->params) ?: [];
+
+$excludeMenu = ($this->excludeMenu) ?: false;
+
+$select = new Element\Select('count');
+$select->setValueOptions(array(
+    '25' => '25',
+    '50' => '50',
+    '75' => '75',
+    '100' => '100'
+));
+$select->setValue((isset($params['count'])) ? $params['count'] : 25);
+$select->setAttribute('class', 'form-control');
+?>
+
+<form id="search-<?= $this->name; ?>" class="form-inline" method="post">
+    <?php foreach ($this->searchInputs as $label => $input): ?>
+        <div class="form-group">
+            <?php if ($input instanceof Element): ?>
+                <?php $value = (isset($params[$input->getName()])) ? $params[$input->getName()] : null; ?>
+                <?= $this->formElement($input->setAttributes([
+                    //'class' => 'form-control',
+                    'value' => $value
+                ])) ?>
+            <?php else: ?>
+                <?php $value = (isset($params[$input])) ? $params[$input] : null; ?>
+                <input type="text" class="form-control" name="<?= $input; ?>" placeholder="<?= ucwords($label) ?>"
+                       value="<?= $value; ?>">
+            <?php endif; ?>
+        </div>
+
+    <?php endforeach; ?>
+    <div class="form-group">
+        <?= $this->formSelect($select); ?>
+    </div>
+    <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> <?=$this->translate('Filter');?></button>
+    <button type="reset" class="btn btn-default"><?=$this->translate('Reset');?></button>
+    <?php if ($this->secondRowInputs): ?>
+        <br>
+        <?php foreach ($this->secondRowInputs as $element): ?>
+            <?php $value = (isset($params[$element->getName()])) ? $params[$element->getName()] : null; ?>
+            <?= $this->formElement($element->setAttributes([
+                //'class' => 'form-control',
+                'value' => $value
+            ])) ?>
+        <?php endforeach; ?>
+    <?php endif; ?>
+</form>
+
+<div class="clearfix">&nbsp;</div>
+
+<?php $this->inlineScript()->captureStart(); ?>
+$('select[name=count]').on('change', function(){
+    $('#table-<?= $this->name; ?>').dataGrid('doSearch');
+});
+<?php $this->inlineScript()->captureEnd(); ?>

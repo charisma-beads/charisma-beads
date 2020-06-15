@@ -1,0 +1,30 @@
+
+<script>
+    $('button[name=<?=$this->elementName;?>]').on('click', function() {
+        var uploadDialog = bootbox.dialog({
+            message: '<i class="fa fa-spinner fa-spin"></i> Loading',
+            title: "Upload Image",
+            show: false,
+            buttons: {
+                default: {
+                    label: "Close",
+                    className: "btn-default",
+                    callback: function (e) {
+                        if (adminClass.upload && adminClass.upload.status) {
+                            $('#<?=$this->elementId;?>').val(adminClass.upload.image.name);
+                        }
+                    }
+                }
+            }
+        });
+
+        uploadDialog.on('show.bs.modal', function () {
+            $(this).find('.modal-body').load('<?=$this->url('admin/uploader', [
+                'action'    => 'upload-form',
+            ]);?>');
+        });
+
+        uploadDialog.modal('show');
+    });
+</script>
+

@@ -1,0 +1,19 @@
+.dropdown-menu.bootstrap-tags-inline {
+    min-width: 138px !important;
+    padding: 5px;
+}
+
+.dropdown-menu.bootstrap-tags-code {
+    min-width: 143px !important;
+    padding: 5px;
+}
+
+.dropdown-menu.bootstrap-tags > div:first-child {
+    /*margin-right: 5px;*/
+}
+
+.note-text-tags-btn {
+    font-family: "Times New Roman", serif;
+    min-width: 30px;
+    max-height: 30px;
+}

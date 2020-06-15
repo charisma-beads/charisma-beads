@@ -1,0 +1,29 @@
+<?php $this->headtitle('Theme Manager Settings');?>
+<?php $this->layout()->pageTitle = $this->translate('Theme Manager Settings');?>
+
+<?php $this->placeholder('header-buttons')->captureStart();?>
+<a href="<?=$this->url('admin/theme-manager/settings/reset-cache');?>" data-toggle="tooltip" title="<?=$this->translate('Reset Asset Cache');?>" class="btn btn-danger">
+    <i class="fa fa-trash"></i>
+</a>
+<button type="submit" form="form-theme-manager" data-toggle="tooltip" title="<?=$this->translate('Save');?>" class="btn btn-primary">
+    <i class="fa fa-save"></i>
+</button>
+<a href="<?=$this->url('admin/theme-manager');?>" type="submit" form="form-user" data-toggle="tooltip" title="<?=$this->translate('Cancel');?>" class="btn btn-default">
+    <i class="fa fa-reply"></i>
+</a>
+<?php $this->placeholder('header-buttons')->captureEnd();?>
+
+<?php $this->form->setAttributes([
+    'method' => 'post',
+    'id' => 'form-post',
+    'action' => $this->url('admin/theme-manager/settings'),
+]); ?>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-cog"></i> <?=$this->translate('Theme Manager Settings');?></h3>
+    </div>
+    <div class="panel-body">
+        <?=$this->form($this->form);?>
+    </div>
+</div>

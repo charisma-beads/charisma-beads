@@ -1,0 +1,41 @@
+<?php if (count($this->models) > 0): ?>
+
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered table-condensed">
+            <thead>
+            <tr>
+                <th data-field="widgetGroupId">Widget Group Id</th>
+                <th data-field="name">Name</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php /* @var $row \ThemeManager\Model\WidgetGroupModel */ ?>
+            <?php foreach($this->models as $row): ?>
+                <tr>
+                    <td><?=$this->escapeHtml($row->getWidgetGroupId()); ?></td>
+                    <td><?=$this->escapeHtml($row->getName()); ?></td>
+                    <td>
+                        <?=$this->partial('admin/partial/edit-actions', [
+                            'pk'		=> 'widgetGroupId',
+                            'id'		=> $row->getWidgetGroupId(),
+                            'tableName'	=> 'post',
+                            'route'		=> 'admin/theme-manager/widget-group/edit',
+                        ]);?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+
+    <?=$this->paginationControl(
+        $this->models,
+        'Elastic',
+        'application/partial/paginate',
+        ['route' => 'admin/theme-manager/widget-group/page']
+    ); ?>
+
+<?php else: ?>
+    <h4>There are no Widget Groups yet.</h4>
+<?php endif; ?>

@@ -1,0 +1,15 @@
+
+<div class="form-group<?php if ($this->element->getMessages()) echo ' has-error'; ?>">
+    <label for="<?=$this->element->getName();?>" class="<?=$this->labelAttributes;?> control-label"><?=$this->label;?></label>
+    <div class="<?=$this->options['elementWidth'];?>">
+        <?=$this->formElement($this->element->setAttribute('class', 'form-control')); ?>
+        <span class="help-block">
+            <?php if ($this->element->getOption('inline-help')): ?>
+            <?=$this->element->getOption('inline-help');?>
+            <?php endif;?>
+            <?=$this->formElementErrors($this->element, [
+                'class' => 'list-unstyled'
+            ]); ?>
+        </span>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+<?php if (count($this->models) > 0): ?>
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered table-condensed">
+            <thead>
+            <tr>
+                <th data-field="newsId">News Id</th>
+                <th data-field="title">Title</th>
+                <th data-field="userId">Created By</th>
+                <th data-field="dateCreated">Date Created</th>
+                <th data-field="dateModified">Date Modified</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php /* @var $row \News\Model\NewsModel */ ?>
+            <?php foreach($this->models as $row): ?>
+                <tr>
+                    <td><?=$this->escapeHtml($row->getNewsId()); ?></td>
+                    <td><?=$this->escapeHtml($row->getTitle()); ?></td>
+                    <td><?=$this->escapeHtml($row->getUser()->getFullName());?></td>
+                    <td><?=$this->escapeHtml($this->formatDate($row->getDateCreated())); ?></td>
+                    <td><?=$this->escapeHtml($this->formatDate($row->getDateModified())); ?></td>
+                    <td>
+                        <?=$this->partial('admin/partial/edit-actions', [
+                            'pk'		=> 'newsId',
+                            'id'		=> $row->getNewsId(),
+                            'tableName'	=> 'news',
+                            'route'		=> 'admin/news/edit',
+                        ]);?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+
+    <?=$this->paginationControl(
+        $this->models,
+        'Elastic',
+        'application/partial/paginate',
+        ['route' => 'admin/news/page']
+    ); ?>
+
+<?php else: ?>
+    <h4>There are no News Items yet.</h4>
+<?php endif; ?>

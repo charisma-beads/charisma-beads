@@ -1,0 +1,66 @@
+
+<?php
+    $iterator   = new RecursiveIteratorIterator($this->container, RecursiveIteratorIterator::SELF_FIRST);
+    $prevDepth  = -1;
+    $count      = -1;
+    $html       = '<ul class="menu">';
+
+    /* @var $page Zend\Navigation\Page\Mvc */
+    foreach ($iterator as $page) {
+        $depth          = $iterator->getDepth();
+        $hasChildren    = $page->hasPages();
+        $count++;
+
+        // when using partials we need to manually check for ACL conditions
+        if( ! $page->isVisible() || !$this->uthandoNavigation()->accept($page)) continue;
+
+        if ($prevDepth > $depth) {
+            for ($i = $prevDepth; $i > $depth; $i--) {
+                $html .= '</li></ul>';
+            }
+
+            $html .= '</li>';
+        }
+
+        $children = $page->getChildren();
+
+        if ($children) {
+            $childrenVisible = $children->getVisible(true);
+        } else {
+            $childrenVisible = null;
+        }
+
+        if($hasChildren && $childrenVisible) {
+            $html .= '<li id="' . strtolower($page->getLabel()) . '">';
+            $html .= '<a class="parent">';
+
+            if ($depth == 0) {
+                $html .= '<i class="fa ' . (isset($page->getParams()['icon']) ? $page->getParams()['icon'] : 'fa-bars') . ' fa-fw"></i> <span>'.$page->getLabel().'</span>';
+            } else {
+                $html .= $page->getLabel();
+            }
+
+            $html .= '</a>';
+            $html .= '<ul>';
+        } elseif ($depth == 0) {
+            $html .= '<li>';
+            $html .= '<a href="'.$page->getHref().'">';
+            $html .= '<i class="fa ' . (isset($page->getParams()['icon']) ? $page->getParams()['icon'] : 'fa-bars') . ' fa-fw"></i> <span>'.$page->getLabel().'</span>';
+            $html .= '</a>';
+        } else {
+            $html .= '<li>';
+            $html .= '<a href="'.$page->getHref().'">';
+            $html .= $page->getLabel();
+            $html .= '</a>';
+        }
+
+        $prevDepth = $depth;
+    }
+
+    for ($i = $prevDepth + 1; $i > 0; $i--) {
+        $html .= '</li></ul>';
+    }
+
+?>
+
+<?=$html;?>

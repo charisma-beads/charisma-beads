@@ -1,0 +1,20 @@
+
+<?php $this->headTitle('File Manager') ?>
+<?php $this->layout()->pageTitle = $this->translate('File Manager');?>
+
+<?php $this->placeholder('header-buttons')->captureStart();?>
+<a href="<?=$this->url('admin/file-manager/settings');?>" data-toggle="tooltip" title="<?=$this->translate('Settings');?>" class="btn btn-primary">
+    <i class="fa fa-cog"></i>
+</a>
+<?php $this->placeholder('header-buttons')->captureEnd();?>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-folder"></i> <?=$this->translate('File Manager');?></h3>
+    </div>
+    <div id="elfinder" class="panel-body">
+
+    </div>
+</div>
+
+<?php $this->fileManager()->standalone();?>

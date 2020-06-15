@@ -1,0 +1,76 @@
+
+<?php $fileElement = $form->get('fileupload'); ?>
+<form id="upload-form" action="<?=$this->url('admin/uploader', [
+    'action' => 'upload-form',
+]);?>" method="post" enctype="multipart/form-data">
+    <div class="input-group">
+        <span class="input-group-btn">
+            <span class="btn btn-primary btn-file">
+                <?=$fileElement->getLabel(); ?> <?=$this->formFile($fileElement); ?>
+            </span>
+        </span>
+        <input type="text" class="form-control" readonly>
+    </div>
+    <span class="help-block text-info">
+        <?=$fileElement->getOption('help-block');?>
+    </span>
+    <span class="help-block">
+        <ul class="list-unstyled"></ul>
+    </span>
+</form>
+
+<!-- Twitter Bootstrap progress bar styles:
+     http://twitter.github.com/bootstrap/components.html#progress -->
+<div id="progress" class="progress help-block">
+    <div class="progress-bar progress-bar-success"></div>
+</div>
+
+<script src="<?=$this->basePath('js/legacy-upload.js');?>"></script>
+<script>
+    $('.btn-file :file').on('change', function (){
+        var input = $(this).parents('.input-group').find(':text')
+        input.val($(this).val());
+    });
+
+    $(function () {
+
+        $('#upload-form').fileupload({
+            dataType: 'json',
+            add: function (e, data) {
+                $('#progress > div').html('Uploading...');
+                data.submit();
+            },
+            done: function (e, data) {
+                if (data.result.status) {
+                    $('#progress > div').html('Upload Finished.');
+                    adminClass.upload = data.result;
+                } else {
+                    $('#progress .progress-bar')
+                        .removeClass('progress-bar-info active')
+                        .addClass('progress-bar-danger');
+                    $('#progress > div').html('Error!');
+
+                    // Clear the file input, otherwise the same file gets re-uploaded
+                    // http://stackoverflow.com/a/1043969
+                    var fileInput = $('#fileupload');
+                    fileInput.replaceWith( fileInput.val('').clone( true ) );
+                    $('.btn-file :file').trigger( "change" );
+
+                    // Do something with these errors
+                    var errors = data.result.formErrors['fileupload'];
+                    $.each(errors, function(key, value){
+                        var el = $('#fileupload .list-unstyled');
+                        el.append('<li class="text-danger">' + value + '</li>');
+                    });
+                }
+            },
+            progressall: function (e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                $('#progress .progress-bar').css(
+                    'width',
+                    progress + '%'
+                );
+            }
+        });
+    });
+</script>

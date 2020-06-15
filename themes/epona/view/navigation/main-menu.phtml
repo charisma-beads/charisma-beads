@@ -1,0 +1,105 @@
+
+<?php $iterator = new RecursiveIteratorIterator($this->container,
+    RecursiveIteratorIterator::SELF_FIRST); ?>
+<?php $prevDepth = 0; ?>
+
+<ul id="topMain" class="nav nav-pills nav-main colored">
+    <?php $count = 1 ?>
+    <?php foreach ($iterator as $page): ?>
+        <?php $depth = $iterator->getDepth(); ?>
+        <?php /* @var $page Zend\Navigation\Page\Mvc */ ?>
+        <?php // when using partials we need to manually check for ACL conditions ?>
+        <?php if( ! $page->isVisible() || !$this->uthandoNavigation()->accept($page)) continue; ?>
+        <?php $hasChildren = $page->hasChildren(); ?>
+
+        <?php if($page->getLabel() == 'Shop'): ?>
+            <?php $cats = $this->category()->getChildCategories();?>
+            <?php $c=0;?>
+            <li class="dropdown<?php if ($page->isActive(true)) echo ' active'; ?>">
+                <a class="dropdown-toggle:disabled" href="<?=$page->getHref() ?>">
+                    <?=$page->getLabel() ?> <span><?=$page->get('labelText');?></span>
+                </a>
+                <?php $cats = $this->category()->getChildCategories();?>
+                <?php $count = -1; ?>
+                <?php $maxDepth = count($cats) - 1; ?>
+                <?php $cats->getHydrator()->addDepth(true); ?>
+                <?php $arrayCopy = $cats->toArray(); ?>
+
+                <ul class="dropdown-menu">
+
+                    <?php /* @var $cat \Shop\Model\Product\ProductCategoryModel */ ?>
+                    <?php foreach ($cats as $cat): ?>
+                        <?php $count++; ?>
+
+                        <?php if ($cat->hasChildren()): ?>
+                            <li><!-- NOTE: "active" to be open on page load -->
+                                <a class="dropdown-toggle" href="<?=$this->url('shop/catalog', [
+                                    'categoryIdent' => $cat->getIdent()
+                                ]); ?>">
+                                    <?=$this->escapehtml($cat->getCategory()); ?>&nbsp;
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <?php elseif ($cat->getDepth() > 0): ?>
+                                    <li>
+                                        <a href="<?=$this->url('shop/catalog', [
+                                            'categoryIdent' => $cat->getIdent()
+                                        ]); ?>"><i class="fa fa-angle-right"></i>&nbsp;<?=$this->escapehtml($cat->getCategory()); ?></a>
+                                        <?php else: ?>
+                                    <li>
+                                        <a href="<?=$this->url('shop/catalog', [
+                                            'categoryIdent' => $cat->getIdent()
+                                        ]); ?>"><?=$this->escapehtml($cat->getCategory()); ?></a>
+                                        <?php endif; ?>
+                                        <?php // closures ?>
+                                        <?php if ($cat->getDepth() > 0):?>
+                                        <?php if ($count == $maxDepth): ?>
+                                        <?=str_repeat('</li></ul>', $cat->getDepth()); ?></li>
+                                <?php elseif ($arrayCopy[$count + 1]['depth'] < $cat->getDepth()): ?>
+                                    <?=str_repeat('</li></ul>', ($cat->getDepth() - $arrayCopy[$count + 1]['depth'])); ?></li>
+                                <?php else: ?>
+                                    <?php if (!$cat->hasChildren()): ?>
+                                        </li>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+                                <?php else: ?>
+                                    <?php if (!$cat->hasChildren()): ?>
+                                        </li>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+
+                            <?php endforeach; ?>
+
+                        </ul>
+                        <!-- /SIDE NAV -->
+                    </li>
+
+        <?php elseif(!$hasChildren): ?>
+        <li class="<?php if ($page->isActive(true)) echo 'active'; ?>">
+            <a href="<?=$page->getHref() ?>">
+                <?=$page->getLabel() ?> <span><?=$page->get('labelText');?></span>
+            </a>
+        </li>
+        <?php else: ?>
+        <li class="dropdown<?php if ($page->isActive(true)) echo ' active'; ?>">
+            <a id="drop<?=$count ?>" href="#" class="dropdown-toggle" data-toggle="dropdown">
+            	<span><?=$page->getLabel() ?></span> <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <?php foreach($page->getPages() as $child): ?>
+                <?php // when using partials we need to manually check for ACL conditions ?>
+                <?php if( ! $child->isVisible() || !$this->uthandoNavigation()->accept($child)) continue; ?>
+                <li>
+                    <a tabindex="-1" href="<?=$child->getHref() ?>">
+                        <?=$child->getLabel() ?>
+                    </a>
+                </li>
+            <?php endforeach ?>
+            </ul>
+        </li>
+        <?php endif ?>
+        <?php $count++ ?>
+        <?php // store as previous depth for next iteration ?>
+        <?php $prevDepth = $depth; ?>
+    <?php endforeach ?>
+</ul>
+

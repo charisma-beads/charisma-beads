@@ -1,0 +1,45 @@
+<?php $this->headTitle('Menu Item') ?>
+<?php $this->layout()->pageTitle = $this->translate('Menu Item');?>
+
+<?php $this->placeholder('header-buttons')->captureStart();?>
+<a href="<?=$this->url('admin/menu-item/edit', [
+    'menuId' => $this->menuId,
+    'action' => 'add'
+]);?>" type="submit" data-toggle="tooltip" title="<?=$this->translate('Add Menu Item');?>" class="btn btn-primary">
+    <i class="fa fa-plus"></i>
+</a>
+<?php $this->placeholder('header-buttons')->captureEnd();?>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-list"></i> <?=$this->translate('Menu Item List');?></h3>
+    </div>
+    <div class="panel-body">
+        <?=$this->partial('admin/partial/search', [
+            'name'			=> 'menuItem',
+            'searchInputs'	=> [
+                $this->translate('Menu Item') => 'menuItemId',
+            ],
+        ]);?>
+    </div>
+    <div id="table-menuItem" class="admin-table">
+        <?=$this->partial('navigation/menu-item/list', [
+            'models' => $this->models,
+            'menuId' => $this->menuId,
+        ]); ?>
+    </div>
+</div>
+
+<?php $this->placeholder('js-scripts')->captureStart();?>
+<script>
+    $(document).ready(function(){
+        $('#table-menuItem').dataGrid({
+            url : '<?=$this->menuId?>/list',
+            query: { sort : 'lft' },
+            searchForm : $('#search-menuItem'),
+            paging : 'links',
+            columnSort: true
+        });
+    });
+</script>
+<?php $this->placeholder('js-scripts')->captureEnd();?>

@@ -1,0 +1,35 @@
+<?php $this->headTitle($this->escapeHtml($this->model->getTitle()));?>
+<?php $newsHelper = $this->newsHelper();?>
+
+<nav>
+    <ol class="breadcrumb">
+        <li><a href="<?=$this->url('home')?>">Home</a></li>
+        <li><a href="<?=$this->url('news')?>">News</a></li>
+        <li class="active"><?=$this->escapeHtml($this->model->getTitle());?></li>
+    </ol>
+</nav>
+<article>
+    <h3><?=$this->escapeHtml($this->model->getTitle());?></h3>
+    <?=$this->model->getContent();?>
+</article>
+<hr>
+<span><b>Author:</b> <?=$this->escapeHtml($this->model->getUser()->getFullName());?></span>
+<span><b>Date:</b> <?=$this->formatDate($this->model->getDateCreated());?></span>
+<hr>
+<?php
+$previous = $newsHelper->getPrevious($this->model->getNewsId());
+$next = $newsHelper->getNext($this->model->getNewsId());
+?>
+
+<ul class="pager">
+    <li class="previous<?php if (!$previous) echo " disabled"; ?>">
+        <a class="noborder" href="<?=$this->url('news', [
+            'news-item' => (!$previous) ? '' : $previous->getSlug()
+        ]);?>">&larr; Previous</a>
+    </li>
+    <li class="next<?php if (!$next) echo " disabled"; ?>">
+        <a class="noborder" href="<?=$this->url('news', [
+            'news-item' => (!$next) ? '' : $next->getSlug()
+        ]);?>">Next &rarr;</a>
+    </li>
+</ul>

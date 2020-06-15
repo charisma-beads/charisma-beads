@@ -1,0 +1,45 @@
+<?php $this->headTitle('Testimonials') ?>
+<?php $this->layout()->pageTitle = $this->translate('Testimonials');?>
+
+<?php $this->placeholder('header-buttons')->captureStart();?>
+
+<a href="<?=$this->url('admin/testimonial/edit', [
+    'action' => 'add'
+]);?>" type="submit" data-toggle="tooltip" title="<?=$this->translate('Add News');?>" class="btn btn-primary">
+    <i class="fa fa-plus"></i>
+</a>
+<?php $this->placeholder('header-buttons')->captureEnd();?>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-list"></i> <?=$this->translate('Testimonials List');?></h3>
+    </div>
+    <div class="panel-body">
+        <?=$this->partial('admin/partial/search', [
+            'name'			=> 'testimonial',
+            'searchInputs'	=> [
+                $this->translate('Company') => 'company',
+            ],
+        ]);?>
+    </div>
+    <div id="table-testimonial" class="admin-table">
+        <?=$this->partial('testimonial/testimonial/list', [
+            'models' => $this->models
+        ]); ?>
+    </div>
+</div>
+
+<?php $this->placeholder('js-scripts')->captureStart();?>
+<script>
+    $(document).ready(function(){
+        $('#table-testimonial').dataGrid({
+            url : 'testimonial/list',
+            query: { sort : 'testimonialId' },
+            searchForm : $('#search-testimonial'),
+            paging : 'links',
+            columnSort: true
+        });
+    });
+</script>
+<?php $this->placeholder('js-scripts')->captureEnd();?>
+

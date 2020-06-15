@@ -1,0 +1,43 @@
+<?php $this->headTitle('Menu') ?>
+<?php $this->layout()->pageTitle = $this->translate('Menu');?>
+
+<?php $this->placeholder('header-buttons')->captureStart();?>
+<a href="<?=$this->url('admin/menu/edit', [
+    'action' => 'add'
+]);?>" type="submit" data-toggle="tooltip" title="<?=$this->translate('Add Menu');?>" class="btn btn-primary">
+    <i class="fa fa-plus"></i>
+</a>
+<?php $this->placeholder('header-buttons')->captureEnd();?>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-list"></i> <?=$this->translate('Menu List');?></h3>
+    </div>
+    <div class="panel-body">
+        <?=$this->partial('admin/partial/search', [
+            'name'			=> 'menu',
+            'searchInputs'	=> [
+                $this->translate('Menu') => 'title',
+            ],
+        ]);?>
+    </div>
+    <div id="table-menu" class="admin-table">
+        <?=$this->partial('navigation/menu/list', [
+            'models' => $this->models
+        ]); ?>
+    </div>
+</div>
+
+<?php $this->placeholder('js-scripts')->captureStart();?>
+<script>
+    $(document).ready(function() {
+        $('#table-menu').dataGrid({
+            url: 'menu/list',
+            query: {sort: 'menu'},
+            searchForm: $('#search-menu'),
+            paging: 'links',
+            columnSort: true
+        });
+    });
+</script>
+<?php $this->placeholder('js-scripts')->captureEnd();?>

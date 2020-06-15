@@ -1,0 +1,20 @@
+<?php $this->headTitle('Newsletter Preferences') ?>
+
+<?php if ($this->form instanceof \Newsletter\Form\PreferencesForm): ?>
+<?php $this->form->setAttributes([
+    'method' => 'post',
+    'action' => $this->url('newsletter'),
+]); ?>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"><?=$this->translate('Remove Email From mailing List');?></h3>
+    </div>
+    <div class="panel-body">
+        <?=$this->form($this->form);?>
+    </div>
+</div>
+
+<?php else: ?>
+<h2><?=$this->translate('Thank you. We will remove your email from our lists.');?></h2>
+<?php endif; ?>

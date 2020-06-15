@@ -1,0 +1,48 @@
+<?php $this->headTitle('Events') ?>
+<?php $this->layout()->pageTitle = $this->translate('Events');?>
+
+<?php $this->placeholder('header-buttons')->captureStart();?>
+<a href="<?=$this->url('admin/events/settings');?>" data-toggle="tooltip" title="<?=$this->translate('Settings');?>" class="btn btn-primary">
+    <i class="fa fa-cog"></i>
+</a>
+<a href="<?=$this->url('admin/events/edit', [
+    'action' => 'add'
+]);?>" type="submit" data-toggle="tooltip" title="<?=$this->translate('Add Event');?>" class="btn btn-primary">
+    <i class="fa fa-plus"></i>
+</a>
+<?php $this->placeholder('header-buttons')->captureEnd();?>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-list"></i> <?=$this->translate('Events List');?></h3>
+    </div>
+    <div class="panel-body">
+        <?=$this->partial('admin/partial/search', [
+            'name'			=> 'events',
+            'searchInputs'	=> [
+                $this->translate('Events') => 'title-description',
+            ],
+        ]);?>
+    </div>
+    <div id="table-events" class="admin-table">
+        <?=$this->partial('events/events/list', [
+            'models' => $this->models
+        ]); ?>
+    </div>
+</div>
+
+<?php $this->placeholder('js-scripts')->captureStart();?>
+<script>
+    $(document).ready(function(){
+        $('#table-events').dataGrid({
+            url : 'events/list',
+            query: { sort : 'eventId' },
+            searchForm : $('#search-events'),
+            paging : 'links',
+            columnSort: true,
+            //rowClick : admin.product.rowClick
+        });
+    });
+</script>
+<?php $this->placeholder('js-scripts')->captureEnd();?>
+

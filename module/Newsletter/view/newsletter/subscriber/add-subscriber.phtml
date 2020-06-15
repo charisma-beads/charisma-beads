@@ -1,0 +1,41 @@
+
+<?php if ($this->result instanceof \Newsletter\Form\SubscriberForm): ?>
+    <?php $newsletter = $this->result;?>
+    <h4><small><strong>Subscribe to our Newsletter</strong></small></h4>
+    <form class="sky-form" id="newsletterSubscribe" method="post" action="<?=$this->url('newsletter/subscribe');?>">
+        <?=$this->formText($newsletter->get('name')->setAttributes([
+            'class' => 'form-control',
+            'id' => 'newsletter_name',
+            'placeholder' => 'Name',
+        ]));?>
+        <span class="help-block">
+            <?=$this->formElementErrors($newsletter->get('name'), [
+                'class' => 'list-unstyled text-danger'
+            ]); ?>
+        </span>
+        <div class="input-group">
+            <?=$this->formEmail($newsletter->get('email')->setAttributes([
+                'class' => 'form-control',
+                'id' => 'newsletter_email',
+                'placeholder' => 'E-mail Address',
+            ]));?>
+            <div class="input-group-btn">
+                <button class="btn btn-primary">SUBMIT</button>
+            </div>
+        </div>
+        <span class="help-block">
+            <?=$this->formElementErrors($newsletter->get('email'), [
+                'class' => 'list-unstyled text-danger'
+            ]); ?>
+        </span>
+        <?=$this->formMultiCheckbox(
+            $newsletter->get('subscribe')
+                ->setLabelOption('disable_html_escape', true)
+                ->setLabelPrepend(true)
+                ->setPreSelect(true)
+                ->setIncludeHidden(false)
+        );?>
+    </form>
+<?php else: ?>
+    <h4><small><strong>Thank you, you have now subscribed to our newsletter.</strong></small></h4>
+<?php endif;?>

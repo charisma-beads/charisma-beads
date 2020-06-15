@@ -1,0 +1,16 @@
+
+<div>
+    <p>
+        Contact Message From <?=$this->escapeHtml($this->data['name']);?>.
+    </p>
+
+    <p>
+        <?=$this->escapeHtml($this->data['body']);?>
+    </p>
+</div>
+
+<div style="font-size: 10px; text-align: center;">
+    Registered at Companies House, register number <?=$this->contact('company.number');?>.<br>
+    Registered office address:
+    <?=$this->contact()->formatAddress('company.address');?>
+</div>

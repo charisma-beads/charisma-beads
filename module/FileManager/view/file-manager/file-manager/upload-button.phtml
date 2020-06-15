@@ -1,0 +1,23 @@
+
+<script>
+    $('button[name=<?=$this->elementName;?>]').on('click', function() {
+        var fm = $('<div/>').dialogelfinder({
+            url : '<?=$this->url('admin/file-manager/connector')?>',
+            lang : 'en',
+            width : 840,
+            height: 450,
+            destroyOnClose : true,
+            getFileCallback : function(files, fm) {
+                $('#<?=$this->elementId;?>').val(files.url);
+            },
+            commandsOptions : {
+                getfile : {
+                    oncomplete : 'close',
+                    folders : false
+                }
+            },
+            soundPath : '<?=$this->basePath('el-finder/sounds/');?>'
+        }).dialogelfinder('instance');
+    });
+</script>
+

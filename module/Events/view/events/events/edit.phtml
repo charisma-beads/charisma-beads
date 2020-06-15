@@ -1,0 +1,37 @@
+<?php $this->headTitle('Edit Event') ?>
+<?php $this->layout()->pageTitle = $this->translate('Edit Event');?>
+
+<?php $this->placeholder('header-buttons')->captureStart();?>
+<button type="submit" form="form-event" data-toggle="tooltip" title="<?=$this->translate('Save');?>" class="btn btn-primary">
+    <i class="fa fa-save"></i>
+</button>
+<a href="<?=$this->url('admin/events');?>" data-toggle="tooltip" title="<?=$this->translate('Cancel');?>" class="btn btn-default">
+    <i class="fa fa-reply"></i>
+</a>
+<?php $this->placeholder('header-buttons')->captureEnd();?>
+
+<?php
+
+$this->form->setAttributes([
+    'method' => 'post',
+    'id' => 'form-event',
+    'action' => $this->url('admin/events/edit', [
+        'action' => 'edit',
+        'id'    => $this->model->getEventId(),
+    ]),
+]);
+
+?>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-pencil"></i> <?=$this->translate('Edit Event');?></h3>
+    </div>
+    <div class="panel-body">
+        <?=$this->form($this->form);?>
+    </div>
+</div>
+
+<?php $this->datePicker($this->convertDateFormat('js'));?>
+
+<?php $this->textEditor()->summernote();?>

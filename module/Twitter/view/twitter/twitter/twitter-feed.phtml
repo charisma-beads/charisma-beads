@@ -1,0 +1,99 @@
+<?php if (!isset($this->tweets['errors'])):?>
+<link href="<?=$this->basePath('/css/tweet-feed.css');?>" media="screen,print" rel="stylesheet" type="text/css">
+
+    <?php $this->inlineScript()->appendFile($this->basePath('/js/twitter.intent.js'));?>
+<h5>
+    <a href="https://twitter.com/" class="twitter-logo">
+        <img src="<?=$this->basePath('/img/twitter-bird-light.png'); ?>" alt="twitter bird">
+    </a>
+    <?=$this->tweets->getUsername(); ?> 
+    <span class="screen-name">
+        <a href="https://twitter.com/<?=$this->tweets->getScreenName(); ?>" target="_blank">@<?=$this->tweets->getScreenName(); ?></a>
+    </span>
+</h5>
+
+<?php /* @var $tweet \Twitter\Model\Tweet */?>
+<?php foreach($this->tweets as $tweet): ?>
+<div class="media">
+    <div class="media-left">
+        <a class="p-image" href="https://twitter.com/intent/user?user_id=<?=$tweet->getUserId(); ?>" aria-label="<?=$tweet->getUserName(); ?>(screen name: <?=$tweet->getScreenName(); ?>)">
+            <img class="media-object" src="<?=$tweet->getProfileImage(); ?>">
+        </a>
+    </div>
+    
+    <div class="media-body">
+        
+        <h4 class="media-heading">
+            <a class="profile" href="https://twitter.com/intent/user?user_id=<?=$tweet->getUserId(); ?>" aria-label="<?=$tweet->getUserName(); ?>(screen name: <?=$tweet->getScreenName(); ?>)">
+                
+                <span class="full-name">
+                    <span class="p-name"><?=$tweet->getUserName(); ?></span>
+                    <?php if ($tweet->getVerified()): ?>
+                    <span class="verified" title="Verified Account" aria-label="Verified Account">
+                        <img src="<?=$this->basePath('/img/twitter-verified.png'); ?>" alt="twitter verified">
+                    </span>
+                    <?php endif; ?>
+                </span>
+                <span class="p-nickname" dir="ltr">
+                    @<?=$tweet->getScreenName(); ?>
+                </span>
+            </a>
+            <a class="permalink" href="https://twitter.com/intent/user?user_id=<?=$tweet->getUserId(); ?>" data-datetime="<?=$tweet->getTime(); ?>">
+                <time class="dt-updated" datetime="<?=$tweet->getTime(); ?>" title="Time posted: <?=$tweet->getTime(); ?>" aria-label="Posted on <?=$tweet->getTimePostedShort(); ?>">
+                    <?=$tweet->getRelativeTime(); ?>
+                </time>
+            </a>
+        </h4>
+
+        <p class="entry-title">
+            <?=$tweet->getText($this->tweets->getShowTweetLinks()); ?>
+        </p>
+        
+        <?php if ($tweet->isRetweet()): ?>
+        <div class="retweet-credit">
+            <i class="rewteet"></i>Retweeted by 
+            <a class="profile" href="https://twitter.com/intent/user?user_id=<?=$tweet->getUserId(true);?>" title="@<?=$tweet->getScreenName(true); ?> on Twitter">
+                <?php echo $tweet->getUserName(true); ?>
+            </a>
+        </div>
+        <?php endif; ?>
+     
+        <!-- footer -->
+        <div class="media footer">
+            <span class="stats-narrow"><span class="stats">
+                <span class="stats-retweets">
+                    <strong><?=$tweet->getRetweetCount(); ?></strong> retweets
+                </span>
+                <span class="stats-favorites">
+                    <strong><?=$tweet->getFavoriteCount(); ?></strong> favorites
+                </span>
+            </span></span>
+            
+            <ul class="tweet-actions pull-right">
+                <li>
+                    <a href="https://twitter.com/intent/tweet?in_reply_to=<?=$tweet->getIdStr(); ?>" class="glyphicon glyphicon-share-alt" title="Reply" target="_blank">
+                        <i></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://twitter.com/intent/retweet?tweet_id=<?=$tweet->getIdStr(); ?>" class="glyphicon glyphicon-retweet" title="Retweet" target="_blank">
+                        <i></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://twitter.com/intent/favorite?tweet_id=<?=$tweet->getIdStr(); ?>" class="glyphicon glyphicon-star" title="Favorite" target="_blank">
+                        <i></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<?php endforeach; ?>
+<?php else: ?>
+<dl>
+    <?php foreach($this->tweets['errors'] as $error):?>
+    <dt> <?=$error->code;?></dt>  <dd>  <?=$error->message;?></dd>
+    <?php endforeach; ?>
+</dl>
+<?php endif; ?>

@@ -1,0 +1,45 @@
+
+<?php $this->headTitle('Mail Queue') ?>
+<?php $this->layout()->pageTitle = $this->translate('Mail Queue');?>
+
+<?php if (count($this->models) > 0): ?>
+<?php $this->placeholder('header-buttons')->captureStart();?>
+<a href="#delete-mail-dialog" class="btn btn-danger btn-tooltip delete-button" title="<?=$this->translate('Delete');?>" data-toggle="modal" data-target="#delete-mail-dialog">
+    <i class="fa fa-trash"></i>
+</a>
+<?php endif; ?>
+
+<?php $this->placeholder('header-buttons')->captureEnd();?>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-list"></i> <?=$this->translate('Mail Queue List');?></h3>
+    </div>
+    <div class="panel-body">
+        <?=$this->partial('admin/partial/search', [
+            'name'			=> 'mail-queue',
+            'searchInputs'	=> [
+                $this->translate('Recipient')	=> 'reciptient',
+            ],
+        ]);?>
+    </div>
+    <div id="table-mail-queue" class="admin-table">
+        <?=$this->partial('mail/mail-queue/list', [
+            'models' => $this->models
+        ]); ?>
+    </div>
+</div>
+
+<?php $this->placeholder('js-scripts')->captureStart();?>
+<script>
+    $(document).ready(function(){
+        $('#table-mail-queue').dataGrid({
+            url : 'mail-queue/list',
+            query: { sort : 'mailQueueId' },
+            searchForm : $('#search-mail-queue'),
+            paging : 'links',
+            columnSort: true,
+        });
+    });
+</script>
+<?php $this->placeholder('js-scripts')->captureEnd();?>

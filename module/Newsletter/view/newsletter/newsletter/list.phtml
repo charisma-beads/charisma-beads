@@ -1,0 +1,45 @@
+<?php if (count($this->models) > 0): ?>
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered table-condensed">
+            <thead>
+            <tr>
+                <th data-field="newsletterId"><?= $this->translate('Newsletter Id'); ?></th>
+                <th data-field="name"><?= $this->translate('Name'); ?></th>
+                <th data-field="description"><?= $this->translate('Description'); ?></th>
+                <th data-field="visible"><?= $this->translate('Visible'); ?></th>
+                <th><?= $this->translate('Actions'); ?></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php /* @var $row \Newsletter\Model\NewsletterModel */ ?>
+            <?php foreach ($this->models as $row): ?>
+                <?php $icon = ($row->isVisible()) ? 'check' : 'times'; ?>
+                <tr>
+                    <td><?= $this->escapeHtml($row->getNewsletterId()); ?></td>
+                    <td><?= $this->escapeHtml($row->getName()); ?></td>
+                    <td><?= $this->escapeHtml($row->getDescription()); ?></td>
+                    <td><i class="fa fa-<?= $icon; ?>"</i></td>
+                    <td>
+                        <?= $this->partial('admin/partial/edit-actions', [
+                            'pk' => 'newsletterId',
+                            'id' => $row->getNewsletterId(),
+                            'tableName' => 'newsletter',
+                            'route' => 'admin/newsletter/edit',
+                        ]); ?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+
+    <?= $this->paginationControl(
+        $this->models,
+        'Elastic',
+        'application/partial/paginate',
+        ['route' => 'admin/newsletter/page']
+    ); ?>
+
+<?php else: ?>
+    <h4><?= $this->translate('There are no Newsletters yet.'); ?></h4>
+<?php endif; ?>

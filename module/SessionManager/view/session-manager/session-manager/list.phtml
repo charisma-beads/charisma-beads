@@ -1,0 +1,79 @@
+
+<?php if (count($this->models) > 0):?>
+
+<div class="table-responsive">
+    <table id="session-list" class="table table-hover table-bordered table-condensed sortable-table">
+        <thead>
+            <tr>
+                <th data-field="id"><?=$this->translate('Session Id');?></th>
+                <th data-field="name"><?=$this->translate('Name');?></th>
+                <th data-field="modified"><?=$this->translate('Modified');?></th>
+                <th data-field="lifetime"><?=$this->translate('Life Time');?></th>
+                <th><?=$this->translate('Expires');?></th>
+                <th><?=$this->translate('Actions');?></th>
+            </tr>
+        </thead>
+
+        <tbody>
+           <?php /* @var $row \SessionManager\Model\SessionModel */ ?>
+            <?php foreach($this->models as $row):?>
+
+            <tr>
+                <td><?=$this->escapeHtml($row->getId());?></td>
+                <td><?=$this->escapeHtml($row->getName());?></td>
+                <td><?=$this->escapeHtml($this->formatDate('@'.$row->getModified()));?></td>
+                <td><?=$this->escapeHtml($row->getLifetime());?></td>
+                <td><?=$this->escapeHtml($this->formatDate('@'.($row->getModified() + $row->getLifetime())));?></td>
+                <td>
+                    <a data-toggle="modal" class="btn btn-default btn-tooltip" href="<?=$this->url('admin/session/view', [
+                        'id' => $row->getId()
+                    ]);?>" data-target="#viewSession<?=$row->getId();?>" title="<?=$this->translate('View');?>">
+                        <i class="fa fa-eye"></i>
+                    </a>
+                    <!-- Modal -->
+                    <div id="viewSession<?=$row->getId(); ?>" class="modal fade" tabindex="-1">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" >&times;</button>
+                                    <h3 id="myModalLabel"><?=$this->translate('Session Data');?></h3>
+                                </div>
+
+                                <div class="modal-body">
+                                    <p>Loading…</p>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button class="btn btn-default" data-dismiss="modal"><?=$this->translate('Close');?></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?= $this->partial('admin/partial/edit-actions', [
+                        'pk' => 'id',
+                        'id' => $row->getId(),
+                        'tableName' => 'session',
+                        'route' => 'admin/session/delete',
+                        'edit' => false,
+                    ]); ?>
+                </td>
+            </tr>
+            <?php endforeach;?>
+        </tbody>
+    </table>
+</div>
+
+
+<?=$this->paginationControl(
+    $this->models,
+    'Elastic',
+	'application/partial/paginate',
+	['route' => 'admin/session/page']
+);?>
+
+<?php else:?>
+<h4><?=$this->translate('No sessions where returned by search.');?></h4>
+<?php endif;?>
+
+

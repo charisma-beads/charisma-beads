@@ -1,0 +1,44 @@
+
+<?php $iterator = new RecursiveIteratorIterator($this->container,
+    RecursiveIteratorIterator::SELF_FIRST); ?>
+<?php $prevDepth = 0; ?>
+
+<ul class="nav navbar-nav">
+    <?php $count = 1 ?>
+    <?php foreach ($iterator as $page): ?>
+        <?php $depth = $iterator->getDepth(); ?>
+        <?php /* @var $page Zend\Navigation\Page\Mvc */ ?>
+        <?php // when using partials we need to manually check for ACL conditions ?>
+        <?php if( ! $page->isVisible() || !$this->uthandoNavigation()->accept($page)) continue; ?>
+        <?php $hasChildren = $page->hasPages(); ?>
+
+        <?php if(!$hasChildren): ?>
+        <li>
+            <a href="<?=$page->getHref() ?>">
+                <?=$page->getLabel() ?>
+            </a>
+        </li>
+        <?php else: ?>
+        <li class="dropdown">
+            <a id="drop<?=$count ?>" href="#" class="dropdown-toggle" data-toggle="dropdown">
+            	<span><?=$page->getLabel() ?></span> <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <?php foreach($page->getPages() as $child): ?>
+                <?php // when using partials we need to manually check for ACL conditions ?>
+                <?php if( ! $child->isVisible() || !$this->uthandoNavigation()->accept($child)) continue; ?>
+                <li>
+                    <a tabindex="-1" href="<?=$child->getHref() ?>">
+                        <?=$child->getLabel() ?>
+                    </a>
+                </li>
+            <?php endforeach ?>
+            </ul>
+        </li>
+        <?php endif ?>
+        <?php $count++ ?>
+        <?php // store as previous depth for next iteration ?>
+        <?php $prevDepth = $depth; ?>
+    <?php endforeach ?>
+</ul>
+

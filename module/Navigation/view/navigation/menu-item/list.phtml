@@ -1,0 +1,57 @@
+<?php if (count($this->models) > 0): ?>
+<div class="table-responsive">
+    <table class="table table-hover table-bordered table-condensed">
+    	<thead>
+    		<tr>
+    			<th data-field="menuItemId">Menu Item Id</th>
+    			<th data-field="label">Label</th>
+    			<th data-field="params">Params</th>
+    			<th data-field="route">Route</th>
+    			<th data-field="reource">Resource</th>
+    			<th data-field="isVisible">Is Visible</th>
+                <th data-field="lft">Lft</th>
+                <th data-field="rgt">Rgt</th>
+    			<th>Actions</th>
+    		</tr>
+    	</thead>
+    	<tbody>
+    		<?php foreach($this->models as $row): ?>
+    		<tr>
+    			<td><?php echo $this->escapeHtml($row->getMenuItemId()); ?></td>
+    			<td>
+                    <?php echo str_repeat('&nbsp;&ndash;', ($row->getDepth())) . '&ndash;'; ?>
+                    <?php echo $this->escapeHtml($row->getLabel()); ?></td>
+    			<td><?php echo $this->escapeHtml($row->getParams()); ?></td>
+    			<td><?php echo $this->escapeHtml($row->getRoute()); ?></td>
+    			<td><?php echo $this->escapeHtml($row->getResource()); ?></td>
+    			<td><?php echo $this->escapeHtml($row->isVisible()); ?></td>
+                <td><?=$this->escapeHtml($row->getLft()); ?></td>
+                <td><?=$this->escapeHtml($row->getRgt()); ?></td>
+    			<td>
+    				<?=$this->partial('admin/partial/edit-actions', [
+                    	'pk'		=> 'menuItemId',
+                    	'id'		=> $row->getMenuItemId(),
+    		    		'tableName'	=> 'menuItem',
+                    	'route'		=> 'admin/menu-item/edit',
+    				    'routeParams' => ['menuId' => $this->menuId],
+    		    	]);?>
+    			</td>
+    		</tr>
+    		<?php endforeach; ?>
+    	</tbody>
+    </table>
+</div>
+<?=$this->paginationControl(
+    $this->models,
+    'Elastic',
+    'application/partial/paginate',
+	[
+        'route' => 'admin/menu-item/page',
+        'routeParams' => ['menuId' => $this->menuId]
+    ]
+); ?>
+
+<?php else: ?>
+<h4>No menu items where returned by search.</h4>
+<?php endif; ?>
+

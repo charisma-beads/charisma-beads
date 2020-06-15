@@ -1,0 +1,18 @@
+<?php $this->headTitle('Register') ?>
+
+<?php $this->registerForm->setAttributes([
+	'method' => 'post',
+	'action' => $this->url('user', [
+		'action' => 'register'
+	]),
+]); ?>
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title"><?=$this->translate('Register');?></h3>
+	</div>
+	<div class="panel-body">
+		<?=$this->form($this->registerForm);?>
+	</div>
+</div>
+

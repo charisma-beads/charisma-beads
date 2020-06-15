@@ -1,0 +1,46 @@
+<?php $this->headTitle('Widgets') ?>
+<?php $this->layout()->pageTitle = $this->translate('Widgets');?>
+
+<?php $this->placeholder('header-buttons')->captureStart();?>
+<a href="<?=$this->url('admin/theme-manager/settings');?>" data-toggle="tooltip" title="<?=$this->translate('Settings');?>" class="btn btn-primary">
+    <i class="fa fa-cog"></i>
+</a>
+<a href="<?=$this->url('admin/theme-manager/widget/edit', [
+    'action' => 'add'
+]);?>" type="submit" data-toggle="tooltip" title="<?=$this->translate('Add Widget');?>" class="btn btn-primary">
+    <i class="fa fa-plus"></i>
+</a>
+<?php $this->placeholder('header-buttons')->captureEnd();?>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-list"></i> <?=$this->translate('Widget List');?></h3>
+    </div>
+    <div class="panel-body">
+        <?=$this->partial('admin/partial/search', [
+            'name'			=> 'widget',
+            'searchInputs'	=> [
+                $this->translate('Widget') => 'name',
+            ],
+        ]);?>
+    </div>
+    <div id="table-widget" class="admin-table">
+        <?=$this->partial('theme-manager/widget/list', [
+            'models' => $this->models
+        ]); ?>
+    </div>
+</div>
+
+<?php $this->placeholder('js-scripts')->captureStart();?>
+<script>
+    $(document).ready(function(){
+        $('#table-widget').dataGrid({
+            url : 'widget/list',
+            query: { sort : 'widgetId' },
+            searchForm : $('#search-widget'),
+            paging : 'links',
+            columnSort: true
+        });
+    });
+</script>
+<?php $this->placeholder('js-scripts')->captureEnd();?>

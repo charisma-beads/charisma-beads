@@ -1,0 +1,45 @@
+
+<?php if (count($this->models) > 0): ?>
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered table-condensed">
+            <thead>
+            <tr>
+                <th data-field="subscriberId"><?=$this->translate('Subscriber Id');?></th>
+                <th data-field="name"><?=$this->translate('Name');?></th>
+                <th data-field="email"><?=$this->translate('Email');?></th>
+                <th data-field="dateCreated"><?=$this->translate('Date Created');?></th>
+                <th><?=$this->translate('Actions');?></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php /* @var $row \Newsletter\Model\SubscriberModel */ ?>
+            <?php foreach($this->models as $row): ?>
+                <tr>
+                    <td><?=$this->escapeHtml($row->getSubscriberId()); ?></td>
+                    <td><?=$this->escapeHtml($row->getName()); ?></td>
+                    <td><?=$this->escapeHtml($row->getEmail()); ?></td>
+                    <td><?=$this->escapeHtml($this->formatDate($row->getDateCreated())); ?></td>
+                    <td>
+                        <?=$this->partial('admin/partial/edit-actions', [
+                            'pk'		=> 'subscriberId',
+                            'id'		=> $row->getSubscriberId(),
+                            'tableName'	=> 'newsletter-subscriber',
+                            'route'		=> 'admin/newsletter/subscriber/edit',
+                        ]);?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+
+    <?=$this->paginationControl(
+        $this->models,
+        'Elastic',
+        'application/partial/paginate',
+        ['route' => 'admin/newsletter/subscriber/page']
+    ); ?>
+
+<?php else: ?>
+    <h4><?=$this->translate('There are no Subscribers yet.');?></h4>
+<?php endif; ?>

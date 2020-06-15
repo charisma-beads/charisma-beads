@@ -1,0 +1,50 @@
+<?php
+return array(
+    'uthando_twitter' => array(
+        'oauth_options' => array(
+            'access_token' => array(
+                'token' => 'put your access token here',
+                'secret' => 'put your secret here',
+            ),
+            'oauth_options' => array(
+                'consumerKey' => 'put your Oauth key here',
+                'consumerSecret' => 'put your Oauth secret here',
+            ),
+            'http_client_options' => array(
+                'adapter' => 'Zend\Http\Client\Adapter\Curl',
+                //'ssltransport' => 'tls',
+                //'sslverifypeer' => false,
+                //'sslcapath'     => '/etc/ssl/certs/',
+            	//'persistent' => true,
+            ),
+        ),
+        'options' => array(
+        	// class to use for tweets
+            'entity_class' => 'Twitter\Model\Tweet',
+            'screen_name' => 'put your twitter screen name here',
+            'username'    => 'put your user name here (normally this is your real name)',
+            // how many tweet to display
+            'display_limit' => 4,
+            'show_direct_tweets' => false,
+            // show retweets or not
+            'show_retweets' => true,
+            // show tweet links or not
+            'show_tweet_links' => true,
+            // show profile picture or not
+            'show_profile_pic' => true,
+        ),
+        'cache' => array(
+            'adapter' => array(
+                'name' => 'filesystem',
+                'options' => array(
+                    'ttl'                   => 60*60, // one hour
+                    'dirLevel'              => 0,
+                    'cacheDir'              => './data/cache',
+                    'dirPermission'         => '700',
+                    'filePermission'        => '600',
+                ),
+            ),
+            'plugins' => ['Serializer'],
+        ),
+    ),
+);

@@ -1,0 +1,104 @@
+<?php
+
+namespace Common\Service;
+
+use Zend\Mvc\Exception\InvalidPluginException;
+use Zend\ServiceManager\AbstractPluginManager;
+use Zend\ServiceManager\ConfigInterface;
+use Zend\Stdlib\InitializableInterface;
+
+
+class ServiceManager extends AbstractPluginManager
+{
+    protected $initialize = true;
+
+    //use ServiceLocatorAwareTrait;
+
+    /**
+     * @param null $configOrContainerInstance
+     * @param array $v3config
+     */
+    public function __construct($configOrContainerInstance = null, array $v3config = [])
+    {
+        $this->addInitializer([$this, 'callServiceInit']);
+        $this->addInitializer([$this, 'callServiceEvents']);
+
+        parent::__construct($configOrContainerInstance, $v3config);
+    }
+
+    /**
+     * Sets up the class events.
+     *
+     * @param $service
+     */
+    public function callServiceEvents($service)
+    {
+        if ($service instanceof ServiceInterface) {
+            $service->attachEvents();
+        }
+    }
+
+    /**
+     * Calls the service init method.
+     *
+     * @param $service
+     */
+    public function callServiceInit($service)
+    {
+        if ($service instanceof InitializableInterface && $this->initialize) {
+            $service->init();
+        }
+    }
+
+    /**
+     * Retrieve a service from the manager by name
+     *
+     * Allows passing an array of options to use when creating the instance.
+     * createFromInvokable() will use these and pass them to the instance
+     * constructor if not null and a non-empty array.
+     *
+     * @param string $name
+     * @param array $options
+     * @param bool $usePeeringServiceManagers
+     * @return object
+     * @throws InvalidPluginException
+     */
+    public function get($name, $options = [], $usePeeringServiceManagers = true)
+    {
+        // If service not registered check the the Service Locator.
+        if (!$this->has($name)) {
+            return $this->getServiceLocator()->get($name);
+        }
+
+        if (isset($options['initialize'])) {
+            $this->initialize = $options['initialize'];
+            unset($options['initialize']);
+        }
+
+        $instance = parent::get($name, $options, $usePeeringServiceManagers);
+        $this->validatePlugin($instance);
+        return $instance;
+    }
+
+    /**
+     * Validate the plugin
+     *
+     * Checks that the Service is an instance of ServiceInterface
+     *
+     * @param  mixed $service
+     * @throws InvalidPluginException
+     * @return void
+     */
+    public function validatePlugin($service)
+    {
+        if ($service instanceof ServiceInterface) {
+            return;
+        }
+
+        throw new InvalidPluginException(sprintf(
+            'Plugin of type %s is invalid; must implement %s\Service\ServiceInterface',
+            (is_object($service) ? get_class($service) : gettype($service)),
+            __NAMESPACE__
+        ));
+    }
+}

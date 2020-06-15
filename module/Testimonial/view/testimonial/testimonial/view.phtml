@@ -1,0 +1,17 @@
+
+<?php /* @var $row \Testimonial\Model\TestimonialModel */ ?>
+<?php foreach($this->models as $row):?>
+<div class="media">
+    <a class="pull-left" href="<?=$this->escapeHtml($row->getWebsite());?>">
+        <img class="media-object" styles="max-width:128px;" src="<?=$this->escapeHtml($row->getImage());?>" alt="...">
+    </a>
+    <div class="media-body">
+        <h4 class="media-heading"><?=$this->escapeHtml($row->getCompany());?></h4>
+        <?=$row->getText();?>
+        <br>
+        <i class="glyphicon glyphicon-tag"></i>&nbsp;<?=$this->escapeHtml($row->getLocation());?>&nbsp;
+        <i class="glyphicon glyphicon-tag"></i>&nbsp;<?=$this->escapeHtml($row->getSector());?>
+    </div>
+</div>
+<hr>
+<?php endforeach;?>

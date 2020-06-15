@@ -1,0 +1,25 @@
+<?=$this->headLink()->appendStylesheet($this->basePath('el-finder/css/elfinder.full.css'));?>
+<script>
+    function elfinderDialog() {
+        var fm = $('<div/>').dialogelfinder({
+            url : '<?=$this->url('admin/file-manager/connector')?>',
+            lang : 'en',
+            width : 840,
+            height: 450,
+            destroyOnClose : true,
+            getFileCallback : function(files, fm) {
+                $('textarea.editable-textarea').summernote('editor.insertImage',files.url);
+            },
+            commandsOptions : {
+                getfile : {
+                    oncomplete : 'close',
+                    folders : false
+                }
+            },
+            soundPath : '<?=$this->basePath('el-finder/sounds/');?>'
+        }).dialogelfinder('instance');
+
+        // fix z-index so dialog shows on top of sommernote when in full screen.
+        $('.dialogelfinder').css('z-index', '100000');
+    }
+</script>

@@ -1,0 +1,67 @@
+
+<?php if (count($this->models) > 0): ?>
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered table-condensed">
+            <thead>
+            <tr>
+                <th data-field="templateId"><?=$this->translate('Template Id');?></th>
+                <th data-field="name"><?=$this->translate('Name');?></th>
+                <th><?=$this->translate('Actions');?></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php /* @var $row \Newsletter\Model\TemplateModel */ ?>
+            <?php foreach($this->models as $row): ?>
+                <tr>
+                    <td><?=$this->escapeHtml($row->getTemplateId()); ?></td>
+                    <td><?=$this->escapeHtml($row->getName()); ?></td>
+                    <td>
+                        <a href="<?=$this->url('admin/newsletter/template/edit', [
+                            'action' => 'preview',
+                            'id' => $row->getTemplateId(),
+                        ]);?>" class="btn btn-default message-preview" data-toggle="tooltip" title="<?=$this->translate('View');?>">
+                            <i class="fa fa-eye"></i></a>&nbsp;
+                        <?=$this->partial('admin/partial/edit-actions', [
+                            'pk'		=> 'templateId',
+                            'id'		=> $row->getTemplateId(),
+                            'tableName'	=> 'newsletter-template',
+                            'route'		=> 'admin/newsletter/template/edit',
+                        ]);?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+
+    <?=$this->paginationControl(
+        $this->models,
+        'Elastic',
+        'application/partial/paginate',
+        ['route' => 'admin/newsletter/template/page']
+    ); ?>
+
+<?php else: ?>
+    <h4><?=$this->translate('There are no Templates yet.');?></h4>
+<?php endif; ?>
+
+<?php $this->placeholder('js-scripts')->captureStart();?>
+<script>
+    $('table').on('click', 'a.message-preview', function(e) {
+        e.preventDefault();
+        var url = $(this).attr('href');
+
+        bootbox.dialog({
+            size: 'large',
+            title: "<?=$this->translate('Newsletter Template Preview');?>",
+            message: '<iframe class="newsletter-preview" src="' + url + '"></iframe>',
+            buttons: {
+                main: {
+                    label: "<?=$this->translate('Close');?>",
+                    className: "btn-default"
+                }
+            }
+        });
+    });
+</script>
+<?php $this->placeholder('js-scripts')->captureEnd();?>

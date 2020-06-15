@@ -1,0 +1,50 @@
+
+<?php if (count($this->models) > 0): ?>
+<div class="table-responsive">
+    <table class="table table-hover table-bordered table-condensed sortable-table">
+    	<thead>
+    		<tr>
+    			<th data-field="articleId">Article Id</th>
+    			<th data-field="title">Title</th>
+    			<th data-field="slug">Slug</th>
+    			<th data-field="pageHits">Page Hits</th>
+    			<th data-field="dateCreated">Date Created</th>
+    			<th data-field="dateModified">Date Modified</th>
+    			<th>Actions</th>
+    		</tr>
+    	</thead>
+    	<tbody>
+            <?php /* @var $row \Article\Model\ArticleModel */ ?>
+    		<?php foreach($this->models as $row): ?>
+    		<tr>
+    			<td><?=$this->escapeHtml($row->getArticleId()); ?></td>
+    			<td><?=$this->escapeHtml($row->getTitle()); ?></td>
+    			<td><?=$this->escapeHtml($row->getSlug()); ?></td>
+    			<td><?=$this->escapeHtml($row->getPageHits()); ?></td>
+    			<td><?=$this->escapeHtml($this->formatDate($row->getDateCreated())); ?></td>
+    			<td><?=$this->escapeHtml($this->formatDate($row->getDateModified())); ?></td>
+    			<td>
+    				<?=$this->partial('admin/partial/edit-actions', [
+                    	'pk'		=> 'articleId',
+                    	'id'		=> $row->getArticleId(),
+    		    		'tableName'	=> 'article',
+                    	'route'		=> 'admin/article/edit',
+    		    	]);?>
+    			</td>
+    		</tr>
+    		<?php endforeach; ?>
+    	</tbody>
+    </table>
+</div>
+
+<?=$this->paginationControl(
+    $this->models,
+    'Elastic',
+    'application/partial/paginate',
+	['route' => 'admin/article/page']
+); ?>
+
+<?php else: ?>
+<h4>There are no articles yet.</h4>
+<?php endif; ?>
+

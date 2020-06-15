@@ -1,0 +1,67 @@
+
+<?php $this->headTitle('Newsletter Message') ?>
+<?php $this->layout()->pageTitle = $this->translate('Newsletter Message');?>
+
+<?php $this->placeholder('header-buttons')->captureStart();?>
+<a href="<?=$this->url('admin/newsletter/message/edit', [
+    'action' => 'add'
+]);?>" type="submit" data-toggle="tooltip" title="<?=$this->translate('Add Message');?>" class="btn btn-primary">
+    <i class="fa fa-plus"></i>
+</a>
+<?php $this->placeholder('header-buttons')->captureEnd();?>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-list"></i> <?=$this->translate('Newsletter Message List');?></h3>
+    </div>
+    <div class="panel-body">
+        <?=$this->partial('admin/partial/search', [
+            'name'			=> 'newsletter-message',
+            'searchInputs'	=> [
+                $this->translate('Newsletter Message') => 'name-subject',
+            ],
+        ]);?>
+    </div>
+    <div id="table-newsletter-message" class="admin-table">
+        <?=$this->partial('newsletter/message/list', [
+            'models' => $this->models
+        ]); ?>
+    </div>
+</div>
+
+<?php $this->placeholder('js-scripts')->captureStart();?>
+<script>
+    $(document).ready(function(){
+        $('#table-newsletter-message').dataGrid({
+            url : 'message/list',
+            query: { sort : 'messageId' },
+            searchForm : $('#search-newsletter-message'),
+            paging : 'links',
+            columnSort: true
+        });
+
+        $('table').on('click', 'a.message-preview', function(e) {
+            e.preventDefault();
+            var url = $(this).attr('href');
+
+            bootbox.dialog({
+                size: 'large',
+                title: "<?=$this->translate('Newsletter Message Preview');?>",
+                message: '<iframe class="newsletter-preview" src="' + url + '"></iframe>',
+                buttons: {
+                    main: {
+                        label: "Close",
+                        className: "btn-default"
+                    }
+                }
+            });
+        });
+
+        $('table').on('click', 'a.send-message', function(e) {
+            $('#table-newsletter-message').loadingOverlay({
+                loadingText: 'Please Wiat while we queue the messages.'
+            });
+        });
+    });
+</script>
+<?php $this->placeholder('js-scripts')->captureEnd();?>

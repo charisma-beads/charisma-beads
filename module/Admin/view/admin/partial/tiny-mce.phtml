@@ -1,0 +1,43 @@
+
+<?php
+$filemanagerUrl = $this->fileManagerUrl ?? $this->url('admin/uploader', [
+    'action'    => 'upload-form',
+]);
+
+$imageBasePath = $this->basePath ?? $this->basePath('/userfiles/');
+?>
+<?=$this->inlineScript()
+    ->appendFile('//cdn.tinymce.com/4/tinymce.min.js');
+?>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        tinymce.init({
+            selector:'.tiny-mce-textarea',
+            relative_urls: false,
+            plugins: [
+                "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+                "searchreplace wordcount visualblocks visualchars code fullscreen",
+                "insertdatetime media nonbreaking save table contextmenu directionality",
+                "emoticons template paste textcolor colorpicker textpattern"
+            ],
+            toolbar1: "insertfile undo redo | styleselect | fontsizeselect bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+            toolbar2: "bootstrap print preview media | forecolor backcolor emoticons",
+            image_advtab: true,
+
+            bootstrapConfig: {
+                'imagesPath': '<?=$this->serverUrl($imageBasePath);?>' // replace with your images folder path
+            },
+
+            external_plugins: {
+                "bootstrap": "<?=$this->basePath('/js/tinymce/plugins/bootstrap/plugin.js');?>"
+            },
+
+            file_picker_types: "image",
+
+            file_picker_callback: function(callback, value, meta) {
+                adminClass.tinyMceFileBrowser(callback, value, meta, '<?=$filemanagerUrl;?>', '<?=$imageBasePath;?>');
+            }
+        });
+    });
+</script>

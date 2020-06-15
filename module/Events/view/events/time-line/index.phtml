@@ -1,0 +1,29 @@
+<?php $this->headTitle('Events') ?>
+
+<div class="row">
+    <div class="col-sm-12">
+
+        <h1>Time Line</h1>
+
+        <?php foreach ($this->events as $event): ?>
+        <div class="media"><!-- item -->
+            <div class="media-body">
+                <h4 class="media-heading">
+                    <a href="#"><?=$this->escapeHtml($event->getTitle());?></a>
+                    <b><?=$this->formatDate($event->getDateTime(), $options->getDateFormat());?></b>
+                </h4>
+                <?=nl2br($this->escapeHtml($event->getDescription()));?>
+                <?php if ($event->getHtml()): ?>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <?=$event->getHtml();?>
+                        </div>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div><!-- /item -->
+        <hr>
+        <?php endforeach; ?>
+    </div>
+</div>
+

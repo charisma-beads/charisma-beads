@@ -1,0 +1,40 @@
+
+<?php $formWidth = ($this->formWidth) ?: '12'; ?>
+
+<?php $this->form->prepare();?>
+<?=$this->form()->openTag($this->form->setAttributes([
+    'class' => 'col-md-' . $formWidth,
+    'action' => $this->postUrl,
+]));?>
+    <fieldset>
+
+        <div class="row">
+            <?php if($this->formName): ?>
+            <legend><?=$this->formName;?></legend>
+            <?php endif; ?>
+            <?php foreach ($this->formElements as $element):?>
+                <?=$this->formRow($this->form->get($element));?>
+            <?php endforeach;?>
+        </div>
+
+        <?php if ($this->postUrl):?>
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+
+                    <button type="submit" class="btn btn-primary" data-loading-text="Please wait...">
+                        Submit
+                    </button>
+
+                    <?php if ($this->cancelUrl):?>
+                    <a href="<?=$this->cancelUrl;?>" class="btn btn-warning"  data-loading-text="Please wait...">
+                        Cancel
+                    </a>
+                    <?php endif;?>
+                </div>
+            </div>
+        </div>
+        <?php endif;?>
+    </fieldset>
+<?=$this->form()->closeTag();?>
+

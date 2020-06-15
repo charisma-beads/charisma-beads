@@ -1,0 +1,128 @@
+<?php
+
+namespace ShopDomPdf\Model;
+
+use Common\Model\Model;
+use Common\Model\ModelInterface;
+use Zend\Stdlib\Exception\InvalidArgumentException;
+
+
+class PdfTextLine implements ModelInterface
+{
+    use Model;
+
+    /**
+     * @var string
+     */
+    protected $text;
+
+    /**
+     * @var string
+     */
+    protected $position;
+
+    /**
+     * @var PdfTextLineFont
+     */
+    protected $font;
+
+    /**
+     * @var array
+     */
+    private $allowedPositions = [
+        'center', 'left', 'right',
+    ];
+
+    /**
+     * @param array $array
+     */
+    public function __construct(array $array = [])
+    {
+        if (isset($array['text'])) {
+            $this->setText($array['text']);
+        }
+
+        if (isset($array['position'])) {
+            $this->setPosition($array['position']);
+        }
+
+        if (isset($array['font'])) {
+            $this->setFont($array['font']);
+        }
+    }
+
+    /**
+     * @return string
+     */
+    public function getText()
+    {
+        return $this->text;
+    }
+
+    /**
+     * @param string $text
+     * @return PdfTextLine
+     */
+    public function setText($text)
+    {
+        $this->text = $text;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * @param string $position
+     * @return PdfTextLine
+     */
+    public function setPosition($position)
+    {
+        if (!in_array($position, $this->allowedPositions)) {
+            $positions = implode(', ', $this->allowedPositions);
+            throw new InvalidArgumentException('"' . $position . '" must be one of ' . $positions . ' called in "' . __METHOD__ . '"');
+        }
+
+        $this->position = $position;
+        return $this;
+    }
+
+    /**
+     * @return PdfTextLineFont
+     */
+    public function getFont()
+    {
+        return $this->font;
+    }
+
+    /**
+     * @param array|PdfTextLineFont $font
+     * @return PdfTextLine
+     */
+    public function setFont($font)
+    {
+        if ($font instanceof PdfTextLineFont) {
+            $this->font = $font;
+        } else {
+            $this->font = new PdfTextLineFont($font);
+        }
+
+        return $this;
+    }
+
+    public function getArrayCopy()
+    {
+        $array = get_object_vars($this);
+
+        if ($array['font'] instanceof  PdfTextLineFont) {
+            $array['font'] = $array['font']->getArrayCopy();
+        }
+
+        return $array;
+    }
+}

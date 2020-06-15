@@ -1,0 +1,30 @@
+<?php
+
+use SessionManager\Service\Factory\SessionSaveHandlerFactory;
+use Zend\Session\Config\SessionConfig;
+use Zend\Session\Storage\SessionArrayStorage;
+use Zend\Session\Validator\HttpUserAgent;
+use Zend\Session\Validator\RemoteAddr;
+
+return [
+    'uthando_session_manager' => [
+        'config' => [
+            'class' => SessionConfig::class,
+            'options' => [
+                'name'          => 'uthando-cms',
+                //'cache_limiter' => 'public',
+                //'save_path'     => APPLICATION_PATH . '/data/sessions',
+                //'remember_me_seconds' => 1209600,
+                //'cookie_lifetime' => 1440,
+                //'gc_maxlifetime' => 1209600,
+                //'gc_divisor' => 1,
+            ],
+        ],
+        'storage' => SessionArrayStorage::class,
+        'save_handler'  => SessionSaveHandlerFactory::class,
+        'validators' => [
+            RemoteAddr::class,
+            HttpUserAgent::class
+        ],
+    ],
+];

@@ -1,0 +1,14 @@
+<h4>Recent <strong>Tweets</strong></h4>
+<ul class="list-unstyled fsize13">
+    <?php /* @var $tweet \Twitter\Model\Tweet */ ?>
+    <?php foreach($this->tweets as $tweet): ?>
+    <li>
+        <i class="fa fa-twitter"></i>&nbsp;
+        <a href="https://twitter.com/intent/user?user_id=<?=$tweet->getUserId(); ?>">
+            @<?=$tweet->getScreenName(); ?>
+        </a>&nbsp;
+        <?=$tweet->getText($this->tweets->getShowTweetLinks()); ?>&nbsp;
+        <small class="ago"><?=$tweet->getRelativeTime(); ?></small>
+    </li>
+    <?php endforeach; ?>
+</ul>
