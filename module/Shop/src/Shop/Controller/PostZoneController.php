@@ -11,7 +11,7 @@
 namespace Shop\Controller;
 
 use Shop\Service\PostZoneService;
-use UthandoCommon\Controller\AbstractCrudController;
+use Common\Controller\AbstractCrudController;
 
 /**
  * Class PostZone

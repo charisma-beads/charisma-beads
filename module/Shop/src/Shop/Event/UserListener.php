@@ -13,7 +13,7 @@ namespace Shop\Event;
 use Shop\Form\Element\AdvertList;
 use Shop\Service\AdvertHitService;
 use Shop\Service\CustomerService;
-use UthandoUser\Service\UserService;
+use User\Service\UserService;
 use Zend\EventManager\Event;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
@@ -73,7 +73,7 @@ class UserListener implements ListenerAggregateInterface
 
         $post = $e->getParam('post');
 
-        /* @var $form \UthandoUser\Form\RegisterForm */
+        /* @var $form \User\Form\RegisterForm */
         $form = $e->getParam('form');
 
         if (isset($post['advertId'])) {

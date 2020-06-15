@@ -12,10 +12,10 @@ namespace Shop\Form;
 
 use Shop\Model\CountryModel;
 use Shop\Model\CustomerAddressModel;
-use UthandoCommon\Filter\Ucwords;
-use UthandoCommon\I18n\Filter\PhoneNumber;
-use UthandoCommon\I18n\Validator\PhoneNumber as PhoneNumberValidator;
-use UthandoCommon\I18n\Validator\PostCode;
+use Common\Filter\Ucwords;
+use Common\I18n\Filter\PhoneNumber;
+use Common\I18n\Validator\PhoneNumber as PhoneNumberValidator;
+use Common\I18n\Validator\PostCode;
 use Zend\Filter\Digits;
 use Zend\Filter\StringToUpper;
 use Zend\Filter\StringTrim;

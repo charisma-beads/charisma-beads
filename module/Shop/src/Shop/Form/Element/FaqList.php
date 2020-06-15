@@ -12,7 +12,7 @@ namespace Shop\Form\Element;
 
 
 use Shop\Service\FaqService;
-use UthandoCommon\Service\ServiceManager;
+use Common\Service\ServiceManager;
 use Zend\Form\Element\Select;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;

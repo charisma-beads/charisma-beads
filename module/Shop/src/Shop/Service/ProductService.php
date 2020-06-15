@@ -15,7 +15,7 @@ use Shop\Hydrator\ProductHydrator;
 use Shop\InputFilter\ProductInputFilter;
 use Shop\Mapper\ProductMapper;
 use Shop\Model\ProductModel;
-use UthandoCommon\Service\AbstractRelationalMapperService;
+use Common\Service\AbstractRelationalMapperService;
 use Zend\EventManager\Event;
 
 /**
@@ -101,7 +101,7 @@ class ProductService extends AbstractRelationalMapperService
      * @param null $order
      * @param bool $deep
      * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
-     * @throws \UthandoCommon\Service\ServiceException
+     * @throws \Common\Service\ServiceException
      */
     public function getProductsByCategory($category, $order = null, $deep = true)
     {
@@ -225,7 +225,7 @@ class ProductService extends AbstractRelationalMapperService
 
     /**
      * @param int $id
-     * @return array|mixed|\UthandoCommon\Model\ModelInterface|ProductModel
+     * @return array|mixed|\Common\Model\ModelInterface|ProductModel
      */
     public function getFullProductById($id)
     {
@@ -240,7 +240,7 @@ class ProductService extends AbstractRelationalMapperService
     /**
      * @param ProductModel $product
      * @return int
-     * @throws \UthandoCommon\Service\ServiceException
+     * @throws \Common\Service\ServiceException
      */
     public function toggleEnabled(ProductModel $product)
     {

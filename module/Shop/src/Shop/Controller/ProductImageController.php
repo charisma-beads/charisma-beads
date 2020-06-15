@@ -11,7 +11,7 @@
 namespace Shop\Controller;
 
 use Shop\Service\ProductImageService;
-use UthandoCommon\Controller\AbstractCrudController;
+use Common\Controller\AbstractCrudController;
 use Zend\View\Model\ViewModel;
 use Shop\ShopException;
 

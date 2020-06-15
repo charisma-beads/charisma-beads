@@ -15,7 +15,7 @@ use Shop\Hydrator\TaxRateHydrator;
 use Shop\InputFilter\TaxRateInputFilter;
 use Shop\Mapper\TaxRateMapper;
 use Shop\Model\TaxRateModel;
-use UthandoCommon\Service\AbstractMapperService;
+use Common\Service\AbstractMapperService;
 
 /**
  * Class Rate

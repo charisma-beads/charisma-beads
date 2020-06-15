@@ -17,8 +17,8 @@ use Shop\Mapper\VoucherCodeMapper;
 use Shop\Model\VoucherCodeModel;
 use Shop\Model\ProductCategoryModel;
 use Shop\Model\VoucherProductCategoryModel;
-use UthandoCommon\Hydrator\Strategy\DateTime;
-use UthandoCommon\Service\AbstractMapperService;
+use Common\Hydrator\Strategy\DateTime;
+use Common\Service\AbstractMapperService;
 use Zend\EventManager\Event;
 
 /**
@@ -67,7 +67,7 @@ class VoucherCodeService extends AbstractMapperService
 
     /**
      * @param Event $e
-     * @throws \UthandoCommon\Model\CollectionException
+     * @throws \Common\Model\CollectionException
      */
     public function checkChildCategories(Event $e)
     {
@@ -97,7 +97,7 @@ class VoucherCodeService extends AbstractMapperService
     /**
      * @param $voucherCode
      * @return bool|int
-     * @throws \UthandoCommon\Service\ServiceException
+     * @throws \Common\Service\ServiceException
      */
     public function updateVoucherCount($voucherCode)
     {
@@ -213,7 +213,7 @@ class VoucherCodeService extends AbstractMapperService
     /**
      * @param VoucherCodeModel $code
      * @return int
-     * @throws \UthandoCommon\Service\ServiceException
+     * @throws \Common\Service\ServiceException
      */
     public function toggleEnabled(VoucherCodeModel $code)
     {

@@ -14,9 +14,9 @@ use Shop\Hydrator\Strategy\VoucherCategoriesStrategy;
 use Shop\Hydrator\Strategy\VoucherExpiryStrategy;
 use Shop\Hydrator\Strategy\VoucherZonesStrategy;
 use Shop\Model\VoucherCodeModel;
-use UthandoCommon\Hydrator\AbstractHydrator;
-use UthandoCommon\Hydrator\Strategy\DateTime;
-use UthandoCommon\Hydrator\Strategy\TrueFalse;
+use Common\Hydrator\AbstractHydrator;
+use Common\Hydrator\Strategy\DateTime;
+use Common\Hydrator\Strategy\TrueFalse;
 
 /**
  * Class Codes

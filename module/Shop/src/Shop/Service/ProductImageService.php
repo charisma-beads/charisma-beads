@@ -15,7 +15,7 @@ use Shop\Hydrator\ProductImageHydrator;
 use Shop\InputFilter\ProductImageInputFilter;
 use Shop\Mapper\ProductImageMapper;
 use Shop\Model\ProductImageModel;
-use UthandoCommon\Service\AbstractRelationalMapperService;
+use Common\Service\AbstractRelationalMapperService;
 use Zend\EventManager\Event;
 
 /**

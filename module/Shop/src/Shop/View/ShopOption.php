@@ -11,7 +11,7 @@
 
 namespace Shop\View;
 
-use UthandoCommon\View\AbstractViewHelper;
+use Common\View\AbstractViewHelper;
 use Shop\ShopException;
 use Shop\Options\ShopOptions;
 

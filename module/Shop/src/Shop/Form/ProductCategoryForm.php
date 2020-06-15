@@ -12,7 +12,7 @@ namespace Shop\Form;
 
 use Shop\Form\Element\ProductCategoryList;
 use TwbBundle\Form\View\Helper\TwbBundleForm;
-use UthandoCommon\Mapper\AbstractNestedSet as NestedSet;
+use Common\Mapper\AbstractNestedSet as NestedSet;
 use Zend\Form\Element\Button;
 use Zend\Form\Element\Checkbox;
 use Zend\Form\Element\Hidden;

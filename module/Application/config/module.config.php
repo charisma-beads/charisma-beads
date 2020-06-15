@@ -23,7 +23,7 @@ return [
             ],
         ],
     ],
-    'uthando_user' => [
+    'user' => [
         'acl' => [
             'roles' => [
                 'guest' => [

@@ -12,7 +12,7 @@ namespace Shop\Form;
 
 use Shop\Form\Element\FaqList;
 use TwbBundle\Form\View\Helper\TwbBundleForm;
-use UthandoCommon\Mapper\AbstractNestedSet as NestedSet;
+use Common\Mapper\AbstractNestedSet as NestedSet;
 use Zend\Form\Element\Hidden;
 use Zend\Form\Element\Radio;
 use Zend\Form\Element\Text;

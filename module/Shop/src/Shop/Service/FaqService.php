@@ -16,8 +16,8 @@ use Shop\InputFilter\FaqInputFilter;
 use Shop\Mapper\FaqMapper as FaqMapper;
 use Shop\Model\FaqModel as FaqModel;
 use Shop\ShopException;
-use UthandoCommon\Model\ModelInterface;
-use UthandoCommon\Service\AbstractMapperService;
+use Common\Model\ModelInterface;
+use Common\Service\AbstractMapperService;
 use Zend\EventManager\Event;
 use Zend\Form\Form;
 
@@ -126,9 +126,9 @@ class FaqService extends AbstractMapperService
      * @param FaqModel|ModelInterface $model
      * @param array $post
      * @param Form $form
-     * @throws ShopException
-     * @throws \UthandoCommon\Service\ServiceException
      * @return int|Form
+     *@throws \Common\Service\ServiceException
+     * @throws ShopException
      */
     public function edit(ModelInterface $model, array $post, Form $form = null)
     {

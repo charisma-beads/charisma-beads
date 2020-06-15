@@ -10,7 +10,7 @@
 
 namespace Shop\Mapper;
 
-use UthandoCommon\Mapper\AbstractDbMapper;
+use Common\Mapper\AbstractDbMapper;
 
 class ProductSizeMapper extends AbstractDbMapper
 {

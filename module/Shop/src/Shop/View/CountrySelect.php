@@ -12,7 +12,7 @@
 namespace Shop\View;
 
 use Shop\Form\Element\CountryList;
-use UthandoCommon\View\AbstractViewHelper;
+use Common\View\AbstractViewHelper;
 
 /**
  * Class CountrySelect

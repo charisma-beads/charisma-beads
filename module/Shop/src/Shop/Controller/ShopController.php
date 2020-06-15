@@ -13,7 +13,7 @@ namespace Shop\Controller;
 use Shop\Service\ProductCategoryService;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use UthandoCommon\Service\ServiceTrait;
+use Common\Service\ServiceTrait;
 
 /**
  * Class Shop

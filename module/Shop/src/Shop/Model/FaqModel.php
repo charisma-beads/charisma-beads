@@ -10,8 +10,8 @@
 
 namespace Shop\Model;
 
-use UthandoCommon\Model\Model;
-use UthandoCommon\Model\NestedSet;
+use Common\Model\Model;
+use Common\Model\NestedSet;
 
 /**
  * Class Faq

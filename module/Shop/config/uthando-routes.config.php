@@ -1,5 +1,7 @@
 <?php
 
+namespace Shop;
+
 return [
     'router' => [
         'routes' => [
@@ -9,7 +11,7 @@ return [
                     'route' => '/shop',
                     'defaults' => [
                         '__NAMESPACE__' => 'Shop\Controller',
-                        'controller' => \Shop\Controller\ShopController::class,
+                        'controller' => Controller\ShopController::class,
                         'action' => 'shop-front',
                         'force-ssl' => 'ssl'
                     ]
@@ -24,7 +26,7 @@ return [
                                 'categoryIdent' => '[a-zA-Z0-9][a-zA-Z0-9_-]*'
                             ],
                             'defaults' => [
-                                'controller' => \Shop\Controller\CatalogController::class,
+                                'controller' => Controller\CatalogController::class,
                                 'action' => 'index',
                                 'categoryIdent' => '',
                             ]
@@ -63,7 +65,7 @@ return [
                         'options' => [
                             'route' => '/search',
                             'defaults' => [
-                                'controller' => \Shop\Controller\CatalogController::class,
+                                'controller' => Controller\CatalogController::class,
                                 'action' => 'search',
                             ]
                         ],
@@ -92,7 +94,7 @@ return [
                                 'id' => '\d+'
                             ],
                             'defaults' => [
-                                'controller' => \Shop\Controller\CartController::class,
+                                'controller' => Controller\CartController::class,
                                 'action' => 'view',
                             ]
                         ]
@@ -105,7 +107,7 @@ return [
                                 'action' => '[a-zA-Z0-9][a-zA-Z0-9_-]*'
                             ],
                             'defaults' => [
-                                'controller' => \Shop\Controller\CheckoutController::class,
+                                'controller' => Controller\CheckoutController::class,
                                 'action' => 'index',
                                 'force-ssl' => 'ssl'
                             ]
@@ -116,7 +118,7 @@ return [
                         'options' => [
                             'route' => '/customer[/]',
                             'defaults' => [
-                                'controller' => \Shop\Controller\CustomerController::class,
+                                'controller' => Controller\CustomerController::class,
                                 'action' => 'my-details',
                                 'force-ssl' => 'ssl'
                             ],
@@ -132,7 +134,7 @@ return [
                                         'id' => '\d+',
                                     ],
                                     'defaults' => [
-                                        'controller' => \Shop\Controller\CustomerAddressController::class,
+                                        'controller' => Controller\CustomerAddressController::class,
                                         'action' => 'my-addresses',
                                         'force-ssl' => 'ssl'
                             		],
@@ -145,7 +147,7 @@ return [
                         'options' => [
                             'route' => '/country/province',
                             'defaults' => [
-                                'controller' => \Shop\Controller\CountryProvinceController::class,
+                                'controller' => Controller\CountryProvinceController::class,
                                 'action' => 'country-province-list',
                             ],
                         ],
@@ -155,7 +157,7 @@ return [
                         'options' => [
                             'route' => '/order[/]',
                             'defaults' => [
-                                'controller' => \Shop\Controller\OrderController::class,
+                                'controller' => Controller\OrderController::class,
                                 'action' => 'my-orders',
                                 'force-ssl' => 'ssl'
                             ]
@@ -208,7 +210,7 @@ return [
                         'options' => [
                             'route' => '/payment',
                             'defaults' => [
-                                'controller' => \Shop\Controller\PaymentController::class,
+                                'controller' => Controller\PaymentController::class,
                                 'force-ssl' => 'ssl'
                             ],
                         ],
@@ -249,7 +251,7 @@ return [
                                 'orderId' => '\d+',
                             ],
                             'defaults' => [
-                                'controller' => \Shop\Controller\PaypalController::class,
+                                'controller' => Controller\PaypalController::class,
                                 'force-ssl' => 'ssl',
                                 'orderId' => 0,
                             ],
@@ -260,7 +262,7 @@ return [
                         'options' => [
                             'route' => '/faq',
                             'defaults' => [
-                                'controller' => \Shop\Controller\FaqController::class,
+                                'controller' => Controller\FaqController::class,
                                 'action' => 'faq',
                                 'force-ssl' => 'ssl',
                             ]
@@ -271,7 +273,7 @@ return [
                         'options' => [
                             'route' => '/add-voucher',
                             'defaults' => [
-                                'controller' => \Shop\Controller\VoucherCodesController::class,
+                                'controller' => Controller\VoucherCodesController::class,
                                 'action' => 'add-voucher',
                                 'force-ssl' => 'ssl',
                             ],
@@ -287,7 +289,7 @@ return [
                             'route' => '/shop',
                             'defaults' => [
                                 '__NAMESPACE__' => 'Shop\Controller',
-                                'controller' => \Shop\Controller\ShopController::class,
+                                'controller' => Controller\ShopController::class,
                                 'action' => 'index',
                                 'force-ssl' => 'ssl'
                             ]
@@ -299,7 +301,7 @@ return [
                                 'options' => [
                                     'route' => '/advert',
                                     'defaults' => [
-                                        'controller' => \Shop\Controller\AdvertController::class,
+                                        'controller' => Controller\AdvertController::class,
                                         'action' => 'index',
                                         'force-ssl' => 'ssl'
                                     ]
@@ -341,7 +343,7 @@ return [
                                 'options' => [
                                     'route' => '/faq',
                                     'defaults' => [
-                                        'controller' => \Shop\Controller\FaqController::class,
+                                        'controller' => Controller\FaqController::class,
                                         'action' => 'index',
                                         'force-ssl' => 'ssl'
                                     ],
@@ -383,7 +385,7 @@ return [
                                 'options' => [
                                     'route' => '/product',
                                     'defaults' => [
-                                        'controller' => \Shop\Controller\ProductController::class,
+                                        'controller' => Controller\ProductController::class,
                                         'action' => 'index',
                                         'force-ssl' => 'ssl'
                                     ]
@@ -426,7 +428,7 @@ return [
                                                 'id' => '\d+',
                                             ],
                                             'defaults' => [
-                                                'controller' => \Shop\Controller\ProductImageController::class,
+                                                'controller' => Controller\ProductImageController::class,
                                                 'action' => 'list',
                                                 'force-ssl' => 'ssl'
                                             ],
@@ -441,7 +443,7 @@ return [
                                                 'id' => '\d+',
                                             ],
                                             'defaults' => [
-                                                'controller' => \Shop\Controller\ProductOptionController::class,
+                                                'controller' => Controller\ProductOptionController::class,
                                                 'action' => 'list',
                                                 'force-ssl' => 'ssl'
                                             ],
@@ -452,7 +454,7 @@ return [
                                         'options' => [
                                             'route' => '/size',
                                             'defaults' => [
-                                                'controller' => \Shop\Controller\ProductSizeController::class,
+                                                'controller' => Controller\ProductSizeController::class,
                                                 'action' => 'index',
                                                 'force-ssl' => 'ssl'
                                             ],
@@ -510,7 +512,7 @@ return [
                                 'options' => [
                                     'route' => '/category',
                                     'defaults' => [
-                                        'controller' => \Shop\Controller\ProductCategoryController::class,
+                                        'controller' => Controller\ProductCategoryController::class,
                                         'action' => 'index',
                                         'force-ssl' => 'ssl'
                                     ]
@@ -552,7 +554,7 @@ return [
                                 'options' => [
                                     'route' => '/group',
                                     'defaults' => [
-                                        'controller' => \Shop\Controller\ProductGroupController::class,
+                                        'controller' => Controller\ProductGroupController::class,
                                         'action' => 'index',
                                         'force-ssl' => 'ssl'
                                     ]
@@ -594,7 +596,7 @@ return [
                                 'options' => [
                                     'route' => '/country',
                                     'defaults' => [
-                                        'controller' => \Shop\Controller\CountryController::class,
+                                        'controller' => Controller\CountryController::class,
                                         'action' => 'index',
                                         'force-ssl' => 'ssl'
                                     ]
@@ -624,7 +626,7 @@ return [
                                                 'id' => '\d+',
                                             ],
                                             'defaults' => [
-                                                'controller' => \Shop\Controller\CountryProvinceController::class,
+                                                'controller' => Controller\CountryProvinceController::class,
                                                 'action' => 'list',
                                                 'force-ssl' => 'ssl'
                                             ],
@@ -651,7 +653,7 @@ return [
                                 'options' => [
                                     'route' => '/customer',
                                     'defaults' => [
-                                        'controller' => \Shop\Controller\CustomerController::class,
+                                        'controller' => Controller\CustomerController::class,
                                         'action' => 'index',
                                         'force-ssl' => 'ssl'
                                     ],
@@ -681,7 +683,7 @@ return [
                                                 'id' => '\d+',
                                             ],
                                             'defaults' => [
-                                                'controller' => \Shop\Controller\CustomerAddressController::class,
+                                                'controller' => Controller\CustomerAddressController::class,
                                                 'action' => 'list',
                                                 'force-ssl' => 'ssl'
                                             ],
@@ -708,7 +710,7 @@ return [
                                 'options' => [
                                     'route' => '/order',
                                     'defaults' => [
-                                        'controller' => \Shop\Controller\OrderController::class,
+                                        'controller' => Controller\OrderController::class,
                                         'action' => 'index',
                                         'force-ssl' => 'ssl'
                                     ]
@@ -724,7 +726,7 @@ return [
                                                 'id' => '\d+'
                                             ],
                                             'defaults' => [
-                                                'controller' => \Shop\Controller\CreateOrderController::class,
+                                                'controller' => Controller\CreateOrderController::class,
                                                 'force-ssl' => 'ssl',
                                                 'action' => 'create',
                                             ]
@@ -765,7 +767,7 @@ return [
                                 'options' => [
                                     'route' => '/post',
                                     'defaults' => [
-                                        'controller' => \Shop\Controller\PostCostController::class,
+                                        'controller' => Controller\PostCostController::class,
                                         'action' => 'index',
                                         'force-ssl' => 'ssl'
                                     ]
@@ -777,7 +779,7 @@ return [
                                         'options' => [
                                             'route' => '/cost',
                                             'defaults' => [
-                                                'controller' => \Shop\Controller\PostCostController::class,
+                                                'controller' => Controller\PostCostController::class,
                                                 'action' => 'index',
                                                 'force-ssl' => 'ssl'
                                             ]
@@ -819,7 +821,7 @@ return [
                                         'options' => [
                                             'route' => '/level',
                                             'defaults' => [
-                                                'controller' => \Shop\Controller\PostLevelController::class,
+                                                'controller' => Controller\PostLevelController::class,
                                                 'action' => 'index',
                                                 'force-ssl' => 'ssl'
                                             ]
@@ -861,7 +863,7 @@ return [
                                         'options' => [
                                             'route' => '/zone',
                                             'defaults' => [
-                                                'controller' => \Shop\Controller\PostZoneController::class,
+                                                'controller' => Controller\PostZoneController::class,
                                                 'action' => 'index',
                                                 'force-ssl' => 'ssl'
                                             ]
@@ -903,7 +905,7 @@ return [
                                         'options' => [
                                             'route' => '/unit',
                                             'defaults' => [
-                                                'controller' => \Shop\Controller\PostUnitController::class,
+                                                'controller' => Controller\PostUnitController::class,
                                                 'action' => 'index',
                                                 'force-ssl' => 'ssl'
                                             ]
@@ -947,7 +949,7 @@ return [
                                 'options' => [
                                     'route' => '/tax',
                                     'defaults' => [
-                                        'controller' => \Shop\Controller\TaxCodeController::class,
+                                        'controller' => Controller\TaxCodeController::class,
                                         'action' => 'index',
                                         'force-ssl' => 'ssl'
                                     ]
@@ -959,7 +961,7 @@ return [
                                         'options' => [
                                             'route' => '/code',
                                             'defaults' => [
-                                                'controller' => \Shop\Controller\TaxCodeController::class,
+                                                'controller' => Controller\TaxCodeController::class,
                                                 'action' => 'index',
                                                 'force-ssl' => 'ssl'
                                             ]
@@ -1001,7 +1003,7 @@ return [
                                         'options' => [
                                             'route' => '/rate',
                                             'defaults' => [
-                                                'controller' => \Shop\Controller\TaxRateController::class,
+                                                'controller' => Controller\TaxRateController::class,
                                                 'action' => 'index',
                                                 'force-ssl' => 'ssl'
                                             ]
@@ -1049,7 +1051,7 @@ return [
                                         'paymentId' => '[a-zA-Z0-9][a-zA-Z0-9-]*',
                                     ],
                                     'defaults' => [
-                                        'controller' => \Shop\Controller\PaypalController::class,
+                                        'controller' => Controller\PaypalController::class,
                                         'force-ssl' => 'ssl',
                                         'paymentId' => '',
                                     ],
@@ -1063,7 +1065,7 @@ return [
                                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                     ],
                                     'defaults' => [
-                                        'controller' => \Shop\Controller\ReportController::class,
+                                        'controller' => Controller\ReportController::class,
                                         'action' => 'index',
                                         'force-ssl' => 'ssl'
                                     ]
@@ -1078,7 +1080,7 @@ return [
                                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                     ],
                                     'defaults' => [
-                                        'controller' => \Shop\Controller\SettingsController::class,
+                                        'controller' => Controller\SettingsController::class,
                                         'action' => 'index',
                                         'force-ssl' => 'ssl'
                                     ]
@@ -1090,7 +1092,7 @@ return [
                                 'options' => [
                                     'route' => '/voucher',
                                     'defaults' => [
-                                        'controller' => \Shop\Controller\VoucherAdminController::class,
+                                        'controller' => Controller\VoucherAdminController::class,
                                         'action' => 'index',
                                         'force-ssl' => 'ssl'
                                     ],
@@ -1141,7 +1143,7 @@ return [
                         'route' => 'shopping-cart gc',
                         'defaults' => array(
                             '__NAMESPACE__' => 'Shop\Controller',
-                            'controller' => \Shop\Controller\ConsoleController::class,
+                            'controller' => Controller\ConsoleController::class,
                             'action' => 'gc'
                         ),
                     ],

@@ -13,8 +13,8 @@ namespace Shop\View;
 
 use Shop\Form\CartAddFrom;
 use Shop\Model\CartModel as CartModel;
-use UthandoCommon\Service\ServiceManager;
-use UthandoCommon\View\AbstractViewHelper;
+use Common\Service\ServiceManager;
+use Common\View\AbstractViewHelper;
 use Zend\I18n\View\Helper\CurrencyFormat;
 use Shop\Service\CartService;
 use Zend\View\Model\ViewModel;

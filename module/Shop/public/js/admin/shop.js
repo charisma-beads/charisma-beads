@@ -21,7 +21,7 @@ var Shop = {
     },
 
     loadPanel : function(el, url, options) {
-        admin.ajaxWidgetPanel($(el), url, options);
+        adminClass.ajaxWidgetPanel($(el), url, options);
     },
 
     addEditButton : function(el, options) {
@@ -39,7 +39,7 @@ var Shop = {
                             loadingText: 'Please wait while I update the database'
                         });
 
-                        var response = admin.ajaxModalForm(modal, url);
+                        var response = adminClass.ajaxModalForm(modal, url);
 
                         response.done(function (data) {
                             if ($.isPlainObject(data)) {
@@ -72,10 +72,10 @@ var Shop = {
             data: params,
             type: 'POST',
             success: function (response) {
-                admin.addAlert(response.messages, response.status);
+                adminClass.addAlert(response.messages, response.status);
             },
             error: function (response) {
-                admin.addAlert(response.messages, 'danger');
+                adminClass.addAlert(response.messages, 'danger');
             }
         });
         response.done(function(){

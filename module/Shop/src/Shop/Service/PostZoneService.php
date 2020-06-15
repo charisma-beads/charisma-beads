@@ -15,7 +15,7 @@ use Shop\Hydrator\PostZoneHydrator;
 use Shop\InputFilter\PostZoneInputFilter;
 use Shop\Mapper\PostZoneMapper;
 use Shop\Model\PostZoneModel;
-use UthandoCommon\Service\AbstractMapperService;
+use Common\Service\AbstractMapperService;
 
 /**
  * Class Zone

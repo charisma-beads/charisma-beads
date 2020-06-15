@@ -12,10 +12,10 @@ namespace Shop\Hydrator;
 
 use Shop\Hydrator\Strategy\NumberFormatStrategy;
 use Shop\Hydrator\Strategy\PercentStrategy;
-use UthandoCommon\Hydrator\AbstractHydrator;
-use UthandoCommon\Hydrator\Strategy\DateTime as DateTimeStrategy;
-use UthandoCommon\Hydrator\Strategy\TrueFalse;
-use UthandoCommon\Hydrator\Strategy\NullStrategy;
+use Common\Hydrator\AbstractHydrator;
+use Common\Hydrator\Strategy\DateTime as DateTimeStrategy;
+use Common\Hydrator\Strategy\TrueFalse;
+use Common\Hydrator\Strategy\NullStrategy;
 
 /**
  * Class Product

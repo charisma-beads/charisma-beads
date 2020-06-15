@@ -13,7 +13,7 @@ namespace Shop\Service;
 use Shop\Hydrator\AdvertHitHydrator;
 use Shop\Mapper\AdvertHitMapper;
 use Shop\Model\AdvertHitModel;
-use UthandoCommon\Service\AbstractRelationalMapperService;
+use Common\Service\AbstractRelationalMapperService;
 
 /**
  * Class Hit

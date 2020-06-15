@@ -20,7 +20,7 @@ use Shop\Model\AbstractOrderCollection;
 use Shop\Model\OrderLineInterface;
 use Shop\Model\VoucherCodeModel;
 use Shop\Model\VoucherCustomerMapModel;
-use UthandoCommon\Mapper\MapperManager;
+use Common\Mapper\MapperManager;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Zend\Validator\AbstractValidator;

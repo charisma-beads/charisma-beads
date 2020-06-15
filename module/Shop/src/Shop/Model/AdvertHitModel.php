@@ -10,9 +10,9 @@
 
 namespace Shop\Model;
 
-use UthandoCommon\Model\ModelInterface;
-use UthandoCommon\Model\Model;
-use UthandoCommon\Model\DateCreatedTrait;
+use Common\Model\ModelInterface;
+use Common\Model\Model;
+use Common\Model\DateCreatedTrait;
 
 /**
  * Class Hit

@@ -27,7 +27,7 @@ $discontinued = new Element\Checkbox('discontinued', [
         <h3 class="panel-title"><i class="fa fa-list"></i> <?=$this->translate('Product List');?></h3>
     </div>
     <div class="panel-body">
-        <?=$this->partial('uthando-admin/partial/search', [
+        <?=$this->partial('admin/partial/search', [
             'name'			=> 'product',
             'searchInputs'	=> [
                 'Product'	=> 'sku-name-shortDescription',

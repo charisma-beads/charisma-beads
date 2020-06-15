@@ -18,7 +18,7 @@
     			<td><?=$this->escapeHtml($row->getPostZoneId()); ?></td>
     			<td><?=$this->escapeHtml($row->getZone()); ?></td>
     			<td>
-                    <?=$this->partial('uthando-admin/partial/edit-actions', [
+                    <?=$this->partial('admin/partial/edit-actions', [
                     	'pk'		=> 'postZoneId',
                     	'id'		=> $row->getPostZoneId(),
     		    		'tableName'	=> 'postZone',

@@ -10,7 +10,7 @@
 
 namespace Shop\Controller;
 
-use UthandoCommon\Controller\SettingsTrait;
+use Common\Controller\SettingsTrait;
 use Zend\Mvc\Controller\AbstractActionController;
 
 /**

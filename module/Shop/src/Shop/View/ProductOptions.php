@@ -13,7 +13,7 @@ namespace Shop\View;
 
 use Shop\Form\Element\ProductOptionsList;
 use Shop\Model\ProductModel;
-use UthandoCommon\View\AbstractViewHelper;
+use Common\View\AbstractViewHelper;
 
 /**
  * Class ProductOptions

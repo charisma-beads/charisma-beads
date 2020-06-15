@@ -46,7 +46,7 @@ $(document).ready(function () {
                         var cat = productList.find('select').val();
                         var errorCount = 0;
                         var response = $.ajax({
-                            url: admin.basePath + '/admin/shop/report/product-list',
+                            url: adminClass.basePath + '/admin/shop/report/product-list',
                             data:  $('#product-report').serialize(),
                             type: 'POST',
                             beforeSend: function() {
@@ -67,7 +67,7 @@ $(document).ready(function () {
                                 productList.find('.modal-content').loadingOverlay('remove');
                             },
                             error: function (response) {
-                                admin.addAlert(response.error, 'danger');
+                                adminClass.addAlert(response.error, 'danger');
                             }
                         });
 
@@ -78,7 +78,7 @@ $(document).ready(function () {
         });
 
         productList.on('show.bs.modal', function () {
-            $(this).find('.bootbox-body').load(admin.basePath + '/admin/shop/report');
+            $(this).find('.bootbox-body').load(adminClass.basePath + '/admin/shop/report');
         });
 
         productList.modal('show');

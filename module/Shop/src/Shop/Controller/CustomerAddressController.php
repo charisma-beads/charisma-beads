@@ -14,7 +14,7 @@ use Exception;
 use Shop\Service\CustomerAddressService;
 use Shop\Service\CustomerService;
 use Shop\ShopException;
-use UthandoCommon\Controller\AbstractCrudController;
+use Common\Controller\AbstractCrudController;
 use Zend\Form\Form;
 use Zend\View\Model\ViewModel;
 

@@ -1,16 +1,18 @@
 <?php
 
-
 namespace Shop\Service;
 
-
-use Shop\Hydrator\ProductAvailabilityHydrator;
-use Shop\Mapper\ProductAvailabilityMapper;
-use Shop\Model\ProductAvailabilityModel;
+use PDO;
 
 class ProductAvailabilityService
 {
-    protected $hydrator     = ProductAvailabilityHydrator::class;
-    protected $mapper       = ProductAvailabilityMapper::class;
-    protected $model        = ProductAvailabilityModel::class;
+    /**
+     * @var PDO
+     */
+    private $pdo;
+
+    public function __construct(PDO $pdo)
+    {
+        $this->pdo = $pdo;
+    }
 }

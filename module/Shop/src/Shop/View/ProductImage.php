@@ -12,7 +12,7 @@
 namespace Shop\View;
 
 use Shop\Model\ProductImageModel as ImageModel;
-use UthandoCommon\View\AbstractViewHelper;
+use Common\View\AbstractViewHelper;
 
 
 /**

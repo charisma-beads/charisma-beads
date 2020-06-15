@@ -15,7 +15,7 @@ use Shop\Hydrator\ProductSizeHydrator;
 use Shop\InputFilter\ProductSizeInputFilter;
 use Shop\Mapper\ProductSizeMapper;
 use Shop\Model\ProductSizeModel;
-use UthandoCommon\Service\AbstractMapperService;
+use Common\Service\AbstractMapperService;
 
 /**
  * Class Size

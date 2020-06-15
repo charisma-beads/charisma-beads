@@ -4,9 +4,9 @@ var country = {
 
     provinces : function () {
 
-        admin.ajaxWidgetPanel(
+        adminClass.ajaxWidgetPanel(
             $('#country-province').find('.country-province-list'),
-            admin.basePath + '/admin/shop/country/province/list',
+            adminClass.basePath + '/admin/shop/country/province/list',
             {countryId: country.countryId}
         );
     }

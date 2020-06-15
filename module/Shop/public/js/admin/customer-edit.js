@@ -4,7 +4,7 @@ var customer = {
 
     updateAddressLists : function () {
         $.ajax({
-            url: admin.basePath + '/admin/shop/customer/address/address-list',
+            url: adminClass.basePath + '/admin/shop/customer/address/address-list',
             data: {customerId: customer.customerId},
             type: 'POST'
         }).done(function (data) {
@@ -25,7 +25,7 @@ var customer = {
     updateCountyList : function () {
         $('#countryId').change(function() {
             $.ajax({
-                url : admin.basePath + '/admin/shop/country/province/country-province-list',
+                url : adminClass.basePath + '/admin/shop/country/province/country-province-list',
                 data : {countryId : this.value},
                 type : 'POST'
             }).done(function(data){
@@ -37,7 +37,7 @@ var customer = {
     getCountryProvinces : function() {
         $('#countryId').change(function() {
             $.ajax({
-                url : admin.basePath + '/admin/shop/country/province',
+                url : adminClass.basePath + '/admin/shop/country/province',
                 data : {countryId : this.value},
                 type : 'POST'
             }).done(function(data){
@@ -64,11 +64,11 @@ var customer = {
                             loadingText: 'Please wait while I update the database'
                         });
 
-                        var response = admin.ajaxModalForm(modal, url);
+                        var response = adminClass.ajaxModalForm(modal, url);
 
                         response.done(function (data) {
                             if ($.isPlainObject(data)) {
-                                Shop.loadPanel('#customer-addresses .panel-body', admin.basePath + '/admin/shop/customer/address/list', {
+                                Shop.loadPanel('#customer-addresses .panel-body', adminClass.basePath + '/admin/shop/customer/address/list', {
                                     customerId: customer.customerId
                                 });
 
@@ -88,7 +88,7 @@ var customer = {
             $(this).find('.bootbox-body').load(url, function(){
                 $('#countryId').change(function() {
                     $.ajax({
-                        url : admin.basePath + '/admin/shop/country/province/country-province-list',
+                        url : adminClass.basePath + '/admin/shop/country/province/country-province-list',
                         data : {countryId : this.value},
                         type : 'POST'
                     }).done(function(data){
@@ -105,10 +105,10 @@ var customer = {
 };
 
 $(document).ready(function () {
-    Shop.loadPanel('#customer-addresses .panel-body', admin.basePath + '/admin/shop/customer/address/list', {
+    Shop.loadPanel('#customer-addresses .panel-body', adminClass.basePath + '/admin/shop/customer/address/list', {
         customerId: customer.customerId
     });
-    Shop.loadPanel('#customer-orders .panel-table', admin.basePath + '/admin/shop/order/order-list', {
+    Shop.loadPanel('#customer-orders .panel-table', adminClass.basePath + '/admin/shop/order/order-list', {
         customerId: customer.customerId
     });
 
@@ -152,17 +152,17 @@ $(document).ready(function () {
             data: params,
             type: 'POST',
             success: function (response) {
-                admin.addAlert(response.messages, response.status);
+                adminClass.addAlert(response.messages, response.status);
             },
             error: function (response) {
-                admin.addAlert(response.error, 'danger');
+                adminClass.addAlert(response.error, 'danger');
             }
         });
 
         response.done(function(data){
             $(el).modal('hide');
             $('.modal-backdrop').remove();
-            Shop.loadPanel('#customer-addresses .panel-body', admin.basePath + '/admin/shop/customer/address/list', {
+            Shop.loadPanel('#customer-addresses .panel-body', adminClass.basePath + '/admin/shop/customer/address/list', {
                 customerId: customer.customerId
             });
             customer.updateAddressLists();

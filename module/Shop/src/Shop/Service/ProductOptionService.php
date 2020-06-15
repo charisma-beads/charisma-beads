@@ -15,7 +15,7 @@ use Shop\Hydrator\ProductOptionHydrator;
 use Shop\InputFilter\ProductOptionInputFilter;
 use Shop\Mapper\ProductOptionMapper;
 use Shop\Model\ProductOptionModel;
-use UthandoCommon\Service\AbstractRelationalMapperService;
+use Common\Service\AbstractRelationalMapperService;
 
 /**
  * Class Option

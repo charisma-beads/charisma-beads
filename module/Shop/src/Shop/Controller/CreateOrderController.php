@@ -14,7 +14,7 @@ use Shop\Service\OrderService;
 use Shop\Service\CustomerService;
 use Shop\Service\ProductService;
 use Shop\ShopException;
-use UthandoCommon\Service\ServiceTrait;
+use Common\Service\ServiceTrait;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
@@ -175,8 +175,8 @@ class CreateOrderController extends AbstractActionController
     /**
      * @return ViewModel
      * @throws ShopException
-     * @throws \UthandoCommon\Model\CollectionException
-     * @throws \UthandoCommon\Service\ServiceException
+     * @throws \Common\Model\CollectionException
+     * @throws \Common\Service\ServiceException
      */
     public function addLineAction()
     {

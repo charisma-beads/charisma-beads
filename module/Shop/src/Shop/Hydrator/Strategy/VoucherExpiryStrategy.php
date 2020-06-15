@@ -10,7 +10,7 @@
 
 namespace Shop\Hydrator\Strategy;
 
-use UthandoCommon\Hydrator\Strategy\DateTime;
+use Common\Hydrator\Strategy\DateTime;
 
 /**
  * Class VoucherExpiryStrategy

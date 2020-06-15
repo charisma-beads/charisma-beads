@@ -11,8 +11,8 @@
 namespace Shop\InputFilter;
 
 use Shop\I18n\Validator\PostCode;
-use UthandoCommon\Filter\Ucwords;
-use UthandoCommon\I18n\Filter\PhoneNumber;
+use Common\Filter\Ucwords;
+use Common\I18n\Filter\PhoneNumber;
 use Zend\Filter\Digits;
 use Zend\Filter\StringToUpper;
 use Zend\Filter\StringTrim;
@@ -159,7 +159,7 @@ class CustomerAddressInputFilter extends InputFilter
     		    ]]
     		],
     		'validators' => [
-        		['name' => \UthandoCommon\I18n\Validator\PhoneNumber::class, 'options' => [
+        		['name' => \Common\I18n\Validator\PhoneNumber::class, 'options' => [
                     'country' => $this->getCountryCode(),
         		]],
     		],

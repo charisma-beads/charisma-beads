@@ -10,8 +10,8 @@
 
 namespace Shop\Model;
 
-use UthandoCommon\Model\Model;
-use UthandoCommon\Model\ModelInterface;
+use Common\Model\Model;
+use Common\Model\ModelInterface;
 
 /**
  * Class Line

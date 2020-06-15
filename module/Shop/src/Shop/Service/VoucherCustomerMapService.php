@@ -15,7 +15,7 @@ use Shop\Mapper\VoucherCustomerMapMapper;
 use Shop\Model\CustomerModel;
 use Shop\Model\VoucherCodeModel;
 use Shop\Model\VoucherCustomerMapModel;
-use UthandoCommon\Service\AbstractMapperService;
+use Common\Service\AbstractMapperService;
 
 /**
  * Class CustomerMap
@@ -37,7 +37,7 @@ class VoucherCustomerMapService extends AbstractMapperService
      * @param VoucherCodeModel $voucher
      * @param CustomerModel $customer
      * @return int
-     * @throws \UthandoCommon\Service\ServiceException
+     * @throws \Common\Service\ServiceException
      */
     public function updateCustomerCount(VoucherCodeModel $voucher, CustomerModel $customer)
     {

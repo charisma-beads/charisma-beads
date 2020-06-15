@@ -15,7 +15,7 @@ use Shop\Hydrator\AdvertHydrator;
 use Shop\InputFilter\AdvertInputFiler;
 use Shop\Mapper\AdvertMapper;
 use Shop\Model\AdvertModel;
-use UthandoCommon\Service\AbstractMapperService;
+use Common\Service\AbstractMapperService;
 use Zend\Json\Json;
 
 /**

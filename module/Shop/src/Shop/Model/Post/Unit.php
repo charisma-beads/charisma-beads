@@ -11,8 +11,8 @@
 namespace Shop\Model\Post;
 
 use Shop\Model\PostUnitModel;
-use UthandoCommon\Model\Model;
-use UthandoCommon\Model\ModelInterface;
+use Common\Model\Model;
+use Common\Model\ModelInterface;
 
 /**
  * Class Unit

@@ -11,7 +11,7 @@
 namespace Shop\Event;
 
 use Shop\Service\ProductImageService;
-use UthandoFileManager\Service\ImageUploader;
+use FileManager\Service\ImageUploader;
 use Zend\EventManager\Event;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
@@ -47,7 +47,7 @@ class FileManagerListener implements ListenerAggregateInterface
             return;
         }
 
-        /* @var $options \UthandoFileManager\Options\FileManagerOptions */
+        /* @var $options \FileManager\Options\FileManagerOptions */
         $options = $e->getParam('options');
         $path = $options->getDestination() . 'shop/images/';
         $options->setDestination($path);
@@ -62,9 +62,9 @@ class FileManagerListener implements ListenerAggregateInterface
             return;
         }
 
-        /* @var $options \UthandoFileManager\Options\FileManagerOptions */
+        /* @var $options \FileManager\Options\FileManagerOptions */
         $options = $e->getParam('options');
-        /* @var $model \UthandoFileManager\Model\ImageModel */
+        /* @var $model \FileManager\Model\ImageModel */
         $model = $e->getParam('model');
 
         /* @var $service \Shop\Service\ProductImageService */

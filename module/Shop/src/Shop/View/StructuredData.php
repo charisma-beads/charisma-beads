@@ -11,7 +11,7 @@
 namespace Shop\View;
 
 use Shop\Model\ProductModel;
-use UthandoCommon\View\AbstractViewHelper;
+use Common\View\AbstractViewHelper;
 use Zend\Json\Json;
 use Zend\Paginator\Paginator;
 

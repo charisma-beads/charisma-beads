@@ -10,9 +10,9 @@
 
 namespace Shop\Hydrator;
 
-use UthandoCommon\Hydrator\AbstractHydrator;
-use UthandoCommon\Hydrator\Strategy\DateTime as DateTimeStrategy;
-use UthandoCommon\Hydrator\Strategy\TrueFalse;
+use Common\Hydrator\AbstractHydrator;
+use Common\Hydrator\Strategy\DateTime as DateTimeStrategy;
+use Common\Hydrator\Strategy\TrueFalse;
 
 /**
  * Class Image

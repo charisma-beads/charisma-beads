@@ -10,7 +10,7 @@
 
 namespace Shop\InputFilter;
 
-use UthandoCommon\Filter\Slug;
+use Common\Filter\Slug;
 use Zend\Filter\StringTrim;
 use Zend\Filter\StripTags;
 use Zend\I18n\Validator\IsFloat;

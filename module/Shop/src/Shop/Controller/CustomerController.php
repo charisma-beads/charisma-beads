@@ -12,7 +12,7 @@ namespace Shop\Controller;
 
 use Shop\Service\CustomerService;
 use Shop\ShopException;
-use UthandoCommon\Controller\AbstractCrudController;
+use Common\Controller\AbstractCrudController;
 use Zend\Form\Form;
 use Zend\Http\PhpEnvironment\Response;
 use Zend\View\Model\JsonModel;
@@ -94,7 +94,7 @@ class CustomerController extends AbstractCrudController
 
     /**
      * @return array|\Zend\Http\Response
-     * @throws \UthandoCommon\Service\ServiceException
+     * @throws \Common\Service\ServiceException
      */
     public function myDetailsAction()
     {

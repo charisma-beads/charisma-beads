@@ -11,7 +11,7 @@ return [
         //'zlib.output_compression'       => true,
         //'zlib.output_compression_level' => -1,
     ],
-    'uthando_user' => [
+    'user' => [
         'default_admin_route' => 'admin/shop',
     ],
 ];

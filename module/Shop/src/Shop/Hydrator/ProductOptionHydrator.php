@@ -11,7 +11,7 @@
 namespace Shop\Hydrator;
 
 use Shop\Hydrator\Strategy\PercentStrategy;
-use UthandoCommon\Hydrator\AbstractHydrator;
+use Common\Hydrator\AbstractHydrator;
 
 /**
  * Class Option

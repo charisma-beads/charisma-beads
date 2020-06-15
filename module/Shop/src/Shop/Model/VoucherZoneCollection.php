@@ -10,7 +10,7 @@
 
 namespace Shop\Model;
 
-use UthandoCommon\Model\AbstractCollection;
+use Common\Model\AbstractCollection;
 
 /**
  * Class VoucherZoneCollection
@@ -23,7 +23,7 @@ class VoucherZoneCollection extends AbstractCollection
 
     /**
      * @param $array
-     * @throws \UthandoCommon\Model\CollectionException
+     * @throws \Common\Model\CollectionException
      */
     public function fromArray($array)
     {

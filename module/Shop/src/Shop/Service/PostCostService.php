@@ -15,7 +15,7 @@ use Shop\Hydrator\PostCostHydrator;
 use Shop\InputFilter\PostCostInputFilter;
 use Shop\Mapper\PostCostMapper;
 use Shop\Model\PostCostModel;
-use UthandoCommon\Service\AbstractRelationalMapperService;
+use Common\Service\AbstractRelationalMapperService;
 
 /**
  * Class Cost

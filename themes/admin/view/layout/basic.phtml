@@ -11,7 +11,7 @@
         ->appendName('rating', 'general'); ?>
 
     <?=$this->headLink()
-        ->appendStylesheet($this->basePath('css/uthando-admin.css')); ?>
+        ->appendStylesheet($this->basePath('css/admin.css')); ?>
 
     <style>
         html {padding-top: 60px;}
@@ -57,10 +57,10 @@
 </div>
 
 <?=$this->inlineScript()
-    ->appendFile($this->basePath('js/uthando-admin.js')); ?>
+    ->appendFile($this->basePath('js/admin.js')); ?>
 
 <script>
-    admin.basePath = '<?=$this->basePath();?>';
+    adminClass.basePath = '<?=$this->basePath();?>';
 </script>
 
 <?=$this->placeholder('js-scripts');?>

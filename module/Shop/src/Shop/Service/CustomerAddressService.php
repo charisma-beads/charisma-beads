@@ -16,7 +16,7 @@ use Shop\InputFilter\CustomerAddressInputFilter;
 use Shop\Mapper\CustomerAddressMapper;
 use Shop\Model\Customer\Address;
 use Shop\ShopException;
-use UthandoCommon\Service\AbstractRelationalMapperService;
+use Common\Service\AbstractRelationalMapperService;
 use Zend\EventManager\Event;
 
 /**
@@ -52,7 +52,7 @@ class CustomerAddressService extends AbstractRelationalMapperService
     
     /**
      * (non-PHPdoc)
-     * @see \UthandoCommon\Service\AbstractService::attachEvents()
+     * @see \Common\Service\AbstractService::attachEvents()
      */
     public function attachEvents()
     {   
@@ -69,7 +69,7 @@ class CustomerAddressService extends AbstractRelationalMapperService
 
     /**
      * @param int $id
-     * @return array|mixed|\UthandoCommon\Model\ModelInterface
+     * @return array|mixed|\Common\Model\ModelInterface
      */
     public function getFullAddressById($id)
     {

@@ -11,8 +11,8 @@
 namespace Shop\Hydrator;
 
 use Shop\Hydrator\Strategy\CreditCardNumberStrategy;
-use UthandoCommon\Hydrator\AbstractHydrator;
-use UthandoCommon\Hydrator\Strategy\DateTime;
+use Common\Hydrator\AbstractHydrator;
+use Common\Hydrator\Strategy\DateTime;
 
 /**
  * Class CreditCard

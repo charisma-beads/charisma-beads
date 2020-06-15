@@ -16,7 +16,7 @@ use Shop\Model\CartModel;
 use Shop\Model\Order\Line;
 use Shop\Model\OrderLineInterface;
 use Shop\Model\OrderLineModel;
-use UthandoCommon\Service\AbstractMapperService;
+use Common\Service\AbstractMapperService;
 
 /**
  * Class Line
@@ -51,7 +51,7 @@ class OrderLineService extends AbstractMapperService
      * @param OrderLineInterface $lineModel
      * @param $orderId
      * @return int
-     * @throws \UthandoCommon\Service\ServiceException
+     * @throws \Common\Service\ServiceException
      */
     public function addLine(OrderLineInterface $lineModel, $orderId)
     {
@@ -75,7 +75,7 @@ class OrderLineService extends AbstractMapperService
     /**
      * @param CartModel|OrderLineModel $lines
      * @param $orderId
-     * @throws \UthandoCommon\Service\ServiceException
+     * @throws \Common\Service\ServiceException
      */
     public function processLines($lines, $orderId)
     {

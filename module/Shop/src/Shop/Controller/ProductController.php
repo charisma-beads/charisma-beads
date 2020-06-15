@@ -14,7 +14,7 @@ use Exception;
 use Shop\Model\Product\ProductModel as ProductModel;
 use Shop\Service\ProductService;
 use Shop\ShopException;
-use UthandoCommon\Controller\AbstractCrudController;
+use Common\Controller\AbstractCrudController;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
 

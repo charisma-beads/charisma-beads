@@ -12,7 +12,7 @@ namespace Shop\Controller;
 
 use Shop\Service\ProductOptionService;
 use Shop\ShopException;
-use UthandoCommon\Controller\AbstractCrudController;
+use Common\Controller\AbstractCrudController;
 use Zend\View\Model\ViewModel;
 
 /**

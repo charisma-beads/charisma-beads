@@ -15,7 +15,7 @@ use Shop\Hydrator\CountryHydrator;
 use Shop\InputFilter\CountryInputFilter;
 use Shop\Mapper\CountryMapper;
 use Shop\Model\CountryModel;
-use UthandoCommon\Service\AbstractRelationalMapperService;
+use Common\Service\AbstractRelationalMapperService;
 
 /**
  * Class Country

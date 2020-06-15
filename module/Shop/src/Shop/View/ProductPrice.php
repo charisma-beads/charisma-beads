@@ -12,7 +12,7 @@
 namespace Shop\View;
 
 use Shop\Model\ProductModel;
-use UthandoCommon\View\AbstractViewHelper;
+use Common\View\AbstractViewHelper;
 
 /**
  * Class ProductPrice

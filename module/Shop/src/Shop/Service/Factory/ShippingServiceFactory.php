@@ -14,7 +14,7 @@ use Shop\Options\CartOptions;
 use Shop\Service\CountryService;
 use Shop\Service\ShippingService;
 use Shop\Service\TaxService;
-use UthandoCommon\Service\ServiceManager;
+use Common\Service\ServiceManager;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
@@ -27,7 +27,7 @@ class ShippingServiceFactory implements FactoryInterface
 {
 	public function createService(ServiceLocatorInterface $serviceLocator)
 	{
-	    /* @var $serviceManager \UthandoCommon\Service\ServiceManager */
+	    /* @var $serviceManager \Common\Service\ServiceManager */
 	    $serviceManager = $serviceLocator->get(ServiceManager::class);
 	    
 	    /* @var $cartOptions \Shop\Options\CartOptions */

@@ -17,7 +17,7 @@ use Shop\Service\CountryService;
 use Shop\Service\CustomerService;
 use Shop\Service\VoucherCodeService;
 use Shop\ShopException;
-use UthandoCommon\Service\ServiceTrait;
+use Common\Service\ServiceTrait;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Session\Container;
 use Zend\View\Model\JsonModel;

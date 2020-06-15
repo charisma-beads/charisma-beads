@@ -12,8 +12,8 @@
 namespace Shop\View;
 
 use Shop\Service\ProductService;
-use UthandoCommon\Service\ServiceManager;
-use UthandoCommon\View\AbstractViewHelper;
+use Common\Service\ServiceManager;
+use Common\View\AbstractViewHelper;
 
 /**
  * Class Product
@@ -29,7 +29,7 @@ class Product extends AbstractViewHelper
 
     /**
      * @param null $productId
-     * @return $this|array|mixed|\Shop\Model\ProductModel|\UthandoCommon\Model\ModelInterface
+     * @return $this|array|mixed|\Shop\Model\ProductModel|\Common\Model\ModelInterface
      */
     public function __invoke($productId = null)
     {

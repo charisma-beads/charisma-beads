@@ -15,7 +15,7 @@ use Shop\Hydrator\TaxCodeHydrator;
 use Shop\InputFilter\TaxCodeInputFilter;
 use Shop\Mapper\TaxCodeMapper;
 use Shop\Model\TaxCodeModel;
-use UthandoCommon\Service\AbstractRelationalMapperService;
+use Common\Service\AbstractRelationalMapperService;
 
 /**
  * Class Code
@@ -47,7 +47,7 @@ class TaxCodeService extends AbstractRelationalMapperService
     /**
      * @param int $id
      * @param null $col
-     * @return array|mixed|\UthandoCommon\Model\ModelInterface
+     * @return array|mixed|\Common\Model\ModelInterface
      */
     public function getById($id, $col = null)
     {

@@ -11,7 +11,7 @@
 namespace Shop\View;
 
 use Shop\Model\ProductCategoryModel;
-use UthandoCommon\View\AbstractViewHelper;
+use Common\View\AbstractViewHelper;
 use Zend\View\Helper\BasePath;
 
 /**

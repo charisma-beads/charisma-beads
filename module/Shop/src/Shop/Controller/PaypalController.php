@@ -15,8 +15,8 @@ use PayPal\Exception\PayPalConnectionException;
 use Shop\Service\PaymentException;
 use Shop\Service\PaypalService;
 use Shop\Service\OrderService;
-use UthandoCommon\Controller\SetExceptionMessages;
-use UthandoCommon\Service\ServiceTrait;
+use Common\Controller\SetExceptionMessages;
+use Common\Service\ServiceTrait;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 

@@ -27,8 +27,8 @@ use PayPal\Rest\ApiContext;
 use Shop\Model\OrderModel as OrderModel;
 use Shop\Options\PaypalOptions;
 use Shop\ShopException;
-use UthandoCommon\Service\AbstractService;
-use UthandoCommon\Stdlib\StringUtils;
+use Common\Service\AbstractService;
+use Common\Stdlib\StringUtils;
 
 /**
  * Class Paypal

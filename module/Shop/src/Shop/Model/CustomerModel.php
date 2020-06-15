@@ -10,11 +10,11 @@
 
 namespace Shop\Model;
 
-use UthandoCommon\Model\DateCreatedTrait;
-use UthandoCommon\Model\DateModifiedTrait;
-use UthandoCommon\Model\Model;
-use UthandoCommon\Model\ModelInterface;
-use UthandoUser\Model\UserModel;
+use Common\Model\DateCreatedTrait;
+use Common\Model\DateModifiedTrait;
+use Common\Model\Model;
+use Common\Model\ModelInterface;
+use User\Model\UserModel;
 
 /**
  * Class Customer

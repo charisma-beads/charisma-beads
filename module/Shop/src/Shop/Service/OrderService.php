@@ -118,8 +118,8 @@ class OrderService extends AbstractOrderService
     /**
      * @param $id
      * @return OrderModel
-     * @throws \UthandoCommon\Model\CollectionException
-     * @throws \UthandoCommon\Service\ServiceException
+     * @throws \Common\Model\CollectionException
+     * @throws \Common\Service\ServiceException
      */
     public function getOrder($id)
     {
@@ -161,8 +161,8 @@ class OrderService extends AbstractOrderService
     /**
      * @param int $orderId
      * @return int
-     * @throws \UthandoCommon\Model\CollectionException
-     * @throws \UthandoCommon\Service\ServiceException
+     * @throws \Common\Model\CollectionException
+     * @throws \Common\Service\ServiceException
      */
     public function processOrderFromCart($orderId)
     {
@@ -241,7 +241,7 @@ class OrderService extends AbstractOrderService
      * @param CustomerModel $customer
      * @param $postData
      * @return int
-     * @throws \UthandoCommon\Service\ServiceException
+     * @throws \Common\Service\ServiceException
      */
     public function create(CustomerModel $customer, $postData)
     {
@@ -301,8 +301,8 @@ class OrderService extends AbstractOrderService
      * @param ProductModel $product
      * @param array $post
      * @return OrderLineInterface|bool
-     * @throws \UthandoCommon\Model\CollectionException
-     * @throws \UthandoCommon\Service\ServiceException
+     * @throws \Common\Model\CollectionException
+     * @throws \Common\Service\ServiceException
      */
     public function addItem(ProductModel $product, $post)
     {
@@ -367,8 +367,8 @@ class OrderService extends AbstractOrderService
      * Updates order items.
      *
      * @param array $items
-     * @throws \UthandoCommon\Model\CollectionException
-     * @throws \UthandoCommon\Service\ServiceException
+     * @throws \Common\Model\CollectionException
+     * @throws \Common\Service\ServiceException
      */
     public function updateItem(array $items)
     {
@@ -474,7 +474,7 @@ class OrderService extends AbstractOrderService
     /**
      * @param OrderLineInterface|null $line
      * @return void
-     * @throws \UthandoCommon\Service\ServiceException
+     * @throws \Common\Service\ServiceException
      */
     public function persist(OrderLineInterface $line = null)
     {
@@ -499,7 +499,7 @@ class OrderService extends AbstractOrderService
      *
      * @param OrderModel|int $orderModelOrId
      * @return OrderModel
-     * @throws \UthandoCommon\Service\ServiceException
+     * @throws \Common\Service\ServiceException
      */
     public function generateOrderNumber($orderModelOrId)
     {
@@ -529,7 +529,7 @@ class OrderService extends AbstractOrderService
      * @param int $orderNumber
      * @param int $orderStatus
      * @return int
-     * @throws \UthandoCommon\Service\ServiceException
+     * @throws \Common\Service\ServiceException
      */
     public function updateOrderStatus($orderNumber, $orderStatus)
     {
@@ -763,7 +763,7 @@ class OrderService extends AbstractOrderService
      * @param int $id
      * @param int $userId
      * @return bool
-     * @throws \UthandoCommon\Service\ServiceException
+     * @throws \Common\Service\ServiceException
      */
     public function cancelOrder($id, $userId)
     {

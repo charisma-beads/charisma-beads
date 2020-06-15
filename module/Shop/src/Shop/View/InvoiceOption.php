@@ -12,7 +12,7 @@ namespace Shop\View;
 
 use Shop\ShopException;
 use Shop\Options\InvoiceOptions;
-use UthandoCommon\View\AbstractViewHelper;
+use Common\View\AbstractViewHelper;
 
 /**
  * Class InvoiceOption

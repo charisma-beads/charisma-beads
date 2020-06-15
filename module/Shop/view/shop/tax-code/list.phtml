@@ -22,7 +22,7 @@
     			<td><?=$this->escapeHtml($row->getTaxCode()); ?></td>
     			<td><?=$this->escapeHtml($row->getDescription()); ?></td>
     			<td>
-                    <?=$this->partial('uthando-admin/partial/edit-actions', [
+                    <?=$this->partial('admin/partial/edit-actions', [
                     	'pk'		=> 'taxCodeId',
                     	'id'		=> $row->getTaxCodeId(),
     		    		'tableName'	=> 'taxCode',

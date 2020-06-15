@@ -17,8 +17,8 @@ use Shop\Model\OrderLineInterface;
 use Shop\Model\ProductMetaDataModel;
 use Shop\Model\ProductModel;
 use Shop\Options\ShopOptions;
-use UthandoCommon\Service\AbstractMapperService;
-use UthandoCommon\Service\AbstractRelationalMapperService;
+use Common\Service\AbstractMapperService;
+use Common\Service\AbstractRelationalMapperService;
 
 /**
  * Class AbstractOrder
@@ -56,8 +56,8 @@ abstract class AbstractOrderService extends AbstractRelationalMapperService
     /**
      * @param AbstractOrderCollection $orderModel
      * @return AbstractOrderCollection
-     * @throws \UthandoCommon\Model\CollectionException
-     * @throws \UthandoCommon\Service\ServiceException
+     * @throws \Common\Model\CollectionException
+     * @throws \Common\Service\ServiceException
      */
     public function loadItems(AbstractOrderCollection $orderModel)
     {
@@ -85,7 +85,7 @@ abstract class AbstractOrderService extends AbstractRelationalMapperService
      * Remove an line item for the order collection
      *
      * @param $id
-     * @throws \UthandoCommon\Service\ServiceException
+     * @throws \Common\Service\ServiceException
      */
     public function removeItem($id)
     {

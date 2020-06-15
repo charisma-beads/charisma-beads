@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "b635e133f94bfc1b15314b6c2f4e0c0e",
+    "content-hash": "0f609f99fb4fe1bcd31d8824803ca063",
     "packages": [
         {
             "name": "ccampbell/chromephp",
@@ -83,28 +83,28 @@
         },
         {
             "name": "dompdf/dompdf",
-            "version": "v0.8.3",
+            "version": "v0.8.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dompdf/dompdf.git",
-                "reference": "75f13c700009be21a1965dc2c5b68a8708c22ba2"
+                "reference": "6782abfc090b132134cd6cea0ec6d76f0fce2c56"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dompdf/dompdf/zipball/75f13c700009be21a1965dc2c5b68a8708c22ba2",
-                "reference": "75f13c700009be21a1965dc2c5b68a8708c22ba2",
+                "url": "https://api.github.com/repos/dompdf/dompdf/zipball/6782abfc090b132134cd6cea0ec6d76f0fce2c56",
+                "reference": "6782abfc090b132134cd6cea0ec6d76f0fce2c56",
                 "shasum": ""
             },
             "require": {
                 "ext-dom": "*",
                 "ext-mbstring": "*",
-                "phenx/php-font-lib": "0.5.*",
-                "phenx/php-svg-lib": "0.3.*",
-                "php": ">=5.4.0"
+                "phenx/php-font-lib": "^0.5.1",
+                "phenx/php-svg-lib": "^0.3.3",
+                "php": "^7.1"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.8|^5.5|^6.5",
-                "squizlabs/php_codesniffer": "2.*"
+                "phpunit/phpunit": "^7.5",
+                "squizlabs/php_codesniffer": "^3.5"
             },
             "suggest": {
                 "ext-gd": "Needed to process images",
@@ -145,7 +145,7 @@
             ],
             "description": "DOMPDF is a CSS 2.1 compliant HTML to PDF converter",
             "homepage": "https://github.com/dompdf/dompdf",
-            "time": "2018-12-14T02:40:31+00:00"
+            "time": "2020-02-20T03:52:51+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -500,24 +500,25 @@
                 "rest",
                 "sdk"
             ],
+            "abandoned": true,
             "time": "2019-01-04T20:04:25+00:00"
         },
         {
             "name": "phenx/php-font-lib",
-            "version": "0.5.1",
+            "version": "0.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PhenX/php-font-lib.git",
-                "reference": "760148820110a1ae0936e5cc35851e25a938bc97"
+                "reference": "ca6ad461f032145fff5971b5985e5af9e7fa88d8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PhenX/php-font-lib/zipball/760148820110a1ae0936e5cc35851e25a938bc97",
-                "reference": "760148820110a1ae0936e5cc35851e25a938bc97",
+                "url": "https://api.github.com/repos/PhenX/php-font-lib/zipball/ca6ad461f032145fff5971b5985e5af9e7fa88d8",
+                "reference": "ca6ad461f032145fff5971b5985e5af9e7fa88d8",
                 "shasum": ""
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.8"
+                "phpunit/phpunit": "^4.8.35 || ^5 || ^6 || ^7"
             },
             "type": "library",
             "autoload": {
@@ -537,7 +538,7 @@
             ],
             "description": "A library to read, parse, export and make subsets of different types of font files.",
             "homepage": "https://github.com/PhenX/php-font-lib",
-            "time": "2017-09-13T16:14:37+00:00"
+            "time": "2020-03-08T15:31:32+00:00"
         },
         {
             "name": "phenx/php-svg-lib",
@@ -789,16 +790,16 @@
         },
         {
             "name": "psr/log",
-            "version": "1.1.2",
+            "version": "1.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/log.git",
-                "reference": "446d54b4cb6bf489fc9d75f55843658e6f25d801"
+                "reference": "0f73288fd15629204f9d42b7055f72dacbe811fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/446d54b4cb6bf489fc9d75f55843658e6f25d801",
-                "reference": "446d54b4cb6bf489fc9d75f55843658e6f25d801",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/0f73288fd15629204f9d42b7055f72dacbe811fc",
+                "reference": "0f73288fd15629204f9d42b7055f72dacbe811fc",
                 "shasum": ""
             },
             "require": {
@@ -832,7 +833,7 @@
                 "psr",
                 "psr-3"
             ],
-            "time": "2019-11-01T11:05:21+00:00"
+            "time": "2020-03-23T09:12:05+00:00"
         },
         {
             "name": "psr/simple-cache",
@@ -996,16 +997,16 @@
         },
         {
             "name": "studio-42/elfinder",
-            "version": "2.1.51",
+            "version": "2.1.56",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Studio-42/elFinder.git",
-                "reference": "783709d6b97cafba586b0aa61e48b271407821fb"
+                "reference": "fa09409aaffe855e1e33b958301d5597c2036062"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Studio-42/elFinder/zipball/783709d6b97cafba586b0aa61e48b271407821fb",
-                "reference": "783709d6b97cafba586b0aa61e48b271407821fb",
+                "url": "https://api.github.com/repos/Studio-42/elFinder/zipball/fa09409aaffe855e1e33b958301d5597c2036062",
+                "reference": "fa09409aaffe855e1e33b958301d5597c2036062",
                 "shasum": ""
             },
             "require": {
@@ -1050,7 +1051,7 @@
             ],
             "description": "File manager for web",
             "homepage": "http://elfinder.org",
-            "time": "2019-12-08T03:03:51+00:00"
+            "time": "2020-04-09T02:33:28+00:00"
         },
         {
             "name": "summernote/summernote",
@@ -1088,16 +1089,16 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.13.1",
+            "version": "v1.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "7b4aab9743c30be783b73de055d24a39cf4b954f"
+                "reference": "fa79b11539418b02fc5e1897267673ba2c19419c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/7b4aab9743c30be783b73de055d24a39cf4b954f",
-                "reference": "7b4aab9743c30be783b73de055d24a39cf4b954f",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/fa79b11539418b02fc5e1897267673ba2c19419c",
+                "reference": "fa79b11539418b02fc5e1897267673ba2c19419c",
                 "shasum": ""
             },
             "require": {
@@ -1109,7 +1110,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.13-dev"
+                    "dev-master": "1.17-dev"
                 }
             },
             "autoload": {
@@ -1143,20 +1144,20 @@
                 "portable",
                 "shim"
             ],
-            "time": "2019-11-27T14:18:11+00:00"
+            "time": "2020-05-12T16:47:27+00:00"
         },
         {
             "name": "symfony/process",
-            "version": "v3.4.36",
+            "version": "v3.4.40",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "9a4545c01e1e4f473492bd52b71e574dcc401ca2"
+                "reference": "f5104c9dcbc2cfad45d01d5150c1da9836967271"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/9a4545c01e1e4f473492bd52b71e574dcc401ca2",
-                "reference": "9a4545c01e1e4f473492bd52b71e574dcc401ca2",
+                "url": "https://api.github.com/repos/symfony/process/zipball/f5104c9dcbc2cfad45d01d5150c1da9836967271",
+                "reference": "f5104c9dcbc2cfad45d01d5150c1da9836967271",
                 "shasum": ""
             },
             "require": {
@@ -1192,7 +1193,7 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
-            "time": "2019-11-28T10:05:51+00:00"
+            "time": "2020-04-12T14:33:46+00:00"
         },
         {
             "name": "true/punycode",
@@ -1274,892 +1275,6 @@
             "time": "2015-04-27T04:02:14+00:00"
         },
         {
-            "name": "uthando-cms/uthando-admin",
-            "version": "2.9.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/uthando-cms/uthando-admin.git",
-                "reference": "24179f1b59bbc5ce63bb1dcbba818e9daccb985b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-admin/zipball/24179f1b59bbc5ce63bb1dcbba818e9daccb985b",
-                "reference": "24179f1b59bbc5ce63bb1dcbba818e9daccb985b",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.0",
-                "rwoverdijk/assetmanager": "1.*",
-                "summernote/summernote": "*",
-                "uthando-cms/uthando-common": "2.*",
-                "uthando-cms/uthando-file-manager": "2.*",
-                "uthando-cms/uthando-navigation": "2.*",
-                "uthando-cms/uthando-user": "2.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "UthandoAdmin": "src/"
-                },
-                "classmap": [
-                    "./Module.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Shaun Freeman",
-                    "email": "shaun@shaunfreeman.co.uk",
-                    "homepage": "https://github.com/shaunfreeman",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Admin module for Uthando CMS",
-            "homepage": "http://shaunfreeman.name/",
-            "keywords": [
-                "admin",
-                "cms",
-                "framework",
-                "uthando",
-                "zf2"
-            ],
-            "time": "2018-11-19T21:58:16+00:00"
-        },
-        {
-            "name": "uthando-cms/uthando-article",
-            "version": "2.6.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/uthando-cms/uthando-article.git",
-                "reference": "5fac9967761ccb12fd8e12e0063758d0b54de108"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-article/zipball/5fac9967761ccb12fd8e12e0063758d0b54de108",
-                "reference": "5fac9967761ccb12fd8e12e0063758d0b54de108",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.0",
-                "uthando-cms/uthando-common": "2.*",
-                "uthando-cms/uthando-file-manager": "2.*",
-                "zendframework/zend-form": "2.*",
-                "zendframework/zend-inputfilter": "2.*"
-            },
-            "require-dev": {
-                "zendframework/zendframework": "2.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "UthandoArticle": "src/"
-                },
-                "classmap": [
-                    "./Module.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Shaun Freeman",
-                    "email": "shaun@shaunfreeman.co.uk",
-                    "homepage": "https://github.com/shaunfreeman",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Article module for Uthando CMS",
-            "homepage": "http://shaunfreeman.name/",
-            "keywords": [
-                "article",
-                "cms",
-                "framework",
-                "uthando",
-                "zf2"
-            ],
-            "time": "2018-12-04T09:04:29+00:00"
-        },
-        {
-            "name": "uthando-cms/uthando-common",
-            "version": "2.17.6",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/uthando-cms/uthando-common.git",
-                "reference": "feb915da5d26b60f536282e1bc3ad5c22e53f485"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-common/zipball/feb915da5d26b60f536282e1bc3ad5c22e53f485",
-                "reference": "feb915da5d26b60f536282e1bc3ad5c22e53f485",
-                "shasum": ""
-            },
-            "require": {
-                "ezyang/htmlpurifier": "^4.9",
-                "giggsey/libphonenumber-for-php": "*",
-                "neilime/zf2-twb-bundle": "2.*@stable",
-                "php": ">=7.0",
-                "zendframework/zend-cache": "2.*",
-                "zendframework/zend-captcha": "2.*",
-                "zendframework/zend-db": "2.*",
-                "zendframework/zend-eventmanager": "2.*",
-                "zendframework/zend-filter": "2.*",
-                "zendframework/zend-form": "2.*",
-                "zendframework/zend-modulemanager": "2.*",
-                "zendframework/zend-mvc": "2.*",
-                "zendframework/zend-paginator": "2.*",
-                "zendframework/zend-servicemanager": "2.*",
-                "zendframework/zend-stdlib": "2.*",
-                "zendframework/zend-view": "2.*",
-                "zendframework/zendservice-akismet": "2.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "UthandoCommon": "src/"
-                },
-                "classmap": [
-                    "./Module.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Shaun Freeman",
-                    "email": "shaun@shaunfreeman.co.uk",
-                    "homepage": "https://github.com/shaunfreeman",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Common class module for Uthando CMS",
-            "homepage": "http://shaunfreeman.name/",
-            "keywords": [
-                "cms",
-                "common",
-                "framework",
-                "uthando",
-                "zf2"
-            ],
-            "time": "2018-12-15T10:45:06+00:00"
-        },
-        {
-            "name": "uthando-cms/uthando-contact",
-            "version": "2.5.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/uthando-cms/uthando-contact.git",
-                "reference": "e12c2d8993610a8c177bd58a637b316c74e630f4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-contact/zipball/e12c2d8993610a8c177bd58a637b316c74e630f4",
-                "reference": "e12c2d8993610a8c177bd58a637b316c74e630f4",
-                "shasum": ""
-            },
-            "require": {
-                "giggsey/libphonenumber-for-php": "7.*",
-                "php": ">=7.0",
-                "uthando-cms/uthando-common": "2.*",
-                "uthando-cms/uthando-mail": "2.*",
-                "zendframework/zend-form": "2.*",
-                "zendframework/zend-inputfilter": "2.*"
-            },
-            "require-dev": {
-                "zendframework/zendframework": "2.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "UthandoContact": "src/"
-                },
-                "classmap": [
-                    "./Module.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Shaun Freeman",
-                    "email": "shaun@shaunfreeman.co.uk",
-                    "homepage": "https://github.com/shaunfreeman",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Contact module for Uthando CMS",
-            "homepage": "http://shaunfreeman.name/",
-            "keywords": [
-                "cms",
-                "contact",
-                "framework",
-                "uthando",
-                "zf2"
-            ],
-            "time": "2018-11-19T19:53:52+00:00"
-        },
-        {
-            "name": "uthando-cms/uthando-dompdf",
-            "version": "2.6.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/uthando-cms/uthando-dompdf.git",
-                "reference": "60a750058c2db9ed167476192b20c7f544c32007"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-dompdf/zipball/60a750058c2db9ed167476192b20c7f544c32007",
-                "reference": "60a750058c2db9ed167476192b20c7f544c32007",
-                "shasum": ""
-            },
-            "require": {
-                "dompdf/dompdf": "0.*",
-                "neilime/zf2-twb-bundle": "2.*@stable",
-                "php": ">=7.0",
-                "uthando-cms/uthando-common": "2.*",
-                "zendframework/zend-config": "2.*",
-                "zendframework/zend-eventmanager": "2.*",
-                "zendframework/zend-http": "2.*",
-                "zendframework/zend-loader": "2.*",
-                "zendframework/zend-modulemanager": "2.*",
-                "zendframework/zend-mvc": "2.*",
-                "zendframework/zend-servicemanager": "2.*",
-                "zendframework/zend-stdlib": "2.*",
-                "zendframework/zend-view": "2.*"
-            },
-            "require-dev": {
-                "codeclimate/php-test-reporter": "dev-master"
-            },
-            "suggest": {
-                "uthando-cms/uthando-admin": "Admin operations",
-                "uthando-cms/uthando-navigation": "Navigation management.",
-                "uthando-cms/uthando-user": "User management"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "UthandoDomPdf": "src/"
-                },
-                "classmap": [
-                    "./Module.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Raymond Kolbe",
-                    "email": "raymond.kolbe@maine.edu"
-                },
-                {
-                    "name": "Shaun Freeman",
-                    "email": "shaun@shaunfreeman.co.uk",
-                    "homepage": "https://github.com/shaunfreeman",
-                    "role": "Developer"
-                }
-            ],
-            "description": "A Zend Framework 2 module for incorporating DOMPDF support.",
-            "homepage": "http://shaunfreeman.name",
-            "keywords": [
-                "dompdf",
-                "pdf",
-                "zf2"
-            ],
-            "time": "2018-11-19T19:33:23+00:00"
-        },
-        {
-            "name": "uthando-cms/uthando-events",
-            "version": "2.7.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/uthando-cms/uthando-events.git",
-                "reference": "01bea3afbac914e59912ed81ce7a1c582e04ccc4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-events/zipball/01bea3afbac914e59912ed81ce7a1c582e04ccc4",
-                "reference": "01bea3afbac914e59912ed81ce7a1c582e04ccc4",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.0",
-                "uthando-cms/uthando-common": "2.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "UthandoEvents": "src/"
-                },
-                "classmap": [
-                    "./Module.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Shaun Freeman",
-                    "email": "shaun@shaunfreeman.co.uk",
-                    "homepage": "https://github.com/shaunfreeman",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Events module for Uthando CMS",
-            "homepage": "http://shaunfreeman.name/",
-            "keywords": [
-                "cms",
-                "events",
-                "framework",
-                "uthando",
-                "zf2"
-            ],
-            "time": "2018-11-19T17:00:46+00:00"
-        },
-        {
-            "name": "uthando-cms/uthando-file-manager",
-            "version": "2.6.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/uthando-cms/uthando-file-manager.git",
-                "reference": "e0b562e9b79f93ffef33a1e4d5a8f400895e7588"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-file-manager/zipball/e0b562e9b79f93ffef33a1e4d5a8f400895e7588",
-                "reference": "e0b562e9b79f93ffef33a1e4d5a8f400895e7588",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.0",
-                "rwoverdijk/assetmanager": "1.*",
-                "studio-42/elfinder": "2.*",
-                "uthando-cms/uthando-common": "2.*",
-                "zendframework/zend-progressbar": "2.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "UthandoFileManager": "src/"
-                },
-                "classmap": [
-                    "./Module.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Shaun Freeman",
-                    "email": "shaun@shaunfreeman.co.uk",
-                    "homepage": "https://github.com/shaunfreeman",
-                    "role": "Developer"
-                }
-            ],
-            "description": "File Manager module for Uthando CMS",
-            "homepage": "http://shaunfreeman.name/",
-            "keywords": [
-                "cms",
-                "file",
-                "framework",
-                "manager",
-                "uthando",
-                "zf2"
-            ],
-            "time": "2018-11-29T15:04:36+00:00"
-        },
-        {
-            "name": "uthando-cms/uthando-mail",
-            "version": "2.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/uthando-cms/uthando-mail.git",
-                "reference": "fcccca7d880ebdbc120b8a7956a397ed7c905afd"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-mail/zipball/fcccca7d880ebdbc120b8a7956a397ed7c905afd",
-                "reference": "fcccca7d880ebdbc120b8a7956a397ed7c905afd",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.0",
-                "uthando-cms/uthando-common": "2.*",
-                "zendframework/zend-console": "2.*",
-                "zendframework/zend-inputfilter": "2.*",
-                "zendframework/zend-mail": "2.*",
-                "zendframework/zend-mime": "2.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "UthandoMail": "src/"
-                },
-                "classmap": [
-                    "./Module.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Shaun Freeman",
-                    "email": "shaun@shaunfreeman.co.uk",
-                    "homepage": "https://github.com/shaunfreeman",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Mail module for Uthando CMS",
-            "homepage": "http://shaunfreeman.name/",
-            "keywords": [
-                "cms",
-                "framework",
-                "mail",
-                "uthando",
-                "zf2"
-            ],
-            "time": "2018-12-15T10:46:36+00:00"
-        },
-        {
-            "name": "uthando-cms/uthando-navigation",
-            "version": "2.8.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/uthando-cms/uthando-navigation.git",
-                "reference": "3aeb687697c3cc94710113246f517745964ac281"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-navigation/zipball/3aeb687697c3cc94710113246f517745964ac281",
-                "reference": "3aeb687697c3cc94710113246f517745964ac281",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.0",
-                "uthando-cms/uthando-common": "2.*",
-                "zendframework/zend-form": "2.*",
-                "zendframework/zend-inputfilter": "2.*",
-                "zendframework/zend-navigation": "2.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "UthandoNavigation": "src/"
-                },
-                "classmap": [
-                    "./Module.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Shaun Freeman",
-                    "email": "shaun@shaunfreeman.co.uk",
-                    "homepage": "https://github.com/shaunfreeman",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Navigation module for Uthando CMS",
-            "homepage": "http://shaunfreeman.name/",
-            "keywords": [
-                "cms",
-                "framework",
-                "navigation",
-                "uthando",
-                "zf2"
-            ],
-            "time": "2018-11-19T14:20:42+00:00"
-        },
-        {
-            "name": "uthando-cms/uthando-news",
-            "version": "2.13.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/uthando-cms/uthando-news.git",
-                "reference": "86a83da53764d01f72ec2c032ac374a8a2302cd3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-news/zipball/86a83da53764d01f72ec2c032ac374a8a2302cd3",
-                "reference": "86a83da53764d01f72ec2c032ac374a8a2302cd3",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.0",
-                "uthando-cms/uthando-article": "2.*",
-                "uthando-cms/uthando-common": "2.*",
-                "zendframework/zend-feed": "2.*",
-                "zendframework/zend-inputfilter": "2.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "UthandoNews": "src/"
-                },
-                "classmap": [
-                    "./Module.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Shaun Freeman",
-                    "email": "shaun@shaunfreeman.co.uk",
-                    "homepage": "https://github.com/shaunfreeman",
-                    "role": "Developer"
-                }
-            ],
-            "description": "News module for Uthando CMS",
-            "homepage": "http://shaunfreeman.name/",
-            "keywords": [
-                "cms",
-                "framework",
-                "mail",
-                "uthando",
-                "zf2"
-            ],
-            "time": "2018-11-29T12:24:57+00:00"
-        },
-        {
-            "name": "uthando-cms/uthando-newsletter",
-            "version": "2.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/uthando-cms/uthando-newsletter.git",
-                "reference": "0c61bb05133a77e6c323785177007326fdf3cc5d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-newsletter/zipball/0c61bb05133a77e6c323785177007326fdf3cc5d",
-                "reference": "0c61bb05133a77e6c323785177007326fdf3cc5d",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.0",
-                "uthando-cms/uthando-common": "2.*",
-                "uthando-cms/uthando-mail": "2.*",
-                "uthando-cms/uthando-user": "2.*",
-                "zendframework/zend-inputfilter": "2.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "UthandoNewsletter": "src/"
-                },
-                "classmap": [
-                    "./Module.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Shaun Freeman",
-                    "email": "shaun@shaunfreeman.co.uk",
-                    "homepage": "https://github.com/shaunfreeman",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Newsletter module for Uthando CMS",
-            "homepage": "http://shaunfreeman.name/",
-            "keywords": [
-                "cms",
-                "framework",
-                "mail",
-                "uthando",
-                "zf2"
-            ],
-            "time": "2018-11-19T13:04:39+00:00"
-        },
-        {
-            "name": "uthando-cms/uthando-session-manager",
-            "version": "2.6.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/uthando-cms/uthando-session-manager.git",
-                "reference": "3bfb0a478d6101d6e6748d8528a2a7fee44af408"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-session-manager/zipball/3bfb0a478d6101d6e6748d8528a2a7fee44af408",
-                "reference": "3bfb0a478d6101d6e6748d8528a2a7fee44af408",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.0",
-                "uthando-cms/uthando-common": "2.*",
-                "zendframework/zend-debug": "2.*",
-                "zendframework/zend-session": "2.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "UthandoSessionManager": "src/"
-                },
-                "classmap": [
-                    "./Module.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Shaun Freeman",
-                    "email": "shaun@shaunfreeman.co.uk",
-                    "homepage": "https://github.com/shaunfreeman",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Session Manager module for Uthando CMS",
-            "homepage": "http://shaunfreeman.name/",
-            "keywords": [
-                "cms",
-                "framework",
-                "manager",
-                "session",
-                "uthando",
-                "zf2"
-            ],
-            "time": "2018-11-20T19:55:19+00:00"
-        },
-        {
-            "name": "uthando-cms/uthando-testimonial",
-            "version": "2.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/uthando-cms/uthando-testimonial.git",
-                "reference": "3d5da22841a7ba2777ea308e8bd0b0c91617639e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-testimonial/zipball/3d5da22841a7ba2777ea308e8bd0b0c91617639e",
-                "reference": "3d5da22841a7ba2777ea308e8bd0b0c91617639e",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.0",
-                "uthando-cms/uthando-common": "2.*",
-                "uthando-cms/uthando-file-manager": "2.*",
-                "zendframework/zend-form": "2.*",
-                "zendframework/zend-inputfilter": "2.*",
-                "zendframework/zend-navigation": "2.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "UthandoTestimonial": "src/"
-                },
-                "classmap": [
-                    "./Module.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Shaun Freeman",
-                    "email": "shaun@shaunfreeman.co.uk",
-                    "homepage": "https://github.com/shaunfreeman",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Testimonial module for Uthando CMS",
-            "homepage": "http://shaunfreeman.name/",
-            "keywords": [
-                "cms",
-                "framework",
-                "testimonial",
-                "uthando",
-                "zf2"
-            ],
-            "time": "2018-11-19T09:39:23+00:00"
-        },
-        {
-            "name": "uthando-cms/uthando-theme-manager",
-            "version": "2.10.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/uthando-cms/uthando-theme-manager.git",
-                "reference": "a0bf4ecea4bba1b3fa15e8c27d1d4837d395ecb7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-theme-manager/zipball/a0bf4ecea4bba1b3fa15e8c27d1d4837d395ecb7",
-                "reference": "a0bf4ecea4bba1b3fa15e8c27d1d4837d395ecb7",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.0",
-                "uthando-cms/uthando-common": "2.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "UthandoThemeManager": "src/"
-                },
-                "classmap": [
-                    "./Module.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Shaun Freeman",
-                    "email": "shaun@shaunfreeman.co.uk",
-                    "homepage": "https://github.com/shaunfreeman",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Theme Manager module for Uthando CMS",
-            "homepage": "http://shaunfreeman.name/",
-            "keywords": [
-                "cms",
-                "framework",
-                "manager",
-                "theme",
-                "uthando",
-                "zf2"
-            ],
-            "time": "2019-02-04T16:08:20+00:00"
-        },
-        {
-            "name": "uthando-cms/uthando-twitter",
-            "version": "2.5.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/uthando-cms/uthando-twitter.git",
-                "reference": "003914b2df2255d52314ed8eb5c92f192dab0f12"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-twitter/zipball/003914b2df2255d52314ed8eb5c92f192dab0f12",
-                "reference": "003914b2df2255d52314ed8eb5c92f192dab0f12",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.0",
-                "uthando-cms/uthando-common": "2.*",
-                "zendframework/zendoauth": "dev-master",
-                "zendframework/zendservice-twitter": ">=2.1.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "UthandoTwitter": "src/"
-                },
-                "classmap": [
-                    "./Module.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Shaun Freeman",
-                    "email": "shaun@shaunfreeman.co.uk",
-                    "homepage": "https://github.com/shaunfreeman",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Twitter module for Uthando CMS",
-            "homepage": "http://shaunfreeman.name/",
-            "keywords": [
-                "cms",
-                "framework",
-                "twitter",
-                "uthando",
-                "zf2"
-            ],
-            "time": "2018-11-19T09:37:38+00:00"
-        },
-        {
-            "name": "uthando-cms/uthando-user",
-            "version": "2.5.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/uthando-cms/uthando-user.git",
-                "reference": "bdbe7ee2efa3a01ee445dcf5bfdc328ba8cd7c15"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/uthando-cms/uthando-user/zipball/bdbe7ee2efa3a01ee445dcf5bfdc328ba8cd7c15",
-                "reference": "bdbe7ee2efa3a01ee445dcf5bfdc328ba8cd7c15",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.1",
-                "uthando-cms/uthando-common": "2.*",
-                "uthando-cms/uthando-mail": "2.*",
-                "zendframework/zend-authentication": "2.*",
-                "zendframework/zend-crypt": "2.*",
-                "zendframework/zend-form": "2.*",
-                "zendframework/zend-permissions-acl": "2.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "UthandoUser": "src/"
-                },
-                "classmap": [
-                    "./Module.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Shaun Freeman",
-                    "email": "shaun@shaunfreeman.co.uk",
-                    "homepage": "https://github.com/shaunfreeman",
-                    "role": "Developer"
-                }
-            ],
-            "description": "User module for Uthando CMS",
-            "homepage": "http://shaunfreeman.name/",
-            "keywords": [
-                "cms",
-                "framework",
-                "user",
-                "uthando",
-                "zf2"
-            ],
-            "time": "2018-12-05T12:41:29+00:00"
-        },
-        {
             "name": "zendframework/zend-authentication",
             "version": "2.6.0",
             "source": {
@@ -2219,6 +1334,7 @@
                 "ZendFramework",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-authentication",
             "time": "2018-04-12T21:09:22+00:00"
         },
         {
@@ -2302,6 +1418,7 @@
                 "psr-6",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-cache",
             "time": "2019-08-28T21:34:32+00:00"
         },
         {
@@ -2360,6 +1477,7 @@
                 "captcha",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-captcha",
             "time": "2018-04-24T17:24:10+00:00"
         },
         {
@@ -2416,6 +1534,7 @@
                 "config",
                 "zf2"
             ],
+            "abandoned": "laminas/laminas-config",
             "time": "2016-02-04T23:01:10+00:00"
         },
         {
@@ -2469,6 +1588,7 @@
                 "console",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-console",
             "time": "2018-01-25T19:08:04+00:00"
         },
         {
@@ -2519,20 +1639,21 @@
                 "crypt",
                 "zf2"
             ],
+            "abandoned": "laminas/laminas-crypt",
             "time": "2016-02-03T23:46:30+00:00"
         },
         {
             "name": "zendframework/zend-db",
-            "version": "2.10.0",
+            "version": "2.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-db.git",
-                "reference": "77022f06f6ffd384fa86d22ab8d8bbdb925a1e8e"
+                "reference": "71626f95f6f9ee326e4be3c34228c1c466300a2c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-db/zipball/77022f06f6ffd384fa86d22ab8d8bbdb925a1e8e",
-                "reference": "77022f06f6ffd384fa86d22ab8d8bbdb925a1e8e",
+                "url": "https://api.github.com/repos/zendframework/zend-db/zipball/71626f95f6f9ee326e4be3c34228c1c466300a2c",
+                "reference": "71626f95f6f9ee326e4be3c34228c1c466300a2c",
                 "shasum": ""
             },
             "require": {
@@ -2540,7 +1661,7 @@
                 "zendframework/zend-stdlib": "^2.7 || ^3.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^5.7.25 || ^6.4.4",
+                "phpunit/phpunit": "^5.7.27 || ^6.5.14",
                 "zendframework/zend-coding-standard": "~1.0.0",
                 "zendframework/zend-eventmanager": "^2.6.2 || ^3.0",
                 "zendframework/zend-hydrator": "^1.1 || ^2.1 || ^3.0",
@@ -2554,8 +1675,8 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.9-dev",
-                    "dev-develop": "2.10-dev"
+                    "dev-master": "2.11.x-dev",
+                    "dev-develop": "2.12.x-dev"
                 },
                 "zf": {
                     "component": "Zend\\Db",
@@ -2577,7 +1698,8 @@
                 "db",
                 "zf"
             ],
-            "time": "2019-02-25T11:37:45+00:00"
+            "abandoned": "laminas/laminas-db",
+            "time": "2019-12-31T19:43:46+00:00"
         },
         {
             "name": "zendframework/zend-debug",
@@ -2689,6 +1811,7 @@
                 "psr",
                 "psr-7"
             ],
+            "abandoned": "laminas/laminas-diactoros",
             "time": "2019-08-06T17:53:53+00:00"
         },
         {
@@ -2734,6 +1857,7 @@
                 "escaper",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-escaper",
             "time": "2019-09-05T20:03:20+00:00"
         },
         {
@@ -2781,6 +1905,7 @@
                 "eventmanager",
                 "zf2"
             ],
+            "abandoned": "laminas/laminas-eventmanager",
             "time": "2017-12-12T17:48:56+00:00"
         },
         {
@@ -2842,6 +1967,7 @@
                 "feed",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-feed",
             "time": "2018-08-01T13:53:20+00:00"
         },
         {
@@ -2907,6 +2033,7 @@
                 "filter",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-filter",
             "time": "2019-08-19T07:08:04+00:00"
         },
         {
@@ -2985,6 +2112,7 @@
                 "form",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-form",
             "time": "2018-12-11T22:51:29+00:00"
         },
         {
@@ -3040,6 +2168,7 @@
                 "zend",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-http",
             "time": "2019-02-07T17:47:08+00:00"
         },
         {
@@ -3098,6 +2227,7 @@
                 "hydrator",
                 "zf2"
             ],
+            "abandoned": "laminas/laminas-hydrator",
             "time": "2016-02-18T22:38:26+00:00"
         },
         {
@@ -3169,6 +2299,7 @@
                 "i18n",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-i18n",
             "time": "2019-12-12T14:08:22+00:00"
         },
         {
@@ -3215,6 +2346,7 @@
                 "translations",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-i18n-resources",
             "time": "2019-06-25T01:21:12+00:00"
         },
         {
@@ -3272,6 +2404,7 @@
                 "inputfilter",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-inputfilter",
             "time": "2019-08-28T19:45:32+00:00"
         },
         {
@@ -3327,6 +2460,7 @@
                 "json",
                 "zf2"
             ],
+            "abandoned": "laminas/laminas-json",
             "time": "2016-02-04T21:20:26+00:00"
         },
         {
@@ -3372,25 +2506,26 @@
                 "loader",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-loader",
             "time": "2019-09-04T19:38:14+00:00"
         },
         {
             "name": "zendframework/zend-log",
-            "version": "2.11.0",
+            "version": "2.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-log.git",
-                "reference": "cb278772afdacb1924342248a069330977625ae6"
+                "reference": "e5ec088dc8a7b4d96a3a6627761f720a738a36b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-log/zipball/cb278772afdacb1924342248a069330977625ae6",
-                "reference": "cb278772afdacb1924342248a069330977625ae6",
+                "url": "https://api.github.com/repos/zendframework/zend-log/zipball/e5ec088dc8a7b4d96a3a6627761f720a738a36b8",
+                "reference": "e5ec088dc8a7b4d96a3a6627761f720a738a36b8",
                 "shasum": ""
             },
             "require": {
                 "php": "^5.6 || ^7.0",
-                "psr/log": "^1.0",
+                "psr/log": "^1.1.2",
                 "zendframework/zend-servicemanager": "^2.7.5 || ^3.0.3",
                 "zendframework/zend-stdlib": "^2.7 || ^3.0"
             },
@@ -3418,8 +2553,8 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.11.x-dev",
-                    "dev-develop": "2.12.x-dev"
+                    "dev-master": "2.12.x-dev",
+                    "dev-develop": "2.13.x-dev"
                 },
                 "zf": {
                     "component": "Zend\\Log",
@@ -3442,7 +2577,8 @@
                 "logging",
                 "zf"
             ],
-            "time": "2019-08-23T21:28:18+00:00"
+            "abandoned": "laminas/laminas-log",
+            "time": "2019-12-27T16:18:31+00:00"
         },
         {
             "name": "zendframework/zend-mail",
@@ -3504,6 +2640,7 @@
                 "mail",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-mail",
             "time": "2018-06-07T13:37:07+00:00"
         },
         {
@@ -3554,6 +2691,7 @@
                 "math",
                 "zf2"
             ],
+            "abandoned": "laminas/laminas-math",
             "time": "2018-12-04T15:34:17+00:00"
         },
         {
@@ -3604,6 +2742,7 @@
                 "mime",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-mime",
             "time": "2019-10-16T19:30:37+00:00"
         },
         {
@@ -3663,6 +2802,7 @@
                 "modulemanager",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-modulemanager",
             "time": "2019-10-28T13:29:38+00:00"
         },
         {
@@ -3758,6 +2898,7 @@
                 "mvc",
                 "zf2"
             ],
+            "abandoned": "laminas/laminas-mvc",
             "time": "2018-05-03T13:13:41+00:00"
         },
         {
@@ -3826,6 +2967,7 @@
                 "navigation",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-navigation",
             "time": "2019-08-21T08:28:20+00:00"
         },
         {
@@ -3891,6 +3033,7 @@
                 "paginator",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-paginator",
             "time": "2019-08-21T13:31:03+00:00"
         },
         {
@@ -3940,6 +3083,7 @@
                 "acl",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-permissions-acl",
             "time": "2019-06-25T08:09:22+00:00"
         },
         {
@@ -3992,6 +3136,7 @@
                 "progressbar",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-progressbar",
             "time": "2018-04-30T19:15:33+00:00"
         },
         {
@@ -4041,6 +3186,7 @@
                 "psr",
                 "psr-7"
             ],
+            "abandoned": "laminas/laminas-psr7bridge",
             "time": "2016-05-10T21:44:39+00:00"
         },
         {
@@ -4098,6 +3244,7 @@
                 "serializer",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-serializer",
             "time": "2019-10-19T08:06:30+00:00"
         },
         {
@@ -4150,6 +3297,7 @@
                 "servicemanager",
                 "zf2"
             ],
+            "abandoned": "laminas/laminas-servicemanager",
             "time": "2018-06-22T14:49:54+00:00"
         },
         {
@@ -4217,6 +3365,7 @@
                 "session",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-session",
             "time": "2019-09-19T19:50:12+00:00"
         },
         {
@@ -4276,6 +3425,7 @@
                 "stdlib",
                 "zf2"
             ],
+            "abandoned": "laminas/laminas-stdlib",
             "time": "2016-04-12T21:17:31+00:00"
         },
         {
@@ -4324,6 +3474,7 @@
                 "text",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-text",
             "time": "2019-10-16T20:36:27+00:00"
         },
         {
@@ -4371,6 +3522,7 @@
                 "uri",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-uri",
             "time": "2019-10-07T13:35:33+00:00"
         },
         {
@@ -4444,6 +3596,7 @@
                 "validator",
                 "zf2"
             ],
+            "abandoned": "laminas/laminas-validator",
             "time": "2019-01-29T22:26:39+00:00"
         },
         {
@@ -4582,6 +3735,7 @@
                 "view",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-view",
             "time": "2019-12-04T08:40:50+00:00"
         },
         {
@@ -4590,12 +3744,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/ZendOAuth.git",
-                "reference": "36defad317aa80ac9366f5e5171dc0316f009f13"
+                "reference": "745accc9223808b2e2e93e1cbc528a9f5057b53a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/ZendOAuth/zipball/36defad317aa80ac9366f5e5171dc0316f009f13",
-                "reference": "36defad317aa80ac9366f5e5171dc0316f009f13",
+                "url": "https://api.github.com/repos/zendframework/ZendOAuth/zipball/745accc9223808b2e2e93e1cbc528a9f5057b53a",
+                "reference": "745accc9223808b2e2e93e1cbc528a9f5057b53a",
                 "shasum": ""
             },
             "require": {
@@ -4629,7 +3783,8 @@
                 "oauth",
                 "zf2"
             ],
-            "time": "2014-04-09T01:02:18+00:00"
+            "abandoned": "laminas/laminas-oauth",
+            "time": "2020-01-20T20:08:16+00:00"
         },
         {
             "name": "zendframework/zendservice-akismet",
@@ -4722,6 +3877,7 @@
                 "twitter",
                 "zf2"
             ],
+            "abandoned": "laminas/laminas-twitter",
             "time": "2013-03-13T20:49:31+00:00"
         },
         {
@@ -4841,16 +3997,16 @@
         },
         {
             "name": "composer/ca-bundle",
-            "version": "1.2.5",
+            "version": "1.2.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/ca-bundle.git",
-                "reference": "62e8fc2dc550e5d6d8c9360c7721662670f58149"
+                "reference": "95c63ab2117a72f48f5a55da9740a3273d45b7fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/ca-bundle/zipball/62e8fc2dc550e5d6d8c9360c7721662670f58149",
-                "reference": "62e8fc2dc550e5d6d8c9360c7721662670f58149",
+                "url": "https://api.github.com/repos/composer/ca-bundle/zipball/95c63ab2117a72f48f5a55da9740a3273d45b7fd",
+                "reference": "95c63ab2117a72f48f5a55da9740a3273d45b7fd",
                 "shasum": ""
             },
             "require": {
@@ -4893,7 +4049,7 @@
                 "ssl",
                 "tls"
             ],
-            "time": "2019-12-11T14:44:42+00:00"
+            "time": "2020-04-08T08:27:21+00:00"
         },
         {
             "name": "doctrine/instantiator",
@@ -5046,16 +4202,16 @@
         },
         {
             "name": "myclabs/deep-copy",
-            "version": "1.9.4",
+            "version": "1.9.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/DeepCopy.git",
-                "reference": "579bb7356d91f9456ccd505f24ca8b667966a0a7"
+                "reference": "b2c28789e80a97badd14145fda39b545d83ca3ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/579bb7356d91f9456ccd505f24ca8b667966a0a7",
-                "reference": "579bb7356d91f9456ccd505f24ca8b667966a0a7",
+                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/b2c28789e80a97badd14145fda39b545d83ca3ef",
+                "reference": "b2c28789e80a97badd14145fda39b545d83ca3ef",
                 "shasum": ""
             },
             "require": {
@@ -5090,7 +4246,7 @@
                 "object",
                 "object graph"
             ],
-            "time": "2019-12-15T19:12:40+00:00"
+            "time": "2020-01-17T21:11:47+00:00"
         },
         {
             "name": "padraic/humbug_get_contents",
@@ -5215,23 +4371,20 @@
         },
         {
             "name": "phpdocumentor/reflection-common",
-            "version": "2.0.0",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/ReflectionCommon.git",
-                "reference": "63a995caa1ca9e5590304cd845c15ad6d482a62a"
+                "reference": "6568f4687e5b41b054365f9ae03fcb1ed5f2069b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionCommon/zipball/63a995caa1ca9e5590304cd845c15ad6d482a62a",
-                "reference": "63a995caa1ca9e5590304cd845c15ad6d482a62a",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionCommon/zipball/6568f4687e5b41b054365f9ae03fcb1ed5f2069b",
+                "reference": "6568f4687e5b41b054365f9ae03fcb1ed5f2069b",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.1"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~6"
             },
             "type": "library",
             "extra": {
@@ -5263,44 +4416,42 @@
                 "reflection",
                 "static analysis"
             ],
-            "time": "2018-08-07T13:53:10+00:00"
+            "time": "2020-04-27T09:25:28+00:00"
         },
         {
             "name": "phpdocumentor/reflection-docblock",
-            "version": "4.3.3",
+            "version": "5.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-                "reference": "2ecaa9fef01634c83bfa8dc1fe35fb5cef223a62"
+                "reference": "cd72d394ca794d3466a3b2fc09d5a6c1dc86b47e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/2ecaa9fef01634c83bfa8dc1fe35fb5cef223a62",
-                "reference": "2ecaa9fef01634c83bfa8dc1fe35fb5cef223a62",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/cd72d394ca794d3466a3b2fc09d5a6c1dc86b47e",
+                "reference": "cd72d394ca794d3466a3b2fc09d5a6c1dc86b47e",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.0",
-                "phpdocumentor/reflection-common": "^1.0.0 || ^2.0.0",
-                "phpdocumentor/type-resolver": "~0.4 || ^1.0.0",
-                "webmozart/assert": "^1.0"
+                "ext-filter": "^7.1",
+                "php": "^7.2",
+                "phpdocumentor/reflection-common": "^2.0",
+                "phpdocumentor/type-resolver": "^1.0",
+                "webmozart/assert": "^1"
             },
             "require-dev": {
-                "doctrine/instantiator": "^1.0.5",
-                "mockery/mockery": "^1.0",
-                "phpunit/phpunit": "^6.4"
+                "doctrine/instantiator": "^1",
+                "mockery/mockery": "^1"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.x-dev"
+                    "dev-master": "5.x-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "phpDocumentor\\Reflection\\": [
-                        "src/"
-                    ]
+                    "phpDocumentor\\Reflection\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -5311,33 +4462,36 @@
                 {
                     "name": "Mike van Riel",
                     "email": "me@mikevanriel.com"
+                },
+                {
+                    "name": "Jaap van Otterdijk",
+                    "email": "account@ijaap.nl"
                 }
             ],
             "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
-            "time": "2019-12-20T13:40:23+00:00"
+            "time": "2020-02-22T12:28:44+00:00"
         },
         {
             "name": "phpdocumentor/type-resolver",
-            "version": "1.0.1",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/TypeResolver.git",
-                "reference": "2e32a6d48972b2c1976ed5d8967145b6cec4a4a9"
+                "reference": "7462d5f123dfc080dfdf26897032a6513644fc95"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/2e32a6d48972b2c1976ed5d8967145b6cec4a4a9",
-                "reference": "2e32a6d48972b2c1976ed5d8967145b6cec4a4a9",
+                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/7462d5f123dfc080dfdf26897032a6513644fc95",
+                "reference": "7462d5f123dfc080dfdf26897032a6513644fc95",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.1",
+                "php": "^7.2",
                 "phpdocumentor/reflection-common": "^2.0"
             },
             "require-dev": {
-                "ext-tokenizer": "^7.1",
-                "mockery/mockery": "~1",
-                "phpunit/phpunit": "^7.0"
+                "ext-tokenizer": "^7.2",
+                "mockery/mockery": "~1"
             },
             "type": "library",
             "extra": {
@@ -5361,28 +4515,28 @@
                 }
             ],
             "description": "A PSR-5 based resolver of Class names, Types and Structural Element Names",
-            "time": "2019-08-22T18:11:29+00:00"
+            "time": "2020-02-18T18:59:58+00:00"
         },
         {
             "name": "phpspec/prophecy",
-            "version": "1.10.0",
+            "version": "v1.10.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/prophecy.git",
-                "reference": "d638ebbb58daba25a6a0dc7969e1358a0e3c6682"
+                "reference": "451c3cd1418cf640de218914901e51b064abb093"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/d638ebbb58daba25a6a0dc7969e1358a0e3c6682",
-                "reference": "d638ebbb58daba25a6a0dc7969e1358a0e3c6682",
+                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/451c3cd1418cf640de218914901e51b064abb093",
+                "reference": "451c3cd1418cf640de218914901e51b064abb093",
                 "shasum": ""
             },
             "require": {
                 "doctrine/instantiator": "^1.0.2",
                 "php": "^5.3|^7.0",
                 "phpdocumentor/reflection-docblock": "^2.0|^3.0.2|^4.0|^5.0",
-                "sebastian/comparator": "^1.2.3|^2.0|^3.0",
-                "sebastian/recursion-context": "^1.0|^2.0|^3.0"
+                "sebastian/comparator": "^1.2.3|^2.0|^3.0|^4.0",
+                "sebastian/recursion-context": "^1.0|^2.0|^3.0|^4.0"
             },
             "require-dev": {
                 "phpspec/phpspec": "^2.5 || ^3.2",
@@ -5424,7 +4578,7 @@
                 "spy",
                 "stub"
             ],
-            "time": "2019-12-17T16:54:23+00:00"
+            "time": "2020-03-05T15:02:03+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -6386,16 +5540,16 @@
         },
         {
             "name": "symfony/config",
-            "version": "v4.4.2",
+            "version": "v4.4.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/config.git",
-                "reference": "6911d432edd5b50822986604fd5a5be3af856d30"
+                "reference": "8ba41fe053683e1e6e3f6fa21f07ea5c4dd9e4c0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/config/zipball/6911d432edd5b50822986604fd5a5be3af856d30",
-                "reference": "6911d432edd5b50822986604fd5a5be3af856d30",
+                "url": "https://api.github.com/repos/symfony/config/zipball/8ba41fe053683e1e6e3f6fa21f07ea5c4dd9e4c0",
+                "reference": "8ba41fe053683e1e6e3f6fa21f07ea5c4dd9e4c0",
                 "shasum": ""
             },
             "require": {
@@ -6446,20 +5600,20 @@
             ],
             "description": "Symfony Config Component",
             "homepage": "https://symfony.com",
-            "time": "2019-12-18T12:00:29+00:00"
+            "time": "2020-04-15T15:56:18+00:00"
         },
         {
             "name": "symfony/console",
-            "version": "v4.4.2",
+            "version": "v4.4.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "82437719dab1e6bdd28726af14cb345c2ec816d0"
+                "reference": "10bb3ee3c97308869d53b3e3d03f6ac23ff985f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/82437719dab1e6bdd28726af14cb345c2ec816d0",
-                "reference": "82437719dab1e6bdd28726af14cb345c2ec816d0",
+                "url": "https://api.github.com/repos/symfony/console/zipball/10bb3ee3c97308869d53b3e3d03f6ac23ff985f7",
+                "reference": "10bb3ee3c97308869d53b3e3d03f6ac23ff985f7",
                 "shasum": ""
             },
             "require": {
@@ -6522,20 +5676,20 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2019-12-17T10:32:23+00:00"
+            "time": "2020-03-30T11:41:10+00:00"
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v4.4.2",
+            "version": "v4.4.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "b3c3068a72623287550fe20b84a2b01dcba2686f"
+                "reference": "abc8e3618bfdb55e44c8c6a00abd333f831bbfed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/b3c3068a72623287550fe20b84a2b01dcba2686f",
-                "reference": "b3c3068a72623287550fe20b84a2b01dcba2686f",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/abc8e3618bfdb55e44c8c6a00abd333f831bbfed",
+                "reference": "abc8e3618bfdb55e44c8c6a00abd333f831bbfed",
                 "shasum": ""
             },
             "require": {
@@ -6592,7 +5746,7 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2019-11-28T13:33:56+00:00"
+            "time": "2020-03-27T16:54:36+00:00"
         },
         {
             "name": "symfony/event-dispatcher-contracts",
@@ -6654,16 +5808,16 @@
         },
         {
             "name": "symfony/filesystem",
-            "version": "v5.0.2",
+            "version": "v5.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "1d71f670bc5a07b9ccc97dc44f932177a322d4e6"
+                "reference": "7cd0dafc4353a0f62e307df90b48466379c8cc91"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/1d71f670bc5a07b9ccc97dc44f932177a322d4e6",
-                "reference": "1d71f670bc5a07b9ccc97dc44f932177a322d4e6",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/7cd0dafc4353a0f62e307df90b48466379c8cc91",
+                "reference": "7cd0dafc4353a0f62e307df90b48466379c8cc91",
                 "shasum": ""
             },
             "require": {
@@ -6700,20 +5854,20 @@
             ],
             "description": "Symfony Filesystem Component",
             "homepage": "https://symfony.com",
-            "time": "2019-11-26T23:25:11+00:00"
+            "time": "2020-04-12T14:40:17+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
-            "version": "v1.13.1",
+            "version": "v1.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-ctype.git",
-                "reference": "f8f0b461be3385e56d6de3dbb5a0df24c0c275e3"
+                "reference": "e94c8b1bbe2bc77507a1056cdb06451c75b427f9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/f8f0b461be3385e56d6de3dbb5a0df24c0c275e3",
-                "reference": "f8f0b461be3385e56d6de3dbb5a0df24c0c275e3",
+                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/e94c8b1bbe2bc77507a1056cdb06451c75b427f9",
+                "reference": "e94c8b1bbe2bc77507a1056cdb06451c75b427f9",
                 "shasum": ""
             },
             "require": {
@@ -6725,7 +5879,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.13-dev"
+                    "dev-master": "1.17-dev"
                 }
             },
             "autoload": {
@@ -6758,20 +5912,20 @@
                 "polyfill",
                 "portable"
             ],
-            "time": "2019-11-27T13:56:44+00:00"
+            "time": "2020-05-12T16:14:59+00:00"
         },
         {
             "name": "symfony/polyfill-php73",
-            "version": "v1.13.1",
+            "version": "v1.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php73.git",
-                "reference": "4b0e2222c55a25b4541305a053013d5647d3a25f"
+                "reference": "a760d8964ff79ab9bf057613a5808284ec852ccc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php73/zipball/4b0e2222c55a25b4541305a053013d5647d3a25f",
-                "reference": "4b0e2222c55a25b4541305a053013d5647d3a25f",
+                "url": "https://api.github.com/repos/symfony/polyfill-php73/zipball/a760d8964ff79ab9bf057613a5808284ec852ccc",
+                "reference": "a760d8964ff79ab9bf057613a5808284ec852ccc",
                 "shasum": ""
             },
             "require": {
@@ -6780,7 +5934,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.13-dev"
+                    "dev-master": "1.17-dev"
                 }
             },
             "autoload": {
@@ -6816,7 +5970,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2019-11-27T16:25:15+00:00"
+            "time": "2020-05-12T16:47:27+00:00"
         },
         {
             "name": "symfony/service-contracts",
@@ -6878,16 +6032,16 @@
         },
         {
             "name": "symfony/stopwatch",
-            "version": "v4.4.2",
+            "version": "v4.4.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/stopwatch.git",
-                "reference": "5745b514fc56ae1907c6b8ed74f94f90f64694e9"
+                "reference": "e0324d3560e4128270e3f08617480d9233d81cfc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/stopwatch/zipball/5745b514fc56ae1907c6b8ed74f94f90f64694e9",
-                "reference": "5745b514fc56ae1907c6b8ed74f94f90f64694e9",
+                "url": "https://api.github.com/repos/symfony/stopwatch/zipball/e0324d3560e4128270e3f08617480d9233d81cfc",
+                "reference": "e0324d3560e4128270e3f08617480d9233d81cfc",
                 "shasum": ""
             },
             "require": {
@@ -6924,20 +6078,20 @@
             ],
             "description": "Symfony Stopwatch Component",
             "homepage": "https://symfony.com",
-            "time": "2019-11-05T16:11:08+00:00"
+            "time": "2020-03-27T16:54:36+00:00"
         },
         {
             "name": "symfony/yaml",
-            "version": "v4.4.2",
+            "version": "v4.4.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "a08832b974dd5fafe3085a66d41fe4c84bb2628c"
+                "reference": "b385dce1c0e9f839b384af90188638819433e252"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/a08832b974dd5fafe3085a66d41fe4c84bb2628c",
-                "reference": "a08832b974dd5fafe3085a66d41fe4c84bb2628c",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/b385dce1c0e9f839b384af90188638819433e252",
+                "reference": "b385dce1c0e9f839b384af90188638819433e252",
                 "shasum": ""
             },
             "require": {
@@ -6983,20 +6137,20 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2019-12-10T10:33:21+00:00"
+            "time": "2020-04-28T17:55:16+00:00"
         },
         {
             "name": "twbs/bootstrap",
-            "version": "v4.4.1",
+            "version": "v4.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twbs/bootstrap.git",
-                "reference": "dca1ab7d877bc4b664b43604657a2b5fbe2b4ecb"
+                "reference": "7a6da5e3e7ad7c749dde806546a35d4d4259d965"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/dca1ab7d877bc4b664b43604657a2b5fbe2b4ecb",
-                "reference": "dca1ab7d877bc4b664b43604657a2b5fbe2b4ecb",
+                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/7a6da5e3e7ad7c749dde806546a35d4d4259d965",
+                "reference": "7a6da5e3e7ad7c749dde806546a35d4d4259d965",
                 "shasum": ""
             },
             "replace": {
@@ -7034,20 +6188,20 @@
                 "sass",
                 "web"
             ],
-            "time": "2019-11-28T12:59:49+00:00"
+            "time": "2020-05-12T17:44:42+00:00"
         },
         {
             "name": "webmozart/assert",
-            "version": "1.6.0",
+            "version": "1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/webmozart/assert.git",
-                "reference": "573381c0a64f155a0d9a23f4b0c797194805b925"
+                "reference": "ab2cb0b3b559010b75981b1bdce728da3ee90ad6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webmozart/assert/zipball/573381c0a64f155a0d9a23f4b0c797194805b925",
-                "reference": "573381c0a64f155a0d9a23f4b0c797194805b925",
+                "url": "https://api.github.com/repos/webmozart/assert/zipball/ab2cb0b3b559010b75981b1bdce728da3ee90ad6",
+                "reference": "ab2cb0b3b559010b75981b1bdce728da3ee90ad6",
                 "shasum": ""
             },
             "require": {
@@ -7055,7 +6209,7 @@
                 "symfony/polyfill-ctype": "^1.8"
             },
             "conflict": {
-                "vimeo/psalm": "<3.6.0"
+                "vimeo/psalm": "<3.9.1"
             },
             "require-dev": {
                 "phpunit/phpunit": "^4.8.36 || ^7.5.13"
@@ -7082,20 +6236,20 @@
                 "check",
                 "validate"
             ],
-            "time": "2019-11-24T13:36:37+00:00"
+            "time": "2020-04-18T12:12:48+00:00"
         },
         {
             "name": "zendframework/zend-barcode",
-            "version": "2.7.1",
+            "version": "2.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-barcode.git",
-                "reference": "44e1c17aceee2ce8c8fa17f316b497cbff037f9b"
+                "reference": "6db95687997920b8217e71d2f12b51ec10e824d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-barcode/zipball/44e1c17aceee2ce8c8fa17f316b497cbff037f9b",
-                "reference": "44e1c17aceee2ce8c8fa17f316b497cbff037f9b",
+                "url": "https://api.github.com/repos/zendframework/zend-barcode/zipball/6db95687997920b8217e71d2f12b51ec10e824d9",
+                "reference": "6db95687997920b8217e71d2f12b51ec10e824d9",
                 "shasum": ""
             },
             "require": {
@@ -7116,8 +6270,8 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.7.x-dev",
-                    "dev-develop": "2.8.x-dev"
+                    "dev-master": "2.8.x-dev",
+                    "dev-develop": "2.9.x-dev"
                 }
             },
             "autoload": {
@@ -7135,7 +6289,8 @@
                 "barcode",
                 "zf"
             ],
-            "time": "2019-09-21T09:11:41+00:00"
+            "abandoned": "laminas/laminas-barcode",
+            "time": "2019-12-26T21:09:26+00:00"
         },
         {
             "name": "zendframework/zend-code",
@@ -7187,6 +6342,7 @@
                 "code",
                 "zf2"
             ],
+            "abandoned": "laminas/laminas-code",
             "time": "2016-04-20T17:26:42+00:00"
         },
         {
@@ -7234,6 +6390,7 @@
                 "di",
                 "zf2"
             ],
+            "abandoned": "laminas/laminas-di",
             "time": "2016-04-25T20:58:11+00:00"
         },
         {
@@ -7279,6 +6436,7 @@
                 "dom",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-dom",
             "time": "2019-06-18T10:36:49+00:00"
         },
         {
@@ -7336,6 +6494,7 @@
                 "file",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-file",
             "time": "2019-02-06T16:53:31+00:00"
         },
         {
@@ -7385,6 +6544,7 @@
                 "memory",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-memory",
             "time": "2019-10-16T11:10:24+00:00"
         },
         {
@@ -7430,6 +6590,7 @@
                 "rbac",
                 "zf2"
             ],
+            "abandoned": "laminas/laminas-permissions-rbac",
             "time": "2018-02-01T09:55:50+00:00"
         },
         {
@@ -7477,32 +6638,32 @@
                 "server",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-server",
             "time": "2019-10-16T18:27:05+00:00"
         },
         {
             "name": "zendframework/zend-soap",
-            "version": "2.8.0",
+            "version": "2.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-soap.git",
-                "reference": "8762d79efa220d82529c43ce08d70554146be645"
+                "reference": "2d6012e7231cce550219eccfc80836a028d20bf1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-soap/zipball/8762d79efa220d82529c43ce08d70554146be645",
-                "reference": "8762d79efa220d82529c43ce08d70554146be645",
+                "url": "https://api.github.com/repos/zendframework/zend-soap/zipball/2d6012e7231cce550219eccfc80836a028d20bf1",
+                "reference": "2d6012e7231cce550219eccfc80836a028d20bf1",
                 "shasum": ""
             },
             "require": {
-                "ext-soap": "*",
-                "php": "^5.6 || ^7.0",
+                "php": "^5.5 || ^7.0",
                 "zendframework/zend-server": "^2.6.1",
                 "zendframework/zend-stdlib": "^2.7 || ^3.0",
                 "zendframework/zend-uri": "^2.5.2"
             },
             "require-dev": {
-                "phpunit/phpunit": "^5.7.21 || ^6.3",
-                "zendframework/zend-coding-standard": "~1.0.0",
+                "phpunit/phpunit": "^4.8",
+                "squizlabs/php_codesniffer": "^2.3.1",
                 "zendframework/zend-config": "^2.6",
                 "zendframework/zend-http": "^2.5.4"
             },
@@ -7512,8 +6673,8 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.7.x-dev",
-                    "dev-develop": "2.8.x-dev"
+                    "dev-master": "2.6-dev",
+                    "dev-develop": "2.7-dev"
                 }
             },
             "autoload": {
@@ -7530,7 +6691,8 @@
                 "soap",
                 "zf2"
             ],
-            "time": "2019-04-30T16:45:35+00:00"
+            "abandoned": "laminas/laminas-soap",
+            "time": "2016-04-21T16:06:27+00:00"
         },
         {
             "name": "zendframework/zend-tag",
@@ -7581,6 +6743,7 @@
                 "tag",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-tag",
             "time": "2019-04-30T21:23:21+00:00"
         },
         {
@@ -7642,6 +6805,7 @@
                 "test",
                 "zf2"
             ],
+            "abandoned": "laminas/laminas-test",
             "time": "2016-03-02T20:15:27+00:00"
         },
         {
@@ -7695,6 +6859,7 @@
                 "xmlrpc",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-xmlrpc",
             "time": "2018-05-14T19:17:17+00:00"
         },
         {
@@ -7741,6 +6906,7 @@
                 "xml",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-xml",
             "time": "2019-01-22T19:42:14+00:00"
         }
     ],
@@ -7748,12 +6914,15 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "zendframework/zendoauth": 20,
+        "neilime/zf2-twb-bundle": 0,
         "codeclimate/php-test-reporter": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.1"
+        "php": ">=7.1",
+        "ext-pdo": "*",
+        "ext-json": "*"
     },
     "platform-dev": []
 }

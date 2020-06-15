@@ -11,8 +11,8 @@
 namespace Shop\Model;
 
 use DateTime;
-use UthandoCommon\Model\Model;
-use UthandoCommon\Model\ModelInterface;
+use Common\Model\Model;
+use Common\Model\ModelInterface;
 
 /**
  * Class Codes

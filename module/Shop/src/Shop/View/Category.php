@@ -12,8 +12,8 @@
 namespace Shop\View;
 
 use Shop\Service\ProductCategoryService;
-use UthandoCommon\Service\ServiceManager;
-use UthandoCommon\View\AbstractViewHelper;
+use Common\Service\ServiceManager;
+use Common\View\AbstractViewHelper;
 
 /**
  * Class Category

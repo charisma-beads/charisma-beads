@@ -11,7 +11,7 @@
 namespace Shop\Hydrator;
 
 use Shop\Model\VoucherCustomerMapModel as CustomerMapModel;
-use UthandoCommon\Hydrator\AbstractHydrator;
+use Common\Hydrator\AbstractHydrator;
 
 /**
  * Class CustomerMap

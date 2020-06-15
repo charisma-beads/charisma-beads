@@ -11,9 +11,9 @@
 namespace Shop\Model;
 
 use Shop\ShopException;
-use UthandoCommon\Model\AbstractCollection;
-use UthandoCommon\Model\Model;
-use UthandoCommon\Model\ModelInterface;
+use Common\Model\AbstractCollection;
+use Common\Model\Model;
+use Common\Model\ModelInterface;
 
 /**
  * Class AbstractOrderCollection

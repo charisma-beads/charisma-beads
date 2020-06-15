@@ -10,7 +10,7 @@
 
 namespace Shop\Hydrator;
 
-use UthandoCommon\Hydrator\AbstractHydrator;
+use Common\Hydrator\AbstractHydrator;
 
 /**
  * Class Group

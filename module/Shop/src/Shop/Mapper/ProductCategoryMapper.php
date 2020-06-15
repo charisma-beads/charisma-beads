@@ -10,7 +10,7 @@
 
 namespace Shop\Mapper;
 
-use UthandoCommon\Mapper\AbstractNestedSet;
+use Common\Mapper\AbstractNestedSet;
 use Shop\Model\ProductCategoryModel as CategoryModel;
 use Zend\Db\Sql\Where;
 use Zend\Db\Sql\Select;

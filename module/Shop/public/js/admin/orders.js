@@ -8,7 +8,7 @@ var Orders = {
         var orderId = $('input[name=orderId]').val();
         data = data + '&id=' + orderId;
         $.ajax({
-            url: admin.basePath + '/admin/shop/order/create/add-line',
+            url: adminClass.basePath + '/admin/shop/order/create/add-line',
             data:  data,
             type: 'POST',
             success: function (response) {
@@ -16,7 +16,7 @@ var Orders = {
                 dialog.modal('hide');
             },
             error: function (response) {
-                admin.addAlert(response.error, 'danger');
+                adminClass.addAlert(response.error, 'danger');
             }
         });
     },
@@ -32,7 +32,7 @@ var Orders = {
                     callback : function() {
 
                         $.ajax({
-                            url: admin.basePath + '/admin/shop/voucher/add-voucher/id/' + orderId,
+                            url: adminClass.basePath + '/admin/shop/voucher/add-voucher/id/' + orderId,
                             data: {'code': $('input[name=code]').val()},
                             type: 'POST',
                             success: function (response) {
@@ -40,7 +40,7 @@ var Orders = {
                                     if (response.success) {
                                         dialog.modal('hide');
                                         $('#order-lines table').load(
-                                            admin.basePath + '/admin/shop/order/create/reload/id/' + orderId,
+                                            adminClass.basePath + '/admin/shop/order/create/reload/id/' + orderId,
                                             function() {
                                                 if (response.discount == 0) {
                                                     el = $('#table-discount td:last-child')
@@ -74,7 +74,7 @@ var Orders = {
             });*/
 
             el.find('.modal-body').load(
-                admin.basePath + '/admin/shop/voucher/add-voucher/id/' + orderId
+                adminClass.basePath + '/admin/shop/voucher/add-voucher/id/' + orderId
             )
         });
 
@@ -95,7 +95,7 @@ var Orders = {
                         });
 
                         $.ajax({
-                            url : admin.basePath + '/admin/shop/product/get/id/' + productId,
+                            url : adminClass.basePath + '/admin/shop/product/get/id/' + productId,
                             type : 'GET'
                         }).done(function(data){
                             dialog.find('.modal-body').html(data);
@@ -130,7 +130,7 @@ var Orders = {
 
         dialog.on('show.bs.modal', function () {
             var el = $(this);
-            el.find('.modal-body').load(admin.basePath + '/admin/shop/product/search',null, function (){
+            el.find('.modal-body').load(adminClass.basePath + '/admin/shop/product/search',null, function (){
 
                 $('#add-product-button').prop('disabled', true);
 
@@ -140,7 +140,7 @@ var Orders = {
                     },
                     queryTokenizer: Bloodhound.tokenizers.whitespace,
                     remote: {
-                        url: admin.basePath + '/admin/shop/product/search/%QUERY',
+                        url: adminClass.basePath + '/admin/shop/product/search/%QUERY',
                         wildcard: '%QUERY',
                         filter: function (data) {
                             return $.map(data.results, function (item) {
@@ -194,7 +194,7 @@ var Orders = {
                         });
 
                         $.ajax({
-                            url : admin.basePath + '/admin/shop/product/get/id/' + Orders.productId,
+                            url : adminClass.basePath + '/admin/shop/product/get/id/' + Orders.productId,
                             type : 'GET'
                         }).done(function(data){
                             Orders.productDialog(data, Orders.productId);
@@ -225,7 +225,7 @@ var Orders = {
             var orderNumber = $(this).next().val();
             var orderStatusId = $(this).val();
             $.ajax({
-                    url: admin.basePath + '/admin/shop/order/update-status',
+                    url: adminClass.basePath + '/admin/shop/order/update-status',
             data: {
                 'orderStatusId': orderStatusId,
                     'orderNumber': orderNumber
@@ -233,13 +233,13 @@ var Orders = {
             type: 'POST',
                 success: function (json) {
                 if (json.success) {
-                    admin.addAlert('Updated order status to order no: ' + orderNumber, 'success');
+                    adminClass.addAlert('Updated order status to order no: ' + orderNumber, 'success');
                 } else {
-                    admin.addAlert('Failed to update order status due to database error', 'danger');
+                    adminClass.addAlert('Failed to update order status due to database error', 'danger');
                 }
             },
             error: function (response) {
-                admin.addAlert(response.responseText, 'danger');
+                adminClass.addAlert(response.responseText, 'danger');
             }
         });
     });
@@ -325,7 +325,7 @@ $(document).ready(function () {
                     queryTokenizer: Bloodhound.tokenizers.whitespace,
                     prefetch: {
                         ttl: 3600000,
-                        url: admin.basePath + '/admin/shop/customer/auto-complete',
+                        url: adminClass.basePath + '/admin/shop/customer/auto-complete',
                         filter: function (data) {
                             return $.map(data.results, function (item) {
                                 return {
@@ -373,7 +373,7 @@ $(document).ready(function () {
         var orderId = $('input[name=orderId]').val();
 
         $.ajax({
-            url: admin.basePath + '/admin/shop/order/create/instore/id/' + orderId,
+            url: adminClass.basePath + '/admin/shop/order/create/instore/id/' + orderId,
             data:  {
 
             },
@@ -382,7 +382,7 @@ $(document).ready(function () {
                 $('#order-lines table').replaceWith(response);
             },
             error: function (response) {
-                admin.addAlert(response.error, 'danger');
+                adminClass.addAlert(response.error, 'danger');
             }
         });
 
@@ -403,7 +403,7 @@ $(document).ready(function () {
                 $('#order-lines table').replaceWith(response);
             },
             error: function (response) {
-                admin.addAlert(response.error, 'danger');
+                adminClass.addAlert(response.error, 'danger');
             }
         });
     });

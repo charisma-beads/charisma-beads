@@ -2,7 +2,7 @@
 
 namespace ShopTest\Framework;
 
-use UthandoUser\Model\User as TestUserModel;
+use User\Model\User as TestUserModel;
 use Zend\Session\Container;
 use Zend\Session\SessionManager;
 use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
@@ -54,7 +54,7 @@ class TestCase extends AbstractHttpControllerTestCase
 
     protected function getAdminUser()
     {
-        /* @var $auth \UthandoUser\Service\Authentication */
+        /* @var $auth \User\Service\Authentication */
         $auth = $this->getApplicationServiceLocator()
             ->get('Zend\Authentication\AuthenticationService');
         $user = new TestUserModel();
@@ -71,7 +71,7 @@ class TestCase extends AbstractHttpControllerTestCase
 
     protected function getRegisteredUser()
     {
-        /* @var $auth \UthandoUser\Service\Authentication */
+        /* @var $auth \User\Service\Authentication */
         $auth = $this->getApplicationServiceLocator()
             ->get('Zend\Authentication\AuthenticationService');
         $user = new TestUserModel();

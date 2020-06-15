@@ -24,7 +24,7 @@
                 <td><?=$this->escapeHtml($row->getAdvertId()); ?></td>
                 <td><?=$this->escapeHtml($row->getAdvert()); ?></td>
                 <td>
-                    <?=$this->partial('uthando-admin/partial/edit-actions', [
+                    <?=$this->partial('admin/partial/edit-actions', [
                         'pk'		=> 'advertId',
                         'id'		=> $row->getAdvertId(),
                         'tableName'	=> 'advert',

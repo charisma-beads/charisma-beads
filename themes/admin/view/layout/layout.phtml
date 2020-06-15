@@ -11,7 +11,7 @@
         ->appendName('rating', 'general'); ?>
 
     <?=$this->headLink()
-        ->appendStylesheet($this->basePath('css/uthando-admin.css')); ?>
+        ->appendStylesheet($this->basePath('css/admin.css')); ?>
 </head>
 <body>
 <div id="container">
@@ -25,7 +25,7 @@
                     <i class="fa fa-user"></i> <?= $this->identity()->getFullName(); ?>
                     <i class="fa fa-caret-down"></i>
                 </a>
-                <?= $this->uthandoNavigation(\UthandoAdmin\Service\AdminUserNavigationFactory::class)
+                <?= $this->uthandoNavigation(\Admin\Service\AdminUserNavigationFactory::class)
                     ->uthandoTbMenu()
                     ->setUlClass('dropdown-menu dropdown-menu-right'); ?>
             </li>
@@ -33,9 +33,9 @@
     </header>
 
     <nav id="column-left">
-        <?= $this->navigation(\UthandoAdmin\Service\AdminNavigationFactory::class)
+        <?= $this->navigation(\Admin\Service\AdminNavigationFactory::class)
             ->menu()
-            ->setPartial('uthando-admin/partial/side-bar'); ?>
+            ->setPartial('admin/partial/side-bar'); ?>
     </nav>
 
     <div id="content">
@@ -46,7 +46,7 @@
                 </div>
                 <h1><?=$this->pageTitle;?></h1>
                 <nav class="breadcrumb">
-                    <?=$this->navigation(\UthandoAdmin\Service\AdminNavigationFactory::class)
+                    <?=$this->navigation(\Admin\Service\AdminNavigationFactory::class)
                         ->breadcrumbs()
                         ->setRenderInvisible(true)
                         ->setSeparator(' / ');
@@ -73,10 +73,10 @@
 </div>
 
 <?=$this->inlineScript()
-    ->appendFile($this->basePath('js/uthando-admin.js')); ?>
+    ->appendFile($this->basePath('js/admin.js')); ?>
 
 <script>
-    admin.basePath = '<?=$this->basePath();?>';
+    adminClass.basePath = '<?=$this->basePath();?>';
 </script>
 
 <?=$this->placeholder('js-scripts');?>

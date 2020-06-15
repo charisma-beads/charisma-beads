@@ -21,7 +21,7 @@ var category = {
         });
 
         modal.on('show.bs.modal', function () {
-            $(this).find('.bootbox-body').load(admin.basePath + '/admin/shop/category/category-image-select/id/' + category.productCategoryId);
+            $(this).find('.bootbox-body').load(adminClass.basePath + '/admin/shop/category/category-image-select/id/' + category.productCategoryId);
         });
 
         modal.modal('show');
@@ -41,12 +41,12 @@ var category = {
         });
 
         modal.on('show.bs.modal', function () {
-            $(this).find('.bootbox-body').load(admin.basePath + '/admin/uploader/upload-form');
+            $(this).find('.bootbox-body').load(adminClass.basePath + '/admin/uploader/upload-form');
         });
 
         modal.on('hide.bs.modal', function () {
-            if (admin.upload && admin.upload.status) {
-                $('#product-category-image').val(admin.upload.image.name);
+            if (adminClass.upload && adminClass.upload.status) {
+                $('#product-category-image').val(adminClass.upload.image.name);
             }
         });
         modal.modal('show');

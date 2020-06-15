@@ -15,7 +15,7 @@ use Shop\Hydrator\PostLevelHydrator;
 use Shop\InputFilter\PostLevelInputFilter;
 use Shop\Mapper\PostLevelMapper;
 use Shop\Model\PostLevelModel;
-use UthandoCommon\Service\AbstractMapperService;
+use Common\Service\AbstractMapperService;
 
 /**
  * Class Level

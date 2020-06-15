@@ -13,7 +13,7 @@ namespace Shop\View;
 
 use Shop\Form\CatalogSearchForm;
 use Shop\InputFilter\CatalogSearchInputFilter;
-use UthandoCommon\View\AbstractViewHelper;
+use Common\View\AbstractViewHelper;
 
 /**
  * Class ProductSearch

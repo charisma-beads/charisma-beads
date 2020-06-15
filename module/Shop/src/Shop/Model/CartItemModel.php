@@ -11,8 +11,8 @@
 namespace Shop\Model;
 
 
-use UthandoCommon\Model\ModelInterface;
-use UthandoCommon\Model\Model;
+use Common\Model\ModelInterface;
+use Common\Model\Model;
 
 /**
  * Class Item

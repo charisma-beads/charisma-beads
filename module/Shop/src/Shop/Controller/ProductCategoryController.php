@@ -13,7 +13,7 @@ namespace Shop\Controller;
 use Shop\Form\Element\ProductCategoryImageList;
 use Shop\Service\ProductCategoryService;
 use Shop\ShopException;
-use UthandoCommon\Controller\AbstractCrudController;
+use Common\Controller\AbstractCrudController;
 use Zend\View\Model\ViewModel;
 
 /**

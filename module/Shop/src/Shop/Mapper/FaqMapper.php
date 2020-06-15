@@ -10,7 +10,7 @@
 
 namespace Shop\Mapper;
 
-use UthandoCommon\Mapper\AbstractNestedSet;
+use Common\Mapper\AbstractNestedSet;
 
 /**
  * Class Faq

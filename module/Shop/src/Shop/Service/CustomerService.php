@@ -15,11 +15,11 @@ use Shop\Hydrator\CustomerHydrator;
 use Shop\InputFilter\CustomerInputFilter;
 use Shop\Mapper\CustomerMapper;
 use Shop\Model\CustomerModel;
-use UthandoCommon\Service\AbstractRelationalMapperService;
-use UthandoCommon\Service\AbstractService;
-use UthandoCommon\Service\ServiceException;
-use UthandoUser\Model\UserModel;
-use UthandoUser\Service\UserService;
+use Common\Service\AbstractRelationalMapperService;
+use Common\Service\AbstractService;
+use Common\Service\ServiceException;
+use User\Model\UserModel;
+use User\Service\UserService;
 use Zend\EventManager\Event;
 use Zend\Math\BigInteger\BigInteger;
 use Zend\Math\Rand;
@@ -110,7 +110,7 @@ class CustomerService extends AbstractRelationalMapperService
 
         // no customer is return create one base on the userId.
         if(!$customer instanceof CustomerModel) {
-            /* @var \UthandoUser\Service\UserService $userService */
+            /* @var \User\Service\UserService $userService */
             $userService = $this->getService(UserService::class);
             $user = $userService->getById($userId);
             $user = $userService->getMapper()->extract($user);
@@ -327,7 +327,7 @@ class CustomerService extends AbstractRelationalMapperService
             $user->getLastname() != $model->getLastname() ||
             $user->getEmail() != $model->getEmail()) {
 
-            /* @var \UthandoUser\Service\UserService $userService */
+            /* @var \User\Service\UserService $userService */
             $userService = $this->getService(UserService::class);
             $post = $user->getArrayCopy();
 
@@ -380,7 +380,7 @@ class CustomerService extends AbstractRelationalMapperService
     }
 
     /**
-     * @return \UthandoUser\Model\UserModel
+     * @return \User\Model\UserModel
      */
     public function getUser()
     {

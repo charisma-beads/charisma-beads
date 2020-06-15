@@ -12,7 +12,7 @@
 namespace Shop\View;
 
 use Shop\Options\ShopOptions;
-use UthandoCommon\View\AbstractViewHelper;
+use Common\View\AbstractViewHelper;
 
 /**
  * Class Alert

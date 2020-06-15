@@ -11,7 +11,7 @@
 namespace Shop\Form\Settings;
 
 use Shop\Options\OrderOptions;
-use UthandoMail\Form\Element\MailTransportList;
+use Mail\Form\Element\MailTransportList;
 use Zend\Filter\Boolean;
 use Zend\Filter\StringTrim;
 use Zend\Filter\StripTags;

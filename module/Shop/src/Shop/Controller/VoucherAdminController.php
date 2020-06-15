@@ -16,7 +16,7 @@ use Shop\Model\VoucherCodeModel;
 use Shop\Service\OrderService;
 use Shop\Service\VoucherCodeService;
 use Shop\ShopException;
-use UthandoCommon\Controller\AbstractCrudController;
+use Common\Controller\AbstractCrudController;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
 
@@ -109,8 +109,8 @@ class VoucherAdminController extends AbstractCrudController
     /**
      * @param $orderId
      * @return null|OrderModel
-     * @throws \UthandoCommon\Model\CollectionException
-     * @throws \UthandoCommon\Service\ServiceException
+     * @throws \Common\Model\CollectionException
+     * @throws \Common\Service\ServiceException
      */
     private function getOrder($orderId) : ?OrderModel
     {

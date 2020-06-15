@@ -14,7 +14,7 @@ use Shop\Hydrator\OrderStatusHydrator;
 use Shop\Mapper\OrderStatusMapper;
 use Shop\Model\Order\Status;
 use Shop\Model\OrderStatusModel;
-use UthandoCommon\Service\AbstractMapperService;
+use Common\Service\AbstractMapperService;
 
 /**
  * Class Status

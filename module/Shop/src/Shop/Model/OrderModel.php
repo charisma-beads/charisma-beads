@@ -240,7 +240,7 @@ class OrderModel extends AbstractOrderCollection
     /**
      * @param OrderLineModel $orderLine
      * @return $this
-     * @throws \UthandoCommon\Model\CollectionException
+     * @throws \Common\Model\CollectionException
      */
     public function setOrderLine(OrderLineModel $orderLine)
     {

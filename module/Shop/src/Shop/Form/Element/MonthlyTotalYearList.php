@@ -11,7 +11,7 @@
 namespace Shop\Form\Element;
 
 use Shop\Mapper\OrderMapper;
-use UthandoCommon\Mapper\MapperManager;
+use Common\Mapper\MapperManager;
 use Zend\Form\Element\Select;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;

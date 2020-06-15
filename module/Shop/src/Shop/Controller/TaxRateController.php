@@ -11,7 +11,7 @@
 namespace Shop\Controller;
 
 use Shop\Service\TaxRateService;
-use UthandoCommon\Controller\AbstractCrudController;
+use Common\Controller\AbstractCrudController;
 
 /**
  * Class TaxRate

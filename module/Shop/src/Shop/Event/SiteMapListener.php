@@ -12,8 +12,8 @@ namespace Shop\Event;
 
 use Shop\Service\ProductCategoryService;
 use Shop\Service\ProductService;
-use UthandoNavigation\Service\MenuService;
-use UthandoNavigation\Service\SiteMapService;
+use Navigation\Service\MenuService;
+use Navigation\Service\SiteMapService;
 use Zend\EventManager\Event;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
@@ -52,7 +52,7 @@ class SiteMapListener implements ListenerAggregateInterface
         $productService = $e->getTarget()->getService(ProductService::class);
         /* @var \Shop\Service\ProductCategoryService $categoryService */
         $categoryService = $e->getTarget()->getService(ProductCategoryService::class);
-        /* @var \UthandoNavigation\Service\MenuService $service */
+        /* @var \Navigation\Service\MenuService $service */
         $menuService = $e->getTarget()->getService(MenuService::class);
 
         $cats = $categoryService->fetchAll();

@@ -15,7 +15,7 @@ use Shop\Hydrator\ProductGroupHydrator;
 use Shop\InputFilter\ProductGroupInputFilter;
 use Shop\Mapper\ProductGroupMapper;
 use Shop\Model\ProductGroupModel;
-use UthandoCommon\Service\AbstractMapperService;
+use Common\Service\AbstractMapperService;
 use Zend\EventManager\Event;
 
 /**

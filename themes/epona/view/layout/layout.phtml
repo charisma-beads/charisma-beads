@@ -161,7 +161,7 @@
                             <nav class="nav-second">
                                 <?=$this->uthandoNavigation()
                                     ->uthandoTbDbMenu('top-menu')
-                                    ->setPartial('uthando-navigation/top-menu')
+                                    ->setPartial('navigation/top-menu')
                                 ;
                                 ?>
                             </nav>
@@ -216,7 +216,7 @@
                             <nav class="nav-main">
                                 <?=$this->uthandoNavigation()
                                     ->uthandoTbDbMenu('main-menu')
-                                    ->setPartial('uthando-navigation/main-menu');
+                                    ->setPartial('navigation/main-menu');
                                 ?>
 
                             </nav>
@@ -280,11 +280,6 @@
 
                             <div class="row vertical-align">
                                 <div class="col-md-6">
-                                    <a href="https://www.positivessl.com" style="font-family: arial; font-size: 10px; color: #212121; text-decoration: none;">
-                                        <img src="https://www.positivessl.com/images-new/PositiveSSL_tl_trans.png" alt="SSL Certificate" title="SSL Certificate" border="0" />
-                                    </a>
-                                </div>
-                                <div class="col-md-6">
                                     <a href=' https://siteuptime.com/statistics.php?Id=5561&UserId=a557440f046f802e263a94108a1ee8f5' target="_blank">
                                         <img width=85 height=16 border=0 alt='website uptime' src="https://siteuptime.com/button/genbutton.php?u=195343&m=16033&c=green&p=total">
                                     </a>
@@ -327,7 +322,7 @@
                             <p>
                                 <?=$this->contact('details.about_us_text');?>
                             </p>
-                            <?php $newsletter = $this->formManager(\UthandoNewsletter\Form\SubscriberForm::class); ?>
+                            <?php $newsletter = $this->formManager(\Newsletter\Form\SubscriberForm::class); ?>
                             <div id="newsletter_form">
                                 <h4><small><strong>Subscribe to our Newsletter</strong></small></h4>
                                 <form class="sky-form" id="newsletterSubscribe" method="post" action="<?=$this->url('newsletter/subscribe');?>">
@@ -422,9 +417,9 @@
     </body>
     <script type="text/javascript">
         $(document).ready(function() {
-            $('#tweet-feed').load('<?=$this->url('twitter', [
+            /*$('#tweet-feed').load('<?=$this->url('twitter', [
                 'action' => 'twitter-feed',
-            ]);?>');
+            ]);?>');*/
 
             $('#newsletter_form').on('submit', 'form', function (event) {
                 event.preventDefault();

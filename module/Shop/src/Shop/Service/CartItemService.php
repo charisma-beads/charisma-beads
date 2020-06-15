@@ -13,7 +13,7 @@ namespace Shop\Service;
 use Shop\Hydrator\CartItemHydrator;
 use Shop\Mapper\CartItemMapper;
 use Shop\Model\CartItemModel;
-use UthandoCommon\Service\AbstractMapperService;
+use Common\Service\AbstractMapperService;
 
 /**
  * Class Item

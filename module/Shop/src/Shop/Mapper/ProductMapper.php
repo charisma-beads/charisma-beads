@@ -12,7 +12,7 @@
 namespace Shop\Mapper;
 
 use Shop\Model\ProductModel as ProductModel;
-use UthandoCommon\Mapper\AbstractDbMapper;
+use Common\Mapper\AbstractDbMapper;
 use Zend\Db\Sql\Expression;
 use Zend\Db\Sql\Select;
 
@@ -30,7 +30,7 @@ class ProductMapper extends AbstractDbMapper
 
     /**
      * @param $ident
-     * @return ProductModel|\UthandoCommon\Model\Model
+     * @return ProductModel|\Common\Model\Model
      */
     public function getProductByIdent($ident)
     {

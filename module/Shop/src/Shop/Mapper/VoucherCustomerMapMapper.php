@@ -11,7 +11,7 @@
 namespace Shop\Mapper;
 
 use Shop\Model\VoucherCustomerMapModel as CustomerMapModel;
-use UthandoCommon\Mapper\AbstractDbMapper;
+use Common\Mapper\AbstractDbMapper;
 
 /**
  * Class CustomerMap

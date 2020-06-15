@@ -10,7 +10,7 @@
 
 namespace Shop\Mapper;
 
-use UthandoCommon\Mapper\AbstractDbMapper;
+use Common\Mapper\AbstractDbMapper;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\Sql\Expression;
 use Zend\Db\Sql\Select;

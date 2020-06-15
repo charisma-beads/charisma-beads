@@ -16,7 +16,7 @@ use Shop\Options\ShopOptions;
 use Shop\Service\ProductCategoryService;
 use Shop\Service\ProductService;
 use Shop\ShopException;
-use UthandoCommon\Service\ServiceTrait;
+use Common\Service\ServiceTrait;
 use Zend\Http\PhpEnvironment\Response;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;

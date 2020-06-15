@@ -10,7 +10,7 @@
 
 namespace Shop\InputFilter;
 
-use UthandoCommon\Filter\Ucwords;
+use Common\Filter\Ucwords;
 use Zend\Filter\StringToUpper;
 use Zend\Filter\StringTrim;
 use Zend\Filter\StripTags;

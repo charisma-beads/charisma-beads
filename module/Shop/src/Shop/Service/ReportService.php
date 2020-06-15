@@ -11,7 +11,7 @@
 namespace Shop\Service;
 
 use Shop\Options\ReportsOptions;
-use UthandoCommon\Service\ServiceManager;
+use Common\Service\ServiceManager;
 use Zend\Json\Json;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;

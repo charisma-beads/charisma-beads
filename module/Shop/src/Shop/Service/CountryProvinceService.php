@@ -16,7 +16,7 @@ use Shop\InputFilter\CountryProvinceInputFilter;
 use Shop\Mapper\CountryProvinceMapper;
 use Shop\Model\CountryProvinceModel;
 use Shop\ShopException;
-use UthandoCommon\Service\AbstractMapperService;
+use Common\Service\AbstractMapperService;
 
 /**
  * Class Province

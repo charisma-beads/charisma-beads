@@ -19,7 +19,7 @@ use Shop\Model\ProductModel;
 use Shop\Model\OrderLineInterface;
 use Shop\Options\CartCookieOptions;
 use Shop\Options\CartOptions;
-use UthandoCommon\Model\CollectionException;
+use Common\Model\CollectionException;
 use Zend\Session\Container;
 use Zend\Stdlib\InitializableInterface;
 
@@ -77,7 +77,7 @@ class CartService extends AbstractOrderService implements InitializableInterface
 
     /**
      * @throws CollectionException
-     * @throws \UthandoCommon\Service\ServiceException
+     * @throws \Common\Service\ServiceException
      */
     public function init()
     {
@@ -146,7 +146,7 @@ class CartService extends AbstractOrderService implements InitializableInterface
      * @param array $post
      * @return OrderLineInterface|bool
      * @throws CollectionException
-     * @throws \UthandoCommon\Service\ServiceException
+     * @throws \Common\Service\ServiceException
      */
     public function addItem(ProductModel $product, $post)
     {
@@ -216,7 +216,7 @@ class CartService extends AbstractOrderService implements InitializableInterface
      *
      * @param array $items
      * @throws CollectionException
-     * @throws \UthandoCommon\Service\ServiceException
+     * @throws \Common\Service\ServiceException
      */
     public function updateItem(array $items)
     {
@@ -401,7 +401,7 @@ class CartService extends AbstractOrderService implements InitializableInterface
      *
      * @param OrderLineInterface $item
      * @return mixed|void
-     * @throws \UthandoCommon\Service\ServiceException
+     * @throws \Common\Service\ServiceException
      */
     public function persist(OrderLineInterface $item = null)
     {

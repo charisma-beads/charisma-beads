@@ -3,7 +3,7 @@ FROM shaunfreeman/php:7.2-fpm
 ARG user
 ARG uid
 
-# RUN rm /usr/local/etc/conf.d/10-opcache.ini
+#RUN rm /usr/local/etc/conf.d/10-opcache.ini
 
 RUN useradd -u $uid $user \
     && echo "[www]" >> /usr/local/etc/php-fpm.d/zz-docker.conf \

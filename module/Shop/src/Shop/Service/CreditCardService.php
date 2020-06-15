@@ -14,7 +14,7 @@ use Shop\Form\CreditCardForm;
 use Shop\Hydrator\CreditCardHydrator;
 use Shop\InputFilter\CreditCardInputFilter;
 use Shop\Options\OrderOptions;
-use UthandoCommon\Service\AbstractService;
+use Common\Service\AbstractService;
 use Zend\View\Model\ViewModel;
 use Shop\Model\CreditCardModel;
 

@@ -10,7 +10,7 @@
 
 namespace Shop\Model;
 
-use UthandoCommon\Model\DateModifiedTrait;
+use Common\Model\DateModifiedTrait;
 
 /**
  * Class Cart

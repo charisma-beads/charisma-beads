@@ -14,7 +14,7 @@ use Shop\Service\ReportService;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\View\Model\JsonModel;
-use UthandoCommon\Service\ServiceTrait;
+use Common\Service\ServiceTrait;
 
 /**
  * Class Report
@@ -48,7 +48,7 @@ class ReportController extends AbstractActionController
 
     public function getReport($report, $params = null)
     {
-        /* @var $service \Shop\Service\ReportService */
+        /* @var $service ReportService */
         $service = $this->getService(ReportService::class);
 
         $jsonModel = new JsonModel();

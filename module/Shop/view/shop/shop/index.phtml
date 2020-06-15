@@ -114,7 +114,7 @@ $this->inlineScript()
 <script>
     $(document).ready(function() {
         function changeMonthlyStats() {
-            admin.ajaxWidgetPanel(
+            adminClass.ajaxWidgetPanel(
                 $('#monthly-totals .panel-widget'),
                 '<?=$this->url('admin/shop/order/edit', [
                     'action' => 'monthly-totals',
@@ -190,11 +190,11 @@ $this->inlineScript()
                     if (json.html) {
                         $('#current-orders .panel-widget').html(json.html);
                     } else {
-                        admin.addAlert('Failed to update order status due to database error', 'danger');
+                        adminClass.addAlert('Failed to update order status due to database error', 'danger');
                     }
                 },
                 error: function (response) {
-                    admin.addAlert(response.responseText, 'danger');
+                    adminClass.addAlert(response.responseText, 'danger');
                 }
             });
         });
@@ -249,11 +249,11 @@ $this->inlineScript()
                 },
                 error: function (response) {
                     if (errorCount < 3) {
-                        admin.addAlert('An error occured, trying again', 'info');
+                        adminClass.addAlert('An error occured, trying again', 'info');
                         $('#get-product-list').trigger('click');
                         errorCount++;
                     } else {
-                        admin.addAlert(response.error, 'danger');
+                        adminClass.addAlert(response.error, 'danger');
                         el.modal('hide');
                         errorCount = 0;
                     }

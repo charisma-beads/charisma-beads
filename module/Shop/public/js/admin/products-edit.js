@@ -3,17 +3,17 @@ var product = {
 
     productOptions : function() {
 
-        admin.ajaxWidgetPanel(
+        adminClass.ajaxWidgetPanel(
             $('#product-option').find('.product-option-list'),
-            admin.basePath + '/admin/shop/product/option/option-list',
+            adminClass.basePath + '/admin/shop/product/option/option-list',
             {productId: product.productId}
         );
     },
 
     productImages : function() {
-        admin.ajaxWidgetPanel(
+        adminClass.ajaxWidgetPanel(
             $('#product-image').find('.product-image-list'),
-            admin.basePath + '/admin/shop/product/image/image-list',
+            adminClass.basePath + '/admin/shop/product/image/image-list',
             {productId: product.productId}
         );
     },
@@ -49,12 +49,12 @@ var product = {
                             loadingText: 'Please wait while I update the database'
                         });
 
-                        var response = admin.ajaxModalForm(modal, admin.basePath + url);
+                        var response = adminClass.ajaxModalForm(modal, adminClass.basePath + url);
 
                         response.done(function (data) {
                             if ($.isPlainObject(data)) {
                                 var el = callbackElement;
-                                el.load(admin.basePath + callbackUrl, null, function () {
+                                el.load(adminClass.basePath + callbackUrl, null, function () {
                                     el.val(data.rowId);
                                 });
                             }
@@ -68,7 +68,7 @@ var product = {
         });
 
         modal.on('show.bs.modal', function () {
-            $(this).find('.bootbox-body').load(admin.basePath + url);
+            $(this).find('.bootbox-body').load(adminClass.basePath + url);
         });
         modal.modal('show');
     },
@@ -88,7 +88,7 @@ var product = {
                             loadingText: 'Please wait while I update the database'
                         });
 
-                        var response = admin.ajaxModalForm(modal, url);
+                        var response = adminClass.ajaxModalForm(modal, url);
 
                         response.done(function (data) {
                             if ($.isPlainObject(data)) {
@@ -121,10 +121,10 @@ var product = {
             data: params,
             type: 'POST',
             success: function (response) {
-                admin.addAlert(response.messages, response.status);
+                adminClass.addAlert(response.messages, response.status);
             },
             error: function (response) {
-                admin.addAlert(response.error, 'danger');
+                adminClass.addAlert(response.error, 'danger');
             }
         });
         response.done(function(){

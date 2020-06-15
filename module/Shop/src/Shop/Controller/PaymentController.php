@@ -14,7 +14,7 @@ use Shop\Service\CreditCardService;
 use Shop\Service\OrderService;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use UthandoCommon\Service\ServiceTrait;
+use Common\Service\ServiceTrait;
 use Shop\Model\OrderModel;
 use Zend\Http\PhpEnvironment\Response;
 use Zend\Form\Form;

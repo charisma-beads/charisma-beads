@@ -15,7 +15,7 @@ use Shop\Hydrator\PostUnitHydrator;
 use Shop\InputFilter\PostUnitInputFilter;
 use Shop\Mapper\PostUnitMapper;
 use Shop\Model\PostUnitModel;
-use UthandoCommon\Service\AbstractMapperService;
+use Common\Service\AbstractMapperService;
 
 /**
  * Class Unit

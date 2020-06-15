@@ -13,7 +13,7 @@ namespace Shop\Hydrator;
 use Shop\Hydrator\Strategy\OptionStrategy;
 use Shop\Hydrator\Strategy\PostUnitStrategy;
 use Shop\Hydrator\Strategy\ProductImageStrategy;
-use UthandoCommon\Hydrator\BaseHydrator;
+use Common\Hydrator\BaseHydrator;
 
 /**
  * Class MetaData

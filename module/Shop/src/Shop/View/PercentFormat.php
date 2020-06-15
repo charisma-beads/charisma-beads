@@ -12,7 +12,7 @@
 namespace Shop\View;
 
 use NumberFormatter;
-use UthandoCommon\View\AbstractViewHelper;
+use Common\View\AbstractViewHelper;
 use Zend\I18n\View\Helper\NumberFormat;
 
 /**

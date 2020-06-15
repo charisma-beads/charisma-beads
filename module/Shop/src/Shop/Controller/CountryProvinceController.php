@@ -11,7 +11,7 @@
 namespace Shop\Controller;
 
 use Shop\Service\CountryProvinceService;
-use UthandoCommon\Controller\AbstractCrudController;
+use Common\Controller\AbstractCrudController;
 use Shop\ShopException;
 use Zend\View\Model\ViewModel;
 

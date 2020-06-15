@@ -45,7 +45,7 @@
 
     <nav id="column-left">
         <?=$this->navigation('navigation')->menu()->setPartial('uthando-admin/partial/side-bar');?>
-        <?= $this->navigation('UthandoAdmin\Navigation')
+        <?= $this->navigation('Admin\Navigation')
             ->menu()
             ->setPartial('uthando-admin/partial/side-bar'); ?>
     </nav>
@@ -58,7 +58,7 @@
                 </div>
                 <h1><?=$this->pageTitle;?></h1>
                 <nav class="breadcrumb">
-                    <?=$this->navigation('UthandoAdmin\Navigation')
+                    <?=$this->navigation('Admin\Navigation')
                         ->breadcrumbs()
                         ->setRenderInvisible(true)
                         ->setSeparator(' / ');
@@ -90,7 +90,7 @@
         ->appendFile($this->basePath('js/uthando-admin.js')); ?>
 
     <script>
-        admin.basePath = '<?=$this->basePath();?>';
+        adminClass.basePath = '<?=$this->basePath();?>';
     </script>
 </body>
 </html>

@@ -13,7 +13,7 @@ namespace Shop\Service;
 use Shop\Hydrator\CustomerPrefixHydrator;
 use Shop\Mapper\CustomerPrefixMapper;
 use Shop\Model\CustomerPrefixModel;
-use UthandoCommon\Service\AbstractMapperService;
+use Common\Service\AbstractMapperService;
 
 /**
  * Class Prefix
