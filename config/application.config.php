@@ -16,7 +16,6 @@ return [
         'FileManager',
         'Testimonial',
         'News',
-        'Twitter',
         'Newsletter',
         'Events',
         'ShopDomPdf',

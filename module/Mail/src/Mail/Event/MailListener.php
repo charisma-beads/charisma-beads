@@ -12,6 +12,7 @@ use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\EventManager\ListenerAggregateTrait;
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\Mvc\Exception\InvalidPluginException;
 
 
 class MailListener implements ListenerAggregateInterface
@@ -36,6 +37,7 @@ class MailListener implements ListenerAggregateInterface
 
     /**
      * @param Event $e
+     * @throws InvalidPluginException
      */
     public function sendMail(Event $e)
     {
@@ -90,7 +92,7 @@ class MailListener implements ListenerAggregateInterface
 
     /**
      * @param Event $e
-     * @throws ServiceException
+     * @throws ServiceException|InvalidPluginException
      */
     public function queueMail(Event $e)
     {

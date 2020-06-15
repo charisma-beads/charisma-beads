@@ -68,8 +68,6 @@ return [
 
         'testimonial/testimonial/view'                  => __DIR__ . '/view/testimonial/testimonial/view.phtml',
 
-        'twitter/twitter/twitter-feed'                  => __DIR__ . '/view/twitter/twitter/twitter-feed.phtml',
-
         'user/email/verify'                                     => __DIR__ . '/view/user/email/verify.phtml',
         'user/user/forgot-password'                             => __DIR__ . '/view/user/user/forgot-password.phtml',
         'user/user/login'                                       => __DIR__ . '/view/user/user/login.phtml',
