@@ -3,18 +3,9 @@
 namespace Application;
 
 use Zend\Mvc\MvcEvent;
-use Zend\ModuleManager\ModuleEvent;
-use Zend\ModuleManager\ModuleManager;
 
 class Module
 {
-    /*public function init(ModuleManager $moduleManager)
-    {
-        $eventManager = $moduleManager->getEventManager();
-
-        //$eventManager->attach(ModuleEvent::EVENT_LOAD_MODULES_POST, [$this, 'setPhpSettings']);
-    }*/
-    
     public function onBootstrap(MvcEvent $event)
     {
         $app                    = $event->getApplication();
@@ -47,15 +38,6 @@ class Module
     public function getConfig()
     {
         return include __DIR__ . '/config/module.config.php';
-    }
-
-    public function getControllerConfig()
-    {
-        return [
-            'invokables' => [
-                'Application\Controller\Index' => 'Application\Controller\IndexController'
-            ],
-        ];
     }
 
     public function getAutoloaderConfig()

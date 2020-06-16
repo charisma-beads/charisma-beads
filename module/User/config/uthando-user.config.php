@@ -7,8 +7,6 @@ return [
         'acl' => [
             'roles' => [
                 'guest' => [
-                    'label' => 'Guest',
-                    'parent' => null,
                     'privileges' => [
                         'allow' => [
                             'controllers' => [
@@ -23,8 +21,6 @@ return [
                     ],
                 ],
                 'registered' => [
-                    'label' => 'User',
-                    'parent' => 'guest',
                     'privileges' => [
                         'deny' => [
                             'controllers' => [
@@ -46,8 +42,6 @@ return [
                     ],
                 ],
                 'admin' => [
-                    'label' => 'Admin',
-                    'parent' => 'registered',
                     'privileges' => [
                         'allow' => [
                             'controllers' => [

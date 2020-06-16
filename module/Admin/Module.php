@@ -2,18 +2,9 @@
 
 namespace Admin;
 
-use Common\Config\ConfigInterface;
-use Common\Config\ConfigTrait;
 
-/**
- * Class Module
- *
- * @package Admin
- */
-class Module implements ConfigInterface
+class Module
 {
-    use ConfigTrait;
-
     /**
      * @return array
      */

@@ -1,5 +1,7 @@
 <?php
 
+namespace Application;
+
 return [
     'asset_manager' => [
         'resolver_configs' => [
@@ -23,31 +25,9 @@ return [
             ],
         ],
     ],
-    'user' => [
-        'acl' => [
-            'roles' => [
-                'guest' => [
-                    'privileges' => [
-                        'allow' => [
-                            'controllers' => [
-                                'Application\Controller\Index' => ['action' => ['index']],
-                            ],
-                        ]
-                    ],
-                ],
-                'registered' => [
-                    'privileges' => [
-                        'allow' => [
-                            'controllers' => [
-                                'Application\Controller\Index' => ['action' => ['index']],
-                            ],
-                        ],
-                    ],
-                ],
-            ],
-            'resources' => [
-                'Application\Controller\Index',
-            ],
+    'controllers' => [
+        'invokables' => [
+            Controller\IndexController::class => Controller\IndexController::class
         ],
     ],
     'router'    => [
@@ -57,8 +37,8 @@ return [
                 'options'   => [
                     'route'     => '/',
                     'defaults'  => [
-                        '__NAMESPACE__' => 'Application\Controller',
-                        'controller'    => 'Index',
+                        '__NAMESPACE__' => __NAMESPACE__,
+                        'controller'    => Controller\IndexController::class,
                         'action'        => 'index',
                         'force-ssl'     => 'http'
                     ],
@@ -80,6 +60,5 @@ return [
         'doctype'                   => 'HTML5',
         'not_found_template'        => 'error/404',
         'exception_template'        => 'error/index',
-        'template_map'              => include __DIR__ . '/../template_map.php'
     ],
 ];
