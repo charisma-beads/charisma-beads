@@ -12,7 +12,7 @@ class DbOptionsFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $config = $serviceLocator->get('config');
-        $dbOptions = (isset($config['uthando_common']['db_options'])) ? $config['uthando_common']['db_options'] : [];
+        $dbOptions = (isset($config['common']['db_options'])) ? $config['common']['db_options'] : [];
 
         return new DbOptions($dbOptions);
     }

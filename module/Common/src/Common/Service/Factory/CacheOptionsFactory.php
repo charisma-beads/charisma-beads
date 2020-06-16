@@ -17,7 +17,7 @@ class CacheOptionsFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator): CacheOptions
     {
         $config = $serviceLocator->get('config');
-        $options = $config['uthando_common']['cache'] ?? [];
+        $options = $config['common']['cache'] ?? [];
 
         return new CacheOptions($options);
     }

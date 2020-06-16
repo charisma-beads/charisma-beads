@@ -50,7 +50,7 @@ use Zend\Cache\Service\StorageCacheFactory;
 use Zend\Db\Adapter\Adapter as DbAdapter;
 
 return [
-    'uthando_common' => [
+    'common' => [
         'captcha' => [
             'class' => 'dumb'
         ],

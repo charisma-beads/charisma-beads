@@ -18,7 +18,7 @@ class AkismetOptionsFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator): AkismetOptions
     {
         $config = $serviceLocator->get('config');
-        $options = $config['uthando_common']['akismet'] ?? [];
+        $options = $config['common']['akismet'] ?? [];
 
         return new AkismetOptions($options);
     }

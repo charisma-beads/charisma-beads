@@ -26,7 +26,7 @@ class CaptchaController extends AbstractActionController
         if ($id) {
             $config = $this->getServiceLocator()->get('config');
 
-            $spec = $config['uthando_common']['captcha'];
+            $spec = $config['common']['captcha'];
 
             $image = join('/', [
                 $spec['options']['imgDir'],

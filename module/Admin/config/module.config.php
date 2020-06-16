@@ -103,9 +103,6 @@ return [
             DatePicker::class           => DatePicker::class
         ],
     ],
-    'view_manager' => [
-        'template_map' => include __DIR__ . '/../template_map.php',
-    ],
     'router' => [
         'routes' => [
             'admin' => [

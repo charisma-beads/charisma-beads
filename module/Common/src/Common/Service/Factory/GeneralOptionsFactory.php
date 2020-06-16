@@ -13,7 +13,7 @@ class GeneralOptionsFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator): GeneralOptions
     {
         $config = $serviceLocator->get('config');
-        $options = $config['uthando_common']['general'] ?? [];
+        $options = $config['common']['general'] ?? [];
 
         return new GeneralOptions($options);
     }

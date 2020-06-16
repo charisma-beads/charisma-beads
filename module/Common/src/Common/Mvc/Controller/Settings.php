@@ -14,6 +14,6 @@ class Settings extends AbstractActionController
     public function __construct()
     {
         $this->setFormName(CommonSettings::class)
-            ->setConfigKey('uthando_common');
+            ->setConfigKey('common');
     }
 }
