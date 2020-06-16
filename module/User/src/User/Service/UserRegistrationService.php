@@ -52,14 +52,14 @@ class UserRegistrationService extends AbstractRelationalMapperService
             'registrationRecord' => $registrationRecord,
         ]);
 
-        $emailView->setTemplate('uthando-user/email/verify');
+        $emailView->setTemplate('user/email/verify');
 
         $this->getEventManager()->trigger('mail.send', $this, [
             'recipient' => [
                 'name' => $user->getFullName(),
                 'address' => $user->getEmail(),
             ],
-            'layout' => 'uthando-user/email/layout',
+            'layout' => 'user/email/layout',
             'body' => $emailView,
             'subject' => 'Verify Account',
             'transport' => 'default',

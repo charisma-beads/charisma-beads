@@ -107,7 +107,7 @@ class UserService extends AbstractMapperService
     public function editUser(UserModel $model, array $post)
     {
         if (!$model instanceof UserModel) {
-            throw new UserException('$model must be an instance of UthandoUser\Model\User, ' . get_class($model) . ' given.');
+            throw new UserException('$model must be an instance of User\Model\User, ' . get_class($model) . ' given.');
         }
 
         $model->setDateModified();
