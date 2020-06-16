@@ -6,7 +6,6 @@ use Admin\Service\AdminUserNavigationFactory;
 use Admin\View\DatePicker;
 use Admin\View\PhpInfo;
 use Admin\View\TextEditor;
-use Admin\View\UthandoFormElement;
 
 return [
     'asset_manager' => [
@@ -91,16 +90,14 @@ return [
     ],
     'view_helpers' => [
         'aliases' => [
-            'phpInfo'               => PhpInfo::class,
-            'uthandoFormElement'    => UthandoFormElement::class,
-            'textEditor'            => TextEditor::class,
-            'datePicker'            => DatePicker::class
+            'phpInfo'           => PhpInfo::class,
+            'textEditor'        => TextEditor::class,
+            'datePicker'        => DatePicker::class
         ],
         'invokables' => [
-            PhpInfo::class              => PhpInfo::class,
-            UthandoFormElement::class   => UthandoFormElement::class,
-            TextEditor::class           => TextEditor::class,
-            DatePicker::class           => DatePicker::class
+            PhpInfo::class      => PhpInfo::class,
+            TextEditor::class   => TextEditor::class,
+            DatePicker::class   => DatePicker::class
         ],
     ],
     'router' => [

@@ -1,6 +1,6 @@
 <?php
 
-use Admin\Controller\IndexController;
+declare(strict_types=1);
 
 return [
     'user' => [
@@ -10,7 +10,7 @@ return [
                     'privileges' => [
                         'allow' => [
                             'controllers' => [
-                                IndexController::class => ['action' => [
+                                Admin\Controller\IndexController::class => ['action' => [
                                     'login',  'forgot-password',
                                 ]],
                             ],
@@ -21,14 +21,14 @@ return [
                     'privileges' => [
                         'deny' => [
                             'controllers' => [
-                                IndexController::class => ['action' => [
+                                Admin\Controller\IndexController::class => ['action' => [
                                     'login', 'forgot-password'
                                 ]],
                             ],
                         ],
                         'allow' => [
                             'controllers' => [
-                                IndexController::class => ['action' => [
+                                Admin\Controller\IndexController::class => ['action' => [
                                     'index', 'logout', 'password', 'profile',
                                 ]],
                             ],
@@ -37,7 +37,7 @@ return [
                 ],
             ],
             'resources' => [
-                IndexController::class,
+                Admin\Controller\IndexController::class,
             ],
         ],
     ],

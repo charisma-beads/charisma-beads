@@ -8,6 +8,7 @@ use User\Form\LoginForm;
 use User\Form\PasswordForm;
 use User\Form\UserEditForm;
 use User\InputFilter\UserInputFilter as UserInputFilter;
+use User\Model\UserModel;
 use User\Service\Authentication;
 use User\Service\LimitLoginService;
 use User\Service\UserService;
@@ -15,13 +16,14 @@ use Zend\Authentication\AuthenticationService;
 use Zend\Form\Form;
 use Zend\Http\Response;
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\Session\Container;
 use Zend\View\Model\ViewModel;
 
 /**
  * Class IndexController
  *
  * @package Admin\Controller
- * @method \Zend\Session\Container sessionContainer()
+ * @method Container sessionContainer()
  */
 class IndexController extends AbstractActionController
 {
@@ -37,7 +39,7 @@ class IndexController extends AbstractActionController
 
     public function profileAction()
     {
-        /* @var $user \User\Model\UserModel */
+        /* @var $user UserModel */
         $user = $this->identity();
 
         $request = $this->getRequest();
@@ -78,7 +80,7 @@ class IndexController extends AbstractActionController
             }
         }
 
-        /* @var \User\Form\UserEditForm $form */
+        /* @var UserEditForm $form */
         $form = $this->getUserService()->getForm(UserEditForm::class);
         $form->bind($user);
 
@@ -90,7 +92,7 @@ class IndexController extends AbstractActionController
     public function passwordAction(): array
     {
         $request = $this->getRequest();
-        /* @var $user \User\Model\UserModel */
+        /* @var $user UserModel */
         $user = $this->identity();
 
         if ($request->isPost()) {
@@ -266,8 +268,8 @@ class IndexController extends AbstractActionController
 
                     $config = $this->getServiceLocator()->get('config');
 
-                    $adminRoute = (isset($config['uthando_user']['default_admin_route'])) ?
-                        $this->getServiceLocator()->get('config')['uthando_user']['default_admin_route'] :
+                    $adminRoute = (isset($config['user']['default_admin_route'])) ?
+                        $this->getServiceLocator()->get('config')['user']['default_admin_route'] :
                         'admin';
 
                     return $this->redirect()->toRoute($adminRoute);
