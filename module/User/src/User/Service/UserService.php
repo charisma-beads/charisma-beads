@@ -350,4 +350,12 @@ class UserService extends AbstractMapperService
 
         return parent::delete($id);
     }
+
+    public function cleanupUsers()
+    {
+        /* @var $mapper UserMapper */
+        $mapper =  $this->getMapper();
+
+        return $mapper->deleteInvalidUsers();
+    }
 }

@@ -5,9 +5,11 @@ namespace User;
 use Common\Config\ConfigInterface;
 use Common\Config\ConfigTrait;
 use User\Event\MvcListener;
+use Zend\Console\Adapter\AdapterInterface as Console;
+use Zend\ModuleManager\Feature\ConsoleUsageProviderInterface;
 use Zend\Mvc\MvcEvent;
 
-class Module implements ConfigInterface
+class Module implements ConfigInterface, ConsoleUsageProviderInterface
 {
     use ConfigTrait;
 
@@ -39,6 +41,14 @@ class Module implements ConfigInterface
                     __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
                 ],
             ],
+        ];
+    }
+
+
+    public function getConsoleUsage(Console $console)
+    {
+        return [
+            'user cleanup' => 'clean all non verified registrations.',
         ];
     }
 }

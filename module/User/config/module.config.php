@@ -27,6 +27,7 @@ return [
             Controller\LimitLoginController::class         => Controller\LimitLoginController::class,
             Controller\RegistrationController::class       => Controller\RegistrationController::class,
             Controller\SettingsController::class           => Controller\SettingsController::class,
+            Controller\UserConsoleController::class        => Controller\UserConsoleController::class,
             Controller\UserController::class               => Controller\UserController::class,
         ],
     ],

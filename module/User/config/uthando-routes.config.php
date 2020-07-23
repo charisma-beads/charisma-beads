@@ -2,6 +2,8 @@
 
 namespace User;
 
+use User\Controller\UserConsoleController;
+
 return [
     'router' => [
         'routes' => [
@@ -143,6 +145,22 @@ return [
                                 ],
                                 'may_terminate' => true,
                             ],
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
+    'console' => [
+        'router' => [
+            'routes' => [
+                'user/cleanup' => [
+                    'options' => [
+                        'route' => 'user cleanup',
+                        'defaults' => [
+                            '__NAMESPACE__' => 'User\Controller',
+                            'controller' => UserConsoleController::class,
+                            'action' => 'cleanup'
                         ],
                     ],
                 ],

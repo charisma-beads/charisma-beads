@@ -18,3 +18,4 @@ deployment.xml
 *.local.php
 !do_not_remove
 .env
+/container-build/mysql/

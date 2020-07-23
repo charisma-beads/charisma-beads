@@ -13,7 +13,7 @@ services:
 
   php-cli:
     image: shaunfreeman/php:7.2-cli
-    working_dir: /home/xdevapi
+    working_dir: /home/charisma
     environment:
       - MYSQL_DATABASE=dbname
       - MYSQL_USER=dbuser
@@ -62,8 +62,4 @@ services:
       - MYSQL_PASSWORD=!OneTwo3
       - MYSQL_DATABASE=charismabeads
     volumes:
-      - "mysql_data:/var/lib/mysql"
-      - ./data/charisma-beads-db.sql:/docker-entrypoint-initdb.d/charisma-beads-db.sql
-
-volumes:
-  mysql_data: { driver: local }
+      - ./container-build/mysql/:/docker-entrypoint-initdb.d/

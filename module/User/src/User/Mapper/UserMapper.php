@@ -7,7 +7,9 @@ namespace User\Mapper;
 use User\Hydrator\UserHydrator;
 use Common\Mapper\AbstractDbMapper;
 use User\Model\UserModel as UserModel;
+use Zend\Db\Sql\Expression;
 use Zend\Db\Sql\Select;
+use Zend\Db\Sql\Where;
 
 class UserMapper extends AbstractDbMapper
 {
@@ -98,5 +100,15 @@ class UserMapper extends AbstractDbMapper
         }
 
         return parent::search($search, $sort, $select);
+    }
+
+    public function deleteInvalidUsers()
+    {
+        //$expression = new Expression('dateCreated < (NOW() - INTERVAL 2 DAY)');
+        $where = new Where();
+        $where->lessThan('dateCreated', new Expression('NOW() - INTERVAL 2 DAY'))
+            ->and
+            ->equalTo('active', 0);
+        return $this->delete($where);
     }
 }

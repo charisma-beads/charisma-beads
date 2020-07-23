@@ -2,8 +2,6 @@
 
 return [
     'template_map' => [
-        'layout/basic'                  => __DIR__ . '/view/layout/basic.phtml',
-        'layout/layout'                 => __DIR__ . '/view/layout/layout.phtml',
 
         'admin/index/password'          => __DIR__ . '/view/index/password.phtml',
         'admin/index/login'             => __DIR__ . '/view/index/login.phtml',
@@ -20,5 +18,11 @@ return [
         'admin/partial/edit-actions'    => __DIR__ . '/view/partial/edit-actions.phtml',
         'admin/partial/side-bar'        => __DIR__ . '/view/partial/side-bar.phtml',
         'admin/partial/code-mirror'     => __DIR__ . '/view/partial/code-mirror.phtml',
+
+        'error/404'                     => __DIR__ . '/view/error/404.phtml',
+        'error/index'                   => __DIR__ . '/view/error/index.phtml',
+
+        'layout/basic'                  => __DIR__ . '/view/layout/basic.phtml',
+        'layout/layout'                 => __DIR__ . '/view/layout/layout.phtml',
     ],
 ];

@@ -93,4 +93,12 @@ class UserRegistrationService extends AbstractRelationalMapperService
 
         return false;
     }
+
+    public function cleanupRegistrations()
+    {
+        /* @var $mapper UserRegistrationMapper */
+        $mapper =  $this->getMapper();
+
+        return $mapper->deleteInvalidRegistrations();
+    }
 }

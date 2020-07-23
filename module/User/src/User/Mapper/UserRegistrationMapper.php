@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace User\Mapper;
 
 use Common\Mapper\AbstractDbMapper;
+use Zend\Db\Sql\Expression;
 use Zend\Db\Sql\Select;
+use Zend\Db\Sql\Where;
 
 class UserRegistrationMapper extends AbstractDbMapper
 {
@@ -37,5 +39,15 @@ class UserRegistrationMapper extends AbstractDbMapper
         }
 
         return parent::search($search, $sort, $select);
+    }
+
+    public function deleteInvalidRegistrations()
+    {
+        //$expression = new Expression('dateCreated < (NOW() - INTERVAL 2 DAY)');
+        $where = new Where();
+        $where->lessThan('requestTime', new Expression('NOW() - INTERVAL 2 DAY'))
+            ->and
+            ->equalTo('responded', 0);
+        return $this->delete($where);
     }
 }
