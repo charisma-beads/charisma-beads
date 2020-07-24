@@ -33,11 +33,6 @@ class NewsOptions extends AbstractOptions
     protected $itemsPerPage = 10;
 
     /**
-     * @var array
-     */
-    protected $autoPost = [];
-
-    /**
      * @return string
      */
     public function getTitleCase(): string
@@ -88,27 +83,6 @@ class NewsOptions extends AbstractOptions
     public function setItemsPerPage(int $itemsPerPage): NewsOptions
     {
         $this->itemsPerPage = $itemsPerPage;
-        return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function getAutoPost(): array
-    {
-        return $this->autoPost;
-    }
-
-    /**
-     * @param array $autoPost
-     * @return NewsOptions
-     */
-    public function setAutoPost(array $autoPost): NewsOptions
-    {
-        foreach ($autoPost as $key => $value) {
-            if ('0' === $value) unset($autoPost[$key]);
-        }
-        $this->autoPost = $autoPost;
         return $this;
     }
 }

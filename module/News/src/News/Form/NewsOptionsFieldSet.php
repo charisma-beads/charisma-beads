@@ -75,18 +75,6 @@ class NewsOptionsFieldSet extends Fieldset implements InputFilterProviderInterfa
                 ],
             ],
         ]);
-
-        $this->add([
-            'type' => SocialMediaFieldSet::class,
-            'name' => 'auto_post',
-            'options' => [
-                'label' => 'Auto Post To:',
-                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-            ],
-            'attributes' => [
-                'class' => 'col-md-12',
-            ],
-        ]);
     }
 
     public function getInputFilterSpecification()

@@ -48,43 +48,6 @@ class NewsService extends AbstractRelationalMapperService
         $this->getEventManager()->attach([
             'pre.add', 'pre.edit'
         ], [$this, 'setValidation']);
-
-        $this->getEventManager()->attach([
-            'post.add',
-        ], [$this, 'autoPost']);
-    }
-
-    public function autoPost(Event $e)
-    {
-        $saved = $e->getParam('saved');
-
-        if ($saved) {
-            /* @var $model NewsModel */
-            $model = $this->getMapper()->getById($saved);
-
-            /* @var $options NewsOptions */
-            $options = $this->getService(NewsOptions::class);
-
-            $viewManager = $this->getServiceLocator()
-                ->get('ViewHelperManager');
-
-            $url = $viewManager->get('Url');
-            $scheme = $viewManager->get('ServerUrl');
-
-            $url = $url('news', [
-                'news-item'    => $model->getSlug(),
-            ]);
-
-            $string = sprintf('%s %s', $model->getTitle(), $scheme($url));
-
-            $argv   = compact('string');
-            $argv   = $this->prepareEventArguments($argv);
-
-            foreach ($options->getAutoPost() as $event) {
-                $this->getEventManager()->trigger($event, $this, $argv);
-            }
-
-        }
     }
 
     /**
