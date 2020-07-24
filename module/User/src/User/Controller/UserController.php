@@ -323,7 +323,7 @@ class UserController extends AbstractActionController
 
         $viewModel = new ViewModel();
 
-        $viewModel->setTemplate('uthando-user/user/login');
+        $viewModel->setTemplate('user/user/login');
 
         if (!$form->isValid()) {
             $this->flashMessenger()->addErrorMessage(
