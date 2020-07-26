@@ -192,7 +192,7 @@ class AbstractDbMapper implements
             if (!$value['searchString'] == '') {
                 if (substr($value['searchString'], 0, 1) == '=' && $key == 0) {
                     $id = (int)substr($value['searchString'], 1);
-                    $select->where->equalTo($this->getPrimaryKey(), $id);
+                    $select->where->equalTo($this->getTable() . '.' .$this->getPrimaryKey(), $id);
                 } else {
                     $where = $select->where->nest();
                     $c = 0;
