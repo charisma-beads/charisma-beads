@@ -107,7 +107,7 @@ class CatalogController extends AbstractActionController
         if ($prg instanceof Response) {
             return $prg;
         } elseif (false === $prg) {
-            $searchData = $session->offsetGet('searchData');
+            $searchData = $session->offsetGet('searchData') ?? [];
         } elseif (is_array($prg)) {
             $searchData = $prg;
         }
