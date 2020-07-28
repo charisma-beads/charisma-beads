@@ -12,7 +12,7 @@ class SettingsForm extends Form
     {
         $this->add([
             'type' => UserFieldSet::class,
-            'name' => 'user_options',
+            'name' => 'options',
             'attributes' => [
                 'class' => 'col-sm-6',
             ],
