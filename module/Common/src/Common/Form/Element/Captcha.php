@@ -25,7 +25,7 @@ class Captcha extends ZendCaptcha implements ServiceLocatorAwareInterface
 
         $config = $sl->get('config');
 
-        $spec = $config['uthando_common']['captcha'];
+        $spec = $config['common']['captcha'];
 
         if ('image' === $spec['class']) {
             $plugins = $sl->get('ViewHelperManager');
