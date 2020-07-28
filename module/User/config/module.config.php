@@ -81,7 +81,7 @@ return [
                 'options' => [
                     'route'    => '/login',
                     'defaults' => [
-                        '__NAMESPACE__' => __NAMESPACE__,
+                        '__NAMESPACE__' => 'User\Controller',
                         'controller'    => Controller\UserController::class,
                         'action'        => 'login',
                     ],
@@ -96,7 +96,7 @@ return [
                         'action'     => '[a-zA-Z][a-zA-Z0-9_-]*'
             		],
                     'defaults' => [
-                        '__NAMESPACE__' => __NAMESPACE__,
+                        '__NAMESPACE__' => 'User\Controller',
                         'controller'    => Controller\UserController::class,
                         'action'        => 'login',
                     ],
@@ -113,7 +113,7 @@ return [
                         //'email'     => '[a-zA-Z0-9@-_.]*',
                     ],
                     'defaults' => [
-                        '__NAMESPACE__' => __NAMESPACE__,
+                        '__NAMESPACE__' => 'User\Controller',
                         'controller'    => Controller\RegistrationController::class,
                         'token'         => '',
                         'email'         => '',
