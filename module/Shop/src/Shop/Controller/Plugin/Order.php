@@ -1,17 +1,9 @@
 <?php
-/**
- * Uthando CMS (http://www.shaunfreeman.co.uk/)
- *
- * @package   Shop\Controller\Plugin
- * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
- */
 
 namespace Shop\Controller\Plugin;
 
-use Zend\Mvc\Controller\Plugin\AbstractPlugin;
-use Zend\Session\Container;
+use Laminas\Mvc\Controller\Plugin\AbstractPlugin;
+use Laminas\Session\Container;
 
 /**
  * Class Order

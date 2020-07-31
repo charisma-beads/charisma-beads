@@ -5,8 +5,8 @@ namespace Common\I18n\View\Helper;
 use libphonenumber\PhoneNumber;
 use libphonenumber\PhoneNumberFormat;
 use libphonenumber\PhoneNumberUtil;
-use Zend\I18n\Exception\InvalidArgumentException;
-use Zend\View\Helper\AbstractHelper;
+use Laminas\I18n\Exception\InvalidArgumentException;
+use Laminas\View\Helper\AbstractHelper;
 
 
 class LibPhoneNumber extends AbstractHelper

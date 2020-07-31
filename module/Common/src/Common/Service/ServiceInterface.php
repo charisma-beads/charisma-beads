@@ -3,8 +3,8 @@
 namespace Common\Service;
 
 use Common\Model\ModelInterface;
-use Zend\Form\Form;
-use Zend\InputFilter\InputFilter;
+use Laminas\Form\Form;
+use Laminas\InputFilter\InputFilter;
 
 
 interface ServiceInterface

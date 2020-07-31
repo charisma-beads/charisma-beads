@@ -2,8 +2,8 @@
 
 namespace Common\Model;
 
-use Zend\Hydrator\HydratorAwareTrait;
-use Zend\Hydrator\HydratorInterface;
+use Laminas\Hydrator\HydratorAwareTrait;
+use Laminas\Hydrator\HydratorInterface;
 
 
 trait ModelAwareTrait

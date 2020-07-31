@@ -10,7 +10,7 @@
 
 namespace Common\Form\Settings;
 
-use Zend\Form\Form;
+use Laminas\Form\Form;
 
 /**
  * Class Settings
@@ -32,17 +32,6 @@ class CommonSettings extends Form
             ],
             'options' => [
                 'label' => 'General',
-            ],
-        ]);
-
-        $this->add([
-            'type' => AkismetFieldSet::class,
-            'name' => 'akismet',
-            'attributes' => [
-                'class' => 'col-sm-6',
-            ],
-            'options' => [
-                'label' => 'Akismet',
             ],
         ]);
 

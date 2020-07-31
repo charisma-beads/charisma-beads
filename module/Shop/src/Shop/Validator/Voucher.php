@@ -1,12 +1,4 @@
 <?php
-/**
- * charisma-beads (http://www.shaunfreeman.co.uk/)
- *
- * @author      Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @link        https://github.com/uthando-cms for the canonical source repository
- * @copyright   Copyright (c) 2017 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license     see LICENSE
- */
 
 namespace Shop\Validator;
 
@@ -21,9 +13,9 @@ use Shop\Model\OrderLineInterface;
 use Shop\Model\VoucherCodeModel;
 use Shop\Model\VoucherCustomerMapModel;
 use Common\Mapper\MapperManager;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
-use Zend\Validator\AbstractValidator;
+use Laminas\ServiceManager\ServiceLocatorAwareInterface;
+use Laminas\ServiceManager\ServiceLocatorAwareTrait;
+use Laminas\Validator\AbstractValidator;
 
 class Voucher extends AbstractValidator implements ServiceLocatorAwareInterface
 {

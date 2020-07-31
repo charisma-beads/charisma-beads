@@ -2,11 +2,11 @@
 
 namespace Events\InputFilter;
 
-use Zend\Filter\StringTrim;
-use Zend\Filter\StripTags;
-use Zend\Filter\ToInt;
-use Zend\InputFilter\InputFilter;
-use Zend\Validator\Digits;
+use Laminas\Filter\StringTrim;
+use Laminas\Filter\StripTags;
+use Laminas\Filter\ToInt;
+use Laminas\InputFilter\InputFilter;
+use Laminas\Validator\Digits;
 
 
 class EventsInputFilter extends InputFilter

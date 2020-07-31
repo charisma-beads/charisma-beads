@@ -4,7 +4,7 @@ namespace News\Mapper;
 
 use Common\Mapper\AbstractDbMapper;
 use News\Model\NewsModel as NewsModel;
-use Zend\Db\Sql\Select;
+use Laminas\Db\Sql\Select;
 
 
 class NewsMapper extends AbstractDbMapper
@@ -31,7 +31,7 @@ class NewsMapper extends AbstractDbMapper
      * @param array $search
      * @param string $sort
      * @param null $select
-     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     * @return \Laminas\Db\ResultSet\HydratingResultSet|\Laminas\Db\ResultSet\ResultSet|\Laminas\Paginator\Paginator
      */
     public function search(array $search, $sort, $select = null)
     {
@@ -42,7 +42,7 @@ class NewsMapper extends AbstractDbMapper
 
     /**
      * @param int $limit
-     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     * @return \Laminas\Db\ResultSet\HydratingResultSet|\Laminas\Db\ResultSet\ResultSet|\Laminas\Paginator\Paginator
      */
     public function getNewsByHits(int $limit)
     {
@@ -58,7 +58,7 @@ class NewsMapper extends AbstractDbMapper
     /**
      * @param int $limit
      * @param string $sort
-     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     * @return \Laminas\Db\ResultSet\HydratingResultSet|\Laminas\Db\ResultSet\ResultSet|\Laminas\Paginator\Paginator
      */
     public function getNewsByDate(int $limit, string $sort = '-')
     {

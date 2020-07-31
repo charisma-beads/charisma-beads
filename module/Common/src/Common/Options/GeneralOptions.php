@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Common\Options;
 
 
-use Zend\Stdlib\AbstractOptions;
+use Laminas\Stdlib\AbstractOptions;
 
 class GeneralOptions extends AbstractOptions
 {

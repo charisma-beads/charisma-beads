@@ -1,19 +1,11 @@
 <?php
-/**
- * Uthando CMS (http://www.shaunfreeman.co.uk/)
- *
- * @package   Shop\Controller\Product
- * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
- */
 
 namespace Shop\Controller;
 
 use Shop\Service\ProductOptionService;
 use Shop\ShopException;
 use Common\Controller\AbstractCrudController;
-use Zend\View\Model\ViewModel;
+use Laminas\View\Model\ViewModel;
 
 /**
  * Class ProductOption

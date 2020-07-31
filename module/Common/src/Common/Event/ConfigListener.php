@@ -3,11 +3,11 @@
 namespace Common\Event;
 
 use Common\Config\ConfigInterface;
-use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\ListenerAggregateInterface;
-use Zend\EventManager\ListenerAggregateTrait;
-use Zend\ModuleManager\ModuleEvent;
-use Zend\Stdlib\ArrayUtils;
+use Laminas\EventManager\EventManagerInterface;
+use Laminas\EventManager\ListenerAggregateInterface;
+use Laminas\EventManager\ListenerAggregateTrait;
+use Laminas\ModuleManager\ModuleEvent;
+use Laminas\Stdlib\ArrayUtils;
 
 
 class ConfigListener implements ListenerAggregateInterface

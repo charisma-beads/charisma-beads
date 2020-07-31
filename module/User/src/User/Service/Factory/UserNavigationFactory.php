@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace User\Service\Factory;
 
-use Zend\Navigation\Service\AbstractNavigationFactory;
+use Laminas\Navigation\Service\AbstractNavigationFactory;
 
 class UserNavigationFactory extends AbstractNavigationFactory
 {

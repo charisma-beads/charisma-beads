@@ -2,9 +2,9 @@
 
 namespace Common\InputFilter;
 
-use Zend\Db\Adapter\Adapter as DbAdapter;
-use Zend\InputFilter\InputFilter;
-use Zend\Validator\Db\NoRecordExists;
+use Laminas\Db\Adapter\Adapter as DbAdapter;
+use Laminas\InputFilter\InputFilter;
+use Laminas\Validator\Db\NoRecordExists;
 
 trait NoRecordExistsTrait
 {

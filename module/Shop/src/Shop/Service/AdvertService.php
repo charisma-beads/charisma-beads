@@ -1,12 +1,4 @@
 <?php
-/**
- * Uthando CMS (http://www.shaunfreeman.co.uk/)
- *
- * @package   Shop\Service\Advert
- * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE
- */
 
 namespace Shop\Service;
 
@@ -16,7 +8,7 @@ use Shop\InputFilter\AdvertInputFiler;
 use Shop\Mapper\AdvertMapper;
 use Shop\Model\AdvertModel;
 use Common\Service\AbstractMapperService;
-use Zend\Json\Json;
+use Laminas\Json\Json;
 
 /**
  * Class Advert

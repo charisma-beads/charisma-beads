@@ -9,8 +9,8 @@ use User\Authentication\Storage;
 use User\Options\AuthOptions;
 use User\Service\Authentication;
 use User\Service\UserService;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\ServiceManager\FactoryInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 class AuthenticationFactory implements FactoryInterface
 {

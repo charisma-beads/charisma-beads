@@ -4,11 +4,11 @@ namespace FileManager\Controller;
 
 use Common\Service\ServiceManager;
 use FileManager\Service\ImageUploader;
-use Zend\Form\Form;
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\ProgressBar\Upload\SessionProgress;
-use Zend\View\Model\JsonModel;
-use Zend\View\Model\ViewModel;
+use Laminas\Form\Form;
+use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\ProgressBar\Upload\SessionProgress;
+use Laminas\View\Model\JsonModel;
+use Laminas\View\Model\ViewModel;
 
 
 class UploaderController extends AbstractActionController

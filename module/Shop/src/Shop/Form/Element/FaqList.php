@@ -1,21 +1,13 @@
 <?php
-/**
- * Uthando CMS (http://www.shaunfreeman.co.uk/)
- *
- * @package   Shop\Form\Element
- * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @copyright Copyright (c) 2015 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE
- */
 
 namespace Shop\Form\Element;
 
 
 use Shop\Service\FaqService;
 use Common\Service\ServiceManager;
-use Zend\Form\Element\Select;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
+use Laminas\Form\Element\Select;
+use Laminas\ServiceManager\ServiceLocatorAwareInterface;
+use Laminas\ServiceManager\ServiceLocatorAwareTrait;
 
 class FaqList extends Select implements ServiceLocatorAwareInterface
 {

@@ -9,7 +9,7 @@ use User\Hydrator\LimitLoginHydrator;
 use User\Mapper\LimitLoginMapper;
 use User\Model\LimitLoginModel;
 use User\Options\LoginOptions;
-use Zend\Http\PhpEnvironment\RemoteAddress;
+use Laminas\Http\PhpEnvironment\RemoteAddress;
 
 class LimitLoginService extends AbstractMapperService
 {
@@ -60,9 +60,8 @@ class LimitLoginService extends AbstractMapperService
     {
         $now        = strtotime('now');
         $lockedTime = $model->getAttemptTime() + $model->getLockedTime();
-        $diff       = $now - $lockedTime;
 
-        return $diff;
+        return $now - $lockedTime;
     }
 
     public function normalizeTime(int $time): string

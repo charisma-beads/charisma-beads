@@ -3,26 +3,16 @@
 namespace Contact\InputFilter;
 
 use Common\Validator\Akismet;
-use Zend\Filter\StringTrim;
-use Zend\Filter\StripTags;
-use Zend\InputFilter\InputFilter;
-use Zend\Validator\EmailAddress;
-use Zend\Validator\Hostname as HostnameValidator;
-use Zend\Validator\StringLength;
+use Laminas\Filter\StringTrim;
+use Laminas\Filter\StripTags;
+use Laminas\InputFilter\InputFilter;
+use Laminas\Validator\EmailAddress;
+use Laminas\Validator\Hostname as HostnameValidator;
+use Laminas\Validator\StringLength;
 
 
 class ContactInputFilter extends InputFilter
 {
-    /**
-     * @var bool
-     */
-    protected $akismetEnabled = false;
-
-    /**
-     * @var array
-     */
-    protected $akismetOptions = [];
-
     /**
      * Set up elements
      */
@@ -75,57 +65,5 @@ class ContactInputFilter extends InputFilter
                 ['name' => StripTags::class],
             ],
         ]);
-
-        if ($this->isAkismetEnabled()) {
-            $options = $this->getAkismetOptions();
-
-            $this->get('body')
-                ->getValidatorChain()
-                ->attachByName(Akismet::class, [
-                    'api_key'               => $options['api_key'] ?? null,
-                    'blog'                  => $options['blog'] ?? null,
-                    'comment_type'          => Akismet::COMMENT_TYPE_CONTACT_FORM,
-                    'comment_author'        => 'name',
-                    'comment_author_email'  => 'email',
-                    'user_agent'            => $options['user_agent'] ?? null,
-                    'user_ip'               => $options['user_ip'] ?? null,
-            ]);
-        }
-    }
-
-    /**
-     * @return bool
-     */
-    public function isAkismetEnabled(): bool
-    {
-        return $this->akismetEnabled;
-    }
-
-    /**
-     * @param bool $akismetEnabled
-     * @return ContactInputFilter
-     */
-    public function setAkismetEnabled(bool $akismetEnabled): ContactInputFilter
-    {
-        $this->akismetEnabled = $akismetEnabled;
-        return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function getAkismetOptions(): array
-    {
-        return $this->akismetOptions;
-    }
-
-    /**
-     * @param array $akismetOptions
-     * @return ContactInputFilter
-     */
-    public function setAkismetOptions(array $akismetOptions): ContactInputFilter
-    {
-        $this->akismetOptions = $akismetOptions;
-        return $this;
     }
 }

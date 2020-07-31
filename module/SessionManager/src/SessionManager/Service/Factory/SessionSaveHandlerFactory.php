@@ -3,12 +3,12 @@
 namespace SessionManager\Service\Factory;
 
 use Common\Options\DbOptions;
-use Zend\Db\Adapter\Adapter;
-use Zend\Db\TableGateway\TableGateway;
-use Zend\Session\SaveHandler\DbTableGatewayOptions;
+use Laminas\Db\Adapter\Adapter;
+use Laminas\Db\TableGateway\TableGateway;
+use Laminas\Session\SaveHandler\DbTableGatewayOptions;
 use SessionManager\Session\SaveHandler\DbTableGateway;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\ServiceManager\FactoryInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 class SessionSaveHandlerFactory implements FactoryInterface
 {

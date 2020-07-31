@@ -2,9 +2,9 @@
 
 namespace FileManager\Form;
 
-use Zend\Form\Element\File;
-use Zend\Form\Element\Hidden;
-use Zend\Form\Form;
+use Laminas\Form\Element\File;
+use Laminas\Form\Element\Hidden;
+use Laminas\Form\Form;
 
 
 class ImageForm extends Form

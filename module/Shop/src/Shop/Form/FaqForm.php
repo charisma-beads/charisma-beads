@@ -1,23 +1,15 @@
 <?php
-/**
- * Uthando CMS (http://www.shaunfreeman.co.uk/)
- *
- * @package   Shop\Form
- * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @copyright Copyright (c) 2015 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE
- */
 
 namespace Shop\Form;
 
 use Shop\Form\Element\FaqList;
 use TwbBundle\Form\View\Helper\TwbBundleForm;
 use Common\Mapper\AbstractNestedSet as NestedSet;
-use Zend\Form\Element\Hidden;
-use Zend\Form\Element\Radio;
-use Zend\Form\Element\Text;
-use Zend\Form\Element\Textarea;
-use Zend\Form\Form;
+use Laminas\Form\Element\Hidden;
+use Laminas\Form\Element\Radio;
+use Laminas\Form\Element\Text;
+use Laminas\Form\Element\Textarea;
+use Laminas\Form\Form;
 
 /**
  * Class Faq
@@ -33,7 +25,7 @@ class FaqForm extends Form
 
     /**
      * @param array|\Traversable $options
-     * @return \Zend\Form\Element|\Zend\Form\ElementInterface
+     * @return \Laminas\Form\Element|\Laminas\Form\ElementInterface
      */
     public function setOptions($options)
     {

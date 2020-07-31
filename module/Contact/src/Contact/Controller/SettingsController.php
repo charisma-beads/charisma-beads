@@ -4,7 +4,7 @@ namespace Contact\Controller;
 
 use Common\Controller\SettingsTrait;
 use Contact\Form\ContactSettings;
-use Zend\Mvc\Controller\AbstractActionController;
+use Laminas\Mvc\Controller\AbstractActionController;
 
 
 class SettingsController extends AbstractActionController

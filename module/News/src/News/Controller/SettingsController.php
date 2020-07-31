@@ -4,7 +4,7 @@ namespace News\Controller;
 
 use Common\Controller\SettingsTrait;
 use News\Form\NewsSettingsForm;
-use Zend\Mvc\Controller\AbstractActionController;
+use Laminas\Mvc\Controller\AbstractActionController;
 
 
 class SettingsController extends AbstractActionController

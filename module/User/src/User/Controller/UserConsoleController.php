@@ -7,8 +7,8 @@ namespace User\Controller;
 use Common\Service\ServiceManager;
 use User\Service\UserRegistrationService;
 use User\Service\UserService;
-use Zend\Console\Request as ConsoleRequest;
-use Zend\Mvc\Controller\AbstractActionController;
+use Laminas\Console\Request as ConsoleRequest;
+use Laminas\Mvc\Controller\AbstractActionController;
 
 class UserConsoleController extends AbstractActionController
 {

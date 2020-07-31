@@ -1,28 +1,20 @@
 <?php
-/**
- * Uthando CMS (http://www.shaunfreeman.co.uk/)
- *
- * @package   Shop\InputFilter\Customer
- * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
- */
 
 namespace Shop\InputFilter;
 
 use Common\Filter\Ucwords;
-use Zend\Filter\StringTrim;
-use Zend\Filter\StripTags;
-use Zend\I18n\Validator\IsInt;
-use Zend\InputFilter\InputFilter;
-use Zend\InputFilter\InputFilterPluginManager;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
-use Zend\Validator\Db\NoRecordExists;
-use Zend\Validator\EmailAddress;
-use Zend\Validator\GreaterThan;
-use Zend\Validator\Hostname;
-use Zend\Validator\StringLength;
+use Laminas\Filter\StringTrim;
+use Laminas\Filter\StripTags;
+use Laminas\I18n\Validator\IsInt;
+use Laminas\InputFilter\InputFilter;
+use Laminas\InputFilter\InputFilterPluginManager;
+use Laminas\ServiceManager\ServiceLocatorAwareInterface;
+use Laminas\ServiceManager\ServiceLocatorAwareTrait;
+use Laminas\Validator\Db\NoRecordExists;
+use Laminas\Validator\EmailAddress;
+use Laminas\Validator\GreaterThan;
+use Laminas\Validator\Hostname;
+use Laminas\Validator\StringLength;
 
 /**
  * Class Customer
@@ -170,7 +162,7 @@ class CustomerInputFilter extends InputFilter implements ServiceLocatorAwareInte
                 'field'     => 'email',
                 'adapter'   => $this->getServiceLocator()
                     ->getServiceLocator()
-                    ->get('Zend\Db\Adapter\Adapter'),
+                    ->get('Laminas\Db\Adapter\Adapter'),
                 'exclude'   => $exclude,
             ]);
 

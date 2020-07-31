@@ -6,8 +6,8 @@ namespace Shop\Controller\Factory;
 
 use Shop\Controller\ProductAvailabilityController;
 use Shop\Service\ProductAvailabilityService;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\ServiceManager\FactoryInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 final class ProductAvailabilityControllerFactory implements FactoryInterface
 {

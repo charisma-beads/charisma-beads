@@ -6,7 +6,7 @@ namespace ShopDomPdf\Model;
 
 use Common\Model\Model;
 use Common\Model\ModelInterface;
-use Zend\Stdlib\Exception\InvalidArgumentException;
+use Laminas\Stdlib\Exception\InvalidArgumentException;
 
 
 class PdfTextLineFont implements ModelInterface

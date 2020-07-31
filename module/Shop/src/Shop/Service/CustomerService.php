@@ -1,12 +1,4 @@
 <?php
-/**
- * Uthando CMS (http://www.shaunfreeman.co.uk/)
- *
- * @package   Shop\Service\Customer
- * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
- */
 
 namespace Shop\Service;
 
@@ -20,9 +12,9 @@ use Common\Service\AbstractService;
 use Common\Service\ServiceException;
 use User\Model\UserModel;
 use User\Service\UserService;
-use Zend\EventManager\Event;
-use Zend\Math\BigInteger\BigInteger;
-use Zend\Math\Rand;
+use Laminas\EventManager\Event;
+use Laminas\Math\BigInteger\BigInteger;
+use Laminas\Math\Rand;
 use Shop\Form\CustomerDetailsForm;
 
 /**
@@ -223,7 +215,7 @@ class CustomerService extends AbstractRelationalMapperService
     /**
      * @param $month
      * @param null $year
-     * @return \Zend\Db\ResultSet\HydratingResultSet
+     * @return \Laminas\Db\ResultSet\HydratingResultSet
      */
     public function getCustomersByMonth($month, $year = null)
     {

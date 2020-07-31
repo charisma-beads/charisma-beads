@@ -5,10 +5,10 @@ namespace ShopDomPdf\View\Strategy;
 use ShopDomPdf\Options\PdfOptions;
 use ShopDomPdf\View\Model;
 use ShopDomPdf\View\Renderer\PdfRenderer;
-use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\ListenerAggregateInterface;
-use Zend\EventManager\ListenerAggregateTrait;
-use Zend\View\ViewEvent;
+use Laminas\EventManager\EventManagerInterface;
+use Laminas\EventManager\ListenerAggregateInterface;
+use Laminas\EventManager\ListenerAggregateTrait;
+use Laminas\View\ViewEvent;
 
 
 class PdfStrategy implements ListenerAggregateInterface

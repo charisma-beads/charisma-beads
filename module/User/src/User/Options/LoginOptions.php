@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace User\Options;
 
-use Zend\Stdlib\AbstractOptions;
-use Zend\Validator\Hostname;
+use Laminas\Stdlib\AbstractOptions;
+use Laminas\Validator\Hostname;
 
 class LoginOptions extends AbstractOptions
 {

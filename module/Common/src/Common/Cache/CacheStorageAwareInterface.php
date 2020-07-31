@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Common\Cache;
 
-use Zend\Cache\Storage\Adapter\AbstractAdapter;
+use Laminas\Cache\Storage\Adapter\AbstractAdapter;
 
 /**
  * Interface CacheStorageAwareInterface

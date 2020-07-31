@@ -6,7 +6,7 @@ namespace ThemeManager\View;
 
 use Common\Service\ServiceManager;
 use ThemeManager\Service\WidgetGroupManager;
-use Zend\ServiceManager\AbstractPluginManager;
+use Laminas\ServiceManager\AbstractPluginManager;
 
 /**
  * Trait GroupServiceTrait

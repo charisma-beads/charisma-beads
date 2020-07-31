@@ -8,8 +8,8 @@ use Common\Model\DateCreatedTrait;
 use Common\Model\DateModifiedTrait;
 use Common\Model\ModelInterface;
 use Common\Model\Model;
-use Zend\Permissions\Acl\Role\RoleInterface;
-use Zend\Math\Rand;
+use Laminas\Permissions\Acl\Role\RoleInterface;
+use Laminas\Math\Rand;
 
 class UserModel implements RoleInterface, ModelInterface
 {

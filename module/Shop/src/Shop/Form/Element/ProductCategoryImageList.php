@@ -1,26 +1,18 @@
 <?php
-/**
- * Uthando CMS (http://www.shaunfreeman.co.uk/)
- *
- * @package   Shop\Form\Element
- * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
- */
 
 namespace Shop\Form\Element;
 
 use Shop\Service\ProductImageService;
 use Common\Service\ServiceManager;
-use Zend\Form\Element\Select;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
+use Laminas\Form\Element\Select;
+use Laminas\ServiceManager\ServiceLocatorAwareInterface;
+use Laminas\ServiceManager\ServiceLocatorAwareTrait;
 
 /**
  * Class ProductCategoryImageList
  *
  * @package Shop\Form\Element
- * @method \Zend\Form\FormElementManager getServiceLocator()
+ * @method \Laminas\Form\FormElementManager getServiceLocator()
  */
 class ProductCategoryImageList extends Select implements ServiceLocatorAwareInterface
 {

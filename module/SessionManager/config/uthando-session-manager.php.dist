@@ -1,10 +1,10 @@
 <?php
 
 use SessionManager\Service\Factory\SessionSaveHandlerFactory;
-use Zend\Session\Config\SessionConfig;
-use Zend\Session\Storage\SessionArrayStorage;
-use Zend\Session\Validator\HttpUserAgent;
-use Zend\Session\Validator\RemoteAddr;
+use Laminas\Session\Config\SessionConfig;
+use Laminas\Session\Storage\SessionArrayStorage;
+use Laminas\Session\Validator\HttpUserAgent;
+use Laminas\Session\Validator\RemoteAddr;
 
 return [
     'uthando_session_manager' => [

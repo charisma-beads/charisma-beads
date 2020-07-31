@@ -6,13 +6,13 @@ namespace ShopDomPdf\Form;
 
 use TwbBundle\Form\View\Helper\TwbBundleForm;
 use ShopDomPdf\Model\PdfTextLine;
-use Zend\Filter\StringTrim;
-use Zend\Filter\StripTags;
-use Zend\Form\Element\Select;
-use Zend\Form\Element\Text;
-use Zend\Form\Fieldset;
-use Zend\Hydrator\ClassMethods;
-use Zend\InputFilter\InputFilterProviderInterface;
+use Laminas\Filter\StringTrim;
+use Laminas\Filter\StripTags;
+use Laminas\Form\Element\Select;
+use Laminas\Form\Element\Text;
+use Laminas\Form\Fieldset;
+use Laminas\Hydrator\ClassMethods;
+use Laminas\InputFilter\InputFilterProviderInterface;
 
 
 class PdfTextLineFieldSet extends Fieldset implements InputFilterProviderInterface

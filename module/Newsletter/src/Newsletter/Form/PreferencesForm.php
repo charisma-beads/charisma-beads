@@ -4,8 +4,8 @@ namespace Newsletter\Form;
 
 use TwbBundle\Form\View\Helper\TwbBundleForm;
 use Common\Form\Element\Captcha;
-use Zend\Form\Element\Csrf;
-use Zend\Form\Element\Submit;
+use Laminas\Form\Element\Csrf;
+use Laminas\Form\Element\Submit;
 
 
 class PreferencesForm extends SubscriberForm

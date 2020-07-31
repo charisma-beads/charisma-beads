@@ -2,16 +2,16 @@
 
 namespace Newsletter\InputFilter;
 
-use Zend\Filter\StringTrim;
-use Zend\Filter\StripTags;
-use Zend\InputFilter\InputFilter;
-use Zend\InputFilter\InputFilterPluginManager;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
-use Zend\Validator\Db\NoRecordExists;
-use Zend\Validator\EmailAddress;
-use Zend\Validator\Hostname;
-use Zend\Validator\StringLength;
+use Laminas\Filter\StringTrim;
+use Laminas\Filter\StripTags;
+use Laminas\InputFilter\InputFilter;
+use Laminas\InputFilter\InputFilterPluginManager;
+use Laminas\ServiceManager\ServiceLocatorAwareInterface;
+use Laminas\ServiceManager\ServiceLocatorAwareTrait;
+use Laminas\Validator\Db\NoRecordExists;
+use Laminas\Validator\EmailAddress;
+use Laminas\Validator\Hostname;
+use Laminas\Validator\StringLength;
 
 /**
  * Class Newsletter
@@ -99,7 +99,7 @@ class SubscriberInputFilter extends InputFilter implements ServiceLocatorAwareIn
                 'field'     => 'email',
                 'adapter'   => $this->getServiceLocator()
                                     ->getServiceLocator()
-                                    ->get('Zend\Db\Adapter\Adapter'),
+                                    ->get('Laminas\Db\Adapter\Adapter'),
                 'exclude'   => $exclude,
             ]);
 

@@ -1,12 +1,4 @@
 <?php
-/**
- * Uthando CMS (http://www.shaunfreeman.co.uk/)
- *
- * @package   Shop\Form\Order
- * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
- */
 
 namespace Shop\Form;
 
@@ -14,9 +6,9 @@ namespace Shop\Form;
 use Shop\Form\Element\Number;
 use Shop\Hydrator\Order\OrderLineHydrator;
 use Shop\Model\OrderLineModel;
-use Zend\Form\Element\Hidden;
-use Zend\Form\Fieldset;
-use Zend\InputFilter\InputFilterProviderInterface;
+use Laminas\Form\Element\Hidden;
+use Laminas\Form\Fieldset;
+use Laminas\InputFilter\InputFilterProviderInterface;
 
 /**
  * Class LineFieldSet

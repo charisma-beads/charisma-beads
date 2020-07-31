@@ -5,13 +5,13 @@ namespace Contact\Form;
 use TwbBundle\Form\View\Helper\TwbBundleForm;
 use Common\Form\Element\Captcha;
 use Contact\Model\AbstractLine;
-use Zend\Form\Element\Csrf;
-use Zend\Form\Element\Email;
-use Zend\Form\Element\Select;
-use Zend\Form\Element\Submit;
-use Zend\Form\Element\Text;
-use Zend\Form\Element\Textarea;
-use Zend\Form\Form;
+use Laminas\Form\Element\Csrf;
+use Laminas\Form\Element\Email;
+use Laminas\Form\Element\Select;
+use Laminas\Form\Element\Submit;
+use Laminas\Form\Element\Text;
+use Laminas\Form\Element\Textarea;
+use Laminas\Form\Form;
 
 
 class ContactForm extends Form

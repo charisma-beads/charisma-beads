@@ -2,7 +2,7 @@
 
 namespace Common\Mapper;
 
-use Zend\Db\Adapter\Adapter;
+use Laminas\Db\Adapter\Adapter;
 
 
 interface DbAdapterAwareInterface

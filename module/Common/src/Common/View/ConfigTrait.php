@@ -2,9 +2,9 @@
 
 namespace Common\View;
 
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
-use Zend\Stdlib\Exception\InvalidArgumentException;
-use Zend\View\HelperPluginManager;
+use Laminas\ServiceManager\ServiceLocatorAwareTrait;
+use Laminas\Stdlib\Exception\InvalidArgumentException;
+use Laminas\View\HelperPluginManager;
 
 /**
  * Class ConfigTrait

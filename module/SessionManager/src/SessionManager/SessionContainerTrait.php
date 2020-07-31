@@ -2,7 +2,7 @@
 
 namespace SessionManager;
 
-use Zend\Session\Container;
+use Laminas\Session\Container;
 
 /**
  * Class SessionContainerTrait

@@ -3,11 +3,11 @@
 namespace Newsletter\Form;
 
 use TwbBundle\Form\View\Helper\TwbBundleForm;
-use Zend\Form\Element\Checkbox;
-use Zend\Form\Element\Csrf;
-use Zend\Form\Element\Hidden;
-use Zend\Form\Element\Text;
-use Zend\Form\Form;
+use Laminas\Form\Element\Checkbox;
+use Laminas\Form\Element\Csrf;
+use Laminas\Form\Element\Hidden;
+use Laminas\Form\Element\Text;
+use Laminas\Form\Form;
 
 
 class NewsletterForm extends Form

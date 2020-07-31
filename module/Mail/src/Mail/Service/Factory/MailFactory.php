@@ -3,9 +3,9 @@
 namespace Mail\Service\Factory;
 
 use Mail\Options\MailOptions;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\View\Renderer\PhpRenderer;
+use Laminas\ServiceManager\FactoryInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
+use Laminas\View\Renderer\PhpRenderer;
 use Mail\Service\Mail;
 
 
@@ -41,9 +41,9 @@ class MailFactory implements FactoryInterface
         $renderer = new PhpRenderer();
 
         // Set the view script resolver if available
-        if ($serviceLocator->has('Zend\View\Resolver\AggregateResolver')) {
+        if ($serviceLocator->has('Laminas\View\Resolver\AggregateResolver')) {
             $renderer->setResolver(
-                $serviceLocator->get('Zend\View\Resolver\AggregateResolver')
+                $serviceLocator->get('Laminas\View\Resolver\AggregateResolver')
             );
         }
 

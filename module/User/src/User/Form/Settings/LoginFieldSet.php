@@ -3,16 +3,16 @@
 namespace User\Form\Settings;
 
 use User\Options\LoginOptions;
-use Zend\Filter\Boolean;
-use Zend\Filter\StringTrim;
-use Zend\Filter\StripTags;
-use Zend\Filter\ToInt;
-use Zend\Form\Element\Checkbox;
-use Zend\Form\Element\Number;
-use Zend\Form\Fieldset;
-use Zend\Hydrator\ClassMethods;
-use Zend\I18n\Validator\IsInt;
-use Zend\InputFilter\InputFilterProviderInterface;
+use Laminas\Filter\Boolean;
+use Laminas\Filter\StringTrim;
+use Laminas\Filter\StripTags;
+use Laminas\Filter\ToInt;
+use Laminas\Form\Element\Checkbox;
+use Laminas\Form\Element\Number;
+use Laminas\Form\Fieldset;
+use Laminas\Hydrator\ClassMethods;
+use Laminas\I18n\Validator\IsInt;
+use Laminas\InputFilter\InputFilterProviderInterface;
 
 class LoginFieldSet extends Fieldset implements InputFilterProviderInterface
 {

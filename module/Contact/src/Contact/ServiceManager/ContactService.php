@@ -8,8 +8,8 @@ use Common\Service\AbstractService;
 use Contact\Form\ContactForm;
 use Contact\InputFilter\ContactInputFilter;
 use Contact\Options\FormOptions;
-use Zend\Form\Form;
-use Zend\View\Model\ViewModel;
+use Laminas\Form\Form;
+use Laminas\View\Model\ViewModel;
 
 class ContactService extends AbstractService
 {

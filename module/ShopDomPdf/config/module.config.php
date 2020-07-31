@@ -17,7 +17,7 @@ use ShopDomPdf\Service\PdfModelFactory;
 use ShopDomPdf\View\Model\PdfModel;
 use ShopDomPdf\View\Renderer\PdfRenderer;
 use ShopDomPdf\View\Strategy\PdfStrategy;
-use Zend\ServiceManager\Factory\InvokableFactory;
+use Laminas\ServiceManager\Factory\InvokableFactory;
 
 return [
     'controllers' => [

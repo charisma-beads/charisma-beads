@@ -3,7 +3,7 @@
 namespace Common\Service;
 
 use Common\Model\Model;
-use Zend\Db\ResultSet\HydratingResultSet;
+use Laminas\Db\ResultSet\HydratingResultSet;
 
 
 abstract class AbstractRelationalMapperService extends AbstractMapperService
@@ -38,7 +38,7 @@ abstract class AbstractRelationalMapperService extends AbstractMapperService
 
     /**
      * @param array $post
-     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     * @return \Laminas\Db\ResultSet\HydratingResultSet|\Laminas\Db\ResultSet\ResultSet|\Laminas\Paginator\Paginator
      */
     public function search(array $post)
     {

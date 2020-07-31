@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace User\Crypt\Password;
 
-use Zend\Crypt\Exception\InvalidArgumentException;
-use Zend\Crypt\Password\PasswordInterface;
-use Zend\Stdlib\ArrayUtils;
+use Laminas\Crypt\Exception\InvalidArgumentException;
+use Laminas\Crypt\Password\PasswordInterface;
+use Laminas\Stdlib\ArrayUtils;
 
 class Password implements PasswordInterface
 {

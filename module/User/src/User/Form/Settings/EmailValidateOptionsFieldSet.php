@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace User\Form\Settings;
 
-use Zend\Filter\Boolean;
-use Zend\Filter\StringTrim;
-use Zend\Filter\StripTags;
-use Zend\Filter\ToInt;
-use Zend\Form\Element\Checkbox;
-use Zend\Form\Element\Select;
-use Zend\Form\Fieldset;
-use Zend\InputFilter\InputFilterProviderInterface;
-use Zend\Validator\Hostname;
+use Laminas\Filter\Boolean;
+use Laminas\Filter\StringTrim;
+use Laminas\Filter\StripTags;
+use Laminas\Filter\ToInt;
+use Laminas\Form\Element\Checkbox;
+use Laminas\Form\Element\Select;
+use Laminas\Form\Fieldset;
+use Laminas\InputFilter\InputFilterProviderInterface;
+use Laminas\Validator\Hostname;
 
 class EmailValidateOptionsFieldSet extends Fieldset implements InputFilterProviderInterface
 {

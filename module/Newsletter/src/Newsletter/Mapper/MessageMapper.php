@@ -3,7 +3,7 @@
 namespace Newsletter\Mapper;
 
 use Common\Mapper\AbstractDbMapper;
-use Zend\Db\Sql\Select;
+use Laminas\Db\Sql\Select;
 
 
 class MessageMapper extends AbstractDbMapper

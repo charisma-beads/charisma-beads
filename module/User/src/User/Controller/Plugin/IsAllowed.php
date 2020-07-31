@@ -6,9 +6,9 @@ namespace User\Controller\Plugin;
 
 use User\Model\UserModel;
 use User\Service\Acl;
-use Zend\Mvc\Controller\Plugin\AbstractPlugin;
-use Zend\Permissions\Acl\Role\GenericRole as Role;
-use Zend\Permissions\Acl\Role\RoleInterface;
+use Laminas\Mvc\Controller\Plugin\AbstractPlugin;
+use Laminas\Permissions\Acl\Role\GenericRole as Role;
+use Laminas\Permissions\Acl\Role\RoleInterface;
 
 class IsAllowed extends AbstractPlugin
 {

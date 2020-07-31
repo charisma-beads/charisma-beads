@@ -5,9 +5,9 @@ namespace Navigation\Form\Element;
 use Common\Service\ServiceManager;
 use Navigation\Service\MenuItemService;
 use Navigation\Service\MenuService;
-use Zend\Form\Element\Select;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
+use Laminas\Form\Element\Select;
+use Laminas\ServiceManager\ServiceLocatorAwareInterface;
+use Laminas\ServiceManager\ServiceLocatorAwareTrait;
 
 
 class MenuItemList extends Select implements ServiceLocatorAwareInterface
@@ -26,7 +26,7 @@ class MenuItemList extends Select implements ServiceLocatorAwareInterface
 
     /**
      * @param array|\Traversable $options
-     * @return void|Select|\Zend\Form\ElementInterface
+     * @return void|Select|\Laminas\Form\ElementInterface
      */
     public function setOptions($options)
     {

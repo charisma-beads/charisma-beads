@@ -4,7 +4,7 @@ namespace Common\Mvc\Controller;
 
 use Common\Controller\SettingsTrait;
 use Common\Form\Settings\CommonSettings;
-use Zend\Mvc\Controller\AbstractActionController;
+use Laminas\Mvc\Controller\AbstractActionController;
 
 
 class Settings extends AbstractActionController

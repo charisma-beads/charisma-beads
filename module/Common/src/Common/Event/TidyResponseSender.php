@@ -2,9 +2,9 @@
 
 namespace Common\Event;
 
-use Zend\Http\PhpEnvironment\Response;
-use Zend\Mvc\ResponseSender\AbstractResponseSender;
-use Zend\Mvc\ResponseSender\SendResponseEvent;
+use Laminas\Http\PhpEnvironment\Response;
+use Laminas\Mvc\ResponseSender\AbstractResponseSender;
+use Laminas\Mvc\ResponseSender\SendResponseEvent;
 
 
 class TidyResponseSender extends AbstractResponseSender

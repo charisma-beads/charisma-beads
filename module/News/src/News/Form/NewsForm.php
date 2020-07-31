@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace News\Form;
 
 use TwbBundle\Form\View\Helper\TwbBundleForm;
-use Zend\Form\Element\Button;
-use Zend\Form\Element\Csrf;
-use Zend\Form\Element\DateTime;
-use Zend\Form\Element\Hidden;
-use Zend\Form\Element\Text;
-use Zend\Form\Element\Textarea;
-use Zend\Form\Form;
+use Laminas\Form\Element\Button;
+use Laminas\Form\Element\Csrf;
+use Laminas\Form\Element\DateTime;
+use Laminas\Form\Element\Hidden;
+use Laminas\Form\Element\Text;
+use Laminas\Form\Element\Textarea;
+use Laminas\Form\Form;
 
 
 class NewsForm extends Form

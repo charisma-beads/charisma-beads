@@ -10,7 +10,7 @@ use News\Mapper\NewsMapper;
 use News\Model\NewsModel;
 use News\Options\NewsOptions;
 use User\Service\UserService;
-use Zend\EventManager\Event;
+use Laminas\EventManager\Event;
 
 /**
  * Class NewsForm
@@ -135,7 +135,7 @@ class NewsService extends AbstractRelationalMapperService
 
     /**
      * @param int $limit
-     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     * @return \Laminas\Db\ResultSet\HydratingResultSet|\Laminas\Db\ResultSet\ResultSet|\Laminas\Paginator\Paginator
      */
     public function getPopularNews(int $limit)
     {
@@ -147,7 +147,7 @@ class NewsService extends AbstractRelationalMapperService
 
     /**
      * @param int $limit
-     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     * @return \Laminas\Db\ResultSet\HydratingResultSet|\Laminas\Db\ResultSet\ResultSet|\Laminas\Paginator\Paginator
      */
     public function getRecentNews(int $limit)
     {

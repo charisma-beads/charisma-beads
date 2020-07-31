@@ -1,19 +1,11 @@
 <?php
-/**
- * Uthando CMS (http://www.shaunfreeman.co.uk/)
- *
- * @package   Shop\Form\Element
- * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
- */
 
 namespace Shop\Form\Element;
 
 use Shop\Model\ProductModel;
-use Zend\Form\Element\Select;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
+use Laminas\Form\Element\Select;
+use Laminas\ServiceManager\ServiceLocatorAwareInterface;
+use Laminas\ServiceManager\ServiceLocatorAwareTrait;
 
 /**
  * Class ProductOptionsList
@@ -38,7 +30,7 @@ class ProductOptionsList extends Select implements ServiceLocatorAwareInterface
 
     /**
      * @param array|\Traversable $options
-     * @return void|Select|\Zend\Form\ElementInterface
+     * @return void|Select|\Laminas\Form\ElementInterface
      */
     public function setOptions($options)
     {

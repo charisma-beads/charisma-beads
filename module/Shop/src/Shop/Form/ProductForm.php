@@ -16,13 +16,13 @@ use Shop\Form\Element\ProductGroupList;
 use Shop\Form\Element\ProductSizeList;
 use Shop\Form\Element\TaxCodeList;
 use TwbBundle\Form\View\Helper\TwbBundleForm;
-use Zend\Form\Element\Button;
-use Zend\Form\Element\Checkbox;
-use Zend\Form\Element\Hidden;
-use Zend\Form\Element\Number;
-use Zend\Form\Element\Text;
-use Zend\Form\Element\Textarea;
-use Zend\Form\Form;
+use Laminas\Form\Element\Button;
+use Laminas\Form\Element\Checkbox;
+use Laminas\Form\Element\Hidden;
+use Laminas\Form\Element\Number;
+use Laminas\Form\Element\Text;
+use Laminas\Form\Element\Textarea;
+use Laminas\Form\Form;
 
 /**
  * Class Product

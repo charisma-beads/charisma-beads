@@ -1,22 +1,16 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: shaun
- * Date: 07/08/17
- * Time: 13:32
- */
 
 namespace Shop\InputFilter\Voucher;
 
 use Shop\Model\AbstractOrderCollection;
 use Shop\Validator\Voucher as VoucherValidator;
-use Zend\Filter\StringToUpper;
-use Zend\Filter\StringTrim;
-use Zend\Filter\StripTags;
-use Zend\I18n\Filter\Alnum;
-use Zend\I18n\Validator\Alnum as AlnumValidator;
-use Zend\Validator\StringLength;
-use Zend\InputFilter\InputFilter;
+use Laminas\Filter\StringToUpper;
+use Laminas\Filter\StringTrim;
+use Laminas\Filter\StripTags;
+use Laminas\I18n\Filter\Alnum;
+use Laminas\I18n\Validator\Alnum as AlnumValidator;
+use Laminas\Validator\StringLength;
+use Laminas\InputFilter\InputFilter;
 
 class VoucherInputFilter extends InputFilter
 {

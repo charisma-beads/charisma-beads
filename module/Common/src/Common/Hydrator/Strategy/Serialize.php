@@ -2,8 +2,8 @@
 
 namespace Common\Hydrator\Strategy;
 
-use Zend\Serializer\Serializer;
-use Zend\Hydrator\Strategy\StrategyInterface;
+use Laminas\Serializer\Serializer;
+use Laminas\Hydrator\Strategy\StrategyInterface;
 
 
 class Serialize implements StrategyInterface

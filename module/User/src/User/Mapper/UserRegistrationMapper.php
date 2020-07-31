@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace User\Mapper;
 
 use Common\Mapper\AbstractDbMapper;
-use Zend\Db\Sql\Expression;
-use Zend\Db\Sql\Select;
-use Zend\Db\Sql\Where;
+use Laminas\Db\Sql\Expression;
+use Laminas\Db\Sql\Select;
+use Laminas\Db\Sql\Where;
 
 class UserRegistrationMapper extends AbstractDbMapper
 {
@@ -18,7 +18,7 @@ class UserRegistrationMapper extends AbstractDbMapper
      * @param array $search
      * @param string $sort
      * @param Select $select
-     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     * @return \Laminas\Db\ResultSet\HydratingResultSet|\Laminas\Db\ResultSet\ResultSet|\Laminas\Paginator\Paginator
      */
     public function search(array $search, $sort, $select = null)
     {

@@ -2,7 +2,7 @@
 
 namespace Contact\Options;
 
-use Zend\Stdlib\AbstractOptions;
+use Laminas\Stdlib\AbstractOptions;
 
 
 class GoogleMapOptions extends AbstractOptions

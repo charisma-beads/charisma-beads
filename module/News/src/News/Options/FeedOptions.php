@@ -2,7 +2,7 @@
 
 namespace News\Options;
 
-use Zend\Stdlib\AbstractOptions;
+use Laminas\Stdlib\AbstractOptions;
 
 
 class FeedOptions extends AbstractOptions

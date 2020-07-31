@@ -2,7 +2,7 @@
 
 namespace Admin\View;
 
-use Zend\View\Helper\AbstractHelper;
+use Laminas\View\Helper\AbstractHelper;
 
 /**
  * Class PhpInfo

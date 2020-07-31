@@ -1,12 +1,4 @@
 <?php
-/**
- * Uthando CMS (http://www.shaunfreeman.co.uk/)
- *
- * @package   Shop\Controller\Product
- * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE
- */
 
 namespace Shop\Controller;
 
@@ -15,8 +7,8 @@ use Shop\Model\Product\ProductModel as ProductModel;
 use Shop\Service\ProductService;
 use Shop\ShopException;
 use Common\Controller\AbstractCrudController;
-use Zend\View\Model\JsonModel;
-use Zend\View\Model\ViewModel;
+use Laminas\View\Model\JsonModel;
+use Laminas\View\Model\ViewModel;
 
 /**
  * Class Product

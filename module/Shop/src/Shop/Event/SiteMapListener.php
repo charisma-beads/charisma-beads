@@ -1,12 +1,4 @@
 <?php
-/**
- * Uthando CMS (http://www.shaunfreeman.co.uk/)
- *
- * @package   Shop\Event
- * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @copyright Copyright (c) 2015 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE
- */
 
 namespace Shop\Event;
 
@@ -14,10 +6,10 @@ use Shop\Service\ProductCategoryService;
 use Shop\Service\ProductService;
 use Navigation\Service\MenuService;
 use Navigation\Service\SiteMapService;
-use Zend\EventManager\Event;
-use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\ListenerAggregateInterface;
-use Zend\EventManager\ListenerAggregateTrait;
+use Laminas\EventManager\Event;
+use Laminas\EventManager\EventManagerInterface;
+use Laminas\EventManager\ListenerAggregateInterface;
+use Laminas\EventManager\ListenerAggregateTrait;
 
 /**
  * Class SiteMapListener
@@ -45,7 +37,7 @@ class SiteMapListener implements ListenerAggregateInterface
      */
     public function addShopPages(Event $e)
     {
-        /* @var \Zend\Navigation\Navigation $navigation */
+        /* @var \Laminas\Navigation\Navigation $navigation */
         $navigation = $e->getParam('navigation');
 
         /* @var \Shop\Service\ProductService $productService */

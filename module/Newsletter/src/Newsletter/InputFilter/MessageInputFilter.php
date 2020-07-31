@@ -2,9 +2,9 @@
 
 namespace Newsletter\InputFilter;
 
-use Zend\Filter\StringTrim;
-use Zend\Filter\StripTags;
-use Zend\InputFilter\InputFilter;
+use Laminas\Filter\StringTrim;
+use Laminas\Filter\StripTags;
+use Laminas\InputFilter\InputFilter;
 
 
 class MessageInputFilter extends InputFilter

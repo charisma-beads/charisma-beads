@@ -4,11 +4,11 @@ namespace FileManager\InputFilter;
 
 use FileManager\Options\FileManagerOptions;
 use FileManager\Validator\IsImage;
-use Zend\Filter\File\RenameUpload;
-use Zend\InputFilter\InputFilter;
-use Zend\Validator\File\Extension;
-use Zend\Validator\File\ImageSize;
-use Zend\Validator\File\UploadFile;
+use Laminas\Filter\File\RenameUpload;
+use Laminas\InputFilter\InputFilter;
+use Laminas\Validator\File\Extension;
+use Laminas\Validator\File\ImageSize;
+use Laminas\Validator\File\UploadFile;
 
 
 class ImageInputFilter extends InputFilter

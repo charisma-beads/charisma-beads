@@ -2,10 +2,10 @@
 
 namespace Common\Service;
 
-use Zend\Mvc\Exception\InvalidPluginException;
-use Zend\ServiceManager\AbstractPluginManager;
-use Zend\ServiceManager\ConfigInterface;
-use Zend\Stdlib\InitializableInterface;
+use Laminas\Mvc\Exception\InvalidPluginException;
+use Laminas\ServiceManager\AbstractPluginManager;
+use Laminas\ServiceManager\ConfigInterface;
+use Laminas\Stdlib\InitializableInterface;
 
 
 class ServiceManager extends AbstractPluginManager

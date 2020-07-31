@@ -7,11 +7,11 @@ namespace User\Service;
 use User\Controller\RegistrationController;
 use User\Controller\UserController;
 use User\Options\UserOptions;
-use Zend\Permissions\Acl\Acl as ZendAcl;
-use Zend\Permissions\Acl\Role\GenericRole as Role;
-use Zend\Permissions\Acl\Resource\GenericResource as Resource;
+use Laminas\Permissions\Acl\Acl as LaminasAcl;
+use Laminas\Permissions\Acl\Role\GenericRole as Role;
+use Laminas\Permissions\Acl\Resource\GenericResource as Resource;
 
-class Acl extends ZendAcl
+class Acl extends LaminasAcl
 {
     /**
      * @var array

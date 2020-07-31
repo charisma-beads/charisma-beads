@@ -1,26 +1,18 @@
 <?php
-/**
- * Uthando CMS (http://www.shaunfreeman.co.uk/)
- *
- * @package   Shop\Form\Settings
- * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
- */
 
 namespace Shop\Form\Settings;
 
 use Shop\Options\NewProductsCarouselOptions;
-use Zend\Filter\Boolean;
-use Zend\Filter\StringTrim;
-use Zend\Filter\StripTags;
-use Zend\Filter\UpperCaseWords;
-use Zend\Form\Element\Checkbox;
-use Zend\Form\Element\Text;
-use Zend\I18n\Validator\IsInt;
-use Zend\InputFilter\InputFilterProviderInterface;
-use Zend\Form\Fieldset;
-use Zend\Hydrator\ClassMethods;
+use Laminas\Filter\Boolean;
+use Laminas\Filter\StringTrim;
+use Laminas\Filter\StripTags;
+use Laminas\Filter\UpperCaseWords;
+use Laminas\Form\Element\Checkbox;
+use Laminas\Form\Element\Text;
+use Laminas\I18n\Validator\IsInt;
+use Laminas\InputFilter\InputFilterProviderInterface;
+use Laminas\Form\Fieldset;
+use Laminas\Hydrator\ClassMethods;
 
 /**
  * Class NewProductsCarouselFieldSet

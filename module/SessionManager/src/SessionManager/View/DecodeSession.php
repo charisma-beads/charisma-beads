@@ -2,7 +2,7 @@
 
 namespace SessionManager\View;
 
-use Zend\View\Helper\AbstractHelper;
+use Laminas\View\Helper\AbstractHelper;
 use Zend\Debug\Debug;
 
 class DecodeSession extends AbstractHelper

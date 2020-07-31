@@ -4,7 +4,7 @@ namespace ShopDomPdf\Controller;
 
 use Common\Controller\SettingsTrait;
 use ShopDomPdf\Form\DomPdfSettings;
-use Zend\Mvc\Controller\AbstractActionController;
+use Laminas\Mvc\Controller\AbstractActionController;
 
 
 class SettingsController extends AbstractActionController

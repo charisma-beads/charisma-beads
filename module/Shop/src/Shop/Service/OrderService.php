@@ -1,12 +1,4 @@
 <?php
-/**
- * Uthando CMS (http://www.shaunfreeman.co.uk/)
- *
- * @package   Shop\Service\Order
- * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
- */
 
 namespace Shop\Service;
 
@@ -25,10 +17,10 @@ use Shop\Model\VoucherCodeModel as VoucherCode;
 use Shop\Options\CartOptions;
 use Shop\Options\OrderOptions;
 use Shop\Validator\Voucher;
-use Zend\Json\Json;
-use Zend\Mail\Protocol\Exception\RuntimeException;
-use Zend\Math\BigInteger\BigInteger;
-use Zend\View\Model\ViewModel;
+use Laminas\Json\Json;
+use Laminas\Mail\Protocol\Exception\RuntimeException;
+use Laminas\Math\BigInteger\BigInteger;
+use Laminas\View\Model\ViewModel;
 
 /**
  * Class Order
@@ -142,7 +134,7 @@ class OrderService extends AbstractOrderService
 
     /**
      * @param $id
-     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     * @return \Laminas\Db\ResultSet\HydratingResultSet|\Laminas\Db\ResultSet\ResultSet|\Laminas\Paginator\Paginator
      */
     public function getCustomerOrdersByCustomerId($id)
     {

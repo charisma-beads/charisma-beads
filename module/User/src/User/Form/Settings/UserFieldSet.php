@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace User\Form\Settings;
 
 use User\Options\UserOptions;
-use Zend\Filter\Boolean;
-use Zend\Filter\StringTrim;
-use Zend\Filter\StripTags;
-use Zend\Form\Element\Checkbox;
-use Zend\Form\Fieldset;
-use Zend\Hydrator\ClassMethods;
-use Zend\InputFilter\InputFilterProviderInterface;
+use Laminas\Filter\Boolean;
+use Laminas\Filter\StringTrim;
+use Laminas\Filter\StripTags;
+use Laminas\Form\Element\Checkbox;
+use Laminas\Form\Fieldset;
+use Laminas\Hydrator\ClassMethods;
+use Laminas\InputFilter\InputFilterProviderInterface;
 
 class UserFieldSet extends Fieldset implements InputFilterProviderInterface
 {

@@ -1,12 +1,4 @@
 <?php
-/**
- * Uthando CMS (http://www.shaunfreeman.co.uk/)
- *
- * @package   Shop\Form\Customer
- * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE
- */
 
 namespace Shop\Form;
 
@@ -16,17 +8,17 @@ use Common\Filter\Ucwords;
 use Common\I18n\Filter\PhoneNumber;
 use Common\I18n\Validator\PhoneNumber as PhoneNumberValidator;
 use Common\I18n\Validator\PostCode;
-use Zend\Filter\Digits;
-use Zend\Filter\StringToUpper;
-use Zend\Filter\StringTrim;
-use Zend\Filter\StripTags;
-use Zend\Form\Fieldset;
-use Zend\I18n\Filter\Alnum;
-use Zend\I18n\Validator\IsInt;
-use Zend\InputFilter\InputFilterProviderInterface;
-use Zend\Hydrator\ClassMethods;
-use Zend\Validator\GreaterThan;
-use Zend\Validator\NotEmpty;
+use Laminas\Filter\Digits;
+use Laminas\Filter\StringToUpper;
+use Laminas\Filter\StringTrim;
+use Laminas\Filter\StripTags;
+use Laminas\Form\Fieldset;
+use Laminas\I18n\Filter\Alnum;
+use Laminas\I18n\Validator\IsInt;
+use Laminas\InputFilter\InputFilterProviderInterface;
+use Laminas\Hydrator\ClassMethods;
+use Laminas\Validator\GreaterThan;
+use Laminas\Validator\NotEmpty;
 
 /**
  * Class AddressFieldSet

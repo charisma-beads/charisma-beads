@@ -1,22 +1,14 @@
 <?php
-/**
- * Uthando CMS (http://www.shaunfreeman.co.uk/)
- *
- * @package   Shop\InputFilter\Post
- * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
- */
 
 namespace Shop\InputFilter;
 
-use Zend\Filter\StringTrim;
-use Zend\Filter\StripTags;
-use Zend\I18n\Validator\IsFloat;
-use Zend\I18n\Validator\IsInt;
-use Zend\InputFilter\InputFilter;
-use Zend\Validator\Between;
-use Zend\Validator\GreaterThan;
+use Laminas\Filter\StringTrim;
+use Laminas\Filter\StripTags;
+use Laminas\I18n\Validator\IsFloat;
+use Laminas\I18n\Validator\IsInt;
+use Laminas\InputFilter\InputFilter;
+use Laminas\Validator\Between;
+use Laminas\Validator\GreaterThan;
 
 /**
  * Class Cost

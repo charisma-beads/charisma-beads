@@ -1,18 +1,10 @@
 <?php
-/**
- * Uthando CMS (http://www.shaunfreeman.co.uk/)
- *
- * @package   Shop\Mapper\Advert
- * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
- */
 
 namespace Shop\Mapper;
 
 use Common\Mapper\AbstractDbMapper;
-use Zend\Db\Sql\Expression;
-use Zend\Db\ResultSet\ResultSet;
+use Laminas\Db\Sql\Expression;
+use Laminas\Db\ResultSet\ResultSet;
 
 /**
  * Class Advert
@@ -25,7 +17,7 @@ class AdvertMapper extends AbstractDbMapper
     protected $primary = 'advertId';
 
     /**
-     * @return \Zend\Db\ResultSet\HydratingResultSet|ResultSet|\Zend\Paginator\Paginator
+     * @return \Laminas\Db\ResultSet\HydratingResultSet|ResultSet|\Laminas\Paginator\Paginator
      */
     public function getStats()
     {

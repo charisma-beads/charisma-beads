@@ -4,9 +4,9 @@ namespace ShopDomPdf\View\Renderer;
 
 use ShopDomPdf\Options\PdfOptions;
 use ShopDomPdf\View\Model\PdfModel;
-use Zend\View\Model\ModelInterface;
-use Zend\View\Renderer\RendererInterface as Renderer;
-use Zend\View\Resolver\ResolverInterface as Resolver;
+use Laminas\View\Model\ModelInterface;
+use Laminas\View\Renderer\RendererInterface as Renderer;
+use Laminas\View\Resolver\ResolverInterface as Resolver;
 use Dompdf\Dompdf;
 
 

@@ -19,7 +19,7 @@ class Module
     public function getAutoloaderConfig()
     {
         return [
-            'Zend\Loader\ClassMapAutoloader' => [
+            'Laminas\Loader\ClassMapAutoloader' => [
                 __DIR__ . '/autoload_classmap.php'
             ],
         ];

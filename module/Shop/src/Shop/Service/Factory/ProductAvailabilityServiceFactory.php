@@ -6,8 +6,8 @@ namespace Shop\Service\Factory;
 
 use PDO;
 use Shop\Service\ProductAvailabilityService;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\ServiceManager\FactoryInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 final class ProductAvailabilityServiceFactory implements FactoryInterface
 {

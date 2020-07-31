@@ -5,11 +5,11 @@ namespace Common\Mapper;
 use Common\Model\ModelAwareInterface;
 use Common\Model\ModelManager;
 use Common\Options\DbOptions;
-use Zend\Db\Adapter\Adapter;
-use Zend\Mvc\Exception\InvalidPluginException;
-use Zend\ServiceManager\AbstractPluginManager;
-use Zend\Hydrator\ClassMethods;
-use Zend\Hydrator\HydratorAwareInterface;
+use Laminas\Db\Adapter\Adapter;
+use Laminas\Mvc\Exception\InvalidPluginException;
+use Laminas\ServiceManager\AbstractPluginManager;
+use Laminas\Hydrator\ClassMethods;
+use Laminas\Hydrator\HydratorAwareInterface;
 
 
 class MapperManager extends AbstractPluginManager

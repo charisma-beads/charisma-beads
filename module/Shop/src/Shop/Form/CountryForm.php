@@ -1,20 +1,12 @@
 <?php
-/**
- * Uthando CMS (http://www.shaunfreeman.co.uk/)
- *
- * @package   Shop\Form\Country
- * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
- */
 
 namespace Shop\Form;
 
 use Shop\Form\Element\PostZoneList;
 use TwbBundle\Form\View\Helper\TwbBundleForm;
-use Zend\Form\Element\Hidden;
-use Zend\Form\Element\Text;
-use Zend\Form\Form;
+use Laminas\Form\Element\Hidden;
+use Laminas\Form\Element\Text;
+use Laminas\Form\Form;
 
 /**
  * Class Country

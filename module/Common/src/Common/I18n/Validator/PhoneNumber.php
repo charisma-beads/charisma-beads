@@ -4,7 +4,7 @@ namespace Common\I18n\Validator;
 
 use libphonenumber\PhoneNumberUtil;
 use libphonenumber\NumberParseException;
-use Zend\Validator\AbstractValidator;
+use Laminas\Validator\AbstractValidator;
 
 
 class PhoneNumber extends AbstractValidator

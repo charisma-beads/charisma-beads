@@ -8,16 +8,16 @@ use TwbBundle\Form\View\Helper\TwbBundleForm;
 use ThemeManager\Form\Element\BootswatchSelect;
 use ThemeManager\Form\Element\ThemeSelect;
 use ThemeManager\Options\ThemeOptions;
-use Zend\Filter\Boolean;
-use Zend\Filter\StringTrim;
-use Zend\Filter\StripTags;
-use Zend\Filter\ToNull;
-use Zend\Form\Element\Checkbox;
-use Zend\Form\Element\Text;
-use Zend\Form\Form;
-use Zend\Hydrator\ClassMethods;
-use Zend\InputFilter\InputFilterProviderInterface;
-use Zend\Validator\StringLength;
+use Laminas\Filter\Boolean;
+use Laminas\Filter\StringTrim;
+use Laminas\Filter\StripTags;
+use Laminas\Filter\ToNull;
+use Laminas\Form\Element\Checkbox;
+use Laminas\Form\Element\Text;
+use Laminas\Form\Form;
+use Laminas\Hydrator\ClassMethods;
+use Laminas\InputFilter\InputFilterProviderInterface;
+use Laminas\Validator\StringLength;
 
 class ThemeManagerSettingsForm extends Form implements InputFilterProviderInterface
 {

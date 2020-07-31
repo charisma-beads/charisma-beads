@@ -5,8 +5,8 @@ namespace Newsletter\Controller;
 use Common\Service\ServiceTrait;
 use Newsletter\Form\PreferencesForm;
 use Newsletter\Service\SubscriberService;
-use Zend\Http\PhpEnvironment\Response;
-use Zend\Mvc\Controller\AbstractActionController;
+use Laminas\Http\PhpEnvironment\Response;
+use Laminas\Mvc\Controller\AbstractActionController;
 
 
 class PreferencesController extends AbstractActionController

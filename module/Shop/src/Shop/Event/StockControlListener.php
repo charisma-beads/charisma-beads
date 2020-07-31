@@ -1,13 +1,4 @@
 <?php
-/**
- * Uthando CMS (http://www.shaunfreeman.co.uk/)
- * 
- * @package   Shop\Service
- * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @link      https://github.com/uthando-cms for the canonical source repository
- * @copyright Copyright (c) 2016 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE
- */
 
 namespace Shop\Event;
 
@@ -17,10 +8,10 @@ use Shop\Model\ProductModel as ProductModel;
 use Shop\Service\CartService;
 use Shop\Service\OrderService;
 use Shop\Service\ProductService;
-use Zend\EventManager\Event;
-use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\ListenerAggregateInterface;
-use Zend\EventManager\ListenerAggregateTrait;
+use Laminas\EventManager\Event;
+use Laminas\EventManager\EventManagerInterface;
+use Laminas\EventManager\ListenerAggregateInterface;
+use Laminas\EventManager\ListenerAggregateTrait;
 
 /**
  * Class StockControl

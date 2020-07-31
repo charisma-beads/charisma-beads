@@ -6,8 +6,8 @@ namespace ThemeManager\Mapper;
 
 use Common\Mapper\AbstractDbMapper;
 use ThemeManager\Model\WidgetModel;
-use Zend\Db\ResultSet\HydratingResultSet;
-use Zend\Db\Sql\Select;
+use Laminas\Db\ResultSet\HydratingResultSet;
+use Laminas\Db\Sql\Select;
 
 class WidgetMapper extends AbstractDbMapper
 {

@@ -6,9 +6,9 @@ use Common\Service\ServiceTrait;
 use News\Options\FeedOptions;
 use News\Options\NewsOptions;
 use News\Service\NewsService;
-use Zend\Feed\Writer\Feed as ZendFeed;
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\FeedModel;
+use Laminas\Feed\Writer\Feed as LaminasFeed;
+use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\View\Model\FeedModel;
 
 
 class FeedController extends AbstractActionController
@@ -35,7 +35,7 @@ class FeedController extends AbstractActionController
         $uri = $this->getRequest()->getUri();
         $base = sprintf('%s://%s', $uri->getScheme(), $uri->getHost());
 
-        $feed = new ZendFeed();
+        $feed = new LaminasFeed();
         $feed->setTitle($feedOptions->getTitle());
         $feed->setFeedLink($base . $this->url()->fromRoute('home'), 'atom');
 

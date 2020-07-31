@@ -7,7 +7,7 @@ namespace ThemeManager\Controller;
 use AssetManager\Service\AssetManager;
 use Common\Controller\SettingsTrait;
 use ThemeManager\Form\ThemeManagerSettingsForm;
-use Zend\Mvc\Controller\AbstractActionController;
+use Laminas\Mvc\Controller\AbstractActionController;
 
 class SettingsController extends AbstractActionController
 {

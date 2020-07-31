@@ -3,7 +3,7 @@
 namespace ShopDomPdf\View\Model;
 
 use ShopDomPdf\Options\PdfOptions;
-use Zend\View\Model\ViewModel;
+use Laminas\View\Model\ViewModel;
 
 
 class PdfModel extends ViewModel

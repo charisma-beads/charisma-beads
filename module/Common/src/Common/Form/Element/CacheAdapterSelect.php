@@ -3,7 +3,7 @@
 namespace Common\Form\Element;
 
 use Common\Options\CacheOptions;
-use Zend\Form\Element\Select;
+use Laminas\Form\Element\Select;
 
 class CacheAdapterSelect extends Select
 {

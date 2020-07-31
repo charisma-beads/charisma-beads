@@ -17,7 +17,7 @@ use User\Service\LimitLoginService;
 use User\Service\UserService as UserService;
 use User\Service\UserRegistrationService as UserRegistrationService;
 use User\View\IsAllowed;
-use Zend\Authentication\AuthenticationService;
+use Laminas\Authentication\AuthenticationService;
 
 return [
     'controllers' => [

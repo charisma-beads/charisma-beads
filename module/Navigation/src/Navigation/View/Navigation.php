@@ -5,7 +5,7 @@ namespace Navigation\View;
 use Navigation\View\Navigation\DbMenu;
 use Navigation\View\Navigation\TwitterBootstrapDbMenu;
 use Navigation\View\Navigation\TwitterBootstrapMenu;
-use Zend\View\Helper\Navigation as ZendNavigation;
+use Laminas\View\Helper\Navigation as ZendNavigation;
 
 
 class Navigation extends ZendNavigation
@@ -27,7 +27,7 @@ class Navigation extends ZendNavigation
      * Lazy-loads an instance of Navigation\HelperLoader if none currently
      * registered.
      *
-     * @return \Zend\View\Helper\Navigation\PluginManager
+     * @return \Laminas\View\Helper\Navigation\PluginManager
      */
     public function getPluginManager()
     {

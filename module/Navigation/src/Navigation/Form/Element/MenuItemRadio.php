@@ -3,7 +3,7 @@
 namespace Navigation\Form\Element;
 
 use Common\Mapper\AbstractNestedSet;
-use Zend\Form\Element\Radio;
+use Laminas\Form\Element\Radio;
 
 class MenuItemRadio extends Radio
 {

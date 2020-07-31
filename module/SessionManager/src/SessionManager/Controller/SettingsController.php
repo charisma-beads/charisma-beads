@@ -6,7 +6,7 @@ namespace SessionManager\Controller;
 
 use Common\Controller\SettingsTrait;
 use SessionManager\Form\SessionOptionsForm;
-use Zend\Mvc\Controller\AbstractActionController;
+use Laminas\Mvc\Controller\AbstractActionController;
 
 class SettingsController extends AbstractActionController
 {

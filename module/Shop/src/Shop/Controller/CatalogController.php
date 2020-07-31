@@ -1,12 +1,4 @@
 <?php
-/**
- * Uthando CMS (http://www.shaunfreeman.co.uk/)
- *
- * @package   Shop\Controller
- * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
- */
 
 namespace Shop\Controller;
 
@@ -17,15 +9,15 @@ use Shop\Service\ProductCategoryService;
 use Shop\Service\ProductService;
 use Shop\ShopException;
 use Common\Service\ServiceTrait;
-use Zend\Http\PhpEnvironment\Response;
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\ViewModel;
+use Laminas\Http\PhpEnvironment\Response;
+use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\View\Model\ViewModel;
 
 /**
  * Class Catalog
  *
  * @package Shop\Controller
- * @method \Zend\Session\Container sessionContainer()
+ * @method \Laminas\Session\Container sessionContainer()
  */
 class CatalogController extends AbstractActionController
 {
@@ -153,7 +145,7 @@ class CatalogController extends AbstractActionController
     /**
      *
      * @return \Shop\Options\ShopOptions;
-     * @throws \Zend\Mvc\Exception\InvalidPluginException
+     * @throws \Laminas\Mvc\Exception\InvalidPluginException
      */
     protected function getShopOptions()
     {

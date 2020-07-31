@@ -4,11 +4,11 @@ namespace Newsletter\Form;
 
 use TwbBundle\Form\View\Helper\TwbBundleForm;
 use Newsletter\Form\Element\SubscriptionList;
-use Zend\Form\Element\DateTime;
-use Zend\Form\Element\Email;
-use Zend\Form\Element\Hidden;
-use Zend\Form\Element\Text;
-use Zend\Form\Form;
+use Laminas\Form\Element\DateTime;
+use Laminas\Form\Element\Email;
+use Laminas\Form\Element\Hidden;
+use Laminas\Form\Element\Text;
+use Laminas\Form\Form;
 
 
 class SubscriberForm extends Form

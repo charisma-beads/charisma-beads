@@ -4,8 +4,8 @@ namespace Newsletter\View\Service;
 
 use Newsletter\View\Renderer\NewsletterRenderer;
 use Newsletter\View\Strategy\NewsletterStrategy;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\ServiceManager\FactoryInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 
 class NewsletterStrategyFactory implements FactoryInterface

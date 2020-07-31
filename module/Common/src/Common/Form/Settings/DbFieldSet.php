@@ -11,9 +11,9 @@
 namespace Common\Form\Settings;
 
 use Common\Options\DbOptions;
-use Zend\Form\Fieldset;
-use Zend\Hydrator\ClassMethods;
-use Zend\InputFilter\InputFilterProviderInterface;
+use Laminas\Form\Fieldset;
+use Laminas\Hydrator\ClassMethods;
+use Laminas\InputFilter\InputFilterProviderInterface;
 
 /**
  * Class DbFieldSet

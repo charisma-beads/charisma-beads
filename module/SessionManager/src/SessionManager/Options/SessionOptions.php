@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace SessionManager\Options;
 
-use Zend\Session\Config\SessionConfig;
-use Zend\Session\Storage\SessionArrayStorage;
-use Zend\Session\Validator\HttpUserAgent;
-use Zend\Session\Validator\RemoteAddr;
-use Zend\Stdlib\AbstractOptions;
+use Laminas\Session\Config\SessionConfig;
+use Laminas\Session\Storage\SessionArrayStorage;
+use Laminas\Session\Validator\HttpUserAgent;
+use Laminas\Session\Validator\RemoteAddr;
+use Laminas\Stdlib\AbstractOptions;
 
 class SessionOptions extends AbstractOptions
 {

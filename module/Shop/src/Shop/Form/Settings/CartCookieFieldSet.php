@@ -1,26 +1,18 @@
 <?php
-/**
- * Uthando CMS (http://www.shaunfreeman.co.uk/)
- *
- * @package   Shop\Form\Settings
- * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
- */
 
 namespace Shop\Form\Settings;
 
-use Zend\Filter\Boolean;
-use Zend\Filter\StringTrim;
-use Zend\Filter\StripTags;
-use Zend\Filter\ToInt;
-use Zend\Form\Element\Checkbox;
-use Zend\Form\Element\Number;
-use Zend\Form\Element\Text;
-use Zend\Hydrator\ClassMethods;
-use Zend\I18n\Validator\IsInt;
-use Zend\InputFilter\InputFilterProviderInterface;
-use Zend\Form\Fieldset;
+use Laminas\Filter\Boolean;
+use Laminas\Filter\StringTrim;
+use Laminas\Filter\StripTags;
+use Laminas\Filter\ToInt;
+use Laminas\Form\Element\Checkbox;
+use Laminas\Form\Element\Number;
+use Laminas\Form\Element\Text;
+use Laminas\Hydrator\ClassMethods;
+use Laminas\I18n\Validator\IsInt;
+use Laminas\InputFilter\InputFilterProviderInterface;
+use Laminas\Form\Fieldset;
 use Shop\Options\CartCookieOptions;
 
 /**
@@ -48,7 +40,7 @@ class CartCookieFieldSet extends Fieldset implements InputFilterProviderInterfac
         ],
      * 
      * (non-PHPdoc)
-     * @see \Zend\Form\Element::init()
+     * @see \Laminas\Form\Element::init()
      */
     public function init()
     {

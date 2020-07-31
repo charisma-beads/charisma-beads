@@ -2,7 +2,7 @@
 
 namespace Common\Options;
 
-use Zend\Stdlib\AbstractOptions;
+use Laminas\Stdlib\AbstractOptions;
 
 
 class DbOptions extends AbstractOptions

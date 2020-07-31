@@ -5,7 +5,7 @@ namespace News;
 use Common\Config\ConfigInterface;
 use Common\Config\ConfigTrait;
 use News\Event\SiteMapListener;
-use Zend\Mvc\MvcEvent;
+use Laminas\Mvc\MvcEvent;
 
 
 class Module implements ConfigInterface
@@ -37,7 +37,7 @@ class Module implements ConfigInterface
     public function getAutoloaderConfig()
     {
         return [
-            'Zend\Loader\StandardAutoloader' => [
+            'Laminas\Loader\StandardAutoloader' => [
                 'namespaces' => [
                     __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
                 ],

@@ -1,17 +1,9 @@
 <?php
-/**
- * Uthando CMS (http://www.shaunfreeman.co.uk/)
- *
- * @package   Shop\Mapper\Customer
- * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE
- */
 
 namespace Shop\Mapper;
 
 use Common\Mapper\AbstractDbMapper;
-use Zend\Db\Sql\Select;
+use Laminas\Db\Sql\Select;
 
 /**
  * Class Customer
@@ -34,7 +26,7 @@ class CustomerMapper extends AbstractDbMapper
      * @param array $search
      * @param string $sort
      * @param Select $select
-     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     * @return \Laminas\Db\ResultSet\HydratingResultSet|\Laminas\Db\ResultSet\ResultSet|\Laminas\Paginator\Paginator
      */
     public function search(array $search, $sort, $select = null)
     {
@@ -75,7 +67,7 @@ class CustomerMapper extends AbstractDbMapper
     /**
      * @param $start
      * @param $end
-     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     * @return \Laminas\Db\ResultSet\HydratingResultSet|\Laminas\Db\ResultSet\ResultSet|\Laminas\Paginator\Paginator
      */
     public function getCustomersByDate($start, $end)
     {

@@ -5,12 +5,12 @@ namespace Common\Db\Table;
 use Common\Hydrator\BaseHydrator;
 use Common\Model\ModelInterface;
 use Common\UthandoException;
-use Zend\Db\Adapter\Adapter;
-use Zend\Db\ResultSet\HydratingResultSet;
-use Zend\Db\ResultSet\ResultSet;
-use Zend\Db\TableGateway\TableGateway;
-use Zend\ServiceManager\AbstractFactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\Db\Adapter\Adapter;
+use Laminas\Db\ResultSet\HydratingResultSet;
+use Laminas\Db\ResultSet\ResultSet;
+use Laminas\Db\TableGateway\TableGateway;
+use Laminas\ServiceManager\AbstractFactoryInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 
 class AbstractTableFactory implements AbstractFactoryInterface
@@ -44,7 +44,7 @@ class AbstractTableFactory implements AbstractFactoryInterface
 
         if (class_exists($requestedName) && is_array($this->tableNamesMap) && array_key_exists($requestedName, $this->tableNamesMap)) {
 
-            /* @var \Zend\Db\Adapter\Adapter $dbAdapter */
+            /* @var \Laminas\Db\Adapter\Adapter $dbAdapter */
             $dbAdapter          = $serviceLocator->get(Adapter::class);
             $resultSetPrototype = $this->getHydrator($requestedName);
             $tableGateway       = new TableGateway($this->tableNamesMap[$requestedName], $dbAdapter, null, $resultSetPrototype);

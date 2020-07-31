@@ -4,9 +4,9 @@ namespace Newsletter\View\Strategy;
 
 use Newsletter\View\Model\NewsletterViewModel;
 use Newsletter\View\Renderer\NewsletterRenderer;
-use Zend\EventManager\AbstractListenerAggregate;
-use Zend\EventManager\EventManagerInterface;
-use Zend\View\ViewEvent;
+use Laminas\EventManager\AbstractListenerAggregate;
+use Laminas\EventManager\EventManagerInterface;
+use Laminas\View\ViewEvent;
 
 
 class NewsletterStrategy extends AbstractListenerAggregate

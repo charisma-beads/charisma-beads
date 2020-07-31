@@ -1,12 +1,4 @@
 <?php
-/**
- * charisma-beads (http://www.shaunfreeman.co.uk/)
- *
- * @author      Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @link        https://github.com/uthando-cms for the canonical source repository
- * @copyright   Copyright (c) 2017 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license     see LICENSE
- */
 
 namespace Shop\Controller;
 
@@ -17,8 +9,8 @@ use Shop\Service\OrderService;
 use Shop\Service\VoucherCodeService;
 use Shop\ShopException;
 use Common\Controller\AbstractCrudController;
-use Zend\View\Model\JsonModel;
-use Zend\View\Model\ViewModel;
+use Laminas\View\Model\JsonModel;
+use Laminas\View\Model\ViewModel;
 
 /**
  * Class VoucherAdmin

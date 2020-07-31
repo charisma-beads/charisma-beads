@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace ThemeManager\Model;
 
 
-use Zend\Config\Reader\Ini;
+use Laminas\Config\Reader\Ini;
 
 trait WidgetParamsTrait
 {

@@ -5,7 +5,7 @@ namespace Events\Controller;
 use Common\Service\ServiceTrait;
 use Events\Options\EventsOptions;
 use Events\ServiceManager\EventsService;
-use Zend\Mvc\Controller\AbstractActionController;
+use Laminas\Mvc\Controller\AbstractActionController;
 
 
 class TimeLineController extends AbstractActionController

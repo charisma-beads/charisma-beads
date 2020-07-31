@@ -5,8 +5,8 @@ namespace Mail\View\Helper;
 use Common\View\AbstractViewHelper;
 use Mail\Model\MailQueueModel;
 use Mail\Options\MailOptions;
-use Zend\Mail\Address;
-use Zend\View\Exception\InvalidArgumentException;
+use Laminas\Mail\Address;
+use Laminas\View\Exception\InvalidArgumentException;
 
 
 class MailAddress extends AbstractViewHelper

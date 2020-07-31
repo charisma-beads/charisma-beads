@@ -8,12 +8,12 @@ namespace SessionManager\Form;
 use TwbBundle\Form\View\Helper\TwbBundleForm;
 use SessionManager\Options\SessionOptions;
 use SessionManager\Service\Factory\SessionSaveHandlerFactory;
-use Zend\Filter\StringTrim;
-use Zend\Filter\StripTags;
-use Zend\Form\Element\Select;
-use Zend\Form\Fieldset;
-use Zend\Hydrator\ClassMethods;
-use Zend\InputFilter\InputFilterProviderInterface;
+use Laminas\Filter\StringTrim;
+use Laminas\Filter\StripTags;
+use Laminas\Form\Element\Select;
+use Laminas\Form\Fieldset;
+use Laminas\Hydrator\ClassMethods;
+use Laminas\InputFilter\InputFilterProviderInterface;
 
 class SessionOptionsFieldSet extends Fieldset implements InputFilterProviderInterface
 {

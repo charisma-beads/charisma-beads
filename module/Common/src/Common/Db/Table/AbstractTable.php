@@ -4,12 +4,12 @@ namespace Common\Db\Table;
 
 use Common\Hydrator\BaseHydrator;
 use Common\Model\ModelInterface;
-use Zend\Db\ResultSet\ResultSet;
-use Zend\Db\Sql\Select;
-use Zend\Db\TableGateway\TableGateway;
-use Zend\Paginator\Adapter\DbSelect;
-use Zend\Paginator\Adapter\DbTableGateway;
-use Zend\Paginator\Paginator;
+use Laminas\Db\ResultSet\ResultSet;
+use Laminas\Db\Sql\Select;
+use Laminas\Db\TableGateway\TableGateway;
+use Laminas\Paginator\Adapter\DbSelect;
+use Laminas\Paginator\Adapter\DbTableGateway;
+use Laminas\Paginator\Paginator;
 
 
 class AbstractTable
@@ -74,7 +74,7 @@ class AbstractTable
     /**
      * @param array $post
      * @param bool $paginated
-     * @return null|\Zend\Db\ResultSet\ResultSetInterface|Paginator
+     * @return null|\Laminas\Db\ResultSet\ResultSetInterface|Paginator
      */
     public function search(array $post, $paginated = false)
     {

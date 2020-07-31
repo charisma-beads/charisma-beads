@@ -6,8 +6,8 @@ use Newsletter\Model\MessageModel as MessageModel;
 use Newsletter\Model\TemplateModel as TemplateModel;
 use Newsletter\Service\MessageService;
 use Newsletter\Service\TemplateService;
-use Zend\View\Renderer\RendererInterface as Renderer;
-use Zend\View\Resolver\ResolverInterface;
+use Laminas\View\Renderer\RendererInterface as Renderer;
+use Laminas\View\Resolver\ResolverInterface;
 
 
 class NewsletterResolver implements ResolverInterface

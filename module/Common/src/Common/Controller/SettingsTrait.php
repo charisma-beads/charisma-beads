@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace Common\Controller;
 
 use Common\Service\ServiceTrait;
-use Zend\Filter\Word\UnderscoreToDash;
-use Zend\Form\Fieldset;
-use Zend\Form\Form;
-use Zend\Http\PhpEnvironment\Response;
-use Zend\Config\Writer\PhpArray;
-use Zend\Hydrator\AbstractHydrator;
-use Zend\Mvc\Controller\Plugin\FlashMessenger;
-use Zend\Mvc\Controller\Plugin\PostRedirectGet;
-use Zend\Stdlib\AbstractOptions;
+use Laminas\Filter\Word\UnderscoreToDash;
+use Laminas\Form\Fieldset;
+use Laminas\Form\Form;
+use Laminas\Http\PhpEnvironment\Response;
+use Laminas\Config\Writer\PhpArray;
+use Laminas\Hydrator\AbstractHydrator;
+use Laminas\Mvc\Controller\Plugin\FlashMessenger;
+use Laminas\Mvc\Controller\Plugin\PostRedirectGet;
+use Laminas\Stdlib\AbstractOptions;
 
 /**
  * Class SettingsTrait

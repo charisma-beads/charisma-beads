@@ -5,9 +5,9 @@ namespace Mail;
 use Common\Config\ConfigInterface;
 use Common\Config\ConfigTrait;
 use Mail\Event\MailListener;
-use Zend\Console\Adapter\AdapterInterface as Console;
-use Zend\ModuleManager\Feature\ConsoleUsageProviderInterface;
-use Zend\Mvc\MvcEvent;
+use Laminas\Console\Adapter\AdapterInterface as Console;
+use Laminas\ModuleManager\Feature\ConsoleUsageProviderInterface;
+use Laminas\Mvc\MvcEvent;
 
 
 class Module implements ConsoleUsageProviderInterface, ConfigInterface
@@ -50,7 +50,7 @@ class Module implements ConsoleUsageProviderInterface, ConfigInterface
     public function getAutoloaderConfig()
     {
         return [
-            'Zend\Loader\StandardAutoloader' => [
+            'Laminas\Loader\StandardAutoloader' => [
                 'namespaces' => [
                     __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
                 ],

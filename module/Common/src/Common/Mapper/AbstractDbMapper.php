@@ -4,14 +4,14 @@ namespace Common\Mapper;
 
 use Common\Model\ModelAwareTrait;
 use Common\Model\ModelInterface;
-use Zend\Db\Adapter\AdapterAwareTrait;
-use Zend\Db\ResultSet\AbstractResultSet;
-use Zend\Db\ResultSet\HydratingResultSet;
-use Zend\Db\Sql\Expression;
-use Zend\Db\Sql\Sql;
-use Zend\Db\Sql\Select;
-use Zend\Paginator\Paginator;
-use Zend\Paginator\Adapter\DbSelect;
+use Laminas\Db\Adapter\AdapterAwareTrait;
+use Laminas\Db\ResultSet\AbstractResultSet;
+use Laminas\Db\ResultSet\HydratingResultSet;
+use Laminas\Db\Sql\Expression;
+use Laminas\Db\Sql\Sql;
+use Laminas\Db\Sql\Select;
+use Laminas\Paginator\Paginator;
+use Laminas\Paginator\Adapter\DbSelect;
 
 
 class AbstractDbMapper implements
@@ -164,7 +164,7 @@ class AbstractDbMapper implements
      * Fetches all rows from database table.
      *
      * @param null|string $sort
-     * @return HydratingResultSet|\Zend\Db\ResultSet\ResultSet|Paginator
+     * @return HydratingResultSet|\Laminas\Db\ResultSet\ResultSet|Paginator
      */
     public function fetchAll($sort = null)
     {
@@ -182,7 +182,7 @@ class AbstractDbMapper implements
      * @param array $search
      * @param string $sort
      * @param Select $select
-     * @return \Zend\Db\ResultSet\ResultSet|Paginator|HydratingResultSet
+     * @return \Laminas\Db\ResultSet\ResultSet|Paginator|HydratingResultSet
      */
     public function search(array $search, $sort, $select = null)
     {
@@ -348,7 +348,7 @@ class AbstractDbMapper implements
      *
      * @param Select $select
      * @param AbstractResultSet $resultSet
-     * @return \Zend\Db\ResultSet\ResultSet|Paginator|HydratingResultSet
+     * @return \Laminas\Db\ResultSet\ResultSet|Paginator|HydratingResultSet
      */
     protected function fetchResult(Select $select, AbstractResultSet $resultSet = null)
     {
@@ -439,7 +439,7 @@ class AbstractDbMapper implements
     }
 
     /**
-     * @return \Zend\Db\Adapter\Adapter
+     * @return \Laminas\Db\Adapter\Adapter
      */
     public function getAdapter()
     {

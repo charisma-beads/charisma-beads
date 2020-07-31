@@ -6,7 +6,7 @@
     <?php $maxDepth = count($this->container) - 1; ?>
     <?php foreach ($this->container as $key => $page): ?>
         <?php $count++; ?>
-        <?php /* @var $page Zend\Navigation\Page\Mvc */ ?>
+        <?php /* @var $page Laminas\Navigation\Page\Mvc */ ?>
         <?php // when using partials we need to manually check for ACL conditions ?>
         <?php if( ! $page->isVisible() || !$this->uthandoNavigation()->accept($page)) continue; ?>
         <?php $isActive = $page->isActive(true); ?>

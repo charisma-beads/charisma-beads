@@ -1,28 +1,20 @@
 <?php
-/**
- * Uthando CMS (http://www.shaunfreeman.co.uk/)
- *
- * @package   Shop\Form\Settings
- * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
- */
 
 namespace Shop\Form\Settings;
 
 use Shop\Form\Settings\Paypal\CredentialPairsFieldSet;
-use Zend\Filter\Boolean;
-use Zend\Filter\StringToUpper;
-use Zend\Filter\StringTrim;
-use Zend\Filter\StripTags;
-use Zend\Form\Element\Checkbox;
-use Zend\Form\Element\Select;
-use Zend\Form\Element\Text;
-use Zend\InputFilter\InputFilterProviderInterface;
-use Zend\Form\Fieldset;
-use Zend\Hydrator\ClassMethods;
+use Laminas\Filter\Boolean;
+use Laminas\Filter\StringToUpper;
+use Laminas\Filter\StringTrim;
+use Laminas\Filter\StripTags;
+use Laminas\Form\Element\Checkbox;
+use Laminas\Form\Element\Select;
+use Laminas\Form\Element\Text;
+use Laminas\InputFilter\InputFilterProviderInterface;
+use Laminas\Form\Fieldset;
+use Laminas\Hydrator\ClassMethods;
 use Shop\Options\PaypalOptions;
-use Zend\Validator\StringLength;
+use Laminas\Validator\StringLength;
 
 /**
  * Class PaypalFieldSet

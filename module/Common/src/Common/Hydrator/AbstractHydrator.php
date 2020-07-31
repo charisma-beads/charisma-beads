@@ -2,7 +2,7 @@
 
 namespace Common\Hydrator;
 
-use Zend\Hydrator\AbstractHydrator as ZendAbstractHydrator;
+use Laminas\Hydrator\AbstractHydrator as ZendAbstractHydrator;
 
 
 abstract class AbstractHydrator extends ZendAbstractHydrator

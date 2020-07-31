@@ -2,7 +2,7 @@
 
 namespace Application;
 
-use Zend\Mvc\MvcEvent;
+use Laminas\Mvc\MvcEvent;
 
 class Module
 {
@@ -43,7 +43,7 @@ class Module
     public function getAutoloaderConfig()
     {
         return [
-            'Zend\Loader\ClassMapAutoloader' => [
+            'Laminas\Loader\ClassMapAutoloader' => [
                 __DIR__ . '/autoload_classmap.php'
             ]
         ];

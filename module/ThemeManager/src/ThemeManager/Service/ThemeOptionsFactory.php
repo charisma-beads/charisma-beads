@@ -3,8 +3,8 @@
 namespace ThemeManager\Service;
 
 use ThemeManager\Options\ThemeOptions as Options;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\ServiceManager\FactoryInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 
 class ThemeOptionsFactory implements FactoryInterface

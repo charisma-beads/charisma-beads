@@ -2,7 +2,7 @@
 
 namespace Navigation\View\Navigation;
 
-use Zend\View\Helper\Navigation\Menu;
+use Laminas\View\Helper\Navigation\Menu;
 
 
 class DbMenu extends Menu

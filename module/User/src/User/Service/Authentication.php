@@ -8,9 +8,9 @@ use User\Authentication\Adapter as AuthAdapter;
 use User\Authentication\Storage;
 use User\Model\UserModel as UserModel;
 use User\Options\AuthOptions;
-use Zend\Authentication\AuthenticationService as ZendAuthenticationService;
+use Laminas\Authentication\AuthenticationService as LaminasAuthenticationService;
 
-class Authentication extends ZendAuthenticationService
+class Authentication extends LaminasAuthenticationService
 {
     /**
      * @var AuthAdapter

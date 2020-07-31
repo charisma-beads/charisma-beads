@@ -4,8 +4,8 @@ namespace Newsletter\View\Renderer;
 
 use Newsletter\Model\MessageModel;
 use Newsletter\Model\TemplateModel;
-use Zend\Config\Reader\Ini;
-use Zend\View\Helper\Url;
+use Laminas\Config\Reader\Ini;
+use Laminas\View\Helper\Url;
 
 
 class NewsletterEngine

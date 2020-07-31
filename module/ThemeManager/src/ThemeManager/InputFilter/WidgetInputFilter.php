@@ -6,14 +6,14 @@ namespace ThemeManager\InputFilter;
 
 use Common\Filter\Slug;
 use Common\InputFilter\NoRecordExistsTrait;
-use Zend\Filter\StringTrim;
-use Zend\Filter\StripTags;
-use Zend\Filter\ToInt;
-use Zend\I18n\Validator\IsInt;
-use Zend\InputFilter\InputFilter;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
-use Zend\Validator\StringLength;
+use Laminas\Filter\StringTrim;
+use Laminas\Filter\StripTags;
+use Laminas\Filter\ToInt;
+use Laminas\I18n\Validator\IsInt;
+use Laminas\InputFilter\InputFilter;
+use Laminas\ServiceManager\ServiceLocatorAwareInterface;
+use Laminas\ServiceManager\ServiceLocatorAwareTrait;
+use Laminas\Validator\StringLength;
 
 class WidgetInputFilter extends InputFilter implements ServiceLocatorAwareInterface
 {

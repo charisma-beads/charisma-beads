@@ -3,7 +3,7 @@
 namespace Navigation\View;
 
 use Common\View\AbstractViewHelper;
-use Zend\Form\Element;
+use Laminas\Form\Element;
 
 
 class NavigationForm extends AbstractViewHelper

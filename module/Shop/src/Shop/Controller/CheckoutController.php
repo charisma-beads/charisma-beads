@@ -1,12 +1,4 @@
 <?php
-/**
- * Uthando CMS (http://www.shaunfreeman.co.uk/)
- *
- * @package   Shop\Controller
- * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
- */
 
 namespace Shop\Controller;
 
@@ -21,12 +13,12 @@ use Shop\Service\OrderService;
 use Common\Service\ServiceTrait;
 use User\Form\LoginForm;
 use User\Form\RegisterForm;
-use Zend\Filter\Word\UnderscoreToDash;
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\ViewModel;
-use Zend\Session\Container;
-use Zend\Http\PhpEnvironment\Response;
-use Zend\Form\Form;
+use Laminas\Filter\Word\UnderscoreToDash;
+use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\View\Model\ViewModel;
+use Laminas\Session\Container;
+use Laminas\Http\PhpEnvironment\Response;
+use Laminas\Form\Form;
 
 /**
  * Class Checkout
@@ -181,7 +173,7 @@ class CheckoutController extends AbstractActionController
 
         // Get Voucher from session
         
-        /* @var $form \Zend\Form\Form */
+        /* @var $form \Laminas\Form\Form */
         $form = $this->getServiceLocator()
             ->get('FormElementManager')
             ->get(OrderConfirmForm::class);
@@ -265,7 +257,7 @@ class CheckoutController extends AbstractActionController
                 $filter = new UnderscoreToDash();
                 $action = $filter->filter($formValues['payment_option']);
 
-                /* @var $container \Zend\Session\AbstractContainer */
+                /* @var $container \Laminas\Session\AbstractContainer */
                 $container = new Container('order');
                 $container->setExpirationHops(1, null);
                 $container->order = $orderParams;

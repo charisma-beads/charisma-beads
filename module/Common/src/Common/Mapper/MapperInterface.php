@@ -3,7 +3,7 @@
 namespace Common\Mapper;
 
 use Common\Model\ModelAwareInterface;
-use Zend\Hydrator\HydratorAwareInterface;
+use Laminas\Hydrator\HydratorAwareInterface;
 
 
 interface MapperInterface extends HydratorAwareInterface, ModelAwareInterface

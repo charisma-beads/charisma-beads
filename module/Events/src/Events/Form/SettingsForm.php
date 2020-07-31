@@ -5,13 +5,13 @@ namespace Events\Form;
 use TwbBundle\Form\View\Helper\TwbBundleForm;
 use Events\InputFilter\SettingsInputFilter;
 use Events\Options\EventsOptions;
-use Zend\Form\Element\Checkbox;
-use Zend\Form\Element\Number;
-use Zend\Form\Element\Text;
-use Zend\Form\Form;
-use Zend\Hydrator\ClassMethods;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
+use Laminas\Form\Element\Checkbox;
+use Laminas\Form\Element\Number;
+use Laminas\Form\Element\Text;
+use Laminas\Form\Form;
+use Laminas\Hydrator\ClassMethods;
+use Laminas\ServiceManager\ServiceLocatorAwareInterface;
+use Laminas\ServiceManager\ServiceLocatorAwareTrait;
 
 
 class SettingsForm extends Form implements ServiceLocatorAwareInterface

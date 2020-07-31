@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Common\View;
 
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
-use Zend\Stdlib\AbstractOptions;
-use Zend\Stdlib\Exception\InvalidArgumentException;
-use Zend\View\Helper\AbstractHelper;
-use Zend\View\HelperPluginManager;
+use Laminas\ServiceManager\ServiceLocatorAwareInterface;
+use Laminas\ServiceManager\ServiceLocatorAwareTrait;
+use Laminas\Stdlib\AbstractOptions;
+use Laminas\Stdlib\Exception\InvalidArgumentException;
+use Laminas\View\Helper\AbstractHelper;
+use Laminas\View\HelperPluginManager;
 
 class OptionsHelper extends AbstractHelper implements ServiceLocatorAwareInterface
 {

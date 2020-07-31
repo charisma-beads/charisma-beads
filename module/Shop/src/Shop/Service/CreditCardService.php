@@ -1,12 +1,4 @@
 <?php
-/**
- * Uthando CMS (http://www.shaunfreeman.co.uk/)
- *
- * @package   Shop\Service\Payment
- * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE
- */
 
 namespace Shop\Service;
 
@@ -15,7 +7,7 @@ use Shop\Hydrator\CreditCardHydrator;
 use Shop\InputFilter\CreditCardInputFilter;
 use Shop\Options\OrderOptions;
 use Common\Service\AbstractService;
-use Zend\View\Model\ViewModel;
+use Laminas\View\Model\ViewModel;
 use Shop\Model\CreditCardModel;
 
 /**

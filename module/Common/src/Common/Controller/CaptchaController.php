@@ -2,8 +2,8 @@
 
 namespace Common\Controller;
 
-use Zend\Http\PHPEnvironment\Response;
-use Zend\Mvc\Controller\AbstractActionController;
+use Laminas\Http\PHPEnvironment\Response;
+use Laminas\Mvc\Controller\AbstractActionController;
 
 /**
  * Class CaptchaController

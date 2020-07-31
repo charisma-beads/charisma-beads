@@ -4,13 +4,13 @@ namespace Events\Form;
 
 use TwbBundle\Form\View\Helper\TwbBundleForm;
 use Events\Options\EventsOptions;
-use Zend\Form\Element\DateTime;
-use Zend\Form\Element\Hidden;
-use Zend\Form\Element\Text;
-use Zend\Form\Element\Textarea;
-use Zend\Form\Form;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
+use Laminas\Form\Element\DateTime;
+use Laminas\Form\Element\Hidden;
+use Laminas\Form\Element\Text;
+use Laminas\Form\Element\Textarea;
+use Laminas\Form\Form;
+use Laminas\ServiceManager\ServiceLocatorAwareInterface;
+use Laminas\ServiceManager\ServiceLocatorAwareTrait;
 
 
 class EventsForm extends Form implements ServiceLocatorAwareInterface

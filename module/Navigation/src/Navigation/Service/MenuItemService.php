@@ -10,7 +10,7 @@ use Navigation\Hydrator\MenuItemHydrator;
 use Navigation\InputFilter\MenuItemInputFilter;
 use Navigation\Mapper\MenuItemMapper;
 use Navigation\Model\MenuItemModel;
-use Zend\Form\Form;
+use Laminas\Form\Form;
 use Exception;
 
 
@@ -64,7 +64,7 @@ class MenuItemService extends AbstractMapperService
 
     /**
      * @param array $post
-     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     * @return \Laminas\Db\ResultSet\HydratingResultSet|\Laminas\Db\ResultSet\ResultSet|\Laminas\Paginator\Paginator
      */
 	public function search(array $post)
 	{

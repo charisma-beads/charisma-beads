@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Contact\Options\Service;
 
 use Contact\Options\DetailsOptions;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\ServiceManager\FactoryInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 class DetailsOptionsFactory implements FactoryInterface
 {

@@ -7,16 +7,16 @@ namespace SessionManager\Form;
 
 use TwbBundle\Form\View\Helper\TwbBundleForm;
 use SessionManager\Options\SessionConfigOptions;
-use Zend\Filter\StringTrim;
-use Zend\Filter\StripTags;
-use Zend\Filter\ToInt;
-use Zend\Form\Element\Number;
-use Zend\Form\Element\Text;
-use Zend\Form\Fieldset;
-use Zend\Hydrator\ClassMethods;
-use Zend\I18n\Validator\IsInt;
-use Zend\InputFilter\InputFilterProviderInterface;
-use Zend\Validator\StringLength;
+use Laminas\Filter\StringTrim;
+use Laminas\Filter\StripTags;
+use Laminas\Filter\ToInt;
+use Laminas\Form\Element\Number;
+use Laminas\Form\Element\Text;
+use Laminas\Form\Fieldset;
+use Laminas\Hydrator\ClassMethods;
+use Laminas\I18n\Validator\IsInt;
+use Laminas\InputFilter\InputFilterProviderInterface;
+use Laminas\Validator\StringLength;
 
 class SessionConfigOptionsFieldSet extends Fieldset implements InputFilterProviderInterface
 {

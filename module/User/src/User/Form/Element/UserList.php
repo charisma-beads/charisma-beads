@@ -7,9 +7,9 @@ namespace User\Form\Element;
 use User\Model\UserModel;
 use Common\Service\ServiceManager;
 use User\Service\UserService;
-use Zend\Form\Element\Select;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
+use Laminas\Form\Element\Select;
+use Laminas\ServiceManager\ServiceLocatorAwareInterface;
+use Laminas\ServiceManager\ServiceLocatorAwareTrait;
 
 class UserList extends Select implements ServiceLocatorAwareInterface
 {

@@ -4,7 +4,7 @@ namespace Article\Controller;
 
 use Article\Service\ArticleService;
 use Common\Controller\AbstractCrudController;
-use Zend\View\Model\ViewModel;
+use Laminas\View\Model\ViewModel;
 
 
 class ArticleController extends AbstractCrudController

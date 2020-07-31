@@ -6,13 +6,13 @@ namespace FileManager\Form;
 
 use FileManager\Hydrator\Strategy\ArrayToIniStrategy;
 use FileManager\Options\ElfinderOptions;
-use Zend\Filter\StringTrim;
-use Zend\Filter\StripTags;
-use Zend\Form\Element\Textarea;
-use Zend\Form\Fieldset;
-use Zend\Hydrator\ClassMethods;
-use Zend\InputFilter\InputFilterProviderInterface;
-use Zend\Validator\StringLength;
+use Laminas\Filter\StringTrim;
+use Laminas\Filter\StripTags;
+use Laminas\Form\Element\Textarea;
+use Laminas\Form\Fieldset;
+use Laminas\Hydrator\ClassMethods;
+use Laminas\InputFilter\InputFilterProviderInterface;
+use Laminas\Validator\StringLength;
 
 class ElfinderFieldSet extends Fieldset implements InputFilterProviderInterface
 {

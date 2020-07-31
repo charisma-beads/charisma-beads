@@ -4,7 +4,7 @@ namespace SessionManager\Controller;
 
 use Common\Controller\AbstractCrudController;
 use SessionManager\Service\SessionManagerService;
-use Zend\View\Model\ViewModel;
+use Laminas\View\Model\ViewModel;
 
 class SessionManagerController extends AbstractCrudController
 {

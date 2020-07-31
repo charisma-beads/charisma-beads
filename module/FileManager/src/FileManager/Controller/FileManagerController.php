@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace FileManager\Controller;
 
 use FileManager\Options\ElfinderOptions;
-use Zend\Mvc\Controller\AbstractActionController;
+use Laminas\Mvc\Controller\AbstractActionController;
 
 
 class FileManagerController extends AbstractActionController

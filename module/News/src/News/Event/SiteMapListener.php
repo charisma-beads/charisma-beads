@@ -5,10 +5,10 @@ namespace News\Event;
 use Navigation\Service\MenuService;
 use Navigation\Service\SiteMapService;
 use News\Service\NewsService;
-use Zend\EventManager\Event;
-use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\ListenerAggregateInterface;
-use Zend\EventManager\ListenerAggregateTrait;
+use Laminas\EventManager\Event;
+use Laminas\EventManager\EventManagerInterface;
+use Laminas\EventManager\ListenerAggregateInterface;
+use Laminas\EventManager\ListenerAggregateTrait;
 
 
 class SiteMapListener implements ListenerAggregateInterface
@@ -26,7 +26,7 @@ class SiteMapListener implements ListenerAggregateInterface
 
     public function addPages(Event $e)
     {
-        /* @var \Zend\Navigation\Navigation $navigation */
+        /* @var \Laminas\Navigation\Navigation $navigation */
         $navigation = $e->getParam('navigation');
 
         /* @var NewsService $newsService */

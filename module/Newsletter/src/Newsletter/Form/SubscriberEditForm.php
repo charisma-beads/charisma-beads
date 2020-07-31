@@ -3,7 +3,7 @@
 namespace Newsletter\Form;
 
 use TwbBundle\Form\View\Helper\TwbBundleForm;
-use Zend\Form\Element\Submit;
+use Laminas\Form\Element\Submit;
 
 
 class SubscriberEditForm extends SubscriberForm

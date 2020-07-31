@@ -5,9 +5,9 @@ namespace Newsletter\Form\Element;
 use Common\Service\ServiceManager;
 use Newsletter\Model\NewsletterModel;
 use Newsletter\Service\NewsletterService;
-use Zend\Form\Element\Select;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
+use Laminas\Form\Element\Select;
+use Laminas\ServiceManager\ServiceLocatorAwareInterface;
+use Laminas\ServiceManager\ServiceLocatorAwareTrait;
 
 
 class NewsletterList extends Select implements ServiceLocatorAwareInterface

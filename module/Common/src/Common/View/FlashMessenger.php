@@ -2,8 +2,8 @@
 
 namespace Common\View;
 
-use Zend\Mvc\Controller\Plugin\FlashMessenger as PluginFlashMessenger;
-use Zend\View\Helper\AbstractHelper;
+use Laminas\Mvc\Controller\Plugin\FlashMessenger as PluginFlashMessenger;
+use Laminas\View\Helper\AbstractHelper;
 
 
 class FlashMessenger extends AbstractHelper
@@ -19,12 +19,12 @@ class FlashMessenger extends AbstractHelper
     protected $alertHelper;
 
     /**
-     * @var \Zend\View\Helper\EscapeHtml
+     * @var \Laminas\View\Helper\EscapeHtml
      */
     protected $escapeHtmlHelper;
 
     /**
-     * @var \Zend\Mvc\Controller\Plugin\FlashMessenger
+     * @var \Laminas\Mvc\Controller\Plugin\FlashMessenger
      */
     protected $pluginFlashMessenger;
 
@@ -204,7 +204,7 @@ class FlashMessenger extends AbstractHelper
     /**
      * Retrieve the escapeHtml helper
      *
-     * @return \Zend\View\Helper\EscapeHtml
+     * @return \Laminas\View\Helper\EscapeHtml
      */
     protected function getEscapeHtmlHelper()
     {
@@ -220,7 +220,7 @@ class FlashMessenger extends AbstractHelper
     /**
      * Retrieve the flash messenger plugin
      *
-     * @return \Zend\Mvc\Controller\Plugin\FlashMessenger
+     * @return \Laminas\Mvc\Controller\Plugin\FlashMessenger
      */
     public function getPluginFlashMessenger()
     {

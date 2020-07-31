@@ -6,7 +6,7 @@ namespace FileManager\Options;
 
 
 use FileManager\Controller\FileManagerController;
-use Zend\Stdlib\AbstractOptions;
+use Laminas\Stdlib\AbstractOptions;
 
 class ElfinderOptions extends AbstractOptions
 {

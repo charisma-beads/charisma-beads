@@ -6,8 +6,8 @@ use Common\Model\AbstractCollection;
 use Common\Model\ModelInterface;
 use ShopDomPdf\Model\PdfFooterCollection;
 use ShopDomPdf\Model\PdfHeaderCollection;
-use Zend\Stdlib\AbstractOptions;
-use Zend\Stdlib\Exception\InvalidArgumentException;
+use Laminas\Stdlib\AbstractOptions;
+use Laminas\Stdlib\Exception\InvalidArgumentException;
 
 
 class PdfOptions extends AbstractOptions

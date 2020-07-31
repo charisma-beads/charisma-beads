@@ -15,10 +15,10 @@ use User\Service\Authentication;
 use User\Service\LimitLoginService;
 use User\Service\UserService as UserService;
 use User\Service\UserRegistrationService;
-use Zend\Authentication\AuthenticationService;
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\Form\Form;
-use Zend\View\Model\ViewModel;
+use Laminas\Authentication\AuthenticationService;
+use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\Form\Form;
+use Laminas\View\Model\ViewModel;
 use Common\Service\ServiceTrait;
 
 class UserController extends AbstractActionController

@@ -5,10 +5,10 @@ namespace Navigation\Service;
 use Common\Service\ServiceManager;
 use Common\Stdlib\ArrayUtils;
 use Navigation\Model\MenuItemModel;
-use Zend\Config\Reader\Ini;
-use Zend\Navigation\Navigation;
-use Zend\Navigation\Service\AbstractNavigationFactory;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\Config\Reader\Ini;
+use Laminas\Navigation\Navigation;
+use Laminas\Navigation\Service\AbstractNavigationFactory;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 
 class DbNavigationFactory extends AbstractNavigationFactory

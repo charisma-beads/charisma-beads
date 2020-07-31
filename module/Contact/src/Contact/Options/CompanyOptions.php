@@ -5,8 +5,8 @@ namespace Contact\Options;
 use Common\Model\AbstractCollection;
 use Common\Model\ModelInterface;
 use Contact\Model\AddressLinesCollection;
-use Zend\Stdlib\AbstractOptions;
-use Zend\Stdlib\Exception\InvalidArgumentException;
+use Laminas\Stdlib\AbstractOptions;
+use Laminas\Stdlib\Exception\InvalidArgumentException;
 
 
 class CompanyOptions extends AbstractOptions

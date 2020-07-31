@@ -10,7 +10,7 @@ use Events\InputFilter\EventsInputFilter;
 use Events\Mapper\EventsMapper;
 use Events\Model\EventModel;
 use Events\Options\EventsOptions;
-use Zend\EventManager\Event;
+use Laminas\EventManager\Event;
 
 /**
  * Class EventsService
@@ -60,7 +60,7 @@ class EventsService extends AbstractMapperService
     }
 
     /**
-     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     * @return \Laminas\Db\ResultSet\HydratingResultSet|\Laminas\Db\ResultSet\ResultSet|\Laminas\Paginator\Paginator
      */
     public function getTimeLine()
     {

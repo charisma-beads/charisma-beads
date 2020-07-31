@@ -1,33 +1,25 @@
 <?php
-/**
- * charisma-beads (http://www.shaunfreeman.co.uk/)
- *
- * @author      Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @link        https://github.com/uthando-cms for the canonical source repository
- * @copyright   Copyright (c) 2017 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license     see LICENSE
- */
 
 namespace Shop\InputFilter;
 
-use Zend\Filter\Boolean;
-use Zend\Filter\StringToUpper;
-use Zend\Filter\StringTrim;
-use Zend\Filter\StripTags;
-use Zend\Filter\ToInt;
-use Zend\I18n\Filter\Alnum;
-use Zend\I18n\Filter\NumberFormat;
-use Zend\I18n\Validator\Alnum as AlnumValidator;
-use Zend\I18n\Validator\IsFloat;
-use Zend\I18n\Validator\IsInt;
-use Zend\InputFilter\InputFilter;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
-use Zend\Validator\Db\NoRecordExists;
-use Zend\Validator\Digits;
-use Zend\Validator\GreaterThan;
-use Zend\Validator\NotEmpty;
-use Zend\Validator\StringLength;
+use Laminas\Filter\Boolean;
+use Laminas\Filter\StringToUpper;
+use Laminas\Filter\StringTrim;
+use Laminas\Filter\StripTags;
+use Laminas\Filter\ToInt;
+use Laminas\I18n\Filter\Alnum;
+use Laminas\I18n\Filter\NumberFormat;
+use Laminas\I18n\Validator\Alnum as AlnumValidator;
+use Laminas\I18n\Validator\IsFloat;
+use Laminas\I18n\Validator\IsInt;
+use Laminas\InputFilter\InputFilter;
+use Laminas\ServiceManager\ServiceLocatorAwareInterface;
+use Laminas\ServiceManager\ServiceLocatorAwareTrait;
+use Laminas\Validator\Db\NoRecordExists;
+use Laminas\Validator\Digits;
+use Laminas\Validator\GreaterThan;
+use Laminas\Validator\NotEmpty;
+use Laminas\Validator\StringLength;
 
 class VoucherCodeInputFilter extends InputFilter implements ServiceLocatorAwareInterface
 {
@@ -197,7 +189,7 @@ class VoucherCodeInputFilter extends InputFilter implements ServiceLocatorAwareI
             ->attachByName(NoRecordExists::class, [
                 'table' => 'voucherCodes',
                 'field' => 'code',
-                'adapter' => $this->getServiceLocator()->getServiceLocator()->get('Zend\Db\Adapter\Adapter'),
+                'adapter' => $this->getServiceLocator()->getServiceLocator()->get('Laminas\Db\Adapter\Adapter'),
                 'exclude' => $exclude,
             ]);
 

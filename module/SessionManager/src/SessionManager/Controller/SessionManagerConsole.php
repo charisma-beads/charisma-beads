@@ -6,8 +6,8 @@ namespace SessionManager\Controller;
 
 use Common\Service\ServiceManager;
 use SessionManager\Service\SessionManagerService;
-use Zend\Console\Request;
-use Zend\Mvc\Controller\AbstractActionController;
+use Laminas\Console\Request;
+use Laminas\Mvc\Controller\AbstractActionController;
 
 class SessionManagerConsole extends AbstractActionController
 {

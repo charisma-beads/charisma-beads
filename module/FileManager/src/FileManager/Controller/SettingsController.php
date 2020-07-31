@@ -4,7 +4,7 @@ namespace FileManager\Controller;
 
 use Common\Controller\SettingsTrait;
 use FileManager\Form\FileManagerSettingsForm;
-use Zend\Mvc\Controller\AbstractActionController;
+use Laminas\Mvc\Controller\AbstractActionController;
 
 
 class SettingsController extends AbstractActionController

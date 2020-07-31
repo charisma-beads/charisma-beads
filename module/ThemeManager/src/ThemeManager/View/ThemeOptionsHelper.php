@@ -4,7 +4,7 @@ namespace ThemeManager\View;
 
 use Common\View\AbstractViewHelper;
 use ThemeManager\Options\ThemeOptions;
-use Zend\Config\Config;
+use Laminas\Config\Config;
 
 
 class ThemeOptionsHelper extends AbstractViewHelper

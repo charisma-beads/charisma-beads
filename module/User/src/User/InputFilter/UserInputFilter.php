@@ -6,20 +6,20 @@ namespace User\InputFilter;
 
 use Common\Filter\Ucwords;
 use User\Options\LoginOptions;
-use Zend\Db\Adapter\Adapter;
-use Zend\Filter\StringTrim;
-use Zend\Filter\StripTags;
-use Zend\Filter\ToInt;
-use Zend\InputFilter\InputFilter;
-use Zend\InputFilter\InputFilterPluginManager;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
-use Zend\Validator\Db\NoRecordExists;
-use Zend\Validator\Db\RecordExists;
-use Zend\Validator\EmailAddress;
-use Zend\Validator\Hostname;
-use Zend\Validator\Identical;
-use Zend\Validator\StringLength;
+use Laminas\Db\Adapter\Adapter;
+use Laminas\Filter\StringTrim;
+use Laminas\Filter\StripTags;
+use Laminas\Filter\ToInt;
+use Laminas\InputFilter\InputFilter;
+use Laminas\InputFilter\InputFilterPluginManager;
+use Laminas\ServiceManager\ServiceLocatorAwareInterface;
+use Laminas\ServiceManager\ServiceLocatorAwareTrait;
+use Laminas\Validator\Db\NoRecordExists;
+use Laminas\Validator\Db\RecordExists;
+use Laminas\Validator\EmailAddress;
+use Laminas\Validator\Hostname;
+use Laminas\Validator\Identical;
+use Laminas\Validator\StringLength;
 
 class UserInputFilter extends InputFilter implements ServiceLocatorAwareInterface
 {

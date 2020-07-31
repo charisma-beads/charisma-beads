@@ -2,7 +2,7 @@
 
 namespace Common\Model;
 
-use Zend\Hydrator\HydratorInterface;
+use Laminas\Hydrator\HydratorInterface;
 
 interface ModelAwareInterface
 {

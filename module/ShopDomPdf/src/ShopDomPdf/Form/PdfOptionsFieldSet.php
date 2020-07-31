@@ -7,16 +7,16 @@ namespace ShopDomPdf\Form;
 use TwbBundle\Form\View\Helper\TwbBundleForm;
 use Common\Hydrator\Strategy\CollectionToArrayStrategy;
 use ShopDomPdf\Options\PdfOptions;
-use Zend\Filter\StringTrim;
-use Zend\Filter\StripTags;
-use Zend\Filter\ToNull;
-use Zend\Form\Element\Collection;
-use Zend\Form\Element\Number;
-use Zend\Form\Element\Select;
-use Zend\Form\Element\Text;
-use Zend\Form\Fieldset;
-use Zend\InputFilter\InputFilterProviderInterface;
-use Zend\Hydrator\ClassMethods;
+use Laminas\Filter\StringTrim;
+use Laminas\Filter\StripTags;
+use Laminas\Filter\ToNull;
+use Laminas\Form\Element\Collection;
+use Laminas\Form\Element\Number;
+use Laminas\Form\Element\Select;
+use Laminas\Form\Element\Text;
+use Laminas\Form\Fieldset;
+use Laminas\InputFilter\InputFilterProviderInterface;
+use Laminas\Hydrator\ClassMethods;
 
 
 class PdfOptionsFieldSet extends Fieldset implements InputFilterProviderInterface

@@ -3,7 +3,7 @@
 namespace Common\Hydrator\Strategy;
 
 use Exception;
-use Zend\Hydrator\Strategy\StrategyInterface;
+use Laminas\Hydrator\Strategy\StrategyInterface;
 use DateTime as DateTimeClass;
 
 

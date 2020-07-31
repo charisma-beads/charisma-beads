@@ -2,9 +2,9 @@
 
 namespace Navigation\Service;
 
-use Zend\Mvc\Application;
-use Zend\Mvc\Router\RouteMatch;
-use Zend\Mvc\Router\RouteStackInterface;
+use Laminas\Mvc\Application;
+use Laminas\Mvc\Router\RouteMatch;
+use Laminas\Mvc\Router\RouteStackInterface;
 
 
 trait NavigationTrait

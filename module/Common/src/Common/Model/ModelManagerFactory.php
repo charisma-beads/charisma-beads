@@ -2,7 +2,7 @@
 
 namespace Common\Model;
 
-use Zend\Mvc\Service\AbstractPluginManagerFactory;
+use Laminas\Mvc\Service\AbstractPluginManagerFactory;
 
 
 class ModelManagerFactory extends AbstractPluginManagerFactory

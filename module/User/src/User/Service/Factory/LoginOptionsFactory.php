@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace User\Service\Factory;
 
 use User\Options\LoginOptions;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\ServiceManager\FactoryInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 class LoginOptionsFactory implements FactoryInterface
 {

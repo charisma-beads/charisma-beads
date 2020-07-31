@@ -1,17 +1,9 @@
 <?php
-/**
- * Uthando CMS (http://www.shaunfreeman.co.uk/)
- *
- * @package   Shop\Mapper\Customer
- * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
- */
 
 namespace Shop\Mapper;
 
 use Common\Mapper\AbstractDbMapper;
-use Zend\Db\Sql\Select;
+use Laminas\Db\Sql\Select;
 
 /**
  * Class Address
@@ -25,7 +17,7 @@ class CustomerAddressMapper extends AbstractDbMapper
 
     /**
      * @param $id
-     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     * @return \Laminas\Db\ResultSet\HydratingResultSet|\Laminas\Db\ResultSet\ResultSet|\Laminas\Paginator\Paginator
      */
     public function getAllByCustomerId($id)
     {

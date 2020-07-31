@@ -1,22 +1,14 @@
 <?php
-/**
- * Uthando CMS (http://www.shaunfreeman.co.uk/)
- *
- * @package   Shop\I18n\Validator
- * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
- */
 
 namespace Shop\I18n\Validator;
 
 use Locale;
 use Traversable;
-use Zend\I18n\Exception as I18nException;
-use Zend\Stdlib\ArrayUtils;
-use Zend\Validator\AbstractValidator;
-use Zend\Validator\Callback;
-use Zend\Validator\Exception;
+use Laminas\I18n\Exception as I18nException;
+use Laminas\Stdlib\ArrayUtils;
+use Laminas\Validator\AbstractValidator;
+use Laminas\Validator\Callback;
+use Laminas\Validator\Exception;
 
 /**
  * Class PostCode

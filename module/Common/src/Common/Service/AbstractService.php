@@ -6,14 +6,14 @@ namespace Common\Service;
 
 use Common\Model\ModelInterface;
 use Common\Model\ModelManager;
-use Zend\EventManager\EventManager;
-use Zend\EventManager\EventManagerAwareInterface;
-use Zend\EventManager\EventManagerAwareTrait;
-use Zend\Form\Form;
-use Zend\Hydrator\HydratorInterface;
-use Zend\InputFilter\InputFilter;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
+use Laminas\EventManager\EventManager;
+use Laminas\EventManager\EventManagerAwareInterface;
+use Laminas\EventManager\EventManagerAwareTrait;
+use Laminas\Form\Form;
+use Laminas\Hydrator\HydratorInterface;
+use Laminas\InputFilter\InputFilter;
+use Laminas\ServiceManager\ServiceLocatorAwareInterface;
+use Laminas\ServiceManager\ServiceLocatorAwareTrait;
 
 
 abstract class AbstractService implements

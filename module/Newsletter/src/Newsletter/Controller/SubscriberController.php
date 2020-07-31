@@ -6,9 +6,9 @@ use Common\Service\ServiceTrait;
 use Newsletter\Form\SubscriberEditForm;
 use Newsletter\Service\SubscriberService as SubscriberService;
 use User\Model\UserModel;
-use Zend\Http\PhpEnvironment\Response;
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\ViewModel;
+use Laminas\Http\PhpEnvironment\Response;
+use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\View\Model\ViewModel;
 
 /**
  * Class Subscriber

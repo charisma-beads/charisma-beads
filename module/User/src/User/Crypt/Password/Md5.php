@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace User\Crypt\Password;
 
-use Zend\Crypt\Password\PasswordInterface;
+use Laminas\Crypt\Password\PasswordInterface;
 
 class Md5 implements PasswordInterface
 {

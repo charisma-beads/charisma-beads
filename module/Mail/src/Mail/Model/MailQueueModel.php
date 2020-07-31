@@ -4,7 +4,7 @@ namespace Mail\Model;
 
 use Common\Model\Model;
 use Common\Model\DateCreatedTrait;
-use Zend\Mail\Address;
+use Laminas\Mail\Address;
 use Common\Model\ModelInterface;
 
 

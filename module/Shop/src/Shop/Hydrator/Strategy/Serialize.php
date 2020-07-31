@@ -1,12 +1,4 @@
 <?php
-/**
- * Uthando CMS (http://www.shaunfreeman.co.uk/)
- *
- * @package   Shop\Hydrator\Strategy
- * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @copyright Copyright (c) 2018 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE
- */
 
 declare(strict_types=1);
 
@@ -14,8 +6,8 @@ declare(strict_types=1);
 namespace Shop\Hydrator\Strategy;
 
 
-use Zend\Hydrator\Strategy\StrategyInterface;
-use Zend\Serializer\Serializer;
+use Laminas\Hydrator\Strategy\StrategyInterface;
+use Laminas\Serializer\Serializer;
 use Zumba\JsonSerializer\Exception\JsonSerializerException;
 use Zumba\JsonSerializer\JsonSerializer;
 

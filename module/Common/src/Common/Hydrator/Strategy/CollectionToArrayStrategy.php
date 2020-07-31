@@ -6,7 +6,7 @@ namespace Common\Hydrator\Strategy;
 
 use Common\Model\AbstractCollection;
 use Common\Model\ModelInterface;
-use Zend\Hydrator\Strategy\StrategyInterface;
+use Laminas\Hydrator\Strategy\StrategyInterface;
 
 class CollectionToArrayStrategy implements StrategyInterface
 {

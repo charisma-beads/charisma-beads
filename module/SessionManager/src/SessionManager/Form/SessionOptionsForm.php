@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace SessionManager\Form;
 
 use TwbBundle\Form\View\Helper\TwbBundleForm;
-use Zend\Form\Form;
+use Laminas\Form\Form;
 
 class SessionOptionsForm extends Form
 {

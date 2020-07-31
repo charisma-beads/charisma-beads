@@ -3,9 +3,9 @@
 namespace Navigation\View\Navigation;
 
 use RecursiveIteratorIterator;
-use Zend\View\Helper\Navigation\Menu as ZendMenu;
-use Zend\Navigation\AbstractContainer;
-use Zend\Navigation\Page\AbstractPage;
+use Laminas\View\Helper\Navigation\Menu as ZendMenu;
+use Laminas\Navigation\AbstractContainer;
+use Laminas\Navigation\Page\AbstractPage;
 
 
 class TwitterBootstrapMenu extends ZendMenu

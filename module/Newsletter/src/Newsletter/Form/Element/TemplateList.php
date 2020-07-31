@@ -5,10 +5,10 @@ namespace Newsletter\Form\Element;
 use Common\Service\ServiceManager;
 use Newsletter\Model\TemplateModel;
 use Newsletter\Service\TemplateService;
-use Zend\Form\Element\Select;
-use Zend\Form\FormElementManager;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
+use Laminas\Form\Element\Select;
+use Laminas\Form\FormElementManager;
+use Laminas\ServiceManager\ServiceLocatorAwareInterface;
+use Laminas\ServiceManager\ServiceLocatorAwareTrait;
 
 
 class TemplateList extends Select implements ServiceLocatorAwareInterface

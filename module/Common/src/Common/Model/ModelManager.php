@@ -2,8 +2,8 @@
 
 namespace Common\Model;
 
-use Zend\Mvc\Exception\InvalidPluginException;
-use Zend\ServiceManager\AbstractPluginManager;
+use Laminas\Mvc\Exception\InvalidPluginException;
+use Laminas\ServiceManager\AbstractPluginManager;
 
 
 class ModelManager extends AbstractPluginManager

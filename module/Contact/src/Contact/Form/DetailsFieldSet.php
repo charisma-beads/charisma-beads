@@ -8,18 +8,18 @@ use Common\Hydrator\Strategy\CollectionToArrayStrategy;
 use Common\I18n\Filter\PhoneNumber;
 use Common\I18n\Validator\PhoneNumber as PhoneNumberValidator;
 use Contact\Options\DetailsOptions;
-use Zend\Filter\Digits;
-use Zend\Filter\StringTrim;
-use Zend\Filter\StripTags;
-use Zend\Form\Element\Collection;
-use Zend\Form\Element\Email;
-use Zend\Form\Element\Text;
-use Zend\Form\Element\Textarea;
-use Zend\Form\Fieldset;
-use Zend\Hydrator\ClassMethods;
-use Zend\InputFilter\InputFilterProviderInterface;
-use Zend\Validator\EmailAddress;
-use Zend\Validator\StringLength;
+use Laminas\Filter\Digits;
+use Laminas\Filter\StringTrim;
+use Laminas\Filter\StripTags;
+use Laminas\Form\Element\Collection;
+use Laminas\Form\Element\Email;
+use Laminas\Form\Element\Text;
+use Laminas\Form\Element\Textarea;
+use Laminas\Form\Fieldset;
+use Laminas\Hydrator\ClassMethods;
+use Laminas\InputFilter\InputFilterProviderInterface;
+use Laminas\Validator\EmailAddress;
+use Laminas\Validator\StringLength;
 
 
 class DetailsFieldSet extends Fieldset implements InputFilterProviderInterface

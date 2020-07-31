@@ -8,7 +8,7 @@ use ThemeManager\Hydrator\WidgetGroupHydrator;
 use ThemeManager\InputFilter\WidgetGroupInputFilter;
 use ThemeManager\Mapper\WidgetGroupMapper;
 use ThemeManager\Model\WidgetGroupModel;
-use Zend\EventManager\Event;
+use Laminas\EventManager\Event;
 
 /**
  * Class WidgetGroupManager

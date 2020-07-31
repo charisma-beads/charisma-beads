@@ -7,12 +7,12 @@ use Common\Service\ServiceException;
 use Common\Service\ServiceManager;
 use Mail\Service\Mail;
 use Mail\Service\MailQueueService;
-use Zend\EventManager\Event;
-use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\ListenerAggregateInterface;
-use Zend\EventManager\ListenerAggregateTrait;
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\Mvc\Exception\InvalidPluginException;
+use Laminas\EventManager\Event;
+use Laminas\EventManager\EventManagerInterface;
+use Laminas\EventManager\ListenerAggregateInterface;
+use Laminas\EventManager\ListenerAggregateTrait;
+use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\Mvc\Exception\InvalidPluginException;
 
 
 class MailListener implements ListenerAggregateInterface

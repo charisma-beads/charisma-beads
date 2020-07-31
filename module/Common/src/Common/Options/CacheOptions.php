@@ -2,11 +2,11 @@
 
 namespace Common\Options;
 
-use Zend\Cache\Storage\Adapter\AdapterOptions;
-use Zend\Cache\Storage\Adapter\Filesystem;
-use Zend\Cache\Storage\Adapter\FilesystemOptions;
-use Zend\Cache\Storage\Plugin\Serializer;
-use Zend\Stdlib\AbstractOptions;
+use Laminas\Cache\Storage\Adapter\AdapterOptions;
+use Laminas\Cache\Storage\Adapter\Filesystem;
+use Laminas\Cache\Storage\Adapter\FilesystemOptions;
+use Laminas\Cache\Storage\Plugin\Serializer;
+use Laminas\Stdlib\AbstractOptions;
 
 
 class CacheOptions extends AbstractOptions

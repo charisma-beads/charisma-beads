@@ -9,10 +9,10 @@ use Newsletter\Service\SubscriberService;
 use User\Form\RegisterForm;
 use User\Model\UserModel;
 use User\Service\UserService;
-use Zend\EventManager\Event;
-use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\ListenerAggregateInterface;
-use Zend\EventManager\ListenerAggregateTrait;
+use Laminas\EventManager\Event;
+use Laminas\EventManager\EventManagerInterface;
+use Laminas\EventManager\ListenerAggregateInterface;
+use Laminas\EventManager\ListenerAggregateTrait;
 
 class UserListener implements ListenerAggregateInterface
 {

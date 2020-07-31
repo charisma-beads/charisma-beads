@@ -1,22 +1,14 @@
 <?php
-/**
- * Uthando CMS (http://www.shaunfreeman.co.uk/)
- *
- * @package   Shop\Controller\Customer
- * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE
- */
 
 namespace Shop\Controller;
 
 use Shop\Service\CustomerService;
 use Shop\ShopException;
 use Common\Controller\AbstractCrudController;
-use Zend\Form\Form;
-use Zend\Http\PhpEnvironment\Response;
-use Zend\View\Model\JsonModel;
-use Zend\View\Model\ViewModel;
+use Laminas\Form\Form;
+use Laminas\Http\PhpEnvironment\Response;
+use Laminas\View\Model\JsonModel;
+use Laminas\View\Model\ViewModel;
 
 /**
  * Class Customer
@@ -93,7 +85,7 @@ class CustomerController extends AbstractCrudController
     }
 
     /**
-     * @return array|\Zend\Http\Response
+     * @return array|\Laminas\Http\Response
      * @throws \Common\Service\ServiceException
      */
     public function myDetailsAction()

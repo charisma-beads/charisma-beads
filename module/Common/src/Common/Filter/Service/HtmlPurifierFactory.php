@@ -11,10 +11,10 @@ use Interop\Container\ContainerInterface;
 use Traversable;
 use Common\Filter\HtmlPurifierFilter;
 use Common\Options\HtmlPurifierOptions;
-use Zend\Filter\FilterPluginManager;
-use Zend\ServiceManager\Exception\InvalidServiceException;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\Filter\FilterPluginManager;
+use Laminas\ServiceManager\Exception\InvalidServiceException;
+use Laminas\ServiceManager\FactoryInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 class HtmlPurifierFactory implements FactoryInterface
 {

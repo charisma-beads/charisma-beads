@@ -3,8 +3,8 @@
 namespace Common\Service\Factory;
 
 use Common\Options\CacheOptions;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\ServiceManager\FactoryInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 class CacheOptionsFactory implements FactoryInterface
 {

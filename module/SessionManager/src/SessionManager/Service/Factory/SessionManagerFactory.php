@@ -3,10 +3,10 @@
 namespace SessionManager\Service\Factory;
 
 use SessionManager\Options\SessionOptions;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\Session\Container;
-use Zend\Session\SessionManager;
+use Laminas\ServiceManager\FactoryInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
+use Laminas\Session\Container;
+use Laminas\Session\SessionManager;
 
 class SessionManagerFactory implements FactoryInterface
 {

@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace User\Authentication;
 
 use User\Model\UserModel as UserModel;
-use Zend\Authentication\Adapter\AbstractAdapter;
-use Zend\Authentication\Result as AuthenticationResult;
-use Zend\Crypt\Password\PasswordInterface;
+use Laminas\Authentication\Adapter\AbstractAdapter;
+use Laminas\Authentication\Result as AuthenticationResult;
+use Laminas\Crypt\Password\PasswordInterface;
 
 class Adapter extends AbstractAdapter
 {

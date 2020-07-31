@@ -12,12 +12,12 @@ use User\Model\UserModel;
 use User\Service\Authentication;
 use User\Service\LimitLoginService;
 use User\Service\UserService;
-use Zend\Authentication\AuthenticationService;
-use Zend\Form\Form;
-use Zend\Http\Response;
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\Session\Container;
-use Zend\View\Model\ViewModel;
+use Laminas\Authentication\AuthenticationService;
+use Laminas\Form\Form;
+use Laminas\Http\Response;
+use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\Session\Container;
+use Laminas\View\Model\ViewModel;
 
 /**
  * Class IndexController

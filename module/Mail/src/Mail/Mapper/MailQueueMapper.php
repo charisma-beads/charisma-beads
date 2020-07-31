@@ -12,7 +12,7 @@ class MailQueueMapper extends AbstractDbMapper
 
     /**
      * @param int $limit
-     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     * @return \Laminas\Db\ResultSet\HydratingResultSet|\Laminas\Db\ResultSet\ResultSet|\Laminas\Paginator\Paginator
      */
     public function getMailsInQueue($limit)
     {

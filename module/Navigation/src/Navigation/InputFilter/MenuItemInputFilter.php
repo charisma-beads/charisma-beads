@@ -3,12 +3,12 @@
 namespace Navigation\InputFilter;
 
 use Common\Filter\Ucwords;
-use Zend\Filter\StringTrim;
-use Zend\Filter\StripTags;
-use Zend\InputFilter\InputFilter;
-use Zend\Uri\Http;
-use Zend\Validator\StringLength;
-use Zend\Validator\Uri;
+use Laminas\Filter\StringTrim;
+use Laminas\Filter\StripTags;
+use Laminas\InputFilter\InputFilter;
+use Laminas\Uri\Http;
+use Laminas\Validator\StringLength;
+use Laminas\Validator\Uri;
 
 
 class MenuItemInputFilter extends InputFilter

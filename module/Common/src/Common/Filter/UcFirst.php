@@ -2,7 +2,7 @@
 
 namespace Common\Filter;
 
-use Zend\Filter\AbstractUnicode;
+use Laminas\Filter\AbstractUnicode;
 use Traversable;
 
 
@@ -32,7 +32,7 @@ class UcFirst extends AbstractUnicode
     }
 
     /**
-     * Defined by Zend\Filter\FilterInterface
+     * Defined by Laminas\Filter\FilterInterface
      *
      * Returns the string $value, converting words to have an uppercase first character as necessary
      *

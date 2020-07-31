@@ -1,18 +1,10 @@
 <?php
-/**
- * charisma-beads (http://www.shaunfreeman.co.uk/)
- *
- * @author      Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @link        https://github.com/uthando-cms for the canonical source repository
- * @copyright   Copyright (c) 2017 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license     see LICENSE
- */
 
 namespace Shop\Hydrator\Strategy;
 
 use Shop\Model\VoucherZoneCollection;
-use Zend\Serializer\Serializer;
-use Zend\Hydrator\Strategy\StrategyInterface;
+use Laminas\Serializer\Serializer;
+use Laminas\Hydrator\Strategy\StrategyInterface;
 
 class VoucherZonesStrategy implements StrategyInterface
 {

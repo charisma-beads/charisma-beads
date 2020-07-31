@@ -18,12 +18,12 @@ use Common\Model\ModelInterface;
 use Common\Model\ModelManager;
 use Common\Service\ServiceInterface;
 use Common\Service\ServiceManager;
-use Zend\Console\Adapter\AdapterInterface as Console;
-use Zend\Http\Request;
-use Zend\ModuleManager\Feature\ConsoleBannerProviderInterface;
-use Zend\ModuleManager\ModuleManager;
-use Zend\Mvc\MvcEvent;
-use Zend\Mvc\ResponseSender\SendResponseEvent;
+use Laminas\Console\Adapter\AdapterInterface as Console;
+use Laminas\Http\Request;
+use Laminas\ModuleManager\Feature\ConsoleBannerProviderInterface;
+use Laminas\ModuleManager\ModuleManager;
+use Laminas\Mvc\MvcEvent;
+use Laminas\Mvc\ResponseSender\SendResponseEvent;
 
 /**
  * Class Module
@@ -39,7 +39,7 @@ class Module implements ConsoleBannerProviderInterface, ConfigInterface
      */
     public function init(ModuleManager $moduleManager)
     {
-        /* @var $sm \Zend\ServiceManager\ServiceManager */
+        /* @var $sm \Laminas\ServiceManager\ServiceManager */
         $sm = $moduleManager->getEvent()->getParam('ServiceManager');
         $serviceListener = $sm->get('ServiceListener');
         $events = $moduleManager->getEventManager();
@@ -87,7 +87,7 @@ class Module implements ConsoleBannerProviderInterface, ConfigInterface
 
             if ($tidyConfig['enable']) {
                 $eventManager->getSharedManager()->attach(
-                    'Zend\Mvc\SendResponseListener',
+                    'Laminas\Mvc\SendResponseListener',
                     SendResponseEvent::EVENT_SEND_RESPONSE,
                     new TidyResponseSender($tidyConfig['config'], $event->getRequest()->isXmlHttpRequest())
                 );
@@ -109,7 +109,7 @@ class Module implements ConsoleBannerProviderInterface, ConfigInterface
     public function getAutoloaderConfig()
     {
         return [
-            'Zend\Loader\StandardAutoloader' => [
+            'Laminas\Loader\StandardAutoloader' => [
                 'namespaces' => [
                     __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
                 ],

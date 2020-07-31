@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace User\Controller;
 
 use User\Service\UserRegistrationService;
-use Zend\Mvc\Controller\AbstractActionController;
+use Laminas\Mvc\Controller\AbstractActionController;
 use Common\Service\ServiceTrait;
 
 class RegistrationController extends AbstractActionController

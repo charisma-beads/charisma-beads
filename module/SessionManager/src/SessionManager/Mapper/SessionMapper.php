@@ -3,8 +3,8 @@
 namespace SessionManager\Mapper;
 
 use Common\Mapper\AbstractDbMapper;
-use Zend\Db\Sql\Expression;
-use Zend\Db\Sql\Where;
+use Laminas\Db\Sql\Expression;
+use Laminas\Db\Sql\Where;
 
 class SessionMapper extends AbstractDbMapper
 {

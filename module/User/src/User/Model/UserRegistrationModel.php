@@ -6,7 +6,7 @@ namespace User\Model;
 
 use Common\Model\ModelInterface;
 use Common\Model\Model;
-use Zend\Math\Rand;
+use Laminas\Math\Rand;
 
 class UserRegistrationModel implements ModelInterface
 {

@@ -2,10 +2,10 @@
 
 namespace Newsletter\InputFilter;
 
-use Zend\Filter\StringTrim;
-use Zend\Filter\StripTags;
-use Zend\InputFilter\InputFilter;
-use Zend\Validator\StringLength;
+use Laminas\Filter\StringTrim;
+use Laminas\Filter\StripTags;
+use Laminas\InputFilter\InputFilter;
+use Laminas\Validator\StringLength;
 
 
 class TemplateInputFilter extends InputFilter

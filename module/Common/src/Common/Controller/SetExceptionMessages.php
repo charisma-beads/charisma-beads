@@ -3,7 +3,7 @@
 namespace Common\Controller;
 
 use Exception;
-use Zend\Mvc\Controller\Plugin\FlashMessenger;
+use Laminas\Mvc\Controller\Plugin\FlashMessenger;
 
 /**
  * Class SetExceptionMessages

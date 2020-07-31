@@ -9,7 +9,7 @@ use Newsletter\Hydrator\SubscriberHydrator;
 use Newsletter\InputFilter\SubscriberInputFilter;
 use Newsletter\Mapper\SubscriberMapper;
 use Newsletter\Model\SubscriberModel as SubscriberModel;
-use Zend\EventManager\Event;
+use Laminas\EventManager\Event;
 
 /**
  * Class Newsletter

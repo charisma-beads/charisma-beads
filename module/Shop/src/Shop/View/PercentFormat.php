@@ -1,19 +1,10 @@
 <?php
-/**
- * Uthando CMS (http://www.shaunfreeman.co.uk/)
- *
- * @package   Shop\View
- * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @link      https://github.com/uthando-cms for the canonical source repository
- * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
- */
 
 namespace Shop\View;
 
 use NumberFormatter;
 use Common\View\AbstractViewHelper;
-use Zend\I18n\View\Helper\NumberFormat;
+use Laminas\I18n\View\Helper\NumberFormat;
 
 /**
  * Class PercentFormat
@@ -42,7 +33,7 @@ class PercentFormat extends AbstractViewHelper
 	}
 	
 	/**
-	 * @return \Zend\I18n\View\Helper\NumberFormat
+	 * @return \Laminas\I18n\View\Helper\NumberFormat
 	 */
 	public function getNumberFormat()
 	{

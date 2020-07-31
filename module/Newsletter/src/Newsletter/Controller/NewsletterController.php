@@ -19,7 +19,7 @@ class NewsletterController extends AbstractCrudController
     protected $route = 'admin/newsletter';
 
     /**
-     * @return \Zend\Http\Response
+     * @return \Laminas\Http\Response
      */
     public function setVisibleAction()
     {

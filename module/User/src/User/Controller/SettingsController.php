@@ -6,7 +6,7 @@ namespace User\Controller;
 
 use Common\Controller\SettingsTrait;
 use User\Form\Settings\SettingsForm as SettingsForm;
-use Zend\Mvc\Controller\AbstractActionController;
+use Laminas\Mvc\Controller\AbstractActionController;
 
 class SettingsController extends AbstractActionController
 {

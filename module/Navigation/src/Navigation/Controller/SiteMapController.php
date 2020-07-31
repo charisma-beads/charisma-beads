@@ -4,7 +4,7 @@ namespace Navigation\Controller;
 
 use Common\Service\ServiceTrait;
 use Navigation\Service\SiteMapService;
-use Zend\Mvc\Controller\AbstractActionController;
+use Laminas\Mvc\Controller\AbstractActionController;
 
 /**
  * Class SiteMapController

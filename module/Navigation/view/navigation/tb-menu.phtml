@@ -7,7 +7,7 @@
     <?php $count = 1 ?>
     <?php foreach ($iterator as $page): ?>
         <?php $depth = $iterator->getDepth(); ?>
-        <?php /* @var $page Zend\Navigation\Page\Mvc */ ?>
+        <?php /* @var $page Laminas\Navigation\Page\Mvc */ ?>
         <?php // when using partials we need to manually check for ACL conditions ?>
         <?php if( ! $page->isVisible() || !$this->uthandoNavigation()->accept($page)) continue; ?>
         <?php $hasChildren = $page->hasPages(); ?>

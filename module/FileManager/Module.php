@@ -5,8 +5,8 @@ namespace FileManager;
 use Common\Config\ConfigInterface;
 use Common\Config\ConfigTrait;
 use SessionManager\Service\Factory\SessionManagerFactory;
-use Zend\Http\Request;
-use Zend\Mvc\MvcEvent;
+use Laminas\Http\Request;
+use Laminas\Mvc\MvcEvent;
 
 
 class Module implements ConfigInterface
@@ -67,7 +67,7 @@ class Module implements ConfigInterface
     public function getAutoloaderConfig()
     {
         return array(
-            'Zend\Loader\StandardAutoloader' => [
+            'Laminas\Loader\StandardAutoloader' => [
                 'namespaces' => [
                     __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
                 ],

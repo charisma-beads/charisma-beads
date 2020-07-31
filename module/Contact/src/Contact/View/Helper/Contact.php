@@ -8,8 +8,8 @@ use TwbBundle\Form\View\Helper\TwbBundleForm;
 use Common\I18n\View\Helper\LibPhoneNumber;
 use Common\View\AbstractViewHelper;
 use Mail\Form\Element\MailTransportList;
-use Zend\Config\Config;
-use Zend\View\Renderer\PhpRenderer;
+use Laminas\Config\Config;
+use Laminas\View\Renderer\PhpRenderer;
 
 /**
  * Class ContactService

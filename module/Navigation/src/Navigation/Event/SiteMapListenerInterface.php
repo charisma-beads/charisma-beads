@@ -2,8 +2,8 @@
 
 namespace Navigation\Event;
 
-use Zend\EventManager\Event;
-use Zend\Navigation\Navigation;
+use Laminas\EventManager\Event;
+use Laminas\Navigation\Navigation;
 
 
 interface SiteMapListenerInterface

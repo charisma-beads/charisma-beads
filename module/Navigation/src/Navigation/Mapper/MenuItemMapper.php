@@ -3,7 +3,7 @@
 namespace Navigation\Mapper;
 
 use Common\Mapper\AbstractNestedSet;
-use Zend\Db\Sql\Select;
+use Laminas\Db\Sql\Select;
 
 
 class MenuItemMapper extends AbstractNestedSet
@@ -20,7 +20,7 @@ class MenuItemMapper extends AbstractNestedSet
      * @param array $search
      * @param string $sort
      * @param Select $select
-     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     * @return \Laminas\Db\ResultSet\HydratingResultSet|\Laminas\Db\ResultSet\ResultSet|\Laminas\Paginator\Paginator
      */
 	public function search(array $search, $sort, $select = null)
 	{
@@ -32,7 +32,7 @@ class MenuItemMapper extends AbstractNestedSet
 
     /**
      * @param int $id
-     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     * @return \Laminas\Db\ResultSet\HydratingResultSet|\Laminas\Db\ResultSet\ResultSet|\Laminas\Paginator\Paginator
      */
     public function getMenuItemsByMenuId($id)
     {   
@@ -45,7 +45,7 @@ class MenuItemMapper extends AbstractNestedSet
 
     /**
      * @param int $menu
-     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     * @return \Laminas\Db\ResultSet\HydratingResultSet|\Laminas\Db\ResultSet\ResultSet|\Laminas\Paginator\Paginator
      */
     public function getMenuItemsByMenu($menu)
     {
@@ -75,7 +75,7 @@ class MenuItemMapper extends AbstractNestedSet
 
     /**
      * @param int $id
-     * @return \Zend\Db\Adapter\Driver\ResultInterface
+     * @return \Laminas\Db\Adapter\Driver\ResultInterface
      */
     public function deleteMenuItemsByMenuId($id)
     {

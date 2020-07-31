@@ -3,8 +3,8 @@
 namespace News\Service;
 
 use News\Options\FeedOptions;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\ServiceManager\FactoryInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 class NewsFeedOptionsFactory implements FactoryInterface
 {

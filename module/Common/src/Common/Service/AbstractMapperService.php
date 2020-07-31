@@ -7,10 +7,10 @@ use Common\Cache\CacheTrait;
 use Common\Mapper\MapperInterface;
 use Common\Mapper\MapperManager;
 use Common\Model\ModelInterface;
-use Zend\Db\ResultSet\HydratingResultSet;
-use Zend\Db\ResultSet\ResultSet;
-use Zend\Form\Form;
-use Zend\Paginator\Paginator;
+use Laminas\Db\ResultSet\HydratingResultSet;
+use Laminas\Db\ResultSet\ResultSet;
+use Laminas\Form\Form;
+use Laminas\Paginator\Paginator;
 
 
 class AbstractMapperService extends AbstractService implements MapperServiceInterface, CacheStorageAwareInterface

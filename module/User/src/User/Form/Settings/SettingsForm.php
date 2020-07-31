@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace User\Form\Settings;
 
-use Zend\Form\Form;
+use Laminas\Form\Form;
 
 class SettingsForm extends Form
 {

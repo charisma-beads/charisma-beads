@@ -7,14 +7,14 @@ namespace User\Form;
 use TwbBundle\Form\View\Helper\TwbBundleForm;
 use Common\Form\Element\Captcha;
 use User\Form\Element\RoleList;
-use Zend\Form\Element\Checkbox;
-use Zend\Form\Element\Csrf;
-use Zend\Form\Element\DateTime;
-use Zend\Form\Element\Email;
-use Zend\Form\Element\Hidden;
-use Zend\Form\Element\Password;
-use Zend\Form\Element\Text;
-use Zend\Form\Form;
+use Laminas\Form\Element\Checkbox;
+use Laminas\Form\Element\Csrf;
+use Laminas\Form\Element\DateTime;
+use Laminas\Form\Element\Email;
+use Laminas\Form\Element\Hidden;
+use Laminas\Form\Element\Password;
+use Laminas\Form\Element\Text;
+use Laminas\Form\Form;
 
 class BaseUserForm extends Form
 {

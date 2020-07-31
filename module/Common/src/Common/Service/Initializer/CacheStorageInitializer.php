@@ -3,9 +3,9 @@
 namespace Common\Service\Initializer;
 
 use Common\Options\CacheOptions;
-use Zend\Cache\Storage\Adapter\AbstractAdapter;
-use Zend\ServiceManager\InitializerInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\Cache\Storage\Adapter\AbstractAdapter;
+use Laminas\ServiceManager\InitializerInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 use Common\Cache\CacheStorageAwareInterface;
 
 class CacheStorageInitializer implements InitializerInterface

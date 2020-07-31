@@ -3,8 +3,8 @@
 namespace ShopDomPdf\Mvc\Service;
 
 use Dompdf\Dompdf;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\ServiceManager\FactoryInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 use ShopDomPdf\View\Renderer\PdfRenderer;
 
 

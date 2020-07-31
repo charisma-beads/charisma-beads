@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace FileManager\Options\Factory;
 
 use FileManager\Options\FileManagerOptions;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\ServiceManager\FactoryInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 
 class FileManagerOptionsFactory implements FactoryInterface

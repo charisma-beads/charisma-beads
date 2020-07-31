@@ -1,12 +1,4 @@
 <?php
-/**
- * Uthando CMS (http://www.shaunfreeman.co.uk/)
- *
- * @package   Shop\Controller\Customer
- * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE
- */
 
 namespace Shop\Controller;
 
@@ -15,8 +7,8 @@ use Shop\Service\CustomerAddressService;
 use Shop\Service\CustomerService;
 use Shop\ShopException;
 use Common\Controller\AbstractCrudController;
-use Zend\Form\Form;
-use Zend\View\Model\ViewModel;
+use Laminas\Form\Form;
+use Laminas\View\Model\ViewModel;
 
 /**
  * Class CustomerAddress

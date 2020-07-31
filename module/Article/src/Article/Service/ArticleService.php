@@ -11,7 +11,7 @@ use Common\Mapper\AbstractNestedSet;
 use Common\Service\AbstractRelationalMapperService;
 use Navigation\Service\MenuItemService;
 use User\Service\UserService;
-use Zend\EventManager\Event;
+use Laminas\EventManager\Event;
 
 
 class ArticleService extends AbstractRelationalMapperService
@@ -175,7 +175,7 @@ class ArticleService extends AbstractRelationalMapperService
 
     /**
      * @param $limit
-     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     * @return \Laminas\Db\ResultSet\HydratingResultSet|\Laminas\Db\ResultSet\ResultSet|\Laminas\Paginator\Paginator
      */
     public function getRecentPosts($limit)
     {

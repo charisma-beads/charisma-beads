@@ -2,7 +2,7 @@
 
 namespace Common\Hydrator;
 
-use Zend\Hydrator\HydratorInterface;
+use Laminas\Hydrator\HydratorInterface;
 
 
 interface NestedSetInterface extends HydratorInterface

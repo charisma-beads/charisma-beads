@@ -1,19 +1,11 @@
 <?php
-/**
- * Uthando CMS (http://www.shaunfreeman.co.uk/)
- *
- * @package   Shop\Form\Customer
- * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE
- */
 
 namespace Shop\Form;
 
-use Zend\Form\Element\Checkbox;
-use Zend\Form\Form;
-use Zend\Hydrator\ClassMethods;
-use Zend\InputFilter\InputFilter;
+use Laminas\Form\Element\Checkbox;
+use Laminas\Form\Form;
+use Laminas\Hydrator\ClassMethods;
+use Laminas\InputFilter\InputFilter;
 
 /**
  * Class CustomerDetails

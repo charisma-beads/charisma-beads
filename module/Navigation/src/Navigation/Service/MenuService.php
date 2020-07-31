@@ -10,8 +10,8 @@ use Navigation\InputFilter\MenuInputFilter;
 use Navigation\Mapper\MenuMapper;
 use Navigation\Model\MenuItemModel;
 use Navigation\Model\MenuModel;
-use Zend\Config\Reader\Ini;
-use Zend\Navigation\Navigation;
+use Laminas\Config\Reader\Ini;
+use Laminas\Navigation\Navigation;
 
 /**
  * Class Menu

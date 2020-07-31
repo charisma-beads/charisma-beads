@@ -5,8 +5,8 @@ namespace SessionManager;
 use Common\Config\ConfigInterface;
 use Common\Config\ConfigTrait;
 use SessionManager\Event\RouteListener;
-use Zend\Console\Adapter\AdapterInterface as Console;
-use Zend\Mvc\MvcEvent;
+use Laminas\Console\Adapter\AdapterInterface as Console;
+use Laminas\Mvc\MvcEvent;
 
 class Module implements ConfigInterface
 {
@@ -44,7 +44,7 @@ class Module implements ConfigInterface
     public function getAutoloaderConfig(): array
     {
         return [
-            'Zend\Loader\StandardAutoloader' => [
+            'Laminas\Loader\StandardAutoloader' => [
                 'namespaces' => [
                     __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
                 ],

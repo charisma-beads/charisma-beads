@@ -5,16 +5,16 @@ namespace Contact\Form;
 use TwbBundle\Form\View\Helper\TwbBundleForm;
 use Common\Hydrator\Strategy\CollectionToArrayStrategy;
 use Contact\Options\FormOptions;
-use Zend\Filter\Boolean;
-use Zend\Filter\StringTrim;
-use Zend\Filter\StripTags;
-use Zend\Form\Element\Collection;
-use Zend\Form\Element\Radio;
-use Zend\Form\Element\Text;
-use Zend\Form\Fieldset;
-use Zend\Hydrator\ClassMethods;
-use Zend\InputFilter\InputFilterProviderInterface;
-use Zend\Validator\StringLength;
+use Laminas\Filter\Boolean;
+use Laminas\Filter\StringTrim;
+use Laminas\Filter\StripTags;
+use Laminas\Form\Element\Collection;
+use Laminas\Form\Element\Radio;
+use Laminas\Form\Element\Text;
+use Laminas\Form\Fieldset;
+use Laminas\Hydrator\ClassMethods;
+use Laminas\InputFilter\InputFilterProviderInterface;
+use Laminas\Validator\StringLength;
 
 
 class FormFieldSet extends Fieldset implements InputFilterProviderInterface
@@ -135,37 +135,6 @@ class FormFieldSet extends Fieldset implements InputFilterProviderInterface
                 ],
             ],
         ]);
-
-        $this->add([
-            'name' => 'enable_akismet',
-            'type' => Radio::class,
-            'options' => [
-                'label' => 'Enable Akismet',
-                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'value_options' => [
-                    [
-                        'value' => 0,
-                        'label' => 'No',
-                        'label_attributes' => [
-                            'class' => 'col-md-12',
-                        ],
-
-                    ],
-                    [
-                        'value' => 1,
-                        'label' => 'Yes',
-                        'label_attributes' => [
-                            'class' => 'col-md-12',
-                        ],
-
-                    ],
-                ],
-                'column-size' => 'md-8',
-                'label_attributes' => [
-                    'class' => 'col-md-4',
-                ],
-            ],
-        ]);
     }
 
     /**
@@ -198,15 +167,6 @@ class FormFieldSet extends Fieldset implements InputFilterProviderInterface
                 ],
             ],
             'enable_captcha' => [
-                'required' => false,
-                'allow_empty' => true,
-                'filters' => [
-                    ['name' => StripTags::class],
-                    ['name' => StringTrim::class],
-                    ['name' => Boolean::class],
-                ],
-            ],
-            'enable_akismet' => [
                 'required' => false,
                 'allow_empty' => true,
                 'filters' => [

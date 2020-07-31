@@ -4,8 +4,8 @@ namespace Mail\Controller;
 
 use Common\Service\ServiceManager;
 use Mail\Service\MailQueueService;
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\Console\Request as ConsoleRequest;
+use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\Console\Request as ConsoleRequest;
 
 
 class MailQueueConsoleController extends AbstractActionController

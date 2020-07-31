@@ -4,10 +4,10 @@ namespace Navigation\View\Service;
 
 use Navigation\View\Navigation;
 use User\Service\Acl;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\View\Helper\Identity;
-use Zend\View\HelperPluginManager;
+use Laminas\ServiceManager\FactoryInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
+use Laminas\View\Helper\Identity;
+use Laminas\View\HelperPluginManager;
 
 
 class NavigationFactory implements FactoryInterface

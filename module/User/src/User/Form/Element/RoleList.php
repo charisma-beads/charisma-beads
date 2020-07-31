@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace User\Form\Element;
 
-use Zend\Form\Element\Select;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
+use Laminas\Form\Element\Select;
+use Laminas\ServiceManager\ServiceLocatorAwareInterface;
+use Laminas\ServiceManager\ServiceLocatorAwareTrait;
 
 class RoleList extends Select implements ServiceLocatorAwareInterface
 {

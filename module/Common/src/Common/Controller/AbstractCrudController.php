@@ -4,14 +4,14 @@ namespace Common\Controller;
 
 use Exception;
 use Common\Service\ServiceTrait;
-use Zend\Session\Container;
-use Zend\EventManager\EventManager;
-use Zend\Form\Form;
-use Zend\Http\PHPEnvironment\Request;
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\Mvc\Controller\Plugin\FlashMessenger;
-use Zend\View\Model\JsonModel;
-use Zend\View\Model\ViewModel;
+use Laminas\Session\Container;
+use Laminas\EventManager\EventManager;
+use Laminas\Form\Form;
+use Laminas\Http\PHPEnvironment\Request;
+use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\Mvc\Controller\Plugin\FlashMessenger;
+use Laminas\View\Model\JsonModel;
+use Laminas\View\Model\ViewModel;
 
 /**
  * Class AbstractCrudController
@@ -85,7 +85,7 @@ abstract class AbstractCrudController extends AbstractActionController
 
     /**
      * @param bool $getParamsFromSession
-     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     * @return \Laminas\Db\ResultSet\HydratingResultSet|\Laminas\Db\ResultSet\ResultSet|\Laminas\Paginator\Paginator
      */
     public function getPaginatorResults($getParamsFromSession = true)
     {
@@ -131,7 +131,7 @@ abstract class AbstractCrudController extends AbstractActionController
     }
 
     /**
-     * @return \Zend\Http\Response|ViewModel
+     * @return \Laminas\Http\Response|ViewModel
      */
     public function listAction()
     {
@@ -149,7 +149,7 @@ abstract class AbstractCrudController extends AbstractActionController
     }
 
     /**
-     * @return \Zend\Http\Response|ViewModel
+     * @return \Laminas\Http\Response|ViewModel
      */
     public function addAction()
     {
@@ -235,7 +235,7 @@ abstract class AbstractCrudController extends AbstractActionController
     }
 
     /**
-     * @return \Zend\Http\Response|JsonModel|ViewModel
+     * @return \Laminas\Http\Response|JsonModel|ViewModel
      */
     public function editAction()
     {
@@ -336,7 +336,7 @@ abstract class AbstractCrudController extends AbstractActionController
     }
 
     /**
-     * @return \Zend\Http\Response|JsonModel
+     * @return \Laminas\Http\Response|JsonModel
      */
     public function deleteAction()
     {

@@ -3,7 +3,7 @@
 namespace ShopDomPdf\Form;
 
 use TwbBundle\Form\View\Helper\TwbBundleForm;
-use Zend\Form\Form;
+use Laminas\Form\Form;
 
 
 class DomPdfSettings extends Form

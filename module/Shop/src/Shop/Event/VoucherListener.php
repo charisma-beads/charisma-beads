@@ -1,12 +1,4 @@
 <?php
-/**
- * charisma-beads (http://www.shaunfreeman.co.uk/)
- *
- * @author      Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @link        https://github.com/uthando-cms for the canonical source repository
- * @copyright   Copyright (c) 2017 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license     see LICENSE
- */
 
 namespace Shop\Event;
 
@@ -18,11 +10,11 @@ use Shop\Service\OrderService;
 use Shop\Service\VoucherCodeService;
 use Shop\Service\VoucherCustomerMapService;
 use Shop\Validator\Voucher;
-use Zend\EventManager\Event;
-use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\ListenerAggregateInterface;
-use Zend\EventManager\ListenerAggregateTrait;
-use Zend\Mvc\Controller\Plugin\FlashMessenger;
+use Laminas\EventManager\Event;
+use Laminas\EventManager\EventManagerInterface;
+use Laminas\EventManager\ListenerAggregateInterface;
+use Laminas\EventManager\ListenerAggregateTrait;
+use Laminas\Mvc\Controller\Plugin\FlashMessenger;
 
 /**
  * Class VoucherListener

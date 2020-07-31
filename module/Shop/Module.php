@@ -1,13 +1,4 @@
 <?php
-/**
- * Uthando CMS (http://www.shaunfreeman.co.uk/)
- *
- * @package   Shop
- * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @link      https://github.com/uthando-cms for the canonical source repository
- * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE
- */
 
 namespace Shop;
 
@@ -20,9 +11,9 @@ use Shop\Event\StockControlListener;
 use Shop\Event\VoucherListener;
 use Common\Config\ConfigInterface;
 use Common\Config\ConfigTrait;
-use Zend\Console\Adapter\AdapterInterface as Console;
-use Zend\ModuleManager\Feature\ConsoleUsageProviderInterface;
-use Zend\Mvc\MvcEvent;
+use Laminas\Console\Adapter\AdapterInterface as Console;
+use Laminas\ModuleManager\Feature\ConsoleUsageProviderInterface;
+use Laminas\Mvc\MvcEvent;
 
 /**
  * Class Module
@@ -62,7 +53,7 @@ class Module implements ConsoleUsageProviderInterface, ConfigInterface
     public function getAutoloaderConfig()
     {
         return [
-            'Zend\Loader\StandardAutoloader' => [
+            'Laminas\Loader\StandardAutoloader' => [
                 'namespaces' => [
                     __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
                 ],

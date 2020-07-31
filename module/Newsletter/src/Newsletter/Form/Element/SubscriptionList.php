@@ -7,10 +7,10 @@ use Newsletter\Service\SubscriptionService;
 use Newsletter\Model\NewsletterModel as NewsletterModel;
 use Newsletter\Service\NewsletterService;
 use Newsletter\Model\SubscriptionModel as SubscriptionModel;
-use Zend\Form\Element\MultiCheckbox;
-use Zend\Form\FormElementManager;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
+use Laminas\Form\Element\MultiCheckbox;
+use Laminas\Form\FormElementManager;
+use Laminas\ServiceManager\ServiceLocatorAwareInterface;
+use Laminas\ServiceManager\ServiceLocatorAwareTrait;
 
 
 class SubscriptionList extends MultiCheckbox implements ServiceLocatorAwareInterface

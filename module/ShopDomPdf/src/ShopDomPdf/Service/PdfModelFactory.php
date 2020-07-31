@@ -4,8 +4,8 @@ namespace ShopDomPdf\Service;
 
 use ShopDomPdf\Options\PdfOptions;
 use ShopDomPdf\View\Model\PdfModel;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\ServiceManager\FactoryInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 
 class PdfModelFactory implements FactoryInterface

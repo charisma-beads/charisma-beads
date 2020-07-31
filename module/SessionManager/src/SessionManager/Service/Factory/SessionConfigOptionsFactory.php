@@ -6,9 +6,9 @@ declare(strict_types=1);
 namespace SessionManager\Service\Factory;
 
 use SessionManager\Options\SessionOptions;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\Session\Config\SessionConfig;
+use Laminas\ServiceManager\FactoryInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
+use Laminas\Session\Config\SessionConfig;
 
 class SessionConfigOptionsFactory implements FactoryInterface
 {

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace FileManager\Hydrator\Strategy;
 
-use Zend\Config\Reader\Ini as IniReader;
-use Zend\Config\Writer\Ini as IniWriter;
-use Zend\Hydrator\Strategy\StrategyInterface;
+use Laminas\Config\Reader\Ini as IniReader;
+use Laminas\Config\Writer\Ini as IniWriter;
+use Laminas\Hydrator\Strategy\StrategyInterface;
 
 class ArrayToIniStrategy implements StrategyInterface
 {

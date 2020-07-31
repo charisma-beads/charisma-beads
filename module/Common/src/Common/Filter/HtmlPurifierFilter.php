@@ -6,7 +6,7 @@ declare(strict_types=1);
 namespace Common\Filter;
 
 use HTMLPurifier;
-use Zend\Filter\AbstractFilter;
+use Laminas\Filter\AbstractFilter;
 
 class HtmlPurifierFilter extends AbstractFilter
 {

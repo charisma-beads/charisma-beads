@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace User\Options;
 
-use Zend\Stdlib\AbstractOptions;
+use Laminas\Stdlib\AbstractOptions;
 
 class UserOptions extends AbstractOptions
 {

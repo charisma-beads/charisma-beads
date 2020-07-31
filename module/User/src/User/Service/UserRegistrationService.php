@@ -8,7 +8,7 @@ use Common\Service\AbstractRelationalMapperService;
 use User\Hydrator\UserRegistrationHydrator;
 use User\Mapper\UserRegistrationMapper;
 use User\Model\UserRegistrationModel;
-use Zend\View\Model\ViewModel;
+use Laminas\View\Model\ViewModel;
 
 class UserRegistrationService extends AbstractRelationalMapperService
 {

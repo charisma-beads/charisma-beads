@@ -3,14 +3,14 @@
 namespace ShopDomPdf\Form;
 
 use ShopDomPdf\Model\PdfTextLineFont;
-use Zend\Filter\StringTrim;
-use Zend\Filter\StripTags;
-use Zend\Form\Element\Number;
-use Zend\Form\Element\Select;
-use Zend\Form\Element\Text;
-use Zend\Form\Fieldset;
-use Zend\Hydrator\ClassMethods;
-use Zend\InputFilter\InputFilterProviderInterface;
+use Laminas\Filter\StringTrim;
+use Laminas\Filter\StripTags;
+use Laminas\Form\Element\Number;
+use Laminas\Form\Element\Select;
+use Laminas\Form\Element\Text;
+use Laminas\Form\Fieldset;
+use Laminas\Hydrator\ClassMethods;
+use Laminas\InputFilter\InputFilterProviderInterface;
 
 
 class PdfTextLineFontFieldSet extends Fieldset implements InputFilterProviderInterface

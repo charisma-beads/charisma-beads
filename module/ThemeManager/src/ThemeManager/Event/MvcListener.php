@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace ThemeManager\Event;
 
 use ThemeManager\Options\ThemeOptions;
-use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\ListenerAggregateInterface;
-use Zend\EventManager\ListenerAggregateTrait;
-use Zend\Http\PhpEnvironment\Request;
-use Zend\Mvc\MvcEvent;
-use Zend\Permissions\Acl\Role\RoleInterface;
-use Zend\Mvc\Router\RouteMatch;
-use Zend\Mvc\Router\Http\RouteMatch as HttpRouteMatch;
+use Laminas\EventManager\EventManagerInterface;
+use Laminas\EventManager\ListenerAggregateInterface;
+use Laminas\EventManager\ListenerAggregateTrait;
+use Laminas\Http\PhpEnvironment\Request;
+use Laminas\Mvc\MvcEvent;
+use Laminas\Permissions\Acl\Role\RoleInterface;
+use Laminas\Mvc\Router\RouteMatch;
+use Laminas\Mvc\Router\Http\RouteMatch as HttpRouteMatch;
 
 /**
  * Class MvcListener

@@ -3,19 +3,19 @@
 namespace Mail\Service;
 
 use DOMElement;
-use Zend\Mail\Header\ContentType;
-use Zend\Mail\Message;
-use Zend\Mail\Transport;
-use Zend\Mime\Part as MimePart;
-use Zend\Mime\Message as MimeMessage;
-use Zend\Stdlib\Exception\DomainException;
-use Zend\View\Model\ViewModel;
+use Laminas\Mail\Header\ContentType;
+use Laminas\Mail\Message;
+use Laminas\Mail\Transport;
+use Laminas\Mime\Part as MimePart;
+use Laminas\Mime\Message as MimeMessage;
+use Laminas\Stdlib\Exception\DomainException;
+use Laminas\View\Model\ViewModel;
 use Common\Stdlib\OptionsTrait;
-use Zend\Mail\Transport\TransportInterface;
-use Zend\Stdlib\Exception\InvalidArgumentException;
-use Zend\View\Renderer\RendererInterface;
-use Zend\Mail\Address;
-use Zend\Mime\Mime;
+use Laminas\Mail\Transport\TransportInterface;
+use Laminas\Stdlib\Exception\InvalidArgumentException;
+use Laminas\View\Renderer\RendererInterface;
+use Laminas\Mail\Address;
+use Laminas\Mime\Mime;
 
 
 class Mail
@@ -23,7 +23,7 @@ class Mail
     use OptionsTrait;
     
     /**
-     * @var \Zend\View\Renderer\RendererInterface
+     * @var \Laminas\View\Renderer\RendererInterface
      */
     protected $view;
     
@@ -33,7 +33,7 @@ class Mail
     protected $transport = [];
     
     /**
-     * @var \Zend\View\Model\ViewModel
+     * @var \Laminas\View\Model\ViewModel
      */
     protected $layout;
 
@@ -63,7 +63,7 @@ class Mail
     	if (null !== $layout && !is_string($layout) && !($layout instanceof ViewModel)) {
     		throw new InvalidArgumentException(
 				'Invalid value supplied for setLayout.'.
-				'Expected null, string, or Zend\View\Model\ViewModel.'
+				'Expected null, string, or Laminas\View\Model\ViewModel.'
     		);
     	}
     	
@@ -222,7 +222,7 @@ class Mail
     	// Supported types are null, ViewModel and string.
     	if (null !== $body && !is_string($body) && !($body instanceof ViewModel)) {
     		throw new InvalidArgumentException(
-    			'Invalid value supplied. Expected null, string or instance of Zend\View\Model\ViewModel.'
+    			'Invalid value supplied. Expected null, string or instance of Laminas\View\Model\ViewModel.'
     		);
     	}
     	
@@ -343,18 +343,18 @@ class Mail
         $options          = $transportConfig['options'];
         
         switch ($class) {
-        	case 'Zend\Mail\Transport\Sendmail':
+        	case 'Laminas\Mail\Transport\Sendmail':
         	case 'Sendmail':
         	case 'sendmail';
         	   $transport = new Transport\Sendmail();
         	   break;
-        	case 'Zend\Mail\Transport\Smtp';
+        	case 'Laminas\Mail\Transport\Smtp';
         	case 'Smtp';
         	case 'smtp';
         	   $options = new Transport\SmtpOptions($options);
         	   $transport = new Transport\Smtp($options);
         	   break;
-        	case 'Zend\Mail\Transport\File';
+        	case 'Laminas\Mail\Transport\File';
         	case 'File';
         	case 'file';
         	   $options = new Transport\FileOptions($options);
@@ -382,7 +382,7 @@ class Mail
     }
     
 	/**
-	 * @return \Zend\View\Renderer\RendererInterface $view
+	 * @return \Laminas\View\Renderer\RendererInterface $view
 	 */
 	public function getView()
 	{
@@ -390,7 +390,7 @@ class Mail
 	}
 
 	/**
-	 * @param \Zend\View\Renderer\RendererInterface $view
+	 * @param \Laminas\View\Renderer\RendererInterface $view
 	 * @return $this
 	 */
 	public function setView($view)

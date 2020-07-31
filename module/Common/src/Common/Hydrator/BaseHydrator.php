@@ -3,8 +3,8 @@
 namespace Common\Hydrator;
 
 use Common\Model\ModelInterface;
-use Zend\Hydrator\AbstractHydrator as ZendAbstractHydrator;
-use Zend\Hydrator\NamingStrategy\MapNamingStrategy;
+use Laminas\Hydrator\AbstractHydrator as ZendAbstractHydrator;
+use Laminas\Hydrator\NamingStrategy\MapNamingStrategy;
 
 
 class BaseHydrator extends ZendAbstractHydrator

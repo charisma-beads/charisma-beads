@@ -46,8 +46,8 @@ use Common\View\FormatDate;
 use Common\View\FormManager;
 use Common\View\OptionsHelper;
 use Common\View\Request;
-use Zend\Cache\Service\StorageCacheFactory;
-use Zend\Db\Adapter\Adapter as DbAdapter;
+use Laminas\Cache\Service\StorageCacheFactory;
+use Laminas\Db\Adapter\Adapter as DbAdapter;
 
 return [
     'common' => [
@@ -77,7 +77,6 @@ return [
             DbAdapter::class            => DbAdapterServiceFactory::class,
             StorageCacheFactory::class  => StorageCacheFactory::class,
 
-            AkismetOptions::class       => AkismetOptionsFactory::class,
             CacheOptions::class         => CacheOptionsFactory::class,
             DbOptions::class            => DbOptionsFactory::class,
             GeneralOptions::class       => GeneralOptionsFactory::class

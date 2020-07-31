@@ -8,8 +8,8 @@ use Newsletter\Service\TemplateService;
 use Newsletter\View\Renderer\NewsletterEngine;
 use Newsletter\View\Renderer\NewsletterRenderer;
 use Newsletter\View\Resolver\NewsletterResolver;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\ServiceManager\FactoryInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 
 class NewsletterRendererFactory implements FactoryInterface

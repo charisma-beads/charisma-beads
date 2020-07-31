@@ -11,10 +11,10 @@
 
 namespace Common\Form\View\Helper;
 
-use Zend\Form\View\Helper\FormSelect as ZendFormSelect;
-use Zend\Stdlib\ArrayUtils;
+use Laminas\Form\View\Helper\FormSelect as LaminasFormSelect;
+use Laminas\Stdlib\ArrayUtils;
 
-class FormSelect extends ZendFormSelect
+class FormSelect extends LaminasFormSelect
 {
     /**
      * Attributes valid for options

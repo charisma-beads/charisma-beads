@@ -3,9 +3,9 @@
 namespace Mail\Form\Element;
 
 use Mail\Options\MailOptions;
-use Zend\Form\Element\Select;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
+use Laminas\Form\Element\Select;
+use Laminas\ServiceManager\ServiceLocatorAwareInterface;
+use Laminas\ServiceManager\ServiceLocatorAwareTrait;
 
 
 class MailTransportList extends Select implements ServiceLocatorAwareInterface

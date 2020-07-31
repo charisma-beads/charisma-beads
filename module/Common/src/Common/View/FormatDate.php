@@ -2,7 +2,7 @@
 
 namespace Common\View;
 
-use Zend\View\Helper\AbstractHelper;
+use Laminas\View\Helper\AbstractHelper;
 
 class FormatDate extends AbstractHelper
 {

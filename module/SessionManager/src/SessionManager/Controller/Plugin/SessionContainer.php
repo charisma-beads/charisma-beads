@@ -2,9 +2,9 @@
 
 namespace SessionManager\Controller\Plugin;
 
-use Zend\Mvc\Controller\Plugin\AbstractPlugin;
+use Laminas\Mvc\Controller\Plugin\AbstractPlugin;
 use SessionManager\SessionContainerTrait;
-use Zend\Session\Container;
+use Laminas\Session\Container;
 
 class SessionContainer extends AbstractPlugin
 {

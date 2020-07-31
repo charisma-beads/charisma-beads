@@ -2,7 +2,7 @@
 
 namespace Common\Mapper;
 
-use Zend\Mvc\Service\AbstractPluginManagerFactory;
+use Laminas\Mvc\Service\AbstractPluginManagerFactory;
 
 
 class MapperManagerFactory extends AbstractPluginManagerFactory

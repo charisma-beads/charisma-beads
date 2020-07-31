@@ -1,24 +1,16 @@
 <?php
-/**
- * Uthando CMS (http://www.shaunfreeman.co.uk/)
- *
- * @package   Shop\InputFilter\Payment
- * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
- */
 
 namespace Shop\InputFilter;
 
-use Zend\Filter\Digits;
-use Zend\Filter\PregReplace;
-use Zend\Filter\StringTrim;
-use Zend\Filter\StripTags;
-use Zend\I18n\Validator\IsFloat;
-use Zend\I18n\Validator\IsInt;
-use Zend\InputFilter\InputFilter;
-use Zend\Validator\CreditCard;
-use Zend\Validator\StringLength;
+use Laminas\Filter\Digits;
+use Laminas\Filter\PregReplace;
+use Laminas\Filter\StringTrim;
+use Laminas\Filter\StripTags;
+use Laminas\I18n\Validator\IsFloat;
+use Laminas\I18n\Validator\IsInt;
+use Laminas\InputFilter\InputFilter;
+use Laminas\Validator\CreditCard;
+use Laminas\Validator\StringLength;
 
 /**
  * Class CreditCard
@@ -97,7 +89,7 @@ class CreditCardInputFilter extends InputFilter
                 ['name' => Digits::class],
             ],
             'validators'	=> [
-                ['name' => \Zend\Validator\Digits::class],
+                ['name' => \Laminas\Validator\Digits::class],
                 ['name' => StringLength::class, 'options' => [
                     'min'      => 3,
                     'max'      => 3,
@@ -115,7 +107,7 @@ class CreditCardInputFilter extends InputFilter
                 ['name' => Digits::class],
             ],
             'validators'	=> [
-                ['name' => \Zend\Validator\Digits::class],
+                ['name' => \Laminas\Validator\Digits::class],
                 ['name' => StringLength::class, 'options' => [
                     'min'      => 1,
                     'max'      => 3,

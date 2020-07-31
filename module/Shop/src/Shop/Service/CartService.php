@@ -1,12 +1,4 @@
 <?php
-/**
- * Uthando CMS (http://www.shaunfreeman.co.uk/)
- *
- * @package   Shop\Service\Cart
- * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE
- */
 
 namespace Shop\Service;
 
@@ -20,8 +12,8 @@ use Shop\Model\OrderLineInterface;
 use Shop\Options\CartCookieOptions;
 use Shop\Options\CartOptions;
 use Common\Model\CollectionException;
-use Zend\Session\Container;
-use Zend\Stdlib\InitializableInterface;
+use Laminas\Session\Container;
+use Laminas\Stdlib\InitializableInterface;
 
 /**
  * Class Cart

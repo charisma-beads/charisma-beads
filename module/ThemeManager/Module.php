@@ -5,8 +5,8 @@ namespace ThemeManager;
 use Common\Config\ConfigInterface;
 use Common\Config\ConfigTrait;
 use ThemeManager\Event\ConfigListener;
-use Zend\ModuleManager\ModuleManager;
-use Zend\Mvc\MvcEvent;
+use Laminas\ModuleManager\ModuleManager;
+use Laminas\Mvc\MvcEvent;
 use ThemeManager\Event\MvcListener;
 
 /**
@@ -20,7 +20,7 @@ class Module implements ConfigInterface
 
     public function init(ModuleManager $moduleManager)
     {
-        /* @var $sm \Zend\ServiceManager\ServiceManager */
+        /* @var $sm \Laminas\ServiceManager\ServiceManager */
         $sm = $moduleManager->getEvent()->getParam('ServiceManager');
         $serviceListener = $sm->get('ServiceListener');
         $events = $moduleManager->getEventManager();
@@ -50,10 +50,10 @@ class Module implements ConfigInterface
     public function getAutoloaderConfig()
     {
         return [
-            'Zend\Loader\ClassMapAutoloader' => [
+            'Laminas\Loader\ClassMapAutoloader' => [
                 __DIR__ . '/autoload_classmap.php'
             ],
-            'Zend\Loader\StandardAutoloader' => [
+            'Laminas\Loader\StandardAutoloader' => [
                 'namespaces' => [
                     __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
                 ],

@@ -16,11 +16,11 @@ use User\Model\UserModel;
 use Common\Service\AbstractMapperService;
 use User\Options\AuthOptions;
 use User\UserException;
-use Zend\Authentication\AuthenticationService;
-use Zend\Crypt\Password\PasswordInterface;
-use Zend\EventManager\Event;
-use Zend\Form\Form;
-use Zend\View\Model\ViewModel;
+use Laminas\Authentication\AuthenticationService;
+use Laminas\Crypt\Password\PasswordInterface;
+use Laminas\EventManager\Event;
+use Laminas\Form\Form;
+use Laminas\View\Model\ViewModel;
 
 class UserService extends AbstractMapperService
 {
@@ -256,7 +256,7 @@ class UserService extends AbstractMapperService
         }
 
         if (!$crypt instanceof PasswordInterface) {
-            throw new UserException('Credential treatment must be an instance of Zend\Crypt\Password\PasswordInterface');
+            throw new UserException('Credential treatment must be an instance of Laminas\Crypt\Password\PasswordInterface');
         }
 
         $password = $crypt->create($password);

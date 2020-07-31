@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Common\Service\Factory;
 
 use Common\Options\GeneralOptions;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\ServiceManager\FactoryInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 class GeneralOptionsFactory implements FactoryInterface
 {

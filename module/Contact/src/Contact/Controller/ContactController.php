@@ -3,9 +3,9 @@
 namespace Contact\Controller;
 
 use Contact\ServiceManager\ContactService;
-use Zend\Http\Response;
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\ViewModel;
+use Laminas\Http\Response;
+use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\View\Model\ViewModel;
 
 
 class ContactController extends AbstractActionController

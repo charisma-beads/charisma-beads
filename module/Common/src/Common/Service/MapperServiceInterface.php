@@ -4,7 +4,7 @@ namespace Common\Service;
 
 use Common\Mapper\MapperInterface;
 use Common\Model\ModelInterface;
-use Zend\Form\Form;
+use Laminas\Form\Form;
 
 
 interface MapperServiceInterface
@@ -22,7 +22,7 @@ interface MapperServiceInterface
      * fetch all records form database
      *
      * @param null|string $sort
-     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     * @return \Laminas\Db\ResultSet\HydratingResultSet|\Laminas\Db\ResultSet\ResultSet|\Laminas\Paginator\Paginator
      */
     public function fetchAll($sort = null);
 
@@ -30,7 +30,7 @@ interface MapperServiceInterface
      * basic search on database
      *
      * @param array $post
-     * @return \Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator|\Zend\Db\ResultSet\HydratingResultSet
+     * @return \Laminas\Db\ResultSet\ResultSet|\Laminas\Paginator\Paginator|\Laminas\Db\ResultSet\HydratingResultSet
      */
     public function search(array $post);
 
@@ -38,7 +38,7 @@ interface MapperServiceInterface
      * prepare and return form
      *
      * @param array $post
-     * @param \Zend\Form\Form $form
+     * @param \Laminas\Form\Form $form
      * @return int|Form
      */
     public function add(array $post, Form $form = null);

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Common\Cache;
 
-use Zend\Cache\Storage\Adapter\AbstractAdapter;
-use Zend\Cache\Storage\TaggableInterface;
+use Laminas\Cache\Storage\Adapter\AbstractAdapter;
+use Laminas\Cache\Storage\TaggableInterface;
 
 /**
  * Class CacheTrait

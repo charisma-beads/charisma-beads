@@ -2,9 +2,9 @@
 
 namespace SessionManager\Session\SaveHandler;
 
-use Zend\Db\Sql\Expression;
-use Zend\Db\Sql\Where;
-use Zend\Session\SaveHandler\DbTableGateway as ZendDbTableGateway;
+use Laminas\Db\Sql\Expression;
+use Laminas\Db\Sql\Where;
+use Laminas\Session\SaveHandler\DbTableGateway as ZendDbTableGateway;
 
 class DbTableGateway extends ZendDbTableGateway
 {

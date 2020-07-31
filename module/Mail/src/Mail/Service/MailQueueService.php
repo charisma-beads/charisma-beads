@@ -7,7 +7,7 @@ use Mail\Hydrator\MailQueueHydrator;
 use Mail\Mapper\MailQueueMapper as MailQueueMapper;
 use Mail\Model\MailQueueModel as MailQueueModel;
 use Mail\Options\MailOptions;
-use Zend\Db\Sql\Where;
+use Laminas\Db\Sql\Where;
 
 /**
  * Class MailQueue

@@ -2,7 +2,7 @@
 
 namespace Mail\Options;
 
-use Zend\Stdlib\AbstractOptions;
+use Laminas\Stdlib\AbstractOptions;
 
 
 class MailOptions extends AbstractOptions

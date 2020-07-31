@@ -2,8 +2,8 @@
 
 namespace Common\Service;
 
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
+use Laminas\ServiceManager\ServiceLocatorAwareInterface;
+use Laminas\ServiceManager\ServiceLocatorAwareTrait;
 use Common\Model\ModelInterface;
 
 
@@ -72,7 +72,7 @@ class FormService implements ServiceLocatorAwareInterface
      * @param string $name
      * @param ModelInterface $model
      * @param array $data
-     * @return \Zend\Form\Form
+     * @return \Laminas\Form\Form
      */
     public function getForm($name, $model = null, $data = null)
     {
@@ -91,7 +91,7 @@ class FormService implements ServiceLocatorAwareInterface
 
     /**
      * @param string $name
-     * @return \Zend\Form\Form
+     * @return \Laminas\Form\Form
      */
     public function getFromServiceManager($name)
     {

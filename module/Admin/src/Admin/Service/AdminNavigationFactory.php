@@ -2,7 +2,7 @@
 
 namespace Admin\Service;
 
-use Zend\Navigation\Service\AbstractNavigationFactory;
+use Laminas\Navigation\Service\AbstractNavigationFactory;
 
 /**
  * Class AdminNavigationFactory

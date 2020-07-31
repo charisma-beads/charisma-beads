@@ -5,8 +5,8 @@ namespace Contact\Options;
 use Common\Model\AbstractCollection;
 use Common\Model\ModelInterface;
 use Contact\Model\TransportListCollection;
-use Zend\Stdlib\AbstractOptions;
-use Zend\Stdlib\Exception\InvalidArgumentException;
+use Laminas\Stdlib\AbstractOptions;
+use Laminas\Stdlib\Exception\InvalidArgumentException;
 
 
 class FormOptions extends AbstractOptions
@@ -30,11 +30,6 @@ class FormOptions extends AbstractOptions
      * @var bool
      */
     protected $enableCaptcha = false;
-
-    /**
-     * @var bool
-     */
-    protected $enableAkismet = false;
 
     /**
      * @return string
@@ -116,24 +111,6 @@ class FormOptions extends AbstractOptions
     public function setEnableCaptcha($enableCaptcha)
     {
         $this->enableCaptcha = (bool) $enableCaptcha;
-        return $this;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function getEnableAkismet()
-    {
-        return $this->enableAkismet;
-    }
-
-    /**
-     * @param boolean $enableAkismet
-     * @return $this
-     */
-    public function setEnableAkismet($enableAkismet)
-    {
-        $this->enableAkismet = (bool) $enableAkismet;
         return $this;
     }
 

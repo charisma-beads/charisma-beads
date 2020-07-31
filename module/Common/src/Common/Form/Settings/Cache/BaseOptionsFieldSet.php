@@ -11,15 +11,15 @@
 namespace Common\Form\Settings\Cache;
 
 use TwbBundle\Form\View\Helper\TwbBundleForm;
-use Zend\Filter\Boolean;
-use Zend\Filter\StringTrim;
-use Zend\Filter\StripTags;
-use Zend\Filter\ToInt;
-use Zend\Form\Element\Checkbox;
-use Zend\Form\Element\Number;
-use Zend\Form\Element\Text;
-use Zend\Form\Fieldset;
-use Zend\InputFilter\InputFilterProviderInterface;
+use Laminas\Filter\Boolean;
+use Laminas\Filter\StringTrim;
+use Laminas\Filter\StripTags;
+use Laminas\Filter\ToInt;
+use Laminas\Form\Element\Checkbox;
+use Laminas\Form\Element\Number;
+use Laminas\Form\Element\Text;
+use Laminas\Form\Fieldset;
+use Laminas\InputFilter\InputFilterProviderInterface;
 
 abstract class BaseOptionsFieldSet extends Fieldset implements InputFilterProviderInterface
 {

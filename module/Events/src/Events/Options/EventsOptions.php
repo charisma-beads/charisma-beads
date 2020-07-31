@@ -2,7 +2,7 @@
 
 namespace Events\Options;
 
-use Zend\Stdlib\AbstractOptions;
+use Laminas\Stdlib\AbstractOptions;
 
 
 class EventsOptions extends AbstractOptions

@@ -39,10 +39,10 @@ return [
     ],
     'service_manager' => [
         'invokables' => [
-            'ModuleRouteListener' => 'Zend\Mvc\ModuleRouteListener'
+            'ModuleRouteListener' => 'Laminas\Mvc\ModuleRouteListener'
         ],
         'factories' => [
-            'Navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory'
+            'Navigation' => 'Laminas\Navigation\Service\DefaultNavigationFactory'
         ]
     ]
 ];

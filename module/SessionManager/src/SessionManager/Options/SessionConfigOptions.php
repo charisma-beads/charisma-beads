@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace SessionManager\Options;
 
-use Zend\Stdlib\AbstractOptions;
+use Laminas\Stdlib\AbstractOptions;
 
 class SessionConfigOptions extends AbstractOptions
 {

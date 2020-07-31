@@ -3,10 +3,10 @@
 namespace Common\Mapper;
 
 use Common\Hydrator\NestedSetInterface;
-use Zend\Db\ResultSet\ResultSet;
-use Zend\Db\Sql\Select;
-use Zend\Db\Sql\Where;
-use Zend\Db\Sql\Expression;
+use Laminas\Db\ResultSet\ResultSet;
+use Laminas\Db\Sql\Select;
+use Laminas\Db\Sql\Where;
+use Laminas\Db\Sql\Expression;
 
 /**
  * Class AbstractNestedSet
@@ -26,7 +26,7 @@ abstract class AbstractNestedSet extends AbstractDbMapper
      * Gets all items in tree.
      *
      * @param null|string $sort
-     * @return \Zend\Db\ResultSet\HydratingResultSet|ResultSet|\Zend\Paginator\Paginator
+     * @return \Laminas\Db\ResultSet\HydratingResultSet|ResultSet|\Laminas\Paginator\Paginator
      */
     public function fetchAll($sort = null)
     {
@@ -39,7 +39,7 @@ abstract class AbstractNestedSet extends AbstractDbMapper
     /**
      * Get only the top level items in tree.
      *
-     * @return \Zend\Db\ResultSet\ResultSet
+     * @return \Laminas\Db\ResultSet\ResultSet
      */
     public function fetchTopLevelOnly()
     {
@@ -78,7 +78,7 @@ abstract class AbstractNestedSet extends AbstractDbMapper
      * Get the pathway of of the child by its id.
      *
      * @param int $id
-     * @return \Zend\Db\Sql\Select
+     * @return \Laminas\Db\Sql\Select
      */
     public function getPathwayByChildId($id)
     {

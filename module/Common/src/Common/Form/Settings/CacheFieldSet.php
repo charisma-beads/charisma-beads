@@ -16,13 +16,13 @@ use Common\Form\Element\CachePluginsSelect;
 use Common\Form\Settings\Cache\FileSystemFieldSet;
 use Common\Hydrator\Strategy\OptionsStrategy;
 use Common\Options\CacheOptions;
-use Zend\Filter\Boolean;
-use Zend\Filter\StringTrim;
-use Zend\Filter\StripTags;
-use Zend\Form\Element\Checkbox;
-use Zend\Form\Fieldset;
-use Zend\Hydrator\ClassMethods;
-use Zend\InputFilter\InputFilterProviderInterface;
+use Laminas\Filter\Boolean;
+use Laminas\Filter\StringTrim;
+use Laminas\Filter\StripTags;
+use Laminas\Form\Element\Checkbox;
+use Laminas\Form\Fieldset;
+use Laminas\Hydrator\ClassMethods;
+use Laminas\InputFilter\InputFilterProviderInterface;
 
 
 /**

@@ -2,9 +2,9 @@
 
 namespace Common\View;
 
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\View\Helper\AbstractHelper;
-use Zend\View\Renderer\PhpRenderer;
+use Laminas\ServiceManager\ServiceLocatorAwareInterface;
+use Laminas\View\Helper\AbstractHelper;
+use Laminas\View\Renderer\PhpRenderer;
 
 /**
  * Class AbstractViewHelper

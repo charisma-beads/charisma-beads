@@ -5,8 +5,8 @@ declare(strict_types=1);
 
 namespace Common\Hydrator\Strategy;
 
-use Zend\Hydrator\Strategy\StrategyInterface;
-use Zend\Stdlib\AbstractOptions;
+use Laminas\Hydrator\Strategy\StrategyInterface;
+use Laminas\Stdlib\AbstractOptions;
 
 class OptionsStrategy implements StrategyInterface
 {

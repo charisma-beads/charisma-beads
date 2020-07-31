@@ -3,12 +3,12 @@
 namespace Navigation\Event;
 
 use Navigation\Service\SiteMapService;
-use Zend\EventManager\Event;
-use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\ListenerAggregateTrait;
-use Zend\Navigation\Navigation;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
+use Laminas\EventManager\Event;
+use Laminas\EventManager\EventManagerInterface;
+use Laminas\EventManager\ListenerAggregateTrait;
+use Laminas\Navigation\Navigation;
+use Laminas\ServiceManager\ServiceLocatorAwareInterface;
+use Laminas\ServiceManager\ServiceLocatorAwareTrait;
 
 
 abstract class AbstractSiteMapListener implements SiteMapListenerInterface, ServiceLocatorAwareInterface

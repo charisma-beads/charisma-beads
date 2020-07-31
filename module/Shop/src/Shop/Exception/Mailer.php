@@ -1,24 +1,16 @@
 <?php
-/**
- * charisma-beads (http://www.shaunfreeman.co.uk/)
- *
- * @package   ${NAMESPACE}
- * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @copyright Copyright (c) 2016 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE
- */
 
 namespace Shop\Exception;
 
-use Zend\Mail\Message;
-use Zend\Mail\Transport\Smtp;
-use Zend\Mail\Transport\SmtpOptions;
-use Zend\Mime\Message as MimeMessage;
-use Zend\Mime\Mime;
-use Zend\Mime\Part;
-use Zend\ServiceManager\ServiceManager;
-use Zend\View\Model\ViewModel;
-use Zend\View\Renderer\PhpRenderer;
+use Laminas\Mail\Message;
+use Laminas\Mail\Transport\Smtp;
+use Laminas\Mail\Transport\SmtpOptions;
+use Laminas\Mime\Message as MimeMessage;
+use Laminas\Mime\Mime;
+use Laminas\Mime\Part;
+use Laminas\ServiceManager\ServiceManager;
+use Laminas\View\Model\ViewModel;
+use Laminas\View\Renderer\PhpRenderer;
 
 /**
  * Class Mailer
@@ -66,7 +58,7 @@ class Mailer
     }
 
     /**
-     * @param \Zend\ServiceManager\ServiceManager $sm
+     * @param \Laminas\ServiceManager\ServiceManager $sm
      *
      * @return Mailer
      */
@@ -77,7 +69,7 @@ class Mailer
     }
 
     /**
-     * @return \Zend\ServiceManager\ServiceManager
+     * @return \Laminas\ServiceManager\ServiceManager
      */
     public function getServiceManager()
     {
@@ -94,7 +86,7 @@ class Mailer
     {
         /** @var PhpRenderer $view */
         $view = $this->getServiceManager()->get('ViewRenderer');
-        /* @var \Zend\Http\PhpEnvironment\Request $request */
+        /* @var \Laminas\Http\PhpEnvironment\Request $request */
         $request = $this->getServiceManager()->get('Request');
 
         $model = new ViewModel(array_merge($extraVars, [

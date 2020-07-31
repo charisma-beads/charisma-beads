@@ -1,19 +1,10 @@
 <?php
-/**
- * Uthando CMS (http://www.shaunfreeman.co.uk/)
- *
- * @package   Shop\Mapper\Country
- * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @link      https://github.com/uthando-cms for the canonical source repository
- * @copyright Copyright (c) 2015 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
- */
 
 namespace Shop\Mapper;
 
 use Common\Mapper\AbstractDbMapper;
-use Zend\Db\ResultSet\ResultSet;
-use Zend\Db\Sql\Select;
+use Laminas\Db\ResultSet\ResultSet;
+use Laminas\Db\Sql\Select;
 
 /**
  * Class Country
@@ -29,7 +20,7 @@ class CountryMapper extends AbstractDbMapper
      * @param array $search
      * @param string $sort
      * @param null $select
-     * @return \Zend\Db\ResultSet\HydratingResultSet|ResultSet|\Zend\Paginator\Paginator
+     * @return \Laminas\Db\ResultSet\HydratingResultSet|ResultSet|\Laminas\Paginator\Paginator
      */
     public function search(array $search, $sort, $select = null)
     {
@@ -62,7 +53,7 @@ class CountryMapper extends AbstractDbMapper
 
     /**
      * @param $id
-     * @return \Zend\Db\ResultSet\HydratingResultSet|ResultSet|\Zend\Paginator\Paginator
+     * @return \Laminas\Db\ResultSet\HydratingResultSet|ResultSet|\Laminas\Paginator\Paginator
      */
     public function getCountryPostalRates($id)
     {

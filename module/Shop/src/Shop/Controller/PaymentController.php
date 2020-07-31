@@ -1,23 +1,15 @@
 <?php
-/**
- * Uthando CMS (http://www.shaunfreeman.co.uk/)
- *
- * @package   Shop\Controller
- * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
- */
 
 namespace Shop\Controller;
 
 use Shop\Service\CreditCardService;
 use Shop\Service\OrderService;
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\ViewModel;
+use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\View\Model\ViewModel;
 use Common\Service\ServiceTrait;
 use Shop\Model\OrderModel;
-use Zend\Http\PhpEnvironment\Response;
-use Zend\Form\Form;
+use Laminas\Http\PhpEnvironment\Response;
+use Laminas\Form\Form;
 
 /**
  * Class Payment

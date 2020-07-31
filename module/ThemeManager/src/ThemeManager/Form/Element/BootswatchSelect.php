@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace ThemeManager\Form\Element;
 
-use Zend\Form\Element\Select;
-use Zend\Json\Json;
+use Laminas\Form\Element\Select;
+use Laminas\Json\Json;
 
 class BootswatchSelect extends Select
 {

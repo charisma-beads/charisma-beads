@@ -1,12 +1,4 @@
 <?php
-/**
- * Uthando CMS (http://www.shaunfreeman.co.uk/)
- *
- * @package   Shop\Service
- * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @copyright Copyright (c) 2015 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE
- */
 
 namespace Shop\Service;
 
@@ -18,8 +10,8 @@ use Shop\Model\FaqModel as FaqModel;
 use Shop\ShopException;
 use Common\Model\ModelInterface;
 use Common\Service\AbstractMapperService;
-use Zend\EventManager\Event;
-use Zend\Form\Form;
+use Laminas\EventManager\Event;
+use Laminas\Form\Form;
 
 /**
  * Class Faq
@@ -54,7 +46,7 @@ class FaqService extends AbstractMapperService
 
     /**
      * @param bool $topLevelOnly
-     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     * @return \Laminas\Db\ResultSet\HydratingResultSet|\Laminas\Db\ResultSet\ResultSet|\Laminas\Paginator\Paginator
      */
     public function fetchAll($topLevelOnly=false)
     {

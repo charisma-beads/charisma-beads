@@ -3,15 +3,15 @@
 namespace Common\Event;
 
 use Common\Options\GeneralOptions;
-use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\ListenerAggregateInterface;
-use Zend\EventManager\ListenerAggregateTrait;
-use Zend\Http\Request;
-use Zend\Http\Response;
-use Zend\Mvc\Application as MvcApplication;
-use Zend\Mvc\Controller\AbstractController;
-use Zend\Mvc\MvcEvent;
-use Zend\Uri\Http as HttpUri;
+use Laminas\EventManager\EventManagerInterface;
+use Laminas\EventManager\ListenerAggregateInterface;
+use Laminas\EventManager\ListenerAggregateTrait;
+use Laminas\Http\Request;
+use Laminas\Http\Response;
+use Laminas\Mvc\Application as MvcApplication;
+use Laminas\Mvc\Controller\AbstractController;
+use Laminas\Mvc\MvcEvent;
+use Laminas\Uri\Http as HttpUri;
 
 
 class MvcListener implements ListenerAggregateInterface

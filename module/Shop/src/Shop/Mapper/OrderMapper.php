@@ -1,19 +1,11 @@
 <?php
-/**
- * Uthando CMS (http://www.shaunfreeman.co.uk/)
- *
- * @package   Shop\Mapper
- * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
- */
 
 namespace Shop\Mapper;
 
 use Common\Mapper\AbstractDbMapper;
-use Zend\Db\ResultSet\ResultSet;
-use Zend\Db\Sql\Expression;
-use Zend\Db\Sql\Select;
+use Laminas\Db\ResultSet\ResultSet;
+use Laminas\Db\Sql\Expression;
+use Laminas\Db\Sql\Select;
 
 /**
  * Class Order
@@ -26,7 +18,7 @@ class OrderMapper extends AbstractDbMapper
     protected $primary = 'orderId';
 
     /**
-     * @return \Zend\Db\ResultSet\HydratingResultSet|ResultSet|\Zend\Paginator\Paginator
+     * @return \Laminas\Db\ResultSet\HydratingResultSet|ResultSet|\Laminas\Paginator\Paginator
      */
     public function getCurrentOrders()
     {
@@ -49,7 +41,7 @@ class OrderMapper extends AbstractDbMapper
 
     /**
      * @param $id
-     * @return \Zend\Db\ResultSet\HydratingResultSet|ResultSet|\Zend\Paginator\Paginator
+     * @return \Laminas\Db\ResultSet\HydratingResultSet|ResultSet|\Laminas\Paginator\Paginator
      */
     public function getOrdersByCustomerId($id)
     {
@@ -80,7 +72,7 @@ class OrderMapper extends AbstractDbMapper
     /**
      * @param null|string $startDate
      * @param null|string $endDate
-     * @return \Zend\Db\ResultSet\HydratingResultSet|ResultSet|\Zend\Paginator\Paginator
+     * @return \Laminas\Db\ResultSet\HydratingResultSet|ResultSet|\Laminas\Paginator\Paginator
      */
     public function getMonthlyTotals($startDate = null, $endDate = null)
     {
@@ -159,7 +151,7 @@ class OrderMapper extends AbstractDbMapper
 
     /**
      * @param $id
-     * @return \Zend\Db\ResultSet\HydratingResultSet|ResultSet|\Zend\Paginator\Paginator
+     * @return \Laminas\Db\ResultSet\HydratingResultSet|ResultSet|\Laminas\Paginator\Paginator
      */
     public function getOrdersByUserId($id)
     {

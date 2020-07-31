@@ -3,7 +3,7 @@
 namespace Shop\Controller;
 
 use Shop\Service\ProductAvailabilityService;
-use Zend\Mvc\Controller\AbstractActionController;
+use Laminas\Mvc\Controller\AbstractActionController;
 
 class ProductAvailabilityController extends AbstractActionController
 {

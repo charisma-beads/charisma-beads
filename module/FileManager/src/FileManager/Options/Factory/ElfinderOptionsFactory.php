@@ -6,8 +6,8 @@ namespace FileManager\Options\Factory;
 
 
 use FileManager\Options\ElfinderOptions;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\ServiceManager\FactoryInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 class ElfinderOptionsFactory implements FactoryInterface
 {

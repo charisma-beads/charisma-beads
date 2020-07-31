@@ -3,7 +3,7 @@
 namespace Common\Form\Element;
 
 use libphonenumber\PhoneNumberUtil;
-use Zend\Form\Element\Select;
+use Laminas\Form\Element\Select;
 
 
 class LibPhoneNumberCountryList extends Select

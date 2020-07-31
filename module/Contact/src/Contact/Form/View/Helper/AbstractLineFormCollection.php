@@ -5,8 +5,8 @@ namespace Contact\Form\View\Helper;
 use TwbBundle\Form\View\Helper\TwbBundleFormCollection;
 use TwbBundle\Form\View\Helper\TwbBundleFormRow;
 use Contact\Form\AbstractLineFieldSet;
-use Zend\Form\Element\Collection;
-use Zend\Form\ElementInterface;
+use Laminas\Form\Element\Collection;
+use Laminas\Form\ElementInterface;
 
 /**
  * Class AbstractLineFormCollection

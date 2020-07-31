@@ -15,10 +15,10 @@ use Newsletter\Model\SubscriberModel;
 use Newsletter\Model\SubscriptionModel;
 use Newsletter\View\Model\NewsletterViewModel;
 use Newsletter\View\Renderer\NewsletterRenderer;
-use Zend\Config\Reader\Ini as IniReader;
-use Zend\Config\Writer\Ini as IniWriter;
-use Zend\View\Helper\BasePath;
-use Zend\View\Helper\ServerUrl;
+use Laminas\Config\Reader\Ini as IniReader;
+use Laminas\Config\Writer\Ini as IniWriter;
+use Laminas\View\Helper\BasePath;
+use Laminas\View\Helper\ServerUrl;
 
 
 class MessageService extends AbstractRelationalMapperService

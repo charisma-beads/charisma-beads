@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace User\Service;
 
-use Zend\Permissions\Acl\AclInterface;
+use Laminas\Permissions\Acl\AclInterface;
 
 /**
  * Interface AclAwareInterface

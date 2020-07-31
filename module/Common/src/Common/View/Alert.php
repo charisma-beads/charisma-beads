@@ -2,7 +2,7 @@
 
 namespace Common\View;
 
-use Zend\Form\View\Helper\AbstractHelper;
+use Laminas\Form\View\Helper\AbstractHelper;
 
 
 class Alert extends AbstractHelper

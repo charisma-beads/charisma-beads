@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace User\Form;
 
 use TwbBundle\Form\View\Helper\TwbBundleForm;
-use Zend\Form\Element\Submit;
+use Laminas\Form\Element\Submit;
 
 class ForgotPasswordForm extends BaseUserForm
 {

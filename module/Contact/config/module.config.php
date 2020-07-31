@@ -22,7 +22,7 @@ use Contact\Options\Service\FormOptionsFactory;
 use Contact\Options\Service\GoogleMapOptionsFactory;
 use Contact\ServiceManager\ContactService;
 use Contact\View\Helper\Contact;
-use Zend\ServiceManager\Factory\InvokableFactory;
+use Laminas\ServiceManager\Factory\InvokableFactory;
 
 return [
     'controllers' => [
@@ -44,7 +44,7 @@ return [
     ],
     'input_filters' => [
         'factories' => [
-           ContactInputFilter::class => ContactInputFilterFactory::class,
+           ContactInputFilter::class => InvokableFactory::class,
         ],
     ],
     'service_manager' => [

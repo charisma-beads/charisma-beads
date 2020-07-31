@@ -4,9 +4,9 @@ namespace News\Options;
 
 use Common\Filter\UcFirst;
 use Common\Filter\Ucwords;
-use Zend\Filter\StringToLower;
-use Zend\Filter\StringToUpper;
-use Zend\Stdlib\AbstractOptions;
+use Laminas\Filter\StringToLower;
+use Laminas\Filter\StringToUpper;
+use Laminas\Stdlib\AbstractOptions;
 
 
 class NewsOptions extends AbstractOptions

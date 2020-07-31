@@ -3,7 +3,7 @@
 namespace FileManager\Hydrator;
 
 use FileManager\Model\Image as ImageModel;
-use Zend\Hydrator\AbstractHydrator;
+use Laminas\Hydrator\AbstractHydrator;
 
 
 class ImageHydrator extends AbstractHydrator

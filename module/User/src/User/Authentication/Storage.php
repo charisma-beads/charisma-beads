@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace User\Authentication;
 
-use Zend\Authentication\Storage\Session;
+use Laminas\Authentication\Storage\Session;
 
 class Storage extends Session
 {

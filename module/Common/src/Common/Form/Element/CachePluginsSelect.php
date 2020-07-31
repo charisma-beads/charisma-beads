@@ -2,8 +2,8 @@
 
 namespace Common\Form\Element;
 
-use Zend\Cache\Storage\Plugin\Serializer;
-use Zend\Form\Element\Select;
+use Laminas\Cache\Storage\Plugin\Serializer;
+use Laminas\Form\Element\Select;
 
 class CachePluginsSelect extends Select
 {

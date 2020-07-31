@@ -1,12 +1,4 @@
 <?php
-/**
- * Uthando CMS (http://www.shaunfreeman.co.uk/)
- *
- * @package   Shop\Service\Customer
- * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
- */
 
 namespace Shop\Service;
 
@@ -17,7 +9,7 @@ use Shop\Mapper\CustomerAddressMapper;
 use Shop\Model\Customer\Address;
 use Shop\ShopException;
 use Common\Service\AbstractRelationalMapperService;
-use Zend\EventManager\Event;
+use Laminas\EventManager\Event;
 
 /**
  * Class Address
@@ -83,7 +75,7 @@ class CustomerAddressService extends AbstractRelationalMapperService
 
     /**
      * @param array $post
-     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     * @return \Laminas\Db\ResultSet\HydratingResultSet|\Laminas\Db\ResultSet\ResultSet|\Laminas\Paginator\Paginator
      * @throws ShopException
      */
     public function search(array $post)
@@ -97,7 +89,7 @@ class CustomerAddressService extends AbstractRelationalMapperService
 
     /**
      * @param int $customerId
-     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     * @return \Laminas\Db\ResultSet\HydratingResultSet|\Laminas\Db\ResultSet\ResultSet|\Laminas\Paginator\Paginator
      */
     public function getAllAddressesByCustomerId($customerId)
     {
@@ -117,7 +109,7 @@ class CustomerAddressService extends AbstractRelationalMapperService
 
     /**
      * @param int $userId
-     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     * @return \Laminas\Db\ResultSet\HydratingResultSet|\Laminas\Db\ResultSet\ResultSet|\Laminas\Paginator\Paginator
      */
     public function getAllUserAddresses($userId)
     {

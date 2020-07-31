@@ -4,13 +4,13 @@ namespace News\InputFilter;
 
 use Common\Filter\Slug;
 use News\Options\NewsOptions;
-use Zend\Filter\Digits;
-use Zend\Filter\StringTrim;
-use Zend\Filter\StripTags;
-use Zend\InputFilter\InputFilter;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
-use Zend\Validator\StringLength;
+use Laminas\Filter\Digits;
+use Laminas\Filter\StringTrim;
+use Laminas\Filter\StripTags;
+use Laminas\InputFilter\InputFilter;
+use Laminas\ServiceManager\ServiceLocatorAwareInterface;
+use Laminas\ServiceManager\ServiceLocatorAwareTrait;
+use Laminas\Validator\StringLength;
 
 
 class NewsInputFilter extends InputFilter implements ServiceLocatorAwareInterface

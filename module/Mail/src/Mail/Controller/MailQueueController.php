@@ -4,7 +4,7 @@ namespace Mail\Controller;
 
 use Common\Controller\AbstractCrudController;
 use Mail\Service\MailQueueService;
-use Zend\Http\PhpEnvironment\Response;
+use Laminas\Http\PhpEnvironment\Response;
 
 
 class MailQueueController extends AbstractCrudController
@@ -14,7 +14,7 @@ class MailQueueController extends AbstractCrudController
     protected $route = 'admin/mail-queue';
 
     /**
-     * @return \Zend\Http\Response
+     * @return \Laminas\Http\Response
      */
     public function addAction()
     {
@@ -22,7 +22,7 @@ class MailQueueController extends AbstractCrudController
     }
 
     /**
-     * @return \Zend\Http\Response
+     * @return \Laminas\Http\Response
      */
     public function editAction()
     {

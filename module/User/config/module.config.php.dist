@@ -10,7 +10,7 @@ return [
         ], 
         'auth' => [
             'authenticateMethod'          => 'getUserByEmail',
-            'credentialTreatment'         => Zend\Crypt\Password\Bcrypt::class,
+            'credentialTreatment'         => Laminas\Crypt\Password\Bcrypt::class,
             'useFallbackTreatment'        => false,
             'fallbackCredentialTreatment' => User\Crypt\Password\Md5::class,
         ],

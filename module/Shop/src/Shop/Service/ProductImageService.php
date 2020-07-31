@@ -1,12 +1,4 @@
 <?php
-/**
- * Uthando CMS (http://www.shaunfreeman.co.uk/)
- *
- * @package   Shop\Service\Product
- * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
- */
 
 namespace Shop\Service;
 
@@ -16,7 +8,7 @@ use Shop\InputFilter\ProductImageInputFilter;
 use Shop\Mapper\ProductImageMapper;
 use Shop\Model\ProductImageModel;
 use Common\Service\AbstractRelationalMapperService;
-use Zend\EventManager\Event;
+use Laminas\EventManager\Event;
 
 /**
  * Class Image
@@ -63,7 +55,7 @@ class ProductImageService extends AbstractRelationalMapperService
     /**
      * @param $id
      * @param bool $recursive
-     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     * @return \Laminas\Db\ResultSet\HydratingResultSet|\Laminas\Db\ResultSet\ResultSet|\Laminas\Paginator\Paginator
      */
     public function getImagesByCategoryId($id, $recursive = false)
     {

@@ -6,10 +6,10 @@ use Newsletter\Model\MessageModel;
 use Newsletter\Model\TemplateModel;
 use Newsletter\View\Model\NewsletterViewModel;
 use Newsletter\View\Resolver\NewsletterResolver;
-use Zend\View\Exception\DomainException;
-use Zend\View\Exception\RuntimeException;
-use Zend\View\Renderer\RendererInterface;
-use Zend\View\Resolver\ResolverInterface;
+use Laminas\View\Exception\DomainException;
+use Laminas\View\Exception\RuntimeException;
+use Laminas\View\Renderer\RendererInterface;
+use Laminas\View\Resolver\ResolverInterface;
 
 
 class NewsletterRenderer implements RendererInterface
@@ -66,7 +66,7 @@ class NewsletterRenderer implements RendererInterface
     }
 
     /**
-     * @param string|\Zend\View\Model\ModelInterface $nameOrModel
+     * @param string|\Laminas\View\Model\ModelInterface $nameOrModel
      * @param null $values
      * @return string
      */

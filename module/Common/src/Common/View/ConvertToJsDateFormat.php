@@ -3,7 +3,7 @@
 namespace Common\View;
 
 use Common\Stdlib\PhpToJsDateFormat;
-use Zend\View\Helper\AbstractHelper;
+use Laminas\View\Helper\AbstractHelper;
 
 
 class ConvertToJsDateFormat extends AbstractHelper

@@ -1,26 +1,18 @@
 <?php
-/**
- * charisma-beads (http://www.shaunfreeman.co.uk/)
- *
- * @author      Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @link        https://github.com/uthando-cms for the canonical source repository
- * @copyright   Copyright (c) 2017 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license     see LICENSE
- */
 
 namespace Shop\Form;
 
 use Shop\Validator\Voucher;
 use TwbBundle\Form\View\Helper\TwbBundleForm;
-use Zend\Filter\StringToUpper;
-use Zend\Filter\StringTrim;
-use Zend\Filter\StripTags;
-use Zend\Form\Element\Text;
-use Zend\Form\Form;
-use Zend\I18n\Filter\Alnum;
-use Zend\I18n\Validator\Alnum as AlnumValidator;
-use Zend\InputFilter\InputFilterProviderInterface;
-use Zend\Validator\StringLength;
+use Laminas\Filter\StringToUpper;
+use Laminas\Filter\StringTrim;
+use Laminas\Filter\StripTags;
+use Laminas\Form\Element\Text;
+use Laminas\Form\Form;
+use Laminas\I18n\Filter\Alnum;
+use Laminas\I18n\Validator\Alnum as AlnumValidator;
+use Laminas\InputFilter\InputFilterProviderInterface;
+use Laminas\Validator\StringLength;
 
 /**\
  * Class Voucher

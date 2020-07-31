@@ -3,12 +3,12 @@
 namespace SessionManager\Event;
 
 use SessionManager\Service\Factory\SessionManagerFactory;
-use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\ListenerAggregateInterface;
-use Zend\EventManager\ListenerAggregateTrait;
-use Zend\Http\Request;
-use Zend\Mvc\MvcEvent;
-use Zend\Session\SessionManager;
+use Laminas\EventManager\EventManagerInterface;
+use Laminas\EventManager\ListenerAggregateInterface;
+use Laminas\EventManager\ListenerAggregateTrait;
+use Laminas\Http\Request;
+use Laminas\Mvc\MvcEvent;
+use Laminas\Session\SessionManager;
 
 class RouteListener implements ListenerAggregateInterface
 {

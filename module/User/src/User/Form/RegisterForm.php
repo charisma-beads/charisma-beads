@@ -6,8 +6,8 @@ namespace User\Form;
 
 use TwbBundle\Form\View\Helper\TwbBundleForm;
 use User\InputFilter\UserInputFilter as UserInputFilter;
-use Zend\Form\Element\Submit;
-use Zend\InputFilter\InputFilterInterface;
+use Laminas\Form\Element\Submit;
+use Laminas\InputFilter\InputFilterInterface;
 
 class RegisterForm extends BaseUserForm
 {

@@ -1,19 +1,11 @@
 <?php
-/**
- * Uthando CMS (http://www.shaunfreeman.co.uk/)
- *
- * @package   Shop\Mapper\Product
- * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
- */
 
 namespace Shop\Mapper;
 
 use Common\Mapper\AbstractNestedSet;
 use Shop\Model\ProductCategoryModel as CategoryModel;
-use Zend\Db\Sql\Where;
-use Zend\Db\Sql\Select;
+use Laminas\Db\Sql\Where;
+use Laminas\Db\Sql\Select;
 
 /**
  * Class Category
@@ -58,7 +50,7 @@ class ProductCategoryMapper extends AbstractNestedSet
     /**
      * @param $parentId
      * @param bool $immediate
-     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     * @return \Laminas\Db\ResultSet\HydratingResultSet|\Laminas\Db\ResultSet\ResultSet|\Laminas\Paginator\Paginator
      */
 	public function getSubCategoriesByParentId($parentId, $immediate=true)
 	{

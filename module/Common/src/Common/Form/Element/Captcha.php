@@ -2,9 +2,9 @@
 
 namespace Common\Form\Element;
 
-use Zend\Form\Element\Captcha as ZendCaptcha;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
+use Laminas\Form\Element\Captcha as ZendCaptcha;
+use Laminas\ServiceManager\ServiceLocatorAwareInterface;
+use Laminas\ServiceManager\ServiceLocatorAwareTrait;
 
 /**
  * Class Captcha

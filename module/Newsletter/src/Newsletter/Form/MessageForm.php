@@ -5,11 +5,11 @@ namespace Newsletter\Form;
 use TwbBundle\Form\View\Helper\TwbBundleForm;
 use Newsletter\Form\Element\NewsletterList;
 use Newsletter\Form\Element\TemplateList;
-use Zend\Form\Element\Csrf;
-use Zend\Form\Element\Hidden;
-use Zend\Form\Element\Text;
-use Zend\Form\Element\Textarea;
-use Zend\Form\Form;
+use Laminas\Form\Element\Csrf;
+use Laminas\Form\Element\Hidden;
+use Laminas\Form\Element\Text;
+use Laminas\Form\Element\Textarea;
+use Laminas\Form\Form;
 
 
 class MessageForm extends Form

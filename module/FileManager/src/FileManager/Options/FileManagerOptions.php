@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace FileManager\Options;
 
-use Zend\Stdlib\AbstractOptions;
+use Laminas\Stdlib\AbstractOptions;
 
 
 class FileManagerOptions extends AbstractOptions

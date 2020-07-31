@@ -7,10 +7,10 @@ namespace ThemeManager\Form\Element;
 use Common\Service\ServiceManager;
 use ThemeManager\Model\WidgetGroupModel;
 use ThemeManager\Service\WidgetGroupManager;
-use Zend\Form\Element\Select;
-use Zend\ServiceManager\AbstractPluginManager;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
+use Laminas\Form\Element\Select;
+use Laminas\ServiceManager\AbstractPluginManager;
+use Laminas\ServiceManager\ServiceLocatorAwareInterface;
+use Laminas\ServiceManager\ServiceLocatorAwareTrait;
 
 /**
  * Class WidgetGroupSelect

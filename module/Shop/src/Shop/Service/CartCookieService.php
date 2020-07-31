@@ -1,19 +1,11 @@
 <?php
-/**
- * Uthando CMS (http://www.shaunfreeman.co.uk/)
- *
- * @package   Shop\Service\Cart
- * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
- */
 
 namespace Shop\Service;
 
 use Shop\Options\CartCookieOptions;
-use Zend\Http\Header\SetCookie;
-use Zend\Http\PhpEnvironment\Request;
-use Zend\Http\PhpEnvironment\Response;
+use Laminas\Http\Header\SetCookie;
+use Laminas\Http\PhpEnvironment\Request;
+use Laminas\Http\PhpEnvironment\Response;
 
 /**
  * Class Cookie
@@ -85,7 +77,7 @@ class CartCookieService
     }
     
 	/**
-	 * @return \Zend\Http\PhpEnvironment\Request
+	 * @return \Laminas\Http\PhpEnvironment\Request
 	 */
     public function getRequest()
     {

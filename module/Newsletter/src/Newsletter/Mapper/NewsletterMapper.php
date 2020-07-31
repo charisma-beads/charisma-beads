@@ -11,7 +11,7 @@ class NewsletterMapper extends AbstractDbMapper
     protected $primary = 'newsletterId';
 
     /**
-     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     * @return \Laminas\Db\ResultSet\HydratingResultSet|\Laminas\Db\ResultSet\ResultSet|\Laminas\Paginator\Paginator
      */
     public function fetchAllVisible()
     {

@@ -3,12 +3,12 @@
 namespace FileManager\Form;
 
 use FileManager\Options\FileManagerOptions;
-use Zend\Form\Element\Checkbox;
-use Zend\Form\Element\Number;
-use Zend\Form\Element\Text;
-use Zend\Form\Fieldset;
-use Zend\Hydrator\ClassMethods;
-use Zend\InputFilter\InputFilterProviderInterface;
+use Laminas\Form\Element\Checkbox;
+use Laminas\Form\Element\Number;
+use Laminas\Form\Element\Text;
+use Laminas\Form\Fieldset;
+use Laminas\Hydrator\ClassMethods;
+use Laminas\InputFilter\InputFilterProviderInterface;
 
 class LegacyFieldSet extends Fieldset implements InputFilterProviderInterface
 {
