@@ -88,8 +88,6 @@ class ReportController extends AbstractActionController
             $response->getHeaders()->addHeaders([
                 'Content-Type'          => $contentTypes[$ext],
                 'Content-Disposition'   => 'attachment;filename="' . $file .'"',
-                'Cache-Control'         => 'max-age=0',
-                'Cache-Control'         => 'max-age=1',
                 'Expires'               => 'Mon, 26 Jul 1997 05:00:00 GMT',
                 'Last-Modified'         => gmdate('D, d M Y H:i:s') . ' GMT',
                 'Cache-Control'         => 'cache, must-revalidate',

@@ -6,6 +6,15 @@
         "php": ">=7.4",
         "ext-pdo": "*",
         "ext-json": "*",
+
+        "giggsey/libphonenumber-for-php": "7.*",
+        "dompdf/dompdf": "0.*",
+        "studio-42/elfinder": "2.*",
+        "paypal/rest-api-sdk-php": "1.*",
+        "phpoffice/phpexcel": "1.*",
+        "zumba/json-serializer": "^2.2",
+
+        "laminas/laminas-dependency-plugin": "^1.0",
         "laminas/laminas-modulemanager": "2.*",
         "laminas/laminas-mvc": "2.*",
         "laminas/laminas-view": "2.*",
@@ -38,17 +47,10 @@
         "laminas/laminas-db": "2.*",
         "laminas/laminas-paginator": "2.*",
         "laminas/laminas-captcha": "2.*",
-        "summernote/summernote": "*",
-        "ezyang/htmlpurifier": "^4.9",
-        "giggsey/libphonenumber-for-php": "7.*",
-        "dompdf/dompdf": "0.*",
-        "neilime/zf2-twb-bundle": "2.*@stable",
+
         "rwoverdijk/assetmanager": "2.*",
-        "studio-42/elfinder": "2.*",
-        "paypal/rest-api-sdk-php": "1.*",
-        "phpoffice/phpexcel": "1.*",
-        "zumba/json-serializer": "^2.2",
-        "laminas/laminas-dependency-plugin": "^1.0"
+
+        "neilime/zf2-twb-bundle": "2.*@stable"
     },
     "require-dev": {
         "laminas/laminas-test": "2.*",
