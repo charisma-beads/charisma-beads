@@ -39,13 +39,4 @@ class Module
     {
         return include __DIR__ . '/config/module.config.php';
     }
-
-    public function getAutoloaderConfig()
-    {
-        return [
-            'Laminas\Loader\ClassMapAutoloader' => [
-                __DIR__ . '/autoload_classmap.php'
-            ]
-        ];
-    }
 }
