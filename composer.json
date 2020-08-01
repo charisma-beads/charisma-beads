@@ -61,6 +61,7 @@
             "Application\\": "module/Application/src",
             "Article\\": "module/Article/src",
             "Common\\": "module/Common/src",
+            "Contact\\": "module/Contact/src",
             "Shop\\": "module/Shop/src"
         }
     },
