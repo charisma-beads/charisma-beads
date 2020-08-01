@@ -57,6 +57,7 @@
     },
     "autoload" : {
         "psr-4" : {
+            "Admin\\" : "module/Admin/src/",
             "Shop\\" : "module/Shop/src/"
         }
     },
