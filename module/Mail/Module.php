@@ -43,18 +43,4 @@ class Module implements ConsoleUsageProviderInterface, ConfigInterface
             'mailqueue send' => 'send the next batch of mail in the mail queue',
         ];
     }
-
-    /**
-     * @return array
-     */
-    public function getAutoloaderConfig()
-    {
-        return [
-            'Laminas\Loader\StandardAutoloader' => [
-                'namespaces' => [
-                    __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
-                ],
-            ],
-        ];
-    }
 }

@@ -64,6 +64,7 @@
             "Contact\\": "module/Contact/src",
             "Events\\": "module/Events/src",
             "FileManager\\": "module/FileManager/src",
+            "Mail\\": "module/Mail/src",
             "Shop\\": "module/Shop/src"
         }
     },
