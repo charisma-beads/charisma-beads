@@ -63,6 +63,7 @@
             "Common\\": "module/Common/src",
             "Contact\\": "module/Contact/src",
             "Events\\": "module/Events/src",
+            "FileManager\\": "module/FileManager/src",
             "Shop\\": "module/Shop/src"
         }
     },
