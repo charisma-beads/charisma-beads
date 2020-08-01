@@ -5,7 +5,6 @@ namespace Shop\Service;
 use Shop\Hydrator\OrderLineHydrator;
 use Shop\Mapper\OrderLineMapper;
 use Shop\Model\CartModel;
-use Shop\Model\Order\Line;
 use Shop\Model\OrderLineInterface;
 use Shop\Model\OrderLineModel;
 use Common\Service\AbstractMapperService;
@@ -19,7 +18,7 @@ class OrderLineService extends AbstractMapperService
 {
     protected $hydrator     = OrderLineHydrator::class;
     protected $mapper       = OrderLineMapper::class;
-    protected $model        = Line::class;
+    protected $model        = OrderLineModel::class;
     
     protected $tags = [
         'order-line',

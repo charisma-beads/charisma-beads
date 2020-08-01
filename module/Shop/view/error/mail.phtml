@@ -60,13 +60,13 @@
 <?php endif ?>
 
 <h2>Get Vars</h2>
-<pre><?=Zend\Debug\Debug::dump($this->getVars, null, false);?></pre>
+<pre><?php var_dump($this->getVars); ?></pre>
 
 <h2>Post Vars</h2>
-<pre><?=Zend\Debug\Debug::dump($this->postVars, null, false);?></pre>
+<pre><?php var_dump($this->postVars); ?></pre>
 
 <h2>HTTP Request</h2>
-<pre><?=Zend\Debug\Debug::dump($this->requestString, null, false);?></pre>
+<pre><?php var_dump($this->requestString); ?></pre>
 
 <h2>Session Information</h2>
-<pre><?=Zend\Debug\Debug::dump($this->sessionVars, null, false);?></pre>
+<pre><?php var_dump($this->sessionVars); ?></pre>

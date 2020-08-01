@@ -4,7 +4,6 @@ namespace Shop\Service;
 
 use Shop\Hydrator\OrderStatusHydrator;
 use Shop\Mapper\OrderStatusMapper;
-use Shop\Model\Order\Status;
 use Shop\Model\OrderStatusModel;
 use Common\Service\AbstractMapperService;
 
@@ -17,7 +16,7 @@ class OrderStatusService extends AbstractMapperService
 {
     protected $hydrator     = OrderStatusHydrator::class;
     protected $mapper       = OrderStatusMapper::class;
-    protected $model        = Status::class;
+    protected $model        = OrderStatusModel::class;
     
     protected $tags = [
         'order-status',

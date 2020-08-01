@@ -11,7 +11,6 @@ use Shop\Model\OrderLineInterface;
 use Shop\Model\OrderMetaDataModel;
 use Shop\Model\OrderModel;
 use Shop\Model\ProductModel;
-use Shop\Model\ProductOptionModel as ProductOption;
 use Shop\Model\ProductOptionModel;
 use Shop\Model\VoucherCodeModel as VoucherCode;
 use Shop\Options\CartOptions;
@@ -311,7 +310,7 @@ class OrderService extends AbstractOrderService
 
         $productOption = ($optionId) ? $product->getProductOption($optionId) : null;
 
-        if ($productOption instanceof ProductOption) {
+        if ($productOption instanceof ProductOptionModel) {
             $productClone->setPostUnitId($productOption->getPostUnitId())
                 ->setPostUnit($productOption->getPostUnit())
                 ->setPrice($productOption->getPrice(false))

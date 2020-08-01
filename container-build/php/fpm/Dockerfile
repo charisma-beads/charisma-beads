@@ -1,4 +1,4 @@
-FROM shaunfreeman/php:7.3-fpm
+FROM shaunfreeman/php:7.4-fpm
 
 ARG user
 ARG uid

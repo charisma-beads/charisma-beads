@@ -5,10 +5,7 @@ declare(strict_types=1);
 
 namespace Shop\Hydrator\Strategy;
 
-
 use Laminas\Hydrator\Strategy\StrategyInterface;
-use Laminas\Serializer\Serializer;
-use Zumba\JsonSerializer\Exception\JsonSerializerException;
 use Zumba\JsonSerializer\JsonSerializer;
 
 class Serialize implements StrategyInterface
@@ -45,12 +42,8 @@ class Serialize implements StrategyInterface
         if (!is_string($value)) {
             return $value;
         }
-
-        try {
-            $value = $this->serializer->unserialize($value);
-        } catch (JsonSerializerException $e) {
-            $value = Serializer::unserialize($value);
-        }
+        
+        $value = $this->serializer->unserialize($value);
 
         return $value;
     }

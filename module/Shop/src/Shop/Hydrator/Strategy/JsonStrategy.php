@@ -5,7 +5,6 @@ declare(strict_types=1);
 
 namespace Shop\Hydrator\Strategy;
 
-
 use Laminas\Hydrator\Strategy\StrategyInterface;
 use Laminas\Json\Json;
 

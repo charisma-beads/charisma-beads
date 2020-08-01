@@ -6,7 +6,7 @@ use Shop\Form\CustomerAddressForm;
 use Shop\Hydrator\CustomerAddressHydrator;
 use Shop\InputFilter\CustomerAddressInputFilter;
 use Shop\Mapper\CustomerAddressMapper;
-use Shop\Model\Customer\Address;
+use Shop\Model\CustomerAddressModel;
 use Shop\ShopException;
 use Common\Service\AbstractRelationalMapperService;
 use Laminas\EventManager\Event;
@@ -22,7 +22,7 @@ class CustomerAddressService extends AbstractRelationalMapperService
     protected $hydrator     = CustomerAddressHydrator::class;
     protected $inputFilter  = CustomerAddressInputFilter::class;
     protected $mapper       = CustomerAddressMapper::class;
-    protected $model        = Address::class;
+    protected $model        = CustomerAddressModel::class;
     
     protected $tags = [
         'customer-address', 'country', 'country-province',

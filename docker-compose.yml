@@ -12,7 +12,7 @@ services:
       - php-fpm
 
   php-cli:
-    image: shaunfreeman/php:7.3-cli
+    image: shaunfreeman/php:7.4-cli
     working_dir: /home/charisma
     environment:
       - MYSQL_DATABASE=dbname
