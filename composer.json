@@ -67,6 +67,7 @@
             "Mail\\": "module/Mail/src",
             "Navigation\\": "module/Navigation/src",
             "News\\": "module/News/src",
+            "Newsletter\\": "module/Newsletter/src",
             "Shop\\": "module/Shop/src"
         }
     },
