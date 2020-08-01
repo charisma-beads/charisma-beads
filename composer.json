@@ -3,7 +3,7 @@
     "description": "Charisma Beads Website",
     "version": "2.0",
     "require": {
-        "php": ">=7.1",
+        "php": ">=7.4",
         "ext-pdo": "*",
         "ext-json": "*",
         "laminas/laminas-modulemanager": "2.*",
@@ -43,7 +43,7 @@
         "giggsey/libphonenumber-for-php": "7.*",
         "dompdf/dompdf": "0.*",
         "neilime/zf2-twb-bundle": "2.*@stable",
-        "rwoverdijk/assetmanager": "1.*",
+        "rwoverdijk/assetmanager": "2.*",
         "studio-42/elfinder": "2.*",
         "paypal/rest-api-sdk-php": "1.*",
         "phpoffice/phpexcel": "1.*",

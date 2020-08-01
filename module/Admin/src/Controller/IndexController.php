@@ -1,6 +1,9 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Admin\Controller;
+
 
 use Common\Service\ServiceTrait;
 use User\Form\ForgotPasswordForm;
@@ -16,15 +19,8 @@ use Laminas\Authentication\AuthenticationService;
 use Laminas\Form\Form;
 use Laminas\Http\Response;
 use Laminas\Mvc\Controller\AbstractActionController;
-use Laminas\Session\Container;
 use Laminas\View\Model\ViewModel;
 
-/**
- * Class IndexController
- *
- * @package Admin\Controller
- * @method Container sessionContainer()
- */
 class IndexController extends AbstractActionController
 {
     use ServiceTrait;

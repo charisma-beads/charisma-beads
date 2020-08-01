@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b305d5216697bdfab31d039944b6f9f3",
+    "content-hash": "5a1687e6c12ec736387956692f23a3b4",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -3488,38 +3488,39 @@
         },
         {
             "name": "rwoverdijk/assetmanager",
-            "version": "1.8.1",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/RWOverdijk/AssetManager.git",
-                "reference": "763b496ef260ecdebb0ca497c7b353d502016734"
+                "reference": "b3e81b6d8b4ff0a5f466c57a6d7954a937387ea9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/RWOverdijk/AssetManager/zipball/763b496ef260ecdebb0ca497c7b353d502016734",
-                "reference": "763b496ef260ecdebb0ca497c7b353d502016734",
+                "url": "https://api.github.com/repos/RWOverdijk/AssetManager/zipball/b3e81b6d8b4ff0a5f466c57a6d7954a937387ea9",
+                "reference": "b3e81b6d8b4ff0a5f466c57a6d7954a937387ea9",
                 "shasum": ""
             },
             "require": {
                 "kriswallsmith/assetic": "^1.4.0",
-                "php": "^5.5 || ^7.0",
-                "zendframework/zend-eventmanager": "^2.6.3 || ^3.0.1",
-                "zendframework/zend-loader": "^2.5.1",
-                "zendframework/zend-modulemanager": "^2.7.2",
-                "zendframework/zend-mvc": "^2.7.9 || ^3.0.2",
-                "zendframework/zend-servicemanager": "^2.7.6 || ^3.1.1",
-                "zendframework/zend-stdlib": "^2.7.7 || ^3.0.1"
+                "laminas/laminas-dependency-plugin": "^1.0",
+                "laminas/laminas-eventmanager": "^2.6.3 || ^3.0.1",
+                "laminas/laminas-loader": "^2.5.1",
+                "laminas/laminas-modulemanager": "^2.7.2",
+                "laminas/laminas-mvc": "^2.7.9 || ^3.0.2",
+                "laminas/laminas-servicemanager": "^2.7.6 || ^3.1.1",
+                "laminas/laminas-stdlib": "^2.7.7 || ^3.0.1",
+                "php": "^7.2"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.8",
-                "squizlabs/php_codesniffer": "~1.5.0",
-                "zendframework/zend-cache": "^2.7.1",
-                "zendframework/zend-console": "^2.6",
-                "zendframework/zend-http": "^2.5.4",
-                "zendframework/zend-view": "^2.8.1"
+                "laminas/laminas-cache": "^2.7.1",
+                "laminas/laminas-console": "^2.6",
+                "laminas/laminas-http": "^2.5.4",
+                "laminas/laminas-view": "^2.8.1",
+                "phpunit/phpunit": "^7.0",
+                "squizlabs/php_codesniffer": "~1.5.0"
             },
             "suggest": {
-                "zendframework/zend-mvc-console": "zend-mvc-console provides the ability to expose zend-mvc as a console application"
+                "laminas/laminas-mvc-console": "laminas-mvc-console provides the ability to expose laminas-mvc as a console application"
             },
             "type": "library",
             "autoload": {
@@ -3543,15 +3544,14 @@
                     "homepage": "http://ocramius.github.com/"
                 }
             ],
-            "description": "An assetmanager module for Zend Framework 2.",
+            "description": "An assetmanager module for Laminas.",
             "homepage": "https://github.com/RWOverdijk/AssetManager",
             "keywords": [
                 "asset",
                 "asset manager",
-                "zend framework 2",
-                "zf2"
+                "laminas"
             ],
-            "time": "2019-04-09T06:04:06+00:00"
+            "time": "2020-03-17T09:12:03+00:00"
         },
         {
             "name": "sabberworm/php-css-parser",
