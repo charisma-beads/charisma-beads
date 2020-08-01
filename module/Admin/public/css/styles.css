@@ -155,9 +155,10 @@ h1, h2, h3, h4, h5, h6, p {
     margin-right: 10px;
     height: auto;
     line-height: 29px;
-    background: url('../img/uthando-cms.png')
+    background: url('/userfiles/logo.png')
                 20px center
                 no-repeat;
+    background-size:contain;
 }
 
 #header .nav > li > a {

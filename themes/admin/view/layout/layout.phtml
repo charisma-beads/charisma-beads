@@ -10,7 +10,9 @@
         ->appendName('viewport', 'width=device-width, initial-scale=1.0')
         ->appendName('rating', 'general'); ?>
 
-    <?=$this->headLink()
+    <?=$this->headLink([
+        'rel'  => 'shortcut icon',
+        'href' => $this->basePath('/userfiles/favicon.ico')])
         ->appendStylesheet($this->basePath('css/admin.css')); ?>
 </head>
 <body>
@@ -18,7 +20,7 @@
     <header id="header" class="navbar navbar-default navbar-static-top">
         <div class="navbar-header">
             <a type="button" id="button-menu" class="pull-left"><i class="fa fa-indent fa-lg"></i></a>
-            <a class="navbar-brand" href="<?= $this->url('home'); ?>">Uthando CMS</a>
+            <a class="navbar-brand" href="<?= $this->url('home'); ?>">Charisma Beads Admin</a>
         </div>
         <ul class="nav pull-right">
             <li><a class="dropdown-toggle" data-toggle="dropdown" href="#">
