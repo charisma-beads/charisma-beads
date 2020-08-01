@@ -40,15 +40,4 @@ class Module implements ConfigInterface
             'session gc' => 'initiate garbage collection on sessions in database.',
         ];
     }
-
-    public function getAutoloaderConfig(): array
-    {
-        return [
-            'Laminas\Loader\StandardAutoloader' => [
-                'namespaces' => [
-                    __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
-                ],
-            ],
-        ];
-    }
 }

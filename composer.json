@@ -68,6 +68,7 @@
             "Navigation\\": "module/Navigation/src",
             "News\\": "module/News/src",
             "Newsletter\\": "module/Newsletter/src",
+            "SessionManager\\": "module/SessionManager/src",
             "Shop\\": "module/Shop/src"
         }
     },
