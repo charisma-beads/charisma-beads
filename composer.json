@@ -60,6 +60,7 @@
             "Admin\\": "module/Admin/src",
             "Application\\": "module/Application/src",
             "Article\\": "module/Article/src",
+            "Common\\": "module/Common/src",
             "Shop\\": "module/Shop/src"
         }
     },

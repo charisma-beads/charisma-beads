@@ -3,8 +3,8 @@
 namespace Common;
 
 // need as autoloader not loaded at this point
-require_once(__DIR__ . '/src/Common/Config/ConfigInterface.php');
-require_once(__DIR__ . '/src/Common/Config/ConfigTrait.php');
+require_once(__DIR__ . '/src/Config/ConfigInterface.php');
+require_once(__DIR__ . '/src/Config/ConfigTrait.php');
 
 use Common\Config\ConfigInterface;
 use Common\Config\ConfigTrait;
@@ -101,20 +101,6 @@ class Module implements ConsoleBannerProviderInterface, ConfigInterface
     public function getConfig()
     {
         return include __DIR__ . '/config/module.config.php';
-    }
-
-    /**
-     * @return array
-     */
-    public function getAutoloaderConfig()
-    {
-        return [
-            'Laminas\Loader\StandardAutoloader' => [
-                'namespaces' => [
-                    __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
-                ],
-            ],
-        ];
     }
 
     /**
