@@ -51,25 +51,14 @@
         "laminas/laminas-dependency-plugin": "^1.0"
     },
     "require-dev": {
-        "laminas/laminas-barcode": "2.*",
-        "laminas/laminas-code": "2.*",
-        "laminas/laminas-di": "2.*",
-        "laminas/laminas-dom": "2.*",
-        "laminas/laminas-escaper": "2.*",
-        "laminas/laminas-file": "2.*",
-        "laminas/laminas-json": "2.*",
-        "laminas/laminas-math": "2.*",
-        "laminas/laminas-memory": "2.*",
-        "laminas/laminas-permissions-rbac": "2.*",
-        "laminas/laminas-server": "2.*",
-        "laminas/laminas-soap": "2.*",
-        "laminas/laminas-tag": "2.*",
         "laminas/laminas-test": "2.*",
-        "laminas/laminas-uri": "2.*",
-        "laminas/laminas-validator": "2.*",
-        "laminas/laminas-xmlrpc": "2.*",
         "codeclimate/php-test-reporter": "dev-master",
         "ccampbell/chromephp": "4.*"
+    },
+    "autoload" : {
+        "psr-4" : {
+            "Shop\\" : "module/Shop/src/"
+        }
     },
     "authors": [
         {
