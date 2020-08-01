@@ -59,6 +59,7 @@
         "psr-4" : {
             "Admin\\": "module/Admin/src",
             "Application\\": "module/Application/src",
+            "Article\\": "module/Article/src",
             "Shop\\": "module/Shop/src"
         }
     },
