@@ -69,7 +69,8 @@
             "News\\": "module/News/src",
             "Newsletter\\": "module/Newsletter/src",
             "SessionManager\\": "module/SessionManager/src",
-            "Shop\\": "module/Shop/src"
+            "Shop\\": "module/Shop/src",
+            "ShopDomPdf\\": "module/ShopDomPdf/src"
         }
     },
     "authors": [
