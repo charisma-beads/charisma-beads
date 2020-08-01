@@ -71,7 +71,8 @@
             "SessionManager\\": "module/SessionManager/src",
             "Shop\\": "module/Shop/src",
             "ShopDomPdf\\": "module/ShopDomPdf/src",
-            "Testimonial\\": "module/Testimonial/src"
+            "Testimonial\\": "module/Testimonial/src",
+            "ThemeManager\\": "module/ThemeManager/src"
         }
     },
     "authors": [
