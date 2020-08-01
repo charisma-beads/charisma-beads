@@ -384,8 +384,8 @@ class UserController extends AbstractActionController
 
         $config = $this->getServiceLocator()->get('config');
 
-        $adminRoute = (isset($config['uthando_user']['default_admin_route'])) ?
-            $this->getServiceLocator()->get('config')['uthando_user']['default_admin_route'] :
+        $adminRoute = (isset($config['user']['default_admin_route'])) ?
+            $this->getServiceLocator()->get('config')['user']['default_admin_route'] :
             'admin';
 
         $return = ($returnTo) ? $returnTo : ('admin' === $auth->getIdentity()->getRole()) ? $adminRoute : 'home';
