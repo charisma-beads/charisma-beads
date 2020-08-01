@@ -65,6 +65,7 @@
             "Events\\": "module/Events/src",
             "FileManager\\": "module/FileManager/src",
             "Mail\\": "module/Mail/src",
+            "Navigation\\": "module/Navigation/src",
             "Shop\\": "module/Shop/src"
         }
     },
