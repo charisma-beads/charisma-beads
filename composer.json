@@ -12,7 +12,7 @@
         "studio-42/elfinder": "2.*",
         "paypal/rest-api-sdk-php": "1.*",
         "phpoffice/phpexcel": "1.*",
-        "zumba/json-serializer": "^2.2",
+        "zumba/json-serializer": "^3.0",
 
         "laminas/laminas-dependency-plugin": "^1.0",
         "laminas/laminas-modulemanager": "2.*",
