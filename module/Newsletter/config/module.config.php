@@ -20,7 +20,7 @@ return [
     'asset_manager' => [
         'resolver_configs' => [
             'collections' => [
-                'css/uthando-admin.css' => [
+                'css/admin.css' => [
                     'css/newsletter-admin.css'
                 ],
             ],
