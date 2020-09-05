@@ -5,6 +5,8 @@ namespace Mail\Hydrator;
 use Common\Hydrator\AbstractHydrator;
 use Common\Hydrator\Strategy\DateTime as DateTimeStrategy;
 use Common\Hydrator\Strategy\Serialize;
+use Exception;
+use Mail\Model\MailQueueModel;
 
 class MailQueueHydrator extends AbstractHydrator
 {
@@ -26,18 +28,46 @@ class MailQueueHydrator extends AbstractHydrator
     }
 
     /**
-     * @param \Mail\Model\MailQueueModel $object
+     * @param array $data
+     * @param MailQueueModel $object
+     * @return MailQueueModel
+     * @throws Exception
+     */
+    public function hydrate(array $data, $object)
+    {
+        try {
+            /** @var MailQueueModel $model */
+            $model = parent::hydrate($data, $object);
+        } catch (Exception $e) {
+            throw new Exception(
+                sprintf(
+                    "Couldn't hydrate mail with ID:%s \n recipient: %s \n sender: %s \n body: %s \n layout: %s",
+                    $object->getMailQueueId(),
+                    $object->getRecipient(),
+                    $object->getSender(),
+                    $object->getBody(),
+                    $object->getLayout()
+                )
+            );
+        }
+
+        return $model;
+
+    }
+
+    /**
+     * @param MailQueueModel $object
      * @return array
      */
     public function extract($object)
     {
         return [
             'mailQueueId'   => $object->getMailQueueId(),
-            'recipient'     => $this->extractValue('recipient', $object->getRecipient()),
-            'sender'        => $this->extractValue('sender', $object->getSender()),
+            'recipient'     => $this->extractValue('recipient', $object->getRecipient(), $object),
+            'sender'        => $this->extractValue('sender', $object->getSender(), $object),
             'subject'       => $object->getSubject(),
-            'body'          => $this->extractValue('body', $object->getBody()),
-            'layout'        => $this->extractValue('layout', $object->getLayout()),
+            'body'          => $this->extractValue('body', $object->getBody(), $object),
+            'layout'        => $this->extractValue('layout', $object->getLayout(), $object),
             'transport'     => $object->getTransport(),
             'renderer'      => $object->getRenderer(),
             'priority'      => $object->getPriority(),
