@@ -58,7 +58,7 @@ class MailAddress extends AbstractViewHelper
         if (!$this->mailOptions instanceof MailOptions) {
             $options = $this->getServiceLocator()
                 ->getServiceLocator()
-                ->get('UthandoMail\Options\MailOptions');
+                ->get(MailOptions::class);
             $this->mailOptions = $options;
         }
 
