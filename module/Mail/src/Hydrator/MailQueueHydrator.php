@@ -42,11 +42,11 @@ class MailQueueHydrator extends AbstractHydrator
             throw new Exception(
                 sprintf(
                     "Couldn't hydrate mail with ID:%s \n recipient: %s \n sender: %s \n body: %s \n layout: %s",
-                    $object->getMailQueueId(),
-                    $object->getRecipient(),
-                    $object->getSender(),
-                    $object->getBody(),
-                    $object->getLayout()
+                    $data['mailQueueId'],
+                    $data['recipient'],
+                    $data['sender'],
+                    $data['body'],
+                    $data['layout']
                 )
             );
         }
