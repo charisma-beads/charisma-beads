@@ -124,7 +124,7 @@ return [
                 'options' => [
                     'route' => '/news/[:news-item]',
                     'constraints' => [
-                        'news-item'  => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'news-item'  => '[a-zA-Z0-9_-]*',
                     ],
                     'defaults' => [
                         '__NAMESPACE__' => 'News\Controller',
