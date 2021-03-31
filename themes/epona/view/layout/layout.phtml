@@ -205,7 +205,7 @@
                             <?=$this->formElement(
                                 $this->productSearch()
                                     ->get('productSearch')
-                                    ->setValue($this->searchData['productSearch'])
+                                    ->setValue($this->searchData['productSearch'] ?? '')
                             );?>
                             <button type="submit" class="fa fa-search"></button>
                         </form>
