@@ -8,7 +8,7 @@
         "ext-json": "*",
 
         "giggsey/libphonenumber-for-php": "7.*",
-        "dompdf/dompdf": "0.*",
+        "dompdf/dompdf": "2.*",
         "studio-42/elfinder": "2.*",
         "paypal/rest-api-sdk-php": "1.*",
         "phpoffice/phpexcel": "1.*",
